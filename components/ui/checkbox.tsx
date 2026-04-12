@@ -3,20 +3,43 @@
 import * as React from 'react'
 import * as CheckboxPrimitive from '@radix-ui/react-checkbox'
 import { CheckIcon } from 'lucide-react'
+import { cva, type VariantProps } from 'class-variance-authority'
 
 import { cn } from '@/lib/utils'
 
+const checkboxVariants = cva(
+  'peer border-input dark:bg-input/30 focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive size-4 shrink-0 rounded-[4px] border shadow-xs transition-shadow outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50',
+  {
+    variants: {
+      variant: {
+        default:
+          'data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground dark:data-[state=checked]:bg-primary data-[state=checked]:border-primary',
+        green:
+          'data-[state=checked]:bg-neon-green data-[state=checked]:text-primary-foreground data-[state=checked]:border-neon-green',
+        purple:
+          'data-[state=checked]:bg-neon-purple data-[state=checked]:text-primary-foreground data-[state=checked]:border-neon-purple',
+        pink:
+          'data-[state=checked]:bg-neon-pink data-[state=checked]:text-primary-foreground data-[state=checked]:border-neon-pink',
+        orange:
+          'data-[state=checked]:bg-neon-orange data-[state=checked]:text-primary-foreground data-[state=checked]:border-neon-orange',
+      },
+    },
+    defaultVariants: {
+      variant: 'default',
+    },
+  },
+)
+
 function Checkbox({
   className,
+  variant,
   ...props
-}: React.ComponentProps<typeof CheckboxPrimitive.Root>) {
+}: React.ComponentProps<typeof CheckboxPrimitive.Root> &
+  VariantProps<typeof checkboxVariants>) {
   return (
     <CheckboxPrimitive.Root
       data-slot="checkbox"
-      className={cn(
-        'peer border-input dark:bg-input/30 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground dark:data-[state=checked]:bg-primary data-[state=checked]:border-primary focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive size-4 shrink-0 rounded-[4px] border shadow-xs transition-shadow outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50',
-        className,
-      )}
+      className={cn(checkboxVariants({ variant }), className)}
       {...props}
     >
       <CheckboxPrimitive.Indicator
@@ -29,4 +52,4 @@ function Checkbox({
   )
 }
 
-export { Checkbox }
+export { Checkbox, checkboxVariants }
