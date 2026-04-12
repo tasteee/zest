@@ -1,60 +1,156 @@
-import * as React from 'react'
-import { Slot } from '@radix-ui/react-slot'
-import { cva, type VariantProps } from 'class-variance-authority'
+import React from "react";
+import { cva } from "class-variance-authority";
 
-import { cn } from '@/lib/utils'
+type ButtonKindT = "outlined" | "solid" | "ghost";
+type ButtonThemeT = "green" | "purple" | "pink" | "orange" | "white";
+type ButtonSizeT = "xs" | "sm" | "md" | "lg" | "xl";
+
+type ButtonPropsT = {
+  kind: ButtonKindT;
+  theme: ButtonThemeT;
+  size: ButtonSizeT;
+  isDisabled: boolean;
+  onClick: () => void;
+  children: React.ReactNode;
+};
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
+  "inline-flex items-center justify-center font-semibold rounded-md border transition-opacity cursor-pointer",
   {
     variants: {
-      variant: {
-        default: 'bg-primary text-primary-foreground hover:bg-primary/90',
-        destructive:
-          'bg-destructive text-white hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60',
-        outline:
-          'border bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50',
-        secondary:
-          'bg-secondary text-secondary-foreground hover:bg-secondary/80',
-        ghost:
-          'hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50',
-        link: 'text-primary underline-offset-4 hover:underline',
+      kind: {
+        solid: "",
+        outlined: "bg-transparent",
+        ghost: "bg-transparent border-transparent",
+      },
+      theme: {
+        green: "",
+        purple: "",
+        pink: "",
+        orange: "",
+        white: "",
       },
       size: {
-        default: 'h-9 px-4 py-2 has-[>svg]:px-3',
-        sm: 'h-8 rounded-md gap-1.5 px-3 has-[>svg]:px-2.5',
-        lg: 'h-10 rounded-md px-6 has-[>svg]:px-4',
-        icon: 'size-9',
-        'icon-sm': 'size-8',
-        'icon-lg': 'size-10',
+        xs: "px-2.5 py-1 text-xs",
+        sm: "px-3.5 py-1.5 text-sm",
+        md: "px-4 py-2 text-sm",
+        lg: "px-6 py-3 text-base",
+        xl: "px-8 py-4 text-lg",
       },
     },
+    compoundVariants: [
+      // solid
+      {
+        kind: "solid",
+        theme: "green",
+        class:
+          "bg-neon-green  border-neon-green  text-primary-foreground hover:opacity-90",
+      },
+      {
+        kind: "solid",
+        theme: "purple",
+        class:
+          "bg-neon-purple border-neon-purple text-primary-foreground hover:opacity-90",
+      },
+      {
+        kind: "solid",
+        theme: "pink",
+        class:
+          "bg-neon-pink   border-neon-pink   text-primary-foreground hover:opacity-90",
+      },
+      {
+        kind: "solid",
+        theme: "orange",
+        class:
+          "bg-neon-orange border-neon-orange text-primary-foreground hover:opacity-90",
+      },
+      {
+        kind: "solid",
+        theme: "white",
+        class:
+          "bg-primary     border-primary     text-primary-foreground hover:opacity-90",
+      },
+      // outlined
+      {
+        kind: "outlined",
+        theme: "green",
+        class: "border-neon-green  text-neon-green  hover:bg-neon-green/10",
+      },
+      {
+        kind: "outlined",
+        theme: "purple",
+        class: "border-neon-purple text-neon-purple hover:bg-neon-purple/10",
+      },
+      {
+        kind: "outlined",
+        theme: "pink",
+        class: "border-neon-pink   text-neon-pink   hover:bg-neon-pink/10",
+      },
+      {
+        kind: "outlined",
+        theme: "orange",
+        class: "border-neon-orange text-neon-orange hover:bg-neon-orange/10",
+      },
+      {
+        kind: "outlined",
+        theme: "white",
+        class:
+          "border-border       text-foreground  hover:border-foreground/50",
+      },
+      // ghost
+      {
+        kind: "ghost",
+        theme: "green",
+        class: "text-neon-green  hover:opacity-70",
+      },
+      {
+        kind: "ghost",
+        theme: "purple",
+        class: "text-neon-purple hover:opacity-70",
+      },
+      {
+        kind: "ghost",
+        theme: "pink",
+        class: "text-neon-pink   hover:opacity-70",
+      },
+      {
+        kind: "ghost",
+        theme: "orange",
+        class: "text-neon-orange hover:opacity-70",
+      },
+      {
+        kind: "ghost",
+        theme: "white",
+        class: "text-foreground  hover:opacity-70",
+      },
+    ],
     defaultVariants: {
-      variant: 'default',
-      size: 'default',
+      kind: "solid",
+      theme: "white",
+      size: "md",
     },
   },
-)
+);
 
-function Button({
-  className,
-  variant,
-  size,
-  asChild = false,
-  ...props
-}: React.ComponentProps<'button'> &
-  VariantProps<typeof buttonVariants> & {
-    asChild?: boolean
-  }) {
-  const Comp = asChild ? Slot : 'button'
+const Button = (props: ButtonPropsT) => {
+  const buttonClass = buttonVariants({
+    kind: props.kind,
+    theme: props.theme,
+    size: props.size,
+  });
+  const disabledClass = props.isDisabled
+    ? "opacity-50 pointer-events-none"
+    : "";
 
   return (
-    <Comp
-      data-slot="button"
-      className={cn(buttonVariants({ variant, size, className }))}
-      {...props}
-    />
-  )
-}
+    <button
+      className={`${buttonClass} ${disabledClass}`}
+      onClick={props.onClick}
+      disabled={props.isDisabled}
+    >
+      {props.children}
+    </button>
+  );
+};
 
-export { Button, buttonVariants }
+export { Button };

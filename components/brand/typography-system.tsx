@@ -1,21 +1,69 @@
-"use client"
+"use client";
 
-import { useEffect, useRef } from "react"
+import { useEffect, useRef } from "react";
 
 interface TypographySystemProps {
-  onInView: () => void
+  onInView: () => void;
 }
 
 const typeScale = [
-  { name: "Display", size: "72px / 4.5rem", weight: "700", lineHeight: "0.9", class: "text-7xl font-bold leading-[0.9]" },
-  { name: "H1", size: "48px / 3rem", weight: "700", lineHeight: "1.0", class: "text-5xl font-bold leading-tight" },
-  { name: "H2", size: "36px / 2.25rem", weight: "600", lineHeight: "1.1", class: "text-4xl font-semibold leading-tight" },
-  { name: "H3", size: "24px / 1.5rem", weight: "600", lineHeight: "1.2", class: "text-2xl font-semibold leading-snug" },
-  { name: "H4", size: "20px / 1.25rem", weight: "500", lineHeight: "1.3", class: "text-xl font-medium leading-snug" },
-  { name: "Body", size: "16px / 1rem", weight: "400", lineHeight: "1.6", class: "text-base font-normal leading-relaxed" },
-  { name: "Small", size: "14px / 0.875rem", weight: "400", lineHeight: "1.5", class: "text-sm font-normal leading-normal" },
-  { name: "Caption", size: "12px / 0.75rem", weight: "500", lineHeight: "1.4", class: "text-xs font-medium leading-normal" },
-]
+  {
+    name: "Display",
+    size: "72px / 4.5rem",
+    weight: "700",
+    lineHeight: "0.9",
+    class: "text-7xl font-bold leading-[0.9]",
+  },
+  {
+    name: "H1",
+    size: "48px / 3rem",
+    weight: "700",
+    lineHeight: "1.0",
+    class: "text-5xl font-bold leading-tight",
+  },
+  {
+    name: "H2",
+    size: "36px / 2.25rem",
+    weight: "600",
+    lineHeight: "1.1",
+    class: "text-4xl font-semibold leading-tight",
+  },
+  {
+    name: "H3",
+    size: "24px / 1.5rem",
+    weight: "600",
+    lineHeight: "1.2",
+    class: "text-2xl font-semibold leading-snug",
+  },
+  {
+    name: "H4",
+    size: "20px / 1.25rem",
+    weight: "500",
+    lineHeight: "1.3",
+    class: "text-xl font-medium leading-snug",
+  },
+  {
+    name: "Body",
+    size: "16px / 1rem",
+    weight: "400",
+    lineHeight: "1.6",
+    class: "text-base font-normal leading-relaxed",
+  },
+  {
+    name: "Small",
+    size: "14px / 0.875rem",
+    weight: "400",
+    lineHeight: "1.5",
+    class: "text-sm font-normal leading-normal",
+  },
+  {
+    name: "Caption",
+    size: "12px / 0.75rem",
+    weight: "500",
+    lineHeight: "1.4",
+    class: "text-xs font-medium leading-normal",
+  },
+];
 
 const weights = [
   { name: "Light", value: 300 },
@@ -24,22 +72,22 @@ const weights = [
   { name: "Semibold", value: 600 },
   { name: "Bold", value: 700 },
   { name: "Black", value: 900 },
-]
+];
 
 export function TypographySystem({ onInView }: TypographySystemProps) {
-  const sectionRef = useRef<HTMLElement>(null)
+  const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) onInView()
+        if (entry.isIntersecting) onInView();
       },
-      { threshold: 0.2 }
-    )
+      { threshold: 0.2 },
+    );
 
-    if (sectionRef.current) observer.observe(sectionRef.current)
-    return () => observer.disconnect()
-  }, [onInView])
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => observer.disconnect();
+  }, [onInView]);
 
   return (
     <section
@@ -61,7 +109,10 @@ export function TypographySystem({ onInView }: TypographySystemProps) {
           </h2>
           <p className="text-foreground text-lg max-w-2xl leading-relaxed">
             DM Sans. Clean, geometric, unapologetic.
-            <span className="text-muted-foreground"> One typeface. Infinite expression.</span>
+            <span className="text-muted-foreground">
+              {" "}
+              One typeface. Infinite expression.
+            </span>
           </p>
         </div>
 
@@ -77,11 +128,15 @@ export function TypographySystem({ onInView }: TypographySystemProps) {
               </h3>
             </div>
             <div className="flex gap-4">
-              <span className="text-muted-foreground text-sm border border-border px-3 py-1 rounded">Google Fonts</span>
-              <span className="text-muted-foreground text-sm border border-border px-3 py-1 rounded">Open Source</span>
+              <span className="text-muted-foreground text-sm border border-border px-3 py-1 rounded">
+                Google Fonts
+              </span>
+              <span className="text-muted-foreground text-sm border border-border px-3 py-1 rounded">
+                Open Source
+              </span>
             </div>
           </div>
-          
+
           <p className="text-primary text-2xl md:text-3xl lg:text-4xl leading-relaxed max-w-4xl">
             The quick brown fox jumps over the lazy dog.
           </p>
@@ -99,18 +154,25 @@ export function TypographySystem({ onInView }: TypographySystemProps) {
             <span className="w-2 h-2 rounded-full bg-neon-purple" />
             Font Weights
           </h3>
-          
+
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
             {weights.map((weight) => (
-              <div key={weight.name} className="border border-border rounded-lg p-6 text-center">
+              <div
+                key={weight.name}
+                className="border border-border rounded-lg p-6 text-center"
+              >
                 <span
                   className="text-primary text-4xl block mb-4"
                   style={{ fontWeight: weight.value }}
                 >
                   Aa
                 </span>
-                <span className="text-foreground text-sm font-medium block">{weight.name}</span>
-                <span className="text-muted-foreground text-xs">{weight.value}</span>
+                <span className="text-foreground text-sm font-medium block">
+                  {weight.name}
+                </span>
+                <span className="text-muted-foreground text-xs">
+                  {weight.value}
+                </span>
               </div>
             ))}
           </div>
@@ -122,7 +184,7 @@ export function TypographySystem({ onInView }: TypographySystemProps) {
             <span className="w-2 h-2 rounded-full bg-neon-green" />
             Type Scale
           </h3>
-          
+
           <div className="space-y-8">
             {typeScale.map((type) => (
               <div
@@ -130,17 +192,25 @@ export function TypographySystem({ onInView }: TypographySystemProps) {
                 className="flex flex-col lg:flex-row lg:items-center gap-4 lg:gap-8 py-6 border-b border-border"
               >
                 <div className="lg:w-48 shrink-0">
-                  <span className="text-neon-green text-xs font-semibold tracking-wider uppercase">{type.name}</span>
+                  <span className="text-neon-green text-xs font-semibold tracking-wider uppercase">
+                    {type.name}
+                  </span>
                 </div>
                 <div className="flex-1">
                   <p className={`text-primary ${type.class}`}>
-                    Fuck it, we ball.
+                    Fuck it, I guess.
                   </p>
                 </div>
                 <div className="lg:w-64 shrink-0 flex flex-wrap gap-3">
-                  <span className="text-muted-foreground text-xs border border-border px-2 py-1 rounded">{type.size}</span>
-                  <span className="text-muted-foreground text-xs border border-border px-2 py-1 rounded">{type.weight}</span>
-                  <span className="text-muted-foreground text-xs border border-border px-2 py-1 rounded">LH {type.lineHeight}</span>
+                  <span className="text-muted-foreground text-xs border border-border px-2 py-1 rounded">
+                    {type.size}
+                  </span>
+                  <span className="text-muted-foreground text-xs border border-border px-2 py-1 rounded">
+                    {type.weight}
+                  </span>
+                  <span className="text-muted-foreground text-xs border border-border px-2 py-1 rounded">
+                    LH {type.lineHeight}
+                  </span>
                 </div>
               </div>
             ))}
@@ -149,26 +219,37 @@ export function TypographySystem({ onInView }: TypographySystemProps) {
 
         {/* Text Hierarchy */}
         <div className="border border-border rounded-lg p-8 lg:p-12">
-          <h3 className="text-primary font-semibold text-xl mb-8">Text Hierarchy in Action</h3>
-          
+          <h3 className="text-primary font-semibold text-xl mb-8">
+            Text Hierarchy in Action
+          </h3>
+
           <div className="grid lg:grid-cols-2 gap-12">
             <div className="space-y-6">
               <h4 className="text-primary font-bold text-3xl leading-tight">
                 Headlines demand attention.
               </h4>
               <p className="text-foreground leading-relaxed">
-                Body text carries the message. It&apos;s readable, comfortable, and gets the job done without stealing the spotlight. Keep it gray, not white.
+                Body text carries the message. It&apos;s readable, comfortable,
+                and gets the job done without stealing the spotlight. Keep it
+                gray, not white.
               </p>
               <p className="text-muted-foreground text-sm leading-relaxed">
-                Secondary text provides context and additional information. It fades into the background while remaining accessible.
+                Secondary text provides context and additional information. It
+                fades into the background while remaining accessible.
               </p>
               <div className="flex gap-3">
-                <span className="text-neon-green text-xs font-semibold tracking-wider uppercase">Label</span>
-                <span className="text-neon-pink text-xs font-semibold tracking-wider uppercase">Tag</span>
-                <span className="text-neon-orange text-xs font-semibold tracking-wider uppercase">Status</span>
+                <span className="text-neon-green text-xs font-semibold tracking-wider uppercase">
+                  Label
+                </span>
+                <span className="text-neon-pink text-xs font-semibold tracking-wider uppercase">
+                  Tag
+                </span>
+                <span className="text-neon-orange text-xs font-semibold tracking-wider uppercase">
+                  Status
+                </span>
               </div>
             </div>
-            
+
             <div className="border border-border rounded-lg p-6 space-y-4">
               <div className="flex items-center justify-between">
                 <span className="text-primary font-semibold">White</span>
@@ -187,12 +268,14 @@ export function TypographySystem({ onInView }: TypographySystemProps) {
               <div className="h-px bg-border" />
               <div className="flex items-center justify-between">
                 <span className="text-neon-orange">Brand</span>
-                <span className="text-neon-orange text-xs">Accents, labels</span>
+                <span className="text-neon-orange text-xs">
+                  Accents, labels
+                </span>
               </div>
             </div>
           </div>
         </div>
       </div>
     </section>
-  )
+  );
 }
