@@ -11,6 +11,15 @@ const alertVariants = cva(
         default: 'bg-card text-card-foreground',
         destructive:
           'text-destructive bg-card [&>svg]:text-current *:data-[slot=alert-description]:text-destructive/90',
+        // Brand neon variants
+        success:
+          'border-neon-green/50 bg-neon-green/10 text-neon-green [&>svg]:text-neon-green *:data-[slot=alert-description]:text-neon-green/80',
+        warning:
+          'border-neon-orange/50 bg-neon-orange/10 text-neon-orange [&>svg]:text-neon-orange *:data-[slot=alert-description]:text-neon-orange/80',
+        info:
+          'border-neon-purple/50 bg-neon-purple/10 text-neon-purple [&>svg]:text-neon-purple *:data-[slot=alert-description]:text-neon-purple/80',
+        accent:
+          'border-neon-pink/50 bg-neon-pink/10 text-neon-pink [&>svg]:text-neon-pink *:data-[slot=alert-description]:text-neon-pink/80',
       },
     },
     defaultVariants: {

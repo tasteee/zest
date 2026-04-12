@@ -2,8 +2,45 @@
 
 import * as React from 'react'
 import * as SliderPrimitive from '@radix-ui/react-slider'
+import { cva, type VariantProps } from 'class-variance-authority'
 
 import { cn } from '@/lib/utils'
+
+const sliderRangeVariants = cva(
+  'absolute data-[orientation=horizontal]:h-full data-[orientation=vertical]:w-full',
+  {
+    variants: {
+      variant: {
+        default: 'bg-primary',
+        green: 'bg-neon-green',
+        purple: 'bg-neon-purple',
+        pink: 'bg-neon-pink',
+        orange: 'bg-neon-orange',
+      },
+    },
+    defaultVariants: {
+      variant: 'default',
+    },
+  },
+)
+
+const sliderThumbVariants = cva(
+  'ring-ring/50 block size-4 shrink-0 rounded-full bg-white shadow-sm transition-[color,box-shadow] hover:ring-4 focus-visible:ring-4 focus-visible:outline-hidden disabled:pointer-events-none disabled:opacity-50',
+  {
+    variants: {
+      variant: {
+        default: 'border-primary border',
+        green: 'border-neon-green border-2',
+        purple: 'border-neon-purple border-2',
+        pink: 'border-neon-pink border-2',
+        orange: 'border-neon-orange border-2',
+      },
+    },
+    defaultVariants: {
+      variant: 'default',
+    },
+  },
+)
 
 function Slider({
   className,
@@ -11,8 +48,10 @@ function Slider({
   value,
   min = 0,
   max = 100,
+  variant,
   ...props
-}: React.ComponentProps<typeof SliderPrimitive.Root>) {
+}: React.ComponentProps<typeof SliderPrimitive.Root> &
+  VariantProps<typeof sliderRangeVariants>) {
   const _values = React.useMemo(
     () =>
       Array.isArray(value)
@@ -42,18 +81,18 @@ function Slider({
       >
         <SliderPrimitive.Range
           data-slot="slider-range"
-          className="bg-primary absolute data-[orientation=horizontal]:h-full data-[orientation=vertical]:w-full"
+          className={sliderRangeVariants({ variant })}
         />
       </SliderPrimitive.Track>
       {Array.from({ length: _values.length }, (_, index) => (
         <SliderPrimitive.Thumb
           data-slot="slider-thumb"
           key={index}
-          className="border-primary ring-ring/50 block size-4 shrink-0 rounded-full border bg-white shadow-sm transition-[color,box-shadow] hover:ring-4 focus-visible:ring-4 focus-visible:outline-hidden disabled:pointer-events-none disabled:opacity-50"
+          className={sliderThumbVariants({ variant })}
         />
       ))}
     </SliderPrimitive.Root>
   )
 }
 
-export { Slider }
+export { Slider, sliderRangeVariants, sliderThumbVariants }

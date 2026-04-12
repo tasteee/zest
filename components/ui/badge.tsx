@@ -17,6 +17,24 @@ const badgeVariants = cva(
           'border-transparent bg-destructive text-white [a&]:hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60',
         outline:
           'text-foreground [a&]:hover:bg-accent [a&]:hover:text-accent-foreground',
+        // Brand neon variants - solid
+        green:
+          'border-transparent bg-neon-green text-primary-foreground [a&]:hover:opacity-90',
+        purple:
+          'border-transparent bg-neon-purple text-primary-foreground [a&]:hover:opacity-90',
+        pink:
+          'border-transparent bg-neon-pink text-primary-foreground [a&]:hover:opacity-90',
+        orange:
+          'border-transparent bg-neon-orange text-primary-foreground [a&]:hover:opacity-90',
+        // Brand neon variants - outlined
+        'green-outline':
+          'border-neon-green text-neon-green bg-transparent [a&]:hover:bg-neon-green/10',
+        'purple-outline':
+          'border-neon-purple text-neon-purple bg-transparent [a&]:hover:bg-neon-purple/10',
+        'pink-outline':
+          'border-neon-pink text-neon-pink bg-transparent [a&]:hover:bg-neon-pink/10',
+        'orange-outline':
+          'border-neon-orange text-neon-orange bg-transparent [a&]:hover:bg-neon-orange/10',
       },
     },
     defaultVariants: {
