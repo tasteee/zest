@@ -349,16 +349,13 @@ export function UsageExamples({ onInView }: UsageExamplesProps) {
             Ready?
           </span>
           <h3 className="text-primary font-bold text-3xl md:text-4xl lg:text-5xl mb-6">
-            Now go build something
+            You designed it.
             <br />
-            <span className="text-neon-pink">fucking incredible.</span>
+            <span className="text-neon-pink">Now go produce it.</span>
           </h3>
           <p className="text-foreground max-w-xl mx-auto mb-10">
-            You have the system. You have the voice. You have the colors.
-            <span className="text-muted-foreground">
-              {" "}
-              No excuses. No compromises.
-            </span>
+            Put that checkered frettboard to some good use.
+            <span className="text-white font-bold"> Fuck it up.</span>
           </p>
           <button className="bg-neon-green text-primary-foreground px-8 py-4 rounded-md font-bold text-lg hover:opacity-90 transition-opacity">
             Start Creating
