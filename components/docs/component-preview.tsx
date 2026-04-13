@@ -20,16 +20,16 @@ export function ComponentPreview({
 }: ComponentPreviewProps) {
   return (
     <Tabs defaultValue="preview" className="w-full">
-      <TabsList className="w-full justify-start border-b border-border rounded-none bg-transparent p-0 h-auto">
+      <TabsList className="w-auto justify-start bg-muted rounded-lg p-1 h-auto">
         <TabsTrigger
           value="preview"
-          className="rounded-none border-b-2 border-transparent data-[state=active]:border-neon-green data-[state=active]:bg-transparent px-4 py-2"
+          className="rounded-md data-[state=active]:bg-card data-[state=active]:text-foreground px-4 py-1.5 text-sm"
         >
           Preview
         </TabsTrigger>
         <TabsTrigger
           value="code"
-          className="rounded-none border-b-2 border-transparent data-[state=active]:border-neon-green data-[state=active]:bg-transparent px-4 py-2"
+          className="rounded-md data-[state=active]:bg-card data-[state=active]:text-foreground px-4 py-1.5 text-sm"
         >
           Code
         </TabsTrigger>

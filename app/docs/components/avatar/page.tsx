@@ -71,7 +71,7 @@ export default function AvatarDocsPage() {
       <div className="space-y-4">
         <div className="flex items-center gap-3">
           <h1 className="text-4xl font-bold tracking-tight text-foreground">
-            Avatar
+            ZAvatar
           </h1>
           <Badge variant="secondary">Component</Badge>
         </div>
@@ -114,7 +114,7 @@ export function AvatarDemo() {
           </TabsList>
           <TabsContent value="cli" className="mt-4">
             <CodeBlock 
-              code="npx shadcn@latest add avatar" 
+              code="npx zest-ui add avatar" 
               language="bash"
               filename="Terminal"
             />

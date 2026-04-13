@@ -5,7 +5,6 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { ComponentPreview } from "@/components/docs/component-preview"
 import { PropsTable, type PropDefinition } from "@/components/docs/props-table"
 import { CodeBlock } from "@/components/docs/code-block"
@@ -75,7 +74,7 @@ export default function InputDocsPage() {
       <div className="space-y-4">
         <div className="flex items-center gap-3">
           <h1 className="text-4xl font-bold tracking-tight text-foreground">
-            Input
+            ZInput
           </h1>
           <Badge variant="secondary">Component</Badge>
         </div>
@@ -87,66 +86,14 @@ export default function InputDocsPage() {
 
       {/* Quick Preview */}
       <ComponentPreview
-        title="Default Input"
-        description="The default form of the input component."
-        code={`import { Input } from "@/components/ui/input"
+        code={`import { ZInput } from '@tasteee/zest'
 
 export function InputDemo() {
-  return <Input placeholder="Enter your email" />
+  return <ZInput placeholder="Enter your email" />
 }`}
       >
         <Input placeholder="Enter your email" className="max-w-sm" />
       </ComponentPreview>
-
-      {/* Installation */}
-      <section className="space-y-6">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">
-          Installation
-        </h2>
-        <Tabs defaultValue="cli" className="w-full">
-          <TabsList>
-            <TabsTrigger value="cli">CLI</TabsTrigger>
-            <TabsTrigger value="manual">Manual</TabsTrigger>
-          </TabsList>
-          <TabsContent value="cli" className="mt-4">
-            <CodeBlock 
-              code="npx shadcn@latest add input" 
-              language="bash"
-              filename="Terminal"
-            />
-          </TabsContent>
-          <TabsContent value="manual" className="mt-4 space-y-4">
-            <p className="text-muted-foreground">
-              Copy and paste the following code into your project.
-            </p>
-            <CodeBlock
-              code={`import * as React from "react"
-import { cn } from "@/lib/utils"
-
-const Input = React.forwardRef<HTMLInputElement, React.ComponentProps<"input">>(
-  ({ className, type, ...props }, ref) => {
-    return (
-      <input
-        type={type}
-        className={cn(
-          "flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
-          className
-        )}
-        ref={ref}
-        {...props}
-      />
-    )
-  }
-)
-Input.displayName = "Input"
-
-export { Input }`}
-              language="tsx"
-              filename="components/ui/input.tsx"
-            />
-          </TabsContent>
-        </Tabs>
-      </section>
 
       {/* Usage */}
       <section className="space-y-6">
@@ -154,11 +101,11 @@ export { Input }`}
           Usage
         </h2>
         <CodeBlock
-          code={`import { Input } from "@/components/ui/input"`}
+          code={`import { ZInput } from '@tasteee/zest'`}
           language="tsx"
         />
         <CodeBlock
-          code={`<Input type="email" placeholder="Email" />`}
+          code={`<ZInput type="email" placeholder="Email" />`}
           language="tsx"
         />
       </section>
@@ -171,11 +118,11 @@ export { Input }`}
 
         {/* With Label */}
         <ComponentPreview
-          title="With Label"
-          description="Pair inputs with labels for better accessibility."
-          code={`<div className="grid w-full max-w-sm gap-1.5">
-  <Label htmlFor="email">Email</Label>
-  <Input type="email" id="email" placeholder="Enter your email" />
+          code={`import { ZInput, ZLabel } from '@tasteee/zest'
+
+<div className="grid w-full max-w-sm gap-1.5">
+  <ZLabel htmlFor="email">Email</ZLabel>
+  <ZInput type="email" id="email" placeholder="Enter your email" />
 </div>`}
         >
           <div className="grid w-full max-w-sm gap-1.5">
@@ -186,15 +133,15 @@ export { Input }`}
 
         {/* Input Types */}
         <ComponentPreview
-          title="Input Types"
-          description="Different input types for different data formats."
-          code={`<div className="grid gap-4 max-w-sm">
-  <Input type="text" placeholder="Text input" />
-  <Input type="email" placeholder="Email input" />
-  <Input type="number" placeholder="Number input" />
-  <Input type="search" placeholder="Search input" />
-  <Input type="tel" placeholder="Phone input" />
-  <Input type="url" placeholder="URL input" />
+          code={`import { ZInput } from '@tasteee/zest'
+
+<div className="grid gap-4 max-w-sm">
+  <ZInput type="text" placeholder="Text input" />
+  <ZInput type="email" placeholder="Email input" />
+  <ZInput type="number" placeholder="Number input" />
+  <ZInput type="search" placeholder="Search input" />
+  <ZInput type="tel" placeholder="Phone input" />
+  <ZInput type="url" placeholder="URL input" />
 </div>`}
         >
           <div className="grid gap-4 max-w-sm">
@@ -209,11 +156,12 @@ export { Input }`}
 
         {/* With Icon */}
         <ComponentPreview
-          title="With Icon"
-          description="Add icons inside the input for visual context."
-          code={`<div className="relative max-w-sm">
+          code={`import { ZInput } from '@tasteee/zest'
+import { Search } from 'lucide-react'
+
+<div className="relative max-w-sm">
   <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-  <Input placeholder="Search..." className="pl-10" />
+  <ZInput placeholder="Search..." className="pl-10" />
 </div>`}
         >
           <div className="relative max-w-sm">
@@ -224,18 +172,19 @@ export { Input }`}
 
         {/* Password Toggle */}
         <ComponentPreview
-          title="Password with Toggle"
-          description="A password input with visibility toggle."
-          code={`const [showPassword, setShowPassword] = useState(false)
+          code={`import { ZInput, ZButton } from '@tasteee/zest'
+import { Lock, Eye, EyeOff } from 'lucide-react'
+
+const [showPassword, setShowPassword] = useState(false)
 
 <div className="relative max-w-sm">
   <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-  <Input 
+  <ZInput 
     type={showPassword ? "text" : "password"} 
     placeholder="Enter password" 
     className="pl-10 pr-10" 
   />
-  <Button
+  <ZButton
     type="button"
     variant="ghost"
     size="icon"
@@ -243,7 +192,7 @@ export { Input }`}
     onClick={() => setShowPassword(!showPassword)}
   >
     {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-  </Button>
+  </ZButton>
 </div>`}
         >
           <div className="relative max-w-sm">
@@ -267,11 +216,11 @@ export { Input }`}
 
         {/* With Button */}
         <ComponentPreview
-          title="With Button"
-          description="Combine input with a button for actions like search or subscribe."
-          code={`<div className="flex max-w-sm gap-2">
-  <Input type="email" placeholder="Enter your email" />
-  <Button type="submit">Subscribe</Button>
+          code={`import { ZInput, ZButton } from '@tasteee/zest'
+
+<div className="flex max-w-sm gap-2">
+  <ZInput type="email" placeholder="Enter your email" />
+  <ZButton type="submit">Subscribe</ZButton>
 </div>`}
         >
           <div className="flex max-w-sm gap-2">
@@ -282,63 +231,26 @@ export { Input }`}
 
         {/* Disabled */}
         <ComponentPreview
-          title="Disabled"
-          description="Disabled inputs cannot be interacted with."
-          code={`<Input disabled placeholder="Disabled input" />`}
+          code={`import { ZInput } from '@tasteee/zest'
+
+<ZInput disabled placeholder="Disabled input" />`}
         >
           <Input disabled placeholder="Disabled input" className="max-w-sm" />
         </ComponentPreview>
 
         {/* File Input */}
         <ComponentPreview
-          title="File Input"
-          description="A styled file input for file uploads."
-          code={`<div className="grid w-full max-w-sm gap-1.5">
-  <Label htmlFor="file">Upload file</Label>
-  <Input id="file" type="file" />
+          code={`import { ZInput, ZLabel } from '@tasteee/zest'
+
+<div className="grid w-full max-w-sm gap-1.5">
+  <ZLabel htmlFor="file">Upload file</ZLabel>
+  <ZInput id="file" type="file" />
 </div>`}
         >
           <div className="grid w-full max-w-sm gap-1.5">
             <Label htmlFor="file-demo">Upload file</Label>
             <Input id="file-demo" type="file" />
           </div>
-        </ComponentPreview>
-
-        {/* Form Example */}
-        <ComponentPreview
-          title="Form Example"
-          description="A complete form example with validation styling."
-          code={`<form className="grid gap-4 max-w-sm">
-  <div className="grid gap-1.5">
-    <Label htmlFor="name">Name</Label>
-    <Input id="name" placeholder="John Doe" />
-  </div>
-  <div className="grid gap-1.5">
-    <Label htmlFor="email">Email</Label>
-    <Input id="email" type="email" placeholder="john@example.com" />
-  </div>
-  <div className="grid gap-1.5">
-    <Label htmlFor="message">Message</Label>
-    <Input id="message" placeholder="Your message..." />
-  </div>
-  <Button type="submit">Submit</Button>
-</form>`}
-        >
-          <form className="grid gap-4 max-w-sm">
-            <div className="grid gap-1.5">
-              <Label htmlFor="name-demo">Name</Label>
-              <Input id="name-demo" placeholder="John Doe" />
-            </div>
-            <div className="grid gap-1.5">
-              <Label htmlFor="email-demo-2">Email</Label>
-              <Input id="email-demo-2" type="email" placeholder="john@example.com" />
-            </div>
-            <div className="grid gap-1.5">
-              <Label htmlFor="message-demo">Message</Label>
-              <Input id="message-demo" placeholder="Your message..." />
-            </div>
-            <Button type="submit">Submit</Button>
-          </form>
         </ComponentPreview>
       </section>
 
@@ -348,10 +260,10 @@ export { Input }`}
           API Reference
         </h2>
         <p className="text-muted-foreground">
-          The Input component extends the native HTML input element and accepts all 
+          The ZInput component extends the native HTML input element and accepts all 
           standard input attributes.
         </p>
-        <PropsTable title="Input" props={inputProps} />
+        <PropsTable title="ZInput" props={inputProps} />
       </section>
 
       {/* Accessibility */}
@@ -364,7 +276,7 @@ export { Input }`}
             <div className="space-y-2">
               <h3 className="font-semibold text-foreground">Best Practices</h3>
               <ul className="text-sm text-muted-foreground space-y-2 list-disc list-inside">
-                <li>Always pair inputs with visible labels using the Label component</li>
+                <li>Always pair inputs with visible labels using the ZLabel component</li>
                 <li>Use the htmlFor attribute on labels to associate them with inputs</li>
                 <li>Provide clear placeholder text that describes expected input</li>
                 <li>Use appropriate input types (email, tel, etc.) for better mobile keyboards</li>

@@ -50,7 +50,7 @@ export default function AlertDocsPage() {
       <div className="space-y-4">
         <div className="flex items-center gap-3">
           <h1 className="text-4xl font-bold tracking-tight text-foreground">
-            Alert
+            ZAlert
           </h1>
           <Badge variant="secondary">Component</Badge>
         </div>
@@ -62,20 +62,18 @@ export default function AlertDocsPage() {
 
       {/* Quick Preview */}
       <ComponentPreview
-        title="Default Alert"
-        description="A basic alert with title and description."
-        code={`import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-import { Terminal } from "lucide-react"
+        code={`import { ZAlert, ZAlertDescription, ZAlertTitle } from '@tasteee/zest'
+import { Terminal } from 'lucide-react'
 
 export function AlertDemo() {
   return (
-    <Alert>
+    <ZAlert>
       <Terminal className="h-4 w-4" />
-      <AlertTitle>Heads up!</AlertTitle>
-      <AlertDescription>
+      <ZAlertTitle>Heads up!</ZAlertTitle>
+      <ZAlertDescription>
         You can add components to your app using the cli.
-      </AlertDescription>
-    </Alert>
+      </ZAlertDescription>
+    </ZAlert>
   )
 }`}
       >
@@ -88,83 +86,20 @@ export function AlertDemo() {
         </Alert>
       </ComponentPreview>
 
-      {/* Installation */}
-      <section className="space-y-6">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">
-          Installation
-        </h2>
-        <Tabs defaultValue="cli" className="w-full">
-          <TabsList>
-            <TabsTrigger value="cli">CLI</TabsTrigger>
-            <TabsTrigger value="manual">Manual</TabsTrigger>
-          </TabsList>
-          <TabsContent value="cli" className="mt-4">
-            <CodeBlock 
-              code="npx shadcn@latest add alert" 
-              language="bash"
-              filename="Terminal"
-            />
-          </TabsContent>
-          <TabsContent value="manual" className="mt-4 space-y-4">
-            <p className="text-muted-foreground">
-              Copy and paste the following code into your project.
-            </p>
-            <CodeBlock
-              code={`import * as React from "react"
-import { cva, type VariantProps } from "class-variance-authority"
-import { cn } from "@/lib/utils"
-
-const alertVariants = cva(
-  "relative w-full rounded-lg border px-4 py-3 text-sm [&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4 [&>svg]:text-foreground [&>svg~*]:pl-7",
-  {
-    variants: {
-      variant: {
-        default: "bg-background text-foreground",
-        destructive:
-          "border-destructive/50 text-destructive dark:border-destructive [&>svg]:text-destructive",
-      },
-    },
-    defaultVariants: {
-      variant: "default",
-    },
-  }
-)
-
-const Alert = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement> & VariantProps<typeof alertVariants>
->(({ className, variant, ...props }, ref) => (
-  <div
-    ref={ref}
-    role="alert"
-    className={cn(alertVariants({ variant }), className)}
-    {...props}
-  />
-))
-Alert.displayName = "Alert"
-
-export { Alert, AlertTitle, AlertDescription }`}
-              language="tsx"
-              filename="components/ui/alert.tsx"
-            />
-          </TabsContent>
-        </Tabs>
-      </section>
-
       {/* Usage */}
       <section className="space-y-6">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">
           Usage
         </h2>
         <CodeBlock
-          code={`import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"`}
+          code={`import { ZAlert, ZAlertDescription, ZAlertTitle } from '@tasteee/zest'`}
           language="tsx"
         />
         <CodeBlock
-          code={`<Alert>
-  <AlertTitle>Alert Title</AlertTitle>
-  <AlertDescription>Alert description text.</AlertDescription>
-</Alert>`}
+          code={`<ZAlert>
+  <ZAlertTitle>Alert Title</ZAlertTitle>
+  <ZAlertDescription>Alert description text.</ZAlertDescription>
+</ZAlert>`}
           language="tsx"
         />
       </section>

@@ -79,7 +79,7 @@ export default function ProgressDocsPage() {
       <div className="space-y-4">
         <div className="flex items-center gap-3">
           <h1 className="text-4xl font-bold tracking-tight text-foreground">
-            Progress
+            ZProgress
           </h1>
           <Badge variant="secondary">Component</Badge>
         </div>
@@ -114,7 +114,7 @@ export function ProgressDemo() {
           </TabsList>
           <TabsContent value="cli" className="mt-4">
             <CodeBlock 
-              code="npx shadcn@latest add progress" 
+              code="npx zest-ui add progress" 
               language="bash"
               filename="Terminal"
             />

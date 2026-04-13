@@ -4,7 +4,6 @@ import { useState } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { ComponentPreview } from "@/components/docs/component-preview"
 import { PropsTable, type PropDefinition } from "@/components/docs/props-table"
 import { CodeBlock } from "@/components/docs/code-block"
@@ -80,7 +79,7 @@ export default function ButtonDocsPage() {
       <div className="space-y-4">
         <div className="flex items-center gap-3">
           <h1 className="text-4xl font-bold tracking-tight text-foreground">
-            Button
+            ZButton
           </h1>
           <Badge variant="secondary">Component</Badge>
         </div>
@@ -92,97 +91,14 @@ export default function ButtonDocsPage() {
 
       {/* Quick Preview */}
       <ComponentPreview
-        title="Default Button"
-        description="The default form of the button component."
-        code={`import { Button } from "@/components/ui/button"
+        code={`import { ZButton } from '@tasteee/zest'
 
 export function ButtonDemo() {
-  return <Button>Click me</Button>
+  return <ZButton>Click me</ZButton>
 }`}
       >
         <Button>Click me</Button>
       </ComponentPreview>
-
-      {/* Installation */}
-      <section className="space-y-6">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">
-          Installation
-        </h2>
-        <Tabs defaultValue="cli" className="w-full">
-          <TabsList>
-            <TabsTrigger value="cli">CLI</TabsTrigger>
-            <TabsTrigger value="manual">Manual</TabsTrigger>
-          </TabsList>
-          <TabsContent value="cli" className="mt-4">
-            <CodeBlock 
-              code="npx shadcn@latest add button" 
-              language="bash"
-              filename="Terminal"
-            />
-          </TabsContent>
-          <TabsContent value="manual" className="mt-4 space-y-4">
-            <p className="text-muted-foreground">
-              Copy and paste the following code into your project.
-            </p>
-            <CodeBlock
-              code={`import * as React from "react"
-import { Slot } from "@radix-ui/react-slot"
-import { cva, type VariantProps } from "class-variance-authority"
-import { cn } from "@/lib/utils"
-
-const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
-  {
-    variants: {
-      variant: {
-        default: "bg-primary text-primary-foreground shadow hover:bg-primary/90",
-        destructive: "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
-        outline: "border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground",
-        secondary: "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
-        ghost: "hover:bg-accent hover:text-accent-foreground",
-        link: "text-primary underline-offset-4 hover:underline",
-      },
-      size: {
-        default: "h-9 px-4 py-2",
-        sm: "h-8 rounded-md px-3 text-xs",
-        lg: "h-10 rounded-md px-8",
-        icon: "h-9 w-9",
-      },
-    },
-    defaultVariants: {
-      variant: "default",
-      size: "default",
-    },
-  }
-)
-
-export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
-  asChild?: boolean
-}
-
-const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, ...props }, ref) => {
-    const Comp = asChild ? Slot : "button"
-    return (
-      <Comp
-        className={cn(buttonVariants({ variant, size, className }))}
-        ref={ref}
-        {...props}
-      />
-    )
-  }
-)
-Button.displayName = "Button"
-
-export { Button, buttonVariants }`}
-              language="tsx"
-              filename="components/ui/button.tsx"
-            />
-          </TabsContent>
-        </Tabs>
-      </section>
 
       {/* Usage */}
       <section className="space-y-6">
@@ -190,11 +106,11 @@ export { Button, buttonVariants }`}
           Usage
         </h2>
         <CodeBlock
-          code={`import { Button } from "@/components/ui/button"`}
+          code={`import { ZButton } from '@tasteee/zest'`}
           language="tsx"
         />
         <CodeBlock
-          code={`<Button variant="outline">Click me</Button>`}
+          code={`<ZButton variant="outline">Click me</ZButton>`}
           language="tsx"
         />
       </section>
@@ -207,15 +123,15 @@ export { Button, buttonVariants }`}
 
         {/* Variants */}
         <ComponentPreview
-          title="Variants"
-          description="Different visual styles for different contexts and emphasis levels."
-          code={`<div className="flex flex-wrap gap-4">
-  <Button variant="default">Default</Button>
-  <Button variant="secondary">Secondary</Button>
-  <Button variant="outline">Outline</Button>
-  <Button variant="ghost">Ghost</Button>
-  <Button variant="link">Link</Button>
-  <Button variant="destructive">Destructive</Button>
+          code={`import { ZButton } from '@tasteee/zest'
+
+<div className="flex flex-wrap gap-4">
+  <ZButton variant="default">Default</ZButton>
+  <ZButton variant="secondary">Secondary</ZButton>
+  <ZButton variant="outline">Outline</ZButton>
+  <ZButton variant="ghost">Ghost</ZButton>
+  <ZButton variant="link">Link</ZButton>
+  <ZButton variant="destructive">Destructive</ZButton>
 </div>`}
         >
           <div className="flex flex-wrap gap-4">
@@ -230,15 +146,16 @@ export { Button, buttonVariants }`}
 
         {/* Sizes */}
         <ComponentPreview
-          title="Sizes"
-          description="Different sizes to fit various UI contexts."
-          code={`<div className="flex items-center gap-4">
-  <Button size="sm">Small</Button>
-  <Button size="default">Default</Button>
-  <Button size="lg">Large</Button>
-  <Button size="icon">
+          code={`import { ZButton } from '@tasteee/zest'
+import { Plus } from 'lucide-react'
+
+<div className="flex items-center gap-4">
+  <ZButton size="sm">Small</ZButton>
+  <ZButton size="default">Default</ZButton>
+  <ZButton size="lg">Large</ZButton>
+  <ZButton size="icon">
     <Plus className="h-4 w-4" />
-  </Button>
+  </ZButton>
 </div>`}
         >
           <div className="flex items-center gap-4">
@@ -253,21 +170,22 @@ export { Button, buttonVariants }`}
 
         {/* With Icons */}
         <ComponentPreview
-          title="With Icons"
-          description="Buttons can include icons for additional visual context."
-          code={`<div className="flex flex-wrap gap-4">
-  <Button>
+          code={`import { ZButton } from '@tasteee/zest'
+import { Mail, Download, ExternalLink } from 'lucide-react'
+
+<div className="flex flex-wrap gap-4">
+  <ZButton>
     <Mail className="mr-2 h-4 w-4" />
     Login with Email
-  </Button>
-  <Button variant="outline">
+  </ZButton>
+  <ZButton variant="outline">
     Download
     <Download className="ml-2 h-4 w-4" />
-  </Button>
-  <Button variant="secondary">
+  </ZButton>
+  <ZButton variant="secondary">
     <ExternalLink className="mr-2 h-4 w-4" />
     Open Link
-  </Button>
+  </ZButton>
 </div>`}
         >
           <div className="flex flex-wrap gap-4">
@@ -288,9 +206,10 @@ export { Button, buttonVariants }`}
 
         {/* Loading State */}
         <ComponentPreview
-          title="Loading State"
-          description="Show a loading spinner when an action is in progress."
-          code={`<Button disabled={isLoading} onClick={handleLoadingClick}>
+          code={`import { ZButton } from '@tasteee/zest'
+import { Loader2 } from 'lucide-react'
+
+<ZButton disabled={isLoading} onClick={handleLoadingClick}>
   {isLoading ? (
     <>
       <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -299,7 +218,7 @@ export { Button, buttonVariants }`}
   ) : (
     "Click me"
   )}
-</Button>`}
+</ZButton>`}
         >
           <Button disabled={isLoading} onClick={handleLoadingClick}>
             {isLoading ? (
@@ -315,12 +234,12 @@ export { Button, buttonVariants }`}
 
         {/* Disabled */}
         <ComponentPreview
-          title="Disabled"
-          description="Disabled buttons cannot be interacted with."
-          code={`<div className="flex gap-4">
-  <Button disabled>Disabled</Button>
-  <Button variant="outline" disabled>Disabled Outline</Button>
-  <Button variant="secondary" disabled>Disabled Secondary</Button>
+          code={`import { ZButton } from '@tasteee/zest'
+
+<div className="flex gap-4">
+  <ZButton disabled>Disabled</ZButton>
+  <ZButton variant="outline" disabled>Disabled Outline</ZButton>
+  <ZButton variant="secondary" disabled>Disabled Secondary</ZButton>
 </div>`}
         >
           <div className="flex gap-4">
@@ -332,16 +251,16 @@ export { Button, buttonVariants }`}
 
         {/* As Child */}
         <ComponentPreview
-          title="As Link"
-          description="Use asChild to render the button as a different element, like a link."
-          code={`import Link from "next/link"
+          code={`import { ZButton } from '@tasteee/zest'
+import Link from 'next/link'
+import { ArrowRight } from 'lucide-react'
 
-<Button asChild>
+<ZButton asChild>
   <Link href="/docs">
     Go to Docs
     <ArrowRight className="ml-2 h-4 w-4" />
   </Link>
-</Button>`}
+</ZButton>`}
         >
           <Button asChild>
             <Link href="/docs">
@@ -353,21 +272,22 @@ export { Button, buttonVariants }`}
 
         {/* Icon Buttons */}
         <ComponentPreview
-          title="Icon Buttons"
-          description="Square buttons containing only an icon."
-          code={`<div className="flex gap-2">
-  <Button size="icon" variant="outline">
+          code={`import { ZButton } from '@tasteee/zest'
+import { Check, X, Plus } from 'lucide-react'
+
+<div className="flex gap-2">
+  <ZButton size="icon" variant="outline">
     <Check className="h-4 w-4" />
-  </Button>
-  <Button size="icon" variant="outline">
+  </ZButton>
+  <ZButton size="icon" variant="outline">
     <X className="h-4 w-4" />
-  </Button>
-  <Button size="icon">
+  </ZButton>
+  <ZButton size="icon">
     <Plus className="h-4 w-4" />
-  </Button>
-  <Button size="icon" variant="destructive">
+  </ZButton>
+  <ZButton size="icon" variant="destructive">
     <X className="h-4 w-4" />
-  </Button>
+  </ZButton>
 </div>`}
         >
           <div className="flex gap-2">
@@ -392,7 +312,7 @@ export { Button, buttonVariants }`}
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">
           API Reference
         </h2>
-        <PropsTable title="Button" props={buttonProps} />
+        <PropsTable title="ZButton" props={buttonProps} />
       </section>
 
       {/* Accessibility */}
@@ -434,9 +354,9 @@ export { Button, buttonVariants }`}
         </h2>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {[
-            { name: "Toggle", href: "/docs/components/toggle", description: "A two-state button that can be on or off" },
-            { name: "Toggle Group", href: "/docs/components/toggle-group", description: "A set of two-state buttons" },
-            { name: "Dropdown Menu", href: "/docs/components/dropdown-menu", description: "Menus triggered by buttons" },
+            { name: "ZDropdownMenu", href: "/docs/components/dropdown-menu", description: "Menus triggered by buttons" },
+            { name: "ZDialog", href: "/docs/components/dialog", description: "Modal dialogs triggered by buttons" },
+            { name: "ZTooltip", href: "/docs/components/tooltip", description: "Tooltips for button hints" },
           ].map((component) => (
             <Link key={component.name} href={component.href}>
               <Card className="h-full transition-colors hover:border-primary/50">

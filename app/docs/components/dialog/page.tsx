@@ -95,7 +95,7 @@ export default function DialogDocsPage() {
       <div className="space-y-4">
         <div className="flex items-center gap-3">
           <h1 className="text-4xl font-bold tracking-tight text-foreground">
-            Dialog
+            ZDialog
           </h1>
           <Badge variant="secondary">Component</Badge>
         </div>
@@ -107,42 +107,43 @@ export default function DialogDocsPage() {
 
       {/* Quick Preview */}
       <ComponentPreview
-        title="Default Dialog"
-        description="A basic dialog with header, content, and footer."
         code={`import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog"
+  ZDialog,
+  ZDialogContent,
+  ZDialogDescription,
+  ZDialogFooter,
+  ZDialogHeader,
+  ZDialogTitle,
+  ZDialogTrigger,
+  ZButton,
+  ZInput,
+  ZLabel,
+} from '@tasteee/zest'
 
 export function DialogDemo() {
   return (
-    <Dialog>
-      <DialogTrigger asChild>
-        <Button variant="outline">Open Dialog</Button>
-      </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
-        <DialogHeader>
-          <DialogTitle>Edit profile</DialogTitle>
-          <DialogDescription>
+    <ZDialog>
+      <ZDialogTrigger asChild>
+        <ZButton variant="outline">Open Dialog</ZButton>
+      </ZDialogTrigger>
+      <ZDialogContent className="sm:max-w-[425px]">
+        <ZDialogHeader>
+          <ZDialogTitle>Edit profile</ZDialogTitle>
+          <ZDialogDescription>
             Make changes to your profile here. Click save when you're done.
-          </DialogDescription>
-        </DialogHeader>
+          </ZDialogDescription>
+        </ZDialogHeader>
         <div className="grid gap-4 py-4">
           <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="name" className="text-right">Name</Label>
-            <Input id="name" defaultValue="Pedro Duarte" className="col-span-3" />
+            <ZLabel htmlFor="name" className="text-right">Name</ZLabel>
+            <ZInput id="name" defaultValue="Pedro Duarte" className="col-span-3" />
           </div>
         </div>
-        <DialogFooter>
-          <Button type="submit">Save changes</Button>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
+        <ZDialogFooter>
+          <ZButton type="submit">Save changes</ZButton>
+        </ZDialogFooter>
+      </ZDialogContent>
+    </ZDialog>
   )
 }`}
       >
@@ -174,96 +175,6 @@ export function DialogDemo() {
         </Dialog>
       </ComponentPreview>
 
-      {/* Installation */}
-      <section className="space-y-6">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">
-          Installation
-        </h2>
-        <Tabs defaultValue="cli" className="w-full">
-          <TabsList>
-            <TabsTrigger value="cli">CLI</TabsTrigger>
-            <TabsTrigger value="manual">Manual</TabsTrigger>
-          </TabsList>
-          <TabsContent value="cli" className="mt-4">
-            <CodeBlock 
-              code="npx shadcn@latest add dialog" 
-              language="bash"
-              filename="Terminal"
-            />
-          </TabsContent>
-          <TabsContent value="manual" className="mt-4 space-y-4">
-            <p className="text-muted-foreground">
-              Install the required dependencies:
-            </p>
-            <CodeBlock
-              code="npm install @radix-ui/react-dialog"
-              language="bash"
-              filename="Terminal"
-            />
-            <p className="text-muted-foreground">
-              Copy and paste the following code into your project.
-            </p>
-            <CodeBlock
-              code={`"use client"
-
-import * as React from "react"
-import * as DialogPrimitive from "@radix-ui/react-dialog"
-import { X } from "lucide-react"
-import { cn } from "@/lib/utils"
-
-const Dialog = DialogPrimitive.Root
-const DialogTrigger = DialogPrimitive.Trigger
-const DialogPortal = DialogPrimitive.Portal
-const DialogClose = DialogPrimitive.Close
-
-const DialogOverlay = React.forwardRef<
-  React.ComponentRef<typeof DialogPrimitive.Overlay>,
-  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Overlay>
->(({ className, ...props }, ref) => (
-  <DialogPrimitive.Overlay
-    ref={ref}
-    className={cn(
-      "fixed inset-0 z-50 bg-black/80 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
-      className
-    )}
-    {...props}
-  />
-))
-DialogOverlay.displayName = DialogPrimitive.Overlay.displayName
-
-const DialogContent = React.forwardRef<
-  React.ComponentRef<typeof DialogPrimitive.Content>,
-  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>
->(({ className, children, ...props }, ref) => (
-  <DialogPortal>
-    <DialogOverlay />
-    <DialogPrimitive.Content
-      ref={ref}
-      className={cn(
-        "fixed left-[50%] top-[50%] z-50 grid w-full max-w-lg translate-x-[-50%] translate-y-[-50%] gap-4 border bg-background p-6 shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] sm:rounded-lg",
-        className
-      )}
-      {...props}
-    >
-      {children}
-      <DialogPrimitive.Close className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground">
-        <X className="h-4 w-4" />
-        <span className="sr-only">Close</span>
-      </DialogPrimitive.Close>
-    </DialogPrimitive.Content>
-  </DialogPortal>
-))
-DialogContent.displayName = DialogPrimitive.Content.displayName
-
-// ... additional components
-export { Dialog, DialogPortal, DialogOverlay, DialogTrigger, DialogClose, DialogContent }`}
-              language="tsx"
-              filename="components/ui/dialog.tsx"
-            />
-          </TabsContent>
-        </Tabs>
-      </section>
-
       {/* Usage */}
       <section className="space-y-6">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">
@@ -271,27 +182,27 @@ export { Dialog, DialogPortal, DialogOverlay, DialogTrigger, DialogClose, Dialog
         </h2>
         <CodeBlock
           code={`import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog"`}
+  ZDialog,
+  ZDialogContent,
+  ZDialogDescription,
+  ZDialogHeader,
+  ZDialogTitle,
+  ZDialogTrigger,
+} from '@tasteee/zest'`}
           language="tsx"
         />
         <CodeBlock
-          code={`<Dialog>
-  <DialogTrigger>Open</DialogTrigger>
-  <DialogContent>
-    <DialogHeader>
-      <DialogTitle>Are you sure?</DialogTitle>
-      <DialogDescription>
+          code={`<ZDialog>
+  <ZDialogTrigger>Open</ZDialogTrigger>
+  <ZDialogContent>
+    <ZDialogHeader>
+      <ZDialogTitle>Are you sure?</ZDialogTitle>
+      <ZDialogDescription>
         This action cannot be undone.
-      </DialogDescription>
-    </DialogHeader>
-  </DialogContent>
-</Dialog>`}
+      </ZDialogDescription>
+    </ZDialogHeader>
+  </ZDialogContent>
+</ZDialog>`}
           language="tsx"
         />
       </section>

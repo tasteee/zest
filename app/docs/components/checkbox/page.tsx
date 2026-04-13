@@ -73,7 +73,7 @@ export default function CheckboxDocsPage() {
       <div className="space-y-4">
         <div className="flex items-center gap-3">
           <h1 className="text-4xl font-bold tracking-tight text-foreground">
-            Checkbox
+            ZCheckbox
           </h1>
           <Badge variant="secondary">Component</Badge>
         </div>
@@ -117,7 +117,7 @@ export function CheckboxDemo() {
           </TabsList>
           <TabsContent value="cli" className="mt-4">
             <CodeBlock 
-              code="npx shadcn@latest add checkbox" 
+              code="npx zest-ui add checkbox" 
               language="bash"
               filename="Terminal"
             />

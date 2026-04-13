@@ -86,7 +86,7 @@ export default function AccordionDocsPage() {
       <div className="space-y-4">
         <div className="flex items-center gap-3">
           <h1 className="text-4xl font-bold tracking-tight text-foreground">
-            Accordion
+            ZAccordion
           </h1>
           <Badge variant="secondary">Component</Badge>
         </div>
@@ -98,37 +98,35 @@ export default function AccordionDocsPage() {
 
       {/* Quick Preview */}
       <ComponentPreview
-        title="Default Accordion"
-        description="A collapsible accordion with single item expansion."
         code={`import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion"
+  ZAccordion,
+  ZAccordionContent,
+  ZAccordionItem,
+  ZAccordionTrigger,
+} from '@tasteee/zest'
 
 export function AccordionDemo() {
   return (
-    <Accordion type="single" collapsible className="w-full">
-      <AccordionItem value="item-1">
-        <AccordionTrigger>Is it accessible?</AccordionTrigger>
-        <AccordionContent>
+    <ZAccordion type="single" collapsible className="w-full">
+      <ZAccordionItem value="item-1">
+        <ZAccordionTrigger>Is it accessible?</ZAccordionTrigger>
+        <ZAccordionContent>
           Yes. It adheres to the WAI-ARIA design pattern.
-        </AccordionContent>
-      </AccordionItem>
-      <AccordionItem value="item-2">
-        <AccordionTrigger>Is it styled?</AccordionTrigger>
-        <AccordionContent>
+        </ZAccordionContent>
+      </ZAccordionItem>
+      <ZAccordionItem value="item-2">
+        <ZAccordionTrigger>Is it styled?</ZAccordionTrigger>
+        <ZAccordionContent>
           Yes. It comes with default styles that match your design system.
-        </AccordionContent>
-      </AccordionItem>
-      <AccordionItem value="item-3">
-        <AccordionTrigger>Is it animated?</AccordionTrigger>
-        <AccordionContent>
+        </ZAccordionContent>
+      </ZAccordionItem>
+      <ZAccordionItem value="item-3">
+        <ZAccordionTrigger>Is it animated?</ZAccordionTrigger>
+        <ZAccordionContent>
           Yes. It's animated by default, but you can disable it.
-        </AccordionContent>
-      </AccordionItem>
-    </Accordion>
+        </ZAccordionContent>
+      </ZAccordionItem>
+    </ZAccordion>
   )
 }`}
       >
@@ -154,36 +152,6 @@ export function AccordionDemo() {
         </Accordion>
       </ComponentPreview>
 
-      {/* Installation */}
-      <section className="space-y-6">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">
-          Installation
-        </h2>
-        <Tabs defaultValue="cli" className="w-full">
-          <TabsList>
-            <TabsTrigger value="cli">CLI</TabsTrigger>
-            <TabsTrigger value="manual">Manual</TabsTrigger>
-          </TabsList>
-          <TabsContent value="cli" className="mt-4">
-            <CodeBlock 
-              code="npx shadcn@latest add accordion" 
-              language="bash"
-              filename="Terminal"
-            />
-          </TabsContent>
-          <TabsContent value="manual" className="mt-4 space-y-4">
-            <p className="text-muted-foreground">
-              Install the required dependencies:
-            </p>
-            <CodeBlock
-              code="npm install @radix-ui/react-accordion"
-              language="bash"
-              filename="Terminal"
-            />
-          </TabsContent>
-        </Tabs>
-      </section>
-
       {/* Usage */}
       <section className="space-y-6">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">
@@ -191,20 +159,20 @@ export function AccordionDemo() {
         </h2>
         <CodeBlock
           code={`import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion"`}
+  ZAccordion,
+  ZAccordionContent,
+  ZAccordionItem,
+  ZAccordionTrigger,
+} from '@tasteee/zest'`}
           language="tsx"
         />
         <CodeBlock
-          code={`<Accordion type="single" collapsible>
-  <AccordionItem value="item-1">
-    <AccordionTrigger>Title</AccordionTrigger>
-    <AccordionContent>Content</AccordionContent>
-  </AccordionItem>
-</Accordion>`}
+          code={`<ZAccordion type="single" collapsible>
+  <ZAccordionItem value="item-1">
+    <ZAccordionTrigger>Title</ZAccordionTrigger>
+    <ZAccordionContent>Content</ZAccordionContent>
+  </ZAccordionItem>
+</ZAccordion>`}
           language="tsx"
         />
       </section>

@@ -77,7 +77,7 @@ export default function TabsDocsPage() {
       <div className="space-y-4">
         <div className="flex items-center gap-3">
           <h1 className="text-4xl font-bold tracking-tight text-foreground">
-            Tabs
+            ZTabs
           </h1>
           <Badge variant="secondary">Component</Badge>
         </div>
@@ -140,7 +140,7 @@ export function TabsDemo() {
           </TabsList>
           <TabsContent value="cli" className="mt-4">
             <CodeBlock 
-              code="npx shadcn@latest add tabs" 
+              code="npx zest-ui add tabs" 
               language="bash"
               filename="Terminal"
             />

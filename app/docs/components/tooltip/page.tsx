@@ -84,7 +84,7 @@ export default function TooltipDocsPage() {
       <div className="space-y-4">
         <div className="flex items-center gap-3">
           <h1 className="text-4xl font-bold tracking-tight text-foreground">
-            Tooltip
+            ZTooltip
           </h1>
           <Badge variant="secondary">Component</Badge>
         </div>
@@ -144,7 +144,7 @@ export function TooltipDemo() {
           </TabsList>
           <TabsContent value="cli" className="mt-4">
             <CodeBlock 
-              code="npx shadcn@latest add tooltip" 
+              code="npx zest-ui add tooltip" 
               language="bash"
               filename="Terminal"
             />

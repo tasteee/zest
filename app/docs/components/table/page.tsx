@@ -55,7 +55,7 @@ export default function TableDocsPage() {
       <div className="space-y-4">
         <div className="flex items-center gap-3">
           <h1 className="text-4xl font-bold tracking-tight text-foreground">
-            Table
+            ZTable
           </h1>
           <Badge variant="secondary">Component</Badge>
         </div>
@@ -140,7 +140,7 @@ export function TableDemo() {
           </TabsList>
           <TabsContent value="cli" className="mt-4">
             <CodeBlock 
-              code="npx shadcn@latest add table" 
+              code="npx zest-ui add table" 
               language="bash"
               filename="Terminal"
             />

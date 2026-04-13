@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { 
   Card, 
   CardContent, 
@@ -17,7 +16,7 @@ import {
 import { ComponentPreview } from "@/components/docs/component-preview"
 import { PropsTable, type PropDefinition } from "@/components/docs/props-table"
 import { CodeBlock } from "@/components/docs/code-block"
-import { ChevronRight, Bell, Check, CreditCard, Settings } from "lucide-react"
+import { ChevronRight, Bell, Check, CreditCard } from "lucide-react"
 import { Switch } from "@/components/ui/switch"
 
 const cardProps: PropDefinition[] = [
@@ -44,7 +43,7 @@ const cardHeaderProps: PropDefinition[] = [
     name: "children",
     type: "React.ReactNode",
     required: true,
-    description: "Typically includes CardTitle and CardDescription."
+    description: "Typically includes ZCardTitle and ZCardDescription."
   },
 ]
 
@@ -82,7 +81,7 @@ export default function CardDocsPage() {
       <div className="space-y-4">
         <div className="flex items-center gap-3">
           <h1 className="text-4xl font-bold tracking-tight text-foreground">
-            Card
+            ZCard
           </h1>
           <Badge variant="secondary">Component</Badge>
         </div>
@@ -94,31 +93,29 @@ export default function CardDocsPage() {
 
       {/* Quick Preview */}
       <ComponentPreview
-        title="Default Card"
-        description="The default card with header, content, and footer."
         code={`import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
+  ZCard,
+  ZCardContent,
+  ZCardDescription,
+  ZCardFooter,
+  ZCardHeader,
+  ZCardTitle,
+} from '@tasteee/zest'
 
 export function CardDemo() {
   return (
-    <Card className="w-[350px]">
-      <CardHeader>
-        <CardTitle>Card Title</CardTitle>
-        <CardDescription>Card Description</CardDescription>
-      </CardHeader>
-      <CardContent>
+    <ZCard className="w-[350px]">
+      <ZCardHeader>
+        <ZCardTitle>Card Title</ZCardTitle>
+        <ZCardDescription>Card Description</ZCardDescription>
+      </ZCardHeader>
+      <ZCardContent>
         <p>Card Content</p>
-      </CardContent>
-      <CardFooter>
+      </ZCardContent>
+      <ZCardFooter>
         <p>Card Footer</p>
-      </CardFooter>
-    </Card>
+      </ZCardFooter>
+    </ZCard>
   )
 }`}
       >
@@ -136,110 +133,6 @@ export function CardDemo() {
         </Card>
       </ComponentPreview>
 
-      {/* Installation */}
-      <section className="space-y-6">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">
-          Installation
-        </h2>
-        <Tabs defaultValue="cli" className="w-full">
-          <TabsList>
-            <TabsTrigger value="cli">CLI</TabsTrigger>
-            <TabsTrigger value="manual">Manual</TabsTrigger>
-          </TabsList>
-          <TabsContent value="cli" className="mt-4">
-            <CodeBlock 
-              code="npx shadcn@latest add card" 
-              language="bash"
-              filename="Terminal"
-            />
-          </TabsContent>
-          <TabsContent value="manual" className="mt-4 space-y-4">
-            <p className="text-muted-foreground">
-              Copy and paste the following code into your project.
-            </p>
-            <CodeBlock
-              code={`import * as React from "react"
-import { cn } from "@/lib/utils"
-
-const Card = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn(
-      "rounded-xl border bg-card text-card-foreground shadow",
-      className
-    )}
-    {...props}
-  />
-))
-Card.displayName = "Card"
-
-const CardHeader = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn("flex flex-col space-y-1.5 p-6", className)}
-    {...props}
-  />
-))
-CardHeader.displayName = "CardHeader"
-
-const CardTitle = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn("font-semibold leading-none tracking-tight", className)}
-    {...props}
-  />
-))
-CardTitle.displayName = "CardTitle"
-
-const CardDescription = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn("text-sm text-muted-foreground", className)}
-    {...props}
-  />
-))
-CardDescription.displayName = "CardDescription"
-
-const CardContent = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div ref={ref} className={cn("p-6 pt-0", className)} {...props} />
-))
-CardContent.displayName = "CardContent"
-
-const CardFooter = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn("flex items-center p-6 pt-0", className)}
-    {...props}
-  />
-))
-CardFooter.displayName = "CardFooter"
-
-export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent }`}
-              language="tsx"
-              filename="components/ui/card.tsx"
-            />
-          </TabsContent>
-        </Tabs>
-      </section>
-
       {/* Usage */}
       <section className="space-y-6">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">
@@ -247,28 +140,28 @@ export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent }
         </h2>
         <CodeBlock
           code={`import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"`}
+  ZCard,
+  ZCardContent,
+  ZCardDescription,
+  ZCardFooter,
+  ZCardHeader,
+  ZCardTitle,
+} from '@tasteee/zest'`}
           language="tsx"
         />
         <CodeBlock
-          code={`<Card>
-  <CardHeader>
-    <CardTitle>Card Title</CardTitle>
-    <CardDescription>Card Description</CardDescription>
-  </CardHeader>
-  <CardContent>
+          code={`<ZCard>
+  <ZCardHeader>
+    <ZCardTitle>Card Title</ZCardTitle>
+    <ZCardDescription>Card Description</ZCardDescription>
+  </ZCardHeader>
+  <ZCardContent>
     <p>Card Content</p>
-  </CardContent>
-  <CardFooter>
+  </ZCardContent>
+  <ZCardFooter>
     <p>Card Footer</p>
-  </CardFooter>
-</Card>`}
+  </ZCardFooter>
+</ZCard>`}
           language="tsx"
         />
       </section>
@@ -281,28 +174,28 @@ export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent }
 
         {/* Form Card */}
         <ComponentPreview
-          title="Form Card"
-          description="A card containing a form with inputs and submit button."
-          code={`<Card className="w-[350px]">
-  <CardHeader>
-    <CardTitle>Create project</CardTitle>
-    <CardDescription>Deploy your new project in one-click.</CardDescription>
-  </CardHeader>
-  <CardContent>
+          code={`import { ZCard, ZCardHeader, ZCardTitle, ZCardDescription, ZCardContent, ZCardFooter, ZButton, ZInput, ZLabel } from '@tasteee/zest'
+
+<ZCard className="w-[350px]">
+  <ZCardHeader>
+    <ZCardTitle>Create project</ZCardTitle>
+    <ZCardDescription>Deploy your new project in one-click.</ZCardDescription>
+  </ZCardHeader>
+  <ZCardContent>
     <form>
       <div className="grid w-full gap-4">
         <div className="flex flex-col space-y-1.5">
-          <Label htmlFor="name">Name</Label>
-          <Input id="name" placeholder="Name of your project" />
+          <ZLabel htmlFor="name">Name</ZLabel>
+          <ZInput id="name" placeholder="Name of your project" />
         </div>
       </div>
     </form>
-  </CardContent>
-  <CardFooter className="flex justify-between">
-    <Button variant="outline">Cancel</Button>
-    <Button>Deploy</Button>
-  </CardFooter>
-</Card>`}
+  </ZCardContent>
+  <ZCardFooter className="flex justify-between">
+    <ZButton variant="outline">Cancel</ZButton>
+    <ZButton>Deploy</ZButton>
+  </ZCardFooter>
+</ZCard>`}
         >
           <Card className="w-[350px]">
             <CardHeader>
@@ -328,21 +221,22 @@ export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent }
 
         {/* Notifications Card */}
         <ComponentPreview
-          title="Notifications"
-          description="A card with a list of notifications settings."
-          code={`<Card className="w-[380px]">
-  <CardHeader>
-    <CardTitle>Notifications</CardTitle>
-    <CardDescription>Choose what you want to be notified about.</CardDescription>
-  </CardHeader>
-  <CardContent className="grid gap-4">
+          code={`import { ZCard, ZCardHeader, ZCardTitle, ZCardDescription, ZCardContent, ZSwitch } from '@tasteee/zest'
+import { Bell, CreditCard } from 'lucide-react'
+
+<ZCard className="w-[380px]">
+  <ZCardHeader>
+    <ZCardTitle>Notifications</ZCardTitle>
+    <ZCardDescription>Choose what you want to be notified about.</ZCardDescription>
+  </ZCardHeader>
+  <ZCardContent className="grid gap-4">
     <div className="flex items-center space-x-4 rounded-md border p-4">
       <Bell className="h-5 w-5" />
       <div className="flex-1 space-y-1">
         <p className="text-sm font-medium leading-none">Push Notifications</p>
         <p className="text-sm text-muted-foreground">Send notifications to device.</p>
       </div>
-      <Switch />
+      <ZSwitch />
     </div>
     <div className="flex items-center space-x-4 rounded-md border p-4">
       <CreditCard className="h-5 w-5" />
@@ -350,10 +244,10 @@ export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent }
         <p className="text-sm font-medium leading-none">Billing Alerts</p>
         <p className="text-sm text-muted-foreground">Receive alerts for billing events.</p>
       </div>
-      <Switch defaultChecked />
+      <ZSwitch defaultChecked />
     </div>
-  </CardContent>
-</Card>`}
+  </ZCardContent>
+</ZCard>`}
         >
           <Card className="w-[380px]">
             <CardHeader>
@@ -383,10 +277,11 @@ export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent }
 
         {/* Simple Card */}
         <ComponentPreview
-          title="Simple Card"
-          description="A minimal card with just content."
-          code={`<Card className="w-[300px]">
-  <CardContent className="pt-6">
+          code={`import { ZCard, ZCardContent } from '@tasteee/zest'
+import { Check } from 'lucide-react'
+
+<ZCard className="w-[300px]">
+  <ZCardContent className="pt-6">
     <div className="flex items-center space-x-4">
       <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
         <Check className="h-6 w-6 text-primary" />
@@ -396,8 +291,8 @@ export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent }
         <p className="text-sm text-muted-foreground">Your payment has been processed.</p>
       </div>
     </div>
-  </CardContent>
-</Card>`}
+  </ZCardContent>
+</ZCard>`}
         >
           <Card className="w-[300px]">
             <CardContent className="pt-6">
@@ -416,36 +311,19 @@ export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent }
 
         {/* Card Grid */}
         <ComponentPreview
-          title="Card Grid"
-          description="Multiple cards in a responsive grid layout."
-          code={`<div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-  <Card>
-    <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-      <CardTitle className="text-sm font-medium">Total Revenue</CardTitle>
-    </CardHeader>
-    <CardContent>
+          code={`import { ZCard, ZCardHeader, ZCardTitle, ZCardContent } from '@tasteee/zest'
+
+<div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+  <ZCard>
+    <ZCardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+      <ZCardTitle className="text-sm font-medium">Total Revenue</ZCardTitle>
+    </ZCardHeader>
+    <ZCardContent>
       <div className="text-2xl font-bold">$45,231.89</div>
       <p className="text-xs text-muted-foreground">+20.1% from last month</p>
-    </CardContent>
-  </Card>
-  <Card>
-    <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-      <CardTitle className="text-sm font-medium">Subscriptions</CardTitle>
-    </CardHeader>
-    <CardContent>
-      <div className="text-2xl font-bold">+2350</div>
-      <p className="text-xs text-muted-foreground">+180.1% from last month</p>
-    </CardContent>
-  </Card>
-  <Card>
-    <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-      <CardTitle className="text-sm font-medium">Active Now</CardTitle>
-    </CardHeader>
-    <CardContent>
-      <div className="text-2xl font-bold">+573</div>
-      <p className="text-xs text-muted-foreground">+201 since last hour</p>
-    </CardContent>
-  </Card>
+    </ZCardContent>
+  </ZCard>
+  ...
 </div>`}
         >
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -485,12 +363,12 @@ export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent }
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">
           API Reference
         </h2>
-        <PropsTable title="Card" props={cardProps} />
-        <PropsTable title="CardHeader" props={cardHeaderProps} />
-        <PropsTable title="CardTitle" props={cardTitleProps} />
+        <PropsTable title="ZCard" props={cardProps} />
+        <PropsTable title="ZCardHeader" props={cardHeaderProps} />
+        <PropsTable title="ZCardTitle" props={cardTitleProps} />
         <div className="text-sm text-muted-foreground">
           <p>
-            CardDescription, CardContent, and CardFooter follow the same pattern, 
+            ZCardDescription, ZCardContent, and ZCardFooter follow the same pattern, 
             accepting className and children props.
           </p>
         </div>
@@ -504,41 +382,41 @@ export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent }
         <Card>
           <CardContent className="p-6">
             <CodeBlock
-              code={`<Card>
-  <CardHeader>
-    <CardTitle />
-    <CardDescription />
-  </CardHeader>
-  <CardContent />
-  <CardFooter />
-</Card>`}
+              code={`<ZCard>
+  <ZCardHeader>
+    <ZCardTitle />
+    <ZCardDescription />
+  </ZCardHeader>
+  <ZCardContent />
+  <ZCardFooter />
+</ZCard>`}
               language="tsx"
             />
           </CardContent>
         </Card>
         <div className="grid gap-4 text-sm">
           <div className="flex gap-4">
-            <code className="font-mono text-primary">Card</code>
+            <code className="font-mono text-primary">ZCard</code>
             <span className="text-muted-foreground">The root container with border, background, and shadow.</span>
           </div>
           <div className="flex gap-4">
-            <code className="font-mono text-primary">CardHeader</code>
+            <code className="font-mono text-primary">ZCardHeader</code>
             <span className="text-muted-foreground">Contains the title and description with consistent spacing.</span>
           </div>
           <div className="flex gap-4">
-            <code className="font-mono text-primary">CardTitle</code>
+            <code className="font-mono text-primary">ZCardTitle</code>
             <span className="text-muted-foreground">The main heading of the card.</span>
           </div>
           <div className="flex gap-4">
-            <code className="font-mono text-primary">CardDescription</code>
+            <code className="font-mono text-primary">ZCardDescription</code>
             <span className="text-muted-foreground">Secondary text that describes the card content.</span>
           </div>
           <div className="flex gap-4">
-            <code className="font-mono text-primary">CardContent</code>
+            <code className="font-mono text-primary">ZCardContent</code>
             <span className="text-muted-foreground">The main content area of the card.</span>
           </div>
           <div className="flex gap-4">
-            <code className="font-mono text-primary">CardFooter</code>
+            <code className="font-mono text-primary">ZCardFooter</code>
             <span className="text-muted-foreground">Contains actions or secondary information.</span>
           </div>
         </div>
