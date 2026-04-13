@@ -34,16 +34,26 @@ const navigation = [
       { title: "Button", href: "/docs/components/button" },
       { title: "Checkbox", href: "/docs/components/checkbox" },
       { title: "Input", href: "/docs/components/input" },
+      { title: "Label", href: "/docs/components/label" },
       { title: "Select", href: "/docs/components/select" },
       { title: "Switch", href: "/docs/components/switch" },
     ],
   },
   {
-    title: "Display",
+    title: "Data Display",
     items: [
-      { title: "Alert", href: "/docs/components/alert" },
+      { title: "Avatar", href: "/docs/components/avatar" },
       { title: "Badge", href: "/docs/components/badge" },
       { title: "Card", href: "/docs/components/card" },
+      { title: "Table", href: "/docs/components/table" },
+    ],
+  },
+  {
+    title: "Feedback",
+    items: [
+      { title: "Alert", href: "/docs/components/alert" },
+      { title: "Progress", href: "/docs/components/progress" },
+      { title: "Skeleton", href: "/docs/components/skeleton" },
       { title: "Tooltip", href: "/docs/components/tooltip" },
     ],
   },
@@ -51,9 +61,15 @@ const navigation = [
     title: "Layout",
     items: [
       { title: "Accordion", href: "/docs/components/accordion" },
+      { title: "Separator", href: "/docs/components/separator" },
+      { title: "Tabs", href: "/docs/components/tabs" },
+    ],
+  },
+  {
+    title: "Overlays",
+    items: [
       { title: "Dialog", href: "/docs/components/dialog" },
       { title: "Dropdown Menu", href: "/docs/components/dropdown-menu" },
-      { title: "Tabs", href: "/docs/components/tabs" },
     ],
   },
   {
