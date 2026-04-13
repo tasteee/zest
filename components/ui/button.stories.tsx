@@ -1,333 +1,147 @@
-import type { Meta, StoryObj } from "@storybook/nextjs";
-import * as Phosphor from "@phosphor-icons/react";
-import { Button } from "./button";
+import type { Meta, StoryObj } from '@storybook/nextjs'
+import * as Phosphor from '@phosphor-icons/react'
+import { Button } from './button'
+import { Layout } from './layout'
 
 const meta: Meta<typeof Button> = {
-  title: "UI/Button",
-  component: Button,
-  tags: ["autodocs"],
-  parameters: {
-    layout: "centered",
-  },
-  argTypes: {
-    variant: {
-      control: "select",
-      options: [
-        "default",
-        "destructive",
-        "outline",
-        "secondary",
-        "ghost",
-        "link",
-      ],
-    },
-    size: {
-      control: "select",
-      options: ["default", "sm", "lg", "icon", "icon-sm", "icon-lg"],
-    },
-  },
-};
+	title: 'UI/Button',
+	component: Button,
+	tags: ['autodocs'],
+	parameters: {
+		layout: 'centered'
+	},
+	argTypes: {
+		kind: {
+			control: 'select',
+			options: ['outlined', 'solid', 'ghost']
+		},
+		theme: {
+			control: 'select',
+			options: ['green', 'purple', 'pink', 'orange', 'white']
+		},
+		size: {
+			control: 'select',
+			options: ['xs', 'sm', 'md', 'lg', 'xl']
+		},
+		isDisabled: {
+			control: 'boolean'
+		}
+	}
+}
 
-export default meta;
+export default meta
 
-type StoryT = StoryObj<typeof Button>;
+type StoryT = StoryObj<typeof Button>
 
 export const Default: StoryT = {
-  args: {
-    children: "Button",
-    variant: "default",
-    size: "default",
-  },
-};
+	args: {
+		children: 'Button',
+		kind: 'outlined',
+		theme: 'white',
+		size: 'md',
+		isDisabled: false
+	}
+}
 
 // ─── Exhaustive grid ────────────────────────────────────────────────────────
 
-type VariantT =
-  | "default"
-  | "destructive"
-  | "outline"
-  | "secondary"
-  | "ghost"
-  | "link";
-type SizeT = "sm" | "default" | "lg";
-type IconSizeT = "icon-sm" | "icon" | "icon-lg";
+type KindT = 'solid' | 'outlined' | 'ghost'
+type ThemeT = 'green' | 'purple' | 'pink' | 'orange' | 'white'
+type SizeT = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
 
-const variants: VariantT[] = [
-  "default",
-  "destructive",
-  "outline",
-  "secondary",
-  "ghost",
-  "link",
-];
-const sizes: SizeT[] = ["sm", "default", "lg"];
-const iconSizes: IconSizeT[] = ["icon-sm", "icon", "icon-lg"];
+const kinds: KindT[] = ['solid', 'outlined', 'ghost']
+const themes: ThemeT[] = ['green', 'purple', 'pink', 'orange', 'white']
+const sizes: SizeT[] = ['xs', 'sm', 'md', 'lg', 'xl']
 
 const sectionLabelStyle: React.CSSProperties = {
-  fontSize: 11,
-  fontWeight: 600,
-  letterSpacing: "0.12em",
-  textTransform: "uppercase",
-  color: "var(--color-muted-foreground, #888)",
-  marginBottom: 12,
-  display: "block",
-};
+	fontSize: 12,
+	fontWeight: 600,
+	letterSpacing: '0.12em',
+	textTransform: 'uppercase',
+	color: 'var(--color-muted-foreground, #888)',
+	marginBottom: 16,
+	display: 'block'
+}
 
-const variantLabelStyle: React.CSSProperties = {
-  fontSize: 11,
-  fontWeight: 500,
-  color: "var(--color-muted-foreground, #888)",
-  width: 100,
-  flexShrink: 0,
-  paddingTop: 8,
-};
+const colorSectionStyle: React.CSSProperties = {
+	display: 'flex',
+	flexDirection: 'column',
+	gap: 8
+}
 
-const columnHeaderStyle: React.CSSProperties = {
-  fontSize: 10,
-  fontWeight: 500,
-  letterSpacing: "0.08em",
-  textTransform: "uppercase",
-  color: "var(--color-muted-foreground, #888)",
-  textAlign: "center",
-  minWidth: 90,
-};
+const cardsWrapStyle: React.CSSProperties = {
+	display: 'flex',
+	flexWrap: 'wrap',
+	gap: 14
+}
 
-const rowStyle: React.CSSProperties = {
-  display: "flex",
-  alignItems: "center",
-  gap: 12,
-  paddingBottom: 8,
-};
+const cardStyle: React.CSSProperties = {
+	width: 230,
+	display: 'flex',
+	flexDirection: 'column',
+	gap: 8
+}
 
-const cellStyle: React.CSSProperties = {
-  minWidth: 90,
-  display: "flex",
-  justifyContent: "center",
-};
+const cardLabelStyle: React.CSSProperties = {
+	fontSize: 11,
+	fontWeight: 500,
+	color: 'var(--color-muted-foreground, #888)',
+	lineHeight: 1.2
+}
+
+const buttonRowStyle: React.CSSProperties = {
+	height: 96,
+	borderRadius: 10,
+	padding: 12
+}
 
 const gridWrapperStyle: React.CSSProperties = {
-  padding: 32,
-  display: "flex",
-  flexDirection: "column",
-  gap: 32,
-};
-
-const tableBlockStyle: React.CSSProperties = {
-  display: "flex",
-  flexDirection: "column",
-  gap: 8,
-};
-
-const headerRowStyle: React.CSSProperties = {
-  display: "flex",
-  alignItems: "center",
-  gap: 12,
-  paddingBottom: 4,
-  borderBottom: "1px solid var(--color-border, #333)",
-  marginBottom: 4,
-};
+	padding: 32,
+	display: 'flex',
+	flexDirection: 'column',
+	gap: 32
+}
 
 export const AllVariants: StoryT = {
-  parameters: {
-    layout: "fullscreen",
-  },
-  render: () => {
-    return (
-      <div style={gridWrapperStyle}>
-        {/* Text buttons */}
-        <div>
-          <span style={sectionLabelStyle}>Text Buttons</span>
-          <div style={tableBlockStyle}>
-            {/* Header row */}
-            <div style={headerRowStyle}>
-              <div style={{ ...variantLabelStyle, color: "transparent" }}>
-                placeholder
-              </div>
-              {sizes.map((size) => {
-                return (
-                  <div key={`header-enabled-${size}`} style={columnHeaderStyle}>
-                    {size} / enabled
-                  </div>
-                );
-              })}
-              {sizes.map((size) => {
-                return (
-                  <div
-                    key={`header-disabled-${size}`}
-                    style={columnHeaderStyle}
-                  >
-                    {size} / disabled
-                  </div>
-                );
-              })}
-            </div>
+	parameters: {
+		layout: 'fullscreen'
+	},
+	render: () => {
+		const isIconButton = (kind: KindT): boolean => {
+			const shouldUseIcon = kind !== 'solid'
+			return shouldUseIcon
+		}
 
-            {/* Variant rows */}
-            {variants.map((variant) => {
-              return (
-                <div key={variant} style={rowStyle}>
-                  <div style={variantLabelStyle}>{variant}</div>
-                  {sizes.map((size) => {
-                    return (
-                      <div key={`${variant}-${size}-enabled`} style={cellStyle}>
-                        <Button variant={variant} size={size}>
-                          Button
-                        </Button>
-                      </div>
-                    );
-                  })}
-                  {sizes.map((size) => {
-                    return (
-                      <div
-                        key={`${variant}-${size}-disabled`}
-                        style={cellStyle}
-                      >
-                        <Button variant={variant} size={size} disabled>
-                          Button
-                        </Button>
-                      </div>
-                    );
-                  })}
-                </div>
-              );
-            })}
-          </div>
-        </div>
+		return (
+			<div style={gridWrapperStyle}>
+				{themes.map((theme) => {
+					return (
+						<section key={theme} style={colorSectionStyle}>
+							<span style={sectionLabelStyle}>{theme}</span>
+							<div style={cardsWrapStyle}>
+								{kinds.map((kind) => {
+									return sizes.map((size) => {
+										const label = `${theme} / ${kind} / ${size}`
+										const shouldUseIcon = isIconButton(kind)
 
-        {/* Icon-only buttons */}
-        <div>
-          <span style={sectionLabelStyle}>Icon Buttons</span>
-          <div style={tableBlockStyle}>
-            {/* Header row */}
-            <div style={headerRowStyle}>
-              <div style={{ ...variantLabelStyle, color: "transparent" }}>
-                placeholder
-              </div>
-              {iconSizes.map((size) => {
-                return (
-                  <div
-                    key={`header-icon-enabled-${size}`}
-                    style={columnHeaderStyle}
-                  >
-                    {size} / enabled
-                  </div>
-                );
-              })}
-              {iconSizes.map((size) => {
-                return (
-                  <div
-                    key={`header-icon-disabled-${size}`}
-                    style={columnHeaderStyle}
-                  >
-                    {size} / disabled
-                  </div>
-                );
-              })}
-            </div>
-
-            {/* Variant rows */}
-            {variants.map((variant) => {
-              return (
-                <div key={variant} style={rowStyle}>
-                  <div style={variantLabelStyle}>{variant}</div>
-                  {iconSizes.map((size) => {
-                    return (
-                      <div
-                        key={`${variant}-${size}-icon-enabled`}
-                        style={cellStyle}
-                      >
-                        <Button variant={variant} size={size}>
-                          <Phosphor.Plus />
-                        </Button>
-                      </div>
-                    );
-                  })}
-                  {iconSizes.map((size) => {
-                    return (
-                      <div
-                        key={`${variant}-${size}-icon-disabled`}
-                        style={cellStyle}
-                      >
-                        <Button variant={variant} size={size} disabled>
-                          <Phosphor.Plus />
-                        </Button>
-                      </div>
-                    );
-                  })}
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Text + icon buttons */}
-        <div>
-          <span style={sectionLabelStyle}>Text + Icon Buttons</span>
-          <div style={tableBlockStyle}>
-            {/* Header row */}
-            <div style={headerRowStyle}>
-              <div style={{ ...variantLabelStyle, color: "transparent" }}>
-                placeholder
-              </div>
-              {sizes.map((size) => {
-                return (
-                  <div
-                    key={`header-icon-text-enabled-${size}`}
-                    style={columnHeaderStyle}
-                  >
-                    {size} / enabled
-                  </div>
-                );
-              })}
-              {sizes.map((size) => {
-                return (
-                  <div
-                    key={`header-icon-text-disabled-${size}`}
-                    style={columnHeaderStyle}
-                  >
-                    {size} / disabled
-                  </div>
-                );
-              })}
-            </div>
-
-            {/* Variant rows */}
-            {variants.map((variant) => {
-              return (
-                <div key={variant} style={rowStyle}>
-                  <div style={variantLabelStyle}>{variant}</div>
-                  {sizes.map((size) => {
-                    return (
-                      <div
-                        key={`${variant}-${size}-icontext-enabled`}
-                        style={cellStyle}
-                      >
-                        <Button variant={variant} size={size}>
-                          <Phosphor.Plus />
-                          Button
-                        </Button>
-                      </div>
-                    );
-                  })}
-                  {sizes.map((size) => {
-                    return (
-                      <div
-                        key={`${variant}-${size}-icontext-disabled`}
-                        style={cellStyle}
-                      >
-                        <Button variant={variant} size={size} disabled>
-                          <Phosphor.Plus />
-                          Button
-                        </Button>
-                      </div>
-                    );
-                  })}
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </div>
-    );
-  },
-};
+										return (
+											<div key={label} style={cardStyle}>
+												<span style={cardLabelStyle}>{label}</span>
+												<Layout.Row isCentered style={buttonRowStyle}>
+													<Button kind={kind} theme={theme} size={size}>
+														{shouldUseIcon ? <Phosphor.Plus /> : null}
+														Button
+													</Button>
+												</Layout.Row>
+											</div>
+										)
+									})
+								})}
+							</div>
+						</section>
+					)
+				})}
+			</div>
+		)
+	}
+}
