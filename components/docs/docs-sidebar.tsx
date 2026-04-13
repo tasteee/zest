@@ -29,66 +29,38 @@ const navigation = [
     ],
   },
   {
-    title: "Actions",
+    title: "Inputs",
     items: [
       { title: "Button", href: "/docs/components/button" },
-    ],
-  },
-  {
-    title: "Data Display",
-    items: [
-      { title: "Badge", href: "/docs/components/badge" },
-      { title: "Card", href: "/docs/components/card" },
-      { title: "Table", href: "/docs/components/table" },
-    ],
-  },
-  {
-    title: "Feedback",
-    items: [
-      { title: "Alert", href: "/docs/components/alert" },
-      { title: "Progress", href: "/docs/components/progress" },
-      { title: "Skeleton", href: "/docs/components/skeleton" },
-      { title: "Spinner", href: "/docs/components/spinner" },
-      { title: "Tooltip", href: "/docs/components/tooltip" },
-    ],
-  },
-  {
-    title: "Forms",
-    items: [
       { title: "Checkbox", href: "/docs/components/checkbox" },
       { title: "Input", href: "/docs/components/input" },
-      { title: "Label", href: "/docs/components/label" },
-      { title: "Radio Group", href: "/docs/components/radio-group" },
       { title: "Select", href: "/docs/components/select" },
       { title: "Switch", href: "/docs/components/switch" },
-      { title: "Textarea", href: "/docs/components/textarea" },
+    ],
+  },
+  {
+    title: "Display",
+    items: [
+      { title: "Alert", href: "/docs/components/alert" },
+      { title: "Badge", href: "/docs/components/badge" },
+      { title: "Card", href: "/docs/components/card" },
+      { title: "Tooltip", href: "/docs/components/tooltip" },
     ],
   },
   {
     title: "Layout",
     items: [
       { title: "Accordion", href: "/docs/components/accordion" },
-      { title: "Collapsible", href: "/docs/components/collapsible" },
-      { title: "Separator", href: "/docs/components/separator" },
+      { title: "Dialog", href: "/docs/components/dialog" },
+      { title: "Dropdown Menu", href: "/docs/components/dropdown-menu" },
       { title: "Tabs", href: "/docs/components/tabs" },
     ],
   },
   {
-    title: "Navigation",
+    title: "Patterns",
     items: [
-      { title: "Breadcrumb", href: "/docs/components/breadcrumb" },
-      { title: "Dropdown Menu", href: "/docs/components/dropdown-menu" },
-      { title: "Pagination", href: "/docs/components/pagination" },
-    ],
-  },
-  {
-    title: "Overlays",
-    items: [
-      { title: "Alert Dialog", href: "/docs/components/alert-dialog" },
-      { title: "Dialog", href: "/docs/components/dialog" },
-      { title: "Hover Card", href: "/docs/components/hover-card" },
-      { title: "Popover", href: "/docs/components/popover" },
-      { title: "Sheet", href: "/docs/components/sheet" },
+      { title: "Overview", href: "/docs/patterns" },
+      { title: "Forms", href: "/docs/patterns/forms" },
     ],
   },
 ];
