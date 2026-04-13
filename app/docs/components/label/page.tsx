@@ -59,14 +59,13 @@ export default function LabelDocsPage() {
       <ComponentPreview
         title="Default Label"
         description="A basic label associated with an input."
-        code={`import { Label } from "@/components/ui/label"
-import { Input } from "@/components/ui/input"
+        code={`import { ZLabel, ZInput } from '@tasteee/zest'
 
 export function LabelDemo() {
   return (
     <div className="grid w-full max-w-sm items-center gap-1.5">
-      <Label htmlFor="email">Email</Label>
-      <Input type="email" id="email" placeholder="Email" />
+      <ZLabel htmlFor="email">Email</ZLabel>
+      <ZInput type="email" id="email" placeholder="Email" />
     </div>
   )
 }`}
@@ -77,69 +76,17 @@ export function LabelDemo() {
         </div>
       </ComponentPreview>
 
-      {/* Installation */}
-      <section className="space-y-6">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">
-          Installation
-        </h2>
-        <Tabs defaultValue="cli" className="w-full">
-          <TabsList>
-            <TabsTrigger value="cli">CLI</TabsTrigger>
-            <TabsTrigger value="manual">Manual</TabsTrigger>
-          </TabsList>
-          <TabsContent value="cli" className="mt-4">
-            <CodeBlock 
-              code="npx zest-ui add label" 
-              language="bash"
-              filename="Terminal"
-            />
-          </TabsContent>
-          <TabsContent value="manual" className="mt-4 space-y-4">
-            <p className="text-muted-foreground">
-              Copy and paste the following code into your project.
-            </p>
-            <CodeBlock
-              code={`'use client'
-
-import * as React from 'react'
-import * as LabelPrimitive from '@radix-ui/react-label'
-import { cn } from '@/lib/utils'
-
-function Label({
-  className,
-  ...props
-}: React.ComponentProps<typeof LabelPrimitive.Root>) {
-  return (
-    <LabelPrimitive.Root
-      data-slot="label"
-      className={cn(
-        'text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70',
-        className,
-      )}
-      {...props}
-    />
-  )
-}
-
-export { Label }`}
-              language="tsx"
-              filename="components/ui/label.tsx"
-            />
-          </TabsContent>
-        </Tabs>
-      </section>
-
       {/* Usage */}
       <section className="space-y-6">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">
           Usage
         </h2>
         <CodeBlock
-          code={`import { Label } from "@/components/ui/label"`}
+          code={`import { ZLabel } from '@tasteee/zest'`}
           language="tsx"
         />
         <CodeBlock
-          code={`<Label htmlFor="email">Your email address</Label>`}
+          code={`<ZLabel htmlFor="email">Your email address</ZLabel>`}
           language="tsx"
         />
       </section>

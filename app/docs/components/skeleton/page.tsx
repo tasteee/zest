@@ -52,56 +52,14 @@ export default function SkeletonDocsPage() {
       <ComponentPreview
         title="Default Skeleton"
         description="A basic skeleton loading placeholder."
-        code={`import { Skeleton } from "@/components/ui/skeleton"
+        code={`import { ZSkeleton } from '@tasteee/zest'
 
 export function SkeletonDemo() {
-  return <Skeleton className="h-4 w-[250px]" />
+  return <ZSkeleton className="h-4 w-[250px]" />
 }`}
       >
         <Skeleton className="h-4 w-[250px]" />
       </ComponentPreview>
-
-      {/* Installation */}
-      <section className="space-y-6">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">
-          Installation
-        </h2>
-        <Tabs defaultValue="cli" className="w-full">
-          <TabsList>
-            <TabsTrigger value="cli">CLI</TabsTrigger>
-            <TabsTrigger value="manual">Manual</TabsTrigger>
-          </TabsList>
-          <TabsContent value="cli" className="mt-4">
-            <CodeBlock 
-              code="npx zest-ui add skeleton" 
-              language="bash"
-              filename="Terminal"
-            />
-          </TabsContent>
-          <TabsContent value="manual" className="mt-4 space-y-4">
-            <p className="text-muted-foreground">
-              Copy and paste the following code into your project.
-            </p>
-            <CodeBlock
-              code={`import { cn } from '@/lib/utils'
-
-function Skeleton({ className, ...props }: React.ComponentProps<'div'>) {
-  return (
-    <div
-      data-slot="skeleton"
-      className={cn('bg-accent animate-pulse rounded-md', className)}
-      {...props}
-    />
-  )
-}
-
-export { Skeleton }`}
-              language="tsx"
-              filename="components/ui/skeleton.tsx"
-            />
-          </TabsContent>
-        </Tabs>
-      </section>
 
       {/* Usage */}
       <section className="space-y-6">
@@ -109,11 +67,11 @@ export { Skeleton }`}
           Usage
         </h2>
         <CodeBlock
-          code={`import { Skeleton } from "@/components/ui/skeleton"`}
+          code={`import { ZSkeleton } from '@tasteee/zest'`}
           language="tsx"
         />
         <CodeBlock
-          code={`<Skeleton className="h-4 w-[200px]" />`}
+          code={`<ZSkeleton className="h-4 w-[200px]" />`}
           language="tsx"
         />
       </section>

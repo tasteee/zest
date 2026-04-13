@@ -99,24 +99,25 @@ export default function TooltipDocsPage() {
         title="Default Tooltip"
         description="Hover over the button to see the tooltip."
         code={`import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip"
+  ZTooltip,
+  ZTooltipContent,
+  ZTooltipProvider,
+  ZTooltipTrigger,
+  ZButton,
+} from '@tasteee/zest'
 
 export function TooltipDemo() {
   return (
-    <TooltipProvider>
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <Button variant="outline">Hover me</Button>
-        </TooltipTrigger>
-        <TooltipContent>
+    <ZTooltipProvider>
+      <ZTooltip>
+        <ZTooltipTrigger asChild>
+          <ZButton variant="outline">Hover me</ZButton>
+        </ZTooltipTrigger>
+        <ZTooltipContent>
           <p>Add to library</p>
-        </TooltipContent>
-      </Tooltip>
-    </TooltipProvider>
+        </ZTooltipContent>
+      </ZTooltip>
+    </ZTooltipProvider>
   )
 }`}
       >
@@ -132,36 +133,6 @@ export function TooltipDemo() {
         </TooltipProvider>
       </ComponentPreview>
 
-      {/* Installation */}
-      <section className="space-y-6">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">
-          Installation
-        </h2>
-        <Tabs defaultValue="cli" className="w-full">
-          <TabsList>
-            <TabsTrigger value="cli">CLI</TabsTrigger>
-            <TabsTrigger value="manual">Manual</TabsTrigger>
-          </TabsList>
-          <TabsContent value="cli" className="mt-4">
-            <CodeBlock 
-              code="npx zest-ui add tooltip" 
-              language="bash"
-              filename="Terminal"
-            />
-          </TabsContent>
-          <TabsContent value="manual" className="mt-4 space-y-4">
-            <p className="text-muted-foreground">
-              Install the required dependencies:
-            </p>
-            <CodeBlock
-              code="npm install @radix-ui/react-tooltip"
-              language="bash"
-              filename="Terminal"
-            />
-          </TabsContent>
-        </Tabs>
-      </section>
-
       {/* Usage */}
       <section className="space-y-6">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">
@@ -169,22 +140,22 @@ export function TooltipDemo() {
         </h2>
         <CodeBlock
           code={`import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip"`}
+  ZTooltip,
+  ZTooltipContent,
+  ZTooltipProvider,
+  ZTooltipTrigger,
+} from '@tasteee/zest'`}
           language="tsx"
         />
         <CodeBlock
-          code={`<TooltipProvider>
-  <Tooltip>
-    <TooltipTrigger>Hover</TooltipTrigger>
-    <TooltipContent>
+          code={`<ZTooltipProvider>
+  <ZTooltip>
+    <ZTooltipTrigger>Hover</ZTooltipTrigger>
+    <ZTooltipContent>
       <p>Tooltip content</p>
-    </TooltipContent>
-  </Tooltip>
-</TooltipProvider>`}
+    </ZTooltipContent>
+  </ZTooltip>
+</ZTooltipProvider>`}
           language="tsx"
         />
       </section>

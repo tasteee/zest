@@ -131,42 +131,44 @@ export default function DropdownMenuDocsPage() {
         title="Default Dropdown Menu"
         description="A basic dropdown menu with various item types."
         code={`import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+  ZDropdownMenu,
+  ZDropdownMenuContent,
+  ZDropdownMenuItem,
+  ZDropdownMenuLabel,
+  ZDropdownMenuSeparator,
+  ZDropdownMenuTrigger,
+  ZButton,
+} from '@tasteee/zest'
+import { User, CreditCard, Settings, LogOut } from 'lucide-react'
 
 export function DropdownMenuDemo() {
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant="outline">Open Menu</Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56">
-        <DropdownMenuLabel>My Account</DropdownMenuLabel>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem>
+    <ZDropdownMenu>
+      <ZDropdownMenuTrigger asChild>
+        <ZButton variant="outline">Open Menu</ZButton>
+      </ZDropdownMenuTrigger>
+      <ZDropdownMenuContent className="w-56">
+        <ZDropdownMenuLabel>My Account</ZDropdownMenuLabel>
+        <ZDropdownMenuSeparator />
+        <ZDropdownMenuItem>
           <User className="mr-2 h-4 w-4" />
           <span>Profile</span>
-        </DropdownMenuItem>
-        <DropdownMenuItem>
+        </ZDropdownMenuItem>
+        <ZDropdownMenuItem>
           <CreditCard className="mr-2 h-4 w-4" />
           <span>Billing</span>
-        </DropdownMenuItem>
-        <DropdownMenuItem>
+        </ZDropdownMenuItem>
+        <ZDropdownMenuItem>
           <Settings className="mr-2 h-4 w-4" />
           <span>Settings</span>
-        </DropdownMenuItem>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem>
+        </ZDropdownMenuItem>
+        <ZDropdownMenuSeparator />
+        <ZDropdownMenuItem>
           <LogOut className="mr-2 h-4 w-4" />
           <span>Log out</span>
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
+        </ZDropdownMenuItem>
+      </ZDropdownMenuContent>
+    </ZDropdownMenu>
   )
 }`}
       >
@@ -198,36 +200,6 @@ export function DropdownMenuDemo() {
         </DropdownMenu>
       </ComponentPreview>
 
-      {/* Installation */}
-      <section className="space-y-6">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">
-          Installation
-        </h2>
-        <Tabs defaultValue="cli" className="w-full">
-          <TabsList>
-            <TabsTrigger value="cli">CLI</TabsTrigger>
-            <TabsTrigger value="manual">Manual</TabsTrigger>
-          </TabsList>
-          <TabsContent value="cli" className="mt-4">
-            <CodeBlock 
-              code="npx zest-ui add dropdown-menu" 
-              language="bash"
-              filename="Terminal"
-            />
-          </TabsContent>
-          <TabsContent value="manual" className="mt-4 space-y-4">
-            <p className="text-muted-foreground">
-              Install the required dependencies:
-            </p>
-            <CodeBlock
-              code="npm install @radix-ui/react-dropdown-menu"
-              language="bash"
-              filename="Terminal"
-            />
-          </TabsContent>
-        </Tabs>
-      </section>
-
       {/* Usage */}
       <section className="space-y-6">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">
@@ -235,26 +207,26 @@ export function DropdownMenuDemo() {
         </h2>
         <CodeBlock
           code={`import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"`}
+  ZDropdownMenu,
+  ZDropdownMenuContent,
+  ZDropdownMenuItem,
+  ZDropdownMenuLabel,
+  ZDropdownMenuSeparator,
+  ZDropdownMenuTrigger,
+} from '@tasteee/zest'`}
           language="tsx"
         />
         <CodeBlock
-          code={`<DropdownMenu>
-  <DropdownMenuTrigger>Open</DropdownMenuTrigger>
-  <DropdownMenuContent>
-    <DropdownMenuLabel>My Account</DropdownMenuLabel>
-    <DropdownMenuSeparator />
-    <DropdownMenuItem>Profile</DropdownMenuItem>
-    <DropdownMenuItem>Billing</DropdownMenuItem>
-    <DropdownMenuItem>Settings</DropdownMenuItem>
-  </DropdownMenuContent>
-</DropdownMenu>`}
+          code={`<ZDropdownMenu>
+  <ZDropdownMenuTrigger>Open</ZDropdownMenuTrigger>
+  <ZDropdownMenuContent>
+    <ZDropdownMenuLabel>My Account</ZDropdownMenuLabel>
+    <ZDropdownMenuSeparator />
+    <ZDropdownMenuItem>Profile</ZDropdownMenuItem>
+    <ZDropdownMenuItem>Billing</ZDropdownMenuItem>
+    <ZDropdownMenuItem>Settings</ZDropdownMenuItem>
+  </ZDropdownMenuContent>
+</ZDropdownMenu>`}
           language="tsx"
         />
       </section>

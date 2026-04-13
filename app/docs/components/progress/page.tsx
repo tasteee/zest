@@ -93,106 +93,14 @@ export default function ProgressDocsPage() {
       <ComponentPreview
         title="Default Progress"
         description="A basic progress bar showing completion status."
-        code={`import { Progress } from "@/components/ui/progress"
+        code={`import { ZProgress } from '@tasteee/zest'
 
 export function ProgressDemo() {
-  return <Progress value={66} />
+  return <ZProgress value={66} />
 }`}
       >
         <Progress value={progress} className="w-[60%]" />
       </ComponentPreview>
-
-      {/* Installation */}
-      <section className="space-y-6">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">
-          Installation
-        </h2>
-        <Tabs defaultValue="cli" className="w-full">
-          <TabsList>
-            <TabsTrigger value="cli">CLI</TabsTrigger>
-            <TabsTrigger value="manual">Manual</TabsTrigger>
-          </TabsList>
-          <TabsContent value="cli" className="mt-4">
-            <CodeBlock 
-              code="npx zest-ui add progress" 
-              language="bash"
-              filename="Terminal"
-            />
-          </TabsContent>
-          <TabsContent value="manual" className="mt-4 space-y-4">
-            <p className="text-muted-foreground">
-              Copy and paste the following code into your project.
-            </p>
-            <CodeBlock
-              code={`'use client'
-
-import * as React from 'react'
-import * as ProgressPrimitive from '@radix-ui/react-progress'
-import { cva, type VariantProps } from 'class-variance-authority'
-import { cn } from '@/lib/utils'
-
-const progressVariants = cva(
-  'relative h-2 w-full overflow-hidden rounded-full',
-  {
-    variants: {
-      variant: {
-        default: 'bg-primary/20',
-        green: 'bg-neon-green/20',
-        purple: 'bg-neon-purple/20',
-        pink: 'bg-neon-pink/20',
-        orange: 'bg-neon-orange/20',
-      },
-    },
-    defaultVariants: {
-      variant: 'default',
-    },
-  },
-)
-
-const indicatorVariants = cva('h-full w-full flex-1 transition-all', {
-  variants: {
-    variant: {
-      default: 'bg-primary',
-      green: 'bg-neon-green',
-      purple: 'bg-neon-purple',
-      pink: 'bg-neon-pink',
-      orange: 'bg-neon-orange',
-    },
-  },
-  defaultVariants: {
-    variant: 'default',
-  },
-})
-
-function Progress({
-  className,
-  value,
-  variant,
-  ...props
-}: React.ComponentProps<typeof ProgressPrimitive.Root> &
-  VariantProps<typeof progressVariants>) {
-  return (
-    <ProgressPrimitive.Root
-      data-slot="progress"
-      className={cn(progressVariants({ variant }), className)}
-      {...props}
-    >
-      <ProgressPrimitive.Indicator
-        data-slot="progress-indicator"
-        className={indicatorVariants({ variant })}
-        style={{ transform: \`translateX(-\${100 - (value || 0)}%)\` }}
-      />
-    </ProgressPrimitive.Root>
-  )
-}
-
-export { Progress, progressVariants }`}
-              language="tsx"
-              filename="components/ui/progress.tsx"
-            />
-          </TabsContent>
-        </Tabs>
-      </section>
 
       {/* Usage */}
       <section className="space-y-6">
@@ -200,11 +108,11 @@ export { Progress, progressVariants }`}
           Usage
         </h2>
         <CodeBlock
-          code={`import { Progress } from "@/components/ui/progress"`}
+          code={`import { ZProgress } from '@tasteee/zest'`}
           language="tsx"
         />
         <CodeBlock
-          code={`<Progress value={33} />`}
+          code={`<ZProgress value={33} />`}
           language="tsx"
         />
       </section>

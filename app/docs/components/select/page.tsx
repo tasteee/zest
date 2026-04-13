@@ -109,26 +109,26 @@ export default function SelectDocsPage() {
         title="Default Select"
         description="A basic select with placeholder and options."
         code={`import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
+  ZSelect,
+  ZSelectContent,
+  ZSelectItem,
+  ZSelectTrigger,
+  ZSelectValue,
+} from '@tasteee/zest'
 
 export function SelectDemo() {
   return (
-    <Select>
-      <SelectTrigger className="w-[180px]">
-        <SelectValue placeholder="Select a fruit" />
-      </SelectTrigger>
-      <SelectContent>
-        <SelectItem value="apple">Apple</SelectItem>
-        <SelectItem value="banana">Banana</SelectItem>
-        <SelectItem value="orange">Orange</SelectItem>
-        <SelectItem value="grape">Grape</SelectItem>
-      </SelectContent>
-    </Select>
+    <ZSelect>
+      <ZSelectTrigger className="w-[180px]">
+        <ZSelectValue placeholder="Select a fruit" />
+      </ZSelectTrigger>
+      <ZSelectContent>
+        <ZSelectItem value="apple">Apple</ZSelectItem>
+        <ZSelectItem value="banana">Banana</ZSelectItem>
+        <ZSelectItem value="orange">Orange</ZSelectItem>
+        <ZSelectItem value="grape">Grape</ZSelectItem>
+      </ZSelectContent>
+    </ZSelect>
   )
 }`}
       >
@@ -145,36 +145,6 @@ export function SelectDemo() {
         </Select>
       </ComponentPreview>
 
-      {/* Installation */}
-      <section className="space-y-6">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">
-          Installation
-        </h2>
-        <Tabs defaultValue="cli" className="w-full">
-          <TabsList>
-            <TabsTrigger value="cli">CLI</TabsTrigger>
-            <TabsTrigger value="manual">Manual</TabsTrigger>
-          </TabsList>
-          <TabsContent value="cli" className="mt-4">
-            <CodeBlock 
-              code="npx zest-ui add select" 
-              language="bash"
-              filename="Terminal"
-            />
-          </TabsContent>
-          <TabsContent value="manual" className="mt-4 space-y-4">
-            <p className="text-muted-foreground">
-              Install the required dependencies:
-            </p>
-            <CodeBlock
-              code="npm install @radix-ui/react-select"
-              language="bash"
-              filename="Terminal"
-            />
-          </TabsContent>
-        </Tabs>
-      </section>
-
       {/* Usage */}
       <section className="space-y-6">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">
@@ -182,25 +152,25 @@ export function SelectDemo() {
         </h2>
         <CodeBlock
           code={`import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"`}
+  ZSelect,
+  ZSelectContent,
+  ZSelectItem,
+  ZSelectTrigger,
+  ZSelectValue,
+} from '@tasteee/zest'`}
           language="tsx"
         />
         <CodeBlock
-          code={`<Select>
-  <SelectTrigger className="w-[180px]">
-    <SelectValue placeholder="Theme" />
-  </SelectTrigger>
-  <SelectContent>
-    <SelectItem value="light">Light</SelectItem>
-    <SelectItem value="dark">Dark</SelectItem>
-    <SelectItem value="system">System</SelectItem>
-  </SelectContent>
-</Select>`}
+          code={`<ZSelect>
+  <ZSelectTrigger className="w-[180px]">
+    <ZSelectValue placeholder="Theme" />
+  </ZSelectTrigger>
+  <ZSelectContent>
+    <ZSelectItem value="light">Light</ZSelectItem>
+    <ZSelectItem value="dark">Dark</ZSelectItem>
+    <ZSelectItem value="system">System</ZSelectItem>
+  </ZSelectContent>
+</ZSelect>`}
           language="tsx"
         />
       </section>

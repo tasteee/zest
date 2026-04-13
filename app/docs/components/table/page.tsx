@@ -70,38 +70,38 @@ export default function TableDocsPage() {
         title="Default Table"
         description="A basic table with headers and data rows."
         code={`import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table"
+  ZTable,
+  ZTableBody,
+  ZTableCaption,
+  ZTableCell,
+  ZTableHead,
+  ZTableHeader,
+  ZTableRow,
+} from '@tasteee/zest'
 
 export function TableDemo() {
   return (
-    <Table>
-      <TableCaption>A list of recent invoices.</TableCaption>
-      <TableHeader>
-        <TableRow>
-          <TableHead className="w-[100px]">Invoice</TableHead>
-          <TableHead>Status</TableHead>
-          <TableHead>Method</TableHead>
-          <TableHead className="text-right">Amount</TableHead>
-        </TableRow>
-      </TableHeader>
-      <TableBody>
+    <ZTable>
+      <ZTableCaption>A list of recent invoices.</ZTableCaption>
+      <ZTableHeader>
+        <ZTableRow>
+          <ZTableHead className="w-[100px]">Invoice</ZTableHead>
+          <ZTableHead>Status</ZTableHead>
+          <ZTableHead>Method</ZTableHead>
+          <ZTableHead className="text-right">Amount</ZTableHead>
+        </ZTableRow>
+      </ZTableHeader>
+      <ZTableBody>
         {invoices.map((invoice) => (
-          <TableRow key={invoice.id}>
-            <TableCell className="font-medium">{invoice.id}</TableCell>
-            <TableCell>{invoice.status}</TableCell>
-            <TableCell>{invoice.method}</TableCell>
-            <TableCell className="text-right">{invoice.amount}</TableCell>
-          </TableRow>
+          <ZTableRow key={invoice.id}>
+            <ZTableCell className="font-medium">{invoice.id}</ZTableCell>
+            <ZTableCell>{invoice.status}</ZTableCell>
+            <ZTableCell>{invoice.method}</ZTableCell>
+            <ZTableCell className="text-right">{invoice.amount}</ZTableCell>
+          </ZTableRow>
         ))}
-      </TableBody>
-    </Table>
+      </ZTableBody>
+    </ZTable>
   )
 }`}
       >
@@ -128,119 +128,6 @@ export function TableDemo() {
         </Table>
       </ComponentPreview>
 
-      {/* Installation */}
-      <section className="space-y-6">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">
-          Installation
-        </h2>
-        <Tabs defaultValue="cli" className="w-full">
-          <TabsList>
-            <TabsTrigger value="cli">CLI</TabsTrigger>
-            <TabsTrigger value="manual">Manual</TabsTrigger>
-          </TabsList>
-          <TabsContent value="cli" className="mt-4">
-            <CodeBlock 
-              code="npx zest-ui add table" 
-              language="bash"
-              filename="Terminal"
-            />
-          </TabsContent>
-          <TabsContent value="manual" className="mt-4 space-y-4">
-            <p className="text-muted-foreground">
-              Copy and paste the following code into your project.
-            </p>
-            <CodeBlock
-              code={`import { cn } from "@/lib/utils"
-
-function Table({ className, ...props }: React.ComponentProps<"table">) {
-  return (
-    <div className="relative w-full overflow-auto">
-      <table
-        className={cn("w-full caption-bottom text-sm", className)}
-        {...props}
-      />
-    </div>
-  )
-}
-
-function TableHeader({ className, ...props }: React.ComponentProps<"thead">) {
-  return <thead className={cn("[&_tr]:border-b", className)} {...props} />
-}
-
-function TableBody({ className, ...props }: React.ComponentProps<"tbody">) {
-  return (
-    <tbody className={cn("[&_tr:last-child]:border-0", className)} {...props} />
-  )
-}
-
-function TableFooter({ className, ...props }: React.ComponentProps<"tfoot">) {
-  return (
-    <tfoot
-      className={cn("border-t bg-muted/50 font-medium", className)}
-      {...props}
-    />
-  )
-}
-
-function TableRow({ className, ...props }: React.ComponentProps<"tr">) {
-  return (
-    <tr
-      className={cn(
-        "border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted",
-        className
-      )}
-      {...props}
-    />
-  )
-}
-
-function TableHead({ className, ...props }: React.ComponentProps<"th">) {
-  return (
-    <th
-      className={cn(
-        "h-10 px-2 text-left align-middle font-medium text-muted-foreground",
-        className
-      )}
-      {...props}
-    />
-  )
-}
-
-function TableCell({ className, ...props }: React.ComponentProps<"td">) {
-  return (
-    <td
-      className={cn("p-2 align-middle [&:has([role=checkbox])]:pr-0", className)}
-      {...props}
-    />
-  )
-}
-
-function TableCaption({ className, ...props }: React.ComponentProps<"caption">) {
-  return (
-    <caption
-      className={cn("mt-4 text-sm text-muted-foreground", className)}
-      {...props}
-    />
-  )
-}
-
-export {
-  Table,
-  TableHeader,
-  TableBody,
-  TableFooter,
-  TableHead,
-  TableRow,
-  TableCell,
-  TableCaption,
-}`}
-              language="tsx"
-              filename="components/ui/table.tsx"
-            />
-          </TabsContent>
-        </Tabs>
-      </section>
-
       {/* Usage */}
       <section className="space-y-6">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">
@@ -248,31 +135,31 @@ export {
         </h2>
         <CodeBlock
           code={`import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table"`}
+  ZTable,
+  ZTableBody,
+  ZTableCaption,
+  ZTableCell,
+  ZTableHead,
+  ZTableHeader,
+  ZTableRow,
+} from '@tasteee/zest'`}
           language="tsx"
         />
         <CodeBlock
-          code={`<Table>
-  <TableHeader>
-    <TableRow>
-      <TableHead>Name</TableHead>
-      <TableHead>Email</TableHead>
-    </TableRow>
-  </TableHeader>
-  <TableBody>
-    <TableRow>
-      <TableCell>John Doe</TableCell>
-      <TableCell>john@example.com</TableCell>
-    </TableRow>
-  </TableBody>
-</Table>`}
+          code={`<ZTable>
+  <ZTableHeader>
+    <ZTableRow>
+      <ZTableHead>Name</ZTableHead>
+      <ZTableHead>Email</ZTableHead>
+    </ZTableRow>
+  </ZTableHeader>
+  <ZTableBody>
+    <ZTableRow>
+      <ZTableCell>John Doe</ZTableCell>
+      <ZTableCell>john@example.com</ZTableCell>
+    </ZTableRow>
+  </ZTableBody>
+</ZTable>`}
           language="tsx"
         />
       </section>

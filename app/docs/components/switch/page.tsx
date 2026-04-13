@@ -87,44 +87,14 @@ export default function SwitchDocsPage() {
       <ComponentPreview
         title="Default Switch"
         description="A basic toggle switch."
-        code={`import { Switch } from "@/components/ui/switch"
+        code={`import { ZSwitch } from '@tasteee/zest'
 
 export function SwitchDemo() {
-  return <Switch />
+  return <ZSwitch />
 }`}
       >
         <Switch />
       </ComponentPreview>
-
-      {/* Installation */}
-      <section className="space-y-6">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">
-          Installation
-        </h2>
-        <Tabs defaultValue="cli" className="w-full">
-          <TabsList>
-            <TabsTrigger value="cli">CLI</TabsTrigger>
-            <TabsTrigger value="manual">Manual</TabsTrigger>
-          </TabsList>
-          <TabsContent value="cli" className="mt-4">
-            <CodeBlock 
-              code="npx zest-ui add switch" 
-              language="bash"
-              filename="Terminal"
-            />
-          </TabsContent>
-          <TabsContent value="manual" className="mt-4 space-y-4">
-            <p className="text-muted-foreground">
-              Install the required dependencies:
-            </p>
-            <CodeBlock
-              code="npm install @radix-ui/react-switch"
-              language="bash"
-              filename="Terminal"
-            />
-          </TabsContent>
-        </Tabs>
-      </section>
 
       {/* Usage */}
       <section className="space-y-6">
@@ -132,11 +102,11 @@ export function SwitchDemo() {
           Usage
         </h2>
         <CodeBlock
-          code={`import { Switch } from "@/components/ui/switch"`}
+          code={`import { ZSwitch } from '@tasteee/zest'`}
           language="tsx"
         />
         <CodeBlock
-          code={`<Switch />`}
+          code={`<ZSwitch />`}
           language="tsx"
         />
       </section>

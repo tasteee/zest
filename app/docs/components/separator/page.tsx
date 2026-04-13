@@ -64,23 +64,23 @@ export default function SeparatorDocsPage() {
       <ComponentPreview
         title="Default Separator"
         description="A horizontal line that separates content."
-        code={`import { Separator } from "@/components/ui/separator"
+        code={`import { ZSeparator } from '@tasteee/zest'
 
 export function SeparatorDemo() {
   return (
     <div>
       <div className="space-y-1">
-        <h4 className="text-sm font-medium leading-none">Radix Primitives</h4>
+        <h4 className="text-sm font-medium leading-none">tasteink Design System</h4>
         <p className="text-sm text-muted-foreground">
-          An open-source UI component library.
+          A comprehensive component library.
         </p>
       </div>
-      <Separator className="my-4" />
+      <ZSeparator className="my-4" />
       <div className="flex h-5 items-center space-x-4 text-sm">
         <div>Blog</div>
-        <Separator orientation="vertical" />
+        <ZSeparator orientation="vertical" />
         <div>Docs</div>
-        <Separator orientation="vertical" />
+        <ZSeparator orientation="vertical" />
         <div>Source</div>
       </div>
     </div>
@@ -105,73 +105,17 @@ export function SeparatorDemo() {
         </div>
       </ComponentPreview>
 
-      {/* Installation */}
-      <section className="space-y-6">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">
-          Installation
-        </h2>
-        <Tabs defaultValue="cli" className="w-full">
-          <TabsList>
-            <TabsTrigger value="cli">CLI</TabsTrigger>
-            <TabsTrigger value="manual">Manual</TabsTrigger>
-          </TabsList>
-          <TabsContent value="cli" className="mt-4">
-            <CodeBlock 
-              code="npx zest-ui add separator" 
-              language="bash"
-              filename="Terminal"
-            />
-          </TabsContent>
-          <TabsContent value="manual" className="mt-4 space-y-4">
-            <p className="text-muted-foreground">
-              Copy and paste the following code into your project.
-            </p>
-            <CodeBlock
-              code={`'use client'
-
-import * as React from 'react'
-import * as SeparatorPrimitive from '@radix-ui/react-separator'
-import { cn } from '@/lib/utils'
-
-function Separator({
-  className,
-  orientation = 'horizontal',
-  decorative = true,
-  ...props
-}: React.ComponentProps<typeof SeparatorPrimitive.Root>) {
-  return (
-    <SeparatorPrimitive.Root
-      data-slot="separator"
-      decorative={decorative}
-      orientation={orientation}
-      className={cn(
-        'bg-border shrink-0 data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-px',
-        className,
-      )}
-      {...props}
-    />
-  )
-}
-
-export { Separator }`}
-              language="tsx"
-              filename="components/ui/separator.tsx"
-            />
-          </TabsContent>
-        </Tabs>
-      </section>
-
       {/* Usage */}
       <section className="space-y-6">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">
           Usage
         </h2>
         <CodeBlock
-          code={`import { Separator } from "@/components/ui/separator"`}
+          code={`import { ZSeparator } from '@tasteee/zest'`}
           language="tsx"
         />
         <CodeBlock
-          code={`<Separator />`}
+          code={`<ZSeparator />`}
           language="tsx"
         />
       </section>

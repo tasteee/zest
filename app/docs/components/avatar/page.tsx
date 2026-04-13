@@ -85,14 +85,14 @@ export default function AvatarDocsPage() {
       <ComponentPreview
         title="Default Avatar"
         description="A basic avatar with an image and fallback."
-        code={`import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+        code={`import { ZAvatar, ZAvatarFallback, ZAvatarImage } from '@tasteee/zest'
 
 export function AvatarDemo() {
   return (
-    <Avatar>
-      <AvatarImage src="/placeholder-user.jpg" alt="User" />
-      <AvatarFallback>JD</AvatarFallback>
-    </Avatar>
+    <ZAvatar>
+      <ZAvatarImage src="/placeholder-user.jpg" alt="User" />
+      <ZAvatarFallback>JD</ZAvatarFallback>
+    </ZAvatar>
   )
 }`}
       >
@@ -102,101 +102,20 @@ export function AvatarDemo() {
         </Avatar>
       </ComponentPreview>
 
-      {/* Installation */}
-      <section className="space-y-6">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">
-          Installation
-        </h2>
-        <Tabs defaultValue="cli" className="w-full">
-          <TabsList>
-            <TabsTrigger value="cli">CLI</TabsTrigger>
-            <TabsTrigger value="manual">Manual</TabsTrigger>
-          </TabsList>
-          <TabsContent value="cli" className="mt-4">
-            <CodeBlock 
-              code="npx zest-ui add avatar" 
-              language="bash"
-              filename="Terminal"
-            />
-          </TabsContent>
-          <TabsContent value="manual" className="mt-4 space-y-4">
-            <p className="text-muted-foreground">
-              Copy and paste the following code into your project.
-            </p>
-            <CodeBlock
-              code={`'use client'
-
-import * as React from 'react'
-import * as AvatarPrimitive from '@radix-ui/react-avatar'
-import { cn } from '@/lib/utils'
-
-function Avatar({
-  className,
-  ...props
-}: React.ComponentProps<typeof AvatarPrimitive.Root>) {
-  return (
-    <AvatarPrimitive.Root
-      data-slot="avatar"
-      className={cn(
-        'relative flex size-8 shrink-0 overflow-hidden rounded-full',
-        className,
-      )}
-      {...props}
-    />
-  )
-}
-
-function AvatarImage({
-  className,
-  ...props
-}: React.ComponentProps<typeof AvatarPrimitive.Image>) {
-  return (
-    <AvatarPrimitive.Image
-      data-slot="avatar-image"
-      className={cn('aspect-square size-full', className)}
-      {...props}
-    />
-  )
-}
-
-function AvatarFallback({
-  className,
-  ...props
-}: React.ComponentProps<typeof AvatarPrimitive.Fallback>) {
-  return (
-    <AvatarPrimitive.Fallback
-      data-slot="avatar-fallback"
-      className={cn(
-        'bg-muted flex size-full items-center justify-center rounded-full',
-        className,
-      )}
-      {...props}
-    />
-  )
-}
-
-export { Avatar, AvatarImage, AvatarFallback }`}
-              language="tsx"
-              filename="components/ui/avatar.tsx"
-            />
-          </TabsContent>
-        </Tabs>
-      </section>
-
       {/* Usage */}
       <section className="space-y-6">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">
           Usage
         </h2>
         <CodeBlock
-          code={`import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"`}
+          code={`import { ZAvatar, ZAvatarFallback, ZAvatarImage } from '@tasteee/zest'`}
           language="tsx"
         />
         <CodeBlock
-          code={`<Avatar>
-  <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-  <AvatarFallback>CN</AvatarFallback>
-</Avatar>`}
+          code={`<ZAvatar>
+  <ZAvatarImage src="https://example.com/user.png" alt="User" />
+  <ZAvatarFallback>JD</ZAvatarFallback>
+</ZAvatar>`}
           language="tsx"
         />
       </section>

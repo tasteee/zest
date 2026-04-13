@@ -91,22 +91,22 @@ export default function TabsDocsPage() {
       <ComponentPreview
         title="Default Tabs"
         description="A basic tabs component with multiple panels."
-        code={`import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+        code={`import { ZTabs, ZTabsContent, ZTabsList, ZTabsTrigger } from '@tasteee/zest'
 
 export function TabsDemo() {
   return (
-    <Tabs defaultValue="account" className="w-[400px]">
-      <TabsList>
-        <TabsTrigger value="account">Account</TabsTrigger>
-        <TabsTrigger value="password">Password</TabsTrigger>
-      </TabsList>
-      <TabsContent value="account">
+    <ZTabs defaultValue="account" className="w-[400px]">
+      <ZTabsList>
+        <ZTabsTrigger value="account">Account</ZTabsTrigger>
+        <ZTabsTrigger value="password">Password</ZTabsTrigger>
+      </ZTabsList>
+      <ZTabsContent value="account">
         Make changes to your account here.
-      </TabsContent>
-      <TabsContent value="password">
+      </ZTabsContent>
+      <ZTabsContent value="password">
         Change your password here.
-      </TabsContent>
-    </Tabs>
+      </ZTabsContent>
+    </ZTabs>
   )
 }`}
       >
@@ -128,54 +128,24 @@ export function TabsDemo() {
         </Tabs>
       </ComponentPreview>
 
-      {/* Installation */}
-      <section className="space-y-6">
-        <h2 className="text-2xl font-semibold tracking-tight text-foreground">
-          Installation
-        </h2>
-        <Tabs defaultValue="cli" className="w-full">
-          <TabsList>
-            <TabsTrigger value="cli">CLI</TabsTrigger>
-            <TabsTrigger value="manual">Manual</TabsTrigger>
-          </TabsList>
-          <TabsContent value="cli" className="mt-4">
-            <CodeBlock 
-              code="npx zest-ui add tabs" 
-              language="bash"
-              filename="Terminal"
-            />
-          </TabsContent>
-          <TabsContent value="manual" className="mt-4 space-y-4">
-            <p className="text-muted-foreground">
-              Install the required dependencies:
-            </p>
-            <CodeBlock
-              code="npm install @radix-ui/react-tabs"
-              language="bash"
-              filename="Terminal"
-            />
-          </TabsContent>
-        </Tabs>
-      </section>
-
       {/* Usage */}
       <section className="space-y-6">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">
           Usage
         </h2>
         <CodeBlock
-          code={`import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"`}
+          code={`import { ZTabs, ZTabsContent, ZTabsList, ZTabsTrigger } from '@tasteee/zest'`}
           language="tsx"
         />
         <CodeBlock
-          code={`<Tabs defaultValue="account">
-  <TabsList>
-    <TabsTrigger value="account">Account</TabsTrigger>
-    <TabsTrigger value="password">Password</TabsTrigger>
-  </TabsList>
-  <TabsContent value="account">Account content</TabsContent>
-  <TabsContent value="password">Password content</TabsContent>
-</Tabs>`}
+          code={`<ZTabs defaultValue="account">
+  <ZTabsList>
+    <ZTabsTrigger value="account">Account</ZTabsTrigger>
+    <ZTabsTrigger value="password">Password</ZTabsTrigger>
+  </ZTabsList>
+  <ZTabsContent value="account">Account content</ZTabsContent>
+  <ZTabsContent value="password">Password content</ZTabsContent>
+</ZTabs>`}
           language="tsx"
         />
       </section>
