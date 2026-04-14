@@ -1,0 +1,537 @@
+.colorsToolsPage {
+	height: 100vh;
+	width: 100%;
+	background: linear-gradient(to bottom, var(--background-soft), var(--background), var(--background-strong));
+	display: grid;
+	grid-template-columns: var(--sidebar-width-open) minmax(0, 1fr);
+	transition: grid-template-columns var(--duration-fast) var(--easing-standard);
+	overflow: hidden;
+}
+
+.colorsToolsPageSidebarCollapsed {
+	grid-template-columns: var(--sidebar-width-collapsed) minmax(0, 1fr);
+}
+
+.colorsSidebar {
+	height: 100vh;
+	border-right: var(--border-width-standard) solid var(--border);
+	padding: var(--space-lg) var(--space-base);
+	display: grid;
+	align-content: start;
+	gap: var(--space-xl);
+	overflow: hidden;
+}
+
+.colorsSidebarHeader {
+	display: grid;
+	gap: var(--space-xs);
+}
+
+.colorsSidebarBackLink {
+	font-size: var(--font-size-caption);
+	line-height: var(--line-height-caption);
+	color: var(--muted-foreground);
+	text-decoration: none;
+	width: max-content;
+}
+
+.colorsSidebarTitle {
+	font-size: var(--font-size-h3);
+	line-height: var(--line-height-h3);
+	color: var(--primary);
+	font-weight: var(--font-weight-semibold);
+}
+
+.sidebarCollapseButton {
+	width: max-content;
+	border: var(--border-width-standard) solid var(--border);
+	border-radius: var(--radius-md);
+	background: transparent;
+	color: var(--foreground);
+	padding: var(--space-xs);
+	cursor: pointer;
+}
+
+.colorsSidebarNavigation {
+	display: grid;
+	gap: var(--space-sm);
+}
+
+.colorsSidebarNavigationItemActive {
+	text-align: left;
+	border: var(--border-width-standard) solid var(--foreground);
+	border-radius: var(--radius-md);
+	background: var(--card);
+	color: var(--primary);
+	padding: var(--space-sm) var(--space-md);
+	font-size: var(--font-size-small);
+	line-height: var(--line-height-small);
+}
+
+.colorsSidebarNavigationItemMuted {
+	text-align: left;
+	border: var(--border-width-standard) solid var(--border);
+	border-radius: var(--radius-md);
+	background: transparent;
+	color: var(--muted-foreground);
+	padding: var(--space-sm) var(--space-md);
+	font-size: var(--font-size-small);
+	line-height: var(--line-height-small);
+}
+
+.sidebarExpandButton {
+	position: fixed;
+	top: var(--space-base);
+	left: var(--space-base);
+	border: var(--border-width-standard) solid var(--border);
+	border-radius: var(--radius-md);
+	background: var(--card);
+	color: var(--foreground);
+	padding: var(--space-xs);
+	z-index: 5;
+	cursor: pointer;
+}
+
+.colorsWorkspace {
+	height: 100vh;
+	padding: var(--space-xl) var(--space-xl) calc(var(--tool-dock-height) + var(--space-xl));
+	display: grid;
+	grid-template-rows: auto auto auto minmax(0, 1fr);
+	gap: var(--space-lg);
+	overflow: hidden;
+}
+
+.scaleHeader {
+	display: flex;
+	justify-content: space-between;
+	align-items: start;
+	gap: var(--space-lg);
+}
+
+.scaleHeaderTitleRow {
+	display: grid;
+	gap: var(--space-xs);
+}
+
+.scaleHeaderTitle {
+	font-size: var(--font-size-h2);
+	line-height: var(--line-height-h2);
+	font-weight: var(--font-weight-semibold);
+	color: var(--primary);
+}
+
+.scaleHeaderToolbarWrap {
+	display: grid;
+	justify-items: end;
+	gap: var(--space-xs);
+	position: relative;
+}
+
+.scaleHeaderToolbar {
+	display: flex;
+	align-items: center;
+	gap: var(--space-sm);
+	position: relative;
+}
+
+.toolbarTextButton,
+.toolbarSubtleButton,
+.toolbarIconButton,
+.optionsToggleButton,
+.optionChip,
+.optionChipActive,
+.stepperButton,
+.toolbarInlineMenuItem,
+.toolbarInlineMenuItemActive,
+.toolbarIconMenuItem {
+	font: inherit;
+}
+
+.toolbarTextButton {
+	border: none;
+	background: transparent;
+	color: var(--primary);
+	font-size: var(--font-size-small);
+	line-height: var(--line-height-small);
+	text-transform: lowercase;
+	cursor: pointer;
+}
+
+.toolbarSubtleButton {
+	border: none;
+	background: transparent;
+	color: var(--muted-foreground);
+	font-size: var(--font-size-small);
+	line-height: var(--line-height-small);
+	cursor: pointer;
+}
+
+.toolbarAlgorithmArea {
+	position: relative;
+}
+
+.toolbarInlineMenu {
+	position: absolute;
+	top: calc(100% + var(--space-xs));
+	right: 0;
+	border: var(--border-width-standard) solid var(--border);
+	border-radius: var(--radius-md);
+	background: var(--card);
+	display: grid;
+	min-width: 11rem;
+	z-index: 5;
+}
+
+.toolbarInlineMenuItem {
+	border: none;
+	background: transparent;
+	text-align: left;
+	color: var(--foreground);
+	padding: var(--space-sm) var(--space-md);
+	cursor: pointer;
+}
+
+.toolbarInlineMenuItemActive {
+	border: none;
+	background: var(--secondary);
+	text-align: left;
+	color: var(--primary);
+	padding: var(--space-sm) var(--space-md);
+	cursor: pointer;
+}
+
+.toolbarIconArea {
+	position: relative;
+}
+
+.toolbarIconButton {
+	width: calc(var(--space-base) * 2);
+	height: calc(var(--space-base) * 2);
+	border: none;
+	background: transparent;
+	color: var(--foreground);
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+}
+
+.toolbarIconMenu {
+	position: absolute;
+	top: calc(100% + var(--space-xs));
+	right: 0;
+	border: var(--border-width-standard) solid var(--border);
+	border-radius: var(--radius-md);
+	background: var(--card);
+	display: grid;
+	min-width: 12rem;
+	z-index: 5;
+}
+
+.toolbarIconMenuItem {
+	border: none;
+	background: transparent;
+	text-align: left;
+	color: var(--foreground);
+	padding: var(--space-sm) var(--space-md);
+	cursor: pointer;
+}
+
+.optionsToggleButton {
+	border: none;
+	background: transparent;
+	color: var(--muted-foreground);
+	font-size: var(--font-size-caption);
+	line-height: var(--line-height-caption);
+	cursor: pointer;
+}
+
+.optionsPanel {
+	position: absolute;
+	top: calc(100% + var(--space-xs));
+	right: 0;
+	width: min(100vw, 36rem);
+	border: var(--border-width-standard) solid var(--border);
+	border-radius: var(--radius-lg);
+	background: var(--card);
+	padding: var(--space-base);
+	display: grid;
+	gap: var(--space-base);
+	z-index: 7;
+}
+
+.optionsRow {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--space-sm);
+}
+
+.optionsLabel {
+	color: var(--muted-foreground);
+	font-size: var(--font-size-small);
+	line-height: var(--line-height-small);
+}
+
+.optionsToggleGroup {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--space-sm);
+}
+
+.optionsCheckboxLabel {
+	color: var(--foreground);
+	font-size: var(--font-size-small);
+	line-height: var(--line-height-small);
+	display: inline-flex;
+	align-items: center;
+	gap: var(--space-xs);
+}
+
+.optionChip {
+	border: var(--border-width-standard) solid var(--border);
+	border-radius: var(--radius-md);
+	background: transparent;
+	color: var(--foreground);
+	padding: var(--space-xs) var(--space-sm);
+	font-size: var(--font-size-small);
+	line-height: var(--line-height-small);
+	cursor: pointer;
+}
+
+.optionChipActive {
+	border: var(--border-width-standard) solid var(--foreground);
+	border-radius: var(--radius-md);
+	background: var(--secondary);
+	color: var(--primary);
+	padding: var(--space-xs) var(--space-sm);
+	font-size: var(--font-size-small);
+	line-height: var(--line-height-small);
+	cursor: pointer;
+}
+
+.stepperControl {
+	display: inline-flex;
+	align-items: center;
+	border: var(--border-width-standard) solid var(--border);
+	border-radius: var(--radius-md);
+}
+
+.stepperButton {
+	border: none;
+	background: transparent;
+	color: var(--foreground);
+	padding: var(--space-xs) var(--space-sm);
+	cursor: pointer;
+}
+
+.stepperValue {
+	min-width: calc(var(--space-base) * 2);
+	text-align: center;
+	color: var(--primary);
+	font-size: var(--font-size-small);
+	line-height: var(--line-height-small);
+}
+
+.seedPickerSection {
+	display: grid;
+	justify-items: center;
+	gap: var(--space-md);
+}
+
+.seedPickerSwatch {
+	position: relative;
+	width: min(100%, 34rem);
+	height: 5rem;
+	border: var(--border-width-standard) solid var(--border);
+	border-radius: var(--radius-lg);
+}
+
+.seedPickerControlRow {
+	width: min(100%, 34rem);
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--space-sm);
+}
+
+.seedPickerControlLabel {
+	font-size: var(--font-size-small);
+	line-height: var(--line-height-small);
+	color: var(--foreground);
+}
+
+.seedPickerNativeControl {
+	width: 3.5rem;
+	height: 2.25rem;
+	padding: 0;
+	border: var(--border-width-standard) solid var(--border);
+	border-radius: var(--radius-md);
+	background: transparent;
+	cursor: pointer;
+}
+
+.seedPickerValueRow {
+	width: min(100%, 34rem);
+	display: grid;
+	gap: var(--space-sm);
+}
+
+.seedPickerHexInput {
+	width: 100%;
+	border: var(--border-width-standard) solid var(--border);
+	border-radius: var(--radius-md);
+	background: transparent;
+	color: var(--primary);
+	padding: var(--space-sm) var(--space-md);
+	font-size: var(--font-size-body);
+	line-height: var(--line-height-body);
+	font-family: var(--font-mono);
+}
+
+.seedPickerFormatValue {
+	color: var(--foreground);
+	font-size: var(--font-size-small);
+	line-height: var(--line-height-small);
+	text-align: center;
+	font-family: var(--font-mono);
+}
+
+.scaleSurface {
+	border: var(--border-width-standard) solid var(--border);
+	border-radius: var(--radius-lg);
+	overflow: hidden;
+	min-height: 0;
+}
+
+.scaleSurfaceVertical {
+	display: grid;
+}
+
+.scaleSurfaceHorizontal {
+	display: grid;
+	grid-auto-flow: column;
+	grid-auto-columns: minmax(0, 1fr);
+	grid-template-rows: minmax(0, 1fr);
+	min-height: var(--tool-step-height-horizontal);
+}
+
+.scaleStep {
+	border: none;
+	width: 100%;
+	position: relative;
+	cursor: pointer;
+	padding: 0;
+}
+
+.scaleStepVertical {
+	height: var(--tool-step-height);
+}
+
+.scaleStepHorizontal {
+	height: 100%;
+	min-height: 0;
+}
+
+.scaleStepOverlay {
+	position: absolute;
+	inset: 0;
+	opacity: 0;
+	transition: opacity var(--duration-fast) var(--easing-standard);
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--space-sm);
+	padding: var(--space-sm) var(--space-md);
+	text-align: left;
+}
+
+.scaleStep:hover .scaleStepOverlay,
+.scaleStep:focus-visible .scaleStepOverlay {
+	opacity: 1;
+}
+
+.scaleStepLabel {
+	font-size: var(--font-size-caption);
+	line-height: var(--line-height-caption);
+	letter-spacing: var(--tracking-wide);
+	text-transform: uppercase;
+	font-family: var(--font-mono);
+}
+
+.scaleStepValue {
+	font-size: var(--font-size-small);
+	line-height: var(--line-height-small);
+	font-family: var(--font-mono);
+}
+
+.savedDock {
+	position: fixed;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	border-top: var(--border-width-standard) solid var(--border);
+	background: color-mix(in oklch, var(--background) 90%, var(--card) 10%);
+	padding: var(--space-sm) var(--space-base);
+	z-index: 4;
+}
+
+.savedDockRail {
+	display: flex;
+	align-items: center;
+	gap: var(--space-sm);
+	overflow-x: auto;
+	min-height: calc(var(--tool-dock-height) - var(--space-base));
+}
+
+.savedDockSwatch {
+	flex: 0 0 auto;
+	width: calc(var(--space-base) * 2.5);
+	height: calc(var(--space-base) * 2.5);
+	border: var(--border-width-standard) solid var(--foreground);
+	border-radius: var(--radius-sm);
+	background: transparent;
+	cursor: pointer;
+}
+
+.savedDockEmpty {
+	color: var(--muted-foreground);
+	font-size: var(--font-size-small);
+	line-height: var(--line-height-small);
+}
+
+@media (max-width: 64rem) {
+	.colorsToolsPage {
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	.colorsSidebar {
+		display: none;
+	}
+
+	.sidebarExpandButton {
+		display: none;
+	}
+
+	.colorsWorkspace {
+		height: 100vh;
+		padding: var(--space-lg) var(--space-base) calc(var(--tool-dock-height) + var(--space-xl));
+		grid-template-rows: auto auto auto minmax(0, 1fr);
+	}
+
+	.scaleHeader {
+		flex-direction: column;
+		align-items: stretch;
+	}
+
+	.scaleHeaderToolbarWrap {
+		justify-items: start;
+	}
+
+	.optionsPanel {
+		left: 0;
+		right: auto;
+		width: min(100%, 28rem);
+	}
+}

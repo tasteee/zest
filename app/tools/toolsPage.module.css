@@ -1,0 +1,119 @@
+.toolsPage {
+	min-height: 100vh;
+	width: 100%;
+	background: linear-gradient(to bottom, var(--background-soft), var(--background), var(--background-strong));
+	padding: var(--space-2xl) var(--space-base) var(--space-3xl);
+}
+
+.toolsPageIntro {
+	max-width: var(--layout-max-width);
+	margin: 0 auto;
+	display: grid;
+	gap: var(--space-sm);
+}
+
+.toolsPageEyebrow {
+	font-size: var(--font-size-caption);
+	line-height: var(--line-height-caption);
+	letter-spacing: var(--tracking-wide);
+	text-transform: uppercase;
+	color: var(--muted-foreground);
+}
+
+.toolsPageTitle {
+	font-size: var(--font-size-h1);
+	line-height: var(--line-height-h1);
+	color: var(--primary);
+	font-weight: var(--font-weight-bold);
+}
+
+.toolsPageDescription {
+	max-width: var(--layout-reading-width);
+	font-size: var(--font-size-body);
+	line-height: var(--line-height-body);
+	color: var(--foreground);
+}
+
+.toolsPageGrid {
+	max-width: var(--layout-max-width);
+	margin: var(--space-xl) auto 0;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(var(--tool-card-min-width), 1fr));
+	gap: var(--space-base);
+}
+
+.toolsPageCard {
+	padding: var(--space-lg);
+	display: grid;
+	gap: var(--space-base);
+}
+
+.toolsPageCardMeta {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: var(--space-sm);
+}
+
+.toolsPageCategory {
+	font-size: var(--font-size-caption);
+	line-height: var(--line-height-caption);
+	color: var(--muted-foreground);
+	letter-spacing: var(--tracking-wide);
+	text-transform: uppercase;
+}
+
+.toolsPageAvailabilityAvailable {
+	font-size: var(--font-size-caption);
+	line-height: var(--line-height-caption);
+	color: var(--primary);
+}
+
+.toolsPageAvailabilitySoon {
+	font-size: var(--font-size-caption);
+	line-height: var(--line-height-caption);
+	color: var(--muted-foreground);
+}
+
+.toolsPageCardTitle {
+	font-size: var(--font-size-h4);
+	line-height: var(--line-height-h4);
+	color: var(--primary);
+	font-weight: var(--font-weight-semibold);
+}
+
+.toolsPageCardDescription {
+	font-size: var(--font-size-small);
+	line-height: var(--line-height-small);
+	color: var(--foreground);
+}
+
+.toolsPageCardActionRow {
+	display: flex;
+	align-items: center;
+}
+
+.toolsPageCardLink {
+	font-size: var(--font-size-small);
+	line-height: var(--line-height-small);
+	color: var(--primary);
+	text-decoration: none;
+	border-bottom: var(--border-width-standard) solid var(--primary);
+	padding-bottom: var(--space-xs);
+}
+
+.toolsPageCardDisabledLink {
+	font-size: var(--font-size-small);
+	line-height: var(--line-height-small);
+	color: var(--muted-foreground);
+}
+
+@media (max-width: 48rem) {
+	.toolsPage {
+		padding-top: var(--space-xl);
+	}
+
+	.toolsPageGrid {
+		margin-top: var(--space-lg);
+	}
+}
