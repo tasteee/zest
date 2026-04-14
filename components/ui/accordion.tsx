@@ -63,4 +63,11 @@ function AccordionContent({
   )
 }
 
-export { Accordion, AccordionItem, AccordionTrigger, AccordionContent }
+// Compound component pattern
+const AccordionNamespace = Object.assign(Accordion, {
+  Item: AccordionItem,
+  Trigger: AccordionTrigger,
+  Content: AccordionContent,
+})
+
+export { AccordionNamespace as Accordion }

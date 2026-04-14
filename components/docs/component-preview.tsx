@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { CodeBlock } from "./code-block";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tabs } from "@/components/ui/tabs";
 
 interface ComponentPreviewProps {
   children: React.ReactNode;
@@ -20,21 +20,21 @@ export function ComponentPreview({
 }: ComponentPreviewProps) {
   return (
     <Tabs defaultValue="preview" className="w-full">
-      <TabsList className="w-auto justify-start bg-muted rounded-lg p-1 h-auto">
-        <TabsTrigger
+      <Tabs.List className="w-auto justify-start bg-muted rounded-lg p-1 h-auto">
+        <Tabs.Trigger
           value="preview"
           className="rounded-md data-[state=active]:bg-card data-[state=active]:text-foreground px-4 py-1.5 text-sm"
         >
           Preview
-        </TabsTrigger>
-        <TabsTrigger
+        </Tabs.Trigger>
+        <Tabs.Trigger
           value="code"
           className="rounded-md data-[state=active]:bg-card data-[state=active]:text-foreground px-4 py-1.5 text-sm"
         >
           Code
-        </TabsTrigger>
-      </TabsList>
-      <TabsContent value="preview" className="mt-0">
+        </Tabs.Trigger>
+      </Tabs.List>
+      <Tabs.Content value="preview" className="mt-0">
         <div
           className={cn(
             "flex min-h-[200px] w-full rounded-lg border border-border bg-card p-8",
@@ -46,10 +46,10 @@ export function ComponentPreview({
         >
           {children}
         </div>
-      </TabsContent>
-      <TabsContent value="code" className="mt-0">
+      </Tabs.Content>
+      <Tabs.Content value="code" className="mt-0">
         <CodeBlock code={code} />
-      </TabsContent>
+      </Tabs.Content>
     </Tabs>
   );
 }

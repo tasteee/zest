@@ -72,4 +72,10 @@ function AlertDescription({
   )
 }
 
-export { Alert, AlertTitle, AlertDescription }
+// Compound component pattern
+const AlertNamespace = Object.assign(Alert, {
+  Title: AlertTitle,
+  Description: AlertDescription,
+})
+
+export { AlertNamespace as Alert }

@@ -58,4 +58,11 @@ function TooltipContent({
   )
 }
 
-export { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider }
+// Compound component pattern
+const TooltipNamespace = Object.assign(Tooltip, {
+  Trigger: TooltipTrigger,
+  Content: TooltipContent,
+  Provider: TooltipProvider,
+})
+
+export { TooltipNamespace as Tooltip }

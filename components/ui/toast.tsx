@@ -116,14 +116,18 @@ type ToastProps = React.ComponentPropsWithoutRef<typeof Toast>
 
 type ToastActionElement = React.ReactElement<typeof ToastAction>
 
+// Compound component pattern
+const ToastNamespace = Object.assign(Toast, {
+  Provider: ToastProvider,
+  Viewport: ToastViewport,
+  Title: ToastTitle,
+  Description: ToastDescription,
+  Close: ToastClose,
+  Action: ToastAction,
+})
+
 export {
   type ToastProps,
   type ToastActionElement,
-  ToastProvider,
-  ToastViewport,
-  Toast,
-  ToastTitle,
-  ToastDescription,
-  ToastClose,
-  ToastAction,
+  ToastNamespace as Toast,
 }

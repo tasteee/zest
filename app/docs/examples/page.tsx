@@ -14,16 +14,16 @@ import { Switch } from "@/components/ui/switch";
 import { Progress } from "@/components/ui/progress";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Separator } from "@/components/ui/separator";
-import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
-import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog";
-import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator } from "@/components/ui/dropdown-menu";
-import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
-import { Tooltip, TooltipProvider, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip";
-import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "@/components/ui/table";
+import { Alert } from "@/components/ui/alert";
+import { Avatar } from "@/components/ui/avatar";
+import { Card } from "@/components/ui/card";
+import { Tabs } from "@/components/ui/tabs";
+import { Accordion } from "@/components/ui/accordion";
+import { Dialog } from "@/components/ui/dialog";
+import { DropdownMenu } from "@/components/ui/dropdown-menu";
+import { Select } from "@/components/ui/select";
+import { Tooltip } from "@/components/ui/tooltip";
+import { Table } from "@/components/ui/table";
 import { useToast } from "@/components/ui/use-toast";
 
 function SectionHeader({ title, description }: { title: string; description?: string }) {
@@ -62,7 +62,7 @@ export default function ExamplesPage() {
   });
 
   return (
-    <TooltipProvider>
+    <Tooltip.Provider>
       <div className="space-y-16 pb-16">
         {/* Page Header */}
         <div className="space-y-4">
@@ -342,14 +342,14 @@ export default function ExamplesPage() {
               <div className="space-y-2 w-full max-w-xs">
                 <Label>Choose a theme</Label>
                 <Select>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select theme" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="light">Light</SelectItem>
-                    <SelectItem value="dark">Dark</SelectItem>
-                    <SelectItem value="system">System</SelectItem>
-                  </SelectContent>
+                  <Select.Trigger>
+                    <Select.Value placeholder="Select theme" />
+                  </Select.Trigger>
+                  <Select.Content>
+                    <Select.Item value="light">Light</Select.Item>
+                    <Select.Item value="dark">Dark</Select.Item>
+                    <Select.Item value="system">System</Select.Item>
+                  </Select.Content>
                 </Select>
               </div>
             </ExampleCard>
@@ -358,16 +358,16 @@ export default function ExamplesPage() {
               <div className="space-y-2 w-full max-w-xs">
                 <Label>Select a fruit</Label>
                 <Select>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Pick a fruit" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="apple">Apple</SelectItem>
-                    <SelectItem value="banana">Banana</SelectItem>
-                    <SelectItem value="orange">Orange</SelectItem>
-                    <SelectItem value="grape">Grape</SelectItem>
-                    <SelectItem value="mango">Mango</SelectItem>
-                  </SelectContent>
+                  <Select.Trigger>
+                    <Select.Value placeholder="Pick a fruit" />
+                  </Select.Trigger>
+                  <Select.Content>
+                    <Select.Item value="apple">Apple</Select.Item>
+                    <Select.Item value="banana">Banana</Select.Item>
+                    <Select.Item value="orange">Orange</Select.Item>
+                    <Select.Item value="grape">Grape</Select.Item>
+                    <Select.Item value="mango">Mango</Select.Item>
+                  </Select.Content>
                 </Select>
               </div>
             </ExampleCard>
@@ -386,50 +386,50 @@ export default function ExamplesPage() {
           <div className="grid gap-4">
             <Alert>
               <Terminal className="h-4 w-4" />
-              <AlertTitle>Default Alert</AlertTitle>
-              <AlertDescription>
+              <Alert.Title>Default Alert</Alert.Title>
+              <Alert.Description>
                 This is a default alert with neutral styling.
-              </AlertDescription>
+              </Alert.Description>
             </Alert>
 
             <Alert variant="success">
               <CheckCircle className="h-4 w-4" />
-              <AlertTitle>Success</AlertTitle>
-              <AlertDescription>
+              <Alert.Title>Success</Alert.Title>
+              <Alert.Description>
                 Your changes have been saved successfully.
-              </AlertDescription>
+              </Alert.Description>
             </Alert>
 
             <Alert variant="warning">
               <AlertTriangle className="h-4 w-4" />
-              <AlertTitle>Warning</AlertTitle>
-              <AlertDescription>
+              <Alert.Title>Warning</Alert.Title>
+              <Alert.Description>
                 Please review your information before proceeding.
-              </AlertDescription>
+              </Alert.Description>
             </Alert>
 
             <Alert variant="destructive">
               <AlertCircle className="h-4 w-4" />
-              <AlertTitle>Error</AlertTitle>
-              <AlertDescription>
+              <Alert.Title>Error</Alert.Title>
+              <Alert.Description>
                 There was an error processing your request.
-              </AlertDescription>
+              </Alert.Description>
             </Alert>
 
             <Alert variant="info">
               <Info className="h-4 w-4" />
-              <AlertTitle>Information</AlertTitle>
-              <AlertDescription>
+              <Alert.Title>Information</Alert.Title>
+              <Alert.Description>
                 Here is some helpful information for you.
-              </AlertDescription>
+              </Alert.Description>
             </Alert>
 
             <Alert variant="accent">
               <Bell className="h-4 w-4" />
-              <AlertTitle>New Feature</AlertTitle>
-              <AlertDescription>
+              <Alert.Title>New Feature</Alert.Title>
+              <Alert.Description>
                 Check out our latest feature update!
-              </AlertDescription>
+              </Alert.Description>
             </Alert>
           </div>
         </section>
@@ -612,54 +612,54 @@ export default function ExamplesPage() {
           <div className="grid gap-6">
             <ExampleCard title="Avatar Sizes">
               <Avatar className="h-8 w-8">
-                <AvatarFallback>XS</AvatarFallback>
+                <Avatar.Fallback>XS</Avatar.Fallback>
               </Avatar>
               <Avatar className="h-10 w-10">
-                <AvatarFallback>SM</AvatarFallback>
+                <Avatar.Fallback>SM</Avatar.Fallback>
               </Avatar>
               <Avatar className="h-12 w-12">
-                <AvatarFallback>MD</AvatarFallback>
+                <Avatar.Fallback>MD</Avatar.Fallback>
               </Avatar>
               <Avatar className="h-16 w-16">
-                <AvatarFallback>LG</AvatarFallback>
+                <Avatar.Fallback>LG</Avatar.Fallback>
               </Avatar>
               <Avatar className="h-20 w-20">
-                <AvatarFallback>XL</AvatarFallback>
+                <Avatar.Fallback>XL</Avatar.Fallback>
               </Avatar>
             </ExampleCard>
 
             <ExampleCard title="Avatar with Fallbacks">
               <Avatar>
-                <AvatarImage src="/placeholder-user.jpg" alt="User" />
-                <AvatarFallback>JD</AvatarFallback>
+                <Avatar.Image src="/placeholder-user.jpg" alt="User" />
+                <Avatar.Fallback>JD</Avatar.Fallback>
               </Avatar>
               <Avatar>
-                <AvatarFallback className="bg-neon-green text-primary-foreground">AB</AvatarFallback>
+                <Avatar.Fallback className="bg-neon-green text-primary-foreground">AB</Avatar.Fallback>
               </Avatar>
               <Avatar>
-                <AvatarFallback className="bg-neon-purple text-primary-foreground">CD</AvatarFallback>
+                <Avatar.Fallback className="bg-neon-purple text-primary-foreground">CD</Avatar.Fallback>
               </Avatar>
               <Avatar>
-                <AvatarFallback className="bg-neon-pink text-primary-foreground">EF</AvatarFallback>
+                <Avatar.Fallback className="bg-neon-pink text-primary-foreground">EF</Avatar.Fallback>
               </Avatar>
               <Avatar>
-                <AvatarFallback className="bg-neon-orange text-primary-foreground">GH</AvatarFallback>
+                <Avatar.Fallback className="bg-neon-orange text-primary-foreground">GH</Avatar.Fallback>
               </Avatar>
             </ExampleCard>
 
             <ExampleCard title="Avatar Group">
               <div className="flex -space-x-3">
                 <Avatar className="border-2 border-background">
-                  <AvatarFallback className="bg-neon-green text-primary-foreground">A</AvatarFallback>
+                  <Avatar.Fallback className="bg-neon-green text-primary-foreground">A</Avatar.Fallback>
                 </Avatar>
                 <Avatar className="border-2 border-background">
-                  <AvatarFallback className="bg-neon-purple text-primary-foreground">B</AvatarFallback>
+                  <Avatar.Fallback className="bg-neon-purple text-primary-foreground">B</Avatar.Fallback>
                 </Avatar>
                 <Avatar className="border-2 border-background">
-                  <AvatarFallback className="bg-neon-pink text-primary-foreground">C</AvatarFallback>
+                  <Avatar.Fallback className="bg-neon-pink text-primary-foreground">C</Avatar.Fallback>
                 </Avatar>
                 <Avatar className="border-2 border-background">
-                  <AvatarFallback className="bg-muted text-muted-foreground">+5</AvatarFallback>
+                  <Avatar.Fallback className="bg-muted text-muted-foreground">+5</Avatar.Fallback>
                 </Avatar>
               </div>
             </ExampleCard>
@@ -720,39 +720,39 @@ export default function ExamplesPage() {
           
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             <Card>
-              <CardHeader>
-                <CardTitle>Basic Card</CardTitle>
-                <CardDescription>A simple card with header and content.</CardDescription>
-              </CardHeader>
-              <CardContent>
+              <Card.Header>
+                <Card.Title>Basic Card</Card.Title>
+                <Card.Description>A simple card with header and content.</Card.Description>
+              </Card.Header>
+              <Card.Content>
                 <p className="text-sm text-muted-foreground">
                   This is the card content area where you can place any content.
                 </p>
-              </CardContent>
+              </Card.Content>
             </Card>
 
             <Card>
-              <CardHeader>
-                <CardTitle>Card with Footer</CardTitle>
-                <CardDescription>Includes action buttons in footer.</CardDescription>
-              </CardHeader>
-              <CardContent>
+              <Card.Header>
+                <Card.Title>Card with Footer</Card.Title>
+                <Card.Description>Includes action buttons in footer.</Card.Description>
+              </Card.Header>
+              <Card.Content>
                 <p className="text-sm text-muted-foreground">
                   Cards can have footers for actions.
                 </p>
-              </CardContent>
-              <CardFooter className="gap-2">
+              </Card.Content>
+              <Card.Footer className="gap-2">
                 <Button kind="outlined" theme="white" size="sm">Cancel</Button>
                 <Button kind="solid" theme="green" size="sm">Save</Button>
-              </CardFooter>
+              </Card.Footer>
             </Card>
 
             <Card>
-              <CardHeader>
-                <CardTitle>Interactive Card</CardTitle>
-                <CardDescription>With form elements inside.</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
+              <Card.Header>
+                <Card.Title>Interactive Card</Card.Title>
+                <Card.Description>With form elements inside.</Card.Description>
+              </Card.Header>
+              <Card.Content className="space-y-4">
                 <div className="space-y-2">
                   <Label htmlFor="card-input">Email</Label>
                   <Input id="card-input" placeholder="name@example.com" />
@@ -761,10 +761,10 @@ export default function ExamplesPage() {
                   <Checkbox id="card-checkbox" />
                   <Label htmlFor="card-checkbox">Remember me</Label>
                 </div>
-              </CardContent>
-              <CardFooter>
+              </Card.Content>
+              <Card.Footer>
                 <Button kind="solid" theme="purple" size="sm" className="w-full">Submit</Button>
-              </CardFooter>
+              </Card.Footer>
             </Card>
           </div>
         </section>
@@ -781,18 +781,18 @@ export default function ExamplesPage() {
           <div className="grid gap-6">
             <ExampleCard title="Default Tabs">
               <Tabs defaultValue="account" className="w-full max-w-lg">
-                <TabsList>
-                  <TabsTrigger value="account">Account</TabsTrigger>
-                  <TabsTrigger value="password">Password</TabsTrigger>
-                  <TabsTrigger value="settings">Settings</TabsTrigger>
-                </TabsList>
-                <TabsContent value="account" className="mt-4">
+                <Tabs.List>
+                  <Tabs.Trigger value="account">Account</Tabs.Trigger>
+                  <Tabs.Trigger value="password">Password</Tabs.Trigger>
+                  <Tabs.Trigger value="settings">Settings</Tabs.Trigger>
+                </Tabs.List>
+                <Tabs.Content value="account" className="mt-4">
                   <Card>
-                    <CardHeader>
-                      <CardTitle>Account</CardTitle>
-                      <CardDescription>Manage your account settings.</CardDescription>
-                    </CardHeader>
-                    <CardContent className="space-y-4">
+                    <Card.Header>
+                      <Card.Title>Account</Card.Title>
+                      <Card.Description>Manage your account settings.</Card.Description>
+                    </Card.Header>
+                    <Card.Content className="space-y-4">
                       <div className="space-y-2">
                         <Label htmlFor="name">Name</Label>
                         <Input id="name" defaultValue="John Doe" />
@@ -801,16 +801,16 @@ export default function ExamplesPage() {
                         <Label htmlFor="username">Username</Label>
                         <Input id="username" defaultValue="@johndoe" />
                       </div>
-                    </CardContent>
+                    </Card.Content>
                   </Card>
-                </TabsContent>
-                <TabsContent value="password" className="mt-4">
+                </Tabs.Content>
+                <Tabs.Content value="password" className="mt-4">
                   <Card>
-                    <CardHeader>
-                      <CardTitle>Password</CardTitle>
-                      <CardDescription>Change your password here.</CardDescription>
-                    </CardHeader>
-                    <CardContent className="space-y-4">
+                    <Card.Header>
+                      <Card.Title>Password</Card.Title>
+                      <Card.Description>Change your password here.</Card.Description>
+                    </Card.Header>
+                    <Card.Content className="space-y-4">
                       <div className="space-y-2">
                         <Label htmlFor="current">Current Password</Label>
                         <Input id="current" type="password" />
@@ -819,16 +819,16 @@ export default function ExamplesPage() {
                         <Label htmlFor="new">New Password</Label>
                         <Input id="new" type="password" />
                       </div>
-                    </CardContent>
+                    </Card.Content>
                   </Card>
-                </TabsContent>
-                <TabsContent value="settings" className="mt-4">
+                </Tabs.Content>
+                <Tabs.Content value="settings" className="mt-4">
                   <Card>
-                    <CardHeader>
-                      <CardTitle>Settings</CardTitle>
-                      <CardDescription>Configure your preferences.</CardDescription>
-                    </CardHeader>
-                    <CardContent className="space-y-4">
+                    <Card.Header>
+                      <Card.Title>Settings</Card.Title>
+                      <Card.Description>Configure your preferences.</Card.Description>
+                    </Card.Header>
+                    <Card.Content className="space-y-4">
                       <div className="flex items-center justify-between">
                         <Label htmlFor="tab-notifications">Email Notifications</Label>
                         <Switch id="tab-notifications" />
@@ -837,9 +837,9 @@ export default function ExamplesPage() {
                         <Label htmlFor="tab-marketing">Marketing Emails</Label>
                         <Switch id="tab-marketing" />
                       </div>
-                    </CardContent>
+                    </Card.Content>
                   </Card>
-                </TabsContent>
+                </Tabs.Content>
               </Tabs>
             </ExampleCard>
           </div>
@@ -857,26 +857,26 @@ export default function ExamplesPage() {
           <div className="grid gap-6">
             <ExampleCard title="Default Accordion">
               <Accordion type="single" collapsible className="w-full max-w-lg">
-                <AccordionItem value="item-1">
-                  <AccordionTrigger>Is it accessible?</AccordionTrigger>
-                  <AccordionContent>
+                <Accordion.Item value="item-1">
+                  <Accordion.Trigger>Is it accessible?</Accordion.Trigger>
+                  <Accordion.Content>
                     Yes. It adheres to the WAI-ARIA design pattern for accordions.
-                  </AccordionContent>
-                </AccordionItem>
-                <AccordionItem value="item-2">
-                  <AccordionTrigger>Is it styled?</AccordionTrigger>
-                  <AccordionContent>
+                  </Accordion.Content>
+                </Accordion.Item>
+                <Accordion.Item value="item-2">
+                  <Accordion.Trigger>Is it styled?</Accordion.Trigger>
+                  <Accordion.Content>
                     Yes. It comes with default styles that match your design system, 
                     following the Zest design language with proper spacing and colors.
-                  </AccordionContent>
-                </AccordionItem>
-                <AccordionItem value="item-3">
-                  <AccordionTrigger>Is it animated?</AccordionTrigger>
-                  <AccordionContent>
+                  </Accordion.Content>
+                </Accordion.Item>
+                <Accordion.Item value="item-3">
+                  <Accordion.Trigger>Is it animated?</Accordion.Trigger>
+                  <Accordion.Content>
                     Yes. It&apos;s animated by default with smooth open/close transitions, 
                     but you can disable animations if needed.
-                  </AccordionContent>
-                </AccordionItem>
+                  </Accordion.Content>
+                </Accordion.Item>
               </Accordion>
             </ExampleCard>
           </div>
@@ -894,16 +894,16 @@ export default function ExamplesPage() {
           <div className="grid gap-6">
             <ExampleCard title="Dialog Examples">
               <Dialog>
-                <DialogTrigger asChild>
+                <Dialog.Trigger asChild>
                   <Button kind="outlined" theme="white">Open Dialog</Button>
-                </DialogTrigger>
-                <DialogContent>
-                  <DialogHeader>
-                    <DialogTitle>Edit Profile</DialogTitle>
-                    <DialogDescription>
+                </Dialog.Trigger>
+                <Dialog.Content>
+                  <Dialog.Header>
+                    <Dialog.Title>Edit Profile</Dialog.Title>
+                    <Dialog.Description>
                       Make changes to your profile here. Click save when you&apos;re done.
-                    </DialogDescription>
-                  </DialogHeader>
+                    </Dialog.Description>
+                  </Dialog.Header>
                   <div className="space-y-4 py-4">
                     <div className="space-y-2">
                       <Label htmlFor="dialog-name">Name</Label>
@@ -914,29 +914,29 @@ export default function ExamplesPage() {
                       <Input id="dialog-email" defaultValue="john@example.com" />
                     </div>
                   </div>
-                  <DialogFooter>
+                  <Dialog.Footer>
                     <Button kind="outlined" theme="white">Cancel</Button>
                     <Button kind="solid" theme="green">Save Changes</Button>
-                  </DialogFooter>
-                </DialogContent>
+                  </Dialog.Footer>
+                </Dialog.Content>
               </Dialog>
 
               <Dialog>
-                <DialogTrigger asChild>
+                <Dialog.Trigger asChild>
                   <Button kind="solid" theme="pink">Confirm Action</Button>
-                </DialogTrigger>
-                <DialogContent>
-                  <DialogHeader>
-                    <DialogTitle>Are you sure?</DialogTitle>
-                    <DialogDescription>
+                </Dialog.Trigger>
+                <Dialog.Content>
+                  <Dialog.Header>
+                    <Dialog.Title>Are you sure?</Dialog.Title>
+                    <Dialog.Description>
                       This action cannot be undone. This will permanently delete your data.
-                    </DialogDescription>
-                  </DialogHeader>
-                  <DialogFooter>
+                    </Dialog.Description>
+                  </Dialog.Header>
+                  <Dialog.Footer>
                     <Button kind="outlined" theme="white">Cancel</Button>
                     <Button kind="solid" theme="pink">Delete</Button>
-                  </DialogFooter>
-                </DialogContent>
+                  </Dialog.Footer>
+                </Dialog.Content>
               </Dialog>
             </ExampleCard>
           </div>
@@ -954,49 +954,49 @@ export default function ExamplesPage() {
           <div className="grid gap-6">
             <ExampleCard title="Dropdown Examples">
               <DropdownMenu>
-                <DropdownMenuTrigger asChild>
+                <DropdownMenu.Trigger asChild>
                   <Button kind="outlined" theme="white">
                     Open Menu
                     <ChevronDown className="h-4 w-4" />
                   </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent className="w-56">
-                  <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem>
+                </DropdownMenu.Trigger>
+                <DropdownMenu.Content className="w-56">
+                  <DropdownMenu.Label>My Account</DropdownMenu.Label>
+                  <DropdownMenu.Separator />
+                  <DropdownMenu.Item>
                     <User className="mr-2 h-4 w-4" />
                     Profile
-                  </DropdownMenuItem>
-                  <DropdownMenuItem>
+                  </DropdownMenu.Item>
+                  <DropdownMenu.Item>
                     <CreditCard className="mr-2 h-4 w-4" />
                     Billing
-                  </DropdownMenuItem>
-                  <DropdownMenuItem>
+                  </DropdownMenu.Item>
+                  <DropdownMenu.Item>
                     <Settings className="mr-2 h-4 w-4" />
                     Settings
-                  </DropdownMenuItem>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem className="text-destructive">
+                  </DropdownMenu.Item>
+                  <DropdownMenu.Separator />
+                  <DropdownMenu.Item className="text-destructive">
                     <LogOut className="mr-2 h-4 w-4" />
                     Log out
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
+                  </DropdownMenu.Item>
+                </DropdownMenu.Content>
               </DropdownMenu>
 
               <DropdownMenu>
-                <DropdownMenuTrigger asChild>
+                <DropdownMenu.Trigger asChild>
                   <Button kind="solid" theme="purple">
                     <Plus className="h-4 w-4" />
                     Create New
                   </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent>
-                  <DropdownMenuItem>New Project</DropdownMenuItem>
-                  <DropdownMenuItem>New Team</DropdownMenuItem>
-                  <DropdownMenuItem>New Document</DropdownMenuItem>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem>Import</DropdownMenuItem>
-                </DropdownMenuContent>
+                </DropdownMenu.Trigger>
+                <DropdownMenu.Content>
+                  <DropdownMenu.Item>New Project</DropdownMenu.Item>
+                  <DropdownMenu.Item>New Team</DropdownMenu.Item>
+                  <DropdownMenu.Item>New Document</DropdownMenu.Item>
+                  <DropdownMenu.Separator />
+                  <DropdownMenu.Item>Import</DropdownMenu.Item>
+                </DropdownMenu.Content>
               </DropdownMenu>
             </ExampleCard>
           </div>
@@ -1014,39 +1014,39 @@ export default function ExamplesPage() {
           <div className="grid gap-6">
             <ExampleCard title="Tooltip Positions">
               <Tooltip>
-                <TooltipTrigger asChild>
+                <Tooltip.Trigger asChild>
                   <Button kind="outlined" theme="white">Hover me (Top)</Button>
-                </TooltipTrigger>
-                <TooltipContent side="top">
+                </Tooltip.Trigger>
+                <Tooltip.Content side="top">
                   <p>Tooltip on top</p>
-                </TooltipContent>
+                </Tooltip.Content>
               </Tooltip>
 
               <Tooltip>
-                <TooltipTrigger asChild>
+                <Tooltip.Trigger asChild>
                   <Button kind="outlined" theme="green">Hover me (Right)</Button>
-                </TooltipTrigger>
-                <TooltipContent side="right">
+                </Tooltip.Trigger>
+                <Tooltip.Content side="right">
                   <p>Tooltip on right</p>
-                </TooltipContent>
+                </Tooltip.Content>
               </Tooltip>
 
               <Tooltip>
-                <TooltipTrigger asChild>
+                <Tooltip.Trigger asChild>
                   <Button kind="outlined" theme="purple">Hover me (Bottom)</Button>
-                </TooltipTrigger>
-                <TooltipContent side="bottom">
+                </Tooltip.Trigger>
+                <Tooltip.Content side="bottom">
                   <p>Tooltip on bottom</p>
-                </TooltipContent>
+                </Tooltip.Content>
               </Tooltip>
 
               <Tooltip>
-                <TooltipTrigger asChild>
+                <Tooltip.Trigger asChild>
                   <Button kind="outlined" theme="pink">Hover me (Left)</Button>
-                </TooltipTrigger>
-                <TooltipContent side="left">
+                </Tooltip.Trigger>
+                <Tooltip.Content side="left">
                   <p>Tooltip on left</p>
-                </TooltipContent>
+                </Tooltip.Content>
               </Tooltip>
             </ExampleCard>
           </div>
@@ -1063,46 +1063,46 @@ export default function ExamplesPage() {
           
           <div className="rounded-lg border border-border overflow-hidden">
             <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead className="w-[100px]">Invoice</TableHead>
-                  <TableHead>Status</TableHead>
-                  <TableHead>Method</TableHead>
-                  <TableHead className="text-right">Amount</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                <TableRow>
-                  <TableCell className="font-medium">INV001</TableCell>
-                  <TableCell><Badge variant="green">Paid</Badge></TableCell>
-                  <TableCell>Credit Card</TableCell>
-                  <TableCell className="text-right">$250.00</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell className="font-medium">INV002</TableCell>
-                  <TableCell><Badge variant="orange">Pending</Badge></TableCell>
-                  <TableCell>PayPal</TableCell>
-                  <TableCell className="text-right">$150.00</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell className="font-medium">INV003</TableCell>
-                  <TableCell><Badge variant="destructive">Overdue</Badge></TableCell>
-                  <TableCell>Bank Transfer</TableCell>
-                  <TableCell className="text-right">$350.00</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell className="font-medium">INV004</TableCell>
-                  <TableCell><Badge variant="green">Paid</Badge></TableCell>
-                  <TableCell>Credit Card</TableCell>
-                  <TableCell className="text-right">$450.00</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell className="font-medium">INV005</TableCell>
-                  <TableCell><Badge variant="purple-outline">Processing</Badge></TableCell>
-                  <TableCell>PayPal</TableCell>
-                  <TableCell className="text-right">$550.00</TableCell>
-                </TableRow>
-              </TableBody>
+              <Table.Header>
+                <Table.Row>
+                  <Table.Head className="w-[100px]">Invoice</Table.Head>
+                  <Table.Head>Status</Table.Head>
+                  <Table.Head>Method</Table.Head>
+                  <Table.Head className="text-right">Amount</Table.Head>
+                </Table.Row>
+              </Table.Header>
+              <Table.Body>
+                <Table.Row>
+                  <Table.Cell className="font-medium">INV001</Table.Cell>
+                  <Table.Cell><Badge variant="green">Paid</Badge></Table.Cell>
+                  <Table.Cell>Credit Card</Table.Cell>
+                  <Table.Cell className="text-right">$250.00</Table.Cell>
+                </Table.Row>
+                <Table.Row>
+                  <Table.Cell className="font-medium">INV002</Table.Cell>
+                  <Table.Cell><Badge variant="orange">Pending</Badge></Table.Cell>
+                  <Table.Cell>PayPal</Table.Cell>
+                  <Table.Cell className="text-right">$150.00</Table.Cell>
+                </Table.Row>
+                <Table.Row>
+                  <Table.Cell className="font-medium">INV003</Table.Cell>
+                  <Table.Cell><Badge variant="destructive">Overdue</Badge></Table.Cell>
+                  <Table.Cell>Bank Transfer</Table.Cell>
+                  <Table.Cell className="text-right">$350.00</Table.Cell>
+                </Table.Row>
+                <Table.Row>
+                  <Table.Cell className="font-medium">INV004</Table.Cell>
+                  <Table.Cell><Badge variant="green">Paid</Badge></Table.Cell>
+                  <Table.Cell>Credit Card</Table.Cell>
+                  <Table.Cell className="text-right">$450.00</Table.Cell>
+                </Table.Row>
+                <Table.Row>
+                  <Table.Cell className="font-medium">INV005</Table.Cell>
+                  <Table.Cell><Badge variant="purple-outline">Processing</Badge></Table.Cell>
+                  <Table.Cell>PayPal</Table.Cell>
+                  <Table.Cell className="text-right">$550.00</Table.Cell>
+                </Table.Row>
+              </Table.Body>
             </Table>
           </div>
         </section>
@@ -1145,6 +1145,6 @@ export default function ExamplesPage() {
           </div>
         </section>
       </div>
-    </TooltipProvider>
+    </Tooltip.Provider>
   );
 }
