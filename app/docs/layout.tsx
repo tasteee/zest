@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { DocsNav } from "@/components/docs/docs-nav";
 import { DocsSidebar } from "@/components/docs/docs-sidebar";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
   title: "Documentation — tasteink",
@@ -26,6 +27,7 @@ export default function DocsLayout({
           </ScrollArea>
         </main>
       </div>
+      <Toaster />
     </div>
   );
 }

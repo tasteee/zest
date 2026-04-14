@@ -8,7 +8,7 @@ const inputVariants = cva(
   {
     variants: {
       focusColor: {
-        default: 'focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]',
+        default: 'focus-visible:border-foreground/50 focus-visible:ring-foreground/20 focus-visible:ring-[3px]',
         green: 'focus-visible:border-neon-green focus-visible:ring-neon-green/30 focus-visible:ring-[3px]',
         purple: 'focus-visible:border-neon-purple focus-visible:ring-neon-purple/30 focus-visible:ring-[3px]',
         pink: 'focus-visible:border-neon-pink focus-visible:ring-neon-pink/30 focus-visible:ring-[3px]',

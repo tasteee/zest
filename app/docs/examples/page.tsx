@@ -24,6 +24,7 @@ import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuIte
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
 import { Tooltip, TooltipProvider, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip";
 import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "@/components/ui/table";
+import { useToast } from "@/components/ui/use-toast";
 
 function SectionHeader({ title, description }: { title: string; description?: string }) {
   return (
@@ -46,6 +47,8 @@ function ExampleCard({ title, children }: { title: string; children: React.React
 }
 
 export default function ExamplesPage() {
+  const { toast } = useToast();
+  
   const [switchStates, setSwitchStates] = useState({
     airplane: false,
     notifications: true,
@@ -428,6 +431,120 @@ export default function ExamplesPage() {
                 Check out our latest feature update!
               </AlertDescription>
             </Alert>
+          </div>
+        </section>
+
+        <Separator />
+
+        {/* Toast Section */}
+        <section className="space-y-6">
+          <SectionHeader 
+            title="ZToast" 
+            description="Temporary notifications that appear and auto-dismiss."
+          />
+
+          {/* Alert vs Toast comparison */}
+          <div className="rounded-lg border border-border bg-card p-6 space-y-4">
+            <h3 className="text-lg font-semibold text-foreground">Alert vs Toast: When to Use Each</h3>
+            <div className="grid gap-4 md:grid-cols-2">
+              <div className="space-y-2">
+                <h4 className="text-sm font-medium text-neon-green">Alerts (Static)</h4>
+                <ul className="text-sm text-muted-foreground space-y-1 list-disc list-inside">
+                  <li>Persistent, inline content within the page</li>
+                  <li>Important information that needs to remain visible</li>
+                  <li>Form validation errors or warnings</li>
+                  <li>System status or maintenance notices</li>
+                  <li>User must acknowledge or dismiss manually</li>
+                </ul>
+              </div>
+              <div className="space-y-2">
+                <h4 className="text-sm font-medium text-neon-purple">Toasts (Ephemeral)</h4>
+                <ul className="text-sm text-muted-foreground space-y-1 list-disc list-inside">
+                  <li>Temporary, floating notifications</li>
+                  <li>Feedback for completed actions</li>
+                  <li>Non-critical success or info messages</li>
+                  <li>Auto-dismiss after a few seconds</li>
+                  <li>Does not block user workflow</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          
+          <div className="grid gap-6">
+            <ExampleCard title="Toast Triggers">
+              <Button 
+                kind="solid" 
+                theme="white"
+                onClick={() => {
+                  toast({
+                    title: "Default Toast",
+                    description: "This is a basic toast notification.",
+                  });
+                }}
+              >
+                Show Default Toast
+              </Button>
+
+              <Button 
+                kind="solid" 
+                theme="green"
+                onClick={() => {
+                  toast({
+                    title: "Success!",
+                    description: "Your changes have been saved successfully.",
+                  });
+                }}
+              >
+                Show Success Toast
+              </Button>
+
+              <Button 
+                kind="solid" 
+                theme="pink"
+                onClick={() => {
+                  toast({
+                    variant: "destructive",
+                    title: "Error",
+                    description: "Something went wrong. Please try again.",
+                  });
+                }}
+              >
+                Show Error Toast
+              </Button>
+
+              <Button 
+                kind="outlined" 
+                theme="purple"
+                onClick={() => {
+                  toast({
+                    title: "Scheduled",
+                    description: "Your meeting has been scheduled for tomorrow at 3pm.",
+                  });
+                }}
+              >
+                Show Info Toast
+              </Button>
+            </ExampleCard>
+
+            <ExampleCard title="Toast with Action">
+              <Button 
+                kind="outlined" 
+                theme="white"
+                onClick={() => {
+                  toast({
+                    title: "Item Deleted",
+                    description: "The item has been moved to trash.",
+                    action: (
+                      <Button kind="ghost" theme="white" size="sm" onClick={() => {}}>
+                        Undo
+                      </Button>
+                    ),
+                  });
+                }}
+              >
+                Toast with Undo Action
+              </Button>
+            </ExampleCard>
           </div>
         </section>
 
