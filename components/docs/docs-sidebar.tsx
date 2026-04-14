@@ -11,6 +11,7 @@ const navigation = [
     items: [
       { title: "Introduction", href: "/docs" },
       { title: "Installation", href: "/docs/installation" },
+      { title: "Examples", href: "/docs/examples" },
     ],
   },
   {
