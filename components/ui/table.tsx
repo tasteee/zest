@@ -104,8 +104,20 @@ function TableCaption({
   )
 }
 
+// Compound component pattern
+const TableNamespace = Object.assign(Table, {
+  Header: TableHeader,
+  Body: TableBody,
+  Footer: TableFooter,
+  Head: TableHead,
+  Row: TableRow,
+  Cell: TableCell,
+  Caption: TableCaption,
+})
+
+// Export both namespace and individual components for flexibility
 export {
-  Table,
+  TableNamespace as Table,
   TableHeader,
   TableBody,
   TableFooter,

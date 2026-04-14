@@ -81,8 +81,19 @@ function CardFooter({ className, ...props }: React.ComponentProps<'div'>) {
   )
 }
 
+// Compound component pattern
+const CardNamespace = Object.assign(Card, {
+  Header: CardHeader,
+  Footer: CardFooter,
+  Title: CardTitle,
+  Action: CardAction,
+  Description: CardDescription,
+  Content: CardContent,
+})
+
+// Export both namespace and individual components for flexibility
 export {
-  Card,
+  CardNamespace as Card,
   CardHeader,
   CardFooter,
   CardTitle,

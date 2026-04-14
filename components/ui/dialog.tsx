@@ -129,8 +129,22 @@ function DialogDescription({
   )
 }
 
+// Compound component pattern
+const DialogNamespace = Object.assign(Dialog, {
+  Close: DialogClose,
+  Content: DialogContent,
+  Description: DialogDescription,
+  Footer: DialogFooter,
+  Header: DialogHeader,
+  Overlay: DialogOverlay,
+  Portal: DialogPortal,
+  Title: DialogTitle,
+  Trigger: DialogTrigger,
+})
+
+// Export both namespace and individual components for flexibility
 export {
-  Dialog,
+  DialogNamespace as Dialog,
   DialogClose,
   DialogContent,
   DialogDescription,

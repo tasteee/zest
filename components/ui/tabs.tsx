@@ -63,4 +63,12 @@ function TabsContent({
   )
 }
 
-export { Tabs, TabsList, TabsTrigger, TabsContent }
+// Compound component pattern
+const TabsNamespace = Object.assign(Tabs, {
+  List: TabsList,
+  Trigger: TabsTrigger,
+  Content: TabsContent,
+})
+
+// Export both namespace and individual components for flexibility
+export { TabsNamespace as Tabs, TabsList, TabsTrigger, TabsContent }

@@ -238,8 +238,27 @@ function DropdownMenuSubContent({
   )
 }
 
+// Compound component pattern
+const DropdownMenuNamespace = Object.assign(DropdownMenu, {
+  Portal: DropdownMenuPortal,
+  Trigger: DropdownMenuTrigger,
+  Content: DropdownMenuContent,
+  Group: DropdownMenuGroup,
+  Label: DropdownMenuLabel,
+  Item: DropdownMenuItem,
+  CheckboxItem: DropdownMenuCheckboxItem,
+  RadioGroup: DropdownMenuRadioGroup,
+  RadioItem: DropdownMenuRadioItem,
+  Separator: DropdownMenuSeparator,
+  Shortcut: DropdownMenuShortcut,
+  Sub: DropdownMenuSub,
+  SubTrigger: DropdownMenuSubTrigger,
+  SubContent: DropdownMenuSubContent,
+})
+
+// Export both namespace and individual components for flexibility
 export {
-  DropdownMenu,
+  DropdownMenuNamespace as DropdownMenu,
   DropdownMenuPortal,
   DropdownMenuTrigger,
   DropdownMenuContent,

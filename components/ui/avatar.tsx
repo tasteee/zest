@@ -50,4 +50,11 @@ function AvatarFallback({
   )
 }
 
-export { Avatar, AvatarImage, AvatarFallback }
+// Compound component pattern
+const AvatarNamespace = Object.assign(Avatar, {
+  Image: AvatarImage,
+  Fallback: AvatarFallback,
+})
+
+// Export both namespace and individual components for flexibility
+export { AvatarNamespace as Avatar, AvatarImage, AvatarFallback }

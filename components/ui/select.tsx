@@ -171,8 +171,22 @@ function SelectScrollDownButton({
   )
 }
 
+// Compound component pattern
+const SelectNamespace = Object.assign(Select, {
+  Content: SelectContent,
+  Group: SelectGroup,
+  Item: SelectItem,
+  Label: SelectLabel,
+  ScrollDownButton: SelectScrollDownButton,
+  ScrollUpButton: SelectScrollUpButton,
+  Separator: SelectSeparator,
+  Trigger: SelectTrigger,
+  Value: SelectValue,
+})
+
+// Export both namespace and individual components for flexibility
 export {
-  Select,
+  SelectNamespace as Select,
   SelectContent,
   SelectGroup,
   SelectItem,

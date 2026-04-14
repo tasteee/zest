@@ -36,7 +36,7 @@ function TooltipTrigger({
 
 function TooltipContent({
   className,
-  sideOffset = 0,
+  sideOffset = 6,
   children,
   ...props
 }: React.ComponentProps<typeof TooltipPrimitive.Content>) {
@@ -58,4 +58,12 @@ function TooltipContent({
   )
 }
 
-export { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider }
+// Compound component pattern
+const TooltipNamespace = Object.assign(Tooltip, {
+  Trigger: TooltipTrigger,
+  Content: TooltipContent,
+  Provider: TooltipProvider,
+})
+
+// Export both namespace and individual components for flexibility
+export { TooltipNamespace as Tooltip, TooltipTrigger, TooltipContent, TooltipProvider }
