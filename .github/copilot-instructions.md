@@ -44,9 +44,8 @@ If an example conflicts with a rule, follow the rule.
 ## Core Principle
 
 Every meaningful computation must have a descriptive variable name.
-Names are documentation.
-
-Code should read top-to-bottom like short, clear sentences.
+Identifiers are self-documenting. Code should read top-to-bottom like
+short, clear sentences.
 
 ---
 
@@ -66,14 +65,14 @@ Example:
 
 ```ts
 const getLabel = (count: number): string => {
-  const isEmpty = count === 0;
-  if (isEmpty) return "No items";
+	const isEmpty = count === 0
+	if (isEmpty) return 'No items'
 
-  const isSingle = count === 1;
-  if (isSingle) return "One item";
+	const isSingle = count === 1
+	if (isSingle) return 'One item'
 
-  return `${count} items`;
-};
+	return `${count} items`
+}
 ```
 
 ---
@@ -87,8 +86,8 @@ Example:
 
 ```ts
 const add = (firstNumber: number, secondNumber: number): number => {
-  return firstNumber + secondNumber;
-};
+	return firstNumber + secondNumber
+}
 ```
 
 ---
@@ -101,9 +100,9 @@ Compute values first. Name them clearly.
 Example:
 
 ```ts
-const hasItems = cart.length > 0;
-const isCheckoutEnabled = hasItems && isUserLoggedIn;
-const buttonLabel = isCheckoutEnabled ? "Checkout" : "Add items to cart";
+const hasItems = cart.length > 0
+const isCheckoutEnabled = hasItems && isUserLoggedIn
+const buttonLabel = isCheckoutEnabled ? 'Checkout' : 'Add items to cart'
 ```
 
 ---
@@ -140,19 +139,19 @@ Example:
 
 ```ts
 type UserT = {
-  id: string;
-  name: string;
-  role: "admin" | "member";
-};
+	id: string
+	name: string
+	role: 'admin' | 'member'
+}
 
 const Direction = {
-  up: "up",
-  down: "down",
-  left: "left",
-  right: "right",
-} as const;
+	up: 'up',
+	down: 'down',
+	left: 'left',
+	right: 'right'
+} as const
 
-type DirectionT = (typeof Direction)[keyof typeof Direction];
+type DirectionT = (typeof Direction)[keyof typeof Direction]
 ```
 
 ---
@@ -165,19 +164,19 @@ Handle each error immediately with an early return.
 Example:
 
 ```ts
-import { to } from "await-to-js";
+import { to } from 'await-to-js'
 
 const loadUser = async (userId: string): Promise<UserT | null> => {
-  const [fetchUserError, fetchedUser] = await to(fetchUser(userId));
+	const [fetchUserError, fetchedUser] = await to(fetchUser(userId))
 
-  if (fetchUserError) return handleError(fetchUserError);
+	if (fetchUserError) return handleError(fetchUserError)
 
-  const [saveUserError] = await to(saveToCache(fetchedUser));
+	const [saveUserError] = await to(saveToCache(fetchedUser))
 
-  if (saveUserError) return handleError(saveUserError);
+	if (saveUserError) return handleError(saveUserError)
 
-  return fetchedUser;
-};
+	return fetchedUser
+}
 ```
 
 ---
@@ -212,24 +211,24 @@ Example:
 
 ```tsx
 type ProfileCardPropsT = {
-  user: {
-    firstName: string;
-    lastName: string;
-    verifiedAt: string | null;
-  };
-};
+	user: {
+		firstName: string
+		lastName: string
+		verifiedAt: string | null
+	}
+}
 
 const ProfileCard = (props: ProfileCardPropsT) => {
-  const fullName = `${props.user.firstName} ${props.user.lastName}`;
-  const isVerified = props.user.verifiedAt !== null;
+	const fullName = `${props.user.firstName} ${props.user.lastName}`
+	const isVerified = props.user.verifiedAt !== null
 
-  return (
-    <div className="profileCard">
-      <span className="profileCardName">{fullName}</span>
-      {isVerified && <span className="profileCardBadge">Verified</span>}
-    </div>
-  );
-};
+	return (
+		<div className='profileCard'>
+			<span className='profileCardName'>{fullName}</span>
+			{isVerified && <span className='profileCardBadge'>Verified</span>}
+		</div>
+	)
+}
 ```
 
 ---
@@ -247,26 +246,26 @@ Example:
 
 ```css
 .profileCard {
-  background: var(--color-surface);
-  padding: var(--spacing-md);
-  border-radius: var(--radius-md);
+	background: var(--color-surface);
+	padding: var(--spacing-md);
+	border-radius: var(--radius-md);
 }
 
 .profileCardName {
-  font-size: var(--font-size-md);
-  color: var(--color-text-primary);
+	font-size: var(--font-size-md);
+	color: var(--color-text-primary);
 }
 
 .profileCardBadge {
-  color: var(--color-text-primary);
+	color: var(--color-text-primary);
 }
 
 .isBlue {
-  color: var(--color-brand-blue);
+	color: var(--color-brand-blue);
 }
 
 .isDisabled {
-  opacity: var(--opacity-disabled);
+	opacity: var(--opacity-disabled);
 }
 ```
 
@@ -286,3 +285,4 @@ Before finalizing generated code, verify:
 - Uses no classes and no Tailwind utilities.
 - Uses design-system CSS variables only.
 - Uses camelCase class names with no hyphens/underscores.
+- Used no abbreviated parameters like `i`, `err`, `res`, `cfg`, `e`, `evt`, etc.
