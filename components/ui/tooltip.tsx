@@ -65,4 +65,5 @@ const TooltipNamespace = Object.assign(Tooltip, {
   Provider: TooltipProvider,
 })
 
-export { TooltipNamespace as Tooltip }
+// Export both namespace and individual components for flexibility
+export { TooltipNamespace as Tooltip, TooltipTrigger, TooltipContent, TooltipProvider }

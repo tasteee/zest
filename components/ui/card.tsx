@@ -91,4 +91,13 @@ const CardNamespace = Object.assign(Card, {
   Content: CardContent,
 })
 
-export { CardNamespace as Card }
+// Export both namespace and individual components for flexibility
+export {
+  CardNamespace as Card,
+  CardHeader,
+  CardFooter,
+  CardTitle,
+  CardAction,
+  CardDescription,
+  CardContent,
+}

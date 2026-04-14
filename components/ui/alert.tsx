@@ -78,4 +78,5 @@ const AlertNamespace = Object.assign(Alert, {
   Description: AlertDescription,
 })
 
-export { AlertNamespace as Alert }
+// Export both namespace and individual components for flexibility
+export { AlertNamespace as Alert, AlertTitle, AlertDescription }

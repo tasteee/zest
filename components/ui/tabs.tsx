@@ -70,4 +70,5 @@ const TabsNamespace = Object.assign(Tabs, {
   Content: TabsContent,
 })
 
-export { TabsNamespace as Tabs }
+// Export both namespace and individual components for flexibility
+export { TabsNamespace as Tabs, TabsList, TabsTrigger, TabsContent }

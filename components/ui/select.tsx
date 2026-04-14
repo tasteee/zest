@@ -184,4 +184,16 @@ const SelectNamespace = Object.assign(Select, {
   Value: SelectValue,
 })
 
-export { SelectNamespace as Select }
+// Export both namespace and individual components for flexibility
+export {
+  SelectNamespace as Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectScrollDownButton,
+  SelectScrollUpButton,
+  SelectSeparator,
+  SelectTrigger,
+  SelectValue,
+}

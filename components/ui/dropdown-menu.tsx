@@ -256,4 +256,21 @@ const DropdownMenuNamespace = Object.assign(DropdownMenu, {
   SubContent: DropdownMenuSubContent,
 })
 
-export { DropdownMenuNamespace as DropdownMenu }
+// Export both namespace and individual components for flexibility
+export {
+  DropdownMenuNamespace as DropdownMenu,
+  DropdownMenuPortal,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuLabel,
+  DropdownMenuItem,
+  DropdownMenuCheckboxItem,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuSub,
+  DropdownMenuSubTrigger,
+  DropdownMenuSubContent,
+}

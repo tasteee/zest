@@ -70,4 +70,5 @@ const AccordionNamespace = Object.assign(Accordion, {
   Content: AccordionContent,
 })
 
-export { AccordionNamespace as Accordion }
+// Export both namespace and individual components for flexibility
+export { AccordionNamespace as Accordion, AccordionItem, AccordionTrigger, AccordionContent }

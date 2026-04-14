@@ -142,4 +142,16 @@ const DialogNamespace = Object.assign(Dialog, {
   Trigger: DialogTrigger,
 })
 
-export { DialogNamespace as Dialog }
+// Export both namespace and individual components for flexibility
+export {
+  DialogNamespace as Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogOverlay,
+  DialogPortal,
+  DialogTitle,
+  DialogTrigger,
+}

@@ -56,4 +56,5 @@ const AvatarNamespace = Object.assign(Avatar, {
   Fallback: AvatarFallback,
 })
 
-export { AvatarNamespace as Avatar }
+// Export both namespace and individual components for flexibility
+export { AvatarNamespace as Avatar, AvatarImage, AvatarFallback }

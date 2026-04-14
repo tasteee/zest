@@ -115,4 +115,14 @@ const TableNamespace = Object.assign(Table, {
   Caption: TableCaption,
 })
 
-export { TableNamespace as Table }
+// Export both namespace and individual components for flexibility
+export {
+  TableNamespace as Table,
+  TableHeader,
+  TableBody,
+  TableFooter,
+  TableHead,
+  TableRow,
+  TableCell,
+  TableCaption,
+}

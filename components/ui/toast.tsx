@@ -126,8 +126,15 @@ const ToastNamespace = Object.assign(Toast, {
   Action: ToastAction,
 })
 
+// Export both namespace and individual components for flexibility
 export {
   type ToastProps,
   type ToastActionElement,
   ToastNamespace as Toast,
+  ToastProvider,
+  ToastViewport,
+  ToastTitle,
+  ToastDescription,
+  ToastClose,
+  ToastAction,
 }
