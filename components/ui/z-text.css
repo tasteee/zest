@@ -1,0 +1,22 @@
+.zText {
+	color: var(--color-text-primary);
+}
+
+.isOrange { color: var(--color-brand-orange); }
+.isPurple { color: var(--color-brand-purple); }
+.isPink { color: var(--color-brand-pink); }
+.isGreen { color: var(--color-brand-green); }
+.isWhite { color: var(--color-white); }
+.isMuted { color: var(--color-text-muted); }
+
+.isSmall { font-size: var(--font-size-sm); }
+.isMedium { font-size: var(--font-size-md); }
+.isLarge { font-size: var(--font-size-lg); }
+.isExtraLarge { font-size: var(--font-size-xl); }
+
+.isThin { font-weight: 300; }
+.isBold { font-weight: 700; }
+.isVeryBold { font-weight: 900; }
+
+.isItalic { font-style: italic; }
+.isUnderlined { text-decoration: underline; }

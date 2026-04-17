@@ -4,6 +4,28 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
+	---green-muted: oklch(0.7 0.12 145);
+	---pink-muted: oklch(0.65 0.12 350);
+	---purple-muted: oklch(0.6 0.12 300);
+	---orange-muted: oklch(0.65 0.1 55);
+	--color-surface: #141814;
+	--color-border: #2a2f2a;
+	--color-green: #39ff14;
+	--color-pink: #ff14c8;
+	--color-purple: #a259ff;
+	--color-white: #fafafa;
+	--color-muted: #707070;
+	--color-light-gray: #a0a0a0;
+	--radius-lg: 16px;
+	--spacing-lg: 1.5rem;
+	--spacing-xs: 0.25rem;
+	--font-size-xs: 12px;
+	--font-size-sm: 14px;
+	--font-size-md: 16px;
+	--font-size-xl: 24px;
+}
+
+:root {
 	/* Deep green-black gradient base */
 	--background: oklch(0.12 0.02 145);
 	--background-light: oklch(0.16 0.025 145);
@@ -42,16 +64,16 @@
 	--ring: oklch(0.85 0.25 145);
 
 	/* Brand neon colors */
-	--neon-green: oklch(0.85 0.28 145);
-	--neon-pink: oklch(0.75 0.25 350);
-	--neon-purple: oklch(0.7 0.25 300);
-	--neon-orange: oklch(0.8 0.22 55);
+	---green: oklch(0.85 0.28 145);
+	---pink: oklch(0.75 0.25 350);
+	---purple: oklch(0.7 0.25 300);
+	---orange: oklch(0.8 0.22 55);
 
 	/* Chart colors using brand neons */
-	--chart-1: var(--neon-green);
-	--chart-2: var(--neon-pink);
-	--chart-3: var(--neon-purple);
-	--chart-4: var(--neon-orange);
+	--chart-1: var(---green);
+	--chart-2: var(---pink);
+	--chart-3: var(---purple);
+	--chart-4: var(---orange);
 	--chart-5: oklch(0.75 0.2 120);
 
 	--radius: 0.5rem;
@@ -141,10 +163,10 @@
 	--border: oklch(0.28 0.015 145);
 	--input: oklch(0.22 0.015 145);
 	--ring: oklch(0.85 0.25 145);
-	--chart-1: var(--neon-green);
-	--chart-2: var(--neon-pink);
-	--chart-3: var(--neon-purple);
-	--chart-4: var(--neon-orange);
+	--chart-1: var(---green);
+	--chart-2: var(---pink);
+	--chart-3: var(---purple);
+	--chart-4: var(---orange);
 	--chart-5: oklch(0.75 0.2 120);
 	--sidebar: oklch(0.1 0.015 145);
 	--sidebar-foreground: oklch(0.65 0 0);
@@ -179,10 +201,6 @@
 	--color-border: var(--border);
 	--color-input: var(--input);
 	--color-ring: var(--ring);
-	--color-neon-green: var(--neon-green);
-	--color-neon-pink: var(--neon-pink);
-	--color-neon-purple: var(--neon-purple);
-	--color-neon-orange: var(--neon-orange);
 	--color-chart-1: var(--chart-1);
 	--color-chart-2: var(--chart-2);
 	--color-chart-3: var(--chart-3);
@@ -228,4 +246,29 @@
 
 ::-webkit-scrollbar-thumb:hover {
 	background: oklch(0.4 0.015 145);
+}
+
+.isNeonGreenTheme {
+	--theme-color: --color-purple-alpha40: color-mix(in srgb, var(--color-purple, #a259ff) 100%, transparent);
+	--theme-color-muted: --color-purple-alpha40: color-mix(in srgb, var(--color-purple, #a259ff) 40%, transparent);
+}
+
+.isNeonPinkTheme {
+	--theme-color: color-mix(in srgb, var(--color-pink, #ff14c8) 100%, transparent);
+	--theme-color-muted: color-mix(in srgb, var(--color-pink, #ff14c8) 40%, transparent);
+}
+
+.isNeonPurpleTheme {
+	--theme-color: color-mix(in srgb, var(--color-purple, #a259ff) 100%, transparent);
+	--theme-color-muted: color-mix(in srgb, var(--color-purple, #a259ff) 40%, transparent);
+}
+
+.isNeonOrangeTheme {
+	--theme-color: color-mix(in srgb, var(--color-orange, #ff6f00) 100%, transparent);
+	--theme-color-muted: color-mix(in srgb, var(--color-orange, #ff6f00) 40%, transparent);
+}
+
+.isWhiteTheme {
+	--theme-color: color-mix(in srgb, var(--color-white, #fafafa) 100%, transparent);
+	--theme-color-muted: color-mix(in srgb, var(--color-light-gray, #a0a0a0) 40%, transparent);
 }

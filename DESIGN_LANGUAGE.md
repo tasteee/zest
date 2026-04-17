@@ -20,12 +20,12 @@ zest is a design language built for bold, risque digital products.
 
 ### Identity Neons
 
-| Name        | Hex       | OKLCH                  | CSS Variable    | Role                                     |
-| ----------- | --------- | ---------------------- | --------------- | ---------------------------------------- |
-| Neon Green  | `#39FF14` | `oklch(0.85 0.28 145)` | `--neon-green`  | Primary actions, success, key highlights |
-| Neon Pink   | `#FF1493` | `oklch(0.75 0.25 350)` | `--neon-pink`   | Secondary accents, badges, emphasis      |
-| Neon Purple | `#BF40BF` | `oklch(0.7 0.25 300)`  | `--neon-purple` | Tertiary accents, tags, categories       |
-| Neon Orange | `#FF6B35` | `oklch(0.8 0.22 55)`   | `--neon-orange` | Warnings, attention, call-outs           |
+| Name        | Hex       | OKLCH                  | CSS Variable | Role                                     |
+| ----------- | --------- | ---------------------- | ------------ | ---------------------------------------- |
+| Neon Green  | `#39FF14` | `oklch(0.85 0.28 145)` | `---green`   | Primary actions, success, key highlights |
+| Neon Pink   | `#FF1493` | `oklch(0.75 0.25 350)` | `---pink`    | Secondary accents, badges, emphasis      |
+| Neon Purple | `#BF40BF` | `oklch(0.7 0.25 300)`  | `---purple`  | Tertiary accents, tags, categories       |
+| Neon Orange | `#FF6B35` | `oklch(0.8 0.22 55)`   | `---orange`  | Warnings, attention, call-outs           |
 
 ### Grayscale
 
@@ -62,10 +62,10 @@ zest is a design language built for bold, risque digital products.
 
 | Token       | Value                 |
 | ----------- | --------------------- |
-| `--chart-1` | `var(--neon-green)`   |
-| `--chart-2` | `var(--neon-pink)`    |
-| `--chart-3` | `var(--neon-purple)`  |
-| `--chart-4` | `var(--neon-orange)`  |
+| `--chart-1` | `var(---green)`       |
+| `--chart-2` | `var(---pink)`        |
+| `--chart-3` | `var(---purple)`      |
+| `--chart-4` | `var(---orange)`      |
 | `--chart-5` | `oklch(0.75 0.2 120)` |
 
 ### Color Rules
@@ -127,7 +127,7 @@ zest is a design language built for bold, risque digital products.
 | Primary   | `--primary` (white)   | Headlines, CTAs           |
 | Body      | `--foreground` (gray) | Body text                 |
 | Secondary | `--muted-foreground`  | Captions, hints, metadata |
-| Accent    | `--neon-*`            | Labels, tags, status      |
+| Accent    | `---*`                | Labels, tags, status      |
 
 ---
 

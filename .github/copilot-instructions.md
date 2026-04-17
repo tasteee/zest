@@ -51,8 +51,7 @@ short, clear sentences.
 
 ## 1) Control Flow
 
-Use flat code and early returns.
-Avoid nesting when possible.
+Use flat code and early returns. Always void nesting when possible.
 
 Rules:
 
@@ -286,3 +285,12 @@ Before finalizing generated code, verify:
 - Uses design-system CSS variables only.
 - Uses camelCase class names with no hyphens/underscores.
 - Used no abbreviated parameters like `i`, `err`, `res`, `cfg`, `e`, `evt`, etc.
+
+---
+
+# Design Rules
+
+Everything should be designed with the utmost consideration of
+the zest design system. If you are making decisions and in uncharted
+territory, it is your job to ensure that the decisions you make are in line with the design system's principles and aesthetics, and that the result
+feels extremely premium and polished.

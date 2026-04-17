@@ -1,0 +1,18 @@
+.zCard {
+	background: var(--color-surface, #141814);
+	border: 1px solid var(--color-border, #2a2f2a);
+	border-radius: var(--radius-lg, 16px);
+	padding: var(--spacing-lg, 1.5rem);
+	transition: border-color 200ms linear;
+	box-sizing: border-box;
+}
+
+.zCard {
+	border-color: var(--theme-color-muted);
+}
+
+.zCard:hover,
+.zCard:focus,
+.zCard:active {
+	border-color: var(--theme-color);
+}
