@@ -1,13 +1,26 @@
 import * as React from 'react'
 import { cn } from '@/lib/utils'
+import styles from './card.module.css'
+
+type CardTone = 'neutral' | 'green' | 'pink' | 'purple' | 'orange'
 
 type CardPropsT = React.ComponentProps<'div'> & {
 	isHoverable?: boolean
+	tone?: CardTone
+	isPremium?: boolean
 }
 
-function Card({ className, isHoverable = false, ...props }: CardPropsT) {
+const toneClassMap: Record<CardTone, string> = {
+	neutral: styles.cardToneNeutral,
+	green: styles.cardToneGreen,
+	pink: styles.cardTonePink,
+	purple: styles.cardTonePurple,
+	orange: styles.cardToneOrange,
+}
+
+function Card({ className, isHoverable = false, tone = 'neutral', isPremium = false, ...props }: CardPropsT) {
 	const hoverClassName = isHoverable
-		? 'transition-[border-color,background-color] duration-[var(--duration-fast)] ease-[var(--easing-standard)] hover:border-[var(--foreground)] hover:bg-[var(--background-light)]'
+		? 'transition-[border-color,background-color,transform] duration-[var(--duration-fast)] ease-[var(--easing-standard)] hover:border-[var(--foreground)] hover:bg-[var(--background-light)] hover:-translate-y-[1px]'
 		: ''
 
 	return (
@@ -15,6 +28,8 @@ function Card({ className, isHoverable = false, ...props }: CardPropsT) {
 			data-slot='card'
 			className={cn(
 				'bg-card text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm',
+				toneClassMap[tone],
+				isPremium && styles.cardPremium,
 				hoverClassName,
 				className
 			)}
@@ -62,15 +77,13 @@ function CardFooter({ className, ...props }: React.ComponentProps<'div'>) {
 	return <div data-slot='card-footer' className={cn('flex items-center px-6 [.border-t]:pt-6', className)} {...props} />
 }
 
-// Compound component pattern
 const CardNamespace = Object.assign(Card, {
 	Header: CardHeader,
 	Footer: CardFooter,
 	Title: CardTitle,
 	Action: CardAction,
 	Description: CardDescription,
-	Content: CardContent
+	Content: CardContent,
 })
 
-// Export both namespace and individual components for flexibility
 export { CardNamespace as Card, CardHeader, CardFooter, CardTitle, CardAction, CardDescription, CardContent }
