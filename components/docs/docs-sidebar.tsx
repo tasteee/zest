@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { COMPONENT_CATALOG } from "@/app/docs/components/catalog";
 
 const navigation = [
   {
@@ -72,6 +73,13 @@ const navigation = [
       { title: "Dialog", href: "/docs/components/dialog" },
       { title: "Dropdown Menu", href: "/docs/components/dropdown-menu" },
     ],
+  },
+  {
+    title: "Full Library",
+    items: COMPONENT_CATALOG.map((component) => ({
+      title: component.name,
+      href: `/docs/components/${component.slug}`,
+    })),
   },
   {
     title: "Patterns",
