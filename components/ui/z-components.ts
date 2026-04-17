@@ -3,32 +3,41 @@ import { Alert, AlertDescription, AlertTitle } from './alert'
 import { Avatar, AvatarFallback, AvatarImage } from './avatar'
 import { Badge } from './badge'
 import {
-  Breadcrumb,
-  BreadcrumbEllipsis,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
+	Breadcrumb,
+	BreadcrumbEllipsis,
+	BreadcrumbItem,
+	BreadcrumbLink,
+	BreadcrumbList,
+	BreadcrumbPage,
+	BreadcrumbSeparator
 } from './breadcrumb'
-import { Button } from './button'
+import { ZButton } from './button'
 import { ButtonGroup, ButtonGroupSeparator, ButtonGroupText } from './button-group'
 import { Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './card'
 import { Checkbox } from './checkbox'
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from './collapsible'
 import {
-  Command,
-  CommandDialog,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
-  CommandSeparator,
-  CommandShortcut,
+	Command,
+	CommandDialog,
+	CommandEmpty,
+	CommandGroup,
+	CommandInput,
+	CommandItem,
+	CommandList,
+	CommandSeparator,
+	CommandShortcut
 } from './command'
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from './dialog'
-import { Drawer, DrawerClose, DrawerContent, DrawerDescription, DrawerFooter, DrawerHeader, DrawerTitle, DrawerTrigger } from './drawer'
+import {
+	Drawer,
+	DrawerClose,
+	DrawerContent,
+	DrawerDescription,
+	DrawerFooter,
+	DrawerHeader,
+	DrawerTitle,
+	DrawerTrigger
+} from './drawer'
 import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from './empty'
 import { Input } from './input'
 import { Chip } from './chip'
@@ -80,7 +89,7 @@ export const ZBreadcrumbPage = BreadcrumbPage
 export const ZBreadcrumbSeparator = BreadcrumbSeparator
 export const ZBreadcrumbEllipsis = BreadcrumbEllipsis
 
-export const ZButton = Button
+export const ZButton = ZButton
 export const ZButtonGroup = ButtonGroup
 export const ZButtonGroupText = ButtonGroupText
 export const ZButtonGroupSeparator = ButtonGroupSeparator
