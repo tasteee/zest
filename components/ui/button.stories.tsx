@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/nextjs'
 import * as Phosphor from '@phosphor-icons/react'
-import { Button } from './button'
+import { ZButton } from './button'
 import { Layout } from './layout'
 
-const meta: Meta<typeof Button> = {
+const meta: Meta<typeof ZButton> = {
 	title: 'UI/Button',
-	component: Button,
+	component: ZButton,
 	tags: ['autodocs'],
 	parameters: {
 		layout: 'centered'
@@ -15,7 +15,7 @@ const meta: Meta<typeof Button> = {
 			control: 'select',
 			options: ['outlined', 'solid', 'ghost']
 		},
-		theme: {
+		color: {
 			control: 'select',
 			options: ['green', 'purple', 'pink', 'orange', 'white']
 		},
@@ -31,13 +31,13 @@ const meta: Meta<typeof Button> = {
 
 export default meta
 
-type StoryT = StoryObj<typeof Button>
+type StoryT = StoryObj<typeof ZButton>
 
 export const Default: StoryT = {
 	args: {
 		children: 'Button',
 		kind: 'outlined',
-		theme: 'white',
+		color: 'white',
 		size: 'md',
 		isDisabled: false
 	}
@@ -128,10 +128,10 @@ export const AllVariants: StoryT = {
 											<div key={label} style={cardStyle}>
 												<span style={cardLabelStyle}>{label}</span>
 												<Layout.Row isCentered style={buttonRowStyle}>
-													<Button kind={kind} theme={theme} size={size}>
+													<ZButton kind={kind} color={theme} size={size}>
 														{shouldUseIcon ? <Phosphor.Plus /> : null}
 														Button
-													</Button>
+													</ZButton>
 												</Layout.Row>
 											</div>
 										)

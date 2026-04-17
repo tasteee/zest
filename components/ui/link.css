@@ -1,0 +1,10 @@
+.link {
+	display: inline-flex;
+	align-items: center;
+	color: var(--color-brand-primary);
+	text-underline-offset: 4px;
+}
+
+.link:hover {
+	text-decoration: underline;
+}
