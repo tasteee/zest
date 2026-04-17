@@ -96,7 +96,7 @@ export default function SelectDocsPage() {
           <h1 className="text-4xl font-bold tracking-tight text-foreground">
             ZSelect
           </h1>
-          <Badge variant="secondary">Component</Badge>
+          <Badge kind="ghost" color="white">Component</Badge>
         </div>
         <p className="text-xl text-muted-foreground max-w-2xl leading-relaxed">
           A dropdown menu for selecting a single value from a list of options. 

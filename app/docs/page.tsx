@@ -62,7 +62,7 @@ export default function DocsPage() {
               <p className="text-foreground text-sm mb-4">{section.description}</p>
               <div className="flex flex-wrap gap-2">
                 {section.items.map((item) => (
-                  <Badge key={item} variant="outline" className="text-xs">
+                  <Badge key={item} kind="outline" color="white" className="text-xs">
                     {item}
                   </Badge>
                 ))}
@@ -86,7 +86,7 @@ export default function DocsPage() {
             >
               <span className="text-foreground font-medium">{link.title}</span>
               {link.badge && (
-                <Badge variant="green" className="text-[10px]">
+                <Badge kind="solid" color="green" className="text-[10px]">
                   {link.badge}
                 </Badge>
               )}

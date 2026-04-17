@@ -79,7 +79,7 @@ export default function ProgressDocsPage() {
 			<div className='space-y-4'>
 				<div className='flex items-center gap-3'>
 					<h1 className='text-4xl font-bold tracking-tight text-foreground'>ZProgress</h1>
-					<Badge variant='secondary'>Component</Badge>
+					<Badge kind='ghost' color='white'>Component</Badge>
 				</div>
 				<p className='text-xl text-muted-foreground max-w-2xl leading-relaxed'>
 					Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.

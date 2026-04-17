@@ -52,7 +52,7 @@ export default function AlertDocsPage() {
           <h1 className="text-4xl font-bold tracking-tight text-foreground">
             ZAlert
           </h1>
-          <Badge variant="secondary">Component</Badge>
+          <Badge kind="ghost" color="white">Component</Badge>
         </div>
         <p className="text-xl text-muted-foreground max-w-2xl leading-relaxed">
           Displays a callout for user attention. Alerts provide contextual feedback 

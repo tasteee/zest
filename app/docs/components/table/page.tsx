@@ -57,7 +57,7 @@ export default function TableDocsPage() {
           <h1 className="text-4xl font-bold tracking-tight text-foreground">
             ZTable
           </h1>
-          <Badge variant="secondary">Component</Badge>
+          <Badge kind="ghost" color="white">Component</Badge>
         </div>
         <p className="text-xl text-muted-foreground max-w-2xl leading-relaxed">
           A responsive table component for displaying tabular data with proper 
@@ -243,10 +243,16 @@ export function TableDemo() {
       <TableRow key={invoice.id}>
         <TableCell className="font-medium">{invoice.id}</TableCell>
         <TableCell>
-          <Badge variant={
-            invoice.status === "Paid" ? "default" :
-            invoice.status === "Pending" ? "secondary" : "destructive"
-          }>
+          <Badge
+            kind={
+              invoice.status === "Paid" ? "solid" :
+              invoice.status === "Pending" ? "ghost" : "solid"
+            }
+            color={
+              invoice.status === "Paid" ? "green" :
+              invoice.status === "Pending" ? "white" : "pink"
+            }
+          >
             {invoice.status}
           </Badge>
         </TableCell>
@@ -271,12 +277,18 @@ export function TableDemo() {
                 <TableRow key={invoice.id}>
                   <TableCell className="font-medium">{invoice.id}</TableCell>
                   <TableCell>
-                    <Badge variant={
-                      invoice.status === "Paid" ? "default" :
-                      invoice.status === "Pending" ? "secondary" : "destructive"
-                    }>
-                      {invoice.status}
-                    </Badge>
+                  <Badge
+                    kind={
+                      invoice.status === "Paid" ? "solid" :
+                      invoice.status === "Pending" ? "ghost" : "solid"
+                    }
+                    color={
+                      invoice.status === "Paid" ? "green" :
+                      invoice.status === "Pending" ? "white" : "pink"
+                    }
+                  >
+                    {invoice.status}
+                  </Badge>
                   </TableCell>
                   <TableCell>{invoice.method}</TableCell>
                   <TableCell className="text-right">{invoice.amount}</TableCell>

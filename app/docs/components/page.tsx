@@ -6,16 +6,16 @@ import { COMPONENT_CATALOG } from "./catalog"
 const categories = ["Inputs", "Data Display", "Navigation", "Overlays", "Feedback", "Layout"] as const
 
 const statusMap = {
-  ready: { label: "Ready", variant: "green-outline" as const },
-  "in-progress": { label: "In Progress", variant: "purple-outline" as const },
-  planned: { label: "Planned", variant: "orange-outline" as const },
+  ready: { label: "Ready", kind: "outline" as const, color: "green" as const },
+  "in-progress": { label: "In Progress", kind: "outline" as const, color: "purple" as const },
+  planned: { label: "Planned", kind: "outline" as const, color: "orange" as const },
 }
 
 export default function ComponentsPage() {
   return (
     <div className="space-y-12">
       <section className="space-y-4">
-        <Badge variant="secondary" className="font-mono text-xs">
+        <Badge kind="ghost" color="white" className="font-mono text-xs">
           Component Inventory
         </Badge>
         <h1 className="text-4xl font-bold tracking-tight text-foreground">Premium Component Library</h1>
@@ -39,8 +39,10 @@ export default function ComponentsPage() {
                     <CardContent className="space-y-3">
                       <div className="flex flex-wrap items-center gap-2">
                         <p className="text-lg font-semibold text-foreground">{entry.name}</p>
-                        <Badge variant={statusMap[entry.status].variant}>{statusMap[entry.status].label}</Badge>
-                        <Badge variant="outline">{entry.foundation}</Badge>
+                        <Badge kind={statusMap[entry.status].kind} color={statusMap[entry.status].color}>
+                          {statusMap[entry.status].label}
+                        </Badge>
+                        <Badge kind="outline" color="white">{entry.foundation}</Badge>
                       </div>
                       <p className="text-sm text-muted-foreground">{entry.description}</p>
                       <p className="text-xs text-muted-foreground">Primary export: <span className="font-mono">{entry.zName}</span></p>

@@ -206,37 +206,37 @@ export default function ExamplesPage() {
 
 					<div className='grid gap-6'>
 						<ExampleCard title='Solid Badges'>
-							<Badge variant='default'>Default</Badge>
-							<Badge variant='secondary'>Secondary</Badge>
-							<Badge variant='destructive'>Destructive</Badge>
-							<Badge variant='green'>Green</Badge>
-							<Badge variant='purple'>Purple</Badge>
-							<Badge variant='pink'>Pink</Badge>
-							<Badge variant='orange'>Orange</Badge>
+							<Badge kind='solid' color='white'>Default</Badge>
+							<Badge kind='ghost' color='white'>Secondary</Badge>
+							<Badge kind='solid' color='pink'>Destructive</Badge>
+							<Badge kind='solid' color='green'>Green</Badge>
+							<Badge kind='solid' color='purple'>Purple</Badge>
+							<Badge kind='solid' color='pink'>Pink</Badge>
+							<Badge kind='solid' color='orange'>Orange</Badge>
 						</ExampleCard>
 
 						<ExampleCard title='Outlined Badges'>
-							<Badge variant='outline'>Outline</Badge>
-							<Badge variant='green-outline'>Green</Badge>
-							<Badge variant='purple-outline'>Purple</Badge>
-							<Badge variant='pink-outline'>Pink</Badge>
-							<Badge variant='orange-outline'>Orange</Badge>
+							<Badge kind='outline' color='white'>Outline</Badge>
+							<Badge kind='outline' color='green'>Green</Badge>
+							<Badge kind='outline' color='purple'>Purple</Badge>
+							<Badge kind='outline' color='pink'>Pink</Badge>
+							<Badge kind='outline' color='orange'>Orange</Badge>
 						</ExampleCard>
 
 						<ExampleCard title='Badges with Icons'>
-							<Badge variant='green'>
+							<Badge kind='solid' color='green'>
 								<CheckCircle className='h-3 w-3' /> Success
 							</Badge>
-							<Badge variant='destructive'>
+							<Badge kind='solid' color='pink'>
 								<AlertCircle className='h-3 w-3' /> Error
 							</Badge>
-							<Badge variant='orange'>
+							<Badge kind='solid' color='orange'>
 								<AlertTriangle className='h-3 w-3' /> Warning
 							</Badge>
-							<Badge variant='purple'>
+							<Badge kind='solid' color='purple'>
 								<Info className='h-3 w-3' /> Info
 							</Badge>
-							<Badge variant='pink'>
+							<Badge kind='solid' color='pink'>
 								<Star className='h-3 w-3' /> Featured
 							</Badge>
 						</ExampleCard>
@@ -1103,7 +1103,7 @@ export default function ExamplesPage() {
 								<Table.Row>
 									<Table.Cell className='font-medium'>INV001</Table.Cell>
 									<Table.Cell>
-										<Badge variant='green'>Paid</Badge>
+										<Badge kind='solid' color='green'>Paid</Badge>
 									</Table.Cell>
 									<Table.Cell>Credit Card</Table.Cell>
 									<Table.Cell className='text-right'>$250.00</Table.Cell>
@@ -1111,7 +1111,7 @@ export default function ExamplesPage() {
 								<Table.Row>
 									<Table.Cell className='font-medium'>INV002</Table.Cell>
 									<Table.Cell>
-										<Badge variant='orange'>Pending</Badge>
+										<Badge kind='solid' color='orange'>Pending</Badge>
 									</Table.Cell>
 									<Table.Cell>PayPal</Table.Cell>
 									<Table.Cell className='text-right'>$150.00</Table.Cell>
@@ -1119,7 +1119,7 @@ export default function ExamplesPage() {
 								<Table.Row>
 									<Table.Cell className='font-medium'>INV003</Table.Cell>
 									<Table.Cell>
-										<Badge variant='destructive'>Overdue</Badge>
+										<Badge kind='solid' color='pink'>Overdue</Badge>
 									</Table.Cell>
 									<Table.Cell>Bank Transfer</Table.Cell>
 									<Table.Cell className='text-right'>$350.00</Table.Cell>
@@ -1127,7 +1127,7 @@ export default function ExamplesPage() {
 								<Table.Row>
 									<Table.Cell className='font-medium'>INV004</Table.Cell>
 									<Table.Cell>
-										<Badge variant='green'>Paid</Badge>
+										<Badge kind='solid' color='green'>Paid</Badge>
 									</Table.Cell>
 									<Table.Cell>Credit Card</Table.Cell>
 									<Table.Cell className='text-right'>$450.00</Table.Cell>
@@ -1135,7 +1135,7 @@ export default function ExamplesPage() {
 								<Table.Row>
 									<Table.Cell className='font-medium'>INV005</Table.Cell>
 									<Table.Cell>
-										<Badge variant='purple-outline'>Processing</Badge>
+										<Badge kind='outline' color='purple'>Processing</Badge>
 									</Table.Cell>
 									<Table.Cell>PayPal</Table.Cell>
 									<Table.Cell className='text-right'>$550.00</Table.Cell>
