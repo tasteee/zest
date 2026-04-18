@@ -96,7 +96,7 @@ export default function DialogDocsPage() {
 			<div className='space-y-4'>
 				<div className='flex items-center gap-3'>
 					<h1 className='text-4xl font-bold tracking-tight text-foreground'>ZDialog</h1>
-					<Badge variant='secondary'>Component</Badge>
+					<Badge kind='ghost' color='white'>Component</Badge>
 				</div>
 				<p className='text-xl text-muted-foreground max-w-2xl leading-relaxed'>
 					A modal dialog that interrupts the user with important content and expects a response. Built on Radix UI Dialog

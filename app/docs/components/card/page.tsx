@@ -74,7 +74,7 @@ export default function CardDocsPage() {
 			<div className='space-y-4'>
 				<div className='flex items-center gap-3'>
 					<h1 className='text-4xl font-bold tracking-tight text-foreground'>ZCard</h1>
-					<Badge variant='secondary'>Component</Badge>
+					<Badge kind='ghost' color='white'>Component</Badge>
 				</div>
 				<p className='text-xl text-muted-foreground max-w-2xl leading-relaxed'>
 					A container component for grouping related content and actions. Cards provide a flexible foundation for building

@@ -108,7 +108,7 @@ export const AllVariants: StoryT = {
 								<CardTitle>Project Alpha</CardTitle>
 								<CardDescription>Last updated 2 days ago</CardDescription>
 								<CardAction>
-									<Badge variant='green'>Active</Badge>
+									<Badge kind='solid' color='green'>Active</Badge>
 								</CardAction>
 							</CardHeader>
 							<CardContent>
@@ -213,7 +213,7 @@ export const AllVariants: StoryT = {
 								<CardDescription>Total Revenue</CardDescription>
 								<CardTitle className='text-3xl font-bold'>$45,231</CardTitle>
 								<CardAction>
-									<Badge variant='green'>+20.1%</Badge>
+									<Badge kind='solid' color='green'>+20.1%</Badge>
 								</CardAction>
 							</CardHeader>
 						</Card>
@@ -223,7 +223,7 @@ export const AllVariants: StoryT = {
 								<CardDescription>Active Users</CardDescription>
 								<CardTitle className='text-3xl font-bold'>2,350</CardTitle>
 								<CardAction>
-									<Badge variant='purple'>+180</Badge>
+									<Badge kind='solid' color='purple'>+180</Badge>
 								</CardAction>
 							</CardHeader>
 						</Card>
@@ -233,7 +233,7 @@ export const AllVariants: StoryT = {
 								<CardDescription>Sales</CardDescription>
 								<CardTitle className='text-3xl font-bold'>12,234</CardTitle>
 								<CardAction>
-									<Badge variant='pink'>+19%</Badge>
+									<Badge kind='solid' color='pink'>+19%</Badge>
 								</CardAction>
 							</CardHeader>
 						</Card>
@@ -311,7 +311,7 @@ export const StatCard: StoryT = {
 					<CardDescription>Total Revenue</CardDescription>
 					<CardTitle className='text-3xl font-bold'>$45,231</CardTitle>
 					<CardAction>
-						<Badge variant='green'>+20.1%</Badge>
+						<Badge kind='solid' color='green'>+20.1%</Badge>
 					</CardAction>
 				</CardHeader>
 			</Card>

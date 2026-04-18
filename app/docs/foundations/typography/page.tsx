@@ -107,8 +107,8 @@ export default function TypographyPage() {
               </h3>
             </div>
             <div className="flex gap-2">
-              <Badge variant="outline">Google Fonts</Badge>
-              <Badge variant="outline">Open Source</Badge>
+              <Badge kind="outline" color="white">Google Fonts</Badge>
+              <Badge kind="outline" color="white">Open Source</Badge>
             </div>
           </div>
           <p className="text-primary text-2xl leading-relaxed mb-4">
@@ -157,7 +157,7 @@ export default function TypographyPage() {
               className="flex flex-col lg:flex-row lg:items-center gap-4 py-6 border-b border-border last:border-b-0"
             >
               <div className="lg:w-24 shrink-0">
-                <Badge variant="green-outline" className="text-xs">
+                <Badge kind="outline" color="green" className="text-xs">
                   {type.name}
                 </Badge>
               </div>

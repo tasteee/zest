@@ -73,7 +73,7 @@ export default function AvatarDocsPage() {
           <h1 className="text-4xl font-bold tracking-tight text-foreground">
             ZAvatar
           </h1>
-          <Badge variant="secondary">Component</Badge>
+          <Badge kind="ghost" color="white">Component</Badge>
         </div>
         <p className="text-xl text-muted-foreground max-w-2xl leading-relaxed">
           An image element with a fallback for representing the user. Displays a profile 

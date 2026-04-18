@@ -10,22 +10,17 @@ const meta: Meta<typeof Badge> = {
     layout: "centered",
   },
   argTypes: {
-    variant: {
+    kind: {
       control: "select",
-      options: [
-        "default",
-        "secondary",
-        "destructive",
-        "outline",
-        "green",
-        "purple",
-        "pink",
-        "orange",
-        "green-outline",
-        "purple-outline",
-        "pink-outline",
-        "orange-outline",
-      ],
+      options: ["outline", "ghost", "solid"],
+    },
+    color: {
+      control: "select",
+      options: ["white", "green", "purple", "pink", "orange"],
+    },
+    size: {
+      control: "select",
+      options: ["sm", "md", "lg"],
     },
   },
 };
@@ -37,11 +32,11 @@ type StoryT = StoryObj<typeof Badge>;
 export const Default: StoryT = {
   args: {
     children: "Badge",
-    variant: "default",
+    kind: "outline",
+    color: "white",
+    size: "md",
   },
 };
-
-// ─── Shared styles ──────────────────────────────────────────────────────────
 
 const sectionLabelStyle: React.CSSProperties = {
   fontSize: 11,
@@ -67,37 +62,8 @@ const rowStyle: React.CSSProperties = {
   flexWrap: "wrap",
 };
 
-// ─── All Variants Story ─────────────────────────────────────────────────────
-
-type VariantT =
-  | "default"
-  | "secondary"
-  | "destructive"
-  | "outline"
-  | "green"
-  | "purple"
-  | "pink"
-  | "orange"
-  | "green-outline"
-  | "purple-outline"
-  | "pink-outline"
-  | "orange-outline";
-
-const coreVariants: VariantT[] = [
-  "default",
-  "secondary",
-  "destructive",
-  "outline",
-];
-
-const neonSolidVariants: VariantT[] = ["green", "purple", "pink", "orange"];
-
-const neonOutlineVariants: VariantT[] = [
-  "green-outline",
-  "purple-outline",
-  "pink-outline",
-  "orange-outline",
-];
+const kinds = ["outline", "ghost", "solid"] as const;
+const colors = ["white", "green", "purple", "pink", "orange"] as const;
 
 export const AllVariants: StoryT = {
   parameters: {
@@ -106,175 +72,49 @@ export const AllVariants: StoryT = {
   render: () => {
     return (
       <div style={gridWrapperStyle}>
-        {/* Core Variants */}
-        <div>
-          <span style={sectionLabelStyle}>Core Variants</span>
-          <div style={rowStyle}>
-            {coreVariants.map((variant) => (
-              <Badge key={variant} variant={variant}>
-                {variant}
-              </Badge>
-            ))}
+        {kinds.map((kind) => (
+          <div key={kind}>
+            <span style={sectionLabelStyle}>{kind}</span>
+            <div style={rowStyle}>
+              {colors.map((color) => (
+                <Badge key={`${kind}-${color}`} kind={kind} color={color}>
+                  {color}
+                </Badge>
+              ))}
+            </div>
           </div>
-        </div>
+        ))}
 
-        {/* Neon Solid Variants */}
-        <div>
-          <span style={sectionLabelStyle}>Brand Neon - Solid</span>
-          <div style={rowStyle}>
-            {neonSolidVariants.map((variant) => (
-              <Badge key={variant} variant={variant}>
-                {variant}
-              </Badge>
-            ))}
-          </div>
-        </div>
-
-        {/* Neon Outline Variants */}
-        <div>
-          <span style={sectionLabelStyle}>Brand Neon - Outline</span>
-          <div style={rowStyle}>
-            {neonOutlineVariants.map((variant) => (
-              <Badge key={variant} variant={variant}>
-                {variant}
-              </Badge>
-            ))}
-          </div>
-        </div>
-
-        {/* With Icons */}
         <div>
           <span style={sectionLabelStyle}>With Icons</span>
           <div style={rowStyle}>
-            <Badge variant="green">
+            <Badge kind="solid" color="green">
               <Phosphor.CheckCircle weight="fill" />
               Success
             </Badge>
-            <Badge variant="destructive">
+            <Badge kind="solid" color="pink">
               <Phosphor.XCircle weight="fill" />
               Error
             </Badge>
-            <Badge variant="purple">
-              <Phosphor.Star weight="fill" />
-              Featured
-            </Badge>
-            <Badge variant="pink">
-              <Phosphor.Heart weight="fill" />
-              Liked
-            </Badge>
-            <Badge variant="orange">
-              <Phosphor.Lightning weight="fill" />
-              Active
-            </Badge>
-            <Badge variant="green-outline">
-              <Phosphor.CheckCircle />
-              Verified
-            </Badge>
-            <Badge variant="purple-outline">
+            <Badge kind="outline" color="purple">
               <Phosphor.Tag />
               Tagged
             </Badge>
           </div>
         </div>
 
-        {/* As Link */}
         <div>
           <span style={sectionLabelStyle}>As Interactive Link</span>
           <div style={rowStyle}>
-            <Badge variant="green" asChild>
+            <Badge kind="solid" color="green" asChild>
               <a href="#">Click me</a>
             </Badge>
-            <Badge variant="purple-outline" asChild>
+            <Badge kind="outline" color="purple" asChild>
               <a href="#">Another link</a>
-            </Badge>
-            <Badge variant="orange" asChild>
-              <a href="#">
-                <Phosphor.ArrowRight />
-                With icon
-              </a>
             </Badge>
           </div>
         </div>
       </div>
     );
-  },
-};
-
-// ─── Individual Stories ─────────────────────────────────────────────────────
-
-export const Secondary: StoryT = {
-  args: {
-    children: "Secondary",
-    variant: "secondary",
-  },
-};
-
-export const Destructive: StoryT = {
-  args: {
-    children: "Destructive",
-    variant: "destructive",
-  },
-};
-
-export const Outline: StoryT = {
-  args: {
-    children: "Outline",
-    variant: "outline",
-  },
-};
-
-export const Green: StoryT = {
-  args: {
-    children: "Green",
-    variant: "green",
-  },
-};
-
-export const Purple: StoryT = {
-  args: {
-    children: "Purple",
-    variant: "purple",
-  },
-};
-
-export const Pink: StoryT = {
-  args: {
-    children: "Pink",
-    variant: "pink",
-  },
-};
-
-export const Orange: StoryT = {
-  args: {
-    children: "Orange",
-    variant: "orange",
-  },
-};
-
-export const GreenOutline: StoryT = {
-  args: {
-    children: "Green Outline",
-    variant: "green-outline",
-  },
-};
-
-export const PurpleOutline: StoryT = {
-  args: {
-    children: "Purple Outline",
-    variant: "purple-outline",
-  },
-};
-
-export const PinkOutline: StoryT = {
-  args: {
-    children: "Pink Outline",
-    variant: "pink-outline",
-  },
-};
-
-export const OrangeOutline: StoryT = {
-  args: {
-    children: "Orange Outline",
-    variant: "orange-outline",
   },
 };

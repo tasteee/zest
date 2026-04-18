@@ -116,7 +116,7 @@ export default function DropdownMenuDocsPage() {
 			<div className='space-y-4'>
 				<div className='flex items-center gap-3'>
 					<h1 className='text-4xl font-bold tracking-tight text-foreground'>ZDropdownMenu</h1>
-					<Badge variant='secondary'>Component</Badge>
+					<Badge kind='ghost' color='white'>Component</Badge>
 				</div>
 				<p className='text-xl text-muted-foreground max-w-2xl leading-relaxed'>
 					Displays a menu to the user triggered by a button. Supports submenus, checkboxes, and radio groups. Built on Radix UI

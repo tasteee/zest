@@ -77,7 +77,7 @@ export default function TabsDocsPage() {
 			<div className='space-y-4'>
 				<div className='flex items-center gap-3'>
 					<h1 className='text-4xl font-bold tracking-tight text-foreground'>ZTabs</h1>
-					<Badge variant='secondary'>Component</Badge>
+					<Badge kind='ghost' color='white'>Component</Badge>
 				</div>
 				<p className='text-xl text-muted-foreground max-w-2xl leading-relaxed'>
 					A set of layered sections of content, known as tab panels, that are displayed one at a time. Built on Radix UI Tabs

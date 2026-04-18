@@ -5,60 +5,141 @@ import { cva, type VariantProps } from 'class-variance-authority'
 import { cn } from '@/lib/utils'
 
 const badgeVariants = cva(
-  'inline-flex items-center justify-center rounded-md border px-2 py-0.5 text-xs font-medium w-fit whitespace-nowrap shrink-0 [&>svg]:size-3 gap-1 [&>svg]:pointer-events-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive transition-[color,box-shadow] overflow-hidden',
+  'inline-flex w-fit shrink-0 items-center justify-center gap-1 whitespace-nowrap overflow-hidden rounded-md border font-medium transition-[color,background-color,border-color,box-shadow] [&>svg]:pointer-events-none [&>svg]:size-3 focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40',
   {
     variants: {
-      variant: {
-        default:
-          'border-transparent bg-primary text-primary-foreground [a&]:hover:bg-primary/90',
-        secondary:
-          'border-transparent bg-secondary text-secondary-foreground [a&]:hover:bg-secondary/90',
-        destructive:
-          'border-transparent bg-destructive text-white [a&]:hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60',
-        outline:
-          'text-foreground [a&]:hover:bg-accent [a&]:hover:text-accent-foreground',
-        // Brand neon variants - solid
-        green:
-          'border-transparent bg-neon-green text-primary-foreground [a&]:hover:opacity-90',
-        purple:
-          'border-transparent bg-neon-purple text-primary-foreground [a&]:hover:opacity-90',
-        pink:
-          'border-transparent bg-neon-pink text-primary-foreground [a&]:hover:opacity-90',
-        orange:
-          'border-transparent bg-neon-orange text-primary-foreground [a&]:hover:opacity-90',
-        // Brand neon variants - outlined
-        'green-outline':
-          'border-neon-green text-neon-green bg-transparent [a&]:hover:bg-neon-green/10',
-        'purple-outline':
-          'border-neon-purple text-neon-purple bg-transparent [a&]:hover:bg-neon-purple/10',
-        'pink-outline':
-          'border-neon-pink text-neon-pink bg-transparent [a&]:hover:bg-neon-pink/10',
-        'orange-outline':
-          'border-neon-orange text-neon-orange bg-transparent [a&]:hover:bg-neon-orange/10',
+      kind: {
+        outline: '',
+        ghost: 'border-transparent bg-transparent',
+        solid: 'border-transparent',
+      },
+      color: {
+        white: '',
+        green: '',
+        purple: '',
+        pink: '',
+        orange: '',
+      },
+      size: {
+        sm: 'px-2 py-0.5 text-[10px]',
+        md: 'px-2.5 py-1 text-xs',
+        lg: 'px-3 py-1.5 text-sm',
       },
     },
+    compoundVariants: [
+      {
+        kind: 'outline',
+        color: 'white',
+        className:
+          'border-border text-foreground [a&]:hover:bg-accent [a&]:hover:text-accent-foreground',
+      },
+      {
+        kind: 'outline',
+        color: 'green',
+        className:
+          'border-neon-green text-neon-green [a&]:hover:bg-neon-green/10',
+      },
+      {
+        kind: 'outline',
+        color: 'purple',
+        className:
+          'border-neon-purple text-neon-purple [a&]:hover:bg-neon-purple/10',
+      },
+      {
+        kind: 'outline',
+        color: 'pink',
+        className: 'border-neon-pink text-neon-pink [a&]:hover:bg-neon-pink/10',
+      },
+      {
+        kind: 'outline',
+        color: 'orange',
+        className:
+          'border-neon-orange text-neon-orange [a&]:hover:bg-neon-orange/10',
+      },
+      {
+        kind: 'ghost',
+        color: 'white',
+        className: 'text-foreground [a&]:hover:bg-accent [a&]:hover:text-accent-foreground',
+      },
+      {
+        kind: 'ghost',
+        color: 'green',
+        className: 'text-neon-green [a&]:hover:bg-neon-green/10',
+      },
+      {
+        kind: 'ghost',
+        color: 'purple',
+        className: 'text-neon-purple [a&]:hover:bg-neon-purple/10',
+      },
+      {
+        kind: 'ghost',
+        color: 'pink',
+        className: 'text-neon-pink [a&]:hover:bg-neon-pink/10',
+      },
+      {
+        kind: 'ghost',
+        color: 'orange',
+        className: 'text-neon-orange [a&]:hover:bg-neon-orange/10',
+      },
+      {
+        kind: 'solid',
+        color: 'white',
+        className: 'bg-foreground text-background [a&]:hover:opacity-90',
+      },
+      {
+        kind: 'solid',
+        color: 'green',
+        className: 'bg-neon-green text-primary-foreground [a&]:hover:opacity-90',
+      },
+      {
+        kind: 'solid',
+        color: 'purple',
+        className: 'bg-neon-purple text-primary-foreground [a&]:hover:opacity-90',
+      },
+      {
+        kind: 'solid',
+        color: 'pink',
+        className: 'bg-neon-pink text-primary-foreground [a&]:hover:opacity-90',
+      },
+      {
+        kind: 'solid',
+        color: 'orange',
+        className: 'bg-neon-orange text-primary-foreground [a&]:hover:opacity-90',
+      },
+    ],
     defaultVariants: {
-      variant: 'default',
+      kind: 'outline',
+      color: 'white',
+      size: 'md',
     },
   },
 )
 
+type BadgeProps = React.ComponentProps<'span'> &
+  VariantProps<typeof badgeVariants> & {
+    asChild?: boolean
+  }
+
 function Badge({
   className,
-  variant,
+  kind,
+  color,
+  size,
   asChild = false,
   ...props
-}: React.ComponentProps<'span'> &
-  VariantProps<typeof badgeVariants> & { asChild?: boolean }) {
+}: BadgeProps) {
   const Comp = asChild ? Slot : 'span'
 
   return (
     <Comp
       data-slot="badge"
-      className={cn(badgeVariants({ variant }), className)}
+      className={cn(badgeVariants({ kind, color, size }), className)}
       {...props}
     />
   )
 }
 
-export { Badge, badgeVariants }
+const ZBadge = Badge
+
+export { Badge, ZBadge, badgeVariants }
+export type { BadgeProps }

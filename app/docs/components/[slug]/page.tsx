@@ -10,9 +10,9 @@ import { CATALOG_BY_SLUG, COMPONENT_CATALOG } from "../catalog"
 import styles from "../component-explorer.module.css"
 
 const statusMap = {
-  ready: { label: "Ready", variant: "green-outline" as const },
-  "in-progress": { label: "In Progress", variant: "purple-outline" as const },
-  planned: { label: "Planned", variant: "orange-outline" as const },
+  ready: { label: "Ready", kind: "outline" as const, color: "green" as const },
+  "in-progress": { label: "In Progress", kind: "outline" as const, color: "purple" as const },
+  planned: { label: "Planned", kind: "outline" as const, color: "orange" as const },
 }
 
 const foundationMap = {
@@ -57,7 +57,12 @@ export default function ComponentExplorerPage({ params }: { params: { slug: stri
         </div>
         <div className="flex flex-wrap items-center gap-3">
           <h1 className="text-4xl font-bold tracking-tight">{component.name}</h1>
-          <Badge variant={statusMap[component.status].variant}>{statusMap[component.status].label}</Badge>
+          <Badge
+            kind={statusMap[component.status].kind}
+            color={statusMap[component.status].color}
+          >
+            {statusMap[component.status].label}
+          </Badge>
         </div>
         <p className="max-w-3xl text-lg text-muted-foreground">{component.description}</p>
         <p className="text-sm text-muted-foreground">Canonical export: <span className="font-mono text-foreground">{component.zName}</span> from <span className="font-mono text-foreground">@/components/ui/z-components</span>.</p>
@@ -115,12 +120,12 @@ export default function ComponentExplorerPage({ params }: { params: { slug: stri
         >
           <div className="flex items-center justify-between">
             <p className="text-xs uppercase tracking-[0.12em] text-muted-foreground">{component.name} variation</p>
-            <Badge variant="outline">{density}</Badge>
+            <Badge kind="outline" color="white">{density}</Badge>
           </div>
           <p className="text-sm text-foreground">{previewCopy}</p>
           <div className={styles.meta}>
-            <Badge variant="secondary">{foundationMap[component.foundation]}</Badge>
-            {component.notes && <Badge variant="outline">{component.notes}</Badge>}
+            <Badge kind="ghost" color="white">{foundationMap[component.foundation]}</Badge>
+            {component.notes && <Badge kind="outline" color="white">{component.notes}</Badge>}
           </div>
         </div>
 
@@ -152,7 +157,9 @@ export function Demo() {
             >
               <div className="mb-2 flex items-center justify-between gap-2">
                 <p className="font-medium text-foreground">{entry.name}</p>
-                <Badge variant={statusMap[entry.status].variant}>{statusMap[entry.status].label}</Badge>
+                <Badge kind={statusMap[entry.status].kind} color={statusMap[entry.status].color}>
+                  {statusMap[entry.status].label}
+                </Badge>
               </div>
               <p className="text-sm text-muted-foreground">{entry.description}</p>
             </Link>

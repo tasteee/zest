@@ -79,7 +79,7 @@ export default function PatternsPage() {
       {/* Header */}
       <div className="space-y-4">
         <div className="flex items-center gap-2">
-          <Badge variant="secondary" className="font-mono text-xs">
+          <Badge kind="ghost" color="white" className="font-mono text-xs">
             Patterns
           </Badge>
         </div>
@@ -111,7 +111,7 @@ export default function PatternsPage() {
                     <pattern.icon className="h-5 w-5 text-foreground" />
                   </div>
                   {pattern.status === "coming-soon" && (
-                    <Badge variant="outline" className="text-xs">
+                    <Badge kind="outline" color="white" className="text-xs">
                       Coming Soon
                     </Badge>
                   )}
