@@ -61,7 +61,7 @@ const navigation = [
 		title: 'Layout',
 		items: [
 			{ title: 'Accordion', href: '/docs/components/accordion' },
-			{ title: 'Separator', href: '/docs/components/separator' },
+			{ title: 'Line', href: '/docs/components/line' },
 			{ title: 'Tabs', href: '/docs/components/tabs' }
 		]
 	},

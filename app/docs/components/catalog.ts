@@ -276,6 +276,15 @@ export const COMPONENT_CATALOG: ComponentCatalogEntry[] = [
 		foundation: 'radix'
 	},
 	{
+		slug: 'line',
+		name: 'Line',
+		zName: 'z.line',
+		category: 'Layout',
+		description: 'Horizontal and vertical dividers between content.',
+		status: 'ready',
+		foundation: 'radix'
+	},
+	{
 		slug: 'scroll-area',
 		name: 'Scroll Area',
 		zName: 'ZScrollArea',

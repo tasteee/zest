@@ -44,6 +44,7 @@ import { Chip } from './chip'
 import { CodeBlock } from './codeblock'
 import { ColorPicker } from './color-picker'
 import { Combobox } from './combobox'
+import { Line } from './line'
 import { Link } from './link'
 import { DropdownMenu } from './dropdown-menu'
 import { NavigationMenu } from './navigation-menu'
@@ -143,6 +144,7 @@ export const ZChip = Chip
 export const ZCodeBlock = CodeBlock
 export const ZColorPicker = ColorPicker
 export const ZCombobox = Combobox
+export const ZLine = Line
 export const ZLink = Link
 export const ZMenu = DropdownMenu
 export const ZNavMenu = NavigationMenu
@@ -251,6 +253,7 @@ export const z = {
 	codeblock: ZCodeBlock,
 	colorPicker: ZColorPicker,
 	combobox: ZCombobox,
+	line: ZLine,
 	link: ZLink,
 
 	menu: ZMenu,

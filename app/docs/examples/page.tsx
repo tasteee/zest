@@ -31,6 +31,7 @@ import { Checkbox } from '@/components/ui/checkbox'
 import { Switch } from '@/components/ui/switch'
 import { Progress } from '@/components/ui/progress'
 import { Skeleton } from '@/components/ui/skeleton'
+import { Line } from '@/components/ui/line'
 import { Separator } from '@/components/ui/separator'
 import { Alert } from '@/components/ui/alert'
 import { Avatar } from '@/components/ui/avatar'
@@ -463,7 +464,7 @@ export default function ExamplesPage() {
 
 						<Alert isPink>
 							<Bell className='h-4 w-4' />
-							<Alert.title>New Feature</Alert.title>
+							<Alert.title>Featured</Alert.title>
 							<Alert.description>Check out our latest feature update!</Alert.description>
 						</Alert>
 					</div>
@@ -1101,18 +1102,18 @@ export default function ExamplesPage() {
 
 				<Separator />
 
-				{/* Separator Section */}
+				{/* Line Section */}
 				<section className='space-y-6'>
-					<SectionHeader title='ZSeparator' description='Visual dividers between content.' />
+					<SectionHeader title='Line' description='Visual dividers between content.' />
 
 					<div className='grid gap-6'>
-						<ExampleCard title='Horizontal Separator'>
+						<ExampleCard title='Horizontal Line'>
 							<div className='w-full max-w-md space-y-4'>
 								<div>
 									<h4 className='text-sm font-medium'>Section One</h4>
 									<p className='text-sm text-muted-foreground'>Content for the first section.</p>
 								</div>
-								<Separator />
+								<Line />
 								<div>
 									<h4 className='text-sm font-medium'>Section Two</h4>
 									<p className='text-sm text-muted-foreground'>Content for the second section.</p>
@@ -1120,14 +1121,14 @@ export default function ExamplesPage() {
 							</div>
 						</ExampleCard>
 
-						<ExampleCard title='Vertical Separator'>
+						<ExampleCard title='Vertical Line'>
 							<div className='flex h-8 items-center space-x-4 text-sm'>
 								<div>Blog</div>
-								<Separator orientation='vertical' />
+								<Line isVertical />
 								<div>Docs</div>
-								<Separator orientation='vertical' />
+								<Line isVertical />
 								<div>Source</div>
-								<Separator orientation='vertical' />
+								<Line isVertical />
 								<div>Support</div>
 							</div>
 						</ExampleCard>

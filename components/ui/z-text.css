@@ -3,16 +3,16 @@
 }
 
 .isOrange {
-	color: var(--color-brand-orange);
+	color: var(--color-neon-orange);
 }
 .isPurple {
-	color: var(--color-brand-purple);
+	color: var(--color-neon-purple);
 }
 .isPink {
-	color: var(--color-brand-pink);
+	color: var(--color-neon-pink);
 }
 .isGreen {
-	color: var(--color-brand-green);
+	color: var(--color-neon-green);
 }
 .isWhite {
 	color: var(--color-white);

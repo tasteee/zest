@@ -256,8 +256,8 @@ Example:
 	color: var(--color-text-primary);
 }
 
-.isBlue {
-	color: var(--color-brand-blue);
+.isGreen {
+	color: var(--color-neon-green);
 }
 
 .isDisabled {

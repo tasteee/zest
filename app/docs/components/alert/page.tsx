@@ -105,7 +105,7 @@ export function AlertDemo() {
   return (
     <ZAlert>
       <Info className="h-4 w-4" />
-      <ZAlertTitle>Heads up!</ZAlertTitle>
+      <ZAlertTitle>Default Alert</ZAlertTitle>
       <ZAlertDescription>
         You can add components to your app using the CLI.
       </ZAlertDescription>
@@ -115,7 +115,7 @@ export function AlertDemo() {
 			>
 				<z.alert className='max-w-lg'>
 					<Info className='h-4 w-4' />
-					<z.alert.title>Heads up!</z.alert.title>
+					<z.alert.title>Default Alert</z.alert.title>
 					<z.alert.description>You can add components to your app using the CLI.</z.alert.description>
 				</z.alert>
 			</ComponentPreview>
@@ -127,7 +127,7 @@ export function AlertDemo() {
 				<CodeBlock
 					code={`<ZAlert isGreen>
   <CheckCircle2 className="h-4 w-4" />
-  <ZAlertTitle>Alert Title</ZAlertTitle>
+  <ZAlertTitle>Success</ZAlertTitle>
   <ZAlertDescription>Alert description text.</ZAlertDescription>
 </ZAlert>`}
 					language='tsx'
@@ -233,20 +233,18 @@ export function AlertDemo() {
 					</z.alert>
 				</ComponentPreview>
 
-				{/* Without Icon */}
+				{/* Automatic Defaults */}
 				<ComponentPreview
-					title='Without Icon'
-					description='Alerts work without icons too.'
+					title='Automatic Defaults'
+					description='Alerts add a matching icon and title for the selected color.'
 					code={`<z.alert>
-  <z.alert.title>Note</z.alert.title>
   <z.alert.description>
-    This is a simple alert without an icon.
+    This alert uses the default icon and title.
   </z.alert.description>
 </z.alert>`}
 				>
 					<z.alert className='max-w-lg'>
-						<z.alert.title>Note</z.alert.title>
-						<z.alert.description>This is a simple alert without an icon.</z.alert.description>
+						<z.alert.description>This alert uses the default icon and title.</z.alert.description>
 					</z.alert>
 				</ComponentPreview>
 			</section>
@@ -278,7 +276,7 @@ export function AlertDemo() {
 								<li>Use descriptive titles that summarize the alert</li>
 								<li>Keep alert descriptions concise and actionable</li>
 								<li>Use one color prop at a time (isRed, isGreen, isOrange, isPurple, isPink)</li>
-								<li>Include icons for visual reinforcement of the alert type</li>
+								<li>Rely on the built-in icon and title defaults unless a custom alert needs more specific copy</li>
 							</ul>
 						</div>
 					</CardContent>

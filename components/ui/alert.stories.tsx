@@ -104,19 +104,18 @@ export const AllVariants: StoryT = {
 	}
 }
 
-// ─── Without Icons ──────────────────────────────────────────────────────────
+// ─── Automatic Defaults ─────────────────────────────────────────────────────
 
-export const WithoutIcons: StoryT = {
+export const AutomaticDefaults: StoryT = {
 	parameters: {
 		layout: 'fullscreen'
 	},
 	render: () => {
 		return (
 			<div style={gridWrapperStyle}>
-				<span style={sectionLabelStyle}>Without Icons</span>
+				<span style={sectionLabelStyle}>Automatic Icon + Title Defaults</span>
 				{allColorKeys.map((colorKey) => (
 					<Alert key={colorKey} {...colorPropsMap[colorKey]}>
-						<AlertTitle>{colorTitles[colorKey]}</AlertTitle>
 						<AlertDescription>{colorDescriptions[colorKey]}</AlertDescription>
 					</Alert>
 				))}
@@ -153,7 +152,7 @@ export const Default: StoryT = {
 		return (
 			<Alert className='w-96'>
 				<Phosphor.Info weight='fill' />
-				<AlertTitle>Heads up!</AlertTitle>
+				<AlertTitle>Default Alert</AlertTitle>
 				<AlertDescription>You can add components to your app using the CLI.</AlertDescription>
 			</Alert>
 		)
@@ -201,7 +200,7 @@ export const Info: StoryT = {
 		return (
 			<Alert isPurple className='w-96'>
 				<Phosphor.Info weight='fill' />
-				<AlertTitle>Did you know?</AlertTitle>
+				<AlertTitle>Information</AlertTitle>
 				<AlertDescription>You can customize your experience in the settings panel.</AlertDescription>
 			</Alert>
 		)

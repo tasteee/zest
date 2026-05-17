@@ -1,7 +1,8 @@
 .link {
 	display: inline-flex;
 	align-items: center;
-	color: var(--color-brand-primary);
+	color: var(--color-white);
+	font-weight: var(--font-weight-medium);
 	text-underline-offset: 4px;
 }
 
