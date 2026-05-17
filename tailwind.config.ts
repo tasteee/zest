@@ -32,6 +32,7 @@ const config: Config = {
 					DEFAULT: 'var(--muted)',
 					foreground: 'var(--muted-foreground)'
 				},
+				skeleton: 'var(--skeleton)',
 				accent: {
 					DEFAULT: 'var(--accent)',
 					foreground: 'var(--accent-foreground)'

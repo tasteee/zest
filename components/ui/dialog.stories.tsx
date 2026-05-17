@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/nextjs'
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from './dialog'
-import { ZButton } from './button'
+import { z } from '@/components/ui'
 import { Input } from './input'
 import { Label } from './label'
 import * as Phosphor from '@phosphor-icons/react'
@@ -59,7 +59,7 @@ export const AllVariants: StoryT = {
 					<div style={rowStyle}>
 						<Dialog>
 							<DialogTrigger asChild>
-								<ZButton variant='outline'>Simple Dialog</ZButton>
+								<z.button>Simple Dialog</z.button>
 							</DialogTrigger>
 							<DialogContent>
 								<DialogHeader>
@@ -71,7 +71,7 @@ export const AllVariants: StoryT = {
 
 						<Dialog>
 							<DialogTrigger asChild>
-								<ZButton variant='outline'>With Footer</ZButton>
+								<z.button>With Footer</z.button>
 							</DialogTrigger>
 							<DialogContent>
 								<DialogHeader>
@@ -79,8 +79,8 @@ export const AllVariants: StoryT = {
 									<DialogDescription>Are you sure you want to continue? This action cannot be undone.</DialogDescription>
 								</DialogHeader>
 								<DialogFooter>
-									<ZButton variant='outline'>Cancel</ZButton>
-									<ZButton>Continue</ZButton>
+									<z.button>Cancel</z.button>
+									<z.button>Continue</z.button>
 								</DialogFooter>
 							</DialogContent>
 						</Dialog>
@@ -93,7 +93,7 @@ export const AllVariants: StoryT = {
 					<div style={rowStyle}>
 						<Dialog>
 							<DialogTrigger asChild>
-								<ZButton variant='destructive'>Delete Account</ZButton>
+								<z.button isPink>Delete Account</z.button>
 							</DialogTrigger>
 							<DialogContent>
 								<DialogHeader>
@@ -104,18 +104,18 @@ export const AllVariants: StoryT = {
 									</DialogDescription>
 								</DialogHeader>
 								<DialogFooter>
-									<ZButton variant='outline'>Cancel</ZButton>
-									<ZButton variant='destructive'>Delete Account</ZButton>
+									<z.button>Cancel</z.button>
+									<z.button isPink>Delete Account</z.button>
 								</DialogFooter>
 							</DialogContent>
 						</Dialog>
 
 						<Dialog>
 							<DialogTrigger asChild>
-								<ZButton variant='outline'>
+								<z.button>
 									<Phosphor.Trash />
 									Delete Item
-								</ZButton>
+								</z.button>
 							</DialogTrigger>
 							<DialogContent>
 								<DialogHeader>
@@ -123,11 +123,11 @@ export const AllVariants: StoryT = {
 									<DialogDescription>Are you sure you want to delete this item? This action cannot be undone.</DialogDescription>
 								</DialogHeader>
 								<DialogFooter>
-									<ZButton variant='outline'>Cancel</ZButton>
-									<ZButton variant='destructive'>
+									<z.button>Cancel</z.button>
+									<z.button isPink>
 										<Phosphor.Trash />
 										Delete
-									</ZButton>
+									</z.button>
 								</DialogFooter>
 							</DialogContent>
 						</Dialog>
@@ -140,10 +140,10 @@ export const AllVariants: StoryT = {
 					<div style={rowStyle}>
 						<Dialog>
 							<DialogTrigger asChild>
-								<ZButton>
+								<z.button>
 									<Phosphor.Plus />
 									Create Project
-								</ZButton>
+								</z.button>
 							</DialogTrigger>
 							<DialogContent>
 								<DialogHeader>
@@ -161,18 +161,18 @@ export const AllVariants: StoryT = {
 									</div>
 								</div>
 								<DialogFooter>
-									<ZButton variant='outline'>Cancel</ZButton>
-									<ZButton>Create Project</ZButton>
+									<z.button>Cancel</z.button>
+									<z.button>Create Project</z.button>
 								</DialogFooter>
 							</DialogContent>
 						</Dialog>
 
 						<Dialog>
 							<DialogTrigger asChild>
-								<ZButton variant='outline'>
+								<z.button>
 									<Phosphor.UserPlus />
 									Invite Member
-								</ZButton>
+								</z.button>
 							</DialogTrigger>
 							<DialogContent>
 								<DialogHeader>
@@ -186,11 +186,11 @@ export const AllVariants: StoryT = {
 									</div>
 								</div>
 								<DialogFooter>
-									<ZButton variant='outline'>Cancel</ZButton>
-									<ZButton>
+									<z.button>Cancel</z.button>
+									<z.button>
 										<Phosphor.PaperPlaneTilt />
 										Send Invite
-									</ZButton>
+									</z.button>
 								</DialogFooter>
 							</DialogContent>
 						</Dialog>
@@ -203,7 +203,7 @@ export const AllVariants: StoryT = {
 					<div style={rowStyle}>
 						<Dialog>
 							<DialogTrigger asChild>
-								<ZButton variant='outline'>No Close Button</ZButton>
+								<z.button>No Close Button</z.button>
 							</DialogTrigger>
 							<DialogContent showCloseButton={false}>
 								<DialogHeader>
@@ -213,7 +213,7 @@ export const AllVariants: StoryT = {
 									</DialogDescription>
 								</DialogHeader>
 								<DialogFooter>
-									<ZButton variant='outline'>Close</ZButton>
+									<z.button>Close</z.button>
 								</DialogFooter>
 							</DialogContent>
 						</Dialog>
@@ -231,7 +231,7 @@ export const Default: StoryT = {
 		return (
 			<Dialog>
 				<DialogTrigger asChild>
-					<ZButton variant='outline'>Open Dialog</ZButton>
+					<z.button>Open Dialog</z.button>
 				</DialogTrigger>
 				<DialogContent>
 					<DialogHeader>
@@ -241,8 +241,8 @@ export const Default: StoryT = {
 						</DialogDescription>
 					</DialogHeader>
 					<DialogFooter>
-						<ZButton variant='outline'>Cancel</ZButton>
-						<ZButton variant='destructive'>Delete</ZButton>
+						<z.button>Cancel</z.button>
+						<z.button isPink>Delete</z.button>
 					</DialogFooter>
 				</DialogContent>
 			</Dialog>
@@ -255,10 +255,10 @@ export const WithForm: StoryT = {
 		return (
 			<Dialog>
 				<DialogTrigger asChild>
-					<ZButton>
+					<z.button>
 						<Phosphor.Plus />
 						Create New
-					</ZButton>
+					</z.button>
 				</DialogTrigger>
 				<DialogContent>
 					<DialogHeader>
@@ -272,8 +272,8 @@ export const WithForm: StoryT = {
 						</div>
 					</div>
 					<DialogFooter>
-						<ZButton variant='outline'>Cancel</ZButton>
-						<ZButton>Create</ZButton>
+						<z.button>Cancel</z.button>
+						<z.button>Create</z.button>
 					</DialogFooter>
 				</DialogContent>
 			</Dialog>
@@ -286,10 +286,10 @@ export const Destructive: StoryT = {
 		return (
 			<Dialog>
 				<DialogTrigger asChild>
-					<ZButton variant='destructive'>
+					<z.button isPink>
 						<Phosphor.Trash />
 						Delete
-					</ZButton>
+					</z.button>
 				</DialogTrigger>
 				<DialogContent>
 					<DialogHeader>
@@ -297,8 +297,8 @@ export const Destructive: StoryT = {
 						<DialogDescription>Are you sure you want to delete this item? This action cannot be undone.</DialogDescription>
 					</DialogHeader>
 					<DialogFooter>
-						<ZButton variant='outline'>Cancel</ZButton>
-						<ZButton variant='destructive'>Delete</ZButton>
+						<z.button>Cancel</z.button>
+						<z.button isPink>Delete</z.button>
 					</DialogFooter>
 				</DialogContent>
 			</Dialog>
@@ -311,7 +311,7 @@ export const NoCloseButton: StoryT = {
 		return (
 			<Dialog>
 				<DialogTrigger asChild>
-					<ZButton variant='outline'>No Close Button</ZButton>
+					<z.button>No Close Button</z.button>
 				</DialogTrigger>
 				<DialogContent showCloseButton={false}>
 					<DialogHeader>
@@ -319,10 +319,11 @@ export const NoCloseButton: StoryT = {
 						<DialogDescription>This dialog has no close button in the corner.</DialogDescription>
 					</DialogHeader>
 					<DialogFooter>
-						<ZButton>Close</ZButton>
+						<z.button>Close</z.button>
 					</DialogFooter>
 				</DialogContent>
 			</Dialog>
 		)
 	}
 }
+

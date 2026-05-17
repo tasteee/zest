@@ -1,8 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { ZButton } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
+import { z } from '@/components/ui'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Card } from '@/components/ui/card'
@@ -74,7 +73,9 @@ export default function CardDocsPage() {
 			<div className='space-y-4'>
 				<div className='flex items-center gap-3'>
 					<h1 className='text-4xl font-bold tracking-tight text-foreground'>ZCard</h1>
-					<Badge kind='ghost' color='white'>Component</Badge>
+					<z.badge isGhost isWhite>
+						Component
+					</z.badge>
 				</div>
 				<p className='text-xl text-muted-foreground max-w-2xl leading-relaxed'>
 					A container component for grouping related content and actions. Cards provide a flexible foundation for building
@@ -88,7 +89,7 @@ export default function CardDocsPage() {
 
 export function CardDemo() {
   return (
-    <ZCard className="w-[350px]">
+    <ZCard className="w-87.5">
       <ZCard.Header>
         <ZCard.Title>Card Title</ZCard.Title>
         <ZCard.Description>Card Description</ZCard.Description>
@@ -103,7 +104,7 @@ export function CardDemo() {
   )
 }`}
 			>
-				<Card className='w-[350px]'>
+				<Card className='w-87.5'>
 					<Card.Header>
 						<Card.Title>Card Title</Card.Title>
 						<Card.Description>Card Description</Card.Description>
@@ -144,9 +145,9 @@ export function CardDemo() {
 
 				{/* Form Card */}
 				<ComponentPreview
-					code={`import { ZCard, ZButton, ZInput, ZLabel } from '@tasteee/zest'
+					code={`import { ZCard, z, ZInput, ZLabel } from '@tasteee/zest'
 
-<ZCard className="w-[350px]">
+<ZCard className="w-87.5">
   <ZCard.Header>
     <ZCard.Title>Create project</ZCard.Title>
     <ZCard.Description>Deploy your new project in one-click.</ZCard.Description>
@@ -162,12 +163,12 @@ export function CardDemo() {
     </form>
   </ZCard.Content>
   <ZCard.Footer className="flex justify-between">
-    <ZButton variant="outline">Cancel</ZButton>
-    <ZButton>Deploy</ZButton>
+    <z.button>Cancel</z.button>
+    <z.button>Deploy</z.button>
   </ZCard.Footer>
 </ZCard>`}
 				>
-					<Card className='w-[350px]'>
+					<Card className='w-87.5'>
 						<Card.Header>
 							<Card.Title>Create project</Card.Title>
 							<Card.Description>Deploy your new project in one-click.</Card.Description>
@@ -183,8 +184,8 @@ export function CardDemo() {
 							</form>
 						</Card.Content>
 						<Card.Footer className='flex justify-between'>
-							<ZButton variant='outline'>Cancel</ZButton>
-							<ZButton>Deploy</ZButton>
+							<z.button>Cancel</z.button>
+							<z.button>Deploy</z.button>
 						</Card.Footer>
 					</Card>
 				</ComponentPreview>
@@ -194,7 +195,7 @@ export function CardDemo() {
 					code={`import { ZCard, ZSwitch } from '@tasteee/zest'
 import { Bell, CreditCard } from 'lucide-react'
 
-<ZCard className="w-[380px]">
+<ZCard className="w-95">
   <ZCard.Header>
     <ZCard.Title>Notifications</ZCard.Title>
     <ZCard.Description>Choose what you want to be notified about.</ZCard.Description>
@@ -219,7 +220,7 @@ import { Bell, CreditCard } from 'lucide-react'
   </ZCard.Content>
 </ZCard>`}
 				>
-					<Card className='w-[380px]'>
+					<Card className='w-95'>
 						<Card.Header>
 							<Card.Title>Notifications</Card.Title>
 							<Card.Description>Choose what you want to be notified about.</Card.Description>
@@ -250,7 +251,7 @@ import { Bell, CreditCard } from 'lucide-react'
 					code={`import { ZCard } from '@tasteee/zest'
 import { Check } from 'lucide-react'
 
-<ZCard className="w-[300px]">
+<ZCard className="w-75">
   <ZCard.Content className="pt-6">
     <div className="flex items-center space-x-4">
       <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
@@ -264,7 +265,7 @@ import { Check } from 'lucide-react'
   </ZCard.Content>
 </ZCard>`}
 				>
-					<Card className='w-[300px]'>
+					<Card className='w-75'>
 						<Card.Content className='pt-6'>
 							<div className='flex items-center space-x-4'>
 								<div className='flex h-12 w-12 items-center justify-center rounded-full bg-primary/10'>

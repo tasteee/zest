@@ -10,7 +10,7 @@ import {
 	AlertDialogTitle,
 	AlertDialogTrigger
 } from './alert-dialog'
-import { ZButton } from './button'
+import { z } from '@/components/ui'
 
 const meta: Meta<typeof AlertDialog> = {
 	title: 'UI/AlertDialog',
@@ -30,7 +30,7 @@ export const Default: StoryT = {
 		return (
 			<AlertDialog>
 				<AlertDialogTrigger asChild>
-					<ZButton variant='destructive'>Delete Account</ZButton>
+					<z.button isPink>Delete Account</z.button>
 				</AlertDialogTrigger>
 				<AlertDialogContent>
 					<AlertDialogHeader>
@@ -48,3 +48,4 @@ export const Default: StoryT = {
 		)
 	}
 }
+

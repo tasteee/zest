@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/nextjs'
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from './sheet'
-import { ZButton } from './button'
+import { z } from '@/components/ui'
 
 const meta: Meta<typeof Sheet> = {
 	title: 'UI/Sheet',
@@ -20,7 +20,7 @@ export const Right: StoryT = {
 		return (
 			<Sheet>
 				<SheetTrigger asChild>
-					<ZButton variant='outline'>Open Sheet</ZButton>
+					<z.button>Open Sheet</z.button>
 				</SheetTrigger>
 				<SheetContent side='right'>
 					<SheetHeader>
@@ -38,7 +38,7 @@ export const Left: StoryT = {
 		return (
 			<Sheet>
 				<SheetTrigger asChild>
-					<ZButton variant='outline'>Open Left</ZButton>
+					<z.button>Open Left</z.button>
 				</SheetTrigger>
 				<SheetContent side='left'>
 					<SheetHeader>
@@ -50,3 +50,4 @@ export const Left: StoryT = {
 		)
 	}
 }
+

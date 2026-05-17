@@ -2,8 +2,7 @@
 
 import { useState } from 'react'
 import { Link } from '@/components/ui/link'
-import { ZButton } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
+import { z } from '@/components/ui'
 import { ComponentPreview } from '@/components/docs/component-preview'
 import { PropsTable } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
@@ -74,8 +73,10 @@ export default function ButtonDocsPage() {
 			{/* Header */}
 			<div className='space-y-4'>
 				<div className='flex items-center gap-3'>
-					<h1 className='text-4xl font-bold tracking-tight text-foreground'>ZButton</h1>
-					<Badge kind='secondary'>Component</Badge>
+					<h1 className='text-4xl font-bold tracking-tight text-foreground'>z.button</h1>
+					<z.badge isGhost isWhite>
+						Component
+					</z.badge>
 				</div>
 				<p className='text-xl text-muted-foreground max-w-2xl leading-relaxed'>
 					Displays a button or a component that looks like a button. Supports multiple kinds, sizes, and states for different use
@@ -85,20 +86,20 @@ export default function ButtonDocsPage() {
 
 			{/* Quick Preview */}
 			<ComponentPreview
-				code={`import { ZButton } from '@tasteee/zest'
+				code={`import { z.button } from '@tasteee/zest'
 
 export function ButtonDemo() {
-  return <ZButton>Click me</ZButton>
+  return <z.button>Click me</z.button>
 }`}
 			>
-				<ZButton>Click me</ZButton>
+				<z.button>Click me</z.button>
 			</ComponentPreview>
 
 			{/* Usage */}
 			<section className='space-y-6'>
 				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>Usage</h2>
-				<CodeBlock code={`import { ZButton } from '@tasteee/zest'`} language='tsx' />
-				<CodeBlock code={`<ZButton kind="outlined">Click me</ZButton>`} language='tsx' />
+				<CodeBlock code={`import { z.button } from '@tasteee/zest'`} language='tsx' />
+				<CodeBlock code={`<z.button>Click me</z.button>`} language='tsx' />
 			</section>
 
 			{/* Examples */}
@@ -107,175 +108,181 @@ export function ButtonDemo() {
 
 				{/* kinds */}
 				<ComponentPreview
-					code={`import { ZButton } from '@tasteee/zest'
+					code={`import { z.button } from '@tasteee/zest'
 
 <div className="flex flex-wrap gap-4">
-  <ZButton kind="outlined">Outlined</ZButton>
-  <ZButton kind="solid">Solid</ZButton>
-  <ZButton kind="ghost">Ghost</ZButton>
+  <z.button isOutlined>Outlined</z.button>
+  <z.button>Solid</z.button>
+  <z.button>Ghost</z.button>
 </div>`}
 				>
 					<div className='flex flex-wrap gap-4'>
-						<ZButton kind='outlined'>Outlined</ZButton>
-						<ZButton kind='solid'>Solid</ZButton>
-						<ZButton kind='ghost'>Ghost</ZButton>
+						<z.button isOutlined isWhite>
+							Outlined
+						</z.button>
+						<z.button isSolid isWhite>
+							Solid
+						</z.button>
+						<z.button isGhost isWhite>
+							Ghost
+						</z.button>
 					</div>
 				</ComponentPreview>
 
 				{/* Colors */}
 				<ComponentPreview
-					code={`import { ZButton } from '@tasteee/zest'
+					code={`import { z.button } from '@tasteee/zest'
 
 {/* Green */}
-<ZButton color="green" kind="outlined">Green Outlined</ZButton>
-<ZButton color="green" kind="solid">Green Solid</ZButton>
-<ZButton color="green" kind="ghost">Green Ghost</ZButton>
+<z.button isGreen isOutlined>Green Outlined</z.button>
+<z.button isGreen isSolid>Green Solid</z.button>
+<z.button isGreen isGhost>Green Ghost</z.button>
 
 {/* Purple */}
-<ZButton color="purple" kind="outlined">Purple Outlined</ZButton>
-<ZButton color="purple" kind="solid">Purple Solid</ZButton>
-<ZButton color="purple" kind="ghost">Purple Ghost</ZButton>
+<z.button isPurple isOutlined>Purple Outlined</z.button>
+<z.button isPurple isSolid>Purple Solid</z.button>
+<z.button isPurple isGhost>Purple Ghost</z.button>
 
 {/* Pink */}
-<ZButton color="pink" kind="outlined">Pink Outlined</ZButton>
-<ZButton color="pink" kind="solid">Pink Solid</ZButton>
-<ZButton color="pink" kind="ghost">Pink Ghost</ZButton>
+<z.button isPink isOutlined>Pink Outlined</z.button>
+<z.button isPink isSolid>Pink Solid</z.button>
+<z.button isPink isGhost>Pink Ghost</z.button>
 
 {/* Orange */}
-<ZButton color="orange" kind="outlined">Orange Outlined</ZButton>
-<ZButton color="orange" kind="solid">Orange Solid</ZButton>
-<ZButton color="orange" kind="ghost">Orange Ghost</ZButton>
+<z.button isOrange isOutlined>Orange Outlined</z.button>
+<z.button isOrange isSolid>Orange Solid</z.button>
+<z.button isOrange isGhost>Orange Ghost</z.button>
 
 {/* White */}
-<ZButton color="white" kind="outlined">White Outlined</ZButton>
-<ZButton color="white" kind="solid">White Solid</ZButton>
-<ZButton color="white" kind="ghost">White Ghost</ZButton>`}
+<z.button isWhite isOutlined>White Outlined</z.button>
+<z.button isWhite isSolid>White Solid</z.button>
+<z.button isWhite isGhost>White Ghost</z.button>`}
 				>
 					<div className='flex flex-col gap-6'>
 						<div className='flex flex-wrap items-center gap-3'>
-							<ZButton color='green' kind='outlined'>
+							<z.button isGreen isOutlined>
 								Green Outlined
-							</ZButton>
-							<ZButton color='green' kind='solid'>
+							</z.button>
+							<z.button isGreen isSolid>
 								Green Solid
-							</ZButton>
-							<ZButton color='green' kind='ghost'>
+							</z.button>
+							<z.button isGreen isGhost>
 								Green Ghost
-							</ZButton>
+							</z.button>
 						</div>
 						<div className='flex flex-wrap items-center gap-3'>
-							<ZButton color='purple' kind='outlined'>
+							<z.button isPurple isOutlined>
 								Purple Outlined
-							</ZButton>
-							<ZButton color='purple' kind='solid'>
+							</z.button>
+							<z.button isPurple isSolid>
 								Purple Solid
-							</ZButton>
-							<ZButton color='purple' kind='ghost'>
+							</z.button>
+							<z.button isPurple isGhost>
 								Purple Ghost
-							</ZButton>
+							</z.button>
 						</div>
 						<div className='flex flex-wrap items-center gap-3'>
-							<ZButton color='pink' kind='outlined'>
+							<z.button isPink isOutlined>
 								Pink Outlined
-							</ZButton>
-							<ZButton color='pink' kind='solid'>
+							</z.button>
+							<z.button isPink isSolid>
 								Pink Solid
-							</ZButton>
-							<ZButton color='pink' kind='ghost'>
+							</z.button>
+							<z.button isPink isGhost>
 								Pink Ghost
-							</ZButton>
+							</z.button>
 						</div>
 						<div className='flex flex-wrap items-center gap-3'>
-							<ZButton color='orange' kind='outlined'>
+							<z.button isOrange isOutlined>
 								Orange Outlined
-							</ZButton>
-							<ZButton color='orange' kind='solid'>
+							</z.button>
+							<z.button isOrange isSolid>
 								Orange Solid
-							</ZButton>
-							<ZButton color='orange' kind='ghost'>
+							</z.button>
+							<z.button isOrange isGhost>
 								Orange Ghost
-							</ZButton>
+							</z.button>
 						</div>
 						<div className='flex flex-wrap items-center gap-3'>
-							<ZButton color='white' kind='outlined'>
+							<z.button isWhite isOutlined>
 								White Outlined
-							</ZButton>
-							<ZButton color='white' kind='solid'>
+							</z.button>
+							<z.button isWhite isSolid>
 								White Solid
-							</ZButton>
-							<ZButton color='white' kind='ghost'>
+							</z.button>
+							<z.button isWhite isGhost>
 								White Ghost
-							</ZButton>
+							</z.button>
 						</div>
 					</div>
 				</ComponentPreview>
 
 				{/* Sizes */}
 				<ComponentPreview
-					code={`import { ZButton } from '@tasteee/zest'
+					code={`import { z.button } from '@tasteee/zest'
 import { Plus } from 'lucide-react'
 
 <div className="flex items-center gap-4">
-  <ZButton size="sm">Small</ZButton>
-  <ZButton size="md">Default</ZButton>
-  <ZButton size="lg">Large</ZButton>
-  <ZButton size="icon">
+  <z.button isSmall>Small</z.button>
+  <z.button isMedium>Default</z.button>
+  <z.button isLarge>Large</z.button>
+  <z.button isIcon>
     <Plus className="h-4 w-4" />
-  </ZButton>
+  </z.button>
 </div>`}
 				>
 					<div className='flex items-center gap-4'>
-						<ZButton size='sm'>Small</ZButton>
-						<ZButton size='md'>Default</ZButton>
-						<ZButton size='lg'>Large</ZButton>
-						<ZButton size='icon'>
+						<z.button isSmall>Small</z.button>
+						<z.button isMedium>Default</z.button>
+						<z.button isLarge>Large</z.button>
+						<z.button isIcon>
 							<Plus className='h-4 w-4' />
-						</ZButton>
+						</z.button>
 					</div>
 				</ComponentPreview>
 
 				{/* With Icons */}
 				<ComponentPreview
-					code={`import { ZButton } from '@tasteee/zest'
+					code={`import { z.button } from '@tasteee/zest'
 import { Mail, Download, ExternalLink } from 'lucide-react'
 
 <div className="flex flex-wrap gap-4">
-  <ZButton>
+  <z.button>
     <Mail className="mr-2 h-4 w-4" />
     Login with Email
-  </ZButton>
-  <ZButton kind="outline">
+  </z.button>
+  <z.button>
     Download
     <Download className="ml-2 h-4 w-4" />
-  </ZButton>
-  <ZButton kind="secondary">
+  </z.button>
+  <z.button>
     <ExternalLink className="mr-2 h-4 w-4" />
     Open Link
-  </ZButton>
+  </z.button>
 </div>`}
 				>
 					<div className='flex flex-wrap gap-4'>
-						<ZButton>
+						<z.button>
 							<Mail className='mr-2 h-4 w-4' />
 							Login with Email
-						</ZButton>
-						<ZButton kind='outlined'>
+						</z.button>
+						<z.button>
 							Download
 							<Download className='ml-2 h-4 w-4' />
-						</ZButton>
-						<ZButton kind='ghost'>
+						</z.button>
+						<z.button>
 							<ExternalLink className='mr-2 h-4 w-4' />
 							Open Link
-						</ZButton>
+						</z.button>
 					</div>
 				</ComponentPreview>
 
 				{/* Loading State */}
 				<ComponentPreview
-					code={`import { ZButton } from '@tasteee/zest'
+					code={`import { z.button } from '@tasteee/zest'
 import { Loader2 } from 'lucide-react'
 
-<ZButton disabled={isLoading} onClick={handleLoadingClick}>
+<z.button disabled={isLoading} onClick={handleLoadingClick}>
   {isLoading ? (
     <>
       <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -284,9 +291,9 @@ import { Loader2 } from 'lucide-react'
   ) : (
     "Click me"
   )}
-</ZButton>`}
+</z.button>`}
 				>
-					<ZButton isDisabled={isLoading} onClick={handleLoadingClick}>
+					<z.button isDisabled={isLoading} onClick={handleLoadingClick}>
 						{isLoading ? (
 							<>
 								<Loader2 className='mr-2 h-4 w-4 animate-spin' />
@@ -295,84 +302,80 @@ import { Loader2 } from 'lucide-react'
 						) : (
 							'Click me'
 						)}
-					</ZButton>
+					</z.button>
 				</ComponentPreview>
 
 				{/* Disabled */}
 				<ComponentPreview
-					code={`import { ZButton } from '@tasteee/zest'
+					code={`import { z.button } from '@tasteee/zest'
 
 <div className="flex gap-4">
-  <ZButton disabled>Disabled</ZButton>
-  <ZButton kind="outline" disabled>Disabled Outline</ZButton>
-  <ZButton kind="secondary" disabled>Disabled Secondary</ZButton>
+  <z.button disabled>Disabled</z.button>
+  <z.button disabled>Disabled Outline</z.button>
+  <z.button disabled>Disabled Secondary</z.button>
 </div>`}
 				>
 					<div className='flex gap-4'>
-						<ZButton isDisabled>Disabled</ZButton>
-						<ZButton kind='outlined' isDisabled>
-							Disabled Outline
-						</ZButton>
-						<ZButton kind='ghost' isDisabled>
-							Disabled Secondary
-						</ZButton>
+						<z.button isDisabled>Disabled</z.button>
+						<z.button isDisabled>Disabled Outline</z.button>
+						<z.button isDisabled>Disabled Secondary</z.button>
 					</div>
 				</ComponentPreview>
 
 				{/* As Child */}
 				<ComponentPreview
-					code={`import { ZButton } from '@tasteee/zest'
+					code={`import { z.button } from '@tasteee/zest'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 
-<ZButton asChild>
+<z.button asChild>
   <Link href="/docs">
     Go to Docs
     <ArrowRight className="ml-2 h-4 w-4" />
   </Link>
-</ZButton>`}
+</z.button>`}
 				>
-					<ZButton>
+					<z.button>
 						<Link href='/docs'>
 							Go to Docs
 							<ArrowRight className='ml-2 h-4 w-4' />
 						</Link>
-					</ZButton>
+					</z.button>
 				</ComponentPreview>
 
 				{/* Icon Buttons */}
 				<ComponentPreview
-					code={`import { ZButton } from '@tasteee/zest'
+					code={`import { z.button } from '@tasteee/zest'
 import { Check, X, Plus } from 'lucide-react'
 
 <div className="flex gap-2">
-  <ZButton size="icon" kind="outline">
+  <z.button isIcon>
     <Check className="h-4 w-4" />
-  </ZButton>
-  <ZButton size="icon" kind="outline">
+  </z.button>
+  <z.button isIcon>
     <X className="h-4 w-4" />
-  </ZButton>
-  <ZButton size="icon">
+  </z.button>
+  <z.button isIcon>
     <Plus className="h-4 w-4" />
-  </ZButton>
-  <ZButton size="icon" kind="destructive">
+  </z.button>
+  <z.button isIcon>
     <X className="h-4 w-4" />
-  </ZButton>
+  </z.button>
 </div>`}
 				>
 					<div className='flex gap-2'>
-						<ZButton size='icon' kind='outlined'>
+						<z.button isIcon>
 							<Check className='h-4 w-4' />
-						</ZButton>
-						<ZButton size='icon' kind='outlined'>
+						</z.button>
+						<z.button isIcon>
 							<X className='h-4 w-4' />
-						</ZButton>
-						<ZButton size='icon'>
+						</z.button>
+						<z.button isIcon>
 							<Plus className='h-4 w-4' />
-						</ZButton>
-						<ZButton size='icon' kind='ghost'>
+						</z.button>
+						<z.button isIcon>
 							<X className='h-4 w-4' />
-						</ZButton>
+						</z.button>
 					</div>
 				</ComponentPreview>
 			</section>
@@ -420,7 +423,7 @@ import { Check, X, Plus } from 'lucide-react'
 					{[
 						{ name: 'ZDropdownMenu', href: '/docs/components/dropdown-menu', description: 'Menus triggered by buttons' },
 						{ name: 'ZDialog', href: '/docs/components/dialog', description: 'Modal dialogs triggered by buttons' },
-						{ name: 'ZTooltip', href: '/docs/components/tooltip', description: 'Tooltips for button hints' }
+						{ name: 'z.tooltip', href: '/docs/components/tooltip', description: 'Tooltips for button hints' }
 					].map((component) => (
 						<Link key={component.name} href={component.href}>
 							<Card className='h-full transition-colors hover:border-primary/50'>

@@ -1,7 +1,7 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from './accordion'
 import { Alert, AlertDescription, AlertTitle } from './alert'
 import { Avatar, AvatarFallback, AvatarImage } from './avatar'
-import { Badge } from './badge'
+import { badge } from './badge'
 import {
 	Breadcrumb,
 	BreadcrumbEllipsis,
@@ -61,7 +61,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from './tabs'
 import { Textarea } from './textarea'
 import { Toast, ToastAction, ToastClose, ToastDescription, ToastProvider, ToastTitle, ToastViewport } from './toast'
 import { ToggleGroup, ToggleGroupItem } from './toggle-group'
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './tooltip'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger, ZTooltip as ZTooltipRoot } from './tooltip'
 import { Spinner } from './spinner'
 import { ZBox } from './z-box'
 import { ZText } from './z-text'
@@ -79,8 +79,6 @@ export const ZAvatar = Avatar
 export const ZAvatarImage = AvatarImage
 export const ZAvatarFallback = AvatarFallback
 
-export const ZBadge = Badge
-
 export const ZBreadcrumbs = Breadcrumb
 export const ZBreadcrumbList = BreadcrumbList
 export const ZBreadcrumbItem = BreadcrumbItem
@@ -89,7 +87,6 @@ export const ZBreadcrumbPage = BreadcrumbPage
 export const ZBreadcrumbSeparator = BreadcrumbSeparator
 export const ZBreadcrumbEllipsis = BreadcrumbEllipsis
 
-export const ZButton = ZButton
 export const ZButtonGroup = ButtonGroup
 export const ZButtonGroupText = ButtonGroupText
 export const ZButtonGroupSeparator = ButtonGroupSeparator
@@ -186,7 +183,8 @@ export const ZToastAction = ToastAction
 export const ZToggleGroup = ToggleGroup
 export const ZToggleGroupItem = ToggleGroupItem
 
-export const ZTooltip = Tooltip
+export const ZTooltip = ZTooltipRoot
+export const ZTooltipRootPrimitive = Tooltip
 export const ZTooltipProvider = TooltipProvider
 export const ZTooltipTrigger = TooltipTrigger
 export const ZTooltipContent = TooltipContent
@@ -194,3 +192,108 @@ export const ZTooltipContent = TooltipContent
 export const ZLoading = Spinner
 
 export { ZBox, ZText }
+
+export const z = {
+	button: ZButton,
+	accordion: ZAccordion,
+	alert: ZAlert,
+	avatar: ZAvatar,
+	badge,
+	breadcrumbs: ZBreadcrumbs,
+	buttonGroup: ZButtonGroup,
+	buttonGroupText: ZButtonGroupText,
+	buttonGroupSeparator: ZButtonGroupSeparator,
+	card: ZCard,
+	cardHeader: ZCardHeader,
+	cardTitle: ZCardTitle,
+	cardDescription: ZCardDescription,
+	cardAction: ZCardAction,
+	cardContent: ZCardContent,
+	cardFooter: ZCardFooter,
+	checkbox: ZCheckbox,
+	collapsible: ZCollapsible,
+	collapsibleTrigger: ZCollapsibleTrigger,
+	collapsibleContent: ZCollapsibleContent,
+	command: ZCommand,
+	commandDialog: ZCommandDialog,
+	commandInput: ZCommandInput,
+	commandList: ZCommandList,
+	commandEmpty: ZCommandEmpty,
+	commandGroup: ZCommandGroup,
+	commandItem: ZCommandItem,
+	commandShortcut: ZCommandShortcut,
+	commandSeparator: ZCommandSeparator,
+	dialog: ZDialog,
+	dialogTrigger: ZDialogTrigger,
+	dialogContent: ZDialogContent,
+	dialogHeader: ZDialogHeader,
+	dialogTitle: ZDialogTitle,
+	dialogDescription: ZDialogDescription,
+	dialogFooter: ZDialogFooter,
+	drawer: ZDrawer,
+	drawerTrigger: ZDrawerTrigger,
+	drawerContent: ZDrawerContent,
+	drawerHeader: ZDrawerHeader,
+	drawerTitle: ZDrawerTitle,
+	drawerDescription: ZDrawerDescription,
+	drawerFooter: ZDrawerFooter,
+	drawerClose: ZDrawerClose,
+	emptyState: ZEmptyState,
+	emptyStateHeader: ZEmptyStateHeader,
+	emptyStateTitle: ZEmptyStateTitle,
+	emptyStateDescription: ZEmptyStateDescription,
+	emptyStateContent: ZEmptyStateContent,
+	emptyStateMedia: ZEmptyStateMedia,
+
+	input: ZInput,
+	chip: ZChip,
+	codeBlock: ZCodeBlock,
+	codeblock: ZCodeBlock,
+	colorPicker: ZColorPicker,
+	combobox: ZCombobox,
+	link: ZLink,
+
+	menu: ZMenu,
+	navMenu: ZNavMenu,
+	pagination: ZPagination,
+	popover: ZPopover,
+	popoverTrigger: ZPopoverTrigger,
+	popoverContent: ZPopoverContent,
+
+	popoverAnchor: ZPopoverAnchor,
+	progress: ZProgress,
+	radioGroup: ZRadioGroup,
+	radioGroupItem: ZRadioGroupItem,
+	select: ZSelect,
+	scrollArea: ZScrollArea,
+	scrollBar: ZScrollBar,
+
+	sidebar: ZSidebar,
+
+	skeleton: ZSkeleton,
+	slider: ZSlider,
+	switch: ZSwitch,
+	tabs: ZTabs,
+	tabsList: ZTabsList,
+	tabsTrigger: ZTabsTrigger,
+	tabsContent: ZTabsContent,
+	textarea: ZTextarea,
+	toast: ZToast,
+	toastProvider: ZToastProvider,
+	toastViewport: ZToastViewport,
+
+	toastTitle: ZToastTitle,
+	toastDescription: ZToastDescription,
+	toastClose: ZToastClose,
+	toastAction: ZToastAction,
+	toggleGroup: ZToggleGroup,
+	toggleGroupItem: ZToggleGroupItem,
+	tooltip: ZTooltip,
+	tooltipRoot: ZTooltipRootPrimitive,
+	tooltipProvider: ZTooltipProvider,
+	tooltipTrigger: ZTooltipTrigger,
+	tooltipContent: ZTooltipContent,
+	loading: ZLoading,
+	box: ZBox,
+	text: ZText
+}

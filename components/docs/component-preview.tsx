@@ -8,6 +8,8 @@ import { Tabs } from "@/components/ui/tabs";
 interface ComponentPreviewProps {
   children: React.ReactNode;
   code: string;
+  title?: string;
+  description?: string;
   className?: string;
   align?: "start" | "center" | "end";
 }
@@ -15,21 +17,29 @@ interface ComponentPreviewProps {
 export function ComponentPreview({
   children,
   code,
+  title,
+  description,
   className,
   align = "center",
 }: ComponentPreviewProps) {
   return (
     <Tabs defaultValue="preview" className="w-full">
-      <Tabs.List className="w-auto justify-start bg-muted rounded-lg p-1 h-auto">
+      {(title || description) && (
+        <div className="mb-4">
+          {title && <h3 className="text-lg font-semibold text-foreground">{title}</h3>}
+          {description && <p className="mt-1 text-sm text-muted-foreground">{description}</p>}
+        </div>
+      )}
+      <Tabs.List className="w-auto justify-start p-1 h-auto">
         <Tabs.Trigger
           value="preview"
-          className="rounded-md data-[state=active]:bg-card data-[state=active]:text-foreground px-4 py-1.5 text-sm"
+          className="px-4 py-1.5 text-sm"
         >
           Preview
         </Tabs.Trigger>
         <Tabs.Trigger
           value="code"
-          className="rounded-md data-[state=active]:bg-card data-[state=active]:text-foreground px-4 py-1.5 text-sm"
+          className="px-4 py-1.5 text-sm"
         >
           Code
         </Tabs.Trigger>

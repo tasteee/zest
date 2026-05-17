@@ -21,8 +21,6 @@ const preview: Preview = {
         "div",
         {
           style: {
-            background: "var(--background)",
-            minHeight: "100vh",
             padding: "2rem",
           },
         },

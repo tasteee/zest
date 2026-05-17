@@ -30,13 +30,13 @@ If an example conflicts with a rule, follow the rule.
 - No implicit arrow returns. Always use braces and explicit `return`.
 - No `interface`. Use `type` only.
 - No `enum`. Use `const` objects with `as const`.
-- No destructuring (objects, arrays, imports, params).
+- No destructuring props or function parameters.
 - No `else` or `else if`. Use early returns.
 - No inline logic inside `if` conditions. Extract to named variables first.
 - No abbreviations in variable names.
 - No `try/catch` for promise flow. Use `await-to-js`.
 - No classes or OOP.
-- No Tailwind utility classes.
+- No Tailwind utility classes. Convert all tailwind classes to CSS.
 - No hardcoded style values. Use design-system CSS variables.
 
 ---
@@ -111,10 +111,7 @@ const buttonLabel = isCheckoutEnabled ? 'Checkout' : 'Add items to cart'
 Do not destructure:
 
 - function parameters
-- local variables
-- arrays
-- object properties
-- imports
+- React component Props
 
 Always access values from their source reference.
 

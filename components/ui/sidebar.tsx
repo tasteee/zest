@@ -7,7 +7,7 @@ import { PanelLeftIcon } from 'lucide-react'
 
 import { useIsMobile } from '@/hooks/use-mobile'
 import { cn } from '@/lib/utils'
-import { ZButton } from '@/components/ui/button'
+import { z } from '@/components/ui'
 import { Input } from '@/components/ui/input'
 import { Separator } from '@/components/ui/separator'
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from '@/components/ui/sheet'
@@ -233,15 +233,15 @@ function Sidebar({
 	)
 }
 
-function SidebarTrigger({ className, onClick, ...props }: React.ComponentProps<typeof ZButton>) {
+function SidebarTrigger({ className, onClick, ...props }: Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'color'>) {
 	const { toggleSidebar } = useSidebar()
 
 	return (
-		<ZButton
+		<z.button
 			data-sidebar='trigger'
 			data-slot='sidebar-trigger'
-			variant='ghost'
-			size='icon'
+			isIcon
+			isWhite
 			className={cn('size-7', className)}
 			onClick={(event) => {
 				onClick?.(event)
@@ -251,7 +251,7 @@ function SidebarTrigger({ className, onClick, ...props }: React.ComponentProps<t
 		>
 			<PanelLeftIcon />
 			<span className='sr-only'>Toggle Sidebar</span>
-		</ZButton>
+		</z.button>
 	)
 }
 

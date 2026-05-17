@@ -2,7 +2,6 @@ import * as React from 'react'
 import { ChevronLeftIcon, ChevronRightIcon, MoreHorizontalIcon } from 'lucide-react'
 
 import { cn } from '@/lib/utils'
-import { ZButton, buttonVariants } from '@/components/ui/button'
 
 function Pagination({ className, ...props }: React.ComponentProps<'nav'>) {
 	return (
@@ -26,20 +25,21 @@ function PaginationItem({ ...props }: React.ComponentProps<'li'>) {
 
 type PaginationLinkProps = {
 	isActive?: boolean
-} & Pick<React.ComponentProps<typeof ZButton>, 'size'> &
-	React.ComponentProps<'a'>
+	isIcon?: boolean
+	isMedium?: boolean
+} & React.ComponentProps<'a'>
 
-function PaginationLink({ className, isActive, size = 'icon', ...props }: PaginationLinkProps) {
+function PaginationLink({ className, isActive, isIcon = true, isMedium, ...props }: PaginationLinkProps) {
 	return (
 		<a
 			aria-current={isActive ? 'page' : undefined}
 			data-slot='pagination-link'
 			data-active={isActive}
 			className={cn(
-				buttonVariants({
-					variant: isActive ? 'outline' : 'ghost',
-					size
-				}),
+				'zButton isWhite',
+				isIcon && 'isIcon',
+				isMedium && 'isMedium',
+				isActive && 'isSolid',
 				className
 			)}
 			{...props}
@@ -51,7 +51,8 @@ function PaginationPrevious({ className, ...props }: React.ComponentProps<typeof
 	return (
 		<PaginationLink
 			aria-label='Go to previous page'
-			size='default'
+			isIcon={false}
+			isMedium
 			className={cn('gap-1 px-2.5 sm:pl-2.5', className)}
 			{...props}
 		>
@@ -65,7 +66,8 @@ function PaginationNext({ className, ...props }: React.ComponentProps<typeof Pag
 	return (
 		<PaginationLink
 			aria-label='Go to next page'
-			size='default'
+			isIcon={false}
+			isMedium
 			className={cn('gap-1 px-2.5 sm:pr-2.5', className)}
 			{...props}
 		>

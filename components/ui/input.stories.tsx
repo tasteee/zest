@@ -280,3 +280,77 @@ export const WithLabel: StoryT = {
     );
   },
 };
+
+export const LabeledInputs: StoryT = {
+  parameters: {
+    layout: "centered",
+  },
+  render: () => {
+    return (
+      <div style={{ ...gridWrapperStyle, width: 360 }}>
+        <div>
+          <span style={sectionLabelStyle}>Labeled Inputs</span>
+          <div style={rowStyle}>
+            <div style={fieldStyle}>
+              <Label htmlFor="labeled-name" style={labelStyle}>
+                Name
+              </Label>
+              <Input
+                id="labeled-name"
+                type="text"
+                placeholder="Jane Zest"
+                focusColor="green"
+              />
+            </div>
+            <div style={fieldStyle}>
+              <Label htmlFor="labeled-email" style={labelStyle}>
+                Email
+              </Label>
+              <Input
+                id="labeled-email"
+                type="email"
+                placeholder="jane@example.com"
+                focusColor="pink"
+              />
+            </div>
+            <div style={fieldStyle}>
+              <Label htmlFor="labeled-password" style={labelStyle}>
+                Password
+              </Label>
+              <Input
+                id="labeled-password"
+                type="password"
+                placeholder="Enter password"
+                focusColor="purple"
+              />
+            </div>
+            <div style={fieldStyle}>
+              <Label htmlFor="labeled-quantity" style={labelStyle}>
+                Quantity
+              </Label>
+              <Input
+                id="labeled-quantity"
+                type="number"
+                min={0}
+                step={1}
+                defaultValue={3}
+                focusColor="orange"
+              />
+            </div>
+            <div style={fieldStyle}>
+              <Label htmlFor="labeled-search" style={labelStyle}>
+                Search
+              </Label>
+              <Input
+                id="labeled-search"
+                type="search"
+                placeholder="Find components..."
+                focusColor="green"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  },
+};

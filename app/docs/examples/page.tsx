@@ -25,8 +25,6 @@ import {
 } from 'lucide-react'
 
 // UI Components
-import { ZButton } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Checkbox } from '@/components/ui/checkbox'
@@ -42,9 +40,9 @@ import { Accordion } from '@/components/ui/accordion'
 import { Dialog } from '@/components/ui/dialog'
 import { DropdownMenu } from '@/components/ui/dropdown-menu'
 import { Select } from '@/components/ui/select'
-import { Tooltip } from '@/components/ui/tooltip'
 import { Table } from '@/components/ui/table'
 import { useToast } from '@/components/ui/use-toast'
+import { z } from '@/components/ui'
 
 function SectionHeader({ title, description }: { title: string; description?: string }) {
 	return (
@@ -80,8 +78,7 @@ export default function ExamplesPage() {
 	})
 
 	return (
-		<Tooltip.Provider>
-			<div className='space-y-16 pb-16'>
+		<div className='space-y-16 pb-16'>
 				{/* Page Header */}
 				<div className='space-y-4'>
 					<nav className='flex items-center gap-2 text-sm text-muted-foreground'>
@@ -100,100 +97,68 @@ export default function ExamplesPage() {
 
 				{/* Buttons Section */}
 				<section className='space-y-6'>
-					<SectionHeader title='ZButton' description='Buttons with different kinds, themes, and sizes.' />
+					<SectionHeader title='z.button' description='Buttons with different kinds, themes, and sizes.' />
 
 					<div className='grid gap-6'>
 						<ExampleCard title='Solid Buttons'>
-							<ZButton kind='solid' color='green'>
-								Green
-							</ZButton>
-							<ZButton kind='solid' color='purple'>
-								Purple
-							</ZButton>
-							<ZButton kind='solid' color='pink'>
-								Pink
-							</ZButton>
-							<ZButton kind='solid' color='orange'>
-								Orange
-							</ZButton>
-							<ZButton kind='solid' color='white'>
-								White
-							</ZButton>
+							<z.button isGreen>Green</z.button>
+							<z.button isPurple>Purple</z.button>
+							<z.button isPink>Pink</z.button>
+							<z.button isOrange>Orange</z.button>
+							<z.button isWhite>White</z.button>
 						</ExampleCard>
 
 						<ExampleCard title='Outlined Buttons'>
-							<ZButton kind='outlined' color='green'>
-								Green
-							</ZButton>
-							<ZButton kind='outlined' color='purple'>
-								Purple
-							</ZButton>
-							<ZButton kind='outlined' color='pink'>
-								Pink
-							</ZButton>
-							<ZButton kind='outlined' color='orange'>
-								Orange
-							</ZButton>
-							<ZButton kind='outlined' color='white'>
-								White
-							</ZButton>
+							<z.button isGreen>Green</z.button>
+							<z.button isPurple>Purple</z.button>
+							<z.button isPink>Pink</z.button>
+							<z.button isOrange>Orange</z.button>
+							<z.button isWhite>White</z.button>
 						</ExampleCard>
 
 						<ExampleCard title='Ghost Buttons'>
-							<ZButton kind='ghost' color='green'>
-								Green
-							</ZButton>
-							<ZButton kind='ghost' color='purple'>
-								Purple
-							</ZButton>
-							<ZButton kind='ghost' color='pink'>
-								Pink
-							</ZButton>
-							<ZButton kind='ghost' color='orange'>
-								Orange
-							</ZButton>
-							<ZButton kind='ghost' color='white'>
-								White
-							</ZButton>
+							<z.button isGreen>Green</z.button>
+							<z.button isPurple>Purple</z.button>
+							<z.button isPink>Pink</z.button>
+							<z.button isOrange>Orange</z.button>
+							<z.button isWhite>White</z.button>
 						</ExampleCard>
 
 						<ExampleCard title='Button Sizes'>
-							<ZButton kind='solid' color='green' size='xs'>
+							<z.button isGreen isExtraSmall>
 								Extra Small
-							</ZButton>
-							<ZButton kind='solid' color='green' size='sm'>
+							</z.button>
+							<z.button isGreen isSmall>
 								Small
-							</ZButton>
-							<ZButton kind='solid' color='green' size='md'>
+							</z.button>
+							<z.button isGreen isMedium>
 								Medium
-							</ZButton>
-							<ZButton kind='solid' color='green' size='lg'>
+							</z.button>
+							<z.button isGreen isLarge>
 								Large
-							</ZButton>
-							<ZButton kind='solid' color='green' size='xl'>
+							</z.button>
+							<z.button isGreen isExtraLarge>
 								Extra Large
-							</ZButton>
+							</z.button>
 						</ExampleCard>
 
 						<ExampleCard title='Button States'>
-							<ZButton kind='solid' color='green'>
-								Default
-							</ZButton>
-							<ZButton kind='solid' color='green' isDisabled>
+							<z.button isGreen>Default</z.button>
+							<z.button isGreen isDisabled>
 								Disabled
-							</ZButton>
-							<ZButton kind='solid' color='purple'>
+							</z.button>
+							<z.button isPurple>
 								<Loader2 className='h-4 w-4 animate-spin' />
 								Loading
-							</ZButton>
-							<ZButton kind='outlined' color='pink'>
+							</z.button>
+							<z.button isPink>
 								<Heart className='h-4 w-4' />
 								With Icon
-							</ZButton>
-							<ZButton kind='solid' color='orange'>
+							</z.button>
+							<z.button isOrange>
 								Submit
 								<Send className='h-4 w-4' />
-							</ZButton>
+							</z.button>
 						</ExampleCard>
 					</div>
 				</section>
@@ -202,43 +167,67 @@ export default function ExamplesPage() {
 
 				{/* Badge Section */}
 				<section className='space-y-6'>
-					<SectionHeader title='ZBadge' description='Small status indicators and labels.' />
+					<SectionHeader title='z.badge' description='Small status indicators and labels.' />
 
 					<div className='grid gap-6'>
 						<ExampleCard title='Solid Badges'>
-							<Badge kind='solid' color='white'>Default</Badge>
-							<Badge kind='ghost' color='white'>Secondary</Badge>
-							<Badge kind='solid' color='pink'>Destructive</Badge>
-							<Badge kind='solid' color='green'>Green</Badge>
-							<Badge kind='solid' color='purple'>Purple</Badge>
-							<Badge kind='solid' color='pink'>Pink</Badge>
-							<Badge kind='solid' color='orange'>Orange</Badge>
+							<z.badge isSolid isWhite>
+								Default
+							</z.badge>
+							<z.badge isGhost isWhite>
+								Secondary
+							</z.badge>
+							<z.badge isSolid isPink>
+								Destructive
+							</z.badge>
+							<z.badge isSolid isGreen>
+								Green
+							</z.badge>
+							<z.badge isSolid isPurple>
+								Purple
+							</z.badge>
+							<z.badge isSolid isPink>
+								Pink
+							</z.badge>
+							<z.badge isSolid isOrange>
+								Orange
+							</z.badge>
 						</ExampleCard>
 
 						<ExampleCard title='Outlined Badges'>
-							<Badge kind='outline' color='white'>Outline</Badge>
-							<Badge kind='outline' color='green'>Green</Badge>
-							<Badge kind='outline' color='purple'>Purple</Badge>
-							<Badge kind='outline' color='pink'>Pink</Badge>
-							<Badge kind='outline' color='orange'>Orange</Badge>
+							<z.badge isOutline isWhite>
+								Outline
+							</z.badge>
+							<z.badge isOutline isGreen>
+								Green
+							</z.badge>
+							<z.badge isOutline isPurple>
+								Purple
+							</z.badge>
+							<z.badge isOutline isPink>
+								Pink
+							</z.badge>
+							<z.badge isOutline isOrange>
+								Orange
+							</z.badge>
 						</ExampleCard>
 
 						<ExampleCard title='Badges with Icons'>
-							<Badge kind='solid' color='green'>
+							<z.badge isSolid isGreen>
 								<CheckCircle className='h-3 w-3' /> Success
-							</Badge>
-							<Badge kind='solid' color='pink'>
+							</z.badge>
+							<z.badge isSolid isPink>
 								<AlertCircle className='h-3 w-3' /> Error
-							</Badge>
-							<Badge kind='solid' color='orange'>
+							</z.badge>
+							<z.badge isSolid isOrange>
 								<AlertTriangle className='h-3 w-3' /> Warning
-							</Badge>
-							<Badge kind='solid' color='purple'>
+							</z.badge>
+							<z.badge isSolid isPurple>
 								<Info className='h-3 w-3' /> Info
-							</Badge>
-							<Badge kind='solid' color='pink'>
+							</z.badge>
+							<z.badge isSolid isPink>
 								<Star className='h-3 w-3' /> Featured
-							</Badge>
+							</z.badge>
 						</ExampleCard>
 					</div>
 				</section>
@@ -254,11 +243,11 @@ export default function ExamplesPage() {
 							<div className='grid gap-4 w-full max-w-md'>
 								<div className='space-y-2'>
 									<Label>Default Focus</Label>
-									<Input placeholder='Default focus ring' focusColor='default' />
+									<z.input placeholder='Default focus ring' focusColor='default' />
 								</div>
 								<div className='space-y-2'>
 									<Label>Green Focus</Label>
-									<Input placeholder='Green focus ring' focusColor='green' />
+									<z.input placeholder='Green focus ring' focusColor='green' />
 								</div>
 								<div className='space-y-2'>
 									<Label>Purple Focus</Label>
@@ -327,7 +316,7 @@ export default function ExamplesPage() {
 								<div className='flex items-center space-x-2'>
 									<Checkbox
 										id='terms'
-										checked={checkboxStates.terms}
+										isChecked={checkboxStates.terms}
 										onCheckedChange={(checked) => setCheckboxStates((prev) => ({ ...prev, terms: checked as boolean }))}
 									/>
 									<Label htmlFor='terms'>Accept terms and conditions</Label>
@@ -335,19 +324,19 @@ export default function ExamplesPage() {
 								<div className='flex items-center space-x-2'>
 									<Checkbox
 										id='newsletter'
-										checked={checkboxStates.newsletter}
+										isChecked={checkboxStates.newsletter}
 										onCheckedChange={(checked) => setCheckboxStates((prev) => ({ ...prev, newsletter: checked as boolean }))}
 									/>
 									<Label htmlFor='newsletter'>Subscribe to newsletter</Label>
 								</div>
 								<div className='flex items-center space-x-2'>
-									<Checkbox id='disabled' disabled />
+									<Checkbox id='disabled' isDisabled />
 									<Label htmlFor='disabled' className='text-muted-foreground'>
 										Disabled checkbox
 									</Label>
 								</div>
 								<div className='flex items-center space-x-2'>
-									<Checkbox id='checked-disabled' checked disabled />
+									<Checkbox id='checked-disabled' isChecked isDisabled />
 									<Label htmlFor='checked-disabled' className='text-muted-foreground'>
 										Checked disabled
 									</Label>
@@ -444,38 +433,38 @@ export default function ExamplesPage() {
 					<div className='grid gap-4'>
 						<Alert>
 							<Terminal className='h-4 w-4' />
-							<Alert.Title>Default Alert</Alert.Title>
-							<Alert.Description>This is a default alert with neutral styling.</Alert.Description>
+							<Alert.title>Default Alert</Alert.title>
+							<Alert.description>This is a default alert with neutral styling.</Alert.description>
 						</Alert>
 
-						<Alert variant='success'>
+						<Alert isGreen>
 							<CheckCircle className='h-4 w-4' />
-							<Alert.Title>Success</Alert.Title>
-							<Alert.Description>Your changes have been saved successfully.</Alert.Description>
+							<Alert.title>Success</Alert.title>
+							<Alert.description>Your changes have been saved successfully.</Alert.description>
 						</Alert>
 
-						<Alert variant='warning'>
+						<Alert isOrange>
 							<AlertTriangle className='h-4 w-4' />
-							<Alert.Title>Warning</Alert.Title>
-							<Alert.Description>Please review your information before proceeding.</Alert.Description>
+							<Alert.title>Warning</Alert.title>
+							<Alert.description>Please review your information before proceeding.</Alert.description>
 						</Alert>
 
-						<Alert variant='destructive'>
+						<Alert isRed>
 							<AlertCircle className='h-4 w-4' />
-							<Alert.Title>Error</Alert.Title>
-							<Alert.Description>There was an error processing your request.</Alert.Description>
+							<Alert.title>Error</Alert.title>
+							<Alert.description>There was an error processing your request.</Alert.description>
 						</Alert>
 
-						<Alert variant='info'>
+						<Alert isPurple>
 							<Info className='h-4 w-4' />
-							<Alert.Title>Information</Alert.Title>
-							<Alert.Description>Here is some helpful information for you.</Alert.Description>
+							<Alert.title>Information</Alert.title>
+							<Alert.description>Here is some helpful information for you.</Alert.description>
 						</Alert>
 
-						<Alert variant='accent'>
+						<Alert isPink>
 							<Bell className='h-4 w-4' />
-							<Alert.Title>New Feature</Alert.Title>
-							<Alert.Description>Check out our latest feature update!</Alert.Description>
+							<Alert.title>New Feature</Alert.title>
+							<Alert.description>Check out our latest feature update!</Alert.description>
 						</Alert>
 					</div>
 				</section>
@@ -515,9 +504,8 @@ export default function ExamplesPage() {
 
 					<div className='grid gap-6'>
 						<ExampleCard title='Toast Triggers'>
-							<ZButton
-								kind='solid'
-								color='white'
+							<z.button
+								isWhite
 								onClick={() => {
 									toast({
 										title: 'Default Toast',
@@ -526,11 +514,10 @@ export default function ExamplesPage() {
 								}}
 							>
 								Show Default Toast
-							</ZButton>
+							</z.button>
 
-							<ZButton
-								kind='solid'
-								color='green'
+							<z.button
+								isGreen
 								onClick={() => {
 									toast({
 										title: 'Success!',
@@ -539,11 +526,10 @@ export default function ExamplesPage() {
 								}}
 							>
 								Show Success Toast
-							</ZButton>
+							</z.button>
 
-							<ZButton
-								kind='solid'
-								color='pink'
+							<z.button
+								isPink
 								onClick={() => {
 									toast({
 										variant: 'destructive',
@@ -553,11 +539,10 @@ export default function ExamplesPage() {
 								}}
 							>
 								Show Error Toast
-							</ZButton>
+							</z.button>
 
-							<ZButton
-								kind='outlined'
-								color='purple'
+							<z.button
+								isPurple
 								onClick={() => {
 									toast({
 										title: 'Scheduled',
@@ -566,27 +551,26 @@ export default function ExamplesPage() {
 								}}
 							>
 								Show Info Toast
-							</ZButton>
+							</z.button>
 						</ExampleCard>
 
 						<ExampleCard title='Toast with Action'>
-							<ZButton
-								kind='outlined'
-								color='white'
+							<z.button
+								isWhite
 								onClick={() => {
 									toast({
 										title: 'Item Deleted',
 										description: 'The item has been moved to trash.',
 										action: (
-											<ZButton kind='ghost' color='white' size='sm' onClick={() => {}}>
+											<z.button isWhite isSmall onClick={() => {}}>
 												Undo
-											</ZButton>
+											</z.button>
 										)
 									})
 								}}
 							>
 								Toast with Undo Action
-							</ZButton>
+							</z.button>
 						</ExampleCard>
 					</div>
 				</section>
@@ -769,12 +753,12 @@ export default function ExamplesPage() {
 								<p className='text-sm text-muted-foreground'>Cards can have footers for actions.</p>
 							</Card.Content>
 							<Card.Footer className='gap-2'>
-								<ZButton kind='outlined' color='white' size='sm'>
+								<z.button isWhite isSmall>
 									Cancel
-								</ZButton>
-								<ZButton kind='solid' color='green' size='sm'>
+								</z.button>
+								<z.button isGreen isSmall>
 									Save
-								</ZButton>
+								</z.button>
 							</Card.Footer>
 						</Card>
 
@@ -794,9 +778,9 @@ export default function ExamplesPage() {
 								</div>
 							</Card.Content>
 							<Card.Footer>
-								<ZButton kind='solid' color='purple' size='sm' className='w-full'>
+								<z.button isPurple isSmall className='w-full'>
 									Submit
-								</ZButton>
+								</z.button>
 							</Card.Footer>
 						</Card>
 					</div>
@@ -916,9 +900,7 @@ export default function ExamplesPage() {
 						<ExampleCard title='Dialog Examples'>
 							<Dialog>
 								<Dialog.Trigger asChild>
-									<ZButton kind='outlined' color='white'>
-										Open Dialog
-									</ZButton>
+									<z.button isWhite>Open Dialog</z.button>
 								</Dialog.Trigger>
 								<Dialog.Content>
 									<Dialog.Header>
@@ -936,21 +918,15 @@ export default function ExamplesPage() {
 										</div>
 									</div>
 									<Dialog.Footer>
-										<ZButton kind='outlined' color='white'>
-											Cancel
-										</ZButton>
-										<ZButton kind='solid' color='green'>
-											Save Changes
-										</ZButton>
+										<z.button isWhite>Cancel</z.button>
+										<z.button isGreen>Save Changes</z.button>
 									</Dialog.Footer>
 								</Dialog.Content>
 							</Dialog>
 
 							<Dialog>
 								<Dialog.Trigger asChild>
-									<ZButton kind='solid' color='pink'>
-										Confirm Action
-									</ZButton>
+									<z.button isPink>Confirm Action</z.button>
 								</Dialog.Trigger>
 								<Dialog.Content>
 									<Dialog.Header>
@@ -958,12 +934,8 @@ export default function ExamplesPage() {
 										<Dialog.Description>This action cannot be undone. This will permanently delete your data.</Dialog.Description>
 									</Dialog.Header>
 									<Dialog.Footer>
-										<ZButton kind='outlined' color='white'>
-											Cancel
-										</ZButton>
-										<ZButton kind='solid' color='pink'>
-											Delete
-										</ZButton>
+										<z.button isWhite>Cancel</z.button>
+										<z.button isPink>Delete</z.button>
 									</Dialog.Footer>
 								</Dialog.Content>
 							</Dialog>
@@ -981,10 +953,10 @@ export default function ExamplesPage() {
 						<ExampleCard title='Dropdown Examples'>
 							<DropdownMenu>
 								<DropdownMenu.Trigger asChild>
-									<ZButton kind='outlined' color='white'>
+									<z.button isWhite>
 										Open Menu
 										<ChevronDown className='h-4 w-4' />
-									</ZButton>
+									</z.button>
 								</DropdownMenu.Trigger>
 								<DropdownMenu.Content className='w-56'>
 									<DropdownMenu.Label>My Account</DropdownMenu.Label>
@@ -1011,10 +983,10 @@ export default function ExamplesPage() {
 
 							<DropdownMenu>
 								<DropdownMenu.Trigger asChild>
-									<ZButton kind='solid' color='purple'>
+									<z.button isPurple>
 										<Plus className='h-4 w-4' />
 										Create New
-									</ZButton>
+									</z.button>
 								</DropdownMenu.Trigger>
 								<DropdownMenu.Content>
 									<DropdownMenu.Item>New Project</DropdownMenu.Item>
@@ -1032,53 +1004,25 @@ export default function ExamplesPage() {
 
 				{/* Tooltip Section */}
 				<section className='space-y-6'>
-					<SectionHeader title='ZTooltip' description='Contextual information on hover.' />
+					<SectionHeader title='z.tooltip' description='Contextual information on hover.' />
 
 					<div className='grid gap-6'>
 						<ExampleCard title='Tooltip Positions'>
-							<Tooltip>
-								<Tooltip.Trigger asChild>
-									<ZButton kind='outlined' color='white'>
-										Hover me (Top)
-									</ZButton>
-								</Tooltip.Trigger>
-								<Tooltip.Content side='top'>
-									<p>Tooltip on top</p>
-								</Tooltip.Content>
-							</Tooltip>
+							<z.tooltip tip='Tooltip on top' side='top'>
+								<z.button isWhite>Hover me (Top)</z.button>
+							</z.tooltip>
 
-							<Tooltip>
-								<Tooltip.Trigger asChild>
-									<ZButton kind='outlined' color='green'>
-										Hover me (Right)
-									</ZButton>
-								</Tooltip.Trigger>
-								<Tooltip.Content side='right'>
-									<p>Tooltip on right</p>
-								</Tooltip.Content>
-							</Tooltip>
+							<z.tooltip tip='Tooltip on right' side='right'>
+								<z.button isGreen>Hover me (Right)</z.button>
+							</z.tooltip>
 
-							<Tooltip>
-								<Tooltip.Trigger asChild>
-									<ZButton kind='outlined' color='purple'>
-										Hover me (Bottom)
-									</ZButton>
-								</Tooltip.Trigger>
-								<Tooltip.Content side='bottom'>
-									<p>Tooltip on bottom</p>
-								</Tooltip.Content>
-							</Tooltip>
+							<z.tooltip tip='Tooltip on bottom' side='bottom'>
+								<z.button isPurple>Hover me (Bottom)</z.button>
+							</z.tooltip>
 
-							<Tooltip>
-								<Tooltip.Trigger asChild>
-									<ZButton kind='outlined' color='pink'>
-										Hover me (Left)
-									</ZButton>
-								</Tooltip.Trigger>
-								<Tooltip.Content side='left'>
-									<p>Tooltip on left</p>
-								</Tooltip.Content>
-							</Tooltip>
+							<z.tooltip tip='Tooltip on left' side='left'>
+								<z.button isPink>Hover me (Left)</z.button>
+							</z.tooltip>
 						</ExampleCard>
 					</div>
 				</section>
@@ -1093,7 +1037,7 @@ export default function ExamplesPage() {
 						<Table>
 							<Table.Header>
 								<Table.Row>
-									<Table.Head className='w-[100px]'>Invoice</Table.Head>
+									<Table.Head className='w-25'>Invoice</Table.Head>
 									<Table.Head>Status</Table.Head>
 									<Table.Head>Method</Table.Head>
 									<Table.Head className='text-right'>Amount</Table.Head>
@@ -1103,7 +1047,9 @@ export default function ExamplesPage() {
 								<Table.Row>
 									<Table.Cell className='font-medium'>INV001</Table.Cell>
 									<Table.Cell>
-										<Badge kind='solid' color='green'>Paid</Badge>
+										<z.badge isSolid isGreen>
+											Paid
+										</z.badge>
 									</Table.Cell>
 									<Table.Cell>Credit Card</Table.Cell>
 									<Table.Cell className='text-right'>$250.00</Table.Cell>
@@ -1111,7 +1057,9 @@ export default function ExamplesPage() {
 								<Table.Row>
 									<Table.Cell className='font-medium'>INV002</Table.Cell>
 									<Table.Cell>
-										<Badge kind='solid' color='orange'>Pending</Badge>
+										<z.badge isSolid isOrange>
+											Pending
+										</z.badge>
 									</Table.Cell>
 									<Table.Cell>PayPal</Table.Cell>
 									<Table.Cell className='text-right'>$150.00</Table.Cell>
@@ -1119,7 +1067,9 @@ export default function ExamplesPage() {
 								<Table.Row>
 									<Table.Cell className='font-medium'>INV003</Table.Cell>
 									<Table.Cell>
-										<Badge kind='solid' color='pink'>Overdue</Badge>
+										<z.badge isSolid isPink>
+											Overdue
+										</z.badge>
 									</Table.Cell>
 									<Table.Cell>Bank Transfer</Table.Cell>
 									<Table.Cell className='text-right'>$350.00</Table.Cell>
@@ -1127,7 +1077,9 @@ export default function ExamplesPage() {
 								<Table.Row>
 									<Table.Cell className='font-medium'>INV004</Table.Cell>
 									<Table.Cell>
-										<Badge kind='solid' color='green'>Paid</Badge>
+										<z.badge isSolid isGreen>
+											Paid
+										</z.badge>
 									</Table.Cell>
 									<Table.Cell>Credit Card</Table.Cell>
 									<Table.Cell className='text-right'>$450.00</Table.Cell>
@@ -1135,7 +1087,9 @@ export default function ExamplesPage() {
 								<Table.Row>
 									<Table.Cell className='font-medium'>INV005</Table.Cell>
 									<Table.Cell>
-										<Badge kind='outline' color='purple'>Processing</Badge>
+										<z.badge isOutline isPurple>
+											Processing
+										</z.badge>
 									</Table.Cell>
 									<Table.Cell>PayPal</Table.Cell>
 									<Table.Cell className='text-right'>$550.00</Table.Cell>
@@ -1179,7 +1133,6 @@ export default function ExamplesPage() {
 						</ExampleCard>
 					</div>
 				</section>
-			</div>
-		</Tooltip.Provider>
+		</div>
 	)
 }

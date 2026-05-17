@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/nextjs'
 import { HoverCard, HoverCardContent, HoverCardTrigger } from './hover-card'
-import { ZButton } from './button'
+import { z } from '@/components/ui'
 
 const meta: Meta<typeof HoverCard> = {
 	title: 'UI/HoverCard',
@@ -20,7 +20,7 @@ export const Default: StoryT = {
 		return (
 			<HoverCard>
 				<HoverCardTrigger asChild>
-					<ZButton variant='link'>@tasteink</ZButton>
+					<z.button>@tasteink</z.button>
 				</HoverCardTrigger>
 				<HoverCardContent>
 					<div className='flex flex-col gap-1'>
@@ -32,3 +32,4 @@ export const Default: StoryT = {
 		)
 	}
 }
+

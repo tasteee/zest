@@ -1,8 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { ZButton } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
+import { z } from '@/components/ui'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
@@ -77,7 +76,9 @@ export default function TabsDocsPage() {
 			<div className='space-y-4'>
 				<div className='flex items-center gap-3'>
 					<h1 className='text-4xl font-bold tracking-tight text-foreground'>ZTabs</h1>
-					<Badge kind='ghost' color='white'>Component</Badge>
+					<z.badge isGhost isWhite>
+						Component
+					</z.badge>
 				</div>
 				<p className='text-xl text-muted-foreground max-w-2xl leading-relaxed'>
 					A set of layered sections of content, known as tab panels, that are displayed one at a time. Built on Radix UI Tabs
@@ -93,7 +94,7 @@ export default function TabsDocsPage() {
 
 export function TabsDemo() {
   return (
-    <ZTabs defaultValue="account" className="w-[400px]">
+    <ZTabs defaultValue="account" className="w-100">
       <ZTabsList>
         <ZTabsTrigger value="account">Account</ZTabsTrigger>
         <ZTabsTrigger value="password">Password</ZTabsTrigger>
@@ -108,7 +109,7 @@ export function TabsDemo() {
   )
 }`}
 			>
-				<Tabs defaultValue='account' className='w-[400px]'>
+				<Tabs defaultValue='account' className='w-100'>
 					<TabsList>
 						<TabsTrigger value='account'>Account</TabsTrigger>
 						<TabsTrigger value='password'>Password</TabsTrigger>
@@ -222,7 +223,7 @@ export function TabsDemo() {
 									</div>
 								</CardContent>
 								<CardFooter>
-									<ZButton>Save changes</ZButton>
+									<z.button>Save changes</z.button>
 								</CardFooter>
 							</Card>
 						</TabsContent>
@@ -243,7 +244,7 @@ export function TabsDemo() {
 									</div>
 								</CardContent>
 								<CardFooter>
-									<ZButton>Save password</ZButton>
+									<z.button>Save password</z.button>
 								</CardFooter>
 							</Card>
 						</TabsContent>

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/nextjs'
 import { Popover, PopoverContent, PopoverTrigger } from './popover'
-import { ZButton } from './button'
+import { z } from '@/components/ui'
 
 const meta: Meta<typeof Popover> = {
 	title: 'UI/Popover',
@@ -20,7 +20,7 @@ export const Default: StoryT = {
 		return (
 			<Popover>
 				<PopoverTrigger asChild>
-					<ZButton variant='outline'>Open Popover</ZButton>
+					<z.button>Open Popover</z.button>
 				</PopoverTrigger>
 				<PopoverContent>
 					<p className='text-sm'>Popover content goes here.</p>
@@ -29,3 +29,4 @@ export const Default: StoryT = {
 		)
 	}
 }
+

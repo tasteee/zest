@@ -5,27 +5,24 @@ import { ChevronDownIcon, ChevronLeftIcon, ChevronRightIcon } from 'lucide-react
 import { DayButton, DayPicker, getDefaultClassNames } from 'react-day-picker'
 
 import { cn } from '@/lib/utils'
-import { ZButton, buttonVariants } from '@/components/ui/button'
+import { z } from '@/components/ui'
 
 function Calendar({
 	className,
 	classNames,
 	showOutsideDays = true,
 	captionLayout = 'label',
-	buttonVariant = 'ghost',
 	formatters,
 	components,
 	...props
-}: React.ComponentProps<typeof DayPicker> & {
-	buttonVariant?: React.ComponentProps<typeof ZButton>['variant']
-}) {
+}: React.ComponentProps<typeof DayPicker>) {
 	const defaultClassNames = getDefaultClassNames()
 
 	return (
 		<DayPicker
 			showOutsideDays={showOutsideDays}
 			className={cn(
-				'bg-background group/calendar p-3 [--cell-size:--spacing(8)] [[data-slot=card-content]_&]:bg-transparent [[data-slot=popover-content]_&]:bg-transparent',
+				'bg-background group/calendar p-3 [--cell-size:--spacing(8)] in-data-[slot=card-content]:bg-transparent in-data-[slot=popover-content]:bg-transparent',
 				String.raw`rtl:**:[.rdp-button\_next>svg]:rotate-180`,
 				String.raw`rtl:**:[.rdp-button\_previous>svg]:rotate-180`,
 				className
@@ -41,13 +38,11 @@ function Calendar({
 				month: cn('flex flex-col w-full gap-4', defaultClassNames.month),
 				nav: cn('flex items-center gap-1 w-full absolute top-0 inset-x-0 justify-between', defaultClassNames.nav),
 				button_previous: cn(
-					buttonVariants({ variant: buttonVariant }),
-					'size-(--cell-size) aria-disabled:opacity-50 p-0 select-none',
+					'z.button isWhite isIcon size-(--cell-size) aria-disabled:opacity-50 p-0 select-none',
 					defaultClassNames.button_previous
 				),
 				button_next: cn(
-					buttonVariants({ variant: buttonVariant }),
-					'size-(--cell-size) aria-disabled:opacity-50 p-0 select-none',
+					'z.button isWhite isIcon size-(--cell-size) aria-disabled:opacity-50 p-0 select-none',
 					defaultClassNames.button_next
 				),
 				month_caption: cn(
@@ -128,10 +123,10 @@ function CalendarDayButton({ className, day, modifiers, ...props }: React.Compon
 	}, [modifiers.focused])
 
 	return (
-		<ZButton
+		<z.button
 			ref={ref}
-			variant='ghost'
-			size='icon'
+			isIcon
+			isWhite
 			data-day={day.date.toLocaleDateString()}
 			data-selected-single={modifiers.selected && !modifiers.range_start && !modifiers.range_end && !modifiers.range_middle}
 			data-range-start={modifiers.range_start}

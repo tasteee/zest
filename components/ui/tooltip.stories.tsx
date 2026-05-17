@@ -1,22 +1,22 @@
 import type { Meta, StoryObj } from '@storybook/nextjs'
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './tooltip'
-import { ZButton } from './button'
+import { z } from '@/components/ui'
 import * as Phosphor from '@phosphor-icons/react'
 
-const meta: Meta<typeof Tooltip> = {
+const meta: Meta<typeof z.tooltip> = {
 	title: 'UI/Tooltip',
-	component: Tooltip,
+	component: z.tooltip,
 	tags: ['autodocs'],
 	parameters: {
 		layout: 'centered'
+	},
+	args: {
+		tip: 'Add to library'
 	}
 }
 
 export default meta
 
-type StoryT = StoryObj<typeof Tooltip>
-
-// ─── Shared styles ──────────────────────────────────────────────────────────
+type StoryT = StoryObj<typeof z.tooltip>
 
 const sectionLabelStyle: React.CSSProperties = {
 	fontSize: 11,
@@ -42,8 +42,6 @@ const rowStyle: React.CSSProperties = {
 	flexWrap: 'wrap'
 }
 
-// ─── All Variants Story ─────────────────────────────────────────────────────
-
 export const AllVariants: StoryT = {
 	parameters: {
 		layout: 'fullscreen'
@@ -51,159 +49,78 @@ export const AllVariants: StoryT = {
 	render: () => {
 		return (
 			<div style={gridWrapperStyle}>
-				{/* Basic Tooltips */}
 				<div>
 					<span style={sectionLabelStyle}>Basic Tooltips</span>
 					<div style={rowStyle}>
-						<TooltipProvider>
-							<Tooltip>
-								<TooltipTrigger asChild>
-									<ZButton variant='outline'>Hover me</ZButton>
-								</TooltipTrigger>
-								<TooltipContent>
-									<p>Simple tooltip text</p>
-								</TooltipContent>
-							</Tooltip>
-						</TooltipProvider>
+						<z.tooltip tip='Simple tooltip text'>
+							<z.button>Hover me</z.button>
+						</z.tooltip>
 
-						<TooltipProvider>
-							<Tooltip>
-								<TooltipTrigger asChild>
-									<ZButton variant='secondary'>Another tooltip</ZButton>
-								</TooltipTrigger>
-								<TooltipContent>
-									<p>More information here</p>
-								</TooltipContent>
-							</Tooltip>
-						</TooltipProvider>
+						<z.tooltip tip='More information here'>
+							<z.button>Another tooltip</z.button>
+						</z.tooltip>
 					</div>
 				</div>
 
-				{/* Tooltip Positions */}
 				<div>
 					<span style={sectionLabelStyle}>Tooltip Positions</span>
 					<div style={rowStyle}>
-						<TooltipProvider>
-							<Tooltip>
-								<TooltipTrigger asChild>
-									<ZButton variant='outline'>Top</ZButton>
-								</TooltipTrigger>
-								<TooltipContent side='top'>
-									<p>Tooltip on top</p>
-								</TooltipContent>
-							</Tooltip>
-						</TooltipProvider>
+						<z.tooltip tip='Tooltip on top' side='top'>
+							<z.button>Top</z.button>
+						</z.tooltip>
 
-						<TooltipProvider>
-							<Tooltip>
-								<TooltipTrigger asChild>
-									<ZButton variant='outline'>Bottom</ZButton>
-								</TooltipTrigger>
-								<TooltipContent side='bottom'>
-									<p>Tooltip on bottom</p>
-								</TooltipContent>
-							</Tooltip>
-						</TooltipProvider>
+						<z.tooltip tip='Tooltip on bottom' side='bottom'>
+							<z.button>Bottom</z.button>
+						</z.tooltip>
 
-						<TooltipProvider>
-							<Tooltip>
-								<TooltipTrigger asChild>
-									<ZButton variant='outline'>Left</ZButton>
-								</TooltipTrigger>
-								<TooltipContent side='left'>
-									<p>Tooltip on left</p>
-								</TooltipContent>
-							</Tooltip>
-						</TooltipProvider>
+						<z.tooltip tip='Tooltip on left' side='left'>
+							<z.button>Left</z.button>
+						</z.tooltip>
 
-						<TooltipProvider>
-							<Tooltip>
-								<TooltipTrigger asChild>
-									<ZButton variant='outline'>Right</ZButton>
-								</TooltipTrigger>
-								<TooltipContent side='right'>
-									<p>Tooltip on right</p>
-								</TooltipContent>
-							</Tooltip>
-						</TooltipProvider>
+						<z.tooltip tip='Tooltip on right' side='right'>
+							<z.button>Right</z.button>
+						</z.tooltip>
 					</div>
 				</div>
 
-				{/* Icon Button Tooltips */}
 				<div>
 					<span style={sectionLabelStyle}>Icon Button Tooltips</span>
 					<div style={rowStyle}>
-						<TooltipProvider>
-							<Tooltip>
-								<TooltipTrigger asChild>
-									<ZButton variant='outline' size='icon'>
-										<Phosphor.Plus />
-									</ZButton>
-								</TooltipTrigger>
-								<TooltipContent>
-									<p>Add new item</p>
-								</TooltipContent>
-							</Tooltip>
-						</TooltipProvider>
+						<z.tooltip tip='Add new item'>
+							<z.button isIcon>
+								<Phosphor.Plus />
+							</z.button>
+						</z.tooltip>
 
-						<TooltipProvider>
-							<Tooltip>
-								<TooltipTrigger asChild>
-									<ZButton variant='outline' size='icon'>
-										<Phosphor.PencilSimple />
-									</ZButton>
-								</TooltipTrigger>
-								<TooltipContent>
-									<p>Edit</p>
-								</TooltipContent>
-							</Tooltip>
-						</TooltipProvider>
+						<z.tooltip tip='Edit'>
+							<z.button isIcon>
+								<Phosphor.PencilSimple />
+							</z.button>
+						</z.tooltip>
 
-						<TooltipProvider>
-							<Tooltip>
-								<TooltipTrigger asChild>
-									<ZButton variant='outline' size='icon'>
-										<Phosphor.Trash />
-									</ZButton>
-								</TooltipTrigger>
-								<TooltipContent>
-									<p>Delete</p>
-								</TooltipContent>
-							</Tooltip>
-						</TooltipProvider>
+						<z.tooltip tip='Delete'>
+							<z.button isIcon>
+								<Phosphor.Trash />
+							</z.button>
+						</z.tooltip>
 
-						<TooltipProvider>
-							<Tooltip>
-								<TooltipTrigger asChild>
-									<ZButton variant='outline' size='icon'>
-										<Phosphor.DotsThree />
-									</ZButton>
-								</TooltipTrigger>
-								<TooltipContent>
-									<p>More options</p>
-								</TooltipContent>
-							</Tooltip>
-						</TooltipProvider>
+						<z.tooltip tip='More options'>
+							<z.button isIcon>
+								<Phosphor.DotsThree />
+							</z.button>
+						</z.tooltip>
 					</div>
 				</div>
 
-				{/* Longer Content */}
 				<div>
 					<span style={sectionLabelStyle}>With Longer Content</span>
 					<div style={rowStyle}>
-						<TooltipProvider>
-							<Tooltip>
-								<TooltipTrigger asChild>
-									<ZButton variant='outline'>
-										<Phosphor.Info />
-										Learn more
-									</ZButton>
-								</TooltipTrigger>
-								<TooltipContent className='max-w-[200px]'>
-									<p>This is a longer tooltip that wraps to multiple lines when needed.</p>
-								</TooltipContent>
-							</Tooltip>
-						</TooltipProvider>
+						<z.tooltip tip={<p className='max-w-50'>This is a longer tooltip that wraps to multiple lines when needed.</p>}>
+							<z.button>
+								<Phosphor.Info />
+								Learn more
+							</z.button>
+						</z.tooltip>
 					</div>
 				</div>
 			</div>
@@ -211,108 +128,75 @@ export const AllVariants: StoryT = {
 	}
 }
 
-// ─── Individual Stories ─────────────────────────────────────────────────────
-
 export const Default: StoryT = {
-	render: () => {
+	render: (args) => {
 		return (
-			<TooltipProvider>
-				<Tooltip>
-					<TooltipTrigger asChild>
-						<ZButton variant='outline'>Hover me</ZButton>
-					</TooltipTrigger>
-					<TooltipContent>
-						<p>Add to library</p>
-					</TooltipContent>
-				</Tooltip>
-			</TooltipProvider>
+			<z.tooltip {...args}>
+				<z.button>Hover me</z.button>
+			</z.tooltip>
 		)
 	}
 }
 
 export const Top: StoryT = {
-	render: () => {
-		return (
-			<TooltipProvider>
-				<Tooltip>
-					<TooltipTrigger asChild>
-						<ZButton variant='outline'>Top</ZButton>
-					</TooltipTrigger>
-					<TooltipContent side='top'>
-						<p>Tooltip on top</p>
-					</TooltipContent>
-				</Tooltip>
-			</TooltipProvider>
-		)
-	}
+	args: {
+		tip: 'Tooltip on top',
+		side: 'top'
+	},
+	render: (args) => (
+		<z.tooltip {...args}>
+			<z.button>Top</z.button>
+		</z.tooltip>
+	)
 }
 
 export const Bottom: StoryT = {
-	render: () => {
-		return (
-			<TooltipProvider>
-				<Tooltip>
-					<TooltipTrigger asChild>
-						<ZButton variant='outline'>Bottom</ZButton>
-					</TooltipTrigger>
-					<TooltipContent side='bottom'>
-						<p>Tooltip on bottom</p>
-					</TooltipContent>
-				</Tooltip>
-			</TooltipProvider>
-		)
-	}
+	args: {
+		tip: 'Tooltip on bottom',
+		side: 'bottom'
+	},
+	render: (args) => (
+		<z.tooltip {...args}>
+			<z.button>Bottom</z.button>
+		</z.tooltip>
+	)
 }
 
 export const Left: StoryT = {
-	render: () => {
-		return (
-			<TooltipProvider>
-				<Tooltip>
-					<TooltipTrigger asChild>
-						<ZButton variant='outline'>Left</ZButton>
-					</TooltipTrigger>
-					<TooltipContent side='left'>
-						<p>Tooltip on left</p>
-					</TooltipContent>
-				</Tooltip>
-			</TooltipProvider>
-		)
-	}
+	args: {
+		tip: 'Tooltip on left',
+		side: 'left'
+	},
+	render: (args) => (
+		<z.tooltip {...args}>
+			<z.button>Left</z.button>
+		</z.tooltip>
+	)
 }
 
 export const Right: StoryT = {
-	render: () => {
-		return (
-			<TooltipProvider>
-				<Tooltip>
-					<TooltipTrigger asChild>
-						<ZButton variant='outline'>Right</ZButton>
-					</TooltipTrigger>
-					<TooltipContent side='right'>
-						<p>Tooltip on right</p>
-					</TooltipContent>
-				</Tooltip>
-			</TooltipProvider>
-		)
-	}
+	args: {
+		tip: 'Tooltip on right',
+		side: 'right'
+	},
+	render: (args) => (
+		<z.tooltip {...args}>
+			<z.button>Right</z.button>
+		</z.tooltip>
+	)
 }
 
 export const OnIconButton: StoryT = {
-	render: () => {
+	args: {
+		tip: 'Add new item'
+	},
+	render: (args) => {
 		return (
-			<TooltipProvider>
-				<Tooltip>
-					<TooltipTrigger asChild>
-						<ZButton variant='outline' size='icon'>
-							<Phosphor.Plus />
-						</ZButton>
-					</TooltipTrigger>
-					<TooltipContent>
-						<p>Add new item</p>
-					</TooltipContent>
-				</Tooltip>
-			</TooltipProvider>
+			<z.tooltip {...args}>
+				<z.button isIcon>
+					<Phosphor.Plus />
+				</z.button>
+			</z.tooltip>
 		)
 	}
 }

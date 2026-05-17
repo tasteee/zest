@@ -3,9 +3,8 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
-import { Badge } from '@/components/ui/badge'
+import { z } from '@/components/ui'
 import { SearchIcon, MenuIcon } from 'lucide-react'
-import { ZButton } from '@/components/ui/button'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import { DocsSidebarContent } from './docs-sidebar'
 
@@ -13,7 +12,7 @@ export function DocsNav() {
 	const pathname = usePathname()
 
 	return (
-		<header className='sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60'>
+		<header className='sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60'>
 			<div className='flex h-14 items-center px-4 lg:px-6'>
 				{/* Mobile menu */}
 				<Sheet>
@@ -74,14 +73,14 @@ export function DocsNav() {
 						<kbd className='ml-auto text-xs bg-muted px-1.5 py-0.5 rounded'>⌘K</kbd>
 					</button>
 
-					<Badge variant='green-outline' className='hidden sm:inline-flex'>
+					<z.badge isOutline isGreen className='hidden sm:inline-flex'>
 						v1.0
-					</Badge>
+					</z.badge>
 
 					<Link href='/'>
-						<ZButton kind='ghost' color='white' size='sm'>
+						<z.button isWhite isSmall>
 							Brand System
-						</ZButton>
+						</z.button>
 					</Link>
 				</div>
 			</div>

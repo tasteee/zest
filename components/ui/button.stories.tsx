@@ -11,17 +11,38 @@ const meta: Meta<typeof ZButton> = {
 		layout: 'centered'
 	},
 	argTypes: {
-		kind: {
-			control: 'select',
-			options: ['outlined', 'solid', 'ghost']
+		isGhost: {
+			control: 'boolean'
 		},
-		color: {
-			control: 'select',
-			options: ['green', 'purple', 'pink', 'orange', 'white']
+		isOutlined: {
+			control: 'boolean'
 		},
-		size: {
-			control: 'select',
-			options: ['xs', 'sm', 'md', 'lg', 'xl']
+		isSolid: {
+			control: 'boolean'
+		},
+		isGreen: {
+			control: 'boolean'
+		},
+		isPurple: {
+			control: 'boolean'
+		},
+		isPink: {
+			control: 'boolean'
+		},
+		isOrange: {
+			control: 'boolean'
+		},
+		isWhite: {
+			control: 'boolean'
+		},
+		isSmall: {
+			control: 'boolean'
+		},
+		isMedium: {
+			control: 'boolean'
+		},
+		isLarge: {
+			control: 'boolean'
 		},
 		isDisabled: {
 			control: 'boolean'
@@ -36,22 +57,44 @@ type StoryT = StoryObj<typeof ZButton>
 export const Default: StoryT = {
 	args: {
 		children: 'Button',
-		kind: 'outlined',
-		color: 'white',
-		size: 'md',
+		isOutlined: true,
+		isWhite: true,
+		isMedium: true,
 		isDisabled: false
 	}
 }
 
 // ─── Exhaustive grid ────────────────────────────────────────────────────────
 
-type KindT = 'solid' | 'outlined' | 'ghost'
+type KindT = 'outlined' | 'solid' | 'ghost'
 type ThemeT = 'green' | 'purple' | 'pink' | 'orange' | 'white'
 type SizeT = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
 
-const kinds: KindT[] = ['solid', 'outlined', 'ghost']
+const kinds: KindT[] = ['outlined', 'solid', 'ghost']
 const themes: ThemeT[] = ['green', 'purple', 'pink', 'orange', 'white']
 const sizes: SizeT[] = ['xs', 'sm', 'md', 'lg', 'xl']
+
+const kindPropsByKind = {
+	outlined: { isOutlined: true },
+	solid: { isSolid: true },
+	ghost: { isGhost: true }
+} as const
+
+const colorPropsByTheme = {
+	green: { isGreen: true },
+	purple: { isPurple: true },
+	pink: { isPink: true },
+	orange: { isOrange: true },
+	white: { isWhite: true }
+} as const
+
+const sizePropsBySize = {
+	xs: { isExtraSmall: true },
+	sm: { isSmall: true },
+	md: { isMedium: true },
+	lg: { isLarge: true },
+	xl: { isExtraLarge: true }
+} as const
 
 const sectionLabelStyle: React.CSSProperties = {
 	fontSize: 12,
@@ -107,11 +150,6 @@ export const AllVariants: StoryT = {
 		layout: 'fullscreen'
 	},
 	render: () => {
-		const isIconButton = (kind: KindT): boolean => {
-			const shouldUseIcon = kind !== 'solid'
-			return shouldUseIcon
-		}
-
 		return (
 			<div style={gridWrapperStyle}>
 				{themes.map((theme) => {
@@ -119,24 +157,21 @@ export const AllVariants: StoryT = {
 						<section key={theme} style={colorSectionStyle}>
 							<span style={sectionLabelStyle}>{theme}</span>
 							<div style={cardsWrapStyle}>
-								{kinds.map((kind) => {
-									return sizes.map((size) => {
-										const label = `${theme} / ${kind} / ${size}`
-										const shouldUseIcon = isIconButton(kind)
+								{kinds.map((kind) => sizes.map((size) => {
+									const label = `${theme} / ${kind} / ${size}`
 
-										return (
-											<div key={label} style={cardStyle}>
-												<span style={cardLabelStyle}>{label}</span>
-												<Layout.Row isCentered style={buttonRowStyle}>
-													<ZButton kind={kind} color={theme} size={size}>
-														{shouldUseIcon ? <Phosphor.Plus /> : null}
-														Button
-													</ZButton>
-												</Layout.Row>
-											</div>
-										)
-									})
-								})}
+									return (
+										<div key={label} style={cardStyle}>
+											<span style={cardLabelStyle}>{label}</span>
+											<Layout.Row isCentered style={buttonRowStyle}>
+												<ZButton {...kindPropsByKind[kind]} {...colorPropsByTheme[theme]} {...sizePropsBySize[size]}>
+													<Phosphor.Plus />
+													Button
+												</ZButton>
+											</Layout.Row>
+										</div>
+									)
+								}))}
 							</div>
 						</section>
 					)

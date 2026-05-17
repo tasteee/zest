@@ -1,8 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { ZButton } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
+import { z } from '@/components/ui'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
@@ -96,7 +95,9 @@ export default function DialogDocsPage() {
 			<div className='space-y-4'>
 				<div className='flex items-center gap-3'>
 					<h1 className='text-4xl font-bold tracking-tight text-foreground'>ZDialog</h1>
-					<Badge kind='ghost' color='white'>Component</Badge>
+					<z.badge isGhost isWhite>
+						Component
+					</z.badge>
 				</div>
 				<p className='text-xl text-muted-foreground max-w-2xl leading-relaxed'>
 					A modal dialog that interrupts the user with important content and expects a response. Built on Radix UI Dialog
@@ -114,7 +115,7 @@ export default function DialogDocsPage() {
   ZDialogHeader,
   ZDialogTitle,
   ZDialogTrigger,
-  ZButton,
+  z,
   ZInput,
   ZLabel,
 } from '@tasteee/zest'
@@ -123,9 +124,9 @@ export function DialogDemo() {
   return (
     <ZDialog>
       <ZDialogTrigger asChild>
-        <ZButton variant="outline">Open Dialog</ZButton>
+        <z.button>Open Dialog</z.button>
       </ZDialogTrigger>
-      <ZDialogContent className="sm:max-w-[425px]">
+      <ZDialogContent className="sm:max-w-106.25>
         <ZDialogHeader>
           <ZDialogTitle>Edit profile</ZDialogTitle>
           <ZDialogDescription>
@@ -139,7 +140,7 @@ export function DialogDemo() {
           </div>
         </div>
         <ZDialogFooter>
-          <ZButton type="submit">Save changes</ZButton>
+          <z.button type="submit">Save changes</z.button>
         </ZDialogFooter>
       </ZDialogContent>
     </ZDialog>
@@ -148,9 +149,9 @@ export function DialogDemo() {
 			>
 				<Dialog>
 					<DialogTrigger asChild>
-						<ZButton variant='outline'>Open Dialog</ZButton>
+						<z.button>Open Dialog</z.button>
 					</DialogTrigger>
-					<DialogContent className='sm:max-w-[425px]'>
+					<DialogContent className='sm:max-w-106.25'>
 						<DialogHeader>
 							<DialogTitle>Edit profile</DialogTitle>
 							<DialogDescription>Make changes to your profile here. Click save when you&apos;re done.</DialogDescription>
@@ -170,7 +171,7 @@ export function DialogDemo() {
 							</div>
 						</div>
 						<DialogFooter>
-							<ZButton type='submit'>Save changes</ZButton>
+							<z.button type='submit'>Save changes</z.button>
 						</DialogFooter>
 					</DialogContent>
 				</Dialog>
@@ -240,7 +241,7 @@ export function DialogDemo() {
 				>
 					<Dialog>
 						<DialogTrigger asChild>
-							<ZButton variant='destructive'>Delete Account</ZButton>
+							<z.button isPink>Delete Account</z.button>
 						</DialogTrigger>
 						<DialogContent>
 							<DialogHeader>
@@ -254,9 +255,9 @@ export function DialogDemo() {
 							</DialogHeader>
 							<DialogFooter className='gap-2 sm:gap-0'>
 								<DialogClose asChild>
-									<ZButton variant='outline'>Cancel</ZButton>
+									<z.button>Cancel</z.button>
 								</DialogClose>
-								<ZButton variant='destructive'>Delete Account</ZButton>
+								<z.button isPink>Delete Account</z.button>
 							</DialogFooter>
 						</DialogContent>
 					</Dialog>
@@ -300,10 +301,10 @@ export function DialogDemo() {
 				>
 					<Dialog>
 						<DialogTrigger asChild>
-							<ZButton variant='outline'>
+							<z.button>
 								<Share className='mr-2 h-4 w-4' />
 								Share
-							</ZButton>
+							</z.button>
 						</DialogTrigger>
 						<DialogContent className='sm:max-w-md'>
 							<DialogHeader>
@@ -317,16 +318,14 @@ export function DialogDemo() {
 									</Label>
 									<Input id='link' defaultValue='https://example.com/share/abc123' readOnly />
 								</div>
-								<ZButton type='submit' size='sm' className='px-3'>
+								<z.button type='submit' isSmall className='px-3'>
 									<span className='sr-only'>Copy</span>
 									<Copy className='h-4 w-4' />
-								</ZButton>
+								</z.button>
 							</div>
 							<DialogFooter className='sm:justify-start'>
 								<DialogClose asChild>
-									<ZButton type='button' variant='secondary'>
-										Close
-									</ZButton>
+									<z.button type='button'>Close</z.button>
 								</DialogClose>
 							</DialogFooter>
 						</DialogContent>
@@ -344,7 +343,7 @@ export function DialogDemo() {
       Settings
     </Button>
   </DialogTrigger>
-  <DialogContent className="sm:max-w-[525px]">
+  <DialogContent className="sm:max-w-131.25">
     <DialogHeader>
       <DialogTitle>Settings</DialogTitle>
       <DialogDescription>
@@ -376,12 +375,12 @@ export function DialogDemo() {
 				>
 					<Dialog>
 						<DialogTrigger asChild>
-							<ZButton variant='outline'>
+							<z.button>
 								<Settings className='mr-2 h-4 w-4' />
 								Settings
-							</ZButton>
+							</z.button>
 						</DialogTrigger>
-						<DialogContent className='sm:max-w-[525px]'>
+						<DialogContent className='sm:max-w-131.25'>
 							<DialogHeader>
 								<DialogTitle>Settings</DialogTitle>
 								<DialogDescription>Configure your account settings and preferences.</DialogDescription>
@@ -402,9 +401,9 @@ export function DialogDemo() {
 							</div>
 							<DialogFooter>
 								<DialogClose asChild>
-									<ZButton variant='outline'>Cancel</ZButton>
+									<z.button>Cancel</z.button>
 								</DialogClose>
-								<ZButton>Save changes</ZButton>
+								<z.button>Save changes</z.button>
 							</DialogFooter>
 						</DialogContent>
 					</Dialog>

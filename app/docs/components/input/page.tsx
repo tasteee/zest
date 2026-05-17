@@ -3,8 +3,7 @@
 import Link from 'next/link'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { ZButton } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
+import { z } from '@/components/ui'
 import { ComponentPreview } from '@/components/docs/component-preview'
 import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
@@ -74,7 +73,9 @@ export default function InputDocsPage() {
 			<div className='space-y-4'>
 				<div className='flex items-center gap-3'>
 					<h1 className='text-4xl font-bold tracking-tight text-foreground'>ZInput</h1>
-					<Badge kind='ghost' color='white'>Component</Badge>
+					<z.badge isGhost isWhite>
+						Component
+					</z.badge>
 				</div>
 				<p className='text-xl text-muted-foreground max-w-2xl leading-relaxed'>
 					A text input field that allows users to enter single-line text. Built with native input semantics and full
@@ -160,7 +161,7 @@ import { Search } from 'lucide-react'
 
 				{/* Password Toggle */}
 				<ComponentPreview
-					code={`import { ZInput, ZButton } from '@tasteee/zest'
+					code={`import { ZInput, z } from '@tasteee/zest'
 import { Lock, Eye, EyeOff } from 'lucide-react'
 
 const [showPassword, setShowPassword] = useState(false)
@@ -172,24 +173,18 @@ const [showPassword, setShowPassword] = useState(false)
     placeholder="Enter password" 
     className="pl-10 pr-10" 
   />
-  <ZButton
-    type="button"
-    variant="ghost"
-    size="icon"
-    className="absolute right-0 top-0 h-full px-3 hover:bg-transparent"
-    onClick={() => setShowPassword(!showPassword)}
+  <z.button type="button" isIcon className="absolute right-0 top-0 h-full px-3 hover:bg-transparent" onClick={() => setShowPassword(!showPassword)}
   >
     {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-  </ZButton>
+  </z.button>
 </div>`}
 				>
 					<div className='relative max-w-sm'>
 						<Lock className='absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground' />
 						<Input type={showPassword ? 'text' : 'password'} placeholder='Enter password' className='pl-10 pr-10' />
-						<ZButton
+						<z.button
 							type='button'
-							variant='ghost'
-							size='icon'
+							isIcon
 							className='absolute right-0 top-0 h-full px-3 hover:bg-transparent'
 							onClick={() => setShowPassword(!showPassword)}
 						>
@@ -198,22 +193,22 @@ const [showPassword, setShowPassword] = useState(false)
 							) : (
 								<Eye className='h-4 w-4 text-muted-foreground' />
 							)}
-						</ZButton>
+						</z.button>
 					</div>
 				</ComponentPreview>
 
 				{/* With Button */}
 				<ComponentPreview
-					code={`import { ZInput, ZButton } from '@tasteee/zest'
+					code={`import { ZInput, z.button } from '@tasteee/zest'
 
 <div className="flex max-w-sm gap-2">
   <ZInput type="email" placeholder="Enter your email" />
-  <ZButton type="submit">Subscribe</ZButton>
+  <z.button type="submit">Subscribe</z.button>
 </div>`}
 				>
 					<div className='flex max-w-sm gap-2'>
 						<Input type='email' placeholder='Enter your email' />
-						<ZButton type='submit'>Subscribe</ZButton>
+						<z.button type='submit'>Subscribe</z.button>
 					</div>
 				</ComponentPreview>
 

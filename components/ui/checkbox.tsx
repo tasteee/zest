@@ -3,53 +3,126 @@
 import * as React from 'react'
 import * as CheckboxPrimitive from '@radix-ui/react-checkbox'
 import { CheckIcon } from 'lucide-react'
-import { cva, type VariantProps } from 'class-variance-authority'
 
+import { createPropClassNameSwitch, createPropsClassNamesBuilder } from '@/lib/create-prop-classname-switch'
 import { cn } from '@/lib/utils'
+import './checkbox.css'
 
-const checkboxVariants = cva(
-  'peer border-input dark:bg-input/30 focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive size-4 shrink-0 rounded-[4px] border shadow-xs transition-shadow outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50',
-  {
-    variants: {
-      variant: {
-        default:
-          'data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground dark:data-[state=checked]:bg-primary data-[state=checked]:border-primary',
-        green:
-          'data-[state=checked]:bg-neon-green data-[state=checked]:text-primary-foreground data-[state=checked]:border-neon-green',
-        purple:
-          'data-[state=checked]:bg-neon-purple data-[state=checked]:text-primary-foreground data-[state=checked]:border-neon-purple',
-        pink:
-          'data-[state=checked]:bg-neon-pink data-[state=checked]:text-primary-foreground data-[state=checked]:border-neon-pink',
-        orange:
-          'data-[state=checked]:bg-neon-orange data-[state=checked]:text-primary-foreground data-[state=checked]:border-neon-orange',
-      },
-    },
-    defaultVariants: {
-      variant: 'default',
-    },
-  },
-)
+type CheckboxColorPropsT = 'isWhite' | 'isGreen' | 'isPurple' | 'isPink' | 'isOrange'
 
-function Checkbox({
-  className,
-  variant,
-  ...props
-}: React.ComponentProps<typeof CheckboxPrimitive.Root> &
-  VariantProps<typeof checkboxVariants>) {
-  return (
-    <CheckboxPrimitive.Root
-      data-slot="checkbox"
-      className={cn(checkboxVariants({ variant }), className)}
-      {...props}
-    >
-      <CheckboxPrimitive.Indicator
-        data-slot="checkbox-indicator"
-        className="flex items-center justify-center text-current transition-none"
-      >
-        <CheckIcon className="size-3.5" />
-      </CheckboxPrimitive.Indicator>
-    </CheckboxPrimitive.Root>
-  )
+type CheckboxOtherPropsT = {
+	isChecked?: boolean
+	isDisabled?: boolean
+	isHidden?: boolean
+	label?: string
+	description?: string
+	onChange?: (isNowChecked: boolean, event: React.SyntheticEvent<HTMLButtonElement> | undefined) => void
+	onCheckedChange?: (checked: boolean | 'indeterminate') => void
 }
 
-export { Checkbox, checkboxVariants }
+type CheckboxPropsT = Omit<
+	React.ComponentProps<typeof CheckboxPrimitive.Root>,
+	'checked' | 'defaultChecked' | 'disabled' | 'color' | 'onChange' | 'onCheckedChange'
+> &
+	ZeroOrOneTruePropT<CheckboxColorPropsT> &
+	CheckboxOtherPropsT
+
+const getColorClass = createPropClassNameSwitch({
+	isOrange: 'isOrange',
+	isPurple: 'isPurple',
+	isPink: 'isPink',
+	isGreen: 'isGreen',
+	isWhite: 'isWhite'
+})
+
+const getStyleClass = createPropsClassNamesBuilder({
+	isDisabled: 'isDisabled',
+	isHidden: 'isHidden'
+})
+
+const hasColorProp = (props: CheckboxPropsT) => {
+	return props.isGreen || props.isPurple || props.isPink || props.isOrange || props.isWhite
+}
+
+const Checkbox = React.forwardRef<React.ElementRef<typeof CheckboxPrimitive.Root>, CheckboxPropsT>((props, ref) => {
+	const {
+		'aria-describedby': ariaDescribedBy,
+		className,
+		description,
+		id,
+		isChecked,
+		isDisabled,
+		isGreen,
+		isHidden,
+		isOrange,
+		isPink,
+		isPurple,
+		isWhite,
+		label,
+		onChange,
+		onCheckedChange,
+		onClick,
+		...checkboxProps
+	} = props
+	const generatedId = React.useId()
+	const hasLabel = label !== undefined
+	const hasDescription = description !== undefined
+	const checkboxId = id ?? (hasLabel || hasDescription ? generatedId : undefined)
+	const descriptionId = hasDescription && checkboxId ? `${checkboxId}-description` : undefined
+	const describedBy = [ariaDescribedBy, descriptionId].filter(Boolean).join(' ') || undefined
+	const colorClass = getColorClass(props)
+	const styleClass = getStyleClass({ isDisabled, isHidden })
+	const changeEventRef = React.useRef<React.SyntheticEvent<HTMLButtonElement> | undefined>(undefined)
+	const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+		changeEventRef.current = event
+		onClick?.(event)
+	}
+	const handleCheckedChange = (checked: boolean | 'indeterminate') => {
+		onCheckedChange?.(checked)
+		onChange?.(checked === true, changeEventRef.current)
+		changeEventRef.current = undefined
+	}
+	const checkbox = (
+		<CheckboxPrimitive.Root
+			ref={ref}
+			id={checkboxId}
+			aria-describedby={describedBy}
+			data-slot='checkbox'
+			checked={isChecked}
+			disabled={isDisabled}
+			className={cn('zCheckbox', hasColorProp(props) ? colorClass : 'isWhite', styleClass, className)}
+			onCheckedChange={handleCheckedChange}
+			onClick={handleClick}
+			{...checkboxProps}
+		>
+			<CheckboxPrimitive.Indicator data-slot='checkbox-indicator' className='zCheckboxIndicator'>
+				<CheckIcon className='zCheckboxIcon' />
+			</CheckboxPrimitive.Indicator>
+		</CheckboxPrimitive.Root>
+	)
+
+	if (!hasLabel && !hasDescription) return checkbox
+
+	return (
+		<div className={cn('zCheckboxField', hasDescription && 'hasDescription', isDisabled && 'isDisabled')}>
+			{checkbox}
+			<div className='zCheckboxText'>
+				{hasLabel ? (
+					<label className='zCheckboxLabel' htmlFor={checkboxId}>
+						{label}
+					</label>
+				) : null}
+				{hasDescription ? (
+					<p className='zCheckboxDescription' id={descriptionId}>
+						{description}
+					</p>
+				) : null}
+			</div>
+		</div>
+	)
+})
+
+Checkbox.displayName = 'Checkbox'
+
+export { Checkbox }
+export type { CheckboxPropsT }

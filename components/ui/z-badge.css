@@ -1,0 +1,129 @@
+.z\.badge {
+	--zBadge-color: var(--foreground);
+	--zBadge-bg: transparent;
+	--zBadge-border: var(--border);
+	--zBadge-hover-bg: var(--accent);
+	--zBadge-hover-color: var(--accent-foreground);
+	--zBadge-solid-bg: var(--foreground);
+	--zBadge-solid-color: var(--background);
+
+	display: inline-flex;
+	width: fit-content;
+	flex-shrink: 0;
+	align-items: center;
+	justify-content: center;
+	gap: 0.25rem;
+	overflow: hidden;
+	white-space: nowrap;
+	user-select: none;
+	border: 1px solid var(--zBadge-border);
+	border-radius: var(--radius-md);
+	background: var(--zBadge-bg);
+	color: var(--zBadge-color);
+	padding: 0.25rem 0.625rem;
+	font-size: 0.75rem;
+	font-weight: 500;
+	line-height: 1;
+	transition:
+		opacity 0.1s ease,
+		color 0.1s ease,
+		background-color 0.1s ease,
+		border-color 0.1s ease,
+		box-shadow 0.1s ease;
+
+	& > svg {
+		width: 0.75rem;
+		height: 0.75rem;
+		flex-shrink: 0;
+		color: currentColor;
+		pointer-events: none;
+	}
+
+	&:focus-visible {
+		border-color: var(--ring);
+		box-shadow: 0 0 0 3px color-mix(in oklch, var(--ring) 50%, transparent);
+		outline: none;
+	}
+
+	&[aria-invalid='true'] {
+		border-color: var(--destructive);
+		box-shadow: 0 0 0 3px color-mix(in oklch, var(--destructive) 20%, transparent);
+	}
+
+	&.isGreen {
+		--zBadge-color: var(---green);
+		--zBadge-border: var(---green);
+		--zBadge-hover-bg: color-mix(in oklch, var(---green) 10%, transparent);
+		--zBadge-hover-color: var(---green);
+		--zBadge-solid-bg: var(---green);
+		--zBadge-solid-color: var(--primary-foreground);
+	}
+
+	&.isPurple {
+		--zBadge-color: var(---purple);
+		--zBadge-border: var(---purple);
+		--zBadge-hover-bg: color-mix(in oklch, var(---purple) 10%, transparent);
+		--zBadge-hover-color: var(---purple);
+		--zBadge-solid-bg: var(---purple);
+		--zBadge-solid-color: var(--primary-foreground);
+	}
+
+	&.isPink {
+		--zBadge-color: var(---pink);
+		--zBadge-border: var(---pink);
+		--zBadge-hover-bg: color-mix(in oklch, var(---pink) 10%, transparent);
+		--zBadge-hover-color: var(---pink);
+		--zBadge-solid-bg: var(---pink);
+		--zBadge-solid-color: var(--primary-foreground);
+	}
+
+	&.isOrange {
+		--zBadge-color: var(---orange);
+		--zBadge-border: var(---orange);
+		--zBadge-hover-bg: color-mix(in oklch, var(---orange) 10%, transparent);
+		--zBadge-hover-color: var(---orange);
+		--zBadge-solid-bg: var(---orange);
+		--zBadge-solid-color: var(--primary-foreground);
+	}
+
+	&.isWhite {
+		--zBadge-color: var(--foreground);
+		--zBadge-border: var(--border);
+		--zBadge-hover-bg: var(--accent);
+		--zBadge-hover-color: var(--accent-foreground);
+		--zBadge-solid-bg: var(--foreground);
+		--zBadge-solid-color: var(--background);
+	}
+
+	&.isOutline {
+		background: transparent;
+		border-color: var(--zBadge-border);
+		color: var(--zBadge-color);
+	}
+
+	a&.isOutline:hover {
+		background: var(--zBadge-hover-bg);
+		color: var(--zBadge-hover-color, var(--zBadge-color));
+	}
+
+	&.isGhost {
+		background: transparent;
+		border-color: transparent;
+		color: var(--zBadge-color);
+	}
+
+	a&.isGhost:hover {
+		background: var(--zBadge-hover-bg);
+		color: var(--zBadge-hover-color, var(--zBadge-color));
+	}
+
+	&.isSolid {
+		background: var(--zBadge-solid-bg);
+		border-color: transparent;
+		color: var(--zBadge-solid-color);
+	}
+
+	a&.isSolid:hover {
+		opacity: 0.9;
+	}
+}

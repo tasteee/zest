@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/nextjs'
 import { Empty, EmptyHeader, EmptyTitle, EmptyDescription, EmptyContent, EmptyMedia } from './empty'
-import { ZButton } from './button'
+import { z } from '@/components/ui'
 import { Inbox } from 'lucide-react'
 
 const meta: Meta<typeof Empty> = {
@@ -28,9 +28,10 @@ export const Default: StoryT = {
 					<EmptyDescription>There are no items to display at this time.</EmptyDescription>
 				</EmptyHeader>
 				<EmptyContent>
-					<ZButton size='sm'>Create item</ZButton>
+					<z.button isSmall>Create item</z.button>
 				</EmptyContent>
 			</Empty>
 		)
 	}
 }
+

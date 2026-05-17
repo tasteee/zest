@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/nextjs'
 import { Collapsible, CollapsibleTrigger, CollapsibleContent } from './collapsible'
-import { ZButton } from './button'
+import { z } from '@/components/ui'
 
 const meta: Meta<typeof Collapsible> = {
 	title: 'UI/Collapsible',
@@ -20,9 +20,9 @@ export const Default: StoryT = {
 		return (
 			<Collapsible className='w-72'>
 				<CollapsibleTrigger asChild>
-					<ZButton variant='outline' className='w-full justify-between'>
+					<z.button className='w-full justify-between'>
 						Toggle section
-					</ZButton>
+					</z.button>
 				</CollapsibleTrigger>
 				<CollapsibleContent className='pt-2'>
 					<p className='text-sm text-muted-foreground'>This content is collapsed by default.</p>
@@ -31,3 +31,4 @@ export const Default: StoryT = {
 		)
 	}
 }
+

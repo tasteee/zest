@@ -1,8 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { Badge } from '@/components/ui/badge'
-import { ZButton } from '@/components/ui/button'
+import { z } from '@/components/ui'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Checkbox } from '@/components/ui/checkbox'
@@ -32,7 +31,9 @@ export default function FormsPatternPage() {
 			<div className='space-y-4'>
 				<div className='flex items-center gap-3'>
 					<h1 className='text-4xl font-bold tracking-tight text-foreground'>Form Patterns</h1>
-					<Badge kind='ghost' color='white'>Pattern</Badge>
+					<z.badge isGhost isWhite>
+						Pattern
+					</z.badge>
 				</div>
 				<p className='text-xl text-muted-foreground max-w-2xl leading-relaxed'>
 					Best practices for building accessible, user-friendly forms with proper validation, error handling, and layout
@@ -76,9 +77,9 @@ export default function FormsPatternPage() {
 							<Label htmlFor='message'>Message</Label>
 							<Input id='message' placeholder='Enter your message' />
 						</div>
-						<ZButton type='submit' className='w-full'>
+						<z.button type='submit' className='w-full'>
 							Send Message
-						</ZButton>
+						</z.button>
 					</form>
 				</ComponentPreview>
 			</section>
@@ -132,7 +133,7 @@ export default function FormsPatternPage() {
 							</form>
 						</CardContent>
 						<CardFooter>
-							<ZButton className='w-full'>Sign In</ZButton>
+							<z.button className='w-full'>Sign In</z.button>
 						</CardFooter>
 					</Card>
 				</ComponentPreview>
@@ -187,7 +188,7 @@ export default function FormsPatternPage() {
 							<Input id='valid-email' type='email' placeholder='Enter email' />
 							<p className='text-sm text-muted-foreground'>We&apos;ll never share your email with anyone else.</p>
 						</div>
-						<ZButton type='submit'>Submit</ZButton>
+						<z.button type='submit'>Submit</z.button>
 					</form>
 				</ComponentPreview>
 			</section>
@@ -282,9 +283,9 @@ export default function FormsPatternPage() {
 								I agree to the terms and conditions
 							</Label>
 						</div>
-						<ZButton type='submit' className='w-full'>
+						<z.button type='submit' className='w-full'>
 							Create Account
-						</ZButton>
+						</z.button>
 					</form>
 				</ComponentPreview>
 			</section>

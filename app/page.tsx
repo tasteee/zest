@@ -14,7 +14,7 @@ export default function BrandGuidePage() {
 	const [activeSection, setActiveSection] = useState('hero')
 
 	return (
-		<div className='min-h-screen bg-gradient-to-b from-[#050908] via-[#0a0f0a] to-[#0d120d]'>
+		<div className='zestPageBackground'>
 			<Navigation activeSection={activeSection} />
 
 			<main className='relative'>

@@ -3,7 +3,7 @@
 import { cva, type VariantProps } from 'class-variance-authority'
 
 import { cn } from '@/lib/utils'
-import { ZButton } from '@/components/ui/button'
+import { z } from '@/components/ui'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 
@@ -91,15 +91,14 @@ const inputGroupButtonVariants = cva('text-sm shadow-none flex gap-2 items-cente
 function InputGroupButton({
 	className,
 	type = 'button',
-	variant = 'ghost',
 	size = 'xs',
 	...props
-}: Omit<React.ComponentProps<typeof ZButton>, 'size'> & VariantProps<typeof inputGroupButtonVariants>) {
+}: Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'color'> & VariantProps<typeof inputGroupButtonVariants>) {
 	return (
-		<ZButton
+		<z.button
 			type={type}
 			data-size={size}
-			variant={variant}
+			isWhite
 			className={cn(inputGroupButtonVariants({ size }), className)}
 			{...props}
 		/>

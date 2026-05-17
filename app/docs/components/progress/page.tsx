@@ -3,8 +3,7 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { Progress } from '@/components/ui/progress'
-import { Badge } from '@/components/ui/badge'
-import { ZButton } from '@/components/ui/button'
+import { z } from '@/components/ui'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { ComponentPreview } from '@/components/docs/component-preview'
 import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
@@ -79,7 +78,9 @@ export default function ProgressDocsPage() {
 			<div className='space-y-4'>
 				<div className='flex items-center gap-3'>
 					<h1 className='text-4xl font-bold tracking-tight text-foreground'>ZProgress</h1>
-					<Badge kind='ghost' color='white'>Component</Badge>
+					<z.badge isGhost isWhite>
+						Component
+					</z.badge>
 				</div>
 				<p className='text-xl text-muted-foreground max-w-2xl leading-relaxed'>
 					Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.
@@ -201,10 +202,10 @@ const startAnimation = () => {
 							<span className='text-muted-foreground'>{animatedProgress}%</span>
 						</div>
 						<Progress value={animatedProgress} variant='green' />
-						<ZButton onClick={startAnimation} size='sm'>
+						<z.button onClick={startAnimation} isSmall>
 							<RotateCcw className='mr-2 h-4 w-4' />
 							Start Animation
-						</ZButton>
+						</z.button>
 					</div>
 				</ComponentPreview>
 

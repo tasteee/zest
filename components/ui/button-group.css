@@ -1,0 +1,27 @@
+.zButtonGroup[data-orientation='horizontal'] > * {
+	border-radius: 0;
+}
+
+.zButtonGroup[data-orientation='horizontal'] > :first-child {
+	border-top-left-radius: var(--radius-md);
+	border-bottom-left-radius: var(--radius-md);
+}
+
+.zButtonGroup[data-orientation='horizontal'] > :last-child {
+	border-top-right-radius: var(--radius-md);
+	border-bottom-right-radius: var(--radius-md);
+}
+
+.zButtonGroup[data-orientation='vertical'] > * {
+	border-radius: 0;
+}
+
+.zButtonGroup[data-orientation='vertical'] > :first-child {
+	border-top-left-radius: var(--radius-md);
+	border-top-right-radius: var(--radius-md);
+}
+
+.zButtonGroup[data-orientation='vertical'] > :last-child {
+	border-bottom-right-radius: var(--radius-md);
+	border-bottom-left-radius: var(--radius-md);
+}

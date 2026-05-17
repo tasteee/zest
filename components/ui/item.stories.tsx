@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/nextjs'
 import { Item, ItemMedia, ItemContent, ItemTitle, ItemDescription, ItemActions, ItemGroup } from './item'
-import { ZButton } from './button'
+import { z } from '@/components/ui'
 import { User } from 'lucide-react'
 
 const meta: Meta<typeof Item> = {
@@ -38,9 +38,9 @@ export const Default: StoryT = {
 					<ItemDescription>shane@tasteink.com</ItemDescription>
 				</ItemContent>
 				<ItemActions>
-					<ZButton size='sm' variant='ghost'>
+					<z.button isSmall>
 						Edit
-					</ZButton>
+					</z.button>
 				</ItemActions>
 			</Item>
 		)
@@ -89,3 +89,4 @@ export const WithGroup: StoryT = {
 		)
 	}
 }
+

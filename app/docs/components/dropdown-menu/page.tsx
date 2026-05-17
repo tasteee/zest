@@ -1,8 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { Badge } from '@/components/ui/badge'
-import { ZButton } from '@/components/ui/button'
+import { z } from '@/components/ui'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import {
 	DropdownMenu,
@@ -116,7 +115,9 @@ export default function DropdownMenuDocsPage() {
 			<div className='space-y-4'>
 				<div className='flex items-center gap-3'>
 					<h1 className='text-4xl font-bold tracking-tight text-foreground'>ZDropdownMenu</h1>
-					<Badge kind='ghost' color='white'>Component</Badge>
+					<z.badge isGhost isWhite>
+						Component
+					</z.badge>
 				</div>
 				<p className='text-xl text-muted-foreground max-w-2xl leading-relaxed'>
 					Displays a menu to the user triggered by a button. Supports submenus, checkboxes, and radio groups. Built on Radix UI
@@ -135,7 +136,7 @@ export default function DropdownMenuDocsPage() {
   ZDropdownMenuLabel,
   ZDropdownMenuSeparator,
   ZDropdownMenuTrigger,
-  ZButton,
+  z,
 } from '@tasteee/zest'
 import { User, CreditCard, Settings, LogOut } from 'lucide-react'
 
@@ -143,7 +144,7 @@ export function DropdownMenuDemo() {
   return (
     <ZDropdownMenu>
       <ZDropdownMenuTrigger asChild>
-        <ZButton variant="outline">Open Menu</ZButton>
+        <z.button>Open Menu</z.button>
       </ZDropdownMenuTrigger>
       <ZDropdownMenuContent className="w-56">
         <ZDropdownMenuLabel>My Account</ZDropdownMenuLabel>
@@ -172,7 +173,7 @@ export function DropdownMenuDemo() {
 			>
 				<DropdownMenu>
 					<DropdownMenuTrigger asChild>
-						<ZButton variant='outline'>Open Menu</ZButton>
+						<z.button>Open Menu</z.button>
 					</DropdownMenuTrigger>
 					<DropdownMenuContent className='w-56'>
 						<DropdownMenuLabel>My Account</DropdownMenuLabel>
@@ -261,7 +262,7 @@ export function DropdownMenuDemo() {
 				>
 					<DropdownMenu>
 						<DropdownMenuTrigger asChild>
-							<ZButton variant='outline'>Edit</ZButton>
+							<z.button>Edit</z.button>
 						</DropdownMenuTrigger>
 						<DropdownMenuContent className='w-56'>
 							<DropdownMenuItem>
@@ -315,7 +316,7 @@ const [showActivityBar, setShowActivityBar] = useState(false)
 				>
 					<DropdownMenu>
 						<DropdownMenuTrigger asChild>
-							<ZButton variant='outline'>View</ZButton>
+							<z.button>View</z.button>
 						</DropdownMenuTrigger>
 						<DropdownMenuContent className='w-56'>
 							<DropdownMenuLabel>Appearance</DropdownMenuLabel>
@@ -353,7 +354,7 @@ const [showActivityBar, setShowActivityBar] = useState(false)
 				>
 					<DropdownMenu>
 						<DropdownMenuTrigger asChild>
-							<ZButton variant='outline'>Position</ZButton>
+							<z.button>Position</z.button>
 						</DropdownMenuTrigger>
 						<DropdownMenuContent className='w-56'>
 							<DropdownMenuLabel>Panel Position</DropdownMenuLabel>
@@ -388,10 +389,10 @@ const [showActivityBar, setShowActivityBar] = useState(false)
 				>
 					<DropdownMenu>
 						<DropdownMenuTrigger asChild>
-							<ZButton variant='ghost' size='icon'>
+							<z.button isIcon>
 								<MoreHorizontal className='h-4 w-4' />
 								<span className='sr-only'>Open menu</span>
-							</ZButton>
+							</z.button>
 						</DropdownMenuTrigger>
 						<DropdownMenuContent align='end'>
 							<DropdownMenuItem>Edit</DropdownMenuItem>

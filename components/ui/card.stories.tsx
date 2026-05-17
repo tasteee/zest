@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/nextjs'
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter, CardAction } from './card'
-import { ZButton } from './button'
-import { Badge } from './badge'
+import { z } from '@/components/ui'
+import { z } from '../ui/z-components'
 import { Progress } from './progress'
 import { Switch } from './switch'
 import { Label } from './label'
@@ -77,8 +77,8 @@ export const AllVariants: StoryT = {
 								<p className='text-sm text-muted-foreground'>Some content for this card example.</p>
 							</CardContent>
 							<CardFooter className='gap-2'>
-								<ZButton variant='outline'>Cancel</ZButton>
-								<ZButton>Save</ZButton>
+								<z.button>Cancel</z.button>
+								<z.button>Save</z.button>
 							</CardFooter>
 						</Card>
 					</div>
@@ -93,9 +93,9 @@ export const AllVariants: StoryT = {
 								<CardTitle>Notifications</CardTitle>
 								<CardDescription>Manage your preferences.</CardDescription>
 								<CardAction>
-									<ZButton size='sm' variant='ghost'>
+									<z.button isSmall>
 										<Phosphor.PencilSimple />
-									</ZButton>
+									</z.button>
 								</CardAction>
 							</CardHeader>
 							<CardContent>
@@ -108,7 +108,9 @@ export const AllVariants: StoryT = {
 								<CardTitle>Project Alpha</CardTitle>
 								<CardDescription>Last updated 2 days ago</CardDescription>
 								<CardAction>
-									<Badge kind='solid' color='green'>Active</Badge>
+									<z.badge isSolid isGreen>
+										Active
+									</z.badge>
 								</CardAction>
 							</CardHeader>
 							<CardContent>
@@ -213,7 +215,9 @@ export const AllVariants: StoryT = {
 								<CardDescription>Total Revenue</CardDescription>
 								<CardTitle className='text-3xl font-bold'>$45,231</CardTitle>
 								<CardAction>
-									<Badge kind='solid' color='green'>+20.1%</Badge>
+									<z.badge isSolid isGreen>
+										+20.1%
+									</z.badge>
 								</CardAction>
 							</CardHeader>
 						</Card>
@@ -223,7 +227,9 @@ export const AllVariants: StoryT = {
 								<CardDescription>Active Users</CardDescription>
 								<CardTitle className='text-3xl font-bold'>2,350</CardTitle>
 								<CardAction>
-									<Badge kind='solid' color='purple'>+180</Badge>
+									<z.badge isSolid isPurple>
+										+180
+									</z.badge>
 								</CardAction>
 							</CardHeader>
 						</Card>
@@ -233,7 +239,9 @@ export const AllVariants: StoryT = {
 								<CardDescription>Sales</CardDescription>
 								<CardTitle className='text-3xl font-bold'>12,234</CardTitle>
 								<CardAction>
-									<Badge kind='solid' color='pink'>+19%</Badge>
+									<z.badge isSolid isPink>
+										+19%
+									</z.badge>
 								</CardAction>
 							</CardHeader>
 						</Card>
@@ -258,8 +266,8 @@ export const Default: StoryT = {
 					<p>Card content and body text.</p>
 				</CardContent>
 				<CardFooter className='gap-2'>
-					<ZButton variant='outline'>Cancel</ZButton>
-					<ZButton>Save</ZButton>
+					<z.button>Cancel</z.button>
+					<z.button>Save</z.button>
 				</CardFooter>
 			</Card>
 		)
@@ -274,9 +282,7 @@ export const WithAction: StoryT = {
 					<CardTitle>Notifications</CardTitle>
 					<CardDescription>Manage your preferences.</CardDescription>
 					<CardAction>
-						<ZButton size='sm' variant='ghost'>
-							Edit
-						</ZButton>
+						<z.button isSmall>Edit</z.button>
 					</CardAction>
 				</CardHeader>
 				<CardContent>
@@ -311,7 +317,9 @@ export const StatCard: StoryT = {
 					<CardDescription>Total Revenue</CardDescription>
 					<CardTitle className='text-3xl font-bold'>$45,231</CardTitle>
 					<CardAction>
-						<Badge kind='solid' color='green'>+20.1%</Badge>
+						<z.badge isSolid isGreen>
+							+20.1%
+						</z.badge>
 					</CardAction>
 				</CardHeader>
 			</Card>
@@ -341,3 +349,4 @@ export const SettingsCard: StoryT = {
 		)
 	}
 }
+

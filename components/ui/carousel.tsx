@@ -5,7 +5,7 @@ import useEmblaCarousel, { type UseEmblaCarouselType } from 'embla-carousel-reac
 import { ArrowLeft, ArrowRight } from 'lucide-react'
 
 import { cn } from '@/lib/utils'
-import { ZButton } from '@/components/ui/button'
+import { z } from '@/components/ui'
 
 type CarouselApi = UseEmblaCarouselType[1]
 type UseCarouselParameters = Parameters<typeof useEmblaCarousel>
@@ -153,19 +153,14 @@ function CarouselItem({ className, ...props }: React.ComponentProps<'div'>) {
 	)
 }
 
-function CarouselPrevious({
-	className,
-	variant = 'outline',
-	size = 'icon',
-	...props
-}: React.ComponentProps<typeof ZButton>) {
+function CarouselPrevious({ className, ...props }: Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'color'>) {
 	const { orientation, scrollPrev, canScrollPrev } = useCarousel()
 
 	return (
-		<ZButton
+		<z.button
 			data-slot='carousel-previous'
-			variant={variant}
-			size={size}
+			isIcon
+			isWhite
 			className={cn(
 				'absolute size-8 rounded-full',
 				orientation === 'horizontal' ? 'top-1/2 -left-12 -translate-y-1/2' : '-top-12 left-1/2 -translate-x-1/2 rotate-90',
@@ -177,18 +172,18 @@ function CarouselPrevious({
 		>
 			<ArrowLeft />
 			<span className='sr-only'>Previous slide</span>
-		</ZButton>
+		</z.button>
 	)
 }
 
-function CarouselNext({ className, variant = 'outline', size = 'icon', ...props }: React.ComponentProps<typeof ZButton>) {
+function CarouselNext({ className, ...props }: Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'color'>) {
 	const { orientation, scrollNext, canScrollNext } = useCarousel()
 
 	return (
-		<ZButton
+		<z.button
 			data-slot='carousel-next'
-			variant={variant}
-			size={size}
+			isIcon
+			isWhite
 			className={cn(
 				'absolute size-8 rounded-full',
 				orientation === 'horizontal' ? 'top-1/2 -right-12 -translate-y-1/2' : '-bottom-12 left-1/2 -translate-x-1/2 rotate-90',
@@ -200,7 +195,7 @@ function CarouselNext({ className, variant = 'outline', size = 'icon', ...props 
 		>
 			<ArrowRight />
 			<span className='sr-only'>Next slide</span>
-		</ZButton>
+		</z.button>
 	)
 }
 

@@ -1,10 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { Badge } from '@/components/ui/badge'
-import { ZButton } from '@/components/ui/button'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
+import { z } from '@/components/ui'
 import { ComponentPreview } from '@/components/docs/component-preview'
 import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
@@ -13,13 +10,18 @@ import { ChevronRight, Plus, HelpCircle, Info } from 'lucide-react'
 
 const tooltipProps: PropDefinition[] = [
 	{
-		name: 'delayDuration',
+		name: 'tip',
+		type: 'string | React.ReactNode',
+		description: 'The tooltip content to show on hover or focus.'
+	},
+	{
+		name: 'delay',
 		type: 'number',
-		defaultValue: '400',
+		defaultValue: '0',
 		description: 'The duration in milliseconds to wait before showing the tooltip.'
 	},
 	{
-		name: 'skipDelayDuration',
+		name: 'skipDelay',
 		type: 'number',
 		defaultValue: '300',
 		description: 'How much time a user has to enter another trigger without incurring a delay.'
@@ -42,7 +44,7 @@ const tooltipContentProps: PropDefinition[] = [
 	{
 		name: 'sideOffset',
 		type: 'number',
-		defaultValue: '0',
+		defaultValue: '6',
 		description: 'The distance in pixels from the trigger.'
 	},
 	{
@@ -78,8 +80,10 @@ export default function TooltipDocsPage() {
 			{/* Header */}
 			<div className='space-y-4'>
 				<div className='flex items-center gap-3'>
-					<h1 className='text-4xl font-bold tracking-tight text-foreground'>ZTooltip</h1>
-					<Badge kind='ghost' color='white'>Component</Badge>
+					<h1 className='text-4xl font-bold tracking-tight text-foreground'>z.tooltip</h1>
+					<z.badge isGhost isWhite>
+						Component
+					</z.badge>
 				</div>
 				<p className='text-xl text-muted-foreground max-w-2xl leading-relaxed'>
 					A popup that displays information related to an element when the element receives keyboard focus or mouse hover. Built
@@ -91,62 +95,32 @@ export default function TooltipDocsPage() {
 			<ComponentPreview
 				title='Default Tooltip'
 				description='Hover over the button to see the tooltip.'
-				code={`import {
-  ZTooltip,
-  ZTooltipContent,
-  ZTooltipProvider,
-  ZTooltipTrigger,
-  ZButton,
-} from '@tasteee/zest'
+				code={`import { z } from '@tasteee/zest'
 
 export function TooltipDemo() {
   return (
-    <ZTooltipProvider>
-      <ZTooltip>
-        <ZTooltipTrigger asChild>
-          <ZButton variant="outline">Hover me</ZButton>
-        </ZTooltipTrigger>
-        <ZTooltipContent>
-          <p>Add to library</p>
-        </ZTooltipContent>
-      </ZTooltip>
-    </ZTooltipProvider>
+    <z.tooltip tip="Add to library">
+      <z.button>Hover me</z.button>
+    </z.tooltip>
   )
 }`}
 			>
-				<TooltipProvider>
-					<Tooltip>
-						<TooltipTrigger asChild>
-							<ZButton variant='outline'>Hover me</ZButton>
-						</TooltipTrigger>
-						<TooltipContent>
-							<p>Add to library</p>
-						</TooltipContent>
-					</Tooltip>
-				</TooltipProvider>
+				<z.tooltip tip='Add to library'>
+					<z.button>Hover me</z.button>
+				</z.tooltip>
 			</ComponentPreview>
 
 			{/* Usage */}
 			<section className='space-y-6'>
 				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>Usage</h2>
 				<CodeBlock
-					code={`import {
-  ZTooltip,
-  ZTooltipContent,
-  ZTooltipProvider,
-  ZTooltipTrigger,
-} from '@tasteee/zest'`}
+					code={`import { z } from '@tasteee/zest'`}
 					language='tsx'
 				/>
 				<CodeBlock
-					code={`<ZTooltipProvider>
-  <ZTooltip>
-    <ZTooltipTrigger>Hover</ZTooltipTrigger>
-    <ZTooltipContent>
-      <p>Tooltip content</p>
-    </ZTooltipContent>
-  </ZTooltip>
-</ZTooltipProvider>`}
+					code={`<z.tooltip tip="Tooltip content">
+  <z.button>Hover</z.button>
+</z.tooltip>`}
 					language='tsx'
 				/>
 			</section>
@@ -160,107 +134,53 @@ export function TooltipDemo() {
 					title='Positions'
 					description='Tooltips can be positioned on different sides of the trigger.'
 					code={`<div className="flex gap-4">
-  <Tooltip>
-    <TooltipTrigger asChild>
-      <Button variant="outline">Top</Button>
-    </TooltipTrigger>
-    <TooltipContent side="top">
-      <p>Tooltip on top</p>
-    </TooltipContent>
-  </Tooltip>
-  <Tooltip>
-    <TooltipTrigger asChild>
-      <Button variant="outline">Right</Button>
-    </TooltipTrigger>
-    <TooltipContent side="right">
-      <p>Tooltip on right</p>
-    </TooltipContent>
-  </Tooltip>
-  <Tooltip>
-    <TooltipTrigger asChild>
-      <Button variant="outline">Bottom</Button>
-    </TooltipTrigger>
-    <TooltipContent side="bottom">
-      <p>Tooltip on bottom</p>
-    </TooltipContent>
-  </Tooltip>
-  <Tooltip>
-    <TooltipTrigger asChild>
-      <Button variant="outline">Left</Button>
-    </TooltipTrigger>
-    <TooltipContent side="left">
-      <p>Tooltip on left</p>
-    </TooltipContent>
-  </Tooltip>
+  <z.tooltip tip="Tooltip on top" side="top">
+    <z.button>Top</z.button>
+  </z.tooltip>
+  <z.tooltip tip="Tooltip on right" side="right">
+    <z.button>Right</z.button>
+  </z.tooltip>
+  <z.tooltip tip="Tooltip on bottom" side="bottom">
+    <z.button>Bottom</z.button>
+  </z.tooltip>
+  <z.tooltip tip="Tooltip on left" side="left">
+    <z.button>Left</z.button>
+  </z.tooltip>
 </div>`}
 				>
-					<TooltipProvider>
-						<div className='flex gap-4'>
-							<Tooltip>
-								<TooltipTrigger asChild>
-									<ZButton variant='outline'>Top</ZButton>
-								</TooltipTrigger>
-								<TooltipContent side='top'>
-									<p>Tooltip on top</p>
-								</TooltipContent>
-							</Tooltip>
-							<Tooltip>
-								<TooltipTrigger asChild>
-									<ZButton variant='outline'>Right</ZButton>
-								</TooltipTrigger>
-								<TooltipContent side='right'>
-									<p>Tooltip on right</p>
-								</TooltipContent>
-							</Tooltip>
-							<Tooltip>
-								<TooltipTrigger asChild>
-									<ZButton variant='outline'>Bottom</ZButton>
-								</TooltipTrigger>
-								<TooltipContent side='bottom'>
-									<p>Tooltip on bottom</p>
-								</TooltipContent>
-							</Tooltip>
-							<Tooltip>
-								<TooltipTrigger asChild>
-									<ZButton variant='outline'>Left</ZButton>
-								</TooltipTrigger>
-								<TooltipContent side='left'>
-									<p>Tooltip on left</p>
-								</TooltipContent>
-							</Tooltip>
-						</div>
-					</TooltipProvider>
+					<div className='flex gap-4'>
+						<z.tooltip tip='Tooltip on top' side='top'>
+							<z.button>Top</z.button>
+						</z.tooltip>
+						<z.tooltip tip='Tooltip on right' side='right'>
+							<z.button>Right</z.button>
+						</z.tooltip>
+						<z.tooltip tip='Tooltip on bottom' side='bottom'>
+							<z.button>Bottom</z.button>
+						</z.tooltip>
+						<z.tooltip tip='Tooltip on left' side='left'>
+							<z.button>Left</z.button>
+						</z.tooltip>
+					</div>
 				</ComponentPreview>
 
 				{/* Icon Button */}
 				<ComponentPreview
 					title='Icon Button Tooltip'
 					description='Common pattern for icon-only buttons.'
-					code={`<Tooltip>
-  <TooltipTrigger asChild>
-    <Button size="icon" variant="outline">
-      <Plus className="h-4 w-4" />
-      <span className="sr-only">Add item</span>
-    </Button>
-  </TooltipTrigger>
-  <TooltipContent>
-    <p>Add item</p>
-  </TooltipContent>
-</Tooltip>`}
+					code={`<z.tooltip tip="Add item">
+  <z.button isIcon>
+    <Plus className="h-4 w-4" />
+    <span className="sr-only">Add item</span>
+  </z.button>
+</z.tooltip>`}
 				>
-					<TooltipProvider>
-						<Tooltip>
-							<TooltipTrigger asChild>
-								<ZButton size='icon' variant='outline'>
-									<Plus className='h-4 w-4' />
-									<span className='sr-only'>Add item</span>
-								</ZButton>
-							</TooltipTrigger>
-							<TooltipContent>
-								<p>Add item</p>
-							</TooltipContent>
-						</Tooltip>
-					</TooltipProvider>
+					<z.tooltip tip='Add item'>
+						<z.button isIcon>
+							<Plus className='h-4 w-4' />
+							<span className='sr-only'>Add item</span>
+						</z.button>
+					</z.tooltip>
 				</ComponentPreview>
 
 				{/* Help Icon */}
@@ -269,73 +189,59 @@ export function TooltipDemo() {
 					description='Using tooltips to provide help text.'
 					code={`<div className="flex items-center gap-2">
   <span className="text-sm font-medium">Password</span>
-  <Tooltip>
-    <TooltipTrigger asChild>
-      <HelpCircle className="h-4 w-4 text-muted-foreground cursor-help" />
-    </TooltipTrigger>
-    <TooltipContent>
-      <p>Password must be at least 8 characters</p>
-    </TooltipContent>
-  </Tooltip>
+  <z.tooltip tip="Password must be at least 8 characters">
+    <HelpCircle className="h-4 w-4 text-muted-foreground cursor-help" />
+  </z.tooltip>
 </div>`}
 				>
-					<TooltipProvider>
-						<div className='flex items-center gap-2'>
-							<span className='text-sm font-medium'>Password</span>
-							<Tooltip>
-								<TooltipTrigger asChild>
-									<HelpCircle className='h-4 w-4 text-muted-foreground cursor-help' />
-								</TooltipTrigger>
-								<TooltipContent>
-									<p>Password must be at least 8 characters</p>
-								</TooltipContent>
-							</Tooltip>
-						</div>
-					</TooltipProvider>
+					<div className='flex items-center gap-2'>
+						<span className='text-sm font-medium'>Password</span>
+						<z.tooltip tip='Password must be at least 8 characters'>
+							<HelpCircle className='h-4 w-4 text-muted-foreground cursor-help' />
+						</z.tooltip>
+					</div>
 				</ComponentPreview>
 
 				{/* Longer Content */}
 				<ComponentPreview
 					title='Longer Content'
 					description='Tooltips can contain longer text content.'
-					code={`<Tooltip>
-  <TooltipTrigger asChild>
-    <Button variant="outline">
-      <Info className="mr-2 h-4 w-4" />
-      More info
-    </Button>
-  </TooltipTrigger>
-  <TooltipContent className="max-w-xs">
+					code={`<z.tooltip
+  tip={
     <p>
       This is a longer tooltip that provides more detailed information
       about the feature. It can wrap to multiple lines.
     </p>
-  </TooltipContent>
-</Tooltip>`}
+  }
+>
+  <z.button>
+    <Info className="mr-2 h-4 w-4" />
+    More info
+  </z.button>
+</z.tooltip>`}
 				>
-					<TooltipProvider>
-						<Tooltip>
-							<TooltipTrigger asChild>
-								<ZButton variant='outline'>
-									<Info className='mr-2 h-4 w-4' />
-									More info
-								</ZButton>
-							</TooltipTrigger>
-							<TooltipContent className='max-w-xs'>
+					<z.tooltip
+						tip={
+							<div className='max-w-xs'>
 								<p>
 									This is a longer tooltip that provides more detailed information about the feature. It can wrap to multiple lines.
 								</p>
-							</TooltipContent>
-						</Tooltip>
-					</TooltipProvider>
+							</div>
+						}
+					>
+						<z.button>
+							<Info className='mr-2 h-4 w-4' />
+							More info
+						</z.button>
+					</z.tooltip>
 				</ComponentPreview>
 			</section>
 
 			{/* API Reference */}
 			<section className='space-y-6'>
 				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>API Reference</h2>
-				<PropsTable title='TooltipProvider' props={tooltipProps} />
-				<PropsTable title='TooltipContent' props={tooltipContentProps} />
+				<PropsTable title='z.tooltip' props={tooltipProps} />
+				<PropsTable title='Positioning' props={tooltipContentProps} />
 			</section>
 
 			{/* Accessibility */}

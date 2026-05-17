@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/nextjs'
 import { ButtonGroup, ButtonGroupSeparator, ButtonGroupText } from './button-group'
-import { ZButton } from './button'
+import { z } from '@/components/ui'
 
 const meta: Meta<typeof ButtonGroup> = {
 	title: 'UI/ButtonGroup',
@@ -25,11 +25,11 @@ export const Horizontal: StoryT = {
 	render: () => {
 		return (
 			<ButtonGroup>
-				<ZButton variant='outline'>Bold</ZButton>
+				<z.button>Bold</z.button>
 				<ButtonGroupSeparator />
-				<ZButton variant='outline'>Italic</ZButton>
+				<z.button>Italic</z.button>
 				<ButtonGroupSeparator />
-				<ZButton variant='outline'>Underline</ZButton>
+				<z.button>Underline</z.button>
 			</ButtonGroup>
 		)
 	}
@@ -39,9 +39,9 @@ export const Vertical: StoryT = {
 	render: () => {
 		return (
 			<ButtonGroup orientation='vertical'>
-				<ZButton variant='outline'>Top</ZButton>
-				<ZButton variant='outline'>Middle</ZButton>
-				<ZButton variant='outline'>Bottom</ZButton>
+				<z.button>Top</z.button>
+				<z.button>Middle</z.button>
+				<z.button>Bottom</z.button>
 			</ButtonGroup>
 		)
 	}
@@ -51,10 +51,11 @@ export const WithText: StoryT = {
 	render: () => {
 		return (
 			<ButtonGroup>
-				<ZButton variant='outline'>Copy</ZButton>
+				<z.button>Copy</z.button>
 				<ButtonGroupText>or</ButtonGroupText>
-				<ZButton variant='outline'>Paste</ZButton>
+				<z.button>Paste</z.button>
 			</ButtonGroup>
 		)
 	}
 }
+
