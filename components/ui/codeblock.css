@@ -1,0 +1,141 @@
+.codeBlock {
+	border: var(--border-width-standard) solid var(--codeblock-theme-editor-border);
+	border-radius: var(--radius-lg);
+	padding: var(--space-lg);
+	overflow: hidden;
+	background: var(--codeblock-theme-editor-background);
+}
+
+.codeBlockLabel {
+	display: block;
+	margin-bottom: var(--space-md);
+	font-size: var(--font-size-caption);
+	line-height: var(--line-height-caption);
+	font-weight: var(--font-weight-semibold);
+	letter-spacing: var(--tracking-wide);
+	text-transform: uppercase;
+}
+
+.codeBlockLabelDefault {
+	color: var(--foreground);
+}
+
+.codeBlockLabelSuccess {
+	color: var(--color-neon-green);
+}
+
+.codeBlockLabelDanger {
+	color: var(--color-neon-pink);
+}
+
+.codeBlockLabelMuted {
+	color: var(--muted-foreground);
+}
+
+.codeBlockContent {
+	overflow: auto;
+	border-radius: var(--radius-md);
+	border: var(--border-width-standard) solid color-mix(in srgb, var(--codeblock-theme-editor-border) 72%, transparent);
+	background: var(--codeblock-theme-editor-background);
+}
+
+.codeBlockPre {
+	margin: 0;
+	padding: var(--space-md);
+	min-height: 100%;
+	font-family: var(--font-mono);
+	font-size: var(--font-size-small);
+	line-height: var(--line-height-small);
+	white-space: pre;
+	color: var(--codeblock-theme-editor-foreground);
+}
+
+.codeBlockCode {
+	display: block;
+	color: var(--codeblock-theme-editor-foreground);
+	tab-size: 2;
+}
+
+.codeBlockStrikeThrough {
+	text-decoration-line: line-through;
+	text-decoration-thickness: var(--border-width-standard);
+}
+
+.codeBlockCode .pl-c {
+	color: var(--codeblock-theme-comment);
+	font-style: italic;
+}
+
+.codeBlockCode .pl-k,
+.codeBlockCode .pl-kv,
+.codeBlockCode .pl-ow {
+	color: var(--codeblock-theme-keyword);
+}
+
+.codeBlockCode .pl-o,
+.codeBlockCode .pl-p {
+	color: var(--codeblock-theme-operator);
+}
+
+.codeBlockCode .pl-s,
+.codeBlockCode .pl-s1,
+.codeBlockCode .pl-s2,
+.codeBlockCode .pl-pds,
+.codeBlockCode .pl-sr,
+.codeBlockCode .pl-sr .pl-cce,
+.codeBlockCode .pl-sr .pl-sre,
+.codeBlockCode .pl-sr .pl-sra {
+	color: var(--codeblock-theme-string);
+}
+
+.codeBlockCode .pl-c1,
+.codeBlockCode .pl-mi,
+.codeBlockCode .pl-mb,
+.codeBlockCode .pl-mf,
+.codeBlockCode .pl-mo,
+.codeBlockCode .pl-mv {
+	color: var(--codeblock-theme-number);
+}
+
+.codeBlockCode .pl-smi,
+.codeBlockCode .pl-s .pl-s1 {
+	color: var(--codeblock-theme-variable);
+}
+
+.codeBlockCode .pl-v,
+.codeBlockCode .pl-smw {
+	color: var(--codeblock-theme-parameter);
+	font-style: italic;
+}
+
+.codeBlockCode .pl-en,
+.codeBlockCode .pl-mr {
+	color: var(--codeblock-theme-function);
+	font-weight: var(--font-weight-bold);
+}
+
+.codeBlockCode .pl-ent,
+.codeBlockCode .pl-e,
+.codeBlockCode .pl-ef {
+	color: var(--codeblock-theme-type);
+}
+
+.codeBlockCode .pl-cm,
+.codeBlockCode .pl-vsc {
+	color: var(--codeblock-theme-property);
+}
+
+.codeBlockCode .pl-mh,
+.codeBlockCode .pl-ms,
+.codeBlockCode .pl-md,
+.codeBlockCode .pl-mi1 {
+	color: var(--codeblock-theme-namespace);
+}
+
+.codeBlockCode .pl-mc,
+.codeBlockCode .pl-mi2,
+.codeBlockCode .pl-ii,
+.codeBlockCode .pl-bu,
+.codeBlockCode .pl-corl {
+	color: var(--codeblock-theme-decorator);
+}

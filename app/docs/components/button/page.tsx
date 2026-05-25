@@ -86,7 +86,7 @@ export default function ButtonDocsPage() {
 
 			{/* Quick Preview */}
 			<ComponentPreview
-				code={`import { z.button } from '@tasteee/zest'
+				code={`import { z } from '@tasteee/zest'
 
 export function ButtonDemo() {
   return <z.button>Click me</z.button>
@@ -98,7 +98,7 @@ export function ButtonDemo() {
 			{/* Usage */}
 			<section className='space-y-6'>
 				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>Usage</h2>
-				<CodeBlock code={`import { z.button } from '@tasteee/zest'`} language='tsx' />
+				<CodeBlock code={`import { z } from '@tasteee/zest'`} language='tsx' />
 				<CodeBlock code={`<z.button>Click me</z.button>`} language='tsx' />
 			</section>
 
@@ -108,7 +108,7 @@ export function ButtonDemo() {
 
 				{/* kinds */}
 				<ComponentPreview
-					code={`import { z.button } from '@tasteee/zest'
+					code={`import { z } from '@tasteee/zest'
 
 <div className="flex flex-wrap gap-4">
   <z.button isOutlined>Outlined</z.button>
@@ -131,7 +131,7 @@ export function ButtonDemo() {
 
 				{/* Colors */}
 				<ComponentPreview
-					code={`import { z.button } from '@tasteee/zest'
+					code={`import { z } from '@tasteee/zest'
 
 {/* Green */}
 <z.button isGreen isOutlined>Green Outlined</z.button>
@@ -219,7 +219,7 @@ export function ButtonDemo() {
 
 				{/* Sizes */}
 				<ComponentPreview
-					code={`import { z.button } from '@tasteee/zest'
+					code={`import { z } from '@tasteee/zest'
 import { Plus } from 'lucide-react'
 
 <div className="flex items-center gap-4">
@@ -243,7 +243,7 @@ import { Plus } from 'lucide-react'
 
 				{/* With Icons */}
 				<ComponentPreview
-					code={`import { z.button } from '@tasteee/zest'
+					code={`import { z } from '@tasteee/zest'
 import { Mail, Download, ExternalLink } from 'lucide-react'
 
 <div className="flex flex-wrap gap-4">
@@ -279,7 +279,7 @@ import { Mail, Download, ExternalLink } from 'lucide-react'
 
 				{/* Loading State */}
 				<ComponentPreview
-					code={`import { z.button } from '@tasteee/zest'
+					code={`import { z } from '@tasteee/zest'
 import { Loader2 } from 'lucide-react'
 
 <z.button disabled={isLoading} onClick={handleLoadingClick}>
@@ -307,7 +307,7 @@ import { Loader2 } from 'lucide-react'
 
 				{/* Disabled */}
 				<ComponentPreview
-					code={`import { z.button } from '@tasteee/zest'
+					code={`import { z } from '@tasteee/zest'
 
 <div className="flex gap-4">
   <z.button disabled>Disabled</z.button>
@@ -324,7 +324,7 @@ import { Loader2 } from 'lucide-react'
 
 				{/* As Child */}
 				<ComponentPreview
-					code={`import { z.button } from '@tasteee/zest'
+					code={`import { z } from '@tasteee/zest'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 
@@ -345,7 +345,7 @@ import { ArrowRight } from 'lucide-react'
 
 				{/* Icon Buttons */}
 				<ComponentPreview
-					code={`import { z.button } from '@tasteee/zest'
+					code={`import { z } from '@tasteee/zest'
 import { Check, X, Plus } from 'lucide-react'
 
 <div className="flex gap-2">

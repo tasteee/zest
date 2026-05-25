@@ -1,5 +1,8 @@
 .zText {
-	color: var(--color-text-primary);
+	color: var(--foreground);
+	font-size: var(--font-size-body);
+	line-height: var(--line-height-body);
+	font-weight: var(--font-weight-regular);
 }
 
 .isOrange {
@@ -18,35 +21,51 @@
 	color: var(--color-white);
 }
 .isMuted {
-	color: var(--color-text-muted);
+	color: var(--muted-foreground);
+}
+
+.isExtraSmall {
+	font-size: var(--font-size-caption);
+	line-height: var(--line-height-caption);
 }
 
 .isSmall {
-	font-size: var(--font-size-sm);
+	font-size: var(--font-size-small);
+	line-height: var(--line-height-small);
 }
 .isMedium {
-	font-size: var(--font-size-md);
+	font-size: var(--font-size-body);
+	line-height: var(--line-height-body);
 }
 .isLarge {
-	font-size: var(--font-size-lg);
+	font-size: var(--font-size-h4);
+	line-height: var(--line-height-h4);
 }
 .isExtraLarge {
-	font-size: var(--font-size-xl);
+	font-size: var(--font-size-h3);
+	line-height: var(--line-height-h3);
 }
 
 .isThin {
-	font-weight: 300;
+	font-weight: var(--font-weight-regular);
 }
+
+.isNormal {
+	font-weight: var(--font-weight-regular);
+}
+
 .isBold {
-	font-weight: 700;
+	font-weight: var(--font-weight-semibold);
 }
+
 .isVeryBold {
-	font-weight: 900;
+	font-weight: var(--font-weight-bold);
 }
 
 .isItalic {
 	font-style: italic;
 }
+
 .isUnderlined {
 	text-decoration: underline;
 }
@@ -56,36 +75,43 @@
 	font-weight: var(--font-weight-bold);
 	line-height: var(--line-height-display);
 }
+
 .zTextH1 {
 	font-size: var(--font-size-h1);
 	font-weight: var(--font-weight-bold);
 	line-height: var(--line-height-h1);
 }
+
 .zTextH2 {
 	font-size: var(--font-size-h2);
 	font-weight: var(--font-weight-semibold);
 	line-height: var(--line-height-h2);
 }
+
 .zTextH3 {
 	font-size: var(--font-size-h3);
 	font-weight: var(--font-weight-semibold);
 	line-height: var(--line-height-h3);
 }
+
 .zTextH4 {
 	font-size: var(--font-size-h4);
 	font-weight: var(--font-weight-medium);
 	line-height: var(--line-height-h4);
 }
+
 .zTextBody {
 	font-size: var(--font-size-body);
 	font-weight: var(--font-weight-regular);
 	line-height: var(--line-height-body);
 }
+
 .zTextSmall {
 	font-size: var(--font-size-small);
 	font-weight: var(--font-weight-regular);
 	line-height: var(--line-height-small);
 }
+
 .zTextCaption {
 	font-size: var(--font-size-caption);
 	font-weight: var(--font-weight-medium);

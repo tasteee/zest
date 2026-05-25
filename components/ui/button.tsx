@@ -86,7 +86,7 @@ const ZButton = React.forwardRef<HTMLButtonElement, ZButtonPropsT>((props, ref) 
 	const colorClass = getColorClass(props) ?? 'isWhite'
 	const sizeClass = getSizeClass(props) ?? 'isMedium'
 	const kindClass = getKindClass(props) ?? 'isOutlined'
-	const styleClass = getStyleClass(props)
+	const styleClass = getStyleClass(props) ?? ''
 	const classNames = cn('zButton', kindClass, colorClass, sizeClass, styleClass, className)
 
 	return (

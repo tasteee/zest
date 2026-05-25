@@ -61,6 +61,7 @@ import { Switch } from './switch'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './tabs'
 import { Textarea } from './textarea'
 import { Toast, ToastAction, ToastClose, ToastDescription, ToastProvider, ToastTitle, ToastViewport } from './toast'
+import { Toggle } from './toggle'
 import { ToggleGroup, ToggleGroupItem } from './toggle-group'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger, ZTooltip as ZTooltipRoot } from './tooltip'
 import { Spinner } from './spinner'
@@ -182,6 +183,7 @@ export const ZToastDescription = ToastDescription
 export const ZToastClose = ToastClose
 export const ZToastAction = ToastAction
 
+export const ZToggle = Toggle
 export const ZToggleGroup = ToggleGroup
 export const ZToggleGroupItem = ToggleGroupItem
 
@@ -289,6 +291,7 @@ export const z = {
 	toastDescription: ZToastDescription,
 	toastClose: ZToastClose,
 	toastAction: ZToastAction,
+	toggle: ZToggle,
 	toggleGroup: ZToggleGroup,
 	toggleGroupItem: ZToggleGroupItem,
 	tooltip: ZTooltip,

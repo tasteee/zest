@@ -1,0 +1,40 @@
+.chip {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: var(--space-xs);
+	border: var(--border-width-standard) solid var(--border);
+	border-radius: 999px;
+	padding-inline: var(--space-md);
+	padding-block: var(--space-xs);
+	background: var(--muted);
+	color: var(--foreground);
+	font-size: var(--font-size-caption);
+	line-height: var(--line-height-caption);
+	font-weight: var(--font-weight-medium);
+	transition:
+		background-color var(--duration-fast) var(--easing-standard),
+		border-color var(--duration-fast) var(--easing-standard),
+		color var(--duration-fast) var(--easing-standard);
+}
+
+.chip:hover {
+	background: color-mix(in oklch, var(--muted) 70%, var(--background) 30%);
+}
+
+.chip:focus-visible {
+	outline: var(--border-width-standard) solid color-mix(in oklch, var(--ring) 65%, transparent);
+	outline-offset: var(--space-xs);
+}
+
+.chip.isSelected {
+	border-color: color-mix(in oklch, var(--accent) 60%, var(--border));
+	background: color-mix(in oklch, var(--accent) 16%, transparent);
+	color: color-mix(in oklch, var(--accent) 85%, var(--foreground));
+}
+
+.chip.isDisabled,
+.chip:disabled {
+	opacity: 0.6;
+	pointer-events: none;
+}

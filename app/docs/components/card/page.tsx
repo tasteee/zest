@@ -252,7 +252,7 @@ import { Bell, CreditCard } from 'lucide-react'
 import { Check } from 'lucide-react'
 
 <ZCard className="w-75">
-  <ZCard.Content className="pt-6">
+  <ZCard.Content>
     <div className="flex items-center space-x-4">
       <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
         <Check className="h-6 w-6 text-primary" />
@@ -266,7 +266,7 @@ import { Check } from 'lucide-react'
 </ZCard>`}
 				>
 					<Card className='w-75'>
-						<Card.Content className='pt-6'>
+						<Card.Content>
 							<div className='flex items-center space-x-4'>
 								<div className='flex h-12 w-12 items-center justify-center rounded-full bg-primary/10'>
 									<Check className='h-6 w-6 text-primary' />

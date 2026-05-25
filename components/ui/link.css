@@ -1,11 +1,50 @@
 .link {
 	display: inline-flex;
 	align-items: center;
-	color: var(--color-white);
+	gap: var(--space-xs);
+	color: var(--foreground);
+	font-size: inherit;
+	line-height: inherit;
 	font-weight: var(--font-weight-medium);
-	text-underline-offset: 4px;
+	text-decoration-line: none;
+	text-decoration-thickness: var(--border-width-standard);
+	text-underline-offset: var(--space-xs);
+	transition: color var(--duration-fast) var(--easing-standard);
 }
 
 .link:hover {
-	text-decoration: underline;
+	text-decoration-line: underline;
+}
+
+.link:focus-visible {
+	outline: var(--border-width-standard) solid color-mix(in oklch, currentColor 55%, transparent);
+	outline-offset: var(--space-xs);
+}
+
+.linkColorDefault {
+	color: var(--foreground);
+}
+
+.linkColorGreen {
+	color: var(--color-neon-green);
+}
+
+.linkColorPurple {
+	color: var(--color-neon-purple);
+}
+
+.linkColorPink {
+	color: var(--color-neon-pink);
+}
+
+.linkColorOrange {
+	color: var(--color-neon-orange);
+}
+
+.linkColorWhite {
+	color: var(--color-white);
+}
+
+.linkColorMuted {
+	color: var(--muted-foreground);
 }

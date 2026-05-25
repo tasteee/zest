@@ -1,18 +1,28 @@
 import * as React from 'react'
 import { cn } from '@/lib/utils'
+import './chip.css'
 
-function Chip({ className, ...props }: React.ComponentProps<'button'>) {
-  return (
-    <button
-      type="button"
-      data-slot="chip"
-      className={cn(
-        'inline-flex items-center gap-1 rounded-full border border-border bg-muted px-3 py-1 text-xs font-medium text-foreground transition-colors hover:bg-muted/80',
-        className,
-      )}
-      {...props}
-    />
-  )
+type ChipPropsT = React.ComponentProps<'button'> & {
+	isSelected?: boolean
+}
+
+const Chip = (props: ChipPropsT) => {
+	const chipProps: Record<string, unknown> = { ...props }
+	const isSelected = props.isSelected === true
+	const isDisabled = props.disabled === true
+	const hasType = props.type != null
+
+	if (!hasType) {
+		chipProps.type = 'button'
+	}
+
+	delete chipProps.className
+	delete chipProps.isSelected
+
+	const classNames = cn('chip', isSelected && 'isSelected', isDisabled && 'isDisabled', props.className)
+
+	return <button data-slot='chip' className={classNames} {...(chipProps as React.ComponentProps<'button'>)} />
 }
 
 export { Chip }
+export type { ChipPropsT }

@@ -366,6 +366,15 @@ export const COMPONENT_CATALOG: ComponentCatalogEntry[] = [
 		foundation: 'radix'
 	},
 	{
+		slug: 'toggle',
+		name: 'Toggle',
+		zName: 'z.toggle',
+		category: 'Inputs',
+		description: 'Two-state pressable button with color and kind variants.',
+		status: 'ready',
+		foundation: 'radix'
+	},
+	{
 		slug: 'toggle-group',
 		name: 'Toggle Group',
 		zName: 'ZToggleGroup',

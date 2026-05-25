@@ -5,3 +5,12 @@ type ComponentPropsT = React.HTMLAttributes<HTMLElement> & {
 	style?: React.CSSProperties
 	asChild?: boolean
 }
+
+type CommonPropsT = {
+	id?: string
+	isHidden?: boolean
+	className?: string
+	testid?: string
+	['data-testid']?: string
+	style?: React.CSSProperties
+}

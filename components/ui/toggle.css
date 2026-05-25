@@ -1,0 +1,251 @@
+.zToggle {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5rem;
+	font-weight: 500;
+	white-space: nowrap;
+	border-radius: var(--radius-md);
+	border: 1px solid transparent;
+	background: transparent;
+	color: var(--foreground);
+	cursor: pointer;
+	font-size: 0.875rem;
+	line-height: 1;
+	transition:
+		opacity 0.1s ease,
+		border-color 0.1s ease,
+		background-color 0.1s ease,
+		color 0.1s ease;
+}
+
+/* Sizes */
+
+.zToggle.isSmall {
+	height: 2rem;
+	padding-inline: 0.75rem;
+	min-width: 2rem;
+	font-size: 0.8125rem;
+}
+
+.zToggle.isMedium {
+	height: 2.5rem;
+	padding-inline: 1rem;
+	min-width: 2.5rem;
+}
+
+.zToggle.isLarge {
+	height: 3rem;
+	padding-inline: 1.25rem;
+	min-width: 3rem;
+	font-size: 1rem;
+}
+
+/* Ghost kind */
+
+.zToggle.isGhost {
+	background: transparent;
+	border-color: transparent;
+}
+
+.zToggle.isGhost.isWhite,
+.zToggle.isGhost:not(.isGreen, .isPurple, .isPink, .isOrange) {
+	color: var(--foreground);
+}
+
+.zToggle.isGhost.isGreen {
+	color: var(---green);
+}
+
+.zToggle.isGhost.isPurple {
+	color: var(---purple);
+}
+
+.zToggle.isGhost.isPink {
+	color: var(---pink);
+}
+
+.zToggle.isGhost.isOrange {
+	color: var(---orange);
+}
+
+.zToggle.isGhost.isWhite:hover,
+.zToggle.isGhost:not(.isGreen, .isPurple, .isPink, .isOrange):hover {
+	background: color-mix(in oklch, var(--foreground) 8%, transparent);
+}
+
+.zToggle.isGhost.isGreen:hover {
+	background: color-mix(in oklch, var(---green) 10%, transparent);
+}
+
+.zToggle.isGhost.isPurple:hover {
+	background: color-mix(in oklch, var(---purple) 10%, transparent);
+}
+
+.zToggle.isGhost.isPink:hover {
+	background: color-mix(in oklch, var(---pink) 10%, transparent);
+}
+
+.zToggle.isGhost.isOrange:hover {
+	background: color-mix(in oklch, var(---orange) 10%, transparent);
+}
+
+.zToggle.isGhost.isWhite[data-state='on'],
+.zToggle.isGhost:not(.isGreen, .isPurple, .isPink, .isOrange)[data-state='on'] {
+	background: var(--primary);
+	color: var(--primary-foreground);
+}
+
+.zToggle.isGhost.isGreen[data-state='on'] {
+	background: var(---green);
+	color: var(--primary-foreground);
+}
+
+.zToggle.isGhost.isPurple[data-state='on'] {
+	background: var(---purple);
+	color: var(--primary-foreground);
+}
+
+.zToggle.isGhost.isPink[data-state='on'] {
+	background: var(---pink);
+	color: var(--primary-foreground);
+}
+
+.zToggle.isGhost.isOrange[data-state='on'] {
+	background: var(---orange);
+	color: var(--primary-foreground);
+}
+
+/* Outlined kind */
+
+.zToggle.isOutlined {
+	border-color: var(--border);
+	background: transparent;
+}
+
+.zToggle.isOutlined.isWhite,
+.zToggle.isOutlined:not(.isGreen, .isPurple, .isPink, .isOrange) {
+	border-color: var(--border);
+	color: var(--foreground);
+}
+
+.zToggle.isOutlined.isGreen {
+	border-color: var(---green);
+	color: var(---green);
+}
+
+.zToggle.isOutlined.isPurple {
+	border-color: var(---purple);
+	color: var(---purple);
+}
+
+.zToggle.isOutlined.isPink {
+	border-color: var(---pink);
+	color: var(---pink);
+}
+
+.zToggle.isOutlined.isOrange {
+	border-color: var(---orange);
+	color: var(---orange);
+}
+
+.zToggle.isOutlined.isWhite:hover,
+.zToggle.isOutlined:not(.isGreen, .isPurple, .isPink, .isOrange):hover {
+	background: color-mix(in oklch, var(--foreground) 5%, transparent);
+	border-color: color-mix(in oklch, var(--foreground) 50%, transparent);
+}
+
+.zToggle.isOutlined.isGreen:hover {
+	background: color-mix(in oklch, var(---green) 10%, transparent);
+}
+
+.zToggle.isOutlined.isPurple:hover {
+	background: color-mix(in oklch, var(---purple) 10%, transparent);
+}
+
+.zToggle.isOutlined.isPink:hover {
+	background: color-mix(in oklch, var(---pink) 10%, transparent);
+}
+
+.zToggle.isOutlined.isOrange:hover {
+	background: color-mix(in oklch, var(---orange) 10%, transparent);
+}
+
+.zToggle.isOutlined.isWhite[data-state='on'],
+.zToggle.isOutlined:not(.isGreen, .isPurple, .isPink, .isOrange)[data-state='on'] {
+	background: color-mix(in oklch, var(--primary) 15%, transparent);
+	border-color: var(--primary);
+	color: var(--primary);
+}
+
+.zToggle.isOutlined.isGreen[data-state='on'] {
+	background: color-mix(in oklch, var(---green) 20%, transparent);
+}
+
+.zToggle.isOutlined.isPurple[data-state='on'] {
+	background: color-mix(in oklch, var(---purple) 20%, transparent);
+}
+
+.zToggle.isOutlined.isPink[data-state='on'] {
+	background: color-mix(in oklch, var(---pink) 20%, transparent);
+}
+
+.zToggle.isOutlined.isOrange[data-state='on'] {
+	background: color-mix(in oklch, var(---orange) 20%, transparent);
+}
+
+/* Focus */
+
+.zToggle:focus-visible {
+	outline: 3px solid color-mix(in oklch, var(--ring) 50%, transparent);
+	outline-offset: 2px;
+}
+
+/* State */
+
+.zToggle.isDisabled,
+.zToggle:disabled {
+	opacity: 0.5;
+	pointer-events: none;
+}
+
+.zToggle.isHidden {
+	display: none;
+}
+
+/* SVG */
+
+.zToggle > svg {
+	width: 1rem;
+	height: 1rem;
+	flex-shrink: 0;
+	pointer-events: none;
+}
+
+.zToggle.isSmall > svg {
+	width: 0.875rem;
+	height: 0.875rem;
+}
+
+.zToggle.isLarge > svg {
+	width: 1.125rem;
+	height: 1.125rem;
+}
+
+/* Icon-only toggle (square, no extra padding) */
+
+.zToggle.isIcon {
+	padding-inline: 0;
+	width: 2.5rem;
+	height: 2.5rem;
+}
+
+.zToggle.isIcon.isSmall {
+	width: 2rem;
+	height: 2rem;
+}
+
+.zToggle.isIcon.isLarge {
+	width: 3rem;
+	height: 3rem;
+}

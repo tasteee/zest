@@ -2,88 +2,103 @@ import * as React from 'react'
 import { cn } from '@/lib/utils'
 import styles from './card.module.css'
 
-type CardTone = 'neutral' | 'green' | 'pink' | 'purple' | 'orange'
+type CardToneT = 'neutral' | 'green' | 'pink' | 'purple' | 'orange'
 
 type CardPropsT = React.ComponentProps<'div'> & {
 	isHoverable?: boolean
-	tone?: CardTone
+	tone?: CardToneT
 	isPremium?: boolean
 }
 
-const toneClassMap: Record<CardTone, string> = {
+const toneClassMap: Record<CardToneT, string> = {
 	neutral: styles.cardToneNeutral,
 	green: styles.cardToneGreen,
 	pink: styles.cardTonePink,
 	purple: styles.cardTonePurple,
-	orange: styles.cardToneOrange,
+	orange: styles.cardToneOrange
 }
 
-function Card({ className, isHoverable = false, tone = 'neutral', isPremium = false, ...props }: CardPropsT) {
-	const hoverClassName = isHoverable
-		? 'transition-[border-color,background-color,transform] duration-[var(--duration-fast)] ease-[var(--easing-standard)] hover:border-[var(--foreground)] hover:bg-[var(--background-light)] hover:-translate-y-[1px]'
-		: ''
+const getPropsWithoutClassName = <PropsT extends { className?: string }>(props: PropsT): Omit<PropsT, 'className'> => {
+	const nextProps: Record<string, unknown> = { ...props }
+	delete nextProps.className
 
-	return (
-		<div
-			data-slot='card'
-			className={cn(
-				'bg-card text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm',
-				toneClassMap[tone],
-				isPremium && styles.cardPremium,
-				hoverClassName,
-				className
-			)}
-			{...props}
-		/>
+	return nextProps as Omit<PropsT, 'className'>
+}
+
+const getCardRootProps = (props: CardPropsT): React.ComponentProps<'div'> => {
+	const nextProps: Record<string, unknown> = getPropsWithoutClassName(props)
+	delete nextProps.tone
+	delete nextProps.isHoverable
+	delete nextProps.isPremium
+
+	return nextProps as React.ComponentProps<'div'>
+}
+
+const CardBase = (props: CardPropsT) => {
+	const tone = props.tone ?? 'neutral'
+	const isHoverable = props.isHoverable === true
+	const isPremium = props.isPremium === true
+	const classNames = cn(
+		styles.card,
+		toneClassMap[tone],
+		isHoverable && styles.cardHoverable,
+		isPremium && styles.cardPremium,
+		props.className
 	)
+	const cardRootProps = getCardRootProps(props)
+
+	return <div data-slot='card' className={classNames} {...cardRootProps} />
 }
 
-function CardHeader({ className, ...props }: React.ComponentProps<'div'>) {
-	return (
-		<div
-			data-slot='card-header'
-			className={cn(
-				'@container/card-header grid auto-rows-min grid-rows-[auto_auto] items-start gap-2 px-6 has-data-[slot=card-action]:grid-cols-[1fr_auto] [.border-b]:pb-6',
-				className
-			)}
-			{...props}
-		/>
-	)
+const CardHeader = (props: React.ComponentProps<'div'>) => {
+	const headerProps = getPropsWithoutClassName(props)
+	const classNames = cn(styles.cardHeader, props.className)
+
+	return <div data-slot='card-header' className={classNames} {...headerProps} />
 }
 
-function CardTitle({ className, ...props }: React.ComponentProps<'div'>) {
-	return <div data-slot='card-title' className={cn('leading-none font-semibold', className)} {...props} />
+const CardTitle = (props: React.ComponentProps<'div'>) => {
+	const titleProps = getPropsWithoutClassName(props)
+	const classNames = cn(styles.cardTitle, props.className)
+
+	return <div data-slot='card-title' className={classNames} {...titleProps} />
 }
 
-function CardDescription({ className, ...props }: React.ComponentProps<'div'>) {
-	return <div data-slot='card-description' className={cn('text-muted-foreground text-sm', className)} {...props} />
+const CardDescription = (props: React.ComponentProps<'div'>) => {
+	const descriptionProps = getPropsWithoutClassName(props)
+	const classNames = cn(styles.cardDescription, props.className)
+
+	return <div data-slot='card-description' className={classNames} {...descriptionProps} />
 }
 
-function CardAction({ className, ...props }: React.ComponentProps<'div'>) {
-	return (
-		<div
-			data-slot='card-action'
-			className={cn('col-start-2 row-span-2 row-start-1 self-start justify-self-end', className)}
-			{...props}
-		/>
-	)
+const CardAction = (props: React.ComponentProps<'div'>) => {
+	const actionProps = getPropsWithoutClassName(props)
+	const classNames = cn(styles.cardAction, props.className)
+
+	return <div data-slot='card-action' className={classNames} {...actionProps} />
 }
 
-function CardContent({ className, ...props }: React.ComponentProps<'div'>) {
-	return <div data-slot='card-content' className={cn('px-6', className)} {...props} />
+const CardContent = (props: React.ComponentProps<'div'>) => {
+	const contentProps = getPropsWithoutClassName(props)
+	const classNames = cn(styles.cardContent, props.className)
+
+	return <div data-slot='card-content' className={classNames} {...contentProps} />
 }
 
-function CardFooter({ className, ...props }: React.ComponentProps<'div'>) {
-	return <div data-slot='card-footer' className={cn('flex items-center px-6 [.border-t]:pt-6', className)} {...props} />
+const CardFooter = (props: React.ComponentProps<'div'>) => {
+	const footerProps = getPropsWithoutClassName(props)
+	const classNames = cn(styles.cardFooter, props.className)
+
+	return <div data-slot='card-footer' className={classNames} {...footerProps} />
 }
 
-const CardNamespace = Object.assign(Card, {
+const CardNamespace = Object.assign(CardBase, {
 	Header: CardHeader,
 	Footer: CardFooter,
 	Title: CardTitle,
 	Action: CardAction,
 	Description: CardDescription,
-	Content: CardContent,
+	Content: CardContent
 })
 
 export { CardNamespace as Card, CardHeader, CardFooter, CardTitle, CardAction, CardDescription, CardContent }
