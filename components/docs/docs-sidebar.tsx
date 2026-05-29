@@ -20,8 +20,7 @@ const navigation = [
 		items: [
 			{ title: 'Colors', href: '/docs/foundations/colors' },
 			{ title: 'Typography', href: '/docs/foundations/typography' },
-			{ title: 'Spacing', href: '/docs/foundations/spacing' },
-			{ title: 'Voice & Tone', href: '/docs/foundations/voice-tone' }
+			{ title: 'Spacing', href: '/docs/foundations/spacing' }
 		]
 	},
 	{
