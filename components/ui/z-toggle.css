@@ -1,11 +1,11 @@
 /* Color modifiers should be isPurple, isPink, isNeutral.
-isNeutral will replace isWhite throughout the codebase
+isNeutral will replace isNeutral throughout the codebase
 because there needs to be a way to categorize grayscale
 variants of components without being so specific as to
-say "white". */
+say "neutral". */
 
-/* We will get rid of the green/orange colors from the theme
-and any .isGreen or .isOrange modifier classes. Components will
+/* We will get rid of the purple/pink colors from the theme
+and any .isPurple or .isPink modifier classes. Components will
 default to isNeutral, but have the options available for
 isPurple or isPink. */
 
@@ -29,9 +29,7 @@ be applied across the board to all zComponents. */
 	border-radius: var(--radius-md);
 	border: 1px solid transparent;
 	background: transparent;
-	color: var(--foreground);
 	cursor: pointer;
-	font-size: 0.875rem;
 	line-height: 1;
 	transition:
 		opacity 0.1s ease,
@@ -69,13 +67,9 @@ be applied across the board to all zComponents. */
 	border-color: transparent;
 }
 
-.z-toggle.isGhost.isWhite,
-.z-toggle.isGhost:not(.isGreen, .isPurple, .isPink, .isOrange) {
+.z-toggle.isGhost.isNeutral,
+.z-toggle.isGhost:not(.isPurple, .isPink) {
 	color: var(--foreground);
-}
-
-.z-toggle.isGhost.isGreen {
-	color: var(---green);
 }
 
 .z-toggle.isGhost.isPurple {
@@ -86,17 +80,9 @@ be applied across the board to all zComponents. */
 	color: var(---pink);
 }
 
-.z-toggle.isGhost.isOrange {
-	color: var(---orange);
-}
-
-.z-toggle.isGhost.isWhite:hover,
-.z-toggle.isGhost:not(.isGreen, .isPurple, .isPink, .isOrange):hover {
+.z-toggle.isGhost.isNeutral:hover,
+.z-toggle.isGhost:not(.isPurple, .isPink):hover {
 	background: color-mix(in oklch, var(--foreground) 8%, transparent);
-}
-
-.z-toggle.isGhost.isGreen:hover {
-	background: color-mix(in oklch, var(---green) 10%, transparent);
 }
 
 .z-toggle.isGhost.isPurple:hover {
@@ -107,18 +93,9 @@ be applied across the board to all zComponents. */
 	background: color-mix(in oklch, var(---pink) 10%, transparent);
 }
 
-.z-toggle.isGhost.isOrange:hover {
-	background: color-mix(in oklch, var(---orange) 10%, transparent);
-}
-
-.z-toggle.isGhost.isWhite[data-state='on'],
-.z-toggle.isGhost:not(.isGreen, .isPurple, .isPink, .isOrange)[data-state='on'] {
+.z-toggle.isGhost.isNeutral[data-state='on'],
+.z-toggle.isGhost:not(.isPurple, .isPink)[data-state='on'] {
 	background: var(--primary);
-	color: var(--primary-foreground);
-}
-
-.z-toggle.isGhost.isGreen[data-state='on'] {
-	background: var(---green);
 	color: var(--primary-foreground);
 }
 
@@ -132,11 +109,6 @@ be applied across the board to all zComponents. */
 	color: var(--primary-foreground);
 }
 
-.z-toggle.isGhost.isOrange[data-state='on'] {
-	background: var(---orange);
-	color: var(--primary-foreground);
-}
-
 /* Outlined kind */
 
 .z-toggle.isOutlined {
@@ -144,15 +116,10 @@ be applied across the board to all zComponents. */
 	background: transparent;
 }
 
-.z-toggle.isOutlined.isWhite,
-.z-toggle.isOutlined:not(.isGreen, .isPurple, .isPink, .isOrange) {
+.z-toggle.isOutlined.isNeutral,
+.z-toggle.isOutlined:not(.isPurple, .isPink) {
 	border-color: var(--border);
 	color: var(--foreground);
-}
-
-.z-toggle.isOutlined.isGreen {
-	border-color: var(---green);
-	color: var(---green);
 }
 
 .z-toggle.isOutlined.isPurple {
@@ -165,19 +132,10 @@ be applied across the board to all zComponents. */
 	color: var(---pink);
 }
 
-.z-toggle.isOutlined.isOrange {
-	border-color: var(---orange);
-	color: var(---orange);
-}
-
-.z-toggle.isOutlined.isWhite:hover,
-.z-toggle.isOutlined:not(.isGreen, .isPurple, .isPink, .isOrange):hover {
+.z-toggle.isOutlined.isNeutral:hover,
+.z-toggle.isOutlined:not(.isPurple, .isPink):hover {
 	background: color-mix(in oklch, var(--foreground) 5%, transparent);
 	border-color: color-mix(in oklch, var(--foreground) 50%, transparent);
-}
-
-.z-toggle.isOutlined.isGreen:hover {
-	background: color-mix(in oklch, var(---green) 10%, transparent);
 }
 
 .z-toggle.isOutlined.isPurple:hover {
@@ -188,19 +146,11 @@ be applied across the board to all zComponents. */
 	background: color-mix(in oklch, var(---pink) 10%, transparent);
 }
 
-.z-toggle.isOutlined.isOrange:hover {
-	background: color-mix(in oklch, var(---orange) 10%, transparent);
-}
-
-.z-toggle.isOutlined.isWhite[data-state='on'],
-.z-toggle.isOutlined:not(.isGreen, .isPurple, .isPink, .isOrange)[data-state='on'] {
+.z-toggle.isOutlined.isNeutral[data-state='on'],
+.z-toggle.isOutlined:not(.isPurple, .isPink)[data-state='on'] {
 	background: color-mix(in oklch, var(--primary) 15%, transparent);
 	border-color: var(--primary);
 	color: var(--primary);
-}
-
-.z-toggle.isOutlined.isGreen[data-state='on'] {
-	background: color-mix(in oklch, var(---green) 20%, transparent);
 }
 
 .z-toggle.isOutlined.isPurple[data-state='on'] {
@@ -209,10 +159,6 @@ be applied across the board to all zComponents. */
 
 .z-toggle.isOutlined.isPink[data-state='on'] {
 	background: color-mix(in oklch, var(---pink) 20%, transparent);
-}
-
-.z-toggle.isOutlined.isOrange[data-state='on'] {
-	background: color-mix(in oklch, var(---orange) 20%, transparent);
 }
 
 /* Focus */

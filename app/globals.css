@@ -288,28 +288,3 @@
 ::-webkit-scrollbar-thumb:hover {
 	background: oklch(0.4 0.015 145);
 }
-
-.isNeonGreenTheme {
-	--theme-color: color-mix(in srgb, var(--color-green, #39ff14) 100%, transparent);
-	--theme-color-muted: color-mix(in srgb, var(--color-green, #39ff14) 40%, transparent);
-}
-
-.isNeonPinkTheme {
-	--theme-color: color-mix(in srgb, var(--color-pink, #ff14c8) 100%, transparent);
-	--theme-color-muted: color-mix(in srgb, var(--color-pink, #ff14c8) 40%, transparent);
-}
-
-.isNeonPurpleTheme {
-	--theme-color: color-mix(in srgb, var(--color-purple, #a259ff) 100%, transparent);
-	--theme-color-muted: color-mix(in srgb, var(--color-purple, #a259ff) 40%, transparent);
-}
-
-.isNeonOrangeTheme {
-	--theme-color: color-mix(in srgb, var(--color-orange, #ff6f00) 100%, transparent);
-	--theme-color-muted: color-mix(in srgb, var(--color-orange, #ff6f00) 40%, transparent);
-}
-
-.isWhiteTheme {
-	--theme-color: color-mix(in srgb, var(--color-white, #fafafa) 100%, transparent);
-	--theme-color-muted: color-mix(in srgb, var(--color-light-gray, #a0a0a0) 40%, transparent);
-}

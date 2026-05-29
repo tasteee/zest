@@ -8,7 +8,7 @@ import { createPropClassNameSwitch, createPropsClassNamesBuilder } from '@/lib/p
 import { cn } from '@/lib/utils'
 import './checkbox.css'
 
-type CheckboxColorPropsT = 'isWhite' | 'isGreen' | 'isPurple' | 'isPink' | 'isOrange'
+type CheckboxColorPropsT = 'isNeutral' | 'isPurple' | 'isPink'
 
 type CheckboxOtherPropsT = {
 	isChecked?: boolean
@@ -28,11 +28,10 @@ type CheckboxPropsT = Omit<
 	CheckboxOtherPropsT
 
 const getColorClass = createPropClassNameSwitch({
-	isOrange: 'isOrange',
 	isPurple: 'isPurple',
 	isPink: 'isPink',
-	isGreen: 'isGreen',
-	isWhite: 'isWhite'
+	isNeutral: 'isNeutral',
+	default: 'isNeutral'
 })
 
 const getStyleClass = createPropsClassNamesBuilder({
@@ -41,7 +40,7 @@ const getStyleClass = createPropsClassNamesBuilder({
 })
 
 const hasColorProp = (props: CheckboxPropsT) => {
-	return props.isGreen || props.isPurple || props.isPink || props.isOrange || props.isWhite
+	return props.isNeutral || props.isPurple || props.isPink
 }
 
 const Checkbox = React.forwardRef<React.ElementRef<typeof CheckboxPrimitive.Root>, CheckboxPropsT>((props, ref) => {
@@ -52,12 +51,10 @@ const Checkbox = React.forwardRef<React.ElementRef<typeof CheckboxPrimitive.Root
 		id,
 		isChecked,
 		isDisabled,
-		isGreen,
 		isHidden,
-		isOrange,
+		isNeutral,
 		isPink,
 		isPurple,
-		isWhite,
 		label,
 		onChange,
 		onCheckedChange,
@@ -90,7 +87,7 @@ const Checkbox = React.forwardRef<React.ElementRef<typeof CheckboxPrimitive.Root
 			data-slot='checkbox'
 			checked={isChecked}
 			disabled={isDisabled}
-			className={cn('zCheckbox', hasColorProp(props) ? colorClass : 'isWhite', styleClass, className)}
+			className={cn('zCheckbox', hasColorProp(props) ? colorClass : 'isNeutral', styleClass, className)}
 			onCheckedChange={handleCheckedChange}
 			onClick={handleClick}
 			{...checkboxProps}

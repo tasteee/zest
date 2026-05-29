@@ -14,16 +14,10 @@ export const toggleProps: PropDefinition[] = [
 		description: 'Outlined kind — bordered background, tinted fill on press.'
 	},
 	{
-		name: 'isWhite',
+		name: 'isNeutral',
 		type: 'boolean',
 		defaultValue: 'true',
 		description: 'Default neutral color.'
-	},
-	{
-		name: 'isGreen',
-		type: 'boolean',
-		defaultValue: 'false',
-		description: 'Neon green color variant.'
 	},
 	{
 		name: 'isPurple',
@@ -36,12 +30,6 @@ export const toggleProps: PropDefinition[] = [
 		type: 'boolean',
 		defaultValue: 'false',
 		description: 'Neon pink color variant.'
-	},
-	{
-		name: 'isOrange',
-		type: 'boolean',
-		defaultValue: 'false',
-		description: 'Neon orange color variant.'
 	},
 	{
 		name: 'isSmall',
@@ -126,9 +114,9 @@ export const toggleGroupProps: PropDefinition[] = [
 		description: 'Kind variant applied to all items (overridable per item).'
 	},
 	{
-		name: 'isWhite / isGreen / isPurple / isPink / isOrange',
+		name: 'isNeutral / isPurple / isPink',
 		type: 'boolean',
-		defaultValue: 'isWhite',
+		defaultValue: 'isNeutral',
 		description: 'Color variant applied to all items (overridable per item).'
 	},
 	{

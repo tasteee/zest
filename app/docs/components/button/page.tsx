@@ -8,44 +8,8 @@ import { PropsTable } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
 import { Card, CardContent } from '@/components/ui/card'
 import { ChevronRight, Loader2, Mail, Plus, ArrowRight, Download, ExternalLink, Check, X } from 'lucide-react'
-
-const buttonProps = [
-	{
-		name: 'kind',
-		type: '"outlined" | "solid" | "ghost"',
-		defaultValue: '"outlined"',
-		description: 'The visual style kind of the button.'
-	},
-	{
-		name: 'size',
-		type: '"xs" | "sm" | "md" | "lg" | "xl"',
-		defaultValue: '"md"',
-		description: 'The size of the button.'
-	},
-	{
-		name: 'color',
-		type: '"green" | "purple" | "pink" | "orange" | "white"',
-		defaultValue: '"white"',
-		description: 'The color theme of the button.'
-	},
-	{
-		name: 'asChild',
-		type: 'boolean',
-		defaultValue: 'false',
-		description: 'Change the default rendered element for the one passed as a child, merging their props and behavior.'
-	},
-	{
-		name: 'disabled',
-		type: 'boolean',
-		defaultValue: 'false',
-		description: 'When true, prevents the user from interacting with the button.'
-	},
-	{
-		name: 'className',
-		type: 'string',
-		description: 'Additional CSS classes to apply to the button.'
-	}
-]
+import { buttonProps } from './props'
+import { examples } from './examples'
 
 export default function ButtonDocsPage() {
 	const [isLoading, setIsLoading] = useState(false)
@@ -74,7 +38,7 @@ export default function ButtonDocsPage() {
 			<div className='space-y-4'>
 				<div className='flex items-center gap-3'>
 					<h1 className='text-4xl font-bold tracking-tight text-foreground'>z.button</h1>
-					<z.badge isGhost isWhite>
+					<z.badge isGhost isNeutral>
 						Component
 					</z.badge>
 				</div>
@@ -85,21 +49,15 @@ export default function ButtonDocsPage() {
 			</div>
 
 			{/* Quick Preview */}
-			<ComponentPreview
-				code={`import { z } from '@tasteee/zest'
-
-export function ButtonDemo() {
-  return <z.button>Click me</z.button>
-}`}
-			>
+			<ComponentPreview code={examples.quickPreview}>
 				<z.button>Click me</z.button>
 			</ComponentPreview>
 
 			{/* Usage */}
 			<section className='space-y-6'>
 				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>Usage</h2>
-				<CodeBlock code={`import { z } from '@tasteee/zest'`} language='tsx' />
-				<CodeBlock code={`<z.button>Click me</z.button>`} language='tsx' />
+				<CodeBlock code={examples.usageImport} language='tsx' />
+				<CodeBlock code={examples.usage} language='tsx' />
 			</section>
 
 			{/* Examples */}
@@ -107,67 +65,32 @@ export function ButtonDemo() {
 				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>Examples</h2>
 
 				{/* kinds */}
-				<ComponentPreview
-					code={`import { z } from '@tasteee/zest'
-
-<div className="flex flex-wrap gap-4">
-  <z.button isOutlined>Outlined</z.button>
-  <z.button>Solid</z.button>
-  <z.button>Ghost</z.button>
-</div>`}
-				>
+				<ComponentPreview code={examples.kinds}>
 					<div className='flex flex-wrap gap-4'>
-						<z.button isOutlined isWhite>
+						<z.button isOutlined isNeutral>
 							Outlined
 						</z.button>
-						<z.button isSolid isWhite>
+						<z.button isSolid isNeutral>
 							Solid
 						</z.button>
-						<z.button isGhost isWhite>
+						<z.button isGhost isNeutral>
 							Ghost
 						</z.button>
 					</div>
 				</ComponentPreview>
 
 				{/* Colors */}
-				<ComponentPreview
-					code={`import { z } from '@tasteee/zest'
-
-{/* Green */}
-<z.button isGreen isOutlined>Green Outlined</z.button>
-<z.button isGreen isSolid>Green Solid</z.button>
-<z.button isGreen isGhost>Green Ghost</z.button>
-
-{/* Purple */}
-<z.button isPurple isOutlined>Purple Outlined</z.button>
-<z.button isPurple isSolid>Purple Solid</z.button>
-<z.button isPurple isGhost>Purple Ghost</z.button>
-
-{/* Pink */}
-<z.button isPink isOutlined>Pink Outlined</z.button>
-<z.button isPink isSolid>Pink Solid</z.button>
-<z.button isPink isGhost>Pink Ghost</z.button>
-
-{/* Orange */}
-<z.button isOrange isOutlined>Orange Outlined</z.button>
-<z.button isOrange isSolid>Orange Solid</z.button>
-<z.button isOrange isGhost>Orange Ghost</z.button>
-
-{/* White */}
-<z.button isWhite isOutlined>White Outlined</z.button>
-<z.button isWhite isSolid>White Solid</z.button>
-<z.button isWhite isGhost>White Ghost</z.button>`}
-				>
+				<ComponentPreview code={examples.colors}>
 					<div className='flex flex-col gap-6'>
 						<div className='flex flex-wrap items-center gap-3'>
-							<z.button isGreen isOutlined>
-								Green Outlined
+							<z.button isPurple isOutlined>
+								Purple Outlined
 							</z.button>
-							<z.button isGreen isSolid>
-								Green Solid
+							<z.button isPurple isSolid>
+								Purple Solid
 							</z.button>
-							<z.button isGreen isGhost>
-								Green Ghost
+							<z.button isPurple isGhost>
+								Purple Ghost
 							</z.button>
 						</div>
 						<div className='flex flex-wrap items-center gap-3'>
@@ -193,44 +116,32 @@ export function ButtonDemo() {
 							</z.button>
 						</div>
 						<div className='flex flex-wrap items-center gap-3'>
-							<z.button isOrange isOutlined>
-								Orange Outlined
+							<z.button isPink isOutlined>
+								Pink Outlined
 							</z.button>
-							<z.button isOrange isSolid>
-								Orange Solid
+							<z.button isPink isSolid>
+								Pink Solid
 							</z.button>
-							<z.button isOrange isGhost>
-								Orange Ghost
+							<z.button isPink isGhost>
+								Pink Ghost
 							</z.button>
 						</div>
 						<div className='flex flex-wrap items-center gap-3'>
-							<z.button isWhite isOutlined>
-								White Outlined
+							<z.button isNeutral isOutlined>
+								Neutral Outlined
 							</z.button>
-							<z.button isWhite isSolid>
-								White Solid
+							<z.button isNeutral isSolid>
+								Neutral Solid
 							</z.button>
-							<z.button isWhite isGhost>
-								White Ghost
+							<z.button isNeutral isGhost>
+								Neutral Ghost
 							</z.button>
 						</div>
 					</div>
 				</ComponentPreview>
 
 				{/* Sizes */}
-				<ComponentPreview
-					code={`import { z } from '@tasteee/zest'
-import { Plus } from 'lucide-react'
-
-<div className="flex items-center gap-4">
-  <z.button isSmall>Small</z.button>
-  <z.button isMedium>Default</z.button>
-  <z.button isLarge>Large</z.button>
-  <z.button isIcon>
-    <Plus className="h-4 w-4" />
-  </z.button>
-</div>`}
-				>
+				<ComponentPreview code={examples.sizes}>
 					<div className='flex items-center gap-4'>
 						<z.button isSmall>Small</z.button>
 						<z.button isMedium>Default</z.button>
@@ -242,25 +153,7 @@ import { Plus } from 'lucide-react'
 				</ComponentPreview>
 
 				{/* With Icons */}
-				<ComponentPreview
-					code={`import { z } from '@tasteee/zest'
-import { Mail, Download, ExternalLink } from 'lucide-react'
-
-<div className="flex flex-wrap gap-4">
-  <z.button>
-    <Mail className="mr-2 h-4 w-4" />
-    Login with Email
-  </z.button>
-  <z.button>
-    Download
-    <Download className="ml-2 h-4 w-4" />
-  </z.button>
-  <z.button>
-    <ExternalLink className="mr-2 h-4 w-4" />
-    Open Link
-  </z.button>
-</div>`}
-				>
+				<ComponentPreview code={examples.withIcons}>
 					<div className='flex flex-wrap gap-4'>
 						<z.button>
 							<Mail className='mr-2 h-4 w-4' />
@@ -278,21 +171,7 @@ import { Mail, Download, ExternalLink } from 'lucide-react'
 				</ComponentPreview>
 
 				{/* Loading State */}
-				<ComponentPreview
-					code={`import { z } from '@tasteee/zest'
-import { Loader2 } from 'lucide-react'
-
-<z.button disabled={isLoading} onClick={handleLoadingClick}>
-  {isLoading ? (
-    <>
-      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-      Please wait
-    </>
-  ) : (
-    "Click me"
-  )}
-</z.button>`}
-				>
+				<ComponentPreview code={examples.loadingState}>
 					<z.button isDisabled={isLoading} onClick={handleLoadingClick}>
 						{isLoading ? (
 							<>
@@ -306,15 +185,7 @@ import { Loader2 } from 'lucide-react'
 				</ComponentPreview>
 
 				{/* Disabled */}
-				<ComponentPreview
-					code={`import { z } from '@tasteee/zest'
-
-<div className="flex gap-4">
-  <z.button disabled>Disabled</z.button>
-  <z.button disabled>Disabled Outline</z.button>
-  <z.button disabled>Disabled Secondary</z.button>
-</div>`}
-				>
+				<ComponentPreview code={examples.disabled}>
 					<div className='flex gap-4'>
 						<z.button isDisabled>Disabled</z.button>
 						<z.button isDisabled>Disabled Outline</z.button>
@@ -323,18 +194,7 @@ import { Loader2 } from 'lucide-react'
 				</ComponentPreview>
 
 				{/* As Child */}
-				<ComponentPreview
-					code={`import { z } from '@tasteee/zest'
-import Link from 'next/link'
-import { ArrowRight } from 'lucide-react'
-
-<z.button asChild>
-  <Link href="/docs">
-    Go to Docs
-    <ArrowRight className="ml-2 h-4 w-4" />
-  </Link>
-</z.button>`}
-				>
+				<ComponentPreview code={examples.asChild}>
 					<z.button>
 						<Link href='/docs'>
 							Go to Docs
@@ -344,25 +204,7 @@ import { ArrowRight } from 'lucide-react'
 				</ComponentPreview>
 
 				{/* Icon Buttons */}
-				<ComponentPreview
-					code={`import { z } from '@tasteee/zest'
-import { Check, X, Plus } from 'lucide-react'
-
-<div className="flex gap-2">
-  <z.button isIcon>
-    <Check className="h-4 w-4" />
-  </z.button>
-  <z.button isIcon>
-    <X className="h-4 w-4" />
-  </z.button>
-  <z.button isIcon>
-    <Plus className="h-4 w-4" />
-  </z.button>
-  <z.button isIcon>
-    <X className="h-4 w-4" />
-  </z.button>
-</div>`}
-				>
+				<ComponentPreview code={examples.iconButtons}>
 					<div className='flex gap-2'>
 						<z.button isIcon>
 							<Check className='h-4 w-4' />

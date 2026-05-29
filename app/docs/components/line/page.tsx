@@ -5,37 +5,12 @@ import { z } from '@/components/ui'
 import { Line } from '@/components/ui/line'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { ComponentPreview } from '@/components/docs/component-preview'
-import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
+import { PropsTable } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
 import { Card, CardContent } from '@/components/ui/card'
 import { ChevronRight } from 'lucide-react'
-
-const lineProps: PropDefinition[] = [
-	{
-		name: 'isVertical',
-		type: 'boolean',
-		defaultValue: 'false',
-		description: 'When true, renders the line vertically.'
-	},
-	{
-		name: 'isHorizontal',
-		type: 'boolean',
-		defaultValue: 'true',
-		description: 'Renders the line horizontally. This is the default.'
-	},
-	{
-		name: 'decorative',
-		type: 'boolean',
-		defaultValue: 'true',
-		description: 'When true, the line is purely visual and has no semantic meaning.'
-	},
-	{
-		name: 'className',
-		type: 'string',
-		description: 'Additional CSS classes to apply.'
-	}
-]
-
+import { lineProps } from './props'
+import { examples } from './examples'
 export default function LineDocsPage() {
 	return (
 		<div className='space-y-16'>
@@ -56,7 +31,7 @@ export default function LineDocsPage() {
 			<div className='space-y-4'>
 				<div className='flex items-center gap-3'>
 					<h1 className='text-4xl font-bold tracking-tight text-foreground'>Line</h1>
-					<z.badge isGhost isWhite>
+					<z.badge isGhost isNeutral>
 						Component
 					</z.badge>
 				</div>
@@ -69,28 +44,7 @@ export default function LineDocsPage() {
 			<ComponentPreview
 				title='Default Line'
 				description='A horizontal line that separates content.'
-				code={`import { z } from '@tasteee/zest'
-
-export function LineDemo() {
-  return (
-    <div>
-      <div className="space-y-1">
-        <h4 className="text-sm font-medium leading-none">tasteink Design System</h4>
-        <p className="text-sm text-muted-foreground">
-          A comprehensive component library.
-        </p>
-      </div>
-      <z.line className="my-4" />
-      <div className="flex h-5 items-center space-x-4 text-sm">
-        <div>Blog</div>
-        <z.line isVertical />
-        <div>Docs</div>
-        <z.line isVertical />
-        <div>Source</div>
-      </div>
-    </div>
-  )
-}`}
+				code={examples.quickPreview}
 			>
 				<div>
 					<div className='space-y-1'>
@@ -111,8 +65,8 @@ export function LineDemo() {
 			{/* Usage */}
 			<section className='space-y-6'>
 				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>Usage</h2>
-				<CodeBlock code={`import { z } from '@tasteee/zest'`} language='tsx' />
-				<CodeBlock code={`<z.line />`} language='tsx' />
+				<CodeBlock code={examples.usageImport} language='tsx' />
+				<CodeBlock code={examples.usage} language='tsx' />
 			</section>
 
 			{/* Examples */}
@@ -123,11 +77,7 @@ export function LineDemo() {
 				<ComponentPreview
 					title='Horizontal Line'
 					description='The default horizontal line.'
-					code={`<div className="space-y-4">
-  <p className="text-sm">Section One Content</p>
-  <z.line />
-  <p className="text-sm">Section Two Content</p>
-</div>`}
+					code={examples.horizontal}
 				>
 					<div className='space-y-4 w-full'>
 						<p className='text-sm'>Section One Content</p>
@@ -140,15 +90,7 @@ export function LineDemo() {
 				<ComponentPreview
 					title='Vertical Line'
 					description='A vertical line for inline content.'
-					code={`<div className="flex h-5 items-center space-x-4 text-sm">
-  <span>Home</span>
-  <z.line isVertical />
-  <span>Products</span>
-  <z.line isVertical />
-  <span>About</span>
-  <z.line isVertical />
-  <span>Contact</span>
-</div>`}
+					code={examples.vertical}
 				>
 					<div className='flex h-5 items-center space-x-4 text-sm'>
 						<span>Home</span>
@@ -165,31 +107,7 @@ export function LineDemo() {
 				<ComponentPreview
 					title='In a Card'
 					description='Separating content sections within a card.'
-					code={`<Card className="w-full max-w-sm">
-  <CardContent className="p-6">
-    <div className="space-y-1">
-      <h3 className="font-semibold">Account Settings</h3>
-      <p className="text-sm text-muted-foreground">
-        Manage your account preferences
-      </p>
-    </div>
-    <z.line className="my-4" />
-    <div className="space-y-2">
-      <div className="flex justify-between text-sm">
-        <span>Email Notifications</span>
-        <span className="text-muted-foreground">Enabled</span>
-      </div>
-      <div className="flex justify-between text-sm">
-        <span>Two-Factor Auth</span>
-        <span className="text-muted-foreground">Active</span>
-      </div>
-    </div>
-    <z.line className="my-4" />
-    <p className="text-xs text-muted-foreground">
-      Last updated: 2 days ago
-    </p>
-  </CardContent>
-</Card>`}
+					code={examples.inACard}
 				>
 					<Card className='w-full max-w-sm'>
 						<CardContent className='p-6'>

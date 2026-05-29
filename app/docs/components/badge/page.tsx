@@ -3,43 +3,12 @@
 import Link from 'next/link'
 import { z } from '@/components/ui'
 import { ComponentPreview } from '@/components/docs/component-preview'
-import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
+import { PropsTable } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
 import { Card, CardContent } from '@/components/ui/card'
 import { ChevronRight, Check, Clock, Palette, Zap } from 'lucide-react'
-
-const badgeProps: PropDefinition[] = [
-	{
-		name: 'isOutline | isGhost | isSolid',
-		type: 'boolean',
-		defaultValue: 'isOutline',
-		description: 'Controls the visual treatment of the badge container.'
-	},
-	{
-		name: 'isWhite | isGreen | isPurple | isPink | isOrange',
-		type: 'boolean',
-		defaultValue: 'isWhite',
-		description: 'Controls the color palette used by the badge.'
-	},
-	{
-		name: 'asChild',
-		type: 'boolean',
-		defaultValue: 'false',
-		description: 'Renders the badge as a child component (e.g. anchor) using Radix Slot.'
-	},
-	{
-		name: 'className',
-		type: 'string',
-		description: 'Additional CSS classes to apply to the badge.'
-	},
-	{
-		name: 'children',
-		type: 'React.ReactNode',
-		required: true,
-		description: 'The content to display inside the badge.'
-	}
-]
-
+import { badgeProps } from './props'
+import { examples } from './examples'
 export default function BadgeDocsPage() {
 	return (
 		<div className='space-y-16'>
@@ -69,37 +38,29 @@ export default function BadgeDocsPage() {
 			</div>
 
 			<ComponentPreview
-				code={`import { z } from '@tasteee/zest'
-
-export function BadgeDemo() {
-  return <z.badge>z.badge</z.badge>
-}`}
+				code={examples.quickPreview}
 			>
 				<z.badge>z.badge</z.badge>
 			</ComponentPreview>
 
 			<section className='space-y-6'>
 				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>Usage</h2>
-				<CodeBlock code={`import { z } from '@tasteee/zest'`} language='tsx' />
-				<CodeBlock code={`<z.badge isOutline isWhite>z.badge</z.badge>`} language='tsx' />
+				<CodeBlock code={examples.usageImport} language='tsx' />
+				<CodeBlock code={examples.usage} language='tsx' />
 			</section>
 
 			<section className='space-y-8'>
 				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>Examples</h2>
 
 				<ComponentPreview
-					code={`<div className="flex flex-wrap gap-2">
-  <z.badge isOutline isWhite>Outline White</z.badge>
-  <z.badge isGhost isGreen>Ghost Green</z.badge>
-  <z.badge isSolid isPurple>Solid Purple</z.badge>
-</div>`}
+					code={examples.kindsAndColors}
 				>
 					<div className='flex flex-wrap gap-2'>
-						<z.badge isOutline isWhite>
-							Outline White
+						<z.badge isOutline isNeutral>
+							Outline Neutral
 						</z.badge>
-						<z.badge isGhost isGreen>
-							Ghost Green
+						<z.badge isGhost isPurple>
+							Ghost Purple
 						</z.badge>
 						<z.badge isSolid isPurple>
 							Solid Purple
@@ -108,30 +69,14 @@ export function BadgeDemo() {
 				</ComponentPreview>
 
 				<ComponentPreview
-					code={`<div className="flex flex-wrap gap-2">
-  <z.badge isSolid isGreen>
-    <Check className="h-3 w-3" />
-    Verified
-  </z.badge>
-  <z.badge isGhost isOrange>
-    <Clock className="h-3 w-3" />
-    Pending
-  </z.badge>
-  <z.badge isOutline isPink>
-    <Zap className="h-3 w-3" />
-    Featured
-  </z.badge>
-  <z.badge isSolid isWhite asChild>
-    <a href="#">Action</a>
-  </z.badge>
-</div>`}
+					code={examples.withIcons}
 				>
 					<div className='flex flex-wrap gap-2'>
-						<z.badge isSolid isGreen>
+						<z.badge isSolid isPurple>
 							<Check className='h-3 w-3' />
 							Verified
 						</z.badge>
-						<z.badge isGhost isOrange>
+						<z.badge isGhost isPink>
 							<Clock className='h-3 w-3' />
 							Pending
 						</z.badge>
@@ -139,29 +84,23 @@ export function BadgeDemo() {
 							<Zap className='h-3 w-3' />
 							Featured
 						</z.badge>
-						<z.badge isSolid isWhite asChild>
+						<z.badge isSolid isNeutral asChild>
 							<a href='#'>Action</a>
 						</z.badge>
 					</div>
 				</ComponentPreview>
 
 				<ComponentPreview
-					code={`<div className="grid grid-cols-2 gap-2 w-full max-w-xl">
-  <z.badge isOutline isWhite><Palette className="h-3 w-3" />white</z.badge>
-  <z.badge isOutline isGreen><Palette className="h-3 w-3" />green</z.badge>
-  <z.badge isOutline isPurple><Palette className="h-3 w-3" />purple</z.badge>
-  <z.badge isOutline isPink><Palette className="h-3 w-3" />pink</z.badge>
-  <z.badge isOutline isOrange><Palette className="h-3 w-3" />orange</z.badge>
-</div>`}
+					code={examples.colorVariants}
 				>
 					<div className='grid grid-cols-2 gap-2 w-full max-w-xl'>
-						<z.badge isOutline isWhite>
+						<z.badge isOutline isNeutral>
 							<Palette className='h-3 w-3' />
-							white
+							neutral
 						</z.badge>
-						<z.badge isOutline isGreen>
+						<z.badge isOutline isPurple>
 							<Palette className='h-3 w-3' />
-							green
+							purple
 						</z.badge>
 						<z.badge isOutline isPurple>
 							<Palette className='h-3 w-3' />
@@ -171,9 +110,9 @@ export function BadgeDemo() {
 							<Palette className='h-3 w-3' />
 							pink
 						</z.badge>
-						<z.badge isOutline isOrange>
+						<z.badge isOutline isPink>
 							<Palette className='h-3 w-3' />
-							orange
+							pink
 						</z.badge>
 					</div>
 				</ComponentPreview>

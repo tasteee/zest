@@ -70,7 +70,7 @@ export default function PatternsPage() {
 			{/* Header */}
 			<div className='space-y-4'>
 				<div className='flex items-center gap-2'>
-					<z.badge isGhost isWhite className='font-mono text-xs'>
+					<z.badge isGhost isNeutral className='font-mono text-xs'>
 						Patterns
 					</z.badge>
 				</div>
@@ -100,7 +100,7 @@ export default function PatternsPage() {
 										<pattern.icon className='h-5 w-5 text-foreground' />
 									</div>
 									{pattern.status === 'coming-soon' && (
-										<z.badge isOutline isWhite className='text-xs'>
+										<z.badge isOutline isNeutral className='text-xs'>
 											Coming Soon
 										</z.badge>
 									)}

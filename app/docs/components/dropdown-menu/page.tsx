@@ -21,7 +21,7 @@ import {
 	DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu'
 import { ComponentPreview } from '@/components/docs/component-preview'
-import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
+import { PropsTable } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
 import { Card, CardContent } from '@/components/ui/card'
 import {
@@ -46,50 +46,8 @@ import {
 	Copy
 } from 'lucide-react'
 import { useState } from 'react'
-
-const dropdownMenuProps: PropDefinition[] = [
-	{
-		name: 'open',
-		type: 'boolean',
-		description: 'The controlled open state of the dropdown menu.'
-	},
-	{
-		name: 'onOpenChange',
-		type: '(open: boolean) => void',
-		description: 'Event handler called when the open state changes.'
-	},
-	{
-		name: 'defaultOpen',
-		type: 'boolean',
-		defaultValue: 'false',
-		description: 'The open state of the dropdown menu when initially rendered.'
-	},
-	{
-		name: 'modal',
-		type: 'boolean',
-		defaultValue: 'true',
-		description: 'Whether the menu should be modal (blocking interaction with outside elements).'
-	}
-]
-
-const dropdownMenuItemProps: PropDefinition[] = [
-	{
-		name: 'disabled',
-		type: 'boolean',
-		defaultValue: 'false',
-		description: 'When true, prevents the user from interacting with the item.'
-	},
-	{
-		name: 'onSelect',
-		type: '(event: Event) => void',
-		description: 'Event handler called when the user selects an item.'
-	},
-	{
-		name: 'textValue',
-		type: 'string',
-		description: 'Optional text used for typeahead purposes.'
-	}
-]
+import { dropdownMenuProps, dropdownMenuItemProps } from './props'
+import { examples } from './examples'
 
 export default function DropdownMenuDocsPage() {
 	const [showStatusBar, setShowStatusBar] = useState(true)
@@ -115,7 +73,7 @@ export default function DropdownMenuDocsPage() {
 			<div className='space-y-4'>
 				<div className='flex items-center gap-3'>
 					<h1 className='text-4xl font-bold tracking-tight text-foreground'>ZDropdownMenu</h1>
-					<z.badge isGhost isWhite>
+					<z.badge isGhost isNeutral>
 						Component
 					</z.badge>
 				</div>
@@ -129,47 +87,7 @@ export default function DropdownMenuDocsPage() {
 			<ComponentPreview
 				title='Default Dropdown Menu'
 				description='A basic dropdown menu with various item types.'
-				code={`import {
-  ZDropdownMenu,
-  ZDropdownMenuContent,
-  ZDropdownMenuItem,
-  ZDropdownMenuLabel,
-  ZDropdownMenuSeparator,
-  ZDropdownMenuTrigger,
-  z,
-} from '@tasteee/zest'
-import { User, CreditCard, Settings, LogOut } from 'lucide-react'
-
-export function DropdownMenuDemo() {
-  return (
-    <ZDropdownMenu>
-      <ZDropdownMenuTrigger asChild>
-        <z.button>Open Menu</z.button>
-      </ZDropdownMenuTrigger>
-      <ZDropdownMenuContent className="w-56">
-        <ZDropdownMenuLabel>My Account</ZDropdownMenuLabel>
-        <ZDropdownMenuSeparator />
-        <ZDropdownMenuItem>
-          <User className="mr-2 h-4 w-4" />
-          <span>Profile</span>
-        </ZDropdownMenuItem>
-        <ZDropdownMenuItem>
-          <CreditCard className="mr-2 h-4 w-4" />
-          <span>Billing</span>
-        </ZDropdownMenuItem>
-        <ZDropdownMenuItem>
-          <Settings className="mr-2 h-4 w-4" />
-          <span>Settings</span>
-        </ZDropdownMenuItem>
-        <ZDropdownMenuSeparator />
-        <ZDropdownMenuItem>
-          <LogOut className="mr-2 h-4 w-4" />
-          <span>Log out</span>
-        </ZDropdownMenuItem>
-      </ZDropdownMenuContent>
-    </ZDropdownMenu>
-  )
-}`}
+				code={examples.quickPreview}
 			>
 				<DropdownMenu>
 					<DropdownMenuTrigger asChild>
@@ -203,27 +121,11 @@ export function DropdownMenuDemo() {
 			<section className='space-y-6'>
 				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>Usage</h2>
 				<CodeBlock
-					code={`import {
-  ZDropdownMenu,
-  ZDropdownMenuContent,
-  ZDropdownMenuItem,
-  ZDropdownMenuLabel,
-  ZDropdownMenuSeparator,
-  ZDropdownMenuTrigger,
-} from '@tasteee/zest'`}
+					code={examples.usageImport}
 					language='tsx'
 				/>
 				<CodeBlock
-					code={`<ZDropdownMenu>
-  <ZDropdownMenuTrigger>Open</ZDropdownMenuTrigger>
-  <ZDropdownMenuContent>
-    <ZDropdownMenuLabel>My Account</ZDropdownMenuLabel>
-    <ZDropdownMenuSeparator />
-    <ZDropdownMenuItem>Profile</ZDropdownMenuItem>
-    <ZDropdownMenuItem>Billing</ZDropdownMenuItem>
-    <ZDropdownMenuItem>Settings</ZDropdownMenuItem>
-  </ZDropdownMenuContent>
-</ZDropdownMenu>`}
+					code={examples.usage}
 					language='tsx'
 				/>
 			</section>
@@ -236,29 +138,7 @@ export function DropdownMenuDemo() {
 				<ComponentPreview
 					title='With Shortcuts'
 					description='Menu items can display keyboard shortcuts.'
-					code={`<DropdownMenu>
-  <DropdownMenuTrigger asChild>
-    <Button variant="outline">Edit</Button>
-  </DropdownMenuTrigger>
-  <DropdownMenuContent className="w-56">
-    <DropdownMenuItem>
-      <Copy className="mr-2 h-4 w-4" />
-      <span>Copy</span>
-      <DropdownMenuShortcut>⌘C</DropdownMenuShortcut>
-    </DropdownMenuItem>
-    <DropdownMenuItem>
-      <Pencil className="mr-2 h-4 w-4" />
-      <span>Edit</span>
-      <DropdownMenuShortcut>⌘E</DropdownMenuShortcut>
-    </DropdownMenuItem>
-    <DropdownMenuSeparator />
-    <DropdownMenuItem className="text-destructive">
-      <Trash className="mr-2 h-4 w-4" />
-      <span>Delete</span>
-      <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
-    </DropdownMenuItem>
-  </DropdownMenuContent>
-</DropdownMenu>`}
+					code={examples.withShortcuts}
 				>
 					<DropdownMenu>
 						<DropdownMenuTrigger asChild>
@@ -289,30 +169,7 @@ export function DropdownMenuDemo() {
 				<ComponentPreview
 					title='Checkbox Items'
 					description='Menu items that can be checked or unchecked.'
-					code={`const [showStatusBar, setShowStatusBar] = useState(true)
-const [showActivityBar, setShowActivityBar] = useState(false)
-
-<DropdownMenu>
-  <DropdownMenuTrigger asChild>
-    <Button variant="outline">View</Button>
-  </DropdownMenuTrigger>
-  <DropdownMenuContent className="w-56">
-    <DropdownMenuLabel>Appearance</DropdownMenuLabel>
-    <DropdownMenuSeparator />
-    <DropdownMenuCheckboxItem
-      checked={showStatusBar}
-      onCheckedChange={setShowStatusBar}
-    >
-      Status Bar
-    </DropdownMenuCheckboxItem>
-    <DropdownMenuCheckboxItem
-      checked={showActivityBar}
-      onCheckedChange={setShowActivityBar}
-    >
-      Activity Bar
-    </DropdownMenuCheckboxItem>
-  </DropdownMenuContent>
-</DropdownMenu>`}
+					code={examples.checkboxItems}
 				>
 					<DropdownMenu>
 						<DropdownMenuTrigger asChild>
@@ -335,22 +192,7 @@ const [showActivityBar, setShowActivityBar] = useState(false)
 				<ComponentPreview
 					title='Radio Items'
 					description='A group of items where only one can be selected.'
-					code={`const [position, setPosition] = useState("bottom")
-
-<DropdownMenu>
-  <DropdownMenuTrigger asChild>
-    <Button variant="outline">Position</Button>
-  </DropdownMenuTrigger>
-  <DropdownMenuContent className="w-56">
-    <DropdownMenuLabel>Panel Position</DropdownMenuLabel>
-    <DropdownMenuSeparator />
-    <DropdownMenuRadioGroup value={position} onValueChange={setPosition}>
-      <DropdownMenuRadioItem value="top">Top</DropdownMenuRadioItem>
-      <DropdownMenuRadioItem value="bottom">Bottom</DropdownMenuRadioItem>
-      <DropdownMenuRadioItem value="right">Right</DropdownMenuRadioItem>
-    </DropdownMenuRadioGroup>
-  </DropdownMenuContent>
-</DropdownMenu>`}
+					code={examples.radioItems}
 				>
 					<DropdownMenu>
 						<DropdownMenuTrigger asChild>
@@ -372,20 +214,7 @@ const [showActivityBar, setShowActivityBar] = useState(false)
 				<ComponentPreview
 					title='Icon Trigger'
 					description='A common pattern using an icon button as the trigger.'
-					code={`<DropdownMenu>
-  <DropdownMenuTrigger asChild>
-    <Button variant="ghost" size="icon">
-      <MoreHorizontal className="h-4 w-4" />
-      <span className="sr-only">Open menu</span>
-    </Button>
-  </DropdownMenuTrigger>
-  <DropdownMenuContent align="end">
-    <DropdownMenuItem>Edit</DropdownMenuItem>
-    <DropdownMenuItem>Duplicate</DropdownMenuItem>
-    <DropdownMenuSeparator />
-    <DropdownMenuItem className="text-destructive">Delete</DropdownMenuItem>
-  </DropdownMenuContent>
-</DropdownMenu>`}
+					code={examples.iconTrigger}
 				>
 					<DropdownMenu>
 						<DropdownMenuTrigger asChild>

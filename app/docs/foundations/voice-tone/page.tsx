@@ -12,7 +12,7 @@ const voicePrinciples = [
     title: "Direct",
     description: "Say what you mean. Mean what you say. No corporate fluff.",
     example: '"Join the club" not "We\'d love for you to consider joining our exclusive waitlist experience"',
-    color: "neon-green",
+    color: "neon-purple",
   },
   {
     title: "Confident",
@@ -30,7 +30,7 @@ const voicePrinciples = [
     title: "Human",
     description: "Real talk with real people. Swear when it fits. Be the friend, not the brand.",
     example: '"We messed up, here\'s how we\'re fixing it" not "We apologize for any inconvenience"',
-    color: "neon-orange",
+    color: "neon-pink",
   },
 ];
 
@@ -110,7 +110,7 @@ export default function VoiceTonePage() {
               }`}
             >
               <div className="md:w-36 shrink-0">
-                <span className="text-neon-orange text-xs font-semibold tracking-wider uppercase">
+                <span className="text-neon-pink text-xs font-semibold tracking-wider uppercase">
                   {item.context}
                 </span>
               </div>
@@ -131,8 +131,8 @@ export default function VoiceTonePage() {
         <DocsSectionTitle>Writing Guidelines</DocsSectionTitle>
         
         <div className="grid md:grid-cols-2 gap-6">
-          <div className="rounded-lg border border-neon-green/30 p-6">
-            <h4 className="text-neon-green font-semibold mb-4 flex items-center gap-2">
+          <div className="rounded-lg border border-neon-purple/30 p-6">
+            <h4 className="text-neon-purple font-semibold mb-4 flex items-center gap-2">
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
@@ -173,7 +173,7 @@ export default function VoiceTonePage() {
             <h4 className="text-primary font-semibold mb-4">Buttons & CTAs</h4>
             <div className="grid md:grid-cols-2 gap-4 text-sm">
               <div>
-                <span className="text-neon-green text-xs uppercase tracking-wider block mb-2">Do</span>
+                <span className="text-neon-purple text-xs uppercase tracking-wider block mb-2">Do</span>
                 <ul className="space-y-1 text-foreground">
                   <li>&quot;Get started&quot;</li>
                   <li>&quot;Join now&quot;</li>
@@ -197,7 +197,7 @@ export default function VoiceTonePage() {
             <h4 className="text-primary font-semibold mb-4">Error States</h4>
             <div className="grid md:grid-cols-2 gap-4 text-sm">
               <div>
-                <span className="text-neon-green text-xs uppercase tracking-wider block mb-2">Do</span>
+                <span className="text-neon-purple text-xs uppercase tracking-wider block mb-2">Do</span>
                 <ul className="space-y-1 text-foreground">
                   <li>&quot;Something broke. We&apos;re on it.&quot;</li>
                   <li>&quot;That didn&apos;t work. Try again?&quot;</li>
@@ -219,7 +219,7 @@ export default function VoiceTonePage() {
             <h4 className="text-primary font-semibold mb-4">Empty States</h4>
             <div className="grid md:grid-cols-2 gap-4 text-sm">
               <div>
-                <span className="text-neon-green text-xs uppercase tracking-wider block mb-2">Do</span>
+                <span className="text-neon-purple text-xs uppercase tracking-wider block mb-2">Do</span>
                 <ul className="space-y-1 text-foreground">
                   <li>&quot;Nothing here yet. Make some magic.&quot;</li>
                   <li>&quot;Your canvas is empty. Time to create.&quot;</li>

@@ -16,9 +16,9 @@ import { cn } from '@/lib/utils'
 
 const brandColors = [
 	{
-		name: 'Neon Green',
-		variable: '---green',
-		class: 'bg-neon-green',
+		name: 'Neon Purple',
+		variable: '---purple',
+		class: 'bg-neon-purple',
 		value: 'oklch(0.85 0.28 145)',
 		hex: '#39FF14',
 		usage: 'Primary actions, success states, key highlights'
@@ -40,9 +40,9 @@ const brandColors = [
 		usage: 'Tertiary accents, tags, categories'
 	},
 	{
-		name: 'Neon Orange',
-		variable: '---orange',
-		class: 'bg-neon-orange',
+		name: 'Neon Pink',
+		variable: '---pink',
+		class: 'bg-neon-pink',
 		value: 'oklch(0.8 0.22 55)',
 		hex: '#FF6B35',
 		usage: 'Warnings, attention, call-outs'
@@ -131,7 +131,7 @@ function ColorSwatch({
 						<span
 							className={cn(
 								'text-[10px] transition-opacity',
-								copied === 'var' ? 'text-neon-green opacity-100' : 'text-muted-foreground opacity-0 group-hover/btn:opacity-100'
+								copied === 'var' ? 'text-neon-purple opacity-100' : 'text-muted-foreground opacity-0 group-hover/btn:opacity-100'
 							)}
 						>
 							{copied === 'var' ? 'Copied!' : 'Copy'}
@@ -142,7 +142,7 @@ function ColorSwatch({
 						<span
 							className={cn(
 								'text-[10px] transition-opacity',
-								copied === 'value' ? 'text-neon-green opacity-100' : 'text-muted-foreground opacity-0 group-hover/btn:opacity-100'
+								copied === 'value' ? 'text-neon-purple opacity-100' : 'text-muted-foreground opacity-0 group-hover/btn:opacity-100'
 							)}
 						>
 							{copied === 'value' ? 'Copied!' : 'Copy'}
@@ -154,7 +154,7 @@ function ColorSwatch({
 							<span
 								className={cn(
 									'text-[10px] transition-opacity',
-									copied === 'hex' ? 'text-neon-green opacity-100' : 'text-muted-foreground opacity-0 group-hover/btn:opacity-100'
+									copied === 'hex' ? 'text-neon-purple opacity-100' : 'text-muted-foreground opacity-0 group-hover/btn:opacity-100'
 								)}
 							>
 								{copied === 'hex' ? 'Copied!' : 'Copy'}
@@ -231,7 +231,7 @@ export default function ColorsPage() {
 <p className="text-muted-foreground">Secondary text</p>
 
 // Brand neons
-<button className="bg-neon-green text-primary-foreground">
+<button className="bg-neon-purple text-primary-foreground">
   Primary Action
 </button>
 <span className="text-neon-pink">Accent text</span>`}
@@ -243,7 +243,7 @@ export default function ColorsPage() {
 				<DocsText>Access colors via CSS variables for custom styling:</DocsText>
 				<CodeBlock
 					code={`.custom-element {
-  background: var(---green);
+  background: var(---purple);
   color: var(--primary-foreground);
   border: 1px solid var(--border);
 }
@@ -251,7 +251,7 @@ export default function ColorsPage() {
 .gradient-accent {
   background: linear-gradient(
     135deg,
-    var(---green),
+    var(---purple),
     var(---purple)
   );
 }`}
@@ -264,8 +264,8 @@ export default function ColorsPage() {
 				<DocsSectionTitle>Usage Guidelines</DocsSectionTitle>
 
 				<div className='grid md:grid-cols-2 gap-6'>
-					<div className='rounded-lg border border-neon-green/30 p-6'>
-						<h4 className='text-neon-green font-semibold mb-4 flex items-center gap-2'>
+					<div className='rounded-lg border border-neon-purple/30 p-6'>
+						<h4 className='text-neon-purple font-semibold mb-4 flex items-center gap-2'>
 							<svg className='w-4 h-4' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
 								<path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M5 13l4 4L19 7' />
 							</svg>
@@ -273,19 +273,19 @@ export default function ColorsPage() {
 						</h4>
 						<ul className='space-y-2 text-sm text-foreground'>
 							<li className='flex items-start gap-2'>
-								<span className='text-neon-green mt-1'>•</span>
+								<span className='text-neon-purple mt-1'>•</span>
 								Use neon colors for interactive elements and highlights
 							</li>
 							<li className='flex items-start gap-2'>
-								<span className='text-neon-green mt-1'>•</span>
+								<span className='text-neon-purple mt-1'>•</span>
 								Maintain high contrast between text and backgrounds
 							</li>
 							<li className='flex items-start gap-2'>
-								<span className='text-neon-green mt-1'>•</span>
-								Use white sparingly for hierarchy
+								<span className='text-neon-purple mt-1'>•</span>
+								Use neutral sparingly for hierarchy
 							</li>
 							<li className='flex items-start gap-2'>
-								<span className='text-neon-green mt-1'>•</span>
+								<span className='text-neon-purple mt-1'>•</span>
 								Scatter brand colors throughout—don&apos;t be shy
 							</li>
 						</ul>

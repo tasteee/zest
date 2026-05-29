@@ -4,21 +4,20 @@ export const examples = {
 export function ToggleDemo() {
   return <z.toggle>Press me</z.toggle>
 }`,
+	usageImport: `import { z } from '@tasteee/zest'`,
+	usage: `<z.toggle>Press me</z.toggle>`,
 	kinds: `<z.toggle isGhost>Ghost</z.toggle>
 <z.toggle isOutlined>Outlined</z.toggle>`,
 	colors: `{/* Ghost */}
-<z.toggle isGhost isWhite>White</z.toggle>
-<z.toggle isGhost isGreen>Green</z.toggle>
+<z.toggle isGhost isNeutral>Neutral</z.toggle>
 <z.toggle isGhost isPurple>Purple</z.toggle>
 <z.toggle isGhost isPink>Pink</z.toggle>
-<z.toggle isGhost isOrange>Orange</z.toggle>
 
 {/* Outlined */}
-<z.toggle isOutlined isWhite>White</z.toggle>
-<z.toggle isOutlined isGreen>Green</z.toggle>
+<z.toggle isOutlined isNeutral>Neutral</z.toggle>
 <z.toggle isOutlined isPurple>Purple</z.toggle>
-<z.toggle isOutlined isPink>Pink</z.toggle>
-<z.toggle isOutlined isOrange>Orange</z.toggle>`,
+<z.toggle isOutlined isPink>Pink</z.toggle>`,
+
 	sizes: `<z.toggle isSmall>Small</z.toggle>
 <z.toggle isMedium>Medium</z.toggle>
 <z.toggle isLarge>Large</z.toggle>`,
@@ -35,7 +34,8 @@ export function ToggleDemo() {
 </z.toggle>`,
 	disabled: `<z.toggle isDisabled>Disabled Ghost</z.toggle>
 <z.toggle isOutlined isDisabled>Disabled Outlined</z.toggle>
-<z.toggle isGreen isDisabled>Disabled Green</z.toggle>`,
+<z.toggle isPurple isDisabled>Disabled Purple</z.toggle>`,
+
 	singleSelection: `import { z } from '@tasteee/zest'
 import { AlignLeft, AlignCenter, AlignRight, AlignJustify } from 'lucide-react'
 
@@ -70,7 +70,7 @@ const [formatting, setFormatting] = useState<string[]>([])
   value={formatting}
   onValueChange={setFormatting}
   isOutlined
-  isGreen
+  isPurple
 >
   <z.toggleGroupItem value="bold" aria-label="Bold">
     <Bold className="h-4 w-4" />
@@ -82,7 +82,7 @@ const [formatting, setFormatting] = useState<string[]>([])
     <Underline className="h-4 w-4" />
   </z.toggleGroupItem>
 </z.toggleGroup>`,
-	groupColorVariants: `<z.toggleGroup type="single" isOutlined isGreen>
+	groupColorVariants: `<z.toggleGroup type="single" isOutlined isNeutral>
   <z.toggleGroupItem value="a">One</z.toggleGroupItem>
   <z.toggleGroupItem value="b">Two</z.toggleGroupItem>
   <z.toggleGroupItem value="c">Three</z.toggleGroupItem>

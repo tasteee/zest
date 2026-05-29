@@ -20,16 +20,10 @@
 		border-color 0.15s ease;
 }
 
-.zCheckbox.isWhite {
+.zCheckbox.isNeutral {
 	--zCheckbox-color: var(--primary);
 	--zCheckbox-bg: color-mix(in oklch, var(--primary) 10%, transparent);
 	--zCheckbox-border: var(--primary);
-}
-
-.zCheckbox.isGreen {
-	--zCheckbox-color: var(---green);
-	--zCheckbox-bg: color-mix(in oklch, var(---green) 10%, transparent);
-	--zCheckbox-border: var(---green);
 }
 
 .zCheckbox.isPurple {
@@ -42,12 +36,6 @@
 	--zCheckbox-color: var(---pink);
 	--zCheckbox-bg: color-mix(in oklch, var(---pink) 10%, transparent);
 	--zCheckbox-border: var(---pink);
-}
-
-.zCheckbox.isOrange {
-	--zCheckbox-color: var(---orange);
-	--zCheckbox-bg: color-mix(in oklch, var(---orange) 10%, transparent);
-	--zCheckbox-border: var(---orange);
 }
 
 .zCheckbox[data-state='checked'] {

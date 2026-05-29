@@ -6,12 +6,11 @@ import { z } from '@/components/ui'
 import { Card } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { Select } from '@/components/ui/select'
 import { Switch } from '@/components/ui/switch'
 import { toast } from '@/components/ui/use-toast'
 
 type ButtonKind = 'outlined' | 'solid' | 'ghost'
-type ButtonColor = 'white' | 'green' | 'purple' | 'pink' | 'orange'
+type ButtonColor = 'neutral' | 'purple' | 'purple' | 'pink' | 'pink'
 type ButtonSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
 type ButtonIcon = 'none' | 'plus' | 'download' | 'arrow-right' | 'check'
 type IconPosition = 'leading' | 'trailing'
@@ -23,11 +22,11 @@ const kindOptions: Array<{ label: string; value: ButtonKind; prop: string }> = [
 ]
 
 const colorOptions: Array<{ label: string; value: ButtonColor; prop: string }> = [
-	{ label: 'White', value: 'white', prop: 'isWhite' },
-	{ label: 'Green', value: 'green', prop: 'isGreen' },
+	{ label: 'Neutral', value: 'neutral', prop: 'isNeutral' },
+	{ label: 'Purple', value: 'purple', prop: 'isPurple' },
 	{ label: 'Purple', value: 'purple', prop: 'isPurple' },
 	{ label: 'Pink', value: 'pink', prop: 'isPink' },
-	{ label: 'Orange', value: 'orange', prop: 'isOrange' }
+	{ label: 'Pink', value: 'pink', prop: 'isPink' }
 ]
 
 const sizeOptions: Array<{ label: string; value: ButtonSize; prop: string }> = [
@@ -69,7 +68,7 @@ function escapeJsxText(text: string) {
 
 export default function ButtonPlaygroundPage() {
 	const [kind, setKind] = useState<ButtonKind>('outlined')
-	const [color, setColor] = useState<ButtonColor>('white')
+	const [color, setColor] = useState<ButtonColor>('neutral')
 	const [size, setSize] = useState<ButtonSize>('md')
 	const [label, setLabel] = useState('Button')
 	const [icon, setIcon] = useState<ButtonIcon>('none')
@@ -159,86 +158,86 @@ export function ButtonDemo() {
 						<div className='grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-1'>
 							<div className='grid gap-2'>
 								<Label htmlFor='button-kind'>Kind</Label>
-								<Select value={kind} onValueChange={(value) => setKind(value as ButtonKind)}>
-									<Select.Trigger id='button-kind' className='w-full'>
-										<Select.Value />
-									</Select.Trigger>
-									<Select.Content>
+								<z.select value={kind} onValueChange={(value) => setKind(value as ButtonKind)}>
+									<z.select.trigger id='button-kind' className='w-full'>
+										<z.select.value />
+									</z.select.trigger>
+									<z.select.content>
 										{kindOptions.map((option) => (
-											<Select.Item key={option.value} value={option.value}>
+											<z.select.item key={option.value} value={option.value}>
 												{option.label}
-											</Select.Item>
+											</z.select.item>
 										))}
-									</Select.Content>
-								</Select>
+									</z.select.content>
+								</z.select>
 							</div>
 
 							<div className='grid gap-2'>
 								<Label htmlFor='button-color'>Color</Label>
-								<Select value={color} onValueChange={(value) => setColor(value as ButtonColor)}>
-									<Select.Trigger id='button-color' className='w-full'>
-										<Select.Value />
-									</Select.Trigger>
-									<Select.Content>
+								<z.select value={color} onValueChange={(value) => setColor(value as ButtonColor)}>
+									<z.select.trigger id='button-color' className='w-full'>
+										<z.select.value />
+									</z.select.trigger>
+									<z.select.content>
 										{colorOptions.map((option) => (
-											<Select.Item key={option.value} value={option.value}>
+											<z.select.item key={option.value} value={option.value}>
 												{option.label}
-											</Select.Item>
+											</z.select.item>
 										))}
-									</Select.Content>
-								</Select>
+									</z.select.content>
+								</z.select>
 							</div>
 
 							<div className='grid gap-2'>
 								<Label htmlFor='button-size'>Size</Label>
-								<Select value={size} onValueChange={(value) => setSize(value as ButtonSize)}>
-									<Select.Trigger id='button-size' className='w-full'>
-										<Select.Value />
-									</Select.Trigger>
-									<Select.Content>
+								<z.select value={size} onValueChange={(value) => setSize(value as ButtonSize)}>
+									<z.select.trigger id='button-size' className='w-full'>
+										<z.select.value />
+									</z.select.trigger>
+									<z.select.content>
 										{sizeOptions.map((option) => (
-											<Select.Item key={option.value} value={option.value}>
+											<z.select.item key={option.value} value={option.value}>
 												{option.label}
-											</Select.Item>
+											</z.select.item>
 										))}
-									</Select.Content>
-								</Select>
+									</z.select.content>
+								</z.select>
 							</div>
 
 							<div className='grid gap-2'>
 								<Label htmlFor='button-icon'>Icon</Label>
-								<Select value={icon} onValueChange={(value) => setIcon(value as ButtonIcon)}>
-									<Select.Trigger id='button-icon' className='w-full'>
-										<Select.Value />
-									</Select.Trigger>
-									<Select.Content>
+								<z.select value={icon} onValueChange={(value) => setIcon(value as ButtonIcon)}>
+									<z.select.trigger id='button-icon' className='w-full'>
+										<z.select.value />
+									</z.select.trigger>
+									<z.select.content>
 										{iconOptions.map((option) => (
-											<Select.Item key={option.value} value={option.value}>
+											<z.select.item key={option.value} value={option.value}>
 												{option.label}
-											</Select.Item>
+											</z.select.item>
 										))}
-									</Select.Content>
-								</Select>
+									</z.select.content>
+								</z.select>
 							</div>
 
 							<div className='grid gap-2'>
 								<Label htmlFor='button-icon-position'>Icon position</Label>
-								<Select
+								<z.select
 									value={iconPosition}
 									onValueChange={(value) => setIconPosition(value as IconPosition)}
 									disabled={icon === 'none'}
 								>
-									<Select.Trigger id='button-icon-position' className='w-full'>
-										<Select.Value />
-									</Select.Trigger>
-									<Select.Content>
+									<z.select.trigger id='button-icon-position' className='w-full'>
+										<z.select.value />
+									</z.select.trigger>
+									<z.select.content>
 										{iconPositionOptions.map((option) => (
-											<Select.Item key={option.value} value={option.value}>
+											<z.select.item key={option.value} value={option.value}>
 												{option.label}
-											</Select.Item>
+											</z.select.item>
 										))}
-									</Select.Content>
-								</Select>
+									</z.select.content>
+								</z.select>
 							</div>
 						</div>
 
@@ -262,12 +261,12 @@ export function ButtonDemo() {
 						<h2 className='text-2xl font-semibold tracking-tight text-foreground'>Current Code</h2>
 						<p className='mt-1 text-sm text-muted-foreground'>Matches the controls above.</p>
 					</div>
-					<z.button isSolid isGreen isSmall onClick={copyCode}>
+					<z.button isSolid isPurple isSmall onClick={copyCode}>
 						<Copy className='h-4 w-4' />
 						Copy Code
 					</z.button>
 				</div>
-				<pre className='max-h-[320px] overflow-auto rounded-lg border border-border bg-muted/20 p-5 text-sm leading-6 text-foreground'>
+				<pre className='max-h-80 overflow-auto rounded-lg border border-border bg-muted/20 p-5 text-sm leading-6 text-foreground'>
 					<code>{code}</code>
 				</pre>
 			</section>

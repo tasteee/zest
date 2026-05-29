@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { z } from '@/components/ui'
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/z-toggle-group'
 import { ComponentPreview } from '@/components/docs/component-preview'
-import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
+import { PropsTable } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
 import { Card, CardContent } from '@/components/ui/card'
 import { ChevronRight, Bold, Italic, Underline, AlignLeft, AlignCenter, AlignRight, AlignJustify } from 'lucide-react'
@@ -36,7 +36,7 @@ export default function ToggleDocsPage() {
 			<div className='space-y-4'>
 				<div className='flex items-center gap-3'>
 					<h1 className='text-4xl font-bold tracking-tight text-foreground'>z.toggle</h1>
-					<z.badge isGhost isWhite>
+					<z.badge isGhost isNeutral>
 						Component
 					</z.badge>
 				</div>
@@ -54,8 +54,8 @@ export default function ToggleDocsPage() {
 			{/* Usage */}
 			<section className='space-y-6'>
 				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>Usage</h2>
-				<CodeBlock code={`import { z } from '@tasteee/zest'`} language='tsx' />
-				<CodeBlock code={`<z.toggle>Press me</z.toggle>`} language='tsx' />
+				<CodeBlock code={examples.usageImport} language='tsx' />
+				<CodeBlock code={examples.usage} language='tsx' />
 			</section>
 
 			{/* Examples */}
@@ -82,11 +82,11 @@ export default function ToggleDocsPage() {
 				>
 					<div className='flex flex-col gap-6'>
 						<div className='flex flex-wrap items-center gap-3'>
-							<z.toggle isGhost isWhite>
-								White
+							<z.toggle isGhost isNeutral>
+								Neutral
 							</z.toggle>
-							<z.toggle isGhost isGreen>
-								Green
+							<z.toggle isGhost isPurple>
+								Purple
 							</z.toggle>
 							<z.toggle isGhost isPurple>
 								Purple
@@ -94,16 +94,16 @@ export default function ToggleDocsPage() {
 							<z.toggle isGhost isPink>
 								Pink
 							</z.toggle>
-							<z.toggle isGhost isOrange>
-								Orange
+							<z.toggle isGhost isPink>
+								Pink
 							</z.toggle>
 						</div>
 						<div className='flex flex-wrap items-center gap-3'>
-							<z.toggle isOutlined isWhite>
-								White
+							<z.toggle isOutlined isNeutral>
+								Neutral
 							</z.toggle>
-							<z.toggle isOutlined isGreen>
-								Green
+							<z.toggle isOutlined isPurple>
+								Purple
 							</z.toggle>
 							<z.toggle isOutlined isPurple>
 								Purple
@@ -111,8 +111,8 @@ export default function ToggleDocsPage() {
 							<z.toggle isOutlined isPink>
 								Pink
 							</z.toggle>
-							<z.toggle isOutlined isOrange>
-								Orange
+							<z.toggle isOutlined isPink>
+								Pink
 							</z.toggle>
 						</div>
 					</div>
@@ -157,8 +157,8 @@ export default function ToggleDocsPage() {
 						<z.toggle isOutlined isDisabled>
 							Disabled Outlined
 						</z.toggle>
-						<z.toggle isGreen isDisabled>
-							Disabled Green
+						<z.toggle isPurple isDisabled>
+							Disabled Purple
 						</z.toggle>
 					</div>
 				</ComponentPreview>
@@ -209,7 +209,7 @@ export default function ToggleDocsPage() {
 					description='Any number of items can be active simultaneously. Ideal for formatting controls.'
 					code={examples.multipleSelection}
 				>
-					<ToggleGroup type='multiple' value={formatting.state} onValueChange={formatting.set} isOutlined isGreen>
+					<ToggleGroup type='multiple' value={formatting.state} onValueChange={formatting.set} isOutlined isPurple>
 						<ToggleGroupItem value='bold' aria-label='Bold'>
 							<Bold className='h-4 w-4' />
 						</ToggleGroupItem>
@@ -229,7 +229,7 @@ export default function ToggleDocsPage() {
 					code={examples.groupColorVariants}
 				>
 					<div className='flex flex-col gap-4'>
-						<ToggleGroup type='single' isOutlined isPurple isGreen>
+						<ToggleGroup type='single' isOutlined isPurple isPurple>
 							<ToggleGroupItem value='a'>One</ToggleGroupItem>
 							<ToggleGroupItem value='b'>Two</ToggleGroupItem>
 							<ToggleGroupItem value='c'>Three</ToggleGroupItem>

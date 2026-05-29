@@ -5,19 +5,12 @@ import { Skeleton } from '@/components/ui/skeleton'
 import { z } from '@/components/ui'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { ComponentPreview } from '@/components/docs/component-preview'
-import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
+import { PropsTable } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
 import { Card, CardContent } from '@/components/ui/card'
 import { ChevronRight } from 'lucide-react'
-
-const skeletonProps: PropDefinition[] = [
-	{
-		name: 'className',
-		type: 'string',
-		description: 'Additional CSS classes to apply to the skeleton element. Use this to control size and shape.'
-	}
-]
-
+import { skeletonProps } from './props'
+import { examples } from './examples'
 export default function SkeletonDocsPage() {
 	return (
 		<div className='space-y-16'>
@@ -38,7 +31,7 @@ export default function SkeletonDocsPage() {
 			<div className='space-y-4'>
 				<div className='flex items-center gap-3'>
 					<h1 className='text-4xl font-bold tracking-tight text-foreground'>ZSkeleton</h1>
-					<z.badge isGhost isWhite>
+					<z.badge isGhost isNeutral>
 						Component
 					</z.badge>
 				</div>
@@ -52,20 +45,16 @@ export default function SkeletonDocsPage() {
 			<ComponentPreview
 				title='Default Skeleton'
 				description='A basic skeleton loading placeholder.'
-				code={`import { ZSkeleton } from '@tasteee/zest'
-
-export function SkeletonDemo() {
-  return <ZSkeleton className="h-4 w-[250px]" />
-}`}
+				code={examples.quickPreview}
 			>
-				<Skeleton className='h-4 w-[250px]' />
+				<Skeleton className='h-4 w-62.5' />
 			</ComponentPreview>
 
 			{/* Usage */}
 			<section className='space-y-6'>
 				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>Usage</h2>
-				<CodeBlock code={`import { ZSkeleton } from '@tasteee/zest'`} language='tsx' />
-				<CodeBlock code={`<ZSkeleton className="h-4 w-[200px]" />`} language='tsx' />
+				<CodeBlock code={examples.usageImport} language='tsx' />
+				<CodeBlock code={examples.usage} language='tsx' />
 			</section>
 
 			{/* Examples */}
@@ -76,19 +65,13 @@ export function SkeletonDemo() {
 				<ComponentPreview
 					title='Card Skeleton'
 					description='A skeleton placeholder for a card component.'
-					code={`<div className="flex items-center space-x-4">
-  <Skeleton className="h-12 w-12 rounded-full" />
-  <div className="space-y-2">
-    <Skeleton className="h-4 w-[250px]" />
-    <Skeleton className="h-4 w-[200px]" />
-  </div>
-</div>`}
+					code={examples.cardSkeleton}
 				>
 					<div className='flex items-center space-x-4'>
 						<Skeleton className='h-12 w-12 rounded-full' />
 						<div className='space-y-2'>
-							<Skeleton className='h-4 w-[250px]' />
-							<Skeleton className='h-4 w-[200px]' />
+							<Skeleton className='h-4 w-62.5' />
+							<Skeleton className='h-4 w-50' />
 						</div>
 					</div>
 				</ComponentPreview>
@@ -97,15 +80,7 @@ export function SkeletonDemo() {
 				<ComponentPreview
 					title='Article Skeleton'
 					description='A skeleton for article or blog post content.'
-					code={`<div className="space-y-6 w-full max-w-md">
-  <Skeleton className="h-48 w-full rounded-lg" />
-  <div className="space-y-3">
-    <Skeleton className="h-6 w-3/4" />
-    <Skeleton className="h-4 w-full" />
-    <Skeleton className="h-4 w-full" />
-    <Skeleton className="h-4 w-2/3" />
-  </div>
-</div>`}
+					code={examples.articleSkeleton}
 				>
 					<div className='space-y-6 w-full max-w-md'>
 						<Skeleton className='h-48 w-full rounded-lg' />
@@ -119,21 +94,7 @@ export function SkeletonDemo() {
 				</ComponentPreview>
 
 				{/* List Skeleton */}
-				<ComponentPreview
-					title='List Skeleton'
-					description='A skeleton for a list of items.'
-					code={`<div className="space-y-4 w-full max-w-sm">
-  {[1, 2, 3].map((i) => (
-    <div key={i} className="flex items-center gap-4">
-      <Skeleton className="h-10 w-10 rounded-full" />
-      <div className="space-y-2 flex-1">
-        <Skeleton className="h-4 w-full" />
-        <Skeleton className="h-3 w-3/4" />
-      </div>
-    </div>
-  ))}
-</div>`}
-				>
+				<ComponentPreview title='List Skeleton' description='A skeleton for a list of items.' code={examples.listSkeleton}>
 					<div className='space-y-4 w-full max-w-sm'>
 						{[1, 2, 3].map((i) => (
 							<div key={i} className='flex items-center gap-4'>
@@ -148,26 +109,7 @@ export function SkeletonDemo() {
 				</ComponentPreview>
 
 				{/* Table Skeleton */}
-				<ComponentPreview
-					title='Table Skeleton'
-					description='A skeleton for tabular data.'
-					code={`<div className="w-full space-y-3">
-  <div className="flex gap-4 pb-2 border-b border-border">
-    <Skeleton className="h-4 w-1/4" />
-    <Skeleton className="h-4 w-1/4" />
-    <Skeleton className="h-4 w-1/4" />
-    <Skeleton className="h-4 w-1/4" />
-  </div>
-  {[1, 2, 3, 4].map((row) => (
-    <div key={row} className="flex gap-4 py-2">
-      <Skeleton className="h-4 w-1/4" />
-      <Skeleton className="h-4 w-1/4" />
-      <Skeleton className="h-4 w-1/4" />
-      <Skeleton className="h-4 w-1/4" />
-    </div>
-  ))}
-</div>`}
-				>
+				<ComponentPreview title='Table Skeleton' description='A skeleton for tabular data.' code={examples.tableSkeleton}>
 					<div className='w-full space-y-3'>
 						<div className='flex gap-4 pb-2 border-b border-border'>
 							<Skeleton className='h-4 w-1/4' />
@@ -187,25 +129,7 @@ export function SkeletonDemo() {
 				</ComponentPreview>
 
 				{/* Form Skeleton */}
-				<ComponentPreview
-					title='Form Skeleton'
-					description='A skeleton for form inputs.'
-					code={`<div className="w-full max-w-sm space-y-4">
-  <div className="space-y-2">
-    <Skeleton className="h-4 w-16" />
-    <Skeleton className="h-10 w-full rounded-md" />
-  </div>
-  <div className="space-y-2">
-    <Skeleton className="h-4 w-20" />
-    <Skeleton className="h-10 w-full rounded-md" />
-  </div>
-  <div className="space-y-2">
-    <Skeleton className="h-4 w-24" />
-    <Skeleton className="h-24 w-full rounded-md" />
-  </div>
-  <Skeleton className="h-10 w-full rounded-md" />
-</div>`}
-				>
+				<ComponentPreview title='Form Skeleton' description='A skeleton for form inputs.' code={examples.formSkeleton}>
 					<div className='w-full max-w-sm space-y-4'>
 						<div className='space-y-2'>
 							<Skeleton className='h-4 w-16' />

@@ -2,7 +2,7 @@ import './z-badge.css'
 
 import * as React from 'react'
 import { Slot } from '@radix-ui/react-slot'
-import { createPropClassNameSwitch, createPropsClassNamesBuilder } from '@/lib/prop'
+import { prop } from '@/lib/prop'
 import { cn } from '@/lib/utils'
 import { COLOR_PROPS, KIND_PROPS } from './constants'
 
@@ -19,51 +19,54 @@ type BadgePropsT = ComponentPropsT &
 	ZeroOrOneTruePropT<BadgeKindPropsT> &
 	BaseBadgePropsT
 
-const getColorClass = createPropClassNameSwitch({
-	isOrange: 'isOrange',
+const CUSTOM_PROPS = [
+	'isNeutral',
+	'isPurple',
+	'isPink',
+	'isSolid',
+	'isGhost',
+	'isOutline',
+	'isHidden',
+	'isDisabled',
+	'label',
+	'asChild',
+	'className',
+	'children'
+]
+
+const getColorClass = prop.classNameSwitch({
 	isPurple: 'isPurple',
 	isPink: 'isPink',
-	isGreen: 'isGreen',
-	isWhite: 'isWhite'
+	isNeutral: 'isNeutral',
+	default: 'isNeutral'
 })
 
-const getKindClass = createPropClassNameSwitch({
+const getKindClass = prop.classNameSwitch({
 	isSolid: 'isSolid',
 	isGhost: 'isGhost',
-	isOutline: 'isOutline'
+	isOutline: 'isOutline',
+	default: 'isOutline'
 })
 
-const getOtherClasses = createPropsClassNamesBuilder({
+const getOtherClasses = prop.classNamesBuilder({
 	isHidden: 'isHidden',
 	isDisabled: 'isDisabled'
 })
 
+const getSplitProps = prop.splitter(CUSTOM_PROPS)
+
 const badge = React.forwardRef<React.ElementRef<'span'>, BadgePropsT>((props, ref) => {
-	const {
-		asChild = false,
-		children,
-		className,
-		isGhost,
-		isGreen,
-		isHidden,
-		isOrange,
-		isOutline,
-		isPink,
-		isPurple,
-		isSolid,
-		isWhite,
-		label,
-		...badgeProps
-	} = props
-	const Comp = asChild ? Slot : 'span'
-	const kindClass = getKindClass(props, 'isOutline')
-	const colorClass = getColorClass(props, 'isWhite')
-	const styleClass = getOtherClasses(props)
-	const classNames = cn('z.badge', kindClass, colorClass, styleClass, className)
+	const [customProps, otherProps] = getSplitProps(props)
+	const Comp = customProps.asChild ? Slot : 'span'
+	const kindClass = getKindClass(customProps)
+	const colorClass = getColorClass(customProps)
+	const styleClass = getOtherClasses(customProps)
+	const classNames = cn('z.badge', kindClass, colorClass, styleClass, customProps.className)
+	const badgeContent = customProps.label ?? props.children
 
 	return (
-		<Comp ref={ref} data-slot='badge' className={classNames} {...badgeProps}>
-			{label ?? children}
+		<Comp ref={ref} data-slot='badge' className={classNames} {...otherProps}>
+			{badgeContent}
 		</Comp>
 	)
 })

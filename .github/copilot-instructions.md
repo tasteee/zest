@@ -273,8 +273,6 @@ const ProfileCard = (props: ProfileCardPropsT) => {
 ## CSS Rules
 
 - Each component must have a sibling CSS file.
-- Class names must be camelCase.
-- Do not use hyphens or underscores in class names.
 - Do not use Tailwind utility classes.
 - Do not hardcode style values.
 - Use design-system variables (for example from `tastey.css`).
@@ -295,10 +293,6 @@ Example:
 
 .profileCardBadge {
 	color: var(--color-text-primary);
-}
-
-.isGreen {
-	color: var(--color-neon-green);
 }
 
 .isDisabled {

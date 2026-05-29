@@ -6,9 +6,9 @@ import { COMPONENT_CATALOG } from './catalog'
 const categories = ['Inputs', 'Data Display', 'Navigation', 'Overlays', 'Feedback', 'Layout'] as const
 
 const statusMap = {
-	ready: { label: 'Ready', badgeProps: { isOutline: true, isGreen: true } },
+	ready: { label: 'Ready', badgeProps: { isOutline: true, isPurple: true } },
 	'in-progress': { label: 'In Progress', badgeProps: { isOutline: true, isPurple: true } },
-	planned: { label: 'Planned', badgeProps: { isOutline: true, isOrange: true } }
+	planned: { label: 'Planned', badgeProps: { isOutline: true, isPink: true } }
 } as const
 
 function getStatusBadgeProps(status: keyof typeof statusMap) {
@@ -19,7 +19,7 @@ export default function ComponentsPage() {
 	return (
 		<div className='space-y-12'>
 			<section className='space-y-4'>
-				<z.badge isGhost isWhite className='font-mono text-xs'>
+				<z.badge isGhost isNeutral className='font-mono text-xs'>
 					Component Inventory
 				</z.badge>
 				<h1 className='text-4xl font-bold tracking-tight text-foreground'>Premium Component Library</h1>
@@ -38,12 +38,12 @@ export default function ComponentsPage() {
 						<div className='grid gap-4 md:grid-cols-2 xl:grid-cols-3'>
 							{entries.map((entry) => (
 								<Link key={entry.slug} href={`/docs/components/${entry.slug}`}>
-									<Card isHoverable tone='green' className='h-full'>
+									<Card isHoverable tone='purple' className='h-full'>
 										<CardContent className='space-y-3'>
 											<div className='flex flex-wrap items-center gap-2'>
 												<p className='text-lg font-semibold text-foreground'>{entry.name}</p>
 												<z.badge {...getStatusBadgeProps(entry.status)}>{statusMap[entry.status].label}</z.badge>
-												<z.badge isOutline isWhite>
+												<z.badge isOutline isNeutral>
 													{entry.foundation}
 												</z.badge>
 											</div>

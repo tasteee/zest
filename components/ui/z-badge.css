@@ -50,15 +50,6 @@
 		box-shadow: 0 0 0 3px color-mix(in oklch, var(--destructive) 20%, transparent);
 	}
 
-	&.isGreen {
-		--zBadge-color: var(---green);
-		--zBadge-border: var(---green);
-		--zBadge-hover-bg: color-mix(in oklch, var(---green) 10%, transparent);
-		--zBadge-hover-color: var(---green);
-		--zBadge-solid-bg: var(---green);
-		--zBadge-solid-color: var(--primary-foreground);
-	}
-
 	&.isPurple {
 		--zBadge-color: var(---purple);
 		--zBadge-border: var(---purple);
@@ -77,16 +68,7 @@
 		--zBadge-solid-color: var(--primary-foreground);
 	}
 
-	&.isOrange {
-		--zBadge-color: var(---orange);
-		--zBadge-border: var(---orange);
-		--zBadge-hover-bg: color-mix(in oklch, var(---orange) 10%, transparent);
-		--zBadge-hover-color: var(---orange);
-		--zBadge-solid-bg: var(---orange);
-		--zBadge-solid-color: var(--primary-foreground);
-	}
-
-	&.isWhite {
+	&.isNeutral {
 		--zBadge-color: var(--foreground);
 		--zBadge-border: var(--border);
 		--zBadge-hover-bg: var(--accent);

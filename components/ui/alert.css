@@ -51,16 +51,6 @@
 
 /* ─── Color Variants ─────────────────────────────────────────────────────── */
 
-.isGreen {
-	color: var(--color-neon-green);
-	border-color: color-mix(in oklch, var(--color-neon-green) 50%, transparent);
-	background: color-mix(in oklch, var(--color-neon-green) 10%, transparent);
-}
-
-.isGreen .alertDescription {
-	color: color-mix(in oklch, var(--color-neon-green) 80%, transparent);
-}
-
 .isPurple {
 	color: var(--color-neon-purple);
 	border-color: color-mix(in oklch, var(--color-neon-purple) 50%, transparent);
@@ -79,24 +69,4 @@
 
 .isPink .alertDescription {
 	color: color-mix(in oklch, var(--color-neon-pink) 80%, transparent);
-}
-
-.isOrange {
-	color: var(--color-neon-orange);
-	border-color: color-mix(in oklch, var(--color-neon-orange) 50%, transparent);
-	background: color-mix(in oklch, var(--color-neon-orange) 10%, transparent);
-}
-
-.isOrange .alertDescription {
-	color: color-mix(in oklch, var(--color-neon-orange) 80%, transparent);
-}
-
-.isRed {
-	color: var(--color-destructive);
-	border-color: color-mix(in oklch, var(--color-destructive) 50%, transparent);
-	background: color-mix(in oklch, var(--color-destructive) 10%, transparent);
-}
-
-.isRed .alertDescription {
-	color: color-mix(in oklch, var(--color-destructive) 80%, transparent);
 }

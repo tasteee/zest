@@ -73,12 +73,12 @@ export function DocsNav() {
 						<kbd className='ml-auto text-xs bg-muted px-1.5 py-0.5 rounded'>⌘K</kbd>
 					</button>
 
-					<z.badge isOutline isGreen className='hidden sm:inline-flex'>
+					<z.badge isOutline isPurple className='hidden sm:inline-flex'>
 						v1.0
 					</z.badge>
 
 					<Link href='/'>
-						<z.button isWhite isSmall>
+						<z.button isNeutral isSmall>
 							Brand System
 						</z.button>
 					</Link>

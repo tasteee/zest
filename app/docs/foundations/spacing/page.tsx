@@ -75,7 +75,7 @@ export default function SpacingPage() {
                 <span className="text-sm text-muted-foreground">{space.value}</span>
                 <div className="flex items-center gap-2">
                   <div
-                    className={`h-4 bg-neon-green ${space.class}`}
+                    className={`h-4 bg-neon-purple ${space.class}`}
                     style={{ minWidth: space.value }}
                   />
                 </div>
@@ -183,23 +183,23 @@ export default function SpacingPage() {
         <DocsSectionTitle>Best Practices</DocsSectionTitle>
         
         <div className="grid md:grid-cols-2 gap-6">
-          <div className="rounded-lg border border-neon-green/30 p-6">
-            <h4 className="text-neon-green font-semibold mb-4">Do</h4>
+          <div className="rounded-lg border border-neon-purple/30 p-6">
+            <h4 className="text-neon-purple font-semibold mb-4">Do</h4>
             <ul className="space-y-2 text-sm text-foreground">
               <li className="flex items-start gap-2">
-                <span className="text-neon-green mt-1">•</span>
+                <span className="text-neon-purple mt-1">•</span>
                 Use the spacing scale: p-4, gap-6, mt-8
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-neon-green mt-1">•</span>
+                <span className="text-neon-purple mt-1">•</span>
                 Prefer gap over margin for flex/grid layouts
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-neon-green mt-1">•</span>
+                <span className="text-neon-purple mt-1">•</span>
                 Use consistent padding within component types
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-neon-green mt-1">•</span>
+                <span className="text-neon-purple mt-1">•</span>
                 Scale spacing responsively: p-4 md:p-6 lg:p-8
               </li>
             </ul>

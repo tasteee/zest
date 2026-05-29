@@ -53,7 +53,7 @@ import { Popover, PopoverAnchor, PopoverContent, PopoverTrigger } from './popove
 import { Progress } from './progress'
 import { RadioGroup, RadioGroupItem } from './radio-group'
 import { ScrollArea, ScrollBar } from './scroll-area'
-import { Select } from './select'
+import { select } from './select'
 import { Sidebar } from './sidebar'
 import { Skeleton } from './skeleton'
 import { Slider } from './slider'
@@ -160,7 +160,6 @@ export const ZProgress = Progress
 export const ZRadioGroup = RadioGroup
 export const ZRadioGroupItem = RadioGroupItem
 
-export const ZSelect = Select
 export const ZScrollArea = ScrollArea
 export const ZScrollBar = ScrollBar
 export const ZSidebar = Sidebar
@@ -269,7 +268,7 @@ export const z = {
 	progress: ZProgress,
 	radioGroup: ZRadioGroup,
 	radioGroupItem: ZRadioGroupItem,
-	select: ZSelect,
+	select,
 	scrollArea: ZScrollArea,
 	scrollBar: ZScrollBar,
 

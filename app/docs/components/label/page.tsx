@@ -7,24 +7,12 @@ import { Checkbox } from '@/components/ui/checkbox'
 import { z } from '@/components/ui'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { ComponentPreview } from '@/components/docs/component-preview'
-import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
+import { PropsTable } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
 import { Card, CardContent } from '@/components/ui/card'
 import { ChevronRight } from 'lucide-react'
-
-const labelProps: PropDefinition[] = [
-	{
-		name: 'htmlFor',
-		type: 'string',
-		description: 'The id of the form element the label is associated with.'
-	},
-	{
-		name: 'className',
-		type: 'string',
-		description: 'Additional CSS classes to apply.'
-	}
-]
-
+import { labelProps } from './props'
+import { examples } from './examples'
 export default function LabelDocsPage() {
 	return (
 		<div className='space-y-16'>
@@ -45,7 +33,7 @@ export default function LabelDocsPage() {
 			<div className='space-y-4'>
 				<div className='flex items-center gap-3'>
 					<h1 className='text-4xl font-bold tracking-tight text-foreground'>ZLabel</h1>
-					<z.badge isGhost isWhite>
+					<z.badge isGhost isNeutral>
 						Component
 					</z.badge>
 				</div>
@@ -58,16 +46,7 @@ export default function LabelDocsPage() {
 			<ComponentPreview
 				title='Default Label'
 				description='A basic label associated with an input.'
-				code={`import { ZLabel, ZInput } from '@tasteee/zest'
-
-export function LabelDemo() {
-  return (
-    <div className="grid w-full max-w-sm items-center gap-1.5">
-      <ZLabel htmlFor="email">Email</ZLabel>
-      <ZInput type="email" id="email" placeholder="Email" />
-    </div>
-  )
-}`}
+				code={examples.quickPreview}
 			>
 				<div className='grid w-full max-w-sm items-center gap-1.5'>
 					<Label htmlFor='email'>Email</Label>
@@ -78,8 +57,8 @@ export function LabelDemo() {
 			{/* Usage */}
 			<section className='space-y-6'>
 				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>Usage</h2>
-				<CodeBlock code={`import { ZLabel } from '@tasteee/zest'`} language='tsx' />
-				<CodeBlock code={`<ZLabel htmlFor="email">Your email address</ZLabel>`} language='tsx' />
+				<CodeBlock code={examples.usageImport} language='tsx' />
+				<CodeBlock code={examples.usage} language='tsx' />
 			</section>
 
 			{/* Examples */}
@@ -90,10 +69,7 @@ export function LabelDemo() {
 				<ComponentPreview
 					title='With Input'
 					description='Label paired with an input field.'
-					code={`<div className="grid w-full max-w-sm items-center gap-1.5">
-  <Label htmlFor="username">Username</Label>
-  <Input id="username" placeholder="Enter username" />
-</div>`}
+					code={examples.withInput}
 				>
 					<div className='grid w-full max-w-sm items-center gap-1.5'>
 						<Label htmlFor='username'>Username</Label>
@@ -105,10 +81,7 @@ export function LabelDemo() {
 				<ComponentPreview
 					title='With Checkbox'
 					description='Label paired with a checkbox for click-to-toggle behavior.'
-					code={`<div className="flex items-center space-x-2">
-  <Checkbox id="terms" />
-  <Label htmlFor="terms">Accept terms and conditions</Label>
-</div>`}
+					code={examples.withCheckbox}
 				>
 					<div className='flex items-center space-x-2'>
 						<Checkbox id='terms' />
@@ -120,12 +93,7 @@ export function LabelDemo() {
 				<ComponentPreview
 					title='Required Field'
 					description='Indicate required fields with an asterisk.'
-					code={`<div className="grid w-full max-w-sm items-center gap-1.5">
-  <Label htmlFor="name">
-    Full Name <span className="text-destructive">*</span>
-  </Label>
-  <Input id="name" placeholder="John Doe" required />
-</div>`}
+					code={examples.requiredField}
 				>
 					<div className='grid w-full max-w-sm items-center gap-1.5'>
 						<Label htmlFor='name'>
@@ -139,13 +107,7 @@ export function LabelDemo() {
 				<ComponentPreview
 					title='With Description'
 					description='Add helper text below the input.'
-					code={`<div className="grid w-full max-w-sm items-center gap-1.5">
-  <Label htmlFor="password">Password</Label>
-  <Input id="password" type="password" />
-  <p className="text-xs text-muted-foreground">
-    Must be at least 8 characters long
-  </p>
-</div>`}
+					code={examples.withDescription}
 				>
 					<div className='grid w-full max-w-sm items-center gap-1.5'>
 						<Label htmlFor='password'>Password</Label>
@@ -158,12 +120,7 @@ export function LabelDemo() {
 				<ComponentPreview
 					title='Disabled State'
 					description='Labels automatically style when their associated input is disabled.'
-					code={`<div className="grid w-full max-w-sm items-center gap-1.5">
-  <Label htmlFor="disabled-input" className="peer-disabled:opacity-70">
-    Disabled Field
-  </Label>
-  <Input id="disabled-input" disabled placeholder="Cannot edit" />
-</div>`}
+					code={examples.disabledState}
 				>
 					<div className='grid w-full max-w-sm items-center gap-1.5'>
 						<Label htmlFor='disabled-input'>Disabled Field</Label>
@@ -175,20 +132,7 @@ export function LabelDemo() {
 				<ComponentPreview
 					title='Form Group'
 					description='Multiple labeled inputs in a form layout.'
-					code={`<div className="space-y-4 w-full max-w-sm">
-  <div className="grid items-center gap-1.5">
-    <Label htmlFor="first-name">First Name</Label>
-    <Input id="first-name" placeholder="John" />
-  </div>
-  <div className="grid items-center gap-1.5">
-    <Label htmlFor="last-name">Last Name</Label>
-    <Input id="last-name" placeholder="Doe" />
-  </div>
-  <div className="grid items-center gap-1.5">
-    <Label htmlFor="email-form">Email</Label>
-    <Input id="email-form" type="email" placeholder="john@example.com" />
-  </div>
-</div>`}
+					code={examples.formGroup}
 				>
 					<div className='space-y-4 w-full max-w-sm'>
 						<div className='grid items-center gap-1.5'>

@@ -5,52 +5,13 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { z } from '@/components/ui'
 import { ComponentPreview } from '@/components/docs/component-preview'
-import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
+import { PropsTable } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
 import { Card, CardContent } from '@/components/ui/card'
 import { ChevronRight, Search, Mail, Eye, EyeOff, Lock } from 'lucide-react'
 import { useState } from 'react'
-
-const inputProps: PropDefinition[] = [
-	{
-		name: 'type',
-		type: '"text" | "password" | "email" | "number" | "search" | "tel" | "url" | ...',
-		defaultValue: '"text"',
-		description: 'The type of input. Supports all standard HTML input types.'
-	},
-	{
-		name: 'placeholder',
-		type: 'string',
-		description: 'Placeholder text displayed when the input is empty.'
-	},
-	{
-		name: 'disabled',
-		type: 'boolean',
-		defaultValue: 'false',
-		description: 'When true, prevents the user from interacting with the input.'
-	},
-	{
-		name: 'value',
-		type: 'string',
-		description: 'The controlled value of the input.'
-	},
-	{
-		name: 'defaultValue',
-		type: 'string',
-		description: 'The default value for an uncontrolled input.'
-	},
-	{
-		name: 'onChange',
-		type: '(event: ChangeEvent<HTMLInputElement>) => void',
-		description: 'Callback fired when the input value changes.'
-	},
-	{
-		name: 'className',
-		type: 'string',
-		description: 'Additional CSS classes to apply to the input.'
-	}
-]
-
+import { inputProps } from './props'
+import { examples } from './examples'
 export default function InputDocsPage() {
 	const [showPassword, setShowPassword] = useState(false)
 
@@ -73,7 +34,7 @@ export default function InputDocsPage() {
 			<div className='space-y-4'>
 				<div className='flex items-center gap-3'>
 					<h1 className='text-4xl font-bold tracking-tight text-foreground'>ZInput</h1>
-					<z.badge isGhost isWhite>
+					<z.badge isGhost isNeutral>
 						Component
 					</z.badge>
 				</div>
@@ -85,11 +46,7 @@ export default function InputDocsPage() {
 
 			{/* Quick Preview */}
 			<ComponentPreview
-				code={`import { ZInput } from '@tasteee/zest'
-
-export function InputDemo() {
-  return <ZInput placeholder="Enter your email" />
-}`}
+				code={examples.quickPreview}
 			>
 				<Input placeholder='Enter your email' className='max-w-sm' />
 			</ComponentPreview>
@@ -97,8 +54,8 @@ export function InputDemo() {
 			{/* Usage */}
 			<section className='space-y-6'>
 				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>Usage</h2>
-				<CodeBlock code={`import { ZInput } from '@tasteee/zest'`} language='tsx' />
-				<CodeBlock code={`<ZInput type="email" placeholder="Email" />`} language='tsx' />
+				<CodeBlock code={examples.usageImport} language='tsx' />
+				<CodeBlock code={examples.usage} language='tsx' />
 			</section>
 
 			{/* Examples */}
@@ -107,12 +64,7 @@ export function InputDemo() {
 
 				{/* With Label */}
 				<ComponentPreview
-					code={`import { ZInput, ZLabel } from '@tasteee/zest'
-
-<div className="grid w-full max-w-sm gap-1.5">
-  <ZLabel htmlFor="email">Email</ZLabel>
-  <ZInput type="email" id="email" placeholder="Enter your email" />
-</div>`}
+					code={examples.withLabel}
 				>
 					<div className='grid w-full max-w-sm gap-1.5'>
 						<Label htmlFor='email-demo'>Email</Label>
@@ -122,16 +74,7 @@ export function InputDemo() {
 
 				{/* Input Types */}
 				<ComponentPreview
-					code={`import { ZInput } from '@tasteee/zest'
-
-<div className="grid gap-4 max-w-sm">
-  <ZInput type="text" placeholder="Text input" />
-  <ZInput type="email" placeholder="Email input" />
-  <ZInput type="number" placeholder="Number input" />
-  <ZInput type="search" placeholder="Search input" />
-  <ZInput type="tel" placeholder="Phone input" />
-  <ZInput type="url" placeholder="URL input" />
-</div>`}
+					code={examples.inputTypes}
 				>
 					<div className='grid gap-4 max-w-sm'>
 						<Input type='text' placeholder='Text input' />
@@ -145,13 +88,7 @@ export function InputDemo() {
 
 				{/* With Icon */}
 				<ComponentPreview
-					code={`import { ZInput } from '@tasteee/zest'
-import { Search } from 'lucide-react'
-
-<div className="relative max-w-sm">
-  <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-  <ZInput placeholder="Search..." className="pl-10" />
-</div>`}
+					code={examples.withIcon}
 				>
 					<div className='relative max-w-sm'>
 						<Search className='absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground' />
@@ -161,23 +98,7 @@ import { Search } from 'lucide-react'
 
 				{/* Password Toggle */}
 				<ComponentPreview
-					code={`import { ZInput, z } from '@tasteee/zest'
-import { Lock, Eye, EyeOff } from 'lucide-react'
-
-const [showPassword, setShowPassword] = useState(false)
-
-<div className="relative max-w-sm">
-  <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-  <ZInput 
-    type={showPassword ? "text" : "password"} 
-    placeholder="Enter password" 
-    className="pl-10 pr-10" 
-  />
-  <z.button type="button" isIcon className="absolute right-0 top-0 h-full px-3 hover:bg-transparent" onClick={() => setShowPassword(!showPassword)}
-  >
-    {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-  </z.button>
-</div>`}
+					code={examples.passwordToggle}
 				>
 					<div className='relative max-w-sm'>
 						<Lock className='absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground' />
@@ -199,12 +120,7 @@ const [showPassword, setShowPassword] = useState(false)
 
 				{/* With Button */}
 				<ComponentPreview
-					code={`import { ZInput, z.button } from '@tasteee/zest'
-
-<div className="flex max-w-sm gap-2">
-  <ZInput type="email" placeholder="Enter your email" />
-  <z.button type="submit">Subscribe</z.button>
-</div>`}
+					code={examples.withButton}
 				>
 					<div className='flex max-w-sm gap-2'>
 						<Input type='email' placeholder='Enter your email' />
@@ -214,21 +130,14 @@ const [showPassword, setShowPassword] = useState(false)
 
 				{/* Disabled */}
 				<ComponentPreview
-					code={`import { ZInput } from '@tasteee/zest'
-
-<ZInput disabled placeholder="Disabled input" />`}
+					code={examples.disabled}
 				>
 					<Input disabled placeholder='Disabled input' className='max-w-sm' />
 				</ComponentPreview>
 
 				{/* File Input */}
 				<ComponentPreview
-					code={`import { ZInput, ZLabel } from '@tasteee/zest'
-
-<div className="grid w-full max-w-sm gap-1.5">
-  <ZLabel htmlFor="file">Upload file</ZLabel>
-  <ZInput id="file" type="file" />
-</div>`}
+					code={examples.fileInput}
 				>
 					<div className='grid w-full max-w-sm gap-1.5'>
 						<Label htmlFor='file-demo'>Upload file</Label>

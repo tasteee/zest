@@ -1,20 +1,19 @@
 import { cn } from '@/lib/utils'
 import { z } from '@/components/ui'
 
-interface DocsTitleProps {
+type DocsTitleProps = {
 	children: React.ReactNode
 	badge?: string
-	badgeVariant?: 'green' | 'pink' | 'purple' | 'orange'
+	badgeVariant?: 'neutral' | 'pink' | 'purple'
 }
 
 const badgeVariantProps = {
-	green: { isOutline: true, isGreen: true },
+	neutral: { isOutline: true, isNeutral: true },
 	pink: { isOutline: true, isPink: true },
-	purple: { isOutline: true, isPurple: true },
-	orange: { isOutline: true, isOrange: true }
+	purple: { isOutline: true, isPurple: true }
 } as const
 
-export function DocsTitle({ children, badge, badgeVariant = 'green' }: DocsTitleProps) {
+export function DocsTitle({ children, badge, badgeVariant = 'purple' }: DocsTitleProps) {
 	return (
 		<div className='space-y-2'>
 			<div className='flex items-center gap-3'>

@@ -197,10 +197,10 @@ export const COMPONENT_CATALOG: ComponentCatalogEntry[] = [
 	{
 		slug: 'link',
 		name: 'Link',
-		zName: 'ZLink',
+		zName: 'Link',
 		category: 'Navigation',
 		description: 'Navigational text with semantic affordance.',
-		status: 'planned',
+		status: 'ready',
 		foundation: 'native'
 	},
 	{

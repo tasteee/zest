@@ -87,11 +87,11 @@ function AlertDialogDescription({ className, ...props }: React.ComponentProps<ty
 }
 
 function AlertDialogAction({ className, ...props }: React.ComponentProps<typeof AlertDialogPrimitive.Action>) {
-	return <AlertDialogPrimitive.Action className={cn('z-button isSolid isGreen isMedium', className)} {...props} />
+	return <AlertDialogPrimitive.Action className={cn('z-button isSolid isPurple isMedium', className)} {...props} />
 }
 
 function AlertDialogCancel({ className, ...props }: React.ComponentProps<typeof AlertDialogPrimitive.Cancel>) {
-	return <AlertDialogPrimitive.Cancel className={cn('z-button isWhite isMedium', className)} {...props} />
+	return <AlertDialogPrimitive.Cancel className={cn('z-button isNeutral isMedium', className)} {...props} />
 }
 
 export {

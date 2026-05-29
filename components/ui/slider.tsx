@@ -122,64 +122,65 @@ type SliderHeaderPropsT = {
 	value?: React.ReactNode
 }
 
+const EmptyLabel = () => <span aria-hidden />
+
+const HeaderLabel = (props: SliderHeaderPropsT) => {
+	if (!props.label) return <EmptyLabel />
+
+	return (
+		<label data-slot='slider-label' htmlFor={props.fieldId} className='zSliderLabel'>
+			{props.label}
+		</label>
+	)
+}
+
 const SliderHeader = (props: SliderHeaderPropsT) => {
+	// If there is no label and no value, we don't render
+	// the header at all to save vertical space.
 	const hasLabel = props.label !== undefined
 	const hasValue = props.value !== undefined
 	const hasContent = hasLabel || hasValue
 	if (!hasContent) return null
 
-	const labelElement = hasLabel ? (
-		<label data-slot='slider-label' htmlFor={props.fieldId} className='zSliderLabel'>
-			{props.label}
-		</label>
-	) : (
-		<span aria-hidden />
-	)
-
-	const valueElement = hasValue ? (
-		<span data-slot='slider-value' className='zSliderValue'>
-			{props.value}
-		</span>
-	) : null
-
 	return (
 		<div data-slot='slider-header' className='zSliderHeader'>
-			{labelElement}
-			{valueElement}
+			<HeaderLabel label={props.label} fieldId={props.fieldId} />
+
+			{hasValue && (
+				<span data-slot='slider-value' className='zSliderValue'>
+					{props.value}
+				</span>
+			)}
 		</div>
 	)
 }
 
-type SliderControlPropsT = React.ComponentPropsWithoutRef<typeof SliderPrimitive.Root> & {
+type SliderControBasePropsT = React.ComponentPropsWithoutRef<typeof SliderPrimitive.Root>
+
+type SliderControlPropsT = SliderControBasePropsT & {
 	customProps: Record<string, any>
 	thumbCount: number
 }
 
-const SliderControl = React.forwardRef<React.ElementRef<typeof SliderPrimitive.Root>, SliderControlPropsT>((props, ref) => {
+type SliderRefT = React.ElementRef<typeof SliderPrimitive.Root>
+
+const getSliderControlSplitProps = prop.splitter(['customProps', 'thumbCount'])
+
+const SliderControl = React.forwardRef<SliderRefT, SliderControlPropsT>((props, ref) => {
 	const mappedProps = getMappedProps(props.customProps)
 	const colorClass = getColorClass(props.customProps)
 	const sizeClass = getSizeClass(props.customProps)
 	const kindClass = getKindClass(props.customProps)
 	const styleClass = getStyleClass(props.customProps)
 	const classNames = cn('z-slider', kindClass, colorClass, sizeClass, styleClass, props.className)
-	const sliderRootProps = { ...props } as Record<string, unknown>
-	delete sliderRootProps.customProps
-	delete sliderRootProps.thumbCount
-	delete sliderRootProps.className
+	const [otherProps, sliderRootProps] = getSliderControlSplitProps(props)
 
-	const thumbElements = Array.from({ length: props.thumbCount }, (unusedValue, index) => {
-		void unusedValue
+	const thumbElements = Array.from({ length: props.thumbCount }, (_, index) => {
 		return <SliderPrimitive.Thumb data-slot='slider-thumb' key={index} className='zSliderThumb' />
 	})
 
 	return (
-		<SliderPrimitive.Root
-			ref={ref}
-			data-slot='slider'
-			className={classNames}
-			{...mappedProps}
-			{...(sliderRootProps as React.ComponentPropsWithoutRef<typeof SliderPrimitive.Root>)}
-		>
+		<SliderPrimitive.Root ref={ref} data-slot='slider' className={classNames} {...mappedProps} {...sliderRootProps}>
 			<SliderPrimitive.Track data-slot='slider-track' className='zSliderTrack'>
 				<SliderPrimitive.Range data-slot='slider-range' className='zSliderRange' />
 			</SliderPrimitive.Track>
@@ -190,16 +191,16 @@ const SliderControl = React.forwardRef<React.ElementRef<typeof SliderPrimitive.R
 
 SliderControl.displayName = 'SliderControl'
 
-const SliderBase = React.forwardRef<React.ElementRef<typeof SliderPrimitive.Root>, SliderPropsT>((props, ref) => {
+const SliderBase = React.forwardRef<SliderRefT, SliderPropsT>((props, ref) => {
 	const [customProps, otherProps] = getSplitProps(props)
 	const minimum = props.min ?? 0
 	const maximum = props.max ?? 100
-	const defaultValue = props.defaultValue
-	const controlledValue = props.value
+
 	const [uncontrolledValue, setUncontrolledValue] = React.useState(() => {
-		return getSingleInitialValue(controlledValue, defaultValue, minimum)
+		return getSingleInitialValue(props.value, props.defaultValue, minimum)
 	})
-	const currentValue = controlledValue ?? uncontrolledValue
+
+	const currentValue = props.value ?? uncontrolledValue
 	const formatValue = (customProps.formatValue as SliderPropsT['formatValue']) ?? defaultFormatValue
 	const hasValueLabel = customProps.valueLabel !== undefined
 	const hasShowValue = customProps.showValue === true
@@ -212,11 +213,15 @@ const SliderBase = React.forwardRef<React.ElementRef<typeof SliderPrimitive.Root
 	const sliderRootProps = {
 		...(otherProps as SliderRootPropsT),
 		...mappedProps
-	}
+	} as Record<string, unknown>
+	delete sliderRootProps.value
+	delete sliderRootProps.defaultValue
+	delete sliderRootProps.onValueChange
+	delete sliderRootProps.onValueCommit
 
 	const handleValueChange = (nextValues: number[]) => {
 		const nextValue = nextValues[0] ?? minimum
-		const isUncontrolled = controlledValue === undefined
+		const isUncontrolled = props.value === undefined
 		if (isUncontrolled) setUncontrolledValue(nextValue)
 		if (props.onValueChange) props.onValueChange(nextValue)
 	}
@@ -234,13 +239,13 @@ const SliderBase = React.forwardRef<React.ElementRef<typeof SliderPrimitive.Root
 			<SliderControl
 				ref={ref}
 				customProps={customProps}
-				defaultValue={[getSingleInitialValue(controlledValue, defaultValue, minimum)]}
+				defaultValue={[getSingleInitialValue(props.value, props.defaultValue, minimum)]}
 				max={maximum}
 				min={minimum}
 				onValueChange={handleValueChange}
 				onValueCommit={handleValueCommit}
 				thumbCount={1}
-				value={controlledValue === undefined ? undefined : [controlledValue]}
+				value={props.value === undefined ? undefined : [props.value]}
 				{...sliderRootProps}
 			/>
 		</div>
@@ -271,7 +276,11 @@ const SliderRange = React.forwardRef<React.ElementRef<typeof SliderPrimitive.Roo
 	const sliderRootProps = {
 		...(otherProps as SliderRootPropsT),
 		...mappedProps
-	}
+	} as Record<string, unknown>
+	delete sliderRootProps.values
+	delete sliderRootProps.defaultValues
+	delete sliderRootProps.onValuesChange
+	delete sliderRootProps.onValuesCommit
 
 	const handleValueChange = (nextValues: number[]) => {
 		const nextRange: [number, number] = [nextValues[0] ?? minimum, nextValues[1] ?? maximum]

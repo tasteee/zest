@@ -3,63 +3,12 @@
 import Link from 'next/link'
 import { z } from '@/components/ui'
 import { ComponentPreview } from '@/components/docs/component-preview'
-import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
+import { PropsTable } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
 import { Card, CardContent } from '@/components/ui/card'
 import { ChevronRight, Plus, HelpCircle, Info } from 'lucide-react'
-
-const tooltipProps: PropDefinition[] = [
-	{
-		name: 'tip',
-		type: 'string | React.ReactNode',
-		description: 'The tooltip content to show on hover or focus.'
-	},
-	{
-		name: 'delay',
-		type: 'number',
-		defaultValue: '0',
-		description: 'The duration in milliseconds to wait before showing the tooltip.'
-	},
-	{
-		name: 'skipDelay',
-		type: 'number',
-		defaultValue: '300',
-		description: 'How much time a user has to enter another trigger without incurring a delay.'
-	},
-	{
-		name: 'disableHoverableContent',
-		type: 'boolean',
-		defaultValue: 'false',
-		description: 'Prevents the tooltip from remaining open while hovering over the content.'
-	}
-]
-
-const tooltipContentProps: PropDefinition[] = [
-	{
-		name: 'side',
-		type: '"top" | "right" | "bottom" | "left"',
-		defaultValue: '"top"',
-		description: 'The preferred side of the trigger to render against.'
-	},
-	{
-		name: 'sideOffset',
-		type: 'number',
-		defaultValue: '6',
-		description: 'The distance in pixels from the trigger.'
-	},
-	{
-		name: 'align',
-		type: '"start" | "center" | "end"',
-		defaultValue: '"center"',
-		description: 'The preferred alignment against the trigger.'
-	},
-	{
-		name: 'alignOffset',
-		type: 'number',
-		defaultValue: '0',
-		description: 'An offset in pixels from the align value.'
-	}
-]
+import { tooltipProps, tooltipContentProps } from './props'
+import { examples } from './examples'
 
 export default function TooltipDocsPage() {
 	return (
@@ -81,7 +30,7 @@ export default function TooltipDocsPage() {
 			<div className='space-y-4'>
 				<div className='flex items-center gap-3'>
 					<h1 className='text-4xl font-bold tracking-tight text-foreground'>z.tooltip</h1>
-					<z.badge isGhost isWhite>
+					<z.badge isGhost isNeutral>
 						Component
 					</z.badge>
 				</div>
@@ -95,15 +44,7 @@ export default function TooltipDocsPage() {
 			<ComponentPreview
 				title='Default Tooltip'
 				description='Hover over the button to see the tooltip.'
-				code={`import { z } from '@tasteee/zest'
-
-export function TooltipDemo() {
-  return (
-    <z.tooltip tip="Add to library">
-      <z.button>Hover me</z.button>
-    </z.tooltip>
-  )
-}`}
+				code={examples.quickPreview}
 			>
 				<z.tooltip tip='Add to library'>
 					<z.button>Hover me</z.button>
@@ -114,13 +55,11 @@ export function TooltipDemo() {
 			<section className='space-y-6'>
 				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>Usage</h2>
 				<CodeBlock
-					code={`import { z } from '@tasteee/zest'`}
+					code={examples.usageImport}
 					language='tsx'
 				/>
 				<CodeBlock
-					code={`<z.tooltip tip="Tooltip content">
-  <z.button>Hover</z.button>
-</z.tooltip>`}
+					code={examples.usage}
 					language='tsx'
 				/>
 			</section>
@@ -133,20 +72,7 @@ export function TooltipDemo() {
 				<ComponentPreview
 					title='Positions'
 					description='Tooltips can be positioned on different sides of the trigger.'
-					code={`<div className="flex gap-4">
-  <z.tooltip tip="Tooltip on top" side="top">
-    <z.button>Top</z.button>
-  </z.tooltip>
-  <z.tooltip tip="Tooltip on right" side="right">
-    <z.button>Right</z.button>
-  </z.tooltip>
-  <z.tooltip tip="Tooltip on bottom" side="bottom">
-    <z.button>Bottom</z.button>
-  </z.tooltip>
-  <z.tooltip tip="Tooltip on left" side="left">
-    <z.button>Left</z.button>
-  </z.tooltip>
-</div>`}
+					code={examples.positions}
 				>
 					<div className='flex gap-4'>
 						<z.tooltip tip='Tooltip on top' side='top'>
@@ -168,12 +94,7 @@ export function TooltipDemo() {
 				<ComponentPreview
 					title='Icon Button Tooltip'
 					description='Common pattern for icon-only buttons.'
-					code={`<z.tooltip tip="Add item">
-  <z.button isIcon>
-    <Plus className="h-4 w-4" />
-    <span className="sr-only">Add item</span>
-  </z.button>
-</z.tooltip>`}
+					code={examples.iconButton}
 				>
 					<z.tooltip tip='Add item'>
 						<z.button isIcon>
@@ -187,12 +108,7 @@ export function TooltipDemo() {
 				<ComponentPreview
 					title='Help Icon'
 					description='Using tooltips to provide help text.'
-					code={`<div className="flex items-center gap-2">
-  <span className="text-sm font-medium">Password</span>
-  <z.tooltip tip="Password must be at least 8 characters">
-    <HelpCircle className="h-4 w-4 text-muted-foreground cursor-help" />
-  </z.tooltip>
-</div>`}
+					code={examples.helpIcon}
 				>
 					<div className='flex items-center gap-2'>
 						<span className='text-sm font-medium'>Password</span>
@@ -206,19 +122,7 @@ export function TooltipDemo() {
 				<ComponentPreview
 					title='Longer Content'
 					description='Tooltips can contain longer text content.'
-					code={`<z.tooltip
-  tip={
-    <p>
-      This is a longer tooltip that provides more detailed information
-      about the feature. It can wrap to multiple lines.
-    </p>
-  }
->
-  <z.button>
-    <Info className="mr-2 h-4 w-4" />
-    More info
-  </z.button>
-</z.tooltip>`}
+					code={examples.longerContent}
 				>
 					<z.tooltip
 						tip={

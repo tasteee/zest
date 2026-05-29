@@ -26,7 +26,7 @@
 }
 
 .linkColorGreen {
-	color: var(--color-neon-green);
+	color: var(--color-neon-purple);
 }
 
 .linkColorPurple {
@@ -38,11 +38,11 @@
 }
 
 .linkColorOrange {
-	color: var(--color-neon-orange);
+	color: var(--color-neon-pink);
 }
 
 .linkColorWhite {
-	color: var(--color-white);
+	color: var(--color-neutral);
 }
 
 .linkColorMuted {

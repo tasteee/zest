@@ -6,117 +6,8 @@ import { ComponentPreview } from '@/components/docs/component-preview'
 import { CodeBlock } from '@/components/docs/code-block'
 import { PropsTable } from '@/components/docs/props-table'
 import { ChevronRight } from 'lucide-react'
-
-type PropDefinitionT = {
-	name: string
-	type: string
-	defaultValue?: string
-	description: string
-	required?: boolean
-}
-
-const codeBlockProps: PropDefinitionT[] = [
-	{
-		name: 'content',
-		type: 'string',
-		description: 'Code content to render.',
-		required: true
-	},
-	{
-		name: 'language',
-		type: 'string',
-		defaultValue: '"tsx"',
-		description: 'Language hint used for syntax highlighting.'
-	},
-	{
-		name: 'label',
-		type: 'string',
-		description: 'Optional uppercase label shown above the block.'
-	},
-	{
-		name: 'tone',
-		type: '"default" | "success" | "danger" | "muted"',
-		defaultValue: '"default"',
-		description: 'Label tone used for guidance states.'
-	},
-	{
-		name: 'height',
-		type: 'string | number',
-		defaultValue: '220',
-		description: 'Viewport height of the scroll container.'
-	},
-	{
-		name: 'minHeight',
-		type: 'string | number',
-		description: 'Minimum visible height for the content viewport.'
-	},
-	{
-		name: 'maxHeight',
-		type: 'string | number',
-		description: 'Maximum visible height before scrolling starts.'
-	},
-	{
-		name: 'strikeThrough',
-		type: 'boolean',
-		defaultValue: 'false',
-		description: 'Applies line-through styling for anti-pattern examples.'
-	}
-]
-
-const previewCode =
-	`import { z } from '@tasteee/zest'
-
-const componentCode = ` +
-	'`' +
-	`type LinkPropsT = {
-  href: string
-  label: string
-}
-
-export const LinkItem = (props: LinkPropsT) => {
-  return <a href={props.href}>{props.label}</a>
-}
-` +
-	'`' +
-	`
-
-export const Example = () => {
-  return (
-    <z.codeblock
-      label='Component'
-      language='tsx'
-      content={componentCode}
-      tone='success'
-      height={220}
-    />
-  )
-}`
-
-const usageImportCode = `import { z } from '@tasteee/zest'`
-
-const usageCode = `<z.codeblock content={sourceCode} language='tsx' />`
-
-const languageExamplesCode = `const cssSample = '.button { color: var(--color-neon-green); }'
-const bashSample = 'pnpm add @wooorm/starry-night'
-
-<div className='grid gap-4 md:grid-cols-2'>
-  <z.codeblock label='Styles' language='css' content={cssSample} height={140} />
-  <z.codeblock label='Install' language='bash' content={bashSample} height={140} tone='muted' />
-</div>`
-
-const doCode = `import { z } from '@tasteee/zest'
-
-<z.codeblock
-  label='Do'
-  tone='success'
-  language='tsx'
-  content={safeCode}
-/>`
-
-const dontCode = `<pre className='rounded border p-4'>
-  {unsafeCode}
-</pre>`
-
+import { codeBlockProps } from './props'
+import { examples } from './examples'
 const CodeBlockDocsPage = () => {
 	return (
 		<div className='space-y-16'>
@@ -131,7 +22,7 @@ const CodeBlockDocsPage = () => {
 			<div className='space-y-4'>
 				<div className='flex items-center gap-3'>
 					<h1 className='text-4xl font-bold tracking-tight text-foreground'>z.codeblock</h1>
-					<z.badge isGhost isWhite>
+					<z.badge isGhost isNeutral>
 						Component
 					</z.badge>
 				</div>
@@ -141,7 +32,7 @@ const CodeBlockDocsPage = () => {
 				</p>
 			</div>
 
-			<ComponentPreview code={previewCode} title='Quick Preview' description='Configurable labels, tones, and dimensions.'>
+			<ComponentPreview code={examples.previewCode} title='Quick Preview' description='Configurable labels, tones, and dimensions.'>
 				<div className='w-full max-w-3xl'>
 					<z.codeblock
 						label='Component'
@@ -162,36 +53,31 @@ export const LinkItem = (props: LinkPropsT) => {
 
 			<section className='space-y-6'>
 				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>Usage</h2>
-				<CodeBlock code={usageImportCode} language='tsx' />
-				<CodeBlock code={usageCode} language='tsx' />
+				<CodeBlock code={examples.usageImport} language='tsx' />
+				<CodeBlock code={examples.usage} language='tsx' />
 			</section>
 
 			<section className='space-y-8'>
 				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>Examples</h2>
 				<ComponentPreview
-					code={languageExamplesCode}
+					code={examples.languageExamples}
 					title='Multiple Languages'
 					description='Use language flags to drive highlighting.'
 				>
 					<div className='grid w-full gap-4 md:grid-cols-2'>
-						<z.codeblock label='Styles' language='css' height={140} content={'.button {\n  color: var(--color-neon-green);\n}'} />
+						<z.codeblock label='Styles' language='css' height={140} content={'.button {\n  color: var(--color-neon-purple);\n}'} />
 						<z.codeblock label='Install' language='bash' tone='muted' height={140} content={'pnpm add @wooorm/starry-night'} />
 					</div>
 				</ComponentPreview>
 
 				<ComponentPreview
-					code={`import { z } from '@tasteee/zest'
-
-<div className='grid gap-4 md:grid-cols-2'>
-  <z.codeblock label='Do' tone='success' content={doCode} />
-  <z.codeblock label="Don't" tone='danger' strikeThrough content={dontCode} />
-</div>`}
+					code={examples.doAndDoNot}
 					title='Do And Do Not'
 					description='Strike-through helps communicate anti-patterns clearly.'
 				>
 					<div className='grid w-full gap-4 md:grid-cols-2'>
-						<z.codeblock label='Do' tone='success' language='tsx' height={180} content={doCode} />
-						<z.codeblock label="Don't" tone='danger' language='tsx' height={180} strikeThrough content={dontCode} />
+						<z.codeblock label='Do' tone='success' language='tsx' height={180} content={examples.doCode} />
+						<z.codeblock label="Don't" tone='danger' language='tsx' height={180} strikeThrough content={examples.dontCode} />
 					</div>
 				</ComponentPreview>
 			</section>

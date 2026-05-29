@@ -6,37 +6,12 @@ import { Progress } from '@/components/ui/progress'
 import { z } from '@/components/ui'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { ComponentPreview } from '@/components/docs/component-preview'
-import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
+import { PropsTable } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
 import { Card, CardContent } from '@/components/ui/card'
 import { ChevronRight, RotateCcw } from 'lucide-react'
-
-const progressProps: PropDefinition[] = [
-	{
-		name: 'value',
-		type: 'number',
-		defaultValue: '0',
-		description: 'The progress value between 0 and 100.'
-	},
-	{
-		name: 'variant',
-		type: '"default" | "green" | "purple" | "pink" | "orange"',
-		defaultValue: '"default"',
-		description: 'The color variant of the progress bar.'
-	},
-	{
-		name: 'max',
-		type: 'number',
-		defaultValue: '100',
-		description: 'The maximum value of the progress bar.'
-	},
-	{
-		name: 'className',
-		type: 'string',
-		description: 'Additional CSS classes to apply.'
-	}
-]
-
+import { progressProps } from './props'
+import { examples } from './examples'
 export default function ProgressDocsPage() {
 	const [progress, setProgress] = useState(13)
 	const [animatedProgress, setAnimatedProgress] = useState(0)
@@ -78,7 +53,7 @@ export default function ProgressDocsPage() {
 			<div className='space-y-4'>
 				<div className='flex items-center gap-3'>
 					<h1 className='text-4xl font-bold tracking-tight text-foreground'>ZProgress</h1>
-					<z.badge isGhost isWhite>
+					<z.badge isGhost isNeutral>
 						Component
 					</z.badge>
 				</div>
@@ -91,11 +66,7 @@ export default function ProgressDocsPage() {
 			<ComponentPreview
 				title='Default Progress'
 				description='A basic progress bar showing completion status.'
-				code={`import { ZProgress } from '@tasteee/zest'
-
-export function ProgressDemo() {
-  return <ZProgress value={66} />
-}`}
+				code={examples.quickPreview}
 			>
 				<Progress value={progress} className='w-[60%]' />
 			</ComponentPreview>
@@ -103,8 +74,8 @@ export function ProgressDemo() {
 			{/* Usage */}
 			<section className='space-y-6'>
 				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>Usage</h2>
-				<CodeBlock code={`import { ZProgress } from '@tasteee/zest'`} language='tsx' />
-				<CodeBlock code={`<ZProgress value={33} />`} language='tsx' />
+				<CodeBlock code={examples.usageImport} language='tsx' />
+				<CodeBlock code={examples.usage} language='tsx' />
 			</section>
 
 			{/* Examples */}
@@ -115,13 +86,7 @@ export function ProgressDemo() {
 				<ComponentPreview
 					title='Color Variants'
 					description='Progress bars come in different color variants matching the brand neons.'
-					code={`<div className="space-y-4 w-full">
-  <Progress variant="default" value={60} />
-  <Progress variant="green" value={75} />
-  <Progress variant="purple" value={45} />
-  <Progress variant="pink" value={90} />
-  <Progress variant="orange" value={30} />
-</div>`}
+					code={examples.colorVariants}
 				>
 					<div className='space-y-4 w-full'>
 						<div className='space-y-1'>
@@ -129,8 +94,8 @@ export function ProgressDemo() {
 							<Progress variant='default' value={60} />
 						</div>
 						<div className='space-y-1'>
-							<span className='text-xs text-muted-foreground'>Green</span>
-							<Progress variant='green' value={75} />
+							<span className='text-xs text-muted-foreground'>Purple</span>
+							<Progress variant='purple' value={75} />
 						</div>
 						<div className='space-y-1'>
 							<span className='text-xs text-muted-foreground'>Purple</span>
@@ -141,8 +106,8 @@ export function ProgressDemo() {
 							<Progress variant='pink' value={90} />
 						</div>
 						<div className='space-y-1'>
-							<span className='text-xs text-muted-foreground'>Orange</span>
-							<Progress variant='orange' value={30} />
+							<span className='text-xs text-muted-foreground'>Pink</span>
+							<Progress variant='pink' value={30} />
 						</div>
 					</div>
 				</ComponentPreview>
@@ -151,13 +116,7 @@ export function ProgressDemo() {
 				<ComponentPreview
 					title='With Label'
 					description='Add a label to show the exact progress percentage.'
-					code={`<div className="space-y-2 w-full">
-  <div className="flex justify-between text-sm">
-    <span>Progress</span>
-    <span className="text-muted-foreground">66%</span>
-  </div>
-  <Progress value={66} />
-</div>`}
+					code={examples.withLabel}
 				>
 					<div className='space-y-2 w-full'>
 						<div className='flex justify-between text-sm'>
@@ -172,36 +131,14 @@ export function ProgressDemo() {
 				<ComponentPreview
 					title='Animated Progress'
 					description='Animate the progress bar to show real-time updates.'
-					code={`const [progress, setProgress] = useState(0)
-
-// Animate progress
-const startAnimation = () => {
-  setProgress(0)
-  const interval = setInterval(() => {
-    setProgress((prev) => {
-      if (prev >= 100) {
-        clearInterval(interval)
-        return 100
-      }
-      return prev + 5
-    })
-  }, 100)
-}
-
-<div className="space-y-4 w-full">
-  <Progress value={progress} variant="green" />
-  <Button onClick={startAnimation}>
-    <RotateCcw className="mr-2 h-4 w-4" />
-    Start
-  </Button>
-</div>`}
+					code={examples.animated}
 				>
 					<div className='space-y-4 w-full'>
 						<div className='flex justify-between text-sm'>
 							<span>Uploading...</span>
 							<span className='text-muted-foreground'>{animatedProgress}%</span>
 						</div>
-						<Progress value={animatedProgress} variant='green' />
+						<Progress value={animatedProgress} variant='purple' />
 						<z.button onClick={startAnimation} isSmall>
 							<RotateCcw className='mr-2 h-4 w-4' />
 							Start Animation
@@ -213,44 +150,22 @@ const startAnimation = () => {
 				<ComponentPreview
 					title='Multi-Step Progress'
 					description='Show progress through multiple steps in a process.'
-					code={`<div className="space-y-6 w-full">
-  <div className="space-y-2">
-    <div className="flex justify-between text-sm">
-      <span>Step 1: Account Setup</span>
-      <span className="text-neon-green">Complete</span>
-    </div>
-    <Progress value={100} variant="green" />
-  </div>
-  <div className="space-y-2">
-    <div className="flex justify-between text-sm">
-      <span>Step 2: Profile Details</span>
-      <span className="text-neon-orange">In Progress</span>
-    </div>
-    <Progress value={60} variant="orange" />
-  </div>
-  <div className="space-y-2">
-    <div className="flex justify-between text-sm">
-      <span>Step 3: Verification</span>
-      <span className="text-muted-foreground">Pending</span>
-    </div>
-    <Progress value={0} />
-  </div>
-</div>`}
+					code={examples.multiStep}
 				>
 					<div className='space-y-6 w-full'>
 						<div className='space-y-2'>
 							<div className='flex justify-between text-sm'>
 								<span>Step 1: Account Setup</span>
-								<span className='text-neon-green'>Complete</span>
+								<span className='text-neon-purple'>Complete</span>
 							</div>
-							<Progress value={100} variant='green' />
+							<Progress value={100} variant='purple' />
 						</div>
 						<div className='space-y-2'>
 							<div className='flex justify-between text-sm'>
 								<span>Step 2: Profile Details</span>
-								<span className='text-neon-orange'>In Progress</span>
+								<span className='text-neon-pink'>In Progress</span>
 							</div>
-							<Progress value={60} variant='orange' />
+							<Progress value={60} variant='pink' />
 						</div>
 						<div className='space-y-2'>
 							<div className='flex justify-between text-sm'>

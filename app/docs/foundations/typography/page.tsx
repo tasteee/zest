@@ -97,16 +97,16 @@ export default function TypographyPage() {
 				<div className='rounded-lg border border-border p-8'>
 					<div className='flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-8'>
 						<div>
-							<span className='text-neon-orange text-xs font-semibold tracking-[0.2em] uppercase block mb-3'>
+							<span className='text-neon-pink text-xs font-semibold tracking-[0.2em] uppercase block mb-3'>
 								Primary Typeface
 							</span>
 							<h3 className='text-primary font-bold text-6xl tracking-tight'>DM Sans</h3>
 						</div>
 						<div className='flex gap-2'>
-							<z.badge isOutline isWhite>
+							<z.badge isOutline isNeutral>
 								Google Fonts
 							</z.badge>
-							<z.badge isOutline isWhite>
+							<z.badge isOutline isNeutral>
 								Open Source
 							</z.badge>
 						</div>
@@ -140,7 +140,7 @@ export default function TypographyPage() {
 							className='flex flex-col lg:flex-row lg:items-center gap-4 py-6 border-b border-border last:border-b-0'
 						>
 							<div className='lg:w-24 shrink-0'>
-								<z.badge isOutline isGreen className='text-xs'>
+								<z.badge isOutline isPurple className='text-xs'>
 									{type.name}
 								</z.badge>
 							</div>
@@ -165,22 +165,22 @@ export default function TypographyPage() {
 						<h4 className='text-primary font-bold text-2xl'>Headlines demand attention.</h4>
 						<p className='text-foreground leading-relaxed'>
 							Body text carries the message. It&apos;s readable, comfortable, and gets the job done without stealing the spotlight.
-							Keep it gray, not white.
+							Keep it gray, not neutral.
 						</p>
 						<p className='text-muted-foreground text-sm'>
 							Secondary text provides context. It fades into the background while remaining accessible.
 						</p>
 						<div className='flex gap-3'>
-							<span className='text-neon-green text-xs font-semibold tracking-wider uppercase'>Label</span>
+							<span className='text-neon-purple text-xs font-semibold tracking-wider uppercase'>Label</span>
 							<span className='text-neon-pink text-xs font-semibold tracking-wider uppercase'>Tag</span>
-							<span className='text-neon-orange text-xs font-semibold tracking-wider uppercase'>Status</span>
+							<span className='text-neon-pink text-xs font-semibold tracking-wider uppercase'>Status</span>
 						</div>
 					</div>
 
 					<div className='rounded-lg border border-border p-6 space-y-3'>
 						<div className='flex items-center justify-between py-2 border-b border-border'>
-							<span className='text-primary font-semibold'>White</span>
-							<span className='text-neon-green text-xs'>Headlines, CTAs</span>
+							<span className='text-primary font-semibold'>Neutral</span>
+							<span className='text-neon-purple text-xs'>Headlines, CTAs</span>
 						</div>
 						<div className='flex items-center justify-between py-2 border-b border-border'>
 							<span className='text-foreground'>Gray</span>
@@ -191,8 +191,8 @@ export default function TypographyPage() {
 							<span className='text-neon-purple text-xs'>Secondary</span>
 						</div>
 						<div className='flex items-center justify-between py-2'>
-							<span className='text-neon-orange'>Brand</span>
-							<span className='text-neon-orange text-xs'>Accents, labels</span>
+							<span className='text-neon-pink'>Brand</span>
+							<span className='text-neon-pink text-xs'>Accents, labels</span>
 						</div>
 					</div>
 				</div>
@@ -244,7 +244,7 @@ export default function RootLayout({ children }) {
 </span>
 
 // Labels
-<span className="text-xs font-semibold tracking-[0.1em] uppercase text-neon-green">
+<span className="text-xs font-semibold tracking-[0.1em] uppercase text-neon-purple">
   Category Label
 </span>`}
 					language='tsx'

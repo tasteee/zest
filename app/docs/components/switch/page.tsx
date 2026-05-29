@@ -6,53 +6,12 @@ import { Label } from '@/components/ui/label'
 import { Switch } from '@/components/ui/switch'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { ComponentPreview } from '@/components/docs/component-preview'
-import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
+import { PropsTable } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
 import { Card, CardContent } from '@/components/ui/card'
 import { ChevronRight } from 'lucide-react'
-
-const switchProps: PropDefinition[] = [
-	{
-		name: 'checked',
-		type: 'boolean',
-		description: 'The controlled state of the switch.'
-	},
-	{
-		name: 'defaultChecked',
-		type: 'boolean',
-		defaultValue: 'false',
-		description: 'The state of the switch when initially rendered.'
-	},
-	{
-		name: 'onCheckedChange',
-		type: '(checked: boolean) => void',
-		description: 'Event handler called when the state changes.'
-	},
-	{
-		name: 'disabled',
-		type: 'boolean',
-		defaultValue: 'false',
-		description: 'When true, prevents the user from interacting with the switch.'
-	},
-	{
-		name: 'required',
-		type: 'boolean',
-		defaultValue: 'false',
-		description: 'When true, the switch is required for form submission.'
-	},
-	{
-		name: 'name',
-		type: 'string',
-		description: 'The name of the switch for form submission.'
-	},
-	{
-		name: 'value',
-		type: 'string',
-		defaultValue: '"on"',
-		description: 'The value submitted with the form when checked.'
-	}
-]
-
+import { switchProps } from './props'
+import { examples } from './examples'
 export default function SwitchDocsPage() {
 	return (
 		<div className='space-y-16'>
@@ -73,7 +32,7 @@ export default function SwitchDocsPage() {
 			<div className='space-y-4'>
 				<div className='flex items-center gap-3'>
 					<h1 className='text-4xl font-bold tracking-tight text-foreground'>ZSwitch</h1>
-					<z.badge isGhost isWhite>
+					<z.badge isGhost isNeutral>
 						Component
 					</z.badge>
 				</div>
@@ -86,11 +45,7 @@ export default function SwitchDocsPage() {
 			<ComponentPreview
 				title='Default Switch'
 				description='A basic toggle switch.'
-				code={`import { ZSwitch } from '@tasteee/zest'
-
-export function SwitchDemo() {
-  return <ZSwitch />
-}`}
+				code={examples.quickPreview}
 			>
 				<Switch />
 			</ComponentPreview>
@@ -98,8 +53,8 @@ export function SwitchDemo() {
 			{/* Usage */}
 			<section className='space-y-6'>
 				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>Usage</h2>
-				<CodeBlock code={`import { ZSwitch } from '@tasteee/zest'`} language='tsx' />
-				<CodeBlock code={`<ZSwitch />`} language='tsx' />
+				<CodeBlock code={examples.usageImport} language='tsx' />
+				<CodeBlock code={examples.usage} language='tsx' />
 			</section>
 
 			{/* Examples */}
@@ -110,10 +65,7 @@ export function SwitchDemo() {
 				<ComponentPreview
 					title='With Label'
 					description='A switch paired with a clickable label.'
-					code={`<div className="flex items-center space-x-2">
-  <Switch id="airplane-mode" />
-  <Label htmlFor="airplane-mode">Airplane Mode</Label>
-</div>`}
+					code={examples.withLabel}
 				>
 					<div className='flex items-center space-x-2'>
 						<Switch id='airplane-mode' />
@@ -125,10 +77,7 @@ export function SwitchDemo() {
 				<ComponentPreview
 					title='Default Checked'
 					description='A switch that starts in the checked state.'
-					code={`<div className="flex items-center space-x-2">
-  <Switch id="notifications" defaultChecked />
-  <Label htmlFor="notifications">Enable notifications</Label>
-</div>`}
+					code={examples.defaultChecked}
 				>
 					<div className='flex items-center space-x-2'>
 						<Switch id='notifications' defaultChecked />
@@ -140,20 +89,7 @@ export function SwitchDemo() {
 				<ComponentPreview
 					title='Disabled'
 					description='Disabled switches cannot be toggled.'
-					code={`<div className="flex flex-col gap-4">
-  <div className="flex items-center space-x-2">
-    <Switch id="disabled-off" disabled />
-    <Label htmlFor="disabled-off" className="text-muted-foreground">
-      Disabled (off)
-    </Label>
-  </div>
-  <div className="flex items-center space-x-2">
-    <Switch id="disabled-on" disabled defaultChecked />
-    <Label htmlFor="disabled-on" className="text-muted-foreground">
-      Disabled (on)
-    </Label>
-  </div>
-</div>`}
+					code={examples.disabled}
 				>
 					<div className='flex flex-col gap-4'>
 						<div className='flex items-center space-x-2'>
@@ -175,35 +111,7 @@ export function SwitchDemo() {
 				<ComponentPreview
 					title='Settings List'
 					description='A list of toggleable settings using switches.'
-					code={`<div className="w-full max-w-sm space-y-4">
-  <div className="flex items-center justify-between rounded-lg border p-4">
-    <div className="space-y-0.5">
-      <Label htmlFor="marketing">Marketing emails</Label>
-      <p className="text-sm text-muted-foreground">
-        Receive emails about new products and features.
-      </p>
-    </div>
-    <Switch id="marketing" />
-  </div>
-  <div className="flex items-center justify-between rounded-lg border p-4">
-    <div className="space-y-0.5">
-      <Label htmlFor="security">Security emails</Label>
-      <p className="text-sm text-muted-foreground">
-        Receive emails about your account activity.
-      </p>
-    </div>
-    <Switch id="security" defaultChecked />
-  </div>
-  <div className="flex items-center justify-between rounded-lg border p-4">
-    <div className="space-y-0.5">
-      <Label htmlFor="updates">Product updates</Label>
-      <p className="text-sm text-muted-foreground">
-        Receive emails about product updates.
-      </p>
-    </div>
-    <Switch id="updates" defaultChecked />
-  </div>
-</div>`}
+					code={examples.settingsList}
 				>
 					<div className='w-full max-w-sm space-y-4'>
 						<div className='flex items-center justify-between rounded-lg border p-4'>

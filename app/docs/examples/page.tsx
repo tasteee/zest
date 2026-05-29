@@ -40,7 +40,7 @@ import { Tabs } from '@/components/ui/tabs'
 import { Accordion } from '@/components/ui/accordion'
 import { Dialog } from '@/components/ui/dialog'
 import { DropdownMenu } from '@/components/ui/dropdown-menu'
-import { Select } from '@/components/ui/select'
+
 import { Table } from '@/components/ui/table'
 import { useToast } from '@/components/ui/use-toast'
 import { z } from '@/components/ui'
@@ -80,1060 +80,1060 @@ export default function ExamplesPage() {
 
 	return (
 		<div className='space-y-16 pb-16'>
-				{/* Page Header */}
-				<div className='space-y-4'>
-					<nav className='flex items-center gap-2 text-sm text-muted-foreground'>
-						<Link href='/docs' className='hover:text-foreground transition-colors'>
-							Docs
-						</Link>
-						<ChevronRight className='h-4 w-4' />
-						<span className='text-foreground'>Examples</span>
-					</nav>
-					<h1 className='text-4xl font-bold tracking-tight text-foreground'>Component Examples</h1>
-					<p className='text-lg text-muted-foreground max-w-3xl'>
-						A comprehensive showcase of all Zest components with their common variations. Use this page as a reference for
-						available styles, states, and configurations.
-					</p>
+			{/* Page Header */}
+			<div className='space-y-4'>
+				<nav className='flex items-center gap-2 text-sm text-muted-foreground'>
+					<Link href='/docs' className='hover:text-foreground transition-colors'>
+						Docs
+					</Link>
+					<ChevronRight className='h-4 w-4' />
+					<span className='text-foreground'>Examples</span>
+				</nav>
+				<h1 className='text-4xl font-bold tracking-tight text-foreground'>Component Examples</h1>
+				<p className='text-lg text-muted-foreground max-w-3xl'>
+					A comprehensive showcase of all Zest components with their common variations. Use this page as a reference for
+					available styles, states, and configurations.
+				</p>
+			</div>
+
+			{/* Buttons Section */}
+			<section className='space-y-6'>
+				<SectionHeader title='z.button' description='Buttons with different kinds, themes, and sizes.' />
+
+				<div className='grid gap-6'>
+					<ExampleCard title='Solid Buttons'>
+						<z.button isPurple>Purple</z.button>
+						<z.button isPurple>Purple</z.button>
+						<z.button isPink>Pink</z.button>
+						<z.button isPink>Pink</z.button>
+						<z.button isNeutral>Neutral</z.button>
+					</ExampleCard>
+
+					<ExampleCard title='Outlined Buttons'>
+						<z.button isPurple>Purple</z.button>
+						<z.button isPurple>Purple</z.button>
+						<z.button isPink>Pink</z.button>
+						<z.button isPink>Pink</z.button>
+						<z.button isNeutral>Neutral</z.button>
+					</ExampleCard>
+
+					<ExampleCard title='Ghost Buttons'>
+						<z.button isPurple>Purple</z.button>
+						<z.button isPurple>Purple</z.button>
+						<z.button isPink>Pink</z.button>
+						<z.button isPink>Pink</z.button>
+						<z.button isNeutral>Neutral</z.button>
+					</ExampleCard>
+
+					<ExampleCard title='Button Sizes'>
+						<z.button isPurple isExtraSmall>
+							Extra Small
+						</z.button>
+						<z.button isPurple isSmall>
+							Small
+						</z.button>
+						<z.button isPurple isMedium>
+							Medium
+						</z.button>
+						<z.button isPurple isLarge>
+							Large
+						</z.button>
+						<z.button isPurple isExtraLarge>
+							Extra Large
+						</z.button>
+					</ExampleCard>
+
+					<ExampleCard title='Button States'>
+						<z.button isPurple>Default</z.button>
+						<z.button isPurple isDisabled>
+							Disabled
+						</z.button>
+						<z.button isPurple>
+							<Loader2 className='h-4 w-4 animate-spin' />
+							Loading
+						</z.button>
+						<z.button isPink>
+							<Heart className='h-4 w-4' />
+							With Icon
+						</z.button>
+						<z.button isPink>
+							Submit
+							<Send className='h-4 w-4' />
+						</z.button>
+					</ExampleCard>
 				</div>
+			</section>
 
-				{/* Buttons Section */}
-				<section className='space-y-6'>
-					<SectionHeader title='z.button' description='Buttons with different kinds, themes, and sizes.' />
+			<Separator />
 
-					<div className='grid gap-6'>
-						<ExampleCard title='Solid Buttons'>
-							<z.button isGreen>Green</z.button>
-							<z.button isPurple>Purple</z.button>
-							<z.button isPink>Pink</z.button>
-							<z.button isOrange>Orange</z.button>
-							<z.button isWhite>White</z.button>
-						</ExampleCard>
+			{/* Badge Section */}
+			<section className='space-y-6'>
+				<SectionHeader title='z.badge' description='Small status indicators and labels.' />
 
-						<ExampleCard title='Outlined Buttons'>
-							<z.button isGreen>Green</z.button>
-							<z.button isPurple>Purple</z.button>
-							<z.button isPink>Pink</z.button>
-							<z.button isOrange>Orange</z.button>
-							<z.button isWhite>White</z.button>
-						</ExampleCard>
+				<div className='grid gap-6'>
+					<ExampleCard title='Solid Badges'>
+						<z.badge isSolid isNeutral>
+							Default
+						</z.badge>
+						<z.badge isGhost isNeutral>
+							Secondary
+						</z.badge>
+						<z.badge isSolid isPink>
+							Destructive
+						</z.badge>
+						<z.badge isSolid isPurple>
+							Purple
+						</z.badge>
+						<z.badge isSolid isPurple>
+							Purple
+						</z.badge>
+						<z.badge isSolid isPink>
+							Pink
+						</z.badge>
+						<z.badge isSolid isPink>
+							Pink
+						</z.badge>
+					</ExampleCard>
 
-						<ExampleCard title='Ghost Buttons'>
-							<z.button isGreen>Green</z.button>
-							<z.button isPurple>Purple</z.button>
-							<z.button isPink>Pink</z.button>
-							<z.button isOrange>Orange</z.button>
-							<z.button isWhite>White</z.button>
-						</ExampleCard>
+					<ExampleCard title='Outlined Badges'>
+						<z.badge isOutline isNeutral>
+							Outline
+						</z.badge>
+						<z.badge isOutline isPurple>
+							Purple
+						</z.badge>
+						<z.badge isOutline isPurple>
+							Purple
+						</z.badge>
+						<z.badge isOutline isPink>
+							Pink
+						</z.badge>
+						<z.badge isOutline isPink>
+							Pink
+						</z.badge>
+					</ExampleCard>
 
-						<ExampleCard title='Button Sizes'>
-							<z.button isGreen isExtraSmall>
-								Extra Small
-							</z.button>
-							<z.button isGreen isSmall>
-								Small
-							</z.button>
-							<z.button isGreen isMedium>
-								Medium
-							</z.button>
-							<z.button isGreen isLarge>
-								Large
-							</z.button>
-							<z.button isGreen isExtraLarge>
-								Extra Large
-							</z.button>
-						</ExampleCard>
+					<ExampleCard title='Badges with Icons'>
+						<z.badge isSolid isPurple>
+							<CheckCircle className='h-3 w-3' /> Success
+						</z.badge>
+						<z.badge isSolid isPink>
+							<AlertCircle className='h-3 w-3' /> Error
+						</z.badge>
+						<z.badge isSolid isPink>
+							<AlertTriangle className='h-3 w-3' /> Warning
+						</z.badge>
+						<z.badge isSolid isPurple>
+							<Info className='h-3 w-3' /> Info
+						</z.badge>
+						<z.badge isSolid isPink>
+							<Star className='h-3 w-3' /> Featured
+						</z.badge>
+					</ExampleCard>
+				</div>
+			</section>
 
-						<ExampleCard title='Button States'>
-							<z.button isGreen>Default</z.button>
-							<z.button isGreen isDisabled>
-								Disabled
-							</z.button>
-							<z.button isPurple>
-								<Loader2 className='h-4 w-4 animate-spin' />
-								Loading
-							</z.button>
-							<z.button isPink>
-								<Heart className='h-4 w-4' />
-								With Icon
-							</z.button>
-							<z.button isOrange>
-								Submit
-								<Send className='h-4 w-4' />
-							</z.button>
-						</ExampleCard>
-					</div>
-				</section>
+			<Separator />
 
-				<Separator />
+			{/* Input Section */}
+			<section className='space-y-6'>
+				<SectionHeader title='ZInput' description='Text inputs with different focus colors and states.' />
 
-				{/* Badge Section */}
-				<section className='space-y-6'>
-					<SectionHeader title='z.badge' description='Small status indicators and labels.' />
-
-					<div className='grid gap-6'>
-						<ExampleCard title='Solid Badges'>
-							<z.badge isSolid isWhite>
-								Default
-							</z.badge>
-							<z.badge isGhost isWhite>
-								Secondary
-							</z.badge>
-							<z.badge isSolid isPink>
-								Destructive
-							</z.badge>
-							<z.badge isSolid isGreen>
-								Green
-							</z.badge>
-							<z.badge isSolid isPurple>
-								Purple
-							</z.badge>
-							<z.badge isSolid isPink>
-								Pink
-							</z.badge>
-							<z.badge isSolid isOrange>
-								Orange
-							</z.badge>
-						</ExampleCard>
-
-						<ExampleCard title='Outlined Badges'>
-							<z.badge isOutline isWhite>
-								Outline
-							</z.badge>
-							<z.badge isOutline isGreen>
-								Green
-							</z.badge>
-							<z.badge isOutline isPurple>
-								Purple
-							</z.badge>
-							<z.badge isOutline isPink>
-								Pink
-							</z.badge>
-							<z.badge isOutline isOrange>
-								Orange
-							</z.badge>
-						</ExampleCard>
-
-						<ExampleCard title='Badges with Icons'>
-							<z.badge isSolid isGreen>
-								<CheckCircle className='h-3 w-3' /> Success
-							</z.badge>
-							<z.badge isSolid isPink>
-								<AlertCircle className='h-3 w-3' /> Error
-							</z.badge>
-							<z.badge isSolid isOrange>
-								<AlertTriangle className='h-3 w-3' /> Warning
-							</z.badge>
-							<z.badge isSolid isPurple>
-								<Info className='h-3 w-3' /> Info
-							</z.badge>
-							<z.badge isSolid isPink>
-								<Star className='h-3 w-3' /> Featured
-							</z.badge>
-						</ExampleCard>
-					</div>
-				</section>
-
-				<Separator />
-
-				{/* Input Section */}
-				<section className='space-y-6'>
-					<SectionHeader title='ZInput' description='Text inputs with different focus colors and states.' />
-
-					<div className='grid gap-6'>
-						<ExampleCard title='Focus Colors'>
-							<div className='grid gap-4 w-full max-w-md'>
-								<div className='space-y-2'>
-									<Label>Default Focus</Label>
-									<z.input placeholder='Default focus ring' focusColor='default' />
-								</div>
-								<div className='space-y-2'>
-									<Label>Green Focus</Label>
-									<z.input placeholder='Green focus ring' focusColor='green' />
-								</div>
-								<div className='space-y-2'>
-									<Label>Purple Focus</Label>
-									<Input placeholder='Purple focus ring' focusColor='purple' />
-								</div>
-								<div className='space-y-2'>
-									<Label>Pink Focus</Label>
-									<Input placeholder='Pink focus ring' focusColor='pink' />
-								</div>
-								<div className='space-y-2'>
-									<Label>Orange Focus</Label>
-									<Input placeholder='Orange focus ring' focusColor='orange' />
-								</div>
-							</div>
-						</ExampleCard>
-
-						<ExampleCard title='Input Types'>
-							<div className='grid gap-4 w-full max-w-md'>
-								<div className='space-y-2'>
-									<Label htmlFor='text'>Text</Label>
-									<Input id='text' type='text' placeholder='Enter text' />
-								</div>
-								<div className='space-y-2'>
-									<Label htmlFor='email'>Email</Label>
-									<Input id='email' type='email' placeholder='name@example.com' />
-								</div>
-								<div className='space-y-2'>
-									<Label htmlFor='password'>Password</Label>
-									<Input id='password' type='password' placeholder='Enter password' />
-								</div>
-								<div className='space-y-2'>
-									<Label htmlFor='search'>Search</Label>
-									<Input id='search' type='search' placeholder='Search...' />
-								</div>
-								<div className='space-y-2'>
-									<Label htmlFor='disabled'>Disabled</Label>
-									<Input id='disabled' placeholder='Disabled input' disabled />
-								</div>
-							</div>
-						</ExampleCard>
-
-						<ExampleCard title='Input with Icons'>
-							<div className='grid gap-4 w-full max-w-md'>
-								<div className='relative'>
-									<Search className='absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground' />
-									<Input className='pl-9' placeholder='Search...' />
-								</div>
-								<div className='relative'>
-									<Mail className='absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground' />
-									<Input className='pl-9' type='email' placeholder='Email address' />
-								</div>
-							</div>
-						</ExampleCard>
-					</div>
-				</section>
-
-				<Separator />
-
-				{/* Checkbox & Switch Section */}
-				<section className='space-y-6'>
-					<SectionHeader title='ZCheckbox & ZSwitch' description='Toggle controls for boolean values.' />
-
-					<div className='grid gap-6 md:grid-cols-2'>
-						<ExampleCard title='Checkboxes'>
-							<div className='space-y-4 w-full'>
-								<div className='flex items-center space-x-2'>
-									<Checkbox
-										id='terms'
-										isChecked={checkboxStates.terms}
-										onCheckedChange={(checked) => setCheckboxStates((prev) => ({ ...prev, terms: checked as boolean }))}
-									/>
-									<Label htmlFor='terms'>Accept terms and conditions</Label>
-								</div>
-								<div className='flex items-center space-x-2'>
-									<Checkbox
-										id='newsletter'
-										isChecked={checkboxStates.newsletter}
-										onCheckedChange={(checked) => setCheckboxStates((prev) => ({ ...prev, newsletter: checked as boolean }))}
-									/>
-									<Label htmlFor='newsletter'>Subscribe to newsletter</Label>
-								</div>
-								<div className='flex items-center space-x-2'>
-									<Checkbox id='disabled' isDisabled />
-									<Label htmlFor='disabled' className='text-muted-foreground'>
-										Disabled checkbox
-									</Label>
-								</div>
-								<div className='flex items-center space-x-2'>
-									<Checkbox id='checked-disabled' isChecked isDisabled />
-									<Label htmlFor='checked-disabled' className='text-muted-foreground'>
-										Checked disabled
-									</Label>
-								</div>
-							</div>
-						</ExampleCard>
-
-						<ExampleCard title='Switches'>
-							<div className='space-y-4 w-full'>
-								<div className='flex items-center justify-between'>
-									<Label htmlFor='airplane'>Airplane Mode</Label>
-									<Switch
-										id='airplane'
-										checked={switchStates.airplane}
-										onCheckedChange={(checked) => setSwitchStates((prev) => ({ ...prev, airplane: checked }))}
-									/>
-								</div>
-								<div className='flex items-center justify-between'>
-									<Label htmlFor='notifications'>Notifications</Label>
-									<Switch
-										id='notifications'
-										checked={switchStates.notifications}
-										onCheckedChange={(checked) => setSwitchStates((prev) => ({ ...prev, notifications: checked }))}
-									/>
-								</div>
-								<div className='flex items-center justify-between'>
-									<Label htmlFor='dark-mode'>Dark Mode</Label>
-									<Switch
-										id='dark-mode'
-										checked={switchStates.darkMode}
-										onCheckedChange={(checked) => setSwitchStates((prev) => ({ ...prev, darkMode: checked }))}
-									/>
-								</div>
-								<div className='flex items-center justify-between'>
-									<Label htmlFor='disabled-switch' className='text-muted-foreground'>
-										Disabled
-									</Label>
-									<Switch id='disabled-switch' disabled />
-								</div>
-							</div>
-						</ExampleCard>
-					</div>
-				</section>
-
-				<Separator />
-
-				{/* Select Section */}
-				<section className='space-y-6'>
-					<SectionHeader title='ZSelect' description='Dropdown selection controls.' />
-
-					<div className='grid gap-6 md:grid-cols-2'>
-						<ExampleCard title='Basic Select'>
-							<div className='space-y-2 w-full max-w-xs'>
-								<Label>Choose a theme</Label>
-								<Select>
-									<Select.Trigger>
-										<Select.Value placeholder='Select theme' />
-									</Select.Trigger>
-									<Select.Content>
-										<Select.Item value='light'>Light</Select.Item>
-										<Select.Item value='dark'>Dark</Select.Item>
-										<Select.Item value='system'>System</Select.Item>
-									</Select.Content>
-								</Select>
-							</div>
-						</ExampleCard>
-
-						<ExampleCard title='Select with Groups'>
-							<div className='space-y-2 w-full max-w-xs'>
-								<Label>Select a fruit</Label>
-								<Select>
-									<Select.Trigger>
-										<Select.Value placeholder='Pick a fruit' />
-									</Select.Trigger>
-									<Select.Content>
-										<Select.Item value='apple'>Apple</Select.Item>
-										<Select.Item value='banana'>Banana</Select.Item>
-										<Select.Item value='orange'>Orange</Select.Item>
-										<Select.Item value='grape'>Grape</Select.Item>
-										<Select.Item value='mango'>Mango</Select.Item>
-									</Select.Content>
-								</Select>
-							</div>
-						</ExampleCard>
-					</div>
-				</section>
-
-				<Separator />
-
-				{/* Alert Section */}
-				<section className='space-y-6'>
-					<SectionHeader title='ZAlert' description='Contextual feedback messages.' />
-
-					<div className='grid gap-4'>
-						<Alert>
-							<Terminal className='h-4 w-4' />
-							<Alert.title>Default Alert</Alert.title>
-							<Alert.description>This is a default alert with neutral styling.</Alert.description>
-						</Alert>
-
-						<Alert isGreen>
-							<CheckCircle className='h-4 w-4' />
-							<Alert.title>Success</Alert.title>
-							<Alert.description>Your changes have been saved successfully.</Alert.description>
-						</Alert>
-
-						<Alert isOrange>
-							<AlertTriangle className='h-4 w-4' />
-							<Alert.title>Warning</Alert.title>
-							<Alert.description>Please review your information before proceeding.</Alert.description>
-						</Alert>
-
-						<Alert isRed>
-							<AlertCircle className='h-4 w-4' />
-							<Alert.title>Error</Alert.title>
-							<Alert.description>There was an error processing your request.</Alert.description>
-						</Alert>
-
-						<Alert isPurple>
-							<Info className='h-4 w-4' />
-							<Alert.title>Information</Alert.title>
-							<Alert.description>Here is some helpful information for you.</Alert.description>
-						</Alert>
-
-						<Alert isPink>
-							<Bell className='h-4 w-4' />
-							<Alert.title>Featured</Alert.title>
-							<Alert.description>Check out our latest feature update!</Alert.description>
-						</Alert>
-					</div>
-				</section>
-
-				<Separator />
-
-				{/* Toast Section */}
-				<section className='space-y-6'>
-					<SectionHeader title='ZToast' description='Temporary notifications that appear and auto-dismiss.' />
-
-					{/* Alert vs Toast comparison */}
-					<div className='rounded-lg border border-border bg-card p-6 space-y-4'>
-						<h3 className='text-lg font-semibold text-foreground'>Alert vs Toast: When to Use Each</h3>
-						<div className='grid gap-4 md:grid-cols-2'>
+				<div className='grid gap-6'>
+					<ExampleCard title='Focus Colors'>
+						<div className='grid gap-4 w-full max-w-md'>
 							<div className='space-y-2'>
-								<h4 className='text-sm font-medium text-neon-green'>Alerts (Static)</h4>
-								<ul className='text-sm text-muted-foreground space-y-1 list-disc list-inside'>
-									<li>Persistent, inline content within the page</li>
-									<li>Important information that needs to remain visible</li>
-									<li>Form validation errors or warnings</li>
-									<li>System status or maintenance notices</li>
-									<li>User must acknowledge or dismiss manually</li>
-								</ul>
+								<Label>Default Focus</Label>
+								<z.input placeholder='Default focus ring' focusColor='neutral' />
 							</div>
 							<div className='space-y-2'>
-								<h4 className='text-sm font-medium text-neon-purple'>Toasts (Ephemeral)</h4>
-								<ul className='text-sm text-muted-foreground space-y-1 list-disc list-inside'>
-									<li>Temporary, floating notifications</li>
-									<li>Feedback for completed actions</li>
-									<li>Non-critical success or info messages</li>
-									<li>Auto-dismiss after a few seconds</li>
-									<li>Does not block user workflow</li>
-								</ul>
+								<Label>Purple Focus</Label>
+								<z.input placeholder='Purple focus ring' focusColor='purple' />
+							</div>
+							<div className='space-y-2'>
+								<Label>Purple Focus</Label>
+								<Input placeholder='Purple focus ring' focusColor='purple' />
+							</div>
+							<div className='space-y-2'>
+								<Label>Pink Focus</Label>
+								<Input placeholder='Pink focus ring' focusColor='pink' />
+							</div>
+							<div className='space-y-2'>
+								<Label>Pink Focus</Label>
+								<Input placeholder='Pink focus ring' focusColor='pink' />
 							</div>
 						</div>
-					</div>
+					</ExampleCard>
 
-					<div className='grid gap-6'>
-						<ExampleCard title='Toast Triggers'>
-							<z.button
-								isWhite
-								onClick={() => {
-									toast({
-										title: 'Default Toast',
-										description: 'This is a basic toast notification.'
-									})
-								}}
-							>
-								Show Default Toast
-							</z.button>
-
-							<z.button
-								isGreen
-								onClick={() => {
-									toast({
-										title: 'Success!',
-										description: 'Your changes have been saved successfully.'
-									})
-								}}
-							>
-								Show Success Toast
-							</z.button>
-
-							<z.button
-								isPink
-								onClick={() => {
-									toast({
-										variant: 'destructive',
-										title: 'Error',
-										description: 'Something went wrong. Please try again.'
-									})
-								}}
-							>
-								Show Error Toast
-							</z.button>
-
-							<z.button
-								isPurple
-								onClick={() => {
-									toast({
-										title: 'Scheduled',
-										description: 'Your meeting has been scheduled for tomorrow at 3pm.'
-									})
-								}}
-							>
-								Show Info Toast
-							</z.button>
-						</ExampleCard>
-
-						<ExampleCard title='Toast with Action'>
-							<z.button
-								isWhite
-								onClick={() => {
-									toast({
-										title: 'Item Deleted',
-										description: 'The item has been moved to trash.',
-										action: (
-											<z.button isWhite isSmall onClick={() => {}}>
-												Undo
-											</z.button>
-										)
-									})
-								}}
-							>
-								Toast with Undo Action
-							</z.button>
-						</ExampleCard>
-					</div>
-				</section>
-
-				<Separator />
-
-				{/* Progress Section */}
-				<section className='space-y-6'>
-					<SectionHeader title='ZProgress' description='Progress indicators with different colors.' />
-
-					<div className='grid gap-6'>
-						<ExampleCard title='Progress Variants'>
-							<div className='space-y-6 w-full max-w-md'>
-								<div className='space-y-2'>
-									<div className='flex justify-between text-sm'>
-										<span className='text-muted-foreground'>Default</span>
-										<span className='text-muted-foreground'>75%</span>
-									</div>
-									<Progress value={75} />
-								</div>
-								<div className='space-y-2'>
-									<div className='flex justify-between text-sm'>
-										<span className='text-neon-green'>Green</span>
-										<span className='text-neon-green'>60%</span>
-									</div>
-									<Progress value={60} variant='green' />
-								</div>
-								<div className='space-y-2'>
-									<div className='flex justify-between text-sm'>
-										<span className='text-neon-purple'>Purple</span>
-										<span className='text-neon-purple'>45%</span>
-									</div>
-									<Progress value={45} variant='purple' />
-								</div>
-								<div className='space-y-2'>
-									<div className='flex justify-between text-sm'>
-										<span className='text-neon-pink'>Pink</span>
-										<span className='text-neon-pink'>90%</span>
-									</div>
-									<Progress value={90} variant='pink' />
-								</div>
-								<div className='space-y-2'>
-									<div className='flex justify-between text-sm'>
-										<span className='text-neon-orange'>Orange</span>
-										<span className='text-neon-orange'>30%</span>
-									</div>
-									<Progress value={30} variant='orange' />
-								</div>
+					<ExampleCard title='Input Types'>
+						<div className='grid gap-4 w-full max-w-md'>
+							<div className='space-y-2'>
+								<Label htmlFor='text'>Text</Label>
+								<Input id='text' type='text' placeholder='Enter text' />
 							</div>
-						</ExampleCard>
-					</div>
-				</section>
-
-				<Separator />
-
-				{/* Avatar Section */}
-				<section className='space-y-6'>
-					<SectionHeader title='ZAvatar' description='User profile images with fallback support.' />
-
-					<div className='grid gap-6'>
-						<ExampleCard title='Avatar Sizes'>
-							<Avatar className='h-8 w-8'>
-								<Avatar.Fallback>XS</Avatar.Fallback>
-							</Avatar>
-							<Avatar className='h-10 w-10'>
-								<Avatar.Fallback>SM</Avatar.Fallback>
-							</Avatar>
-							<Avatar className='h-12 w-12'>
-								<Avatar.Fallback>MD</Avatar.Fallback>
-							</Avatar>
-							<Avatar className='h-16 w-16'>
-								<Avatar.Fallback>LG</Avatar.Fallback>
-							</Avatar>
-							<Avatar className='h-20 w-20'>
-								<Avatar.Fallback>XL</Avatar.Fallback>
-							</Avatar>
-						</ExampleCard>
-
-						<ExampleCard title='Avatar with Fallbacks'>
-							<Avatar>
-								<Avatar.Image src='/placeholder-user.jpg' alt='User' />
-								<Avatar.Fallback>JD</Avatar.Fallback>
-							</Avatar>
-							<Avatar>
-								<Avatar.Fallback className='bg-neon-green text-primary-foreground'>AB</Avatar.Fallback>
-							</Avatar>
-							<Avatar>
-								<Avatar.Fallback className='bg-neon-purple text-primary-foreground'>CD</Avatar.Fallback>
-							</Avatar>
-							<Avatar>
-								<Avatar.Fallback className='bg-neon-pink text-primary-foreground'>EF</Avatar.Fallback>
-							</Avatar>
-							<Avatar>
-								<Avatar.Fallback className='bg-neon-orange text-primary-foreground'>GH</Avatar.Fallback>
-							</Avatar>
-						</ExampleCard>
-
-						<ExampleCard title='Avatar Group'>
-							<div className='flex -space-x-3'>
-								<Avatar className='border-2 border-background'>
-									<Avatar.Fallback className='bg-neon-green text-primary-foreground'>A</Avatar.Fallback>
-								</Avatar>
-								<Avatar className='border-2 border-background'>
-									<Avatar.Fallback className='bg-neon-purple text-primary-foreground'>B</Avatar.Fallback>
-								</Avatar>
-								<Avatar className='border-2 border-background'>
-									<Avatar.Fallback className='bg-neon-pink text-primary-foreground'>C</Avatar.Fallback>
-								</Avatar>
-								<Avatar className='border-2 border-background'>
-									<Avatar.Fallback className='bg-muted text-muted-foreground'>+5</Avatar.Fallback>
-								</Avatar>
+							<div className='space-y-2'>
+								<Label htmlFor='email'>Email</Label>
+								<Input id='email' type='email' placeholder='name@example.com' />
 							</div>
-						</ExampleCard>
+							<div className='space-y-2'>
+								<Label htmlFor='password'>Password</Label>
+								<Input id='password' type='password' placeholder='Enter password' />
+							</div>
+							<div className='space-y-2'>
+								<Label htmlFor='search'>Search</Label>
+								<Input id='search' type='search' placeholder='Search...' />
+							</div>
+							<div className='space-y-2'>
+								<Label htmlFor='disabled'>Disabled</Label>
+								<Input id='disabled' placeholder='Disabled input' disabled />
+							</div>
+						</div>
+					</ExampleCard>
+
+					<ExampleCard title='Input with Icons'>
+						<div className='grid gap-4 w-full max-w-md'>
+							<div className='relative'>
+								<Search className='absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground' />
+								<Input className='pl-9' placeholder='Search...' />
+							</div>
+							<div className='relative'>
+								<Mail className='absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground' />
+								<Input className='pl-9' type='email' placeholder='Email address' />
+							</div>
+						</div>
+					</ExampleCard>
+				</div>
+			</section>
+
+			<Separator />
+
+			{/* Checkbox & Switch Section */}
+			<section className='space-y-6'>
+				<SectionHeader title='ZCheckbox & ZSwitch' description='Toggle controls for boolean values.' />
+
+				<div className='grid gap-6 md:grid-cols-2'>
+					<ExampleCard title='Checkboxes'>
+						<div className='space-y-4 w-full'>
+							<div className='flex items-center space-x-2'>
+								<Checkbox
+									id='terms'
+									isChecked={checkboxStates.terms}
+									onCheckedChange={(checked) => setCheckboxStates((prev) => ({ ...prev, terms: checked as boolean }))}
+								/>
+								<Label htmlFor='terms'>Accept terms and conditions</Label>
+							</div>
+							<div className='flex items-center space-x-2'>
+								<Checkbox
+									id='newsletter'
+									isChecked={checkboxStates.newsletter}
+									onCheckedChange={(checked) => setCheckboxStates((prev) => ({ ...prev, newsletter: checked as boolean }))}
+								/>
+								<Label htmlFor='newsletter'>Subscribe to newsletter</Label>
+							</div>
+							<div className='flex items-center space-x-2'>
+								<Checkbox id='disabled' isDisabled />
+								<Label htmlFor='disabled' className='text-muted-foreground'>
+									Disabled checkbox
+								</Label>
+							</div>
+							<div className='flex items-center space-x-2'>
+								<Checkbox id='checked-disabled' isChecked isDisabled />
+								<Label htmlFor='checked-disabled' className='text-muted-foreground'>
+									Checked disabled
+								</Label>
+							</div>
+						</div>
+					</ExampleCard>
+
+					<ExampleCard title='Switches'>
+						<div className='space-y-4 w-full'>
+							<div className='flex items-center justify-between'>
+								<Label htmlFor='airplane'>Airplane Mode</Label>
+								<Switch
+									id='airplane'
+									checked={switchStates.airplane}
+									onCheckedChange={(checked) => setSwitchStates((prev) => ({ ...prev, airplane: checked }))}
+								/>
+							</div>
+							<div className='flex items-center justify-between'>
+								<Label htmlFor='notifications'>Notifications</Label>
+								<Switch
+									id='notifications'
+									checked={switchStates.notifications}
+									onCheckedChange={(checked) => setSwitchStates((prev) => ({ ...prev, notifications: checked }))}
+								/>
+							</div>
+							<div className='flex items-center justify-between'>
+								<Label htmlFor='dark-mode'>Dark Mode</Label>
+								<Switch
+									id='dark-mode'
+									checked={switchStates.darkMode}
+									onCheckedChange={(checked) => setSwitchStates((prev) => ({ ...prev, darkMode: checked }))}
+								/>
+							</div>
+							<div className='flex items-center justify-between'>
+								<Label htmlFor='disabled-switch' className='text-muted-foreground'>
+									Disabled
+								</Label>
+								<Switch id='disabled-switch' disabled />
+							</div>
+						</div>
+					</ExampleCard>
+				</div>
+			</section>
+
+			<Separator />
+
+			{/* Select Section */}
+			<section className='space-y-6'>
+				<SectionHeader title='ZSelect' description='Dropdown selection controls.' />
+
+				<div className='grid gap-6 md:grid-cols-2'>
+					<ExampleCard title='Basic Select'>
+						<div className='space-y-2 w-full max-w-xs'>
+							<Label>Choose a theme</Label>
+							<z.select>
+								<z.select.trigger>
+									<z.select.value placeholder='Select theme' />
+								</z.select.trigger>
+								<z.select.content>
+									<z.select.item value='light'>Light</z.select.item>
+									<z.select.item value='dark'>Dark</z.select.item>
+									<z.select.item value='system'>System</z.select.item>
+								</z.select.content>
+							</z.select>
+						</div>
+					</ExampleCard>
+
+					<ExampleCard title='Select with Groups'>
+						<div className='space-y-2 w-full max-w-xs'>
+							<Label>Select a fruit</Label>
+							<z.select>
+								<z.select.trigger>
+									<z.select.value placeholder='Pick a fruit' />
+								</z.select.trigger>
+								<z.select.content>
+									<z.select.item value='apple'>Apple</z.select.item>
+									<z.select.item value='banana'>Banana</z.select.item>
+									<z.select.item value='pink'>Pink</z.select.item>
+									<z.select.item value='grape'>Grape</z.select.item>
+									<z.select.item value='mango'>Mango</z.select.item>
+								</z.select.content>
+							</z.select>
+						</div>
+					</ExampleCard>
+				</div>
+			</section>
+
+			<Separator />
+
+			{/* Alert Section */}
+			<section className='space-y-6'>
+				<SectionHeader title='ZAlert' description='Contextual feedback messages.' />
+
+				<div className='grid gap-4'>
+					<Alert>
+						<Terminal className='h-4 w-4' />
+						<Alert.title>Default Alert</Alert.title>
+						<Alert.description>This is a default alert with neutral styling.</Alert.description>
+					</Alert>
+
+					<Alert isPurple>
+						<CheckCircle className='h-4 w-4' />
+						<Alert.title>Success</Alert.title>
+						<Alert.description>Your changes have been saved successfully.</Alert.description>
+					</Alert>
+
+					<Alert isPink>
+						<AlertTriangle className='h-4 w-4' />
+						<Alert.title>Warning</Alert.title>
+						<Alert.description>Please review your information before proceeding.</Alert.description>
+					</Alert>
+
+					<Alert isRed>
+						<AlertCircle className='h-4 w-4' />
+						<Alert.title>Error</Alert.title>
+						<Alert.description>There was an error processing your request.</Alert.description>
+					</Alert>
+
+					<Alert isPurple>
+						<Info className='h-4 w-4' />
+						<Alert.title>Information</Alert.title>
+						<Alert.description>Here is some helpful information for you.</Alert.description>
+					</Alert>
+
+					<Alert isPink>
+						<Bell className='h-4 w-4' />
+						<Alert.title>Featured</Alert.title>
+						<Alert.description>Check out our latest feature update!</Alert.description>
+					</Alert>
+				</div>
+			</section>
+
+			<Separator />
+
+			{/* Toast Section */}
+			<section className='space-y-6'>
+				<SectionHeader title='ZToast' description='Temporary notifications that appear and auto-dismiss.' />
+
+				{/* Alert vs Toast comparison */}
+				<div className='rounded-lg border border-border bg-card p-6 space-y-4'>
+					<h3 className='text-lg font-semibold text-foreground'>Alert vs Toast: When to Use Each</h3>
+					<div className='grid gap-4 md:grid-cols-2'>
+						<div className='space-y-2'>
+							<h4 className='text-sm font-medium text-neon-purple'>Alerts (Static)</h4>
+							<ul className='text-sm text-muted-foreground space-y-1 list-disc list-inside'>
+								<li>Persistent, inline content within the page</li>
+								<li>Important information that needs to remain visible</li>
+								<li>Form validation errors or warnings</li>
+								<li>System status or maintenance notices</li>
+								<li>User must acknowledge or dismiss manually</li>
+							</ul>
+						</div>
+						<div className='space-y-2'>
+							<h4 className='text-sm font-medium text-neon-purple'>Toasts (Ephemeral)</h4>
+							<ul className='text-sm text-muted-foreground space-y-1 list-disc list-inside'>
+								<li>Temporary, floating notifications</li>
+								<li>Feedback for completed actions</li>
+								<li>Non-critical success or info messages</li>
+								<li>Auto-dismiss after a few seconds</li>
+								<li>Does not block user workflow</li>
+							</ul>
+						</div>
 					</div>
-				</section>
+				</div>
 
-				<Separator />
+				<div className='grid gap-6'>
+					<ExampleCard title='Toast Triggers'>
+						<z.button
+							isNeutral
+							onClick={() => {
+								toast({
+									title: 'Default Toast',
+									description: 'This is a basic toast notification.'
+								})
+							}}
+						>
+							Show Default Toast
+						</z.button>
 
-				{/* Skeleton Section */}
-				<section className='space-y-6'>
-					<SectionHeader title='ZSkeleton' description='Loading placeholders for content.' />
+						<z.button
+							isPurple
+							onClick={() => {
+								toast({
+									title: 'Success!',
+									description: 'Your changes have been saved successfully.'
+								})
+							}}
+						>
+							Show Success Toast
+						</z.button>
 
-					<div className='grid gap-6'>
-						<ExampleCard title='Basic Skeletons'>
-							<div className='space-y-4 w-full max-w-md'>
+						<z.button
+							isPink
+							onClick={() => {
+								toast({
+									variant: 'destructive',
+									title: 'Error',
+									description: 'Something went wrong. Please try again.'
+								})
+							}}
+						>
+							Show Error Toast
+						</z.button>
+
+						<z.button
+							isPurple
+							onClick={() => {
+								toast({
+									title: 'Scheduled',
+									description: 'Your meeting has been scheduled for tomorrow at 3pm.'
+								})
+							}}
+						>
+							Show Info Toast
+						</z.button>
+					</ExampleCard>
+
+					<ExampleCard title='Toast with Action'>
+						<z.button
+							isNeutral
+							onClick={() => {
+								toast({
+									title: 'Item Deleted',
+									description: 'The item has been moved to trash.',
+									action: (
+										<z.button isNeutral isSmall onClick={() => {}}>
+											Undo
+										</z.button>
+									)
+								})
+							}}
+						>
+							Toast with Undo Action
+						</z.button>
+					</ExampleCard>
+				</div>
+			</section>
+
+			<Separator />
+
+			{/* Progress Section */}
+			<section className='space-y-6'>
+				<SectionHeader title='ZProgress' description='Progress indicators with different colors.' />
+
+				<div className='grid gap-6'>
+					<ExampleCard title='Progress Variants'>
+						<div className='space-y-6 w-full max-w-md'>
+							<div className='space-y-2'>
+								<div className='flex justify-between text-sm'>
+									<span className='text-muted-foreground'>Default</span>
+									<span className='text-muted-foreground'>75%</span>
+								</div>
+								<Progress value={75} />
+							</div>
+							<div className='space-y-2'>
+								<div className='flex justify-between text-sm'>
+									<span className='text-neon-purple'>Purple</span>
+									<span className='text-neon-purple'>60%</span>
+								</div>
+								<Progress value={60} variant='purple' />
+							</div>
+							<div className='space-y-2'>
+								<div className='flex justify-between text-sm'>
+									<span className='text-neon-purple'>Purple</span>
+									<span className='text-neon-purple'>45%</span>
+								</div>
+								<Progress value={45} variant='purple' />
+							</div>
+							<div className='space-y-2'>
+								<div className='flex justify-between text-sm'>
+									<span className='text-neon-pink'>Pink</span>
+									<span className='text-neon-pink'>90%</span>
+								</div>
+								<Progress value={90} variant='pink' />
+							</div>
+							<div className='space-y-2'>
+								<div className='flex justify-between text-sm'>
+									<span className='text-neon-pink'>Pink</span>
+									<span className='text-neon-pink'>30%</span>
+								</div>
+								<Progress value={30} variant='pink' />
+							</div>
+						</div>
+					</ExampleCard>
+				</div>
+			</section>
+
+			<Separator />
+
+			{/* Avatar Section */}
+			<section className='space-y-6'>
+				<SectionHeader title='ZAvatar' description='User profile images with fallback support.' />
+
+				<div className='grid gap-6'>
+					<ExampleCard title='Avatar Sizes'>
+						<Avatar className='h-8 w-8'>
+							<Avatar.Fallback>XS</Avatar.Fallback>
+						</Avatar>
+						<Avatar className='h-10 w-10'>
+							<Avatar.Fallback>SM</Avatar.Fallback>
+						</Avatar>
+						<Avatar className='h-12 w-12'>
+							<Avatar.Fallback>MD</Avatar.Fallback>
+						</Avatar>
+						<Avatar className='h-16 w-16'>
+							<Avatar.Fallback>LG</Avatar.Fallback>
+						</Avatar>
+						<Avatar className='h-20 w-20'>
+							<Avatar.Fallback>XL</Avatar.Fallback>
+						</Avatar>
+					</ExampleCard>
+
+					<ExampleCard title='Avatar with Fallbacks'>
+						<Avatar>
+							<Avatar.Image src='/placeholder-user.jpg' alt='User' />
+							<Avatar.Fallback>JD</Avatar.Fallback>
+						</Avatar>
+						<Avatar>
+							<Avatar.Fallback className='bg-neon-purple text-primary-foreground'>AB</Avatar.Fallback>
+						</Avatar>
+						<Avatar>
+							<Avatar.Fallback className='bg-neon-purple text-primary-foreground'>CD</Avatar.Fallback>
+						</Avatar>
+						<Avatar>
+							<Avatar.Fallback className='bg-neon-pink text-primary-foreground'>EF</Avatar.Fallback>
+						</Avatar>
+						<Avatar>
+							<Avatar.Fallback className='bg-neon-pink text-primary-foreground'>GH</Avatar.Fallback>
+						</Avatar>
+					</ExampleCard>
+
+					<ExampleCard title='Avatar Group'>
+						<div className='flex -space-x-3'>
+							<Avatar className='border-2 border-background'>
+								<Avatar.Fallback className='bg-neon-purple text-primary-foreground'>A</Avatar.Fallback>
+							</Avatar>
+							<Avatar className='border-2 border-background'>
+								<Avatar.Fallback className='bg-neon-purple text-primary-foreground'>B</Avatar.Fallback>
+							</Avatar>
+							<Avatar className='border-2 border-background'>
+								<Avatar.Fallback className='bg-neon-pink text-primary-foreground'>C</Avatar.Fallback>
+							</Avatar>
+							<Avatar className='border-2 border-background'>
+								<Avatar.Fallback className='bg-muted text-muted-foreground'>+5</Avatar.Fallback>
+							</Avatar>
+						</div>
+					</ExampleCard>
+				</div>
+			</section>
+
+			<Separator />
+
+			{/* Skeleton Section */}
+			<section className='space-y-6'>
+				<SectionHeader title='ZSkeleton' description='Loading placeholders for content.' />
+
+				<div className='grid gap-6'>
+					<ExampleCard title='Basic Skeletons'>
+						<div className='space-y-4 w-full max-w-md'>
+							<Skeleton className='h-4 w-full' />
+							<Skeleton className='h-4 w-3/4' />
+							<Skeleton className='h-4 w-1/2' />
+						</div>
+					</ExampleCard>
+
+					<ExampleCard title='Card Skeleton'>
+						<div className='flex items-center space-x-4 w-full max-w-sm'>
+							<Skeleton className='h-12 w-12 rounded-full' />
+							<div className='space-y-2 flex-1'>
 								<Skeleton className='h-4 w-full' />
 								<Skeleton className='h-4 w-3/4' />
-								<Skeleton className='h-4 w-1/2' />
 							</div>
-						</ExampleCard>
+						</div>
+					</ExampleCard>
 
-						<ExampleCard title='Card Skeleton'>
-							<div className='flex items-center space-x-4 w-full max-w-sm'>
-								<Skeleton className='h-12 w-12 rounded-full' />
-								<div className='space-y-2 flex-1'>
-									<Skeleton className='h-4 w-full' />
-									<Skeleton className='h-4 w-3/4' />
-								</div>
+					<ExampleCard title='Content Skeleton'>
+						<div className='space-y-4 w-full max-w-lg'>
+							<Skeleton className='h-8 w-1/3' />
+							<Skeleton className='h-4 w-full' />
+							<Skeleton className='h-4 w-full' />
+							<Skeleton className='h-4 w-2/3' />
+							<div className='flex gap-2 pt-2'>
+								<Skeleton className='h-10 w-24' />
+								<Skeleton className='h-10 w-24' />
 							</div>
-						</ExampleCard>
+						</div>
+					</ExampleCard>
+				</div>
+			</section>
 
-						<ExampleCard title='Content Skeleton'>
-							<div className='space-y-4 w-full max-w-lg'>
-								<Skeleton className='h-8 w-1/3' />
-								<Skeleton className='h-4 w-full' />
-								<Skeleton className='h-4 w-full' />
-								<Skeleton className='h-4 w-2/3' />
-								<div className='flex gap-2 pt-2'>
-									<Skeleton className='h-10 w-24' />
-									<Skeleton className='h-10 w-24' />
-								</div>
+			<Separator />
+
+			{/* Card Section */}
+			<section className='space-y-6'>
+				<SectionHeader title='ZCard' description='Flexible container components.' />
+
+				<div className='grid gap-6 md:grid-cols-2 lg:grid-cols-3'>
+					<Card>
+						<Card.Header>
+							<Card.Title>Basic Card</Card.Title>
+							<Card.Description>A simple card with header and content.</Card.Description>
+						</Card.Header>
+						<Card.Content>
+							<p className='text-sm text-muted-foreground'>This is the card content area where you can place any content.</p>
+						</Card.Content>
+					</Card>
+
+					<Card>
+						<Card.Header>
+							<Card.Title>Card with Footer</Card.Title>
+							<Card.Description>Includes action buttons in footer.</Card.Description>
+						</Card.Header>
+						<Card.Content>
+							<p className='text-sm text-muted-foreground'>Cards can have footers for actions.</p>
+						</Card.Content>
+						<Card.Footer className='gap-2'>
+							<z.button isNeutral isSmall>
+								Cancel
+							</z.button>
+							<z.button isPurple isSmall>
+								Save
+							</z.button>
+						</Card.Footer>
+					</Card>
+
+					<Card>
+						<Card.Header>
+							<Card.Title>Interactive Card</Card.Title>
+							<Card.Description>With form elements inside.</Card.Description>
+						</Card.Header>
+						<Card.Content className='space-y-4'>
+							<div className='space-y-2'>
+								<Label htmlFor='card-input'>Email</Label>
+								<Input id='card-input' placeholder='name@example.com' />
 							</div>
-						</ExampleCard>
-					</div>
-				</section>
+							<div className='flex items-center space-x-2'>
+								<Checkbox id='card-checkbox' />
+								<Label htmlFor='card-checkbox'>Remember me</Label>
+							</div>
+						</Card.Content>
+						<Card.Footer>
+							<z.button isPurple isSmall className='w-full'>
+								Submit
+							</z.button>
+						</Card.Footer>
+					</Card>
+				</div>
+			</section>
 
-				<Separator />
+			<Separator />
 
-				{/* Card Section */}
-				<section className='space-y-6'>
-					<SectionHeader title='ZCard' description='Flexible container components.' />
+			{/* Tabs Section */}
+			<section className='space-y-6'>
+				<SectionHeader title='ZTabs' description='Tabbed content navigation.' />
 
-					<div className='grid gap-6 md:grid-cols-2 lg:grid-cols-3'>
-						<Card>
-							<Card.Header>
-								<Card.Title>Basic Card</Card.Title>
-								<Card.Description>A simple card with header and content.</Card.Description>
-							</Card.Header>
-							<Card.Content>
-								<p className='text-sm text-muted-foreground'>This is the card content area where you can place any content.</p>
-							</Card.Content>
-						</Card>
-
-						<Card>
-							<Card.Header>
-								<Card.Title>Card with Footer</Card.Title>
-								<Card.Description>Includes action buttons in footer.</Card.Description>
-							</Card.Header>
-							<Card.Content>
-								<p className='text-sm text-muted-foreground'>Cards can have footers for actions.</p>
-							</Card.Content>
-							<Card.Footer className='gap-2'>
-								<z.button isWhite isSmall>
-									Cancel
-								</z.button>
-								<z.button isGreen isSmall>
-									Save
-								</z.button>
-							</Card.Footer>
-						</Card>
-
-						<Card>
-							<Card.Header>
-								<Card.Title>Interactive Card</Card.Title>
-								<Card.Description>With form elements inside.</Card.Description>
-							</Card.Header>
-							<Card.Content className='space-y-4'>
-								<div className='space-y-2'>
-									<Label htmlFor='card-input'>Email</Label>
-									<Input id='card-input' placeholder='name@example.com' />
-								</div>
-								<div className='flex items-center space-x-2'>
-									<Checkbox id='card-checkbox' />
-									<Label htmlFor='card-checkbox'>Remember me</Label>
-								</div>
-							</Card.Content>
-							<Card.Footer>
-								<z.button isPurple isSmall className='w-full'>
-									Submit
-								</z.button>
-							</Card.Footer>
-						</Card>
-					</div>
-				</section>
-
-				<Separator />
-
-				{/* Tabs Section */}
-				<section className='space-y-6'>
-					<SectionHeader title='ZTabs' description='Tabbed content navigation.' />
-
-					<div className='grid gap-6'>
-						<ExampleCard title='Default Tabs'>
-							<Tabs defaultValue='account' className='w-full max-w-lg'>
-								<Tabs.List>
-									<Tabs.Trigger value='account'>Account</Tabs.Trigger>
-									<Tabs.Trigger value='password'>Password</Tabs.Trigger>
-									<Tabs.Trigger value='settings'>Settings</Tabs.Trigger>
-								</Tabs.List>
-								<Tabs.Content value='account' className='mt-4'>
-									<Card>
-										<Card.Header>
-											<Card.Title>Account</Card.Title>
-											<Card.Description>Manage your account settings.</Card.Description>
-										</Card.Header>
-										<Card.Content className='space-y-4'>
-											<div className='space-y-2'>
-												<Label htmlFor='name'>Name</Label>
-												<Input id='name' defaultValue='John Doe' />
-											</div>
-											<div className='space-y-2'>
-												<Label htmlFor='username'>Username</Label>
-												<Input id='username' defaultValue='@johndoe' />
-											</div>
-										</Card.Content>
-									</Card>
-								</Tabs.Content>
-								<Tabs.Content value='password' className='mt-4'>
-									<Card>
-										<Card.Header>
-											<Card.Title>Password</Card.Title>
-											<Card.Description>Change your password here.</Card.Description>
-										</Card.Header>
-										<Card.Content className='space-y-4'>
-											<div className='space-y-2'>
-												<Label htmlFor='current'>Current Password</Label>
-												<Input id='current' type='password' />
-											</div>
-											<div className='space-y-2'>
-												<Label htmlFor='new'>New Password</Label>
-												<Input id='new' type='password' />
-											</div>
-										</Card.Content>
-									</Card>
-								</Tabs.Content>
-								<Tabs.Content value='settings' className='mt-4'>
-									<Card>
-										<Card.Header>
-											<Card.Title>Settings</Card.Title>
-											<Card.Description>Configure your preferences.</Card.Description>
-										</Card.Header>
-										<Card.Content className='space-y-4'>
-											<div className='flex items-center justify-between'>
-												<Label htmlFor='tab-notifications'>Email Notifications</Label>
-												<Switch id='tab-notifications' />
-											</div>
-											<div className='flex items-center justify-between'>
-												<Label htmlFor='tab-marketing'>Marketing Emails</Label>
-												<Switch id='tab-marketing' />
-											</div>
-										</Card.Content>
-									</Card>
-								</Tabs.Content>
-							</Tabs>
-						</ExampleCard>
-					</div>
-				</section>
-
-				<Separator />
-
-				{/* Accordion Section */}
-				<section className='space-y-6'>
-					<SectionHeader title='ZAccordion' description='Collapsible content panels.' />
-
-					<div className='grid gap-6'>
-						<ExampleCard title='Default Accordion'>
-							<Accordion type='single' collapsible className='w-full max-w-lg'>
-								<Accordion.Item value='item-1'>
-									<Accordion.Trigger>Is it accessible?</Accordion.Trigger>
-									<Accordion.Content>Yes. It adheres to the WAI-ARIA design pattern for accordions.</Accordion.Content>
-								</Accordion.Item>
-								<Accordion.Item value='item-2'>
-									<Accordion.Trigger>Is it styled?</Accordion.Trigger>
-									<Accordion.Content>
-										Yes. It comes with default styles that match your design system, following the Zest design language with proper
-										spacing and colors.
-									</Accordion.Content>
-								</Accordion.Item>
-								<Accordion.Item value='item-3'>
-									<Accordion.Trigger>Is it animated?</Accordion.Trigger>
-									<Accordion.Content>
-										Yes. It&apos;s animated by default with smooth open/close transitions, but you can disable animations if needed.
-									</Accordion.Content>
-								</Accordion.Item>
-							</Accordion>
-						</ExampleCard>
-					</div>
-				</section>
-
-				<Separator />
-
-				{/* Dialog Section */}
-				<section className='space-y-6'>
-					<SectionHeader title='ZDialog' description='Modal dialogs for focused interactions.' />
-
-					<div className='grid gap-6'>
-						<ExampleCard title='Dialog Examples'>
-							<Dialog>
-								<Dialog.Trigger asChild>
-									<z.button isWhite>Open Dialog</z.button>
-								</Dialog.Trigger>
-								<Dialog.Content>
-									<Dialog.Header>
-										<Dialog.Title>Edit Profile</Dialog.Title>
-										<Dialog.Description>Make changes to your profile here. Click save when you&apos;re done.</Dialog.Description>
-									</Dialog.Header>
-									<div className='space-y-4 py-4'>
+				<div className='grid gap-6'>
+					<ExampleCard title='Default Tabs'>
+						<Tabs defaultValue='account' className='w-full max-w-lg'>
+							<Tabs.List>
+								<Tabs.Trigger value='account'>Account</Tabs.Trigger>
+								<Tabs.Trigger value='password'>Password</Tabs.Trigger>
+								<Tabs.Trigger value='settings'>Settings</Tabs.Trigger>
+							</Tabs.List>
+							<Tabs.Content value='account' className='mt-4'>
+								<Card>
+									<Card.Header>
+										<Card.Title>Account</Card.Title>
+										<Card.Description>Manage your account settings.</Card.Description>
+									</Card.Header>
+									<Card.Content className='space-y-4'>
 										<div className='space-y-2'>
-											<Label htmlFor='dialog-name'>Name</Label>
-											<Input id='dialog-name' defaultValue='John Doe' />
+											<Label htmlFor='name'>Name</Label>
+											<Input id='name' defaultValue='John Doe' />
 										</div>
 										<div className='space-y-2'>
-											<Label htmlFor='dialog-email'>Email</Label>
-											<Input id='dialog-email' defaultValue='john@example.com' />
+											<Label htmlFor='username'>Username</Label>
+											<Input id='username' defaultValue='@johndoe' />
 										</div>
+									</Card.Content>
+								</Card>
+							</Tabs.Content>
+							<Tabs.Content value='password' className='mt-4'>
+								<Card>
+									<Card.Header>
+										<Card.Title>Password</Card.Title>
+										<Card.Description>Change your password here.</Card.Description>
+									</Card.Header>
+									<Card.Content className='space-y-4'>
+										<div className='space-y-2'>
+											<Label htmlFor='current'>Current Password</Label>
+											<Input id='current' type='password' />
+										</div>
+										<div className='space-y-2'>
+											<Label htmlFor='new'>New Password</Label>
+											<Input id='new' type='password' />
+										</div>
+									</Card.Content>
+								</Card>
+							</Tabs.Content>
+							<Tabs.Content value='settings' className='mt-4'>
+								<Card>
+									<Card.Header>
+										<Card.Title>Settings</Card.Title>
+										<Card.Description>Configure your preferences.</Card.Description>
+									</Card.Header>
+									<Card.Content className='space-y-4'>
+										<div className='flex items-center justify-between'>
+											<Label htmlFor='tab-notifications'>Email Notifications</Label>
+											<Switch id='tab-notifications' />
+										</div>
+										<div className='flex items-center justify-between'>
+											<Label htmlFor='tab-marketing'>Marketing Emails</Label>
+											<Switch id='tab-marketing' />
+										</div>
+									</Card.Content>
+								</Card>
+							</Tabs.Content>
+						</Tabs>
+					</ExampleCard>
+				</div>
+			</section>
+
+			<Separator />
+
+			{/* Accordion Section */}
+			<section className='space-y-6'>
+				<SectionHeader title='ZAccordion' description='Collapsible content panels.' />
+
+				<div className='grid gap-6'>
+					<ExampleCard title='Default Accordion'>
+						<Accordion type='single' collapsible className='w-full max-w-lg'>
+							<Accordion.Item value='item-1'>
+								<Accordion.Trigger>Is it accessible?</Accordion.Trigger>
+								<Accordion.Content>Yes. It adheres to the WAI-ARIA design pattern for accordions.</Accordion.Content>
+							</Accordion.Item>
+							<Accordion.Item value='item-2'>
+								<Accordion.Trigger>Is it styled?</Accordion.Trigger>
+								<Accordion.Content>
+									Yes. It comes with default styles that match your design system, following the Zest design language with proper
+									spacing and colors.
+								</Accordion.Content>
+							</Accordion.Item>
+							<Accordion.Item value='item-3'>
+								<Accordion.Trigger>Is it animated?</Accordion.Trigger>
+								<Accordion.Content>
+									Yes. It&apos;s animated by default with smooth open/close transitions, but you can disable animations if needed.
+								</Accordion.Content>
+							</Accordion.Item>
+						</Accordion>
+					</ExampleCard>
+				</div>
+			</section>
+
+			<Separator />
+
+			{/* Dialog Section */}
+			<section className='space-y-6'>
+				<SectionHeader title='ZDialog' description='Modal dialogs for focused interactions.' />
+
+				<div className='grid gap-6'>
+					<ExampleCard title='Dialog Examples'>
+						<Dialog>
+							<Dialog.Trigger asChild>
+								<z.button isNeutral>Open Dialog</z.button>
+							</Dialog.Trigger>
+							<Dialog.Content>
+								<Dialog.Header>
+									<Dialog.Title>Edit Profile</Dialog.Title>
+									<Dialog.Description>Make changes to your profile here. Click save when you&apos;re done.</Dialog.Description>
+								</Dialog.Header>
+								<div className='space-y-4 py-4'>
+									<div className='space-y-2'>
+										<Label htmlFor='dialog-name'>Name</Label>
+										<Input id='dialog-name' defaultValue='John Doe' />
 									</div>
-									<Dialog.Footer>
-										<z.button isWhite>Cancel</z.button>
-										<z.button isGreen>Save Changes</z.button>
-									</Dialog.Footer>
-								</Dialog.Content>
-							</Dialog>
-
-							<Dialog>
-								<Dialog.Trigger asChild>
-									<z.button isPink>Confirm Action</z.button>
-								</Dialog.Trigger>
-								<Dialog.Content>
-									<Dialog.Header>
-										<Dialog.Title>Are you sure?</Dialog.Title>
-										<Dialog.Description>This action cannot be undone. This will permanently delete your data.</Dialog.Description>
-									</Dialog.Header>
-									<Dialog.Footer>
-										<z.button isWhite>Cancel</z.button>
-										<z.button isPink>Delete</z.button>
-									</Dialog.Footer>
-								</Dialog.Content>
-							</Dialog>
-						</ExampleCard>
-					</div>
-				</section>
-
-				<Separator />
-
-				{/* Dropdown Menu Section */}
-				<section className='space-y-6'>
-					<SectionHeader title='ZDropdownMenu' description='Contextual menus with actions.' />
-
-					<div className='grid gap-6'>
-						<ExampleCard title='Dropdown Examples'>
-							<DropdownMenu>
-								<DropdownMenu.Trigger asChild>
-									<z.button isWhite>
-										Open Menu
-										<ChevronDown className='h-4 w-4' />
-									</z.button>
-								</DropdownMenu.Trigger>
-								<DropdownMenu.Content className='w-56'>
-									<DropdownMenu.Label>My Account</DropdownMenu.Label>
-									<DropdownMenu.Separator />
-									<DropdownMenu.Item>
-										<User className='mr-2 h-4 w-4' />
-										Profile
-									</DropdownMenu.Item>
-									<DropdownMenu.Item>
-										<CreditCard className='mr-2 h-4 w-4' />
-										Billing
-									</DropdownMenu.Item>
-									<DropdownMenu.Item>
-										<Settings className='mr-2 h-4 w-4' />
-										Settings
-									</DropdownMenu.Item>
-									<DropdownMenu.Separator />
-									<DropdownMenu.Item className='text-destructive'>
-										<LogOut className='mr-2 h-4 w-4' />
-										Log out
-									</DropdownMenu.Item>
-								</DropdownMenu.Content>
-							</DropdownMenu>
-
-							<DropdownMenu>
-								<DropdownMenu.Trigger asChild>
-									<z.button isPurple>
-										<Plus className='h-4 w-4' />
-										Create New
-									</z.button>
-								</DropdownMenu.Trigger>
-								<DropdownMenu.Content>
-									<DropdownMenu.Item>New Project</DropdownMenu.Item>
-									<DropdownMenu.Item>New Team</DropdownMenu.Item>
-									<DropdownMenu.Item>New Document</DropdownMenu.Item>
-									<DropdownMenu.Separator />
-									<DropdownMenu.Item>Import</DropdownMenu.Item>
-								</DropdownMenu.Content>
-							</DropdownMenu>
-						</ExampleCard>
-					</div>
-				</section>
-
-				<Separator />
-
-				{/* Tooltip Section */}
-				<section className='space-y-6'>
-					<SectionHeader title='z.tooltip' description='Contextual information on hover.' />
-
-					<div className='grid gap-6'>
-						<ExampleCard title='Tooltip Positions'>
-							<z.tooltip tip='Tooltip on top' side='top'>
-								<z.button isWhite>Hover me (Top)</z.button>
-							</z.tooltip>
-
-							<z.tooltip tip='Tooltip on right' side='right'>
-								<z.button isGreen>Hover me (Right)</z.button>
-							</z.tooltip>
-
-							<z.tooltip tip='Tooltip on bottom' side='bottom'>
-								<z.button isPurple>Hover me (Bottom)</z.button>
-							</z.tooltip>
-
-							<z.tooltip tip='Tooltip on left' side='left'>
-								<z.button isPink>Hover me (Left)</z.button>
-							</z.tooltip>
-						</ExampleCard>
-					</div>
-				</section>
-
-				<Separator />
-
-				{/* Table Section */}
-				<section className='space-y-6'>
-					<SectionHeader title='ZTable' description='Data tables with proper styling.' />
-
-					<div className='rounded-lg border border-border overflow-hidden'>
-						<Table>
-							<Table.Header>
-								<Table.Row>
-									<Table.Head className='w-25'>Invoice</Table.Head>
-									<Table.Head>Status</Table.Head>
-									<Table.Head>Method</Table.Head>
-									<Table.Head className='text-right'>Amount</Table.Head>
-								</Table.Row>
-							</Table.Header>
-							<Table.Body>
-								<Table.Row>
-									<Table.Cell className='font-medium'>INV001</Table.Cell>
-									<Table.Cell>
-										<z.badge isSolid isGreen>
-											Paid
-										</z.badge>
-									</Table.Cell>
-									<Table.Cell>Credit Card</Table.Cell>
-									<Table.Cell className='text-right'>$250.00</Table.Cell>
-								</Table.Row>
-								<Table.Row>
-									<Table.Cell className='font-medium'>INV002</Table.Cell>
-									<Table.Cell>
-										<z.badge isSolid isOrange>
-											Pending
-										</z.badge>
-									</Table.Cell>
-									<Table.Cell>PayPal</Table.Cell>
-									<Table.Cell className='text-right'>$150.00</Table.Cell>
-								</Table.Row>
-								<Table.Row>
-									<Table.Cell className='font-medium'>INV003</Table.Cell>
-									<Table.Cell>
-										<z.badge isSolid isPink>
-											Overdue
-										</z.badge>
-									</Table.Cell>
-									<Table.Cell>Bank Transfer</Table.Cell>
-									<Table.Cell className='text-right'>$350.00</Table.Cell>
-								</Table.Row>
-								<Table.Row>
-									<Table.Cell className='font-medium'>INV004</Table.Cell>
-									<Table.Cell>
-										<z.badge isSolid isGreen>
-											Paid
-										</z.badge>
-									</Table.Cell>
-									<Table.Cell>Credit Card</Table.Cell>
-									<Table.Cell className='text-right'>$450.00</Table.Cell>
-								</Table.Row>
-								<Table.Row>
-									<Table.Cell className='font-medium'>INV005</Table.Cell>
-									<Table.Cell>
-										<z.badge isOutline isPurple>
-											Processing
-										</z.badge>
-									</Table.Cell>
-									<Table.Cell>PayPal</Table.Cell>
-									<Table.Cell className='text-right'>$550.00</Table.Cell>
-								</Table.Row>
-							</Table.Body>
-						</Table>
-					</div>
-				</section>
-
-				<Separator />
-
-				{/* Line Section */}
-				<section className='space-y-6'>
-					<SectionHeader title='Line' description='Visual dividers between content.' />
-
-					<div className='grid gap-6'>
-						<ExampleCard title='Horizontal Line'>
-							<div className='w-full max-w-md space-y-4'>
-								<div>
-									<h4 className='text-sm font-medium'>Section One</h4>
-									<p className='text-sm text-muted-foreground'>Content for the first section.</p>
+									<div className='space-y-2'>
+										<Label htmlFor='dialog-email'>Email</Label>
+										<Input id='dialog-email' defaultValue='john@example.com' />
+									</div>
 								</div>
-								<Line />
-								<div>
-									<h4 className='text-sm font-medium'>Section Two</h4>
-									<p className='text-sm text-muted-foreground'>Content for the second section.</p>
-								</div>
-							</div>
-						</ExampleCard>
+								<Dialog.Footer>
+									<z.button isNeutral>Cancel</z.button>
+									<z.button isPurple>Save Changes</z.button>
+								</Dialog.Footer>
+							</Dialog.Content>
+						</Dialog>
 
-						<ExampleCard title='Vertical Line'>
-							<div className='flex h-8 items-center space-x-4 text-sm'>
-								<div>Blog</div>
-								<Line isVertical />
-								<div>Docs</div>
-								<Line isVertical />
-								<div>Source</div>
-								<Line isVertical />
-								<div>Support</div>
+						<Dialog>
+							<Dialog.Trigger asChild>
+								<z.button isPink>Confirm Action</z.button>
+							</Dialog.Trigger>
+							<Dialog.Content>
+								<Dialog.Header>
+									<Dialog.Title>Are you sure?</Dialog.Title>
+									<Dialog.Description>This action cannot be undone. This will permanently delete your data.</Dialog.Description>
+								</Dialog.Header>
+								<Dialog.Footer>
+									<z.button isNeutral>Cancel</z.button>
+									<z.button isPink>Delete</z.button>
+								</Dialog.Footer>
+							</Dialog.Content>
+						</Dialog>
+					</ExampleCard>
+				</div>
+			</section>
+
+			<Separator />
+
+			{/* Dropdown Menu Section */}
+			<section className='space-y-6'>
+				<SectionHeader title='ZDropdownMenu' description='Contextual menus with actions.' />
+
+				<div className='grid gap-6'>
+					<ExampleCard title='Dropdown Examples'>
+						<DropdownMenu>
+							<DropdownMenu.Trigger asChild>
+								<z.button isNeutral>
+									Open Menu
+									<ChevronDown className='h-4 w-4' />
+								</z.button>
+							</DropdownMenu.Trigger>
+							<DropdownMenu.Content className='w-56'>
+								<DropdownMenu.Label>My Account</DropdownMenu.Label>
+								<DropdownMenu.Separator />
+								<DropdownMenu.Item>
+									<User className='mr-2 h-4 w-4' />
+									Profile
+								</DropdownMenu.Item>
+								<DropdownMenu.Item>
+									<CreditCard className='mr-2 h-4 w-4' />
+									Billing
+								</DropdownMenu.Item>
+								<DropdownMenu.Item>
+									<Settings className='mr-2 h-4 w-4' />
+									Settings
+								</DropdownMenu.Item>
+								<DropdownMenu.Separator />
+								<DropdownMenu.Item className='text-destructive'>
+									<LogOut className='mr-2 h-4 w-4' />
+									Log out
+								</DropdownMenu.Item>
+							</DropdownMenu.Content>
+						</DropdownMenu>
+
+						<DropdownMenu>
+							<DropdownMenu.Trigger asChild>
+								<z.button isPurple>
+									<Plus className='h-4 w-4' />
+									Create New
+								</z.button>
+							</DropdownMenu.Trigger>
+							<DropdownMenu.Content>
+								<DropdownMenu.Item>New Project</DropdownMenu.Item>
+								<DropdownMenu.Item>New Team</DropdownMenu.Item>
+								<DropdownMenu.Item>New Document</DropdownMenu.Item>
+								<DropdownMenu.Separator />
+								<DropdownMenu.Item>Import</DropdownMenu.Item>
+							</DropdownMenu.Content>
+						</DropdownMenu>
+					</ExampleCard>
+				</div>
+			</section>
+
+			<Separator />
+
+			{/* Tooltip Section */}
+			<section className='space-y-6'>
+				<SectionHeader title='z.tooltip' description='Contextual information on hover.' />
+
+				<div className='grid gap-6'>
+					<ExampleCard title='Tooltip Positions'>
+						<z.tooltip tip='Tooltip on top' side='top'>
+							<z.button isNeutral>Hover me (Top)</z.button>
+						</z.tooltip>
+
+						<z.tooltip tip='Tooltip on right' side='right'>
+							<z.button isPurple>Hover me (Right)</z.button>
+						</z.tooltip>
+
+						<z.tooltip tip='Tooltip on bottom' side='bottom'>
+							<z.button isPurple>Hover me (Bottom)</z.button>
+						</z.tooltip>
+
+						<z.tooltip tip='Tooltip on left' side='left'>
+							<z.button isPink>Hover me (Left)</z.button>
+						</z.tooltip>
+					</ExampleCard>
+				</div>
+			</section>
+
+			<Separator />
+
+			{/* Table Section */}
+			<section className='space-y-6'>
+				<SectionHeader title='ZTable' description='Data tables with proper styling.' />
+
+				<div className='rounded-lg border border-border overflow-hidden'>
+					<Table>
+						<Table.Header>
+							<Table.Row>
+								<Table.Head className='w-25'>Invoice</Table.Head>
+								<Table.Head>Status</Table.Head>
+								<Table.Head>Method</Table.Head>
+								<Table.Head className='text-right'>Amount</Table.Head>
+							</Table.Row>
+						</Table.Header>
+						<Table.Body>
+							<Table.Row>
+								<Table.Cell className='font-medium'>INV001</Table.Cell>
+								<Table.Cell>
+									<z.badge isSolid isPurple>
+										Paid
+									</z.badge>
+								</Table.Cell>
+								<Table.Cell>Credit Card</Table.Cell>
+								<Table.Cell className='text-right'>$250.00</Table.Cell>
+							</Table.Row>
+							<Table.Row>
+								<Table.Cell className='font-medium'>INV002</Table.Cell>
+								<Table.Cell>
+									<z.badge isSolid isPink>
+										Pending
+									</z.badge>
+								</Table.Cell>
+								<Table.Cell>PayPal</Table.Cell>
+								<Table.Cell className='text-right'>$150.00</Table.Cell>
+							</Table.Row>
+							<Table.Row>
+								<Table.Cell className='font-medium'>INV003</Table.Cell>
+								<Table.Cell>
+									<z.badge isSolid isPink>
+										Overdue
+									</z.badge>
+								</Table.Cell>
+								<Table.Cell>Bank Transfer</Table.Cell>
+								<Table.Cell className='text-right'>$350.00</Table.Cell>
+							</Table.Row>
+							<Table.Row>
+								<Table.Cell className='font-medium'>INV004</Table.Cell>
+								<Table.Cell>
+									<z.badge isSolid isPurple>
+										Paid
+									</z.badge>
+								</Table.Cell>
+								<Table.Cell>Credit Card</Table.Cell>
+								<Table.Cell className='text-right'>$450.00</Table.Cell>
+							</Table.Row>
+							<Table.Row>
+								<Table.Cell className='font-medium'>INV005</Table.Cell>
+								<Table.Cell>
+									<z.badge isOutline isPurple>
+										Processing
+									</z.badge>
+								</Table.Cell>
+								<Table.Cell>PayPal</Table.Cell>
+								<Table.Cell className='text-right'>$550.00</Table.Cell>
+							</Table.Row>
+						</Table.Body>
+					</Table>
+				</div>
+			</section>
+
+			<Separator />
+
+			{/* Line Section */}
+			<section className='space-y-6'>
+				<SectionHeader title='Line' description='Visual dividers between content.' />
+
+				<div className='grid gap-6'>
+					<ExampleCard title='Horizontal Line'>
+						<div className='w-full max-w-md space-y-4'>
+							<div>
+								<h4 className='text-sm font-medium'>Section One</h4>
+								<p className='text-sm text-muted-foreground'>Content for the first section.</p>
 							</div>
-						</ExampleCard>
-					</div>
-				</section>
+							<Line />
+							<div>
+								<h4 className='text-sm font-medium'>Section Two</h4>
+								<p className='text-sm text-muted-foreground'>Content for the second section.</p>
+							</div>
+						</div>
+					</ExampleCard>
+
+					<ExampleCard title='Vertical Line'>
+						<div className='flex h-8 items-center space-x-4 text-sm'>
+							<div>Blog</div>
+							<Line isVertical />
+							<div>Docs</div>
+							<Line isVertical />
+							<div>Source</div>
+							<Line isVertical />
+							<div>Support</div>
+						</div>
+					</ExampleCard>
+				</div>
+			</section>
 		</div>
 	)
 }

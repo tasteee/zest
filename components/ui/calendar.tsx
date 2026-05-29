@@ -38,11 +38,11 @@ function Calendar({
 				month: cn('flex flex-col w-full gap-4', defaultClassNames.month),
 				nav: cn('flex items-center gap-1 w-full absolute top-0 inset-x-0 justify-between', defaultClassNames.nav),
 				button_previous: cn(
-					'z.button isWhite isIcon size-(--cell-size) aria-disabled:opacity-50 p-0 select-none',
+					'z.button isNeutral isIcon size-(--cell-size) aria-disabled:opacity-50 p-0 select-none',
 					defaultClassNames.button_previous
 				),
 				button_next: cn(
-					'z.button isWhite isIcon size-(--cell-size) aria-disabled:opacity-50 p-0 select-none',
+					'z.button isNeutral isIcon size-(--cell-size) aria-disabled:opacity-50 p-0 select-none',
 					defaultClassNames.button_next
 				),
 				month_caption: cn(
@@ -126,7 +126,7 @@ function CalendarDayButton({ className, day, modifiers, ...props }: React.Compon
 		<z.button
 			ref={ref}
 			isIcon
-			isWhite
+			isNeutral
 			data-day={day.date.toLocaleDateString()}
 			data-selected-single={modifiers.selected && !modifiers.range_start && !modifiers.range_end && !modifiers.range_middle}
 			data-range-start={modifiers.range_start}

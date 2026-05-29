@@ -29,13 +29,11 @@ type ZTextComponentT = ((props: ZTextPropsT) => React.ReactElement) & {
 }
 
 const getColorClass = prop.classNameSwitch({
-	isOrange: 'isOrange',
 	isPurple: 'isPurple',
 	isPink: 'isPink',
-	isGreen: 'isGreen',
-	isWhite: 'isWhite',
+	isNeutral: 'isNeutral',
 	isMuted: 'isMuted',
-	default: 'isWhite'
+	default: 'isNeutral'
 })
 
 const getSizeClass = prop.classNameSwitch({
@@ -61,11 +59,9 @@ const getStyleClass = prop.classNamesBuilder({
 })
 
 const CUSTOM_PROPS = [
-	'isWhite',
-	'isGreen',
+	'isNeutral',
 	'isPurple',
 	'isPink',
-	'isOrange',
 	'isMuted',
 	'isExtraSmall',
 	'isSmall',

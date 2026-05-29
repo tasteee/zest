@@ -2,11 +2,11 @@
 
 import * as React from 'react'
 import * as TogglePrimitive from '@radix-ui/react-toggle'
-import { prop, createPropsClassNamesBuilder } from '@/lib/prop'
+import { prop } from '@/lib/prop'
 import { cn } from '@/lib/utils'
 import './z-toggle.css'
 
-type ToggleColorPropsT = 'isWhite' | 'isGreen' | 'isPurple' | 'isPink' | 'isOrange'
+type ToggleColorPropsT = 'isNeutral' | 'isPurple' | 'isPink'
 type ToggleSizePropsT = 'isSmall' | 'isMedium' | 'isLarge'
 type ToggleKindPropsT = 'isGhost' | 'isOutlined'
 
@@ -28,11 +28,9 @@ type TogglePropsT = BaseTogglePropsT &
 	ToggleOtherPropsT
 
 const CUSTOM_PROPS = [
-	'isWhite',
-	'isGreen',
+	'isNeutral',
 	'isPurple',
 	'isPink',
-	'isOrange',
 	'isSmall',
 	'isMedium',
 	'isLarge',
@@ -45,12 +43,10 @@ const CUSTOM_PROPS = [
 ]
 
 const getColorClass = prop.classNameSwitch({
-	isOrange: 'isOrange',
 	isPurple: 'isPurple',
 	isPink: 'isPink',
-	isGreen: 'isGreen',
-	isWhite: 'isWhite',
-	default: 'isWhite'
+	isNeutral: 'isNeutral',
+	default: 'isNeutral'
 })
 
 const getSizeClass = prop.classNameSwitch({

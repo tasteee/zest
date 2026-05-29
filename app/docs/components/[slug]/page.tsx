@@ -10,9 +10,9 @@ import { CATALOG_BY_SLUG, COMPONENT_CATALOG } from '../catalog'
 import styles from '../component-explorer.module.css'
 
 const statusMap = {
-	ready: { label: 'Ready', badgeProps: { isOutline: true, isGreen: true } },
+	ready: { label: 'Ready', badgeProps: { isOutline: true, isPurple: true } },
 	'in-progress': { label: 'In Progress', badgeProps: { isOutline: true, isPurple: true } },
-	planned: { label: 'Planned', badgeProps: { isOutline: true, isOrange: true } }
+	planned: { label: 'Planned', badgeProps: { isOutline: true, isPink: true } }
 } as const
 
 function getStatusBadgeProps(status: keyof typeof statusMap) {
@@ -116,17 +116,17 @@ export default function ComponentExplorerPage(props: { params: Promise<{ slug: s
 				>
 					<div className='flex items-center justify-between'>
 						<p className='text-xs uppercase tracking-[0.12em] text-muted-foreground'>{component.name} variation</p>
-						<z.badge isOutline isWhite>
+						<z.badge isOutline isNeutral>
 							{density}
 						</z.badge>
 					</div>
 					<p className='text-sm text-foreground'>{previewCopy}</p>
 					<div className={styles.meta}>
-						<z.badge isGhost isWhite>
+						<z.badge isGhost isNeutral>
 							{foundationMap[component.foundation]}
 						</z.badge>
 						{component.notes && (
-							<z.badge isOutline isWhite>
+							<z.badge isOutline isNeutral>
 								{component.notes}
 							</z.badge>
 						)}

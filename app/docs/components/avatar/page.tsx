@@ -5,52 +5,12 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { z } from '@/components/ui'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { ComponentPreview } from '@/components/docs/component-preview'
-import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
+import { PropsTable } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
 import { Card, CardContent } from '@/components/ui/card'
 import { ChevronRight } from 'lucide-react'
-
-const avatarProps: PropDefinition[] = [
-	{
-		name: 'className',
-		type: 'string',
-		description: 'Additional CSS classes to apply to the avatar container.'
-	}
-]
-
-const avatarImageProps: PropDefinition[] = [
-	{
-		name: 'src',
-		type: 'string',
-		description: 'The URL of the image to display.',
-		required: true
-	},
-	{
-		name: 'alt',
-		type: 'string',
-		description: 'Alternative text for the image.',
-		required: true
-	},
-	{
-		name: 'className',
-		type: 'string',
-		description: 'Additional CSS classes to apply to the image.'
-	}
-]
-
-const avatarFallbackProps: PropDefinition[] = [
-	{
-		name: 'delayMs',
-		type: 'number',
-		description: 'How long to wait before showing the fallback.'
-	},
-	{
-		name: 'className',
-		type: 'string',
-		description: 'Additional CSS classes to apply to the fallback.'
-	}
-]
-
+import { avatarProps, avatarImageProps, avatarFallbackProps } from './props'
+import { examples } from './examples'
 export default function AvatarDocsPage() {
 	return (
 		<div className='space-y-16'>
@@ -71,7 +31,7 @@ export default function AvatarDocsPage() {
 			<div className='space-y-4'>
 				<div className='flex items-center gap-3'>
 					<h1 className='text-4xl font-bold tracking-tight text-foreground'>ZAvatar</h1>
-					<z.badge isGhost isWhite>
+					<z.badge isGhost isNeutral>
 						Component
 					</z.badge>
 				</div>
@@ -85,16 +45,7 @@ export default function AvatarDocsPage() {
 			<ComponentPreview
 				title='Default Avatar'
 				description='A basic avatar with an image and fallback.'
-				code={`import { ZAvatar, ZAvatarFallback, ZAvatarImage } from '@tasteee/zest'
-
-export function AvatarDemo() {
-  return (
-    <ZAvatar>
-      <ZAvatarImage src="/placeholder-user.jpg" alt="User" />
-      <ZAvatarFallback>JD</ZAvatarFallback>
-    </ZAvatar>
-  )
-}`}
+				code={examples.quickPreview}
 			>
 				<Avatar>
 					<AvatarImage src='/placeholder-user.jpg' alt='User' />
@@ -105,12 +56,9 @@ export function AvatarDemo() {
 			{/* Usage */}
 			<section className='space-y-6'>
 				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>Usage</h2>
-				<CodeBlock code={`import { ZAvatar, ZAvatarFallback, ZAvatarImage } from '@tasteee/zest'`} language='tsx' />
+				<CodeBlock code={examples.usageImport} language='tsx' />
 				<CodeBlock
-					code={`<ZAvatar>
-  <ZAvatarImage src="https://example.com/user.png" alt="User" />
-  <ZAvatarFallback>JD</ZAvatarFallback>
-</ZAvatar>`}
+					code={examples.usage}
 					language='tsx'
 				/>
 			</section>
@@ -123,24 +71,7 @@ export function AvatarDemo() {
 				<ComponentPreview
 					title='Sizes'
 					description='Avatars can be rendered at different sizes using className.'
-					code={`<div className="flex items-center gap-4">
-  <Avatar className="size-6">
-    <AvatarImage src="/placeholder-user.jpg" alt="User" />
-    <AvatarFallback className="text-xs">SM</AvatarFallback>
-  </Avatar>
-  <Avatar className="size-8">
-    <AvatarImage src="/placeholder-user.jpg" alt="User" />
-    <AvatarFallback>MD</AvatarFallback>
-  </Avatar>
-  <Avatar className="size-12">
-    <AvatarImage src="/placeholder-user.jpg" alt="User" />
-    <AvatarFallback>LG</AvatarFallback>
-  </Avatar>
-  <Avatar className="size-16">
-    <AvatarImage src="/placeholder-user.jpg" alt="User" />
-    <AvatarFallback className="text-xl">XL</AvatarFallback>
-  </Avatar>
-</div>`}
+					code={examples.sizes}
 				>
 					<div className='flex items-center gap-4'>
 						<Avatar className='size-6'>
@@ -166,20 +97,7 @@ export function AvatarDemo() {
 				<ComponentPreview
 					title='Fallback'
 					description='When the image fails to load, the fallback is displayed.'
-					code={`<div className="flex items-center gap-4">
-  <Avatar>
-    <AvatarImage src="/broken-image.jpg" alt="User" />
-    <AvatarFallback>JD</AvatarFallback>
-  </Avatar>
-  <Avatar>
-    <AvatarImage src="/broken-image.jpg" alt="User" />
-    <AvatarFallback>AB</AvatarFallback>
-  </Avatar>
-  <Avatar>
-    <AvatarImage src="/broken-image.jpg" alt="User" />
-    <AvatarFallback>TK</AvatarFallback>
-  </Avatar>
-</div>`}
+					code={examples.fallback}
 				>
 					<div className='flex items-center gap-4'>
 						<Avatar>
@@ -201,23 +119,7 @@ export function AvatarDemo() {
 				<ComponentPreview
 					title='Avatar Group'
 					description='Multiple avatars can be stacked together.'
-					code={`<div className="flex -space-x-2">
-  <Avatar className="border-2 border-background">
-    <AvatarImage src="/placeholder-user.jpg" alt="User 1" />
-    <AvatarFallback>U1</AvatarFallback>
-  </Avatar>
-  <Avatar className="border-2 border-background">
-    <AvatarImage src="/placeholder-user.jpg" alt="User 2" />
-    <AvatarFallback>U2</AvatarFallback>
-  </Avatar>
-  <Avatar className="border-2 border-background">
-    <AvatarImage src="/placeholder-user.jpg" alt="User 3" />
-    <AvatarFallback>U3</AvatarFallback>
-  </Avatar>
-  <Avatar className="border-2 border-background">
-    <AvatarFallback>+5</AvatarFallback>
-  </Avatar>
-</div>`}
+					code={examples.avatarGroup}
 				>
 					<div className='flex -space-x-2'>
 						<Avatar className='border-2 border-background'>
@@ -242,22 +144,7 @@ export function AvatarDemo() {
 				<ComponentPreview
 					title='With Status Indicator'
 					description='Add a status indicator to show online/offline state.'
-					code={`<div className="flex items-center gap-4">
-  <div className="relative">
-    <Avatar>
-      <AvatarImage src="/placeholder-user.jpg" alt="User" />
-      <AvatarFallback>JD</AvatarFallback>
-    </Avatar>
-    <span className="absolute bottom-0 right-0 size-2.5 rounded-full bg-neon-green border-2 border-background" />
-  </div>
-  <div className="relative">
-    <Avatar>
-      <AvatarImage src="/placeholder-user.jpg" alt="User" />
-      <AvatarFallback>AB</AvatarFallback>
-    </Avatar>
-    <span className="absolute bottom-0 right-0 size-2.5 rounded-full bg-muted-foreground border-2 border-background" />
-  </div>
-</div>`}
+					code={examples.withStatusIndicator}
 				>
 					<div className='flex items-center gap-4'>
 						<div className='relative'>
@@ -265,7 +152,7 @@ export function AvatarDemo() {
 								<AvatarImage src='/placeholder-user.jpg' alt='User' />
 								<AvatarFallback>JD</AvatarFallback>
 							</Avatar>
-							<span className='absolute bottom-0 right-0 size-2.5 rounded-full bg-neon-green border-2 border-background' />
+							<span className='absolute bottom-0 right-0 size-2.5 rounded-full bg-neon-purple border-2 border-background' />
 						</div>
 						<div className='relative'>
 							<Avatar>

@@ -1,12 +1,12 @@
 import * as React from 'react'
-import { CheckCircle2, CircleAlert, Info, Sparkles, TriangleAlert, XCircle, type LucideIcon } from 'lucide-react'
+import { CircleAlert, Info, Sparkles, type LucideIcon } from 'lucide-react'
 
 import { cn } from '@/lib/utils'
 import { createPropClassNameSwitch } from '@/lib/prop'
 import './alert.css'
 
-type AlertColorPropT = 'isGreen' | 'isPurple' | 'isPink' | 'isOrange' | 'isRed'
-type AlertColorKeyT = 'default' | 'green' | 'purple' | 'pink' | 'orange' | 'red'
+type AlertColorPropT = 'isNeutral' | 'isPurple' | 'isPink'
+type AlertColorKeyT = 'neutral' | 'purple' | 'pink'
 
 type AlertPropsT = {
 	children?: React.ReactNode
@@ -15,30 +15,23 @@ type AlertPropsT = {
 } & ZeroOrOneTruePropT<AlertColorPropT>
 
 const getColorClass = createPropClassNameSwitch({
-	isGreen: 'isGreen',
 	isPurple: 'isPurple',
 	isPink: 'isPink',
-	isOrange: 'isOrange',
-	isRed: 'isRed'
+	isNeutral: 'isNeutral',
+	default: 'isNeutral'
 })
 
 const alertDefaults: Record<AlertColorKeyT, { Icon: LucideIcon; title: string }> = {
-	default: { Icon: Info, title: 'Default Alert' },
-	green: { Icon: CheckCircle2, title: 'Success' },
+	neutral: { Icon: Info, title: 'Notice' },
 	purple: { Icon: CircleAlert, title: 'Information' },
-	pink: { Icon: Sparkles, title: 'Featured' },
-	orange: { Icon: TriangleAlert, title: 'Warning' },
-	red: { Icon: XCircle, title: 'Error' }
+	pink: { Icon: Sparkles, title: 'Featured' }
 }
 
 const getAlertColorKey = (props: AlertPropsT): AlertColorKeyT => {
-	if (props.isGreen) return 'green'
 	if (props.isPurple) return 'purple'
 	if (props.isPink) return 'pink'
-	if (props.isOrange) return 'orange'
-	if (props.isRed) return 'red'
 
-	return 'default'
+	return 'neutral'
 }
 
 const AlertTitle = (props: React.ComponentProps<'div'>) => {

@@ -42,9 +42,9 @@
 
 /* Solid variants */
 .solidGreen {
-	background: var(---green);
+	background: var(---purple);
 	color: var(--primary-foreground);
-	border-color: var(---green);
+	border-color: var(---purple);
 }
 
 .solidGreen:hover {
@@ -72,9 +72,9 @@
 }
 
 .solidOrange {
-	background: var(---orange);
+	background: var(---pink);
 	color: var(--primary-foreground);
-	border-color: var(---orange);
+	border-color: var(---pink);
 }
 
 .solidOrange:hover {
@@ -94,12 +94,12 @@
 /* Outlined variants */
 .outlinedGreen {
 	background: transparent;
-	color: var(---green);
-	border-color: var(---green);
+	color: var(---purple);
+	border-color: var(---purple);
 }
 
 .outlinedGreen:hover {
-	background: color-mix(in oklch, var(---green) 10%, transparent);
+	background: color-mix(in oklch, var(---purple) 10%, transparent);
 }
 
 .outlinedPurple {
@@ -124,12 +124,12 @@
 
 .outlinedOrange {
 	background: transparent;
-	color: var(---orange);
-	border-color: var(---orange);
+	color: var(---pink);
+	border-color: var(---pink);
 }
 
 .outlinedOrange:hover {
-	background: color-mix(in oklch, var(---orange) 10%, transparent);
+	background: color-mix(in oklch, var(---pink) 10%, transparent);
 }
 
 .outlinedWhite {
@@ -145,7 +145,7 @@
 /* Ghost variants */
 .ghostGreen {
 	background: transparent;
-	color: var(---green);
+	color: var(---purple);
 	border-color: transparent;
 }
 
@@ -175,7 +175,7 @@
 
 .ghostOrange {
 	background: transparent;
-	color: var(---orange);
+	color: var(---pink);
 	border-color: transparent;
 }
 

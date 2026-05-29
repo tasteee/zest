@@ -6,7 +6,6 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { ComponentPreview } from '@/components/docs/component-preview'
 import { CodeBlock } from '@/components/docs/code-block'
 import { ChevronRight, AlertCircle } from 'lucide-react'
@@ -31,7 +30,7 @@ export default function FormsPatternPage() {
 			<div className='space-y-4'>
 				<div className='flex items-center gap-3'>
 					<h1 className='text-4xl font-bold tracking-tight text-foreground'>Form Patterns</h1>
-					<z.badge isGhost isWhite>
+					<z.badge isGhost isNeutral>
 						Pattern
 					</z.badge>
 				</div>
@@ -218,16 +217,16 @@ export default function FormsPatternPage() {
   <div className="grid grid-cols-2 gap-4">
     <div className="space-y-2">
       <Label htmlFor="country">Country</Label>
-      <Select>
-        <SelectTrigger id="country">
-          <SelectValue placeholder="Select" />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectItem value="us">United States</SelectItem>
-          <SelectItem value="uk">United Kingdom</SelectItem>
-          <SelectItem value="ca">Canada</SelectItem>
-        </SelectContent>
-      </Select>
+      <z.select>
+        <z.select.trigger id="country">
+          <z.select.value placeholder="Select" />
+        </z.select.trigger>
+        <z.select.content>
+          <z.select.item value="us">United States</z.select.item>
+          <z.select.item value="uk">United Kingdom</z.select.item>
+          <z.select.item value="ca">Canada</z.select.item>
+        </z.select.content>
+      </z.select>
     </div>
     <div className="space-y-2">
       <Label htmlFor="city">City</Label>
@@ -261,16 +260,16 @@ export default function FormsPatternPage() {
 						<div className='grid grid-cols-2 gap-4'>
 							<div className='space-y-2'>
 								<Label htmlFor='country'>Country</Label>
-								<Select>
-									<SelectTrigger id='country'>
-										<SelectValue placeholder='Select' />
-									</SelectTrigger>
-									<SelectContent>
-										<SelectItem value='us'>United States</SelectItem>
-										<SelectItem value='uk'>United Kingdom</SelectItem>
-										<SelectItem value='ca'>Canada</SelectItem>
-									</SelectContent>
-								</Select>
+								<z.select>
+									<z.select.trigger id='country'>
+										<z.select.value placeholder='Select' />
+									</z.select.trigger>
+									<z.select.content>
+										<z.select.item value='us'>United States</z.select.item>
+										<z.select.item value='uk'>United Kingdom</z.select.item>
+										<z.select.item value='ca'>Canada</z.select.item>
+									</z.select.content>
+								</z.select>
 							</div>
 							<div className='space-y-2'>
 								<Label htmlFor='city'>City</Label>

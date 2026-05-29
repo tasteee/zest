@@ -7,54 +7,11 @@ import { Label } from '@/components/ui/label'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { ComponentPreview } from '@/components/docs/component-preview'
-import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
+import { PropsTable } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
 import { ChevronRight, User, CreditCard, Settings, Bell } from 'lucide-react'
-
-const tabsProps: PropDefinition[] = [
-	{
-		name: 'defaultValue',
-		type: 'string',
-		description: 'The value of the tab that should be active when initially rendered.'
-	},
-	{
-		name: 'value',
-		type: 'string',
-		description: 'The controlled value of the tab to activate.'
-	},
-	{
-		name: 'onValueChange',
-		type: '(value: string) => void',
-		description: 'Event handler called when the value changes.'
-	},
-	{
-		name: 'orientation',
-		type: '"horizontal" | "vertical"',
-		defaultValue: '"horizontal"',
-		description: 'The orientation of the tabs.'
-	},
-	{
-		name: 'activationMode',
-		type: '"automatic" | "manual"',
-		defaultValue: '"automatic"',
-		description: 'Whether a tab is activated automatically or manually.'
-	}
-]
-
-const tabsTriggerProps: PropDefinition[] = [
-	{
-		name: 'value',
-		type: 'string',
-		required: true,
-		description: 'A unique value that associates the trigger with a content.'
-	},
-	{
-		name: 'disabled',
-		type: 'boolean',
-		defaultValue: 'false',
-		description: 'When true, prevents the user from interacting with the tab.'
-	}
-]
+import { tabsProps, tabsTriggerProps } from './props'
+import { examples } from './examples'
 
 export default function TabsDocsPage() {
 	return (
@@ -76,7 +33,7 @@ export default function TabsDocsPage() {
 			<div className='space-y-4'>
 				<div className='flex items-center gap-3'>
 					<h1 className='text-4xl font-bold tracking-tight text-foreground'>ZTabs</h1>
-					<z.badge isGhost isWhite>
+					<z.badge isGhost isNeutral>
 						Component
 					</z.badge>
 				</div>
@@ -90,24 +47,7 @@ export default function TabsDocsPage() {
 			<ComponentPreview
 				title='Default Tabs'
 				description='A basic tabs component with multiple panels.'
-				code={`import { ZTabs, ZTabsContent, ZTabsList, ZTabsTrigger } from '@tasteee/zest'
-
-export function TabsDemo() {
-  return (
-    <ZTabs defaultValue="account" className="w-100">
-      <ZTabsList>
-        <ZTabsTrigger value="account">Account</ZTabsTrigger>
-        <ZTabsTrigger value="password">Password</ZTabsTrigger>
-      </ZTabsList>
-      <ZTabsContent value="account">
-        Make changes to your account here.
-      </ZTabsContent>
-      <ZTabsContent value="password">
-        Change your password here.
-      </ZTabsContent>
-    </ZTabs>
-  )
-}`}
+				code={examples.quickPreview}
 			>
 				<Tabs defaultValue='account' className='w-100'>
 					<TabsList>
@@ -126,16 +66,9 @@ export function TabsDemo() {
 			{/* Usage */}
 			<section className='space-y-6'>
 				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>Usage</h2>
-				<CodeBlock code={`import { ZTabs, ZTabsContent, ZTabsList, ZTabsTrigger } from '@tasteee/zest'`} language='tsx' />
+				<CodeBlock code={examples.usageImport} language='tsx' />
 				<CodeBlock
-					code={`<ZTabs defaultValue="account">
-  <ZTabsList>
-    <ZTabsTrigger value="account">Account</ZTabsTrigger>
-    <ZTabsTrigger value="password">Password</ZTabsTrigger>
-  </ZTabsList>
-  <ZTabsContent value="account">Account content</ZTabsContent>
-  <ZTabsContent value="password">Password content</ZTabsContent>
-</ZTabs>`}
+					code={examples.usage}
 					language='tsx'
 				/>
 			</section>
@@ -148,58 +81,7 @@ export function TabsDemo() {
 				<ComponentPreview
 					title='With Cards'
 					description='Tabs with card content for forms and settings.'
-					code={`<Tabs defaultValue="account" className="w-full max-w-lg">
-  <TabsList className="grid w-full grid-cols-2">
-    <TabsTrigger value="account">Account</TabsTrigger>
-    <TabsTrigger value="password">Password</TabsTrigger>
-  </TabsList>
-  <TabsContent value="account">
-    <Card>
-      <CardHeader>
-        <CardTitle>Account</CardTitle>
-        <CardDescription>
-          Make changes to your account here. Click save when you're done.
-        </CardDescription>
-      </CardHeader>
-      <CardContent className="space-y-2">
-        <div className="space-y-1">
-          <Label htmlFor="name">Name</Label>
-          <Input id="name" defaultValue="Pedro Duarte" />
-        </div>
-        <div className="space-y-1">
-          <Label htmlFor="username">Username</Label>
-          <Input id="username" defaultValue="@peduarte" />
-        </div>
-      </CardContent>
-      <CardFooter>
-        <Button>Save changes</Button>
-      </CardFooter>
-    </Card>
-  </TabsContent>
-  <TabsContent value="password">
-    <Card>
-      <CardHeader>
-        <CardTitle>Password</CardTitle>
-        <CardDescription>
-          Change your password here. After saving, you'll be logged out.
-        </CardDescription>
-      </CardHeader>
-      <CardContent className="space-y-2">
-        <div className="space-y-1">
-          <Label htmlFor="current">Current password</Label>
-          <Input id="current" type="password" />
-        </div>
-        <div className="space-y-1">
-          <Label htmlFor="new">New password</Label>
-          <Input id="new" type="password" />
-        </div>
-      </CardContent>
-      <CardFooter>
-        <Button>Save password</Button>
-      </CardFooter>
-    </Card>
-  </TabsContent>
-</Tabs>`}
+					code={examples.withCards}
 				>
 					<Tabs defaultValue='account' className='w-full max-w-lg'>
 						<TabsList className='grid w-full grid-cols-2'>
@@ -255,46 +137,7 @@ export function TabsDemo() {
 				<ComponentPreview
 					title='With Icons'
 					description='Tabs with icons for visual context.'
-					code={`<Tabs defaultValue="profile" className="w-full max-w-md">
-  <TabsList className="grid w-full grid-cols-4">
-    <TabsTrigger value="profile" className="flex items-center gap-2">
-      <User className="h-4 w-4" />
-      <span className="hidden sm:inline">Profile</span>
-    </TabsTrigger>
-    <TabsTrigger value="billing" className="flex items-center gap-2">
-      <CreditCard className="h-4 w-4" />
-      <span className="hidden sm:inline">Billing</span>
-    </TabsTrigger>
-    <TabsTrigger value="notifications" className="flex items-center gap-2">
-      <Bell className="h-4 w-4" />
-      <span className="hidden sm:inline">Alerts</span>
-    </TabsTrigger>
-    <TabsTrigger value="settings" className="flex items-center gap-2">
-      <Settings className="h-4 w-4" />
-      <span className="hidden sm:inline">Settings</span>
-    </TabsTrigger>
-  </TabsList>
-  <TabsContent value="profile" className="mt-6">
-    <p className="text-sm text-muted-foreground">
-      Manage your profile information and preferences.
-    </p>
-  </TabsContent>
-  <TabsContent value="billing" className="mt-6">
-    <p className="text-sm text-muted-foreground">
-      View and manage your billing information.
-    </p>
-  </TabsContent>
-  <TabsContent value="notifications" className="mt-6">
-    <p className="text-sm text-muted-foreground">
-      Configure your notification preferences.
-    </p>
-  </TabsContent>
-  <TabsContent value="settings" className="mt-6">
-    <p className="text-sm text-muted-foreground">
-      Adjust your account settings.
-    </p>
-  </TabsContent>
-</Tabs>`}
+					code={examples.withIcons}
 				>
 					<Tabs defaultValue='profile' className='w-full max-w-md'>
 						<TabsList className='grid w-full grid-cols-4'>
@@ -334,13 +177,7 @@ export function TabsDemo() {
 				<ComponentPreview
 					title='Disabled Tab'
 					description='Individual tabs can be disabled.'
-					code={`<Tabs defaultValue="active">
-  <TabsList>
-    <TabsTrigger value="active">Active</TabsTrigger>
-    <TabsTrigger value="disabled" disabled>Disabled</TabsTrigger>
-    <TabsTrigger value="another">Another</TabsTrigger>
-  </TabsList>
-</Tabs>`}
+					code={examples.disabledTab}
 				>
 					<Tabs defaultValue='active'>
 						<TabsList>

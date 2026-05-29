@@ -22,7 +22,7 @@ const sections = [
 		title: 'Components',
 		description: 'A complete library of accessible, customizable components.',
 		href: '/docs/components',
-		color: 'neon-green',
+		color: 'neon-purple',
 		items: ['50+ Components', 'Radix Primitives', 'Full Variants']
 	}
 ]
@@ -59,7 +59,7 @@ export default function DocsPage() {
 							<p className='text-foreground text-sm mb-4'>{section.description}</p>
 							<div className='flex flex-wrap gap-2'>
 								{section.items.map((item) => (
-									<z.badge key={item} isOutline isWhite className='text-xs'>
+									<z.badge key={item} isOutline isNeutral className='text-xs'>
 										{item}
 									</z.badge>
 								))}
@@ -81,7 +81,7 @@ export default function DocsPage() {
 						>
 							<span className='text-foreground font-medium'>{link.title}</span>
 							{link.badge && (
-								<z.badge isSolid isGreen className='text-[10px]'>
+								<z.badge isSolid isPurple className='text-[10px]'>
 									{link.badge}
 								</z.badge>
 							)}
@@ -95,7 +95,7 @@ export default function DocsPage() {
 				<div className='grid gap-6 md:grid-cols-2'>
 					<div className='rounded-lg border border-border p-6'>
 						<div className='flex items-center gap-3 mb-3'>
-							<div className='w-2 h-2 rounded-full bg-neon-green' />
+							<div className='w-2 h-2 rounded-full bg-neon-purple' />
 							<h4 className='font-semibold text-primary'>Unapologetic</h4>
 						</div>
 						<p className='text-sm text-foreground'>Bold choices, confident execution. We don&apos;t follow trends—we set them.</p>
@@ -116,7 +116,7 @@ export default function DocsPage() {
 					</div>
 					<div className='rounded-lg border border-border p-6'>
 						<div className='flex items-center gap-3 mb-3'>
-							<div className='w-2 h-2 rounded-full bg-neon-orange' />
+							<div className='w-2 h-2 rounded-full bg-neon-pink' />
 							<h4 className='font-semibold text-primary'>Themeable</h4>
 						</div>
 						<p className='text-sm text-foreground'>CSS variables and variant props make customization effortless.</p>

@@ -1,9 +1,9 @@
 import React from 'react'
 import { cn } from '@/lib/utils'
-import { createPropClassNameSwitch, createPropsClassNamesBuilder } from '@/lib/prop'
+import { prop } from '@/lib/prop'
 import './z-button.css'
 
-type ZColorSwitchPropsT = 'isOrange' | 'isWhite' | 'isPurple' | 'isPink' | 'isGreen'
+type ZColorSwitchPropsT = 'isNeutral' | 'isPurple' | 'isPink'
 type ZButtonSizePropsT = 'isExtraSmall' | 'isSmall' | 'isMedium' | 'isLarge' | 'isExtraLarge' | 'isIcon'
 type ZButtonKindPropsT = 'isGhost' | 'isOutlined' | 'isSolid'
 
@@ -21,85 +21,85 @@ type ZButtonPropsT = Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'color'
 	ZeroOrOneTruePropT<ZButtonKindPropsT> &
 	ZButtonOtherPropsT
 
-const getColorClass = createPropClassNameSwitch({
-	isOrange: 'isOrange',
+const CUSTOM_PROPS = [
+	'isNeutral',
+	'isPurple',
+	'isPink',
+	'isExtraSmall',
+	'isSmall',
+	'isMedium',
+	'isLarge',
+	'isExtraLarge',
+	'isIcon',
+	'isGhost',
+	'isOutlined',
+	'isSolid',
+	'isHidden',
+	'isDisabled',
+	'isLoading',
+	'label',
+	'className',
+	'children',
+	'testId',
+	'type',
+	'as'
+]
+
+const getColorClass = prop.classNameSwitch({
 	isPurple: 'isPurple',
 	isPink: 'isPink',
-	isGreen: 'isGreen',
-	isWhite: 'isWhite'
+	isNeutral: 'isNeutral',
+	default: 'isNeutral'
 })
 
-const getSizeClass = createPropClassNameSwitch({
+const getSizeClass = prop.classNameSwitch({
 	isExtraSmall: 'isExtraSmall',
 	isSmall: 'isSmall',
 	isMedium: 'isMedium',
 	isLarge: 'isLarge',
 	isExtraLarge: 'isExtraLarge',
-	isIcon: 'isIcon'
+	isIcon: 'isIcon',
+	default: 'isMedium'
 })
 
-const getKindClass = createPropClassNameSwitch({
+const getKindClass = prop.classNameSwitch({
 	isGhost: 'isGhost',
 	isOutlined: 'isOutlined',
-	isSolid: 'isSolid'
+	isSolid: 'isSolid',
+	default: 'isOutlined'
 })
 
-const getStyleClass = createPropsClassNamesBuilder({
+const getStyleClass = prop.classNamesBuilder({
 	isDisabled: 'isDisabled',
 	isHidden: 'isHidden',
 	isLoading: 'isLoading'
 })
 
-const hasKindProp = (props: ZButtonPropsT) => {
-	return props.isGhost || props.isOutlined || props.isSolid
-}
+const getSplitProps = prop.splitter(CUSTOM_PROPS)
 
 const ZButton = React.forwardRef<HTMLButtonElement, ZButtonPropsT>((props, ref) => {
-	const {
-		as,
-		children,
-		className,
-		disabled,
-		isDisabled,
-		isExtraLarge,
-		isExtraSmall,
-		isGreen,
-		isHidden,
-		isIcon,
-		isLarge,
-		isLoading,
-		isMedium,
-		isOrange,
-		isOutlined,
-		isPink,
-		isPurple,
-		isSmall,
-		isSolid,
-		isGhost,
-		isWhite,
-		label,
-		testId,
-		type,
-		...buttonProps
-	} = props
-
-	const colorClass = getColorClass(props) ?? 'isWhite'
-	const sizeClass = getSizeClass(props) ?? 'isMedium'
-	const kindClass = getKindClass(props) ?? 'isOutlined'
-	const styleClass = getStyleClass(props) ?? ''
-	const classNames = cn('z-button', kindClass, colorClass, sizeClass, styleClass, className)
+	const [customProps, otherProps] = getSplitProps(props)
+	const colorClass = getColorClass(customProps)
+	const sizeClass = getSizeClass(customProps)
+	const kindClass = getKindClass(customProps)
+	const styleClass = getStyleClass(customProps)
+	const classNames = cn('z-button', kindClass, colorClass, sizeClass, styleClass, customProps.className)
+	const buttonProps = otherProps as React.ButtonHTMLAttributes<HTMLButtonElement>
+	const isButtonDisabled = props.disabled || customProps.isDisabled || customProps.isLoading
+	const buttonType = customProps.type ?? 'button'
+	const buttonContent = customProps.label ?? props.children
 
 	return (
 		<button
+			{...buttonProps}
 			ref={ref}
 			className={classNames}
-			data-testid={testId}
-			disabled={disabled || isDisabled || isLoading}
-			type={type ?? 'button'}
-			{...buttonProps}
+			data-testid={customProps.testId}
+			disabled={isButtonDisabled}
+			type={buttonType}
 		>
-			{isLoading ? <span className='zButtonSpinner' aria-hidden /> : null}
-			{label ?? children}
+			{customProps.isLoading ? <span className='zButtonSpinner' aria-hidden /> : null}
+			{buttonContent}
 		</button>
 	)
 })

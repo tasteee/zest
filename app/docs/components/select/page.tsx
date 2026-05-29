@@ -4,75 +4,13 @@ import Link from 'next/link'
 import { z } from '@/components/ui'
 import { Label } from '@/components/ui/label'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import {
-	Select,
-	SelectContent,
-	SelectGroup,
-	SelectItem,
-	SelectLabel,
-	SelectTrigger,
-	SelectValue
-} from '@/components/ui/select'
 import { ComponentPreview } from '@/components/docs/component-preview'
 import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
 import { Card, CardContent } from '@/components/ui/card'
 import { ChevronRight } from 'lucide-react'
-
-const selectProps: PropDefinition[] = [
-	{
-		name: 'defaultValue',
-		type: 'string',
-		description: 'The value of the select when initially rendered.'
-	},
-	{
-		name: 'value',
-		type: 'string',
-		description: 'The controlled value of the select.'
-	},
-	{
-		name: 'onValueChange',
-		type: '(value: string) => void',
-		description: 'Event handler called when the value changes.'
-	},
-	{
-		name: 'disabled',
-		type: 'boolean',
-		defaultValue: 'false',
-		description: 'When true, prevents the user from interacting with the select.'
-	},
-	{
-		name: 'required',
-		type: 'boolean',
-		defaultValue: 'false',
-		description: 'When true, the select is required for form submission.'
-	},
-	{
-		name: 'name',
-		type: 'string',
-		description: 'The name of the select for form submission.'
-	}
-]
-
-const selectItemProps: PropDefinition[] = [
-	{
-		name: 'value',
-		type: 'string',
-		required: true,
-		description: 'The value of the item.'
-	},
-	{
-		name: 'disabled',
-		type: 'boolean',
-		defaultValue: 'false',
-		description: 'When true, prevents the user from selecting the item.'
-	},
-	{
-		name: 'textValue',
-		type: 'string',
-		description: 'Optional text used for typeahead purposes.'
-	}
-]
+import { selectProps, selectItemProps } from './props'
+import { examples } from './examples'
 
 export default function SelectDocsPage() {
 	return (
@@ -94,7 +32,7 @@ export default function SelectDocsPage() {
 			<div className='space-y-4'>
 				<div className='flex items-center gap-3'>
 					<h1 className='text-4xl font-bold tracking-tight text-foreground'>ZSelect</h1>
-					<z.badge isGhost isWhite>
+					<z.badge isGhost isNeutral>
 						Component
 					</z.badge>
 				</div>
@@ -108,69 +46,26 @@ export default function SelectDocsPage() {
 			<ComponentPreview
 				title='Default Select'
 				description='A basic select with placeholder and options.'
-				code={`import {
-  ZSelect,
-  ZSelectContent,
-  ZSelectItem,
-  ZSelectTrigger,
-  ZSelectValue,
-} from '@tasteee/zest'
-
-export function SelectDemo() {
-  return (
-    <ZSelect>
-      <ZSelectTrigger className="w-45">
-        <ZSelectValue placeholder="Select a fruit" />
-      </ZSelectTrigger>
-      <ZSelectContent>
-        <ZSelectItem value="apple">Apple</ZSelectItem>
-        <ZSelectItem value="banana">Banana</ZSelectItem>
-        <ZSelectItem value="orange">Orange</ZSelectItem>
-        <ZSelectItem value="grape">Grape</ZSelectItem>
-      </ZSelectContent>
-    </ZSelect>
-  )
-}`}
+				code={examples.quickPreview}
 			>
-				<Select>
-					<SelectTrigger className='w-45'>
-						<SelectValue placeholder='Select a fruit' />
-					</SelectTrigger>
-					<SelectContent>
-						<SelectItem value='apple'>Apple</SelectItem>
-						<SelectItem value='banana'>Banana</SelectItem>
-						<SelectItem value='orange'>Orange</SelectItem>
-						<SelectItem value='grape'>Grape</SelectItem>
-					</SelectContent>
-				</Select>
+				<z.select>
+					<z.select.trigger className='w-45'>
+						<z.select.value placeholder='Select a fruit' />
+					</z.select.trigger>
+					<z.select.content>
+						<z.select.item value='apple'>Apple</z.select.item>
+						<z.select.item value='banana'>Banana</z.select.item>
+						<z.select.item value='pink'>Pink</z.select.item>
+						<z.select.item value='grape'>Grape</z.select.item>
+					</z.select.content>
+				</z.select>
 			</ComponentPreview>
 
 			{/* Usage */}
 			<section className='space-y-6'>
 				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>Usage</h2>
-				<CodeBlock
-					code={`import {
-  ZSelect,
-  ZSelectContent,
-  ZSelectItem,
-  ZSelectTrigger,
-  ZSelectValue,
-} from '@tasteee/zest'`}
-					language='tsx'
-				/>
-				<CodeBlock
-					code={`<ZSelect>
-  <ZSelectTrigger className="w-45">
-    <ZSelectValue placeholder="Theme" />
-  </ZSelectTrigger>
-  <ZSelectContent>
-    <ZSelectItem value="light">Light</ZSelectItem>
-    <ZSelectItem value="dark">Dark</ZSelectItem>
-    <ZSelectItem value="system">System</ZSelectItem>
-  </ZSelectContent>
-</ZSelect>`}
-					language='tsx'
-				/>
+				<CodeBlock code={examples.usageImport} language='tsx' />
+				<CodeBlock code={examples.usage} language='tsx' />
 			</section>
 
 			{/* Examples */}
@@ -181,160 +76,91 @@ export function SelectDemo() {
 				<ComponentPreview
 					title='With Label'
 					description='A select paired with a label for better accessibility.'
-					code={`<div className="grid gap-2">
-  <Label htmlFor="timezone">Timezone</Label>
-  <Select>
-    <SelectTrigger id="timezone" className="w-70">
-      <SelectValue placeholder="Select your timezone" />
-    </SelectTrigger>
-    <SelectContent>
-      <SelectItem value="pst">Pacific Time (PST)</SelectItem>
-      <SelectItem value="mst">Mountain Time (MST)</SelectItem>
-      <SelectItem value="cst">Central Time (CST)</SelectItem>
-      <SelectItem value="est">Eastern Time (EST)</SelectItem>
-    </SelectContent>
-  </Select>
-</div>`}
+					code={examples.withLabel}
 				>
 					<div className='grid gap-2'>
 						<Label htmlFor='timezone'>Timezone</Label>
-						<Select>
-							<SelectTrigger id='timezone' className='w-70'>
-								<SelectValue placeholder='Select your timezone' />
-							</SelectTrigger>
-							<SelectContent>
-								<SelectItem value='pst'>Pacific Time (PST)</SelectItem>
-								<SelectItem value='mst'>Mountain Time (MST)</SelectItem>
-								<SelectItem value='cst'>Central Time (CST)</SelectItem>
-								<SelectItem value='est'>Eastern Time (EST)</SelectItem>
-							</SelectContent>
-						</Select>
+						<z.select>
+							<z.select.trigger id='timezone' className='w-70'>
+								<z.select.value placeholder='Select your timezone' />
+							</z.select.trigger>
+							<z.select.content>
+								<z.select.item value='pst'>Pacific Time (PST)</z.select.item>
+								<z.select.item value='mst'>Mountain Time (MST)</z.select.item>
+								<z.select.item value='cst'>Central Time (CST)</z.select.item>
+								<z.select.item value='est'>Eastern Time (EST)</z.select.item>
+							</z.select.content>
+						</z.select>
 					</div>
 				</ComponentPreview>
 
 				{/* With Groups */}
-				<ComponentPreview
-					title='With Groups'
-					description='Organize options into labeled groups.'
-					code={`<Select>
-  <SelectTrigger className="w-70">
-    <SelectValue placeholder="Select a framework" />
-  </SelectTrigger>
-  <SelectContent>
-    <SelectGroup>
-      <SelectLabel>Frontend</SelectLabel>
-      <SelectItem value="react">React</SelectItem>
-      <SelectItem value="vue">Vue</SelectItem>
-      <SelectItem value="angular">Angular</SelectItem>
-      <SelectItem value="svelte">Svelte</SelectItem>
-    </SelectGroup>
-    <SelectGroup>
-      <SelectLabel>Backend</SelectLabel>
-      <SelectItem value="express">Express</SelectItem>
-      <SelectItem value="fastify">Fastify</SelectItem>
-      <SelectItem value="hono">Hono</SelectItem>
-    </SelectGroup>
-  </SelectContent>
-</Select>`}
-				>
-					<Select>
-						<SelectTrigger className='w-70'>
-							<SelectValue placeholder='Select a framework' />
-						</SelectTrigger>
-						<SelectContent>
-							<SelectGroup>
-								<SelectLabel>Frontend</SelectLabel>
-								<SelectItem value='react'>React</SelectItem>
-								<SelectItem value='vue'>Vue</SelectItem>
-								<SelectItem value='angular'>Angular</SelectItem>
-								<SelectItem value='svelte'>Svelte</SelectItem>
-							</SelectGroup>
-							<SelectGroup>
-								<SelectLabel>Backend</SelectLabel>
-								<SelectItem value='express'>Express</SelectItem>
-								<SelectItem value='fastify'>Fastify</SelectItem>
-								<SelectItem value='hono'>Hono</SelectItem>
-							</SelectGroup>
-						</SelectContent>
-					</Select>
+				<ComponentPreview title='With Groups' description='Organize options into labeled groups.' code={examples.withGroups}>
+					<z.select>
+						<z.select.trigger className='w-70'>
+							<z.select.value placeholder='Select a framework' />
+						</z.select.trigger>
+						<z.select.content>
+							<z.select.group>
+								<z.select.label>Frontend</z.select.label>
+								<z.select.item value='react'>React</z.select.item>
+								<z.select.item value='vue'>Vue</z.select.item>
+								<z.select.item value='angular'>Angular</z.select.item>
+								<z.select.item value='svelte'>Svelte</z.select.item>
+							</z.select.group>
+							<z.select.group>
+								<z.select.label>Backend</z.select.label>
+								<z.select.item value='express'>Express</z.select.item>
+								<z.select.item value='fastify'>Fastify</z.select.item>
+								<z.select.item value='hono'>Hono</z.select.item>
+							</z.select.group>
+						</z.select.content>
+					</z.select>
 				</ComponentPreview>
 
 				{/* Disabled */}
 				<ComponentPreview
 					title='Disabled'
 					description='A disabled select and individual disabled items.'
-					code={`<div className="flex flex-col gap-4">
-  <Select disabled>
-    <SelectTrigger className="w-45">
-      <SelectValue placeholder="Disabled select" />
-    </SelectTrigger>
-    <SelectContent>
-      <SelectItem value="option">Option</SelectItem>
-    </SelectContent>
-  </Select>
-  
-  <Select>
-    <SelectTrigger className="w-45">
-      <SelectValue placeholder="Select an option" />
-    </SelectTrigger>
-    <SelectContent>
-      <SelectItem value="available">Available</SelectItem>
-      <SelectItem value="disabled" disabled>Disabled Option</SelectItem>
-      <SelectItem value="another">Another</SelectItem>
-    </SelectContent>
-  </Select>
-</div>`}
+					code={examples.disabled}
 				>
 					<div className='flex flex-col gap-4'>
-						<Select disabled>
-							<SelectTrigger className='w-45'>
-								<SelectValue placeholder='Disabled select' />
-							</SelectTrigger>
-							<SelectContent>
-								<SelectItem value='option'>Option</SelectItem>
-							</SelectContent>
-						</Select>
+						<z.select disabled>
+							<z.select.trigger className='w-45'>
+								<z.select.value placeholder='Disabled select' />
+							</z.select.trigger>
+							<z.select.content>
+								<z.select.item value='option'>Option</z.select.item>
+							</z.select.content>
+						</z.select>
 
-						<Select>
-							<SelectTrigger className='w-45'>
-								<SelectValue placeholder='Select an option' />
-							</SelectTrigger>
-							<SelectContent>
-								<SelectItem value='available'>Available</SelectItem>
-								<SelectItem value='disabled' disabled>
+						<z.select>
+							<z.select.trigger className='w-45'>
+								<z.select.value placeholder='Select an option' />
+							</z.select.trigger>
+							<z.select.content>
+								<z.select.item value='available'>Available</z.select.item>
+								<z.select.item value='disabled' disabled>
 									Disabled Option
-								</SelectItem>
-								<SelectItem value='another'>Another</SelectItem>
-							</SelectContent>
-						</Select>
+								</z.select.item>
+								<z.select.item value='another'>Another</z.select.item>
+							</z.select.content>
+						</z.select>
 					</div>
 				</ComponentPreview>
 
 				{/* Default Value */}
-				<ComponentPreview
-					title='Default Value'
-					description='A select with a default value set.'
-					code={`<Select defaultValue="medium">
-  <SelectTrigger className="w-45">
-    <SelectValue />
-  </SelectTrigger>
-  <SelectContent>
-    <SelectItem value="small">Small</SelectItem>
-    <SelectItem value="medium">Medium</SelectItem>
-    <SelectItem value="large">Large</SelectItem>
-  </SelectContent>
-</Select>`}
-				>
-					<Select defaultValue='medium'>
-						<SelectTrigger className='w-45'>
-							<SelectValue />
-						</SelectTrigger>
-						<SelectContent>
-							<SelectItem value='small'>Small</SelectItem>
-							<SelectItem value='medium'>Medium</SelectItem>
-							<SelectItem value='large'>Large</SelectItem>
-						</SelectContent>
-					</Select>
+				<ComponentPreview title='Default Value' description='A select with a default value set.' code={examples.defaultValue}>
+					<z.select defaultValue='medium'>
+						<z.select.trigger className='w-45'>
+							<z.select.value />
+						</z.select.trigger>
+						<z.select.content>
+							<z.select.item value='small'>Small</z.select.item>
+							<z.select.item value='medium'>Medium</z.select.item>
+							<z.select.item value='large'>Large</z.select.item>
+						</z.select.content>
+					</z.select>
 				</ComponentPreview>
 			</section>
 

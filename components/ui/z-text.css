@@ -5,20 +5,14 @@
 	font-weight: var(--font-weight-regular);
 }
 
-.isOrange {
-	color: var(--color-neon-orange);
-}
 .isPurple {
 	color: var(--color-neon-purple);
 }
 .isPink {
 	color: var(--color-neon-pink);
 }
-.isGreen {
-	color: var(--color-neon-green);
-}
-.isWhite {
-	color: var(--color-white);
+.isNeutral {
+	color: var(--color-neutral);
 }
 .isMuted {
 	color: var(--muted-foreground);

@@ -35,7 +35,7 @@ function PaginationLink({ className, isActive, isIcon = true, isMedium, ...props
 			aria-current={isActive ? 'page' : undefined}
 			data-slot='pagination-link'
 			data-active={isActive}
-			className={cn('z-button isWhite', isIcon && 'isIcon', isMedium && 'isMedium', isActive && 'isSolid', className)}
+			className={cn('z-button isNeutral', isIcon && 'isIcon', isMedium && 'isMedium', isActive && 'isSolid', className)}
 			{...props}
 		/>
 	)

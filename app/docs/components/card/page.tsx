@@ -6,53 +6,12 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Card } from '@/components/ui/card'
 import { ComponentPreview } from '@/components/docs/component-preview'
-import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
+import { PropsTable } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
 import { ChevronRight, Bell, Check, CreditCard } from 'lucide-react'
 import { Switch } from '@/components/ui/switch'
-
-const cardProps: PropDefinition[] = [
-	{
-		name: 'className',
-		type: 'string',
-		description: 'Additional CSS classes to apply to the card container.'
-	},
-	{
-		name: 'children',
-		type: 'React.ReactNode',
-		required: true,
-		description: 'The content to render inside the card.'
-	}
-]
-
-const cardHeaderProps: PropDefinition[] = [
-	{
-		name: 'className',
-		type: 'string',
-		description: 'Additional CSS classes to apply to the header.'
-	},
-	{
-		name: 'children',
-		type: 'React.ReactNode',
-		required: true,
-		description: 'Typically includes ZCard.Title and ZCard.Description.'
-	}
-]
-
-const cardTitleProps: PropDefinition[] = [
-	{
-		name: 'className',
-		type: 'string',
-		description: 'Additional CSS classes to apply to the title.'
-	},
-	{
-		name: 'children',
-		type: 'React.ReactNode',
-		required: true,
-		description: 'The title text content.'
-	}
-]
-
+import { cardProps, cardHeaderProps, cardTitleProps } from './props'
+import { examples } from './examples'
 export default function CardDocsPage() {
 	return (
 		<div className='space-y-16'>
@@ -73,7 +32,7 @@ export default function CardDocsPage() {
 			<div className='space-y-4'>
 				<div className='flex items-center gap-3'>
 					<h1 className='text-4xl font-bold tracking-tight text-foreground'>ZCard</h1>
-					<z.badge isGhost isWhite>
+					<z.badge isGhost isNeutral>
 						Component
 					</z.badge>
 				</div>
@@ -85,24 +44,7 @@ export default function CardDocsPage() {
 
 			{/* Quick Preview */}
 			<ComponentPreview
-				code={`import { ZCard } from '@tasteee/zest'
-
-export function CardDemo() {
-  return (
-    <ZCard className="w-87.5">
-      <ZCard.Header>
-        <ZCard.Title>Card Title</ZCard.Title>
-        <ZCard.Description>Card Description</ZCard.Description>
-      </ZCard.Header>
-      <ZCard.Content>
-        <p>Card Content</p>
-      </ZCard.Content>
-      <ZCard.Footer>
-        <p>Card Footer</p>
-      </ZCard.Footer>
-    </ZCard>
-  )
-}`}
+				code={examples.quickPreview}
 			>
 				<Card className='w-87.5'>
 					<Card.Header>
@@ -121,20 +63,9 @@ export function CardDemo() {
 			{/* Usage */}
 			<section className='space-y-6'>
 				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>Usage</h2>
-				<CodeBlock code={`import { ZCard } from '@tasteee/zest'`} language='tsx' />
+				<CodeBlock code={examples.usageImport} language='tsx' />
 				<CodeBlock
-					code={`<ZCard>
-  <ZCard.Header>
-    <ZCard.Title>Card Title</ZCard.Title>
-    <ZCard.Description>Card Description</ZCard.Description>
-  </ZCard.Header>
-  <ZCard.Content>
-    <p>Card Content</p>
-  </ZCard.Content>
-  <ZCard.Footer>
-    <p>Card Footer</p>
-  </ZCard.Footer>
-</ZCard>`}
+					code={examples.usage}
 					language='tsx'
 				/>
 			</section>
@@ -145,28 +76,7 @@ export function CardDemo() {
 
 				{/* Form Card */}
 				<ComponentPreview
-					code={`import { ZCard, z, ZInput, ZLabel } from '@tasteee/zest'
-
-<ZCard className="w-87.5">
-  <ZCard.Header>
-    <ZCard.Title>Create project</ZCard.Title>
-    <ZCard.Description>Deploy your new project in one-click.</ZCard.Description>
-  </ZCard.Header>
-  <ZCard.Content>
-    <form>
-      <div className="grid w-full gap-4">
-        <div className="flex flex-col space-y-1.5">
-          <ZLabel htmlFor="name">Name</ZLabel>
-          <ZInput id="name" placeholder="Name of your project" />
-        </div>
-      </div>
-    </form>
-  </ZCard.Content>
-  <ZCard.Footer className="flex justify-between">
-    <z.button>Cancel</z.button>
-    <z.button>Deploy</z.button>
-  </ZCard.Footer>
-</ZCard>`}
+					code={examples.formCard}
 				>
 					<Card className='w-87.5'>
 						<Card.Header>
@@ -192,33 +102,7 @@ export function CardDemo() {
 
 				{/* Notifications Card */}
 				<ComponentPreview
-					code={`import { ZCard, ZSwitch } from '@tasteee/zest'
-import { Bell, CreditCard } from 'lucide-react'
-
-<ZCard className="w-95">
-  <ZCard.Header>
-    <ZCard.Title>Notifications</ZCard.Title>
-    <ZCard.Description>Choose what you want to be notified about.</ZCard.Description>
-  </ZCard.Header>
-  <ZCard.Content className="grid gap-4">
-    <div className="flex items-center space-x-4 rounded-md border p-4">
-      <Bell className="h-5 w-5" />
-      <div className="flex-1 space-y-1">
-        <p className="text-sm font-medium leading-none">Push Notifications</p>
-        <p className="text-sm text-muted-foreground">Send notifications to device.</p>
-      </div>
-      <ZSwitch />
-    </div>
-    <div className="flex items-center space-x-4 rounded-md border p-4">
-      <CreditCard className="h-5 w-5" />
-      <div className="flex-1 space-y-1">
-        <p className="text-sm font-medium leading-none">Billing Alerts</p>
-        <p className="text-sm text-muted-foreground">Receive alerts for billing events.</p>
-      </div>
-      <ZSwitch defaultChecked />
-    </div>
-  </ZCard.Content>
-</ZCard>`}
+					code={examples.notificationsCard}
 				>
 					<Card className='w-95'>
 						<Card.Header>
@@ -248,22 +132,7 @@ import { Bell, CreditCard } from 'lucide-react'
 
 				{/* Simple Card */}
 				<ComponentPreview
-					code={`import { ZCard } from '@tasteee/zest'
-import { Check } from 'lucide-react'
-
-<ZCard className="w-75">
-  <ZCard.Content>
-    <div className="flex items-center space-x-4">
-      <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
-        <Check className="h-6 w-6 text-primary" />
-      </div>
-      <div className="space-y-1">
-        <p className="text-sm font-medium leading-none">Payment successful</p>
-        <p className="text-sm text-muted-foreground">Your payment has been processed.</p>
-      </div>
-    </div>
-  </ZCard.Content>
-</ZCard>`}
+					code={examples.simpleCard}
 				>
 					<Card className='w-75'>
 						<Card.Content>
@@ -282,20 +151,7 @@ import { Check } from 'lucide-react'
 
 				{/* Card Grid */}
 				<ComponentPreview
-					code={`import { ZCard } from '@tasteee/zest'
-
-<div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-  <ZCard>
-    <ZCard.Header className="flex flex-row items-center justify-between space-y-0 pb-2">
-      <ZCard.Title className="text-sm font-medium">Total Revenue</ZCard.Title>
-    </ZCard.Header>
-    <ZCard.Content>
-      <div className="text-2xl font-bold">$45,231.89</div>
-      <p className="text-xs text-muted-foreground">+20.1% from last month</p>
-    </ZCard.Content>
-  </ZCard>
-  ...
-</div>`}
+					code={examples.cardGrid}
 				>
 					<div className='grid gap-4 md:grid-cols-2 lg:grid-cols-3'>
 						<Card>
@@ -348,14 +204,7 @@ import { Check } from 'lucide-react'
 				<Card>
 					<Card.Content className='p-6'>
 						<CodeBlock
-							code={`<ZCard>
-  <ZCard.Header>
-    <ZCard.Title />
-    <ZCard.Description />
-  </ZCard.Header>
-  <ZCard.Content />
-  <ZCard.Footer />
-</ZCard>`}
+							code={examples.anatomy}
 							language='tsx'
 						/>
 					</Card.Content>
