@@ -49,7 +49,7 @@ short, clear sentences.
 
 ---
 
-## 1) Control Flow
+## Control Flow
 
 Use flat code and early returns. Always void nesting when possible.
 
@@ -76,7 +76,7 @@ const getLabel = (count: number): string => {
 
 ---
 
-## 2) Functions
+## Functions
 
 Use arrow functions only.
 Always use block bodies and explicit returns.
@@ -91,7 +91,7 @@ const add = (firstNumber: number, secondNumber: number): number => {
 
 ---
 
-## 3) Variables Over Inline Logic
+## Variables Over Inline Logic
 
 Do not embed meaningful logic in JSX, return statements, or conditions.
 Compute values first. Name them clearly.
@@ -104,9 +104,50 @@ const isCheckoutEnabled = hasItems && isUserLoggedIn
 const buttonLabel = isCheckoutEnabled ? 'Checkout' : 'Add items to cart'
 ```
 
+## Boolean identifiers are prefixed with `is`, `has`, `can`, `should`, etc.
+
+Example:
+
+```ts
+const isVisible = true
+const hasError = false
+const canSubmit = isFormValid && !isSubmitting
+const shouldShowTooltip = isHovered && !isMobile
+```
+
+## Function names are prefixed with a verb describing what they do.
+
+Example:
+
+```ts
+const getUserName = (user: UserT): string => {
+	return `${user.firstName} ${user.lastName}`
+}
+
+const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
+	event.preventDefault()
+	// submission logic
+}
+```
+
 ---
 
-## 4) No Destructuring
+## Prefer datass for state management over useState.
+
+```ts
+import { datass, useDatass } from 'datass'
+
+// good: global state
+const $storeName = datass.object({ ... })
+
+// good: local component state
+const MyComponent = () => {
+  const localState = useDatass.object({ ... })
+  ...
+}
+```
+
+## No Destructuring
 
 Do not destructure:
 
@@ -125,7 +166,7 @@ const UserCard = (props: UserCardPropsT) => {
 
 ---
 
-## 5) TypeScript Rules
+## TypeScript Rules
 
 - Use `type`, never `interface`.
 - Type names must end with `T`.
@@ -152,7 +193,7 @@ type DirectionT = (typeof Direction)[keyof typeof Direction]
 
 ---
 
-## 6) Async Rules
+## Async Rules
 
 Use `await-to-js` for async error handling.
 Handle each error immediately with an early return.
@@ -177,7 +218,7 @@ const loadUser = async (userId: string): Promise<UserT | null> => {
 
 ---
 
-## 7) Naming Rules
+## Naming Rules
 
 Use full descriptive names.
 Do not abbreviate.
@@ -195,7 +236,7 @@ Examples:
 
 ---
 
-## 8) React Rules
+## React Rules
 
 - Function components only.
 - No class components.
@@ -229,7 +270,7 @@ const ProfileCard = (props: ProfileCardPropsT) => {
 
 ---
 
-## 9) CSS Rules
+## CSS Rules
 
 - Each component must have a sibling CSS file.
 - Class names must be camelCase.
@@ -267,7 +308,7 @@ Example:
 
 ---
 
-## 10) Quick Copilot Checklist
+## Quick Copilot Checklist
 
 Before finalizing generated code, verify:
 

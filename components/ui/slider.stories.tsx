@@ -9,11 +9,9 @@ const meta: Meta<typeof Slider> = {
 		layout: 'centered'
 	},
 	argTypes: {
-		isGreen: { control: 'boolean' },
 		isPurple: { control: 'boolean' },
 		isPink: { control: 'boolean' },
-		isOrange: { control: 'boolean' },
-		isWhite: { control: 'boolean' }
+		isNeutral: { control: 'boolean' }
 	}
 }
 
@@ -22,11 +20,9 @@ export default meta
 type StoryT = StoryObj<typeof Slider>
 
 const colors = [
-	{ label: 'White', props: { isWhite: true } },
-	{ label: 'Green', props: { isGreen: true } },
+	{ label: 'Neutral', props: { isNeutral: true } },
 	{ label: 'Purple', props: { isPurple: true } },
-	{ label: 'Pink', props: { isPink: true } },
-	{ label: 'Orange', props: { isOrange: true } }
+	{ label: 'Pink', props: { isPink: true } }
 ] as const
 
 export const Default: StoryT = {
@@ -39,11 +35,11 @@ export const Default: StoryT = {
 	}
 }
 
-export const Green: StoryT = {
+export const Purple: StoryT = {
 	args: {
 		className: 'w-64',
 		defaultValue: 50,
-		isGreen: true,
+		isPurple: true,
 		label: 'Saturation'
 	}
 }
@@ -59,7 +55,7 @@ export const Pink: StoryT = {
 }
 
 export const Range: StoryT = {
-	render: () => <Slider.Range className='w-64' defaultValues={[20, 80]} isGreen label='Price range' min={0} max={100} />
+	render: () => <Slider.Range className='w-64' defaultValues={[20, 80]} label='Price range' min={0} max={100} />
 }
 
 export const AllColors: StoryT = {
@@ -67,7 +63,7 @@ export const AllColors: StoryT = {
 		layout: 'fullscreen'
 	},
 	render: () => (
-		<div className='flex w-[420px] flex-col gap-6 p-8'>
+		<div className='flex w-105 flex-col gap-6 p-8'>
 			{colors.map(({ label, props }) => (
 				<Slider key={label} defaultValue={50} label={label} {...props} />
 			))}
@@ -80,9 +76,9 @@ export const Values: StoryT = {
 		layout: 'fullscreen'
 	},
 	render: () => (
-		<div className='flex w-[420px] flex-col gap-6 p-8'>
+		<div className='flex w-105 flex-col gap-6 p-8'>
 			{[0, 25, 50, 75, 100].map((value) => (
-				<Slider key={value} defaultValue={value} formatValue={(currentValue) => `${currentValue}%`} isGreen label={`${value}%`} />
+				<Slider key={value} defaultValue={value} formatValue={(currentValue) => `${currentValue}%`} label={`${value}%`} />
 			))}
 		</div>
 	)
@@ -93,11 +89,9 @@ export const Ranges: StoryT = {
 		layout: 'fullscreen'
 	},
 	render: () => (
-		<div className='flex w-[420px] flex-col gap-6 p-8'>
-			<Slider.Range defaultValues={[20, 80]} isGreen label='Green range' />
+		<div className='flex w-105 flex-col gap-6 p-8'>
 			<Slider.Range defaultValues={[30, 70]} isPurple label='Purple range' />
 			<Slider.Range defaultValues={[10, 90]} isPink label='Pink range' />
-			<Slider.Range defaultValues={[40, 60]} isOrange label='Orange range' />
 		</div>
 	)
 }
@@ -108,7 +102,6 @@ export const CustomValueLabel: StoryT = {
 			className='w-72'
 			defaultValue={75}
 			formatValue={(value) => `${value}% ready`}
-			isGreen
 			label='Readiness'
 			min={0}
 			max={100}
@@ -120,7 +113,7 @@ export const HiddenValue: StoryT = {
 	args: {
 		className: 'w-64',
 		defaultValue: 40,
-		isGreen: true,
+		isNeutral: true,
 		label: 'No value label',
 		showValue: false
 	}
@@ -131,7 +124,7 @@ export const Disabled: StoryT = {
 		className: 'w-64',
 		defaultValue: 40,
 		disabled: true,
-		isGreen: true,
+		isNeutral: true,
 		label: 'Disabled'
 	}
 }

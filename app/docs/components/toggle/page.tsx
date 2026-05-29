@@ -3,155 +3,19 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { z } from '@/components/ui'
-import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
+import { ToggleGroup, ToggleGroupItem } from '@/components/ui/z-toggle-group'
 import { ComponentPreview } from '@/components/docs/component-preview'
 import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
 import { Card, CardContent } from '@/components/ui/card'
 import { ChevronRight, Bold, Italic, Underline, AlignLeft, AlignCenter, AlignRight, AlignJustify } from 'lucide-react'
-
-const toggleProps: PropDefinition[] = [
-	{
-		name: 'isGhost',
-		type: 'boolean',
-		defaultValue: 'true',
-		description: 'Ghost kind — transparent background, fills on press.'
-	},
-	{
-		name: 'isOutlined',
-		type: 'boolean',
-		defaultValue: 'false',
-		description: 'Outlined kind — bordered background, tinted fill on press.'
-	},
-	{
-		name: 'isWhite',
-		type: 'boolean',
-		defaultValue: 'true',
-		description: 'Default neutral color.'
-	},
-	{
-		name: 'isGreen',
-		type: 'boolean',
-		defaultValue: 'false',
-		description: 'Neon green color variant.'
-	},
-	{
-		name: 'isPurple',
-		type: 'boolean',
-		defaultValue: 'false',
-		description: 'Neon purple color variant.'
-	},
-	{
-		name: 'isPink',
-		type: 'boolean',
-		defaultValue: 'false',
-		description: 'Neon pink color variant.'
-	},
-	{
-		name: 'isOrange',
-		type: 'boolean',
-		defaultValue: 'false',
-		description: 'Neon orange color variant.'
-	},
-	{
-		name: 'isSmall',
-		type: 'boolean',
-		defaultValue: 'false',
-		description: 'Small size (2rem height).'
-	},
-	{
-		name: 'isMedium',
-		type: 'boolean',
-		defaultValue: 'true',
-		description: 'Medium size (2.25rem height).'
-	},
-	{
-		name: 'isLarge',
-		type: 'boolean',
-		defaultValue: 'false',
-		description: 'Large size (2.5rem height).'
-	},
-	{
-		name: 'isDisabled',
-		type: 'boolean',
-		defaultValue: 'false',
-		description: 'When true, prevents interaction and reduces opacity.'
-	},
-	{
-		name: 'isHidden',
-		type: 'boolean',
-		defaultValue: 'false',
-		description: 'When true, sets display: none.'
-	},
-	{
-		name: 'isPressed',
-		type: 'boolean',
-		description: 'Controlled pressed state.'
-	},
-	{
-		name: 'isDefaultPressed',
-		type: 'boolean',
-		defaultValue: 'false',
-		description: 'The pressed state when initially rendered (uncontrolled).'
-	},
-	{
-		name: 'onPressedChange',
-		type: '(pressed: boolean) => void',
-		description: 'Event handler called when the pressed state changes.'
-	}
-]
-
-const toggleGroupProps: PropDefinition[] = [
-	{
-		name: 'type',
-		type: '"single" | "multiple"',
-		defaultValue: '"single"',
-		description: 'Whether one or multiple items can be pressed at a time.'
-	},
-	{
-		name: 'value',
-		type: 'string | string[]',
-		description: 'Controlled value of the pressed item(s).'
-	},
-	{
-		name: 'defaultValue',
-		type: 'string | string[]',
-		description: 'Default value when uncontrolled.'
-	},
-	{
-		name: 'onValueChange',
-		type: '(value: string | string[]) => void',
-		description: 'Called when the pressed value changes.'
-	},
-	{
-		name: 'disabled',
-		type: 'boolean',
-		defaultValue: 'false',
-		description: 'When true, disables all items in the group.'
-	},
-	{
-		name: 'isGhost / isOutlined',
-		type: 'boolean',
-		defaultValue: 'isGhost',
-		description: 'Kind variant applied to all items (overridable per item).'
-	},
-	{
-		name: 'isWhite / isGreen / isPurple / isPink / isOrange',
-		type: 'boolean',
-		defaultValue: 'isWhite',
-		description: 'Color variant applied to all items (overridable per item).'
-	},
-	{
-		name: 'isSmall / isMedium / isLarge',
-		type: 'boolean',
-		defaultValue: 'isMedium',
-		description: 'Size applied to all items (overridable per item).'
-	}
-]
+import { toggleProps, toggleGroupProps } from './props'
+import { examples } from './examples'
+import { useDatass } from 'datass'
 
 export default function ToggleDocsPage() {
-	const [alignment, setAlignment] = useState('left')
-	const [formatting, setFormatting] = useState<string[]>([])
+	const alignment = useDatass.string('left')
+	const formatting = useDatass.array<string>([])
 
 	return (
 		<div className='space-y-16'>
@@ -183,13 +47,7 @@ export default function ToggleDocsPage() {
 			</div>
 
 			{/* Quick Preview */}
-			<ComponentPreview
-				code={`import { z } from '@tasteee/zest'
-
-export function ToggleDemo() {
-  return <z.toggle>Press me</z.toggle>
-}`}
-			>
+			<ComponentPreview code={examples.quickPreview}>
 				<z.toggle>Press me</z.toggle>
 			</ComponentPreview>
 
@@ -208,8 +66,7 @@ export function ToggleDemo() {
 				<ComponentPreview
 					title='Kinds'
 					description='Ghost fills on press. Outlined shows a tinted border fill.'
-					code={`<z.toggle isGhost>Ghost</z.toggle>
-<z.toggle isOutlined>Outlined</z.toggle>`}
+					code={examples.kinds}
 				>
 					<div className='flex flex-wrap gap-4'>
 						<z.toggle isGhost>Ghost</z.toggle>
@@ -221,19 +78,7 @@ export function ToggleDemo() {
 				<ComponentPreview
 					title='Colors'
 					description='Five color variants across both kinds. Neon colors activate on press.'
-					code={`{/* Ghost */}
-<z.toggle isGhost isWhite>White</z.toggle>
-<z.toggle isGhost isGreen>Green</z.toggle>
-<z.toggle isGhost isPurple>Purple</z.toggle>
-<z.toggle isGhost isPink>Pink</z.toggle>
-<z.toggle isGhost isOrange>Orange</z.toggle>
-
-{/* Outlined */}
-<z.toggle isOutlined isWhite>White</z.toggle>
-<z.toggle isOutlined isGreen>Green</z.toggle>
-<z.toggle isOutlined isPurple>Purple</z.toggle>
-<z.toggle isOutlined isPink>Pink</z.toggle>
-<z.toggle isOutlined isOrange>Orange</z.toggle>`}
+					code={examples.colors}
 				>
 					<div className='flex flex-col gap-6'>
 						<div className='flex flex-wrap items-center gap-3'>
@@ -274,13 +119,7 @@ export function ToggleDemo() {
 				</ComponentPreview>
 
 				{/* Sizes */}
-				<ComponentPreview
-					title='Sizes'
-					description='Three sizes: small, medium (default), and large.'
-					code={`<z.toggle isSmall>Small</z.toggle>
-<z.toggle isMedium>Medium</z.toggle>
-<z.toggle isLarge>Large</z.toggle>`}
-				>
+				<ComponentPreview title='Sizes' description='Three sizes: small, medium (default), and large.' code={examples.sizes}>
 					<div className='flex flex-wrap items-center gap-4'>
 						<z.toggle isSmall>Small</z.toggle>
 						<z.toggle isMedium>Medium</z.toggle>
@@ -292,17 +131,7 @@ export function ToggleDemo() {
 				<ComponentPreview
 					title='With Icons'
 					description='Icon-only toggles work well for compact toolbars.'
-					code={`import { Bold, Italic, Underline } from 'lucide-react'
-
-<z.toggle aria-label="Bold">
-  <Bold className="h-4 w-4" />
-</z.toggle>
-<z.toggle aria-label="Italic">
-  <Italic className="h-4 w-4" />
-</z.toggle>
-<z.toggle aria-label="Underline">
-  <Underline className="h-4 w-4" />
-</z.toggle>`}
+					code={examples.withIcons}
 				>
 					<div className='flex flex-wrap gap-2'>
 						<z.toggle aria-label='Bold'>
@@ -321,9 +150,7 @@ export function ToggleDemo() {
 				<ComponentPreview
 					title='Disabled'
 					description='Disabled toggles are non-interactive and visually dimmed.'
-					code={`<z.toggle isDisabled>Disabled Ghost</z.toggle>
-<z.toggle isOutlined isDisabled>Disabled Outlined</z.toggle>
-<z.toggle isGreen isDisabled>Disabled Green</z.toggle>`}
+					code={examples.disabled}
 				>
 					<div className='flex flex-wrap gap-3'>
 						<z.toggle isDisabled>Disabled Ghost</z.toggle>
@@ -350,37 +177,14 @@ export function ToggleDemo() {
 				<ComponentPreview
 					title='Single Selection'
 					description='Only one item can be active at a time. Ideal for alignment, view modes, and exclusive options.'
-					code={`import { z } from '@tasteee/zest'
-import { AlignLeft, AlignCenter, AlignRight, AlignJustify } from 'lucide-react'
-
-const [alignment, setAlignment] = useState('left')
-
-<z.toggleGroup
-  type="single"
-  value={alignment}
-  onValueChange={(value) => { if (value) setAlignment(value) }}
-  isOutlined
->
-  <z.toggleGroupItem value="left" aria-label="Align left">
-    <AlignLeft className="h-4 w-4" />
-  </z.toggleGroupItem>
-  <z.toggleGroupItem value="center" aria-label="Align center">
-    <AlignCenter className="h-4 w-4" />
-  </z.toggleGroupItem>
-  <z.toggleGroupItem value="right" aria-label="Align right">
-    <AlignRight className="h-4 w-4" />
-  </z.toggleGroupItem>
-  <z.toggleGroupItem value="justify" aria-label="Justify">
-    <AlignJustify className="h-4 w-4" />
-  </z.toggleGroupItem>
-</z.toggleGroup>`}
+					code={examples.singleSelection}
 				>
 					<ToggleGroup
 						type='single'
-						value={alignment}
-						onValueChange={(value) => {
+						value={alignment.state}
+						onValueChange={(value: string) => {
 							const hasValue = value !== ''
-							if (hasValue) setAlignment(value)
+							if (hasValue) alignment.set(value)
 						}}
 						isOutlined
 					>
@@ -403,30 +207,9 @@ const [alignment, setAlignment] = useState('left')
 				<ComponentPreview
 					title='Multiple Selection'
 					description='Any number of items can be active simultaneously. Ideal for formatting controls.'
-					code={`import { z } from '@tasteee/zest'
-import { Bold, Italic, Underline } from 'lucide-react'
-
-const [formatting, setFormatting] = useState<string[]>([])
-
-<z.toggleGroup
-  type="multiple"
-  value={formatting}
-  onValueChange={setFormatting}
-  isOutlined
-  isGreen
->
-  <z.toggleGroupItem value="bold" aria-label="Bold">
-    <Bold className="h-4 w-4" />
-  </z.toggleGroupItem>
-  <z.toggleGroupItem value="italic" aria-label="Italic">
-    <Italic className="h-4 w-4" />
-  </z.toggleGroupItem>
-  <z.toggleGroupItem value="underline" aria-label="Underline">
-    <Underline className="h-4 w-4" />
-  </z.toggleGroupItem>
-</z.toggleGroup>`}
+					code={examples.multipleSelection}
 				>
-					<ToggleGroup type='multiple' value={formatting} onValueChange={setFormatting} isOutlined isGreen>
+					<ToggleGroup type='multiple' value={formatting.state} onValueChange={formatting.set} isOutlined isGreen>
 						<ToggleGroupItem value='bold' aria-label='Bold'>
 							<Bold className='h-4 w-4' />
 						</ToggleGroupItem>
@@ -443,26 +226,10 @@ const [formatting, setFormatting] = useState<string[]>([])
 				<ComponentPreview
 					title='Group Color Variants'
 					description='Color and kind props cascade from the group down to all items.'
-					code={`<z.toggleGroup type="single" isOutlined isGreen>
-  <z.toggleGroupItem value="a">One</z.toggleGroupItem>
-  <z.toggleGroupItem value="b">Two</z.toggleGroupItem>
-  <z.toggleGroupItem value="c">Three</z.toggleGroupItem>
-</z.toggleGroup>
-
-<z.toggleGroup type="single" isOutlined isPurple>
-  <z.toggleGroupItem value="a">One</z.toggleGroupItem>
-  <z.toggleGroupItem value="b">Two</z.toggleGroupItem>
-  <z.toggleGroupItem value="c">Three</z.toggleGroupItem>
-</z.toggleGroup>
-
-<z.toggleGroup type="single" isOutlined isPink>
-  <z.toggleGroupItem value="a">One</z.toggleGroupItem>
-  <z.toggleGroupItem value="b">Two</z.toggleGroupItem>
-  <z.toggleGroupItem value="c">Three</z.toggleGroupItem>
-</z.toggleGroup>`}
+					code={examples.groupColorVariants}
 				>
 					<div className='flex flex-col gap-4'>
-						<ToggleGroup type='single' isOutlined isGreen>
+						<ToggleGroup type='single' isOutlined isPurple isGreen>
 							<ToggleGroupItem value='a'>One</ToggleGroupItem>
 							<ToggleGroupItem value='b'>Two</ToggleGroupItem>
 							<ToggleGroupItem value='c'>Three</ToggleGroupItem>

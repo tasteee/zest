@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/nextjs'
-import { Toggle } from './toggle'
+import { Toggle } from './z-toggle'
 import * as Phosphor from '@phosphor-icons/react'
 
 const meta: Meta<typeof Toggle> = {
@@ -107,7 +107,12 @@ export const AllVariants: StoryT = {
 									<Toggle {...kindPropsByKind[kind]} {...colorPropsByColor[color]} aria-label={`${kind} ${color}`}>
 										<Phosphor.Star />
 									</Toggle>
-									<Toggle {...kindPropsByKind[kind]} {...colorPropsByColor[color]} defaultPressed aria-label={`${kind} ${color} on`}>
+									<Toggle
+										{...kindPropsByKind[kind]}
+										{...colorPropsByColor[color]}
+										isDefaultPressed
+										aria-label={`${kind} ${color} on`}
+									>
 										<Phosphor.Star weight='fill' />
 									</Toggle>
 								</div>
@@ -124,7 +129,7 @@ export const AllVariants: StoryT = {
 								<Toggle {...sizePropsBySize[size]} isGreen aria-label={size}>
 									<Phosphor.Star />
 								</Toggle>
-								<Toggle {...sizePropsBySize[size]} isGreen defaultPressed aria-label={`${size} on`}>
+								<Toggle {...sizePropsBySize[size]} isGreen isDefaultPressed aria-label={`${size} on`}>
 									<Phosphor.Star weight='fill' />
 								</Toggle>
 							</div>
@@ -140,7 +145,7 @@ export const AllVariants: StoryT = {
 								<Toggle {...sizePropsBySize[size]} isGreen isOutlined aria-label={size}>
 									<Phosphor.Star />
 								</Toggle>
-								<Toggle {...sizePropsBySize[size]} isGreen isOutlined defaultPressed aria-label={`${size} on`}>
+								<Toggle {...sizePropsBySize[size]} isGreen isOutlined isDefaultPressed aria-label={`${size} on`}>
 									<Phosphor.Star weight='fill' />
 								</Toggle>
 							</div>
@@ -156,7 +161,7 @@ export const AllVariants: StoryT = {
 								<Toggle isGhost {...colorPropsByColor[color]} aria-label={color}>
 									<Phosphor.Star />
 								</Toggle>
-								<Toggle isGhost {...colorPropsByColor[color]} defaultPressed aria-label={`${color} on`}>
+								<Toggle isGhost {...colorPropsByColor[color]} isDefaultPressed aria-label={`${color} on`}>
 									<Phosphor.Star weight='fill' />
 								</Toggle>
 							</div>
@@ -172,7 +177,7 @@ export const AllVariants: StoryT = {
 								<Toggle isOutlined {...colorPropsByColor[color]} aria-label={color}>
 									<Phosphor.Star />
 								</Toggle>
-								<Toggle isOutlined {...colorPropsByColor[color]} defaultPressed aria-label={`${color} on`}>
+								<Toggle isOutlined {...colorPropsByColor[color]} isDefaultPressed aria-label={`${color} on`}>
 									<Phosphor.Star weight='fill' />
 								</Toggle>
 							</div>
@@ -187,7 +192,7 @@ export const AllVariants: StoryT = {
 							<Phosphor.Star />
 							Favorite
 						</Toggle>
-						<Toggle isPurple defaultPressed>
+						<Toggle isPurple isDefaultPressed>
 							<Phosphor.Bell weight='fill' />
 							Notifications On
 						</Toggle>
@@ -195,7 +200,7 @@ export const AllVariants: StoryT = {
 							<Phosphor.Heart />
 							Like
 						</Toggle>
-						<Toggle isOrange defaultPressed>
+						<Toggle isOrange isDefaultPressed>
 							<Phosphor.Eye weight='fill' />
 							Watching
 						</Toggle>
@@ -226,7 +231,7 @@ export const AllVariants: StoryT = {
 						<Toggle isGreen disabled aria-label='Disabled off'>
 							<Phosphor.Star />
 						</Toggle>
-						<Toggle isGreen disabled defaultPressed aria-label='Disabled on'>
+						<Toggle isGreen disabled isDefaultPressed aria-label='Disabled on'>
 							<Phosphor.Star weight='fill' />
 						</Toggle>
 						<Toggle isPurple isOutlined disabled aria-label='Disabled outline'>
@@ -259,7 +264,7 @@ export const Green: StoryT = {
 				<Toggle isGreen aria-label='Green toggle'>
 					<Phosphor.Star />
 				</Toggle>
-				<Toggle isGreen defaultPressed aria-label='Green toggle on'>
+				<Toggle isGreen isDefaultPressed aria-label='Green toggle on'>
 					<Phosphor.Star weight='fill' />
 				</Toggle>
 			</div>
@@ -274,7 +279,7 @@ export const Purple: StoryT = {
 				<Toggle isPurple aria-label='Purple toggle'>
 					<Phosphor.Bell />
 				</Toggle>
-				<Toggle isPurple defaultPressed aria-label='Purple toggle on'>
+				<Toggle isPurple isDefaultPressed aria-label='Purple toggle on'>
 					<Phosphor.Bell weight='fill' />
 				</Toggle>
 			</div>
@@ -289,7 +294,7 @@ export const Pink: StoryT = {
 				<Toggle isPink aria-label='Pink toggle'>
 					<Phosphor.Heart />
 				</Toggle>
-				<Toggle isPink defaultPressed aria-label='Pink toggle on'>
+				<Toggle isPink isDefaultPressed aria-label='Pink toggle on'>
 					<Phosphor.Heart weight='fill' />
 				</Toggle>
 			</div>
@@ -304,7 +309,7 @@ export const Orange: StoryT = {
 				<Toggle isOrange aria-label='Orange toggle'>
 					<Phosphor.Lightning />
 				</Toggle>
-				<Toggle isOrange defaultPressed aria-label='Orange toggle on'>
+				<Toggle isOrange isDefaultPressed aria-label='Orange toggle on'>
 					<Phosphor.Lightning weight='fill' />
 				</Toggle>
 			</div>
@@ -319,7 +324,7 @@ export const GreenOutline: StoryT = {
 				<Toggle isGreen isOutlined aria-label='Green outline toggle'>
 					<Phosphor.Star />
 				</Toggle>
-				<Toggle isGreen isOutlined defaultPressed aria-label='Green outline toggle on'>
+				<Toggle isGreen isOutlined isDefaultPressed aria-label='Green outline toggle on'>
 					<Phosphor.Star weight='fill' />
 				</Toggle>
 			</div>
@@ -352,7 +357,7 @@ export const Disabled: StoryT = {
 				<Toggle isGreen disabled aria-label='Disabled'>
 					<Phosphor.Star />
 				</Toggle>
-				<Toggle isGreen disabled defaultPressed aria-label='Disabled on'>
+				<Toggle isGreen disabled isDefaultPressed aria-label='Disabled on'>
 					<Phosphor.Star weight='fill' />
 				</Toggle>
 			</div>

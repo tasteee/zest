@@ -1,6 +1,6 @@
 import React from 'react'
 import { cn } from '@/lib/utils'
-import { createPropClassNameSwitch, createPropsClassNamesBuilder } from '@/lib/create-prop-classname-switch'
+import { createPropClassNameSwitch, createPropsClassNamesBuilder } from '@/lib/prop'
 import './z-button.css'
 
 type ZColorSwitchPropsT = 'isOrange' | 'isWhite' | 'isPurple' | 'isPink' | 'isGreen'
@@ -87,7 +87,7 @@ const ZButton = React.forwardRef<HTMLButtonElement, ZButtonPropsT>((props, ref) 
 	const sizeClass = getSizeClass(props) ?? 'isMedium'
 	const kindClass = getKindClass(props) ?? 'isOutlined'
 	const styleClass = getStyleClass(props) ?? ''
-	const classNames = cn('zButton', kindClass, colorClass, sizeClass, styleClass, className)
+	const classNames = cn('z-button', kindClass, colorClass, sizeClass, styleClass, className)
 
 	return (
 		<button

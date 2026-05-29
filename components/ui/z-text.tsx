@@ -1,11 +1,7 @@
 import { cn } from '@/lib/utils'
 import * as React from 'react'
 import './z-text.css'
-import { createPropClassNameSwitch, createPropsClassNamesBuilder } from '@/lib/create-prop-classname-switch'
-
-type ZColorSwitchPropsT = 'isOrange' | 'isWhite' | 'isPurple' | 'isPink' | 'isGreen'
-type ZTextSizePropsT = 'isExtraSmall' | 'isSmall' | 'isMedium' | 'isLarge' | 'isExtraLarge'
-type ZTextWeightPropsT = 'isThin' | 'isNormal' | 'isBold' | 'isVeryBold'
+import { prop } from '@/lib/prop'
 
 type ZTextStylePropsT = {
 	isMuted?: boolean
@@ -14,9 +10,10 @@ type ZTextStylePropsT = {
 }
 
 type ZTextPropsT = ComponentPropsT &
-	ZeroOrOneTruePropT<ZColorSwitchPropsT> &
-	ZeroOrOneTruePropT<ZTextSizePropsT> &
-	ZeroOrOneTruePropT<ZTextWeightPropsT> &
+	ZeroOrOneTruePropT<FontT.ColorPropNames> &
+	ZeroOrOneTruePropT<FontT.SizePropNames> &
+	ZeroOrOneTruePropT<FontT.WeightPropNames> &
+	ZeroOrOneTruePropT<FontT.StylePropNames> &
 	ZTextStylePropsT
 
 type ZTextComponentT = ((props: ZTextPropsT) => React.ReactElement) & {
@@ -28,119 +25,144 @@ type ZTextComponentT = ((props: ZTextPropsT) => React.ReactElement) & {
 	body: (props: ZTextPropsT) => React.ReactElement
 	small: (props: ZTextPropsT) => React.ReactElement
 	caption: (props: ZTextPropsT) => React.ReactElement
+	displayName: string
 }
 
-const getColorClass = createPropClassNameSwitch({
+const getColorClass = prop.classNameSwitch({
 	isOrange: 'isOrange',
 	isPurple: 'isPurple',
 	isPink: 'isPink',
 	isGreen: 'isGreen',
 	isWhite: 'isWhite',
-	isMuted: 'isMuted'
+	isMuted: 'isMuted',
+	default: 'isWhite'
 })
 
-const getSizeClass = createPropClassNameSwitch({
+const getSizeClass = prop.classNameSwitch({
 	isExtraSmall: 'isExtraSmall',
 	isSmall: 'isSmall',
 	isMedium: 'isMedium',
 	isLarge: 'isLarge',
-	isExtraLarge: 'isExtraLarge'
+	isExtraLarge: 'isExtraLarge',
+	default: 'isMedium'
 })
 
-const getWeightClass = createPropClassNameSwitch({
+const getWeightClass = prop.classNameSwitch({
 	isThin: 'isThin',
 	isBold: 'isBold',
 	isNormal: 'isNormal',
-	isVeryBold: 'isVeryBold'
+	isVeryBold: 'isVeryBold',
+	default: 'isNormal'
 })
 
-const getStyleClass = createPropsClassNamesBuilder({
+const getStyleClass = prop.classNamesBuilder({
 	isItalic: 'isItalic',
 	isUnderlined: 'isUnderlined'
 })
 
-const getZTextElementProps = (props: ZTextPropsT): React.HTMLAttributes<HTMLElement> => {
-	const elementProps: Record<string, unknown> = { ...props }
-	const testIdentifier = props.testId
+const CUSTOM_PROPS = [
+	'isWhite',
+	'isGreen',
+	'isPurple',
+	'isPink',
+	'isOrange',
+	'isMuted',
+	'isExtraSmall',
+	'isSmall',
+	'isMedium',
+	'isLarge',
+	'isExtraLarge',
+	'isThin',
+	'isNormal',
+	'isBold',
+	'isVeryBold',
+	'isItalic',
+	'isUnderlined',
+	'testId',
+	'as'
+]
 
-	if (testIdentifier != null) {
-		elementProps['data-testid'] = testIdentifier
-	}
+const getSplitProps = prop.splitter(CUSTOM_PROPS)
 
-	delete elementProps.as
-	delete elementProps.children
-	delete elementProps.className
-	delete elementProps.style
-	delete elementProps.testId
-	delete elementProps.isOrange
-	delete elementProps.isWhite
-	delete elementProps.isPurple
-	delete elementProps.isPink
-	delete elementProps.isGreen
-	delete elementProps.isMuted
-	delete elementProps.isExtraSmall
-	delete elementProps.isSmall
-	delete elementProps.isMedium
-	delete elementProps.isLarge
-	delete elementProps.isExtraLarge
-	delete elementProps.isThin
-	delete elementProps.isNormal
-	delete elementProps.isBold
-	delete elementProps.isVeryBold
-	delete elementProps.isItalic
-	delete elementProps.isUnderlined
-
-	return elementProps as React.HTMLAttributes<HTMLElement>
-}
+const getMappedProps = prop.nameMapper({
+	testId: 'data-testid'
+})
 
 const ZTextBase = (props: ZTextPropsT): React.ReactElement => {
-	const Element = props.as || 'span'
+	const [customProps, otherProps] = getSplitProps(props)
+	const Element = customProps.as || 'span'
 
-	const colorClass = getColorClass(props)
-	const sizeClass = getSizeClass(props, 'isMedium')
-	const weightClass = getWeightClass(props, 'isNormal')
-	const styleClass = getStyleClass(props)
-	const elementProps = getZTextElementProps(props)
-	const classes = cn('zText', colorClass, sizeClass, weightClass, styleClass, props.className)
+	const mappedProps = getMappedProps(customProps)
+	const colorClass = getColorClass(customProps)
+	const sizeClass = getSizeClass(customProps)
+	const weightClass = getWeightClass(customProps)
+	const styleClass = getStyleClass(customProps)
+	const classes = cn('zText', colorClass, sizeClass, weightClass, styleClass, customProps.className)
 
 	return (
-		<Element className={classes} style={props.style} {...elementProps}>
+		<Element className={classes} style={props.style} {...mappedProps} {...otherProps}>
 			{props.children}
 		</Element>
 	)
 }
 
-const ZTextDisplay = (props: ZTextPropsT): React.ReactElement => {
-	return <ZTextBase {...props} as='h1' className={cn('zTextDisplay', props.className)} />
+const configurableComponent = (options: AnyObjectT): React.FC<ZTextPropsT> => {
+	const Component = options.component
+	const { component, ...baseProps } = options
+
+	return (props: ZTextPropsT): React.ReactElement => {
+		const className = cn(baseProps.className, props.className)
+		return <Component {...baseProps} {...props} className={className} />
+	}
 }
 
-const ZTextH1 = (props: ZTextPropsT): React.ReactElement => {
-	return <ZTextBase {...props} as='h1' className={cn('zTextH1', props.className)} />
-}
+const ZTextDisplay = configurableComponent({
+	component: ZTextBase,
+	className: 'zTextDisplay',
+	as: 'h1'
+})
 
-const ZTextH2 = (props: ZTextPropsT): React.ReactElement => {
-	return <ZTextBase {...props} as='h2' className={cn('zTextH2', props.className)} />
-}
+const ZTextH1 = configurableComponent({
+	component: ZTextBase,
+	className: 'zTextH1',
+	as: 'h1'
+})
 
-const ZTextH3 = (props: ZTextPropsT): React.ReactElement => {
-	return <ZTextBase {...props} as='h3' className={cn('zTextH3', props.className)} />
-}
+const ZTextH2 = configurableComponent({
+	component: ZTextBase,
+	className: 'zTextH2',
+	as: 'h2'
+})
 
-const ZTextH4 = (props: ZTextPropsT): React.ReactElement => {
-	return <ZTextBase {...props} as='h4' className={cn('zTextH4', props.className)} />
-}
+const ZTextH3 = configurableComponent({
+	component: ZTextBase,
+	className: 'zTextH3',
+	as: 'h3'
+})
 
-const ZTextBody = (props: ZTextPropsT): React.ReactElement => {
-	return <ZTextBase {...props} as='p' className={cn('zTextBody', props.className)} />
-}
+const ZTextH4 = configurableComponent({
+	component: ZTextBase,
+	className: 'zTextH4',
+	as: 'h4'
+})
 
-const ZTextSmall = (props: ZTextPropsT): React.ReactElement => {
-	return <ZTextBase {...props} as='p' className={cn('zTextSmall', props.className)} />
-}
+const ZTextBody = configurableComponent({
+	component: ZTextBase,
+	className: 'zTextBody',
+	as: 'p'
+})
 
-const ZTextCaption = (props: ZTextPropsT): React.ReactElement => {
-	return <ZTextBase {...props} as='p' className={cn('zTextCaption', props.className)} />
-}
+const ZTextSmall = configurableComponent({
+	component: ZTextBase,
+	className: 'zTextSmall',
+	as: 'p'
+})
+
+const ZTextCaption = configurableComponent({
+	component: ZTextBase,
+	className: 'zTextCaption',
+	as: 'p'
+})
 
 const ZText = Object.assign(ZTextBase, {
 	display: ZTextDisplay,
@@ -150,10 +172,9 @@ const ZText = Object.assign(ZTextBase, {
 	h4: ZTextH4,
 	body: ZTextBody,
 	small: ZTextSmall,
-	caption: ZTextCaption
+	caption: ZTextCaption,
+	displayName: 'ZText'
 }) as ZTextComponentT
-
-ZText.displayName = 'ZText'
 
 export { ZText }
 export type { ZTextPropsT }

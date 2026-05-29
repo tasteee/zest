@@ -4,7 +4,7 @@ import * as React from 'react'
 import * as CheckboxPrimitive from '@radix-ui/react-checkbox'
 import { CheckIcon } from 'lucide-react'
 
-import { createPropClassNameSwitch, createPropsClassNamesBuilder } from '@/lib/create-prop-classname-switch'
+import { createPropClassNameSwitch, createPropsClassNamesBuilder } from '@/lib/prop'
 import { cn } from '@/lib/utils'
 import './checkbox.css'
 

@@ -2,7 +2,7 @@ import * as React from 'react'
 import { CheckCircle2, CircleAlert, Info, Sparkles, TriangleAlert, XCircle, type LucideIcon } from 'lucide-react'
 
 import { cn } from '@/lib/utils'
-import { createPropClassNameSwitch } from '@/lib/create-prop-classname-switch'
+import { createPropClassNameSwitch } from '@/lib/prop'
 import './alert.css'
 
 type AlertColorPropT = 'isGreen' | 'isPurple' | 'isPink' | 'isOrange' | 'isRed'

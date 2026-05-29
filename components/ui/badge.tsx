@@ -2,7 +2,7 @@ import './z-badge.css'
 
 import * as React from 'react'
 import { Slot } from '@radix-ui/react-slot'
-import { createPropClassNameSwitch, createPropsClassNamesBuilder } from '@/lib/create-prop-classname-switch'
+import { createPropClassNameSwitch, createPropsClassNamesBuilder } from '@/lib/prop'
 import { cn } from '@/lib/utils'
 import { COLOR_PROPS, KIND_PROPS } from './constants'
 

@@ -1,18 +1,42 @@
-.zCard {
-	background: var(--color-surface, #141814);
-	border: 1px solid var(--color-border, #2a2f2a);
+.z-card {
 	border-radius: var(--radius-lg, 16px);
 	padding: var(--spacing-lg, 1.5rem);
 	transition: border-color 0.1s linear;
 	box-sizing: border-box;
 }
 
-.zCard {
-	border-color: var(--theme-color-muted);
+.z-card.isNeutral {
+	background: var(--card);
+	border: 1px solid var(--border);
+	color: var(--foreground);
 }
 
-.zCard:hover,
-.zCard:focus,
-.zCard:active {
-	border-color: var(--theme-color);
+.z-card.isPurple {
+	background: color-mix(in oklch, var(--card) 92%, var(---purple) 8%);
+	border: 1px solid color-mix(in oklch, var(---purple) 30%, var(--border));
+	color: var(--foreground);
+}
+
+.z-card.isPink {
+	background: color-mix(in oklch, var(--card) 92%, var(---pink) 8%);
+	border: 1px solid color-mix(in oklch, var(---pink) 30%, var(--border));
+	color: var(--foreground);
+}
+
+.z-card.isNeutral:hover,
+.z-card.isNeutral:focus,
+.z-card.isNeutral:active {
+	border-color: color-mix(in oklch, var(--foreground) 50%, transparent);
+}
+
+.z-card.isPurple:hover,
+.z-card.isPurple:focus,
+.z-card.isPurple:active {
+	border-color: color-mix(in oklch, var(---purple) 55%, transparent);
+}
+
+.z-card.isPink:hover,
+.z-card.isPink:focus,
+.z-card.isPink:active {
+	border-color: color-mix(in oklch, var(---pink) 55%, transparent);
 }

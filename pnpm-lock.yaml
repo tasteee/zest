@@ -116,6 +116,9 @@ importers:
       culori:
         specifier: ^4.0.2
         version: 4.0.2
+      datass:
+        specifier: ^2.1.2
+        version: 2.1.2(react@19.2.4)
       date-fns:
         specifier: 4.1.0
         version: 4.1.0
@@ -2729,6 +2732,11 @@ packages:
     resolution: {integrity: sha512-ndfJ/JxxMd3nw31uyKoY2naivF+r29V+Lc0svZxe1JvvIRmi8hUsrMvdOwgS1o6uBHmiz91geQ0ylPP0aj1VUA==}
     engines: {node: '>=12'}
 
+  datass@2.1.2:
+    resolution: {integrity: sha512-MUBwTzdQyHoamxOsiecd1ChA9rpTGdGEGBFcHh6nIWjwn8Lgzt6EgJxsP+f9jp6TsOqC253qI4MzR/jQiJOn3g==}
+    peerDependencies:
+      react: ^18.0.0 || ^19.0.0
+
   date-fns-jalali@4.1.0-0:
     resolution: {integrity: sha512-hTIP/z+t+qKwBDcmmsnmjWTduxCg+5KfdqWQvb2X/8C9+knYY6epN/pfxdDuyVlSVeFz0sM5eEfwIUQ70U4ckg==}
 
@@ -3145,6 +3153,9 @@ packages:
     engines: {node: '>=16.x'}
     hasBin: true
 
+  immer@10.2.0:
+    resolution: {integrity: sha512-d/+XTN3zfODyjr89gM3mPq1WNX2B8pYsu7eORitdwyA2sBubnTl3laYlBk4sXY5FUa5qTZGBDPJICVbvqzjlbw==}
+
   import-fresh@3.3.1:
     resolution: {integrity: sha512-TR3KfrTZTYLPB6jUjfx6MF9WcWrHL9su5TObK4ZkYgBdWKPOFoSoQIdEuTuR82pmtxH2spWG9h6etwfr1pLBqQ==}
     engines: {node: '>=6'}
@@ -3267,6 +3278,12 @@ packages:
 
   jsonfile@6.2.0:
     resolution: {integrity: sha512-FGuPw30AdOIUTRMC2OMRtQV+jkVj2cfPqSeWXv1NEAJ1qZ5zb1X6z1mFhbfOB/iy3ssJCD+3KuZ8r8C3uVFlAg==}
+
+  just-safe-get@4.2.0:
+    resolution: {integrity: sha512-+tS4Bvgr/FnmYxOGbwziJ8I2BFk+cP1gQHm6rm7zo61w1SbxBwWGEq/Ryy9Gb6bvnloPq6pz7Bmm4a0rjTNlXA==}
+
+  just-safe-set@4.2.1:
+    resolution: {integrity: sha512-La5CP41Ycv52+E4g7w1sRV8XXk7Sp8a/TwWQAYQKn6RsQz1FD4Z/rDRRmqV3wJznS1MDF3YxK7BCudX1J8FxLg==}
 
   keyv@4.5.4:
     resolution: {integrity: sha512-oxVHkHR/EJf2CNXnWxRLW6mg7JyCCUcG0DtEGmL2ctUo1PNTin1PUil+r/+4r5MpVgC/fn1kjsx7mjSujKqIpw==}
@@ -7095,6 +7112,13 @@ snapshots:
 
   d3-timer@3.0.1: {}
 
+  datass@2.1.2(react@19.2.4):
+    dependencies:
+      immer: 10.2.0
+      just-safe-get: 4.2.0
+      just-safe-set: 4.2.1
+      react: 19.2.4
+
   date-fns-jalali@4.1.0-0: {}
 
   date-fns@4.1.0: {}
@@ -7545,6 +7569,8 @@ snapshots:
 
   image-size@2.0.2: {}
 
+  immer@10.2.0: {}
+
   import-fresh@3.3.1:
     dependencies:
       parent-module: 1.0.1
@@ -7652,6 +7678,10 @@ snapshots:
       universalify: 2.0.1
     optionalDependencies:
       graceful-fs: 4.2.11
+
+  just-safe-get@4.2.0: {}
+
+  just-safe-set@4.2.1: {}
 
   keyv@4.5.4:
     dependencies:

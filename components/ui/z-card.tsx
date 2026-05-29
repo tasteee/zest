@@ -1,23 +1,42 @@
 import { cn } from '@/lib/utils'
-import * as React from 'react'
+import { prop } from '@/lib/prop'
 import { ZBox } from './z-box'
 import './z-card.css'
 
-type ZCardPropsT = ComponentPropsT & {
-	color?: 'green' | 'pink' | 'purple'
+type CardColorPropsT = 'isNeutral' | 'isPurple' | 'isPink'
+
+type CardOtherPropsT = {
+	isHidden?: boolean
 }
 
-const getThemeClass = (color: string) => {
-	if (color === 'green') return 'isNeonGreenTheme'
-	if (color === 'pink') return 'isNeonPinkTheme'
-	if (color === 'purple') return 'isNeonPurpleTheme'
-	if (color === 'orange') return 'isNeonOrangeTheme'
-	return 'isWhiteTheme'
-}
+type ZCardPropsT = ComponentPropsT & ZeroOrOneTruePropT<CardColorPropsT> & CardOtherPropsT
+
+const CUSTOM_PROPS = ['isNeutral', 'isPurple', 'isPink', 'isHidden']
+
+const getColorClass = prop.classNameSwitch({
+	isPurple: 'isPurple',
+	isPink: 'isPink',
+	isNeutral: 'isNeutral',
+	default: 'isNeutral'
+})
+
+const getStyleClass = prop.classNamesBuilder({
+	isHidden: 'isHidden'
+})
+
+const getSplitProps = prop.splitter(CUSTOM_PROPS)
 
 export const ZCard = (props: ZCardPropsT) => {
-	const themeClass = getThemeClass(props.color || '')
-	const classes = cn('zCard', themeClass, props.className)
+	const [customProps, otherProps] = getSplitProps(props)
+	const colorClass = getColorClass(customProps)
+	const styleClass = getStyleClass(customProps)
+	const classes = cn('z-card', colorClass, styleClass, props.className)
 
-	return <ZBox className={classes}>{props.children}</ZBox>
+	return (
+		<ZBox className={classes} {...otherProps}>
+			{props.children}
+		</ZBox>
+	)
 }
+
+export type { ZCardPropsT, CardColorPropsT }
