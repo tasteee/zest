@@ -97,9 +97,7 @@ export default function SidebarDocsPage() {
 								<span className='text-sm font-medium'>Dashboard</span>
 							</header>
 							<main className='p-4'>
-								<p className='text-sm text-muted-foreground'>
-									Click the trigger or press ⌘B to collapse the sidebar.
-								</p>
+								<p className='text-sm text-muted-foreground'>Click the trigger or press ⌘B to collapse the sidebar.</p>
 							</main>
 						</SidebarInset>
 					</SidebarProvider>

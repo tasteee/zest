@@ -44,8 +44,8 @@ export default function NavMenuDocsPage() {
 					</z.badge>
 				</div>
 				<p className='text-xl text-muted-foreground max-w-2xl leading-relaxed'>
-					A structured primary navigation component built on Radix NavigationMenu. Supports simple link lists and rich
-					dropdown content panels with animated viewport transitions.
+					A structured primary navigation component built on Radix NavigationMenu. Supports simple link lists and rich dropdown
+					content panels with animated viewport transitions.
 				</p>
 			</div>
 

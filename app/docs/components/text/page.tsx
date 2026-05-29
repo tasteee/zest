@@ -36,8 +36,8 @@ export default function TextDocsPage() {
 					</z.badge>
 				</div>
 				<p className='text-xl text-muted-foreground max-w-2xl leading-relaxed'>
-					Semantic typography primitives that map directly to the design-system type scale. Use sub-components for headings
-					and prose, and prop modifiers for color, size, weight, and style.
+					Semantic typography primitives that map directly to the design-system type scale. Use sub-components for headings and
+					prose, and prop modifiers for color, size, weight, and style.
 				</p>
 			</div>
 
@@ -116,7 +116,9 @@ export default function TextDocsPage() {
 					<div className='flex flex-col gap-3'>
 						<ZText isItalic>Italic text</ZText>
 						<ZText isUnderlined>Underlined text</ZText>
-						<ZText isItalic isUnderlined>Italic and underlined</ZText>
+						<ZText isItalic isUnderlined>
+							Italic and underlined
+						</ZText>
 					</div>
 				</ComponentPreview>
 

@@ -64,8 +64,8 @@ export default function CommandDocsPage() {
 					</z.badge>
 				</div>
 				<p className='text-xl text-muted-foreground max-w-2xl leading-relaxed'>
-					A fast, keyboard-driven command palette built on cmdk. Supports grouped items, keyboard shortcuts, custom
-					filtering, and a full-screen dialog mode.
+					A fast, keyboard-driven command palette built on cmdk. Supports grouped items, keyboard shortcuts, custom filtering,
+					and a full-screen dialog mode.
 				</p>
 			</div>
 
@@ -158,7 +158,11 @@ export default function CommandDocsPage() {
 					code={examples.dialog}
 				>
 					<div className='flex flex-col items-center gap-4'>
-						<z.button onClick={() => { setIsDialogOpen(true) }}>
+						<z.button
+							onClick={() => {
+								setIsDialogOpen(true)
+							}}
+						>
 							Open Command Palette
 						</z.button>
 						<p className='text-sm text-muted-foreground'>or press ⌘K</p>

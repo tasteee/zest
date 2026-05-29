@@ -48,8 +48,8 @@ export default function DrawerDocsPage() {
 					</z.badge>
 				</div>
 				<p className='text-xl text-muted-foreground max-w-2xl leading-relaxed'>
-					A panel that slides in from any edge of the screen, built on Vaul. Supports bottom, top, left, and right
-					directions with touch drag-to-dismiss on mobile.
+					A panel that slides in from any edge of the screen, built on Vaul. Supports bottom, top, left, and right directions
+					with touch drag-to-dismiss on mobile.
 				</p>
 			</div>
 
@@ -121,7 +121,13 @@ export default function DrawerDocsPage() {
 					code={examples.controlled}
 				>
 					<div className='flex items-center gap-3'>
-						<z.button onClick={() => { setIsControlledOpen(true) }}>Open Programmatically</z.button>
+						<z.button
+							onClick={() => {
+								setIsControlledOpen(true)
+							}}
+						>
+							Open Programmatically
+						</z.button>
 					</div>
 					<Drawer open={isControlledOpen} onOpenChange={setIsControlledOpen}>
 						<DrawerContent>
@@ -130,7 +136,11 @@ export default function DrawerDocsPage() {
 								<DrawerDescription>Open state is managed externally.</DrawerDescription>
 							</DrawerHeader>
 							<DrawerFooter>
-								<z.button onClick={() => { setIsControlledOpen(false) }}>
+								<z.button
+									onClick={() => {
+										setIsControlledOpen(false)
+									}}
+								>
 									Close
 								</z.button>
 							</DrawerFooter>

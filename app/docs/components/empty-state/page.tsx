@@ -36,8 +36,8 @@ export default function EmptyStateDocsPage() {
 					</z.badge>
 				</div>
 				<p className='text-xl text-muted-foreground max-w-2xl leading-relaxed'>
-					A structured placeholder displayed when a data region has no content. Communicates what's missing and guides
-					users toward their next action.
+					A structured placeholder displayed when a data region has no content. Communicates what's missing and guides users
+					toward their next action.
 				</p>
 			</div>
 
@@ -101,7 +101,9 @@ export default function EmptyStateDocsPage() {
 						</EmptyHeader>
 						<EmptyContent>
 							<z.button isSmall>New document</z.button>
-							<z.button isSmall isGhost>Import from file</z.button>
+							<z.button isSmall isGhost>
+								Import from file
+							</z.button>
 						</EmptyContent>
 					</Empty>
 				</ComponentPreview>

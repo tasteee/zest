@@ -5,7 +5,8 @@ export const zTextProps: PropDefinition[] = [
 		name: 'as',
 		type: 'React.ElementType',
 		defaultValue: '"span"',
-		description: 'The HTML element or component to render. Sub-components (ZText.h1, ZText.body, etc.) set this automatically.'
+		description:
+			'The HTML element or component to render. Sub-components (ZText.h1, ZText.body, etc.) set this automatically.'
 	},
 	{
 		name: 'isNeutral | isPurple | isPink | isMuted',

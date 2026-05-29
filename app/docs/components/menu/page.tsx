@@ -56,8 +56,8 @@ export default function MenuDocsPage() {
 					</z.badge>
 				</div>
 				<p className='text-xl text-muted-foreground max-w-2xl leading-relaxed'>
-					An application-style horizontal menu bar with full keyboard navigation. Supports grouped items, checkboxes,
-					radio groups, keyboard shortcuts, and nested submenus.
+					An application-style horizontal menu bar with full keyboard navigation. Supports grouped items, checkboxes, radio
+					groups, keyboard shortcuts, and nested submenus.
 				</p>
 			</div>
 

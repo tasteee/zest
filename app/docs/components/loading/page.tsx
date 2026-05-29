@@ -46,8 +46,8 @@ export default function LoadingDocsPage() {
 					</z.badge>
 				</div>
 				<p className='text-xl text-muted-foreground max-w-2xl leading-relaxed'>
-					A lightweight animated spinner for conveying async loading states. Accessible by default with a role and
-					aria-label. Scalable via className.
+					A lightweight animated spinner for conveying async loading states. Accessible by default with a role and aria-label.
+					Scalable via className.
 				</p>
 			</div>
 
@@ -122,17 +122,9 @@ export default function LoadingDocsPage() {
 						<div className='space-y-2'>
 							<h3 className='font-semibold text-foreground'>Best Practices</h3>
 							<ul className='text-sm text-muted-foreground space-y-2 list-disc list-inside'>
-								<li>
-									The Spinner renders with role="status" and aria-label="Loading" — screen readers announce it
-									automatically
-								</li>
-								<li>
-									Override aria-label with a specific description when context matters, e.g. "Submitting form"
-								</li>
-								<li>
-									For buttons, use z.button's built-in isLoading prop which handles the spinner and disabled state
-									together
-								</li>
+								<li>The Spinner renders with role="status" and aria-label="Loading" — screen readers announce it automatically</li>
+								<li>Override aria-label with a specific description when context matters, e.g. "Submitting form"</li>
+								<li>For buttons, use z.button's built-in isLoading prop which handles the spinner and disabled state together</li>
 								<li>Pair the spinner with a visible text label when used in larger loading regions</li>
 							</ul>
 						</div>

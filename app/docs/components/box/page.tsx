@@ -36,8 +36,8 @@ export default function BoxDocsPage() {
 					</z.badge>
 				</div>
 				<p className='text-xl text-muted-foreground max-w-2xl leading-relaxed'>
-					A primitive layout component that applies spacing, backgrounds, borders, and typography through props instead of
-					class names. Composable, predictable, and entirely driven by design-system tokens.
+					A primitive layout component that applies spacing, backgrounds, borders, and typography through props instead of class
+					names. Composable, predictable, and entirely driven by design-system tokens.
 				</p>
 			</div>
 

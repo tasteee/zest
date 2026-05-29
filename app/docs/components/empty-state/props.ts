@@ -18,7 +18,8 @@ export const emptyMediaProps: PropDefinition[] = [
 		name: 'variant',
 		type: '"default" | "icon"',
 		defaultValue: '"default"',
-		description: 'When "icon", wraps the child in a small boxed container with a rounded background. When "default", renders transparently.'
+		description:
+			'When "icon", wraps the child in a small boxed container with a rounded background. When "default", renders transparently.'
 	},
 	{
 		name: 'children',

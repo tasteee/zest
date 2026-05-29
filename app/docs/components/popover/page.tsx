@@ -38,8 +38,8 @@ export default function PopoverDocsPage() {
 					</z.badge>
 				</div>
 				<p className='text-xl text-muted-foreground max-w-2xl leading-relaxed'>
-					A floating panel anchored to a trigger element. Ideal for inline settings, quick actions, and contextual
-					information that doesn't require full dialog treatment.
+					A floating panel anchored to a trigger element. Ideal for inline settings, quick actions, and contextual information
+					that doesn't require full dialog treatment.
 				</p>
 			</div>
 

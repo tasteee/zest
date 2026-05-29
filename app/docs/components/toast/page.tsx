@@ -70,8 +70,8 @@ export default function ToastDocsPage() {
 					</z.badge>
 				</div>
 				<p className='text-xl text-muted-foreground max-w-2xl leading-relaxed'>
-					Transient notification messages triggered imperatively via the useToast hook. Supports titles, descriptions,
-					action buttons, and a destructive variant.
+					Transient notification messages triggered imperatively via the useToast hook. Supports titles, descriptions, action
+					buttons, and a destructive variant.
 				</p>
 			</div>
 

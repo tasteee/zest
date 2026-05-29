@@ -72,8 +72,8 @@ export default function PaginationDocsPage() {
 					</z.badge>
 				</div>
 				<p className='text-xl text-muted-foreground max-w-2xl leading-relaxed'>
-					Navigation controls for paged content. Includes previous/next links, page number links, ellipsis for collapsed
-					ranges, and full controlled state support.
+					Navigation controls for paged content. Includes previous/next links, page number links, ellipsis for collapsed ranges,
+					and full controlled state support.
 				</p>
 			</div>
 
@@ -221,9 +221,7 @@ export default function PaginationDocsPage() {
 								<li>The Pagination root renders a nav element with aria-label="pagination" automatically</li>
 								<li>PaginationLink sets aria-current="page" on the active page link</li>
 								<li>PaginationEllipsis has aria-hidden="true" — it is decorative, not interactive</li>
-								<li>
-									For controlled pagination, always prevent default on href="#" links to avoid scroll jumps
-								</li>
+								<li>For controlled pagination, always prevent default on href="#" links to avoid scroll jumps</li>
 							</ul>
 						</div>
 					</CardContent>

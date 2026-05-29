@@ -44,8 +44,8 @@ export default function BreadcrumbsDocsPage() {
 					</z.badge>
 				</div>
 				<p className='text-xl text-muted-foreground max-w-2xl leading-relaxed'>
-					A hierarchical navigation trail that shows users where they are within the application structure. Fully
-					accessible with landmark navigation and current-page semantics.
+					A hierarchical navigation trail that shows users where they are within the application structure. Fully accessible with
+					landmark navigation and current-page semantics.
 				</p>
 			</div>
 

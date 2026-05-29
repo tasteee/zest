@@ -79,22 +79,11 @@ export default function SliderDocsPage() {
 					description='Provide formatValue to display the current value alongside the label.'
 					code={examples.withValue}
 				>
-					<Slider
-						defaultValue={75}
-						label='Opacity'
-						formatValue={(value) => `${value}%`}
-						min={0}
-						max={100}
-						className='w-64'
-					/>
+					<Slider defaultValue={75} label='Opacity' formatValue={(value) => `${value}%`} min={0} max={100} className='w-64' />
 				</ComponentPreview>
 
 				{/* Range */}
-				<ComponentPreview
-					title='Range'
-					description='Use Slider.Range for two-thumb range selection.'
-					code={examples.range}
-				>
+				<ComponentPreview title='Range' description='Use Slider.Range for two-thumb range selection.' code={examples.range}>
 					<Slider.Range defaultValues={[20, 80]} label='Price range' min={0} max={100} className='w-64' />
 				</ComponentPreview>
 
@@ -135,11 +124,7 @@ export default function SliderDocsPage() {
 				</ComponentPreview>
 
 				{/* Disabled */}
-				<ComponentPreview
-					title='Disabled'
-					description='Prevent interaction with isDisabled.'
-					code={examples.disabled}
-				>
+				<ComponentPreview title='Disabled' description='Prevent interaction with isDisabled.' code={examples.disabled}>
 					<Slider defaultValue={40} label='Disabled' isDisabled className='w-64' />
 				</ComponentPreview>
 			</section>

@@ -10,6 +10,7 @@ export const spinnerProps: PropDefinition[] = [
 		name: 'aria-label',
 		type: 'string',
 		defaultValue: '"Loading"',
-		description: 'Accessible label announced to screen readers. Override when the context requires a more specific description.'
+		description:
+			'Accessible label announced to screen readers. Override when the context requires a more specific description.'
 	}
 ]

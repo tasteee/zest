@@ -88,12 +88,7 @@ export default function TextareaDocsPage() {
 					code={examples.withCharCount}
 				>
 					<div className='flex flex-col gap-1 w-80'>
-						<Textarea
-							value={bioText}
-							onChange={handleBioChange}
-							placeholder='Write a bio...'
-							maxLength={MAX_CHAR_COUNT}
-						/>
+						<Textarea value={bioText} onChange={handleBioChange} placeholder='Write a bio...' maxLength={MAX_CHAR_COUNT} />
 						<p className='text-xs text-muted-foreground text-right'>{remainingChars} characters remaining</p>
 					</div>
 				</ComponentPreview>

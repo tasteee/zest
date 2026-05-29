@@ -39,8 +39,8 @@ export default function ToggleGroupDocsPage() {
 					</z.badge>
 				</div>
 				<p className='text-xl text-muted-foreground max-w-2xl leading-relaxed'>
-					A group of two-state buttons that share visual context. Supports single-select and multi-select modes, with
-					color, size, and kind variants inherited from the group or overridden per item.
+					A group of two-state buttons that share visual context. Supports single-select and multi-select modes, with color,
+					size, and kind variants inherited from the group or overridden per item.
 				</p>
 			</div>
 

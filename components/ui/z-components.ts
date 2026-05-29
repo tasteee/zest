@@ -67,6 +67,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger, ZTooltip as Z
 import { Spinner } from './spinner'
 import { ZBox } from './z-box'
 import { ZText } from './z-text'
+import { Table, TableHeader, TableBody, TableFooter, TableHead, TableRow, TableCell, TableCaption } from './table'
 
 export const ZAccordion = Accordion
 export const ZAccordionItem = AccordionItem
@@ -194,6 +195,15 @@ export const ZTooltipContent = TooltipContent
 
 export const ZLoading = Spinner
 
+export const ZTable = Table
+export const ZTableHeader = TableHeader
+export const ZTableBody = TableBody
+export const ZTableFooter = TableFooter
+export const ZTableHead = TableHead
+export const ZTableRow = TableRow
+export const ZTableCell = TableCell
+export const ZTableCaption = TableCaption
+
 export { ZBox, ZText }
 
 export const z = {
@@ -300,5 +310,13 @@ export const z = {
 	tooltipContent: ZTooltipContent,
 	loading: ZLoading,
 	box: ZBox,
-	text: ZText
+	text: ZText,
+	table: ZTable,
+	tableHeader: ZTableHeader,
+	tableBody: ZTableBody,
+	tableFooter: ZTableFooter,
+	tableHead: ZTableHead,
+	tableRow: ZTableRow,
+	tableCell: ZTableCell,
+	tableCaption: ZTableCaption
 }

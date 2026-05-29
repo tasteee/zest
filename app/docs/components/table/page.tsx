@@ -2,24 +2,13 @@
 
 import Link from 'next/link'
 import { z } from '@/components/ui'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { ComponentPreview } from '@/components/docs/component-preview'
 import { PropsTable } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
-import { Card, CardContent } from '@/components/ui/card'
 import { ChevronRight } from 'lucide-react'
-import {
 import { tableProps } from './props'
 import { examples } from './examples'
-	Table,
-	TableBody,
-	TableCaption,
-	TableCell,
-	TableHead,
-	TableHeader,
-	TableRow,
-	TableFooter
-} from '@/components/ui/table'
+
 const invoices = [
 	{ id: 'INV001', status: 'Paid', method: 'Credit Card', amount: '$250.00' },
 	{ id: 'INV002', status: 'Pending', method: 'PayPal', amount: '$150.00' },
@@ -69,40 +58,34 @@ export default function TableDocsPage() {
 				description='A basic table with headers and data rows.'
 				code={examples.quickPreview}
 			>
-				<Table>
-					<TableCaption>A list of recent invoices.</TableCaption>
-					<TableHeader>
-						<TableRow>
-							<TableHead className='w-25'>Invoice</TableHead>
-							<TableHead>Status</TableHead>
-							<TableHead>Method</TableHead>
-							<TableHead className='text-right'>Amount</TableHead>
-						</TableRow>
-					</TableHeader>
-					<TableBody>
+				<z.table>
+					<z.tableCaption>A list of recent invoices.</z.tableCaption>
+					<z.tableHeader>
+						<z.tableRow>
+							<z.tableHead className='w-25'>Invoice</z.tableHead>
+							<z.tableHead>Status</z.tableHead>
+							<z.tableHead>Method</z.tableHead>
+							<z.tableHead className='text-right'>Amount</z.tableHead>
+						</z.tableRow>
+					</z.tableHeader>
+					<z.tableBody>
 						{invoices.map((invoice) => (
-							<TableRow key={invoice.id}>
-								<TableCell className='font-medium'>{invoice.id}</TableCell>
-								<TableCell>{invoice.status}</TableCell>
-								<TableCell>{invoice.method}</TableCell>
-								<TableCell className='text-right'>{invoice.amount}</TableCell>
-							</TableRow>
+							<z.tableRow key={invoice.id}>
+								<z.tableCell className='font-medium'>{invoice.id}</z.tableCell>
+								<z.tableCell>{invoice.status}</z.tableCell>
+								<z.tableCell>{invoice.method}</z.tableCell>
+								<z.tableCell className='text-right'>{invoice.amount}</z.tableCell>
+							</z.tableRow>
 						))}
-					</TableBody>
-				</Table>
+					</z.tableBody>
+				</z.table>
 			</ComponentPreview>
 
 			{/* Usage */}
 			<section className='space-y-6'>
 				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>Usage</h2>
-				<CodeBlock
-					code={examples.usageImport}
-					language='tsx'
-				/>
-				<CodeBlock
-					code={examples.usage}
-					language='tsx'
-				/>
+				<CodeBlock code={examples.usageImport} language='tsx' />
+				<CodeBlock code={examples.usage} language='tsx' />
 			</section>
 
 			{/* Examples */}
@@ -115,30 +98,30 @@ export default function TableDocsPage() {
 					description='A table with a footer row for totals or summaries.'
 					code={examples.withFooter}
 				>
-					<Table>
-						<TableHeader>
-							<TableRow>
-								<TableHead>Invoice</TableHead>
-								<TableHead>Status</TableHead>
-								<TableHead className='text-right'>Amount</TableHead>
-							</TableRow>
-						</TableHeader>
-						<TableBody>
+					<z.table>
+						<z.tableHeader>
+							<z.tableRow>
+								<z.tableHead>Invoice</z.tableHead>
+								<z.tableHead>Status</z.tableHead>
+								<z.tableHead className='text-right'>Amount</z.tableHead>
+							</z.tableRow>
+						</z.tableHeader>
+						<z.tableBody>
 							{invoices.map((invoice) => (
-								<TableRow key={invoice.id}>
-									<TableCell>{invoice.id}</TableCell>
-									<TableCell>{invoice.status}</TableCell>
-									<TableCell className='text-right'>{invoice.amount}</TableCell>
-								</TableRow>
+								<z.tableRow key={invoice.id}>
+									<z.tableCell>{invoice.id}</z.tableCell>
+									<z.tableCell>{invoice.status}</z.tableCell>
+									<z.tableCell className='text-right'>{invoice.amount}</z.tableCell>
+								</z.tableRow>
 							))}
-						</TableBody>
-						<TableFooter>
-							<TableRow>
-								<TableCell colSpan={2}>Total</TableCell>
-								<TableCell className='text-right'>$1,750.00</TableCell>
-							</TableRow>
-						</TableFooter>
-					</Table>
+						</z.tableBody>
+						<z.tableFooter>
+							<z.tableRow>
+								<z.tableCell colSpan={2}>Total</z.tableCell>
+								<z.tableCell className='text-right'>$1,750.00</z.tableCell>
+							</z.tableRow>
+						</z.tableFooter>
+					</z.table>
 				</ComponentPreview>
 
 				{/* With Status Badges */}
@@ -147,28 +130,28 @@ export default function TableDocsPage() {
 					description='Using badges to indicate status in table cells.'
 					code={examples.withStatusBadges}
 				>
-					<Table>
-						<TableHeader>
-							<TableRow>
-								<TableHead>Invoice</TableHead>
-								<TableHead>Status</TableHead>
-								<TableHead>Method</TableHead>
-								<TableHead className='text-right'>Amount</TableHead>
-							</TableRow>
-						</TableHeader>
-						<TableBody>
+					<z.table>
+						<z.tableHeader>
+							<z.tableRow>
+								<z.tableHead>Invoice</z.tableHead>
+								<z.tableHead>Status</z.tableHead>
+								<z.tableHead>Method</z.tableHead>
+								<z.tableHead className='text-right'>Amount</z.tableHead>
+							</z.tableRow>
+						</z.tableHeader>
+						<z.tableBody>
 							{invoices.map((invoice) => (
-								<TableRow key={invoice.id}>
-									<TableCell className='font-medium'>{invoice.id}</TableCell>
-									<TableCell>
+								<z.tableRow key={invoice.id}>
+									<z.tableCell className='font-medium'>{invoice.id}</z.tableCell>
+									<z.tableCell>
 										<z.badge {...getInvoiceStatusBadgeProps(invoice.status)}>{invoice.status}</z.badge>
-									</TableCell>
-									<TableCell>{invoice.method}</TableCell>
-									<TableCell className='text-right'>{invoice.amount}</TableCell>
-								</TableRow>
+									</z.tableCell>
+									<z.tableCell>{invoice.method}</z.tableCell>
+									<z.tableCell className='text-right'>{invoice.amount}</z.tableCell>
+								</z.tableRow>
 							))}
-						</TableBody>
-					</Table>
+						</z.tableBody>
+					</z.table>
 				</ComponentPreview>
 			</section>
 
@@ -186,8 +169,8 @@ export default function TableDocsPage() {
 			{/* Accessibility */}
 			<section className='space-y-6'>
 				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>Accessibility</h2>
-				<Card>
-					<CardContent className='p-6 space-y-4'>
+				<z.card>
+					<z.cardContent className='p-6 space-y-4'>
 						<div className='space-y-2'>
 							<h3 className='font-semibold text-foreground'>Semantic HTML</h3>
 							<p className='text-sm text-muted-foreground'>
@@ -209,8 +192,8 @@ export default function TableDocsPage() {
 								cells.
 							</p>
 						</div>
-					</CardContent>
-				</Card>
+					</z.cardContent>
+				</z.card>
 			</section>
 		</div>
 	)

@@ -39,8 +39,8 @@ export default function ScrollAreaDocsPage() {
 					</z.badge>
 				</div>
 				<p className='text-xl text-muted-foreground max-w-2xl leading-relaxed'>
-					A custom-styled scrollable region built on Radix ScrollArea. Replaces the browser native scrollbar with a
-					themed overlay track that works consistently across platforms.
+					A custom-styled scrollable region built on Radix ScrollArea. Replaces the browser native scrollbar with a themed
+					overlay track that works consistently across platforms.
 				</p>
 			</div>
 
