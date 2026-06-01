@@ -15,14 +15,14 @@ const voicePrinciples = [
 	},
 	{
 		title: 'Confident',
-		description: "I know my shit and I'm not afraid to say so.",
+		description: "I know my craft and I'm not afraid to say so.",
 		example: '"This will change everything" not "We think this might possibly help"',
 		color: 'neon-pink'
 	},
 	{
 		title: 'Rebellious',
 		description: 'Challenge the status quo. Question everything. Rules are suggestions.',
-		example: '"Fuck the algorithm" not "Working within platform guidelines"',
+		example: '"Outshine the algorithm" not "Working within platform guidelines"',
 		color: 'neon-purple'
 	},
 	{
@@ -42,12 +42,12 @@ const toneSpectrum = [
 	{
 		context: 'Success states',
 		tone: 'Celebratory',
-		example: 'Fuck yes. You did it.'
+		example: 'Iconic. You did it.'
 	},
 	{
 		context: 'Onboarding',
 		tone: 'Warm + Guiding',
-		example: "Let's get you set up. No bullshit, promise."
+		example: "Let's get you set up. No fluff, promise."
 	},
 	{
 		context: 'Marketing',
@@ -57,7 +57,7 @@ const toneSpectrum = [
 	{
 		context: 'Support',
 		tone: 'Empathetic + Honest',
-		example: "That sucks. Here's what we can do."
+		example: "That stings. Here's what we can do."
 	}
 ]
 
@@ -157,7 +157,7 @@ export function VoiceTone({ onInView }: VoiceToneProps) {
 						<ul className='space-y-4'>
 							<li className='flex items-start gap-3'>
 								<span className='text-neon-purple mt-1'>•</span>
-								<span className='text-foreground'>&quot;Let&apos;s fucking go.&quot;</span>
+								<span className='text-foreground'>&quot;Let&apos;s go full voltage.&quot;</span>
 							</li>
 							<li className='flex items-start gap-3'>
 								<span className='text-neon-purple mt-1'>•</span>

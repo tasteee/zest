@@ -92,7 +92,7 @@ export const IconsAssets = (props: IconsAssetsPropsT) => {
 					</div>
 					<h2 className='text-primary font-bold text-4xl md:text-5xl lg:text-6xl tracking-tight mb-6'>Icons & Assets</h2>
 					<p className='text-foreground text-lg max-w-2xl leading-relaxed'>
-						Minimal. Functional. Sharp as fuck.
+						Minimal. Functional. Razor sharp.
 						<span className='text-muted-foreground'> Every pixel has purpose.</span>
 					</p>
 				</div>

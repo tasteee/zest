@@ -110,7 +110,9 @@ export function UsageExamples({ onInView }: UsageExamplesProps) {
 							</div>
 							<div>
 								<h4 className='text-primary font-semibold text-sm mb-1'>Campaign launched</h4>
-								<p className='text-foreground text-sm'>Your campaign &quot;Spring Drop&quot; is now live. Let&apos;s fucking go.</p>
+								<p className='text-foreground text-sm'>
+									Your campaign &quot;Spring Drop&quot; is now live. Let&apos;s go full voltage.
+								</p>
 							</div>
 						</div>
 
@@ -140,7 +142,7 @@ export function UsageExamples({ onInView }: UsageExamplesProps) {
 							</div>
 							<div>
 								<h4 className='text-primary font-semibold text-sm mb-1'>New feature unlocked</h4>
-								<p className='text-foreground text-sm'>You now have access to advanced analytics. About damn time.</p>
+								<p className='text-foreground text-sm'>You now have access to advanced analytics. Right on time.</p>
 							</div>
 						</div>
 					</div>
@@ -258,7 +260,7 @@ export function UsageExamples({ onInView }: UsageExamplesProps) {
 					</h3>
 					<p className='text-foreground max-w-xl mx-auto mb-10'>
 						Put that checkered frettboard to some good use.
-						<span className='text-white font-bold'> Fuck it up.</span>
+						<span className='text-white font-bold'> Serve it sharp.</span>
 					</p>
 					<button className='bg-neon-purple text-primary-foreground px-8 py-4 rounded-md font-bold text-lg hover:opacity-90 transition-opacity'>
 						Start Creating

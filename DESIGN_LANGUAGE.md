@@ -12,20 +12,19 @@ zest is a design language built for bold, risque digital products.
 - **Icons**: Phosphor Icons (`@phosphor-icons/react`). No other icon library is permitted.
 - **Color model**: OKLCH for all color definitions.
 - **Border radius base**: `0.5rem` (`--radius`)
-- **No blue. Ever.**
 
 ---
 
 ## Color System
 
-### Identity Neons
+### Identity Palette
 
-| Name        | Hex       | OKLCH                  | CSS Variable | Role                                     |
-| ----------- | --------- | ---------------------- | ------------ | ---------------------------------------- |
-| Neon Green  | `#39FF14` | `oklch(0.85 0.28 145)` | `---green`   | Primary actions, success, key highlights |
-| Neon Pink   | `#FF1493` | `oklch(0.75 0.25 350)` | `---pink`    | Secondary accents, badges, emphasis      |
-| Neon Purple | `#BF40BF` | `oklch(0.7 0.25 300)`  | `---purple`  | Tertiary accents, tags, categories       |
-| Neon Orange | `#FF6B35` | `oklch(0.8 0.22 55)`   | `---orange`  | Warnings, attention, call-outs           |
+| Name        | Hex       | OKLCH                  | CSS Variable    | Role                                  |
+| ----------- | --------- | ---------------------- | --------------- | ------------------------------------- |
+| Pure White  | `#FAFAFA` | `oklch(0.98 0 0)`      | `--primary`     | Headlines, primary text, primary CTAs |
+| Neon Pink   | `#FF1493` | `oklch(0.75 0.25 350)` | `---pink`       | Secondary accents, badges, emphasis   |
+| Neon Purple | `#BF40BF` | `oklch(0.7 0.25 300)`  | `---purple`     | Tertiary accents, tags, categories    |
+| Danger Red  | `#FF3B30` | `oklch(0.65 0.25 25)`  | `--destructive` | Error, danger, destructive actions    |
 
 ### Grayscale
 
@@ -51,22 +50,12 @@ zest is a design language built for bold, risque digital products.
 | `--secondary-foreground` | `oklch(0.65 0 0)`       | Text on secondary     |
 | `--muted`                | `oklch(0.2 0.012 145)`  | Disabled backgrounds  |
 | `--muted-foreground`     | `oklch(0.55 0 0)`       | Captions, hints       |
-| `--accent`               | `oklch(0.85 0.25 145)`  | Neon green accent     |
-| `--accent-foreground`    | `oklch(0.12 0.02 145)`  | Text on accent fills  |
+| `--accent`               | `oklch(0.7 0.25 300)`   | Purple accent         |
+| `--accent-foreground`    | `oklch(0.98 0 0)`       | Text on accent fills  |
 | `--destructive`          | `oklch(0.65 0.25 25)`   | Error / destructive   |
 | `--border`               | `oklch(0.28 0.015 145)` | Borders, dividers     |
 | `--input`                | `oklch(0.22 0.015 145)` | Input backgrounds     |
 | `--ring`                 | `oklch(0.85 0.25 145)`  | Focus rings           |
-
-### Chart Colors
-
-| Token       | Value                 |
-| ----------- | --------------------- |
-| `--chart-1` | `var(---green)`       |
-| `--chart-2` | `var(---pink)`        |
-| `--chart-3` | `var(---purple)`      |
-| `--chart-4` | `var(---orange)`      |
-| `--chart-5` | `oklch(0.75 0.2 120)` |
 
 ### Color Rules
 
@@ -76,10 +65,10 @@ zest is a design language built for bold, risque digital products.
 - Maintain high contrast between text and backgrounds.
 - Use white sparingly — only for headlines and CTAs — to create hierarchy.
 - Scatter identity colors throughout the UI freely.
+- Use red only for danger, errors, destructive actions, and invalid form states.
 
 **Never:**
 
-- Use blue. Not even close.
 - Place similar background colors on top of each other.
 - Use pure black (`#000000`) as a background.
 - Use neon colors for large text blocks.
@@ -195,10 +184,9 @@ Used for cards, buttons, inputs, badges. Badges and status pills use `rounded-fu
 | Context | Class                   |
 | ------- | ----------------------- |
 | Default | `text-foreground`       |
-| Success | `text-neon-green`       |
 | Accent  | `text-neon-pink`        |
 | Info    | `text-neon-purple`      |
-| Warning | `text-neon-orange`      |
+| Danger  | `text-destructive`      |
 | Muted   | `text-muted-foreground` |
 
 ---
@@ -207,16 +195,16 @@ Used for cards, buttons, inputs, badges. Badges and status pills use `rounded-fu
 
 ### Buttons
 
-**Primary**: Solid fill (`bg-primary`, `bg-neon-green`, `bg-neon-pink`), `text-primary-foreground`, `rounded-md`, `font-semibold`, `px-6 py-3`.
+**Primary**: Solid fill using `--primary`, `---purple`, or `---pink`. Red is reserved for danger buttons only.
 
-**Secondary / Outline**: `border border-border`, `text-foreground`, `rounded-md`, `font-medium`. Hover: `border-foreground/50`.
+**Secondary / Outline**: Border uses `--border`; text uses `--foreground`; hover raises border contrast.
 
-**Ghost / Text**: No border, neon text color, `font-medium`. Hover: reduced opacity.
+**Ghost / Text**: No border, purple or pink text color, `font-medium`. Hover: reduced opacity.
 
 ### Badges & Tags
 
 - Pill shape: `rounded-full`, `text-xs font-semibold`, `px-3 py-1.5`.
-- Tinted bg: `bg-{neon-color}/15` + `text-{neon-color}`.
+- Tinted bg: purple or pink tint with matching text.
 - Outline variant: `border border-border`, `text-muted-foreground`.
 - Inline status: dot + uppercase tracking-wider text (`text-xs font-semibold tracking-wider uppercase`).
 
@@ -230,29 +218,28 @@ Used for cards, buttons, inputs, badges. Badges and status pills use `rounded-fu
 ### Form Inputs
 
 - `bg-transparent border border-border rounded-md px-4 py-3`
-- Focus: `focus:border-neon-green focus:outline-none`
-- Error: `border-neon-pink`
+- Focus: purple or pink border/ring.
+- Error: red border/ring using `--destructive`.
 - Disabled: `text-muted-foreground`
 
 ### Tabs
 
 - Text-based, no pill backgrounds.
-- Active: `text-primary` + `h-0.5 bg-neon-green` underline.
+- Active: `text-primary` + purple or pink underline.
 - Inactive: `text-muted-foreground`, hover to `text-foreground`.
 
 ### Notifications / Alerts
 
 - Border-left or full border with tinted background.
-- Success: `border-neon-green/30 bg-neon-green/5`
-- Warning: `border-neon-orange/30 bg-neon-orange/5`
-- Info: `border-neon-purple/30 bg-neon-purple/5`
+- General: purple or pink border with a subtle matching tint.
+- Danger: red border with a subtle red tint.
 - Icon + title + description pattern.
 
 ### Data Tables
 
 - Header: `text-muted-foreground text-xs font-semibold tracking-wider uppercase`
 - Rows: `border-b border-border`, hover `bg-secondary/50`
-- Status: colored dot + neon text.
+- Status: purple, pink, white, or red dot with matching text. Red means danger only.
 
 ---
 
@@ -263,7 +250,7 @@ Used for cards, buttons, inputs, badges. Badges and status pills use `rounded-fu
 
 ### Icon Mark
 
-- Solid neon-green circle, used as the compact logo form.
+- Solid white, purple, or pink mark, used as the compact logo form.
 
 ---
 
@@ -274,19 +261,19 @@ Used for cards, buttons, inputs, badges. Badges and status pills use `rounded-fu
 | Principle  | Description                                                        |
 | ---------- | ------------------------------------------------------------------ |
 | Direct     | Say what you mean. No filler.                                      |
-| Confident  | Know your shit and say so.                                         |
+| Confident  | Know your edge and say so.                                         |
 | Rebellious | Challenge the status quo. Rules are suggestions.                   |
 | Human      | Real talk. Swear when it fits. Be the friend, not the corporation. |
 
 ### Tone by Context
 
-| Context        | Tone                | Example                                       |
-| -------------- | ------------------- | --------------------------------------------- |
-| Error messages | Calm + Direct       | "Something broke. We're on it."               |
-| Success states | Celebratory         | "Fuck yes. You did it."                       |
-| Onboarding     | Warm + Guiding      | "Let's get you set up. No bullshit, promise." |
-| Marketing      | Bold + Provocative  | "Ready to stop playing it safe?"              |
-| Support        | Empathetic + Honest | "That sucks. Here's what we can do."          |
+| Context        | Tone                | Example                                    |
+| -------------- | ------------------- | ------------------------------------------ |
+| Error messages | Calm + Direct       | "Something broke. We're on it."            |
+| Success states | Celebratory         | "Iconic. You did it."                      |
+| Onboarding     | Warm + Guiding      | "Let's get you set up. No fluff, promise." |
+| Marketing      | Bold + Provocative  | "Ready to stop playing it safe?"           |
+| Support        | Empathetic + Honest | "That stings. Here's what we can do."      |
 
 ---
 
@@ -296,20 +283,20 @@ Custom WebKit scrollbar:
 
 - Width/height: `6px`
 - Track: transparent
-- Thumb: `oklch(0.3 0.015 145)`, `border-radius: 3px`
-- Thumb hover: `oklch(0.4 0.015 145)`
+- Thumb: `oklch(0.3 0.015 300)`, `border-radius: 3px`
+- Thumb hover: `oklch(0.4 0.015 300)`
 
 ---
 
 ## Background
 
-Page uses a subtle gradient from near-black to dark green-black:
+Page uses a subtle gradient from near-black to dark purple-black:
 
 ```
-from-[#050908] via-[#0a0f0a] to-[#0d120d]
+from-[#08060a] via-[#0d0a10] to-[#130f18]
 ```
 
-All backgrounds carry a slight green tint (hue 145 in OKLCH) to reinforce the neon-green identity without being overt.
+All backgrounds carry a slight purple tint (hue 300 in OKLCH) to reinforce the purple and pink identity without being overt.
 
 ---
 
@@ -317,14 +304,14 @@ All backgrounds carry a slight green tint (hue 145 in OKLCH) to reinforce the ne
 
 | Token                          | OKLCH                   |
 | ------------------------------ | ----------------------- |
-| `--sidebar`                    | `oklch(0.1 0.015 145)`  |
+| `--sidebar`                    | `oklch(0.1 0.015 300)`  |
 | `--sidebar-foreground`         | `oklch(0.65 0 0)`       |
 | `--sidebar-primary`            | `oklch(0.98 0 0)`       |
-| `--sidebar-primary-foreground` | `oklch(0.12 0.02 145)`  |
-| `--sidebar-accent`             | `oklch(0.85 0.25 145)`  |
-| `--sidebar-accent-foreground`  | `oklch(0.12 0.02 145)`  |
-| `--sidebar-border`             | `oklch(0.25 0.015 145)` |
-| `--sidebar-ring`               | `oklch(0.85 0.25 145)`  |
+| `--sidebar-primary-foreground` | `oklch(0.12 0.02 300)`  |
+| `--sidebar-accent`             | `oklch(0.7 0.25 300)`   |
+| `--sidebar-accent-foreground`  | `oklch(0.98 0 0)`       |
+| `--sidebar-border`             | `oklch(0.25 0.015 300)` |
+| `--sidebar-ring`               | `oklch(0.7 0.25 300)`   |
 
 ---
 
@@ -332,11 +319,13 @@ All backgrounds carry a slight green tint (hue 145 in OKLCH) to reinforce the ne
 
 1. **Dark only.** No light theme. No light mode variables.
 2. **No blue.** Anywhere. For any reason.
-3. **No pure black** (`#000000`). Backgrounds use green-tinted near-blacks.
-4. **No shadows.** Elevation is communicated through borders and background shifts.
-5. **Neons are for accents**, never for large body text blocks.
-6. **White is hierarchy**, not default. Headlines and CTAs only.
-7. **Phosphor Icons only.** No lucide, heroicons, or inline SVGs.
-8. **DM Sans only.** No secondary display typeface.
-9. **OKLCH color model** for all color definitions.
-10. **Borders over backgrounds** for card/container delineation.
+3. **No green or orange.** Purple, pink, white, and danger red are the complete palette.
+4. **Red is danger only.** Do not use red for general emphasis or decoration.
+5. **No pure black** (`#000000`). Backgrounds use purple-tinted near-blacks.
+6. **No shadows.** Elevation is communicated through borders and background shifts.
+7. **Neons are for accents**, never for large body text blocks.
+8. **White is hierarchy**, not default. Headlines and CTAs only.
+9. **Phosphor Icons only.** No lucide, heroicons, or inline SVGs.
+10. **DM Sans only.** No secondary display typeface.
+11. **OKLCH color model** for all color definitions.
+12. **Borders over backgrounds** for card/container delineation.

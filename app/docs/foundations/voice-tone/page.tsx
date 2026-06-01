@@ -18,14 +18,14 @@ const voicePrinciples = [
 	},
 	{
 		title: 'Confident',
-		description: "We know our shit. We\'re not afraid to show it.",
+		description: "We know our craft. We\'re not afraid to show it.",
 		example: '"This will change everything" not "We think this might possibly help"',
 		color: 'neon-pink'
 	},
 	{
 		title: 'Rebellious',
 		description: 'Challenge the status quo. Question everything. Rules are suggestions.',
-		example: '"Fuck the algorithm" not "Working within platform guidelines"',
+		example: '"Outshine the algorithm" not "Working within platform guidelines"',
 		color: 'neon-purple'
 	},
 	{
@@ -45,12 +45,12 @@ const toneSpectrum = [
 	{
 		context: 'Success states',
 		tone: 'Celebratory',
-		example: 'Fuck yes. You did it.'
+		example: 'Iconic. You did it.'
 	},
 	{
 		context: 'Onboarding',
 		tone: 'Warm + Guiding',
-		example: "Let's get you set up. No bullshit, promise."
+		example: "Let's get you set up. No fluff, promise."
 	},
 	{
 		context: 'Marketing',
@@ -60,7 +60,7 @@ const toneSpectrum = [
 	{
 		context: 'Support',
 		tone: 'Empathetic + Honest',
-		example: "That sucks. Here's what we can do."
+		example: "That stings. Here's what we can do."
 	}
 ]
 
@@ -127,7 +127,7 @@ export default function VoiceTonePage() {
 							Sound Like This
 						</z.text.h4>
 						<z.box as='ul' className='space-y-3 text-sm text-foreground'>
-							<z.box as='li'>&quot;Let&apos;s fucking go.&quot;</z.box>
+							<z.box as='li'>&quot;Let&apos;s go full voltage.&quot;</z.box>
 							<z.box as='li'>&quot;No cap, this slaps.&quot;</z.box>
 							<z.box as='li'>&quot;Built different. Hits different.&quot;</z.box>
 							<z.box as='li'>&quot;You in or you out?&quot;</z.box>

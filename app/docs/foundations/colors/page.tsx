@@ -171,7 +171,7 @@ export default function ColorsPage() {
 	return (
 		<z.box>
 			<DocsTitle>Colors</DocsTitle>
-			<DocsDescription>Neons that cut through the dark. No fucking blue. Ever.</DocsDescription>
+			<DocsDescription>Neons that cut through the dark. No boring blue. Ever.</DocsDescription>
 
 			<DocsSection>
 				<DocsSectionTitle>Brand Neons</DocsSectionTitle>

@@ -17,7 +17,7 @@ const typeScale = [
 		weight: '700',
 		lineHeight: '0.9',
 		class: 'text-7xl font-bold leading-[0.9]',
-		sample: 'Fuck it.'
+		sample: 'Serve it sharp.'
 	},
 	{
 		name: 'H1',

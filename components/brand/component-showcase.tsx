@@ -35,7 +35,7 @@ export function ComponentShowcase({ onInView }: ComponentShowcaseProps) {
 					<h2 className='text-primary font-bold text-4xl md:text-5xl lg:text-6xl tracking-tight mb-6'>Components</h2>
 					<p className='text-foreground text-lg max-w-2xl leading-relaxed'>
 						No shade. Accessible borders.
-						<span className='text-muted-foreground'> Ultra premium, zero bullshit.</span>
+						<span className='text-muted-foreground'> Ultra premium, zero filler.</span>
 					</p>
 				</div>
 
@@ -58,7 +58,7 @@ export function ComponentShowcase({ onInView }: ComponentShowcaseProps) {
 									Let&apos;s Go
 								</button>
 								<button className='bg-neon-pink text-primary-foreground px-6 py-3 rounded-md font-semibold hover:opacity-90 transition-opacity'>
-									Fuck Yeah
+									Go Off
 								</button>
 							</div>
 						</div>
