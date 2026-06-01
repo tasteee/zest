@@ -20,7 +20,8 @@ import {
 } from '@/components/ui/menubar'
 import { ComponentPreview } from '@/components/docs/component-preview'
 import { PropsTable } from '@/components/docs/props-table'
-import { CodeBlock } from '@/components/docs/code-block'import { ChevronRight } from 'lucide-react'
+import { CodeBlock } from '@/components/docs/code-block'
+import { ChevronRight } from 'lucide-react'
 import { useState } from 'react'
 import { menubarItemProps, menubarCheckboxItemProps, menubarRadioGroupProps } from './props'
 import { examples } from './examples'
@@ -196,19 +197,27 @@ export default function MenuDocsPage() {
 							<z.text.h3>Keyboard Interactions</z.text.h3>
 							<z.box className='grid gap-2'>
 								<z.box className='flex items-center gap-4 text-sm'>
-									<z.text as='kbd' className='px-2 py-1 bg-muted rounded text-xs font-mono'>← →</z.text>
+									<z.text as='kbd' className='px-2 py-1 bg-muted rounded text-xs font-mono'>
+										← →
+									</z.text>
 									<z.text className='text-muted-foreground'>Move between top-level menu triggers</z.text>
 								</z.box>
 								<z.box className='flex items-center gap-4 text-sm'>
-									<z.text as='kbd' className='px-2 py-1 bg-muted rounded text-xs font-mono'>↑ ↓</z.text>
+									<z.text as='kbd' className='px-2 py-1 bg-muted rounded text-xs font-mono'>
+										↑ ↓
+									</z.text>
 									<z.text className='text-muted-foreground'>Move between items in an open menu</z.text>
 								</z.box>
 								<z.box className='flex items-center gap-4 text-sm'>
-									<z.text as='kbd' className='px-2 py-1 bg-muted rounded text-xs font-mono'>Enter / Space</z.text>
+									<z.text as='kbd' className='px-2 py-1 bg-muted rounded text-xs font-mono'>
+										Enter / Space
+									</z.text>
 									<z.text className='text-muted-foreground'>Select the focused item</z.text>
 								</z.box>
 								<z.box className='flex items-center gap-4 text-sm'>
-									<z.text as='kbd' className='px-2 py-1 bg-muted rounded text-xs font-mono'>Escape</z.text>
+									<z.text as='kbd' className='px-2 py-1 bg-muted rounded text-xs font-mono'>
+										Escape
+									</z.text>
 									<z.text className='text-muted-foreground'>Close the open menu</z.text>
 								</z.box>
 							</z.box>

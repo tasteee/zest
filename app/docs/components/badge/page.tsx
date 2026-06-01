@@ -4,7 +4,8 @@ import Link from 'next/link'
 import { z } from '@/components/ui'
 import { ComponentPreview } from '@/components/docs/component-preview'
 import { PropsTable } from '@/components/docs/props-table'
-import { CodeBlock } from '@/components/docs/code-block'import { ChevronRight, Check, Clock, Palette, Zap } from 'lucide-react'
+import { CodeBlock } from '@/components/docs/code-block'
+import { ChevronRight, Check, Clock, Palette, Zap } from 'lucide-react'
 import { badgeProps } from './props'
 import { examples } from './examples'
 export default function BadgeDocsPage() {
@@ -35,9 +36,7 @@ export default function BadgeDocsPage() {
 				</z.text.body>
 			</z.box>
 
-			<ComponentPreview
-				code={examples.quickPreview}
-			>
+			<ComponentPreview code={examples.quickPreview}>
 				<z.badge>z.badge</z.badge>
 			</ComponentPreview>
 
@@ -50,9 +49,7 @@ export default function BadgeDocsPage() {
 			<z.box as='section' className='space-y-8'>
 				<z.text.h2>Examples</z.text.h2>
 
-				<ComponentPreview
-					code={examples.kindsAndColors}
-				>
+				<ComponentPreview code={examples.kindsAndColors}>
 					<z.box className='flex flex-wrap gap-2'>
 						<z.badge isOutline isNeutral>
 							Outline Neutral
@@ -66,9 +63,7 @@ export default function BadgeDocsPage() {
 					</z.box>
 				</ComponentPreview>
 
-				<ComponentPreview
-					code={examples.withIcons}
-				>
+				<ComponentPreview code={examples.withIcons}>
 					<z.box className='flex flex-wrap gap-2'>
 						<z.badge isSolid isPurple>
 							<Check className='h-3 w-3' />
@@ -88,9 +83,7 @@ export default function BadgeDocsPage() {
 					</z.box>
 				</ComponentPreview>
 
-				<ComponentPreview
-					code={examples.colorVariants}
-				>
+				<ComponentPreview code={examples.colorVariants}>
 					<z.box className='grid grid-cols-2 gap-2 w-full max-w-xl'>
 						<z.badge isOutline isNeutral>
 							<Palette className='h-3 w-3' />

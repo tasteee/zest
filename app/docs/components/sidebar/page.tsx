@@ -19,7 +19,8 @@ import {
 } from '@/components/ui/sidebar'
 import { ComponentPreview } from '@/components/docs/component-preview'
 import { PropsTable } from '@/components/docs/props-table'
-import { CodeBlock } from '@/components/docs/code-block'import { ChevronRight, Home, Settings, Users, BarChart3 } from 'lucide-react'
+import { CodeBlock } from '@/components/docs/code-block'
+import { ChevronRight, Home, Settings, Users, BarChart3 } from 'lucide-react'
 import { sidebarProviderProps, sidebarProps, sidebarMenuButtonProps, useSidebarReturn } from './props'
 import { examples } from './examples'
 
@@ -95,7 +96,9 @@ export default function SidebarDocsPage() {
 								<z.text className='text-sm font-medium'>Dashboard</z.text>
 							</z.box>
 							<z.box as='main' className='p-4'>
-								<z.text.body className='text-sm text-muted-foreground'>Click the trigger or press ⌘B to collapse the sidebar.</z.text.body>
+								<z.text.body className='text-sm text-muted-foreground'>
+									Click the trigger or press ⌘B to collapse the sidebar.
+								</z.text.body>
 							</z.box>
 						</SidebarInset>
 					</SidebarProvider>
@@ -135,11 +138,17 @@ export default function SidebarDocsPage() {
 						<z.box className='space-y-2'>
 							<z.text.h3>Best Practices</z.text.h3>
 							<z.box as='ul' className='text-sm text-muted-foreground space-y-2 list-disc list-inside'>
-								<z.box as='li'>SidebarTrigger renders a button with an accessible label — always keep it visible in the layout header</z.box>
+								<z.box as='li'>
+									SidebarTrigger renders a button with an accessible label — always keep it visible in the layout header
+								</z.box>
 								<z.box as='li'>Keyboard shortcut ⌘B (Mac) / Ctrl+B (Windows) toggles the sidebar automatically</z.box>
 								<z.box as='li'>On mobile the sidebar renders as a Drawer — no additional configuration needed</z.box>
-								<z.box as='li'>Use SidebarMenuButton with asChild and an anchor tag to get correct link semantics and aria-current</z.box>
-								<z.box as='li'>Set the isActive prop on the active SidebarMenuButton to convey current location to assistive technology</z.box>
+								<z.box as='li'>
+									Use SidebarMenuButton with asChild and an anchor tag to get correct link semantics and aria-current
+								</z.box>
+								<z.box as='li'>
+									Set the isActive prop on the active SidebarMenuButton to convey current location to assistive technology
+								</z.box>
 							</z.box>
 						</z.box>
 					</z.cardContent>

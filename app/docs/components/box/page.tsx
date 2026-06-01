@@ -4,7 +4,8 @@ import Link from 'next/link'
 import { z } from '@/components/ui'
 import { ComponentPreview } from '@/components/docs/component-preview'
 import { PropsTable } from '@/components/docs/props-table'
-import { CodeBlock } from '@/components/docs/code-block'import { ChevronRight } from 'lucide-react'
+import { CodeBlock } from '@/components/docs/code-block'
+import { ChevronRight } from 'lucide-react'
 import { zBoxLayoutProps, zBoxSpacingProps, zBoxVisualProps } from './props'
 import { examples } from './examples'
 
@@ -144,7 +145,9 @@ export default function BoxDocsPage() {
 						<z.box className='space-y-2'>
 							<z.text.h3>Best Practices</z.text.h3>
 							<z.box as='ul' className='text-sm text-muted-foreground space-y-2 list-disc list-inside'>
-								<z.box as='li'>Use the as prop to render semantic HTML elements — never nest a div where a section or article belongs</z.box>
+								<z.box as='li'>
+									Use the as prop to render semantic HTML elements — never nest a div where a section or article belongs
+								</z.box>
 								<z.box as='li'>Always use design-system CSS variables for colors and spacing rather than hardcoded values</z.box>
 								<z.box as='li'>z.box does not apply any roles — semantic meaning comes from the element you render via as</z.box>
 							</z.box>

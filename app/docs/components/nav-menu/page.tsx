@@ -13,7 +13,8 @@ import {
 } from '@/components/ui/navigation-menu'
 import { ComponentPreview } from '@/components/docs/component-preview'
 import { PropsTable } from '@/components/docs/props-table'
-import { CodeBlock } from '@/components/docs/code-block'import { ChevronRight } from 'lucide-react'
+import { CodeBlock } from '@/components/docs/code-block'
+import { ChevronRight } from 'lucide-react'
 import { navigationMenuProps, navigationMenuLinkProps } from './props'
 import { examples } from './examples'
 
@@ -165,19 +166,27 @@ export default function NavMenuDocsPage() {
 							<z.text.h3>Keyboard Interactions</z.text.h3>
 							<z.box className='grid gap-2'>
 								<z.box className='flex items-center gap-4 text-sm'>
-									<z.text as='kbd' className='px-2 py-1 bg-muted rounded text-xs font-mono'>Tab</z.text>
+									<z.text as='kbd' className='px-2 py-1 bg-muted rounded text-xs font-mono'>
+										Tab
+									</z.text>
 									<z.text className='text-muted-foreground'>Move focus to the next menu item or trigger</z.text>
 								</z.box>
 								<z.box className='flex items-center gap-4 text-sm'>
-									<z.text as='kbd' className='px-2 py-1 bg-muted rounded text-xs font-mono'>Enter / Space</z.text>
+									<z.text as='kbd' className='px-2 py-1 bg-muted rounded text-xs font-mono'>
+										Enter / Space
+									</z.text>
 									<z.text className='text-muted-foreground'>Open the focused trigger's content panel</z.text>
 								</z.box>
 								<z.box className='flex items-center gap-4 text-sm'>
-									<z.text as='kbd' className='px-2 py-1 bg-muted rounded text-xs font-mono'>Escape</z.text>
+									<z.text as='kbd' className='px-2 py-1 bg-muted rounded text-xs font-mono'>
+										Escape
+									</z.text>
 									<z.text className='text-muted-foreground'>Close the open content panel</z.text>
 								</z.box>
 								<z.box className='flex items-center gap-4 text-sm'>
-									<z.text as='kbd' className='px-2 py-1 bg-muted rounded text-xs font-mono'>← →</z.text>
+									<z.text as='kbd' className='px-2 py-1 bg-muted rounded text-xs font-mono'>
+										← →
+									</z.text>
 									<z.text className='text-muted-foreground'>Navigate between top-level triggers</z.text>
 								</z.box>
 							</z.box>
@@ -187,7 +196,9 @@ export default function NavMenuDocsPage() {
 							<z.box as='ul' className='text-sm text-muted-foreground space-y-2 list-disc list-inside'>
 								<z.box as='li'>NavigationMenu renders a nav element — use it as the primary site navigation landmark</z.box>
 								<z.box as='li'>Set active={true} on NavigationMenuLink for the current route to expose aria-current="page"</z.box>
-								<z.box as='li'>Use navigationMenuTriggerStyle() on simple link items for visual consistency with trigger items</z.box>
+								<z.box as='li'>
+									Use navigationMenuTriggerStyle() on simple link items for visual consistency with trigger items
+								</z.box>
 							</z.box>
 						</z.box>
 					</z.cardContent>

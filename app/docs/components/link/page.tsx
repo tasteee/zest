@@ -1,6 +1,7 @@
 'use client'
 
-import NextLink from 'next/link'import { z } from '@/components/ui'
+import NextLink from 'next/link'
+import { z } from '@/components/ui'
 import { ComponentPreview } from '@/components/docs/component-preview'
 import { PropsTable } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
@@ -90,8 +91,8 @@ export default function LinkDocsPage() {
 				<z.box className='space-y-4'>
 					<z.text.h3>With Router Link</z.text.h3>
 					<z.text.body className='text-sm text-muted-foreground'>
-						Use the <z.box as='code'>as</z.box> prop to render with a router-aware link component, such as Next.js <z.box as='code'>Link</z.box>. Pass the
-						destination via <z.box as='code'>href</z.box> or <z.box as='code'>to</z.box>.
+						Use the <z.box as='code'>as</z.box> prop to render with a router-aware link component, such as Next.js{' '}
+						<z.box as='code'>Link</z.box>. Pass the destination via <z.box as='code'>href</z.box> or <z.box as='code'>to</z.box>.
 					</z.text.body>
 					<ComponentPreview code={examples.withRouterLink}>
 						<z.box className='flex flex-wrap gap-4'>

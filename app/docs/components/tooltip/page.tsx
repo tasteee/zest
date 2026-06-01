@@ -4,7 +4,8 @@ import Link from 'next/link'
 import { z } from '@/components/ui'
 import { ComponentPreview } from '@/components/docs/component-preview'
 import { PropsTable } from '@/components/docs/props-table'
-import { CodeBlock } from '@/components/docs/code-block'import { ChevronRight, Plus, HelpCircle, Info } from 'lucide-react'
+import { CodeBlock } from '@/components/docs/code-block'
+import { ChevronRight, Plus, HelpCircle, Info } from 'lucide-react'
 import { tooltipProps, tooltipContentProps } from './props'
 import { examples } from './examples'
 
@@ -52,14 +53,8 @@ export default function TooltipDocsPage() {
 			{/* Usage */}
 			<z.box as='section' className='space-y-6'>
 				<z.text.h2>Usage</z.text.h2>
-				<CodeBlock
-					code={examples.usageImport}
-					language='tsx'
-				/>
-				<CodeBlock
-					code={examples.usage}
-					language='tsx'
-				/>
+				<CodeBlock code={examples.usageImport} language='tsx' />
+				<CodeBlock code={examples.usage} language='tsx' />
 			</z.box>
 
 			{/* Examples */}
@@ -103,11 +98,7 @@ export default function TooltipDocsPage() {
 				</ComponentPreview>
 
 				{/* Help Icon */}
-				<ComponentPreview
-					title='Help Icon'
-					description='Using tooltips to provide help text.'
-					code={examples.helpIcon}
-				>
+				<ComponentPreview title='Help Icon' description='Using tooltips to provide help text.' code={examples.helpIcon}>
 					<z.box className='flex items-center gap-2'>
 						<z.text className='text-sm font-medium'>Password</z.text>
 						<z.tooltip tip='Password must be at least 8 characters'>
@@ -155,11 +146,15 @@ export default function TooltipDocsPage() {
 							<z.text.h3>Keyboard Interactions</z.text.h3>
 							<z.box className='grid gap-2'>
 								<z.box className='flex items-center gap-4 text-sm'>
-									<z.text as='kbd' className='px-2 py-1 bg-muted rounded text-xs font-mono'>Tab</z.text>
+									<z.text as='kbd' className='px-2 py-1 bg-muted rounded text-xs font-mono'>
+										Tab
+									</z.text>
 									<z.text className='text-muted-foreground'>Move focus to the trigger</z.text>
 								</z.box>
 								<z.box className='flex items-center gap-4 text-sm'>
-									<z.text as='kbd' className='px-2 py-1 bg-muted rounded text-xs font-mono'>Escape</z.text>
+									<z.text as='kbd' className='px-2 py-1 bg-muted rounded text-xs font-mono'>
+										Escape
+									</z.text>
 									<z.text className='text-muted-foreground'>Close the tooltip</z.text>
 								</z.box>
 							</z.box>

@@ -13,7 +13,8 @@ import {
 } from '@/components/ui/pagination'
 import { ComponentPreview } from '@/components/docs/component-preview'
 import { PropsTable } from '@/components/docs/props-table'
-import { CodeBlock } from '@/components/docs/code-block'import { ChevronRight } from 'lucide-react'
+import { CodeBlock } from '@/components/docs/code-block'
+import { ChevronRight } from 'lucide-react'
 import { useState } from 'react'
 import { paginationLinkProps, paginationPreviousNextProps } from './props'
 import { examples } from './examples'
@@ -204,11 +205,15 @@ export default function PaginationDocsPage() {
 							<z.text.h3>Keyboard Interactions</z.text.h3>
 							<z.box className='grid gap-2'>
 								<z.box className='flex items-center gap-4 text-sm'>
-									<z.text as='kbd' className='px-2 py-1 bg-muted rounded text-xs font-mono'>Tab</z.text>
+									<z.text as='kbd' className='px-2 py-1 bg-muted rounded text-xs font-mono'>
+										Tab
+									</z.text>
 									<z.text className='text-muted-foreground'>Move focus between pagination links</z.text>
 								</z.box>
 								<z.box className='flex items-center gap-4 text-sm'>
-									<z.text as='kbd' className='px-2 py-1 bg-muted rounded text-xs font-mono'>Enter</z.text>
+									<z.text as='kbd' className='px-2 py-1 bg-muted rounded text-xs font-mono'>
+										Enter
+									</z.text>
 									<z.text className='text-muted-foreground'>Navigate to the focused page</z.text>
 								</z.box>
 							</z.box>

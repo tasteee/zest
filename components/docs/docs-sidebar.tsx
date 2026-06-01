@@ -2,7 +2,8 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { cn } from '@/lib/utils'import { COMPONENT_CATALOG } from '@/app/docs/components/catalog'
+import { cn } from '@/lib/utils'
+import { COMPONENT_CATALOG } from '@/app/docs/components/catalog'
 import { z } from '@/components/ui'
 
 const navigation = [
@@ -93,7 +94,9 @@ export function DocsSidebarContent() {
 		<z.box className='space-y-6 py-4'>
 			{navigation.map((section) => (
 				<z.box key={section.title} className='px-4'>
-					<z.text.h4 className='mb-2 text-xs font-semibold tracking-widest uppercase text-muted-foreground'>{section.title}</z.text.h4>
+					<z.text.h4 className='mb-2 text-xs font-semibold tracking-widest uppercase text-muted-foreground'>
+						{section.title}
+					</z.text.h4>
 					<z.box as='ul' className='space-y-1'>
 						{section.items.map((item) => (
 							<z.box as='li' key={item.href}>
@@ -119,7 +122,10 @@ export function DocsSidebarContent() {
 
 export function DocsSidebar() {
 	return (
-		<z.box as='aside' className='hidden lg:fixed lg:top-14 lg:bottom-0 lg:left-0 lg:flex lg:w-72 lg:flex-col border-r border-border'>
+		<z.box
+			as='aside'
+			className='hidden lg:fixed lg:top-14 lg:bottom-0 lg:left-0 lg:flex lg:w-72 lg:flex-col border-r border-border'
+		>
 			<z.scrollArea className='h-full py-4'>
 				<DocsSidebarContent />
 			</z.scrollArea>

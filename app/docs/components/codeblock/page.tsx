@@ -1,4 +1,5 @@
-'use client'import { z } from '@/components/ui'
+'use client'
+import { z } from '@/components/ui'
 import { ComponentPreview } from '@/components/docs/component-preview'
 import { CodeBlock } from '@/components/docs/code-block'
 import { PropsTable } from '@/components/docs/props-table'
@@ -29,7 +30,11 @@ const CodeBlockDocsPage = () => {
 				</z.text.body>
 			</z.box>
 
-			<ComponentPreview code={examples.previewCode} title='Quick Preview' description='Configurable labels, tones, and dimensions.'>
+			<ComponentPreview
+				code={examples.previewCode}
+				title='Quick Preview'
+				description='Configurable labels, tones, and dimensions.'
+			>
 				<z.box className='w-full max-w-3xl'>
 					<z.codeblock
 						label='Component'
@@ -62,7 +67,12 @@ export const LinkItem = (props: LinkPropsT) => {
 					description='Use language flags to drive highlighting.'
 				>
 					<z.box className='grid w-full gap-4 md:grid-cols-2'>
-						<z.codeblock label='Styles' language='css' height={140} content={'.button {\n  color: var(--color-neon-purple);\n}'} />
+						<z.codeblock
+							label='Styles'
+							language='css'
+							height={140}
+							content={'.button {\n  color: var(--color-neon-purple);\n}'}
+						/>
 						<z.codeblock label='Install' language='bash' tone='muted' height={140} content={'pnpm add @wooorm/starry-night'} />
 					</z.box>
 				</ComponentPreview>

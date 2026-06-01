@@ -4,7 +4,8 @@ import Link from 'next/link'
 import { z } from '@/components/ui'
 import { ComponentPreview } from '@/components/docs/component-preview'
 import { PropsTable } from '@/components/docs/props-table'
-import { CodeBlock } from '@/components/docs/code-block'import { ChevronRight, CircleAlert, Info, CheckCircle2, TriangleAlert, Terminal, Sparkles } from 'lucide-react'
+import { CodeBlock } from '@/components/docs/code-block'
+import { ChevronRight, CircleAlert, Info, CheckCircle2, TriangleAlert, Terminal, Sparkles } from 'lucide-react'
 import { alertProps } from './props'
 import { examples } from './examples'
 const AlertDocsPage = () => {
@@ -37,9 +38,7 @@ const AlertDocsPage = () => {
 			</z.box>
 
 			{/* Quick Preview */}
-			<ComponentPreview
-				code={examples.quickPreview}
-			>
+			<ComponentPreview code={examples.quickPreview}>
 				<z.alert className='max-w-lg'>
 					<Info className='h-4 w-4' />
 					<z.alert.title>Default Alert</z.alert.title>
@@ -51,10 +50,7 @@ const AlertDocsPage = () => {
 			<z.box as='section' className='space-y-6'>
 				<z.text.h2>Usage</z.text.h2>
 				<CodeBlock code={examples.usageImport} language='tsx' />
-				<CodeBlock
-					code={examples.usage}
-					language='tsx'
-				/>
+				<CodeBlock code={examples.usage} language='tsx' />
 			</z.box>
 
 			{/* Examples */}
@@ -62,11 +58,7 @@ const AlertDocsPage = () => {
 				<z.text.h2>Examples</z.text.h2>
 
 				{/* Error */}
-				<ComponentPreview
-					title='Error Alert'
-					description='Use isRed for destructive or blocking errors.'
-					code={examples.error}
-				>
+				<ComponentPreview title='Error Alert' description='Use isRed for destructive or blocking errors.' code={examples.error}>
 					<z.alert isRed className='max-w-lg'>
 						<CircleAlert className='h-4 w-4' />
 						<z.alert.title>Error</z.alert.title>
@@ -153,7 +145,11 @@ const AlertDocsPage = () => {
 							<z.text.h3>ARIA Roles</z.text.h3>
 							<z.box as='ul' className='text-sm text-muted-foreground space-y-2 list-disc list-inside'>
 								<z.box as='li'>
-									The Alert component has <z.box as='code' className='text-primary'>role=&quot;alert&quot;</z.box> by default
+									The Alert component has{' '}
+									<z.box as='code' className='text-primary'>
+										role=&quot;alert&quot;
+									</z.box>{' '}
+									by default
 								</z.box>
 								<z.box as='li'>Screen readers will announce alert content immediately</z.box>
 								<z.box as='li'>For non-urgent information, consider using a different role</z.box>
