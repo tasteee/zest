@@ -25,19 +25,11 @@
 	color: var(--foreground);
 }
 
-.linkColorGreen {
-	color: var(--color-neon-purple);
-}
-
 .linkColorPurple {
 	color: var(--color-neon-purple);
 }
 
 .linkColorPink {
-	color: var(--color-neon-pink);
-}
-
-.linkColorOrange {
 	color: var(--color-neon-pink);
 }
 

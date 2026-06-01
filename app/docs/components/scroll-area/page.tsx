@@ -2,11 +2,9 @@
 
 import Link from 'next/link'
 import { z } from '@/components/ui'
-import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
 import { ComponentPreview } from '@/components/docs/component-preview'
 import { PropsTable } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
-import { Card, CardContent } from '@/components/ui/card'
 import { ChevronRight } from 'lucide-react'
 import { scrollAreaProps, scrollBarProps } from './props'
 import { examples } from './examples'
@@ -16,9 +14,9 @@ const HORIZONTAL_TAGS = Array.from({ length: 20 }, (_, index) => `Tag ${index + 
 
 export default function ScrollAreaDocsPage() {
 	return (
-		<div className='space-y-16'>
+		<z.box className='space-y-16'>
 			{/* Breadcrumb */}
-			<div className='flex items-center gap-2 text-sm text-muted-foreground'>
+			<z.box className='flex items-center gap-2 text-sm text-muted-foreground'>
 				<Link href='/docs' className='hover:text-foreground transition-colors'>
 					Docs
 				</Link>
@@ -27,46 +25,46 @@ export default function ScrollAreaDocsPage() {
 					Components
 				</Link>
 				<ChevronRight className='h-4 w-4' />
-				<span className='text-foreground'>Scroll Area</span>
-			</div>
+				<z.text className='text-foreground'>Scroll Area</z.text>
+			</z.box>
 
 			{/* Header */}
-			<div className='space-y-4'>
-				<div className='flex items-center gap-3'>
-					<h1 className='text-4xl font-bold tracking-tight text-foreground'>Scroll Area</h1>
+			<z.box className='space-y-4'>
+				<z.box className='flex items-center gap-3'>
+					<z.text.h1>Scroll Area</z.text.h1>
 					<z.badge isGhost isNeutral>
 						Component
 					</z.badge>
-				</div>
-				<p className='text-xl text-muted-foreground max-w-2xl leading-relaxed'>
+				</z.box>
+				<z.text.body className='text-xl text-muted-foreground max-w-2xl leading-relaxed'>
 					A custom-styled scrollable region built on Radix ScrollArea. Replaces the browser native scrollbar with a themed
 					overlay track that works consistently across platforms.
-				</p>
-			</div>
+				</z.text.body>
+			</z.box>
 
 			{/* Quick Preview */}
 			<ComponentPreview code={examples.quickPreview}>
-				<ScrollArea className='h-64 w-72 rounded-md border'>
-					<div className='p-4'>
+				<z.scrollArea className='h-64 w-72 rounded-md border'>
+					<z.box className='p-4'>
 						{VERTICAL_ITEMS.map((item) => (
-							<p key={item} className='text-sm py-1.5 border-b last:border-0 text-muted-foreground'>
+							<z.text.body key={item} className='text-sm py-1.5 border-b last:border-0 text-muted-foreground'>
 								{item}
-							</p>
+							</z.text.body>
 						))}
-					</div>
-				</ScrollArea>
+					</z.box>
+				</z.scrollArea>
 			</ComponentPreview>
 
 			{/* Usage */}
-			<section className='space-y-6'>
-				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>Usage</h2>
+			<z.box as='section' className='space-y-6'>
+				<z.text.h2>Usage</z.text.h2>
 				<CodeBlock code={examples.usageImport} language='tsx' />
 				<CodeBlock code={examples.usage} language='tsx' />
-			</section>
+			</z.box>
 
 			{/* Examples */}
-			<section className='space-y-8'>
-				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>Examples</h2>
+			<z.box as='section' className='space-y-8'>
+				<z.text.h2>Examples</z.text.h2>
 
 				{/* Horizontal */}
 				<ComponentPreview
@@ -74,16 +72,16 @@ export default function ScrollAreaDocsPage() {
 					description='Add ScrollBar with orientation="horizontal" for horizontally overflowing content. Ensure the content does not wrap with whitespace-nowrap.'
 					code={examples.horizontal}
 				>
-					<ScrollArea className='w-72 whitespace-nowrap rounded-md border'>
-						<div className='flex gap-3 p-4'>
+					<z.scrollArea className='w-72 whitespace-nowrap rounded-md border'>
+						<z.box className='flex gap-3 p-4'>
 							{HORIZONTAL_TAGS.map((tag) => (
-								<span key={tag} className='shrink-0 rounded-md border px-3 py-1 text-sm'>
+								<z.text key={tag} className='shrink-0 rounded-md border px-3 py-1 text-sm'>
 									{tag}
-								</span>
+								</z.text>
 							))}
-						</div>
-						<ScrollBar orientation='horizontal' />
-					</ScrollArea>
+						</z.box>
+						<z.scrollBar orientation='horizontal' />
+					</z.scrollArea>
 				</ComponentPreview>
 
 				{/* Both Axes */}
@@ -92,46 +90,46 @@ export default function ScrollAreaDocsPage() {
 					description='Include both a vertical (implicit) and horizontal ScrollBar for two-dimensional scrolling.'
 					code={examples.bothAxes}
 				>
-					<ScrollArea className='h-48 w-64 rounded-md border'>
-						<div style={{ width: '500px', padding: '1rem' }}>
-							<p className='text-sm text-muted-foreground whitespace-nowrap'>
+					<z.scrollArea className='h-48 w-64 rounded-md border'>
+						<z.box style={{ width: '500px', padding: '1rem' }}>
+							<z.text.body className='text-sm text-muted-foreground whitespace-nowrap'>
 								This content is much wider than the container. Scroll horizontally to see more.
-							</p>
+							</z.text.body>
 							{Array.from({ length: 10 }, (_, index) => (
-								<p key={index} className='text-sm py-1 border-b last:border-0 whitespace-nowrap'>
+								<z.text.body key={index} className='text-sm py-1 border-b last:border-0 whitespace-nowrap'>
 									Row {index + 1} — wide content that extends beyond the boundary
-								</p>
+								</z.text.body>
 							))}
-						</div>
-						<ScrollBar orientation='horizontal' />
-					</ScrollArea>
+						</z.box>
+						<z.scrollBar orientation='horizontal' />
+					</z.scrollArea>
 				</ComponentPreview>
-			</section>
+			</z.box>
 
 			{/* API Reference */}
-			<section className='space-y-6'>
-				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>API Reference</h2>
+			<z.box as='section' className='space-y-6'>
+				<z.text.h2>API Reference</z.text.h2>
 				<PropsTable title='ScrollArea' props={scrollAreaProps} />
 				<PropsTable title='ScrollBar' props={scrollBarProps} />
-			</section>
+			</z.box>
 
 			{/* Accessibility */}
-			<section className='space-y-6'>
-				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>Accessibility</h2>
-				<Card>
-					<CardContent className='p-6 space-y-4'>
-						<div className='space-y-2'>
-							<h3 className='font-semibold text-foreground'>Best Practices</h3>
-							<ul className='text-sm text-muted-foreground space-y-2 list-disc list-inside'>
-								<li>Always set an explicit fixed height (h-*) on ScrollArea — without it, content will not scroll</li>
-								<li>ScrollArea is keyboard scrollable — users can navigate content without a mouse</li>
-								<li>The custom scrollbar is purely visual; underlying scroll behaviour is native and accessible</li>
-								<li>For long lists, prefer virtualization rather than rendering everything inside ScrollArea</li>
-							</ul>
-						</div>
-					</CardContent>
-				</Card>
-			</section>
-		</div>
+			<z.box as='section' className='space-y-6'>
+				<z.text.h2>Accessibility</z.text.h2>
+				<z.card>
+					<z.cardContent className='p-6 space-y-4'>
+						<z.box className='space-y-2'>
+							<z.text.h3>Best Practices</z.text.h3>
+							<z.box as='ul' className='text-sm text-muted-foreground space-y-2 list-disc list-inside'>
+								<z.box as='li'>Always set an explicit fixed height (h-*) on ScrollArea — without it, content will not scroll</z.box>
+								<z.box as='li'>ScrollArea is keyboard scrollable — users can navigate content without a mouse</z.box>
+								<z.box as='li'>The custom scrollbar is purely visual; underlying scroll behaviour is native and accessible</z.box>
+								<z.box as='li'>For long lists, prefer virtualization rather than rendering everything inside ScrollArea</z.box>
+							</z.box>
+						</z.box>
+					</z.cardContent>
+				</z.card>
+			</z.box>
+		</z.box>
 	)
 }

@@ -13,17 +13,15 @@ import {
 } from '@/components/ui/navigation-menu'
 import { ComponentPreview } from '@/components/docs/component-preview'
 import { PropsTable } from '@/components/docs/props-table'
-import { CodeBlock } from '@/components/docs/code-block'
-import { Card, CardContent } from '@/components/ui/card'
-import { ChevronRight } from 'lucide-react'
+import { CodeBlock } from '@/components/docs/code-block'import { ChevronRight } from 'lucide-react'
 import { navigationMenuProps, navigationMenuLinkProps } from './props'
 import { examples } from './examples'
 
 export default function NavMenuDocsPage() {
 	return (
-		<div className='space-y-16'>
+		<z.box className='space-y-16'>
 			{/* Breadcrumb */}
-			<div className='flex items-center gap-2 text-sm text-muted-foreground'>
+			<z.box className='flex items-center gap-2 text-sm text-muted-foreground'>
 				<Link href='/docs' className='hover:text-foreground transition-colors'>
 					Docs
 				</Link>
@@ -32,22 +30,22 @@ export default function NavMenuDocsPage() {
 					Components
 				</Link>
 				<ChevronRight className='h-4 w-4' />
-				<span className='text-foreground'>Navigation Menu</span>
-			</div>
+				<z.text className='text-foreground'>Navigation Menu</z.text>
+			</z.box>
 
 			{/* Header */}
-			<div className='space-y-4'>
-				<div className='flex items-center gap-3'>
-					<h1 className='text-4xl font-bold tracking-tight text-foreground'>Navigation Menu</h1>
+			<z.box className='space-y-4'>
+				<z.box className='flex items-center gap-3'>
+					<z.text.h1>Navigation Menu</z.text.h1>
 					<z.badge isGhost isNeutral>
 						Component
 					</z.badge>
-				</div>
-				<p className='text-xl text-muted-foreground max-w-2xl leading-relaxed'>
+				</z.box>
+				<z.text.body className='text-xl text-muted-foreground max-w-2xl leading-relaxed'>
 					A structured primary navigation component built on Radix NavigationMenu. Supports simple link lists and rich dropdown
 					content panels with animated viewport transitions.
-				</p>
-			</div>
+				</z.text.body>
+			</z.box>
 
 			{/* Quick Preview */}
 			<ComponentPreview code={examples.quickPreview}>
@@ -73,15 +71,15 @@ export default function NavMenuDocsPage() {
 			</ComponentPreview>
 
 			{/* Usage */}
-			<section className='space-y-6'>
-				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>Usage</h2>
+			<z.box as='section' className='space-y-6'>
+				<z.text.h2>Usage</z.text.h2>
 				<CodeBlock code={examples.usageImport} language='tsx' />
 				<CodeBlock code={examples.usage} language='tsx' />
-			</section>
+			</z.box>
 
 			{/* Examples */}
-			<section className='space-y-8'>
-				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>Examples</h2>
+			<z.box as='section' className='space-y-8'>
+				<z.text.h2>Examples</z.text.h2>
 
 				{/* With Dropdown */}
 				<ComponentPreview
@@ -94,20 +92,20 @@ export default function NavMenuDocsPage() {
 							<NavigationMenuItem>
 								<NavigationMenuTrigger>Getting Started</NavigationMenuTrigger>
 								<NavigationMenuContent>
-									<ul className='grid gap-3 p-4 w-64'>
-										<li>
+									<z.box as='ul' className='grid gap-3 p-4 w-64'>
+										<z.box as='li'>
 											<NavigationMenuLink href='/docs' className='block rounded-md p-2 hover:bg-accent transition-colors'>
-												<div className='font-medium mb-1'>Overview</div>
-												<p className='text-sm text-muted-foreground'>Introduction to the design system.</p>
+												<z.box className='font-medium mb-1'>Overview</z.box>
+												<z.text.body className='text-sm text-muted-foreground'>Introduction to the design system.</z.text.body>
 											</NavigationMenuLink>
-										</li>
-										<li>
+										</z.box>
+										<z.box as='li'>
 											<NavigationMenuLink href='/docs' className='block rounded-md p-2 hover:bg-accent transition-colors'>
-												<div className='font-medium mb-1'>Installation</div>
-												<p className='text-sm text-muted-foreground'>How to install and configure.</p>
+												<z.box className='font-medium mb-1'>Installation</z.box>
+												<z.text.body className='text-sm text-muted-foreground'>How to install and configure.</z.text.body>
 											</NavigationMenuLink>
-										</li>
-									</ul>
+										</z.box>
+									</z.box>
 								</NavigationMenuContent>
 							</NavigationMenuItem>
 							<NavigationMenuItem>
@@ -130,71 +128,71 @@ export default function NavMenuDocsPage() {
 							<NavigationMenuItem>
 								<NavigationMenuTrigger>Components</NavigationMenuTrigger>
 								<NavigationMenuContent>
-									<ul className='grid grid-cols-2 gap-2 p-4 w-80'>
+									<z.box as='ul' className='grid grid-cols-2 gap-2 p-4 w-80'>
 										{['Button', 'Card', 'Input', 'Dialog', 'Select', 'Switch'].map((name) => {
 											return (
-												<li key={name}>
+												<z.box as='li' key={name}>
 													<NavigationMenuLink
 														href='/docs/components'
 														className='block rounded-md px-3 py-2 text-sm hover:bg-accent transition-colors'
 													>
 														{name}
 													</NavigationMenuLink>
-												</li>
+												</z.box>
 											)
 										})}
-									</ul>
+									</z.box>
 								</NavigationMenuContent>
 							</NavigationMenuItem>
 						</NavigationMenuList>
 					</NavigationMenu>
 				</ComponentPreview>
-			</section>
+			</z.box>
 
 			{/* API Reference */}
-			<section className='space-y-6'>
-				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>API Reference</h2>
+			<z.box as='section' className='space-y-6'>
+				<z.text.h2>API Reference</z.text.h2>
 				<PropsTable title='NavigationMenu' props={navigationMenuProps} />
 				<PropsTable title='NavigationMenuLink' props={navigationMenuLinkProps} />
-			</section>
+			</z.box>
 
 			{/* Accessibility */}
-			<section className='space-y-6'>
-				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>Accessibility</h2>
-				<Card>
-					<CardContent className='p-6 space-y-4'>
-						<div className='space-y-2'>
-							<h3 className='font-semibold text-foreground'>Keyboard Interactions</h3>
-							<div className='grid gap-2'>
-								<div className='flex items-center gap-4 text-sm'>
-									<kbd className='px-2 py-1 bg-muted rounded text-xs font-mono'>Tab</kbd>
-									<span className='text-muted-foreground'>Move focus to the next menu item or trigger</span>
-								</div>
-								<div className='flex items-center gap-4 text-sm'>
-									<kbd className='px-2 py-1 bg-muted rounded text-xs font-mono'>Enter / Space</kbd>
-									<span className='text-muted-foreground'>Open the focused trigger's content panel</span>
-								</div>
-								<div className='flex items-center gap-4 text-sm'>
-									<kbd className='px-2 py-1 bg-muted rounded text-xs font-mono'>Escape</kbd>
-									<span className='text-muted-foreground'>Close the open content panel</span>
-								</div>
-								<div className='flex items-center gap-4 text-sm'>
-									<kbd className='px-2 py-1 bg-muted rounded text-xs font-mono'>← →</kbd>
-									<span className='text-muted-foreground'>Navigate between top-level triggers</span>
-								</div>
-							</div>
-						</div>
-						<div className='space-y-2'>
-							<h3 className='font-semibold text-foreground'>Best Practices</h3>
-							<ul className='text-sm text-muted-foreground space-y-2 list-disc list-inside'>
-								<li>NavigationMenu renders a nav element — use it as the primary site navigation landmark</li>
-								<li>Set active={true} on NavigationMenuLink for the current route to expose aria-current="page"</li>
-								<li>Use navigationMenuTriggerStyle() on simple link items for visual consistency with trigger items</li>
-							</ul>
-						</div>
-					</CardContent>
-				</Card>
-			</section>
-		</div>
+			<z.box as='section' className='space-y-6'>
+				<z.text.h2>Accessibility</z.text.h2>
+				<z.card>
+					<z.cardContent className='p-6 space-y-4'>
+						<z.box className='space-y-2'>
+							<z.text.h3>Keyboard Interactions</z.text.h3>
+							<z.box className='grid gap-2'>
+								<z.box className='flex items-center gap-4 text-sm'>
+									<z.text as='kbd' className='px-2 py-1 bg-muted rounded text-xs font-mono'>Tab</z.text>
+									<z.text className='text-muted-foreground'>Move focus to the next menu item or trigger</z.text>
+								</z.box>
+								<z.box className='flex items-center gap-4 text-sm'>
+									<z.text as='kbd' className='px-2 py-1 bg-muted rounded text-xs font-mono'>Enter / Space</z.text>
+									<z.text className='text-muted-foreground'>Open the focused trigger's content panel</z.text>
+								</z.box>
+								<z.box className='flex items-center gap-4 text-sm'>
+									<z.text as='kbd' className='px-2 py-1 bg-muted rounded text-xs font-mono'>Escape</z.text>
+									<z.text className='text-muted-foreground'>Close the open content panel</z.text>
+								</z.box>
+								<z.box className='flex items-center gap-4 text-sm'>
+									<z.text as='kbd' className='px-2 py-1 bg-muted rounded text-xs font-mono'>← →</z.text>
+									<z.text className='text-muted-foreground'>Navigate between top-level triggers</z.text>
+								</z.box>
+							</z.box>
+						</z.box>
+						<z.box className='space-y-2'>
+							<z.text.h3>Best Practices</z.text.h3>
+							<z.box as='ul' className='text-sm text-muted-foreground space-y-2 list-disc list-inside'>
+								<z.box as='li'>NavigationMenu renders a nav element — use it as the primary site navigation landmark</z.box>
+								<z.box as='li'>Set active={true} on NavigationMenuLink for the current route to expose aria-current="page"</z.box>
+								<z.box as='li'>Use navigationMenuTriggerStyle() on simple link items for visual consistency with trigger items</z.box>
+							</z.box>
+						</z.box>
+					</z.cardContent>
+				</z.card>
+			</z.box>
+		</z.box>
 	)
 }

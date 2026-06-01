@@ -1,4 +1,3 @@
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { z } from '@/components/ui'
 import { InlineCode } from './code-block'
 
@@ -18,41 +17,41 @@ interface PropsTableProps {
 
 export function PropsTable({ title, props }: PropsTableProps) {
 	return (
-		<div className='space-y-3'>
-			{title && <h3 className='text-lg font-semibold text-foreground'>{title}</h3>}
-			<div className='overflow-hidden rounded-lg border border-border'>
-				<Table>
-					<TableHeader>
-						<TableRow className='hover:bg-transparent'>
-							<TableHead className='w-45'>Prop</TableHead>
-							<TableHead className='w-50'>Type</TableHead>
-							<TableHead className='w-30'>Default</TableHead>
-							<TableHead>Description</TableHead>
-						</TableRow>
-					</TableHeader>
-					<TableBody>
+		<z.box className='space-y-3'>
+			{title && <z.text.h3 className='text-lg font-semibold text-foreground'>{title}</z.text.h3>}
+			<z.box className='overflow-hidden rounded-lg border border-border'>
+				<z.table>
+					<z.tableHeader>
+						<z.tableRow className='hover:bg-transparent'>
+							<z.tableHead className='w-45'>Prop</z.tableHead>
+							<z.tableHead className='w-50'>Type</z.tableHead>
+							<z.tableHead className='w-30'>Default</z.tableHead>
+							<z.tableHead>Description</z.tableHead>
+						</z.tableRow>
+					</z.tableHeader>
+					<z.tableBody>
 						{props.map((prop) => (
-							<TableRow key={prop.name} className='hover:bg-muted/30'>
-								<TableCell className='font-mono text-sm'>
-									<span className='text-primary'>{prop.name}</span>
+							<z.tableRow key={prop.name} className='hover:bg-muted/30'>
+								<z.tableCell className='font-mono text-sm'>
+									<z.text className='text-primary'>{prop.name}</z.text>
 									{prop.required && (
 										<z.badge isOutline isPink className='ml-2 text-[10px]'>
 											Required
 										</z.badge>
 									)}
-								</TableCell>
-								<TableCell>
+								</z.tableCell>
+								<z.tableCell>
 									<InlineCode>{prop.type}</InlineCode>
-								</TableCell>
-								<TableCell className='text-muted-foreground'>
+								</z.tableCell>
+								<z.tableCell className='text-muted-foreground'>
 									{prop.defaultValue || prop.default ? <InlineCode>{prop.defaultValue ?? prop.default}</InlineCode> : '-'}
-								</TableCell>
-								<TableCell className='text-foreground'>{prop.description}</TableCell>
-							</TableRow>
+								</z.tableCell>
+								<z.tableCell className='text-foreground'>{prop.description}</z.tableCell>
+							</z.tableRow>
 						))}
-					</TableBody>
-				</Table>
-			</div>
-		</div>
+					</z.tableBody>
+				</z.table>
+			</z.box>
+		</z.box>
 	)
 }

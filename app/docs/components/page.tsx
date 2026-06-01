@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import { z } from '@/components/ui'
-import { Card, CardContent } from '@/components/ui/card'
 import { COMPONENT_CATALOG } from './catalog'
 
 const categories = ['Inputs', 'Data Display', 'Navigation', 'Overlays', 'Feedback', 'Layout'] as const
@@ -17,49 +16,49 @@ function getStatusBadgeProps(status: keyof typeof statusMap) {
 
 export default function ComponentsPage() {
 	return (
-		<div className='space-y-12'>
-			<section className='space-y-4'>
+		<z.box className='space-y-12'>
+			<z.box as='section' className='space-y-4'>
 				<z.badge isGhost isNeutral className='font-mono text-xs'>
 					Component Inventory
 				</z.badge>
-				<h1 className='text-4xl font-bold tracking-tight text-foreground'>Premium Component Library</h1>
-				<p className='max-w-3xl text-lg text-muted-foreground'>
+				<z.text.h1>Premium Component Library</z.text.h1>
+				<z.text.body className='max-w-3xl text-lg text-muted-foreground'>
 					Every target component now has a dedicated documentation route with configurable controls for density, accent emphasis,
 					and presentation behavior. Build-ready components are flagged as ready; active design items are marked in progress.
-				</p>
-			</section>
+				</z.text.body>
+			</z.box>
 
 			{categories.map((category) => {
 				const entries = COMPONENT_CATALOG.filter((entry) => entry.category === category)
 
 				return (
-					<section key={category} className='space-y-4'>
-						<h2 className='text-2xl font-semibold tracking-tight'>{category}</h2>
-						<div className='grid gap-4 md:grid-cols-2 xl:grid-cols-3'>
+					<z.box as='section' key={category} className='space-y-4'>
+						<z.text.h2>{category}</z.text.h2>
+						<z.box className='grid gap-4 md:grid-cols-2 xl:grid-cols-3'>
 							{entries.map((entry) => (
 								<Link key={entry.slug} href={`/docs/components/${entry.slug}`}>
-									<Card isHoverable tone='purple' className='h-full'>
-										<CardContent className='space-y-3'>
-											<div className='flex flex-wrap items-center gap-2'>
-												<p className='text-lg font-semibold text-foreground'>{entry.name}</p>
+									<z.card isHoverable tone='purple' className='h-full'>
+										<z.cardContent className='space-y-3'>
+											<z.box className='flex flex-wrap items-center gap-2'>
+												<z.text.body className='text-lg font-semibold text-foreground'>{entry.name}</z.text.body>
 												<z.badge {...getStatusBadgeProps(entry.status)}>{statusMap[entry.status].label}</z.badge>
 												<z.badge isOutline isNeutral>
 													{entry.foundation}
 												</z.badge>
-											</div>
-											<p className='text-sm text-muted-foreground'>{entry.description}</p>
-											<p className='text-xs text-muted-foreground'>
-												Primary export: <span className='font-mono'>{entry.zName}</span>
-											</p>
-											{entry.notes && <p className='text-xs text-muted-foreground'>{entry.notes}</p>}
-										</CardContent>
-									</Card>
+											</z.box>
+											<z.text.body className='text-sm text-muted-foreground'>{entry.description}</z.text.body>
+											<z.text.body className='text-xs text-muted-foreground'>
+												Primary export: <z.text className='font-mono'>{entry.zName}</z.text>
+											</z.text.body>
+											{entry.notes && <z.text.body className='text-xs text-muted-foreground'>{entry.notes}</z.text.body>}
+										</z.cardContent>
+									</z.card>
 								</Link>
 							))}
-						</div>
-					</section>
+						</z.box>
+					</z.box>
 				)
 			})}
-		</div>
+		</z.box>
 	)
 }

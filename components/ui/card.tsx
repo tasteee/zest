@@ -2,7 +2,7 @@ import * as React from 'react'
 import { cn } from '@/lib/utils'
 import styles from './card.module.css'
 
-type CardToneT = 'neutral' | 'purple' | 'pink' | 'purple' | 'pink'
+type CardToneT = 'neutral' | 'purple' | 'pink'
 
 type CardPropsT = React.ComponentProps<'div'> & {
 	isHoverable?: boolean
@@ -12,10 +12,8 @@ type CardPropsT = React.ComponentProps<'div'> & {
 
 const toneClassMap: Record<CardToneT, string> = {
 	neutral: styles.cardToneNeutral,
-	purple: styles.cardToneGreen,
-	pink: styles.cardTonePink,
 	purple: styles.cardTonePurple,
-	pink: styles.cardToneOrange
+	pink: styles.cardTonePink
 }
 
 const getPropsWithoutClassName = <PropsT extends { className?: string }>(props: PropsT): Omit<PropsT, 'className'> => {

@@ -27,7 +27,16 @@ import {
 	CommandSeparator,
 	CommandShortcut
 } from './command'
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from './dialog'
+import {
+	Dialog,
+	DialogClose,
+	DialogContent,
+	DialogDescription,
+	DialogFooter,
+	DialogHeader,
+	DialogTitle,
+	DialogTrigger
+} from './dialog'
 import {
 	Drawer,
 	DrawerClose,
@@ -45,6 +54,7 @@ import { CodeBlock } from './codeblock'
 import { ColorPicker } from './color-picker'
 import { Combobox } from './combobox'
 import { Line } from './line'
+import { Label } from './label'
 import { Link } from './link'
 import { DropdownMenu } from './dropdown-menu'
 import { NavigationMenu } from './navigation-menu'
@@ -54,6 +64,7 @@ import { Progress } from './progress'
 import { RadioGroup, RadioGroupItem } from './radio-group'
 import { ScrollArea, ScrollBar } from './scroll-area'
 import { select } from './select'
+import { Separator } from './separator'
 import { Sidebar } from './sidebar'
 import { Skeleton } from './skeleton'
 import { Slider } from './slider'
@@ -119,6 +130,7 @@ export const ZCommandSeparator = CommandSeparator
 
 export const ZDialog = Dialog
 export const ZDialogTrigger = DialogTrigger
+export const ZDialogClose = DialogClose
 export const ZDialogContent = DialogContent
 export const ZDialogHeader = DialogHeader
 export const ZDialogTitle = DialogTitle
@@ -147,6 +159,7 @@ export const ZCodeBlock = CodeBlock
 export const ZColorPicker = ColorPicker
 export const ZCombobox = Combobox
 export const ZLine = Line
+export const ZLabel = Label
 export const ZLink = Link
 export const ZMenu = DropdownMenu
 export const ZNavMenu = NavigationMenu
@@ -163,6 +176,7 @@ export const ZRadioGroupItem = RadioGroupItem
 
 export const ZScrollArea = ScrollArea
 export const ZScrollBar = ScrollBar
+export const ZSeparator = Separator
 export const ZSidebar = Sidebar
 export const ZSkeleton = Skeleton
 export const ZSlider = Slider
@@ -209,10 +223,23 @@ export { ZBox, ZText }
 export const z = {
 	button: ZButton,
 	accordion: ZAccordion,
+	accordionItem: ZAccordionItem,
+	accordionTrigger: ZAccordionTrigger,
+	accordionContent: ZAccordionContent,
 	alert: ZAlert,
+	alertTitle: ZAlertTitle,
+	alertDescription: ZAlertDescription,
 	avatar: ZAvatar,
+	avatarImage: ZAvatarImage,
+	avatarFallback: ZAvatarFallback,
 	badge,
 	breadcrumbs: ZBreadcrumbs,
+	breadcrumbList: ZBreadcrumbList,
+	breadcrumbItem: ZBreadcrumbItem,
+	breadcrumbLink: ZBreadcrumbLink,
+	breadcrumbPage: ZBreadcrumbPage,
+	breadcrumbSeparator: ZBreadcrumbSeparator,
+	breadcrumbEllipsis: ZBreadcrumbEllipsis,
 	buttonGroup: ZButtonGroup,
 	buttonGroupText: ZButtonGroupText,
 	buttonGroupSeparator: ZButtonGroupSeparator,
@@ -238,6 +265,7 @@ export const z = {
 	commandSeparator: ZCommandSeparator,
 	dialog: ZDialog,
 	dialogTrigger: ZDialogTrigger,
+	dialogClose: ZDialogClose,
 	dialogContent: ZDialogContent,
 	dialogHeader: ZDialogHeader,
 	dialogTitle: ZDialogTitle,
@@ -265,6 +293,7 @@ export const z = {
 	colorPicker: ZColorPicker,
 	combobox: ZCombobox,
 	line: ZLine,
+	label: ZLabel,
 	link: ZLink,
 
 	menu: ZMenu,
@@ -281,6 +310,7 @@ export const z = {
 	select,
 	scrollArea: ZScrollArea,
 	scrollBar: ZScrollBar,
+	separator: ZSeparator,
 
 	sidebar: ZSidebar,
 

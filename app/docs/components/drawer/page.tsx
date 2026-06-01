@@ -2,20 +2,9 @@
 
 import Link from 'next/link'
 import { z } from '@/components/ui'
-import {
-	Drawer,
-	DrawerTrigger,
-	DrawerContent,
-	DrawerHeader,
-	DrawerTitle,
-	DrawerDescription,
-	DrawerFooter,
-	DrawerClose
-} from '@/components/ui/drawer'
 import { ComponentPreview } from '@/components/docs/component-preview'
 import { PropsTable } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
-import { Card, CardContent } from '@/components/ui/card'
 import { ChevronRight } from 'lucide-react'
 import { useState } from 'react'
 import { drawerProps, drawerContentProps } from './props'
@@ -25,9 +14,9 @@ export default function DrawerDocsPage() {
 	const [isControlledOpen, setIsControlledOpen] = useState(false)
 
 	return (
-		<div className='space-y-16'>
+		<z.box className='space-y-16'>
 			{/* Breadcrumb */}
-			<div className='flex items-center gap-2 text-sm text-muted-foreground'>
+			<z.box className='flex items-center gap-2 text-sm text-muted-foreground'>
 				<Link href='/docs' className='hover:text-foreground transition-colors'>
 					Docs
 				</Link>
@@ -36,56 +25,56 @@ export default function DrawerDocsPage() {
 					Components
 				</Link>
 				<ChevronRight className='h-4 w-4' />
-				<span className='text-foreground'>Drawer</span>
-			</div>
+				<z.text className='text-foreground'>Drawer</z.text>
+			</z.box>
 
 			{/* Header */}
-			<div className='space-y-4'>
-				<div className='flex items-center gap-3'>
-					<h1 className='text-4xl font-bold tracking-tight text-foreground'>Drawer</h1>
+			<z.box className='space-y-4'>
+				<z.box className='flex items-center gap-3'>
+					<z.text.h1>Drawer</z.text.h1>
 					<z.badge isGhost isNeutral>
 						Component
 					</z.badge>
-				</div>
-				<p className='text-xl text-muted-foreground max-w-2xl leading-relaxed'>
+				</z.box>
+				<z.text.body className='text-xl text-muted-foreground max-w-2xl leading-relaxed'>
 					A panel that slides in from any edge of the screen, built on Vaul. Supports bottom, top, left, and right directions
 					with touch drag-to-dismiss on mobile.
-				</p>
-			</div>
+				</z.text.body>
+			</z.box>
 
 			{/* Quick Preview */}
 			<ComponentPreview code={examples.quickPreview}>
-				<Drawer>
-					<DrawerTrigger asChild>
+				<z.drawer>
+					<z.drawerTrigger asChild>
 						<z.button>Open Drawer</z.button>
-					</DrawerTrigger>
-					<DrawerContent>
-						<DrawerHeader>
-							<DrawerTitle>Edit profile</DrawerTitle>
-							<DrawerDescription>Make changes to your profile here.</DrawerDescription>
-						</DrawerHeader>
-						<div className='p-4'>
-							<p className='text-sm text-muted-foreground'>Your content goes here.</p>
-						</div>
-						<DrawerFooter>
-							<DrawerClose asChild>
+					</z.drawerTrigger>
+					<z.drawerContent>
+						<z.drawerHeader>
+							<z.drawerTitle>Edit profile</z.drawerTitle>
+							<z.drawerDescription>Make changes to your profile here.</z.drawerDescription>
+						</z.drawerHeader>
+						<z.box className='p-4'>
+							<z.text.body className='text-sm text-muted-foreground'>Your content goes here.</z.text.body>
+						</z.box>
+						<z.drawerFooter>
+							<z.drawerClose asChild>
 								<z.button isGhost>Cancel</z.button>
-							</DrawerClose>
-						</DrawerFooter>
-					</DrawerContent>
-				</Drawer>
+							</z.drawerClose>
+						</z.drawerFooter>
+					</z.drawerContent>
+				</z.drawer>
 			</ComponentPreview>
 
 			{/* Usage */}
-			<section className='space-y-6'>
-				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>Usage</h2>
+			<z.box as='section' className='space-y-6'>
+				<z.text.h2>Usage</z.text.h2>
 				<CodeBlock code={examples.usageImport} language='tsx' />
 				<CodeBlock code={examples.usage} language='tsx' />
-			</section>
+			</z.box>
 
 			{/* Examples */}
-			<section className='space-y-8'>
-				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>Examples</h2>
+			<z.box as='section' className='space-y-8'>
+				<z.text.h2>Examples</z.text.h2>
 
 				{/* From Right */}
 				<ComponentPreview
@@ -93,25 +82,25 @@ export default function DrawerDocsPage() {
 					description='Use direction="right" for a side panel layout common in settings and detail views.'
 					code={examples.fromRight}
 				>
-					<Drawer direction='right'>
-						<DrawerTrigger asChild>
+					<z.drawer direction='right'>
+						<z.drawerTrigger asChild>
 							<z.button>Open Right Panel</z.button>
-						</DrawerTrigger>
-						<DrawerContent>
-							<DrawerHeader>
-								<DrawerTitle>Settings</DrawerTitle>
-								<DrawerDescription>Configure your preferences.</DrawerDescription>
-							</DrawerHeader>
-							<div className='p-4 flex-1 overflow-auto'>
-								<p className='text-sm text-muted-foreground'>Panel content here.</p>
-							</div>
-							<DrawerFooter>
-								<DrawerClose asChild>
+						</z.drawerTrigger>
+						<z.drawerContent>
+							<z.drawerHeader>
+								<z.drawerTitle>Settings</z.drawerTitle>
+								<z.drawerDescription>Configure your preferences.</z.drawerDescription>
+							</z.drawerHeader>
+							<z.box className='p-4 flex-1 overflow-auto'>
+								<z.text.body className='text-sm text-muted-foreground'>Panel content here.</z.text.body>
+							</z.box>
+							<z.drawerFooter>
+								<z.drawerClose asChild>
 									<z.button isGhost>Done</z.button>
-								</DrawerClose>
-							</DrawerFooter>
-						</DrawerContent>
-					</Drawer>
+								</z.drawerClose>
+							</z.drawerFooter>
+						</z.drawerContent>
+					</z.drawer>
 				</ComponentPreview>
 
 				{/* Controlled */}
@@ -120,7 +109,7 @@ export default function DrawerDocsPage() {
 					description='Manage the open state externally to trigger the drawer programmatically.'
 					code={examples.controlled}
 				>
-					<div className='flex items-center gap-3'>
+					<z.box className='flex items-center gap-3'>
 						<z.button
 							onClick={() => {
 								setIsControlledOpen(true)
@@ -128,14 +117,14 @@ export default function DrawerDocsPage() {
 						>
 							Open Programmatically
 						</z.button>
-					</div>
-					<Drawer open={isControlledOpen} onOpenChange={setIsControlledOpen}>
-						<DrawerContent>
-							<DrawerHeader>
-								<DrawerTitle>Controlled Drawer</DrawerTitle>
-								<DrawerDescription>Open state is managed externally.</DrawerDescription>
-							</DrawerHeader>
-							<DrawerFooter>
+					</z.box>
+					<z.drawer open={isControlledOpen} onOpenChange={setIsControlledOpen}>
+						<z.drawerContent>
+							<z.drawerHeader>
+								<z.drawerTitle>Controlled Drawer</z.drawerTitle>
+								<z.drawerDescription>Open state is managed externally.</z.drawerDescription>
+							</z.drawerHeader>
+							<z.drawerFooter>
 								<z.button
 									onClick={() => {
 										setIsControlledOpen(false)
@@ -143,48 +132,48 @@ export default function DrawerDocsPage() {
 								>
 									Close
 								</z.button>
-							</DrawerFooter>
-						</DrawerContent>
-					</Drawer>
+							</z.drawerFooter>
+						</z.drawerContent>
+					</z.drawer>
 				</ComponentPreview>
-			</section>
+			</z.box>
 
 			{/* API Reference */}
-			<section className='space-y-6'>
-				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>API Reference</h2>
+			<z.box as='section' className='space-y-6'>
+				<z.text.h2>API Reference</z.text.h2>
 				<PropsTable title='Drawer' props={drawerProps} />
 				<PropsTable title='DrawerContent' props={drawerContentProps} />
-			</section>
+			</z.box>
 
 			{/* Accessibility */}
-			<section className='space-y-6'>
-				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>Accessibility</h2>
-				<Card>
-					<CardContent className='p-6 space-y-4'>
-						<div className='space-y-2'>
-							<h3 className='font-semibold text-foreground'>Keyboard Interactions</h3>
-							<div className='grid gap-2'>
-								<div className='flex items-center gap-4 text-sm'>
-									<kbd className='px-2 py-1 bg-muted rounded text-xs font-mono'>Escape</kbd>
-									<span className='text-muted-foreground'>Close the drawer</span>
-								</div>
-								<div className='flex items-center gap-4 text-sm'>
-									<kbd className='px-2 py-1 bg-muted rounded text-xs font-mono'>Tab</kbd>
-									<span className='text-muted-foreground'>Move focus between interactive elements inside the drawer</span>
-								</div>
-							</div>
-						</div>
-						<div className='space-y-2'>
-							<h3 className='font-semibold text-foreground'>Best Practices</h3>
-							<ul className='text-sm text-muted-foreground space-y-2 list-disc list-inside'>
-								<li>Always include a DrawerTitle for screen readers, even if visually hidden</li>
-								<li>Provide a DrawerClose action so users without touch input can dismiss the drawer</li>
-								<li>Use bottom drawers for mobile-first patterns; right panels for desktop detail views</li>
-							</ul>
-						</div>
-					</CardContent>
-				</Card>
-			</section>
-		</div>
+			<z.box as='section' className='space-y-6'>
+				<z.text.h2>Accessibility</z.text.h2>
+				<z.card>
+					<z.cardContent className='p-6 space-y-4'>
+						<z.box className='space-y-2'>
+							<z.text.h3>Keyboard Interactions</z.text.h3>
+							<z.box className='grid gap-2'>
+								<z.box className='flex items-center gap-4 text-sm'>
+									<z.text as='kbd' className='px-2 py-1 bg-muted rounded text-xs font-mono'>Escape</z.text>
+									<z.text className='text-muted-foreground'>Close the drawer</z.text>
+								</z.box>
+								<z.box className='flex items-center gap-4 text-sm'>
+									<z.text as='kbd' className='px-2 py-1 bg-muted rounded text-xs font-mono'>Tab</z.text>
+									<z.text className='text-muted-foreground'>Move focus between interactive elements inside the drawer</z.text>
+								</z.box>
+							</z.box>
+						</z.box>
+						<z.box className='space-y-2'>
+							<z.text.h3>Best Practices</z.text.h3>
+							<z.box as='ul' className='text-sm text-muted-foreground space-y-2 list-disc list-inside'>
+								<z.box as='li'>Always include a DrawerTitle for screen readers, even if visually hidden</z.box>
+								<z.box as='li'>Provide a DrawerClose action so users without touch input can dismiss the drawer</z.box>
+								<z.box as='li'>Use bottom drawers for mobile-first patterns; right panels for desktop detail views</z.box>
+							</z.box>
+						</z.box>
+					</z.cardContent>
+				</z.card>
+			</z.box>
+		</z.box>
 	)
 }

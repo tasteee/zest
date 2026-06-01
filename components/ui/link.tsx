@@ -2,7 +2,7 @@ import * as React from 'react'
 import { cn } from '@/lib/utils'
 import './link.css'
 
-type LinkColorT = 'default' | 'purple' | 'purple' | 'pink' | 'pink' | 'neutral' | 'muted'
+type LinkColorT = 'default' | 'purple' | 'pink' | 'neutral' | 'muted'
 
 type LinkPropsT = React.ComponentProps<'a'> & {
 	as?: React.ElementType
@@ -12,10 +12,8 @@ type LinkPropsT = React.ComponentProps<'a'> & {
 
 const linkColorClassMap: Record<LinkColorT, string> = {
 	default: 'linkColorDefault',
-	purple: 'linkColorGreen',
 	purple: 'linkColorPurple',
 	pink: 'linkColorPink',
-	pink: 'linkColorOrange',
 	neutral: 'linkColorWhite',
 	muted: 'linkColorMuted'
 }

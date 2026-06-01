@@ -2,19 +2,15 @@
 
 import Link from 'next/link'
 import { z } from '@/components/ui'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { Checkbox } from '@/components/ui/checkbox'
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { ComponentPreview } from '@/components/docs/component-preview'
 import { CodeBlock } from '@/components/docs/code-block'
 import { ChevronRight, AlertCircle } from 'lucide-react'
 
 export default function FormsPatternPage() {
 	return (
-		<div className='space-y-16'>
+		<z.box className='space-y-16'>
 			{/* Breadcrumb */}
-			<div className='flex items-center gap-2 text-sm text-muted-foreground'>
+			<z.box className='flex items-center gap-2 text-sm text-muted-foreground'>
 				<Link href='/docs' className='hover:text-foreground transition-colors'>
 					Docs
 				</Link>
@@ -23,200 +19,200 @@ export default function FormsPatternPage() {
 					Patterns
 				</Link>
 				<ChevronRight className='h-4 w-4' />
-				<span className='text-foreground'>Forms</span>
-			</div>
+				<z.text className='text-foreground'>Forms</z.text>
+			</z.box>
 
 			{/* Header */}
-			<div className='space-y-4'>
-				<div className='flex items-center gap-3'>
-					<h1 className='text-4xl font-bold tracking-tight text-foreground'>Form Patterns</h1>
+			<z.box className='space-y-4'>
+				<z.box className='flex items-center gap-3'>
+					<z.text.h1>Form Patterns</z.text.h1>
 					<z.badge isGhost isNeutral>
 						Pattern
 					</z.badge>
-				</div>
-				<p className='text-xl text-muted-foreground max-w-2xl leading-relaxed'>
+				</z.box>
+				<z.text.body className='text-xl text-muted-foreground max-w-2xl leading-relaxed'>
 					Best practices for building accessible, user-friendly forms with proper validation, error handling, and layout
 					patterns.
-				</p>
-			</div>
+				</z.text.body>
+			</z.box>
 
 			{/* Basic Form */}
-			<section className='space-y-6'>
-				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>Basic Form Layout</h2>
-				<p className='text-muted-foreground'>A standard form with labeled inputs and a submit button.</p>
+			<z.box as='section' className='space-y-6'>
+				<z.text.h2>Basic Form Layout</z.text.h2>
+				<z.text.body className='text-muted-foreground'>A standard form with labeled inputs and a submit button.</z.text.body>
 				<ComponentPreview
 					title='Contact Form'
 					description='A simple contact form with name, email, and message fields.'
-					code={`<form className="space-y-6 max-w-md">
-  <div className="space-y-2">
-    <Label htmlFor="name">Name</Label>
-    <Input id="name" placeholder="Enter your name" />
-  </div>
-  <div className="space-y-2">
-    <Label htmlFor="email">Email</Label>
-    <Input id="email" type="email" placeholder="Enter your email" />
-  </div>
-  <div className="space-y-2">
-    <Label htmlFor="message">Message</Label>
-    <Input id="message" placeholder="Enter your message" />
-  </div>
-  <Button type="submit" className="w-full">Send Message</Button>
-</form>`}
+					code={`<z.box as="form" className="space-y-6 max-w-md">
+  <z.box className="space-y-2">
+    <z.label htmlFor="name">Name</z.label>
+    <z.input id="name" placeholder="Enter your name" />
+  </z.box>
+  <z.box className="space-y-2">
+    <z.label htmlFor="email">Email</z.label>
+    <z.input id="email" type="email" placeholder="Enter your email" />
+  </z.box>
+  <z.box className="space-y-2">
+    <z.label htmlFor="message">Message</z.label>
+    <z.input id="message" placeholder="Enter your message" />
+  </z.box>
+  <z.button type="submit" className="w-full">Send Message</z.button>
+</z.box>`}
 				>
-					<form className='space-y-6 max-w-md w-full'>
-						<div className='space-y-2'>
-							<Label htmlFor='name'>Name</Label>
-							<Input id='name' placeholder='Enter your name' />
-						</div>
-						<div className='space-y-2'>
-							<Label htmlFor='email'>Email</Label>
-							<Input id='email' type='email' placeholder='Enter your email' />
-						</div>
-						<div className='space-y-2'>
-							<Label htmlFor='message'>Message</Label>
-							<Input id='message' placeholder='Enter your message' />
-						</div>
+					<z.box as='form' className='space-y-6 max-w-md w-full'>
+						<z.box className='space-y-2'>
+							<z.label htmlFor='name'>Name</z.label>
+							<z.input id='name' placeholder='Enter your name' />
+						</z.box>
+						<z.box className='space-y-2'>
+							<z.label htmlFor='email'>Email</z.label>
+							<z.input id='email' type='email' placeholder='Enter your email' />
+						</z.box>
+						<z.box className='space-y-2'>
+							<z.label htmlFor='message'>Message</z.label>
+							<z.input id='message' placeholder='Enter your message' />
+						</z.box>
 						<z.button type='submit' className='w-full'>
 							Send Message
 						</z.button>
-					</form>
+					</z.box>
 				</ComponentPreview>
-			</section>
+			</z.box>
 
 			{/* Form in Card */}
-			<section className='space-y-6'>
-				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>Form in Card</h2>
-				<p className='text-muted-foreground'>Wrapping forms in cards provides visual separation and structure.</p>
+			<z.box as='section' className='space-y-6'>
+				<z.text.h2>Form in Card</z.text.h2>
+				<z.text.body className='text-muted-foreground'>Wrapping forms in cards provides visual separation and structure.</z.text.body>
 				<ComponentPreview
 					title='Login Form'
 					description='A login form wrapped in a card component.'
-					code={`<Card className="w-full max-w-sm">
-  <CardHeader>
-    <CardTitle>Login</CardTitle>
-    <CardDescription>
+					code={`<z.card className="w-full max-w-sm">
+  <z.cardHeader>
+    <z.cardTitle>Login</z.cardTitle>
+    <z.cardDescription>
       Enter your email below to login to your account.
-    </CardDescription>
-  </CardHeader>
-  <CardContent>
-    <form className="space-y-4">
-      <div className="space-y-2">
-        <Label htmlFor="login-email">Email</Label>
-        <Input id="login-email" type="email" placeholder="m@example.com" />
-      </div>
-      <div className="space-y-2">
-        <Label htmlFor="login-password">Password</Label>
-        <Input id="login-password" type="password" />
-      </div>
-    </form>
-  </CardContent>
-  <CardFooter>
-    <Button className="w-full">Sign In</Button>
-  </CardFooter>
-</Card>`}
+    </z.cardDescription>
+  </z.cardHeader>
+  <z.cardContent>
+    <z.box as="form" className="space-y-4">
+      <z.box className="space-y-2">
+        <z.label htmlFor="login-email">Email</z.label>
+        <z.input id="login-email" type="email" placeholder="m@example.com" />
+      </z.box>
+      <z.box className="space-y-2">
+        <z.label htmlFor="login-password">Password</z.label>
+        <z.input id="login-password" type="password" />
+      </z.box>
+    </z.box>
+  </z.cardContent>
+  <z.cardFooter>
+    <z.button className="w-full">Sign In</z.button>
+  </z.cardFooter>
+</z.card>`}
 				>
-					<Card className='w-full max-w-sm'>
-						<CardHeader>
-							<CardTitle>Login</CardTitle>
-							<CardDescription>Enter your email below to login to your account.</CardDescription>
-						</CardHeader>
-						<CardContent>
-							<form className='space-y-4'>
-								<div className='space-y-2'>
-									<Label htmlFor='login-email'>Email</Label>
-									<Input id='login-email' type='email' placeholder='m@example.com' />
-								</div>
-								<div className='space-y-2'>
-									<Label htmlFor='login-password'>Password</Label>
-									<Input id='login-password' type='password' />
-								</div>
-							</form>
-						</CardContent>
-						<CardFooter>
+					<z.card className='w-full max-w-sm'>
+						<z.cardHeader>
+							<z.cardTitle>Login</z.cardTitle>
+							<z.cardDescription>Enter your email below to login to your account.</z.cardDescription>
+						</z.cardHeader>
+						<z.cardContent>
+							<z.box as='form' className='space-y-4'>
+								<z.box className='space-y-2'>
+									<z.label htmlFor='login-email'>Email</z.label>
+									<z.input id='login-email' type='email' placeholder='m@example.com' />
+								</z.box>
+								<z.box className='space-y-2'>
+									<z.label htmlFor='login-password'>Password</z.label>
+									<z.input id='login-password' type='password' />
+								</z.box>
+							</z.box>
+						</z.cardContent>
+						<z.cardFooter>
 							<z.button className='w-full'>Sign In</z.button>
-						</CardFooter>
-					</Card>
+						</z.cardFooter>
+					</z.card>
 				</ComponentPreview>
-			</section>
+			</z.box>
 
 			{/* Form with Validation */}
-			<section className='space-y-6'>
-				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>Form with Validation Errors</h2>
-				<p className='text-muted-foreground'>Show clear error messages to help users correct their input.</p>
+			<z.box as='section' className='space-y-6'>
+				<z.text.h2>Form with Validation Errors</z.text.h2>
+				<z.text.body className='text-muted-foreground'>Show clear error messages to help users correct their input.</z.text.body>
 				<ComponentPreview
 					title='Validation Example'
 					description='A form showing validation error states.'
-					code={`<form className="space-y-6 max-w-md">
-  <div className="space-y-2">
-    <Label htmlFor="username">Username</Label>
-    <Input 
+					code={`<z.box as="form" className="space-y-6 max-w-md">
+  <z.box className="space-y-2">
+    <z.label htmlFor="username">Username</z.label>
+    <z.input 
       id="username" 
       placeholder="Enter username"
       className="border-destructive focus-visible:ring-destructive"
     />
-    <p className="text-sm text-destructive flex items-center gap-1">
+    <z.text.body className="text-sm text-destructive flex items-center gap-1">
       <AlertCircle className="h-4 w-4" />
       Username is already taken
-    </p>
-  </div>
-  <div className="space-y-2">
-    <Label htmlFor="valid-email">Email</Label>
-    <Input id="valid-email" type="email" placeholder="Enter email" />
-    <p className="text-sm text-muted-foreground">
+    </z.text.body>
+  </z.box>
+  <z.box className="space-y-2">
+    <z.label htmlFor="valid-email">Email</z.label>
+    <z.input id="valid-email" type="email" placeholder="Enter email" />
+    <z.text.body className="text-sm text-muted-foreground">
       We'll never share your email with anyone else.
-    </p>
-  </div>
-  <Button type="submit">Submit</Button>
-</form>`}
+    </z.text.body>
+  </z.box>
+  <z.button type="submit">Submit</z.button>
+</z.box>`}
 				>
-					<form className='space-y-6 max-w-md w-full'>
-						<div className='space-y-2'>
-							<Label htmlFor='username'>Username</Label>
-							<Input
+					<z.box as='form' className='space-y-6 max-w-md w-full'>
+						<z.box className='space-y-2'>
+							<z.label htmlFor='username'>Username</z.label>
+							<z.input
 								id='username'
 								placeholder='Enter username'
 								defaultValue='johndoe'
 								className='border-destructive focus-visible:ring-destructive'
 							/>
-							<p className='text-sm text-destructive flex items-center gap-1'>
+							<z.text.body className='text-sm text-destructive flex items-center gap-1'>
 								<AlertCircle className='h-4 w-4' />
 								Username is already taken
-							</p>
-						</div>
-						<div className='space-y-2'>
-							<Label htmlFor='valid-email'>Email</Label>
-							<Input id='valid-email' type='email' placeholder='Enter email' />
-							<p className='text-sm text-muted-foreground'>We&apos;ll never share your email with anyone else.</p>
-						</div>
+							</z.text.body>
+						</z.box>
+						<z.box className='space-y-2'>
+							<z.label htmlFor='valid-email'>Email</z.label>
+							<z.input id='valid-email' type='email' placeholder='Enter email' />
+							<z.text.body className='text-sm text-muted-foreground'>We&apos;ll never share your email with anyone else.</z.text.body>
+						</z.box>
 						<z.button type='submit'>Submit</z.button>
-					</form>
+					</z.box>
 				</ComponentPreview>
-			</section>
+			</z.box>
 
 			{/* Multi-column Form */}
-			<section className='space-y-6'>
-				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>Multi-Column Layout</h2>
-				<p className='text-muted-foreground'>Use a grid layout for forms with multiple related fields.</p>
+			<z.box as='section' className='space-y-6'>
+				<z.text.h2>Multi-Column Layout</z.text.h2>
+				<z.text.body className='text-muted-foreground'>Use a grid layout for forms with multiple related fields.</z.text.body>
 				<ComponentPreview
 					title='Registration Form'
 					description='A registration form with a two-column layout.'
-					code={`<form className="space-y-6 max-w-lg">
-  <div className="grid grid-cols-2 gap-4">
-    <div className="space-y-2">
-      <Label htmlFor="first-name">First Name</Label>
-      <Input id="first-name" placeholder="John" />
-    </div>
-    <div className="space-y-2">
-      <Label htmlFor="last-name">Last Name</Label>
-      <Input id="last-name" placeholder="Doe" />
-    </div>
-  </div>
-  <div className="space-y-2">
-    <Label htmlFor="reg-email">Email</Label>
-    <Input id="reg-email" type="email" placeholder="john@example.com" />
-  </div>
-  <div className="grid grid-cols-2 gap-4">
-    <div className="space-y-2">
-      <Label htmlFor="country">Country</Label>
+					code={`<z.box as="form" className="space-y-6 max-w-lg">
+  <z.box className="grid grid-cols-2 gap-4">
+    <z.box className="space-y-2">
+      <z.label htmlFor="first-name">First Name</z.label>
+      <z.input id="first-name" placeholder="John" />
+    </z.box>
+    <z.box className="space-y-2">
+      <z.label htmlFor="last-name">Last Name</z.label>
+      <z.input id="last-name" placeholder="Doe" />
+    </z.box>
+  </z.box>
+  <z.box className="space-y-2">
+    <z.label htmlFor="reg-email">Email</z.label>
+    <z.input id="reg-email" type="email" placeholder="john@example.com" />
+  </z.box>
+  <z.box className="grid grid-cols-2 gap-4">
+    <z.box className="space-y-2">
+      <z.label htmlFor="country">Country</z.label>
       <z.select>
         <z.select.trigger id="country">
           <z.select.value placeholder="Select" />
@@ -227,39 +223,39 @@ export default function FormsPatternPage() {
           <z.select.item value="ca">Canada</z.select.item>
         </z.select.content>
       </z.select>
-    </div>
-    <div className="space-y-2">
-      <Label htmlFor="city">City</Label>
-      <Input id="city" placeholder="New York" />
-    </div>
-  </div>
-  <div className="flex items-center space-x-2">
-    <Checkbox id="terms" />
-    <Label htmlFor="terms" className="text-sm font-normal">
+    </z.box>
+    <z.box className="space-y-2">
+      <z.label htmlFor="city">City</z.label>
+      <z.input id="city" placeholder="New York" />
+    </z.box>
+  </z.box>
+  <z.box className="flex items-center space-x-2">
+    <z.checkbox id="terms" />
+    <z.label htmlFor="terms" className="text-sm font-normal">
       I agree to the terms and conditions
-    </Label>
-  </div>
-  <Button type="submit" className="w-full">Create Account</Button>
-</form>`}
+    </z.label>
+  </z.box>
+  <z.button type="submit" className="w-full">Create Account</z.button>
+</z.box>`}
 				>
-					<form className='space-y-6 max-w-lg w-full'>
-						<div className='grid grid-cols-2 gap-4'>
-							<div className='space-y-2'>
-								<Label htmlFor='first-name'>First Name</Label>
-								<Input id='first-name' placeholder='John' />
-							</div>
-							<div className='space-y-2'>
-								<Label htmlFor='last-name'>Last Name</Label>
-								<Input id='last-name' placeholder='Doe' />
-							</div>
-						</div>
-						<div className='space-y-2'>
-							<Label htmlFor='reg-email'>Email</Label>
-							<Input id='reg-email' type='email' placeholder='john@example.com' />
-						</div>
-						<div className='grid grid-cols-2 gap-4'>
-							<div className='space-y-2'>
-								<Label htmlFor='country'>Country</Label>
+					<z.box as='form' className='space-y-6 max-w-lg w-full'>
+						<z.box className='grid grid-cols-2 gap-4'>
+							<z.box className='space-y-2'>
+								<z.label htmlFor='first-name'>First Name</z.label>
+								<z.input id='first-name' placeholder='John' />
+							</z.box>
+							<z.box className='space-y-2'>
+								<z.label htmlFor='last-name'>Last Name</z.label>
+								<z.input id='last-name' placeholder='Doe' />
+							</z.box>
+						</z.box>
+						<z.box className='space-y-2'>
+							<z.label htmlFor='reg-email'>Email</z.label>
+							<z.input id='reg-email' type='email' placeholder='john@example.com' />
+						</z.box>
+						<z.box className='grid grid-cols-2 gap-4'>
+							<z.box className='space-y-2'>
+								<z.label htmlFor='country'>Country</z.label>
 								<z.select>
 									<z.select.trigger id='country'>
 										<z.select.value placeholder='Select' />
@@ -270,60 +266,60 @@ export default function FormsPatternPage() {
 										<z.select.item value='ca'>Canada</z.select.item>
 									</z.select.content>
 								</z.select>
-							</div>
-							<div className='space-y-2'>
-								<Label htmlFor='city'>City</Label>
-								<Input id='city' placeholder='New York' />
-							</div>
-						</div>
-						<div className='flex items-center space-x-2'>
-							<Checkbox id='terms' />
-							<Label htmlFor='terms' className='text-sm font-normal'>
+							</z.box>
+							<z.box className='space-y-2'>
+								<z.label htmlFor='city'>City</z.label>
+								<z.input id='city' placeholder='New York' />
+							</z.box>
+						</z.box>
+						<z.box className='flex items-center space-x-2'>
+							<z.checkbox id='terms' />
+							<z.label htmlFor='terms' className='text-sm font-normal'>
 								I agree to the terms and conditions
-							</Label>
-						</div>
+							</z.label>
+						</z.box>
 						<z.button type='submit' className='w-full'>
 							Create Account
 						</z.button>
-					</form>
+					</z.box>
 				</ComponentPreview>
-			</section>
+			</z.box>
 
 			{/* Best Practices */}
-			<section className='space-y-6'>
-				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>Best Practices</h2>
-				<Card>
-					<CardContent className='p-6 space-y-4'>
-						<div className='space-y-2'>
-							<h3 className='font-semibold text-foreground'>Accessibility</h3>
-							<ul className='text-sm text-muted-foreground space-y-2 list-disc list-inside'>
-								<li>Always pair inputs with visible labels using the Label component</li>
-								<li>Use htmlFor on labels to associate them with inputs</li>
-								<li>Include aria-describedby for error messages and help text</li>
-								<li>Ensure adequate color contrast for error states</li>
-							</ul>
-						</div>
-						<div className='space-y-2'>
-							<h3 className='font-semibold text-foreground'>User Experience</h3>
-							<ul className='text-sm text-muted-foreground space-y-2 list-disc list-inside'>
-								<li>Provide clear, actionable error messages</li>
-								<li>Show validation errors inline, near the relevant field</li>
-								<li>Use appropriate input types (email, tel, url) for better mobile keyboards</li>
-								<li>Disable submit buttons during form submission to prevent double-submits</li>
-							</ul>
-						</div>
-						<div className='space-y-2'>
-							<h3 className='font-semibold text-foreground'>Layout</h3>
-							<ul className='text-sm text-muted-foreground space-y-2 list-disc list-inside'>
-								<li>Use consistent spacing between form fields (space-y-4 or space-y-6)</li>
-								<li>Group related fields together (name fields, address fields)</li>
-								<li>Place primary actions at the bottom of the form</li>
-								<li>Consider using cards for standalone forms</li>
-							</ul>
-						</div>
-					</CardContent>
-				</Card>
-			</section>
-		</div>
+			<z.box as='section' className='space-y-6'>
+				<z.text.h2>Best Practices</z.text.h2>
+				<z.card>
+					<z.cardContent className='p-6 space-y-4'>
+						<z.box className='space-y-2'>
+							<z.text.h3>Accessibility</z.text.h3>
+							<z.box as='ul' className='text-sm text-muted-foreground space-y-2 list-disc list-inside'>
+								<z.box as='li'>Always pair inputs with visible labels using the Label component</z.box>
+								<z.box as='li'>Use htmlFor on labels to associate them with inputs</z.box>
+								<z.box as='li'>Include aria-describedby for error messages and help text</z.box>
+								<z.box as='li'>Ensure adequate color contrast for error states</z.box>
+							</z.box>
+						</z.box>
+						<z.box className='space-y-2'>
+							<z.text.h3>User Experience</z.text.h3>
+							<z.box as='ul' className='text-sm text-muted-foreground space-y-2 list-disc list-inside'>
+								<z.box as='li'>Provide clear, actionable error messages</z.box>
+								<z.box as='li'>Show validation errors inline, near the relevant field</z.box>
+								<z.box as='li'>Use appropriate input types (email, tel, url) for better mobile keyboards</z.box>
+								<z.box as='li'>Disable submit buttons during form submission to prevent double-submits</z.box>
+							</z.box>
+						</z.box>
+						<z.box className='space-y-2'>
+							<z.text.h3>Layout</z.text.h3>
+							<z.box as='ul' className='text-sm text-muted-foreground space-y-2 list-disc list-inside'>
+								<z.box as='li'>Use consistent spacing between form fields (space-y-4 or space-y-6)</z.box>
+								<z.box as='li'>Group related fields together (name fields, address fields)</z.box>
+								<z.box as='li'>Place primary actions at the bottom of the form</z.box>
+								<z.box as='li'>Consider using cards for standalone forms</z.box>
+							</z.box>
+						</z.box>
+					</z.cardContent>
+				</z.card>
+			</z.box>
+		</z.box>
 	)
 }

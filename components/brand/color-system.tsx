@@ -9,13 +9,6 @@ interface ColorSystemProps {
 
 const brandColors = [
 	{
-		name: 'Neon Green',
-		value: '#39FF14',
-		oklch: 'oklch(0.85 0.28 145)',
-		usage: 'Primary actions, success states, key highlights',
-		variable: '---green'
-	},
-	{
 		name: 'Neon Pink',
 		value: '#FF1493',
 		oklch: 'oklch(0.75 0.25 350)',
@@ -28,13 +21,6 @@ const brandColors = [
 		oklch: 'oklch(0.7 0.25 300)',
 		usage: 'Tertiary accents, tags, categories',
 		variable: '---purple'
-	},
-	{
-		name: 'Neon Orange',
-		value: '#FF6B35',
-		oklch: 'oklch(0.8 0.22 55)',
-		usage: 'Warnings, attention, call-outs',
-		variable: '---orange'
 	}
 ]
 
@@ -88,7 +74,7 @@ export function ColorSystem({ onInView }: ColorSystemProps) {
 				{/* Brand Colors */}
 				<div className='mb-24'>
 					<h3 className='text-primary font-semibold text-xl mb-8 flex items-center gap-3'>
-						<span className='w-2 h-2 rounded-full bg-neon-green' />
+						<span className='w-2 h-2 rounded-full bg-neon-purple' />
 						Brand Neons
 					</h3>
 
@@ -107,7 +93,7 @@ export function ColorSystem({ onInView }: ColorSystemProps) {
 											className={cn(
 												'text-xs transition-opacity',
 												copiedColor === color.name
-													? 'text-neon-green opacity-100'
+													? 'text-neon-purple opacity-100'
 													: 'text-muted-foreground opacity-0 group-hover:opacity-100'
 											)}
 										>
@@ -150,7 +136,7 @@ export function ColorSystem({ onInView }: ColorSystemProps) {
 
 					<div className='grid md:grid-cols-2 gap-12'>
 						<div>
-							<h4 className='text-neon-green font-medium mb-4 flex items-center gap-2'>
+							<h4 className='text-neon-purple font-medium mb-4 flex items-center gap-2'>
 								<svg className='w-4 h-4' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
 									<path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M5 13l4 4L19 7' />
 								</svg>
@@ -158,23 +144,23 @@ export function ColorSystem({ onInView }: ColorSystemProps) {
 							</h4>
 							<ul className='space-y-3 text-foreground text-sm'>
 								<li className='flex items-start gap-3'>
-									<span className='text-neon-green mt-1'>•</span>
+									<span className='text-neon-purple mt-1'>•</span>
 									<span>
-										Use <span className='text-neon-green'>neon colors</span> for interactive elements, badges, and key highlights
+										Use <span className='text-neon-purple'>neon colors</span> for interactive elements, badges, and key highlights
 									</span>
 								</li>
 								<li className='flex items-start gap-3'>
-									<span className='text-neon-green mt-1'>•</span>
+									<span className='text-neon-purple mt-1'>•</span>
 									<span>Maintain high contrast between text and backgrounds</span>
 								</li>
 								<li className='flex items-start gap-3'>
-									<span className='text-neon-green mt-1'>•</span>
+									<span className='text-neon-purple mt-1'>•</span>
 									<span>
 										Use <span className='text-primary font-semibold'>white</span> sparingly for hierarchy
 									</span>
 								</li>
 								<li className='flex items-start gap-3'>
-									<span className='text-neon-green mt-1'>•</span>
+									<span className='text-neon-purple mt-1'>•</span>
 									<span>Scatter brand colors throughout the UI—don&apos;t be shy</span>
 								</li>
 							</ul>

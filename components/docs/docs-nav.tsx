@@ -12,30 +12,30 @@ export function DocsNav() {
 	const pathname = usePathname()
 
 	return (
-		<header className='sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60'>
-			<div className='flex h-14 items-center px-4 lg:px-6'>
+		<z.box as='header' className='sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60'>
+			<z.box className='flex h-14 items-center px-4 lg:px-6'>
 				{/* Mobile menu */}
 				<Sheet>
 					<SheetTrigger asChild>
-						<button className='lg:hidden mr-4 p-2 -ml-2 hover:bg-muted rounded-md'>
+						<z.button className='lg:hidden mr-4 p-2 -ml-2 hover:bg-muted rounded-md'>
 							<MenuIcon className='h-5 w-5 text-foreground' />
-							<span className='sr-only'>Toggle menu</span>
-						</button>
+							<z.text className='sr-only'>Toggle menu</z.text>
+						</z.button>
 					</SheetTrigger>
 					<SheetContent side='left' className='w-72 p-0'>
-						<div className='pt-6'>
+						<z.box className='pt-6'>
 							<DocsSidebarContent />
-						</div>
+						</z.box>
 					</SheetContent>
 				</Sheet>
 
 				{/* Logo */}
 				<Link href='/' className='flex items-center gap-2 mr-6'>
-					<span className='text-primary font-bold text-lg tracking-tight'>tasteink</span>
+					<z.text className='text-primary font-bold text-lg tracking-tight'>tasteink</z.text>
 				</Link>
 
 				{/* Main nav */}
-				<nav className='hidden lg:flex items-center gap-6 text-sm'>
+				<z.box as='nav' className='hidden lg:flex items-center gap-6 text-sm'>
 					<Link
 						href='/docs'
 						className={cn(
@@ -63,15 +63,15 @@ export function DocsNav() {
 					>
 						Components
 					</Link>
-				</nav>
+				</z.box>
 
-				<div className='ml-auto flex items-center gap-4'>
+				<z.box className='ml-auto flex items-center gap-4'>
 					{/* Search placeholder */}
-					<button className='hidden md:flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground border border-border rounded-md px-3 py-1.5 w-64 transition-colors hover:border-foreground/30'>
+					<z.button className='hidden md:flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground border border-border rounded-md px-3 py-1.5 w-64 transition-colors hover:border-foreground/30'>
 						<SearchIcon className='h-4 w-4' />
-						<span>Search docs...</span>
-						<kbd className='ml-auto text-xs bg-muted px-1.5 py-0.5 rounded'>⌘K</kbd>
-					</button>
+						<z.text>Search docs...</z.text>
+						<z.text as='kbd' className='ml-auto text-xs bg-muted px-1.5 py-0.5 rounded'>⌘K</z.text>
+					</z.button>
 
 					<z.badge isOutline isPurple className='hidden sm:inline-flex'>
 						v1.0
@@ -82,8 +82,8 @@ export function DocsNav() {
 							Brand System
 						</z.button>
 					</Link>
-				</div>
-			</div>
-		</header>
+				</z.box>
+			</z.box>
+		</z.box>
 	)
 }

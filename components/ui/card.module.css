@@ -79,20 +79,12 @@
 	--card-accent: color-mix(in srgb, var(--foreground) 14%, transparent);
 }
 
-.cardToneGreen {
-	--card-accent: color-mix(in srgb, var(--accent) 34%, transparent);
-}
-
 .cardTonePink {
 	--card-accent: color-mix(in srgb, oklch(0.75 0.25 350) 34%, transparent);
 }
 
 .cardTonePurple {
 	--card-accent: color-mix(in srgb, oklch(0.7 0.25 300) 34%, transparent);
-}
-
-.cardToneOrange {
-	--card-accent: color-mix(in srgb, oklch(0.8 0.22 55) 34%, transparent);
 }
 
 .cardPremium {

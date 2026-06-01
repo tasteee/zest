@@ -5,65 +5,6 @@
 	font-weight: var(--font-weight-regular);
 }
 
-.isPurple {
-	color: var(--color-neon-purple);
-}
-.isPink {
-	color: var(--color-neon-pink);
-}
-.isNeutral {
-	color: var(--color-neutral);
-}
-.isMuted {
-	color: var(--muted-foreground);
-}
-
-.isExtraSmall {
-	font-size: var(--font-size-caption);
-	line-height: var(--line-height-caption);
-}
-
-.isSmall {
-	font-size: var(--font-size-small);
-	line-height: var(--line-height-small);
-}
-.isMedium {
-	font-size: var(--font-size-body);
-	line-height: var(--line-height-body);
-}
-.isLarge {
-	font-size: var(--font-size-h4);
-	line-height: var(--line-height-h4);
-}
-.isExtraLarge {
-	font-size: var(--font-size-h3);
-	line-height: var(--line-height-h3);
-}
-
-.isThin {
-	font-weight: var(--font-weight-regular);
-}
-
-.isNormal {
-	font-weight: var(--font-weight-regular);
-}
-
-.isBold {
-	font-weight: var(--font-weight-semibold);
-}
-
-.isVeryBold {
-	font-weight: var(--font-weight-bold);
-}
-
-.isItalic {
-	font-style: italic;
-}
-
-.isUnderlined {
-	text-decoration: underline;
-}
-
 .zTextDisplay {
 	font-size: var(--font-size-display);
 	font-weight: var(--font-weight-bold);
@@ -110,4 +51,73 @@
 	font-size: var(--font-size-caption);
 	font-weight: var(--font-weight-medium);
 	line-height: var(--line-height-caption);
+}
+
+.isPurple {
+	color: var(--color-neon-purple);
+}
+
+.isPink {
+	color: var(--color-neon-pink);
+}
+
+.isNeutral {
+	color: var(--color-neutral);
+}
+
+.isPrimary {
+	color: var(--primary);
+}
+
+.isMuted {
+	color: var(--muted-foreground);
+}
+
+.isExtraSmall {
+	font-size: var(--font-size-caption);
+	line-height: var(--line-height-caption);
+}
+
+.isSmall {
+	font-size: var(--font-size-small);
+	line-height: var(--line-height-small);
+}
+
+.isMedium {
+	font-size: var(--font-size-body);
+	line-height: var(--line-height-body);
+}
+
+.isLarge {
+	font-size: var(--font-size-h4);
+	line-height: var(--line-height-h4);
+}
+
+.isExtraLarge {
+	font-size: var(--font-size-h3);
+	line-height: var(--line-height-h3);
+}
+
+.isThin {
+	font-weight: var(--font-weight-regular);
+}
+
+.isNormal {
+	font-weight: var(--font-weight-regular);
+}
+
+.isBold {
+	font-weight: var(--font-weight-semibold);
+}
+
+.isVeryBold {
+	font-weight: var(--font-weight-bold);
+}
+
+.isItalic {
+	font-style: italic;
+}
+
+.isUnderlined {
+	text-decoration: underline;
 }

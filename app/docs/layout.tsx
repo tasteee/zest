@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { DocsNav } from "@/components/docs/docs-nav";
-import { DocsSidebar } from "@/components/docs/docs-sidebar";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { Toaster } from "@/components/ui/toaster";
+import { DocsSidebar } from "@/components/docs/docs-sidebar";import { Toaster } from "@/components/ui/toaster";
+import { z } from '@/components/ui'
 
 export const metadata: Metadata = {
   title: "Documentation — tasteink",
@@ -15,19 +14,19 @@ export default function DocsLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="zestPageBackground">
+    <z.box className="zestPageBackground">
       <DocsNav />
-      <div className="flex">
+      <z.box className="flex">
         <DocsSidebar />
-        <main className="flex-1 lg:pl-72">
-          <ScrollArea className="h-[calc(100vh-3.5rem)]">
-            <div className="max-w-4xl mx-auto px-6 py-12 lg:px-12">
+        <z.box as='main' className="flex-1 lg:pl-72">
+          <z.scrollArea className="h-[calc(100vh-3.5rem)]">
+            <z.box className="max-w-4xl mx-auto px-6 py-12 lg:px-12">
               {children}
-            </div>
-          </ScrollArea>
-        </main>
-      </div>
+            </z.box>
+          </z.scrollArea>
+        </z.box>
+      </z.box>
       <Toaster />
-    </div>
+    </z.box>
   );
 }

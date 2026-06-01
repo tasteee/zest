@@ -2,7 +2,7 @@
 
 import { cn } from '@/lib/utils'
 import { z } from '@/components/ui'
-import { Input } from '@/components/ui/input'
+import { Input, type InputPropsT } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 
 function InputGroup({ className, ...props }: React.ComponentProps<'div'>) {
@@ -122,7 +122,7 @@ function InputGroupText({ className, ...props }: React.ComponentProps<'span'>) {
 	)
 }
 
-function InputGroupInput({ className, ...props }: React.ComponentProps<'input'>) {
+function InputGroupInput({ className, ...props }: InputPropsT) {
 	return (
 		<Input
 			data-slot='input-group-control'

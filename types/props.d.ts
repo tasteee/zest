@@ -1,4 +1,4 @@
-type CommonColorPropNamesT = 'isNeutral' | 'isPurple' | 'isPink'
+type CommonColorPropNamesT = 'isNeutral' | 'isPrimary' | 'isPurple' | 'isPink'
 type CommonSizePropNamesT = 'isSmall' | 'isMedium' | 'isLarge'
 type CommonKindPropNamesT = 'isGhost' | 'isOutlined' | 'isSolid'
 

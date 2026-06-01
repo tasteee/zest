@@ -23,43 +23,26 @@ import {
 	Send,
 	ChevronDown
 } from 'lucide-react'
-
-// UI Components
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { Checkbox } from '@/components/ui/checkbox'
-import { Switch } from '@/components/ui/switch'
-import { Progress } from '@/components/ui/progress'
-import { Skeleton } from '@/components/ui/skeleton'
-import { Line } from '@/components/ui/line'
-import { Separator } from '@/components/ui/separator'
-import { Alert } from '@/components/ui/alert'
-import { Avatar } from '@/components/ui/avatar'
-import { Card } from '@/components/ui/card'
-import { Tabs } from '@/components/ui/tabs'
-import { Accordion } from '@/components/ui/accordion'
-import { Dialog } from '@/components/ui/dialog'
-import { DropdownMenu } from '@/components/ui/dropdown-menu'
-
-import { Table } from '@/components/ui/table'
 import { useToast } from '@/components/ui/use-toast'
 import { z } from '@/components/ui'
 
 function SectionHeader({ title, description }: { title: string; description?: string }) {
 	return (
-		<div className='mb-8'>
-			<h2 className='text-2xl font-semibold tracking-tight text-foreground mb-2'>{title}</h2>
-			{description && <p className='text-muted-foreground'>{description}</p>}
-		</div>
+		<z.box className='mb-8'>
+			<z.text.h2 className='mb-2'>{title}</z.text.h2>
+			{description && <z.text.body className='text-muted-foreground'>{description}</z.text.body>}
+		</z.box>
 	)
 }
 
 function ExampleCard({ title, children }: { title: string; children: React.ReactNode }) {
 	return (
-		<div className='rounded-lg border border-border bg-card p-6'>
-			<h3 className='text-sm font-medium text-muted-foreground mb-4'>{title}</h3>
-			<div className='flex flex-wrap items-start gap-4'>{children}</div>
-		</div>
+		<z.box className='rounded-lg border border-border bg-card p-6'>
+			<z.text as='h3' isSmall isMuted isBold className='mb-4'>
+				{title}
+			</z.text>
+			<z.box className='flex flex-wrap items-start gap-4'>{children}</z.box>
+		</z.box>
 	)
 }
 
@@ -79,28 +62,28 @@ export default function ExamplesPage() {
 	})
 
 	return (
-		<div className='space-y-16 pb-16'>
+		<z.box className='space-y-16 pb-16'>
 			{/* Page Header */}
-			<div className='space-y-4'>
-				<nav className='flex items-center gap-2 text-sm text-muted-foreground'>
+			<z.box className='space-y-4'>
+				<z.box as='nav' className='flex items-center gap-2 text-sm text-muted-foreground'>
 					<Link href='/docs' className='hover:text-foreground transition-colors'>
 						Docs
 					</Link>
 					<ChevronRight className='h-4 w-4' />
-					<span className='text-foreground'>Examples</span>
-				</nav>
-				<h1 className='text-4xl font-bold tracking-tight text-foreground'>Component Examples</h1>
-				<p className='text-lg text-muted-foreground max-w-3xl'>
+					<z.text className='text-foreground'>Examples</z.text>
+				</z.box>
+				<z.text.h1>Component Examples</z.text.h1>
+				<z.text.body className='text-lg text-muted-foreground max-w-3xl'>
 					A comprehensive showcase of all Zest components with their common variations. Use this page as a reference for
 					available styles, states, and configurations.
-				</p>
-			</div>
+				</z.text.body>
+			</z.box>
 
 			{/* Buttons Section */}
-			<section className='space-y-6'>
+			<z.box as='section' className='space-y-6'>
 				<SectionHeader title='z.button' description='Buttons with different kinds, themes, and sizes.' />
 
-				<div className='grid gap-6'>
+				<z.box className='grid gap-6'>
 					<ExampleCard title='Solid Buttons'>
 						<z.button isPurple>Purple</z.button>
 						<z.button isPurple>Purple</z.button>
@@ -161,16 +144,16 @@ export default function ExamplesPage() {
 							<Send className='h-4 w-4' />
 						</z.button>
 					</ExampleCard>
-				</div>
-			</section>
+				</z.box>
+			</z.box>
 
-			<Separator />
+			<z.separator />
 
 			{/* Badge Section */}
-			<section className='space-y-6'>
+			<z.box as='section' className='space-y-6'>
 				<SectionHeader title='z.badge' description='Small status indicators and labels.' />
 
-				<div className='grid gap-6'>
+				<z.box className='grid gap-6'>
 					<ExampleCard title='Solid Badges'>
 						<z.badge isSolid isNeutral>
 							Default
@@ -230,168 +213,168 @@ export default function ExamplesPage() {
 							<Star className='h-3 w-3' /> Featured
 						</z.badge>
 					</ExampleCard>
-				</div>
-			</section>
+				</z.box>
+			</z.box>
 
-			<Separator />
+			<z.separator />
 
 			{/* Input Section */}
-			<section className='space-y-6'>
+			<z.box as='section' className='space-y-6'>
 				<SectionHeader title='ZInput' description='Text inputs with different focus colors and states.' />
 
-				<div className='grid gap-6'>
+				<z.box className='grid gap-6'>
 					<ExampleCard title='Focus Colors'>
-						<div className='grid gap-4 w-full max-w-md'>
-							<div className='space-y-2'>
-								<Label>Default Focus</Label>
+						<z.box className='grid gap-4 w-full max-w-md'>
+							<z.box className='space-y-2'>
+								<z.label>Default Focus</z.label>
 								<z.input placeholder='Default focus ring' focusColor='neutral' />
-							</div>
-							<div className='space-y-2'>
-								<Label>Purple Focus</Label>
+							</z.box>
+							<z.box className='space-y-2'>
+								<z.label>Purple Focus</z.label>
 								<z.input placeholder='Purple focus ring' focusColor='purple' />
-							</div>
-							<div className='space-y-2'>
-								<Label>Purple Focus</Label>
-								<Input placeholder='Purple focus ring' focusColor='purple' />
-							</div>
-							<div className='space-y-2'>
-								<Label>Pink Focus</Label>
-								<Input placeholder='Pink focus ring' focusColor='pink' />
-							</div>
-							<div className='space-y-2'>
-								<Label>Pink Focus</Label>
-								<Input placeholder='Pink focus ring' focusColor='pink' />
-							</div>
-						</div>
+							</z.box>
+							<z.box className='space-y-2'>
+								<z.label>Purple Focus</z.label>
+								<z.input placeholder='Purple focus ring' focusColor='purple' />
+							</z.box>
+							<z.box className='space-y-2'>
+								<z.label>Pink Focus</z.label>
+								<z.input placeholder='Pink focus ring' focusColor='pink' />
+							</z.box>
+							<z.box className='space-y-2'>
+								<z.label>Pink Focus</z.label>
+								<z.input placeholder='Pink focus ring' focusColor='pink' />
+							</z.box>
+						</z.box>
 					</ExampleCard>
 
 					<ExampleCard title='Input Types'>
-						<div className='grid gap-4 w-full max-w-md'>
-							<div className='space-y-2'>
-								<Label htmlFor='text'>Text</Label>
-								<Input id='text' type='text' placeholder='Enter text' />
-							</div>
-							<div className='space-y-2'>
-								<Label htmlFor='email'>Email</Label>
-								<Input id='email' type='email' placeholder='name@example.com' />
-							</div>
-							<div className='space-y-2'>
-								<Label htmlFor='password'>Password</Label>
-								<Input id='password' type='password' placeholder='Enter password' />
-							</div>
-							<div className='space-y-2'>
-								<Label htmlFor='search'>Search</Label>
-								<Input id='search' type='search' placeholder='Search...' />
-							</div>
-							<div className='space-y-2'>
-								<Label htmlFor='disabled'>Disabled</Label>
-								<Input id='disabled' placeholder='Disabled input' disabled />
-							</div>
-						</div>
+						<z.box className='grid gap-4 w-full max-w-md'>
+							<z.box className='space-y-2'>
+								<z.label htmlFor='text'>Text</z.label>
+								<z.input id='text' type='text' placeholder='Enter text' />
+							</z.box>
+							<z.box className='space-y-2'>
+								<z.label htmlFor='email'>Email</z.label>
+								<z.input id='email' type='email' placeholder='name@example.com' />
+							</z.box>
+							<z.box className='space-y-2'>
+								<z.label htmlFor='password'>Password</z.label>
+								<z.input id='password' type='password' placeholder='Enter password' />
+							</z.box>
+							<z.box className='space-y-2'>
+								<z.label htmlFor='search'>Search</z.label>
+								<z.input id='search' type='search' placeholder='Search...' />
+							</z.box>
+							<z.box className='space-y-2'>
+								<z.label htmlFor='disabled'>Disabled</z.label>
+								<z.input id='disabled' placeholder='Disabled input' disabled />
+							</z.box>
+						</z.box>
 					</ExampleCard>
 
 					<ExampleCard title='Input with Icons'>
-						<div className='grid gap-4 w-full max-w-md'>
-							<div className='relative'>
+						<z.box className='grid gap-4 w-full max-w-md'>
+							<z.box className='relative'>
 								<Search className='absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground' />
-								<Input className='pl-9' placeholder='Search...' />
-							</div>
-							<div className='relative'>
+								<z.input className='pl-9' placeholder='Search...' />
+							</z.box>
+							<z.box className='relative'>
 								<Mail className='absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground' />
-								<Input className='pl-9' type='email' placeholder='Email address' />
-							</div>
-						</div>
+								<z.input className='pl-9' type='email' placeholder='Email address' />
+							</z.box>
+						</z.box>
 					</ExampleCard>
-				</div>
-			</section>
+				</z.box>
+			</z.box>
 
-			<Separator />
+			<z.separator />
 
 			{/* Checkbox & Switch Section */}
-			<section className='space-y-6'>
+			<z.box as='section' className='space-y-6'>
 				<SectionHeader title='ZCheckbox & ZSwitch' description='Toggle controls for boolean values.' />
 
-				<div className='grid gap-6 md:grid-cols-2'>
+				<z.box className='grid gap-6 md:grid-cols-2'>
 					<ExampleCard title='Checkboxes'>
-						<div className='space-y-4 w-full'>
-							<div className='flex items-center space-x-2'>
-								<Checkbox
+						<z.box className='space-y-4 w-full'>
+							<z.box className='flex items-center space-x-2'>
+								<z.checkbox
 									id='terms'
 									isChecked={checkboxStates.terms}
 									onCheckedChange={(checked) => setCheckboxStates((prev) => ({ ...prev, terms: checked as boolean }))}
 								/>
-								<Label htmlFor='terms'>Accept terms and conditions</Label>
-							</div>
-							<div className='flex items-center space-x-2'>
-								<Checkbox
+								<z.label htmlFor='terms'>Accept terms and conditions</z.label>
+							</z.box>
+							<z.box className='flex items-center space-x-2'>
+								<z.checkbox
 									id='newsletter'
 									isChecked={checkboxStates.newsletter}
 									onCheckedChange={(checked) => setCheckboxStates((prev) => ({ ...prev, newsletter: checked as boolean }))}
 								/>
-								<Label htmlFor='newsletter'>Subscribe to newsletter</Label>
-							</div>
-							<div className='flex items-center space-x-2'>
-								<Checkbox id='disabled' isDisabled />
-								<Label htmlFor='disabled' className='text-muted-foreground'>
+								<z.label htmlFor='newsletter'>Subscribe to newsletter</z.label>
+							</z.box>
+							<z.box className='flex items-center space-x-2'>
+								<z.checkbox id='disabled' isDisabled />
+								<z.label htmlFor='disabled' className='text-muted-foreground'>
 									Disabled checkbox
-								</Label>
-							</div>
-							<div className='flex items-center space-x-2'>
-								<Checkbox id='checked-disabled' isChecked isDisabled />
-								<Label htmlFor='checked-disabled' className='text-muted-foreground'>
+								</z.label>
+							</z.box>
+							<z.box className='flex items-center space-x-2'>
+								<z.checkbox id='checked-disabled' isChecked isDisabled />
+								<z.label htmlFor='checked-disabled' className='text-muted-foreground'>
 									Checked disabled
-								</Label>
-							</div>
-						</div>
+								</z.label>
+							</z.box>
+						</z.box>
 					</ExampleCard>
 
 					<ExampleCard title='Switches'>
-						<div className='space-y-4 w-full'>
-							<div className='flex items-center justify-between'>
-								<Label htmlFor='airplane'>Airplane Mode</Label>
-								<Switch
+						<z.box className='space-y-4 w-full'>
+							<z.box className='flex items-center justify-between'>
+								<z.label htmlFor='airplane'>Airplane Mode</z.label>
+								<z.switch
 									id='airplane'
 									checked={switchStates.airplane}
 									onCheckedChange={(checked) => setSwitchStates((prev) => ({ ...prev, airplane: checked }))}
 								/>
-							</div>
-							<div className='flex items-center justify-between'>
-								<Label htmlFor='notifications'>Notifications</Label>
-								<Switch
+							</z.box>
+							<z.box className='flex items-center justify-between'>
+								<z.label htmlFor='notifications'>Notifications</z.label>
+								<z.switch
 									id='notifications'
 									checked={switchStates.notifications}
 									onCheckedChange={(checked) => setSwitchStates((prev) => ({ ...prev, notifications: checked }))}
 								/>
-							</div>
-							<div className='flex items-center justify-between'>
-								<Label htmlFor='dark-mode'>Dark Mode</Label>
-								<Switch
+							</z.box>
+							<z.box className='flex items-center justify-between'>
+								<z.label htmlFor='dark-mode'>Dark Mode</z.label>
+								<z.switch
 									id='dark-mode'
 									checked={switchStates.darkMode}
 									onCheckedChange={(checked) => setSwitchStates((prev) => ({ ...prev, darkMode: checked }))}
 								/>
-							</div>
-							<div className='flex items-center justify-between'>
-								<Label htmlFor='disabled-switch' className='text-muted-foreground'>
+							</z.box>
+							<z.box className='flex items-center justify-between'>
+								<z.label htmlFor='disabled-switch' className='text-muted-foreground'>
 									Disabled
-								</Label>
-								<Switch id='disabled-switch' disabled />
-							</div>
-						</div>
+								</z.label>
+								<z.switch id='disabled-switch' disabled />
+							</z.box>
+						</z.box>
 					</ExampleCard>
-				</div>
-			</section>
+				</z.box>
+			</z.box>
 
-			<Separator />
+			<z.separator />
 
 			{/* Select Section */}
-			<section className='space-y-6'>
+			<z.box as='section' className='space-y-6'>
 				<SectionHeader title='ZSelect' description='Dropdown selection controls.' />
 
-				<div className='grid gap-6 md:grid-cols-2'>
+				<z.box className='grid gap-6 md:grid-cols-2'>
 					<ExampleCard title='Basic Select'>
-						<div className='space-y-2 w-full max-w-xs'>
-							<Label>Choose a theme</Label>
+						<z.box className='space-y-2 w-full max-w-xs'>
+							<z.label>Choose a theme</z.label>
 							<z.select>
 								<z.select.trigger>
 									<z.select.value placeholder='Select theme' />
@@ -402,12 +385,12 @@ export default function ExamplesPage() {
 									<z.select.item value='system'>System</z.select.item>
 								</z.select.content>
 							</z.select>
-						</div>
+						</z.box>
 					</ExampleCard>
 
 					<ExampleCard title='Select with Groups'>
-						<div className='space-y-2 w-full max-w-xs'>
-							<Label>Select a fruit</Label>
+						<z.box className='space-y-2 w-full max-w-xs'>
+							<z.label>Select a fruit</z.label>
 							<z.select>
 								<z.select.trigger>
 									<z.select.value placeholder='Pick a fruit' />
@@ -420,90 +403,94 @@ export default function ExamplesPage() {
 									<z.select.item value='mango'>Mango</z.select.item>
 								</z.select.content>
 							</z.select>
-						</div>
+						</z.box>
 					</ExampleCard>
-				</div>
-			</section>
+				</z.box>
+			</z.box>
 
-			<Separator />
+			<z.separator />
 
 			{/* Alert Section */}
-			<section className='space-y-6'>
+			<z.box as='section' className='space-y-6'>
 				<SectionHeader title='ZAlert' description='Contextual feedback messages.' />
 
-				<div className='grid gap-4'>
-					<Alert>
+				<z.box className='grid gap-4'>
+					<z.alert>
 						<Terminal className='h-4 w-4' />
-						<Alert.title>Default Alert</Alert.title>
-						<Alert.description>This is a default alert with neutral styling.</Alert.description>
-					</Alert>
+						<z.alertTitle>Default Alert</z.alertTitle>
+						<z.alertDescription>This is a default alert with neutral styling.</z.alertDescription>
+					</z.alert>
 
-					<Alert isPurple>
+					<z.alert isPurple>
 						<CheckCircle className='h-4 w-4' />
-						<Alert.title>Success</Alert.title>
-						<Alert.description>Your changes have been saved successfully.</Alert.description>
-					</Alert>
+						<z.alertTitle>Success</z.alertTitle>
+						<z.alertDescription>Your changes have been saved successfully.</z.alertDescription>
+					</z.alert>
 
-					<Alert isPink>
+					<z.alert isPink>
 						<AlertTriangle className='h-4 w-4' />
-						<Alert.title>Warning</Alert.title>
-						<Alert.description>Please review your information before proceeding.</Alert.description>
-					</Alert>
+						<z.alertTitle>Warning</z.alertTitle>
+						<z.alertDescription>Please review your information before proceeding.</z.alertDescription>
+					</z.alert>
 
-					<Alert isRed>
+					<z.alert isPink>
 						<AlertCircle className='h-4 w-4' />
-						<Alert.title>Error</Alert.title>
-						<Alert.description>There was an error processing your request.</Alert.description>
-					</Alert>
+						<z.alertTitle>Error</z.alertTitle>
+						<z.alertDescription>There was an error processing your request.</z.alertDescription>
+					</z.alert>
 
-					<Alert isPurple>
+					<z.alert isPurple>
 						<Info className='h-4 w-4' />
-						<Alert.title>Information</Alert.title>
-						<Alert.description>Here is some helpful information for you.</Alert.description>
-					</Alert>
+						<z.alertTitle>Information</z.alertTitle>
+						<z.alertDescription>Here is some helpful information for you.</z.alertDescription>
+					</z.alert>
 
-					<Alert isPink>
+					<z.alert isPink>
 						<Bell className='h-4 w-4' />
-						<Alert.title>Featured</Alert.title>
-						<Alert.description>Check out our latest feature update!</Alert.description>
-					</Alert>
-				</div>
-			</section>
+						<z.alertTitle>Featured</z.alertTitle>
+						<z.alertDescription>Check out our latest feature update!</z.alertDescription>
+					</z.alert>
+				</z.box>
+			</z.box>
 
-			<Separator />
+			<z.separator />
 
 			{/* Toast Section */}
-			<section className='space-y-6'>
+			<z.box as='section' className='space-y-6'>
 				<SectionHeader title='ZToast' description='Temporary notifications that appear and auto-dismiss.' />
 
 				{/* Alert vs Toast comparison */}
-				<div className='rounded-lg border border-border bg-card p-6 space-y-4'>
-					<h3 className='text-lg font-semibold text-foreground'>Alert vs Toast: When to Use Each</h3>
-					<div className='grid gap-4 md:grid-cols-2'>
-						<div className='space-y-2'>
-							<h4 className='text-sm font-medium text-neon-purple'>Alerts (Static)</h4>
-							<ul className='text-sm text-muted-foreground space-y-1 list-disc list-inside'>
-								<li>Persistent, inline content within the page</li>
-								<li>Important information that needs to remain visible</li>
-								<li>Form validation errors or warnings</li>
-								<li>System status or maintenance notices</li>
-								<li>User must acknowledge or dismiss manually</li>
-							</ul>
-						</div>
-						<div className='space-y-2'>
-							<h4 className='text-sm font-medium text-neon-purple'>Toasts (Ephemeral)</h4>
-							<ul className='text-sm text-muted-foreground space-y-1 list-disc list-inside'>
-								<li>Temporary, floating notifications</li>
-								<li>Feedback for completed actions</li>
-								<li>Non-critical success or info messages</li>
-								<li>Auto-dismiss after a few seconds</li>
-								<li>Does not block user workflow</li>
-							</ul>
-						</div>
-					</div>
-				</div>
+				<z.box className='rounded-lg border border-border bg-card p-6 space-y-4'>
+					<z.text.h3>Alert vs Toast: When to Use Each</z.text.h3>
+					<z.box className='grid gap-4 md:grid-cols-2'>
+						<z.box className='space-y-2'>
+							<z.text as='h4' isSmall isBold isPurple>
+								Alerts (Static)
+							</z.text>
+							<z.box as='ul' className='text-sm text-muted-foreground space-y-1 list-disc list-inside'>
+								<z.box as='li'>Persistent, inline content within the page</z.box>
+								<z.box as='li'>Important information that needs to remain visible</z.box>
+								<z.box as='li'>Form validation errors or warnings</z.box>
+								<z.box as='li'>System status or maintenance notices</z.box>
+								<z.box as='li'>User must acknowledge or dismiss manually</z.box>
+							</z.box>
+						</z.box>
+						<z.box className='space-y-2'>
+							<z.text as='h4' isSmall isBold isPurple>
+								Toasts (Ephemeral)
+							</z.text>
+							<z.box as='ul' className='text-sm text-muted-foreground space-y-1 list-disc list-inside'>
+								<z.box as='li'>Temporary, floating notifications</z.box>
+								<z.box as='li'>Feedback for completed actions</z.box>
+								<z.box as='li'>Non-critical success or info messages</z.box>
+								<z.box as='li'>Auto-dismiss after a few seconds</z.box>
+								<z.box as='li'>Does not block user workflow</z.box>
+							</z.box>
+						</z.box>
+					</z.box>
+				</z.box>
 
-				<div className='grid gap-6'>
+				<z.box className='grid gap-6'>
 					<ExampleCard title='Toast Triggers'>
 						<z.button
 							isNeutral
@@ -573,441 +560,443 @@ export default function ExamplesPage() {
 							Toast with Undo Action
 						</z.button>
 					</ExampleCard>
-				</div>
-			</section>
+				</z.box>
+			</z.box>
 
-			<Separator />
+			<z.separator />
 
 			{/* Progress Section */}
-			<section className='space-y-6'>
+			<z.box as='section' className='space-y-6'>
 				<SectionHeader title='ZProgress' description='Progress indicators with different colors.' />
 
-				<div className='grid gap-6'>
+				<z.box className='grid gap-6'>
 					<ExampleCard title='Progress Variants'>
-						<div className='space-y-6 w-full max-w-md'>
-							<div className='space-y-2'>
-								<div className='flex justify-between text-sm'>
-									<span className='text-muted-foreground'>Default</span>
-									<span className='text-muted-foreground'>75%</span>
-								</div>
-								<Progress value={75} />
-							</div>
-							<div className='space-y-2'>
-								<div className='flex justify-between text-sm'>
-									<span className='text-neon-purple'>Purple</span>
-									<span className='text-neon-purple'>60%</span>
-								</div>
-								<Progress value={60} variant='purple' />
-							</div>
-							<div className='space-y-2'>
-								<div className='flex justify-between text-sm'>
-									<span className='text-neon-purple'>Purple</span>
-									<span className='text-neon-purple'>45%</span>
-								</div>
-								<Progress value={45} variant='purple' />
-							</div>
-							<div className='space-y-2'>
-								<div className='flex justify-between text-sm'>
-									<span className='text-neon-pink'>Pink</span>
-									<span className='text-neon-pink'>90%</span>
-								</div>
-								<Progress value={90} variant='pink' />
-							</div>
-							<div className='space-y-2'>
-								<div className='flex justify-between text-sm'>
-									<span className='text-neon-pink'>Pink</span>
-									<span className='text-neon-pink'>30%</span>
-								</div>
-								<Progress value={30} variant='pink' />
-							</div>
-						</div>
+						<z.box className='space-y-6 w-full max-w-md'>
+							<z.box className='space-y-2'>
+								<z.box className='flex justify-between text-sm'>
+									<z.text className='text-muted-foreground'>Default</z.text>
+									<z.text className='text-muted-foreground'>75%</z.text>
+								</z.box>
+								<z.progress value={75} />
+							</z.box>
+							<z.box className='space-y-2'>
+								<z.box className='flex justify-between text-sm'>
+									<z.text className='text-neon-purple'>Purple</z.text>
+									<z.text className='text-neon-purple'>60%</z.text>
+								</z.box>
+								<z.progress value={60} variant='purple' />
+							</z.box>
+							<z.box className='space-y-2'>
+								<z.box className='flex justify-between text-sm'>
+									<z.text className='text-neon-purple'>Purple</z.text>
+									<z.text className='text-neon-purple'>45%</z.text>
+								</z.box>
+								<z.progress value={45} variant='purple' />
+							</z.box>
+							<z.box className='space-y-2'>
+								<z.box className='flex justify-between text-sm'>
+									<z.text className='text-neon-pink'>Pink</z.text>
+									<z.text className='text-neon-pink'>90%</z.text>
+								</z.box>
+								<z.progress value={90} variant='pink' />
+							</z.box>
+							<z.box className='space-y-2'>
+								<z.box className='flex justify-between text-sm'>
+									<z.text className='text-neon-pink'>Pink</z.text>
+									<z.text className='text-neon-pink'>30%</z.text>
+								</z.box>
+								<z.progress value={30} variant='pink' />
+							</z.box>
+						</z.box>
 					</ExampleCard>
-				</div>
-			</section>
+				</z.box>
+			</z.box>
 
-			<Separator />
+			<z.separator />
 
 			{/* Avatar Section */}
-			<section className='space-y-6'>
+			<z.box as='section' className='space-y-6'>
 				<SectionHeader title='ZAvatar' description='User profile images with fallback support.' />
 
-				<div className='grid gap-6'>
+				<z.box className='grid gap-6'>
 					<ExampleCard title='Avatar Sizes'>
-						<Avatar className='h-8 w-8'>
-							<Avatar.Fallback>XS</Avatar.Fallback>
-						</Avatar>
-						<Avatar className='h-10 w-10'>
-							<Avatar.Fallback>SM</Avatar.Fallback>
-						</Avatar>
-						<Avatar className='h-12 w-12'>
-							<Avatar.Fallback>MD</Avatar.Fallback>
-						</Avatar>
-						<Avatar className='h-16 w-16'>
-							<Avatar.Fallback>LG</Avatar.Fallback>
-						</Avatar>
-						<Avatar className='h-20 w-20'>
-							<Avatar.Fallback>XL</Avatar.Fallback>
-						</Avatar>
+						<z.avatar className='h-8 w-8'>
+							<z.avatarFallback>XS</z.avatarFallback>
+						</z.avatar>
+						<z.avatar className='h-10 w-10'>
+							<z.avatarFallback>SM</z.avatarFallback>
+						</z.avatar>
+						<z.avatar className='h-12 w-12'>
+							<z.avatarFallback>MD</z.avatarFallback>
+						</z.avatar>
+						<z.avatar className='h-16 w-16'>
+							<z.avatarFallback>LG</z.avatarFallback>
+						</z.avatar>
+						<z.avatar className='h-20 w-20'>
+							<z.avatarFallback>XL</z.avatarFallback>
+						</z.avatar>
 					</ExampleCard>
 
 					<ExampleCard title='Avatar with Fallbacks'>
-						<Avatar>
-							<Avatar.Image src='/placeholder-user.jpg' alt='User' />
-							<Avatar.Fallback>JD</Avatar.Fallback>
-						</Avatar>
-						<Avatar>
-							<Avatar.Fallback className='bg-neon-purple text-primary-foreground'>AB</Avatar.Fallback>
-						</Avatar>
-						<Avatar>
-							<Avatar.Fallback className='bg-neon-purple text-primary-foreground'>CD</Avatar.Fallback>
-						</Avatar>
-						<Avatar>
-							<Avatar.Fallback className='bg-neon-pink text-primary-foreground'>EF</Avatar.Fallback>
-						</Avatar>
-						<Avatar>
-							<Avatar.Fallback className='bg-neon-pink text-primary-foreground'>GH</Avatar.Fallback>
-						</Avatar>
+						<z.avatar>
+							<z.avatarImage src='/placeholder-user.jpg' alt='User' />
+							<z.avatarFallback>JD</z.avatarFallback>
+						</z.avatar>
+						<z.avatar>
+							<z.avatarFallback className='bg-neon-purple text-primary-foreground'>AB</z.avatarFallback>
+						</z.avatar>
+						<z.avatar>
+							<z.avatarFallback className='bg-neon-purple text-primary-foreground'>CD</z.avatarFallback>
+						</z.avatar>
+						<z.avatar>
+							<z.avatarFallback className='bg-neon-pink text-primary-foreground'>EF</z.avatarFallback>
+						</z.avatar>
+						<z.avatar>
+							<z.avatarFallback className='bg-neon-pink text-primary-foreground'>GH</z.avatarFallback>
+						</z.avatar>
 					</ExampleCard>
 
 					<ExampleCard title='Avatar Group'>
-						<div className='flex -space-x-3'>
-							<Avatar className='border-2 border-background'>
-								<Avatar.Fallback className='bg-neon-purple text-primary-foreground'>A</Avatar.Fallback>
-							</Avatar>
-							<Avatar className='border-2 border-background'>
-								<Avatar.Fallback className='bg-neon-purple text-primary-foreground'>B</Avatar.Fallback>
-							</Avatar>
-							<Avatar className='border-2 border-background'>
-								<Avatar.Fallback className='bg-neon-pink text-primary-foreground'>C</Avatar.Fallback>
-							</Avatar>
-							<Avatar className='border-2 border-background'>
-								<Avatar.Fallback className='bg-muted text-muted-foreground'>+5</Avatar.Fallback>
-							</Avatar>
-						</div>
+						<z.box className='flex -space-x-3'>
+							<z.avatar className='border-2 border-background'>
+								<z.avatarFallback className='bg-neon-purple text-primary-foreground'>A</z.avatarFallback>
+							</z.avatar>
+							<z.avatar className='border-2 border-background'>
+								<z.avatarFallback className='bg-neon-purple text-primary-foreground'>B</z.avatarFallback>
+							</z.avatar>
+							<z.avatar className='border-2 border-background'>
+								<z.avatarFallback className='bg-neon-pink text-primary-foreground'>C</z.avatarFallback>
+							</z.avatar>
+							<z.avatar className='border-2 border-background'>
+								<z.avatarFallback className='bg-muted text-muted-foreground'>+5</z.avatarFallback>
+							</z.avatar>
+						</z.box>
 					</ExampleCard>
-				</div>
-			</section>
+				</z.box>
+			</z.box>
 
-			<Separator />
+			<z.separator />
 
 			{/* Skeleton Section */}
-			<section className='space-y-6'>
+			<z.box as='section' className='space-y-6'>
 				<SectionHeader title='ZSkeleton' description='Loading placeholders for content.' />
 
-				<div className='grid gap-6'>
+				<z.box className='grid gap-6'>
 					<ExampleCard title='Basic Skeletons'>
-						<div className='space-y-4 w-full max-w-md'>
-							<Skeleton className='h-4 w-full' />
-							<Skeleton className='h-4 w-3/4' />
-							<Skeleton className='h-4 w-1/2' />
-						</div>
+						<z.box className='space-y-4 w-full max-w-md'>
+							<z.skeleton className='h-4 w-full' />
+							<z.skeleton className='h-4 w-3/4' />
+							<z.skeleton className='h-4 w-1/2' />
+						</z.box>
 					</ExampleCard>
 
 					<ExampleCard title='Card Skeleton'>
-						<div className='flex items-center space-x-4 w-full max-w-sm'>
-							<Skeleton className='h-12 w-12 rounded-full' />
-							<div className='space-y-2 flex-1'>
-								<Skeleton className='h-4 w-full' />
-								<Skeleton className='h-4 w-3/4' />
-							</div>
-						</div>
+						<z.box className='flex items-center space-x-4 w-full max-w-sm'>
+							<z.skeleton className='h-12 w-12 rounded-full' />
+							<z.box className='space-y-2 flex-1'>
+								<z.skeleton className='h-4 w-full' />
+								<z.skeleton className='h-4 w-3/4' />
+							</z.box>
+						</z.box>
 					</ExampleCard>
 
 					<ExampleCard title='Content Skeleton'>
-						<div className='space-y-4 w-full max-w-lg'>
-							<Skeleton className='h-8 w-1/3' />
-							<Skeleton className='h-4 w-full' />
-							<Skeleton className='h-4 w-full' />
-							<Skeleton className='h-4 w-2/3' />
-							<div className='flex gap-2 pt-2'>
-								<Skeleton className='h-10 w-24' />
-								<Skeleton className='h-10 w-24' />
-							</div>
-						</div>
+						<z.box className='space-y-4 w-full max-w-lg'>
+							<z.skeleton className='h-8 w-1/3' />
+							<z.skeleton className='h-4 w-full' />
+							<z.skeleton className='h-4 w-full' />
+							<z.skeleton className='h-4 w-2/3' />
+							<z.box className='flex gap-2 pt-2'>
+								<z.skeleton className='h-10 w-24' />
+								<z.skeleton className='h-10 w-24' />
+							</z.box>
+						</z.box>
 					</ExampleCard>
-				</div>
-			</section>
+				</z.box>
+			</z.box>
 
-			<Separator />
+			<z.separator />
 
 			{/* Card Section */}
-			<section className='space-y-6'>
+			<z.box as='section' className='space-y-6'>
 				<SectionHeader title='ZCard' description='Flexible container components.' />
 
-				<div className='grid gap-6 md:grid-cols-2 lg:grid-cols-3'>
-					<Card>
-						<Card.Header>
-							<Card.Title>Basic Card</Card.Title>
-							<Card.Description>A simple card with header and content.</Card.Description>
-						</Card.Header>
-						<Card.Content>
-							<p className='text-sm text-muted-foreground'>This is the card content area where you can place any content.</p>
-						</Card.Content>
-					</Card>
+				<z.box className='grid gap-6 md:grid-cols-2 lg:grid-cols-3'>
+					<z.card>
+						<z.cardHeader>
+							<z.cardTitle>Basic Card</z.cardTitle>
+							<z.cardDescription>A simple card with header and content.</z.cardDescription>
+						</z.cardHeader>
+						<z.cardContent>
+							<z.text.body className='text-sm text-muted-foreground'>
+								This is the card content area where you can place any content.
+							</z.text.body>
+						</z.cardContent>
+					</z.card>
 
-					<Card>
-						<Card.Header>
-							<Card.Title>Card with Footer</Card.Title>
-							<Card.Description>Includes action buttons in footer.</Card.Description>
-						</Card.Header>
-						<Card.Content>
-							<p className='text-sm text-muted-foreground'>Cards can have footers for actions.</p>
-						</Card.Content>
-						<Card.Footer className='gap-2'>
+					<z.card>
+						<z.cardHeader>
+							<z.cardTitle>Card with Footer</z.cardTitle>
+							<z.cardDescription>Includes action buttons in footer.</z.cardDescription>
+						</z.cardHeader>
+						<z.cardContent>
+							<z.text.body className='text-sm text-muted-foreground'>Cards can have footers for actions.</z.text.body>
+						</z.cardContent>
+						<z.cardFooter className='gap-2'>
 							<z.button isNeutral isSmall>
 								Cancel
 							</z.button>
 							<z.button isPurple isSmall>
 								Save
 							</z.button>
-						</Card.Footer>
-					</Card>
+						</z.cardFooter>
+					</z.card>
 
-					<Card>
-						<Card.Header>
-							<Card.Title>Interactive Card</Card.Title>
-							<Card.Description>With form elements inside.</Card.Description>
-						</Card.Header>
-						<Card.Content className='space-y-4'>
-							<div className='space-y-2'>
-								<Label htmlFor='card-input'>Email</Label>
-								<Input id='card-input' placeholder='name@example.com' />
-							</div>
-							<div className='flex items-center space-x-2'>
-								<Checkbox id='card-checkbox' />
-								<Label htmlFor='card-checkbox'>Remember me</Label>
-							</div>
-						</Card.Content>
-						<Card.Footer>
+					<z.card>
+						<z.cardHeader>
+							<z.cardTitle>Interactive Card</z.cardTitle>
+							<z.cardDescription>With form elements inside.</z.cardDescription>
+						</z.cardHeader>
+						<z.cardContent className='space-y-4'>
+							<z.box className='space-y-2'>
+								<z.label htmlFor='card-input'>Email</z.label>
+								<z.input id='card-input' placeholder='name@example.com' />
+							</z.box>
+							<z.box className='flex items-center space-x-2'>
+								<z.checkbox id='card-checkbox' />
+								<z.label htmlFor='card-checkbox'>Remember me</z.label>
+							</z.box>
+						</z.cardContent>
+						<z.cardFooter>
 							<z.button isPurple isSmall className='w-full'>
 								Submit
 							</z.button>
-						</Card.Footer>
-					</Card>
-				</div>
-			</section>
+						</z.cardFooter>
+					</z.card>
+				</z.box>
+			</z.box>
 
-			<Separator />
+			<z.separator />
 
 			{/* Tabs Section */}
-			<section className='space-y-6'>
+			<z.box as='section' className='space-y-6'>
 				<SectionHeader title='ZTabs' description='Tabbed content navigation.' />
 
-				<div className='grid gap-6'>
+				<z.box className='grid gap-6'>
 					<ExampleCard title='Default Tabs'>
-						<Tabs defaultValue='account' className='w-full max-w-lg'>
-							<Tabs.List>
-								<Tabs.Trigger value='account'>Account</Tabs.Trigger>
-								<Tabs.Trigger value='password'>Password</Tabs.Trigger>
-								<Tabs.Trigger value='settings'>Settings</Tabs.Trigger>
-							</Tabs.List>
-							<Tabs.Content value='account' className='mt-4'>
-								<Card>
-									<Card.Header>
-										<Card.Title>Account</Card.Title>
-										<Card.Description>Manage your account settings.</Card.Description>
-									</Card.Header>
-									<Card.Content className='space-y-4'>
-										<div className='space-y-2'>
-											<Label htmlFor='name'>Name</Label>
-											<Input id='name' defaultValue='John Doe' />
-										</div>
-										<div className='space-y-2'>
-											<Label htmlFor='username'>Username</Label>
-											<Input id='username' defaultValue='@johndoe' />
-										</div>
-									</Card.Content>
-								</Card>
-							</Tabs.Content>
-							<Tabs.Content value='password' className='mt-4'>
-								<Card>
-									<Card.Header>
-										<Card.Title>Password</Card.Title>
-										<Card.Description>Change your password here.</Card.Description>
-									</Card.Header>
-									<Card.Content className='space-y-4'>
-										<div className='space-y-2'>
-											<Label htmlFor='current'>Current Password</Label>
-											<Input id='current' type='password' />
-										</div>
-										<div className='space-y-2'>
-											<Label htmlFor='new'>New Password</Label>
-											<Input id='new' type='password' />
-										</div>
-									</Card.Content>
-								</Card>
-							</Tabs.Content>
-							<Tabs.Content value='settings' className='mt-4'>
-								<Card>
-									<Card.Header>
-										<Card.Title>Settings</Card.Title>
-										<Card.Description>Configure your preferences.</Card.Description>
-									</Card.Header>
-									<Card.Content className='space-y-4'>
-										<div className='flex items-center justify-between'>
-											<Label htmlFor='tab-notifications'>Email Notifications</Label>
-											<Switch id='tab-notifications' />
-										</div>
-										<div className='flex items-center justify-between'>
-											<Label htmlFor='tab-marketing'>Marketing Emails</Label>
-											<Switch id='tab-marketing' />
-										</div>
-									</Card.Content>
-								</Card>
-							</Tabs.Content>
-						</Tabs>
+						<z.tabs defaultValue='account' className='w-full max-w-lg'>
+							<z.tabsList>
+								<z.tabsTrigger value='account'>Account</z.tabsTrigger>
+								<z.tabsTrigger value='password'>Password</z.tabsTrigger>
+								<z.tabsTrigger value='settings'>Settings</z.tabsTrigger>
+							</z.tabsList>
+							<z.tabsContent value='account' className='mt-4'>
+								<z.card>
+									<z.cardHeader>
+										<z.cardTitle>Account</z.cardTitle>
+										<z.cardDescription>Manage your account settings.</z.cardDescription>
+									</z.cardHeader>
+									<z.cardContent className='space-y-4'>
+										<z.box className='space-y-2'>
+											<z.label htmlFor='name'>Name</z.label>
+											<z.input id='name' defaultValue='John Doe' />
+										</z.box>
+										<z.box className='space-y-2'>
+											<z.label htmlFor='username'>Username</z.label>
+											<z.input id='username' defaultValue='@johndoe' />
+										</z.box>
+									</z.cardContent>
+								</z.card>
+							</z.tabsContent>
+							<z.tabsContent value='password' className='mt-4'>
+								<z.card>
+									<z.cardHeader>
+										<z.cardTitle>Password</z.cardTitle>
+										<z.cardDescription>Change your password here.</z.cardDescription>
+									</z.cardHeader>
+									<z.cardContent className='space-y-4'>
+										<z.box className='space-y-2'>
+											<z.label htmlFor='current'>Current Password</z.label>
+											<z.input id='current' type='password' />
+										</z.box>
+										<z.box className='space-y-2'>
+											<z.label htmlFor='new'>New Password</z.label>
+											<z.input id='new' type='password' />
+										</z.box>
+									</z.cardContent>
+								</z.card>
+							</z.tabsContent>
+							<z.tabsContent value='settings' className='mt-4'>
+								<z.card>
+									<z.cardHeader>
+										<z.cardTitle>Settings</z.cardTitle>
+										<z.cardDescription>Configure your preferences.</z.cardDescription>
+									</z.cardHeader>
+									<z.cardContent className='space-y-4'>
+										<z.box className='flex items-center justify-between'>
+											<z.label htmlFor='tab-notifications'>Email Notifications</z.label>
+											<z.switch id='tab-notifications' />
+										</z.box>
+										<z.box className='flex items-center justify-between'>
+											<z.label htmlFor='tab-marketing'>Marketing Emails</z.label>
+											<z.switch id='tab-marketing' />
+										</z.box>
+									</z.cardContent>
+								</z.card>
+							</z.tabsContent>
+						</z.tabs>
 					</ExampleCard>
-				</div>
-			</section>
+				</z.box>
+			</z.box>
 
-			<Separator />
+			<z.separator />
 
 			{/* Accordion Section */}
-			<section className='space-y-6'>
+			<z.box as='section' className='space-y-6'>
 				<SectionHeader title='ZAccordion' description='Collapsible content panels.' />
 
-				<div className='grid gap-6'>
+				<z.box className='grid gap-6'>
 					<ExampleCard title='Default Accordion'>
-						<Accordion type='single' collapsible className='w-full max-w-lg'>
-							<Accordion.Item value='item-1'>
-								<Accordion.Trigger>Is it accessible?</Accordion.Trigger>
-								<Accordion.Content>Yes. It adheres to the WAI-ARIA design pattern for accordions.</Accordion.Content>
-							</Accordion.Item>
-							<Accordion.Item value='item-2'>
-								<Accordion.Trigger>Is it styled?</Accordion.Trigger>
-								<Accordion.Content>
+						<z.accordion type='single' collapsible className='w-full max-w-lg'>
+							<z.accordionItem value='item-1'>
+								<z.accordionTrigger>Is it accessible?</z.accordionTrigger>
+								<z.accordionContent>Yes. It adheres to the WAI-ARIA design pattern for accordions.</z.accordionContent>
+							</z.accordionItem>
+							<z.accordionItem value='item-2'>
+								<z.accordionTrigger>Is it styled?</z.accordionTrigger>
+								<z.accordionContent>
 									Yes. It comes with default styles that match your design system, following the Zest design language with proper
 									spacing and colors.
-								</Accordion.Content>
-							</Accordion.Item>
-							<Accordion.Item value='item-3'>
-								<Accordion.Trigger>Is it animated?</Accordion.Trigger>
-								<Accordion.Content>
+								</z.accordionContent>
+							</z.accordionItem>
+							<z.accordionItem value='item-3'>
+								<z.accordionTrigger>Is it animated?</z.accordionTrigger>
+								<z.accordionContent>
 									Yes. It&apos;s animated by default with smooth open/close transitions, but you can disable animations if needed.
-								</Accordion.Content>
-							</Accordion.Item>
-						</Accordion>
+								</z.accordionContent>
+							</z.accordionItem>
+						</z.accordion>
 					</ExampleCard>
-				</div>
-			</section>
+				</z.box>
+			</z.box>
 
-			<Separator />
+			<z.separator />
 
 			{/* Dialog Section */}
-			<section className='space-y-6'>
+			<z.box as='section' className='space-y-6'>
 				<SectionHeader title='ZDialog' description='Modal dialogs for focused interactions.' />
 
-				<div className='grid gap-6'>
+				<z.box className='grid gap-6'>
 					<ExampleCard title='Dialog Examples'>
-						<Dialog>
-							<Dialog.Trigger asChild>
+						<z.dialog>
+							<z.dialogTrigger asChild>
 								<z.button isNeutral>Open Dialog</z.button>
-							</Dialog.Trigger>
-							<Dialog.Content>
-								<Dialog.Header>
-									<Dialog.Title>Edit Profile</Dialog.Title>
-									<Dialog.Description>Make changes to your profile here. Click save when you&apos;re done.</Dialog.Description>
-								</Dialog.Header>
-								<div className='space-y-4 py-4'>
-									<div className='space-y-2'>
-										<Label htmlFor='dialog-name'>Name</Label>
-										<Input id='dialog-name' defaultValue='John Doe' />
-									</div>
-									<div className='space-y-2'>
-										<Label htmlFor='dialog-email'>Email</Label>
-										<Input id='dialog-email' defaultValue='john@example.com' />
-									</div>
-								</div>
-								<Dialog.Footer>
+							</z.dialogTrigger>
+							<z.dialogContent>
+								<z.dialogHeader>
+									<z.dialogTitle>Edit Profile</z.dialogTitle>
+									<z.dialogDescription>Make changes to your profile here. Click save when you&apos;re done.</z.dialogDescription>
+								</z.dialogHeader>
+								<z.box className='space-y-4 py-4'>
+									<z.box className='space-y-2'>
+										<z.label htmlFor='dialog-name'>Name</z.label>
+										<z.input id='dialog-name' defaultValue='John Doe' />
+									</z.box>
+									<z.box className='space-y-2'>
+										<z.label htmlFor='dialog-email'>Email</z.label>
+										<z.input id='dialog-email' defaultValue='john@example.com' />
+									</z.box>
+								</z.box>
+								<z.dialogFooter>
 									<z.button isNeutral>Cancel</z.button>
 									<z.button isPurple>Save Changes</z.button>
-								</Dialog.Footer>
-							</Dialog.Content>
-						</Dialog>
+								</z.dialogFooter>
+							</z.dialogContent>
+						</z.dialog>
 
-						<Dialog>
-							<Dialog.Trigger asChild>
+						<z.dialog>
+							<z.dialogTrigger asChild>
 								<z.button isPink>Confirm Action</z.button>
-							</Dialog.Trigger>
-							<Dialog.Content>
-								<Dialog.Header>
-									<Dialog.Title>Are you sure?</Dialog.Title>
-									<Dialog.Description>This action cannot be undone. This will permanently delete your data.</Dialog.Description>
-								</Dialog.Header>
-								<Dialog.Footer>
+							</z.dialogTrigger>
+							<z.dialogContent>
+								<z.dialogHeader>
+									<z.dialogTitle>Are you sure?</z.dialogTitle>
+									<z.dialogDescription>This action cannot be undone. This will permanently delete your data.</z.dialogDescription>
+								</z.dialogHeader>
+								<z.dialogFooter>
 									<z.button isNeutral>Cancel</z.button>
 									<z.button isPink>Delete</z.button>
-								</Dialog.Footer>
-							</Dialog.Content>
-						</Dialog>
+								</z.dialogFooter>
+							</z.dialogContent>
+						</z.dialog>
 					</ExampleCard>
-				</div>
-			</section>
+				</z.box>
+			</z.box>
 
-			<Separator />
+			<z.separator />
 
 			{/* Dropdown Menu Section */}
-			<section className='space-y-6'>
+			<z.box as='section' className='space-y-6'>
 				<SectionHeader title='ZDropdownMenu' description='Contextual menus with actions.' />
 
-				<div className='grid gap-6'>
+				<z.box className='grid gap-6'>
 					<ExampleCard title='Dropdown Examples'>
-						<DropdownMenu>
-							<DropdownMenu.Trigger asChild>
+						<z.menu>
+							<z.menu.Trigger asChild>
 								<z.button isNeutral>
 									Open Menu
 									<ChevronDown className='h-4 w-4' />
 								</z.button>
-							</DropdownMenu.Trigger>
-							<DropdownMenu.Content className='w-56'>
-								<DropdownMenu.Label>My Account</DropdownMenu.Label>
-								<DropdownMenu.Separator />
-								<DropdownMenu.Item>
+							</z.menu.Trigger>
+							<z.menu.Content className='w-56'>
+								<z.menu.Label>My Account</z.menu.Label>
+								<z.menu.Separator />
+								<z.menu.Item>
 									<User className='mr-2 h-4 w-4' />
 									Profile
-								</DropdownMenu.Item>
-								<DropdownMenu.Item>
+								</z.menu.Item>
+								<z.menu.Item>
 									<CreditCard className='mr-2 h-4 w-4' />
 									Billing
-								</DropdownMenu.Item>
-								<DropdownMenu.Item>
+								</z.menu.Item>
+								<z.menu.Item>
 									<Settings className='mr-2 h-4 w-4' />
 									Settings
-								</DropdownMenu.Item>
-								<DropdownMenu.Separator />
-								<DropdownMenu.Item className='text-destructive'>
+								</z.menu.Item>
+								<z.menu.Separator />
+								<z.menu.Item className='text-destructive'>
 									<LogOut className='mr-2 h-4 w-4' />
 									Log out
-								</DropdownMenu.Item>
-							</DropdownMenu.Content>
-						</DropdownMenu>
+								</z.menu.Item>
+							</z.menu.Content>
+						</z.menu>
 
-						<DropdownMenu>
-							<DropdownMenu.Trigger asChild>
+						<z.menu>
+							<z.menu.Trigger asChild>
 								<z.button isPurple>
 									<Plus className='h-4 w-4' />
 									Create New
 								</z.button>
-							</DropdownMenu.Trigger>
-							<DropdownMenu.Content>
-								<DropdownMenu.Item>New Project</DropdownMenu.Item>
-								<DropdownMenu.Item>New Team</DropdownMenu.Item>
-								<DropdownMenu.Item>New Document</DropdownMenu.Item>
-								<DropdownMenu.Separator />
-								<DropdownMenu.Item>Import</DropdownMenu.Item>
-							</DropdownMenu.Content>
-						</DropdownMenu>
+							</z.menu.Trigger>
+							<z.menu.Content>
+								<z.menu.Item>New Project</z.menu.Item>
+								<z.menu.Item>New Team</z.menu.Item>
+								<z.menu.Item>New Document</z.menu.Item>
+								<z.menu.Separator />
+								<z.menu.Item>Import</z.menu.Item>
+							</z.menu.Content>
+						</z.menu>
 					</ExampleCard>
-				</div>
-			</section>
+				</z.box>
+			</z.box>
 
-			<Separator />
+			<z.separator />
 
 			{/* Tooltip Section */}
-			<section className='space-y-6'>
+			<z.box as='section' className='space-y-6'>
 				<SectionHeader title='z.tooltip' description='Contextual information on hover.' />
 
-				<div className='grid gap-6'>
+				<z.box className='grid gap-6'>
 					<ExampleCard title='Tooltip Positions'>
 						<z.tooltip tip='Tooltip on top' side='top'>
 							<z.button isNeutral>Hover me (Top)</z.button>
@@ -1025,115 +1014,119 @@ export default function ExamplesPage() {
 							<z.button isPink>Hover me (Left)</z.button>
 						</z.tooltip>
 					</ExampleCard>
-				</div>
-			</section>
+				</z.box>
+			</z.box>
 
-			<Separator />
+			<z.separator />
 
 			{/* Table Section */}
-			<section className='space-y-6'>
+			<z.box as='section' className='space-y-6'>
 				<SectionHeader title='ZTable' description='Data tables with proper styling.' />
 
-				<div className='rounded-lg border border-border overflow-hidden'>
-					<Table>
-						<Table.Header>
-							<Table.Row>
-								<Table.Head className='w-25'>Invoice</Table.Head>
-								<Table.Head>Status</Table.Head>
-								<Table.Head>Method</Table.Head>
-								<Table.Head className='text-right'>Amount</Table.Head>
-							</Table.Row>
-						</Table.Header>
-						<Table.Body>
-							<Table.Row>
-								<Table.Cell className='font-medium'>INV001</Table.Cell>
-								<Table.Cell>
+				<z.box className='rounded-lg border border-border overflow-hidden'>
+					<z.table>
+						<z.tableHeader>
+							<z.tableRow>
+								<z.tableHead className='w-25'>Invoice</z.tableHead>
+								<z.tableHead>Status</z.tableHead>
+								<z.tableHead>Method</z.tableHead>
+								<z.tableHead className='text-right'>Amount</z.tableHead>
+							</z.tableRow>
+						</z.tableHeader>
+						<z.tableBody>
+							<z.tableRow>
+								<z.tableCell className='font-medium'>INV001</z.tableCell>
+								<z.tableCell>
 									<z.badge isSolid isPurple>
 										Paid
 									</z.badge>
-								</Table.Cell>
-								<Table.Cell>Credit Card</Table.Cell>
-								<Table.Cell className='text-right'>$250.00</Table.Cell>
-							</Table.Row>
-							<Table.Row>
-								<Table.Cell className='font-medium'>INV002</Table.Cell>
-								<Table.Cell>
+								</z.tableCell>
+								<z.tableCell>Credit Card</z.tableCell>
+								<z.tableCell className='text-right'>$250.00</z.tableCell>
+							</z.tableRow>
+							<z.tableRow>
+								<z.tableCell className='font-medium'>INV002</z.tableCell>
+								<z.tableCell>
 									<z.badge isSolid isPink>
 										Pending
 									</z.badge>
-								</Table.Cell>
-								<Table.Cell>PayPal</Table.Cell>
-								<Table.Cell className='text-right'>$150.00</Table.Cell>
-							</Table.Row>
-							<Table.Row>
-								<Table.Cell className='font-medium'>INV003</Table.Cell>
-								<Table.Cell>
+								</z.tableCell>
+								<z.tableCell>PayPal</z.tableCell>
+								<z.tableCell className='text-right'>$150.00</z.tableCell>
+							</z.tableRow>
+							<z.tableRow>
+								<z.tableCell className='font-medium'>INV003</z.tableCell>
+								<z.tableCell>
 									<z.badge isSolid isPink>
 										Overdue
 									</z.badge>
-								</Table.Cell>
-								<Table.Cell>Bank Transfer</Table.Cell>
-								<Table.Cell className='text-right'>$350.00</Table.Cell>
-							</Table.Row>
-							<Table.Row>
-								<Table.Cell className='font-medium'>INV004</Table.Cell>
-								<Table.Cell>
+								</z.tableCell>
+								<z.tableCell>Bank Transfer</z.tableCell>
+								<z.tableCell className='text-right'>$350.00</z.tableCell>
+							</z.tableRow>
+							<z.tableRow>
+								<z.tableCell className='font-medium'>INV004</z.tableCell>
+								<z.tableCell>
 									<z.badge isSolid isPurple>
 										Paid
 									</z.badge>
-								</Table.Cell>
-								<Table.Cell>Credit Card</Table.Cell>
-								<Table.Cell className='text-right'>$450.00</Table.Cell>
-							</Table.Row>
-							<Table.Row>
-								<Table.Cell className='font-medium'>INV005</Table.Cell>
-								<Table.Cell>
+								</z.tableCell>
+								<z.tableCell>Credit Card</z.tableCell>
+								<z.tableCell className='text-right'>$450.00</z.tableCell>
+							</z.tableRow>
+							<z.tableRow>
+								<z.tableCell className='font-medium'>INV005</z.tableCell>
+								<z.tableCell>
 									<z.badge isOutline isPurple>
 										Processing
 									</z.badge>
-								</Table.Cell>
-								<Table.Cell>PayPal</Table.Cell>
-								<Table.Cell className='text-right'>$550.00</Table.Cell>
-							</Table.Row>
-						</Table.Body>
-					</Table>
-				</div>
-			</section>
+								</z.tableCell>
+								<z.tableCell>PayPal</z.tableCell>
+								<z.tableCell className='text-right'>$550.00</z.tableCell>
+							</z.tableRow>
+						</z.tableBody>
+					</z.table>
+				</z.box>
+			</z.box>
 
-			<Separator />
+			<z.separator />
 
 			{/* Line Section */}
-			<section className='space-y-6'>
+			<z.box as='section' className='space-y-6'>
 				<SectionHeader title='Line' description='Visual dividers between content.' />
 
-				<div className='grid gap-6'>
+				<z.box className='grid gap-6'>
 					<ExampleCard title='Horizontal Line'>
-						<div className='w-full max-w-md space-y-4'>
-							<div>
-								<h4 className='text-sm font-medium'>Section One</h4>
-								<p className='text-sm text-muted-foreground'>Content for the first section.</p>
-							</div>
-							<Line />
-							<div>
-								<h4 className='text-sm font-medium'>Section Two</h4>
-								<p className='text-sm text-muted-foreground'>Content for the second section.</p>
-							</div>
-						</div>
+						<z.box className='w-full max-w-md space-y-4'>
+							<z.box>
+								<z.text as='h4' isSmall isBold>
+									Section One
+								</z.text>
+								<z.text.body className='text-sm text-muted-foreground'>Content for the first section.</z.text.body>
+							</z.box>
+							<z.line />
+							<z.box>
+								<z.text as='h4' isSmall isBold>
+									Section Two
+								</z.text>
+								<z.text.body className='text-sm text-muted-foreground'>Content for the second section.</z.text.body>
+							</z.box>
+						</z.box>
 					</ExampleCard>
 
 					<ExampleCard title='Vertical Line'>
-						<div className='flex h-8 items-center space-x-4 text-sm'>
-							<div>Blog</div>
-							<Line isVertical />
-							<div>Docs</div>
-							<Line isVertical />
-							<div>Source</div>
-							<Line isVertical />
-							<div>Support</div>
-						</div>
+						<z.box className='flex h-8 items-center space-x-4 text-sm'>
+							<z.box>Blog</z.box>
+							<z.line isVertical />
+							<z.box>Docs</z.box>
+							<z.line isVertical />
+							<z.box>Source</z.box>
+							<z.line isVertical />
+							<z.box>Support</z.box>
+						</z.box>
 					</ExampleCard>
-				</div>
-			</section>
-		</div>
+				</z.box>
+			</z.box>
+		</z.box>
 	)
 }

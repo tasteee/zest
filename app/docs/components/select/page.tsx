@@ -2,21 +2,18 @@
 
 import Link from 'next/link'
 import { z } from '@/components/ui'
-import { Label } from '@/components/ui/label'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { ComponentPreview } from '@/components/docs/component-preview'
 import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
-import { Card, CardContent } from '@/components/ui/card'
 import { ChevronRight } from 'lucide-react'
 import { selectProps, selectItemProps } from './props'
 import { examples } from './examples'
 
 export default function SelectDocsPage() {
 	return (
-		<div className='space-y-16'>
+		<z.box className='space-y-16'>
 			{/* Breadcrumb */}
-			<div className='flex items-center gap-2 text-sm text-muted-foreground'>
+			<z.box className='flex items-center gap-2 text-sm text-muted-foreground'>
 				<Link href='/docs' className='hover:text-foreground transition-colors'>
 					Docs
 				</Link>
@@ -25,22 +22,22 @@ export default function SelectDocsPage() {
 					Components
 				</Link>
 				<ChevronRight className='h-4 w-4' />
-				<span className='text-foreground'>Select</span>
-			</div>
+				<z.text className='text-foreground'>Select</z.text>
+			</z.box>
 
 			{/* Header */}
-			<div className='space-y-4'>
-				<div className='flex items-center gap-3'>
-					<h1 className='text-4xl font-bold tracking-tight text-foreground'>ZSelect</h1>
+			<z.box className='space-y-4'>
+				<z.box className='flex items-center gap-3'>
+					<z.text.h1>ZSelect</z.text.h1>
 					<z.badge isGhost isNeutral>
 						Component
 					</z.badge>
-				</div>
-				<p className='text-xl text-muted-foreground max-w-2xl leading-relaxed'>
+				</z.box>
+				<z.text.body className='text-xl text-muted-foreground max-w-2xl leading-relaxed'>
 					A dropdown menu for selecting a single value from a list of options. Built on Radix UI Select primitive with full
 					keyboard support.
-				</p>
-			</div>
+				</z.text.body>
+			</z.box>
 
 			{/* Quick Preview */}
 			<ComponentPreview
@@ -62,15 +59,15 @@ export default function SelectDocsPage() {
 			</ComponentPreview>
 
 			{/* Usage */}
-			<section className='space-y-6'>
-				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>Usage</h2>
+			<z.box as='section' className='space-y-6'>
+				<z.text.h2>Usage</z.text.h2>
 				<CodeBlock code={examples.usageImport} language='tsx' />
 				<CodeBlock code={examples.usage} language='tsx' />
-			</section>
+			</z.box>
 
 			{/* Examples */}
-			<section className='space-y-8'>
-				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>Examples</h2>
+			<z.box as='section' className='space-y-8'>
+				<z.text.h2>Examples</z.text.h2>
 
 				{/* With Label */}
 				<ComponentPreview
@@ -78,8 +75,8 @@ export default function SelectDocsPage() {
 					description='A select paired with a label for better accessibility.'
 					code={examples.withLabel}
 				>
-					<div className='grid gap-2'>
-						<Label htmlFor='timezone'>Timezone</Label>
+					<z.box className='grid gap-2'>
+						<z.label htmlFor='timezone'>Timezone</z.label>
 						<z.select>
 							<z.select.trigger id='timezone' className='w-70'>
 								<z.select.value placeholder='Select your timezone' />
@@ -91,7 +88,7 @@ export default function SelectDocsPage() {
 								<z.select.item value='est'>Eastern Time (EST)</z.select.item>
 							</z.select.content>
 						</z.select>
-					</div>
+					</z.box>
 				</ComponentPreview>
 
 				{/* With Groups */}
@@ -124,7 +121,7 @@ export default function SelectDocsPage() {
 					description='A disabled select and individual disabled items.'
 					code={examples.disabled}
 				>
-					<div className='flex flex-col gap-4'>
+					<z.box className='flex flex-col gap-4'>
 						<z.select disabled>
 							<z.select.trigger className='w-45'>
 								<z.select.value placeholder='Disabled select' />
@@ -146,7 +143,7 @@ export default function SelectDocsPage() {
 								<z.select.item value='another'>Another</z.select.item>
 							</z.select.content>
 						</z.select>
-					</div>
+					</z.box>
 				</ComponentPreview>
 
 				{/* Default Value */}
@@ -162,48 +159,48 @@ export default function SelectDocsPage() {
 						</z.select.content>
 					</z.select>
 				</ComponentPreview>
-			</section>
+			</z.box>
 
 			{/* API Reference */}
-			<section className='space-y-6'>
-				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>API Reference</h2>
+			<z.box as='section' className='space-y-6'>
+				<z.text.h2>API Reference</z.text.h2>
 				<PropsTable title='Select' props={selectProps} />
 				<PropsTable title='SelectItem' props={selectItemProps} />
-			</section>
+			</z.box>
 
 			{/* Accessibility */}
-			<section className='space-y-6'>
-				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>Accessibility</h2>
-				<Card>
-					<CardContent className='p-6 space-y-4'>
-						<div className='space-y-2'>
-							<h3 className='font-semibold text-foreground'>Keyboard Interactions</h3>
-							<div className='grid gap-2'>
-								<div className='flex items-center gap-4 text-sm'>
-									<kbd className='px-2 py-1 bg-muted rounded text-xs font-mono'>Space / Enter</kbd>
-									<span className='text-muted-foreground'>Open the select and select the focused item</span>
-								</div>
-								<div className='flex items-center gap-4 text-sm'>
-									<kbd className='px-2 py-1 bg-muted rounded text-xs font-mono'>Arrow Up/Down</kbd>
-									<span className='text-muted-foreground'>Move focus between items</span>
-								</div>
-								<div className='flex items-center gap-4 text-sm'>
-									<kbd className='px-2 py-1 bg-muted rounded text-xs font-mono'>Home / End</kbd>
-									<span className='text-muted-foreground'>Jump to first or last item</span>
-								</div>
-								<div className='flex items-center gap-4 text-sm'>
-									<kbd className='px-2 py-1 bg-muted rounded text-xs font-mono'>Escape</kbd>
-									<span className='text-muted-foreground'>Close the select</span>
-								</div>
-								<div className='flex items-center gap-4 text-sm'>
-									<kbd className='px-2 py-1 bg-muted rounded text-xs font-mono'>A-Z</kbd>
-									<span className='text-muted-foreground'>Jump to items starting with that letter</span>
-								</div>
-							</div>
-						</div>
-					</CardContent>
-				</Card>
-			</section>
-		</div>
+			<z.box as='section' className='space-y-6'>
+				<z.text.h2>Accessibility</z.text.h2>
+				<z.card>
+					<z.cardContent className='p-6 space-y-4'>
+						<z.box className='space-y-2'>
+							<z.text.h3>Keyboard Interactions</z.text.h3>
+							<z.box className='grid gap-2'>
+								<z.box className='flex items-center gap-4 text-sm'>
+									<z.text as='kbd' className='px-2 py-1 bg-muted rounded text-xs font-mono'>Space / Enter</z.text>
+									<z.text className='text-muted-foreground'>Open the select and select the focused item</z.text>
+								</z.box>
+								<z.box className='flex items-center gap-4 text-sm'>
+									<z.text as='kbd' className='px-2 py-1 bg-muted rounded text-xs font-mono'>Arrow Up/Down</z.text>
+									<z.text className='text-muted-foreground'>Move focus between items</z.text>
+								</z.box>
+								<z.box className='flex items-center gap-4 text-sm'>
+									<z.text as='kbd' className='px-2 py-1 bg-muted rounded text-xs font-mono'>Home / End</z.text>
+									<z.text className='text-muted-foreground'>Jump to first or last item</z.text>
+								</z.box>
+								<z.box className='flex items-center gap-4 text-sm'>
+									<z.text as='kbd' className='px-2 py-1 bg-muted rounded text-xs font-mono'>Escape</z.text>
+									<z.text className='text-muted-foreground'>Close the select</z.text>
+								</z.box>
+								<z.box className='flex items-center gap-4 text-sm'>
+									<z.text as='kbd' className='px-2 py-1 bg-muted rounded text-xs font-mono'>A-Z</z.text>
+									<z.text className='text-muted-foreground'>Jump to items starting with that letter</z.text>
+								</z.box>
+							</z.box>
+						</z.box>
+					</z.cardContent>
+				</z.card>
+			</z.box>
+		</z.box>
 	)
 }

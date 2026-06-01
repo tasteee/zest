@@ -41,13 +41,13 @@
 }
 
 /* Solid variants */
-.solidGreen {
+.solidPurpleAlias {
 	background: var(---purple);
 	color: var(--primary-foreground);
 	border-color: var(---purple);
 }
 
-.solidGreen:hover {
+.solidPurpleAlias:hover {
 	opacity: 0.9;
 }
 
@@ -71,13 +71,13 @@
 	opacity: 0.9;
 }
 
-.solidOrange {
+.solidPinkAlias {
 	background: var(---pink);
 	color: var(--primary-foreground);
 	border-color: var(---pink);
 }
 
-.solidOrange:hover {
+.solidPinkAlias:hover {
 	opacity: 0.9;
 }
 
@@ -92,13 +92,13 @@
 }
 
 /* Outlined variants */
-.outlinedGreen {
+.outlinedPurpleAlias {
 	background: transparent;
 	color: var(---purple);
 	border-color: var(---purple);
 }
 
-.outlinedGreen:hover {
+.outlinedPurpleAlias:hover {
 	background: color-mix(in oklch, var(---purple) 10%, transparent);
 }
 
@@ -122,13 +122,13 @@
 	background: color-mix(in oklch, var(---pink) 10%, transparent);
 }
 
-.outlinedOrange {
+.outlinedPinkAlias {
 	background: transparent;
 	color: var(---pink);
 	border-color: var(---pink);
 }
 
-.outlinedOrange:hover {
+.outlinedPinkAlias:hover {
 	background: color-mix(in oklch, var(---pink) 10%, transparent);
 }
 
@@ -143,13 +143,13 @@
 }
 
 /* Ghost variants */
-.ghostGreen {
+.ghostPurpleAlias {
 	background: transparent;
 	color: var(---purple);
 	border-color: transparent;
 }
 
-.ghostGreen:hover {
+.ghostPurpleAlias:hover {
 	opacity: 0.7;
 }
 
@@ -173,13 +173,13 @@
 	opacity: 0.7;
 }
 
-.ghostOrange {
+.ghostPinkAlias {
 	background: transparent;
 	color: var(---pink);
 	border-color: transparent;
 }
 
-.ghostOrange:hover {
+.ghostPinkAlias:hover {
 	opacity: 0.7;
 }
 

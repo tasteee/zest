@@ -1,9 +1,9 @@
 export const examples = {
-	quickPreview: `import { ZBox } from '@tasteee/zest'
+	quickPreview: `import { z } from '@tasteee/zest'
 
 export function BoxDemo() {
   return (
-    <ZBox
+    <z.box
       isFlex
       isRow
       gap="1rem"
@@ -11,55 +11,55 @@ export function BoxDemo() {
       background="var(--color-surface)"
       borderRadius="var(--radius-md)"
     >
-      <ZBox padding="0.5rem" background="var(--color-muted)" borderRadius="var(--radius-sm)">
+      <z.box padding="0.5rem" background="var(--color-muted)" borderRadius="var(--radius-sm)">
         Item one
-      </ZBox>
-      <ZBox padding="0.5rem" background="var(--color-muted)" borderRadius="var(--radius-sm)">
+      </z.box>
+      <z.box padding="0.5rem" background="var(--color-muted)" borderRadius="var(--radius-sm)">
         Item two
-      </ZBox>
-    </ZBox>
+      </z.box>
+    </z.box>
   )
 }`,
 
-	usageImport: `import { ZBox } from '@tasteee/zest'`,
+	usageImport: `import { z } from '@tasteee/zest'`,
 
-	usage: `<ZBox padding="1rem" background="var(--color-surface)">
+	usage: `<z.box padding="1rem" background="var(--color-surface)">
   Content
-</ZBox>`,
+</z.box>`,
 
 	flex: `{/* Flex row with gap */}
-<ZBox isFlex isRow gap="0.75rem" alignY="center">
-  <ZBox>Left</ZBox>
-  <ZBox>Right</ZBox>
-</ZBox>
+<z.box isFlex isRow gap="0.75rem" alignY="center">
+  <z.box>Left</z.box>
+  <z.box>Right</z.box>
+</z.box>
 
 {/* Flex column centred */}
-<ZBox isFlex isColumn alignX="center" gap="0.5rem">
-  <ZBox>Top</ZBox>
-  <ZBox>Bottom</ZBox>
-</ZBox>`,
+<z.box isFlex isColumn alignX="center" gap="0.5rem">
+  <z.box>Top</z.box>
+  <z.box>Bottom</z.box>
+</z.box>`,
 
 	spacing: `{/* Explicit padding */}
-<ZBox padding="2rem">All sides</ZBox>
-<ZBox paddingX="1.5rem" paddingY="0.75rem">Horizontal and vertical</ZBox>
-<ZBox paddingTop="1rem" paddingBottom="1rem">Top and bottom only</ZBox>
+<z.box padding="2rem">All sides</z.box>
+<z.box paddingX="1.5rem" paddingY="0.75rem">Horizontal and vertical</z.box>
+<z.box paddingTop="1rem" paddingBottom="1rem">Top and bottom only</z.box>
 
 {/* Margin */}
-<ZBox marginX="auto">Centred with auto margins</ZBox>`,
+<z.box marginX="auto">Centred with auto margins</z.box>`,
 
 	typography: `{/* Text styling */}
-<ZBox
+<z.box
   fontSize="1.25rem"
   fontWeight="600"
   color="var(--color-text-primary)"
   lineHeight="1.5"
 >
   Styled text inside a Box
-</ZBox>`,
+</z.box>`,
 
 	asElement: `{/* Render as any HTML element */}
-<ZBox as="section" padding="1.5rem">
-  <ZBox as="h2" fontSize="1.5rem" fontWeight="700">Heading</ZBox>
-  <ZBox as="p" color="var(--color-text-muted)">Paragraph content here.</ZBox>
-</ZBox>`
+<z.box as="section" padding="1.5rem">
+  <z.box as="h2" fontSize="1.5rem" fontWeight="700">Heading</z.box>
+  <z.box as="p" color="var(--color-text-muted)">Paragraph content here.</z.box>
+</z.box>`
 } as const

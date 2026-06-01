@@ -1,21 +1,18 @@
 'use client'
 
 import Link from 'next/link'
-import { Skeleton } from '@/components/ui/skeleton'
 import { z } from '@/components/ui'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { ComponentPreview } from '@/components/docs/component-preview'
 import { PropsTable } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
-import { Card, CardContent } from '@/components/ui/card'
 import { ChevronRight } from 'lucide-react'
 import { skeletonProps } from './props'
 import { examples } from './examples'
 export default function SkeletonDocsPage() {
 	return (
-		<div className='space-y-16'>
+		<z.box className='space-y-16'>
 			{/* Breadcrumb */}
-			<div className='flex items-center gap-2 text-sm text-muted-foreground'>
+			<z.box className='flex items-center gap-2 text-sm text-muted-foreground'>
 				<Link href='/docs' className='hover:text-foreground transition-colors'>
 					Docs
 				</Link>
@@ -24,22 +21,22 @@ export default function SkeletonDocsPage() {
 					Components
 				</Link>
 				<ChevronRight className='h-4 w-4' />
-				<span className='text-foreground'>Skeleton</span>
-			</div>
+				<z.text className='text-foreground'>Skeleton</z.text>
+			</z.box>
 
 			{/* Header */}
-			<div className='space-y-4'>
-				<div className='flex items-center gap-3'>
-					<h1 className='text-4xl font-bold tracking-tight text-foreground'>ZSkeleton</h1>
+			<z.box className='space-y-4'>
+				<z.box className='flex items-center gap-3'>
+					<z.text.h1>ZSkeleton</z.text.h1>
 					<z.badge isGhost isNeutral>
 						Component
 					</z.badge>
-				</div>
-				<p className='text-xl text-muted-foreground max-w-2xl leading-relaxed'>
+				</z.box>
+				<z.text.body className='text-xl text-muted-foreground max-w-2xl leading-relaxed'>
 					Use to show a placeholder while content is loading. Skeletons provide a low-fidelity preview of the content that will
 					eventually appear.
-				</p>
-			</div>
+				</z.text.body>
+			</z.box>
 
 			{/* Quick Preview */}
 			<ComponentPreview
@@ -47,19 +44,19 @@ export default function SkeletonDocsPage() {
 				description='A basic skeleton loading placeholder.'
 				code={examples.quickPreview}
 			>
-				<Skeleton className='h-4 w-62.5' />
+				<z.skeleton className='h-4 w-62.5' />
 			</ComponentPreview>
 
 			{/* Usage */}
-			<section className='space-y-6'>
-				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>Usage</h2>
+			<z.box as='section' className='space-y-6'>
+				<z.text.h2>Usage</z.text.h2>
 				<CodeBlock code={examples.usageImport} language='tsx' />
 				<CodeBlock code={examples.usage} language='tsx' />
-			</section>
+			</z.box>
 
 			{/* Examples */}
-			<section className='space-y-8'>
-				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>Examples</h2>
+			<z.box as='section' className='space-y-8'>
+				<z.text.h2>Examples</z.text.h2>
 
 				{/* Card Skeleton */}
 				<ComponentPreview
@@ -67,13 +64,13 @@ export default function SkeletonDocsPage() {
 					description='A skeleton placeholder for a card component.'
 					code={examples.cardSkeleton}
 				>
-					<div className='flex items-center space-x-4'>
-						<Skeleton className='h-12 w-12 rounded-full' />
-						<div className='space-y-2'>
-							<Skeleton className='h-4 w-62.5' />
-							<Skeleton className='h-4 w-50' />
-						</div>
-					</div>
+					<z.box className='flex items-center space-x-4'>
+						<z.skeleton className='h-12 w-12 rounded-full' />
+						<z.box className='space-y-2'>
+							<z.skeleton className='h-4 w-62.5' />
+							<z.skeleton className='h-4 w-50' />
+						</z.box>
+					</z.box>
 				</ComponentPreview>
 
 				{/* Article Skeleton */}
@@ -82,133 +79,133 @@ export default function SkeletonDocsPage() {
 					description='A skeleton for article or blog post content.'
 					code={examples.articleSkeleton}
 				>
-					<div className='space-y-6 w-full max-w-md'>
-						<Skeleton className='h-48 w-full rounded-lg' />
-						<div className='space-y-3'>
-							<Skeleton className='h-6 w-3/4' />
-							<Skeleton className='h-4 w-full' />
-							<Skeleton className='h-4 w-full' />
-							<Skeleton className='h-4 w-2/3' />
-						</div>
-					</div>
+					<z.box className='space-y-6 w-full max-w-md'>
+						<z.skeleton className='h-48 w-full rounded-lg' />
+						<z.box className='space-y-3'>
+							<z.skeleton className='h-6 w-3/4' />
+							<z.skeleton className='h-4 w-full' />
+							<z.skeleton className='h-4 w-full' />
+							<z.skeleton className='h-4 w-2/3' />
+						</z.box>
+					</z.box>
 				</ComponentPreview>
 
 				{/* List Skeleton */}
 				<ComponentPreview title='List Skeleton' description='A skeleton for a list of items.' code={examples.listSkeleton}>
-					<div className='space-y-4 w-full max-w-sm'>
+					<z.box className='space-y-4 w-full max-w-sm'>
 						{[1, 2, 3].map((i) => (
-							<div key={i} className='flex items-center gap-4'>
-								<Skeleton className='h-10 w-10 rounded-full' />
-								<div className='space-y-2 flex-1'>
-									<Skeleton className='h-4 w-full' />
-									<Skeleton className='h-3 w-3/4' />
-								</div>
-							</div>
+							<z.box key={i} className='flex items-center gap-4'>
+								<z.skeleton className='h-10 w-10 rounded-full' />
+								<z.box className='space-y-2 flex-1'>
+									<z.skeleton className='h-4 w-full' />
+									<z.skeleton className='h-3 w-3/4' />
+								</z.box>
+							</z.box>
 						))}
-					</div>
+					</z.box>
 				</ComponentPreview>
 
 				{/* Table Skeleton */}
 				<ComponentPreview title='Table Skeleton' description='A skeleton for tabular data.' code={examples.tableSkeleton}>
-					<div className='w-full space-y-3'>
-						<div className='flex gap-4 pb-2 border-b border-border'>
-							<Skeleton className='h-4 w-1/4' />
-							<Skeleton className='h-4 w-1/4' />
-							<Skeleton className='h-4 w-1/4' />
-							<Skeleton className='h-4 w-1/4' />
-						</div>
+					<z.box className='w-full space-y-3'>
+						<z.box className='flex gap-4 pb-2 border-b border-border'>
+							<z.skeleton className='h-4 w-1/4' />
+							<z.skeleton className='h-4 w-1/4' />
+							<z.skeleton className='h-4 w-1/4' />
+							<z.skeleton className='h-4 w-1/4' />
+						</z.box>
 						{[1, 2, 3, 4].map((row) => (
-							<div key={row} className='flex gap-4 py-2'>
-								<Skeleton className='h-4 w-1/4' />
-								<Skeleton className='h-4 w-1/4' />
-								<Skeleton className='h-4 w-1/4' />
-								<Skeleton className='h-4 w-1/4' />
-							</div>
+							<z.box key={row} className='flex gap-4 py-2'>
+								<z.skeleton className='h-4 w-1/4' />
+								<z.skeleton className='h-4 w-1/4' />
+								<z.skeleton className='h-4 w-1/4' />
+								<z.skeleton className='h-4 w-1/4' />
+							</z.box>
 						))}
-					</div>
+					</z.box>
 				</ComponentPreview>
 
 				{/* Form Skeleton */}
 				<ComponentPreview title='Form Skeleton' description='A skeleton for form inputs.' code={examples.formSkeleton}>
-					<div className='w-full max-w-sm space-y-4'>
-						<div className='space-y-2'>
-							<Skeleton className='h-4 w-16' />
-							<Skeleton className='h-10 w-full rounded-md' />
-						</div>
-						<div className='space-y-2'>
-							<Skeleton className='h-4 w-20' />
-							<Skeleton className='h-10 w-full rounded-md' />
-						</div>
-						<div className='space-y-2'>
-							<Skeleton className='h-4 w-24' />
-							<Skeleton className='h-24 w-full rounded-md' />
-						</div>
-						<Skeleton className='h-10 w-full rounded-md' />
-					</div>
+					<z.box className='w-full max-w-sm space-y-4'>
+						<z.box className='space-y-2'>
+							<z.skeleton className='h-4 w-16' />
+							<z.skeleton className='h-10 w-full rounded-md' />
+						</z.box>
+						<z.box className='space-y-2'>
+							<z.skeleton className='h-4 w-20' />
+							<z.skeleton className='h-10 w-full rounded-md' />
+						</z.box>
+						<z.box className='space-y-2'>
+							<z.skeleton className='h-4 w-24' />
+							<z.skeleton className='h-24 w-full rounded-md' />
+						</z.box>
+						<z.skeleton className='h-10 w-full rounded-md' />
+					</z.box>
 				</ComponentPreview>
-			</section>
+			</z.box>
 
 			{/* API Reference */}
-			<section className='space-y-6'>
-				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>API Reference</h2>
+			<z.box as='section' className='space-y-6'>
+				<z.text.h2>API Reference</z.text.h2>
 				<PropsTable title='Skeleton' props={skeletonProps} />
-			</section>
+			</z.box>
 
 			{/* Best Practices */}
-			<section className='space-y-6'>
-				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>Best Practices</h2>
-				<Card>
-					<CardContent className='p-6 space-y-4'>
-						<div className='space-y-2'>
-							<h3 className='font-semibold text-foreground'>Match Content Dimensions</h3>
-							<p className='text-sm text-muted-foreground'>
+			<z.box as='section' className='space-y-6'>
+				<z.text.h2>Best Practices</z.text.h2>
+				<z.card>
+					<z.cardContent className='p-6 space-y-4'>
+						<z.box className='space-y-2'>
+							<z.text.h3>Match Content Dimensions</z.text.h3>
+							<z.text.body className='text-sm text-muted-foreground'>
 								Size your skeletons to match the expected dimensions of the content they&apos;re replacing. This prevents layout
 								shifts when content loads.
-							</p>
-						</div>
-						<div className='space-y-2'>
-							<h3 className='font-semibold text-foreground'>Use Realistic Shapes</h3>
-							<p className='text-sm text-muted-foreground'>
-								Use <code className='text-xs bg-muted px-1 py-0.5 rounded'>rounded-full</code> for avatars,{' '}
-								<code className='text-xs bg-muted px-1 py-0.5 rounded'>rounded-md</code> for cards, and appropriate widths for text
+							</z.text.body>
+						</z.box>
+						<z.box className='space-y-2'>
+							<z.text.h3>Use Realistic Shapes</z.text.h3>
+							<z.text.body className='text-sm text-muted-foreground'>
+								Use <z.box as='code' className='text-xs bg-muted px-1 py-0.5 rounded'>rounded-full</z.box> for avatars,{' '}
+								<z.box as='code' className='text-xs bg-muted px-1 py-0.5 rounded'>rounded-md</z.box> for cards, and appropriate widths for text
 								to give users a preview of the layout.
-							</p>
-						</div>
-						<div className='space-y-2'>
-							<h3 className='font-semibold text-foreground'>Avoid Overuse</h3>
-							<p className='text-sm text-muted-foreground'>
+							</z.text.body>
+						</z.box>
+						<z.box className='space-y-2'>
+							<z.text.h3>Avoid Overuse</z.text.h3>
+							<z.text.body className='text-sm text-muted-foreground'>
 								Too many skeleton elements can be as distracting as a spinner. Focus on the main content areas that users will be
 								looking at.
-							</p>
-						</div>
-					</CardContent>
-				</Card>
-			</section>
+							</z.text.body>
+						</z.box>
+					</z.cardContent>
+				</z.card>
+			</z.box>
 
 			{/* Accessibility */}
-			<section className='space-y-6'>
-				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>Accessibility</h2>
-				<Card>
-					<CardContent className='p-6 space-y-4'>
-						<div className='space-y-2'>
-							<h3 className='font-semibold text-foreground'>Animation</h3>
-							<p className='text-sm text-muted-foreground'>
+			<z.box as='section' className='space-y-6'>
+				<z.text.h2>Accessibility</z.text.h2>
+				<z.card>
+					<z.cardContent className='p-6 space-y-4'>
+						<z.box className='space-y-2'>
+							<z.text.h3>Animation</z.text.h3>
+							<z.text.body className='text-sm text-muted-foreground'>
 								The pulse animation respects the{' '}
-								<code className='text-xs bg-muted px-1 py-0.5 rounded'>prefers-reduced-motion</code> media query. Users who have
+								<z.box as='code' className='text-xs bg-muted px-1 py-0.5 rounded'>prefers-reduced-motion</z.box> media query. Users who have
 								reduced motion preferences will see a static skeleton.
-							</p>
-						</div>
-						<div className='space-y-2'>
-							<h3 className='font-semibold text-foreground'>Loading State</h3>
-							<p className='text-sm text-muted-foreground'>
-								Consider adding <code className='text-xs bg-muted px-1 py-0.5 rounded'>aria-busy=&quot;true&quot;</code> to the
-								container element and <code className='text-xs bg-muted px-1 py-0.5 rounded'>aria-live=&quot;polite&quot;</code> to
+							</z.text.body>
+						</z.box>
+						<z.box className='space-y-2'>
+							<z.text.h3>Loading State</z.text.h3>
+							<z.text.body className='text-sm text-muted-foreground'>
+								Consider adding <z.box as='code' className='text-xs bg-muted px-1 py-0.5 rounded'>aria-busy=&quot;true&quot;</z.box> to the
+								container element and <z.box as='code' className='text-xs bg-muted px-1 py-0.5 rounded'>aria-live=&quot;polite&quot;</z.box> to
 								announce when content has loaded.
-							</p>
-						</div>
-					</CardContent>
-				</Card>
-			</section>
-		</div>
+							</z.text.body>
+						</z.box>
+					</z.cardContent>
+				</z.card>
+			</z.box>
+		</z.box>
 	)
 }

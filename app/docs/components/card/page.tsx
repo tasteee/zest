@@ -2,21 +2,17 @@
 
 import Link from 'next/link'
 import { z } from '@/components/ui'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { Card } from '@/components/ui/card'
 import { ComponentPreview } from '@/components/docs/component-preview'
 import { PropsTable } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
 import { ChevronRight, Bell, Check, CreditCard } from 'lucide-react'
-import { Switch } from '@/components/ui/switch'
 import { cardProps, cardHeaderProps, cardTitleProps } from './props'
 import { examples } from './examples'
 export default function CardDocsPage() {
 	return (
-		<div className='space-y-16'>
+		<z.box className='space-y-16'>
 			{/* Breadcrumb */}
-			<div className='flex items-center gap-2 text-sm text-muted-foreground'>
+			<z.box className='flex items-center gap-2 text-sm text-muted-foreground'>
 				<Link href='/docs' className='hover:text-foreground transition-colors'>
 					Docs
 				</Link>
@@ -25,217 +21,213 @@ export default function CardDocsPage() {
 					Components
 				</Link>
 				<ChevronRight className='h-4 w-4' />
-				<span className='text-foreground'>Card</span>
-			</div>
+				<z.text className='text-foreground'>Card</z.text>
+			</z.box>
 
 			{/* Header */}
-			<div className='space-y-4'>
-				<div className='flex items-center gap-3'>
-					<h1 className='text-4xl font-bold tracking-tight text-foreground'>ZCard</h1>
+			<z.box className='space-y-4'>
+				<z.box className='flex items-center gap-3'>
+					<z.text.h1>ZCard</z.text.h1>
 					<z.badge isGhost isNeutral>
 						Component
 					</z.badge>
-				</div>
-				<p className='text-xl text-muted-foreground max-w-2xl leading-relaxed'>
+				</z.box>
+				<z.text.body className='text-xl text-muted-foreground max-w-2xl leading-relaxed'>
 					A container component for grouping related content and actions. Cards provide a flexible foundation for building
 					complex UI patterns.
-				</p>
-			</div>
+				</z.text.body>
+			</z.box>
 
 			{/* Quick Preview */}
-			<ComponentPreview
-				code={examples.quickPreview}
-			>
-				<Card className='w-87.5'>
-					<Card.Header>
-						<Card.Title>Card Title</Card.Title>
-						<Card.Description>Card Description</Card.Description>
-					</Card.Header>
-					<Card.Content>
-						<p className='text-muted-foreground'>Card Content</p>
-					</Card.Content>
-					<Card.Footer>
-						<p className='text-sm text-muted-foreground'>Card Footer</p>
-					</Card.Footer>
-				</Card>
+			<ComponentPreview code={examples.quickPreview}>
+				<z.card className='w-87.5'>
+					<z.cardHeader>
+						<z.cardTitle>Card Title</z.cardTitle>
+						<z.cardDescription>Card Description</z.cardDescription>
+					</z.cardHeader>
+					<z.cardContent>
+						<z.text.body className='text-muted-foreground'>Card Content</z.text.body>
+					</z.cardContent>
+					<z.cardFooter>
+						<z.text.body className='text-sm text-muted-foreground'>Card Footer</z.text.body>
+					</z.cardFooter>
+				</z.card>
 			</ComponentPreview>
 
 			{/* Usage */}
-			<section className='space-y-6'>
-				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>Usage</h2>
+			<z.box as='section' className='space-y-6'>
+				<z.text.h2>Usage</z.text.h2>
 				<CodeBlock code={examples.usageImport} language='tsx' />
-				<CodeBlock
-					code={examples.usage}
-					language='tsx'
-				/>
-			</section>
+				<CodeBlock code={examples.usage} language='tsx' />
+			</z.box>
 
 			{/* Examples */}
-			<section className='space-y-8'>
-				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>Examples</h2>
+			<z.box as='section' className='space-y-8'>
+				<z.text.h2>Examples</z.text.h2>
 
 				{/* Form Card */}
-				<ComponentPreview
-					code={examples.formCard}
-				>
-					<Card className='w-87.5'>
-						<Card.Header>
-							<Card.Title>Create project</Card.Title>
-							<Card.Description>Deploy your new project in one-click.</Card.Description>
-						</Card.Header>
-						<Card.Content>
-							<form>
-								<div className='grid w-full gap-4'>
-									<div className='flex flex-col space-y-1.5'>
-										<Label htmlFor='name'>Name</Label>
-										<Input id='name' placeholder='Name of your project' />
-									</div>
-								</div>
-							</form>
-						</Card.Content>
-						<Card.Footer className='flex justify-between'>
+				<ComponentPreview code={examples.formCard}>
+					<z.card className='w-87.5'>
+						<z.cardHeader>
+							<z.cardTitle>Create project</z.cardTitle>
+							<z.cardDescription>Deploy your new project in one-click.</z.cardDescription>
+						</z.cardHeader>
+						<z.cardContent>
+							<z.box as='form'>
+								<z.box className='grid w-full gap-4'>
+									<z.box className='flex flex-col space-y-1.5'>
+										<z.label htmlFor='name'>Name</z.label>
+										<z.input id='name' placeholder='Name of your project' />
+									</z.box>
+								</z.box>
+							</z.box>
+						</z.cardContent>
+						<z.cardFooter className='flex justify-between'>
 							<z.button>Cancel</z.button>
 							<z.button>Deploy</z.button>
-						</Card.Footer>
-					</Card>
+						</z.cardFooter>
+					</z.card>
 				</ComponentPreview>
 
 				{/* Notifications Card */}
-				<ComponentPreview
-					code={examples.notificationsCard}
-				>
-					<Card className='w-95'>
-						<Card.Header>
-							<Card.Title>Notifications</Card.Title>
-							<Card.Description>Choose what you want to be notified about.</Card.Description>
-						</Card.Header>
-						<Card.Content className='grid gap-4'>
-							<div className='flex items-center space-x-4 rounded-md border p-4'>
+				<ComponentPreview code={examples.notificationsCard}>
+					<z.card className='w-95'>
+						<z.cardHeader>
+							<z.cardTitle>Notifications</z.cardTitle>
+							<z.cardDescription>Choose what you want to be notified about.</z.cardDescription>
+						</z.cardHeader>
+						<z.cardContent className='grid gap-4'>
+							<z.box className='flex items-center space-x-4 rounded-md border p-4'>
 								<Bell className='h-5 w-5' />
-								<div className='flex-1 space-y-1'>
-									<p className='text-sm font-medium leading-none'>Push Notifications</p>
-									<p className='text-sm text-muted-foreground'>Send notifications to device.</p>
-								</div>
-								<Switch />
-							</div>
-							<div className='flex items-center space-x-4 rounded-md border p-4'>
+								<z.box className='flex-1 space-y-1'>
+									<z.text.body className='text-sm font-medium leading-none'>Push Notifications</z.text.body>
+									<z.text.body className='text-sm text-muted-foreground'>Send notifications to device.</z.text.body>
+								</z.box>
+								<z.switch />
+							</z.box>
+							<z.box className='flex items-center space-x-4 rounded-md border p-4'>
 								<CreditCard className='h-5 w-5' />
-								<div className='flex-1 space-y-1'>
-									<p className='text-sm font-medium leading-none'>Billing Alerts</p>
-									<p className='text-sm text-muted-foreground'>Receive alerts for billing events.</p>
-								</div>
-								<Switch defaultChecked />
-							</div>
-						</Card.Content>
-					</Card>
+								<z.box className='flex-1 space-y-1'>
+									<z.text.body className='text-sm font-medium leading-none'>Billing Alerts</z.text.body>
+									<z.text.body className='text-sm text-muted-foreground'>Receive alerts for billing events.</z.text.body>
+								</z.box>
+								<z.switch defaultChecked />
+							</z.box>
+						</z.cardContent>
+					</z.card>
 				</ComponentPreview>
 
 				{/* Simple Card */}
-				<ComponentPreview
-					code={examples.simpleCard}
-				>
-					<Card className='w-75'>
-						<Card.Content>
-							<div className='flex items-center space-x-4'>
-								<div className='flex h-12 w-12 items-center justify-center rounded-full bg-primary/10'>
+				<ComponentPreview code={examples.simpleCard}>
+					<z.card className='w-75'>
+						<z.cardContent>
+							<z.box className='flex items-center space-x-4'>
+								<z.box className='flex h-12 w-12 items-center justify-center rounded-full bg-primary/10'>
 									<Check className='h-6 w-6 text-primary' />
-								</div>
-								<div className='space-y-1'>
-									<p className='text-sm font-medium leading-none'>Payment successful</p>
-									<p className='text-sm text-muted-foreground'>Your payment has been processed.</p>
-								</div>
-							</div>
-						</Card.Content>
-					</Card>
+								</z.box>
+								<z.box className='space-y-1'>
+									<z.text.body className='text-sm font-medium leading-none'>Payment successful</z.text.body>
+									<z.text.body className='text-sm text-muted-foreground'>Your payment has been processed.</z.text.body>
+								</z.box>
+							</z.box>
+						</z.cardContent>
+					</z.card>
 				</ComponentPreview>
 
 				{/* Card Grid */}
-				<ComponentPreview
-					code={examples.cardGrid}
-				>
-					<div className='grid gap-4 md:grid-cols-2 lg:grid-cols-3'>
-						<Card>
-							<Card.Header className='flex flex-row items-center justify-between space-y-0 pb-2'>
-								<Card.Title className='text-sm font-medium'>Total Revenue</Card.Title>
-							</Card.Header>
-							<Card.Content>
-								<div className='text-2xl font-bold'>$45,231.89</div>
-								<p className='text-xs text-muted-foreground'>+20.1% from last month</p>
-							</Card.Content>
-						</Card>
-						<Card>
-							<Card.Header className='flex flex-row items-center justify-between space-y-0 pb-2'>
-								<Card.Title className='text-sm font-medium'>Subscriptions</Card.Title>
-							</Card.Header>
-							<Card.Content>
-								<div className='text-2xl font-bold'>+2350</div>
-								<p className='text-xs text-muted-foreground'>+180.1% from last month</p>
-							</Card.Content>
-						</Card>
-						<Card>
-							<Card.Header className='flex flex-row items-center justify-between space-y-0 pb-2'>
-								<Card.Title className='text-sm font-medium'>Active Now</Card.Title>
-							</Card.Header>
-							<Card.Content>
-								<div className='text-2xl font-bold'>+573</div>
-								<p className='text-xs text-muted-foreground'>+201 since last hour</p>
-							</Card.Content>
-						</Card>
-					</div>
+				<ComponentPreview code={examples.cardGrid}>
+					<z.box className='grid gap-4 md:grid-cols-2 lg:grid-cols-3'>
+						<z.card>
+							<z.cardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
+								<z.cardTitle className='text-sm font-medium'>Total Revenue</z.cardTitle>
+							</z.cardHeader>
+							<z.cardContent>
+								<z.box className='text-2xl font-bold'>$45,231.89</z.box>
+								<z.text.body className='text-xs text-muted-foreground'>+20.1% from last month</z.text.body>
+							</z.cardContent>
+						</z.card>
+						<z.card>
+							<z.cardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
+								<z.cardTitle className='text-sm font-medium'>Subscriptions</z.cardTitle>
+							</z.cardHeader>
+							<z.cardContent>
+								<z.box className='text-2xl font-bold'>+2350</z.box>
+								<z.text.body className='text-xs text-muted-foreground'>+180.1% from last month</z.text.body>
+							</z.cardContent>
+						</z.card>
+						<z.card>
+							<z.cardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
+								<z.cardTitle className='text-sm font-medium'>Active Now</z.cardTitle>
+							</z.cardHeader>
+							<z.cardContent>
+								<z.box className='text-2xl font-bold'>+573</z.box>
+								<z.text.body className='text-xs text-muted-foreground'>+201 since last hour</z.text.body>
+							</z.cardContent>
+						</z.card>
+					</z.box>
 				</ComponentPreview>
-			</section>
+			</z.box>
 
 			{/* API Reference */}
-			<section className='space-y-6'>
-				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>API Reference</h2>
+			<z.box as='section' className='space-y-6'>
+				<z.text.h2>API Reference</z.text.h2>
 				<PropsTable title='ZCard' props={cardProps} />
-				<PropsTable title='ZCard.Header' props={cardHeaderProps} />
-				<PropsTable title='ZCard.Title' props={cardTitleProps} />
-				<div className='text-sm text-muted-foreground'>
-					<p>
-						ZCard.Description, ZCard.Content, and ZCard.Footer follow the same pattern, accepting className and children props.
-					</p>
-				</div>
-			</section>
+				<PropsTable title='Zz.cardHeader' props={cardHeaderProps} />
+				<PropsTable title='Zz.cardTitle' props={cardTitleProps} />
+				<z.box className='text-sm text-muted-foreground'>
+					<z.text.body>
+						Zz.cardDescription, Zz.cardContent, and Zz.cardFooter follow the same pattern, accepting className and children props.
+					</z.text.body>
+				</z.box>
+			</z.box>
 
 			{/* Anatomy */}
-			<section className='space-y-6'>
-				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>Anatomy</h2>
-				<Card>
-					<Card.Content className='p-6'>
-						<CodeBlock
-							code={examples.anatomy}
-							language='tsx'
-						/>
-					</Card.Content>
-				</Card>
-				<div className='grid gap-4 text-sm'>
-					<div className='flex gap-4'>
-						<code className='font-mono text-primary'>ZCard</code>
-						<span className='text-muted-foreground'>The root container with border, background, and shadow.</span>
-					</div>
-					<div className='flex gap-4'>
-						<code className='font-mono text-primary'>ZCard.Header</code>
-						<span className='text-muted-foreground'>Contains the title and description with consistent spacing.</span>
-					</div>
-					<div className='flex gap-4'>
-						<code className='font-mono text-primary'>ZCard.Title</code>
-						<span className='text-muted-foreground'>The main heading of the card.</span>
-					</div>
-					<div className='flex gap-4'>
-						<code className='font-mono text-primary'>ZCard.Description</code>
-						<span className='text-muted-foreground'>Secondary text that describes the card content.</span>
-					</div>
-					<div className='flex gap-4'>
-						<code className='font-mono text-primary'>ZCard.Content</code>
-						<span className='text-muted-foreground'>The main content area of the card.</span>
-					</div>
-					<div className='flex gap-4'>
-						<code className='font-mono text-primary'>ZCard.Footer</code>
-						<span className='text-muted-foreground'>Contains actions or secondary information.</span>
-					</div>
-				</div>
-			</section>
-		</div>
+			<z.box as='section' className='space-y-6'>
+				<z.text.h2>Anatomy</z.text.h2>
+				<z.card>
+					<z.cardContent className='p-6'>
+						<CodeBlock code={examples.anatomy} language='tsx' />
+					</z.cardContent>
+				</z.card>
+				<z.box className='grid gap-4 text-sm'>
+					<z.box className='flex gap-4'>
+						<z.box as='code' className='font-mono text-primary'>
+							ZCard
+						</z.box>
+						<z.text className='text-muted-foreground'>The root container with border, background, and shadow.</z.text>
+					</z.box>
+					<z.box className='flex gap-4'>
+						<z.box as='code' className='font-mono text-primary'>
+							Zz.cardHeader
+						</z.box>
+						<z.text className='text-muted-foreground'>Contains the title and description with consistent spacing.</z.text>
+					</z.box>
+					<z.box className='flex gap-4'>
+						<z.box as='code' className='font-mono text-primary'>
+							Zz.cardTitle
+						</z.box>
+						<z.text className='text-muted-foreground'>The main heading of the card.</z.text>
+					</z.box>
+					<z.box className='flex gap-4'>
+						<z.box as='code' className='font-mono text-primary'>
+							Zz.cardDescription
+						</z.box>
+						<z.text className='text-muted-foreground'>Secondary text that describes the card content.</z.text>
+					</z.box>
+					<z.box className='flex gap-4'>
+						<z.box as='code' className='font-mono text-primary'>
+							Zz.cardContent
+						</z.box>
+						<z.text className='text-muted-foreground'>The main content area of the card.</z.text>
+					</z.box>
+					<z.box className='flex gap-4'>
+						<z.box as='code' className='font-mono text-primary'>
+							Zz.cardFooter
+						</z.box>
+						<z.text className='text-muted-foreground'>Contains actions or secondary information.</z.text>
+					</z.box>
+				</z.box>
+			</z.box>
+		</z.box>
 	)
 }

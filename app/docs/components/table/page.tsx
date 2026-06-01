@@ -25,9 +25,9 @@ function getInvoiceStatusBadgeProps(status: (typeof invoices)[number]['status'])
 
 export default function TableDocsPage() {
 	return (
-		<div className='space-y-16'>
+		<z.box className='space-y-16'>
 			{/* Breadcrumb */}
-			<div className='flex items-center gap-2 text-sm text-muted-foreground'>
+			<z.box className='flex items-center gap-2 text-sm text-muted-foreground'>
 				<Link href='/docs' className='hover:text-foreground transition-colors'>
 					Docs
 				</Link>
@@ -36,21 +36,21 @@ export default function TableDocsPage() {
 					Components
 				</Link>
 				<ChevronRight className='h-4 w-4' />
-				<span className='text-foreground'>Table</span>
-			</div>
+				<z.text className='text-foreground'>Table</z.text>
+			</z.box>
 
 			{/* Header */}
-			<div className='space-y-4'>
-				<div className='flex items-center gap-3'>
-					<h1 className='text-4xl font-bold tracking-tight text-foreground'>ZTable</h1>
+			<z.box className='space-y-4'>
+				<z.box className='flex items-center gap-3'>
+					<z.text.h1>ZTable</z.text.h1>
 					<z.badge isGhost isNeutral>
 						Component
 					</z.badge>
-				</div>
-				<p className='text-xl text-muted-foreground max-w-2xl leading-relaxed'>
+				</z.box>
+				<z.text.body className='text-xl text-muted-foreground max-w-2xl leading-relaxed'>
 					A responsive table component for displaying tabular data with proper accessibility and styling.
-				</p>
-			</div>
+				</z.text.body>
+			</z.box>
 
 			{/* Quick Preview */}
 			<ComponentPreview
@@ -82,15 +82,15 @@ export default function TableDocsPage() {
 			</ComponentPreview>
 
 			{/* Usage */}
-			<section className='space-y-6'>
-				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>Usage</h2>
+			<z.box as='section' className='space-y-6'>
+				<z.text.h2>Usage</z.text.h2>
 				<CodeBlock code={examples.usageImport} language='tsx' />
 				<CodeBlock code={examples.usage} language='tsx' />
-			</section>
+			</z.box>
 
 			{/* Examples */}
-			<section className='space-y-8'>
-				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>Examples</h2>
+			<z.box as='section' className='space-y-8'>
+				<z.text.h2>Examples</z.text.h2>
 
 				{/* With Footer */}
 				<ComponentPreview
@@ -153,48 +153,48 @@ export default function TableDocsPage() {
 						</z.tableBody>
 					</z.table>
 				</ComponentPreview>
-			</section>
+			</z.box>
 
 			{/* API Reference */}
-			<section className='space-y-6'>
-				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>API Reference</h2>
+			<z.box as='section' className='space-y-6'>
+				<z.text.h2>API Reference</z.text.h2>
 				<PropsTable title='Table' props={tableProps} />
-				<p className='text-sm text-muted-foreground'>
+				<z.text.body className='text-sm text-muted-foreground'>
 					All table components (TableHeader, TableBody, TableFooter, TableRow, TableHead, TableCell, TableCaption) accept
 					standard HTML attributes for their respective elements plus a{' '}
-					<code className='text-xs bg-muted px-1 py-0.5 rounded'>className</code> prop.
-				</p>
-			</section>
+					<z.box as='code' className='text-xs bg-muted px-1 py-0.5 rounded'>className</z.box> prop.
+				</z.text.body>
+			</z.box>
 
 			{/* Accessibility */}
-			<section className='space-y-6'>
-				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>Accessibility</h2>
+			<z.box as='section' className='space-y-6'>
+				<z.text.h2>Accessibility</z.text.h2>
 				<z.card>
 					<z.cardContent className='p-6 space-y-4'>
-						<div className='space-y-2'>
-							<h3 className='font-semibold text-foreground'>Semantic HTML</h3>
-							<p className='text-sm text-muted-foreground'>
+						<z.box className='space-y-2'>
+							<z.text.h3>Semantic HTML</z.text.h3>
+							<z.text.body className='text-sm text-muted-foreground'>
 								The Table component uses native HTML table elements which provide built-in accessibility for screen readers and
 								other assistive technologies.
-							</p>
-						</div>
-						<div className='space-y-2'>
-							<h3 className='font-semibold text-foreground'>Table Caption</h3>
-							<p className='text-sm text-muted-foreground'>
+							</z.text.body>
+						</z.box>
+						<z.box className='space-y-2'>
+							<z.text.h3>Table Caption</z.text.h3>
+							<z.text.body className='text-sm text-muted-foreground'>
 								Use the TableCaption component to provide a description of the table&apos;s contents. This helps screen reader users
 								understand the purpose of the table.
-							</p>
-						</div>
-						<div className='space-y-2'>
-							<h3 className='font-semibold text-foreground'>Column Headers</h3>
-							<p className='text-sm text-muted-foreground'>
+							</z.text.body>
+						</z.box>
+						<z.box className='space-y-2'>
+							<z.text.h3>Column Headers</z.text.h3>
+							<z.text.body className='text-sm text-muted-foreground'>
 								Always use TableHead for column headers. Screen readers use these to announce column names when navigating table
 								cells.
-							</p>
-						</div>
+							</z.text.body>
+						</z.box>
 					</z.cardContent>
 				</z.card>
-			</section>
-		</div>
+			</z.box>
+		</z.box>
 	)
 }

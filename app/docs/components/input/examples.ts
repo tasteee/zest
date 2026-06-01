@@ -27,6 +27,16 @@ export function InputDemo() {
   <ZInput type="url" placeholder="URL input" />
 </div>`,
 
+	sizes: `import { ZInput } from '@tasteee/zest'
+
+<div className="grid gap-4 max-w-sm">
+  <ZInput isExtraSmall placeholder="Extra small input" />
+  <ZInput isSmall placeholder="Small input" />
+  <ZInput isMedium placeholder="Medium input" />
+  <ZInput isLarge placeholder="Large input" />
+  <ZInput isExtraLarge placeholder="Extra large input" />
+</div>`,
+
 	withIcon: `import { ZInput } from '@tasteee/zest'
 import { Search } from 'lucide-react'
 

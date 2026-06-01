@@ -1,0 +1,281 @@
+.z-box {
+	margin: var(--z-box-margin);
+	margin-top: var(--z-box-margin-top);
+	margin-right: var(--z-box-margin-right);
+	margin-bottom: var(--z-box-margin-bottom);
+	margin-left: var(--z-box-margin-left);
+	padding: var(--z-box-padding);
+	padding-top: var(--z-box-padding-top);
+	padding-right: var(--z-box-padding-right);
+	padding-bottom: var(--z-box-padding-bottom);
+	padding-left: var(--z-box-padding-left);
+	gap: var(--z-box-gap);
+	row-gap: var(--z-box-row-gap, var(--z-box-gap));
+	column-gap: var(--z-box-column-gap, var(--z-box-gap));
+	grid-template-columns: var(--z-box-grid-template-columns);
+	grid-template-rows: var(--z-box-grid-template-rows);
+	grid-auto-columns: var(--z-box-grid-auto-columns);
+	grid-auto-rows: var(--z-box-grid-auto-rows);
+	grid-auto-flow: var(--z-box-grid-auto-flow);
+	grid-column: var(--z-box-grid-column);
+	grid-row: var(--z-box-grid-row);
+	grid-column-start: var(--z-box-grid-column-start);
+	grid-column-end: var(--z-box-grid-column-end);
+	grid-row-start: var(--z-box-grid-row-start);
+	grid-row-end: var(--z-box-grid-row-end);
+	justify-items: var(--z-box-justify-items);
+	align-content: var(--z-box-align-content);
+	justify-self: var(--z-box-justify-self);
+	align-self: var(--z-box-align-self);
+	width: var(--z-box-width);
+	min-width: var(--z-box-min-width);
+	max-width: var(--z-box-max-width);
+	height: var(--z-box-height);
+	min-height: var(--z-box-min-height);
+	max-height: var(--z-box-max-height);
+	border: var(--z-box-border);
+	background: var(--z-box-background);
+	color: var(--z-box-color);
+	border-radius: var(--z-box-border-radius);
+	border-color: var(--z-box-border-color);
+	border-width: var(--z-box-border-width);
+	outline: var(--z-box-outline);
+	outline-color: var(--z-box-outline-color);
+	outline-width: var(--z-box-outline-width);
+	outline-offset: var(--z-box-outline-offset);
+	box-shadow: var(--z-box-box-shadow);
+	z-index: var(--z-box-z-index);
+	font-family: var(--z-box-font-family);
+	font-size: var(--z-box-font-size);
+	font-weight: var(--z-box-font-weight);
+	line-height: var(--z-box-line-height);
+	font-style: var(--z-box-font-style);
+	font-variant: var(--z-box-font-variant);
+	font-stretch: var(--z-box-font-stretch);
+	text-align: var(--z-box-text-align);
+	text-decoration: var(--z-box-text-decoration);
+	text-transform: var(--z-box-text-transform);
+	text-overflow: var(--z-box-text-overflow);
+	white-space: var(--z-box-white-space);
+	justify-content: var(--z-box-justify-content);
+	align-items: var(--z-box-align-items);
+	flex-direction: var(--z-box-flex-direction);
+	flex-wrap: var(--z-box-flex-wrap);
+	box-sizing: border-box;
+	min-width: 0;
+}
+
+.z-box.isFlex {
+	display: flex;
+	flex-direction: row;
+	align-items: stretch;
+	justify-content: flex-start;
+	flex-wrap: nowrap;
+}
+
+.z-box.isInlineFlex {
+	display: inline-flex;
+	flex-direction: row;
+	align-items: stretch;
+	justify-content: flex-start;
+	flex-wrap: nowrap;
+}
+
+.z-box.isGrid {
+	display: grid;
+}
+
+.z-box.isInlineGrid {
+	display: inline-grid;
+}
+
+@media (min-width: 40rem) {
+	.z-box {
+		grid-template-columns: var(--z-box-small-grid-template-columns, var(--z-box-grid-template-columns));
+	}
+}
+
+@media (min-width: 48rem) {
+	.z-box {
+		grid-template-columns: var(
+			--z-box-medium-grid-template-columns,
+			var(--z-box-small-grid-template-columns, var(--z-box-grid-template-columns))
+		);
+	}
+}
+
+@media (min-width: 64rem) {
+	.z-box {
+		grid-template-columns: var(
+			--z-box-large-grid-template-columns,
+			var(--z-box-medium-grid-template-columns, var(--z-box-small-grid-template-columns, var(--z-box-grid-template-columns)))
+		);
+	}
+}
+
+@media (min-width: 80rem) {
+	.z-box {
+		grid-template-columns: var(
+			--z-box-extra-large-grid-template-columns,
+			var(
+				--z-box-large-grid-template-columns,
+				var(--z-box-medium-grid-template-columns, var(--z-box-small-grid-template-columns, var(--z-box-grid-template-columns)))
+			)
+		);
+	}
+}
+
+.z-box.isBlock {
+	display: block;
+}
+
+.z-box.isInlineBlock {
+	display: inline-block;
+}
+
+.z-box.isInline:not(.isFlex):not(.isInlineFlex) {
+	display: inline;
+}
+
+.z-box.isFlex.isInline,
+.z-box.isInlineFlex.isInline {
+	display: inline-flex;
+}
+
+.z-box.isRow {
+	flex-direction: row;
+}
+
+.z-box.isColumn {
+	flex-direction: column;
+}
+
+.z-box.doesWrap {
+	flex-wrap: wrap;
+}
+
+.z-box.doesWrapText {
+	white-space: normal;
+}
+
+.z-box.isRow.xStart,
+.z-box.isFlex:not(.isColumn).xStart,
+.z-box.isInlineFlex:not(.isColumn).xStart {
+	justify-content: flex-start;
+}
+
+.z-box.isRow.xCenter,
+.z-box.isFlex:not(.isColumn).xCenter,
+.z-box.isInlineFlex:not(.isColumn).xCenter {
+	justify-content: center;
+}
+
+.z-box.isRow.xEnd,
+.z-box.isFlex:not(.isColumn).xEnd,
+.z-box.isInlineFlex:not(.isColumn).xEnd {
+	justify-content: flex-end;
+}
+
+.z-box.isRow.xBetween,
+.z-box.isFlex:not(.isColumn).xBetween,
+.z-box.isInlineFlex:not(.isColumn).xBetween {
+	justify-content: space-between;
+}
+
+.z-box.isRow.xAround,
+.z-box.isFlex:not(.isColumn).xAround,
+.z-box.isInlineFlex:not(.isColumn).xAround {
+	justify-content: space-around;
+}
+
+.z-box.isRow.xEvenly,
+.z-box.isFlex:not(.isColumn).xEvenly,
+.z-box.isInlineFlex:not(.isColumn).xEvenly {
+	justify-content: space-evenly;
+}
+
+.z-box.isRow.xStretch,
+.z-box.isFlex:not(.isColumn).xStretch,
+.z-box.isInlineFlex:not(.isColumn).xStretch {
+	justify-content: stretch;
+}
+
+.z-box.isRow.yStart,
+.z-box.isFlex:not(.isColumn).yStart,
+.z-box.isInlineFlex:not(.isColumn).yStart {
+	align-items: flex-start;
+}
+
+.z-box.isRow.yCenter,
+.z-box.isFlex:not(.isColumn).yCenter,
+.z-box.isInlineFlex:not(.isColumn).yCenter {
+	align-items: center;
+}
+
+.z-box.isRow.yEnd,
+.z-box.isFlex:not(.isColumn).yEnd,
+.z-box.isInlineFlex:not(.isColumn).yEnd {
+	align-items: flex-end;
+}
+
+.z-box.isRow.yBetween,
+.z-box.isFlex:not(.isColumn).yBetween,
+.z-box.isInlineFlex:not(.isColumn).yBetween,
+.z-box.isRow.yAround,
+.z-box.isFlex:not(.isColumn).yAround,
+.z-box.isInlineFlex:not(.isColumn).yAround,
+.z-box.isRow.yEvenly,
+.z-box.isFlex:not(.isColumn).yEvenly,
+.z-box.isInlineFlex:not(.isColumn).yEvenly,
+.z-box.isRow.yStretch,
+.z-box.isFlex:not(.isColumn).yStretch,
+.z-box.isInlineFlex:not(.isColumn).yStretch {
+	align-items: stretch;
+}
+
+.z-box.isColumn.xStart {
+	align-items: flex-start;
+}
+
+.z-box.isColumn.xCenter {
+	align-items: center;
+}
+
+.z-box.isColumn.xEnd {
+	align-items: flex-end;
+}
+
+.z-box.isColumn.xBetween,
+.z-box.isColumn.xAround,
+.z-box.isColumn.xEvenly,
+.z-box.isColumn.xStretch {
+	align-items: stretch;
+}
+
+.z-box.isColumn.yStart {
+	justify-content: flex-start;
+}
+
+.z-box.isColumn.yCenter {
+	justify-content: center;
+}
+
+.z-box.isColumn.yEnd {
+	justify-content: flex-end;
+}
+
+.z-box.isColumn.yBetween {
+	justify-content: space-between;
+}
+
+.z-box.isColumn.yAround {
+	justify-content: space-around;
+}
+
+.z-box.isColumn.yEvenly {
+	justify-content: space-evenly;
+}
+
+.z-box.isColumn.yStretch {
+	justify-content: stretch;
+}

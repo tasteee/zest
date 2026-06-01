@@ -2,20 +2,18 @@
 
 import Link from 'next/link'
 import { z } from '@/components/ui'
-import { ButtonGroup, ButtonGroupSeparator, ButtonGroupText } from '@/components/ui/button-group'
 import { ComponentPreview } from '@/components/docs/component-preview'
 import { PropsTable } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
-import { Card, CardContent } from '@/components/ui/card'
 import { ChevronRight, Bold, Italic, Underline } from 'lucide-react'
 import { buttonGroupProps, buttonGroupTextProps, buttonGroupSeparatorProps } from './props'
 import { examples } from './examples'
 
 export default function ButtonGroupDocsPage() {
 	return (
-		<div className='space-y-16'>
+		<z.box className='space-y-16'>
 			{/* Breadcrumb */}
-			<div className='flex items-center gap-2 text-sm text-muted-foreground'>
+			<z.box className='flex items-center gap-2 text-sm text-muted-foreground'>
 				<Link href='/docs' className='hover:text-foreground transition-colors'>
 					Docs
 				</Link>
@@ -24,44 +22,44 @@ export default function ButtonGroupDocsPage() {
 					Components
 				</Link>
 				<ChevronRight className='h-4 w-4' />
-				<span className='text-foreground'>Button Group</span>
-			</div>
+				<z.text className='text-foreground'>Button Group</z.text>
+			</z.box>
 
 			{/* Header */}
-			<div className='space-y-4'>
-				<div className='flex items-center gap-3'>
-					<h1 className='text-4xl font-bold tracking-tight text-foreground'>ButtonGroup</h1>
+			<z.box className='space-y-4'>
+				<z.box className='flex items-center gap-3'>
+					<z.text.h1>ButtonGroup</z.text.h1>
 					<z.badge isGhost isNeutral>
 						Component
 					</z.badge>
-				</div>
-				<p className='text-xl text-muted-foreground max-w-2xl leading-relaxed'>
+				</z.box>
+				<z.text.body className='text-xl text-muted-foreground max-w-2xl leading-relaxed'>
 					Groups related action controls together with shared borders and radius, creating a visually unified toolbar or input
 					cluster.
-				</p>
-			</div>
+				</z.text.body>
+			</z.box>
 
 			{/* Quick Preview */}
 			<ComponentPreview code={examples.quickPreview}>
-				<ButtonGroup>
+				<z.buttonGroup>
 					<z.button>Bold</z.button>
-					<ButtonGroupSeparator />
+					<z.buttonGroupSeparator />
 					<z.button>Italic</z.button>
-					<ButtonGroupSeparator />
+					<z.buttonGroupSeparator />
 					<z.button>Underline</z.button>
-				</ButtonGroup>
+				</z.buttonGroup>
 			</ComponentPreview>
 
 			{/* Usage */}
-			<section className='space-y-6'>
-				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>Usage</h2>
+			<z.box as='section' className='space-y-6'>
+				<z.text.h2>Usage</z.text.h2>
 				<CodeBlock code={examples.usageImport} language='tsx' />
 				<CodeBlock code={examples.usage} language='tsx' />
-			</section>
+			</z.box>
 
 			{/* Examples */}
-			<section className='space-y-8'>
-				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>Examples</h2>
+			<z.box as='section' className='space-y-8'>
+				<z.text.h2>Examples</z.text.h2>
 
 				{/* Horizontal */}
 				<ComponentPreview
@@ -69,13 +67,13 @@ export default function ButtonGroupDocsPage() {
 					description='The default orientation. Buttons share a horizontal border edge.'
 					code={examples.horizontal}
 				>
-					<ButtonGroup>
+					<z.buttonGroup>
 						<z.button>Bold</z.button>
-						<ButtonGroupSeparator />
+						<z.buttonGroupSeparator />
 						<z.button>Italic</z.button>
-						<ButtonGroupSeparator />
+						<z.buttonGroupSeparator />
 						<z.button>Underline</z.button>
-					</ButtonGroup>
+					</z.buttonGroup>
 				</ComponentPreview>
 
 				{/* Vertical */}
@@ -84,11 +82,11 @@ export default function ButtonGroupDocsPage() {
 					description='Stacks buttons vertically with shared side borders.'
 					code={examples.vertical}
 				>
-					<ButtonGroup orientation='vertical'>
+					<z.buttonGroup orientation='vertical'>
 						<z.button>Top</z.button>
 						<z.button>Middle</z.button>
 						<z.button>Bottom</z.button>
-					</ButtonGroup>
+					</z.buttonGroup>
 				</ComponentPreview>
 
 				{/* With Text */}
@@ -97,11 +95,11 @@ export default function ButtonGroupDocsPage() {
 					description='Use ButtonGroupText to insert a static label between action controls.'
 					code={examples.withText}
 				>
-					<ButtonGroup>
+					<z.buttonGroup>
 						<z.button>Copy</z.button>
-						<ButtonGroupText>or</ButtonGroupText>
+						<z.buttonGroupText>or</z.buttonGroupText>
 						<z.button>Paste</z.button>
-					</ButtonGroup>
+					</z.buttonGroup>
 				</ComponentPreview>
 
 				{/* Icon Buttons */}
@@ -110,19 +108,19 @@ export default function ButtonGroupDocsPage() {
 					description='Combine icon-only buttons inside a group for compact toolbars.'
 					code={examples.withIcons}
 				>
-					<ButtonGroup>
+					<z.buttonGroup>
 						<z.button>
 							<Bold className='h-4 w-4' />
 						</z.button>
-						<ButtonGroupSeparator />
+						<z.buttonGroupSeparator />
 						<z.button>
 							<Italic className='h-4 w-4' />
 						</z.button>
-						<ButtonGroupSeparator />
+						<z.buttonGroupSeparator />
 						<z.button>
 							<Underline className='h-4 w-4' />
 						</z.button>
-					</ButtonGroup>
+					</z.buttonGroup>
 				</ComponentPreview>
 
 				{/* Mixed */}
@@ -131,52 +129,52 @@ export default function ButtonGroupDocsPage() {
 					description='Combine static text labels with interactive buttons for URL or input-like patterns.'
 					code={examples.mixed}
 				>
-					<ButtonGroup>
-						<ButtonGroupText>https://</ButtonGroupText>
+					<z.buttonGroup>
+						<z.buttonGroupText>https://</z.buttonGroupText>
 						<z.button>example.com</z.button>
-						<ButtonGroupSeparator />
+						<z.buttonGroupSeparator />
 						<z.button>Copy</z.button>
-					</ButtonGroup>
+					</z.buttonGroup>
 				</ComponentPreview>
-			</section>
+			</z.box>
 
 			{/* API Reference */}
-			<section className='space-y-6'>
-				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>API Reference</h2>
+			<z.box as='section' className='space-y-6'>
+				<z.text.h2>API Reference</z.text.h2>
 				<PropsTable title='ButtonGroup' props={buttonGroupProps} />
 				<PropsTable title='ButtonGroupText' props={buttonGroupTextProps} />
 				<PropsTable title='ButtonGroupSeparator' props={buttonGroupSeparatorProps} />
-			</section>
+			</z.box>
 
 			{/* Accessibility */}
-			<section className='space-y-6'>
-				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>Accessibility</h2>
-				<Card>
-					<CardContent className='p-6 space-y-4'>
-						<div className='space-y-2'>
-							<h3 className='font-semibold text-foreground'>Keyboard Interactions</h3>
-							<div className='grid gap-2'>
-								<div className='flex items-center gap-4 text-sm'>
-									<kbd className='px-2 py-1 bg-muted rounded text-xs font-mono'>Tab</kbd>
-									<span className='text-muted-foreground'>Move focus between buttons in the group</span>
-								</div>
-								<div className='flex items-center gap-4 text-sm'>
-									<kbd className='px-2 py-1 bg-muted rounded text-xs font-mono'>Enter / Space</kbd>
-									<span className='text-muted-foreground'>Activate the focused button</span>
-								</div>
-							</div>
-						</div>
-						<div className='space-y-2'>
-							<h3 className='font-semibold text-foreground'>Best Practices</h3>
-							<ul className='text-sm text-muted-foreground space-y-2 list-disc list-inside'>
-								<li>Group only actions that are semantically related</li>
-								<li>Use separators to visually distinguish related sub-groups within a larger group</li>
-								<li>Avoid mixing too many variants inside a single group to preserve visual coherence</li>
-							</ul>
-						</div>
-					</CardContent>
-				</Card>
-			</section>
-		</div>
+			<z.box as='section' className='space-y-6'>
+				<z.text.h2>Accessibility</z.text.h2>
+				<z.card>
+					<z.cardContent className='p-6 space-y-4'>
+						<z.box className='space-y-2'>
+							<z.text.h3>Keyboard Interactions</z.text.h3>
+							<z.box className='grid gap-2'>
+								<z.box className='flex items-center gap-4 text-sm'>
+									<z.text as='kbd' className='px-2 py-1 bg-muted rounded text-xs font-mono'>Tab</z.text>
+									<z.text className='text-muted-foreground'>Move focus between buttons in the group</z.text>
+								</z.box>
+								<z.box className='flex items-center gap-4 text-sm'>
+									<z.text as='kbd' className='px-2 py-1 bg-muted rounded text-xs font-mono'>Enter / Space</z.text>
+									<z.text className='text-muted-foreground'>Activate the focused button</z.text>
+								</z.box>
+							</z.box>
+						</z.box>
+						<z.box className='space-y-2'>
+							<z.text.h3>Best Practices</z.text.h3>
+							<z.box as='ul' className='text-sm text-muted-foreground space-y-2 list-disc list-inside'>
+								<z.box as='li'>Group only actions that are semantically related</z.box>
+								<z.box as='li'>Use separators to visually distinguish related sub-groups within a larger group</z.box>
+								<z.box as='li'>Avoid mixing too many variants inside a single group to preserve visual coherence</z.box>
+							</z.box>
+						</z.box>
+					</z.cardContent>
+				</z.card>
+			</z.box>
+		</z.box>
 	)
 }

@@ -1,0 +1,177 @@
+.zInput {
+	box-sizing: border-box;
+	width: 100%;
+	min-width: 0;
+	border: 1px solid var(--input);
+	border-radius: var(--radius-md);
+	background: transparent;
+	color: var(--foreground);
+	box-shadow: 0 1px 2px rgb(0 0 0 / 0.05);
+	outline: none;
+	transition:
+		border-color 0.1s ease,
+		box-shadow 0.1s ease,
+		color 0.1s ease;
+}
+
+.zInput::placeholder {
+	color: var(--muted-foreground);
+}
+
+.zInput::selection {
+	background: var(--accent);
+	color: var(--accent-foreground);
+}
+
+.zInput::file-selector-button {
+	height: calc(100% - var(--space-sm));
+	margin-inline-end: var(--space-sm);
+	border: 0;
+	background: transparent;
+	color: var(--foreground);
+	font: inherit;
+	font-weight: 500;
+}
+
+.zInput:disabled {
+	cursor: not-allowed;
+	opacity: 0.5;
+	pointer-events: none;
+}
+
+.zInput:focus-visible {
+	box-shadow: 0 0 0 3px color-mix(in oklch, var(--foreground) 20%, transparent);
+}
+
+.zInput.isFocusNeutral:focus-visible {
+	border-color: color-mix(in oklch, var(--foreground) 50%, transparent);
+}
+
+.zInput.isFocusPurple:focus-visible {
+	border-color: var(---purple);
+	box-shadow: 0 0 0 3px color-mix(in oklch, var(---purple) 30%, transparent);
+}
+
+.zInput.isFocusPink:focus-visible {
+	border-color: var(---pink);
+	box-shadow: 0 0 0 3px color-mix(in oklch, var(---pink) 30%, transparent);
+}
+
+.zInput[aria-invalid='true'] {
+	border-color: var(--destructive);
+	box-shadow: 0 0 0 3px color-mix(in oklch, var(--destructive) 20%, transparent);
+}
+
+.zInput.isExtraSmall {
+	height: 1.5rem;
+	padding-inline: 0.625rem;
+	font-size: 0.6875rem;
+}
+
+.zInput.isSmall {
+	height: 2rem;
+	padding-inline: 0.875rem;
+	font-size: 0.875rem;
+}
+
+.zInput.isMedium {
+	height: 2.5rem;
+	padding-inline: 1rem;
+	font-size: 0.875rem;
+}
+
+.zInput.isLarge {
+	height: 3rem;
+	padding-inline: 1.5rem;
+	font-size: 1rem;
+}
+
+.zInput.isExtraLarge {
+	height: 3.5rem;
+	padding-inline: 2rem;
+	font-size: 1.125rem;
+}
+
+.zInput.isIcon {
+	width: 2.5rem;
+	height: 2.5rem;
+	padding: 0;
+	text-align: center;
+}
+
+.zInputNumber {
+	position: relative;
+	width: 100%;
+	min-width: 0;
+}
+
+.zInputNumberControl {
+	padding-right: 3rem;
+	appearance: textfield;
+}
+
+.zInputNumberControl::-webkit-inner-spin-button,
+.zInputNumberControl::-webkit-outer-spin-button {
+	appearance: none;
+}
+
+.zInputStepper {
+	position: absolute;
+	top: 50%;
+	right: 0.375rem;
+	display: flex;
+	width: 1.75rem;
+	height: 1.75rem;
+	transform: translateY(-50%);
+	flex-direction: column;
+	overflow: hidden;
+	border: 1px solid var(--border);
+	border-radius: calc(var(--radius) - 4px);
+	background: transparent;
+}
+
+.zInputNumber.isExtraSmall .zInputStepper,
+.zInputNumber.isSmall .zInputStepper {
+	width: 1.5rem;
+	height: 1.5rem;
+}
+
+.zInputNumber.isIcon {
+	width: 2.5rem;
+}
+
+.zInputNumber.isIcon .zInputStepper {
+	display: none;
+}
+
+.zInputStepperButton {
+	display: flex;
+	min-height: 0;
+	flex: 1;
+	align-items: center;
+	justify-content: center;
+	border: 0;
+	background: transparent;
+	color: var(--primary);
+	cursor: pointer;
+	transition:
+		background-color 0.1s ease,
+		opacity 0.1s ease;
+}
+
+.zInputStepperButton + .zInputStepperButton {
+	border-top: 1px solid var(--border);
+}
+
+.zInputStepperButton:hover {
+	background: var(--muted);
+}
+
+.zInputStepperButton:active {
+	background: var(--secondary);
+}
+
+.zInputStepperButton:disabled {
+	opacity: 0.4;
+	pointer-events: none;
+}

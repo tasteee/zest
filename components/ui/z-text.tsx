@@ -29,6 +29,7 @@ type ZTextComponentT = ((props: ZTextPropsT) => React.ReactElement) & {
 }
 
 const getColorClass = prop.classNameSwitch({
+	isPrimary: 'isPrimary',
 	isPurple: 'isPurple',
 	isPink: 'isPink',
 	isNeutral: 'isNeutral',
@@ -42,7 +43,7 @@ const getSizeClass = prop.classNameSwitch({
 	isMedium: 'isMedium',
 	isLarge: 'isLarge',
 	isExtraLarge: 'isExtraLarge',
-	default: 'isMedium'
+	default: ''
 })
 
 const getWeightClass = prop.classNameSwitch({
@@ -50,7 +51,7 @@ const getWeightClass = prop.classNameSwitch({
 	isBold: 'isBold',
 	isNormal: 'isNormal',
 	isVeryBold: 'isVeryBold',
-	default: 'isNormal'
+	default: ''
 })
 
 const getStyleClass = prop.classNamesBuilder({
@@ -60,6 +61,7 @@ const getStyleClass = prop.classNamesBuilder({
 
 const CUSTOM_PROPS = [
 	'isNeutral',
+	'isPrimary',
 	'isPurple',
 	'isPink',
 	'isMuted',
@@ -75,7 +77,10 @@ const CUSTOM_PROPS = [
 	'isItalic',
 	'isUnderlined',
 	'testId',
-	'as'
+	'as',
+	'className',
+	'children',
+	'style'
 ]
 
 const getSplitProps = prop.splitter(CUSTOM_PROPS)
@@ -96,8 +101,8 @@ const ZTextBase = (props: ZTextPropsT): React.ReactElement => {
 	const classes = cn('zText', colorClass, sizeClass, weightClass, styleClass, customProps.className)
 
 	return (
-		<Element className={classes} style={props.style} {...mappedProps} {...otherProps}>
-			{props.children}
+		<Element className={classes} style={customProps.style} {...mappedProps} {...otherProps}>
+			{customProps.children}
 		</Element>
 	)
 }

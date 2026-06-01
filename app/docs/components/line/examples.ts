@@ -5,7 +5,7 @@ export function LineDemo() {
   return (
     <div>
       <div className="space-y-1">
-        <h4 className="text-sm font-medium leading-none">tasteink Design System</h4>
+        <z.text as="h4" isSmall isBold>tasteink Design System</z.text>
         <p className="text-sm text-muted-foreground">
           A comprehensive component library.
         </p>
@@ -45,7 +45,7 @@ export function LineDemo() {
 	inACard: `<Card className="w-full max-w-sm">
   <CardContent className="p-6">
     <div className="space-y-1">
-      <h3 className="font-semibold">Account Settings</h3>
+      <z.text.h3>Account Settings</z.text.h3>
       <p className="text-sm text-muted-foreground">
         Manage your account preferences
       </p>

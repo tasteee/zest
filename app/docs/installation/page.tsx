@@ -8,10 +8,11 @@ import {
 	DocsNote
 } from '@/components/docs/mdx-components'
 import { CodeBlock } from '@/components/docs/code-block'
+import { z } from '@/components/ui'
 
 export default function InstallationPage() {
 	return (
-		<div>
+		<z.box>
 			<DocsTitle>Installation</DocsTitle>
 			<DocsDescription>Get up and running with Zest in seconds.</DocsDescription>
 
@@ -57,12 +58,12 @@ export function MyComponent() {
 			<DocsSection>
 				<DocsSectionTitle>Requirements</DocsSectionTitle>
 				<DocsList>
-					<li>React 18 or later</li>
-					<li>Tailwind CSS 4.0 or later</li>
+					<z.box as='li'>React 18 or later</z.box>
+					<z.box as='li'>Tailwind CSS 4.0 or later</z.box>
 				</DocsList>
 			</DocsSection>
 
 			<DocsNote variant='success'>You&apos;re all set. Start building interfaces that hit different.</DocsNote>
-		</div>
+		</z.box>
 	)
 }

@@ -88,114 +88,124 @@ const weights = [
 
 export default function TypographyPage() {
 	return (
-		<div>
+		<z.box>
 			<DocsTitle>Typography</DocsTitle>
 			<DocsDescription>DM Sans. Clean, geometric, unapologetic. One typeface. Infinite expression.</DocsDescription>
 
 			<DocsSection>
 				<DocsSectionTitle>Typeface</DocsSectionTitle>
-				<div className='rounded-lg border border-border p-8'>
-					<div className='flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-8'>
-						<div>
-							<span className='text-neon-pink text-xs font-semibold tracking-[0.2em] uppercase block mb-3'>
+				<z.box className='rounded-lg border border-border p-8'>
+					<z.box className='flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-8'>
+						<z.box>
+							<z.text className='text-neon-pink text-xs font-semibold tracking-[0.2em] uppercase block mb-3'>
 								Primary Typeface
-							</span>
-							<h3 className='text-primary font-bold text-6xl tracking-tight'>DM Sans</h3>
-						</div>
-						<div className='flex gap-2'>
+							</z.text>
+							<z.text.h3 isPrimary isVeryBold>
+								DM Sans
+							</z.text.h3>
+						</z.box>
+						<z.box className='flex gap-2'>
 							<z.badge isOutline isNeutral>
 								Google Fonts
 							</z.badge>
 							<z.badge isOutline isNeutral>
 								Open Source
 							</z.badge>
-						</div>
-					</div>
-					<p className='text-primary text-2xl leading-relaxed mb-4'>The quick brown fox jumps over the lazy dog.</p>
-					<p className='text-foreground font-mono text-sm'>ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz 0123456789</p>
-				</div>
+						</z.box>
+					</z.box>
+					<z.text.body className='text-primary text-2xl leading-relaxed mb-4'>
+						The quick brown fox jumps over the lazy dog.
+					</z.text.body>
+					<z.text.body className='text-foreground font-mono text-sm'>
+						ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz 0123456789
+					</z.text.body>
+				</z.box>
 			</DocsSection>
 
 			<DocsSection>
 				<DocsSectionTitle>Font Weights</DocsSectionTitle>
 				<DocsText>DM Sans supports a full range of weights for creating visual hierarchy.</DocsText>
-				<div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4'>
+				<z.box className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4'>
 					{weights.map((weight) => (
-						<div key={weight.name} className='rounded-lg border border-border p-4 text-center'>
-							<span className={`text-primary text-3xl block mb-2 ${weight.class}`}>Aa</span>
-							<span className='text-foreground text-sm font-medium block'>{weight.name}</span>
-							<span className='text-muted-foreground text-xs'>{weight.value}</span>
-						</div>
+						<z.box key={weight.name} className='rounded-lg border border-border p-4 text-center'>
+							<z.text className={`text-primary text-3xl block mb-2 ${weight.class}`}>Aa</z.text>
+							<z.text className='text-foreground text-sm font-medium block'>{weight.name}</z.text>
+							<z.text className='text-muted-foreground text-xs'>{weight.value}</z.text>
+						</z.box>
 					))}
-				</div>
+				</z.box>
 			</DocsSection>
 
 			<DocsSection>
 				<DocsSectionTitle>Type Scale</DocsSectionTitle>
 				<DocsText>A carefully crafted type scale for consistent hierarchy across the interface.</DocsText>
-				<div className='space-y-6'>
+				<z.box className='space-y-6'>
 					{typeScale.map((type) => (
-						<div
+						<z.box
 							key={type.name}
 							className='flex flex-col lg:flex-row lg:items-center gap-4 py-6 border-b border-border last:border-b-0'
 						>
-							<div className='lg:w-24 shrink-0'>
+							<z.box className='lg:w-24 shrink-0'>
 								<z.badge isOutline isPurple className='text-xs'>
 									{type.name}
 								</z.badge>
-							</div>
-							<div className='flex-1 min-w-0'>
-								<p className={`text-primary ${type.class} truncate`}>{type.sample}</p>
-							</div>
-							<div className='flex flex-wrap gap-2 lg:w-64 shrink-0'>
-								<span className='text-muted-foreground text-xs border border-border px-2 py-1 rounded'>{type.size}</span>
-								<span className='text-muted-foreground text-xs border border-border px-2 py-1 rounded'>{type.weight}</span>
-								<span className='text-muted-foreground text-xs border border-border px-2 py-1 rounded'>LH {type.lineHeight}</span>
-							</div>
-						</div>
+							</z.box>
+							<z.box className='flex-1 min-w-0'>
+								<z.text.body className={`text-primary ${type.class} truncate`}>{type.sample}</z.text.body>
+							</z.box>
+							<z.box className='flex flex-wrap gap-2 lg:w-64 shrink-0'>
+								<z.text className='text-muted-foreground text-xs border border-border px-2 py-1 rounded'>{type.size}</z.text>
+								<z.text className='text-muted-foreground text-xs border border-border px-2 py-1 rounded'>{type.weight}</z.text>
+								<z.text className='text-muted-foreground text-xs border border-border px-2 py-1 rounded'>
+									LH {type.lineHeight}
+								</z.text>
+							</z.box>
+						</z.box>
 					))}
-				</div>
+				</z.box>
 			</DocsSection>
 
 			<DocsSection>
 				<DocsSectionTitle>Text Hierarchy</DocsSectionTitle>
 				<DocsText>Use color alongside size to establish clear visual hierarchy.</DocsText>
-				<div className='grid lg:grid-cols-2 gap-8'>
-					<div className='space-y-4'>
-						<h4 className='text-primary font-bold text-2xl'>Headlines demand attention.</h4>
-						<p className='text-foreground leading-relaxed'>
+				<z.box className='grid lg:grid-cols-2 gap-8'>
+					<z.box className='space-y-4'>
+						<z.text.h4 isPrimary isVeryBold>
+							Headlines demand attention.
+						</z.text.h4>
+						<z.text.body className='text-foreground leading-relaxed'>
 							Body text carries the message. It&apos;s readable, comfortable, and gets the job done without stealing the spotlight.
 							Keep it gray, not neutral.
-						</p>
-						<p className='text-muted-foreground text-sm'>
+						</z.text.body>
+						<z.text.body className='text-muted-foreground text-sm'>
 							Secondary text provides context. It fades into the background while remaining accessible.
-						</p>
-						<div className='flex gap-3'>
-							<span className='text-neon-purple text-xs font-semibold tracking-wider uppercase'>Label</span>
-							<span className='text-neon-pink text-xs font-semibold tracking-wider uppercase'>Tag</span>
-							<span className='text-neon-pink text-xs font-semibold tracking-wider uppercase'>Status</span>
-						</div>
-					</div>
+						</z.text.body>
+						<z.box className='flex gap-3'>
+							<z.text className='text-neon-purple text-xs font-semibold tracking-wider uppercase'>Label</z.text>
+							<z.text className='text-neon-pink text-xs font-semibold tracking-wider uppercase'>Tag</z.text>
+							<z.text className='text-neon-pink text-xs font-semibold tracking-wider uppercase'>Status</z.text>
+						</z.box>
+					</z.box>
 
-					<div className='rounded-lg border border-border p-6 space-y-3'>
-						<div className='flex items-center justify-between py-2 border-b border-border'>
-							<span className='text-primary font-semibold'>Neutral</span>
-							<span className='text-neon-purple text-xs'>Headlines, CTAs</span>
-						</div>
-						<div className='flex items-center justify-between py-2 border-b border-border'>
-							<span className='text-foreground'>Gray</span>
-							<span className='text-neon-pink text-xs'>Body text</span>
-						</div>
-						<div className='flex items-center justify-between py-2 border-b border-border'>
-							<span className='text-muted-foreground'>Muted</span>
-							<span className='text-neon-purple text-xs'>Secondary</span>
-						</div>
-						<div className='flex items-center justify-between py-2'>
-							<span className='text-neon-pink'>Brand</span>
-							<span className='text-neon-pink text-xs'>Accents, labels</span>
-						</div>
-					</div>
-				</div>
+					<z.box className='rounded-lg border border-border p-6 space-y-3'>
+						<z.box className='flex items-center justify-between py-2 border-b border-border'>
+							<z.text className='text-primary font-semibold'>Neutral</z.text>
+							<z.text className='text-neon-purple text-xs'>Headlines, CTAs</z.text>
+						</z.box>
+						<z.box className='flex items-center justify-between py-2 border-b border-border'>
+							<z.text className='text-foreground'>Gray</z.text>
+							<z.text className='text-neon-pink text-xs'>Body text</z.text>
+						</z.box>
+						<z.box className='flex items-center justify-between py-2 border-b border-border'>
+							<z.text className='text-muted-foreground'>Muted</z.text>
+							<z.text className='text-neon-purple text-xs'>Secondary</z.text>
+						</z.box>
+						<z.box className='flex items-center justify-between py-2'>
+							<z.text className='text-neon-pink'>Brand</z.text>
+							<z.text className='text-neon-pink text-xs'>Accents, labels</z.text>
+						</z.box>
+					</z.box>
+				</z.box>
 			</DocsSection>
 
 			<DocsSection>
@@ -229,9 +239,9 @@ export default function RootLayout({ children }) {
 				<DocsText>Use utility classes to apply typography styles:</DocsText>
 				<CodeBlock
 					code={`// Headlines
-<h1 className="text-5xl font-bold leading-tight text-primary">
+<z.text.h1 isPrimary isVeryBold>
   Display Headline
-</h1>
+</z.text.h1>
 
 // Body text
 <p className="text-base leading-relaxed text-foreground">
@@ -244,7 +254,7 @@ export default function RootLayout({ children }) {
 </span>
 
 // Labels
-<span className="text-xs font-semibold tracking-[0.1em] uppercase text-neon-purple">
+<span className="text-xs font-semibold tracking-widest uppercase text-neon-purple">
   Category Label
 </span>`}
 					language='tsx'
@@ -256,6 +266,6 @@ export default function RootLayout({ children }) {
 				Always use the semantic text color classes (text-primary, text-foreground, text-muted-foreground) rather than arbitrary
 				colors to maintain consistency.
 			</DocsNote>
-		</div>
+		</z.box>
 	)
 }
