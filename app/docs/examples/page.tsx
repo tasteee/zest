@@ -517,10 +517,10 @@ export default function ExamplesPage() {
 						</z.button>
 
 						<z.button
-							isPink
+							isRed
 							onClick={() => {
 								toast({
-									variant: 'destructive',
+									isRed: true,
 									title: 'Error',
 									description: 'Something went wrong. Please try again.'
 								})

@@ -3,7 +3,7 @@ import { cn } from '@/lib/utils'
 import { prop } from '@/lib/prop'
 import './z-button.css'
 
-type ZColorSwitchPropsT = 'isNeutral' | 'isPurple' | 'isPink'
+type ZColorSwitchPropsT = 'isNeutral' | 'isPurple' | 'isPink' | 'isRed'
 type ZButtonSizePropsT = 'isExtraSmall' | 'isSmall' | 'isMedium' | 'isLarge' | 'isExtraLarge' | 'isIcon'
 type ZButtonKindPropsT = 'isGhost' | 'isOutlined' | 'isSolid'
 
@@ -25,6 +25,7 @@ const CUSTOM_PROPS = [
 	'isNeutral',
 	'isPurple',
 	'isPink',
+	'isRed',
 	'isExtraSmall',
 	'isSmall',
 	'isMedium',
@@ -48,6 +49,7 @@ const CUSTOM_PROPS = [
 const getColorClass = prop.classNameSwitch({
 	isPurple: 'isPurple',
 	isPink: 'isPink',
+	isRed: 'isRed',
 	isNeutral: 'isNeutral',
 	default: 'isNeutral'
 })

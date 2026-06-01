@@ -66,6 +66,13 @@
 	font-weight: 600;
 }
 
+.z-button.isSolid.isRed {
+	background: var(--destructive);
+	border-color: var(--destructive);
+	color: var(--destructive-foreground);
+	font-weight: 600;
+}
+
 .z-button.isSolid.isNeutral {
 	background: var(--primary);
 	border-color: var(--primary);
@@ -95,8 +102,13 @@
 	color: var(---pink);
 }
 
+.z-button.isOutlined.isRed {
+	border-color: var(--destructive);
+	color: var(--destructive);
+}
+
 .z-button.isOutlined.isNeutral,
-.z-button.isOutlined:not(.isPurple, .isPink) {
+.z-button.isOutlined:not(.isPurple, .isPink, .isRed) {
 	border-color: var(--border);
 	color: var(--foreground);
 }
@@ -109,8 +121,12 @@
 	background: color-mix(in oklch, var(---pink) 10%, transparent);
 }
 
+.z-button.isOutlined.isRed:hover {
+	background: color-mix(in oklch, var(--destructive) 10%, transparent);
+}
+
 .z-button.isOutlined.isNeutral:hover,
-.z-button.isOutlined:not(.isPurple, .isPink):hover {
+.z-button.isOutlined:not(.isPurple, .isPink, .isRed):hover {
 	border-color: color-mix(in oklch, var(--foreground) 50%, transparent);
 }
 
@@ -122,8 +138,12 @@
 	background: color-mix(in oklch, var(---pink) 20%, transparent);
 }
 
+.z-button.isOutlined.isRed:active {
+	background: color-mix(in oklch, var(--destructive) 20%, transparent);
+}
+
 .z-button.isOutlined.isNeutral:active,
-.z-button.isOutlined:not(.isPurple, .isPink):active {
+.z-button.isOutlined:not(.isPurple, .isPink, .isRed):active {
 	border-color: color-mix(in oklch, var(--foreground) 70%, transparent);
 	background: color-mix(in oklch, var(--foreground) 5%, transparent);
 }
@@ -141,8 +161,12 @@
 	color: var(---pink);
 }
 
+.z-button.isGhost.isRed {
+	color: var(--destructive);
+}
+
 .z-button.isGhost.isNeutral,
-.z-button.isGhost:not(.isPurple, .isPink) {
+.z-button.isGhost:not(.isPurple, .isPink, .isRed) {
 	color: var(--foreground);
 }
 

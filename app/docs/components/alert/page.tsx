@@ -160,7 +160,7 @@ const AlertDocsPage = () => {
 							<z.box as='ul' className='text-sm text-muted-foreground space-y-2 list-disc list-inside'>
 								<z.box as='li'>Use descriptive titles that summarize the alert</z.box>
 								<z.box as='li'>Keep alert descriptions concise and actionable</z.box>
-								<z.box as='li'>Use one color prop at a time (isRed, isPurple, isPink, isPurple, isPink)</z.box>
+								<z.box as='li'>Use one color prop at a time (isRed, isPurple, isPink, isNeutral)</z.box>
 								<z.box as='li'>Rely on the built-in icon and title defaults unless a custom alert needs more specific copy</z.box>
 							</z.box>
 						</z.box>

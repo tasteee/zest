@@ -34,7 +34,7 @@ export default function ToastDocsPage() {
 
 	const handleDestructiveToast = () => {
 		toast({
-			variant: 'destructive',
+			isRed: true,
 			title: 'Something went wrong',
 			description: 'There was a problem with your request. Please try again.'
 		})
@@ -110,7 +110,7 @@ export default function ToastDocsPage() {
 				{/* Destructive */}
 				<ComponentPreview
 					title='Destructive'
-					description='Use variant="destructive" for errors and irreversible operations.'
+					description='Use isRed for errors and irreversible operations.'
 					code={examples.destructive}
 				>
 					<z.button onClick={handleDestructiveToast}>Show error toast</z.button>

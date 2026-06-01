@@ -1,12 +1,12 @@
 import * as React from 'react'
-import { CircleAlert, Info, Sparkles, type LucideIcon } from 'lucide-react'
+import { CircleAlert, Info, Sparkles, TriangleAlert, type LucideIcon } from 'lucide-react'
 
 import { cn } from '@/lib/utils'
 import { createPropClassNameSwitch } from '@/lib/prop'
 import './alert.css'
 
-type AlertColorPropT = 'isNeutral' | 'isPurple' | 'isPink'
-type AlertColorKeyT = 'neutral' | 'purple' | 'pink'
+type AlertColorPropT = 'isNeutral' | 'isPurple' | 'isPink' | 'isRed'
+type AlertColorKeyT = 'neutral' | 'purple' | 'pink' | 'red'
 
 type AlertPropsT = {
 	children?: React.ReactNode
@@ -17,6 +17,7 @@ type AlertPropsT = {
 const getColorClass = createPropClassNameSwitch({
 	isPurple: 'isPurple',
 	isPink: 'isPink',
+	isRed: 'isRed',
 	isNeutral: 'isNeutral',
 	default: 'isNeutral'
 })
@@ -24,12 +25,14 @@ const getColorClass = createPropClassNameSwitch({
 const alertDefaults: Record<AlertColorKeyT, { Icon: LucideIcon; title: string }> = {
 	neutral: { Icon: Info, title: 'Notice' },
 	purple: { Icon: CircleAlert, title: 'Information' },
-	pink: { Icon: Sparkles, title: 'Featured' }
+	pink: { Icon: Sparkles, title: 'Featured' },
+	red: { Icon: TriangleAlert, title: 'Error' }
 }
 
 const getAlertColorKey = (props: AlertPropsT): AlertColorKeyT => {
 	if (props.isPurple) return 'purple'
 	if (props.isPink) return 'pink'
+	if (props.isRed) return 'red'
 
 	return 'neutral'
 }

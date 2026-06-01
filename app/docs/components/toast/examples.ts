@@ -50,7 +50,7 @@ toast({
 })`,
 
 	destructive: `toast({
-  variant: 'destructive',
+  isRed: true,
   title: 'Something went wrong',
   description: 'There was a problem with your request. Please try again.'
 })`,

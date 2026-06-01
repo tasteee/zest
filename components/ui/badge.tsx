@@ -12,6 +12,8 @@ type BadgeKindPropsT = (typeof KIND_PROPS)[number]
 type BaseBadgePropsT = {
 	isHidden?: boolean
 	label?: string
+	isDisabled?: boolean
+	asChild?: boolean
 }
 
 type BadgePropsT = ComponentPropsT &

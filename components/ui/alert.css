@@ -70,3 +70,13 @@
 .isPink .alertDescription {
 	color: color-mix(in oklch, var(--color-neon-pink) 80%, transparent);
 }
+
+.isRed {
+	color: var(--destructive);
+	border-color: color-mix(in oklch, var(--destructive) 50%, transparent);
+	background: color-mix(in oklch, var(--destructive) 10%, transparent);
+}
+
+.isRed .alertDescription {
+	color: color-mix(in oklch, var(--destructive) 80%, transparent);
+}

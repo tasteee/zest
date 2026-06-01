@@ -57,6 +57,15 @@
 	box-shadow: 0 0 0 3px color-mix(in oklch, var(---pink) 30%, transparent);
 }
 
+.zInput.isFocusRed:focus-visible {
+	border-color: var(--destructive);
+	box-shadow: 0 0 0 3px color-mix(in oklch, var(--destructive) 30%, transparent);
+}
+
+.zInput.isRed {
+	border-color: var(--destructive);
+}
+
 .zInput[aria-invalid='true'] {
 	border-color: var(--destructive);
 	box-shadow: 0 0 0 3px color-mix(in oklch, var(--destructive) 20%, transparent);

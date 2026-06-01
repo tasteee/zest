@@ -15,7 +15,7 @@ export const buttonProps: PropDefinition[] = [
 	},
 	{
 		name: 'color',
-		type: '"purple" | "pink" | "neutral"',
+		type: '"purple" | "pink" | "red" | "neutral"',
 		defaultValue: '"neutral"',
 		description: 'The color theme of the button.'
 	},

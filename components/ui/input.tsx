@@ -7,16 +7,27 @@ import { cn } from '@/lib/utils'
 import { prop } from '@/lib/prop'
 import './z-input.css'
 
-type InputFocusColorT = 'neutral' | 'purple' | 'pink'
+type InputFocusColorT = 'neutral' | 'purple' | 'pink' | 'red'
 type InputSizePropsT = 'isExtraSmall' | 'isSmall' | 'isMedium' | 'isLarge' | 'isExtraLarge' | 'isIcon'
 
 type InputVariantOptionsT = {
 	focusColor?: InputFocusColorT | null
+	isRed?: boolean
 } & ZeroOrOneTruePropT<InputSizePropsT>
 
 type InputPropsT = React.ComponentProps<'input'> & InputVariantOptionsT
 
-const CUSTOM_PROPS = ['isExtraSmall', 'isSmall', 'isMedium', 'isLarge', 'isExtraLarge', 'isIcon', 'focusColor', 'className']
+const CUSTOM_PROPS = [
+	'isExtraSmall',
+	'isSmall',
+	'isMedium',
+	'isLarge',
+	'isExtraLarge',
+	'isIcon',
+	'focusColor',
+	'isRed',
+	'className'
+]
 
 const getSizeClass = prop.classNameSwitch({
 	isExtraSmall: 'isExtraSmall',
@@ -32,17 +43,20 @@ const getFocusColorClass = prop.classNameSwitch({
 	neutral: 'isFocusNeutral',
 	purple: 'isFocusPurple',
 	pink: 'isFocusPink',
+	red: 'isFocusRed',
 	default: 'isFocusNeutral'
 })
 
 const getSplitProps = prop.splitter(CUSTOM_PROPS)
 
 const inputVariants = (options?: InputVariantOptionsT): string => {
-	const focusColor = options?.focusColor ?? 'neutral'
+	const hasRedState = options?.isRed === true
+	const focusColor = hasRedState ? 'red' : (options?.focusColor ?? 'neutral')
 	const sizeClass = getSizeClass(options ?? {})
 	const focusColorClass = getFocusColorClass({ [focusColor]: true })
+	const stateClass = hasRedState ? 'isRed' : ''
 
-	return cn('zInput', sizeClass, focusColorClass)
+	return cn('zInput', sizeClass, focusColorClass, stateClass)
 }
 
 const dispatchInputChange = (input: HTMLInputElement): void => {

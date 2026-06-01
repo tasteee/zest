@@ -15,11 +15,35 @@ export const toastFnProps: PropDefinition[] = [
 		name: 'variant',
 		type: '"default" | "destructive"',
 		defaultValue: '"default"',
-		description: 'Visual style of the toast. "destructive" uses error colors.'
+		description: 'Legacy visual style option. "destructive" maps to isRed.'
+	},
+	{
+		name: 'isNeutral',
+		type: 'boolean',
+		defaultValue: 'true',
+		description: 'Applies the neutral toast style.'
+	},
+	{
+		name: 'isPurple',
+		type: 'boolean',
+		defaultValue: 'false',
+		description: 'Applies the purple toast style.'
+	},
+	{
+		name: 'isPink',
+		type: 'boolean',
+		defaultValue: 'false',
+		description: 'Applies the pink toast style.'
+	},
+	{
+		name: 'isRed',
+		type: 'boolean',
+		defaultValue: 'false',
+		description: 'Applies the red danger style to the toast.'
 	},
 	{
 		name: 'action',
-		type: 'ToastActionElement',
+		type: 'ToastActionElementT',
 		description: 'A ToastAction element rendered on the right side of the toast.'
 	},
 	{

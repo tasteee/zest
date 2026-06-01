@@ -41,9 +41,15 @@ export const inputProps: PropDefinition[] = [
 	},
 	{
 		name: 'focusColor',
-		type: '"neutral" | "purple" | "pink"',
+		type: '"neutral" | "purple" | "pink" | "red"',
 		defaultValue: '"neutral"',
 		description: 'The focus ring color used when the input receives keyboard focus.'
+	},
+	{
+		name: 'isRed',
+		type: 'boolean',
+		defaultValue: 'false',
+		description: 'Applies the red danger state to the input.'
 	},
 	{
 		name: 'className',
