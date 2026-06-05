@@ -3,6 +3,10 @@
 import { useMemo, useState } from 'react'
 import { ArrowRight, Check, Copy, Download, Plus } from 'lucide-react'
 import { z } from '@/components/ui'
+import { Card } from '@/components/ui/card'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { Switch } from '@/components/ui/switch'
 import { toast } from '@/components/ui/use-toast'
 
 type ButtonKind = 'outlined' | 'solid' | 'ghost'
@@ -121,39 +125,39 @@ export function ButtonDemo() {
 	}
 
 	return (
-		<z.box className='space-y-10'>
-			<z.box className='space-y-3'>
-				<z.text.body className='text-sm font-medium text-muted-foreground'>Components / Button</z.text.body>
-				<z.text.h1>Button Playground</z.text.h1>
-				<z.text.body className='max-w-2xl text-lg leading-8 text-muted-foreground'>
+		<div className='space-y-10'>
+			<div className='space-y-3'>
+				<p className='text-sm font-medium text-muted-foreground'>Components / Button</p>
+				<h1 className='text-4xl font-bold tracking-tight text-foreground'>Button Playground</h1>
+				<p className='max-w-2xl text-lg leading-8 text-muted-foreground'>
 					Tune the button props, preview the result, then copy the JSX for the current configuration.
-				</z.text.body>
-			</z.box>
+				</p>
+			</div>
 
-			<z.card className='gap-0 overflow-hidden rounded-lg border-border py-0 shadow-none'>
-				<z.box className='grid gap-0 lg:grid-cols-[minmax(0,1fr)_320px]'>
-					<z.box className='flex min-h-65 items-center justify-center border-b border-border bg-muted/20 p-10 lg:border-b-0 lg:border-r'>
+			<Card className='gap-0 overflow-hidden rounded-lg border-border py-0 shadow-none'>
+				<div className='grid gap-0 lg:grid-cols-[minmax(0,1fr)_320px]'>
+					<div className='flex min-h-65 items-center justify-center border-b border-border bg-muted/20 p-10 lg:border-b-0 lg:border-r'>
 						<z.button {...buttonProps}>
 							{Icon && iconPosition === 'leading' ? <Icon /> : null}
 							{buttonText}
 							{Icon && iconPosition === 'trailing' ? <Icon /> : null}
 						</z.button>
-					</z.box>
+					</div>
 
-					<z.box className='grid gap-5 p-5'>
-						<z.box className='grid gap-2'>
-							<z.label htmlFor='button-label'>Label</z.label>
-							<z.input
+					<div className='grid gap-5 p-5'>
+						<div className='grid gap-2'>
+							<Label htmlFor='button-label'>Label</Label>
+							<Input
 								id='button-label'
 								value={label}
 								onChange={(event) => setLabel(event.target.value)}
 								placeholder='Button label'
 							/>
-						</z.box>
+						</div>
 
-						<z.box className='grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-1'>
-							<z.box className='grid gap-2'>
-								<z.label htmlFor='button-kind'>Kind</z.label>
+						<div className='grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-1'>
+							<div className='grid gap-2'>
+								<Label htmlFor='button-kind'>Kind</Label>
 								<z.select value={kind} onValueChange={(value) => setKind(value as ButtonKind)}>
 									<z.select.trigger id='button-kind' className='w-full'>
 										<z.select.value />
@@ -166,10 +170,10 @@ export function ButtonDemo() {
 										))}
 									</z.select.content>
 								</z.select>
-							</z.box>
+							</div>
 
-							<z.box className='grid gap-2'>
-								<z.label htmlFor='button-color'>Color</z.label>
+							<div className='grid gap-2'>
+								<Label htmlFor='button-color'>Color</Label>
 								<z.select value={color} onValueChange={(value) => setColor(value as ButtonColor)}>
 									<z.select.trigger id='button-color' className='w-full'>
 										<z.select.value />
@@ -182,10 +186,10 @@ export function ButtonDemo() {
 										))}
 									</z.select.content>
 								</z.select>
-							</z.box>
+							</div>
 
-							<z.box className='grid gap-2'>
-								<z.label htmlFor='button-size'>Size</z.label>
+							<div className='grid gap-2'>
+								<Label htmlFor='button-size'>Size</Label>
 								<z.select value={size} onValueChange={(value) => setSize(value as ButtonSize)}>
 									<z.select.trigger id='button-size' className='w-full'>
 										<z.select.value />
@@ -198,10 +202,10 @@ export function ButtonDemo() {
 										))}
 									</z.select.content>
 								</z.select>
-							</z.box>
+							</div>
 
-							<z.box className='grid gap-2'>
-								<z.label htmlFor='button-icon'>Icon</z.label>
+							<div className='grid gap-2'>
+								<Label htmlFor='button-icon'>Icon</Label>
 								<z.select value={icon} onValueChange={(value) => setIcon(value as ButtonIcon)}>
 									<z.select.trigger id='button-icon' className='w-full'>
 										<z.select.value />
@@ -214,10 +218,10 @@ export function ButtonDemo() {
 										))}
 									</z.select.content>
 								</z.select>
-							</z.box>
+							</div>
 
-							<z.box className='grid gap-2'>
-								<z.label htmlFor='button-icon-position'>Icon position</z.label>
+							<div className='grid gap-2'>
+								<Label htmlFor='button-icon-position'>Icon position</Label>
 								<z.select
 									value={iconPosition}
 									onValueChange={(value) => setIconPosition(value as IconPosition)}
@@ -234,41 +238,38 @@ export function ButtonDemo() {
 										))}
 									</z.select.content>
 								</z.select>
-							</z.box>
-						</z.box>
+							</div>
+						</div>
 
-						<z.box className='grid gap-3 border-t border-border pt-4'>
-							<z.box className='flex items-center justify-between gap-4'>
-								<z.label htmlFor='button-disabled'>Disabled</z.label>
-								<z.switch id='button-disabled' checked={isDisabled} onCheckedChange={setIsDisabled} />
-							</z.box>
-							<z.box className='flex items-center justify-between gap-4'>
-								<z.label htmlFor='button-loading'>Loading</z.label>
-								<z.switch id='button-loading' checked={isLoading} onCheckedChange={setIsLoading} />
-							</z.box>
-						</z.box>
-					</z.box>
-				</z.box>
-			</z.card>
+						<div className='grid gap-3 border-t border-border pt-4'>
+							<div className='flex items-center justify-between gap-4'>
+								<Label htmlFor='button-disabled'>Disabled</Label>
+								<Switch id='button-disabled' checked={isDisabled} onCheckedChange={setIsDisabled} />
+							</div>
+							<div className='flex items-center justify-between gap-4'>
+								<Label htmlFor='button-loading'>Loading</Label>
+								<Switch id='button-loading' checked={isLoading} onCheckedChange={setIsLoading} />
+							</div>
+						</div>
+					</div>
+				</div>
+			</Card>
 
-			<z.box as='section' className='space-y-4'>
-				<z.box className='flex flex-wrap items-center justify-between gap-3'>
-					<z.box>
-						<z.text.h2>Current Code</z.text.h2>
-						<z.text.body className='mt-1 text-sm text-muted-foreground'>Matches the controls above.</z.text.body>
-					</z.box>
+			<section className='space-y-4'>
+				<div className='flex flex-wrap items-center justify-between gap-3'>
+					<div>
+						<h2 className='text-2xl font-semibold tracking-tight text-foreground'>Current Code</h2>
+						<p className='mt-1 text-sm text-muted-foreground'>Matches the controls above.</p>
+					</div>
 					<z.button isSolid isPurple isSmall onClick={copyCode}>
 						<Copy className='h-4 w-4' />
 						Copy Code
 					</z.button>
-				</z.box>
-				<z.box
-					as='pre'
-					className='max-h-80 overflow-auto rounded-lg border border-border bg-muted/20 p-5 text-sm leading-6 text-foreground'
-				>
-					<z.box as='code'>{code}</z.box>
-				</z.box>
-			</z.box>
-		</z.box>
+				</div>
+				<pre className='max-h-80 overflow-auto rounded-lg border border-border bg-muted/20 p-5 text-sm leading-6 text-foreground'>
+					<code>{code}</code>
+				</pre>
+			</section>
+		</div>
 	)
 }

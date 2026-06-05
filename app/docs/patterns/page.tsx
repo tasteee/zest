@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { z } from '@/components/ui'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { FormInput, LayoutGrid, Navigation, UserCircle, FileText, MessageSquare, Settings, CreditCard } from 'lucide-react'
 
 const patterns = [
@@ -65,63 +66,63 @@ const patterns = [
 
 export default function PatternsPage() {
 	return (
-		<z.box className='space-y-16'>
+		<div className='space-y-16'>
 			{/* Header */}
-			<z.box className='space-y-4'>
-				<z.box className='flex items-center gap-2'>
+			<div className='space-y-4'>
+				<div className='flex items-center gap-2'>
 					<z.badge isGhost isNeutral className='font-mono text-xs'>
 						Patterns
 					</z.badge>
-				</z.box>
-				<z.text.h1>UI Patterns</z.text.h1>
-				<z.text.body className='text-xl text-muted-foreground max-w-2xl leading-relaxed'>
+				</div>
+				<h1 className='text-4xl font-bold tracking-tight text-foreground'>UI Patterns</h1>
+				<p className='text-xl text-muted-foreground max-w-2xl leading-relaxed'>
 					Common UI patterns and best practices for building consistent, accessible interfaces. Each pattern demonstrates how to
 					combine components effectively.
-				</z.text.body>
-			</z.box>
+				</p>
+			</div>
 
 			{/* Pattern Grid */}
-			<z.box className='grid gap-6 sm:grid-cols-2'>
+			<div className='grid gap-6 sm:grid-cols-2'>
 				{patterns.map((pattern) => (
 					<Link
 						key={pattern.name}
 						href={pattern.status === 'available' ? pattern.href : '#'}
 						className={pattern.status === 'coming-soon' ? 'cursor-not-allowed' : ''}
 					>
-						<z.card
+						<Card
 							className={`h-full transition-all duration-200 ${
 								pattern.status === 'available' ? 'hover:border-primary/50 hover:shadow-md' : 'opacity-60'
 							}`}
 						>
-							<z.cardHeader>
-								<z.box className='flex items-start justify-between'>
-									<z.box className='flex h-10 w-10 items-center justify-center rounded-lg bg-muted'>
+							<CardHeader>
+								<div className='flex items-start justify-between'>
+									<div className='flex h-10 w-10 items-center justify-center rounded-lg bg-muted'>
 										<pattern.icon className='h-5 w-5 text-foreground' />
-									</z.box>
+									</div>
 									{pattern.status === 'coming-soon' && (
 										<z.badge isOutline isNeutral className='text-xs'>
 											Coming Soon
 										</z.badge>
 									)}
-								</z.box>
-								<z.cardTitle className='text-lg'>{pattern.name}</z.cardTitle>
-								<z.cardDescription className='leading-relaxed'>{pattern.description}</z.cardDescription>
-							</z.cardHeader>
-						</z.card>
+								</div>
+								<CardTitle className='text-lg'>{pattern.name}</CardTitle>
+								<CardDescription className='leading-relaxed'>{pattern.description}</CardDescription>
+							</CardHeader>
+						</Card>
 					</Link>
 				))}
-			</z.box>
+			</div>
 
 			{/* Contributing */}
-			<z.card className='border-dashed'>
-				<z.cardContent className='p-8 text-center space-y-4'>
-					<z.text.h3>Want to contribute a pattern?</z.text.h3>
-					<z.text.body className='text-muted-foreground max-w-md mx-auto'>
+			<Card className='border-dashed'>
+				<CardContent className='p-8 text-center space-y-4'>
+					<h3 className='text-lg font-semibold'>Want to contribute a pattern?</h3>
+					<p className='text-muted-foreground max-w-md mx-auto'>
 						We welcome contributions! If you have a UI pattern that could help others, consider submitting it to our
 						documentation.
-					</z.text.body>
-				</z.cardContent>
-			</z.card>
-		</z.box>
+					</p>
+				</CardContent>
+			</Card>
+		</div>
 	)
 }

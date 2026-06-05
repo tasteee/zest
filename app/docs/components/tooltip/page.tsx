@@ -5,15 +5,16 @@ import { z } from '@/components/ui'
 import { ComponentPreview } from '@/components/docs/component-preview'
 import { PropsTable } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
+import { Card, CardContent } from '@/components/ui/card'
 import { ChevronRight, Plus, HelpCircle, Info } from 'lucide-react'
 import { tooltipProps, tooltipContentProps } from './props'
 import { examples } from './examples'
 
 export default function TooltipDocsPage() {
 	return (
-		<z.box className='space-y-16'>
+		<div className='space-y-16'>
 			{/* Breadcrumb */}
-			<z.box className='flex items-center gap-2 text-sm text-muted-foreground'>
+			<div className='flex items-center gap-2 text-sm text-muted-foreground'>
 				<Link href='/docs' className='hover:text-foreground transition-colors'>
 					Docs
 				</Link>
@@ -22,22 +23,22 @@ export default function TooltipDocsPage() {
 					Components
 				</Link>
 				<ChevronRight className='h-4 w-4' />
-				<z.text className='text-foreground'>Tooltip</z.text>
-			</z.box>
+				<span className='text-foreground'>Tooltip</span>
+			</div>
 
 			{/* Header */}
-			<z.box className='space-y-4'>
-				<z.box className='flex items-center gap-3'>
-					<z.text.h1>z.tooltip</z.text.h1>
+			<div className='space-y-4'>
+				<div className='flex items-center gap-3'>
+					<h1 className='text-4xl font-bold tracking-tight text-foreground'>z.tooltip</h1>
 					<z.badge isGhost isNeutral>
 						Component
 					</z.badge>
-				</z.box>
-				<z.text.body className='text-xl text-muted-foreground max-w-2xl leading-relaxed'>
+				</div>
+				<p className='text-xl text-muted-foreground max-w-2xl leading-relaxed'>
 					A popup that displays information related to an element when the element receives keyboard focus or mouse hover. Built
 					on Radix UI Tooltip.
-				</z.text.body>
-			</z.box>
+				</p>
+			</div>
 
 			{/* Quick Preview */}
 			<ComponentPreview
@@ -51,15 +52,21 @@ export default function TooltipDocsPage() {
 			</ComponentPreview>
 
 			{/* Usage */}
-			<z.box as='section' className='space-y-6'>
-				<z.text.h2>Usage</z.text.h2>
-				<CodeBlock code={examples.usageImport} language='tsx' />
-				<CodeBlock code={examples.usage} language='tsx' />
-			</z.box>
+			<section className='space-y-6'>
+				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>Usage</h2>
+				<CodeBlock
+					code={examples.usageImport}
+					language='tsx'
+				/>
+				<CodeBlock
+					code={examples.usage}
+					language='tsx'
+				/>
+			</section>
 
 			{/* Examples */}
-			<z.box as='section' className='space-y-8'>
-				<z.text.h2>Examples</z.text.h2>
+			<section className='space-y-8'>
+				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>Examples</h2>
 
 				{/* Positions */}
 				<ComponentPreview
@@ -67,7 +74,7 @@ export default function TooltipDocsPage() {
 					description='Tooltips can be positioned on different sides of the trigger.'
 					code={examples.positions}
 				>
-					<z.box className='flex gap-4'>
+					<div className='flex gap-4'>
 						<z.tooltip tip='Tooltip on top' side='top'>
 							<z.button>Top</z.button>
 						</z.tooltip>
@@ -80,7 +87,7 @@ export default function TooltipDocsPage() {
 						<z.tooltip tip='Tooltip on left' side='left'>
 							<z.button>Left</z.button>
 						</z.tooltip>
-					</z.box>
+					</div>
 				</ComponentPreview>
 
 				{/* Icon Button */}
@@ -92,19 +99,23 @@ export default function TooltipDocsPage() {
 					<z.tooltip tip='Add item'>
 						<z.button isIcon>
 							<Plus className='h-4 w-4' />
-							<z.text className='sr-only'>Add item</z.text>
+							<span className='sr-only'>Add item</span>
 						</z.button>
 					</z.tooltip>
 				</ComponentPreview>
 
 				{/* Help Icon */}
-				<ComponentPreview title='Help Icon' description='Using tooltips to provide help text.' code={examples.helpIcon}>
-					<z.box className='flex items-center gap-2'>
-						<z.text className='text-sm font-medium'>Password</z.text>
+				<ComponentPreview
+					title='Help Icon'
+					description='Using tooltips to provide help text.'
+					code={examples.helpIcon}
+				>
+					<div className='flex items-center gap-2'>
+						<span className='text-sm font-medium'>Password</span>
 						<z.tooltip tip='Password must be at least 8 characters'>
 							<HelpCircle className='h-4 w-4 text-muted-foreground cursor-help' />
 						</z.tooltip>
-					</z.box>
+					</div>
 				</ComponentPreview>
 
 				{/* Longer Content */}
@@ -115,11 +126,11 @@ export default function TooltipDocsPage() {
 				>
 					<z.tooltip
 						tip={
-							<z.box className='max-w-xs'>
-								<z.text.body>
+							<div className='max-w-xs'>
+								<p>
 									This is a longer tooltip that provides more detailed information about the feature. It can wrap to multiple lines.
-								</z.text.body>
-							</z.box>
+								</p>
+							</div>
 						}
 					>
 						<z.button>
@@ -128,49 +139,45 @@ export default function TooltipDocsPage() {
 						</z.button>
 					</z.tooltip>
 				</ComponentPreview>
-			</z.box>
+			</section>
 
 			{/* API Reference */}
-			<z.box as='section' className='space-y-6'>
-				<z.text.h2>API Reference</z.text.h2>
+			<section className='space-y-6'>
+				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>API Reference</h2>
 				<PropsTable title='z.tooltip' props={tooltipProps} />
 				<PropsTable title='Positioning' props={tooltipContentProps} />
-			</z.box>
+			</section>
 
 			{/* Accessibility */}
-			<z.box as='section' className='space-y-6'>
-				<z.text.h2>Accessibility</z.text.h2>
-				<z.card>
-					<z.cardContent className='p-6 space-y-4'>
-						<z.box className='space-y-2'>
-							<z.text.h3>Keyboard Interactions</z.text.h3>
-							<z.box className='grid gap-2'>
-								<z.box className='flex items-center gap-4 text-sm'>
-									<z.text as='kbd' className='px-2 py-1 bg-muted rounded text-xs font-mono'>
-										Tab
-									</z.text>
-									<z.text className='text-muted-foreground'>Move focus to the trigger</z.text>
-								</z.box>
-								<z.box className='flex items-center gap-4 text-sm'>
-									<z.text as='kbd' className='px-2 py-1 bg-muted rounded text-xs font-mono'>
-										Escape
-									</z.text>
-									<z.text className='text-muted-foreground'>Close the tooltip</z.text>
-								</z.box>
-							</z.box>
-						</z.box>
-						<z.box className='space-y-2'>
-							<z.text.h3>Best Practices</z.text.h3>
-							<z.box as='ul' className='text-sm text-muted-foreground space-y-2 list-disc list-inside'>
-								<z.box as='li'>Tooltips appear on hover and focus for accessibility</z.box>
-								<z.box as='li'>Keep tooltip content brief and informative</z.box>
-								<z.box as='li'>Use tooltips for supplementary information, not essential content</z.box>
-								<z.box as='li'>For icon-only buttons, include sr-only text for screen readers</z.box>
-							</z.box>
-						</z.box>
-					</z.cardContent>
-				</z.card>
-			</z.box>
-		</z.box>
+			<section className='space-y-6'>
+				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>Accessibility</h2>
+				<Card>
+					<CardContent className='p-6 space-y-4'>
+						<div className='space-y-2'>
+							<h3 className='font-semibold text-foreground'>Keyboard Interactions</h3>
+							<div className='grid gap-2'>
+								<div className='flex items-center gap-4 text-sm'>
+									<kbd className='px-2 py-1 bg-muted rounded text-xs font-mono'>Tab</kbd>
+									<span className='text-muted-foreground'>Move focus to the trigger</span>
+								</div>
+								<div className='flex items-center gap-4 text-sm'>
+									<kbd className='px-2 py-1 bg-muted rounded text-xs font-mono'>Escape</kbd>
+									<span className='text-muted-foreground'>Close the tooltip</span>
+								</div>
+							</div>
+						</div>
+						<div className='space-y-2'>
+							<h3 className='font-semibold text-foreground'>Best Practices</h3>
+							<ul className='text-sm text-muted-foreground space-y-2 list-disc list-inside'>
+								<li>Tooltips appear on hover and focus for accessibility</li>
+								<li>Keep tooltip content brief and informative</li>
+								<li>Use tooltips for supplementary information, not essential content</li>
+								<li>For icon-only buttons, include sr-only text for screen readers</li>
+							</ul>
+						</div>
+					</CardContent>
+				</Card>
+			</section>
+		</div>
 	)
 }

@@ -1,6 +1,7 @@
 'use client'
 
 import NextLink from 'next/link'
+import { Link } from '@/components/ui/link'
 import { z } from '@/components/ui'
 import { ComponentPreview } from '@/components/docs/component-preview'
 import { PropsTable } from '@/components/docs/props-table'
@@ -11,8 +12,8 @@ import { examples } from './examples'
 
 export default function LinkDocsPage() {
 	return (
-		<z.box className='space-y-16'>
-			<z.box className='flex items-center gap-2 text-sm text-muted-foreground'>
+		<div className='space-y-16'>
+			<div className='flex items-center gap-2 text-sm text-muted-foreground'>
 				<NextLink href='/docs' className='hover:text-foreground transition-colors'>
 					Docs
 				</NextLink>
@@ -21,109 +22,109 @@ export default function LinkDocsPage() {
 					Components
 				</NextLink>
 				<ChevronRight className='h-4 w-4' />
-				<z.text className='text-foreground'>Link</z.text>
-			</z.box>
+				<span className='text-foreground'>Link</span>
+			</div>
 
-			<z.box className='space-y-4'>
-				<z.box className='flex items-center gap-3'>
-					<z.text.h1>Link</z.text.h1>
+			<div className='space-y-4'>
+				<div className='flex items-center gap-3'>
+					<h1 className='text-4xl font-bold tracking-tight text-foreground'>Link</h1>
 					<z.badge isGhost isNeutral>
 						Component
 					</z.badge>
-				</z.box>
-				<z.text.body className='text-xl text-muted-foreground max-w-2xl leading-relaxed'>
+				</div>
+				<p className='text-xl text-muted-foreground max-w-2xl leading-relaxed'>
 					Navigational text with semantic affordance. Supports color variants, icon composition, and custom router link elements.
-				</z.text.body>
-			</z.box>
+				</p>
+			</div>
 
 			<ComponentPreview code={examples.quickPreview}>
-				<z.link href='#'>Read the docs</z.link>
+				<Link href='#'>Read the docs</Link>
 			</ComponentPreview>
 
-			<z.box as='section' className='space-y-6'>
-				<z.text.h2>Usage</z.text.h2>
+			<section className='space-y-6'>
+				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>Usage</h2>
 				<CodeBlock code={examples.usageImport} language='tsx' />
 				<CodeBlock code={examples.usage} language='tsx' />
-			</z.box>
+			</section>
 
-			<z.box as='section' className='space-y-8'>
-				<z.text.h2>Examples</z.text.h2>
+			<section className='space-y-8'>
+				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>Examples</h2>
 
-				<z.box className='space-y-4'>
-					<z.text.h3>Color Variants</z.text.h3>
+				<div className='space-y-4'>
+					<h3 className='text-lg font-medium text-foreground'>Color Variants</h3>
 					<ComponentPreview code={examples.colorVariants}>
-						<z.box className='flex flex-wrap gap-4'>
-							<z.link href='#' color='default'>
+						<div className='flex flex-wrap gap-4'>
+							<Link href='#' color='default'>
 								Default link
-							</z.link>
-							<z.link href='#' color='purple'>
+							</Link>
+							<Link href='#' color='purple'>
 								Purple link
-							</z.link>
-							<z.link href='#' color='pink'>
+							</Link>
+							<Link href='#' color='pink'>
 								Pink link
-							</z.link>
-							<z.link href='#' color='neutral'>
+							</Link>
+							<Link href='#' color='neutral'>
 								Neutral link
-							</z.link>
-							<z.link href='#' color='muted'>
+							</Link>
+							<Link href='#' color='muted'>
 								Muted link
-							</z.link>
-						</z.box>
+							</Link>
+						</div>
 					</ComponentPreview>
-				</z.box>
+				</div>
 
-				<z.box className='space-y-4'>
-					<z.text.h3>With Icons</z.text.h3>
+				<div className='space-y-4'>
+					<h3 className='text-lg font-medium text-foreground'>With Icons</h3>
 					<ComponentPreview code={examples.withIcons}>
-						<z.box className='flex flex-wrap gap-4'>
-							<z.link href='#' color='purple'>
+						<div className='flex flex-wrap gap-4'>
+							<Link href='#' color='purple'>
 								Visit site
 								<ExternalLink className='h-3.5 w-3.5' />
-							</z.link>
-							<z.link href='#' color='pink'>
+							</Link>
+							<Link href='#' color='pink'>
 								Learn more
 								<ArrowRight className='h-3.5 w-3.5' />
-							</z.link>
-						</z.box>
+							</Link>
+						</div>
 					</ComponentPreview>
-				</z.box>
+				</div>
 
-				<z.box className='space-y-4'>
-					<z.text.h3>With Router Link</z.text.h3>
-					<z.text.body className='text-sm text-muted-foreground'>
-						Use the <z.box as='code'>as</z.box> prop to render with a router-aware link component, such as Next.js{' '}
-						<z.box as='code'>Link</z.box>. Pass the destination via <z.box as='code'>href</z.box> or <z.box as='code'>to</z.box>.
-					</z.text.body>
+				<div className='space-y-4'>
+					<h3 className='text-lg font-medium text-foreground'>With Router Link</h3>
+					<p className='text-sm text-muted-foreground'>
+						Use the <code>as</code> prop to render with a router-aware link component, such as Next.js <code>Link</code>. Pass the
+						destination via <code>href</code> or <code>to</code>.
+					</p>
 					<ComponentPreview code={examples.withRouterLink}>
-						<z.box className='flex flex-wrap gap-4'>
-							<z.link as={NextLink} href='/docs/components/button' color='purple'>
+						<div className='flex flex-wrap gap-4'>
+							<Link as={NextLink} href='/docs/components/button' color='purple'>
 								Button docs
-							</z.link>
-							<z.link as={NextLink} to='/docs/components/badge' color='pink'>
+							</Link>
+							<Link as={NextLink} to='/docs/components/badge' color='pink'>
 								Badge docs
-							</z.link>
-						</z.box>
+							</Link>
+						</div>
 					</ComponentPreview>
-				</z.box>
+				</div>
 
-				<z.box className='space-y-4'>
-					<z.text.h3>Inline in Text</z.text.h3>
+				<div className='space-y-4'>
+					<h3 className='text-lg font-medium text-foreground'>Inline in Text</h3>
 					<ComponentPreview code={examples.inlineInText}>
-						<z.text.body className='text-muted-foreground'>
+						<p className='text-muted-foreground'>
 							Read the{' '}
-							<z.link href='#' color='purple'>
+							<Link href='#' color='purple'>
 								full documentation
-							</z.link>{' '}
+							</Link>{' '}
 							to learn more about the design system and its principles.
-						</z.text.body>
+						</p>
 					</ComponentPreview>
-				</z.box>
-			</z.box>
+				</div>
+			</section>
 
-			<z.box as='section' className='space-y-6'>
-				<z.text.h2>Props</z.text.h2>
+			<section className='space-y-6'>
+				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>Props</h2>
 				<PropsTable props={linkProps} />
-			</z.box>
-		</z.box>
+			</section>
+		</div>
 	)
 }

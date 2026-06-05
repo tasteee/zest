@@ -34,24 +34,6 @@ export const inputProps: PropDefinition[] = [
 		description: 'Callback fired when the input value changes.'
 	},
 	{
-		name: 'isExtraSmall | isSmall | isMedium | isLarge | isExtraLarge | isIcon',
-		type: 'boolean',
-		defaultValue: 'isMedium',
-		description: 'Boolean size switches matching z.button sizes. Only one size switch should be true.'
-	},
-	{
-		name: 'focusColor',
-		type: '"neutral" | "purple" | "pink" | "red"',
-		defaultValue: '"neutral"',
-		description: 'The focus ring color used when the input receives keyboard focus.'
-	},
-	{
-		name: 'isRed',
-		type: 'boolean',
-		defaultValue: 'false',
-		description: 'Applies the red danger state to the input.'
-	},
-	{
 		name: 'className',
 		type: 'string',
 		description: 'Additional CSS classes to apply to the input.'

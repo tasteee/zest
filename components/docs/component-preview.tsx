@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { cn } from '@/lib/utils'
 import { CodeBlock } from './code-block'
-import { z } from '@/components/ui'
+import { Tabs } from '@/components/ui/tabs'
 
 interface ComponentPreviewProps {
 	children: React.ReactNode
@@ -23,23 +23,23 @@ export function ComponentPreview({
 	align = 'center'
 }: ComponentPreviewProps) {
 	return (
-		<z.tabs defaultValue='preview' className='w-full'>
+		<Tabs defaultValue='preview' className='w-full'>
 			{(title || description) && (
-				<z.box className='mb-4'>
-					{title && <z.text.h3 className='text-lg font-semibold text-foreground'>{title}</z.text.h3>}
-					{description && <z.text.body className='mt-1 text-sm text-muted-foreground'>{description}</z.text.body>}
-				</z.box>
+				<div className='mb-4'>
+					{title && <h3 className='text-lg font-semibold text-foreground'>{title}</h3>}
+					{description && <p className='mt-1 text-sm text-muted-foreground'>{description}</p>}
+				</div>
 			)}
-			<z.tabsList className='w-auto justify-start p-1 h-auto'>
-				<z.tabsTrigger value='preview' className='px-4 py-1.5 text-sm'>
+			<Tabs.List className='w-auto justify-start p-1 h-auto'>
+				<Tabs.Trigger value='preview' className='px-4 py-1.5 text-sm'>
 					Preview
-				</z.tabsTrigger>
-				<z.tabsTrigger value='code' className='px-4 py-1.5 text-sm'>
+				</Tabs.Trigger>
+				<Tabs.Trigger value='code' className='px-4 py-1.5 text-sm'>
 					Code
-				</z.tabsTrigger>
-			</z.tabsList>
-			<z.tabsContent value='preview' className='mt-0'>
-				<z.box
+				</Tabs.Trigger>
+			</Tabs.List>
+			<Tabs.Content value='preview' className='mt-0'>
+				<div
 					className={cn(
 						'flex min-h-50 w-full rounded-lg border border-border bg-card p-8',
 						align === 'center' && 'items-center justify-center',
@@ -49,12 +49,12 @@ export function ComponentPreview({
 					)}
 				>
 					{children}
-				</z.box>
-			</z.tabsContent>
-			<z.tabsContent value='code' className='mt-0'>
+				</div>
+			</Tabs.Content>
+			<Tabs.Content value='code' className='mt-0'>
 				<CodeBlock code={code} />
-			</z.tabsContent>
-		</z.tabs>
+			</Tabs.Content>
+		</Tabs>
 	)
 }
 
@@ -68,12 +68,12 @@ interface ComponentExampleProps {
 
 export function ComponentExample({ title, description, children, code, className }: ComponentExampleProps) {
 	return (
-		<z.box className={cn('space-y-4', className)}>
-			<z.box>
-				<z.text.h3 className='text-lg font-semibold text-primary'>{title}</z.text.h3>
-				{description && <z.text.body className='text-sm text-muted-foreground mt-1'>{description}</z.text.body>}
-			</z.box>
+		<div className={cn('space-y-4', className)}>
+			<div>
+				<h3 className='text-lg font-semibold text-primary'>{title}</h3>
+				{description && <p className='text-sm text-muted-foreground mt-1'>{description}</p>}
+			</div>
 			<ComponentPreview code={code}>{children}</ComponentPreview>
-		</z.box>
+		</div>
 	)
 }

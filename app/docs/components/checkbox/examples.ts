@@ -43,7 +43,7 @@ export function CheckboxDemo() {
 />`,
 
 	checkboxGroup: `<div className="space-y-4">
-  <z.text as="h4" isSmall isBold>Select your interests</z.text>
+  <h4 className="text-sm font-medium">Select your interests</h4>
   <div className="space-y-2">
     <Checkbox id="interest-1" label="Technology" />
     <Checkbox id="interest-2" isChecked label="Design" />

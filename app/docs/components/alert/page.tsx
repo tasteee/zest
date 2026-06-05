@@ -5,14 +5,15 @@ import { z } from '@/components/ui'
 import { ComponentPreview } from '@/components/docs/component-preview'
 import { PropsTable } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
+import { Card, CardContent } from '@/components/ui/card'
 import { ChevronRight, CircleAlert, Info, CheckCircle2, TriangleAlert, Terminal, Sparkles } from 'lucide-react'
 import { alertProps } from './props'
 import { examples } from './examples'
 const AlertDocsPage = () => {
 	return (
-		<z.box className='space-y-16'>
+		<div className='space-y-16'>
 			{/* Breadcrumb */}
-			<z.box className='flex items-center gap-2 text-sm text-muted-foreground'>
+			<div className='flex items-center gap-2 text-sm text-muted-foreground'>
 				<Link href='/docs' className='hover:text-foreground transition-colors'>
 					Docs
 				</Link>
@@ -21,24 +22,26 @@ const AlertDocsPage = () => {
 					Components
 				</Link>
 				<ChevronRight className='h-4 w-4' />
-				<z.text className='text-foreground'>Alert</z.text>
-			</z.box>
+				<span className='text-foreground'>Alert</span>
+			</div>
 
 			{/* Header */}
-			<z.box className='space-y-4'>
-				<z.box className='flex items-center gap-3'>
-					<z.text.h1>ZAlert</z.text.h1>
+			<div className='space-y-4'>
+				<div className='flex items-center gap-3'>
+					<h1 className='text-4xl font-bold tracking-tight text-foreground'>ZAlert</h1>
 					<z.badge isGhost isNeutral>
 						Component
 					</z.badge>
-				</z.box>
-				<z.text.body className='text-xl text-muted-foreground max-w-2xl leading-relaxed'>
+				</div>
+				<p className='text-xl text-muted-foreground max-w-2xl leading-relaxed'>
 					Displays a callout for user attention. Alerts provide contextual feedback messages for typical user actions.
-				</z.text.body>
-			</z.box>
+				</p>
+			</div>
 
 			{/* Quick Preview */}
-			<ComponentPreview code={examples.quickPreview}>
+			<ComponentPreview
+				code={examples.quickPreview}
+			>
 				<z.alert className='max-w-lg'>
 					<Info className='h-4 w-4' />
 					<z.alert.title>Default Alert</z.alert.title>
@@ -47,18 +50,25 @@ const AlertDocsPage = () => {
 			</ComponentPreview>
 
 			{/* Usage */}
-			<z.box as='section' className='space-y-6'>
-				<z.text.h2>Usage</z.text.h2>
+			<section className='space-y-6'>
+				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>Usage</h2>
 				<CodeBlock code={examples.usageImport} language='tsx' />
-				<CodeBlock code={examples.usage} language='tsx' />
-			</z.box>
+				<CodeBlock
+					code={examples.usage}
+					language='tsx'
+				/>
+			</section>
 
 			{/* Examples */}
-			<z.box as='section' className='space-y-8'>
-				<z.text.h2>Examples</z.text.h2>
+			<section className='space-y-8'>
+				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>Examples</h2>
 
 				{/* Error */}
-				<ComponentPreview title='Error Alert' description='Use isRed for destructive or blocking errors.' code={examples.error}>
+				<ComponentPreview
+					title='Error Alert'
+					description='Use isRed for destructive or blocking errors.'
+					code={examples.error}
+				>
 					<z.alert isRed className='max-w-lg'>
 						<CircleAlert className='h-4 w-4' />
 						<z.alert.title>Error</z.alert.title>
@@ -128,46 +138,42 @@ const AlertDocsPage = () => {
 						<z.alert.description>This alert uses the default icon and title.</z.alert.description>
 					</z.alert>
 				</ComponentPreview>
-			</z.box>
+			</section>
 
 			{/* API Reference */}
-			<z.box as='section' className='space-y-6'>
-				<z.text.h2>API Reference</z.text.h2>
+			<section className='space-y-6'>
+				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>API Reference</h2>
 				<PropsTable title='ZAlert' props={alertProps} />
-			</z.box>
+			</section>
 
 			{/* Accessibility */}
-			<z.box as='section' className='space-y-6'>
-				<z.text.h2>Accessibility</z.text.h2>
-				<z.card>
-					<z.cardContent className='p-6 space-y-4'>
-						<z.box className='space-y-2'>
-							<z.text.h3>ARIA Roles</z.text.h3>
-							<z.box as='ul' className='text-sm text-muted-foreground space-y-2 list-disc list-inside'>
-								<z.box as='li'>
-									The Alert component has{' '}
-									<z.box as='code' className='text-primary'>
-										role=&quot;alert&quot;
-									</z.box>{' '}
-									by default
-								</z.box>
-								<z.box as='li'>Screen readers will announce alert content immediately</z.box>
-								<z.box as='li'>For non-urgent information, consider using a different role</z.box>
-							</z.box>
-						</z.box>
-						<z.box className='space-y-2'>
-							<z.text.h3>Best Practices</z.text.h3>
-							<z.box as='ul' className='text-sm text-muted-foreground space-y-2 list-disc list-inside'>
-								<z.box as='li'>Use descriptive titles that summarize the alert</z.box>
-								<z.box as='li'>Keep alert descriptions concise and actionable</z.box>
-								<z.box as='li'>Use one color prop at a time (isRed, isPurple, isPink, isNeutral)</z.box>
-								<z.box as='li'>Rely on the built-in icon and title defaults unless a custom alert needs more specific copy</z.box>
-							</z.box>
-						</z.box>
-					</z.cardContent>
-				</z.card>
-			</z.box>
-		</z.box>
+			<section className='space-y-6'>
+				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>Accessibility</h2>
+				<Card>
+					<CardContent className='p-6 space-y-4'>
+						<div className='space-y-2'>
+							<h3 className='font-semibold text-foreground'>ARIA Roles</h3>
+							<ul className='text-sm text-muted-foreground space-y-2 list-disc list-inside'>
+								<li>
+									The Alert component has <code className='text-primary'>role=&quot;alert&quot;</code> by default
+								</li>
+								<li>Screen readers will announce alert content immediately</li>
+								<li>For non-urgent information, consider using a different role</li>
+							</ul>
+						</div>
+						<div className='space-y-2'>
+							<h3 className='font-semibold text-foreground'>Best Practices</h3>
+							<ul className='text-sm text-muted-foreground space-y-2 list-disc list-inside'>
+								<li>Use descriptive titles that summarize the alert</li>
+								<li>Keep alert descriptions concise and actionable</li>
+								<li>Use one color prop at a time (isRed, isPurple, isPink, isPurple, isPink)</li>
+								<li>Rely on the built-in icon and title defaults unless a custom alert needs more specific copy</li>
+							</ul>
+						</div>
+					</CardContent>
+				</Card>
+			</section>
+		</div>
 	)
 }
 

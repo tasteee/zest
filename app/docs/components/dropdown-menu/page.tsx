@@ -2,9 +2,28 @@
 
 import Link from 'next/link'
 import { z } from '@/components/ui'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import {
+	DropdownMenu,
+	DropdownMenuContent,
+	DropdownMenuGroup,
+	DropdownMenuItem,
+	DropdownMenuLabel,
+	DropdownMenuPortal,
+	DropdownMenuSeparator,
+	DropdownMenuShortcut,
+	DropdownMenuSub,
+	DropdownMenuSubContent,
+	DropdownMenuSubTrigger,
+	DropdownMenuCheckboxItem,
+	DropdownMenuRadioGroup,
+	DropdownMenuRadioItem,
+	DropdownMenuTrigger
+} from '@/components/ui/dropdown-menu'
 import { ComponentPreview } from '@/components/docs/component-preview'
 import { PropsTable } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
+import { Card, CardContent } from '@/components/ui/card'
 import {
 	ChevronRight,
 	User,
@@ -36,9 +55,9 @@ export default function DropdownMenuDocsPage() {
 	const [position, setPosition] = useState('bottom')
 
 	return (
-		<z.box className='space-y-16'>
+		<div className='space-y-16'>
 			{/* Breadcrumb */}
-			<z.box className='flex items-center gap-2 text-sm text-muted-foreground'>
+			<div className='flex items-center gap-2 text-sm text-muted-foreground'>
 				<Link href='/docs' className='hover:text-foreground transition-colors'>
 					Docs
 				</Link>
@@ -47,22 +66,22 @@ export default function DropdownMenuDocsPage() {
 					Components
 				</Link>
 				<ChevronRight className='h-4 w-4' />
-				<z.text className='text-foreground'>Dropdown Menu</z.text>
-			</z.box>
+				<span className='text-foreground'>Dropdown Menu</span>
+			</div>
 
 			{/* Header */}
-			<z.box className='space-y-4'>
-				<z.box className='flex items-center gap-3'>
-					<z.text.h1>ZDropdownMenu</z.text.h1>
+			<div className='space-y-4'>
+				<div className='flex items-center gap-3'>
+					<h1 className='text-4xl font-bold tracking-tight text-foreground'>ZDropdownMenu</h1>
 					<z.badge isGhost isNeutral>
 						Component
 					</z.badge>
-				</z.box>
-				<z.text.body className='text-xl text-muted-foreground max-w-2xl leading-relaxed'>
+				</div>
+				<p className='text-xl text-muted-foreground max-w-2xl leading-relaxed'>
 					Displays a menu to the user triggered by a button. Supports submenus, checkboxes, and radio groups. Built on Radix UI
 					Dropdown Menu.
-				</z.text.body>
-			</z.box>
+				</p>
+			</div>
 
 			{/* Quick Preview */}
 			<ComponentPreview
@@ -70,44 +89,50 @@ export default function DropdownMenuDocsPage() {
 				description='A basic dropdown menu with various item types.'
 				code={examples.quickPreview}
 			>
-				<z.menu>
-					<z.menu.Trigger asChild>
+				<DropdownMenu>
+					<DropdownMenuTrigger asChild>
 						<z.button>Open Menu</z.button>
-					</z.menu.Trigger>
-					<z.menu.Content className='w-56'>
-						<z.menu.Label>My Account</z.menu.Label>
-						<z.menu.Separator />
-						<z.menu.Item>
+					</DropdownMenuTrigger>
+					<DropdownMenuContent className='w-56'>
+						<DropdownMenuLabel>My Account</DropdownMenuLabel>
+						<DropdownMenuSeparator />
+						<DropdownMenuItem>
 							<User className='mr-2 h-4 w-4' />
-							<z.text>Profile</z.text>
-						</z.menu.Item>
-						<z.menu.Item>
+							<span>Profile</span>
+						</DropdownMenuItem>
+						<DropdownMenuItem>
 							<CreditCard className='mr-2 h-4 w-4' />
-							<z.text>Billing</z.text>
-						</z.menu.Item>
-						<z.menu.Item>
+							<span>Billing</span>
+						</DropdownMenuItem>
+						<DropdownMenuItem>
 							<Settings className='mr-2 h-4 w-4' />
-							<z.text>Settings</z.text>
-						</z.menu.Item>
-						<z.menu.Separator />
-						<z.menu.Item>
+							<span>Settings</span>
+						</DropdownMenuItem>
+						<DropdownMenuSeparator />
+						<DropdownMenuItem>
 							<LogOut className='mr-2 h-4 w-4' />
-							<z.text>Log out</z.text>
-						</z.menu.Item>
-					</z.menu.Content>
-				</z.menu>
+							<span>Log out</span>
+						</DropdownMenuItem>
+					</DropdownMenuContent>
+				</DropdownMenu>
 			</ComponentPreview>
 
 			{/* Usage */}
-			<z.box as='section' className='space-y-6'>
-				<z.text.h2>Usage</z.text.h2>
-				<CodeBlock code={examples.usageImport} language='tsx' />
-				<CodeBlock code={examples.usage} language='tsx' />
-			</z.box>
+			<section className='space-y-6'>
+				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>Usage</h2>
+				<CodeBlock
+					code={examples.usageImport}
+					language='tsx'
+				/>
+				<CodeBlock
+					code={examples.usage}
+					language='tsx'
+				/>
+			</section>
 
 			{/* Examples */}
-			<z.box as='section' className='space-y-8'>
-				<z.text.h2>Examples</z.text.h2>
+			<section className='space-y-8'>
+				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>Examples</h2>
 
 				{/* With Shortcuts */}
 				<ComponentPreview
@@ -115,29 +140,29 @@ export default function DropdownMenuDocsPage() {
 					description='Menu items can display keyboard shortcuts.'
 					code={examples.withShortcuts}
 				>
-					<z.menu>
-						<z.menu.Trigger asChild>
+					<DropdownMenu>
+						<DropdownMenuTrigger asChild>
 							<z.button>Edit</z.button>
-						</z.menu.Trigger>
-						<z.menu.Content className='w-56'>
-							<z.menu.Item>
+						</DropdownMenuTrigger>
+						<DropdownMenuContent className='w-56'>
+							<DropdownMenuItem>
 								<Copy className='mr-2 h-4 w-4' />
-								<z.text>Copy</z.text>
-								<z.menu.Shortcut>Ctrl+C</z.menu.Shortcut>
-							</z.menu.Item>
-							<z.menu.Item>
+								<span>Copy</span>
+								<DropdownMenuShortcut>Ctrl+C</DropdownMenuShortcut>
+							</DropdownMenuItem>
+							<DropdownMenuItem>
 								<Pencil className='mr-2 h-4 w-4' />
-								<z.text>Edit</z.text>
-								<z.menu.Shortcut>Ctrl+E</z.menu.Shortcut>
-							</z.menu.Item>
-							<z.menu.Separator />
-							<z.menu.Item className='text-destructive'>
+								<span>Edit</span>
+								<DropdownMenuShortcut>Ctrl+E</DropdownMenuShortcut>
+							</DropdownMenuItem>
+							<DropdownMenuSeparator />
+							<DropdownMenuItem className='text-destructive'>
 								<Trash className='mr-2 h-4 w-4' />
-								<z.text>Delete</z.text>
-								<z.menu.Shortcut>Ctrl+Del</z.menu.Shortcut>
-							</z.menu.Item>
-						</z.menu.Content>
-					</z.menu>
+								<span>Delete</span>
+								<DropdownMenuShortcut>Ctrl+Del</DropdownMenuShortcut>
+							</DropdownMenuItem>
+						</DropdownMenuContent>
+					</DropdownMenu>
 				</ComponentPreview>
 
 				{/* Checkbox Items */}
@@ -146,21 +171,21 @@ export default function DropdownMenuDocsPage() {
 					description='Menu items that can be checked or unchecked.'
 					code={examples.checkboxItems}
 				>
-					<z.menu>
-						<z.menu.Trigger asChild>
+					<DropdownMenu>
+						<DropdownMenuTrigger asChild>
 							<z.button>View</z.button>
-						</z.menu.Trigger>
-						<z.menu.Content className='w-56'>
-							<z.menu.Label>Appearance</z.menu.Label>
-							<z.menu.Separator />
-							<z.menu.CheckboxItem checked={showStatusBar} onCheckedChange={setShowStatusBar}>
+						</DropdownMenuTrigger>
+						<DropdownMenuContent className='w-56'>
+							<DropdownMenuLabel>Appearance</DropdownMenuLabel>
+							<DropdownMenuSeparator />
+							<DropdownMenuCheckboxItem checked={showStatusBar} onCheckedChange={setShowStatusBar}>
 								Status Bar
-							</z.menu.CheckboxItem>
-							<z.menu.CheckboxItem checked={showActivityBar} onCheckedChange={setShowActivityBar}>
+							</DropdownMenuCheckboxItem>
+							<DropdownMenuCheckboxItem checked={showActivityBar} onCheckedChange={setShowActivityBar}>
 								Activity Bar
-							</z.menu.CheckboxItem>
-						</z.menu.Content>
-					</z.menu>
+							</DropdownMenuCheckboxItem>
+						</DropdownMenuContent>
+					</DropdownMenu>
 				</ComponentPreview>
 
 				{/* Radio Items */}
@@ -169,20 +194,20 @@ export default function DropdownMenuDocsPage() {
 					description='A group of items where only one can be selected.'
 					code={examples.radioItems}
 				>
-					<z.menu>
-						<z.menu.Trigger asChild>
+					<DropdownMenu>
+						<DropdownMenuTrigger asChild>
 							<z.button>Position</z.button>
-						</z.menu.Trigger>
-						<z.menu.Content className='w-56'>
-							<z.menu.Label>Panel Position</z.menu.Label>
-							<z.menu.Separator />
-							<z.menu.RadioGroup value={position} onValueChange={setPosition}>
-								<z.menu.RadioItem value='top'>Top</z.menu.RadioItem>
-								<z.menu.RadioItem value='bottom'>Bottom</z.menu.RadioItem>
-								<z.menu.RadioItem value='right'>Right</z.menu.RadioItem>
-							</z.menu.RadioGroup>
-						</z.menu.Content>
-					</z.menu>
+						</DropdownMenuTrigger>
+						<DropdownMenuContent className='w-56'>
+							<DropdownMenuLabel>Panel Position</DropdownMenuLabel>
+							<DropdownMenuSeparator />
+							<DropdownMenuRadioGroup value={position} onValueChange={setPosition}>
+								<DropdownMenuRadioItem value='top'>Top</DropdownMenuRadioItem>
+								<DropdownMenuRadioItem value='bottom'>Bottom</DropdownMenuRadioItem>
+								<DropdownMenuRadioItem value='right'>Right</DropdownMenuRadioItem>
+							</DropdownMenuRadioGroup>
+						</DropdownMenuContent>
+					</DropdownMenu>
 				</ComponentPreview>
 
 				{/* Icon Trigger */}
@@ -191,67 +216,59 @@ export default function DropdownMenuDocsPage() {
 					description='A common pattern using an icon button as the trigger.'
 					code={examples.iconTrigger}
 				>
-					<z.menu>
-						<z.menu.Trigger asChild>
+					<DropdownMenu>
+						<DropdownMenuTrigger asChild>
 							<z.button isIcon>
 								<MoreHorizontal className='h-4 w-4' />
-								<z.text className='sr-only'>Open menu</z.text>
+								<span className='sr-only'>Open menu</span>
 							</z.button>
-						</z.menu.Trigger>
-						<z.menu.Content align='end'>
-							<z.menu.Item>Edit</z.menu.Item>
-							<z.menu.Item>Duplicate</z.menu.Item>
-							<z.menu.Separator />
-							<z.menu.Item className='text-destructive'>Delete</z.menu.Item>
-						</z.menu.Content>
-					</z.menu>
+						</DropdownMenuTrigger>
+						<DropdownMenuContent align='end'>
+							<DropdownMenuItem>Edit</DropdownMenuItem>
+							<DropdownMenuItem>Duplicate</DropdownMenuItem>
+							<DropdownMenuSeparator />
+							<DropdownMenuItem className='text-destructive'>Delete</DropdownMenuItem>
+						</DropdownMenuContent>
+					</DropdownMenu>
 				</ComponentPreview>
-			</z.box>
+			</section>
 
 			{/* API Reference */}
-			<z.box as='section' className='space-y-6'>
-				<z.text.h2>API Reference</z.text.h2>
+			<section className='space-y-6'>
+				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>API Reference</h2>
 				<PropsTable title='DropdownMenu' props={dropdownMenuProps} />
 				<PropsTable title='DropdownMenuItem' props={dropdownMenuItemProps} />
-			</z.box>
+			</section>
 
 			{/* Accessibility */}
-			<z.box as='section' className='space-y-6'>
-				<z.text.h2>Accessibility</z.text.h2>
-				<z.card>
-					<z.cardContent className='p-6 space-y-4'>
-						<z.box className='space-y-2'>
-							<z.text.h3>Keyboard Interactions</z.text.h3>
-							<z.box className='grid gap-2'>
-								<z.box className='flex items-center gap-4 text-sm'>
-									<z.text as='kbd' className='px-2 py-1 bg-muted rounded text-xs font-mono'>
-										Space / Enter
-									</z.text>
-									<z.text className='text-muted-foreground'>Open menu or select focused item</z.text>
-								</z.box>
-								<z.box className='flex items-center gap-4 text-sm'>
-									<z.text as='kbd' className='px-2 py-1 bg-muted rounded text-xs font-mono'>
-										Arrow Down
-									</z.text>
-									<z.text className='text-muted-foreground'>Move focus to next item</z.text>
-								</z.box>
-								<z.box className='flex items-center gap-4 text-sm'>
-									<z.text as='kbd' className='px-2 py-1 bg-muted rounded text-xs font-mono'>
-										Arrow Up
-									</z.text>
-									<z.text className='text-muted-foreground'>Move focus to previous item</z.text>
-								</z.box>
-								<z.box className='flex items-center gap-4 text-sm'>
-									<z.text as='kbd' className='px-2 py-1 bg-muted rounded text-xs font-mono'>
-										Escape
-									</z.text>
-									<z.text className='text-muted-foreground'>Close the menu</z.text>
-								</z.box>
-							</z.box>
-						</z.box>
-					</z.cardContent>
-				</z.card>
-			</z.box>
-		</z.box>
+			<section className='space-y-6'>
+				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>Accessibility</h2>
+				<Card>
+					<CardContent className='p-6 space-y-4'>
+						<div className='space-y-2'>
+							<h3 className='font-semibold text-foreground'>Keyboard Interactions</h3>
+							<div className='grid gap-2'>
+								<div className='flex items-center gap-4 text-sm'>
+									<kbd className='px-2 py-1 bg-muted rounded text-xs font-mono'>Space / Enter</kbd>
+									<span className='text-muted-foreground'>Open menu or select focused item</span>
+								</div>
+								<div className='flex items-center gap-4 text-sm'>
+									<kbd className='px-2 py-1 bg-muted rounded text-xs font-mono'>Arrow Down</kbd>
+									<span className='text-muted-foreground'>Move focus to next item</span>
+								</div>
+								<div className='flex items-center gap-4 text-sm'>
+									<kbd className='px-2 py-1 bg-muted rounded text-xs font-mono'>Arrow Up</kbd>
+									<span className='text-muted-foreground'>Move focus to previous item</span>
+								</div>
+								<div className='flex items-center gap-4 text-sm'>
+									<kbd className='px-2 py-1 bg-muted rounded text-xs font-mono'>Escape</kbd>
+									<span className='text-muted-foreground'>Close the menu</span>
+								</div>
+							</div>
+						</div>
+					</CardContent>
+				</Card>
+			</section>
+		</div>
 	)
 }

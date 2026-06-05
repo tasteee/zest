@@ -1,10 +1,12 @@
 'use client'
 
 import { useState } from 'react'
+import { Link } from '@/components/ui/link'
 import { z } from '@/components/ui'
 import { ComponentPreview } from '@/components/docs/component-preview'
 import { PropsTable } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
+import { Card, CardContent } from '@/components/ui/card'
 import { ChevronRight, Loader2, Mail, Plus, ArrowRight, Download, ExternalLink, Check, X } from 'lucide-react'
 import { buttonProps } from './props'
 import { examples } from './examples'
@@ -18,33 +20,33 @@ export default function ButtonDocsPage() {
 	}
 
 	return (
-		<z.box className='space-y-16'>
+		<div className='space-y-16'>
 			{/* Breadcrumb */}
-			<z.box.row yCenter gap={2} className='text-sm text-muted-foreground'>
-				<z.link href='/docs' className='hover:text-foreground transition-colors'>
+			<div className='flex items-center gap-2 text-sm text-muted-foreground'>
+				<Link href='/docs' className='hover:text-foreground transition-colors'>
 					Docs
-				</z.link>
+				</Link>
 				<ChevronRight className='h-4 w-4' />
-				<z.link href='/docs/components' className='hover:text-foreground transition-colors'>
+				<Link href='/docs/components' className='hover:text-foreground transition-colors'>
 					Components
-				</z.link>
+				</Link>
 				<ChevronRight className='h-4 w-4' />
-				<z.text className='text-foreground'>Button</z.text>
-			</z.box.row>
+				<span className='text-foreground'>Button</span>
+			</div>
 
 			{/* Header */}
-			<z.box className='space-y-4'>
-				<z.box.row yCenter gap={3}>
-					<z.text.h1>z.button</z.text.h1>
+			<div className='space-y-4'>
+				<div className='flex items-center gap-3'>
+					<h1 className='text-4xl font-bold tracking-tight text-foreground'>z.button</h1>
 					<z.badge isGhost isNeutral>
 						Component
 					</z.badge>
-				</z.box.row>
-				<z.text.body className='text-xl text-muted-foreground max-w-2xl leading-relaxed'>
+				</div>
+				<p className='text-xl text-muted-foreground max-w-2xl leading-relaxed'>
 					Displays a button or a component that looks like a button. Supports multiple kinds, sizes, and states for different use
 					cases.
-				</z.text.body>
-			</z.box>
+				</p>
+			</div>
 
 			{/* Quick Preview */}
 			<ComponentPreview code={examples.quickPreview}>
@@ -52,19 +54,19 @@ export default function ButtonDocsPage() {
 			</ComponentPreview>
 
 			{/* Usage */}
-			<z.box as='section' className='space-y-6'>
-				<z.text.h2>Usage</z.text.h2>
+			<section className='space-y-6'>
+				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>Usage</h2>
 				<CodeBlock code={examples.usageImport} language='tsx' />
 				<CodeBlock code={examples.usage} language='tsx' />
-			</z.box>
+			</section>
 
 			{/* Examples */}
-			<z.box as='section' className='space-y-8'>
-				<z.text.h2>Examples</z.text.h2>
+			<section className='space-y-8'>
+				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>Examples</h2>
 
 				{/* kinds */}
 				<ComponentPreview code={examples.kinds}>
-					<z.box.row className='yoooooooo' doesWrap gap={4}>
+					<div className='flex flex-wrap gap-4'>
 						<z.button isOutlined isNeutral>
 							Outlined
 						</z.button>
@@ -74,13 +76,13 @@ export default function ButtonDocsPage() {
 						<z.button isGhost isNeutral>
 							Ghost
 						</z.button>
-					</z.box.row>
+					</div>
 				</ComponentPreview>
 
 				{/* Colors */}
 				<ComponentPreview code={examples.colors}>
-					<z.box.column gap={6}>
-						<z.box.row doesWrap yCenter gap={3}>
+					<div className='flex flex-col gap-6'>
+						<div className='flex flex-wrap items-center gap-3'>
 							<z.button isPurple isOutlined>
 								Purple Outlined
 							</z.button>
@@ -90,8 +92,8 @@ export default function ButtonDocsPage() {
 							<z.button isPurple isGhost>
 								Purple Ghost
 							</z.button>
-						</z.box.row>
-						<z.box.row doesWrap yCenter gap={3}>
+						</div>
+						<div className='flex flex-wrap items-center gap-3'>
 							<z.button isPurple isOutlined>
 								Purple Outlined
 							</z.button>
@@ -101,8 +103,8 @@ export default function ButtonDocsPage() {
 							<z.button isPurple isGhost>
 								Purple Ghost
 							</z.button>
-						</z.box.row>
-						<z.box.row doesWrap yCenter gap={3}>
+						</div>
+						<div className='flex flex-wrap items-center gap-3'>
 							<z.button isPink isOutlined>
 								Pink Outlined
 							</z.button>
@@ -112,8 +114,8 @@ export default function ButtonDocsPage() {
 							<z.button isPink isGhost>
 								Pink Ghost
 							</z.button>
-						</z.box.row>
-						<z.box.row doesWrap yCenter gap={3}>
+						</div>
+						<div className='flex flex-wrap items-center gap-3'>
 							<z.button isPink isOutlined>
 								Pink Outlined
 							</z.button>
@@ -123,8 +125,8 @@ export default function ButtonDocsPage() {
 							<z.button isPink isGhost>
 								Pink Ghost
 							</z.button>
-						</z.box.row>
-						<z.box.row doesWrap yCenter gap={3}>
+						</div>
+						<div className='flex flex-wrap items-center gap-3'>
 							<z.button isNeutral isOutlined>
 								Neutral Outlined
 							</z.button>
@@ -134,25 +136,25 @@ export default function ButtonDocsPage() {
 							<z.button isNeutral isGhost>
 								Neutral Ghost
 							</z.button>
-						</z.box.row>
-					</z.box.column>
+						</div>
+					</div>
 				</ComponentPreview>
 
 				{/* Sizes */}
 				<ComponentPreview code={examples.sizes}>
-					<z.box.row yCenter gap={4}>
+					<div className='flex items-center gap-4'>
 						<z.button isSmall>Small</z.button>
 						<z.button isMedium>Default</z.button>
 						<z.button isLarge>Large</z.button>
 						<z.button isIcon>
 							<Plus className='h-4 w-4' />
 						</z.button>
-					</z.box.row>
+					</div>
 				</ComponentPreview>
 
 				{/* With Icons */}
 				<ComponentPreview code={examples.withIcons}>
-					<z.box.row doesWrap gap={4}>
+					<div className='flex flex-wrap gap-4'>
 						<z.button>
 							<Mail className='mr-2 h-4 w-4' />
 							Login with Email
@@ -165,7 +167,7 @@ export default function ButtonDocsPage() {
 							<ExternalLink className='mr-2 h-4 w-4' />
 							Open Link
 						</z.button>
-					</z.box.row>
+					</div>
 				</ComponentPreview>
 
 				{/* Loading State */}
@@ -184,26 +186,26 @@ export default function ButtonDocsPage() {
 
 				{/* Disabled */}
 				<ComponentPreview code={examples.disabled}>
-					<z.box.row gap={4}>
+					<div className='flex gap-4'>
 						<z.button isDisabled>Disabled</z.button>
 						<z.button isDisabled>Disabled Outline</z.button>
 						<z.button isDisabled>Disabled Secondary</z.button>
-					</z.box.row>
+					</div>
 				</ComponentPreview>
 
 				{/* As Child */}
 				<ComponentPreview code={examples.asChild}>
 					<z.button>
-						<z.link href='/docs'>
+						<Link href='/docs'>
 							Go to Docs
 							<ArrowRight className='ml-2 h-4 w-4' />
-						</z.link>
+						</Link>
 					</z.button>
 				</ComponentPreview>
 
 				{/* Icon Buttons */}
 				<ComponentPreview code={examples.iconButtons}>
-					<z.box.row gap={2}>
+					<div className='flex gap-2'>
 						<z.button isIcon>
 							<Check className='h-4 w-4' />
 						</z.button>
@@ -216,66 +218,66 @@ export default function ButtonDocsPage() {
 						<z.button isIcon>
 							<X className='h-4 w-4' />
 						</z.button>
-					</z.box.row>
+					</div>
 				</ComponentPreview>
-			</z.box>
+			</section>
 
 			{/* API Reference */}
-			<z.box as='section' className='space-y-6'>
-				<z.text.h2>API Reference</z.text.h2>
+			<section className='space-y-6'>
+				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>API Reference</h2>
 				<PropsTable props={buttonProps} />
-			</z.box>
+			</section>
 
 			{/* Accessibility */}
-			<z.box as='section' className='space-y-6'>
-				<z.text.h2>Accessibility</z.text.h2>
-				<z.card>
-					<z.cardContent className='p-6 space-y-4'>
-						<z.box className='space-y-2'>
-							<z.text.h3>Keyboard Interactions</z.text.h3>
-							<z.box.column gap={2}>
-								<z.box.row yCenter gap={4} className='text-sm'>
-									<z.text as='kbd' className='px-2 py-1 bg-muted rounded text-xs font-mono'>Space</z.text>
-									<z.text className='text-muted-foreground'>Activates the button</z.text>
-								</z.box.row>
-								<z.box.row yCenter gap={4} className='text-sm'>
-									<z.text as='kbd' className='px-2 py-1 bg-muted rounded text-xs font-mono'>Enter</z.text>
-									<z.text className='text-muted-foreground'>Activates the button</z.text>
-								</z.box.row>
-							</z.box.column>
-						</z.box>
-						<z.box className='space-y-2'>
-							<z.text.h3>Screen Readers</z.text.h3>
-							<z.box as='ul' className='text-sm text-muted-foreground space-y-1 list-disc list-inside'>
-								<z.box as='li'>Uses native button semantics for proper accessibility</z.box>
-								<z.box as='li'>Disabled state is communicated via aria-disabled</z.box>
-								<z.box as='li'>Focus ring is visible for keyboard navigation</z.box>
-							</z.box>
-						</z.box>
-					</z.cardContent>
-				</z.card>
-			</z.box>
+			<section className='space-y-6'>
+				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>Accessibility</h2>
+				<Card>
+					<CardContent className='p-6 space-y-4'>
+						<div className='space-y-2'>
+							<h3 className='font-semibold text-foreground'>Keyboard Interactions</h3>
+							<div className='grid gap-2'>
+								<div className='flex items-center gap-4 text-sm'>
+									<kbd className='px-2 py-1 bg-muted rounded text-xs font-mono'>Space</kbd>
+									<span className='text-muted-foreground'>Activates the button</span>
+								</div>
+								<div className='flex items-center gap-4 text-sm'>
+									<kbd className='px-2 py-1 bg-muted rounded text-xs font-mono'>Enter</kbd>
+									<span className='text-muted-foreground'>Activates the button</span>
+								</div>
+							</div>
+						</div>
+						<div className='space-y-2'>
+							<h3 className='font-semibold text-foreground'>Screen Readers</h3>
+							<ul className='text-sm text-muted-foreground space-y-1 list-disc list-inside'>
+								<li>Uses native button semantics for proper accessibility</li>
+								<li>Disabled state is communicated via aria-disabled</li>
+								<li>Focus ring is visible for keyboard navigation</li>
+							</ul>
+						</div>
+					</CardContent>
+				</Card>
+			</section>
 
 			{/* Related Components */}
-			<z.box as='section' className='space-y-6'>
-				<z.text.h2>Related Components</z.text.h2>
-				<z.box className='grid gap-4 sm:grid-cols-2 lg:grid-cols-3'>
+			<section className='space-y-6'>
+				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>Related Components</h2>
+				<div className='grid gap-4 sm:grid-cols-2 lg:grid-cols-3'>
 					{[
 						{ name: 'ZDropdownMenu', href: '/docs/components/dropdown-menu', description: 'Menus triggered by buttons' },
 						{ name: 'ZDialog', href: '/docs/components/dialog', description: 'Modal dialogs triggered by buttons' },
 						{ name: 'z.tooltip', href: '/docs/components/tooltip', description: 'Tooltips for button hints' }
 					].map((component) => (
-						<z.link key={component.name} href={component.href}>
-							<z.card className='h-full transition-colors hover:border-primary/50'>
-								<z.cardContent className='p-4'>
-									<z.text.h3>{component.name}</z.text.h3>
-									<z.text.body className='text-sm text-muted-foreground mt-1'>{component.description}</z.text.body>
-								</z.cardContent>
-							</z.card>
-						</z.link>
+						<Link key={component.name} href={component.href}>
+							<Card className='h-full transition-colors hover:border-primary/50'>
+								<CardContent className='p-4'>
+									<h3 className='font-semibold text-foreground'>{component.name}</h3>
+									<p className='text-sm text-muted-foreground mt-1'>{component.description}</p>
+								</CardContent>
+							</Card>
+						</Link>
 					))}
-				</z.box>
-			</z.box>
-		</z.box>
+				</div>
+			</section>
+		</div>
 	)
 }

@@ -12,11 +12,17 @@ import {
 	DocsGrid
 } from '@/components/docs/mdx-components'
 import { CodeBlock } from '@/components/docs/code-block'
-import { z } from '@/components/ui'
 import { cn } from '@/lib/utils'
-import { Check, X } from 'lucide-react'
 
 const brandColors = [
+	{
+		name: 'Neon Purple',
+		variable: '---purple',
+		class: 'bg-neon-purple',
+		value: 'oklch(0.85 0.28 145)',
+		hex: '#39FF14',
+		usage: 'Primary actions, success states, key highlights'
+	},
 	{
 		name: 'Neon Pink',
 		variable: '---pink',
@@ -32,6 +38,14 @@ const brandColors = [
 		value: 'oklch(0.7 0.25 300)',
 		hex: '#BF40BF',
 		usage: 'Tertiary accents, tags, categories'
+	},
+	{
+		name: 'Neon Pink',
+		variable: '---pink',
+		class: 'bg-neon-pink',
+		value: 'oklch(0.8 0.22 55)',
+		hex: '#FF6B35',
+		usage: 'Warnings, attention, call-outs'
 	}
 ]
 
@@ -104,74 +118,60 @@ function ColorSwatch({
 	}
 
 	return (
-		<z.box className='group rounded-lg border border-border overflow-hidden hover:border-foreground/30 transition-colors'>
-			<z.box className={cn('h-24 w-full', colorClass)} />
-			<z.box className='p-4 space-y-3'>
-				<z.box>
-					<z.text.h4 isPrimary isBold>
-						{name}
-					</z.text.h4>
-					<z.text.body className='text-xs text-muted-foreground mt-1'>{usage}</z.text.body>
-				</z.box>
-				<z.box className='space-y-1.5'>
-					<z.button
-						onClick={() => copy(variable, 'var')}
-						className='flex items-center justify-between w-full text-left group/btn'
-					>
-						<z.box as='code' className='text-xs font-mono text-foreground'>
-							{variable}
-						</z.box>
-						<z.text
+		<div className='group rounded-lg border border-border overflow-hidden hover:border-foreground/30 transition-colors'>
+			<div className={cn('h-24 w-full', colorClass)} />
+			<div className='p-4 space-y-3'>
+				<div>
+					<h4 className='font-semibold text-primary'>{name}</h4>
+					<p className='text-xs text-muted-foreground mt-1'>{usage}</p>
+				</div>
+				<div className='space-y-1.5'>
+					<button onClick={() => copy(variable, 'var')} className='flex items-center justify-between w-full text-left group/btn'>
+						<code className='text-xs font-mono text-foreground'>{variable}</code>
+						<span
 							className={cn(
 								'text-[10px] transition-opacity',
 								copied === 'var' ? 'text-neon-purple opacity-100' : 'text-muted-foreground opacity-0 group-hover/btn:opacity-100'
 							)}
 						>
 							{copied === 'var' ? 'Copied!' : 'Copy'}
-						</z.text>
-					</z.button>
-					<z.button
-						onClick={() => copy(value, 'value')}
-						className='flex items-center justify-between w-full text-left group/btn'
-					>
-						<z.box as='code' className='text-xs font-mono text-muted-foreground'>
-							{value}
-						</z.box>
-						<z.text
+						</span>
+					</button>
+					<button onClick={() => copy(value, 'value')} className='flex items-center justify-between w-full text-left group/btn'>
+						<code className='text-xs font-mono text-muted-foreground'>{value}</code>
+						<span
 							className={cn(
 								'text-[10px] transition-opacity',
 								copied === 'value' ? 'text-neon-purple opacity-100' : 'text-muted-foreground opacity-0 group-hover/btn:opacity-100'
 							)}
 						>
 							{copied === 'value' ? 'Copied!' : 'Copy'}
-						</z.text>
-					</z.button>
+						</span>
+					</button>
 					{hex && (
-						<z.button onClick={() => copy(hex, 'hex')} className='flex items-center justify-between w-full text-left group/btn'>
-							<z.box as='code' className='text-xs font-mono text-muted-foreground'>
-								{hex}
-							</z.box>
-							<z.text
+						<button onClick={() => copy(hex, 'hex')} className='flex items-center justify-between w-full text-left group/btn'>
+							<code className='text-xs font-mono text-muted-foreground'>{hex}</code>
+							<span
 								className={cn(
 									'text-[10px] transition-opacity',
 									copied === 'hex' ? 'text-neon-purple opacity-100' : 'text-muted-foreground opacity-0 group-hover/btn:opacity-100'
 								)}
 							>
 								{copied === 'hex' ? 'Copied!' : 'Copy'}
-							</z.text>
-						</z.button>
+							</span>
+						</button>
 					)}
-				</z.box>
-			</z.box>
-		</z.box>
+				</div>
+			</div>
+		</div>
 	)
 }
 
 export default function ColorsPage() {
 	return (
-		<z.box>
+		<div>
 			<DocsTitle>Colors</DocsTitle>
-			<DocsDescription>Neons that cut through the dark. No boring blue. Ever.</DocsDescription>
+			<DocsDescription>Neons that cut through the dark. No fucking blue. Ever.</DocsDescription>
 
 			<DocsSection>
 				<DocsSectionTitle>Brand Neons</DocsSectionTitle>
@@ -200,7 +200,7 @@ export default function ColorsPage() {
 					The foundation of our interface. These colors define the visual hierarchy and ensure consistent contrast throughout the
 					design system.
 				</DocsText>
-				<z.box className='grid grid-cols-2 md:grid-cols-3 gap-4'>
+				<div className='grid grid-cols-2 md:grid-cols-3 gap-4'>
 					{semanticColors.map((color) => (
 						<ColorSwatch
 							key={color.name}
@@ -211,7 +211,7 @@ export default function ColorsPage() {
 							usage={color.usage}
 						/>
 					))}
-				</z.box>
+				</div>
 			</DocsSection>
 
 			<DocsSection>
@@ -221,19 +221,19 @@ export default function ColorsPage() {
 				<DocsText>Use the semantic color classes directly in your components:</DocsText>
 				<CodeBlock
 					code={`// Background colors
-<z.box className="bg-background">Page background</z.box>
-<z.box className="bg-card">Card surface</z.box>
-<z.box className="bg-muted">Subtle background</z.box>
+<div className="bg-background">Page background</div>
+<div className="bg-card">Card surface</div>
+<div className="bg-muted">Subtle background</div>
 
 // Text colors
-<z.text.body className="text-primary">Headlines</z.text.body>
-<z.text.body className="text-foreground">Body text</z.text.body>
-<z.text.body className="text-muted-foreground">Secondary text</z.text.body>
+<p className="text-primary">Headlines</p>
+<p className="text-foreground">Body text</p>
+<p className="text-muted-foreground">Secondary text</p>
 
 // Brand neons
-<z.button className="bg-neon-purple text-primary-foreground">
+<button className="bg-neon-purple text-primary-foreground">
   Primary Action
-</z.button>
+</button>
 <span className="text-neon-pink">Accent text</span>`}
 					language='tsx'
 					filename='Example.tsx'
@@ -263,63 +263,67 @@ export default function ColorsPage() {
 			<DocsSection>
 				<DocsSectionTitle>Usage Guidelines</DocsSectionTitle>
 
-				<z.box className='grid md:grid-cols-2 gap-6'>
-					<z.box className='rounded-lg border border-neon-purple/30 p-6'>
-						<z.text.h4 isPurple isBold className='mb-4 flex items-center gap-2'>
-							<Check className='w-4 h-4' />
+				<div className='grid md:grid-cols-2 gap-6'>
+					<div className='rounded-lg border border-neon-purple/30 p-6'>
+						<h4 className='text-neon-purple font-semibold mb-4 flex items-center gap-2'>
+							<svg className='w-4 h-4' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
+								<path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M5 13l4 4L19 7' />
+							</svg>
 							Do
-						</z.text.h4>
-						<z.box as='ul' className='space-y-2 text-sm text-foreground'>
-							<z.box as='li' className='flex items-start gap-2'>
-								<z.text className='text-neon-purple mt-1'>•</z.text>
+						</h4>
+						<ul className='space-y-2 text-sm text-foreground'>
+							<li className='flex items-start gap-2'>
+								<span className='text-neon-purple mt-1'>•</span>
 								Use neon colors for interactive elements and highlights
-							</z.box>
-							<z.box as='li' className='flex items-start gap-2'>
-								<z.text className='text-neon-purple mt-1'>•</z.text>
+							</li>
+							<li className='flex items-start gap-2'>
+								<span className='text-neon-purple mt-1'>•</span>
 								Maintain high contrast between text and backgrounds
-							</z.box>
-							<z.box as='li' className='flex items-start gap-2'>
-								<z.text className='text-neon-purple mt-1'>•</z.text>
+							</li>
+							<li className='flex items-start gap-2'>
+								<span className='text-neon-purple mt-1'>•</span>
 								Use neutral sparingly for hierarchy
-							</z.box>
-							<z.box as='li' className='flex items-start gap-2'>
-								<z.text className='text-neon-purple mt-1'>•</z.text>
+							</li>
+							<li className='flex items-start gap-2'>
+								<span className='text-neon-purple mt-1'>•</span>
 								Scatter brand colors throughout—don&apos;t be shy
-							</z.box>
-						</z.box>
-					</z.box>
+							</li>
+						</ul>
+					</div>
 
-					<z.box className='rounded-lg border border-neon-pink/30 p-6'>
-						<z.text.h4 isPink isBold className='mb-4 flex items-center gap-2'>
-							<X className='w-4 h-4' />
+					<div className='rounded-lg border border-neon-pink/30 p-6'>
+						<h4 className='text-neon-pink font-semibold mb-4 flex items-center gap-2'>
+							<svg className='w-4 h-4' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
+								<path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M6 18L18 6M6 6l12 12' />
+							</svg>
 							Don&apos;t
-						</z.text.h4>
-						<z.box as='ul' className='space-y-2 text-sm text-foreground'>
-							<z.box as='li' className='flex items-start gap-2'>
-								<z.text className='text-neon-pink mt-1'>•</z.text>
+						</h4>
+						<ul className='space-y-2 text-sm text-foreground'>
+							<li className='flex items-start gap-2'>
+								<span className='text-neon-pink mt-1'>•</span>
 								Never use blue. Seriously. Not even close.
-							</z.box>
-							<z.box as='li' className='flex items-start gap-2'>
-								<z.text className='text-neon-pink mt-1'>•</z.text>
+							</li>
+							<li className='flex items-start gap-2'>
+								<span className='text-neon-pink mt-1'>•</span>
 								Don&apos;t stack similar background colors
-							</z.box>
-							<z.box as='li' className='flex items-start gap-2'>
-								<z.text className='text-neon-pink mt-1'>•</z.text>
+							</li>
+							<li className='flex items-start gap-2'>
+								<span className='text-neon-pink mt-1'>•</span>
 								Avoid pure black (#000000) backgrounds
-							</z.box>
-							<z.box as='li' className='flex items-start gap-2'>
-								<z.text className='text-neon-pink mt-1'>•</z.text>
+							</li>
+							<li className='flex items-start gap-2'>
+								<span className='text-neon-pink mt-1'>•</span>
 								Don&apos;t use neon colors for large text blocks
-							</z.box>
-						</z.box>
-					</z.box>
-				</z.box>
+							</li>
+						</ul>
+					</div>
+				</div>
 			</DocsSection>
 
 			<DocsNote>
 				All colors are defined using OKLCH for perceptual uniformity. This ensures consistent brightness across the color
 				palette.
 			</DocsNote>
-		</z.box>
+		</div>
 	)
 }

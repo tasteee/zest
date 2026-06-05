@@ -1,18 +1,21 @@
 'use client'
 
 import Link from 'next/link'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { z } from '@/components/ui'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { ComponentPreview } from '@/components/docs/component-preview'
 import { PropsTable } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
+import { Card, CardContent } from '@/components/ui/card'
 import { ChevronRight } from 'lucide-react'
 import { avatarProps, avatarImageProps, avatarFallbackProps } from './props'
 import { examples } from './examples'
 export default function AvatarDocsPage() {
 	return (
-		<z.box className='space-y-16'>
+		<div className='space-y-16'>
 			{/* Breadcrumb */}
-			<z.box className='flex items-center gap-2 text-sm text-muted-foreground'>
+			<div className='flex items-center gap-2 text-sm text-muted-foreground'>
 				<Link href='/docs' className='hover:text-foreground transition-colors'>
 					Docs
 				</Link>
@@ -21,22 +24,22 @@ export default function AvatarDocsPage() {
 					Components
 				</Link>
 				<ChevronRight className='h-4 w-4' />
-				<z.text className='text-foreground'>Avatar</z.text>
-			</z.box>
+				<span className='text-foreground'>Avatar</span>
+			</div>
 
 			{/* Header */}
-			<z.box className='space-y-4'>
-				<z.box className='flex items-center gap-3'>
-					<z.text.h1>ZAvatar</z.text.h1>
+			<div className='space-y-4'>
+				<div className='flex items-center gap-3'>
+					<h1 className='text-4xl font-bold tracking-tight text-foreground'>ZAvatar</h1>
 					<z.badge isGhost isNeutral>
 						Component
 					</z.badge>
-				</z.box>
-				<z.text.body className='text-xl text-muted-foreground max-w-2xl leading-relaxed'>
+				</div>
+				<p className='text-xl text-muted-foreground max-w-2xl leading-relaxed'>
 					An image element with a fallback for representing the user. Displays a profile picture with graceful fallback to
 					initials or an icon.
-				</z.text.body>
-			</z.box>
+				</p>
+			</div>
 
 			{/* Quick Preview */}
 			<ComponentPreview
@@ -44,25 +47,25 @@ export default function AvatarDocsPage() {
 				description='A basic avatar with an image and fallback.'
 				code={examples.quickPreview}
 			>
-				<z.avatar>
-					<z.avatarImage src='/placeholder-user.jpg' alt='User' />
-					<z.avatarFallback>JD</z.avatarFallback>
-				</z.avatar>
+				<Avatar>
+					<AvatarImage src='/placeholder-user.jpg' alt='User' />
+					<AvatarFallback>JD</AvatarFallback>
+				</Avatar>
 			</ComponentPreview>
 
 			{/* Usage */}
-			<z.box as='section' className='space-y-6'>
-				<z.text.h2>Usage</z.text.h2>
+			<section className='space-y-6'>
+				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>Usage</h2>
 				<CodeBlock code={examples.usageImport} language='tsx' />
 				<CodeBlock
 					code={examples.usage}
 					language='tsx'
 				/>
-			</z.box>
+			</section>
 
 			{/* Examples */}
-			<z.box as='section' className='space-y-8'>
-				<z.text.h2>Examples</z.text.h2>
+			<section className='space-y-8'>
+				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>Examples</h2>
 
 				{/* Sizes */}
 				<ComponentPreview
@@ -70,24 +73,24 @@ export default function AvatarDocsPage() {
 					description='Avatars can be rendered at different sizes using className.'
 					code={examples.sizes}
 				>
-					<z.box className='flex items-center gap-4'>
-						<z.avatar className='size-6'>
-							<z.avatarImage src='/placeholder-user.jpg' alt='User' />
-							<z.avatarFallback className='text-xs'>SM</z.avatarFallback>
-						</z.avatar>
-						<z.avatar className='size-8'>
-							<z.avatarImage src='/placeholder-user.jpg' alt='User' />
-							<z.avatarFallback>MD</z.avatarFallback>
-						</z.avatar>
-						<z.avatar className='size-12'>
-							<z.avatarImage src='/placeholder-user.jpg' alt='User' />
-							<z.avatarFallback>LG</z.avatarFallback>
-						</z.avatar>
-						<z.avatar className='size-16'>
-							<z.avatarImage src='/placeholder-user.jpg' alt='User' />
-							<z.avatarFallback className='text-xl'>XL</z.avatarFallback>
-						</z.avatar>
-					</z.box>
+					<div className='flex items-center gap-4'>
+						<Avatar className='size-6'>
+							<AvatarImage src='/placeholder-user.jpg' alt='User' />
+							<AvatarFallback className='text-xs'>SM</AvatarFallback>
+						</Avatar>
+						<Avatar className='size-8'>
+							<AvatarImage src='/placeholder-user.jpg' alt='User' />
+							<AvatarFallback>MD</AvatarFallback>
+						</Avatar>
+						<Avatar className='size-12'>
+							<AvatarImage src='/placeholder-user.jpg' alt='User' />
+							<AvatarFallback>LG</AvatarFallback>
+						</Avatar>
+						<Avatar className='size-16'>
+							<AvatarImage src='/placeholder-user.jpg' alt='User' />
+							<AvatarFallback className='text-xl'>XL</AvatarFallback>
+						</Avatar>
+					</div>
 				</ComponentPreview>
 
 				{/* Fallback */}
@@ -96,20 +99,20 @@ export default function AvatarDocsPage() {
 					description='When the image fails to load, the fallback is displayed.'
 					code={examples.fallback}
 				>
-					<z.box className='flex items-center gap-4'>
-						<z.avatar>
-							<z.avatarImage src='/broken-image.jpg' alt='User' />
-							<z.avatarFallback>JD</z.avatarFallback>
-						</z.avatar>
-						<z.avatar>
-							<z.avatarImage src='/broken-image.jpg' alt='User' />
-							<z.avatarFallback>AB</z.avatarFallback>
-						</z.avatar>
-						<z.avatar>
-							<z.avatarImage src='/broken-image.jpg' alt='User' />
-							<z.avatarFallback>TK</z.avatarFallback>
-						</z.avatar>
-					</z.box>
+					<div className='flex items-center gap-4'>
+						<Avatar>
+							<AvatarImage src='/broken-image.jpg' alt='User' />
+							<AvatarFallback>JD</AvatarFallback>
+						</Avatar>
+						<Avatar>
+							<AvatarImage src='/broken-image.jpg' alt='User' />
+							<AvatarFallback>AB</AvatarFallback>
+						</Avatar>
+						<Avatar>
+							<AvatarImage src='/broken-image.jpg' alt='User' />
+							<AvatarFallback>TK</AvatarFallback>
+						</Avatar>
+					</div>
 				</ComponentPreview>
 
 				{/* Avatar Group */}
@@ -118,23 +121,23 @@ export default function AvatarDocsPage() {
 					description='Multiple avatars can be stacked together.'
 					code={examples.avatarGroup}
 				>
-					<z.box className='flex -space-x-2'>
-						<z.avatar className='border-2 border-background'>
-							<z.avatarImage src='/placeholder-user.jpg' alt='User 1' />
-							<z.avatarFallback>U1</z.avatarFallback>
-						</z.avatar>
-						<z.avatar className='border-2 border-background'>
-							<z.avatarImage src='/placeholder-user.jpg' alt='User 2' />
-							<z.avatarFallback>U2</z.avatarFallback>
-						</z.avatar>
-						<z.avatar className='border-2 border-background'>
-							<z.avatarImage src='/placeholder-user.jpg' alt='User 3' />
-							<z.avatarFallback>U3</z.avatarFallback>
-						</z.avatar>
-						<z.avatar className='border-2 border-background'>
-							<z.avatarFallback>+5</z.avatarFallback>
-						</z.avatar>
-					</z.box>
+					<div className='flex -space-x-2'>
+						<Avatar className='border-2 border-background'>
+							<AvatarImage src='/placeholder-user.jpg' alt='User 1' />
+							<AvatarFallback>U1</AvatarFallback>
+						</Avatar>
+						<Avatar className='border-2 border-background'>
+							<AvatarImage src='/placeholder-user.jpg' alt='User 2' />
+							<AvatarFallback>U2</AvatarFallback>
+						</Avatar>
+						<Avatar className='border-2 border-background'>
+							<AvatarImage src='/placeholder-user.jpg' alt='User 3' />
+							<AvatarFallback>U3</AvatarFallback>
+						</Avatar>
+						<Avatar className='border-2 border-background'>
+							<AvatarFallback>+5</AvatarFallback>
+						</Avatar>
+					</div>
 				</ComponentPreview>
 
 				{/* With Status Indicator */}
@@ -143,55 +146,55 @@ export default function AvatarDocsPage() {
 					description='Add a status indicator to show online/offline state.'
 					code={examples.withStatusIndicator}
 				>
-					<z.box className='flex items-center gap-4'>
-						<z.box className='relative'>
-							<z.avatar>
-								<z.avatarImage src='/placeholder-user.jpg' alt='User' />
-								<z.avatarFallback>JD</z.avatarFallback>
-							</z.avatar>
-							<z.text className='absolute bottom-0 right-0 size-2.5 rounded-full bg-neon-purple border-2 border-background' />
-						</z.box>
-						<z.box className='relative'>
-							<z.avatar>
-								<z.avatarImage src='/placeholder-user.jpg' alt='User' />
-								<z.avatarFallback>AB</z.avatarFallback>
-							</z.avatar>
-							<z.text className='absolute bottom-0 right-0 size-2.5 rounded-full bg-muted-foreground border-2 border-background' />
-						</z.box>
-					</z.box>
+					<div className='flex items-center gap-4'>
+						<div className='relative'>
+							<Avatar>
+								<AvatarImage src='/placeholder-user.jpg' alt='User' />
+								<AvatarFallback>JD</AvatarFallback>
+							</Avatar>
+							<span className='absolute bottom-0 right-0 size-2.5 rounded-full bg-neon-purple border-2 border-background' />
+						</div>
+						<div className='relative'>
+							<Avatar>
+								<AvatarImage src='/placeholder-user.jpg' alt='User' />
+								<AvatarFallback>AB</AvatarFallback>
+							</Avatar>
+							<span className='absolute bottom-0 right-0 size-2.5 rounded-full bg-muted-foreground border-2 border-background' />
+						</div>
+					</div>
 				</ComponentPreview>
-			</z.box>
+			</section>
 
 			{/* API Reference */}
-			<z.box as='section' className='space-y-6'>
-				<z.text.h2>API Reference</z.text.h2>
+			<section className='space-y-6'>
+				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>API Reference</h2>
 				<PropsTable title='Avatar' props={avatarProps} />
 				<PropsTable title='AvatarImage' props={avatarImageProps} />
 				<PropsTable title='AvatarFallback' props={avatarFallbackProps} />
-			</z.box>
+			</section>
 
 			{/* Accessibility */}
-			<z.box as='section' className='space-y-6'>
-				<z.text.h2>Accessibility</z.text.h2>
-				<z.card>
-					<z.cardContent className='p-6 space-y-4'>
-						<z.box className='space-y-2'>
-							<z.text.h3>Image Alt Text</z.text.h3>
-							<z.text.body className='text-sm text-muted-foreground'>
+			<section className='space-y-6'>
+				<h2 className='text-2xl font-semibold tracking-tight text-foreground'>Accessibility</h2>
+				<Card>
+					<CardContent className='p-6 space-y-4'>
+						<div className='space-y-2'>
+							<h3 className='font-semibold text-foreground'>Image Alt Text</h3>
+							<p className='text-sm text-muted-foreground'>
 								Always provide meaningful alt text for avatar images. This helps screen reader users understand who or what the
 								avatar represents.
-							</z.text.body>
-						</z.box>
-						<z.box className='space-y-2'>
-							<z.text.h3>Fallback Content</z.text.h3>
-							<z.text.body className='text-sm text-muted-foreground'>
+							</p>
+						</div>
+						<div className='space-y-2'>
+							<h3 className='font-semibold text-foreground'>Fallback Content</h3>
+							<p className='text-sm text-muted-foreground'>
 								The fallback content should be descriptive enough to identify the user when the image cannot be loaded. Typically,
 								initials work well.
-							</z.text.body>
-						</z.box>
-					</z.cardContent>
-				</z.card>
-			</z.box>
-		</z.box>
+							</p>
+						</div>
+					</CardContent>
+				</Card>
+			</section>
+		</div>
 	)
 }

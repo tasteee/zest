@@ -3,8 +3,8 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
+import { ScrollArea } from '@/components/ui/scroll-area'
 import { COMPONENT_CATALOG } from '@/app/docs/components/catalog'
-import { z } from '@/components/ui'
 
 const navigation = [
 	{
@@ -91,15 +91,13 @@ export function DocsSidebarContent() {
 	const pathname = usePathname()
 
 	return (
-		<z.box className='space-y-6 py-4'>
+		<div className='space-y-6 py-4'>
 			{navigation.map((section) => (
-				<z.box key={section.title} className='px-4'>
-					<z.text.h4 className='mb-2 text-xs font-semibold tracking-widest uppercase text-muted-foreground'>
-						{section.title}
-					</z.text.h4>
-					<z.box as='ul' className='space-y-1'>
+				<div key={section.title} className='px-4'>
+					<h4 className='mb-2 text-xs font-semibold tracking-widest uppercase text-muted-foreground'>{section.title}</h4>
+					<ul className='space-y-1'>
 						{section.items.map((item) => (
-							<z.box as='li' key={item.href}>
+							<li key={item.href}>
 								<Link
 									href={item.href}
 									className={cn(
@@ -111,24 +109,21 @@ export function DocsSidebarContent() {
 								>
 									{item.title}
 								</Link>
-							</z.box>
+							</li>
 						))}
-					</z.box>
-				</z.box>
+					</ul>
+				</div>
 			))}
-		</z.box>
+		</div>
 	)
 }
 
 export function DocsSidebar() {
 	return (
-		<z.box
-			as='aside'
-			className='hidden lg:fixed lg:top-14 lg:bottom-0 lg:left-0 lg:flex lg:w-72 lg:flex-col border-r border-border'
-		>
-			<z.scrollArea className='h-full py-4'>
+		<aside className='hidden lg:fixed lg:top-14 lg:bottom-0 lg:left-0 lg:flex lg:w-72 lg:flex-col border-r border-border'>
+			<ScrollArea className='h-full py-4'>
 				<DocsSidebarContent />
-			</z.scrollArea>
-		</z.box>
+			</ScrollArea>
+		</aside>
 	)
 }
