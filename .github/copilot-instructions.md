@@ -1,28 +1,4 @@
-## Purpose
-
-This document defines strict coding rules for this repository.
-Follow these rules exactly when generating or editing code.
-
-Code should optimize for readability and low cognitive load.
-Prefer explicit, predictable code over short or clever code.
-
----
-
-## Priority Order (When Rules Conflict)
-
-Apply rules in this exact order:
-
-1. Non-Negotiables
-2. TypeScript Rules
-3. Control Flow Rules
-4. Naming Rules
-5. React Rules
-6. CSS Rules
-7. Examples
-
-If an example conflicts with a rule, follow the rule.
-
----
+# DO NOT EVER TRY TO RUN TSC OR ESLINT OR TESTS ON YOUR OWN UNLESS ASKED.
 
 ## Non-Negotiables
 
@@ -35,8 +11,8 @@ If an example conflicts with a rule, follow the rule.
 - No inline logic inside `if` conditions. Extract to named variables first.
 - No abbreviations in variable names.
 - No `try/catch` for promise flow. Use `await-to-js`.
-- No classes or OOP.
-- No Tailwind utility classes. Convert all tailwind classes to CSS.
+- No JS/TS classes or OOP.
+- No Tailwind utility classes. Use zest css patterns, base classes with modifiers and design-system variables.
 - No hardcoded style values. Use design-system CSS variables.
 
 ---
