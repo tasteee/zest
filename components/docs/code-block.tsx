@@ -70,7 +70,7 @@ export const CodeBlock = (props: CodeBlockPropsT) => {
 					)}
 					aria-label='Copy code'
 				>
-					{copied ? <CheckIcon className='h-4 w-4 text-neon-green' /> : <CopyIcon className='h-4 w-4' />}
+					{copied ? <CheckIcon className='h-4 w-4 text-primary' /> : <CopyIcon className='h-4 w-4' />}
 				</button>
 			</div>
 		</div>

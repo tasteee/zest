@@ -1,4 +1,4 @@
-.z-button {
+.zButton {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
@@ -16,179 +16,179 @@
 		color 0.1s ease;
 }
 
-.z-button.isExtraSmall {
+.zButton.isExtraSmall {
 	height: 1.5rem;
 	padding-inline: 0.625rem;
 	font-size: 0.6875rem;
 }
 
-.z-button.isSmall {
+.zButton.isSmall {
 	height: 2rem;
 	padding-inline: 0.875rem;
 	font-size: 0.875rem;
 }
 
-.z-button.isMedium {
+.zButton.isMedium {
 	height: 2.5rem;
 	padding-inline: 1rem;
 	font-size: 0.875rem;
 }
 
-.z-button.isLarge {
+.zButton.isLarge {
 	height: 3rem;
 	padding-inline: 1.5rem;
 	font-size: 1rem;
 }
 
-.z-button.isExtraLarge {
+.zButton.isExtraLarge {
 	height: 3.5rem;
 	padding-inline: 2rem;
 	font-size: 1.125rem;
 }
 
-.z-button.isIcon {
+.zButton.isIcon {
 	width: 2.5rem;
 	height: 2.5rem;
 	padding: 0;
 }
 
-.z-button.isSolid.isPurple {
+.zButton.isSolid.isPurple {
 	background: var(---purple);
 	border-color: var(---purple);
 	color: var(--primary-foreground);
 	font-weight: 600;
 }
 
-.z-button.isSolid.isPink {
+.zButton.isSolid.isPink {
 	background: var(---pink);
 	border-color: var(---pink);
 	color: var(--primary-foreground);
 	font-weight: 600;
 }
 
-.z-button.isSolid.isRed {
+.zButton.isSolid.isRed {
 	background: var(--destructive);
 	border-color: var(--destructive);
 	color: var(--destructive-foreground);
 	font-weight: 600;
 }
 
-.z-button.isSolid.isNeutral {
+.zButton.isSolid.isNeutral {
 	background: var(--primary);
 	border-color: var(--primary);
 	color: var(--primary-foreground);
 	font-weight: 600;
 }
 
-.z-button.isSolid:hover {
+.zButton.isSolid:hover {
 	opacity: 0.9;
 }
 
-.z-button.isSolid:active {
+.zButton.isSolid:active {
 	opacity: 0.8;
 }
 
-.z-button.isOutlined {
+.zButton.isOutlined {
 	background: transparent;
 }
 
-.z-button.isOutlined.isPurple {
+.zButton.isOutlined.isPurple {
 	border-color: var(---purple);
 	color: var(---purple);
 }
 
-.z-button.isOutlined.isPink {
+.zButton.isOutlined.isPink {
 	border-color: var(---pink);
 	color: var(---pink);
 }
 
-.z-button.isOutlined.isRed {
+.zButton.isOutlined.isRed {
 	border-color: var(--destructive);
 	color: var(--destructive);
 }
 
-.z-button.isOutlined.isNeutral,
-.z-button.isOutlined:not(.isPurple, .isPink, .isRed) {
+.zButton.isOutlined.isNeutral,
+.zButton.isOutlined:not(.isPurple, .isPink, .isRed) {
 	border-color: var(--border);
 	color: var(--foreground);
 }
 
-.z-button.isOutlined.isPurple:hover {
+.zButton.isOutlined.isPurple:hover {
 	background: color-mix(in oklch, var(---purple) 10%, transparent);
 }
 
-.z-button.isOutlined.isPink:hover {
+.zButton.isOutlined.isPink:hover {
 	background: color-mix(in oklch, var(---pink) 10%, transparent);
 }
 
-.z-button.isOutlined.isRed:hover {
+.zButton.isOutlined.isRed:hover {
 	background: color-mix(in oklch, var(--destructive) 10%, transparent);
 }
 
-.z-button.isOutlined.isNeutral:hover,
-.z-button.isOutlined:not(.isPurple, .isPink, .isRed):hover {
+.zButton.isOutlined.isNeutral:hover,
+.zButton.isOutlined:not(.isPurple, .isPink, .isRed):hover {
 	border-color: color-mix(in oklch, var(--foreground) 50%, transparent);
 }
 
-.z-button.isOutlined.isPurple:active {
+.zButton.isOutlined.isPurple:active {
 	background: color-mix(in oklch, var(---purple) 20%, transparent);
 }
 
-.z-button.isOutlined.isPink:active {
+.zButton.isOutlined.isPink:active {
 	background: color-mix(in oklch, var(---pink) 20%, transparent);
 }
 
-.z-button.isOutlined.isRed:active {
+.zButton.isOutlined.isRed:active {
 	background: color-mix(in oklch, var(--destructive) 20%, transparent);
 }
 
-.z-button.isOutlined.isNeutral:active,
-.z-button.isOutlined:not(.isPurple, .isPink, .isRed):active {
+.zButton.isOutlined.isNeutral:active,
+.zButton.isOutlined:not(.isPurple, .isPink, .isRed):active {
 	border-color: color-mix(in oklch, var(--foreground) 70%, transparent);
 	background: color-mix(in oklch, var(--foreground) 5%, transparent);
 }
 
-.z-button.isGhost {
+.zButton.isGhost {
 	background: transparent;
 	border-color: transparent;
 }
 
-.z-button.isGhost.isPurple {
+.zButton.isGhost.isPurple {
 	color: var(---purple);
 }
 
-.z-button.isGhost.isPink {
+.zButton.isGhost.isPink {
 	color: var(---pink);
 }
 
-.z-button.isGhost.isRed {
+.zButton.isGhost.isRed {
 	color: var(--destructive);
 }
 
-.z-button.isGhost.isNeutral,
-.z-button.isGhost:not(.isPurple, .isPink, .isRed) {
+.zButton.isGhost.isNeutral,
+.zButton.isGhost:not(.isPurple, .isPink, .isRed) {
 	color: var(--foreground);
 }
 
-.z-button.isGhost:hover {
+.zButton.isGhost:hover {
 	opacity: 0.7;
 }
 
-.z-button.isGhost:active {
+.zButton.isGhost:active {
 	opacity: 0.55;
 }
 
-.z-button.isDisabled,
-.z-button:disabled {
+.zButton.isDisabled,
+.zButton:disabled {
 	opacity: 0.5;
 	pointer-events: none;
 }
 
-.z-button.isHidden {
+.zButton.isHidden {
 	display: none;
 }
 
-.z-button.isLoading {
+.zButton.isLoading {
 	cursor: progress;
 }
 
@@ -201,39 +201,39 @@
 	animation: zButtonSpin 0.7s linear infinite;
 }
 
-.z-button > svg {
+.zButton > svg {
 	width: 1rem;
 	height: 1rem;
 	margin-top: 1px;
 	flex-shrink: 0;
 }
 
-.z-button.isExtraSmall > svg {
+.zButton.isExtraSmall > svg {
 	width: 0.75rem;
 	height: 0.75rem;
 }
 
-.z-button.isSmall > svg {
+.zButton.isSmall > svg {
 	width: 0.875rem;
 	height: 0.875rem;
 }
 
-.z-button.isMedium > svg {
+.zButton.isMedium > svg {
 	width: 1rem;
 	height: 1rem;
 }
 
-.z-button.isLarge > svg {
+.zButton.isLarge > svg {
 	width: 1.125rem;
 	height: 1.125rem;
 }
 
-.z-button.isExtraLarge > svg {
+.zButton.isExtraLarge > svg {
 	width: 1.25rem;
 	height: 1.25rem;
 }
 
-.z-button.isIcon > svg {
+.zButton.isIcon > svg {
 	width: 1rem;
 	height: 1rem;
 }

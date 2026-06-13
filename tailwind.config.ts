@@ -44,10 +44,8 @@ const config: Config = {
 				border: 'var(--border)',
 				input: 'var(--input)',
 				ring: 'var(--ring)',
-				'neon-green': 'var(---green)',
-				'neon-pink': 'var(---pink)',
-				'neon-purple': 'var(---purple)',
-				'neon-orange': 'var(---orange)',
+				'neon-pink': 'var(--neon-pink)',
+				'neon-purple': 'var(--neon-purple)',
 				chart: {
 					1: 'var(--chart-1)',
 					2: 'var(--chart-2)',

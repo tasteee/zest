@@ -329,3 +329,78 @@ All backgrounds carry a slight purple tint (hue 300 in OKLCH) to reinforce the p
 10. **DM Sans only.** No secondary display typeface.
 11. **OKLCH color model** for all color definitions.
 12. **Borders over backgrounds** for card/container delineation.
+
+---
+
+```ts
+const navigation = [
+	{
+		label: 'Overview',
+		route: '/',
+		children: [
+			{
+				label: 'Lorem Ipsum',
+				route: '/lorem-ipsum'
+			},
+			{
+				label: 'Dolor Sit Amet',
+				route: '/dolor-sit-amet'
+			},
+			{
+				label: 'Consectetur Adipiscing',
+				route: '/consectetur-adipiscing'
+			},
+			{
+				label: 'Foo',
+				route: '/foo'
+			}
+		]
+	},
+
+	{
+		label: 'Overview',
+		route: '/',
+		children: [
+			{
+				label: 'Lorem Ipsum',
+				route: '/lorem-ipsum'
+			},
+			{
+				label: 'Dolor Sit Amet',
+				route: '/dolor-sit-amet'
+			},
+			{
+				label: 'Consectetur Adipiscing',
+				route: '/consectetur-adipiscing'
+			},
+			{
+				label: 'Foo',
+				route: '/foo'
+			}
+		]
+	},
+
+	{
+		label: 'Overview',
+		route: '/',
+		children: [
+			{
+				label: 'Lorem Ipsum',
+				route: '/lorem-ipsum'
+			},
+			{
+				label: 'Dolor Sit Amet',
+				route: '/dolor-sit-amet'
+			},
+			{
+				label: 'Consectetur Adipiscing',
+				route: '/consectetur-adipiscing'
+			},
+			{
+				label: 'Foo',
+				route: '/foo'
+			}
+		]
+	}
+]
+```

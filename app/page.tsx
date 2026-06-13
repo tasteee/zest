@@ -33,7 +33,7 @@ export default function BrandGuidePage() {
 							<p className='text-muted-foreground text-sm'>Built with intention. Designed without compromise.</p>
 						</div>
 						<div className='flex items-center gap-6'>
-							<span className='text-neon-green text-xs font-medium tracking-wider uppercase'>v1.0</span>
+							<span className='text-primary text-xs font-medium tracking-wider uppercase'>v1.0</span>
 							<span className='text-muted-foreground text-xs'>2026</span>
 						</div>
 					</div>

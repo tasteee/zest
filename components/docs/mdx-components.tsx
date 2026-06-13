@@ -93,14 +93,14 @@ interface DocsNoteProps {
 export function DocsNote({ children, variant = 'default' }: DocsNoteProps) {
 	const variants = {
 		default: 'border-neon-purple/50 bg-neon-purple/5',
-		warning: 'border-neon-orange/50 bg-neon-orange/5',
-		success: 'border-neon-green/50 bg-neon-green/5'
+		warning: 'border-neon-pink/50 bg-neon-pink/5',
+		success: 'border-primary/50 bg-primary/5'
 	}
 
 	const iconColors = {
 		default: 'text-neon-purple',
-		warning: 'text-neon-orange',
-		success: 'text-neon-green'
+		warning: 'text-neon-pink',
+		success: 'text-primary'
 	}
 
 	return (
