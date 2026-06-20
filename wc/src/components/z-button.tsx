@@ -60,55 +60,42 @@ const styles = css`
 		font-size: 1rem;
 	}
 
-	/* tones: each one defines --tone-fill (the solid background) and
-	   --tone-accent (the border/text color used by every other kind) so the
-	   kind classes below never need a rule per tone. For most tones these are
-	   the same vivid color; success/danger use a darker fill paired with a
-	   brighter accent for legibility on the dark theme, mirroring the
-	   existing --destructive / --destructive-foreground split. */
+	/* tones: each one sets --tone-color, the single color every kind below
+	   paints with. primary/secondary/success/warning/danger share the same
+	   oklch lightness/chroma (see --tone-accent-l/-c in tokens.css) so a solid
+	   button of any tone reads with the same boldness, hue aside. They're all
+	   light enough to pair with --primary-foreground for solid-kind text. */
 
 	button.is-primary {
-		--tone-fill: var(--purple);
-		--tone-accent: var(--purple);
-		--tone-foreground: var(--primary-foreground);
+		--tone-color: var(--purple);
 	}
 
 	button.is-secondary {
-		--tone-fill: var(--secondary);
-		--tone-accent: var(--secondary);
-		--tone-foreground: var(--secondary-foreground);
+		--tone-color: var(--pink);
 	}
 
 	button.is-neutral {
-		--tone-fill: var(--primary);
-		--tone-accent: var(--primary);
-		--tone-foreground: var(--primary-foreground);
+		--tone-color: var(--primary);
 	}
 
 	button.is-success {
-		--tone-fill: var(--success);
-		--tone-accent: var(--success-foreground);
-		--tone-foreground: var(--success-foreground);
+		--tone-color: var(--success);
 	}
 
 	button.is-warning {
-		--tone-fill: var(--warning);
-		--tone-accent: var(--warning);
-		--tone-foreground: var(--primary-foreground);
+		--tone-color: var(--warning);
 	}
 
 	button.is-danger {
-		--tone-fill: var(--destructive);
-		--tone-accent: var(--destructive-foreground);
-		--tone-foreground: var(--destructive-foreground);
+		--tone-color: var(--destructive);
 	}
 
-	/* kinds: paint using the tone variables above */
+	/* kinds: paint using --tone-color */
 
 	button.is-solid {
-		background: var(--tone-fill);
-		border-color: var(--tone-fill);
-		color: var(--tone-foreground);
+		background: var(--tone-color);
+		border-color: var(--tone-color);
+		color: var(--primary-foreground);
 		font-weight: 600;
 	}
 
@@ -122,51 +109,51 @@ const styles = css`
 
 	button.is-outline {
 		background: transparent;
-		border-color: var(--tone-accent);
-		color: var(--tone-accent);
+		border-color: var(--tone-color);
+		color: var(--tone-color);
 	}
 
 	button.is-outline:hover {
-		background: color-mix(in oklch, var(--tone-accent) 10%, transparent);
+		background: color-mix(in oklch, var(--tone-color) 10%, transparent);
 	}
 
 	button.is-outline:active {
-		background: color-mix(in oklch, var(--tone-accent) 20%, transparent);
+		background: color-mix(in oklch, var(--tone-color) 20%, transparent);
 	}
 
 	button.is-ghost {
 		background: transparent;
 		border-color: transparent;
-		color: var(--tone-accent);
+		color: var(--tone-color);
 	}
 
 	button.is-ghost:hover {
-		background: color-mix(in oklch, var(--tone-accent) 10%, transparent);
+		background: color-mix(in oklch, var(--tone-color) 10%, transparent);
 	}
 
 	button.is-ghost:active {
-		background: color-mix(in oklch, var(--tone-accent) 18%, transparent);
+		background: color-mix(in oklch, var(--tone-color) 18%, transparent);
 	}
 
 	button.is-soft {
-		background: color-mix(in oklch, var(--tone-accent) 15%, transparent);
+		background: color-mix(in oklch, var(--tone-color) 15%, transparent);
 		border-color: transparent;
-		color: var(--tone-accent);
+		color: var(--tone-color);
 		font-weight: 600;
 	}
 
 	button.is-soft:hover {
-		background: color-mix(in oklch, var(--tone-accent) 24%, transparent);
+		background: color-mix(in oklch, var(--tone-color) 24%, transparent);
 	}
 
 	button.is-soft:active {
-		background: color-mix(in oklch, var(--tone-accent) 32%, transparent);
+		background: color-mix(in oklch, var(--tone-color) 32%, transparent);
 	}
 
 	button.is-plain {
 		background: transparent;
 		border-color: transparent;
-		color: var(--tone-accent);
+		color: var(--tone-color);
 	}
 
 	button.is-plain:hover {

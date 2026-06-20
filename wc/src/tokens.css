@@ -10,8 +10,16 @@
 :root {
 	--base-accent-color-0: #ff75be;
 	--base-accent-color-1: #b27eff;
+	--base-success-color: #22c55e;
+	--base-warning-color: #f97316;
+	--base-danger-color: #ef4444;
 	--base-neutral-color-light: #fff;
 	--base-neutral-color-dark: #0a0f0a;
+	/* shared lightness/chroma for the primary/secondary/success/warning/danger
+	   button tones — only hue differs between them, so a solid button of any
+	   tone reads with the same boldness */
+	--tone-accent-l: 0.74;
+	--tone-accent-c: 0.19;
 	--base-sans-font-family: 'DM Sans';
 	--base-mono-font-family: 'DM Mono';
 	--base-spacing: 0.25rem;
@@ -99,9 +107,13 @@
 	--secondary: var(--color-neutral-5);
 	--accent: var(--color-purple);
 	--accent-alt: var(--color-pink);
-	--warning: var(--color-pink);
-	--pink: var(--color-pink);
-	--purple: var(--color-purple);
+	/* normalized button-tone colors: same lightness/chroma, hue-only difference.
+	   Deliberately decoupled from --color-purple/--color-pink above (which stay
+	   tied to the raw base accent colors z-toggle's is-purple/is-pink rely on). */
+	--purple: oklch(from var(--base-accent-color-1) var(--tone-accent-l) var(--tone-accent-c) h);
+	--pink: oklch(from var(--base-accent-color-0) var(--tone-accent-l) var(--tone-accent-c) h);
+	--success: oklch(from var(--base-success-color) var(--tone-accent-l) var(--tone-accent-c) h);
+	--warning: oklch(from var(--base-warning-color) var(--tone-accent-l) var(--tone-accent-c) h);
 	--background: var(--bg);
 	--background-light: var(--paper-soft);
 	--card: var(--paper);
@@ -113,10 +125,7 @@
 	--muted-foreground: var(--muted);
 	--skeleton: var(--color-neutral-3);
 	--accent-foreground: var(--primary);
-	--destructive: #82181a;
-	--destructive-foreground: #fb2c36;
-	--success: #14532d;
-	--success-foreground: #05df72;
+	--destructive: oklch(from var(--base-danger-color) var(--tone-accent-l) var(--tone-accent-c) h);
 	--border: var(--line);
 	--input: var(--line);
 	--ring: var(--color-neutral-4);
@@ -165,9 +174,7 @@
 	--color-accent: var(--accent);
 	--color-accent-foreground: var(--accent-foreground);
 	--color-destructive: var(--destructive);
-	--color-destructive-foreground: var(--destructive-foreground);
 	--color-success: var(--success);
-	--color-success-foreground: var(--success-foreground);
 	--color-border: var(--border);
 	--color-input: var(--input);
 	--color-ring: var(--ring);
@@ -186,13 +193,6 @@
 	--color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
 	--color-sidebar-border: var(--sidebar-border);
 	--color-sidebar-ring: var(--sidebar-ring);
-}
-
-@supports (color: lab(0% 0 0)) {
-	:root {
-		--destructive: lab(28.5139% 44.5539 29.0463);
-		--destructive-foreground: lab(55.4814% 75.0732 48.8528);
-	}
 }
 
 /*
