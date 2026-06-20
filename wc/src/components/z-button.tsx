@@ -17,7 +17,6 @@ const styles = css`
 		font-family: inherit;
 		font-weight: 500;
 		white-space: nowrap;
-		border-radius: var(--z-button-radius, var(--radius-md));
 		border: 1px solid transparent;
 		cursor: pointer;
 		line-height: 1;
@@ -30,51 +29,57 @@ const styles = css`
 	}
 
 	button.is-extra-small {
+		border-radius: var(--z-button-radius, var(--small-button-radius));
 		height: 1.5rem;
 		padding-inline: 0.625rem;
 		font-size: 0.6875rem;
 	}
 
 	button.is-small {
+		border-radius: var(--z-button-radius, var(--small-button-radius));
 		height: 2rem;
 		padding-inline: 0.875rem;
 		font-size: 0.875rem;
 	}
 
 	button.is-medium {
+		border-radius: var(--z-button-radius, var(--medium-button-radius));
 		height: 2.5rem;
 		padding-inline: 1rem;
 		font-size: 0.875rem;
 	}
 
 	button.is-large {
+		border-radius: var(--z-button-radius, var(--large-button-radius));
 		height: 3rem;
 		padding-inline: 1.5rem;
 		font-size: 1rem;
 	}
 
 	button.is-extra-large {
+		border-radius: var(--z-button-radius, var(--large-button-radius));
 		height: 3.5rem;
 		padding-inline: 2rem;
 		font-size: 1.125rem;
 	}
 
 	button.is-icon {
+		border-radius: var(--z-button-radius, var(--small-button-radius));
 		width: 2.5rem;
 		height: 2.5rem;
 		padding: 0;
 	}
 
 	button.is-solid.is-purple {
-		background: var(--neon-purple);
-		border-color: var(--neon-purple);
+		background: var(--purple);
+		border-color: var(--purple);
 		color: var(--primary-foreground);
 		font-weight: 600;
 	}
 
 	button.is-solid.is-pink {
-		background: var(--neon-pink);
-		border-color: var(--neon-pink);
+		background: var(--pink);
+		border-color: var(--pink);
 		color: var(--primary-foreground);
 		font-weight: 600;
 	}
@@ -101,18 +106,33 @@ const styles = css`
 		opacity: 0.8;
 	}
 
+	button.is-dim {
+		color: #fff;
+		background: #ffffff25;
+		border-color: transparent;
+		font-weight: 600;
+	}
+
+	button.is-dim:hover {
+		background: #ffffff38;
+	}
+
+	button.is-dim:active {
+		background: #ffffff4d;
+	}
+
 	button.is-outlined {
 		background: transparent;
 	}
 
 	button.is-outlined.is-purple {
-		border-color: var(--neon-purple);
-		color: var(--neon-purple);
+		border-color: var(--purple);
+		color: var(--purple);
 	}
 
 	button.is-outlined.is-pink {
-		border-color: var(--neon-pink);
-		color: var(--neon-pink);
+		border-color: var(--pink);
+		color: var(--pink);
 	}
 
 	button.is-outlined.is-red {
@@ -120,40 +140,43 @@ const styles = css`
 		color: var(--destructive);
 	}
 
-	button.is-outlined.is-neutral {
+	button.is-outlined.is-neutral,
+	button.is-outlined:not(.is-purple, .is-pink, .is-red) {
 		border-color: var(--border);
 		color: var(--foreground);
 	}
 
 	button.is-outlined.is-purple:hover {
-		background: color-mix(in oklch, var(--neon-purple) 10%, transparent);
+		background: color-mix(in oklch, var(--purple) 10%, transparent);
 	}
 
 	button.is-outlined.is-pink:hover {
-		background: color-mix(in oklch, var(--neon-pink) 10%, transparent);
+		background: color-mix(in oklch, var(--pink) 10%, transparent);
 	}
 
 	button.is-outlined.is-red:hover {
 		background: color-mix(in oklch, var(--destructive) 10%, transparent);
 	}
 
-	button.is-outlined.is-neutral:hover {
+	button.is-outlined.is-neutral:hover,
+	button.is-outlined:not(.is-purple, .is-pink, .is-red):hover {
 		border-color: color-mix(in oklch, var(--foreground) 50%, transparent);
 	}
 
 	button.is-outlined.is-purple:active {
-		background: color-mix(in oklch, var(--neon-purple) 20%, transparent);
+		background: color-mix(in oklch, var(--purple) 20%, transparent);
 	}
 
 	button.is-outlined.is-pink:active {
-		background: color-mix(in oklch, var(--neon-pink) 20%, transparent);
+		background: color-mix(in oklch, var(--pink) 20%, transparent);
 	}
 
 	button.is-outlined.is-red:active {
 		background: color-mix(in oklch, var(--destructive) 20%, transparent);
 	}
 
-	button.is-outlined.is-neutral:active {
+	button.is-outlined.is-neutral:active,
+	button.is-outlined:not(.is-purple, .is-pink, .is-red):active {
 		border-color: color-mix(in oklch, var(--foreground) 70%, transparent);
 		background: color-mix(in oklch, var(--foreground) 5%, transparent);
 	}
@@ -164,18 +187,19 @@ const styles = css`
 	}
 
 	button.is-ghost.is-purple {
-		color: var(--neon-purple);
+		color: var(--purple);
 	}
 
 	button.is-ghost.is-pink {
-		color: var(--neon-pink);
+		color: var(--pink);
 	}
 
 	button.is-ghost.is-red {
 		color: var(--destructive);
 	}
 
-	button.is-ghost.is-neutral {
+	button.is-ghost.is-neutral,
+	button.is-ghost:not(.is-purple, .is-pink, .is-red) {
 		color: var(--foreground);
 	}
 
@@ -187,6 +211,7 @@ const styles = css`
 		opacity: 0.55;
 	}
 
+	button.is-disabled,
 	button:disabled {
 		opacity: 0.5;
 		pointer-events: none;
@@ -258,6 +283,7 @@ const resolveSizeClass = (props: any): string => {
 const resolveKindClass = (props: any): string => {
 	if (props.isGhost) return 'is-ghost'
 	if (props.isSolid) return 'is-solid'
+	if (props.isDim) return 'is-dim'
 	return 'is-outlined'
 }
 
@@ -269,6 +295,7 @@ export const ZButton = c(
 		const isButtonDisabled = props.isDisabled || props.isLoading
 		const buttonClass = [kindClass, colorClass, sizeClass]
 			.concat(props.isLoading ? ['is-loading'] : [])
+			.concat(props.isDisabled ? ['is-disabled'] : [])
 			.join(' ')
 
 		return (
@@ -295,6 +322,7 @@ export const ZButton = c(
 			isGhost: { type: Boolean, reflect: true },
 			isOutlined: { type: Boolean, reflect: true },
 			isSolid: { type: Boolean, reflect: true },
+			isDim: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			isDisabled: { type: Boolean, reflect: true },
 			isLoading: { type: Boolean, reflect: true },

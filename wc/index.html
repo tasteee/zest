@@ -58,6 +58,7 @@
 			<div class="row">
 				<z-button is-solid is-loading>Loading</z-button>
 				<z-button is-solid is-disabled>Disabled</z-button>
+				<z-button is-dim>Dim</z-button>
 			</div>
 		</section>
 
@@ -127,11 +128,9 @@
 					<z-text preset="h4">Card title</z-text>
 					<z-text preset="small" is-muted>Some card body copy.</z-text>
 				</z-card>
-				<z-card is-purple style="width: 220px">
-					<z-text preset="h4">Purple card</z-text>
-				</z-card>
-				<z-card is-pink style="width: 220px">
-					<z-text preset="h4">Pink card</z-text>
+				<z-card does-light-up-on-hover style="width: 220px">
+					<z-text preset="h4">Hover me</z-text>
+					<z-text preset="small" is-muted>Border lights up on hover/focus.</z-text>
 				</z-card>
 			</div>
 		</section>
