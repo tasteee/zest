@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Zesty WC Demo</title>
+		<style>
+			body {
+				margin: 0;
+				padding: 2rem;
+				background: var(--background);
+				font-family: system-ui, sans-serif;
+			}
+
+			section {
+				margin-bottom: 3rem;
+			}
+
+			h2 {
+				color: var(--foreground);
+				font-size: 1rem;
+				text-transform: uppercase;
+				letter-spacing: 0.05em;
+				margin-bottom: 1rem;
+			}
+
+			.row {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 0.75rem;
+				align-items: center;
+				margin-bottom: 0.75rem;
+			}
+		</style>
+	</head>
+	<body>
+		<section>
+			<h2>z-button</h2>
+			<div class="row">
+				<z-button>Default</z-button>
+				<z-button is-solid>Solid</z-button>
+				<z-button is-outlined>Outlined</z-button>
+				<z-button is-ghost>Ghost</z-button>
+			</div>
+			<div class="row">
+				<z-button is-solid is-purple>Purple</z-button>
+				<z-button is-solid is-pink>Pink</z-button>
+				<z-button is-solid is-red>Red</z-button>
+				<z-button is-solid is-neutral>Neutral</z-button>
+			</div>
+			<div class="row">
+				<z-button is-solid is-extra-small>XS</z-button>
+				<z-button is-solid is-small>Small</z-button>
+				<z-button is-solid>Medium</z-button>
+				<z-button is-solid is-large>Large</z-button>
+				<z-button is-solid is-extra-large>XL</z-button>
+			</div>
+			<div class="row">
+				<z-button is-solid is-loading>Loading</z-button>
+				<z-button is-solid is-disabled>Disabled</z-button>
+			</div>
+		</section>
+
+		<section>
+			<h2>z-button-group</h2>
+			<div class="row">
+				<z-button-group>
+					<z-button is-outlined>Left</z-button>
+					<z-button is-outlined>Mid</z-button>
+					<z-button is-outlined>Right</z-button>
+				</z-button-group>
+				<z-button-group is-vertical>
+					<z-button is-outlined>Top</z-button>
+					<z-button is-outlined>Mid</z-button>
+					<z-button is-outlined>Bottom</z-button>
+				</z-button-group>
+			</div>
+		</section>
+
+		<section>
+			<h2>z-toggle</h2>
+			<div class="row">
+				<z-toggle>Default</z-toggle>
+				<z-toggle is-outlined>Outlined</z-toggle>
+				<z-toggle is-purple is-outlined>Purple</z-toggle>
+				<z-toggle is-pink is-outlined is-pressed>Pink (pressed)</z-toggle>
+				<z-toggle is-small>Small</z-toggle>
+				<z-toggle is-large>Large</z-toggle>
+				<z-toggle is-disabled>Disabled</z-toggle>
+			</div>
+		</section>
+
+		<section>
+			<h2>z-toggle-group (single select, group-level variant)</h2>
+			<div class="row">
+				<z-toggle-group type="single" is-outlined is-purple>
+					<z-toggle-group-item value="left">Left</z-toggle-group-item>
+					<z-toggle-group-item value="center">Center</z-toggle-group-item>
+					<z-toggle-group-item value="right">Right</z-toggle-group-item>
+				</z-toggle-group>
+			</div>
+			<h2>z-toggle-group (multiple select, per-item override)</h2>
+			<div class="row">
+				<z-toggle-group type="multiple" is-outlined>
+					<z-toggle-group-item value="bold">Bold</z-toggle-group-item>
+					<z-toggle-group-item value="italic">Italic</z-toggle-group-item>
+					<z-toggle-group-item value="underline" is-pink>Underline</z-toggle-group-item>
+				</z-toggle-group>
+			</div>
+		</section>
+
+		<section>
+			<h2>z-text</h2>
+			<z-box is-flex is-column gap="2">
+				<z-text preset="h1">Heading 1</z-text>
+				<z-text preset="h2">Heading 2</z-text>
+				<z-text preset="body">Body text</z-text>
+				<z-text preset="small" is-muted>Small muted text</z-text>
+				<z-text is-purple is-bold>Purple bold inline text</z-text>
+			</z-box>
+		</section>
+
+		<section>
+			<h2>z-card</h2>
+			<div class="row">
+				<z-card style="width: 220px">
+					<z-text preset="h4">Card title</z-text>
+					<z-text preset="small" is-muted>Some card body copy.</z-text>
+				</z-card>
+				<z-card is-purple style="width: 220px">
+					<z-text preset="h4">Purple card</z-text>
+				</z-card>
+				<z-card is-pink style="width: 220px">
+					<z-text preset="h4">Pink card</z-text>
+				</z-card>
+			</div>
+		</section>
+
+		<section>
+			<h2>z-box + z-line</h2>
+			<z-box is-flex is-row gap="3" style="align-items: center">
+				<z-text>Item A</z-text>
+				<z-line is-vertical style="height: 1.5rem"></z-line>
+				<z-text>Item B</z-text>
+				<z-line is-vertical style="height: 1.5rem"></z-line>
+				<z-text>Item C</z-text>
+			</z-box>
+			<z-line style="margin-top: 1rem"></z-line>
+		</section>
+
+		<script type="module" src="/src/index.ts"></script>
+	</body>
+</html>
