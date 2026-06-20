@@ -10,7 +10,7 @@ const dmSans = DM_Sans({
 })
 
 export const metadata: Metadata = {
-	title: 'tasteink — Brand System',
+	title: 'zest | digital identity system',
 	description: 'Serve it sharp. Premium punk rock identity system.',
 	generator: 'v0.app',
 	icons: {

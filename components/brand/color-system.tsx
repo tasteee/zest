@@ -66,8 +66,8 @@ export function ColorSystem({ onInView }: ColorSystemProps) {
 					</div>
 					<h2 className='text-primary font-bold text-4xl md:text-5xl lg:text-6xl tracking-tight mb-6'>Color System</h2>
 					<p className='text-foreground text-lg max-w-2xl leading-relaxed'>
-						Neons that cut through the dark.
-						<span className='text-muted-foreground'> No boring blue. Ever.</span>
+						Neons cut through the dark.
+						<span className='text-muted-foreground'> No blue. Ever.</span>
 					</p>
 				</div>
 

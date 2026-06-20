@@ -27,7 +27,7 @@ export function HeroSection({ onInView }: HeroSectionProps) {
 			<div className='max-w-7xl mx-auto w-full'>
 				{/* Overline */}
 				<div className='flex items-center gap-4 mb-8'>
-					<span className='text-neon-purple text-xs font-semibold tracking-[0.2em] uppercase'>Brand System</span>
+					<span className='text-neon-purple text-xs font-semibold tracking-[0.2em] uppercase'>Digital Identity System</span>
 					<div className='h-px flex-1 max-w-24 bg-border' />
 					<span className='text-muted-foreground text-xs tracking-wider'>v1.0</span>
 				</div>

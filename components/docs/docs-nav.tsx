@@ -79,7 +79,7 @@ export function DocsNav() {
 
 					<Link href='/'>
 						<z.button isNeutral isSmall>
-							Brand System
+							Digital Identity System
 						</z.button>
 					</Link>
 				</div>

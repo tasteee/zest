@@ -164,7 +164,7 @@ export function TypographySystem({ onInView }: TypographySystemProps) {
 									<span className='text-neon-purple text-xs font-semibold tracking-wider uppercase'>{type.name}</span>
 								</div>
 								<div className='flex-1'>
-									<p className={`text-primary ${type.class}`}>Serve it sharp, I guess.</p>
+									<p className={`text-primary ${type.class}`}>Fork it.</p>
 								</div>
 								<div className='lg:w-64 shrink-0 flex flex-wrap gap-3'>
 									<span className='text-muted-foreground text-xs border border-border px-2 py-1 rounded'>{type.size}</span>
