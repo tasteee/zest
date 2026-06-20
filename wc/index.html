@@ -31,49 +31,52 @@
 				align-items: center;
 				margin-bottom: 0.75rem;
 			}
+
+			.kind-block {
+				margin-top: 1.5rem;
+			}
+
+			.kind-block h3 {
+				color: var(--foreground);
+				font-size: 0.8125rem;
+				text-transform: capitalize;
+				margin-bottom: 0.5rem;
+			}
+
+			.size-label {
+				color: var(--muted);
+				font-size: 0.75rem;
+				width: 4.5rem;
+				flex-shrink: 0;
+			}
 		</style>
 	</head>
 	<body>
 		<section>
 			<h2>z-button</h2>
+			<p style="color: var(--muted); max-width: 640px; margin-bottom: 1rem">
+				<code>&lt;z-button&gt;Default&lt;/z-button&gt;</code> with no attributes at all renders
+				<strong>kind="solid"</strong>, <strong>tone="neutral"</strong>, <strong>size="medium"</strong> — a
+				solid, medium-height, neutral-colored button.
+			</p>
 			<div class="row">
 				<z-button>Default</z-button>
-				<z-button is-solid>Solid</z-button>
-				<z-button is-outlined>Outlined</z-button>
-				<z-button is-ghost>Ghost</z-button>
 			</div>
-			<div class="row">
-				<z-button is-solid is-purple>Purple</z-button>
-				<z-button is-solid is-pink>Pink</z-button>
-				<z-button is-solid is-red>Red</z-button>
-				<z-button is-solid is-neutral>Neutral</z-button>
-			</div>
-			<div class="row">
-				<z-button is-solid is-extra-small>XS</z-button>
-				<z-button is-solid is-small>Small</z-button>
-				<z-button is-solid>Medium</z-button>
-				<z-button is-solid is-large>Large</z-button>
-				<z-button is-solid is-extra-large>XL</z-button>
-			</div>
-			<div class="row">
-				<z-button is-solid is-loading>Loading</z-button>
-				<z-button is-solid is-disabled>Disabled</z-button>
-				<z-button is-dim>Dim</z-button>
-			</div>
+			<div id="z-button-grid"></div>
 		</section>
 
 		<section>
 			<h2>z-button-group</h2>
 			<div class="row">
 				<z-button-group>
-					<z-button is-outlined>Left</z-button>
-					<z-button is-outlined>Mid</z-button>
-					<z-button is-outlined>Right</z-button>
+					<z-button kind="outline">Left</z-button>
+					<z-button kind="outline">Mid</z-button>
+					<z-button kind="outline">Right</z-button>
 				</z-button-group>
 				<z-button-group is-vertical>
-					<z-button is-outlined>Top</z-button>
-					<z-button is-outlined>Mid</z-button>
-					<z-button is-outlined>Bottom</z-button>
+					<z-button kind="outline">Top</z-button>
+					<z-button kind="outline">Mid</z-button>
+					<z-button kind="outline">Bottom</z-button>
 				</z-button-group>
 			</div>
 		</section>
@@ -148,5 +151,56 @@
 		</section>
 
 		<script type="module" src="/src/index.ts"></script>
+		<script type="module">
+			const KINDS = ['solid', 'outline', 'ghost', 'soft', 'plain']
+			const SIZES = ['small', 'medium', 'large']
+			const TONES = ['primary', 'secondary', 'neutral', 'success', 'warning', 'danger']
+
+			const makeButton = (kind, size, tone, extra = {}) => {
+				const button = document.createElement('z-button')
+				button.setAttribute('kind', kind)
+				button.setAttribute('size', size)
+				button.setAttribute('tone', tone)
+				if (extra.isLoading) button.setAttribute('is-loading', '')
+				if (extra.isDisabled) button.setAttribute('is-disabled', '')
+				if (extra.isFullWidth) button.setAttribute('is-full-width', '')
+				button.textContent = extra.label || tone
+				return button
+			}
+
+			const grid = document.getElementById('z-button-grid')
+
+			for (const kind of KINDS) {
+				const kindBlock = document.createElement('div')
+				kindBlock.className = 'kind-block'
+
+				const heading = document.createElement('h3')
+				heading.textContent = `kind="${kind}"`
+				kindBlock.append(heading)
+
+				for (const size of SIZES) {
+					const row = document.createElement('div')
+					row.className = 'row'
+
+					const sizeLabel = document.createElement('span')
+					sizeLabel.className = 'size-label'
+					sizeLabel.textContent = size
+					row.append(sizeLabel)
+
+					for (const tone of TONES) row.append(makeButton(kind, size, tone))
+					row.append(makeButton(kind, size, 'neutral', { isLoading: true, label: 'Loading' }))
+					row.append(makeButton(kind, size, 'neutral', { isDisabled: true, label: 'Disabled' }))
+
+					kindBlock.append(row)
+				}
+
+				const fullWidthRow = document.createElement('div')
+				fullWidthRow.className = 'row'
+				fullWidthRow.append(makeButton(kind, 'medium', 'neutral', { isFullWidth: true, label: `Full width ${kind} button` }))
+				kindBlock.append(fullWidthRow)
+
+				grid.append(kindBlock)
+			}
+		</script>
 	</body>
 </html>

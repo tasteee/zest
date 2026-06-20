@@ -9,6 +9,11 @@ const styles = css`
 		display: none;
 	}
 
+	:host([is-full-width]) {
+		display: flex;
+		width: 100%;
+	}
+
 	button {
 		display: inline-flex;
 		align-items: center;
@@ -28,12 +33,11 @@ const styles = css`
 			color 0.1s ease;
 	}
 
-	button.is-extra-small {
-		border-radius: var(--z-button-radius, var(--small-button-radius));
-		height: 1.5rem;
-		padding-inline: 0.625rem;
-		font-size: 0.6875rem;
+	button.is-full-width {
+		width: 100%;
 	}
+
+	/* sizes */
 
 	button.is-small {
 		border-radius: var(--z-button-radius, var(--small-button-radius));
@@ -56,45 +60,55 @@ const styles = css`
 		font-size: 1rem;
 	}
 
-	button.is-extra-large {
-		border-radius: var(--z-button-radius, var(--large-button-radius));
-		height: 3.5rem;
-		padding-inline: 2rem;
-		font-size: 1.125rem;
+	/* tones: each one defines --tone-fill (the solid background) and
+	   --tone-accent (the border/text color used by every other kind) so the
+	   kind classes below never need a rule per tone. For most tones these are
+	   the same vivid color; success/danger use a darker fill paired with a
+	   brighter accent for legibility on the dark theme, mirroring the
+	   existing --destructive / --destructive-foreground split. */
+
+	button.is-primary {
+		--tone-fill: var(--purple);
+		--tone-accent: var(--purple);
+		--tone-foreground: var(--primary-foreground);
 	}
 
-	button.is-icon {
-		border-radius: var(--z-button-radius, var(--small-button-radius));
-		width: 2.5rem;
-		height: 2.5rem;
-		padding: 0;
+	button.is-secondary {
+		--tone-fill: var(--secondary);
+		--tone-accent: var(--secondary);
+		--tone-foreground: var(--secondary-foreground);
 	}
 
-	button.is-solid.is-purple {
-		background: var(--purple);
-		border-color: var(--purple);
-		color: var(--primary-foreground);
-		font-weight: 600;
+	button.is-neutral {
+		--tone-fill: var(--primary);
+		--tone-accent: var(--primary);
+		--tone-foreground: var(--primary-foreground);
 	}
 
-	button.is-solid.is-pink {
-		background: var(--pink);
-		border-color: var(--pink);
-		color: var(--primary-foreground);
-		font-weight: 600;
+	button.is-success {
+		--tone-fill: var(--success);
+		--tone-accent: var(--success-foreground);
+		--tone-foreground: var(--success-foreground);
 	}
 
-	button.is-solid.is-red {
-		background: var(--destructive);
-		border-color: var(--destructive);
-		color: var(--destructive-foreground);
-		font-weight: 600;
+	button.is-warning {
+		--tone-fill: var(--warning);
+		--tone-accent: var(--warning);
+		--tone-foreground: var(--primary-foreground);
 	}
 
-	button.is-solid.is-neutral {
-		background: var(--primary);
-		border-color: var(--primary);
-		color: var(--primary-foreground);
+	button.is-danger {
+		--tone-fill: var(--destructive);
+		--tone-accent: var(--destructive-foreground);
+		--tone-foreground: var(--destructive-foreground);
+	}
+
+	/* kinds: paint using the tone variables above */
+
+	button.is-solid {
+		background: var(--tone-fill);
+		border-color: var(--tone-fill);
+		color: var(--tone-foreground);
 		font-weight: 600;
 	}
 
@@ -106,110 +120,64 @@ const styles = css`
 		opacity: 0.8;
 	}
 
-	button.is-dim {
-		color: #fff;
-		background: #ffffff25;
-		border-color: transparent;
-		font-weight: 600;
-	}
-
-	button.is-dim:hover {
-		background: #ffffff38;
-	}
-
-	button.is-dim:active {
-		background: #ffffff4d;
-	}
-
-	button.is-outlined {
+	button.is-outline {
 		background: transparent;
+		border-color: var(--tone-accent);
+		color: var(--tone-accent);
 	}
 
-	button.is-outlined.is-purple {
-		border-color: var(--purple);
-		color: var(--purple);
+	button.is-outline:hover {
+		background: color-mix(in oklch, var(--tone-accent) 10%, transparent);
 	}
 
-	button.is-outlined.is-pink {
-		border-color: var(--pink);
-		color: var(--pink);
-	}
-
-	button.is-outlined.is-red {
-		border-color: var(--destructive);
-		color: var(--destructive);
-	}
-
-	button.is-outlined.is-neutral,
-	button.is-outlined:not(.is-purple, .is-pink, .is-red) {
-		border-color: var(--border);
-		color: var(--foreground);
-	}
-
-	button.is-outlined.is-purple:hover {
-		background: color-mix(in oklch, var(--purple) 10%, transparent);
-	}
-
-	button.is-outlined.is-pink:hover {
-		background: color-mix(in oklch, var(--pink) 10%, transparent);
-	}
-
-	button.is-outlined.is-red:hover {
-		background: color-mix(in oklch, var(--destructive) 10%, transparent);
-	}
-
-	button.is-outlined.is-neutral:hover,
-	button.is-outlined:not(.is-purple, .is-pink, .is-red):hover {
-		border-color: color-mix(in oklch, var(--foreground) 50%, transparent);
-	}
-
-	button.is-outlined.is-purple:active {
-		background: color-mix(in oklch, var(--purple) 20%, transparent);
-	}
-
-	button.is-outlined.is-pink:active {
-		background: color-mix(in oklch, var(--pink) 20%, transparent);
-	}
-
-	button.is-outlined.is-red:active {
-		background: color-mix(in oklch, var(--destructive) 20%, transparent);
-	}
-
-	button.is-outlined.is-neutral:active,
-	button.is-outlined:not(.is-purple, .is-pink, .is-red):active {
-		border-color: color-mix(in oklch, var(--foreground) 70%, transparent);
-		background: color-mix(in oklch, var(--foreground) 5%, transparent);
+	button.is-outline:active {
+		background: color-mix(in oklch, var(--tone-accent) 20%, transparent);
 	}
 
 	button.is-ghost {
 		background: transparent;
 		border-color: transparent;
-	}
-
-	button.is-ghost.is-purple {
-		color: var(--purple);
-	}
-
-	button.is-ghost.is-pink {
-		color: var(--pink);
-	}
-
-	button.is-ghost.is-red {
-		color: var(--destructive);
-	}
-
-	button.is-ghost.is-neutral,
-	button.is-ghost:not(.is-purple, .is-pink, .is-red) {
-		color: var(--foreground);
+		color: var(--tone-accent);
 	}
 
 	button.is-ghost:hover {
-		opacity: 0.7;
+		background: color-mix(in oklch, var(--tone-accent) 10%, transparent);
 	}
 
 	button.is-ghost:active {
-		opacity: 0.55;
+		background: color-mix(in oklch, var(--tone-accent) 18%, transparent);
 	}
+
+	button.is-soft {
+		background: color-mix(in oklch, var(--tone-accent) 15%, transparent);
+		border-color: transparent;
+		color: var(--tone-accent);
+		font-weight: 600;
+	}
+
+	button.is-soft:hover {
+		background: color-mix(in oklch, var(--tone-accent) 24%, transparent);
+	}
+
+	button.is-soft:active {
+		background: color-mix(in oklch, var(--tone-accent) 32%, transparent);
+	}
+
+	button.is-plain {
+		background: transparent;
+		border-color: transparent;
+		color: var(--tone-accent);
+	}
+
+	button.is-plain:hover {
+		text-decoration: underline;
+	}
+
+	button.is-plain:active {
+		opacity: 0.8;
+	}
+
+	/* states */
 
 	button.is-disabled,
 	button:disabled {
@@ -237,11 +205,6 @@ const styles = css`
 		flex-shrink: 0;
 	}
 
-	button.is-extra-small ::slotted(svg) {
-		width: 0.75rem;
-		height: 0.75rem;
-	}
-
 	button.is-small ::slotted(svg) {
 		width: 0.875rem;
 		height: 0.875rem;
@@ -252,11 +215,6 @@ const styles = css`
 		height: 1.125rem;
 	}
 
-	button.is-extra-large ::slotted(svg) {
-		width: 1.25rem;
-		height: 1.25rem;
-	}
-
 	@keyframes z-button-spin {
 		to {
 			transform: rotate(360deg);
@@ -264,38 +222,39 @@ const styles = css`
 	}
 `
 
-const resolveColorClass = (props: any): string => {
-	if (props.isPurple) return 'is-purple'
-	if (props.isPink) return 'is-pink'
-	if (props.isRed) return 'is-red'
-	return 'is-neutral'
-}
-
 const resolveSizeClass = (props: any): string => {
-	if (props.isExtraSmall) return 'is-extra-small'
-	if (props.isSmall) return 'is-small'
-	if (props.isLarge) return 'is-large'
-	if (props.isExtraLarge) return 'is-extra-large'
-	if (props.isIcon) return 'is-icon'
+	if (props.size === 'small') return 'is-small'
+	if (props.size === 'large') return 'is-large'
 	return 'is-medium'
 }
 
 const resolveKindClass = (props: any): string => {
-	if (props.isGhost) return 'is-ghost'
-	if (props.isSolid) return 'is-solid'
-	if (props.isDim) return 'is-dim'
-	return 'is-outlined'
+	if (props.kind === 'outline') return 'is-outline'
+	if (props.kind === 'ghost') return 'is-ghost'
+	if (props.kind === 'soft') return 'is-soft'
+	if (props.kind === 'plain') return 'is-plain'
+	return 'is-solid'
+}
+
+const resolveToneClass = (props: any): string => {
+	if (props.tone === 'primary') return 'is-primary'
+	if (props.tone === 'secondary') return 'is-secondary'
+	if (props.tone === 'success') return 'is-success'
+	if (props.tone === 'warning') return 'is-warning'
+	if (props.tone === 'danger') return 'is-danger'
+	return 'is-neutral'
 }
 
 export const ZButton = c(
 	(props) => {
 		const kindClass = resolveKindClass(props)
-		const colorClass = resolveColorClass(props)
+		const toneClass = resolveToneClass(props)
 		const sizeClass = resolveSizeClass(props)
 		const isButtonDisabled = props.isDisabled || props.isLoading
-		const buttonClass = [kindClass, colorClass, sizeClass]
+		const buttonClass = [kindClass, toneClass, sizeClass]
 			.concat(props.isLoading ? ['is-loading'] : [])
 			.concat(props.isDisabled ? ['is-disabled'] : [])
+			.concat(props.isFullWidth ? ['is-full-width'] : [])
 			.join(' ')
 
 		return (
@@ -309,23 +268,13 @@ export const ZButton = c(
 	},
 	{
 		props: {
-			isPurple: { type: Boolean, reflect: true },
-			isPink: { type: Boolean, reflect: true },
-			isRed: { type: Boolean, reflect: true },
-			isNeutral: { type: Boolean, reflect: true },
-			isExtraSmall: { type: Boolean, reflect: true },
-			isSmall: { type: Boolean, reflect: true },
-			isMedium: { type: Boolean, reflect: true },
-			isLarge: { type: Boolean, reflect: true },
-			isExtraLarge: { type: Boolean, reflect: true },
-			isIcon: { type: Boolean, reflect: true },
-			isGhost: { type: Boolean, reflect: true },
-			isOutlined: { type: Boolean, reflect: true },
-			isSolid: { type: Boolean, reflect: true },
-			isDim: { type: Boolean, reflect: true },
+			size: { type: String, reflect: true },
+			kind: { type: String, reflect: true },
+			tone: { type: String, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			isDisabled: { type: Boolean, reflect: true },
 			isLoading: { type: Boolean, reflect: true },
+			isFullWidth: { type: Boolean, reflect: true },
 			label: String,
 			type: String
 		},
