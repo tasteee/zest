@@ -208,23 +208,23 @@ const styles = css`
 	   weight overrides
 	--------------------------------------------- */
 
-	.text.is-weight-xxl {
+	.text.is-weight-900 {
 		font-weight: 900;
 	}
 
-	.text.is-weight-xl {
+	.text.is-weight-700 {
 		font-weight: 700;
 	}
 
-	.text.is-weight-lg {
+	.text.is-weight-600 {
 		font-weight: 600;
 	}
 
-	.text.is-weight-md {
+	.text.is-weight-400 {
 		font-weight: 400;
 	}
 
-	.text.is-weight-sm {
+	.text.is-weight-300 {
 		font-weight: 300;
 	}
 
@@ -256,7 +256,6 @@ const resolveSizeClass = (props: any, fallback: string): string => {
 	if (props.size === 'md') return 'is-md'
 	if (props.size === 'sm') return 'is-sm'
 	if (props.size === 'xs') return 'is-xs'
-
 	return fallback
 }
 
@@ -264,18 +263,16 @@ const resolveColorClass = (props: any): string => {
 	if (props.color === 'primary') return 'is-primary'
 	if (props.color === 'secondary') return 'is-secondary'
 	if (props.color === 'muted') return 'is-muted'
-
 	return 'is-neutral'
 }
 
 const resolveWeightClass = (props: any): string => {
-	if (props.weight === 'xxl') return 'is-weight-xxl'
-	if (props.weight === 'xl') return 'is-weight-xl'
-	if (props.weight === 'lg') return 'is-weight-lg'
-	if (props.weight === 'md') return 'is-weight-md'
-	if (props.weight === 'sm') return 'is-weight-sm'
-
-	return ''
+	if (props.weight === '900') return 'is-weight-900'
+	if (props.weight === '700') return 'is-weight-700'
+	if (props.weight === '600') return 'is-weight-600'
+	if (props.weight === '400') return 'is-weight-400'
+	if (props.weight === '300') return 'is-weight-300'
+	return 'is-weight-400'
 }
 
 const resolveHeadingTag = (props: any): string => {
@@ -286,7 +283,6 @@ const resolveHeadingTag = (props: any): string => {
 	if (props.level === '4' || props.level === 4) return 'h4'
 	if (props.level === '5' || props.level === 5) return 'h5'
 	if (props.level === '6' || props.level === 6) return 'h6'
-
 	return 'h2'
 }
 

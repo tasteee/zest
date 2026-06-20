@@ -114,11 +114,13 @@ export const toggleStyles = css`
 		--z-toggle-on-border: transparent;
 	}
 
+	/* off: tone-colored text (--z-toggle-color) + a dimmed tone border so the two
+	   agree. on: solid tone fill with dark on-foreground text and a solid border. */
 	button.is-outlined {
-		--z-toggle-border: var(--border);
+		--z-toggle-border: color-mix(in oklch, var(--z-toggle-accent, var(--foreground)) 50%, transparent);
 		--z-toggle-hover-bg: color-mix(in oklch, var(--z-toggle-accent, var(--foreground)) 10%, transparent);
-		--z-toggle-on-bg: color-mix(in oklch, var(--z-toggle-accent, var(--primary)) 18%, transparent);
-		--z-toggle-on-color: var(--z-toggle-accent, var(--primary));
+		--z-toggle-on-bg: var(--z-toggle-accent, var(--primary));
+		--z-toggle-on-color: var(--z-toggle-accent-foreground, var(--primary-foreground));
 		--z-toggle-on-border: var(--z-toggle-accent, var(--primary));
 	}
 

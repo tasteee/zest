@@ -6,7 +6,7 @@ const styles = css`
 		box-sizing: border-box;
 		border-radius: var(--radius-lg);
 		padding: var(--space-lg);
-		transition: border-color 0.1s linear;
+		transition: border-color 0.05s linear;
 		border: 1px solid var(--border);
 		color: var(--foreground);
 	}

@@ -115,14 +115,14 @@ const styles = css`
 		--toggle-border: transparent;
 	}
 
+	/* off: tone-colored text + a dimmed tone border (border and text agree).
+	   on: solid tone fill (inherits the base on-state) with a solid tone border. */
 	button.is-outline {
-		--toggle-border: var(--border);
+		--toggle-border: color-mix(in oklch, var(--tone-color) 50%, transparent);
 	}
 
 	button.is-outline[data-state='on'] {
-		background: color-mix(in oklch, var(--tone-color) 18%, transparent);
 		border-color: var(--tone-color);
-		color: var(--tone-color);
 	}
 
 	::slotted(svg) {
@@ -140,8 +140,8 @@ const resolveSizeClass = (props: any): string => {
 }
 
 const resolveKindClass = (props: any): string => {
-	if (props.kind === 'outline') return 'is-outline'
-	return 'is-ghost'
+	if (props.kind === 'ghost') return 'is-ghost'
+	return 'is-outline'
 }
 
 const resolveToneClass = (props: any): string => {

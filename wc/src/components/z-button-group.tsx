@@ -44,9 +44,39 @@ const styles = css`
 		margin-top: -1px;
 	}
 
-	::slotted(:focus-visible) {
+	/* Stacking ladder: earlier items paint above later ones so each item shows
+	   its own trailing border at the seam instead of being covered by the next
+	   item. The focused item jumps above all so its full border is never clipped. */
+	::slotted(*) {
 		position: relative;
 		z-index: 1;
+	}
+	::slotted(:nth-child(1)) {
+		z-index: 9;
+	}
+	::slotted(:nth-child(2)) {
+		z-index: 8;
+	}
+	::slotted(:nth-child(3)) {
+		z-index: 7;
+	}
+	::slotted(:nth-child(4)) {
+		z-index: 6;
+	}
+	::slotted(:nth-child(5)) {
+		z-index: 5;
+	}
+	::slotted(:nth-child(6)) {
+		z-index: 4;
+	}
+	::slotted(:nth-child(7)) {
+		z-index: 3;
+	}
+	::slotted(:nth-child(8)) {
+		z-index: 2;
+	}
+	::slotted(:focus-visible) {
+		z-index: 20;
 	}
 `
 

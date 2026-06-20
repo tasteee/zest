@@ -46,11 +46,43 @@ const styles = css`
 		margin-top: -1px;
 	}
 
+	/* Stacking ladder: items overlap by 1px (above) so neighbouring borders
+	   collapse into a single seam. Earlier items are laid ABOVE later ones so
+	   each item paints its OWN right/bottom border at the seam rather than being
+	   covered by the next item's leading border. The hovered/focused/selected
+	   item jumps above everything so its full (accent) border is never clipped. */
+	::slotted(*) {
+		position: relative;
+		z-index: 1;
+	}
+	::slotted(:nth-child(1)) {
+		z-index: 9;
+	}
+	::slotted(:nth-child(2)) {
+		z-index: 8;
+	}
+	::slotted(:nth-child(3)) {
+		z-index: 7;
+	}
+	::slotted(:nth-child(4)) {
+		z-index: 6;
+	}
+	::slotted(:nth-child(5)) {
+		z-index: 5;
+	}
+	::slotted(:nth-child(6)) {
+		z-index: 4;
+	}
+	::slotted(:nth-child(7)) {
+		z-index: 3;
+	}
+	::slotted(:nth-child(8)) {
+		z-index: 2;
+	}
 	::slotted(:hover),
 	::slotted([data-state='on']),
 	::slotted(:focus-visible) {
-		position: relative;
-		z-index: 1;
+		z-index: 20;
 	}
 
 	:host([is-purple]) {
@@ -95,11 +127,13 @@ const styles = css`
 		--z-toggle-on-border: transparent;
 	}
 
+	/* off: tone-colored text + a dimmed tone border (mixed toward transparent so
+	   the hue never rotates). on: solid tone fill with dark on-foreground text. */
 	:host([is-outlined]) {
-		--z-toggle-border: var(--border);
+		--z-toggle-border: color-mix(in oklch, var(--z-toggle-accent, var(--foreground)) 50%, transparent);
 		--z-toggle-hover-bg: color-mix(in oklch, var(--z-toggle-accent, var(--foreground)) 10%, transparent);
-		--z-toggle-on-bg: color-mix(in oklch, var(--z-toggle-accent, var(--primary)) 18%, transparent);
-		--z-toggle-on-color: var(--z-toggle-accent, var(--primary));
+		--z-toggle-on-bg: var(--z-toggle-accent, var(--primary));
+		--z-toggle-on-color: var(--z-toggle-accent-foreground, var(--primary-foreground));
 		--z-toggle-on-border: var(--z-toggle-accent, var(--primary));
 	}
 

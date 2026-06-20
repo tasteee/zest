@@ -27,10 +27,10 @@ const styles = css`
 		line-height: 1;
 		box-sizing: border-box;
 		transition:
-			opacity 0.1s ease,
-			border-color 0.1s ease,
-			background-color 0.1s ease,
-			color 0.1s ease;
+			opacity 0.05s,
+			border-color 0.05s,
+			background-color 0.05s,
+			color 0.05s;
 	}
 
 	button.is-full-width {
@@ -206,6 +206,21 @@ const styles = css`
 		height: 1.125rem;
 	}
 
+	button.is-outline.is-neutral {
+		--tone-color: var(--color-neutral-7);
+		color: var(--color-neutral-7);
+
+		&:hover {
+			background: var(--color-neutral-3);
+			color: var(--color-neutral-9) !important;
+		}
+	}
+
+	.is-solid.is-primary .label,
+	.is-solid.is-secondary .label {
+		text-shadow: 0 0px 3px var(--primary-foreground);
+	}
+
 	@keyframes z-button-spin {
 		to {
 			transform: rotate(360deg);
@@ -254,8 +269,10 @@ export const ZButton = c(
 		return (
 			<host shadowDom>
 				<button class={buttonClass} type={buttonType} disabled={isButtonDisabled}>
-					{props.isLoading && <span class='spinner' aria-hidden='true'></span>}
-					{props.label ? props.label : <slot />}
+					<span class='label'>
+						{props.isLoading && <span class='spinner' aria-hidden='true'></span>}
+						{props.label ? props.label : <slot />}
+					</span>
 				</button>
 			</host>
 		)
