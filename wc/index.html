@@ -53,11 +53,123 @@
 	</head>
 	<body>
 		<section>
-			<h2>z-button</h2>
+			<z-heading level="1" size="xxl">Page title</z-heading>
+
+			<z-heading level="2" size="lg" color="primary"> Section title </z-heading>
+
+			<z-subheading size="sm" color="muted"> Account summary </z-subheading>
+
+			<z-text size="md"> Normal paragraph text. </z-text>
+
+			<z-text size="sm" color="muted"> Muted supporting copy. </z-text>
+
+			<z-label size="lg" weight="semibold"> Customer name </z-label>
+			<z-heading level="xl">z-button</z-heading>
+
+			<div class="z-button-row" data-kind="solid" data-size="large" data-colors="brand"></div>
+			<div class="z-button-row" data-kind="solid" data-size="large" data-colors="semantic"></div>
+
+			<div class="z-button-row" data-kind="solid" data-size="medium" data-colors="brand"></div>
+			<div class="z-button-row" data-kind="solid" data-size="medium" data-colors="semantic"></div>
+
+			<div class="z-button-row" data-kind="solid" data-size="small" data-colors="brand"></div>
+			<div class="z-button-row" data-kind="solid" data-size="small" data-colors="semantic"></div>
+
+			<!--  -->
+
+			<div class="z-button-row" data-kind="outline" data-size="large" data-colors="brand"></div>
+			<div class="z-button-row" data-kind="outline" data-size="large" data-colors="semantic"></div>
+
+			<div class="z-button-row" data-kind="outline" data-size="medium" data-colors="brand"></div>
+			<div class="z-button-row" data-kind="outline" data-size="medium" data-colors="semantic"></div>
+
+			<div class="z-button-row" data-kind="outline" data-size="small" data-colors="brand"></div>
+			<div class="z-button-row" data-kind="outline" data-size="small" data-colors="semantic"></div>
+
+			<!--  -->
+
+			<div class="z-button-row" data-kind="ghost" data-size="large" data-colors="brand"></div>
+			<div class="z-button-row" data-kind="ghost" data-size="large" data-colors="semantic"></div>
+
+			<div class="z-button-row" data-kind="ghost" data-size="medium" data-colors="brand"></div>
+			<div class="z-button-row" data-kind="ghost" data-size="medium" data-colors="semantic"></div>
+
+			<div class="z-button-row" data-kind="ghost" data-size="small" data-colors="brand"></div>
+			<div class="z-button-row" data-kind="ghost" data-size="small" data-colors="semantic"></div>
+
+			<!--  -->
+
+			<div class="z-button-row" data-kind="soft" data-size="large" data-colors="brand"></div>
+			<div class="z-button-row" data-kind="soft" data-size="large" data-colors="semantic"></div>
+
+			<div class="z-button-row" data-kind="soft" data-size="medium" data-colors="brand"></div>
+			<div class="z-button-row" data-kind="soft" data-size="medium" data-colors="semantic"></div>
+
+			<div class="z-button-row" data-kind="soft" data-size="small" data-colors="brand"></div>
+			<div class="z-button-row" data-kind="soft" data-size="small" data-colors="semantic"></div>
+
+			<!--  -->
+
+			<div class="z-button-row" data-kind="plain" data-size="large" data-colors="brand"></div>
+			<div class="z-button-row" data-kind="plain" data-size="large" data-colors="semantic"></div>
+
+			<div class="z-button-row" data-kind="plain" data-size="medium" data-colors="brand"></div>
+			<div class="z-button-row" data-kind="plain" data-size="medium" data-colors="semantic"></div>
+
+			<div class="z-button-row" data-kind="plain" data-size="small" data-colors="brand"></div>
+			<div class="z-button-row" data-kind="plain" data-size="small" data-colors="semantic"></div>
+
+			<style>
+				:nth-child(1 of .z-button-row) {
+					margin-top: 2rem;
+				}
+
+				.z-button-row {
+					display: flex;
+					gap: 1rem;
+					margin-bottom: 1rem;
+				}
+
+				[data-size='small'] + [data-size='large'] {
+					margin-top: 6rem;
+				}
+
+				[data-size='large'] + [data-size='medium'] {
+					margin-top: 3rem;
+				}
+
+				[data-size='medium'] + [data-size='small'] {
+					margin-top: 3rem;
+				}
+			</style>
+
+			<script>
+				const buttonRows = document.querySelectorAll('.z-button-row')
+
+				buttonRows.forEach((row) => {
+					const colorSets = {
+						brand: ['primary', 'secondary', 'neutral'],
+						semantic: ['success', 'warning', 'danger']
+					}
+
+					const kind = row.dataset.kind
+					const size = row.dataset.size
+					const colors = colorSets[row.dataset.colors]
+
+					colors.forEach((color) => {
+						const button = document.createElement('z-button')
+						button.setAttribute('kind', kind)
+						button.setAttribute('size', size)
+						button.setAttribute('tone', color)
+						button.textContent = `${color}`
+						row.appendChild(button)
+					})
+				})
+			</script>
+
 			<p style="color: var(--muted); max-width: 640px; margin-bottom: 1rem">
-				<code>&lt;z-button&gt;Default&lt;/z-button&gt;</code> with no attributes at all renders
-				<strong>kind="solid"</strong>, <strong>tone="neutral"</strong>, <strong>size="medium"</strong> — a
-				solid, medium-height, neutral-colored button.
+				<code>&lt;z-button&gt;Default&lt;/z-button&gt;</code> with no attributes at all renders <strong>kind="solid"</strong>,
+				<strong>tone="neutral"</strong>, <strong>size="medium"</strong> — a solid, medium-height, neutral-colored button.
 			</p>
 			<div class="row">
 				<z-button>Default</z-button>
@@ -85,11 +197,11 @@
 			<h2>z-toggle</h2>
 			<div class="row">
 				<z-toggle>Default</z-toggle>
-				<z-toggle is-outlined>Outlined</z-toggle>
-				<z-toggle is-purple is-outlined>Purple</z-toggle>
-				<z-toggle is-pink is-outlined is-pressed>Pink (pressed)</z-toggle>
-				<z-toggle is-small>Small</z-toggle>
-				<z-toggle is-large>Large</z-toggle>
+				<z-toggle kind="outline">Outlined</z-toggle>
+				<z-toggle tone="primary" kind="outline">Purple</z-toggle>
+				<z-toggle tone="secondary" kind="outline" is-pressed>Pink (pressed)</z-toggle>
+				<z-toggle size="small">Small</z-toggle>
+				<z-toggle size="large">Large</z-toggle>
 				<z-toggle is-disabled>Disabled</z-toggle>
 			</div>
 		</section>
@@ -155,6 +267,15 @@
 			const KINDS = ['solid', 'outline', 'ghost', 'soft', 'plain']
 			const SIZES = ['small', 'medium', 'large']
 			const TONES = ['primary', 'secondary', 'neutral', 'success', 'warning', 'danger']
+
+			for (const kind of KINDS) {
+				for (const size of SIZES) {
+					for (const tone of TONES) {
+						const button = `<z-button kind="${kind}" size="${size}" tone="${tone}">${tone}</z-button>`
+						document.write(button)
+					}
+				}
+			}
 
 			const makeButton = (kind, size, tone, extra = {}) => {
 				const button = document.createElement('z-button')

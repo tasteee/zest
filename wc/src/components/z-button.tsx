@@ -43,7 +43,7 @@ const styles = css`
 		border-radius: var(--z-button-radius, var(--small-button-radius));
 		height: 2rem;
 		padding-inline: 0.875rem;
-		font-size: 0.875rem;
+		font-size: 0.75rem;
 	}
 
 	button.is-medium {
@@ -75,7 +75,7 @@ const styles = css`
 	}
 
 	button.is-neutral {
-		--tone-color: var(--primary);
+		--tone-color: var(--color-neutral-8);
 	}
 
 	button.is-success {
@@ -95,8 +95,12 @@ const styles = css`
 	button.is-solid {
 		background: var(--tone-color);
 		border-color: var(--tone-color);
-		color: var(--primary-foreground);
+		color: white;
 		font-weight: 600;
+	}
+
+	button.is-solid.is-neutral {
+		color: black;
 	}
 
 	button.is-solid:hover {
@@ -168,7 +172,7 @@ const styles = css`
 
 	button.is-disabled,
 	button:disabled {
-		opacity: 0.5;
+		filter: contrast(75%) brightness(0.6);
 		pointer-events: none;
 	}
 
@@ -234,10 +238,13 @@ const resolveToneClass = (props: any): string => {
 
 export const ZButton = c(
 	(props) => {
+		const buttonType = (props.type as any) || 'button'
+
 		const kindClass = resolveKindClass(props)
 		const toneClass = resolveToneClass(props)
 		const sizeClass = resolveSizeClass(props)
 		const isButtonDisabled = props.isDisabled || props.isLoading
+
 		const buttonClass = [kindClass, toneClass, sizeClass]
 			.concat(props.isLoading ? ['is-loading'] : [])
 			.concat(props.isDisabled ? ['is-disabled'] : [])
@@ -246,8 +253,8 @@ export const ZButton = c(
 
 		return (
 			<host shadowDom>
-				<button class={buttonClass} type={(props.type as any) || 'button'} disabled={isButtonDisabled}>
-					{props.isLoading && <span class="spinner" aria-hidden="true"></span>}
+				<button class={buttonClass} type={buttonType} disabled={isButtonDisabled}>
+					{props.isLoading && <span class='spinner' aria-hidden='true'></span>}
 					{props.label ? props.label : <slot />}
 				</button>
 			</host>

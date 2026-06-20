@@ -7,7 +7,6 @@ const styles = css`
 		border-radius: var(--radius-lg);
 		padding: var(--space-lg);
 		transition: border-color 0.1s linear;
-		background: var(--card);
 		border: 1px solid var(--border);
 		color: var(--foreground);
 	}

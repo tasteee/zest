@@ -8,18 +8,23 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,100..1000&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap');
 
 :root {
-	--base-accent-color-0: #ff75be;
-	--base-accent-color-1: #b27eff;
-	--base-success-color: #22c55e;
-	--base-warning-color: #f97316;
-	--base-danger-color: #ef4444;
+	/* --color-danger: lch(58 72 22 / 1);
+	--color-warning: lch(72 78 76 / 1);
+	--color-success: lch(62 58 145 / 1); */
+
+	/* secondary tone */
+	--base-accent-color-0: lch(62.44 70.29 0.86 / 1);
+	--base-accent-color-1: lab(60 40.17 -57.68);
+	--base-success-color: lab(52.2 -46.61 31.61 / 1);
+	--base-warning-color: lch(62.44 70.29 54.86 / 1);
+	--base-danger-color: lch(59.5 75.52 35.8 / 1);
+
+	--base-success-color: lch(62 58 145 / 1);
+	--base-warning-color: lch(72 78 76 / 1);
+	--base-danger-color: lch(58 72 37 / 1);
+
 	--base-neutral-color-light: #fff;
 	--base-neutral-color-dark: #0a0f0a;
-	/* shared lightness/chroma for the primary/secondary/success/warning/danger
-	   button tones — only hue differs between them, so a solid button of any
-	   tone reads with the same boldness */
-	--tone-accent-l: 0.74;
-	--tone-accent-c: 0.19;
 	--base-sans-font-family: 'DM Sans';
 	--base-mono-font-family: 'DM Mono';
 	--base-spacing: 0.25rem;
@@ -88,8 +93,6 @@
 
 @supports (color: lab(0% 0 0)) {
 	:root {
-		--base-accent-color-0: lab(67.6187% 79.1701 -15.4143);
-		--base-accent-color-1: lab(61.0676% 57.4525 -77.0985);
 		--base-neutral-color-dark: lab(3.87% -2.29438 1.63959);
 	}
 }
@@ -107,13 +110,13 @@
 	--secondary: var(--color-neutral-5);
 	--accent: var(--color-purple);
 	--accent-alt: var(--color-pink);
-	/* normalized button-tone colors: same lightness/chroma, hue-only difference.
+	/* button-tone colors: exact per-tone colors with hand-tuned lightness/chroma.
 	   Deliberately decoupled from --color-purple/--color-pink above (which stay
 	   tied to the raw base accent colors z-toggle's is-purple/is-pink rely on). */
-	--purple: oklch(from var(--base-accent-color-1) var(--tone-accent-l) var(--tone-accent-c) h);
-	--pink: oklch(from var(--base-accent-color-0) var(--tone-accent-l) var(--tone-accent-c) h);
-	--success: oklch(from var(--base-success-color) var(--tone-accent-l) var(--tone-accent-c) h);
-	--warning: oklch(from var(--base-warning-color) var(--tone-accent-l) var(--tone-accent-c) h);
+	--purple: var(--base-accent-color-1);
+	--pink: var(--base-accent-color-0);
+	--success: var(--base-success-color);
+	--warning: var(--base-warning-color);
 	--background: var(--bg);
 	--background-light: var(--paper-soft);
 	--card: var(--paper);
@@ -125,7 +128,7 @@
 	--muted-foreground: var(--muted);
 	--skeleton: var(--color-neutral-3);
 	--accent-foreground: var(--primary);
-	--destructive: oklch(from var(--base-danger-color) var(--tone-accent-l) var(--tone-accent-c) h);
+	--destructive: var(--base-danger-color);
 	--border: var(--line);
 	--input: var(--line);
 	--ring: var(--color-neutral-4);
@@ -154,9 +157,9 @@
 	--radius-md: calc(var(--radius) - 2px);
 	--radius-lg: var(--radius);
 	--radius-xl: calc(var(--radius) + 4px);
-	--small-button-radius: 0.25rem;
-	--medium-button-radius: 0.375rem;
-	--large-button-radius: 0.5rem;
+	--small-button-radius: 2px;
+	--medium-button-radius: 3px;
+	--large-button-radius: 5px;
 	--color-background: var(--background);
 	--color-background-light: var(--background-light);
 	--color-foreground: var(--foreground);
