@@ -25,46 +25,44 @@ const styles = css`
 	   heading
 	--------------------------------------------- */
 
+	.text.is-heading {
+		font-weight: 700;
+	}
+
 	.text.is-heading.is-xxl {
 		font-size: 64px;
 		line-height: 72px;
 		letter-spacing: -0.96px;
-		font-weight: 600;
 	}
 
 	.text.is-heading.is-xl {
 		font-size: 56px;
 		line-height: 64px;
 		letter-spacing: -0.8px;
-		font-weight: 600;
 	}
 
 	.text.is-heading.is-lg {
 		font-size: 48px;
 		line-height: 56px;
 		letter-spacing: -0.64px;
-		font-weight: 600;
 	}
 
 	.text.is-heading.is-md {
 		font-size: 40px;
 		line-height: 52px;
 		letter-spacing: -0.54px;
-		font-weight: 600;
 	}
 
 	.text.is-heading.is-sm {
 		font-size: 32px;
 		line-height: 40px;
 		letter-spacing: -0.48px;
-		font-weight: 600;
 	}
 
 	.text.is-heading.is-xs {
 		font-size: 24px;
 		line-height: 32px;
 		letter-spacing: -0.1px;
-		font-weight: 600;
 	}
 
 	/* ---------------------------------------------
@@ -110,78 +108,76 @@ const styles = css`
 	   text / paragraph
 	--------------------------------------------- */
 
+	.text.is-text {
+		font-weight: 400;
+	}
+
 	.text.is-text.is-xxl {
 		font-size: 24px;
 		line-height: 40px;
 		letter-spacing: -0.44px;
-		font-weight: 400;
 	}
 
 	.text.is-text.is-xl {
 		font-size: 20px;
 		line-height: 32px;
 		letter-spacing: -0.32px;
-		font-weight: 400;
 	}
 
 	.text.is-text.is-lg {
 		font-size: 18px;
 		line-height: 32px;
 		letter-spacing: -0.26px;
-		font-weight: 400;
 	}
 
 	.text.is-text.is-md {
 		font-size: 16px;
 		line-height: 28px;
 		letter-spacing: -0.18px;
-		font-weight: 400;
 	}
 
 	.text.is-text.is-sm {
 		font-size: 14px;
 		line-height: 24px;
 		letter-spacing: -0.08px;
-		font-weight: 400;
 	}
 
 	.text.is-text.is-xs {
 		font-size: 12px;
 		line-height: 16px;
 		letter-spacing: 0;
-		font-weight: 400;
 	}
 
 	/* ---------------------------------------------
 	   label
 	--------------------------------------------- */
 
+	.text.is-label {
+		font-weight: 500;
+	}
+
 	.text.is-label.is-lg {
 		font-size: 18px;
 		line-height: 24px;
 		letter-spacing: -0.24px;
-		font-weight: 500;
 	}
 
 	.text.is-label.is-md {
 		font-size: 16px;
 		line-height: 24px;
 		letter-spacing: -0.18px;
-		font-weight: 500;
 	}
 
 	.text.is-label.is-sm {
 		font-size: 14px;
 		line-height: 20px;
 		letter-spacing: -0.08px;
-		font-weight: 500;
 	}
 
 	.text.is-label.is-xs {
 		font-size: 12px;
 		line-height: 16px;
 		letter-spacing: 0;
-		font-weight: 500;
 	}
 
 	/* ---------------------------------------------
@@ -272,18 +268,30 @@ const resolveWeightClass = (props: any): string => {
 	if (props.weight === '600') return 'is-weight-600'
 	if (props.weight === '400') return 'is-weight-400'
 	if (props.weight === '300') return 'is-weight-300'
-	return 'is-weight-400'
+	// No explicit weight: emit no override class so each variant keeps its own
+	// base weight (heading 700, label 500, text/subheading per their rules).
+	// Returning is-weight-400 here previously clobbered the heading weight.
+	return ''
+}
+
+/*
+ * The visual size scale and the semantic heading levels are the same six steps,
+ * so the tag is derived straight from `size` (xxl→h1 … xs→h6) rather than
+ * carrying a separate `level` prop. When you need the element to diverge from
+ * its visual weight — a large-looking h2, say — the `tag` prop overrides.
+ */
+const SIZE_TO_HEADING_TAG: Record<string, string> = {
+	xxl: 'h1',
+	xl: 'h2',
+	lg: 'h3',
+	md: 'h4',
+	sm: 'h5',
+	xs: 'h6'
 }
 
 const resolveHeadingTag = (props: any): string => {
 	if (props.tag) return props.tag
-	if (props.level === '1' || props.level === 1) return 'h1'
-	if (props.level === '2' || props.level === 2) return 'h2'
-	if (props.level === '3' || props.level === 3) return 'h3'
-	if (props.level === '4' || props.level === 4) return 'h4'
-	if (props.level === '5' || props.level === 5) return 'h5'
-	if (props.level === '6' || props.level === 6) return 'h6'
-	return 'h2'
+	return SIZE_TO_HEADING_TAG[props.size] || 'h4'
 }
 
 const resolveTextClass = (props: any, variantClass: string, fallbackSizeClass: string): string => {
@@ -324,10 +332,7 @@ export const ZHeading = c(
 		)
 	},
 	{
-		props: {
-			...textProps,
-			level: { type: String, reflect: true }
-		},
+		props: textProps,
 		styles
 	}
 )

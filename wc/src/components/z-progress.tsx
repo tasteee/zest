@@ -9,12 +9,13 @@ const styles = css`
 	:host {
 		display: block;
 		width: 100%;
-		--accent: var(--purple);
+		--accent: var(--color-neutral-8);
 	}
 
 	:host([tone='secondary']) {
 		--accent: var(--pink);
 	}
+
 	:host([tone='success']) {
 		--accent: var(--success);
 	}
@@ -76,13 +77,13 @@ export const ZProgress = c(
 		return (
 			<host
 				shadowDom
-				role="progressbar"
-				aria-valuemin="0"
+				role='progressbar'
+				aria-valuemin='0'
 				aria-valuemax={String(max)}
 				aria-valuenow={props.isIndeterminate ? undefined : String(value)}
 			>
 				<div class={props.isIndeterminate ? 'track is-indeterminate' : 'track'}>
-					<div class="bar" style={{ width: `${pct}%` }}></div>
+					<div class='bar' style={{ width: `${pct}%` }}></div>
 				</div>
 			</host>
 		)

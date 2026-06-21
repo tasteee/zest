@@ -336,6 +336,10 @@
 				<a href="#actions">Actions</a>
 				<a href="#forms">Forms</a>
 				<a href="#data">Data</a>
+				<a href="#navigation">Navigation</a>
+				<a href="#overlays">Overlays</a>
+				<a href="#specialized">Specialized</a>
+				<a href="/typography.html">Typography</a>
 			</div>
 			<div class="nav-tag">WIP</div>
 		</nav>
@@ -357,15 +361,15 @@
 				<p class="section-sub">The primitives every other component composes from — type, surfaces, and dividers.</p>
 
 				<!-- Typography -->
-				<div class="block">
+				<z-box is-column class="block">
 					<div class="block-title">
 						<h3>&lt;z-heading&gt; · &lt;z-text&gt;</h3>
 						<span class="desc">DM Sans, one family, all weights</span>
 					</div>
 					<div class="panel">
 						<z-box is-flex is-column gap="4">
-							<z-heading level="1" size="xxl">The quick brown fox</z-heading>
-							<z-heading level="2" size="lg">Jumps over the lazy dog</z-heading>
+							<z-heading size="xxl">The quick brown fox</z-heading>
+							<z-heading size="lg" tag="h2">Jumps over the lazy dog</z-heading>
 							<z-subheading size="sm" color="muted">Subheading · uppercase · tracked</z-subheading>
 							<z-text size="lg">
 								Body copy stays calm and legible. White is reserved for hierarchy — headlines and CTAs — while supporting text rests
@@ -381,44 +385,44 @@
 							</z-box>
 						</z-box>
 					</div>
-				</div>
+				</z-box>
 
 				<!-- Cards -->
-				<div class="block">
+				<z-box is-column class="block">
 					<div class="block-title">
 						<h3>&lt;z-card&gt;</h3>
 						<span class="desc">borders only — no shadows, ever</span>
 					</div>
 					<div class="panel-grid">
 						<z-card does-light-up-on-hover is-flex is-column gap="3">
-							<z-box is-flex is-row yCenter style="justify-content: space-between">
-								<z-text color="primary" weight="lg" size="sm">Active</z-text>
+							<z-box is-flex is-row y-center margin-bottom="1rem" x-between>
+								<z-text color="primary" weight="700" size="sm">Active</z-text>
 								<z-text color="muted" size="xs">2 min ago</z-text>
 							</z-box>
-							<z-heading level="3" size="xs">Project Alpha</z-heading>
+							<z-heading size="xs" tag="h3">Project Alpha</z-heading>
 							<z-text size="sm" color="muted">Breaking conventions since day one. No rules, just results.</z-text>
-							<z-box is-flex is-row yCenter gap="2" style="margin-top: 0.5rem">
+							<z-box is-flex is-row y-center gap="2" margin-top="1.5rem">
 								<span style="width: 1.5rem; height: 1.5rem; border-radius: 999px; background: var(--pink)"></span>
 								<z-text size="sm" color="muted">@creator</z-text>
 							</z-box>
 						</z-card>
 						<z-card does-light-up-on-hover is-flex is-column gap="3">
-							<z-box is-flex is-row yCenter style="justify-content: space-between">
+							<z-box is-flex is-row y-center x-between>
 								<z-text color="secondary" weight="lg" size="sm">Draft</z-text>
 								<z-text color="muted" size="xs">Yesterday</z-text>
 							</z-box>
-							<z-heading level="3" size="xs">Campaign Beta</z-heading>
+							<z-heading size="xs" tag="h3">Campaign Beta</z-heading>
 							<z-text size="sm" color="muted">Still cooking. The best things take time to burn bright.</z-text>
-							<z-box is-flex is-row yCenter gap="2" style="margin-top: 0.5rem">
+							<z-box is-flex is-row y-center gap="2" style="margin-top: 0.5rem">
 								<span style="width: 1.5rem; height: 1.5rem; border-radius: 999px; background: var(--purple)"></span>
 								<z-text size="sm" color="muted">@team</z-text>
 							</z-box>
 						</z-card>
 					</div>
-				</div>
+				</z-box>
 
 				<!-- Separator / Line -->
-				<div class="block">
+				<z-box is-column class="block">
 					<div class="block-title">
 						<h3>&lt;z-separator&gt; · &lt;z-line&gt;</h3>
 						<span class="desc">hairline dividers, with or without a label</span>
@@ -426,7 +430,7 @@
 					<div class="panel">
 						<z-text size="sm">Section one</z-text>
 						<z-separator label="Or continue with" style="margin: 1.5rem 0"></z-separator>
-						<z-box is-flex is-row gap="3" yCenter>
+						<z-box is-flex is-row gap="3" y-center>
 							<z-text size="sm">Section two</z-text>
 							<z-text size="sm" color="muted">Inline</z-text>
 							<z-line is-vertical style="height: 1.25rem"></z-line>
@@ -437,7 +441,7 @@
 						<z-line style="margin: 1.5rem 0"></z-line>
 						<z-text size="sm">Section three</z-text>
 					</div>
-				</div>
+				</z-box>
 			</section>
 
 			<!-- ═══════════════════ ACTIONS ═══════════════════ -->
@@ -448,7 +452,7 @@
 				</div>
 				<p class="section-sub">Solid for the one thing that matters. Outline and ghost for everything else.</p>
 
-				<div class="block">
+				<z-box is-column class="block">
 					<div class="panel-grid">
 						<div class="panel">
 							<div class="micro">Primary actions</div>
@@ -467,9 +471,9 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</z-box>
 
-				<div class="block">
+				<z-box is-column class="block">
 					<div class="block-title">
 						<h3>&lt;z-button&gt;</h3>
 						<span class="desc">5 kinds × 6 tones × 3 sizes</span>
@@ -511,9 +515,9 @@
 							<z-button is-disabled>Disabled</z-button>
 						</div>
 					</div>
-				</div>
+				</z-box>
 
-				<div class="block">
+				<z-box is-column class="block">
 					<div class="block-title">
 						<h3>&lt;z-button-group&gt;</h3>
 						<span class="desc">seamless segmented actions</span>
@@ -532,9 +536,9 @@
 							</z-button-group>
 						</div>
 					</div>
-				</div>
+				</z-box>
 
-				<div class="block">
+				<z-box is-column class="block">
 					<div class="block-title">
 						<h3>&lt;z-toggle&gt; · &lt;z-toggle-group&gt;</h3>
 						<span class="desc">pressable state, single or multiple</span>
@@ -566,9 +570,9 @@
 							</z-toggle-group>
 						</div>
 					</div>
-				</div>
+				</z-box>
 
-				<div class="block">
+				<z-box is-column class="block">
 					<div class="block-title">
 						<h3>&lt;z-link&gt;</h3>
 						<span class="desc">animated underline, accent tones</span>
@@ -583,7 +587,7 @@
 							<z-link tone="primary" is-disabled>Disabled</z-link>
 						</div>
 					</div>
-				</div>
+				</z-box>
 			</section>
 
 			<!-- ═══════════════════ FORMS ═══════════════════ -->
@@ -796,7 +800,7 @@
 							<div class="micro" style="margin: 0">Progress</div>
 							<z-progress value="72"></z-progress>
 							<z-progress value="45" tone="secondary"></z-progress>
-							<z-progress value="90" tone="success" size="small"></z-progress>
+							<z-progress value="90" tone="neutral" size="small"></z-progress>
 							<z-progress is-indeterminate></z-progress>
 						</div>
 						<div class="panel">
@@ -834,11 +838,441 @@
 				</div>
 			</section>
 
+			<!-- ═══════════════════ NAVIGATION & DISCLOSURE ═══════════════════ -->
+			<section class="section" id="navigation">
+				<div class="section-head">
+					<span class="dot purple"></span>
+					<h2>Navigation &amp; Disclosure</h2>
+				</div>
+				<p class="section-sub">
+					Wayfinding and progressive reveal — trails, tabs, menus, and collapsibles. Borders draw the structure; the accent marks
+					where you are.
+				</p>
+
+				<div class="block">
+					<div class="block-title">
+						<h3>&lt;z-breadcrumbs&gt;</h3>
+						<span class="desc">trail with collapse</span>
+					</div>
+					<div class="panel">
+						<div class="col" style="gap: 1.5rem; align-items: flex-start">
+							<z-breadcrumbs id="demo-breadcrumbs"></z-breadcrumbs>
+							<z-breadcrumbs id="demo-breadcrumbs-collapsed" max="3" tone="secondary"></z-breadcrumbs>
+						</div>
+					</div>
+				</div>
+
+				<div class="block">
+					<div class="block-title">
+						<h3>&lt;z-tabs&gt;</h3>
+						<span class="desc">panels via named slots</span>
+					</div>
+					<div class="panel">
+						<z-tabs id="demo-tabs" value="overview" tone="primary">
+							<div slot="overview">
+								<z-text size="sm" color="muted">
+									Overview — the calm landing surface. Tabs swap the active panel without a layout shift.
+								</z-text>
+							</div>
+							<div slot="activity">
+								<z-text size="sm" color="muted">Activity — recent events would stream in here.</z-text>
+							</div>
+							<div slot="settings">
+								<z-text size="sm" color="muted">Settings — configuration lives behind this tab.</z-text>
+							</div>
+						</z-tabs>
+					</div>
+				</div>
+
+				<div class="block">
+					<div class="block-title">
+						<h3>&lt;z-collapsible&gt; · &lt;z-accordion&gt;</h3>
+						<span class="desc">single &amp; coordinated disclosure</span>
+					</div>
+					<div class="panel-grid">
+						<div class="panel">
+							<div class="micro">Standalone collapsible</div>
+							<z-collapsible label="What is zest?" is-open>
+								A dark-only, border-first component language. No shadows, OKLCH color, DM Sans throughout.
+							</z-collapsible>
+							<z-collapsible label="Is it accessible?">
+								Focus rings, ARIA roles, and full keyboard support ship on every interactive component.
+							</z-collapsible>
+						</div>
+						<div class="panel">
+							<div class="micro">Accordion — single open</div>
+							<z-accordion type="single">
+								<z-collapsible value="ship" label="Shipping" tone="primary" is-open>
+									Orders leave the warehouse within two business days.
+								</z-collapsible>
+								<z-collapsible value="returns" label="Returns" tone="primary">
+									Thirty-day window, no questions asked.
+								</z-collapsible>
+								<z-collapsible value="warranty" label="Warranty" tone="primary">
+									One year of coverage against manufacturing defects.
+								</z-collapsible>
+							</z-accordion>
+						</div>
+					</div>
+				</div>
+
+				<div class="block">
+					<div class="block-title">
+						<h3>&lt;z-menu&gt; · &lt;z-nav-menu&gt;</h3>
+						<span class="desc">dropdown actions &amp; top nav</span>
+					</div>
+					<div class="panel">
+						<div class="row" style="gap: 2rem; align-items: flex-start">
+							<z-menu id="demo-menu" tone="primary">
+								<z-button slot="trigger" kind="outline" tone="primary">Actions ▾</z-button>
+							</z-menu>
+							<z-nav-menu id="demo-nav-menu" value="products"></z-nav-menu>
+						</div>
+					</div>
+				</div>
+
+				<div class="block">
+					<div class="block-title">
+						<h3>&lt;z-sidebar&gt;</h3>
+						<span class="desc">grouped vertical rail</span>
+					</div>
+					<div class="panel">
+						<div class="row" style="gap: 1.5rem; align-items: stretch; height: 22rem">
+							<z-sidebar id="demo-sidebar" value="dashboard" style="--z-sidebar-width: 15rem">
+								<div slot="header">
+									<z-text weight="lg" color="primary">Acme Inc.</z-text>
+								</div>
+								<div slot="footer">
+									<z-text size="xs" color="muted">v0.1.0 · WIP</z-text>
+								</div>
+							</z-sidebar>
+							<z-sidebar id="demo-sidebar-collapsed" value="dashboard" tone="secondary" is-collapsed></z-sidebar>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- ═══════════════════ OVERLAYS ═══════════════════ -->
+			<section class="section" id="overlays">
+				<div class="section-head">
+					<span class="dot pink"></span>
+					<h2>Overlays</h2>
+				</div>
+				<p class="section-sub">
+					Floating surfaces that escape the layout — tooltips, popovers, and modals. All share one anchoring core: top
+					layer via the platform, JS positioning that flips near edges, borders over shadows.
+				</p>
+
+				<div class="block">
+					<div class="block-title">
+						<h3>&lt;z-tooltip&gt;</h3>
+						<span class="desc">hover / focus label</span>
+					</div>
+					<div class="panel">
+						<div class="row" style="gap: 1.5rem">
+							<z-tooltip content="Saves your changes" placement="top">
+								<z-button kind="outline">Top</z-button>
+							</z-tooltip>
+							<z-tooltip content="Shown to the right" placement="right">
+								<z-button kind="outline">Right</z-button>
+							</z-tooltip>
+							<z-tooltip content="Drops below the trigger" placement="bottom" tone="primary">
+								<z-button kind="outline" tone="primary">Bottom</z-button>
+							</z-tooltip>
+							<z-tooltip content="Anchored to the left" placement="left" tone="secondary">
+								<z-button kind="outline" tone="secondary">Left</z-button>
+							</z-tooltip>
+						</div>
+					</div>
+				</div>
+
+				<div class="block">
+					<div class="block-title">
+						<h3>&lt;z-popover&gt; · &lt;z-hover-card&gt;</h3>
+						<span class="desc">click panel &amp; hover preview</span>
+					</div>
+					<div class="panel">
+						<div class="row" style="gap: 1.5rem">
+							<z-popover placement="bottom-start" tone="primary">
+								<z-button slot="trigger" kind="outline" tone="primary">Open popover</z-button>
+								<z-box is-flex is-column gap="2">
+									<z-heading size="xs" tag="h3">Dimensions</z-heading>
+									<z-text size="sm" color="muted">
+										Click outside or press Esc to dismiss. The panel flips when it nears a viewport edge.
+									</z-text>
+								</z-box>
+							</z-popover>
+
+							<z-hover-card placement="bottom">
+								<z-link slot="trigger" tone="primary">@ada</z-link>
+								<z-box is-flex is-row gap="3" yCenter>
+									<z-avatar name="Ada Lovelace" size="large" tone="primary"></z-avatar>
+									<z-box is-flex is-column gap="1">
+										<z-text weight="lg" color="primary">Ada Lovelace</z-text>
+										<z-text size="sm" color="muted">First programmer. Hovers welcome.</z-text>
+									</z-box>
+								</z-box>
+							</z-hover-card>
+						</div>
+					</div>
+				</div>
+
+				<div class="block">
+					<div class="block-title">
+						<h3>&lt;z-dialog&gt;</h3>
+						<span class="desc">native modal — focus-trapped</span>
+					</div>
+					<div class="panel">
+						<div class="row" style="gap: 1.5rem">
+							<z-dialog
+								heading="Edit profile"
+								description="Make changes to your profile here. Click save when you're done."
+							>
+								<z-button slot="trigger" kind="solid" tone="primary">Open dialog</z-button>
+								<z-box is-flex is-column gap="3" style="margin-top: 0.5rem">
+									<div class="field">
+										<label>Display name</label>
+										<z-input value="Ada Lovelace"></z-input>
+									</div>
+								</z-box>
+								<z-button slot="footer" kind="solid" tone="primary">Save changes</z-button>
+							</z-dialog>
+
+							<z-dialog size="large" heading="Large dialog" description="The same modal at a wider size.">
+								<z-button slot="trigger" kind="outline">Large</z-button>
+								<z-text size="sm" color="muted">
+									Esc, the close button, and a backdrop click all dismiss this one.
+								</z-text>
+							</z-dialog>
+						</div>
+					</div>
+				</div>
+
+				<div class="block">
+					<div class="block-title">
+						<h3>&lt;z-alert-dialog&gt;</h3>
+						<span class="desc">explicit confirm / cancel</span>
+					</div>
+					<div class="panel">
+						<div class="row" style="gap: 1.5rem">
+							<z-alert-dialog
+								tone="danger"
+								heading="Delete project?"
+								description="This permanently removes the project and all of its data. This action cannot be undone."
+								confirm-label="Delete"
+							>
+								<z-button slot="trigger" kind="outline" tone="danger">Delete…</z-button>
+							</z-alert-dialog>
+
+							<z-alert-dialog
+								heading="Publish now?"
+								description="Your changes will go live immediately for everyone."
+								confirm-label="Publish"
+							>
+								<z-button slot="trigger" kind="outline" tone="primary">Publish…</z-button>
+							</z-alert-dialog>
+						</div>
+					</div>
+				</div>
+
+				<div class="block">
+					<div class="block-title">
+						<h3>&lt;z-alert&gt;</h3>
+						<span class="desc">inline status banner</span>
+					</div>
+					<div class="panel">
+						<div class="col" style="gap: 1rem; align-items: stretch">
+							<z-alert tone="info" heading="Heads up">A new version is available — refresh when convenient.</z-alert>
+							<z-alert tone="success" heading="Saved">Your changes have been published.</z-alert>
+							<z-alert tone="warning" heading="Approaching limit">You've used 90% of your monthly quota.</z-alert>
+							<z-alert tone="danger" heading="Payment failed" is-dismissable>
+								We couldn't process your card. Update your billing details.
+							</z-alert>
+						</div>
+					</div>
+				</div>
+
+				<div class="block">
+					<div class="block-title">
+						<h3>&lt;z-sheet&gt; · &lt;z-drawer&gt;</h3>
+						<span class="desc">edge panel &amp; bottom drawer</span>
+					</div>
+					<div class="panel">
+						<div class="row" style="gap: 1.5rem">
+							<z-sheet side="right" heading="Filters" description="Narrow the results below.">
+								<z-button slot="trigger" kind="outline">Right sheet</z-button>
+								<z-box is-flex is-column gap="3" style="margin-top: 0.5rem">
+									<z-checkbox is-checked>In stock</z-checkbox>
+									<z-checkbox>On sale</z-checkbox>
+									<z-checkbox>Free shipping</z-checkbox>
+								</z-box>
+								<z-button slot="footer" kind="solid" tone="primary">Apply</z-button>
+							</z-sheet>
+
+							<z-sheet side="left" heading="Navigation">
+								<z-button slot="trigger" kind="outline">Left sheet</z-button>
+								<z-text size="sm" color="muted">A left-anchored panel — good for navigation.</z-text>
+							</z-sheet>
+
+							<z-drawer heading="Quick actions" description="Drag the handle down to dismiss.">
+								<z-button slot="trigger" kind="outline" tone="primary">Open drawer</z-button>
+								<z-box is-flex is-column gap="2" style="margin-top: 0.5rem">
+									<z-text size="sm" color="muted">A bottom drawer with a grab handle and drag-to-close.</z-text>
+								</z-box>
+								<z-button slot="footer" kind="solid" tone="primary">Confirm</z-button>
+							</z-drawer>
+						</div>
+					</div>
+				</div>
+
+				<div class="block">
+					<div class="block-title">
+						<h3>&lt;z-context-menu&gt;</h3>
+						<span class="desc">right-click target</span>
+					</div>
+					<div class="panel">
+						<z-context-menu id="demo-context-menu" tone="primary">
+							<div
+								style="
+									display: grid;
+									place-items: center;
+									height: 8rem;
+									border: 1px dashed var(--border);
+									border-radius: var(--radius-md);
+									color: var(--muted-foreground);
+									font-size: 0.875rem;
+								"
+							>
+								Right-click anywhere in this area
+							</div>
+						</z-context-menu>
+					</div>
+				</div>
+
+				<div class="block">
+					<div class="block-title">
+						<h3>&lt;z-command&gt;</h3>
+						<span class="desc">command palette</span>
+					</div>
+					<div class="panel">
+						<z-command id="demo-command" placeholder="Type a command or search…">
+							<z-button slot="trigger" kind="outline" tone="primary">Open command palette</z-button>
+						</z-command>
+					</div>
+				</div>
+
+				<div class="block">
+					<div class="block-title">
+						<h3>&lt;z-toast&gt;</h3>
+						<span class="desc">transient notifications</span>
+					</div>
+					<div class="panel">
+						<div class="row" style="gap: 1.5rem">
+							<z-button id="toast-success" kind="outline">Success toast</z-button>
+							<z-button id="toast-info" kind="outline" tone="primary">Info toast</z-button>
+							<z-button id="toast-danger" kind="outline" tone="danger">Danger toast</z-button>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- ═══════════════════ SPECIALIZED ═══════════════════ -->
+			<section class="section" id="specialized">
+				<div class="section-head">
+					<span class="dot purple"></span>
+					<h2>Specialized</h2>
+				</div>
+				<p class="section-sub">
+					Purpose-built surfaces — code, charts, carousels, scroll regions, and the empty state. Dependency-free, same
+					border-first language.
+				</p>
+
+				<div class="block">
+					<div class="block-title">
+						<h3>&lt;z-chart&gt;</h3>
+						<span class="desc">bar · line · area, single series</span>
+					</div>
+					<div class="panel-grid">
+						<div class="panel">
+							<div class="micro">Bar — with grid</div>
+							<z-chart id="chart-bar" type="bar" show-grid></z-chart>
+						</div>
+						<div class="panel">
+							<div class="micro">Area — pink tone</div>
+							<z-chart id="chart-area" type="area" tone="secondary"></z-chart>
+						</div>
+					</div>
+				</div>
+
+				<div class="block">
+					<div class="block-title">
+						<h3>&lt;z-code-block&gt;</h3>
+						<span class="desc">copy button &amp; line numbers</span>
+					</div>
+					<z-code-block id="demo-code" filename="overlay.ts" language="ts" is-line-numbers></z-code-block>
+				</div>
+
+				<div class="block">
+					<div class="block-title">
+						<h3>&lt;z-carousel&gt;</h3>
+						<span class="desc">slides, dots &amp; autoplay</span>
+					</div>
+					<z-carousel loop autoplay="5000" tone="primary">
+						<z-card is-flex is-column gap="2" style="height: 12rem; justify-content: center; align-items: center; border: 0; background: color-mix(in oklch, var(--purple) 14%, transparent)">
+							<z-heading size="xs" tag="h3">Ship inward</z-heading>
+							<z-text size="sm" color="muted">Slide one</z-text>
+						</z-card>
+						<z-card is-flex is-column gap="2" style="height: 12rem; justify-content: center; align-items: center; border: 0; background: color-mix(in oklch, var(--pink) 14%, transparent)">
+							<z-heading size="xs" tag="h3">Name it well</z-heading>
+							<z-text size="sm" color="muted">Slide two</z-text>
+						</z-card>
+						<z-card is-flex is-column gap="2" style="height: 12rem; justify-content: center; align-items: center; border: 0; background: color-mix(in oklch, var(--foreground) 8%, transparent)">
+							<z-heading size="xs" tag="h3">Document it</z-heading>
+							<z-text size="sm" color="muted">Slide three</z-text>
+						</z-card>
+					</z-carousel>
+				</div>
+
+				<div class="block">
+					<div class="block-title">
+						<h3>&lt;z-scroll-area&gt; · &lt;z-empty-state&gt;</h3>
+						<span class="desc">themed scroll &amp; the blank slate</span>
+					</div>
+					<div class="panel-grid">
+						<div class="panel">
+							<div class="micro">Scroll area — max-height</div>
+							<z-scroll-area max-height="11rem" orientation="vertical">
+								<div style="display: flex; flex-direction: column; gap: 0.75rem; padding-right: 0.75rem">
+									<z-text size="sm">Internal platforms accrete usage the way products do.</z-text>
+									<z-text size="sm" color="muted">Scroll to see the themed scrollbar.</z-text>
+									<z-text size="sm">A brand is a compression algorithm for trust.</z-text>
+									<z-text size="sm" color="muted">Documentation is the product surface.</z-text>
+									<z-text size="sm">Treat engineers as users.</z-text>
+									<z-text size="sm" color="muted">Measure adoption like a funnel.</z-text>
+									<z-text size="sm">Name the thing or you haven't scoped it.</z-text>
+									<z-text size="sm" color="muted">The default beats the mandate.</z-text>
+								</div>
+							</z-scroll-area>
+						</div>
+						<div class="panel">
+							<z-empty-state heading="No projects yet" description="Create your first project to see it here." is-bordered>
+								<svg slot="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+									<path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z" />
+								</svg>
+								<z-button kind="solid" tone="primary" size="small">New project</z-button>
+							</z-empty-state>
+						</div>
+					</div>
+				</div>
+			</section>
+
 			<footer>
 				<span>zest · dark only · borders over shadows</span>
 				<span>DM Sans · OKLCH · WIP</span>
 			</footer>
 		</main>
+
+		<z-toast id="demo-toaster" position="bottom-end"></z-toast>
 
 		<script type="module" src="/src/index.ts"></script>
 		<script type="module">
@@ -878,7 +1312,177 @@
 				]
 			}
 
-			// scroll-spy for the nav
+			// ── Navigation & disclosure (array-valued props) ──
+			const trail = [
+				{ label: 'Home', href: '#' },
+				{ label: 'Components', href: '#' },
+				{ label: 'Navigation', href: '#' },
+				{ label: 'Breadcrumbs', isCurrent: true }
+			]
+			const crumbs = document.getElementById('demo-breadcrumbs')
+			if (crumbs) crumbs.items = trail
+			const crumbsCollapsed = document.getElementById('demo-breadcrumbs-collapsed')
+			if (crumbsCollapsed)
+				crumbsCollapsed.items = [
+					{ label: 'Home', href: '#' },
+					{ label: 'Workspace', href: '#' },
+					{ label: 'Projects', href: '#' },
+					{ label: 'Alpha', href: '#' },
+					{ label: 'Settings', isCurrent: true }
+				]
+
+			const tabs = document.getElementById('demo-tabs')
+			if (tabs)
+				tabs.tabs = [
+					{ value: 'overview', label: 'Overview' },
+					{ value: 'activity', label: 'Activity' },
+					{ value: 'settings', label: 'Settings' },
+					{ value: 'billing', label: 'Billing', isDisabled: true }
+				]
+
+			const menu = document.getElementById('demo-menu')
+			if (menu)
+				menu.items = [
+					{ value: 'rename', label: 'Rename', shortcut: '⌘R' },
+					{ value: 'duplicate', label: 'Duplicate', shortcut: '⌘D' },
+					{ value: 'share', label: 'Share…' },
+					{ isSeparator: true },
+					{ value: 'delete', label: 'Delete', shortcut: '⌫', isDanger: true }
+				]
+
+			const navMenu = document.getElementById('demo-nav-menu')
+			if (navMenu)
+				navMenu.items = [
+					{ value: 'home', label: 'Home', href: '#' },
+					{
+						value: 'products',
+						label: 'Products',
+						children: [
+							{ value: 'analytics', label: 'Analytics', description: 'Track everything that moves' },
+							{ value: 'automation', label: 'Automation', description: 'Set it and forget it' },
+							{ value: 'reports', label: 'Reports', description: 'Numbers, framed' }
+						]
+					},
+					{ value: 'pricing', label: 'Pricing', href: '#' },
+					{ value: 'docs', label: 'Docs', href: '#' }
+				]
+
+			const sidebarItems = [
+				{
+					label: 'Main',
+					items: [
+						{ value: 'dashboard', label: 'Dashboard' },
+						{ value: 'projects', label: 'Projects', badge: '4' },
+						{ value: 'tasks', label: 'Tasks' }
+					]
+				},
+				{
+					label: 'Account',
+					items: [
+						{ value: 'team', label: 'Team' },
+						{ value: 'settings', label: 'Settings' }
+					]
+				}
+			]
+			const sidebar = document.getElementById('demo-sidebar')
+			if (sidebar) sidebar.items = sidebarItems
+			const sidebarCollapsed = document.getElementById('demo-sidebar-collapsed')
+			if (sidebarCollapsed)
+				sidebarCollapsed.items = [
+					{ value: 'dashboard', label: 'Dashboard' },
+					{ value: 'projects', label: 'Projects' },
+					{ value: 'tasks', label: 'Tasks' },
+					{ value: 'team', label: 'Team' },
+					{ value: 'settings', label: 'Settings' }
+				]
+
+			// ── Overlays (array-valued props + imperative toasts) ──
+				const contextMenu = document.getElementById('demo-context-menu')
+				if (contextMenu)
+					contextMenu.items = [
+						{ value: 'back', label: 'Back', shortcut: '⌘[' },
+						{ value: 'forward', label: 'Forward', shortcut: '⌘]' },
+						{ isSeparator: true },
+						{ value: 'reload', label: 'Reload', shortcut: '⌘R' },
+						{ value: 'save', label: 'Save as…', shortcut: '⌘S' },
+						{ isSeparator: true },
+						{ value: 'delete', label: 'Delete', isDanger: true }
+					]
+
+				const command = document.getElementById('demo-command')
+				if (command)
+					command.items = [
+						{ group: 'Navigation', value: 'home', label: 'Go to Dashboard', shortcut: 'G D' },
+						{ group: 'Navigation', value: 'projects', label: 'Go to Projects', shortcut: 'G P', keywords: 'work' },
+						{ group: 'Navigation', value: 'settings', label: 'Go to Settings', shortcut: 'G S' },
+						{ group: 'Actions', value: 'new', label: 'New Project', shortcut: '⌘N', keywords: 'create add' },
+						{ group: 'Actions', value: 'invite', label: 'Invite teammate', keywords: 'member user' },
+						{ group: 'Actions', value: 'theme', label: 'Toggle theme', isDisabled: true }
+					]
+
+				const toaster = document.getElementById('demo-toaster')
+				const fireToast = (opts) => toaster && toaster.push(opts)
+				document
+					.getElementById('toast-success')
+					?.addEventListener('click', () =>
+						fireToast({ tone: 'success', title: 'Changes saved', description: 'Your project is up to date.' })
+					)
+				document
+					.getElementById('toast-info')
+					?.addEventListener('click', () =>
+						fireToast({ tone: 'info', title: 'New message', description: 'Ada sent you a comment.' })
+					)
+				document
+					.getElementById('toast-danger')
+					?.addEventListener('click', () =>
+						fireToast({ tone: 'danger', title: 'Upload failed', description: 'The file was too large.', duration: 6000 })
+					)
+
+				// open the command palette with ⌘K / Ctrl+K
+				document.addEventListener('keydown', (e) => {
+					if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+						e.preventDefault()
+						if (command) command.isOpen = true
+					}
+				})
+
+				// ── Specialized (chart data + code) ──
+				const barData = [
+					{ label: 'Mon', value: 42 },
+					{ label: 'Tue', value: 58 },
+					{ label: 'Wed', value: 35 },
+					{ label: 'Thu', value: 71 },
+					{ label: 'Fri', value: 64 },
+					{ label: 'Sat', value: 28 },
+					{ label: 'Sun', value: 49 }
+				]
+				const chartBar = document.getElementById('chart-bar')
+				if (chartBar) chartBar.data = barData
+				const chartArea = document.getElementById('chart-area')
+				if (chartArea)
+					chartArea.data = [
+						{ label: 'W1', value: 12 },
+						{ label: 'W2', value: 28 },
+						{ label: 'W3', value: 22 },
+						{ label: 'W4', value: 45 },
+						{ label: 'W5', value: 38 },
+						{ label: 'W6', value: 60 }
+					]
+
+				const codeEl = document.getElementById('demo-code')
+				if (codeEl)
+					codeEl.code = [
+						"import { computePosition, autoUpdate } from './overlay'",
+						'',
+						'export const open = (anchor, floating) => {',
+						'\tfloating.showPopover()',
+						'\treturn autoUpdate(anchor, floating, () => {',
+						'\t\tapplyPosition(floating, computePosition(anchor, floating))',
+						'\t})',
+						'}'
+					].join('\n')
+
+				// scroll-spy for the nav
 			const links = [...document.querySelectorAll('.nav-links a')]
 			const sections = links.map((l) => document.querySelector(l.getAttribute('href')))
 			const spy = new IntersectionObserver(

@@ -36,3 +36,32 @@ export * from './components/z-progress'
 export * from './components/z-skeleton'
 export * from './components/z-table'
 export * from './components/z-pagination'
+
+// Navigation & disclosure
+export * from './components/z-breadcrumbs'
+export * from './components/z-tabs'
+export * from './components/z-collapsible'
+export * from './components/z-accordion'
+export * from './components/z-menu'
+export * from './components/z-nav-menu'
+export * from './components/z-sidebar'
+
+// Overlays
+export * from './components/z-tooltip'
+export * from './components/z-popover'
+export * from './components/z-hover-card'
+export * from './components/z-dialog'
+export * from './components/z-alert-dialog'
+export * from './components/z-alert'
+export * from './components/z-sheet'
+export * from './components/z-drawer'
+export * from './components/z-context-menu'
+export * from './components/z-toast'
+export * from './components/z-command'
+
+// Specialized
+export * from './components/z-empty-state'
+export * from './components/z-scroll-area'
+export * from './components/z-code-block'
+export * from './components/z-carousel'
+export * from './components/z-chart'

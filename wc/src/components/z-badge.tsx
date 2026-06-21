@@ -105,7 +105,7 @@ const styles = css`
 
 	.is-solid.is-primary .label,
 	.is-solid.is-secondary .label {
-		text-shadow: 0 0px 3px var(--primary-foreground);
+		text-shadow: 0 0px 12px var(--primary-foreground);
 	}
 
 	::slotted(svg) {
@@ -139,10 +139,8 @@ export const ZBadge = c(
 		return (
 			<host shadowDom>
 				<span class={badgeClass}>
-					<span class='label'>
-						{props.isDot && <span class='dot' aria-hidden='true'></span>}
-						{props.label ? props.label : <slot />}
-					</span>
+					{props.isDot && <span class='dot' aria-hidden='true'></span>}
+					<span class='label'>{props.label ? props.label : <slot />}</span>
 				</span>
 			</host>
 		)

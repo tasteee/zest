@@ -28,6 +28,7 @@ export const boxLayoutStyles = css`
 		height: var(--z-box-height);
 		min-height: var(--z-box-min-height);
 		max-height: var(--z-box-max-height);
+		display: flex;
 	}
 
 	:host([is-flex]) {
@@ -73,10 +74,7 @@ export const boxLayoutStyles = css`
 		:host {
 			grid-template-columns: var(
 				--z-box-large-grid-template-columns,
-				var(
-					--z-box-medium-grid-template-columns,
-					var(--z-box-small-grid-template-columns, var(--z-box-grid-template-columns))
-				)
+				var(--z-box-medium-grid-template-columns, var(--z-box-small-grid-template-columns, var(--z-box-grid-template-columns)))
 			);
 		}
 	}
@@ -87,10 +85,7 @@ export const boxLayoutStyles = css`
 				--z-box-extra-large-grid-template-columns,
 				var(
 					--z-box-large-grid-template-columns,
-					var(
-						--z-box-medium-grid-template-columns,
-						var(--z-box-small-grid-template-columns, var(--z-box-grid-template-columns))
-					)
+					var(--z-box-medium-grid-template-columns, var(--z-box-small-grid-template-columns, var(--z-box-grid-template-columns)))
 				)
 			);
 		}

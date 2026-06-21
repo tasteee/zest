@@ -218,7 +218,7 @@ const styles = css`
 
 	.is-solid.is-primary .label,
 	.is-solid.is-secondary .label {
-		text-shadow: 0 0px 3px var(--primary-foreground);
+		text-shadow: 0 0px 12px var(--primary-foreground);
 	}
 
 	@keyframes z-button-spin {
@@ -269,10 +269,8 @@ export const ZButton = c(
 		return (
 			<host shadowDom>
 				<button class={buttonClass} type={buttonType} disabled={isButtonDisabled}>
-					<span class='label'>
-						{props.isLoading && <span class='spinner' aria-hidden='true'></span>}
-						{props.label ? props.label : <slot />}
-					</span>
+					{props.isLoading && <span class='spinner' aria-hidden='true'></span>}
+					<span class='label'>{props.label ? props.label : <slot />}</span>
 				</button>
 			</host>
 		)

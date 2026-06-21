@@ -30,7 +30,12 @@ const styles = css`
 		border-radius: var(--radius-md);
 		color: var(--foreground);
 		font-family: inherit;
-		transition: border-color 0.12s ease, background-color 0.12s ease;
+		/* a <label> wrapper: clicking the padding or empty adornments focuses the
+		   input natively, so there are no dead zones on the sides. */
+		cursor: text;
+		transition:
+			border-color 0.12s ease,
+			background-color 0.12s ease;
 		--accent: var(--primary);
 	}
 
@@ -81,6 +86,7 @@ const styles = css`
 	input {
 		flex: 1 1 auto;
 		min-width: 0;
+		height: 100%;
 		appearance: none;
 		background: transparent;
 		border: none;
@@ -142,9 +148,9 @@ export const ZInput = c(
 
 		return (
 			<host shadowDom>
-				<div class={fieldClass}>
-					<span class="adornment">
-						<slot name="prefix" />
+				<label class={fieldClass}>
+					<span class='adornment'>
+						<slot name='prefix' />
 					</span>
 					<input
 						type={props.type || 'text'}
@@ -168,10 +174,10 @@ export const ZInput = c(
 							props.input({ value: next })
 						}}
 					/>
-					<span class="adornment">
-						<slot name="suffix" />
+					<span class='adornment'>
+						<slot name='suffix' />
 					</span>
-				</div>
+				</label>
 			</host>
 		)
 	},
