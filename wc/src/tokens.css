@@ -247,6 +247,31 @@
 	--easing-standard: ease-out;
 }
 
+/*
+ * Syntax-highlighting palette for z-code-block. Anchored on the zest accents
+ * (purple keywords, pink functions) and extended with a few hues the base
+ * theme doesn't carry — a green for strings, amber for numbers, orange for
+ * constants, and cyan for types — all tuned for legibility on the near-black
+ * code surface (--color-neutral-1). Override any of these to retheme code.
+ */
+:root {
+	--syntax-comment: var(--color-neutral-5);
+	--syntax-keyword: var(--color-secondary-6);
+	--syntax-string: oklch(0.79 0.13 152);
+	--syntax-number: oklch(0.82 0.12 78);
+	--syntax-constant: oklch(0.76 0.16 48);
+	--syntax-function: var(--color-primary-6);
+	--syntax-class: oklch(0.83 0.11 200);
+	--syntax-property: oklch(0.86 0.07 222);
+	--syntax-operator: var(--color-neutral-6);
+	--syntax-punctuation: var(--color-neutral-6);
+	--syntax-tag: var(--color-primary-6);
+	--syntax-attr: oklch(0.82 0.12 78);
+	--syntax-variable: var(--color-neutral-8);
+	--syntax-regex: oklch(0.79 0.13 168);
+	--syntax-plain: var(--color-neutral-8);
+}
+
 html,
 body {
 	margin: 0;

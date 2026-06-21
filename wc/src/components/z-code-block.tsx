@@ -1,11 +1,13 @@
-import { c, css, event, useState } from 'atomico'
+import { c, css, event, useState, useMemo } from 'atomico'
+import { highlight, splitTokenLines, type Token } from '../shared/highlight'
 
 /*
  * z-code-block — a monospace code surface with an optional header (filename +
  * language tag) and a copy-to-clipboard button. Pass the source via the `code`
- * property (preserves whitespace); `is-line-numbers` adds a gutter. No syntax
- * highlighter is bundled — this stays dependency-free and renders plain,
- * legible mono on the panel surface. Fires `copy` after a successful copy.
+ * property (preserves whitespace); `is-line-numbers` adds a gutter. Syntax
+ * highlighting is provided by lowlight (highlight.js) via shared/highlight.ts
+ * and themed against the zest `--syntax-*` palette, so it renders synchronously
+ * inside the shadow root. Fires `copy` after a successful copy.
  */
 const styles = css`
 	:host {
@@ -24,7 +26,7 @@ const styles = css`
 	.block {
 		border: 1px solid var(--border);
 		border-radius: var(--radius-md);
-		background: var(--color-neutral-1);
+		background: var(--color-neutral-0);
 		overflow: hidden;
 		font-family: var(--font-mono);
 	}
@@ -151,6 +153,90 @@ const styles = css`
 		user-select: none;
 		opacity: 0.6;
 	}
+
+	/*
+	 * highlight.js token classes mapped onto the zest --syntax-* palette.
+	 * Ordering matters: highlight.js nests JSX content inside .hljs-tag (e.g.
+	 * "hljs-tag hljs-attr"), so structural classes (.hljs-tag) are declared
+	 * BEFORE content classes — equal-specificity ties go to the later rule, so
+	 * the nested attr/name/string colors win over the dim tag brackets.
+	 */
+	.hljs-comment,
+	.hljs-quote {
+		color: var(--syntax-comment);
+		font-style: italic;
+	}
+	/* JSX/HTML angle-bracket structure: <, >, /, = — kept dim. */
+	.hljs-tag,
+	.hljs-operator,
+	.hljs-punctuation {
+		color: var(--syntax-operator);
+	}
+	.hljs-keyword,
+	.hljs-selector-tag,
+	.hljs-meta,
+	.hljs-meta-keyword,
+	.hljs-doctag {
+		color: var(--syntax-keyword);
+	}
+	.hljs-string,
+	.hljs-meta .hljs-string,
+	.hljs-addition {
+		color: var(--syntax-string);
+	}
+	.hljs-number {
+		color: var(--syntax-number);
+	}
+	.hljs-literal,
+	.hljs-symbol,
+	.hljs-bullet,
+	.hljs-deletion {
+		color: var(--syntax-constant);
+	}
+	.hljs-built_in,
+	.hljs-type,
+	.hljs-title.class_,
+	.hljs-class .hljs-title,
+	.hljs-selector-class {
+		color: var(--syntax-class);
+	}
+	.hljs-attr,
+	.hljs-attribute,
+	.hljs-property,
+	.hljs-selector-attr,
+	.hljs-selector-pseudo {
+		color: var(--syntax-property);
+	}
+	.hljs-variable,
+	.hljs-template-variable,
+	.hljs-params {
+		color: var(--syntax-variable);
+	}
+	.hljs-title,
+	.hljs-title.function_,
+	.hljs-section,
+	.hljs-selector-id {
+		color: var(--syntax-function);
+	}
+	/* Tag/component name (declared after .hljs-tag so it wins in JSX). */
+	.hljs-name {
+		color: var(--syntax-tag);
+	}
+	.hljs-regexp {
+		color: var(--syntax-regex);
+	}
+	.hljs-emphasis {
+		font-style: italic;
+	}
+	.hljs-strong {
+		font-weight: 700;
+	}
+
+	.rows {
+		line-height: 1.75 !important;
+		letter-spacing: 0.35px !important;
+		font-family: var(--font-mono);
+	}
 `
 
 export const ZCodeBlock = c(
@@ -158,7 +244,19 @@ export const ZCodeBlock = c(
 		const [copied, setCopied] = useState(false)
 
 		const code = (props.code as string) ?? ''
-		const lines = code.replace(/\n$/, '').split('\n')
+		const language = props.language as string | undefined
+
+		const tokens = useMemo(() => highlight(code.replace(/\n$/, ''), language), [code, language])
+		const tokenLines = useMemo(() => splitTokenLines(tokens), [tokens])
+
+		const renderToken = (token: Token, key: number) =>
+			token.className ? (
+				<span class={token.className} key={key}>
+					{token.value}
+				</span>
+			) : (
+				token.value
+			)
 
 		const onCopy = async () => {
 			try {
@@ -175,21 +273,23 @@ export const ZCodeBlock = c(
 
 		return (
 			<host shadowDom>
-				<div class="block">
+				<div class='block'>
 					{showHead && (
-						<div class="head">
-							<div class="meta">
-								{props.filename && <span class="filename">{props.filename}</span>}
-								{props.language && <span class="lang">{props.language}</span>}
+						<div class='head'>
+							<div class='meta'>
+								{props.filename && <span class='filename'>{props.filename}</span>}
+								{props.language && <span class='lang'>{props.language}</span>}
 							</div>
 							{!props.hideCopy && (
-								<button type="button" class={copied ? 'copy is-copied' : 'copy'} onclick={onCopy}>
+								<button type='button' class={copied ? 'copy is-copied' : 'copy'} onclick={onCopy}>
 									{copied ? (
-										<svg viewBox="0 0 24 24"><polyline points="4 12 10 18 20 6" /></svg>
+										<svg viewBox='0 0 24 24'>
+											<polyline points='4 12 10 18 20 6' />
+										</svg>
 									) : (
-										<svg viewBox="0 0 24 24">
-											<rect x="9" y="9" width="11" height="11" rx="2" />
-											<path d="M5 15V5a2 2 0 0 1 2-2h10" />
+										<svg viewBox='0 0 24 24'>
+											<rect x='9' y='9' width='11' height='11' rx='2' />
+											<path d='M5 15V5a2 2 0 0 1 2-2h10' />
 										</svg>
 									)}
 									{copied ? 'Copied' : 'Copy'}
@@ -197,19 +297,19 @@ export const ZCodeBlock = c(
 							)}
 						</div>
 					)}
-					<div class="scroll">
+					<div class='scroll'>
 						<pre>
 							{props.isLineNumbers ? (
-								<div class="rows">
-									{lines.map((line, i) => (
-										<div class="line" key={i}>
-											<span class="gutter">{i + 1}</span>
-											<span class="text">{line || ' '}</span>
+								<div class='rows'>
+									{tokenLines.map((line, i) => (
+										<div class='line' key={i}>
+											<span class='gutter'>{i + 1}</span>
+											<span class='text'>{line.length ? line.map(renderToken) : ' '}</span>
 										</div>
 									))}
 								</div>
 							) : (
-								<code>{code}</code>
+								<code>{tokens.map(renderToken)}</code>
 							)}
 						</pre>
 					</div>

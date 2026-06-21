@@ -467,7 +467,7 @@
 							<div class="row">
 								<z-button kind="outline" tone="neutral">Learn More</z-button>
 								<z-button kind="outline" tone="primary">Explore</z-button>
-								<z-link tone="primary" style="margin-left: 0.5rem">Skip →</z-link>
+								<z-link tone="secondary" style="margin-left: 0.5rem">Skip →</z-link>
 							</div>
 						</div>
 					</div>
@@ -547,10 +547,9 @@
 						<div class="micro">Standalone toggles</div>
 						<div class="row">
 							<z-toggle>Default</z-toggle>
-							<z-toggle tone="primary">Purple off</z-toggle>
-							<z-toggle tone="primary" is-pressed>Purple on</z-toggle>
-							<z-toggle tone="secondary">Pink off</z-toggle>
-							<z-toggle kind="ghost" tone="secondary">Ghost</z-toggle>
+							<z-toggle tone="primary">Primary</z-toggle>
+							<z-toggle tone="secondary">Secondary</z-toggle>
+							<z-toggle kind="ghost">Ghost</z-toggle>
 							<z-toggle is-disabled>Disabled</z-toggle>
 						</div>
 						<div class="micro" style="margin-top: 2rem">Group — single select</div>
@@ -566,7 +565,7 @@
 							<z-toggle-group type="multiple" is-outlined>
 								<z-toggle-group-item value="bold" is-pressed>Bold</z-toggle-group-item>
 								<z-toggle-group-item value="italic">Italic</z-toggle-group-item>
-								<z-toggle-group-item value="underline" is-pink>Underline</z-toggle-group-item>
+								<z-toggle-group-item value="underline">Underline</z-toggle-group-item>
 							</z-toggle-group>
 						</div>
 					</div>
@@ -868,7 +867,7 @@
 						<span class="desc">panels via named slots</span>
 					</div>
 					<div class="panel">
-						<z-tabs id="demo-tabs" value="overview" tone="primary">
+						<z-tabs id="demo-tabs" value="overview">
 							<div slot="overview">
 								<z-text size="sm" color="muted">
 									Overview — the calm landing surface. Tabs swap the active panel without a layout shift.
@@ -902,13 +901,11 @@
 						<div class="panel">
 							<div class="micro">Accordion — single open</div>
 							<z-accordion type="single">
-								<z-collapsible value="ship" label="Shipping" tone="primary" is-open>
+								<z-collapsible value="ship" label="Shipping" is-open>
 									Orders leave the warehouse within two business days.
 								</z-collapsible>
-								<z-collapsible value="returns" label="Returns" tone="primary">
-									Thirty-day window, no questions asked.
-								</z-collapsible>
-								<z-collapsible value="warranty" label="Warranty" tone="primary">
+								<z-collapsible value="returns" label="Returns"> Thirty-day window, no questions asked. </z-collapsible>
+								<z-collapsible value="warranty" label="Warranty">
 									One year of coverage against manufacturing defects.
 								</z-collapsible>
 							</z-accordion>
@@ -923,8 +920,8 @@
 					</div>
 					<div class="panel">
 						<div class="row" style="gap: 2rem; align-items: flex-start">
-							<z-menu id="demo-menu" tone="primary">
-								<z-button slot="trigger" kind="outline" tone="primary">Actions ▾</z-button>
+							<z-menu id="demo-menu">
+								<z-button slot="trigger" kind="outline">Actions ▾</z-button>
 							</z-menu>
 							<z-nav-menu id="demo-nav-menu" value="products"></z-nav-menu>
 						</div>
@@ -940,7 +937,7 @@
 						<div class="row" style="gap: 1.5rem; align-items: stretch; height: 22rem">
 							<z-sidebar id="demo-sidebar" value="dashboard" style="--z-sidebar-width: 15rem">
 								<div slot="header">
-									<z-text weight="lg" color="primary">Acme Inc.</z-text>
+									<z-text weight="lg">Acme Inc.</z-text>
 								</div>
 								<div slot="footer">
 									<z-text size="xs" color="muted">v0.1.0 · WIP</z-text>
@@ -959,8 +956,8 @@
 					<h2>Overlays</h2>
 				</div>
 				<p class="section-sub">
-					Floating surfaces that escape the layout — tooltips, popovers, and modals. All share one anchoring core: top
-					layer via the platform, JS positioning that flips near edges, borders over shadows.
+					Floating surfaces that escape the layout — tooltips, popovers, and modals. All share one anchoring core: top layer via
+					the platform, JS positioning that flips near edges, borders over shadows.
 				</p>
 
 				<div class="block">
@@ -1004,11 +1001,11 @@
 							</z-popover>
 
 							<z-hover-card placement="bottom">
-								<z-link slot="trigger" tone="primary">@ada</z-link>
+								<z-link slot="trigger">@ada</z-link>
 								<z-box is-flex is-row gap="3" yCenter>
-									<z-avatar name="Ada Lovelace" size="large" tone="primary"></z-avatar>
+									<z-avatar name="Ada Lovelace" size="large"></z-avatar>
 									<z-box is-flex is-column gap="1">
-										<z-text weight="lg" color="primary">Ada Lovelace</z-text>
+										<z-text weight="lg">Ada Lovelace</z-text>
 										<z-text size="sm" color="muted">First programmer. Hovers welcome.</z-text>
 									</z-box>
 								</z-box>
@@ -1024,25 +1021,20 @@
 					</div>
 					<div class="panel">
 						<div class="row" style="gap: 1.5rem">
-							<z-dialog
-								heading="Edit profile"
-								description="Make changes to your profile here. Click save when you're done."
-							>
-								<z-button slot="trigger" kind="solid" tone="primary">Open dialog</z-button>
+							<z-dialog heading="Edit profile" description="Make changes to your profile here. Click save when you're done.">
+								<z-button slot="trigger" kind="solid">Open dialog</z-button>
 								<z-box is-flex is-column gap="3" style="margin-top: 0.5rem">
 									<div class="field">
 										<label>Display name</label>
 										<z-input value="Ada Lovelace"></z-input>
 									</div>
 								</z-box>
-								<z-button slot="footer" kind="solid" tone="primary">Save changes</z-button>
+								<z-button slot="footer" kind="solid">Save changes</z-button>
 							</z-dialog>
 
 							<z-dialog size="large" heading="Large dialog" description="The same modal at a wider size.">
 								<z-button slot="trigger" kind="outline">Large</z-button>
-								<z-text size="sm" color="muted">
-									Esc, the close button, and a backdrop click all dismiss this one.
-								</z-text>
+								<z-text size="sm" color="muted"> Esc, the close button, and a backdrop click all dismiss this one. </z-text>
 							</z-dialog>
 						</div>
 					</div>
@@ -1115,11 +1107,11 @@
 							</z-sheet>
 
 							<z-drawer heading="Quick actions" description="Drag the handle down to dismiss.">
-								<z-button slot="trigger" kind="outline" tone="primary">Open drawer</z-button>
+								<z-button slot="trigger" kind="outline">Open drawer</z-button>
 								<z-box is-flex is-column gap="2" style="margin-top: 0.5rem">
 									<z-text size="sm" color="muted">A bottom drawer with a grab handle and drag-to-close.</z-text>
 								</z-box>
-								<z-button slot="footer" kind="solid" tone="primary">Confirm</z-button>
+								<z-button slot="footer" kind="solid">Confirm</z-button>
 							</z-drawer>
 						</div>
 					</div>
@@ -1131,7 +1123,7 @@
 						<span class="desc">right-click target</span>
 					</div>
 					<div class="panel">
-						<z-context-menu id="demo-context-menu" tone="primary">
+						<z-context-menu id="demo-context-menu">
 							<div
 								style="
 									display: grid;
@@ -1156,7 +1148,7 @@
 					</div>
 					<div class="panel">
 						<z-command id="demo-command" placeholder="Type a command or search…">
-							<z-button slot="trigger" kind="outline" tone="primary">Open command palette</z-button>
+							<z-button slot="trigger" kind="outline">Open command palette</z-button>
 						</z-command>
 					</div>
 				</div>
@@ -1169,7 +1161,7 @@
 					<div class="panel">
 						<div class="row" style="gap: 1.5rem">
 							<z-button id="toast-success" kind="outline">Success toast</z-button>
-							<z-button id="toast-info" kind="outline" tone="primary">Info toast</z-button>
+							<z-button id="toast-info" kind="outline">Info toast</z-button>
 							<z-button id="toast-danger" kind="outline" tone="danger">Danger toast</z-button>
 						</div>
 					</div>
@@ -1209,7 +1201,7 @@
 						<h3>&lt;z-code-block&gt;</h3>
 						<span class="desc">copy button &amp; line numbers</span>
 					</div>
-					<z-code-block id="demo-code" filename="overlay.ts" language="ts" is-line-numbers></z-code-block>
+					<z-code-block id="demo-code" filename="overlay.tsx" language="tsx" is-line-numbers></z-code-block>
 				</div>
 
 				<div class="block">
@@ -1217,16 +1209,49 @@
 						<h3>&lt;z-carousel&gt;</h3>
 						<span class="desc">slides, dots &amp; autoplay</span>
 					</div>
-					<z-carousel loop autoplay="5000" tone="primary">
-						<z-card is-flex is-column gap="2" style="height: 12rem; justify-content: center; align-items: center; border: 0; background: color-mix(in oklch, var(--purple) 14%, transparent)">
+					<z-carousel loop autoplay="5000">
+						<z-card
+							is-flex
+							is-column
+							gap="2"
+							style="
+								height: 12rem;
+								justify-content: center;
+								align-items: center;
+								border: 0;
+								background: color-mix(in oklch, var(--purple) 14%, transparent);
+							"
+						>
 							<z-heading size="xs" tag="h3">Ship inward</z-heading>
 							<z-text size="sm" color="muted">Slide one</z-text>
 						</z-card>
-						<z-card is-flex is-column gap="2" style="height: 12rem; justify-content: center; align-items: center; border: 0; background: color-mix(in oklch, var(--pink) 14%, transparent)">
+						<z-card
+							is-flex
+							is-column
+							gap="2"
+							style="
+								height: 12rem;
+								justify-content: center;
+								align-items: center;
+								border: 0;
+								background: color-mix(in oklch, var(--pink) 14%, transparent);
+							"
+						>
 							<z-heading size="xs" tag="h3">Name it well</z-heading>
 							<z-text size="sm" color="muted">Slide two</z-text>
 						</z-card>
-						<z-card is-flex is-column gap="2" style="height: 12rem; justify-content: center; align-items: center; border: 0; background: color-mix(in oklch, var(--foreground) 8%, transparent)">
+						<z-card
+							is-flex
+							is-column
+							gap="2"
+							style="
+								height: 12rem;
+								justify-content: center;
+								align-items: center;
+								border: 0;
+								background: color-mix(in oklch, var(--foreground) 8%, transparent);
+							"
+						>
 							<z-heading size="xs" tag="h3">Document it</z-heading>
 							<z-text size="sm" color="muted">Slide three</z-text>
 						</z-card>
@@ -1256,7 +1281,15 @@
 						</div>
 						<div class="panel">
 							<z-empty-state heading="No projects yet" description="Create your first project to see it here." is-bordered>
-								<svg slot="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+								<svg
+									slot="icon"
+									viewBox="0 0 24 24"
+									fill="none"
+									stroke="currentColor"
+									stroke-width="2"
+									stroke-linecap="round"
+									stroke-linejoin="round"
+								>
 									<path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z" />
 								</svg>
 								<z-button kind="solid" tone="primary" size="small">New project</z-button>
@@ -1397,92 +1430,127 @@
 				]
 
 			// ── Overlays (array-valued props + imperative toasts) ──
-				const contextMenu = document.getElementById('demo-context-menu')
-				if (contextMenu)
-					contextMenu.items = [
-						{ value: 'back', label: 'Back', shortcut: '⌘[' },
-						{ value: 'forward', label: 'Forward', shortcut: '⌘]' },
-						{ isSeparator: true },
-						{ value: 'reload', label: 'Reload', shortcut: '⌘R' },
-						{ value: 'save', label: 'Save as…', shortcut: '⌘S' },
-						{ isSeparator: true },
-						{ value: 'delete', label: 'Delete', isDanger: true }
-					]
-
-				const command = document.getElementById('demo-command')
-				if (command)
-					command.items = [
-						{ group: 'Navigation', value: 'home', label: 'Go to Dashboard', shortcut: 'G D' },
-						{ group: 'Navigation', value: 'projects', label: 'Go to Projects', shortcut: 'G P', keywords: 'work' },
-						{ group: 'Navigation', value: 'settings', label: 'Go to Settings', shortcut: 'G S' },
-						{ group: 'Actions', value: 'new', label: 'New Project', shortcut: '⌘N', keywords: 'create add' },
-						{ group: 'Actions', value: 'invite', label: 'Invite teammate', keywords: 'member user' },
-						{ group: 'Actions', value: 'theme', label: 'Toggle theme', isDisabled: true }
-					]
-
-				const toaster = document.getElementById('demo-toaster')
-				const fireToast = (opts) => toaster && toaster.push(opts)
-				document
-					.getElementById('toast-success')
-					?.addEventListener('click', () =>
-						fireToast({ tone: 'success', title: 'Changes saved', description: 'Your project is up to date.' })
-					)
-				document
-					.getElementById('toast-info')
-					?.addEventListener('click', () =>
-						fireToast({ tone: 'info', title: 'New message', description: 'Ada sent you a comment.' })
-					)
-				document
-					.getElementById('toast-danger')
-					?.addEventListener('click', () =>
-						fireToast({ tone: 'danger', title: 'Upload failed', description: 'The file was too large.', duration: 6000 })
-					)
-
-				// open the command palette with ⌘K / Ctrl+K
-				document.addEventListener('keydown', (e) => {
-					if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
-						e.preventDefault()
-						if (command) command.isOpen = true
-					}
-				})
-
-				// ── Specialized (chart data + code) ──
-				const barData = [
-					{ label: 'Mon', value: 42 },
-					{ label: 'Tue', value: 58 },
-					{ label: 'Wed', value: 35 },
-					{ label: 'Thu', value: 71 },
-					{ label: 'Fri', value: 64 },
-					{ label: 'Sat', value: 28 },
-					{ label: 'Sun', value: 49 }
+			const contextMenu = document.getElementById('demo-context-menu')
+			if (contextMenu)
+				contextMenu.items = [
+					{ value: 'back', label: 'Back', shortcut: '⌘[' },
+					{ value: 'forward', label: 'Forward', shortcut: '⌘]' },
+					{ isSeparator: true },
+					{ value: 'reload', label: 'Reload', shortcut: '⌘R' },
+					{ value: 'save', label: 'Save as…', shortcut: '⌘S' },
+					{ isSeparator: true },
+					{ value: 'delete', label: 'Delete', isDanger: true }
 				]
-				const chartBar = document.getElementById('chart-bar')
-				if (chartBar) chartBar.data = barData
-				const chartArea = document.getElementById('chart-area')
-				if (chartArea)
-					chartArea.data = [
-						{ label: 'W1', value: 12 },
-						{ label: 'W2', value: 28 },
-						{ label: 'W3', value: 22 },
-						{ label: 'W4', value: 45 },
-						{ label: 'W5', value: 38 },
-						{ label: 'W6', value: 60 }
-					]
 
-				const codeEl = document.getElementById('demo-code')
-				if (codeEl)
-					codeEl.code = [
-						"import { computePosition, autoUpdate } from './overlay'",
-						'',
-						'export const open = (anchor, floating) => {',
-						'\tfloating.showPopover()',
-						'\treturn autoUpdate(anchor, floating, () => {',
-						'\t\tapplyPosition(floating, computePosition(anchor, floating))',
-						'\t})',
-						'}'
-					].join('\n')
+			const command = document.getElementById('demo-command')
+			if (command)
+				command.items = [
+					{ group: 'Navigation', value: 'home', label: 'Go to Dashboard', shortcut: 'G D' },
+					{ group: 'Navigation', value: 'projects', label: 'Go to Projects', shortcut: 'G P', keywords: 'work' },
+					{ group: 'Navigation', value: 'settings', label: 'Go to Settings', shortcut: 'G S' },
+					{ group: 'Actions', value: 'new', label: 'New Project', shortcut: '⌘N', keywords: 'create add' },
+					{ group: 'Actions', value: 'invite', label: 'Invite teammate', keywords: 'member user' },
+					{ group: 'Actions', value: 'theme', label: 'Toggle theme', isDisabled: true }
+				]
 
-				// scroll-spy for the nav
+			const toaster = document.getElementById('demo-toaster')
+			const fireToast = (opts) => toaster && toaster.push(opts)
+			document
+				.getElementById('toast-success')
+				?.addEventListener('click', () =>
+					fireToast({ tone: 'success', title: 'Changes saved', description: 'Your project is up to date.' })
+				)
+			document
+				.getElementById('toast-info')
+				?.addEventListener('click', () =>
+					fireToast({ tone: 'info', title: 'New message', description: 'Ada sent you a comment.' })
+				)
+			document
+				.getElementById('toast-danger')
+				?.addEventListener('click', () =>
+					fireToast({ tone: 'danger', title: 'Upload failed', description: 'The file was too large.', duration: 6000 })
+				)
+
+			// open the command palette with ⌘K / Ctrl+K
+			document.addEventListener('keydown', (e) => {
+				if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+					e.preventDefault()
+					if (command) command.isOpen = true
+				}
+			})
+
+			// ── Specialized (chart data + code) ──
+			const barData = [
+				{ label: 'Mon', value: 42 },
+				{ label: 'Tue', value: 58 },
+				{ label: 'Wed', value: 35 },
+				{ label: 'Thu', value: 71 },
+				{ label: 'Fri', value: 64 },
+				{ label: 'Sat', value: 28 },
+				{ label: 'Sun', value: 49 }
+			]
+			const chartBar = document.getElementById('chart-bar')
+			if (chartBar) chartBar.data = barData
+			const chartArea = document.getElementById('chart-area')
+			if (chartArea)
+				chartArea.data = [
+					{ label: 'W1', value: 12 },
+					{ label: 'W2', value: 28 },
+					{ label: 'W3', value: 22 },
+					{ label: 'W4', value: 45 },
+					{ label: 'W5', value: 38 },
+					{ label: 'W6', value: 60 }
+				]
+
+			const codeEl = document.getElementById('demo-code')
+			if (codeEl)
+				codeEl.code = [
+					`const resolveToneClass = (props: any): string => {
+	if (props.tone === 'primary') return 'is-primary'
+	if (props.tone === 'secondary') return 'is-secondary'
+	if (props.tone === 'success') return 'is-success'
+	if (props.tone === 'warning') return 'is-warning'
+	if (props.tone === 'danger') return 'is-danger'
+	return 'is-neutral'
+}
+
+const resolveKindClass = (props: any): string => {
+	if (props.kind === 'solid') return 'is-solid'
+	if (props.kind === 'outline') return 'is-outline'
+	return 'is-soft'
+}
+
+export const ZBadge = c(
+	(props) => {
+		const sizeClass = props.size === 'small' ? 'is-small' : 'is-medium'
+		const badgeClass = ['badge', resolveToneClass(props), props.isDot ? 'is-dot' : resolveKindClass(props), sizeClass].join(
+			' '
+		)
+
+		return (
+			<host shadowDom>
+				<span class={badgeClass}>
+					{props.isDot && <span class='dot' aria-hidden='true'></span>}
+					<span class='label'>{props.label ? props.label : <slot />}</span>
+				</span>
+			</host>
+		)
+	},
+	{
+		props: {
+			tone: { type: String, reflect: true },
+			kind: { type: String, reflect: true },
+			size: { type: String, reflect: true },
+			label: String,
+			isDot: { type: Boolean, reflect: true },
+			isHidden: { type: Boolean, reflect: true }
+		},
+		styles
+	}
+)`
+				].join('\n')
+
+			// scroll-spy for the nav
 			const links = [...document.querySelectorAll('.nav-links a')]
 			const sections = links.map((l) => document.querySelector(l.getAttribute('href')))
 			const spy = new IntersectionObserver(

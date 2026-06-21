@@ -11,7 +11,7 @@ const styles = css`
 	:host {
 		display: block;
 		position: relative;
-		--accent: var(--purple);
+		--accent: var(--color-neutral-8);
 	}
 
 	:host([tone='secondary']) {
@@ -169,41 +169,35 @@ export const ZCarousel = c(
 				onfocusin={() => (paused.current = true)}
 				onfocusout={() => (paused.current = false)}
 			>
-				<div class="viewport">
-					<div class="track" style={{ transform: `translateX(-${safeIndex * 100}%)` }}>
-						<slot
-							onslotchange={(e: Event) =>
-								setCount((e.target as HTMLSlotElement).assignedElements().length)
-							}
-						/>
+				<div class='viewport'>
+					<div class='track' style={{ transform: `translateX(-${safeIndex * 100}%)` }}>
+						<slot onslotchange={(e: Event) => setCount((e.target as HTMLSlotElement).assignedElements().length)} />
 					</div>
 				</div>
 
 				{count > 1 && (
 					<>
 						<button
-							type="button"
-							class="btn prev"
-							aria-label="Previous slide"
+							type='button'
+							class='btn prev'
+							aria-label='Previous slide'
 							disabled={atStart}
 							onclick={() => go(safeIndex - 1)}
 						>
-							<svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6" /></svg>
+							<svg viewBox='0 0 24 24'>
+								<polyline points='15 18 9 12 15 6' />
+							</svg>
 						</button>
-						<button
-							type="button"
-							class="btn next"
-							aria-label="Next slide"
-							disabled={atEnd}
-							onclick={() => go(safeIndex + 1)}
-						>
-							<svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6" /></svg>
+						<button type='button' class='btn next' aria-label='Next slide' disabled={atEnd} onclick={() => go(safeIndex + 1)}>
+							<svg viewBox='0 0 24 24'>
+								<polyline points='9 18 15 12 9 6' />
+							</svg>
 						</button>
-						<div class="dots">
+						<div class='dots'>
 							{Array.from({ length: count }).map((_, i) => (
 								<button
 									key={i}
-									type="button"
+									type='button'
 									class={i === safeIndex ? 'dot is-active' : 'dot'}
 									aria-label={`Go to slide ${i + 1}`}
 									aria-current={i === safeIndex ? 'true' : 'false'}

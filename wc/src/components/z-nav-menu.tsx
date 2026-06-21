@@ -61,7 +61,7 @@ const styles = css`
 	}
 
 	.trigger.is-active {
-		color: var(--accent);
+		color: var(--color-neutral-9);
 	}
 
 	.trigger.is-open {
@@ -178,39 +178,39 @@ export const ZNavMenu = c(
 								.concat(isOpen ? ['is-open'] : [])
 								.join(' ')
 							return (
-								<div key={key} class="top">
+								<div key={key} class='top'>
 									<button
-										type="button"
+										type='button'
 										class={triggerClass}
-										aria-haspopup="menu"
+										aria-haspopup='menu'
 										aria-expanded={isOpen ? 'true' : 'false'}
 										onclick={() => setOpenValue(isOpen ? null : key)}
 									>
 										{item.label}
-										<svg class="caret" viewBox="0 0 24 24">
-											<polyline points="6 9 12 15 18 9" />
+										<svg class='caret' viewBox='0 0 24 24'>
+											<polyline points='6 9 12 15 18 9' />
 										</svg>
 									</button>
 									{isOpen && (
-										<div class="panel" role="menu">
+										<div class='panel' role='menu'>
 											{item.children.map((child, ci) => {
 												const ckey = child.value || child.label || String(ci)
 												const content = (
 													<>
-														<span class="child-label">{child.label}</span>
-														{child.description && <span class="child-desc">{child.description}</span>}
+														<span class='child-label'>{child.label}</span>
+														{child.description && <span class='child-desc'>{child.description}</span>}
 													</>
 												)
 												return child.href ? (
-													<a key={ckey} class="child" href={child.href} role="menuitem">
+													<a key={ckey} class='child' href={child.href} role='menuitem'>
 														{content}
 													</a>
 												) : (
 													<button
 														key={ckey}
-														type="button"
-														class="child"
-														role="menuitem"
+														type='button'
+														class='child'
+														role='menuitem'
 														onclick={() => pick(child.value || child.label)}
 													>
 														{content}
@@ -229,7 +229,7 @@ export const ZNavMenu = c(
 								{item.label}
 							</a>
 						) : (
-							<button key={key} type="button" class={triggerClass} onclick={() => pick(item.value || item.label)}>
+							<button key={key} type='button' class={triggerClass} onclick={() => pick(item.value || item.label)}>
 								{item.label}
 							</button>
 						)

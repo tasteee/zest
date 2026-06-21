@@ -10,9 +10,12 @@
 		"preview": "vite preview"
 	},
 	"dependencies": {
-		"atomico": "^2.1.0"
+		"atomico": "^2.1.0",
+		"highlight.js": "^11.11.1",
+		"lowlight": "^3.3.0"
 	},
 	"devDependencies": {
+		"@types/hast": "^3.0.4",
 		"typescript": "^5.7.3",
 		"vite": "^6.0.0"
 	}

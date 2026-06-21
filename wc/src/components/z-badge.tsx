@@ -105,7 +105,7 @@ const styles = css`
 
 	.is-solid.is-primary .label,
 	.is-solid.is-secondary .label {
-		text-shadow: 0 0px 12px var(--primary-foreground);
+		text-shadow: 0 0px 18px var(--primary-foreground);
 	}
 
 	::slotted(svg) {
