@@ -126,3 +126,245 @@ body {
 	display: block;
 	margin-block: 1rem;
 }
+
+/* ── Admin / manage posts ────────────────────────────────── */
+
+.AdminContainer {
+	max-width: 60rem;
+}
+
+.AdminHeader {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.AdminTabs {
+	display: flex;
+	gap: 0.25rem;
+	width: 100%;
+	border-bottom: 1px solid var(--line);
+}
+
+.AdminTab {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.4rem;
+	padding: 0.5rem 0.75rem;
+	border: none;
+	background: transparent;
+	color: var(--muted);
+	font-family: var(--font-sans);
+	font-size: var(--font-size-small);
+	font-weight: var(--font-weight-medium);
+	cursor: pointer;
+	border-bottom: 2px solid transparent;
+	margin-bottom: -1px;
+}
+
+.AdminTab[data-active='true'] {
+	color: var(--foreground);
+	border-bottom-color: var(--primary);
+}
+
+.AdminTabCount {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 1.25rem;
+	height: 1.25rem;
+	padding: 0 0.35rem;
+	border-radius: 999px;
+	background: var(--color-neutral-2);
+	color: var(--muted);
+	font-size: 0.7rem;
+	font-weight: var(--font-weight-semibold);
+}
+
+.AdminList {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+
+.AdminRow {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	padding: 0.75rem 1rem;
+	border: 1px solid var(--line);
+	border-radius: var(--radius-md);
+	background: var(--paper);
+	transition: border-color 0.12s ease, background 0.12s ease;
+}
+
+.AdminRow:hover {
+	border-color: color-mix(in oklch, var(--foreground) 22%, transparent);
+}
+
+.AdminRowMain {
+	flex: 1;
+	min-width: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 0.3rem;
+	border: none;
+	background: transparent;
+	text-align: left;
+	cursor: pointer;
+	font-family: var(--font-sans);
+}
+
+.AdminRowTitle {
+	color: var(--foreground);
+	font-size: var(--font-size-body, 1rem);
+	font-weight: var(--font-weight-semibold);
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.AdminRowMeta {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 0.4rem;
+	color: var(--muted);
+	font-size: var(--font-size-caption);
+}
+
+.AdminDot {
+	opacity: 0.5;
+}
+
+.AdminStatus {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.35rem;
+	font-weight: var(--font-weight-semibold);
+}
+
+.AdminStatus::before {
+	content: '';
+	width: 0.5rem;
+	height: 0.5rem;
+	border-radius: 999px;
+	background: var(--muted);
+}
+
+.AdminStatus[data-status='published'] {
+	color: var(--color-success, var(--success));
+}
+
+.AdminStatus[data-status='published']::before {
+	background: var(--color-success, var(--success));
+}
+
+/* ── Dropdown (three-dot) menu ───────────────────────────── */
+
+.DropdownMenu {
+	position: relative;
+	flex-shrink: 0;
+}
+
+.DropdownMenuTrigger {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 2rem;
+	height: 2rem;
+	border: 1px solid transparent;
+	border-radius: var(--small-button-radius);
+	background: transparent;
+	color: var(--muted);
+	cursor: pointer;
+	transition: background 0.1s ease, color 0.1s ease;
+}
+
+.DropdownMenuTrigger:hover {
+	background: color-mix(in oklch, var(--foreground) 8%, transparent);
+	color: var(--foreground);
+}
+
+.DropdownMenuList {
+	position: absolute;
+	top: calc(100% + 4px);
+	right: 0;
+	z-index: 30;
+	min-width: 10rem;
+	padding: 0.25rem;
+	border: 1px solid var(--line);
+	border-radius: var(--radius-md);
+	background: var(--popover, var(--paper));
+	box-shadow: 0 8px 28px color-mix(in srgb, black 22%, transparent);
+	display: flex;
+	flex-direction: column;
+	gap: 0.1rem;
+}
+
+.DropdownMenuItem {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	width: 100%;
+	padding: 0.45rem 0.6rem;
+	border: none;
+	border-radius: var(--radius-sm);
+	background: transparent;
+	color: var(--foreground);
+	font-family: var(--font-sans);
+	font-size: var(--font-size-small);
+	text-align: left;
+	cursor: pointer;
+}
+
+.DropdownMenuItem:hover {
+	background: color-mix(in oklch, var(--foreground) 8%, transparent);
+}
+
+.DropdownMenuItem[data-danger='true'] {
+	color: var(--destructive, var(--color-destructive));
+}
+
+.DropdownMenuItem[data-danger='true']:hover {
+	background: color-mix(in oklch, var(--destructive, var(--color-destructive)) 12%, transparent);
+}
+
+/* ── Confirm dialog ──────────────────────────────────────── */
+
+.ConfirmOverlay {
+	position: fixed;
+	inset: 0;
+	z-index: 50;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 1rem;
+	background: color-mix(in srgb, black 45%, transparent);
+	backdrop-filter: blur(2px);
+}
+
+.ConfirmCard {
+	display: flex;
+	flex-direction: column;
+	gap: 0.75rem;
+	width: 100%;
+	max-width: 24rem;
+	padding: 1.25rem;
+	border: 1px solid var(--line);
+	border-radius: var(--radius-lg, var(--radius-md));
+	background: var(--paper);
+	box-shadow: 0 16px 48px color-mix(in srgb, black 30%, transparent);
+}
+
+.ConfirmActions {
+	display: flex;
+	justify-content: flex-end;
+	gap: 0.5rem;
+	margin-top: 0.25rem;
+}

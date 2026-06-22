@@ -49,7 +49,9 @@ const styles = css`
 		justify-content: center;
 		box-sizing: border-box;
 		border: 1px solid color-mix(in oklch, var(--foreground) 14%, transparent);
-		background: color-mix(in oklch, var(--tone) 22%, var(--card));
+		/* srgb: mixing a chromatic tone with the hue-carrying --card in oklch
+		   drifts the hue around the wheel. */
+		background: color-mix(in srgb, var(--tone) 22%, var(--card));
 		color: color-mix(in oklch, var(--tone) 85%, white);
 		font-family: inherit;
 		font-weight: 600;

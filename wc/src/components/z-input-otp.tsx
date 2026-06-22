@@ -65,7 +65,8 @@ const styles = css`
 
 	.cell.is-filled {
 		color: var(--accent);
-		border-color: color-mix(in oklch, var(--accent) 45%, var(--border));
+		/* srgb: oklch drifts the hue when mixing --accent against the hue-carrying --border. */
+		border-color: color-mix(in srgb, var(--accent) 45%, var(--border));
 	}
 
 	.cell:focus {

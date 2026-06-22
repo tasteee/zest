@@ -118,11 +118,11 @@ const styles = css`
 	}
 
 	button.is-outline:hover {
-		background: color-mix(in oklch, var(--tone-color) 10%, transparent);
+		background: color-mix(in srgb, var(--tone-color) 10%, transparent);
 	}
 
 	button.is-outline:active {
-		background: color-mix(in oklch, var(--tone-color) 20%, transparent);
+		background: color-mix(in srgb, var(--tone-color) 20%, transparent);
 	}
 
 	button.is-ghost {
@@ -132,26 +132,26 @@ const styles = css`
 	}
 
 	button.is-ghost:hover {
-		background: color-mix(in oklch, var(--tone-color) 10%, transparent);
+		background: color-mix(in srgb, var(--tone-color) 10%, transparent);
 	}
 
 	button.is-ghost:active {
-		background: color-mix(in oklch, var(--tone-color) 18%, transparent);
+		background: color-mix(in srgb, var(--tone-color) 18%, transparent);
 	}
 
 	button.is-soft {
-		background: color-mix(in oklch, var(--tone-color) 15%, transparent);
+		background: color-mix(in srgb, var(--tone-color) 15%, transparent);
 		border-color: transparent;
 		color: var(--tone-color);
 		font-weight: 600;
 	}
 
 	button.is-soft:hover {
-		background: color-mix(in oklch, var(--tone-color) 24%, transparent);
+		background: color-mix(in srgb, var(--tone-color) 24%, transparent);
 	}
 
 	button.is-soft:active {
-		background: color-mix(in oklch, var(--tone-color) 32%, transparent);
+		background: color-mix(in srgb, var(--tone-color) 32%, transparent);
 	}
 
 	button.is-plain {

@@ -76,7 +76,9 @@ const styles = css`
 	}
 	.badge.is-outline {
 		background: transparent;
-		border-color: color-mix(in oklch, var(--tone) 45%, var(--border));
+		/* srgb, not oklch: --border carries a faint green hue, and interpolating
+		   hue against it in oklch drags the tone around the wheel (purple → blue). */
+		border-color: color-mix(in srgb, var(--tone) 45%, var(--border));
 		color: var(--tone);
 	}
 	.badge.is-neutral.is-outline {

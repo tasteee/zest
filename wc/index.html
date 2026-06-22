@@ -162,9 +162,10 @@
 			<div class="nav-links">
 				<a href="/" class="active">Home</a>
 				<a href="/blog.html">Blog</a>
-				<a href="/components.html">Components</a>
+				<a href="/pages/components.html">Components</a>
+				<a href="/pages/layout-components.html">Layout</a>
+				<a href="/pages/typography-components.html">Typography</a>
 				<a href="#packages">Packages</a>
-				<a href="#tools">Tools</a>
 			</div>
 			<z-button tone="primary" kind="solid" size="small" id="nav-explore">Explore</z-button>
 		</nav>
@@ -222,7 +223,7 @@
 				</div>
 
 				<!-- feature: component library -->
-				<a class="card-link" href="/components.html">
+				<a class="card-link" href="/pages/components.html">
 					<z-card does-light-up-on-hover is-column gap="4">
 						<z-box is-flex is-row x-between y-start does-wrap gap="3">
 							<z-box is-column gap="2">
@@ -358,7 +359,7 @@
 				</div>
 
 				<z-box is-grid columns="1" medium-columns="3" gap="4">
-					<a class="card-link" href="/components.html">
+					<a class="card-link" href="/pages/components.html">
 						<z-card does-light-up-on-hover is-column gap="3" style="height: 100%">
 							<z-box is-flex is-row x-between y-center>
 								<span class="mono" style="color: var(--foreground)">zesty-wc</span>
@@ -453,14 +454,14 @@
 					<z-box is-column gap="3">
 						<z-subheading size="xs" color="muted">Explore</z-subheading>
 						<z-link href="/blog.html" tone="neutral" size="small">Blog</z-link>
-						<z-link href="/components.html" tone="neutral" size="small">Components</z-link>
+						<z-link href="/pages/components.html" tone="neutral" size="small">Components</z-link>
 						<z-link href="#packages" tone="neutral" size="small">Packages</z-link>
 						<z-link href="#tools" tone="neutral" size="small">Tools</z-link>
 					</z-box>
 					<z-box is-column gap="3">
 						<z-subheading size="xs" color="muted">Reference</z-subheading>
-						<z-link href="/typography.html" tone="neutral" size="small">Typography</z-link>
-						<z-link href="/components.html" tone="neutral" size="small">Design system</z-link>
+						<z-link href="/pages/typography-components.html" tone="neutral" size="small">Typography</z-link>
+						<z-link href="/pages/components.html" tone="neutral" size="small">Design system</z-link>
 					</z-box>
 				</z-box>
 			</z-box>
@@ -470,11 +471,11 @@
 		<script type="module">
 			// z-button doesn't navigate on its own — wire the CTA buttons to their destinations.
 			const go = (id, href) => document.getElementById(id)?.addEventListener('click', () => (location.href = href))
-			go('nav-explore', '/components.html')
+			go('nav-explore', '/pages/components.html')
 			go('cta-blog', '/blog.html')
-			go('cta-components', '/components.html')
+			go('cta-components', '/pages/components.html')
 			go('cta-blog-2', '/blog.html')
-			go('cta-components-2', '/components.html')
+			go('cta-components-2', '/pages/components.html')
 		</script>
 	</body>
 </html>

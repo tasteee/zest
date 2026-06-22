@@ -7,6 +7,17 @@ export * from './components/z-card'
 export * from './components/z-line'
 export * from './components/z-separator'
 
+// Layout primitives
+export * from './components/z-stack'
+export * from './components/z-grid'
+export * from './components/z-cluster'
+export * from './components/z-center'
+export * from './components/z-container'
+export * from './components/z-section'
+export * from './components/z-surface'
+export * from './components/z-scroll'
+export * from './components/z-spacer'
+
 // Buttons & actions
 export * from './components/z-button'
 export * from './components/z-button-group'

@@ -35,7 +35,9 @@ const styles = css`
 		gap: 0.75rem;
 		box-sizing: border-box;
 		padding: var(--space-md) var(--space-base);
-		border: 1px solid color-mix(in oklch, var(--alert-color) 40%, var(--border));
+		/* srgb: oklch would drift the hue when mixing the chromatic alert colour
+		   against the hue-carrying --border. */
+		border: 1px solid color-mix(in srgb, var(--alert-color) 40%, var(--border));
 		border-radius: var(--radius-md);
 		background: color-mix(in oklch, var(--alert-color) 8%, transparent);
 		color: var(--foreground);
