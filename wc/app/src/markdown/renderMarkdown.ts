@@ -73,13 +73,61 @@ const rehypeCodeBlocks = () => (tree: AnyNode) => {
 	})
 }
 
+// hast: inline markdown links become z-link, so they pick up the zest tone/
+// underline treatment instead of a bare browser anchor.
+const rehypeLinks = () => (tree: AnyNode) => {
+	visit(tree, 'element', (node: AnyNode) => {
+		if (node.tagName !== 'a') return
+		node.tagName = 'z-link'
+		node.properties = { ...node.properties, tone: 'primary' }
+	})
+}
+
+// Sized for in-article section heads, not hero/marketing copy — e.g. the
+// typography page's own article body uses size="sm" for an h2, not xl.
+const HEADING_SIZE_BY_TAG: Record<string, string> = {
+	h1: 'lg',
+	h2: 'sm',
+	h3: 'xs',
+	h4: 'xs',
+	h5: 'xs',
+	h6: 'xs'
+}
+
+// hast: top-level paragraphs/headings that weren't already rewritten by a
+// custom marker become z-text/z-heading, so default prose gets real
+// typography-component sizing and color (muted body, bold headings) instead
+// of bare <p>/<hN> with no styling. Only the document's direct children are
+// touched — paragraphs nested in lists/blockquotes stay plain and are styled
+// via `.Prose` instead.
+const rehypeDefaultTypography = () => (tree: AnyNode) => {
+	for (const node of tree.children ?? []) {
+		if (node.type !== 'element' || !node.tagName) continue
+		if ((node.properties?.className as unknown[] | string | undefined)?.length) continue
+
+		if (node.tagName === 'p') {
+			node.tagName = 'z-text'
+			node.properties = { ...node.properties, size: 'lg', color: 'muted', tag: 'p' }
+			continue
+		}
+
+		const size = HEADING_SIZE_BY_TAG[node.tagName]
+		if (!size) continue
+		const tag = node.tagName
+		node.tagName = 'z-heading'
+		node.properties = { ...node.properties, size, tag }
+	}
+}
+
 const processor = unified()
 	.use(remarkParse)
 	.use(remarkGfm)
 	.use(remarkCustomParagraphs)
 	.use(remarkRehype, { allowDangerousHtml: true })
 	.use(rehypeCodeBlocks)
+	.use(rehypeLinks)
 	.use(rehypeSlug)
+	.use(rehypeDefaultTypography)
 	.use(rehypeStringify, { allowDangerousHtml: true })
 
 export const renderMarkdown = async (content: string): Promise<string> => {

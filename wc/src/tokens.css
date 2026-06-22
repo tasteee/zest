@@ -58,10 +58,14 @@
 	--color-secondary-7: oklch(from var(--base-accent-color-1) 0.89 0.1 h);
 	--color-secondary-8: oklch(from var(--base-accent-color-1) 0.93 0.05 h);
 	--color-secondary-9: oklch(from var(--base-accent-color-1) 0.97 0.02 h);
+	/* Neutral ramp: lightness must climb monotonically 0 -> 9. neutral-0 keeps
+	   the base dark's own L (~0.17) as the page floor; every step above it lifts
+	   lighter. The old 1/2 values (0.12/0.18) dipped below 0, so surfaces above
+	   the background rendered darker-than-black — fixed by stepping 1/2 up. */
 	--color-neutral-0: oklch(from var(--base-neutral-color-dark) l c h);
-	--color-neutral-1: oklch(from var(--base-neutral-color-dark) 0.12 c h);
-	--color-neutral-2: oklch(from var(--base-neutral-color-dark) 0.18 c h);
-	--color-neutral-3: oklch(from var(--base-neutral-color-dark) 0.28 c h);
+	--color-neutral-1: oklch(from var(--base-neutral-color-dark) 0.21 c h);
+	--color-neutral-2: oklch(from var(--base-neutral-color-dark) 0.25 c h);
+	--color-neutral-3: oklch(from var(--base-neutral-color-dark) 0.31 c h);
 	--color-neutral-4: oklch(from var(--base-neutral-color-dark) 0.4 c h);
 	--color-neutral-5: oklch(from var(--base-neutral-color-dark) 0.55 c h);
 	--color-neutral-6: oklch(from var(--base-neutral-color-dark) 0.68 c h);

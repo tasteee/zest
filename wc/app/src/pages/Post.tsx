@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useQuery } from 'convex/react'
 import { Link, useRoute } from 'wouter'
 import { api } from '@convex/_generated/api'
-import { renderMarkdown } from '@blog/markdown/renderMarkdown'
+import { renderMarkdown } from '@app/markdown/renderMarkdown'
 
 const formatDate = (ms: number): string =>
 	new Date(ms).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })

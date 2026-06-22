@@ -4,8 +4,8 @@ import { useQuery, useMutation } from 'convex/react'
 import { useLocation, useRoute } from 'wouter'
 import { api } from '@convex/_generated/api'
 import type { Id } from '@convex/_generated/dataModel'
-import { renderMarkdown } from '@blog/markdown/renderMarkdown'
-import { MarkdownEditor } from '@blog/editor/MarkdownEditor'
+import { renderMarkdown } from '@app/markdown/renderMarkdown'
+import { MarkdownEditor } from '@app/editor/MarkdownEditor'
 
 type SaveState = 'saved' | 'saving' | 'unsaved'
 
@@ -144,7 +144,7 @@ export const EditorPage = () => {
 						<z-button size="small" kind="soft" tone="primary" onClick={() => void publishPost({ id: postId })}>Publish</z-button>
 					)}
 					{isPublished && (
-						<z-button size="small" kind="ghost" onClick={() => window.open(`/post/${post.slug}`, '_blank')}>View</z-button>
+						<z-button size="small" kind="ghost" onClick={() => window.open(`/blog/post/${post.slug}`, '_blank')}>View</z-button>
 					)}
 					<z-button
 						size="small"

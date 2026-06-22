@@ -4,13 +4,15 @@
 	"private": true,
 	"type": "module",
 	"scripts": {
-		"dev": "vite",
-		"build": "tsc --noEmit && vite build",
-		"typecheck": "tsc --noEmit",
+		"dev": "concurrently -k -n lib,web,convex -c blue,green,magenta \"vite build --config vite.lib.config.ts --watch\" \"vite --port 5174\" \"convex dev\"",
+		"dev:lib": "vite build --config vite.lib.config.ts --watch",
+		"dev:web": "vite",
+		"dev:convex": "convex dev",
+		"build": "npm run build:lib && tsc --noEmit -p tsconfig.app.json && vite build",
+		"build:lib": "tsc --noEmit -p tsconfig.json && vite build --config vite.lib.config.ts",
 		"preview": "vite preview",
-		"dev:blog": "vite --config vite.blog.config.ts",
-		"build:blog": "tsc -p tsconfig.blog.json && vite build --config vite.blog.config.ts",
-		"typecheck:blog": "tsc -p tsconfig.blog.json"
+		"typecheck": "tsc --noEmit -p tsconfig.json",
+		"typecheck:app": "tsc --noEmit -p tsconfig.app.json"
 	},
 	"dependencies": {
 		"@auth/core": "0.41.1",
@@ -39,6 +41,7 @@
 		"@types/react": "^19.2.17",
 		"@types/react-dom": "^19.2.3",
 		"@vitejs/plugin-react": "^4.7.0",
+		"concurrently": "^10.0.3",
 		"monaco-editor": "^0.55.1",
 		"typescript": "^5.7.3",
 		"vite": "^6.0.0"

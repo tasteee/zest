@@ -116,6 +116,37 @@ body {
 	margin-block: 0.75rem;
 }
 
+/* z-text/z-heading default to display:inline (so they can sit mid-sentence
+   elsewhere); promote the top-level blocks the markdown renderer emits so
+   they stack like paragraphs and pick up margin-block above. */
+.Prose > z-text,
+.Prose > z-heading {
+	display: block;
+}
+
+.Prose > z-heading {
+	margin-top: 2.5rem;
+}
+
+.Prose > z-heading:first-child {
+	margin-top: 0;
+}
+
+.Prose > z-heading + * {
+	margin-top: 0.75rem;
+}
+
+.Prose z-text.isCenteredBlock {
+	text-align: center;
+}
+
+/* !SMALL wants a dimmer gray than the standard --muted-foreground; custom
+   properties pierce the shadow root, so scoping the override to this host
+   re-themes just this instance's color="muted" lookup. */
+.Prose z-text.isSmallMuted {
+	--muted-foreground: var(--color-neutral-5);
+}
+
 .Prose img {
 	max-width: 100%;
 	height: auto;
@@ -125,6 +156,120 @@ body {
 .Prose z-code-block {
 	display: block;
 	margin-block: 1rem;
+}
+
+/* ── Inline marks ─────────────────────────────────────────── */
+
+.Prose code {
+	font-family: var(--font-mono);
+	font-size: 0.9em;
+	color: var(--foreground);
+	background: var(--color-neutral-2);
+	padding: 0.1em 0.4em;
+	border-radius: 4px;
+}
+
+/* ── Lists ───────────────────────────────────────────────── */
+
+.Prose ul,
+.Prose ol {
+	color: var(--muted);
+	padding-left: 1.35rem;
+	display: flex;
+	flex-direction: column;
+	gap: 0.6rem;
+}
+
+.Prose li {
+	line-height: 1.7;
+	padding-left: 0.25rem;
+}
+
+.Prose li::marker {
+	color: var(--purple);
+}
+
+.Prose li strong {
+	color: var(--foreground);
+	font-weight: var(--font-weight-semibold);
+}
+
+/* ── Blockquote (native `>` quotes) ─────────────────────────
+   The !QUOTE marker (zQuote, below) is for a large attributed pull-quote;
+   this is for ordinary quoted text indented inline with the prose. */
+
+.Prose blockquote {
+	margin: 2rem 0;
+	padding: 0.25rem 0 0.25rem 1.75rem;
+	border-left: 3px solid var(--purple);
+	color: var(--muted);
+	font-style: normal;
+}
+
+.Prose blockquote > *:first-child {
+	margin-top: 0;
+}
+
+.Prose blockquote > *:last-child {
+	margin-bottom: 0;
+}
+
+/* ── Marker elements (markdown/markers.ts) ──────────────────── */
+
+.Prose z-heading.zQuote {
+	display: block;
+	margin: 2.5rem 0;
+	padding: 0.25rem 0 0.25rem 1.75rem;
+	border-left: 3px solid var(--purple);
+}
+
+/* One callout shape, themed per `callout-<type>` via --callout-accent. New
+   types (`!CALLOUT:<type>`) just need an accent line below, or they fall
+   back to --accent. */
+.Prose .callout {
+	margin: 1.6rem 0;
+	padding: 0.85rem 1.1rem;
+	border: 1px solid color-mix(in srgb, var(--callout-accent, var(--accent)) 45%, var(--line));
+	border-left: 3px solid var(--callout-accent, var(--accent));
+	border-radius: 0 var(--radius-md) var(--radius-md) 0;
+	background: color-mix(in srgb, var(--callout-accent, var(--accent)) 10%, transparent);
+	color: var(--foreground);
+	font-size: var(--font-size-small);
+}
+
+.Prose .callout-note {
+	--callout-accent: var(--pink);
+}
+
+.Prose .callout-tip {
+	--callout-accent: var(--purple);
+}
+
+.Prose .callout-warning {
+	--callout-accent: var(--warning);
+}
+
+.Prose .callout-success {
+	--callout-accent: var(--success);
+}
+
+.Prose .zTodo {
+	color: var(--muted);
+}
+
+.Prose .zTodo::before {
+	content: '☐ ';
+	color: var(--purple);
+}
+
+.Prose hr.zDivider {
+	border: none;
+	border-top: 1px solid var(--line);
+	margin: 2.5rem 0;
+}
+
+.Prose .zSpacer {
+	width: 100%;
 }
 
 /* ── Admin / manage posts ────────────────────────────────── */
@@ -200,7 +345,9 @@ body {
 	border: 1px solid var(--line);
 	border-radius: var(--radius-md);
 	background: var(--paper);
-	transition: border-color 0.12s ease, background 0.12s ease;
+	transition:
+		border-color 0.12s ease,
+		background 0.12s ease;
 }
 
 .AdminRow:hover {
@@ -283,7 +430,9 @@ body {
 	background: transparent;
 	color: var(--muted);
 	cursor: pointer;
-	transition: background 0.1s ease, color 0.1s ease;
+	transition:
+		background 0.1s ease,
+		color 0.1s ease;
 }
 
 .DropdownMenuTrigger:hover {

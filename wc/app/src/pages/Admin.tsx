@@ -3,9 +3,9 @@ import { useMutation, useQuery } from 'convex/react'
 import { useLocation } from 'wouter'
 import { api } from '@convex/_generated/api'
 import type { Doc, Id } from '@convex/_generated/dataModel'
-import { useAuth } from '@blog/useAuth'
-import { DropdownMenu, type MenuItem } from '@blog/components/DropdownMenu'
-import { ConfirmDialog } from '@blog/components/ConfirmDialog'
+import { useAuth } from '@app/useAuth'
+import { DropdownMenu, type MenuItem } from '@app/components/DropdownMenu'
+import { ConfirmDialog } from '@app/components/ConfirmDialog'
 
 type Filter = 'all' | 'published' | 'draft'
 
@@ -59,7 +59,7 @@ export const Admin = () => {
 	const menuItemsFor = (post: Doc<'posts'>): MenuItem[] => {
 		const items: MenuItem[] = [{ label: 'Edit', onSelect: () => navigate(`/edit/${post._id}`) }]
 		if (post.status === 'published') {
-			items.push({ label: 'View', onSelect: () => window.open(`/post/${post.slug}`, '_blank') })
+			items.push({ label: 'View', onSelect: () => window.open(`/blog/post/${post.slug}`, '_blank') })
 			items.push({ label: 'Unpublish', onSelect: () => void unpublishPost({ id: post._id as Id<'posts'> }) })
 		} else {
 			items.push({ label: 'Publish', onSelect: () => void publishPost({ id: post._id as Id<'posts'> }) })
