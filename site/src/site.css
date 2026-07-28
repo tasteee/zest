@@ -1,0 +1,647 @@
+/* Chrome for the docs/playground site itself. Everything here reads from
+   the ink.css tokens — nothing hardcoded — so the site inherits whatever
+   theme zest ships without drifting from it. */
+
+html,
+body {
+	height: 100%;
+}
+
+#app {
+	height: 100dvh;
+}
+
+.appShell {
+	display: grid;
+	grid-template-columns: 260px 1fr;
+	grid-template-rows: auto 1fr;
+	height: 100%;
+}
+
+.appHeader {
+	grid-column: 1 / -1;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	height: 56px;
+	padding: 0 var(--spacing-6);
+	border-bottom: 1px solid var(--border);
+}
+
+.appLogo {
+	font-family: var(--font-mono);
+	font-weight: var(--font-weight-semibold);
+	font-size: var(--font-size-4);
+	color: var(--foreground);
+	letter-spacing: -0.02em;
+}
+
+.searchTrigger {
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-3);
+	padding: var(--spacing-2) var(--spacing-3);
+	background: var(--background-light);
+	border: 1px solid var(--border);
+	border-radius: var(--radius-md);
+	color: var(--muted-foreground);
+	font-family: var(--font-sans);
+	font-size: var(--font-size-2);
+	cursor: pointer;
+	transition: border-color var(--duration-fast) var(--easing-standard);
+}
+
+.searchTrigger:hover {
+	border-color: var(--color-neutral-4);
+	color: var(--foreground);
+}
+
+.searchTriggerKeys {
+	display: flex;
+	gap: var(--spacing-1);
+}
+
+.appNav {
+	grid-row: 2;
+	overflow-y: auto;
+	padding: var(--spacing-5) var(--spacing-3);
+	border-right: 1px solid var(--border);
+}
+
+.navGroup + .navGroup {
+	margin-top: var(--spacing-5);
+}
+
+.navGroupLabel {
+	margin: 0 0 var(--spacing-2);
+	padding: 0 var(--spacing-3);
+	font-family: var(--font-mono);
+	font-size: var(--font-size-0);
+	font-weight: var(--font-weight-medium);
+	text-transform: uppercase;
+	letter-spacing: 0.06em;
+	color: var(--muted-foreground);
+}
+
+.navList {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-1);
+}
+
+.navLink {
+	display: block;
+	padding: var(--spacing-2) var(--spacing-3);
+	border-radius: var(--radius-md);
+	color: var(--muted-foreground);
+	font-family: var(--font-mono);
+	font-size: var(--font-size-2);
+	text-decoration: none;
+	transition: background-color var(--duration-fast) var(--easing-standard), color var(--duration-fast) var(--easing-standard);
+}
+
+.navLink:hover {
+	color: var(--foreground);
+	background: var(--background-light);
+}
+
+.navLink.isActive {
+	color: var(--foreground);
+	background: var(--card);
+	font-weight: var(--font-weight-medium);
+}
+
+.appContent {
+	grid-row: 2;
+	overflow-y: auto;
+}
+
+.docArticle {
+	max-width: 860px;
+	margin: 0 auto;
+	padding: var(--spacing-10) var(--spacing-8) var(--spacing-24);
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-5);
+}
+
+.docHeader {
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-2);
+}
+
+.docPreviewLabel {
+	margin: 0 0 var(--spacing-2);
+	font-family: var(--font-mono);
+	font-size: var(--font-size-0);
+	font-weight: var(--font-weight-medium);
+	text-transform: uppercase;
+	letter-spacing: 0.06em;
+	color: var(--muted-foreground);
+}
+
+.playground {
+	display: flex;
+	flex-direction: column;
+}
+
+.playgroundPreview {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+	gap: var(--spacing-4);
+	padding: var(--spacing-10) var(--spacing-6);
+	min-height: 4rem;
+}
+
+.playgroundControls {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: flex-end;
+	gap: var(--spacing-5);
+	padding: var(--spacing-4) var(--spacing-6);
+	border-top: 1px solid var(--border);
+}
+
+.playgroundControlField {
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-1);
+}
+
+.playgroundControlLabel {
+	font-family: var(--font-mono);
+	font-size: var(--font-size-0);
+	font-weight: var(--font-weight-medium);
+	text-transform: uppercase;
+	letter-spacing: 0.06em;
+	color: var(--muted-foreground);
+}
+
+.playgroundControlInput {
+	background: var(--background);
+	border: 1px solid var(--border);
+	border-radius: var(--radius-md);
+	padding: var(--spacing-1) var(--spacing-2);
+	color: var(--foreground);
+	font-family: var(--font-mono);
+	font-size: var(--font-size-2);
+	min-width: 8rem;
+}
+
+.playgroundControlInput:focus {
+	outline: none;
+	border-color: var(--color-neutral-5);
+}
+
+.playgroundToggle {
+	appearance: none;
+	-webkit-appearance: none;
+	width: 2.25rem;
+	height: 1.25rem;
+	margin: 0;
+	background: var(--background);
+	border: 1px solid var(--border);
+	border-radius: var(--radius-xl);
+	position: relative;
+	cursor: pointer;
+	transition: background-color var(--duration-fast) var(--easing-standard), border-color var(--duration-fast) var(--easing-standard);
+}
+
+.playgroundToggle::after {
+	content: '';
+	position: absolute;
+	top: 1px;
+	left: 1px;
+	width: 1rem;
+	height: 1rem;
+	border-radius: var(--radius-full, 999px);
+	background: var(--muted-foreground);
+	transition: transform var(--duration-fast) var(--easing-standard), background-color var(--duration-fast) var(--easing-standard);
+}
+
+.playgroundToggle:checked {
+	background: var(--color-primary-4);
+	border-color: var(--color-primary-4);
+}
+
+.playgroundToggle:checked::after {
+	transform: translateX(1rem);
+	background: var(--color-neutral-9);
+}
+
+.playgroundCodeSection {
+	padding: var(--spacing-4);
+	border-top: 1px solid var(--border);
+}
+
+.playgroundCode {
+	width: 100%;
+}
+
+.playgroundSetup {
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-2);
+	padding: var(--spacing-4) var(--spacing-6) var(--spacing-6);
+	border-top: 1px solid var(--border);
+}
+
+.playgroundSetupLabel {
+	margin: 0;
+	font-family: var(--font-mono);
+	font-size: var(--font-size-0);
+	font-weight: var(--font-weight-medium);
+	text-transform: uppercase;
+	letter-spacing: 0.06em;
+	color: var(--muted-foreground);
+}
+
+.playgroundFootnote {
+	margin: var(--spacing-4) var(--spacing-6) var(--spacing-6);
+}
+
+.notFound {
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-4);
+	align-items: flex-start;
+}
+
+/* ---------------------------------------------------------------------
+   Component reference pages
+   Depth comes from surfaces, hairline borders, and space — never shadow.
+   --------------------------------------------------------------------- */
+
+.componentPage {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) 200px;
+	gap: var(--spacing-12);
+	max-width: 1120px;
+	margin: 0 auto;
+	padding: var(--spacing-10) var(--spacing-8) var(--spacing-32);
+	align-items: start;
+}
+
+.componentArticle {
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-12);
+	min-width: 0;
+}
+
+.pageHeader {
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-3);
+	padding-bottom: var(--spacing-8);
+	border-bottom: 1px solid var(--border);
+}
+
+.pageTitleRow {
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-3);
+}
+
+.pageSection {
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-5);
+	scroll-margin-top: var(--spacing-6);
+	min-width: 0;
+}
+
+.sectionHeader {
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-1);
+}
+
+.inlineCode {
+	font-family: var(--font-mono);
+	font-size: 0.9em;
+	padding: 0.1em 0.35em;
+	border: 1px solid var(--border);
+	border-radius: var(--radius-sm);
+	background: var(--background-light);
+	color: var(--foreground);
+}
+
+/* --- guidance and accessibility lists --- */
+
+.guidanceList {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-3);
+}
+
+.guidanceItem {
+	position: relative;
+	padding-left: var(--spacing-5);
+}
+
+.guidanceItem::before {
+	content: '';
+	position: absolute;
+	top: 0.6em;
+	left: 0;
+	width: var(--spacing-2);
+	height: 1px;
+	background: var(--color-neutral-4);
+}
+
+/* --- anatomy --- */
+
+.anatomyList {
+	display: flex;
+	flex-direction: column;
+	border: 1px solid var(--border);
+	border-radius: var(--radius-lg);
+	overflow: hidden;
+}
+
+.anatomyRow {
+	display: grid;
+	grid-template-columns: 180px minmax(0, 1fr);
+	gap: var(--spacing-5);
+	padding: var(--spacing-4) var(--spacing-5);
+	border-bottom: 1px solid var(--border);
+}
+
+.anatomyRow:last-child {
+	border-bottom: none;
+}
+
+.anatomyName {
+	font-family: var(--font-mono);
+}
+
+/* --- examples --- */
+
+.exampleList {
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-10);
+}
+
+.exampleCard {
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-4);
+	scroll-margin-top: var(--spacing-6);
+}
+
+.exampleHeader {
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-1);
+}
+
+.exampleFrame {
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+}
+
+.examplePreview {
+	display: flex;
+	padding: var(--spacing-10) var(--spacing-6);
+	min-height: 5rem;
+}
+
+.examplePreviewRoot {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: var(--spacing-4);
+	min-width: 0;
+}
+
+.examplePreview.is-center {
+	align-items: center;
+	justify-content: center;
+}
+
+.examplePreview.is-center .examplePreviewRoot {
+	justify-content: center;
+}
+
+.examplePreview.is-start {
+	align-items: center;
+	justify-content: flex-start;
+}
+
+/* Stacked previews show several independent rows of the same component,
+   so each row needs its own line rather than wrapping into its neighbour. */
+.examplePreview.is-stack .examplePreviewRoot {
+	flex-direction: column;
+	align-items: center;
+	gap: var(--spacing-5);
+}
+
+.examplePreview.is-stack {
+	justify-content: center;
+}
+
+.examplePreview.is-fill .examplePreviewRoot {
+	flex-direction: column;
+	align-items: stretch;
+	width: 100%;
+}
+
+.exampleToolbar {
+	display: flex;
+	justify-content: flex-end;
+	padding: var(--spacing-2) var(--spacing-3);
+	border-top: 1px solid var(--border);
+}
+
+.exampleSource {
+	border-top: 1px solid var(--border);
+	padding: var(--spacing-4);
+}
+
+.exampleSource[hidden] {
+	display: none;
+}
+
+.exampleSourcePanel {
+	padding-top: var(--spacing-4);
+}
+
+/* --- API reference --- */
+
+.apiReference {
+	min-width: 0;
+}
+
+.apiPanel {
+	padding-top: var(--spacing-5);
+}
+
+/* --- playground --- */
+
+.playground {
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+}
+
+.playgroundStage {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+	gap: var(--spacing-4);
+	padding: var(--spacing-12) var(--spacing-6);
+	min-height: 6rem;
+}
+
+.playgroundControls {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+	gap: var(--spacing-4) var(--spacing-5);
+	padding: var(--spacing-5) var(--spacing-6);
+	border-top: 1px solid var(--border);
+}
+
+.playgroundField {
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-2);
+	min-width: 0;
+}
+
+/* Booleans read better as a label and a switch on one line — a stacked
+   column of half-empty rows wastes the width the grid just handed us. */
+.playgroundField.is-boolean {
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--spacing-3);
+}
+
+.playgroundFieldLabel {
+	font-family: var(--font-mono);
+}
+
+.playgroundOutput {
+	padding: var(--spacing-4);
+	border-top: 1px solid var(--border);
+}
+
+/* Demo scaffolding for playground stages: a few layout primitives are
+   invisible on their own (a spacer, a bare grid), so the stage frames them
+   just enough to see what they are doing. */
+
+.demoFrame {
+	border: 1px solid var(--border);
+	border-radius: var(--radius-md);
+}
+
+.demoPadded {
+	padding: var(--spacing-3);
+}
+
+.demoFullWidth {
+	width: 100%;
+}
+
+.demoConstrained {
+	max-width: 22rem;
+}
+
+.demoTall {
+	height: 16rem;
+}
+
+.demoShort {
+	height: 10rem;
+}
+
+/* --- related --- */
+
+.relatedGrid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+	gap: var(--spacing-3);
+}
+
+.relatedCard {
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-1);
+	padding: var(--spacing-4);
+	border: 1px solid var(--border);
+	border-radius: var(--radius-md);
+	text-decoration: none;
+	transition: border-color var(--duration-fast) var(--easing-standard),
+		background-color var(--duration-fast) var(--easing-standard);
+}
+
+.relatedCard:hover {
+	border-color: var(--color-neutral-4);
+	background: var(--background-light);
+}
+
+.relatedName {
+	font-family: var(--font-mono);
+}
+
+/* --- on-this-page rail --- */
+
+.pageOutline {
+	position: sticky;
+	top: var(--spacing-10);
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-3);
+	padding-left: var(--spacing-5);
+	border-left: 1px solid var(--border);
+}
+
+.pageOutlineLabel {
+	font-family: var(--font-mono);
+	text-transform: uppercase;
+	letter-spacing: 0.06em;
+}
+
+.pageOutlineList {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-2);
+}
+
+.pageOutlineLink {
+	display: block;
+	color: var(--muted-foreground);
+	font-size: var(--font-size-2);
+	text-decoration: none;
+	transition: color var(--duration-fast) var(--easing-standard);
+}
+
+.pageOutlineLink:hover {
+	color: var(--foreground);
+}
+
+@media (max-width: 1100px) {
+	.componentPage {
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	.pageOutline {
+		display: none;
+	}
+}

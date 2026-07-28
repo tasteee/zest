@@ -10,14 +10,13 @@ syntax-highlighting deps are bundled in at build time).
 
 ```sh
 npm install @tasteee/zest
-# or: pnpm add @tasteee/zest
 ```
 
 ## Usage
 
 ```js
-import '@tasteee/zest'          // registers every <z-*> element
-import '@tasteee/zest/ink.css'  // design tokens: CSS custom properties + fonts
+import "@tasteee/zest"; // registers every <z-*> element
+import "@tasteee/zest/ink.css"; // design tokens: CSS custom properties + fonts
 ```
 
 - **`@tasteee/zest`** runs the side-effectful registration. Importing it calls
@@ -33,15 +32,15 @@ TODO: Make it so fonts can be opted into, rather than automatic.
 ### React
 
 ```jsx
-import '@tasteee/zest'
-import '@tasteee/zest/ink.css'
+import "@tasteee/zest";
+import "@tasteee/zest/ink.css";
 
 export function App() {
   return (
-    <z-button kind="primary" onClick={() => console.log('clicked')}>
+    <z-button kind="primary" onClick={() => console.log("clicked")}>
       Click me
     </z-button>
-  )
+  );
 }
 ```
 
@@ -80,7 +79,7 @@ attribute autocompletion for the `<z-*>` elements.
 
 The generated [`custom-elements.json`](./custom-elements.json) is the
 machine-readable source for editor tooling; the docs component manifest mirrors
-the same 153 elements.
+the same 151 elements.
 
 #### Foundations
 
@@ -88,7 +87,7 @@ the same 153 elements.
 
 #### Layout
 
-`z-row` `z-column` `z-stack` `z-grid` `z-bento-grid` `z-bento-item` `z-cluster` `z-center` `z-container` `z-section` `z-surface` `z-scroll` `z-spacer` `z-chassis` `z-resizable-panels` `z-panel` `z-panel-handle` `z-editor-canvas` `z-canvas-item`
+`z-row` `z-column` `z-grid` `z-bento-grid` `z-bento-item` `z-center` `z-container` `z-section` `z-surface` `z-scroll` `z-spacer` `z-chassis` `z-resizable-panels` `z-panel` `z-panel-handle` `z-editor-canvas` `z-canvas-item`
 
 #### Actions
 

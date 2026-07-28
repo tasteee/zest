@@ -9,7 +9,8 @@ import { c, css } from 'atomico'
  *   <z-message-bubble>Hey! How's it going?</z-message-bubble>
  *
  * Content is slotted, so a bubble can hold plain text, a z-markdown, an image,
- * or any other z-* payload.
+ * or any other z-* payload. `tone` (primary/secondary/success/warning/danger)
+ * overrides the side-based background for status/system bubbles.
  */
 const styles = css`
 	:host {
@@ -39,6 +40,29 @@ const styles = css`
 	:host([side='end']) .bubble {
 		background: var(--primary);
 		color: var(--primary-foreground);
+	}
+
+	/* tone overrides the side-based background — for status/system bubbles
+	   (a payment failure, a success confirmation, …) regardless of who "sent" it. */
+	:host([tone='primary']) .bubble {
+		background: color-mix(in oklch, var(--purple) 16%, var(--card));
+		color: var(--foreground);
+	}
+	:host([tone='secondary']) .bubble {
+		background: color-mix(in oklch, var(--pink) 16%, var(--card));
+		color: var(--foreground);
+	}
+	:host([tone='success']) .bubble {
+		background: color-mix(in oklch, var(--success) 16%, var(--card));
+		color: var(--foreground);
+	}
+	:host([tone='warning']) .bubble {
+		background: color-mix(in oklch, var(--warning) 16%, var(--card));
+		color: var(--foreground);
+	}
+	:host([tone='danger']) .bubble {
+		background: color-mix(in oklch, var(--destructive) 16%, var(--card));
+		color: var(--foreground);
 	}
 
 	/* grouped corners — tuck the corners on the sender's near side */

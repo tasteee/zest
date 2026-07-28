@@ -1,9 +1,11 @@
 import { css } from 'atomico'
 
 /**
- * Shared flex/grid layout rules, used by both <z-box> and <z-card>.
- * Direct attribute-selector translation of the React design system's
- * z-box.css (.isFlex -> [is-flex], .xCenter -> [x-center], etc).
+ * Shared flex/grid layout rules, used by <z-box> (and, via the box props +
+ * this stylesheet, its thin z-row/z-column wrappers). `aligns-x`/`aligns-y`
+ * are resolved in JS (see box-schema.ts's getBoxHostStyle) into the
+ * --z-box-justify/--z-box-align (flex) or --z-box-justify-items/
+ * --z-box-align-items (grid) custom properties consumed below.
  */
 export const boxLayoutStyles = css`
 	:host {
@@ -29,22 +31,30 @@ export const boxLayoutStyles = css`
 		min-height: var(--z-box-min-height);
 		max-height: var(--z-box-max-height);
 		display: flex;
+		justify-content: var(--z-box-justify, flex-start);
+		align-items: var(--z-box-align, stretch);
 	}
 
 	:host([is-flex]) {
 		display: flex;
 		flex-direction: row;
-		align-items: stretch;
-		justify-content: flex-start;
+		align-items: var(--z-box-align, stretch);
+		justify-content: var(--z-box-justify, flex-start);
 		flex-wrap: nowrap;
 	}
 
 	:host([is-inline-flex]) {
 		display: inline-flex;
 		flex-direction: row;
-		align-items: stretch;
-		justify-content: flex-start;
+		align-items: var(--z-box-align, stretch);
+		justify-content: var(--z-box-justify, flex-start);
 		flex-wrap: nowrap;
+	}
+
+	:host([is-grid]),
+	:host([is-inline-grid]) {
+		justify-items: var(--z-box-justify-items, stretch);
+		align-items: var(--z-box-align-items, stretch);
 	}
 
 	:host([is-grid]) {
@@ -116,7 +126,7 @@ export const boxLayoutStyles = css`
 		flex-direction: column;
 	}
 
-	:host([does-wrap]) {
+	:host([wrap]) {
 		flex-wrap: wrap;
 	}
 
@@ -124,118 +134,11 @@ export const boxLayoutStyles = css`
 		white-space: normal;
 	}
 
-	:host([is-row][x-start]),
-	:host([is-flex]:not([is-column])[x-start]),
-	:host([is-inline-flex]:not([is-column])[x-start]) {
-		justify-content: flex-start;
+	:host([full-width]) {
+		width: 100%;
 	}
 
-	:host([is-row][x-center]),
-	:host([is-flex]:not([is-column])[x-center]),
-	:host([is-inline-flex]:not([is-column])[x-center]) {
-		justify-content: center;
-	}
-
-	:host([is-row][x-end]),
-	:host([is-flex]:not([is-column])[x-end]),
-	:host([is-inline-flex]:not([is-column])[x-end]) {
-		justify-content: flex-end;
-	}
-
-	:host([is-row][x-between]),
-	:host([is-flex]:not([is-column])[x-between]),
-	:host([is-inline-flex]:not([is-column])[x-between]) {
-		justify-content: space-between;
-	}
-
-	:host([is-row][x-around]),
-	:host([is-flex]:not([is-column])[x-around]),
-	:host([is-inline-flex]:not([is-column])[x-around]) {
-		justify-content: space-around;
-	}
-
-	:host([is-row][x-evenly]),
-	:host([is-flex]:not([is-column])[x-evenly]),
-	:host([is-inline-flex]:not([is-column])[x-evenly]) {
-		justify-content: space-evenly;
-	}
-
-	:host([is-row][x-stretch]),
-	:host([is-flex]:not([is-column])[x-stretch]),
-	:host([is-inline-flex]:not([is-column])[x-stretch]) {
-		justify-content: stretch;
-	}
-
-	:host([is-row][y-start]),
-	:host([is-flex]:not([is-column])[y-start]),
-	:host([is-inline-flex]:not([is-column])[y-start]) {
-		align-items: flex-start;
-	}
-
-	:host([is-row][y-center]),
-	:host([is-flex]:not([is-column])[y-center]),
-	:host([is-inline-flex]:not([is-column])[y-center]) {
-		align-items: center;
-	}
-
-	:host([is-row][y-end]),
-	:host([is-flex]:not([is-column])[y-end]),
-	:host([is-inline-flex]:not([is-column])[y-end]) {
-		align-items: flex-end;
-	}
-
-	:host([is-row][y-between]),
-	:host([is-flex]:not([is-column])[y-between]),
-	:host([is-inline-flex]:not([is-column])[y-between]),
-	:host([is-row][y-around]),
-	:host([is-flex]:not([is-column])[y-around]),
-	:host([is-inline-flex]:not([is-column])[y-around]),
-	:host([is-row][y-evenly]),
-	:host([is-flex]:not([is-column])[y-evenly]),
-	:host([is-inline-flex]:not([is-column])[y-evenly]) {
-		align-items: stretch;
-	}
-
-	:host([is-column][x-start]) {
-		align-items: flex-start;
-	}
-
-	:host([is-column][x-center]) {
-		align-items: center;
-	}
-
-	:host([is-column][x-end]) {
-		align-items: flex-end;
-	}
-
-	:host([is-column][x-between]),
-	:host([is-column][x-around]),
-	:host([is-column][x-evenly]),
-	:host([is-column][x-stretch]) {
-		align-items: stretch;
-	}
-
-	:host([is-column][y-start]) {
-		justify-content: flex-start;
-	}
-
-	:host([is-column][y-center]) {
-		justify-content: center;
-	}
-
-	:host([is-column][y-end]) {
-		justify-content: flex-end;
-	}
-
-	:host([is-column][y-between]) {
-		justify-content: space-between;
-	}
-
-	:host([is-column][y-around]) {
-		justify-content: space-around;
-	}
-
-	:host([is-column][y-evenly]) {
-		justify-content: space-evenly;
+	:host([full-height]) {
+		height: 100%;
 	}
 `

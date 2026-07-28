@@ -40,9 +40,29 @@ const styles = css`
 		background: transparent;
 		border: 1px solid var(--border);
 		border-radius: var(--radius-md);
+		transition: border-color 0.12s ease, background-color 0.12s ease;
+	}
+
+	/* matches z-input's scale — a combobox is a text field first, and the two
+	   sit side by side in forms often enough that they must share a baseline. */
+	.field.is-small {
+		height: 2.25rem;
+		padding-inline: 0.75rem;
+	}
+	.field.is-medium {
 		height: 2.75rem;
 		padding-inline: 0.875rem;
-		transition: border-color 0.12s ease, background-color 0.12s ease;
+	}
+	.field.is-large {
+		height: 3.25rem;
+		padding-inline: 1rem;
+	}
+
+	.field.is-small input {
+		font-size: var(--font-size-small);
+	}
+	.field.is-large input {
+		font-size: var(--font-size-h4);
 	}
 
 	.field:hover {
@@ -52,6 +72,10 @@ const styles = css`
 	.field.is-open {
 		border-color: var(--accent);
 		background: color-mix(in oklch, var(--accent) 5%, transparent);
+	}
+
+	.field.is-invalid {
+		border-color: var(--destructive);
 	}
 
 	.field.is-disabled {
@@ -149,6 +173,12 @@ const styles = css`
 
 type OptionT = { value: string; label: string; isDisabled?: boolean }
 
+const resolveSizeClass = (props: any): string => {
+	if (props.size === 'small') return 'is-small'
+	if (props.size === 'large') return 'is-large'
+	return 'is-medium'
+}
+
 export const ZCombobox = c(
 	(props) => {
 		const host = useHost()
@@ -205,8 +235,9 @@ export const ZCombobox = c(
 			}
 		}
 
-		const fieldClass = ['field']
+		const fieldClass = ['field', resolveSizeClass(props)]
 			.concat(isOpen ? ['is-open'] : [])
+			.concat(props.isInvalid ? ['is-invalid'] : [])
 			.concat(props.isDisabled ? ['is-disabled'] : [])
 			.join(' ')
 
@@ -224,6 +255,7 @@ export const ZCombobox = c(
 						role="combobox"
 						aria-label={props.label || host.current?.getAttribute('aria-label') || undefined}
 						aria-expanded={isOpen ? 'true' : 'false'}
+						aria-invalid={props.isInvalid ? 'true' : undefined}
 						aria-autocomplete="list"
 						onfocus={() => setIsOpen(true)}
 						oninput={(e: any) => {
@@ -278,7 +310,9 @@ export const ZCombobox = c(
 			label: String,
 			placeholder: String,
 			options: { type: Array },
+			size: { type: String, reflect: true },
 			tone: { type: String, reflect: true },
+			isInvalid: { type: Boolean, reflect: true },
 			isDisabled: { type: Boolean, reflect: true },
 			isInline: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },

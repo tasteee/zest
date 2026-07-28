@@ -4,8 +4,12 @@ import { c, css, event, useProp, useHost } from 'atomico'
  * z-input-otp — a row of single-character cells for one-time codes. Typing
  * auto-advances, Backspace steps back, and pasting a full code fills every
  * cell at once. Each cell is a hairline box that lifts to the accent on focus;
- * the active/filled cells read with the accent color. Emits `change` with the
- * full string and `complete` when every cell is filled.
+ * the active/filled cells read with the accent color.
+ *
+ * `value` is positionally faithful to the cells: clearing a middle cell leaves
+ * a hole rather than sliding the rest back, and that hole is held as a space.
+ * `change` emits exactly that string, so the event and the property never
+ * disagree; `complete` fires only once every cell is filled with no holes.
  */
 const styles = css`
 	:host {
@@ -109,13 +113,28 @@ export const ZInputOtp = c(
 			cell?.select()
 		}
 
-		const setCharAt = (index: number, char: string) => {
-			const arr = (value || '').padEnd(length, ' ').slice(0, length).split('')
-			arr[index] = char || ' '
-			const next = arr.join('').replace(/ /g, ' ').trimEnd()
+		// Clearing a middle cell leaves a real hole, and the characters after it
+		// must not slide back a position — the user would watch their code
+		// rewrite itself. A hole is held as a space so the value stays
+		// positionally faithful to the cells; only trailing holes are dropped.
+		const buildValueWithCharAt = (index: number, char: string): string => {
+			const slots = (value || '').padEnd(length, ' ').slice(0, length).split('')
+			slots[index] = char || ' '
+			return slots.join('').trimEnd()
+		}
+
+		const checkIsComplete = (candidate: string): boolean => {
+			return candidate.length === length && !candidate.includes(' ')
+		}
+
+		const emit = (next: string) => {
 			setValue(next)
-			props.change({ value: next.replace(/\s/g, '') })
-			if (next.replace(/\s/g, '').length === length) props.complete({ value: next.replace(/\s/g, '') })
+			props.change({ value: next })
+			if (checkIsComplete(next)) props.complete({ value: next })
+		}
+
+		const setCharAt = (index: number, char: string) => {
+			emit(buildValueWithCharAt(index, char))
 		}
 
 		const onInput = (index: number) => (e: any) => {
@@ -147,23 +166,31 @@ export const ZInputOtp = c(
 
 		const onPaste = (e: ClipboardEvent) => {
 			e.preventDefault()
-			let pasted = (e.clipboardData?.getData('text') || '').trim()
-			if (props.isNumeric) pasted = pasted.replace(/[^0-9]/g, '')
-			pasted = pasted.slice(0, length)
-			if (!pasted) return
-			setValue(pasted)
-			props.change({ value: pasted })
-			if (pasted.length === length) {
-				props.complete({ value: pasted })
-				focusCell(length - 1)
-			} else {
-				focusCell(pasted.length)
-			}
+			const clipboardText = e.clipboardData?.getData('text') || ''
+
+			// Whitespace is the hole marker, so it can never be a real
+			// character — strip it rather than letting a pasted "12 4 56"
+			// masquerade as a code with gaps in it.
+			const stripped = props.isNumeric ? clipboardText.replace(/[^0-9]/g, '') : clipboardText.replace(/\s/g, '')
+			const pasted = stripped.slice(0, length)
+
+			const hasPastedText = pasted.length > 0
+			if (!hasPastedText) return
+
+			emit(pasted)
+
+			const isFull = pasted.length === length
+			focusCell(isFull ? length - 1 : pasted.length)
 		}
 
 		return (
 			<host shadowDom>
-				<div class="cells" role="group" aria-label="One-time code" onpaste={onPaste}>
+				<div
+					class="cells"
+					role="group"
+					aria-label={props.label || host.current?.getAttribute('aria-label') || 'One-time code'}
+					onpaste={onPaste}
+				>
 					{Array.from({ length }).map((_, index) => {
 						const ch = chars[index] && chars[index] !== ' ' ? chars[index] : ''
 						const cellClass = ['cell', sizeClass]
@@ -194,6 +221,7 @@ export const ZInputOtp = c(
 	{
 		props: {
 			value: { type: String, reflect: true },
+			label: String,
 			length: { type: Number, reflect: true },
 			size: { type: String, reflect: true },
 			tone: { type: String, reflect: true },

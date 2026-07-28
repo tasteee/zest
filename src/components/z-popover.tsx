@@ -1,4 +1,4 @@
-import { c, css, event, useRef, useState, useEffect, useHost } from 'atomico'
+import { c, css, event, useRef, useProp, useEffect, useHost } from 'atomico'
 import { floatingSurfaceStyles } from '../shared/overlay-styles'
 import {
 	computePosition,
@@ -17,6 +17,9 @@ import {
  * Uses the shared overlay core (a top-layer [popover=manual] surface positioned
  * by shared/overlay.ts). Dismiss is handled here — outside-click + Esc — mirroring
  * z-select / z-menu so behavior stays uniform. Fires `toggle` with { open }.
+ *
+ * `is-open` reflects and is two-way, matching the dialog family: assigning it
+ * opens or closes the panel and fires the same `toggle` a click would.
  */
 const styles = css`
 	.trigger {
@@ -34,12 +37,27 @@ export const ZPopover = c(
 	(props) => {
 		const host = useHost()
 		const floatRef = useRef<HTMLDivElement>()
-		const [isOpen, setIsOpen] = useState(false)
+		const [isOpen, setIsOpen] = useProp<boolean>('isOpen')
+		const lastAnnouncedOpen = useRef<boolean | undefined>(undefined)
 
-		const setOpen = (next: boolean) => {
-			setIsOpen(next)
-			props.toggle({ open: next })
-		}
+		// `toggle` is announced from the state itself rather than from the click
+		// handler, so opening the panel by assigning `isOpen` fires the same
+		// event as clicking the trigger. The initial state is not an event.
+		useEffect(() => {
+			const isCurrentlyOpen = Boolean(isOpen)
+
+			const isFirstRun = lastAnnouncedOpen.current === undefined
+			if (isFirstRun) {
+				lastAnnouncedOpen.current = isCurrentlyOpen
+				return
+			}
+
+			const hasChanged = lastAnnouncedOpen.current !== isCurrentlyOpen
+			if (!hasChanged) return
+
+			lastAnnouncedOpen.current = isCurrentlyOpen
+			props.toggle({ open: isCurrentlyOpen })
+		}, [isOpen])
 
 		useEffect(() => {
 			const floating = floatRef.current
@@ -59,9 +77,9 @@ export const ZPopover = c(
 			const cleanup = autoUpdate(host.current, floating, update)
 
 			const onDocumentPointerDown = (e: Event) => {
-				if (!e.composedPath().includes(host.current as EventTarget)) setOpen(false)
+				if (!e.composedPath().includes(host.current as EventTarget)) setIsOpen(false)
 			}
-			const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setOpen(false)
+			const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setIsOpen(false)
 			document.addEventListener('pointerdown', onDocumentPointerDown)
 			document.addEventListener('keydown', onKey)
 
@@ -79,7 +97,7 @@ export const ZPopover = c(
 					class="trigger"
 					aria-haspopup="dialog"
 					aria-expanded={isOpen ? 'true' : 'false'}
-					onclick={() => !props.isDisabled && setOpen(!isOpen)}
+					onclick={() => !props.isDisabled && setIsOpen(!isOpen)}
 				>
 					<slot name="trigger" />
 				</div>
@@ -92,6 +110,7 @@ export const ZPopover = c(
 	{
 		props: {
 			...overlayPositionProps,
+			isOpen: { type: Boolean, reflect: true },
 			isDisabled: { type: Boolean, reflect: true },
 			toggle: event<{ open: boolean }>({ bubbles: true, composed: true })
 		},

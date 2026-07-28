@@ -20,8 +20,14 @@ const styles = css`
 	:host {
 		display: flex;
 		align-items: center;
-		gap: var(--space-xs);
+		gap: var(--space-sm);
 		min-width: 0;
+	}
+	:host([size='small']) {
+		gap: var(--space-xs);
+	}
+	:host([size='large']) {
+		gap: var(--space-md);
 	}
 	:host([orientation='vertical']) {
 		flex-direction: column;

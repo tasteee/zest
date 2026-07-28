@@ -25,11 +25,23 @@ const styles = css`
 		border-radius: var(--radius-md);
 		color: var(--foreground);
 		font-family: inherit;
-		font-size: var(--font-size-body);
 		line-height: 1.6;
-		padding: 0.75rem 0.875rem;
 		transition: border-color 0.12s ease, background-color 0.12s ease;
 		--accent: var(--primary);
+	}
+
+	/* sizes — same scale as z-input */
+	.field.is-small {
+		padding: 0.5rem 0.75rem;
+		font-size: var(--font-size-small);
+	}
+	.field.is-medium {
+		padding: 0.75rem 0.875rem;
+		font-size: var(--font-size-body);
+	}
+	.field.is-large {
+		padding: 0.875rem 1rem;
+		font-size: var(--font-size-h4);
 	}
 
 	:host([tone='primary']) .field {
@@ -91,13 +103,19 @@ const autoGrow = (el: HTMLTextAreaElement) => {
 	el.style.height = `${el.scrollHeight}px`
 }
 
+const resolveSizeClass = (props: any): string => {
+	if (props.size === 'small') return 'is-small'
+	if (props.size === 'large') return 'is-large'
+	return 'is-medium'
+}
+
 export const ZTextarea = c(
 	(props) => {
 		const host = useHost()
 		const [value, setValue] = useProp<string>('value')
 		const [isFocused, setIsFocused] = useProp<boolean>('isFocused')
 
-		const fieldClass = ['field']
+		const fieldClass = ['field', resolveSizeClass(props)]
 			.concat(isFocused ? ['is-focused'] : [])
 			.concat(props.isInvalid ? ['is-invalid'] : [])
 			.concat(props.isDisabled ? ['is-disabled'] : [])

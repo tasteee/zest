@@ -205,6 +205,7 @@ type HandleElementT = HTMLElement & {
 	max?: number
 	step?: number
 	tone?: string
+	label?: string
 }
 
 type RangeDetailT = { left: number; right: number }
@@ -216,10 +217,12 @@ type ConfigT = {
 	leftMax: number
 	leftStep: number
 	leftAccent: string
+	leftLabel: string
 	rightMin: number
 	rightMax: number
 	rightStep: number
 	rightAccent: string
+	rightLabel: string
 }
 
 const num = (value: unknown, fallback: number): number => {
@@ -256,7 +259,8 @@ export const ZRange = c(
 				const max = clamp(num(el.max ?? el.getAttribute('max'), domainMax), domainMin, domainMax)
 				const step = num(el.step ?? el.getAttribute('step'), domainStep) || domainStep
 				const value = clamp(num(el.value ?? el.getAttribute('value'), domainMin), min, max)
-				return { min, max, step, value, accent: accentFor(el.tone ?? el.getAttribute('tone')) }
+				const label = el.label ?? el.getAttribute('label') ?? ''
+				return { min, max, step, value, label, accent: accentFor(el.tone ?? el.getAttribute('tone')) }
 			}
 
 			const left = read(handles[0])
@@ -274,10 +278,12 @@ export const ZRange = c(
 				leftMax: left.max,
 				leftStep: left.step,
 				leftAccent: left.accent,
+				leftLabel: left.label || 'Lower value',
 				rightMin: right.min,
 				rightMax: right.max,
 				rightStep: right.step,
-				rightAccent: right.accent
+				rightAccent: right.accent,
+				rightLabel: right.label || 'Upper value'
 			})
 			setLeftValue(lv)
 			setRightValue(rv)
@@ -381,7 +387,7 @@ export const ZRange = c(
 						step={config.leftStep}
 						value={leftValue}
 						disabled={props.isDisabled}
-						aria-label="Lower value"
+						aria-label={config.leftLabel}
 						oninput={(e: any) => commit(e.target, 'left', 'input')}
 						onchange={(e: any) => commit(e.target, 'left', 'change')}
 					/>
@@ -393,7 +399,7 @@ export const ZRange = c(
 						step={config.rightStep}
 						value={rightValue}
 						disabled={props.isDisabled}
-						aria-label="Upper value"
+						aria-label={config.rightLabel}
 						oninput={(e: any) => commit(e.target, 'right', 'input')}
 						onchange={(e: any) => commit(e.target, 'right', 'change')}
 					/>

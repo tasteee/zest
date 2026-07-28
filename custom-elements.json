@@ -1125,7 +1125,7 @@
             },
             {
               "kind": "field",
-              "name": "doesWrap",
+              "name": "wrap",
               "type": {
                 "text": "boolean"
               }
@@ -1139,91 +1139,14 @@
             },
             {
               "kind": "field",
-              "name": "xStart",
+              "name": "fullWidth",
               "type": {
                 "text": "boolean"
               }
             },
             {
               "kind": "field",
-              "name": "xCenter",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "xEnd",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "xBetween",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "xAround",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "xEvenly",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "xStretch",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "yStart",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "yCenter",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "yEnd",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "yBetween",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "yAround",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "yEvenly",
+              "name": "fullHeight",
               "type": {
                 "text": "boolean"
               }
@@ -1430,6 +1353,41 @@
               "type": {
                 "text": "string"
               }
+            },
+            {
+              "kind": "field",
+              "name": "alignsX",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "alignsY",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "inset",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "insetX",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "insetY",
+              "type": {
+                "text": "string"
+              }
             }
           ],
           "attributes": [
@@ -1497,8 +1455,8 @@
               }
             },
             {
-              "name": "does-wrap",
-              "fieldName": "doesWrap",
+              "name": "wrap",
+              "fieldName": "wrap",
               "type": {
                 "text": "boolean"
               }
@@ -1511,92 +1469,15 @@
               }
             },
             {
-              "name": "x-start",
-              "fieldName": "xStart",
+              "name": "full-width",
+              "fieldName": "fullWidth",
               "type": {
                 "text": "boolean"
               }
             },
             {
-              "name": "x-center",
-              "fieldName": "xCenter",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "x-end",
-              "fieldName": "xEnd",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "x-between",
-              "fieldName": "xBetween",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "x-around",
-              "fieldName": "xAround",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "x-evenly",
-              "fieldName": "xEvenly",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "x-stretch",
-              "fieldName": "xStretch",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "y-start",
-              "fieldName": "yStart",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "y-center",
-              "fieldName": "yCenter",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "y-end",
-              "fieldName": "yEnd",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "y-between",
-              "fieldName": "yBetween",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "y-around",
-              "fieldName": "yAround",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "y-evenly",
-              "fieldName": "yEvenly",
+              "name": "full-height",
+              "fieldName": "fullHeight",
               "type": {
                 "text": "boolean"
               }
@@ -1800,6 +1681,41 @@
             {
               "name": "extra-large-columns",
               "fieldName": "extraLargeColumns",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "aligns-x",
+              "fieldName": "alignsX",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "aligns-y",
+              "fieldName": "alignsY",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "inset",
+              "fieldName": "inset",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "inset-x",
+              "fieldName": "insetX",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "inset-y",
+              "fieldName": "insetY",
               "type": {
                 "text": "string"
               }
@@ -3457,128 +3373,6 @@
         {
           "kind": "class",
           "customElement": true,
-          "tagName": "z-cluster",
-          "name": "ZCluster",
-          "members": [
-            {
-              "kind": "field",
-              "name": "gap",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "alignsX",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "alignsY",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "noWrap",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "fullWidth",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "inset",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "insetX",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "insetY",
-              "type": {
-                "text": "string"
-              }
-            }
-          ],
-          "attributes": [
-            {
-              "name": "gap",
-              "fieldName": "gap",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "name": "aligns-x",
-              "fieldName": "alignsX",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "name": "aligns-y",
-              "fieldName": "alignsY",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "name": "no-wrap",
-              "fieldName": "noWrap",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "full-width",
-              "fieldName": "fullWidth",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "inset",
-              "fieldName": "inset",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "name": "inset-x",
-              "fieldName": "insetX",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "name": "inset-y",
-              "fieldName": "insetY",
-              "type": {
-                "text": "string"
-              }
-            }
-          ]
-        },
-        {
-          "kind": "class",
-          "customElement": true,
           "tagName": "z-code-block",
           "name": "ZCodeBlock",
           "members": [
@@ -3905,164 +3699,8 @@
           "customElement": true,
           "tagName": "z-column",
           "name": "ZColumn",
-          "members": [
-            {
-              "kind": "field",
-              "name": "gap",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "padding",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "margin",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "alignsX",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "alignsY",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "wrap",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "fullWidth",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "fullHeight",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "inset",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "insetX",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "insetY",
-              "type": {
-                "text": "string"
-              }
-            }
-          ],
-          "attributes": [
-            {
-              "name": "gap",
-              "fieldName": "gap",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "name": "padding",
-              "fieldName": "padding",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "name": "margin",
-              "fieldName": "margin",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "name": "aligns-x",
-              "fieldName": "alignsX",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "name": "aligns-y",
-              "fieldName": "alignsY",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "name": "wrap",
-              "fieldName": "wrap",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "full-width",
-              "fieldName": "fullWidth",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "full-height",
-              "fieldName": "fullHeight",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "inset",
-              "fieldName": "inset",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "name": "inset-x",
-              "fieldName": "insetX",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "name": "inset-y",
-              "fieldName": "insetY",
-              "type": {
-                "text": "string"
-              }
-            }
-          ]
+          "members": [],
+          "attributes": []
         },
         {
           "kind": "class",
@@ -8464,13 +8102,6 @@
               "type": {
                 "text": "string"
               }
-            },
-            {
-              "kind": "field",
-              "name": "copy",
-              "type": {
-                "text": "string"
-              }
             }
           ],
           "attributes": [
@@ -8519,13 +8150,6 @@
             {
               "name": "linkclick",
               "fieldName": "linkclick",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "name": "copy",
-              "fieldName": "copy",
               "type": {
                 "text": "string"
               }
@@ -11865,164 +11489,8 @@
           "customElement": true,
           "tagName": "z-row",
           "name": "ZRow",
-          "members": [
-            {
-              "kind": "field",
-              "name": "gap",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "padding",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "margin",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "alignsX",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "alignsY",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "wrap",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "fullWidth",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "fullHeight",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "inset",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "insetX",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "insetY",
-              "type": {
-                "text": "string"
-              }
-            }
-          ],
-          "attributes": [
-            {
-              "name": "gap",
-              "fieldName": "gap",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "name": "padding",
-              "fieldName": "padding",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "name": "margin",
-              "fieldName": "margin",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "name": "aligns-x",
-              "fieldName": "alignsX",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "name": "aligns-y",
-              "fieldName": "alignsY",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "name": "wrap",
-              "fieldName": "wrap",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "full-width",
-              "fieldName": "fullWidth",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "full-height",
-              "fieldName": "fullHeight",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "inset",
-              "fieldName": "inset",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "name": "inset-x",
-              "fieldName": "insetX",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "name": "inset-y",
-              "fieldName": "insetY",
-              "type": {
-                "text": "string"
-              }
-            }
-          ]
+          "members": [],
+          "attributes": []
         },
         {
           "kind": "class",
@@ -12241,20 +11709,6 @@
             },
             {
               "kind": "field",
-              "name": "spaceLeft",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "spaceRight",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
               "name": "container",
               "type": {
                 "text": "string"
@@ -12286,20 +11740,6 @@
             {
               "name": "space-bottom",
               "fieldName": "spaceBottom",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "name": "space-left",
-              "fieldName": "spaceLeft",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "name": "space-right",
-              "fieldName": "spaceRight",
               "type": {
                 "text": "string"
               }
@@ -13682,170 +13122,6 @@
               "fieldName": "grow",
               "type": {
                 "text": "boolean"
-              }
-            }
-          ]
-        },
-        {
-          "kind": "class",
-          "customElement": true,
-          "tagName": "z-stack",
-          "name": "ZStack",
-          "members": [
-            {
-              "kind": "field",
-              "name": "isRow",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "isColumn",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "gap",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "alignsX",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "alignsY",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "wrap",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "fullWidth",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "fullHeight",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "inset",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "insetX",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "insetY",
-              "type": {
-                "text": "string"
-              }
-            }
-          ],
-          "attributes": [
-            {
-              "name": "is-row",
-              "fieldName": "isRow",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "is-column",
-              "fieldName": "isColumn",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "gap",
-              "fieldName": "gap",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "name": "aligns-x",
-              "fieldName": "alignsX",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "name": "aligns-y",
-              "fieldName": "alignsY",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "name": "wrap",
-              "fieldName": "wrap",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "full-width",
-              "fieldName": "fullWidth",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "full-height",
-              "fieldName": "fullHeight",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "inset",
-              "fieldName": "inset",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "name": "inset-x",
-              "fieldName": "insetX",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "name": "inset-y",
-              "fieldName": "insetY",
-              "type": {
-                "text": "string"
               }
             }
           ]
@@ -17492,14 +16768,6 @@
         },
         {
           "kind": "custom-element-definition",
-          "name": "z-cluster",
-          "declaration": {
-            "name": "ZCluster",
-            "module": "dist/zest.js"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
           "name": "z-code-block",
           "declaration": {
             "name": "ZCodeBlock",
@@ -18247,14 +17515,6 @@
           "name": "z-spacer",
           "declaration": {
             "name": "ZSpacer",
-            "module": "dist/zest.js"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "z-stack",
-          "declaration": {
-            "name": "ZStack",
             "module": "dist/zest.js"
           }
         },

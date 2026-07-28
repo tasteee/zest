@@ -186,6 +186,11 @@ export const ZColorPicker = c(
 			props.change({ value: hex })
 		}
 
+		// The hex is the trigger's only text, so a bare aria-label would hide the
+		// value. Name what is being coloured, then say what it currently is.
+		const providedLabel = props.label || host.current?.getAttribute('aria-label')
+		const triggerLabel = providedLabel ? `${providedLabel}, ${current.toUpperCase()}` : undefined
+
 		return (
 			<host shadowDom>
 				<button
@@ -193,6 +198,7 @@ export const ZColorPicker = c(
 					class={isOpen ? 'trigger is-open' : 'trigger'}
 					disabled={props.isDisabled}
 					aria-haspopup="dialog"
+					aria-label={triggerLabel}
 					aria-expanded={isOpen ? 'true' : 'false'}
 					onclick={() => setIsOpen(!isOpen)}
 				>
@@ -238,6 +244,7 @@ export const ZColorPicker = c(
 	{
 		props: {
 			value: { type: String, reflect: true },
+			label: String,
 			presets: { type: Array },
 			tone: { type: String, reflect: true },
 			isDisabled: { type: Boolean, reflect: true },

@@ -50,6 +50,8 @@
 	"scripts": {
 		"build": "vite build && tsc -p tsconfig.build.json && node scripts/build-cem.mjs",
 		"dev": "vite build --watch",
+		"demo": "pnpm run build && vite --config vite.demo.config.ts",
+		"docs": "pnpm run build && vite --config vite.site.config.ts",
 		"typecheck": "tsc --noEmit -p tsconfig.json",
 		"prepublishOnly": "pnpm run build"
 	},

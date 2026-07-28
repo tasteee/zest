@@ -61,8 +61,6 @@ export const ZSection = c(
 			space: sizeProp,
 			spaceTop: sizeProp,
 			spaceBottom: sizeProp,
-			spaceLeft: sizeProp,
-			spaceRight: sizeProp,
 			container: String,
 			gutter: sizeProp
 		},

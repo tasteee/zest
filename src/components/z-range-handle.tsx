@@ -7,6 +7,8 @@ import { c, css } from 'atomico'
  * right/upper one. When min/max are omitted they inherit the parent z-range's
  * domain; when set they are clamped to that domain. z-range mirrors the live
  * value back onto `value` so reading `handleEl.value` always stays truthful.
+ * `label` names this end for assistive technology, defaulting to "Lower value"
+ * and "Upper value" by position.
  */
 const styles = css`
 	:host {

@@ -13,7 +13,10 @@ import { Marked } from 'marked'
  * Set `is-streaming` while tokens are still arriving (chat / AI). Sanitization is
  * on by default (strips dangerous tags/attributes, neutralizes javascript: URLs);
  * `allow-html` opts out. Code fences route through z-code-block unless
- * `no-highlight`. Emits `linkclick` {href} when a rendered link is clicked.
+ * `no-highlight`. `heading-anchors` gives every heading a stable id and a
+ * hover-revealed "#" permalink. Emits `linkclick` {href} when a rendered link
+ * is clicked; a fenced code block's own copy button dispatches z-code-block's
+ * `copy` event, which bubbles through this component untouched.
  */
 const styles = css`
 	:host {
@@ -45,9 +48,21 @@ const styles = css`
 	h4,
 	h5,
 	h6 {
+		position: relative;
 		margin: 1.2em 0 0.5em;
 		line-height: 1.25;
 		font-weight: 700;
+	}
+	.heading-anchor {
+		margin-left: 0.4em;
+		font-weight: 400;
+		color: var(--muted-foreground);
+		text-decoration: none;
+		opacity: 0;
+	}
+	:is(h1, h2, h3, h4, h5, h6):hover .heading-anchor,
+	.heading-anchor:focus-visible {
+		opacity: 1;
 	}
 	h1 {
 		font-size: 1.6em;
@@ -145,6 +160,32 @@ const marked = new Marked({ gfm: true, breaks: true })
 const DANGEROUS_TAGS = 'script,style,iframe,object,embed,link,meta,base,form'
 const BAD_URL = /^\s*(javascript:|vbscript:|data:text\/html)/i
 
+const slugify = (text: string): string =>
+	text
+		.trim()
+		.toLowerCase()
+		.replace(/[^\w\s-]/g, '')
+		.replace(/\s+/g, '-')
+
+// Gives every heading a stable, unique id and appends a "#" permalink to it.
+// Collisions (two headings with the same text) get -2, -3, … suffixes.
+const addHeadingAnchors = (root: ParentNode) => {
+	const seen = new Map<string, number>()
+	root.querySelectorAll('h1, h2, h3, h4, h5, h6').forEach((heading) => {
+		const base = slugify(heading.textContent ?? '') || 'section'
+		const count = (seen.get(base) ?? 0) + 1
+		seen.set(base, count)
+		const slug = count === 1 ? base : `${base}-${count}`
+		heading.id = slug
+		const anchor = document.createElement('a')
+		anchor.className = 'heading-anchor'
+		anchor.href = `#${slug}`
+		anchor.setAttribute('aria-label', `Link to "${heading.textContent ?? ''}"`)
+		anchor.textContent = '#'
+		heading.appendChild(anchor)
+	})
+}
+
 // Minimal DOM sanitizer — drops dangerous tags, on* handlers, and unsafe URLs.
 // Not a full DOMPurify; enough to neutralize the common injection vectors in
 // user-authored chat/markdown. (Swap in DOMPurify here if you need more.)
@@ -165,11 +206,18 @@ const sanitize = (root: ParentNode) => {
 // the result can be set through the vdom via `innerHTML` — surviving Atomico
 // re-renders (a streaming parent re-renders us every token). z-code-block reads
 // its `code` from an attribute, which serialization escapes for us.
-const buildHtml = (src: string, allowHtml: boolean, noHighlight: boolean): string => {
+const buildHtml = (
+	src: string,
+	allowHtml: boolean,
+	noHighlight: boolean,
+	headingAnchors: boolean
+): string => {
 	const container = document.createElement('div')
 	container.innerHTML = marked.parse(src, { async: false }) as string
 
 	if (!allowHtml) sanitize(container)
+
+	if (headingAnchors) addHeadingAnchors(container)
 
 	if (!noHighlight) {
 		container.querySelectorAll('pre > code').forEach((code) => {
@@ -195,8 +243,14 @@ const buildHtml = (src: string, allowHtml: boolean, noHighlight: boolean): strin
 export const ZMarkdown = c(
 	(props) => {
 		const html = useMemo(
-			() => buildHtml((props.content as string) ?? '', Boolean(props.allowHtml), Boolean(props.noHighlight)),
-			[props.content, props.allowHtml, props.noHighlight]
+			() =>
+				buildHtml(
+					(props.content as string) ?? '',
+					Boolean(props.allowHtml),
+					Boolean(props.noHighlight),
+					Boolean(props.headingAnchors)
+				),
+			[props.content, props.allowHtml, props.noHighlight, props.headingAnchors]
 		)
 
 		const onClick = (e: MouseEvent) => {
@@ -218,8 +272,7 @@ export const ZMarkdown = c(
 			noHighlight: { type: Boolean, reflect: true },
 			headingAnchors: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
-			linkclick: event<{ href: string }>({ bubbles: true, composed: true }),
-			copy: event<{ text: string }>({ bubbles: true, composed: true })
+			linkclick: event<{ href: string }>({ bubbles: true, composed: true })
 		},
 		styles
 	}

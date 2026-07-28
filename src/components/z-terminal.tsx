@@ -38,10 +38,17 @@ import { themedScrollbarStyles } from '../shared/scrollbar-styles'
  *   { text, type?: 'command' | 'output', delay?, typeSpeed?, fade? }
  * where `delay` is the pause before that line begins — so a slow step can hold
  * longer before the next one starts, rather than every gap being uniform.
+ *
+ * ── Sizing ───────────────────────────────────────────────────────────────────
+ * `width`, `height`, and `max-height` take any CSS length and pin the window to
+ * a fixed box. The header stays put and the body scrolls inside the remaining
+ * space, so a sized terminal never grows as an animated run reveals lines — it
+ * scrolls, following the playhead. Opt out of that follow with `no-auto-scroll`.
  */
 const styles = css`
 	:host {
 		display: block;
+		width: var(--z-terminal-width, auto);
 		--accent: var(--success);
 	}
 
@@ -53,8 +60,15 @@ const styles = css`
 		display: none;
 	}
 
+	/* Column layout so a pinned height splits into a fixed bar + scrolling body
+	   instead of letting the content stretch the window. */
 	.window {
 		position: relative;
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+		height: var(--z-terminal-height, auto);
+		max-height: var(--z-terminal-max-height, none);
 		border: 1px solid var(--border);
 		border-radius: var(--radius-md);
 		background: var(--color-neutral-0);
@@ -68,6 +82,7 @@ const styles = css`
 		align-items: center;
 		justify-content: space-between;
 		gap: 0.75rem;
+		flex: 0 0 auto;
 		padding: 0.625rem 0.875rem 0.25rem 0.875rem;
 		user-select: none;
 	}
@@ -120,6 +135,8 @@ const styles = css`
 	}
 
 	.scroll {
+		flex: 1 1 auto;
+		min-height: 0;
 		overflow: auto;
 	}
 	/* Firefox only — Chromium uses the arrow-less ::-webkit-scrollbar below; giving
@@ -144,11 +161,15 @@ const styles = css`
 		height: 0;
 	}
 
+	/* max-content keeps lines at their natural width so a narrow terminal scrolls
+	   sideways rather than squeezing text. */
 	.body {
+		min-width: max-content;
 		padding: 0.375rem 0 0.75rem 0;
 		font-size: var(--font-size-small);
 		line-height: 1.75;
 		letter-spacing: 0.35px;
+		text-align: left;
 		color: var(--foreground);
 		tab-size: 2;
 	}
@@ -167,6 +188,7 @@ const styles = css`
 	.line {
 		display: flex;
 		align-items: center;
+		justify-content: flex-start;
 		gap: 0.75rem;
 		padding: 0 0.875rem;
 		min-height: 1.75em;
@@ -183,6 +205,7 @@ const styles = css`
 	.text {
 		flex: 1 1 auto;
 		min-width: 0;
+		text-align: left;
 		white-space: pre;
 		overflow: hidden;
 		/* Terminal text stays selectable even though the page default opts out. */
@@ -453,6 +476,7 @@ const num = (v: unknown, fallback: number): number =>
 export const ZTerminal = c(
 	(props) => {
 		const host = useHost()
+		const scrollRef = useRef<HTMLDivElement>()
 		const [copied, setCopied] = useState(-1)
 		// active: index of the line currently revealing (-1 = idle/gap).
 		// shown: number of fully-revealed lines above `active`.
@@ -627,6 +651,19 @@ export const ZTerminal = c(
 			}
 		}, [playing, model, typeSpeed, lineDelay, fadeDuration, loop, loopDelay, props.startOnView])
 
+		// Follow the playhead so a height-constrained terminal scrolls its newest
+		// line into view instead of the run disappearing below the fold.
+		const shouldFollowPlayhead = playing && !props.noAutoScroll
+
+		useEffect(() => {
+			if (!shouldFollowPlayhead) return
+
+			const viewport = scrollRef.current
+			if (!viewport) return
+
+			viewport.scrollTop = viewport.scrollHeight
+		}, [shouldFollowPlayhead, state.shown, state.active, state.typed])
+
 		const copyText = (line: Line) => (line.isCommand ? line.command : line.raw)
 
 		const onCopy = async (line: Line, index: number) => {
@@ -643,8 +680,14 @@ export const ZTerminal = c(
 
 		const showReplay = playing && state.done && !props.hideReplay
 
+		const sizing = {
+			'--z-terminal-width': (props.width as string) || '',
+			'--z-terminal-height': (props.height as string) || '',
+			'--z-terminal-max-height': (props.maxHeight as string) || ''
+		}
+
 		return (
-			<host shadowDom>
+			<host shadowDom style={sizing}>
 				<div class='window'>
 					<div class='bar'>
 						<div class='meta'>
@@ -657,7 +700,7 @@ export const ZTerminal = c(
 							<span class='dot green'></span>
 						</div>
 					</div>
-					<div class='scroll'>
+					<div class='scroll' ref={scrollRef}>
 						<div class='body'>
 							{model.map((line, i) => {
 								// In play mode only lines up to the playhead exist yet.
@@ -741,6 +784,10 @@ export const ZTerminal = c(
 			copyLines: String,
 			tone: { type: String, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
+			// Sizing — any CSS length; height pins the window and scrolls the body.
+			width: String,
+			height: String,
+			maxHeight: String,
 			// Animation
 			animate: { type: Boolean, reflect: true },
 			startOnView: { type: Boolean },
@@ -751,6 +798,7 @@ export const ZTerminal = c(
 			loop: { type: Boolean },
 			loopDelay: { type: Number },
 			hideReplay: { type: Boolean },
+			noAutoScroll: { type: Boolean },
 			copy: event<string>({ bubbles: true, composed: true }),
 			done: event<void>({ bubbles: true, composed: true })
 		},
