@@ -100,14 +100,20 @@ const styles = css`
 	/* kinds: paint using --tone-color */
 
 	button.is-solid {
-		background: var(--tone-color);
+		/* --haze-tone resolves to none in the dark theme, so this paints exactly
+		   the flat tone colour there and picks up a whisper of light only when
+		   the light theme is active. */
+		background: var(--haze-tone), var(--tone-color);
 		border-color: var(--tone-color);
 		color: white;
 		font-weight: 600;
 	}
 
+	/* The neutral tone is the one fill that flips with the theme — near-white
+	   on dark, near-black on light — so its label has to flip with it rather
+	   than being pinned to black. */
 	button.is-solid.is-neutral {
-		color: black;
+		color: var(--primary-foreground);
 	}
 
 	button.is-solid:hover {

@@ -20,7 +20,8 @@ const styles = css`
 		display: block;
 		width: 100%;
 		box-sizing: border-box;
-		background: transparent;
+		/* transparent in the dark theme, a faint wash in the light one */
+		background: var(--haze);
 		border: 1px solid var(--border);
 		border-radius: var(--radius-md);
 		color: var(--foreground);

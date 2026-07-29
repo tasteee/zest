@@ -41,6 +41,11 @@ export * from './components/z-toolbar'
 export * from './components/z-toolbar-group'
 export * from './components/z-swap'
 export * from './components/z-link'
+export * from './components/z-theme-switcher'
+
+// The theme state behind z-theme-switcher, exported so an app can read or set
+// the theme from its own chrome without rendering a switcher.
+export * from './shared/theme'
 
 // Form controls
 export * from './components/z-field'

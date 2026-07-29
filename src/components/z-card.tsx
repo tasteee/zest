@@ -10,6 +10,8 @@ const styles = css`
 		transition: border-color 0.05s linear;
 		border: 1px solid var(--border);
 		color: var(--foreground);
+		/* transparent in the dark theme, a faint wash in the light one */
+		background: var(--haze);
 	}
 
 	:host([is-flex]) {

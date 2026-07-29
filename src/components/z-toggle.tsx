@@ -42,7 +42,9 @@ const styles = css`
 	}
 
 	button[data-state='on'] {
-		background: var(--tone-color);
+		/* --haze-tone resolves to none in the dark theme, so the pressed fill
+		   stays exactly flat there. */
+		background: var(--haze-tone), var(--tone-color);
 		border-color: transparent;
 		color: var(--tone-on-foreground, var(--primary-foreground));
 	}

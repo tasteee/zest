@@ -36,6 +36,12 @@ body {
 	letter-spacing: -0.02em;
 }
 
+.appHeaderActions {
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-3);
+}
+
 .searchTrigger {
 	display: flex;
 	align-items: center;

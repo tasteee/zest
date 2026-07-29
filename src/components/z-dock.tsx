@@ -35,7 +35,10 @@ const styles = css`
 		box-sizing: border-box;
 		padding: 0.6rem;
 		border-radius: var(--radius-xl);
-		background: color-mix(in oklch, var(--popover) 85%, transparent);
+		/* Mixes the flat ramp colour rather than --popover: in the light theme
+		   --popover carries a haze layer in front of its colour, which is a
+		   background shorthand value, not something color-mix can take. */
+		background: color-mix(in oklch, var(--color-neutral-1) 85%, transparent);
 		border: 1px solid var(--border);
 		backdrop-filter: blur(12px);
 		-webkit-backdrop-filter: blur(12px);

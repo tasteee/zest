@@ -25,14 +25,24 @@ export const dedent = (source: string): string => {
 	return trimmedLines.join('\n')
 }
 
-// Parses trusted, repo-authored markup into a real element tree. The custom
-// elements are already registered by the time this runs (zest.js loads before
-// the site module), so the returned nodes are upgraded immediately and their
-// JS properties can be set right away.
+// Parses trusted, repo-authored markup into a real element tree, upgraded and
+// ready for an example's wiring to assign properties to it.
+//
+// Both steps here are load-bearing. Template content lives in an inert
+// document that has no custom element registry, so `cloneNode` would hand back
+// elements that can never upgrade; `importNode` adopts them into this document
+// instead. They are still only *upgrade candidates* until they are inserted,
+// though, and wiring runs before insertion — so `upgrade` is what makes the
+// component's accessors exist in time. Skip either and an assignment like
+// `.code = …` writes a plain own property that shadows the accessor for the
+// life of the element, and the component silently never sees the value.
 export const buildFragmentFromMarkup = (markup: string): DocumentFragment => {
 	const template = document.createElement('template')
 	template.innerHTML = dedent(markup)
-	return template.content.cloneNode(true) as DocumentFragment
+
+	const fragment = document.importNode(template.content, true)
+	customElements.upgrade(fragment)
+	return fragment
 }
 
 const buildPreviewRoot = (markup: string): HTMLElement => {

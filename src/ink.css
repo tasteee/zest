@@ -5,7 +5,7 @@
  * so every z-* component picks these up via var(--token-name).
  */
 
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,100..1000&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,100..1000&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap");
 
 /*
  * Registered custom property for z-aura's rotating conic-gradient frame.
@@ -16,245 +16,270 @@
  * would jump discretely, and var(--aura-angle) would resolve invalid).
  */
 @property --aura-angle {
-	syntax: '<angle>';
-	inherits: false;
-	initial-value: 0deg;
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
 }
 
 /* Every scroll surface in light DOM, including the document itself. Components
  * add the matching shadow-root sheet from shared/scrollbar-styles.ts. */
 @supports not selector(::-webkit-scrollbar) {
-	html,
-	body,
-	* {
-		scrollbar-color: var(--color-neutral-3) transparent;
-		scrollbar-width: thin;
-	}
+  html,
+  body,
+  * {
+    scrollbar-color: var(--color-neutral-3) transparent;
+    scrollbar-width: thin;
+  }
 }
 
 ::-webkit-scrollbar {
-	width: 8px;
-	height: 8px;
+  width: 8px;
+  height: 8px;
 }
 ::-webkit-scrollbar-track,
 ::-webkit-scrollbar-corner {
-	background: transparent;
+  background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-	background: var(--color-neutral-3);
-	border: 2px solid transparent;
-	border-radius: 999px;
-	background-clip: padding-box;
+  background: var(--color-neutral-3);
+  border: 2px solid transparent;
+  border-radius: 999px;
+  background-clip: padding-box;
 }
 ::-webkit-scrollbar-thumb:hover {
-	background: var(--color-neutral-4);
+  background: var(--color-neutral-4);
 }
 ::-webkit-scrollbar-button {
-	display: none;
-	width: 0;
-	height: 0;
+  display: none;
+  width: 0;
+  height: 0;
 }
 
-:root {
-	/* --color-danger: lch(58 72 22 / 1);
+/*
+ * Dark is the default theme and also the value of [data-theme='dark'], so a
+ * dark region can be nested inside a light one (and vice versa) rather than
+ * the theme being a document-wide switch only. Every themed block below is
+ * selector-paired the same way: `:root, [data-theme='dark']` carries the dark
+ * values, and a matching `[data-theme='light']` block further down overrides
+ * them. Both selectors weigh the same, and no element can match both, so the
+ * order of the two blocks never decides the outcome.
+ */
+:root,
+[data-theme="dark"] {
+  /* --color-danger: lch(58 72 22 / 1);
 	--color-warning: lch(72 78 76 / 1);
 	--color-success: lch(62 58 145 / 1); */
 
-	/* secondary tone */
-	--base-accent-color-0: lch(62.44 70.29 0.86 / 1);
-	--base-accent-color-1: lab(60 40.17 -57.68);
-	--base-success-color: lab(52.2 -46.61 31.61 / 1);
-	--base-warning-color: lch(62.44 70.29 54.86 / 1);
-	--base-danger-color: lch(59.5 75.52 35.8 / 1);
+  /* secondary tone */
+  --base-accent-color-0: lch(62.44 70.29 0.86 / 1);
+  --base-accent-color-1: lab(60 40.17 -57.68);
+  --base-success-color: lab(52.2 -46.61 31.61 / 1);
+  --base-warning-color: lch(62.44 70.29 54.86 / 1);
+  --base-danger-color: lch(59.5 75.52 35.8 / 1);
 
-	--base-success-color: lch(62 58 145 / 1);
-	--base-warning-color: lch(72 78 76 / 1);
-	--base-danger-color: lch(58 72 37 / 1);
+  --base-success-color: lch(62 58 145 / 1);
+  --base-warning-color: lch(72 78 76 / 1);
+  --base-danger-color: lch(58 72 37 / 1);
 
-	--base-neutral-color-light: #fff;
-	--base-neutral-color-dark: #0a0f0a;
-	--base-sans-font-family: 'DM Sans';
-	--base-mono-font-family: 'DM Mono';
-	--base-spacing: 0.25rem;
-	--base-radius: 0.625rem;
-	/* The single dial for the z-text/z-heading/z-subheading/z-label scale —
+  --base-neutral-color-light: #fff;
+  --base-neutral-color-dark: #0a0f0a;
+  --base-sans-font-family: "DM Sans";
+  --base-mono-font-family: "DM Mono";
+  --base-spacing: 0.25rem;
+  --base-radius: 0.625rem;
+  /* The single dial for the z-text/z-heading/z-subheading/z-label scale —
 	   every step in that scale is a calc() multiple of this, so scoping this
 	   var on any container (or :root) rescales the whole type system there
 	   without touching the components themselves. */
-	--base-font-size: 16px;
-	--font-size-0: calc(0.579rem * var(--base-font-size) / 16);
-	--font-size-1: calc(0.694rem * var(--base-font-size) / 16);
-	--font-size-2: calc(0.833rem * var(--base-font-size) / 16);
-	--font-size-3: calc(1rem * var(--base-font-size) / 16);
-	--font-size-4: calc(1.25rem * var(--base-font-size) / 16);
-	--font-size-5: calc(1.563rem * var(--base-font-size) / 16);
-	--font-size-6: calc(1.953rem * var(--base-font-size) / 16);
-	--font-size-7: calc(2.441rem * var(--base-font-size) / 16);
-	--font-size-8: calc(3.052rem * var(--base-font-size) / 16);
-	--color-primary-0: oklch(from var(--base-accent-color-0) 0.18 0.1 h);
-	--color-primary-1: oklch(from var(--base-accent-color-0) 0.28 0.14 h);
-	--color-primary-2: oklch(from var(--base-accent-color-0) 0.38 0.18 h);
-	--color-primary-3: oklch(from var(--base-accent-color-0) 0.52 0.22 h);
-	--color-primary-4: var(--base-accent-color-0);
-	--color-primary-5: oklch(from var(--base-accent-color-0) 0.82 0.21 h);
-	--color-primary-6: oklch(from var(--base-accent-color-0) 0.87 0.16 h);
-	--color-primary-7: oklch(from var(--base-accent-color-0) 0.91 0.11 h);
-	--color-primary-8: oklch(from var(--base-accent-color-0) 0.94 0.06 h);
-	--color-primary-9: oklch(from var(--base-accent-color-0) 0.97 0.02 h);
-	--color-secondary-0: oklch(from var(--base-accent-color-1) 0.15 0.1 h);
-	--color-secondary-1: oklch(from var(--base-accent-color-1) 0.25 0.14 h);
-	--color-secondary-2: oklch(from var(--base-accent-color-1) 0.35 0.18 h);
-	--color-secondary-3: oklch(from var(--base-accent-color-1) 0.5 0.22 h);
-	--color-secondary-4: var(--base-accent-color-1);
-	--color-secondary-5: oklch(from var(--base-accent-color-1) 0.78 0.21 h);
-	--color-secondary-6: oklch(from var(--base-accent-color-1) 0.84 0.16 h);
-	--color-secondary-7: oklch(from var(--base-accent-color-1) 0.89 0.1 h);
-	--color-secondary-8: oklch(from var(--base-accent-color-1) 0.93 0.05 h);
-	--color-secondary-9: oklch(from var(--base-accent-color-1) 0.97 0.02 h);
-	/* Neutral ramp: lightness must climb monotonically 0 -> 9. neutral-0 keeps
+  --base-font-size: 16px;
+  --font-size-0: calc(0.579rem * var(--base-font-size) / 16);
+  --font-size-1: calc(0.694rem * var(--base-font-size) / 16);
+  --font-size-2: calc(0.833rem * var(--base-font-size) / 16);
+  --font-size-3: calc(1rem * var(--base-font-size) / 16);
+  --font-size-4: calc(1.25rem * var(--base-font-size) / 16);
+  --font-size-5: calc(1.563rem * var(--base-font-size) / 16);
+  --font-size-6: calc(1.953rem * var(--base-font-size) / 16);
+  --font-size-7: calc(2.441rem * var(--base-font-size) / 16);
+  --font-size-8: calc(3.052rem * var(--base-font-size) / 16);
+  --color-primary-0: oklch(from var(--base-accent-color-0) 0.18 0.1 h);
+  --color-primary-1: oklch(from var(--base-accent-color-0) 0.28 0.14 h);
+  --color-primary-2: oklch(from var(--base-accent-color-0) 0.38 0.18 h);
+  --color-primary-3: oklch(from var(--base-accent-color-0) 0.52 0.22 h);
+  --color-primary-4: var(--base-accent-color-0);
+  --color-primary-5: oklch(from var(--base-accent-color-0) 0.82 0.21 h);
+  --color-primary-6: oklch(from var(--base-accent-color-0) 0.87 0.16 h);
+  --color-primary-7: oklch(from var(--base-accent-color-0) 0.91 0.11 h);
+  --color-primary-8: oklch(from var(--base-accent-color-0) 0.94 0.06 h);
+  --color-primary-9: oklch(from var(--base-accent-color-0) 0.97 0.02 h);
+  --color-secondary-0: oklch(from var(--base-accent-color-1) 0.15 0.1 h);
+  --color-secondary-1: oklch(from var(--base-accent-color-1) 0.25 0.14 h);
+  --color-secondary-2: oklch(from var(--base-accent-color-1) 0.35 0.18 h);
+  --color-secondary-3: oklch(from var(--base-accent-color-1) 0.5 0.22 h);
+  --color-secondary-4: var(--base-accent-color-1);
+  --color-secondary-5: oklch(from var(--base-accent-color-1) 0.78 0.21 h);
+  --color-secondary-6: oklch(from var(--base-accent-color-1) 0.84 0.16 h);
+  --color-secondary-7: oklch(from var(--base-accent-color-1) 0.89 0.1 h);
+  --color-secondary-8: oklch(from var(--base-accent-color-1) 0.93 0.05 h);
+  --color-secondary-9: oklch(from var(--base-accent-color-1) 0.97 0.02 h);
+  /* Neutral ramp: lightness must climb monotonically 0 -> 9. neutral-0 keeps
 	   the base dark's own L (~0.17) as the page floor; every step above it lifts
 	   lighter. The old 1/2 values (0.12/0.18) dipped below 0, so surfaces above
 	   the background rendered darker-than-black — fixed by stepping 1/2 up. */
-	--color-neutral-0: oklch(from var(--base-neutral-color-dark) l c h);
-	--color-neutral-1: oklch(from var(--base-neutral-color-dark) 0.21 c h);
-	--color-neutral-2: oklch(from var(--base-neutral-color-dark) 0.25 c h);
-	--color-neutral-3: oklch(from var(--base-neutral-color-dark) 0.31 c h);
-	--color-neutral-4: oklch(from var(--base-neutral-color-dark) 0.4 c h);
-	--color-neutral-5: oklch(from var(--base-neutral-color-dark) 0.55 c h);
-	--color-neutral-6: oklch(from var(--base-neutral-color-dark) 0.68 c h);
-	--color-neutral-7: oklch(from var(--base-neutral-color-dark) 0.8 c h);
-	--color-neutral-8: oklch(from var(--base-neutral-color-dark) 0.9 c h);
-	--color-neutral-9: oklch(from var(--base-neutral-color-light) l c h);
-	--spacing-0: 0;
-	--spacing-1: calc(var(--base-spacing) * 1);
-	--spacing-2: calc(var(--base-spacing) * 2);
-	--spacing-3: calc(var(--base-spacing) * 3);
-	--spacing-4: calc(var(--base-spacing) * 4);
-	--spacing-5: calc(var(--base-spacing) * 5);
-	--spacing-6: calc(var(--base-spacing) * 6);
-	--spacing-7: calc(var(--base-spacing) * 7);
-	--spacing-8: calc(var(--base-spacing) * 8);
-	--spacing-9: calc(var(--base-spacing) * 9);
-	--spacing-10: calc(var(--base-spacing) * 10);
-	--spacing-11: calc(var(--base-spacing) * 11);
-	--spacing-12: calc(var(--base-spacing) * 12);
-	--spacing-14: calc(var(--base-spacing) * 14);
-	--spacing-16: calc(var(--base-spacing) * 16);
-	--spacing-20: calc(var(--base-spacing) * 20);
-	--spacing-24: calc(var(--base-spacing) * 24);
-	--spacing-28: calc(var(--base-spacing) * 28);
-	--spacing-32: calc(var(--base-spacing) * 32);
-	--spacing-36: calc(var(--base-spacing) * 36);
-	--spacing-40: calc(var(--base-spacing) * 40);
+  --color-neutral-0: oklch(from var(--base-neutral-color-dark) l c h);
+  --color-neutral-1: oklch(from var(--base-neutral-color-dark) 0.21 c h);
+  --color-neutral-2: oklch(from var(--base-neutral-color-dark) 0.25 c h);
+  --color-neutral-3: oklch(from var(--base-neutral-color-dark) 0.31 c h);
+  --color-neutral-4: oklch(from var(--base-neutral-color-dark) 0.4 c h);
+  --color-neutral-5: oklch(from var(--base-neutral-color-dark) 0.55 c h);
+  --color-neutral-6: oklch(from var(--base-neutral-color-dark) 0.68 c h);
+  --color-neutral-7: oklch(from var(--base-neutral-color-dark) 0.8 c h);
+  --color-neutral-8: oklch(from var(--base-neutral-color-dark) 0.9 c h);
+  --color-neutral-9: oklch(from var(--base-neutral-color-light) l c h);
+  --spacing-0: 0;
+  --spacing-1: calc(var(--base-spacing) * 1);
+  --spacing-2: calc(var(--base-spacing) * 2);
+  --spacing-3: calc(var(--base-spacing) * 3);
+  --spacing-4: calc(var(--base-spacing) * 4);
+  --spacing-5: calc(var(--base-spacing) * 5);
+  --spacing-6: calc(var(--base-spacing) * 6);
+  --spacing-7: calc(var(--base-spacing) * 7);
+  --spacing-8: calc(var(--base-spacing) * 8);
+  --spacing-9: calc(var(--base-spacing) * 9);
+  --spacing-10: calc(var(--base-spacing) * 10);
+  --spacing-11: calc(var(--base-spacing) * 11);
+  --spacing-12: calc(var(--base-spacing) * 12);
+  --spacing-14: calc(var(--base-spacing) * 14);
+  --spacing-16: calc(var(--base-spacing) * 16);
+  --spacing-20: calc(var(--base-spacing) * 20);
+  --spacing-24: calc(var(--base-spacing) * 24);
+  --spacing-28: calc(var(--base-spacing) * 28);
+  --spacing-32: calc(var(--base-spacing) * 32);
+  --spacing-36: calc(var(--base-spacing) * 36);
+  --spacing-40: calc(var(--base-spacing) * 40);
 }
 
 @supports (color: lab(0% 0 0)) {
-	:root {
-		--base-neutral-color-dark: lab(3.87% -2.29438 1.63959);
-	}
+  :root,
+  [data-theme="dark"] {
+    --base-neutral-color-dark: lab(3.87% -2.29438 1.63959);
+  }
 }
 
-:root {
-	--color-pink: var(--color-primary-4);
-	--color-purple: var(--color-secondary-4);
-	--bg: var(--color-neutral-0);
-	--paper: var(--color-neutral-1);
-	--paper-soft: var(--color-neutral-2);
-	--line: var(--color-neutral-3);
-	/* Primary UI color is neutral-8. neutral-9 (the brightest white) is reserved
+:root,
+[data-theme="dark"] {
+  --color-pink: var(--color-primary-4);
+  --color-purple: var(--color-secondary-4);
+  --bg: var(--color-neutral-0);
+  --paper: var(--color-neutral-1);
+  --paper-soft: var(--color-neutral-2);
+  --line: var(--color-neutral-3);
+  /* Primary UI color is neutral-8. neutral-9 (the brightest white) is reserved
 	   for a few specific elements that opt into it directly. */
-	--primary: var(--color-neutral-8);
-	--foreground: var(--color-neutral-8);
-	--muted: var(--color-neutral-6);
-	--secondary: var(--color-neutral-5);
-	--accent: var(--color-purple);
-	--accent-alt: var(--color-pink);
-	/* button-tone colors: exact per-tone colors with hand-tuned lightness/chroma.
+  --primary: var(--color-neutral-8);
+  --foreground: var(--color-neutral-8);
+  --muted: var(--color-neutral-6);
+  --secondary: var(--color-neutral-5);
+  --accent: var(--color-purple);
+  --accent-alt: var(--color-pink);
+  /* button-tone colors: exact per-tone colors with hand-tuned lightness/chroma.
 	   Deliberately decoupled from --color-purple/--color-pink above (which stay
 	   tied to the raw base accent colors z-toggle's is-purple/is-pink rely on). */
-	--purple: var(--base-accent-color-1);
-	--pink: var(--base-accent-color-0);
-	--success: var(--base-success-color);
-	--warning: var(--base-warning-color);
-	--background: var(--bg);
-	--background-light: var(--paper-soft);
-	--card: var(--paper);
-	--card-foreground: var(--primary);
-	--popover: var(--paper);
-	--popover-foreground: var(--primary);
-	--primary-foreground: var(--bg);
-	--secondary-foreground: var(--primary);
-	--muted-foreground: var(--muted);
-	--skeleton: var(--color-neutral-3);
-	--accent-foreground: var(--primary);
-	--destructive: var(--base-danger-color);
-	--border: var(--line);
-	--input: var(--line);
-	--ring: var(--color-neutral-4);
-	--chart-1: var(--color-purple);
-	--chart-2: var(--color-pink);
-	--chart-3: var(--color-neutral-7);
-	--chart-4: var(--color-neutral-5);
-	--chart-5: var(--color-neutral-4);
-	--sidebar: var(--paper);
-	--sidebar-foreground: var(--primary);
-	--sidebar-primary: var(--accent);
-	--sidebar-primary-foreground: var(--primary);
-	--sidebar-accent: var(--paper-soft);
-	--sidebar-accent-foreground: var(--primary);
-	--sidebar-border: var(--line);
-	--sidebar-ring: var(--ring);
-	--page-gradient-from: var(--color-neutral-0);
-	--page-gradient-via: var(--color-neutral-1);
-	--page-gradient-to: var(--color-neutral-2);
-	--page-gradient-min-height: 2000px;
-	--page-gradient: none;
-	--font-sans: var(--base-sans-font-family), 'DM Sans Fallback', system-ui, sans-serif;
-	--font-mono: var(--base-mono-font-family), 'Geist Mono', 'Fira Code', monospace;
-	--radius: var(--base-radius);
-	--radius-sm: calc(var(--radius) - 4px);
-	--radius-md: calc(var(--radius) - 2px);
-	--radius-lg: var(--radius);
-	--radius-xl: calc(var(--radius) + 4px);
-	--small-button-radius: 4px;
-	--medium-button-radius: 5px;
-	--large-button-radius: 6px;
-	--color-background: var(--background);
-	--color-background-light: var(--background-light);
-	--color-foreground: var(--foreground);
-	--color-card: var(--card);
-	--color-card-foreground: var(--card-foreground);
-	--color-popover: var(--popover);
-	--color-popover-foreground: var(--popover-foreground);
-	--color-primary: var(--primary);
-	--color-primary-foreground: var(--primary-foreground);
-	--color-secondary: var(--secondary);
-	--color-secondary-foreground: var(--secondary-foreground);
-	--color-muted: var(--muted);
-	--color-muted-foreground: var(--muted-foreground);
-	--color-skeleton: var(--skeleton);
-	--color-accent: var(--accent);
-	--color-accent-foreground: var(--accent-foreground);
-	--color-destructive: var(--destructive);
-	--color-success: var(--success);
-	--color-border: var(--border);
-	--color-input: var(--input);
-	--color-ring: var(--ring);
-	--color-chart-1: var(--chart-1);
-	--color-chart-2: var(--chart-2);
-	--color-chart-3: var(--chart-3);
-	--color-chart-4: var(--chart-4);
-	--color-chart-5: var(--chart-5);
-	--color-neon-pink: var(--color-pink);
-	--color-neon-purple: var(--color-purple);
-	--color-sidebar: var(--sidebar);
-	--color-sidebar-foreground: var(--sidebar-foreground);
-	--color-sidebar-primary: var(--sidebar-primary);
-	--color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-	--color-sidebar-accent: var(--sidebar-accent);
-	--color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-	--color-sidebar-border: var(--sidebar-border);
-	--color-sidebar-ring: var(--sidebar-ring);
+  --purple: var(--base-accent-color-1);
+  --pink: var(--base-accent-color-0);
+  --success: var(--base-success-color);
+  --warning: var(--base-warning-color);
+  --background: var(--bg);
+  --background-light: var(--paper-soft);
+  --card: var(--paper);
+  --card-foreground: var(--primary);
+  --popover: var(--paper);
+  --popover-foreground: var(--primary);
+  --primary-foreground: var(--bg);
+  --secondary-foreground: var(--primary);
+  --muted-foreground: var(--muted);
+  --skeleton: var(--color-neutral-3);
+  --accent-foreground: var(--primary);
+  --destructive: var(--base-danger-color);
+  --border: var(--line);
+  --input: var(--line);
+  --ring: var(--color-neutral-4);
+  --chart-1: var(--color-purple);
+  --chart-2: var(--color-pink);
+  --chart-3: var(--color-neutral-7);
+  --chart-4: var(--color-neutral-5);
+  --chart-5: var(--color-neutral-4);
+  --sidebar: var(--paper);
+  --sidebar-foreground: var(--primary);
+  --sidebar-primary: var(--accent);
+  --sidebar-primary-foreground: var(--primary);
+  --sidebar-accent: var(--paper-soft);
+  --sidebar-accent-foreground: var(--primary);
+  --sidebar-border: var(--line);
+  --sidebar-ring: var(--ring);
+  --page-gradient-from: var(--color-neutral-0);
+  --page-gradient-via: var(--color-neutral-1);
+  --page-gradient-to: var(--color-neutral-2);
+  --page-gradient-min-height: 2000px;
+  --page-gradient: none;
+  /* Haze layers. The light theme is built on a soft atmospheric wash rather
+	   than flat fills, so surfaces need somewhere to paint one. These are the
+	   inert dark-theme values — dark stays strictly flat, with no gradient
+	   anywhere — and the light block below swaps in the real washes.
+	   Each is written to be a legal `background:` shorthand value on its own
+	   (--haze, --haze-page) or a legal first layer in front of a color
+	   (--haze-tone), so a component opts in with one declaration that costs
+	   the dark theme nothing. */
+  --haze: transparent;
+  --haze-page: none;
+  --haze-tone: none;
+  --font-sans:
+    var(--base-sans-font-family), "DM Sans Fallback", system-ui, sans-serif;
+  --font-mono:
+    var(--base-mono-font-family), "Geist Mono", "Fira Code", monospace;
+  --radius: var(--base-radius);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --small-button-radius: 4px;
+  --medium-button-radius: 5px;
+  --large-button-radius: 6px;
+  --color-background: var(--background);
+  --color-background-light: var(--background-light);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-skeleton: var(--skeleton);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-success: var(--success);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-neon-pink: var(--color-pink);
+  --color-neon-purple: var(--color-purple);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
 }
 
 /*
@@ -265,43 +290,43 @@
  * already-shipped component's CSS.
  */
 :root {
-	--neon-purple: var(--color-neon-purple);
-	--neon-pink: var(--color-neon-pink);
+  --neon-purple: var(--color-neon-purple);
+  --neon-pink: var(--color-neon-pink);
 
-	--space-xs: var(--spacing-1);
-	--space-sm: var(--spacing-2);
-	--space-md: var(--spacing-3);
-	--space-base: var(--spacing-4);
-	--space-lg: var(--spacing-6);
-	--space-xl: var(--spacing-8);
-	--space-2xl: var(--spacing-12);
-	--space-3xl: var(--spacing-16);
+  --space-xs: var(--spacing-1);
+  --space-sm: var(--spacing-2);
+  --space-md: var(--spacing-3);
+  --space-base: var(--spacing-4);
+  --space-lg: var(--spacing-6);
+  --space-xl: var(--spacing-8);
+  --space-2xl: var(--spacing-12);
+  --space-3xl: var(--spacing-16);
 
-	--font-size-display: 4.5rem;
-	--font-size-h1: 3rem;
-	--font-size-h2: 2.25rem;
-	--font-size-h3: 1.5rem;
-	--font-size-h4: 1.25rem;
-	--font-size-body: 1rem;
-	--font-size-small: 0.875rem;
-	--font-size-caption: 0.75rem;
+  --font-size-display: 4.5rem;
+  --font-size-h1: 3rem;
+  --font-size-h2: 2.25rem;
+  --font-size-h3: 1.5rem;
+  --font-size-h4: 1.25rem;
+  --font-size-body: 1rem;
+  --font-size-small: 0.875rem;
+  --font-size-caption: 0.75rem;
 
-	--line-height-display: 0.9;
-	--line-height-h1: 1;
-	--line-height-h2: 1.1;
-	--line-height-h3: 1.2;
-	--line-height-h4: 1.3;
-	--line-height-body: 1.6;
-	--line-height-small: 1.5;
-	--line-height-caption: 1.4;
+  --line-height-display: 0.9;
+  --line-height-h1: 1;
+  --line-height-h2: 1.1;
+  --line-height-h3: 1.2;
+  --line-height-h4: 1.3;
+  --line-height-body: 1.6;
+  --line-height-small: 1.5;
+  --line-height-caption: 1.4;
 
-	--font-weight-regular: 400;
-	--font-weight-medium: 500;
-	--font-weight-semibold: 600;
-	--font-weight-bold: 700;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
 
-	--duration-fast: 140ms;
-	--easing-standard: ease-out;
+  --duration-fast: 140ms;
+  --easing-standard: ease-out;
 }
 
 /*
@@ -311,22 +336,23 @@
  * constants, and cyan for types — all tuned for legibility on the near-black
  * code surface (--color-neutral-1). Override any of these to retheme code.
  */
-:root {
-	--syntax-comment: var(--color-neutral-5);
-	--syntax-keyword: var(--color-secondary-6);
-	--syntax-string: oklch(0.79 0.13 152);
-	--syntax-number: oklch(0.82 0.12 78);
-	--syntax-constant: oklch(0.76 0.16 48);
-	--syntax-function: var(--color-primary-6);
-	--syntax-class: oklch(0.83 0.11 200);
-	--syntax-property: oklch(0.86 0.07 222);
-	--syntax-operator: var(--color-neutral-6);
-	--syntax-punctuation: var(--color-neutral-6);
-	--syntax-tag: var(--color-primary-6);
-	--syntax-attr: oklch(0.82 0.12 78);
-	--syntax-variable: var(--color-neutral-8);
-	--syntax-regex: oklch(0.79 0.13 168);
-	--syntax-plain: var(--color-neutral-8);
+:root,
+[data-theme="dark"] {
+  --syntax-comment: var(--color-neutral-5);
+  --syntax-keyword: var(--color-secondary-6);
+  --syntax-string: oklch(0.79 0.13 152);
+  --syntax-number: oklch(0.82 0.12 78);
+  --syntax-constant: oklch(0.76 0.16 48);
+  --syntax-function: var(--color-primary-6);
+  --syntax-class: oklch(0.83 0.11 200);
+  --syntax-property: oklch(0.86 0.07 222);
+  --syntax-operator: var(--color-neutral-6);
+  --syntax-punctuation: var(--color-neutral-6);
+  --syntax-tag: var(--color-primary-6);
+  --syntax-attr: oklch(0.82 0.12 78);
+  --syntax-variable: var(--color-neutral-8);
+  --syntax-regex: oklch(0.79 0.13 168);
+  --syntax-plain: var(--color-neutral-8);
 }
 
 /*
@@ -335,9 +361,154 @@
  * near-black ink rather than the browser's default blue, so it reads as part of
  * the zest surface. Override either token to retheme selection everywhere.
  */
-:root {
-	--selection-background: var(--color-neutral-7);
-	--selection-foreground: var(--color-neutral-1);
+:root,
+[data-theme="dark"] {
+  --selection-background: var(--color-neutral-7);
+  --selection-foreground: var(--color-neutral-1);
+}
+
+/*
+ * ---------------------------------------------------------------------------
+ * Light theme — "haze"
+ * ---------------------------------------------------------------------------
+ *
+ * Not an inversion of the dark theme. Dark zest is flat ink; light zest is
+ * atmosphere — a soft, slightly lavender paper lit by a few very wide colour
+ * washes, with no pure white anywhere. The washes are the one deliberate
+ * exception to the no-gradient rule, and they are scoped to this theme only.
+ *
+ * The neutral ramp is authored by hand here rather than derived, because the
+ * light ramp is not monotonic the way the dark one is. Its steps are
+ * semantic, not ordinal: 0 is the page, 1 lifts *above* the page (raised
+ * surfaces read lighter on paper), 2 recedes below it, 3-4 are hairlines,
+ * and 5-9 descend into ink. Every consumer of --color-neutral-N already
+ * reads it that way, so the whole component library re-themes from this one
+ * block.
+ */
+[data-theme="light"] {
+  --base-neutral-color-light: oklch(0.988 0.004 292);
+  --base-neutral-color-dark: oklch(0.176 0.022 292);
+
+  /* The accents are held a few steps darker than their dark-theme
+	   counterparts. On paper the same colour has to do two jobs at once — be
+	   legible as text on the page, and carry white text when it becomes a
+	   solid fill — and only the darker end of each hue clears both. Every
+	   value below was picked against measured contrast on --color-neutral-0,
+	   not by eye. */
+  --base-accent-color-0: oklch(0.565 0.2 12);
+  --base-accent-color-1: oklch(0.525 0.195 288);
+  --base-success-color: oklch(0.522 0.128 155);
+  --base-warning-color: oklch(0.578 0.135 70);
+  --base-danger-color: oklch(0.555 0.195 27);
+
+  --color-neutral-0: oklch(0.966 0.006 292);
+  --color-neutral-1: oklch(0.988 0.004 292);
+  --color-neutral-2: oklch(0.951 0.008 292);
+  --color-neutral-3: oklch(0.876 0.011 292);
+  --color-neutral-4: oklch(0.818 0.014 292);
+  --color-neutral-5: oklch(0.628 0.017 292);
+  --color-neutral-6: oklch(0.528 0.02 292);
+  --color-neutral-7: oklch(0.408 0.02 292);
+  --color-neutral-8: oklch(0.286 0.02 292);
+  --color-neutral-9: oklch(0.176 0.022 292);
+
+  /* The three washes that make the page feel lit rather than filled: a cool
+	   lavender falling in from the top left, a warm rose off the top right,
+	   and a cold one rising from below. All are wide enough that no edge of
+	   any one of them is ever visible on screen — the eye reads a tint, not a
+	   gradient. */
+  --haze-page:
+    radial-gradient(
+      1400px 900px at 6% -14%,
+      oklch(0.92 0.055 300 / 0.55),
+      transparent 62%
+    ),
+    radial-gradient(
+      1150px 820px at 98% 2%,
+      oklch(0.93 0.05 18 / 0.48),
+      transparent 60%
+    ),
+    radial-gradient(
+      1050px 1050px at 42% 114%,
+      oklch(0.93 0.042 214 / 0.45),
+      transparent 64%
+    );
+
+  /* The whisper. Sits on surfaces that are otherwise unfilled — cards,
+	   fields, wells — so they catch a little light off the page instead of
+	   disappearing into it. */
+  --haze: linear-gradient(
+    165deg,
+    oklch(1 0 0 / 0.62),
+    oklch(0.975 0.012 292 / 0.3)
+  );
+
+  /* A touch stronger, for surfaces that must read as lifted off the page:
+	   popovers, menus, dialogs, the sidebar. */
+  --haze-raised: linear-gradient(
+    158deg,
+    oklch(1 0 0 / 0.78),
+    oklch(0.972 0.016 292 / 0.38) 62%,
+    oklch(0.968 0.02 12 / 0.24)
+  );
+
+  /* For solid accent fills. Light from above, shadow below, both barely
+	   there — enough to keep a saturated button from reading as a flat sticker
+	   on a hazy page. */
+  --haze-tone: linear-gradient(
+    180deg,
+    oklch(1 0 0 / 0.15),
+    oklch(0.2 0.02 292 / 0.07)
+  );
+
+  /* --popover and --background-light are only ever consumed by a
+	   `background:` shorthand, which is what lets them carry an image layer in
+	   front of their colour. The one place that needed the flat colour instead
+	   (z-dock) reads --color-neutral-1 directly now. */
+  --popover: var(--haze-raised), var(--color-neutral-1);
+  --background-light: var(--haze), var(--color-neutral-2);
+
+  /* --card takes the opposite route to the same effect. A dozen components
+	   tint it with color-mix, which can't accept an image layer, so instead of
+	   painting haze *onto* the card it is left slightly translucent and lets
+	   the page wash come through from behind. Cards end up genuinely lit by
+	   wherever they sit on the page rather than carrying a copy of the light,
+	   and every color-mix over it keeps working.
+	   This is safe here because every --card surface is inline content — chips,
+	   lists, composers, bubbles. Overlays read --popover, which stays opaque so
+	   nothing shows through a menu. */
+  --card: oklch(0.995 0.003 292 / 0.66);
+
+  --page-gradient-from: var(--color-neutral-1);
+  --page-gradient-via: var(--color-neutral-0);
+  --page-gradient-to: var(--color-neutral-2);
+
+  --skeleton: var(--color-neutral-3);
+  --ring: var(--color-neutral-4);
+
+  /* A pale highlighter band tinted toward the purple accent, with ink dark
+	   enough to stay comfortable inside it. */
+  --selection-background: oklch(0.87 0.072 292);
+  --selection-foreground: oklch(0.22 0.03 292);
+
+  /* Code needs its own light palette rather than the dark one dimmed: these
+	   are held near L 0.5 so every token clears text contrast on the pale code
+	   surface while the hues stay recognisably the same language. */
+  --syntax-comment: oklch(0.578 0.019 292);
+  --syntax-keyword: oklch(0.5 0.18 288);
+  --syntax-string: oklch(0.475 0.125 152);
+  --syntax-number: oklch(0.52 0.125 62);
+  --syntax-constant: oklch(0.52 0.16 40);
+  --syntax-function: oklch(0.53 0.185 8);
+  --syntax-class: oklch(0.5 0.115 215);
+  --syntax-property: oklch(0.475 0.09 235);
+  --syntax-operator: oklch(0.55 0.018 292);
+  --syntax-punctuation: oklch(0.578 0.019 292);
+  --syntax-tag: oklch(0.53 0.185 8);
+  --syntax-attr: oklch(0.52 0.125 62);
+  --syntax-variable: oklch(0.3 0.02 292);
+  --syntax-regex: oklch(0.475 0.125 168);
+  --syntax-plain: oklch(0.3 0.02 292);
 }
 
 /*
@@ -351,19 +522,114 @@
  * being dragged over).
  */
 :root {
-	--z-toolbar: 40;
-	--z-menu: 50;
-	--z-overlay: 60;
+  --z-toolbar: 40;
+  --z-menu: 50;
+  --z-overlay: 60;
 }
 
 html,
 body {
-	margin: 0;
-	font-family: var(--font-sans);
-	background-color: var(--background);
-	color: var(--foreground);
-	user-select: text;
-	-webkit-user-select: text;
+  margin: 0;
+  font-family: var(--font-sans);
+  background-color: var(--background);
+  color: var(--foreground);
+  user-select: text;
+  -webkit-user-select: text;
+}
+
+/*
+ * The page wash lives on <body> alone — putting it on both elements would
+ * paint it twice, and the two copies would not line up. `fixed` keeps it
+ * anchored to the viewport so the light never slides around under a long
+ * scroll. In the dark theme --haze-page is `none` and this costs nothing.
+ */
+body {
+  background-image: var(--haze-page);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+/*
+ * ---------------------------------------------------------------------------
+ * Theme transition
+ * ---------------------------------------------------------------------------
+ *
+ * Swapping themes changes hundreds of values at once, and almost none of them
+ * can be transitioned in CSS. Custom properties don't interpolate unless
+ * they're registered, and the light theme swaps in gradients and a translucent
+ * card surface, which can't animate from their flat dark-theme equivalents at
+ * any price.
+ *
+ * So the transition happens on pixels instead of values. The View Transition
+ * API snapshots the page, lets the attribute swap, and cross-fades the two
+ * frames — which covers gradients, translucency and shadow DOM alike, with no
+ * per-token work at all. The page never goes blank; the old frame is still
+ * there underneath the new one the whole way across.
+ */
+:root {
+  --theme-transition-duration: 0.025s;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: var(--theme-transition-duration);
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/*
+ * Fallback for browsers without view transitions: fade the page down, swap
+ * underneath, fade back up. Half the budget each way.
+ *
+ * The two classes do different jobs, which is why both exist. isThemeAnimating
+ * carries the transition and stays on for the whole exchange — take it off with
+ * the opacity and the way back would snap rather than fade. isThemeFading is
+ * the opacity itself, and comes off at the halfway point to start the return.
+ *
+ * Both are driven from shared/theme.ts, which reads the computed value of
+ * --theme-transition-duration rather than keeping its own copy — so retiming
+ * the token retimes both paths, and the swap always lands at the midpoint.
+ */
+html.isThemeAnimating body {
+  transition: opacity calc(var(--theme-transition-duration) / 2) ease;
+}
+
+html.isThemeFading body {
+  opacity: 0;
+}
+
+/*
+ * An instant swap is the correct response to a reduced-motion request, not a
+ * slower one. theme.ts skips the animation path entirely; these rules make
+ * sure a transition already in flight when the setting changes can't strand
+ * the page at zero opacity.
+ */
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+  }
+
+  html.isThemeAnimating body {
+    transition: none;
+  }
+
+  html.isThemeFading body {
+    opacity: 1;
+  }
+}
+
+/*
+ * Tells the browser which way round the theme is, so native chrome it paints
+ * for us — form control internals, the default caret, overlay scrollbars —
+ * matches instead of fighting the surface underneath it.
+ */
+:root,
+[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+[data-theme="light"] {
+  color-scheme: light;
 }
 
 /*
@@ -373,10 +639,10 @@ body {
  */
 
 ::selection {
-	user-select: text;
-	-webkit-user-select: text;
-	color: var(--selection-foreground);
-	background-color: var(--selection-background);
+  user-select: text;
+  -webkit-user-select: text;
+  color: var(--selection-foreground);
+  background-color: var(--selection-background);
 }
 
 /*
@@ -387,9 +653,9 @@ body {
  */
 input,
 textarea,
-[contenteditable]:not([contenteditable='false']) {
-	user-select: text;
-	-webkit-user-select: text;
+[contenteditable]:not([contenteditable="false"]) {
+  user-select: text;
+  -webkit-user-select: text;
 }
 
 /*
@@ -399,10 +665,10 @@ textarea,
  * doesn't pierce shadow boundaries; they share the same --selection-* tokens.
  */
 ::selection {
-	background: var(--selection-background);
-	color: var(--selection-foreground);
+  background: var(--selection-background);
+  color: var(--selection-foreground);
 }
 ::-moz-selection {
-	background: var(--selection-background);
-	color: var(--selection-foreground);
+  background: var(--selection-background);
+  color: var(--selection-foreground);
 }

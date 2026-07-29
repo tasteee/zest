@@ -11,6 +11,7 @@ import { zDockDoc } from './buttons-actions/z-dock'
 import { zDockItemDoc } from './buttons-actions/z-dock-item'
 import { zLinkDoc } from './buttons-actions/z-link'
 import { zSendButtonDoc } from './buttons-actions/z-send-button'
+import { zThemeSwitcherDoc } from './buttons-actions/z-theme-switcher'
 import { zToggleDoc } from './buttons-actions/z-toggle'
 import { zToggleGroupDoc } from './buttons-actions/z-toggle-group'
 import { zToggleGroupItemDoc } from './buttons-actions/z-toggle-group-item'
@@ -73,6 +74,8 @@ import { zSheetDoc } from './overlays/z-sheet'
 import { zToastDoc } from './overlays/z-toast'
 import { zTooltipDoc } from './overlays/z-tooltip'
 
+import { zTerminalDoc } from './specialized/z-terminal'
+
 import type { ComponentDocT } from './types'
 
 const ALL_COMPONENT_DOCS: ComponentDocT[] = [
@@ -82,6 +85,7 @@ const ALL_COMPONENT_DOCS: ComponentDocT[] = [
 	zDockItemDoc,
 	zLinkDoc,
 	zSendButtonDoc,
+	zThemeSwitcherDoc,
 	zToggleDoc,
 	zToggleGroupDoc,
 	zToggleGroupItemDoc,
@@ -142,7 +146,9 @@ const ALL_COMPONENT_DOCS: ComponentDocT[] = [
 	zPopoverDoc,
 	zSheetDoc,
 	zToastDoc,
-	zTooltipDoc
+	zTooltipDoc,
+
+	zTerminalDoc
 ]
 
 const buildDocsByTag = (): Map<string, ComponentDocT> => {

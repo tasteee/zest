@@ -303,7 +303,13 @@ const buildHeader = (commandPalette: ZCommandElementT): HTMLElement => {
 		commandPalette.isOpen = true
 	})
 
-	header.append(logo, searchTrigger)
+	const headerActions = createElement('div', 'appHeaderActions')
+	const themeSwitcher = createElement('z-theme-switcher')
+	themeSwitcher.setAttribute('is-small', '')
+	themeSwitcher.setAttribute('is-icon-only', '')
+	headerActions.append(searchTrigger, themeSwitcher)
+
+	header.append(logo, headerActions)
 	return header
 }
 

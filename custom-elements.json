@@ -3615,6 +3615,13 @@
             },
             {
               "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
               "name": "presets",
               "type": {
                 "text": "array"
@@ -3653,6 +3660,13 @@
             {
               "name": "value",
               "fieldName": "value",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "label",
+              "fieldName": "label",
               "type": {
                 "text": "string"
               }
@@ -3738,9 +3752,23 @@
             },
             {
               "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
               "name": "tone",
               "type": {
                 "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isInvalid",
+              "type": {
+                "text": "boolean"
               }
             },
             {
@@ -3802,10 +3830,24 @@
               }
             },
             {
+              "name": "size",
+              "fieldName": "size",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
               "name": "tone",
               "fieldName": "tone",
               "type": {
                 "text": "string"
+              }
+            },
+            {
+              "name": "is-invalid",
+              "fieldName": "isInvalid",
+              "type": {
+                "text": "boolean"
               }
             },
             {
@@ -6370,6 +6412,13 @@
             },
             {
               "kind": "field",
+              "name": "isDisabled",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
               "name": "isHidden",
               "type": {
                 "text": "boolean"
@@ -6422,6 +6471,13 @@
             {
               "name": "is-drilldown",
               "fieldName": "isDrilldown",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "is-disabled",
+              "fieldName": "isDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -7461,6 +7517,13 @@
             },
             {
               "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
               "name": "length",
               "type": {
                 "text": "number"
@@ -7527,6 +7590,13 @@
             {
               "name": "value",
               "fieldName": "value",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "label",
+              "fieldName": "label",
               "type": {
                 "text": "string"
               }
@@ -10326,6 +10396,13 @@
             },
             {
               "kind": "field",
+              "name": "isOpen",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
               "name": "isDisabled",
               "type": {
                 "text": "boolean"
@@ -10364,6 +10441,13 @@
             {
               "name": "is-hidden",
               "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "is-open",
+              "fieldName": "isOpen",
               "type": {
                 "text": "boolean"
               }
@@ -14625,6 +14709,27 @@
             },
             {
               "kind": "field",
+              "name": "width",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "height",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "maxHeight",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
               "name": "animate",
               "type": {
                 "text": "boolean"
@@ -14682,6 +14787,13 @@
             {
               "kind": "field",
               "name": "hideReplay",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "noAutoScroll",
               "type": {
                 "text": "boolean"
               }
@@ -14752,6 +14864,27 @@
               }
             },
             {
+              "name": "width",
+              "fieldName": "width",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "height",
+              "fieldName": "height",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "max-height",
+              "fieldName": "maxHeight",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
               "name": "animate",
               "fieldName": "animate",
               "type": {
@@ -14810,6 +14943,13 @@
             {
               "name": "hide-replay",
               "fieldName": "hideReplay",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "no-auto-scroll",
+              "fieldName": "noAutoScroll",
               "type": {
                 "text": "boolean"
               }
@@ -15175,6 +15315,114 @@
               "fieldName": "input",
               "type": {
                 "text": "string"
+              }
+            },
+            {
+              "name": "change",
+              "fieldName": "change",
+              "type": {
+                "text": "string"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
+          "tagName": "z-theme-switcher",
+          "name": "ZThemeSwitcher",
+          "members": [
+            {
+              "kind": "field",
+              "name": "kind",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "tone",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isIconOnly",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isSmall",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isLarge",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "change",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "kind",
+              "fieldName": "kind",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "tone",
+              "fieldName": "tone",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "is-icon-only",
+              "fieldName": "isIconOnly",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "is-small",
+              "fieldName": "isSmall",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "is-large",
+              "fieldName": "isLarge",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
               }
             },
             {
@@ -17651,6 +17899,14 @@
           "name": "z-textarea",
           "declaration": {
             "name": "ZTextarea",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "z-theme-switcher",
+          "declaration": {
+            "name": "ZThemeSwitcher",
             "module": "dist/zest.js"
           }
         },
