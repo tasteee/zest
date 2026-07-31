@@ -40,8 +40,10 @@ const styles = css`
 		gap: 0.625rem;
 		width: 100%;
 		box-sizing: border-box;
-		/* transparent in the dark theme, a faint wash in the light one */
-		background: var(--haze);
+		/* The trigger is a pressable cap, not a hole — raised, unlike z-input.
+		   Inert in the flat themes. */
+		background: var(--material-raised), transparent;
+		box-shadow: var(--elevation-raised);
 		border: 1px solid var(--border);
 		border-radius: var(--radius-md);
 		color: var(--foreground);
@@ -52,17 +54,17 @@ const styles = css`
 	}
 
 	.trigger.is-small {
-		height: 2rem;
+		height: var(--control-height-sm);
 		padding-inline: 0.75rem;
 		font-size: var(--font-size-small);
 	}
 	.trigger.is-medium {
-		height: 2.5rem;
+		height: var(--control-height-md);
 		padding-inline: 0.875rem;
 		font-size: var(--font-size-body);
 	}
 	.trigger.is-large {
-		height: 3rem;
+		height: var(--control-height-lg);
 		padding-inline: 1rem;
 		font-size: var(--font-size-h4);
 	}

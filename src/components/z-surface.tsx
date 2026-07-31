@@ -56,7 +56,7 @@ const styles = css`
 		background: var(--background-light);
 	}
 	:host([variant='filled']) {
-		background: var(--tone);
+		background: var(--material-tone), var(--tone);
 		color: var(--primary-foreground);
 	}
 	/* purple/pink fills are light; dark text reads better on them */

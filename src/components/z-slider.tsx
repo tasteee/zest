@@ -97,14 +97,18 @@ const styles = css`
 		background: var(--accent);
 	}
 
-	/* WebKit thumb */
+	/* WebKit thumb. A fader cap: raised off the track, and lit in the accent
+	   so it reads as the live part of the control. Both tokens are inert in
+	   the flat themes. */
 	input::-webkit-slider-thumb {
 		appearance: none;
 		width: 1rem;
 		height: 1rem;
 		margin-top: -6px;
 		border-radius: 999px;
-		background: var(--accent);
+		--emissive-color: var(--accent);
+		background: var(--material-raised), var(--accent);
+		box-shadow: var(--elevation-raised), var(--emissive-tone);
 		border: 2px solid var(--background);
 		transition: transform 0.1s ease;
 	}
@@ -117,7 +121,9 @@ const styles = css`
 		width: 1rem;
 		height: 1rem;
 		border-radius: 999px;
-		background: var(--accent);
+		--emissive-color: var(--accent);
+		background: var(--material-raised), var(--accent);
+		box-shadow: var(--elevation-raised), var(--emissive-tone);
 		border: 2px solid var(--background);
 	}
 

@@ -13,20 +13,46 @@
 // token block in ink.css keys off. Custom properties cross shadow boundaries,
 // so that single attribute re-themes every z-* element on the page.
 
-export const ThemePreference = {
-	light: 'light',
+export const Theme = {
 	dark: 'dark',
+	light: 'light',
+	console: 'console',
+	studio: 'studio'
+} as const
+
+export type ThemeT = (typeof Theme)[keyof typeof Theme]
+
+export const ThemePreference = {
+	...Theme,
 	system: 'system'
 } as const
 
 export type ThemePreferenceT = (typeof ThemePreference)[keyof typeof ThemePreference]
 
-export const Theme = {
-	light: 'light',
-	dark: 'dark'
+// Which of the two canonical themes a theme belongs with. It decides what
+// 'system' resolves to, and which way toggleTheme flips from here — a reader
+// on 'studio' who hits the icon toggle wants dark, not the other light theme.
+export const ThemeScheme = {
+	dark: 'dark',
+	light: 'light'
 } as const
 
-export type ThemeT = (typeof Theme)[keyof typeof Theme]
+export type ThemeSchemeT = (typeof ThemeScheme)[keyof typeof ThemeScheme]
+
+const THEME_SCHEMES: Record<ThemeT, ThemeSchemeT> = {
+	dark: ThemeScheme.dark,
+	light: ThemeScheme.light,
+	console: ThemeScheme.dark,
+	studio: ThemeScheme.light
+}
+
+export const getThemeScheme = (theme: ThemeT): ThemeSchemeT => {
+	return THEME_SCHEMES[theme]
+}
+
+export const getAllThemes = (): ThemeT[] => {
+	return Object.values(Theme)
+}
 
 export type ThemeStateT = {
 	preference: ThemePreferenceT
@@ -47,11 +73,11 @@ const checkIsBrowser = (): boolean => {
 	return typeof document !== 'undefined'
 }
 
+const ALL_PREFERENCES: string[] = Object.values(ThemePreference)
+
 const checkIsThemePreference = (candidate: string | null): candidate is ThemePreferenceT => {
-	if (candidate === ThemePreference.light) return true
-	if (candidate === ThemePreference.dark) return true
-	if (candidate === ThemePreference.system) return true
-	return false
+	if (candidate === null) return false
+	return ALL_PREFERENCES.includes(candidate)
 }
 
 // Storage is allowed to fail — Safari in private mode throws on read, and an
@@ -92,12 +118,13 @@ export const getSystemTheme = (): ThemeT => {
 	return darkQuery.matches ? Theme.dark : Theme.light
 }
 
-// zest is a dark-first library, so 'system' resolves to dark on any platform
-// that won't tell us its preference.
+// Every preference except 'system' names a theme outright. 'system' is the one
+// that has to be resolved, and it only ever resolves to one of the two
+// canonical themes — the OS tells us light or dark, not which flavour of light.
 export const resolveTheme = (preference: ThemePreferenceT): ThemeT => {
-	if (preference === ThemePreference.light) return Theme.light
-	if (preference === ThemePreference.dark) return Theme.dark
-	return getSystemTheme()
+	const isFollowingSystem = preference === ThemePreference.system
+	if (isFollowingSystem) return getSystemTheme()
+	return preference
 }
 
 export const getThemePreference = (): ThemePreferenceT => {
@@ -117,10 +144,11 @@ const applyThemeAttribute = (): void => {
 	document.documentElement.setAttribute(THEME_ATTRIBUTE, resolveTheme(currentPreference))
 }
 
+const ALL_THEMES: string[] = Object.values(Theme)
+
 const checkIsTheme = (candidate: string | null): candidate is ThemeT => {
-	if (candidate === Theme.light) return true
-	if (candidate === Theme.dark) return true
-	return false
+	if (candidate === null) return false
+	return ALL_THEMES.includes(candidate)
 }
 
 // A theme the page itself declared, by writing data-theme onto <html> in the
@@ -142,18 +170,23 @@ const notifyListeners = (): void => {
 //
 // A theme swap changes hundreds of values at once, most of which cannot be
 // transitioned in CSS: custom properties don't interpolate unless registered,
-// and the light theme swaps gradients and a translucent surface, neither of
-// which can animate from their dark-theme equivalents at all.
+// and the material themes swap gradients and translucent surfaces, none of
+// which can animate from their flat equivalents at all.
 //
-// The View Transition API sidesteps the whole problem by working on pixels
-// rather than values. It snapshots the page, applies the change, and
-// cross-fades the two frames — so gradients, shadow DOM and translucency all
-// come along for free.
+// So the change is sequenced rather than blended. The page fades out, the
+// attribute swaps while nothing is visible, and the page fades back in. Half
+// the budget each way, with the swap landing exactly at the midpoint.
 //
-// Browsers without it fall back to fading the page down and back up around
-// the swap. Half the budget out, half the budget in.
+// This used to go through the View Transition API, which is the obvious tool
+// and the wrong one. Its default root animation cross-fades the two snapshots
+// under mix-blend-mode: plus-lighter — the frames are added rather than
+// interpolated, so halfway through a dark-to-light swap the sum blows past
+// white and the whole screen flashes. Sequencing has no overlap, so there is
+// no blend to get wrong.
+//
+// ink.css handles the one thing that must not fade: the page colour itself
+// transitions on its own underneath, so the gap is never empty.
 
-const ANIMATING_CLASS = 'isThemeAnimating'
 const FADING_CLASS = 'isThemeFading'
 const DURATION_PROPERTY = '--theme-transition-duration'
 const FALLBACK_DURATION_MS = 600
@@ -176,9 +209,9 @@ const parseDurationMs = (rawDuration: string): number | null => {
 }
 
 // The token is the single source of truth for how long a theme change takes.
-// The view-transition path follows it through CSS on its own; the fallback
-// fade is driven from here, so it has to read the same value rather than keep
-// a copy that could drift the moment anyone retimes the token.
+// The fade itself is CSS; this only decides when to flip the attribute, so it
+// has to read the same value rather than keep a copy that could drift the
+// moment anyone retimes the token.
 const getThemeTransitionMs = (): number => {
 	if (!checkIsBrowser()) return FALLBACK_DURATION_MS
 
@@ -188,27 +221,15 @@ const getThemeTransitionMs = (): number => {
 	return parsed
 }
 
-type ViewTransitionT = { finished: Promise<void> }
-type StartViewTransitionT = (callback: () => void) => ViewTransitionT
-type DocumentWithViewTransitionsT = Document & { startViewTransition?: StartViewTransitionT }
-
 const checkPrefersReducedMotion = (): boolean => {
 	const hasMatchMedia = typeof window !== 'undefined' && typeof window.matchMedia === 'function'
 	if (!hasMatchMedia) return false
 	return window.matchMedia('(prefers-reduced-motion: reduce)').matches
 }
 
-const getStartViewTransition = (): StartViewTransitionT | null => {
-	if (!checkIsBrowser()) return null
-
-	const candidate = (document as DocumentWithViewTransitionsT).startViewTransition
-	if (typeof candidate !== 'function') return null
-	return candidate.bind(document)
-}
-
 let fadeTimeoutId = 0
 
-const runFallbackFade = (commit: () => void): void => {
+const runThemeFade = (commit: () => void): void => {
 	const root = document.documentElement
 
 	// Half the budget fading out, half fading back in — so the swap lands at
@@ -219,16 +240,11 @@ const runFallbackFade = (commit: () => void): void => {
 	// it — the reader's latest choice is the one worth animating to.
 	window.clearTimeout(fadeTimeoutId)
 
-	root.classList.add(ANIMATING_CLASS)
 	root.classList.add(FADING_CLASS)
 
 	fadeTimeoutId = window.setTimeout(() => {
 		commit()
 		root.classList.remove(FADING_CLASS)
-
-		fadeTimeoutId = window.setTimeout(() => {
-			root.classList.remove(ANIMATING_CLASS)
-		}, fadePhaseMs)
 	}, fadePhaseMs)
 }
 
@@ -249,13 +265,7 @@ const runThemeChange = (): void => {
 		return
 	}
 
-	const startViewTransition = getStartViewTransition()
-	if (startViewTransition) {
-		startViewTransition(commitThemeChange)
-		return
-	}
-
-	runFallbackFade(commitThemeChange)
+	runThemeFade(commitThemeChange)
 }
 
 export const setThemePreference = (preference: ThemePreferenceT): void => {
@@ -278,8 +288,12 @@ export const setThemePreference = (preference: ThemePreferenceT): void => {
 // Convenience for the icon switcher, which has no 'system' state to offer.
 // Flipping from 'system' commits to the opposite of whatever the system is
 // currently showing, which is the only reading of "toggle" that isn't a no-op.
+//
+// It flips by scheme rather than by name, so a reader on one of the material
+// themes lands on the canonical opposite: studio (light) toggles to dark, not
+// to the other light theme.
 export const toggleTheme = (): void => {
-	const isCurrentlyDark = getTheme() === Theme.dark
+	const isCurrentlyDark = getThemeScheme(getTheme()) === ThemeScheme.dark
 	setThemePreference(isCurrentlyDark ? ThemePreference.light : ThemePreference.dark)
 }
 

@@ -74,6 +74,15 @@ const getDocTitle = (rawMarkdown: string, fallbackSlug: string): string => {
 	return titleMatch[1].trim()
 }
 
+// Roughly half the files under docs/ are saved with CRLF line endings, and
+// `?raw` hands them over byte for byte. Every fence and heading pattern in
+// this module anchors on a bare \n, so a CRLF file silently matched nothing
+// — its playground never rendered at all. Normalizing once here keeps that
+// concern out of every individual regex.
+const normalizeLineEndings = (rawMarkdown: string): string => {
+	return rawMarkdown.replace(/\r\n/g, '\n')
+}
+
 // Every doc's first fenced block is a ```html usage snippet (verified across
 // the whole docs/ tree) — safe to use as the live-preview source.
 const getPrimaryExampleHtml = (rawMarkdown: string): string | null => {
@@ -115,7 +124,7 @@ export const buildDocSiteData = (rawDocsByPath: Record<string, string>): DocSite
 	let homeMarkdown = ''
 
 	for (const path of Object.keys(rawDocsByPath)) {
-		const rawMarkdown = rawDocsByPath[path]
+		const rawMarkdown = normalizeLineEndings(rawDocsByPath[path])
 		const parsedPath = parseDocPath(path)
 		if (!parsedPath) continue
 
@@ -274,18 +283,69 @@ const getBacktickTokens = (cell: string): string[] => {
 	return matches.map((match) => match[1])
 }
 
-// True only when the cell is *nothing but* backtick-wrapped tokens (e.g.
-// "`sm` `md` `lg`") — excludes prose like "derived from `name`".
-const isPureEnumCell = (cell: string): boolean => {
+// The design-system scales, mirrored from src/shared/layout-schema.ts. Docs
+// name these families in prose ("size token / length") rather than spelling
+// the members out, so the control has to know them to offer a real select
+// instead of dropping the reader into a free-text box.
+const TOKEN_FAMILY_OPTIONS: Record<string, string[]> = {
+	size: ['0', '2xs', 'xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl'],
+	width: ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', 'full', 'screen'],
+	radius: ['none', 'sm', 'md', 'lg', 'xl', '2xl', 'full']
+}
+
+// Matches "size token / length", "radius token", "width token / length".
+const getTokenFamilyOptions = (cell: string): string[] => {
+	const familyMatch = cell.trim().toLowerCase().match(/^(size|width|radius)\s+token\b/)
+	if (!familyMatch) return []
+	return TOKEN_FAMILY_OPTIONS[familyMatch[1]]
+}
+
+// True when the cell is backtick-wrapped tokens and nothing else of
+// substance. A trailing parenthetical is allowed, because several tables
+// annotate their enums — "`top` `bottom` `left` `right` (+ `-start`/`-end`)"
+// is still a four-option enum. Prose *before* the tokens is not: "derived
+// from `name`" names one field, it doesn't enumerate values.
+const getEnumOptions = (cell: string): string[] => {
+	const tokens = getBacktickTokens(cell)
+	const hasTokens = tokens.length > 0
+	if (!hasTokens) return []
+
+	const leadingProse = cell.split('`')[0].trim()
+	const hasLeadingProse = leadingProse.length > 0
+	if (hasLeadingProse) return []
+
 	const withoutTokens = cell.replace(/`[^`]+`/g, '').trim()
-	return withoutTokens.length === 0 && getBacktickTokens(cell).length > 0
+	const isBareTokenList = withoutTokens.length === 0
+	if (isBareTokenList) return tokens
+
+	const isAnnotatedTokenList = /^\([^)]*\)$/.test(withoutTokens)
+	if (isAnnotatedTokenList) return tokens
+
+	return []
+}
+
+// Numeric cells carry their unit in prose — "number (px)", "number (ms)",
+// "number (0–100)" — so an exact match on "number" missed almost all of
+// them and handed a stepper's worth of attributes to a text box.
+const isNumericCell = (cell: string): boolean => {
+	return /^number\b/i.test(cell.trim())
+}
+
+const getControlOptions = (valuesCell: string): string[] => {
+	const enumOptions = getEnumOptions(valuesCell)
+	if (enumOptions.length > 0) return enumOptions
+
+	return getTokenFamilyOptions(valuesCell)
 }
 
 const getControlKind = (valuesCell: string): AttributeControlKindT => {
 	const normalizedValuesCell = valuesCell.trim().toLowerCase()
 	if (normalizedValuesCell === 'boolean') return 'boolean'
-	if (normalizedValuesCell === 'number') return 'number'
-	if (isPureEnumCell(valuesCell)) return 'enum'
+	if (isNumericCell(valuesCell)) return 'number'
+
+	const hasOptions = getControlOptions(valuesCell).length > 0
+	if (hasOptions) return 'enum'
+
 	return 'text'
 }
 
@@ -333,7 +393,7 @@ export const getComponentPlaygroundData = (rawMarkdown: string): ComponentPlaygr
 		if (isVisibilityToggle) continue
 
 		const kind = getControlKind(row.valuesCell)
-		const options = kind === 'enum' ? getBacktickTokens(row.valuesCell) : []
+		const options = kind === 'enum' ? getControlOptions(row.valuesCell) : []
 		const defaultValue = getDefaultValue(row.defaultCell)
 
 		controls.push({ name: row.name, kind, options, defaultValue, description: row.descriptionCell })

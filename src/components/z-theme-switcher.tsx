@@ -2,8 +2,10 @@ import { c, css, event, useEffect, useState } from 'atomico'
 import {
 	Theme,
 	ThemePreference,
+	ThemeScheme,
 	getTheme,
 	getThemePreference,
+	getThemeScheme,
 	setThemePreference,
 	startTheme,
 	subscribeToTheme,
@@ -33,7 +35,7 @@ const styles = css`
 		display: inline-flex;
 		user-select: none;
 		-webkit-user-select: none;
-		--switcher-height: 2.25rem;
+		--switcher-height: var(--control-height-md);
 		--switcher-padding-inline: 0.75rem;
 		--switcher-font-size: var(--font-size-2);
 		--switcher-icon-size: 0.9375rem;
@@ -45,7 +47,7 @@ const styles = css`
 	}
 
 	:host([is-small]) {
-		--switcher-height: 1.875rem;
+		--switcher-height: var(--control-height-sm);
 		--switcher-padding-inline: 0.5625rem;
 		--switcher-font-size: var(--font-size-1);
 		--switcher-icon-size: 0.8125rem;
@@ -53,7 +55,7 @@ const styles = css`
 	}
 
 	:host([is-large]) {
-		--switcher-height: 2.75rem;
+		--switcher-height: var(--control-height-lg);
 		--switcher-padding-inline: 1rem;
 		--switcher-font-size: var(--font-size-3);
 		--switcher-icon-size: 1.125rem;
@@ -86,7 +88,10 @@ const styles = css`
 		gap: 2px;
 		border: 1px solid var(--border);
 		border-radius: var(--radius-lg);
-		background: var(--haze);
+		/* The track is a channel milled into the panel; the selected segment
+		   rises out of it. Inert in the flat themes. */
+		background: var(--material-surface);
+		box-shadow: var(--elevation-carved);
 	}
 
 	.segment {
@@ -115,9 +120,9 @@ const styles = css`
 	}
 
 	.segment[aria-checked='true'] {
-		/* --haze-tone resolves to none in the dark theme, so the selected
-		   segment is a flat fill there and picks up light only under haze. */
-		background: var(--haze-tone), var(--switcher-accent);
+		--emissive-color: var(--switcher-accent);
+		background: var(--material-tone), var(--switcher-accent);
+		box-shadow: var(--elevation-raised), var(--emissive-tone);
 		border-color: var(--switcher-accent);
 		color: var(--switcher-accent-foreground);
 	}
@@ -136,10 +141,19 @@ const styles = css`
 		height: calc(var(--switcher-height) + 6px);
 		border: 1px solid var(--border);
 		border-radius: var(--radius-lg);
-		background: var(--haze);
+		/* A single pressable cap, so it is raised rather than carved. */
+		background: var(--material-raised), transparent;
+		box-shadow: var(--elevation-raised);
 		color: var(--muted-foreground);
 		cursor: pointer;
-		transition: color 0.12s ease, border-color 0.12s ease;
+		transition:
+			color 0.12s ease,
+			border-color 0.12s ease,
+			box-shadow var(--material-press-duration) ease;
+	}
+
+	.iconButton:active {
+		box-shadow: var(--elevation-pressed);
 	}
 
 	.iconButton:hover {
@@ -210,20 +224,64 @@ const MonitorIcon = () => (
 	</svg>
 )
 
+// Console: a rack unit, faceplate and rails.
+const RackIcon = () => (
+	<svg viewBox="0 0 24 24" aria-hidden="true">
+		<rect x="2.5" y="5" width="19" height="14" rx="2" />
+		<path d="M6 5v14M18 5v14M9.5 12h5" />
+	</svg>
+)
+
+// Studio: a knob with its pointer and travel arc.
+const KnobIcon = () => (
+	<svg viewBox="0 0 24 24" aria-hidden="true">
+		<circle cx="12" cy="12.5" r="6" />
+		<path d="M12 12.5V8M4.8 18.2A9 9 0 0 1 19.2 18.2" />
+	</svg>
+)
+
 type SegmentT = {
 	preference: ThemePreferenceT
 	label: string
 	icon: () => unknown
 }
 
-const SEGMENTS: SegmentT[] = [
-	{ preference: ThemePreference.light, label: 'Light', icon: SunIcon },
-	{ preference: ThemePreference.dark, label: 'Dark', icon: MoonIcon },
-	{ preference: ThemePreference.system, label: 'System', icon: MonitorIcon }
-]
+// The full catalogue. A switcher renders whichever subset its `themes`
+// property names, in the order it names them, so a product can offer two
+// themes or all six without the component knowing anything about the choice.
+const SEGMENTS_BY_PREFERENCE: Record<string, SegmentT> = {
+	[ThemePreference.light]: { preference: ThemePreference.light, label: 'Light', icon: SunIcon },
+	[ThemePreference.dark]: { preference: ThemePreference.dark, label: 'Dark', icon: MoonIcon },
+	[ThemePreference.system]: { preference: ThemePreference.system, label: 'System', icon: MonitorIcon },
+	[ThemePreference.console]: { preference: ThemePreference.console, label: 'Console', icon: RackIcon },
+	[ThemePreference.studio]: { preference: ThemePreference.studio, label: 'Studio', icon: KnobIcon }
+}
+
+const DEFAULT_PREFERENCES: ThemePreferenceT[] = [ThemePreference.light, ThemePreference.dark, ThemePreference.system]
+
+// Takes unknown[] rather than ThemePreferenceT[] because the value can arrive
+// from an HTML attribute as parsed JSON, where nothing has been validated. The
+// lookup below is the validation: a name that isn't in the catalogue is simply
+// not rendered.
+const resolveSegments = (requested: unknown[] | undefined): SegmentT[] => {
+	const hasRequest = Array.isArray(requested) && requested.length > 0
+	const names: unknown[] = hasRequest ? requested : DEFAULT_PREFERENCES
+
+	const segments: SegmentT[] = []
+	for (const name of names) {
+		const segment = SEGMENTS_BY_PREFERENCE[String(name)]
+		if (segment) segments.push(segment)
+	}
+
+	// An unrecognised list would otherwise render an empty control, which
+	// looks like a bug rather than like a configuration mistake.
+	const isEmpty = segments.length === 0
+	if (isEmpty) return DEFAULT_PREFERENCES.map((name) => SEGMENTS_BY_PREFERENCE[name])
+	return segments
+}
 
 const getIconButtonLabel = (theme: ThemeT): string => {
-	const isDark = theme === Theme.dark
+	const isDark = getThemeScheme(theme) === ThemeScheme.dark
 	if (isDark) return 'Switch to light theme'
 	return 'Switch to dark theme'
 }
@@ -283,7 +341,7 @@ export const ZThemeSwitcher = c(
 			)
 		}
 
-		const segments = SEGMENTS.map((segment) => {
+		const segments = resolveSegments(props.themes).map((segment) => {
 			const isSelected = segment.preference === preference
 			const SegmentIcon = segment.icon
 
@@ -315,6 +373,7 @@ export const ZThemeSwitcher = c(
 		props: {
 			kind: { type: String, reflect: true },
 			tone: { type: String, reflect: true },
+			themes: { type: Array },
 			isIconOnly: { type: Boolean, reflect: true },
 			isSmall: { type: Boolean, reflect: true },
 			isLarge: { type: Boolean, reflect: true },

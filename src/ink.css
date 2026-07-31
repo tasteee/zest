@@ -5,7 +5,24 @@
  * so every z-* component picks these up via var(--token-name).
  */
 
-@import url("https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,100..1000&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap");
+/*
+ * Every family any theme can ask for, in one request.
+ *
+ * This looks expensive and isn't: the URL returns a stylesheet of @font-face
+ * rules, and a browser downloads the actual woff2 only when something on the
+ * page renders in that family. A reader who stays in the default dark theme
+ * fetches DM Sans and DM Mono and nothing else, exactly as before.
+ *
+ * The families are grouped by the theme that uses them — see the type notes in
+ * each theme block below.
+ *   DM Sans / DM Mono        → dark, studio
+ *   Outfit / Manrope         → light, console
+ *   IBM Plex Mono            → console readouts
+ *   DM Serif Display         → not used by any shipped theme; kept because
+ *                              --font-serif is a public token and costs nothing
+ *                              until something renders in it
+ */
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,100..1000&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=DM+Serif+Display&family=IBM+Plex+Mono:wght@300;400;500;600&family=Outfit:wght@100..900&family=Manrope:wght@200..800&display=swap");
 
 /*
  * Registered custom property for z-aura's rotating conic-gradient frame.
@@ -56,16 +73,39 @@
 }
 
 /*
- * Dark is the default theme and also the value of [data-theme='dark'], so a
- * dark region can be nested inside a light one (and vice versa) rather than
- * the theme being a document-wide switch only. Every themed block below is
- * selector-paired the same way: `:root, [data-theme='dark']` carries the dark
- * values, and a matching `[data-theme='light']` block further down overrides
- * them. Both selectors weigh the same, and no element can match both, so the
- * order of the two blocks never decides the outcome.
+ * ===========================================================================
+ * Why the derivation blocks target `:root, [data-theme]` and not
+ * `:root, [data-theme='dark']`
+ * ===========================================================================
+ *
+ * A custom property's value is substituted where it is DECLARED, not where it
+ * is used. Once `--foreground: var(--color-neutral-8)` has been computed on
+ * <html>, descendants inherit the resulting colour — not the var() expression.
+ * Redefining `--color-neutral-8` further down the tree does nothing to it.
+ *
+ * That breaks region theming, and it breaks it silently. With the derivation
+ * block scoped to `[data-theme='dark']`, a <div data-theme="light"> would pick
+ * up light's neutral ramp but keep the dark `--foreground` it inherited from
+ * <html> — near-white text on pale paper. Nothing errors; the page is just
+ * wrong. It looks fine as long as data-theme only ever sits on <html>, because
+ * there :root and [data-theme='...'] are the same element.
+ *
+ * Matching `[data-theme]` — any value — makes every themed element re-run the
+ * derivations against its own ramp. So the split is:
+ *
+ *   `:root, [data-theme]`   the dark ramp AND every derivation from it. The
+ *                           ramp values here are dark's, and act as defaults.
+ *   `[data-theme='name']`   a theme's own ramp, which overrides those defaults
+ *                           on that element and re-derives everything above.
+ *
+ * The contract this creates: every theme block must declare the FULL ramp and
+ * base palette — all ten neutrals, all five base accents, both base neutral
+ * anchors — because anything it leaves out silently falls back to dark's
+ * value rather than to nothing. Derived tokens need no such care; they
+ * re-substitute on their own.
  */
 :root,
-[data-theme="dark"] {
+[data-theme] {
   /* --color-danger: lch(58 72 22 / 1);
 	--color-warning: lch(72 78 76 / 1);
 	--color-success: lch(62 58 145 / 1); */
@@ -85,6 +125,7 @@
   --base-neutral-color-dark: #0a0f0a;
   --base-sans-font-family: "DM Sans";
   --base-mono-font-family: "DM Mono";
+  --base-serif-font-family: "DM Serif Display";
   --base-spacing: 0.25rem;
   --base-radius: 0.625rem;
   /* The single dial for the z-text/z-heading/z-subheading/z-label scale —
@@ -160,13 +201,13 @@
 
 @supports (color: lab(0% 0 0)) {
   :root,
-  [data-theme="dark"] {
+  [data-theme] {
     --base-neutral-color-dark: lab(3.87% -2.29438 1.63959);
   }
 }
 
 :root,
-[data-theme="dark"] {
+[data-theme] {
   --color-pink: var(--color-primary-4);
   --color-purple: var(--color-secondary-4);
   --bg: var(--color-neutral-0);
@@ -221,26 +262,96 @@
   --page-gradient-to: var(--color-neutral-2);
   --page-gradient-min-height: 2000px;
   --page-gradient: none;
-  /* Haze layers. The light theme is built on a soft atmospheric wash rather
-	   than flat fills, so surfaces need somewhere to paint one. These are the
-	   inert dark-theme values — dark stays strictly flat, with no gradient
-	   anywhere — and the light block below swaps in the real washes.
-	   Each is written to be a legal `background:` shorthand value on its own
-	   (--haze, --haze-page) or a legal first layer in front of a color
-	   (--haze-tone), so a component opts in with one declaration that costs
-	   the dark theme nothing. */
-  --haze: transparent;
-  --haze-page: none;
-  --haze-tone: none;
+  /* ---- Material system (tier 2: semantic, component-facing) ----
+	   See the block above html/body for the full architecture. These are the
+	   inert values: the default dark theme is strictly flat — no gradient, no
+	   shadow, anywhere — so every token here resolves to something that paints
+	   nothing while still being a legal value in the property that consumes it.
+	   Themes that want material override them; components never know which. */
+
+  /* Surface materials — legal `background` shorthand values (--material-page,
+	   --material-surface) or a legal first layer in front of a colour
+	   (--material-raised, --material-tone). */
+  --material-page: none;
+  --material-surface: transparent;
+  --material-raised: none;
+  --material-tone: none;
+
+  /* Elevation — legal `box-shadow` values. Note these are `0 0 transparent`
+	   rather than `none`: components compose elevation and emissive into one
+	   box-shadow list, and `none` is not a legal *layer* in a comma-separated
+	   list, so `none, none` would invalidate the whole declaration. A fully
+	   transparent shadow composes safely and paints nothing. */
+  --elevation-flush: 0 0 transparent;
+  --elevation-raised: 0 0 transparent;
+  --elevation-pressed: 0 0 transparent;
+  --elevation-overlay: 0 0 transparent;
+  --elevation-carved: 0 0 transparent;
+
+  /* Emissive — the LED rim behind an interactive element, also box-shadow.
+	   Reads --emissive-color, which a component sets locally to whatever its
+	   own tone resolved to; themes never need to know the tone names. */
+  --emissive-tone: 0 0 transparent;
+  --emissive-focus: 0 0 transparent;
+
+  /* How fast a control settles when pressed. Material themes want this to
+	   feel mechanical; flat themes never move at all. */
+  --material-press-duration: 90ms;
   --font-sans:
     var(--base-sans-font-family), "DM Sans Fallback", system-ui, sans-serif;
   --font-mono:
     var(--base-mono-font-family), "Geist Mono", "Fira Code", monospace;
+  --font-serif:
+    var(--base-serif-font-family), "Iowan Old Style", Georgia, "Times New Roman",
+    serif;
+
+  /* A theme re-faces the sans and mono tiers by overriding the two base
+	   families above rather than these, so the fallback stacks stay intact. */
+
+  /* ---- Heading face ----
+	   The one type tier a theme is allowed to re-face. z-display and z-heading
+	   read these four; nothing else does, so body text, labels and UI chrome
+	   stay on the sans stack whatever a theme does up top.
+	   Defaults reproduce exactly what those components used to hardcode, so a
+	   theme that says nothing about type is unaffected. */
+  --font-heading: var(--font-sans);
+  --font-heading-weight: 700;
+  --font-heading-settings: normal;
+  /* Multiplies the heading scale's built-in negative tracking. Sans faces want
+	   the full amount; high-contrast serifs need much less, because their thin
+	   strokes start colliding long before a geometric sans would. */
+  --font-heading-tracking-scale: 1;
   --radius: var(--base-radius);
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+  /* ---- Control metrics ----
+	   One height scale for every interactive control, so an input, a select, a
+	   button and a toggle standing next to each other agree. Before this,
+	   input and combobox were 44px at medium while everything else was 40, and
+	   nothing said which was right.
+	   Padding deliberately stays per-component: a button wants more inline room
+	   than a text field at the same height, and unifying that would make both
+	   worse. Height is what has to match; padding is taste. */
+  --control-height-sm: 2rem;
+  --control-height-md: 2.5rem;
+  --control-height-lg: 3rem;
+
+  /* ---- Field composition ----
+	   A labelled control is three bands stacked: label, gap, control. Fixing
+	   the first two means every labelled control in a row resolves to the same
+	   total height regardless of what is inside it —
+	   1.25 + 0.25 + 2.5 = 4rem, or 64px at the default root size.
+	   The label height is set rather than left to line-height because a label
+	   that wraps, or one rendered in a theme with different metrics, would
+	   otherwise silently change the height of the whole row. */
+  --field-label-height: 1.25rem;
+  --field-gap: 0.25rem;
+  --field-row-height: calc(
+    var(--field-label-height) + var(--field-gap) + var(--control-height-md)
+  );
+
   --small-button-radius: 4px;
   --medium-button-radius: 5px;
   --large-button-radius: 6px;
@@ -337,7 +448,7 @@
  * code surface (--color-neutral-1). Override any of these to retheme code.
  */
 :root,
-[data-theme="dark"] {
+[data-theme] {
   --syntax-comment: var(--color-neutral-5);
   --syntax-keyword: var(--color-secondary-6);
   --syntax-string: oklch(0.79 0.13 152);
@@ -362,7 +473,7 @@
  * the zest surface. Override either token to retheme selection everywhere.
  */
 :root,
-[data-theme="dark"] {
+[data-theme] {
   --selection-background: var(--color-neutral-7);
   --selection-foreground: var(--color-neutral-1);
 }
@@ -417,7 +528,7 @@
 	   and a cold one rising from below. All are wide enough that no edge of
 	   any one of them is ever visible on screen — the eye reads a tint, not a
 	   gradient. */
-  --haze-page:
+  --material-page:
     radial-gradient(
       1400px 900px at 6% -14%,
       oklch(0.92 0.055 300 / 0.55),
@@ -437,7 +548,7 @@
   /* The whisper. Sits on surfaces that are otherwise unfilled — cards,
 	   fields, wells — so they catch a little light off the page instead of
 	   disappearing into it. */
-  --haze: linear-gradient(
+  --material-surface: linear-gradient(
     165deg,
     oklch(1 0 0 / 0.62),
     oklch(0.975 0.012 292 / 0.3)
@@ -445,7 +556,7 @@
 
   /* A touch stronger, for surfaces that must read as lifted off the page:
 	   popovers, menus, dialogs, the sidebar. */
-  --haze-raised: linear-gradient(
+  --material-raised: linear-gradient(
     158deg,
     oklch(1 0 0 / 0.78),
     oklch(0.972 0.016 292 / 0.38) 62%,
@@ -455,18 +566,33 @@
   /* For solid accent fills. Light from above, shadow below, both barely
 	   there — enough to keep a saturated button from reading as a flat sticker
 	   on a hazy page. */
-  --haze-tone: linear-gradient(
+  --material-tone: linear-gradient(
     180deg,
     oklch(1 0 0 / 0.15),
     oklch(0.2 0.02 292 / 0.07)
   );
 
+  /* Haze is light, not structure. Depth still comes from surface, border and
+	   space exactly as in the dark theme; the washes only decide how the light
+	   falls across them.
+	   These are reset explicitly rather than left unset, because tokens
+	   inherit: a light region pinned inside a studio page would otherwise pick
+	   up studio's shadow stacks and stop being a flat theme. Every theme block
+	   declares the whole vocabulary, including the parts it wants inert. */
+  --elevation-flush: 0 0 transparent;
+  --elevation-raised: 0 0 transparent;
+  --elevation-pressed: 0 0 transparent;
+  --elevation-overlay: 0 0 transparent;
+  --elevation-carved: 0 0 transparent;
+  --emissive-tone: 0 0 transparent;
+  --emissive-focus: 0 0 transparent;
+
   /* --popover and --background-light are only ever consumed by a
 	   `background:` shorthand, which is what lets them carry an image layer in
 	   front of their colour. The one place that needed the flat colour instead
 	   (z-dock) reads --color-neutral-1 directly now. */
-  --popover: var(--haze-raised), var(--color-neutral-1);
-  --background-light: var(--haze), var(--color-neutral-2);
+  --popover: var(--material-raised), var(--color-neutral-1);
+  --background-light: var(--material-surface), var(--color-neutral-2);
 
   /* --card takes the opposite route to the same effect. A dozen components
 	   tint it with color-mix, which can't accept an image layer, so instead of
@@ -485,6 +611,24 @@
 
   --skeleton: var(--color-neutral-3);
   --ring: var(--color-neutral-4);
+
+  /* ---- Type: Outfit / Manrope ----
+	   Outfit is close to pure geometric — near-circular bowls, even strokes —
+	   which gives headings a clean, modern authority without any decoration to
+	   fight the haze behind them.
+	   Manrope takes the body because pure geometry is tiring to read at small
+	   sizes. It is semi-geometric: the same family of shapes, loosened just
+	   enough at text sizes to stay comfortable over long passages.
+	   DM Mono stays on the mono tier — soft-cornered and geometric itself, so
+	   it sits with the pair rather than cutting against them. */
+  --base-sans-font-family: "Manrope";
+  --base-mono-font-family: "DM Mono";
+  --font-heading: "Outfit", var(--font-sans);
+  --font-heading-weight: 700;
+  --font-heading-settings: normal;
+  /* Outfit sets a little wider than DM Sans, so it wants most but not all of
+	   the scale's negative tracking. */
+  --font-heading-tracking-scale: 0.85;
 
   /* A pale highlighter band tinted toward the purple accent, with ink dark
 	   enough to stay comfortable inside it. */
@@ -509,6 +653,322 @@
   --syntax-variable: oklch(0.3 0.02 292);
   --syntax-regex: oklch(0.475 0.125 168);
   --syntax-plain: oklch(0.3 0.02 292);
+}
+
+/*
+ * ---------------------------------------------------------------------------
+ * Console — dark hardware
+ * ---------------------------------------------------------------------------
+ *
+ * Black anodized aluminium with matte plastic caps and LED indicators. The
+ * reference is a rack unit photographed under a single overhead lamp: light
+ * comes from directly above and only from above, so every raised edge catches
+ * a hairline of it on top and drops occlusion below. Nothing is lit from the
+ * side, and nothing is lit from behind except the LEDs.
+ *
+ * The accents are the LEDs, so they are pushed brighter and more saturated
+ * than the flat themes would allow — a colour that only ever appears as a lit
+ * indicator can afford chroma that would be shouting as body text.
+ */
+[data-theme="console"] {
+  --base-neutral-color-light: oklch(0.975 0.004 250);
+  --base-neutral-color-dark: oklch(0.155 0.008 250);
+
+  --base-accent-color-0: oklch(0.68 0.22 15);
+  --base-accent-color-1: oklch(0.66 0.21 285);
+  --base-success-color: oklch(0.72 0.19 145);
+  --base-warning-color: oklch(0.78 0.17 78);
+  --base-danger-color: oklch(0.63 0.24 27);
+
+  --color-neutral-0: oklch(0.155 0.008 250);
+  --color-neutral-1: oklch(0.205 0.01 250);
+  --color-neutral-2: oklch(0.245 0.011 250);
+  --color-neutral-3: oklch(0.315 0.012 250);
+  --color-neutral-4: oklch(0.4 0.012 250);
+  --color-neutral-5: oklch(0.545 0.012 250);
+  --color-neutral-6: oklch(0.675 0.012 250);
+  --color-neutral-7: oklch(0.795 0.01 250);
+  --color-neutral-8: oklch(0.895 0.008 250);
+  --color-neutral-9: oklch(0.975 0.004 250);
+
+  /* Tier 1: the theme's own vocabulary. */
+  --panel-grain: repeating-linear-gradient(
+    109deg,
+    oklch(1 0 0 / 0.014) 0 1px,
+    transparent 1px 3px
+  );
+  --panel-toplight: oklch(1 0 0 / 0.055);
+  --panel-occlusion: oklch(0 0 0 / 0.55);
+
+  /* Tier 2: the mapping. */
+  --material-page:
+    radial-gradient(
+      140% 70% at 50% -20%,
+      oklch(0.32 0.02 250 / 0.5),
+      transparent 62%
+    ),
+    var(--panel-grain);
+
+  --material-surface: linear-gradient(
+    180deg,
+    oklch(1 0 0 / 0.05),
+    oklch(1 0 0 / 0.012) 42%,
+    oklch(0 0 0 / 0.05)
+  );
+
+  --material-raised: linear-gradient(
+    180deg,
+    oklch(1 0 0 / 0.08),
+    oklch(1 0 0 / 0.02) 45%,
+    oklch(0 0 0 / 0.06)
+  );
+
+  --material-tone: linear-gradient(
+    180deg,
+    oklch(1 0 0 / 0.2),
+    oklch(0 0 0 / 0.14)
+  );
+
+  --elevation-flush:
+    inset 0 1px 0 var(--panel-toplight), 0 1px 2px oklch(0 0 0 / 0.45);
+
+  --elevation-raised:
+    inset 0 1px 0 oklch(1 0 0 / 0.1), 0 1px 1px var(--panel-occlusion),
+    0 3px 7px oklch(0 0 0 / 0.42);
+
+  --elevation-pressed:
+    inset 0 2px 5px oklch(0 0 0 / 0.6), inset 0 -1px 0 oklch(1 0 0 / 0.05);
+
+  --elevation-overlay:
+    inset 0 1px 0 oklch(1 0 0 / 0.07), 0 2px 8px oklch(0 0 0 / 0.5),
+    0 14px 34px oklch(0 0 0 / 0.62);
+
+  --elevation-carved:
+    inset 0 2px 5px oklch(0 0 0 / 0.55), inset 0 -1px 0 oklch(1 0 0 / 0.06);
+
+  /* Deliberately inert. An LED is a discrete component on a panel — one
+	   indicator, doing one job — and hanging a coloured halo off every button,
+	   badge and toggle reads as a UI effect rather than as hardware. The knob
+	   arcs still light, because those genuinely are LEDs; they run on z-knob's
+	   own glow layer rather than this token. */
+  --emissive-tone: 0 0 transparent;
+
+  /* Focus stays neutral for the same reason: it is a state, not a light. */
+  --emissive-focus:
+    0 0 0 1px color-mix(in oklch, var(--ring) 70%, transparent),
+    0 0 14px 2px color-mix(in oklch, var(--ring) 35%, transparent);
+
+  --card: var(--color-neutral-1);
+  --popover: var(--material-raised), var(--color-neutral-2);
+  --background-light: var(--material-surface), var(--color-neutral-1);
+
+  /* ---- Type: Outfit / Manrope, over IBM Plex Mono ----
+	   The same geometric pair the haze theme uses, which keeps the two themes
+	   speaking one language rather than each inventing its own.
+	   The mono tier is where console diverges: IBM Plex Mono was drawn out of
+	   the engineering-drawing tradition this hardware comes from, and readouts
+	   are exactly where that register belongs.
+	   All three are declared, not inherited — type tokens cascade, so a console
+	   region pinned inside another theme's page would otherwise be set in
+	   whatever that page uses. */
+  --base-sans-font-family: "Manrope";
+  --base-mono-font-family: "IBM Plex Mono";
+  --font-heading: "Outfit", var(--font-sans);
+  --font-heading-weight: 700;
+  --font-heading-settings: normal;
+  --font-heading-tracking-scale: 0.85;
+
+  /* Rack hardware is milled, not moulded: square corners throughout. This one
+	   dial squares every radius in the theme — cards take --radius-lg, fields
+	   --radius-md, and both derive from here. */
+  --base-radius: 0.3125rem;
+
+  --selection-background: oklch(0.42 0.13 285);
+  --selection-foreground: oklch(0.97 0.005 250);
+}
+
+/*
+ * ---------------------------------------------------------------------------
+ * Studio — light hardware
+ * ---------------------------------------------------------------------------
+ *
+ * The synthesiser front panel: bead-blasted aluminium, matte plastic caps,
+ * silkscreened labels, LEDs. The panel is mid-grey rather than white, because
+ * hardware panels are — a white panel reads as paper and loses the metal
+ * immediately.
+ *
+ * The bead-blast is a fine repeating gradient at very low opacity rather than
+ * an image, so it costs one composited layer and no request. Grain runs at
+ * 109deg for the same reason it does on real brushed stock: an angle that is
+ * neither vertical nor diagonal reads as machining rather than as a pattern.
+ *
+ * Depth is four separate jobs stacked in one shadow list — top-light on the
+ * raised edge, occlusion under it, contact shadow, ambient drop — which is
+ * what separates this from a theme that simply has shadows.
+ */
+[data-theme="studio"] {
+  --base-neutral-color-light: oklch(0.935 0.004 220);
+  --base-neutral-color-dark: oklch(0.155 0.014 220);
+
+  /* An aluminium panel is much lighter than the paper themes, so the LEDs
+	   have to sit lower than their brightness suggests. These are the lightest
+	   values that stay legible as text on the panel and carry white text as a
+	   solid fill. The glow does the work the raw chroma would have. */
+  /* Each of these sits at the maximum chroma sRGB can actually reproduce at
+	   the lightness the panel needs — solved, not guessed. Two of them used to
+	   be past that edge (success at .15, warning at .13), which does not make a
+	   colour bolder: out-of-gamut values get clipped per channel, which shifts
+	   the hue and flattens the saturation. Pulling them back in is why they
+	   read cleaner now despite the smaller number.
+	   The purple had real headroom and took most of it, .19 to .27. */
+  --base-accent-color-0: oklch(0.515 0.21 25);
+  --base-accent-color-1: oklch(0.52 0.27 275);
+  --base-success-color: oklch(0.475 0.138 148);
+  --base-warning-color: oklch(0.495 0.106 72);
+  --base-danger-color: oklch(0.515 0.21 27);
+
+  --color-neutral-0: oklch(0.895 0.005 220);
+  --color-neutral-1: oklch(0.935 0.004 220);
+  --color-neutral-2: oklch(0.862 0.006 220);
+  --color-neutral-3: oklch(0.775 0.008 220);
+  --color-neutral-4: oklch(0.695 0.01 220);
+  --color-neutral-5: oklch(0.545 0.012 220);
+  --color-neutral-6: oklch(0.445 0.013 220);
+  --color-neutral-7: oklch(0.345 0.014 220);
+  --color-neutral-8: oklch(0.245 0.014 220);
+  --color-neutral-9: oklch(0.155 0.014 220);
+
+  /* Tier 1. */
+  --blast-grain: repeating-linear-gradient(
+    109deg,
+    oklch(1 0 0 / 0.05) 0 1px,
+    oklch(0.4 0.01 220 / 0.022) 1px 2px,
+    transparent 2px 4px
+  );
+  --panel-toplight: oklch(1 0 0 / 0.5);
+  --panel-occlusion: oklch(0.28 0.03 240 / 0.08);
+  --panel-contact: oklch(0.28 0.03 240 / 0.07);
+
+  --material-page:
+    radial-gradient(
+      120% 80% at 50% -10%,
+      oklch(1 0 0 / 0.6),
+      transparent 62%
+    ),
+    var(--blast-grain);
+
+  --material-surface: linear-gradient(
+    180deg,
+    oklch(1 0 0 / 0.42),
+    oklch(1 0 0 / 0.16) 52%,
+    oklch(0.3 0.02 240 / 0.015)
+  );
+
+  /* Raised caps are lit radially, not linearly — a knob or a keycap is a
+	   curved surface, and a linear ramp on one reads as a flat card. Held low:
+	   the shape of the light is what sells the curve, not its strength. */
+  --material-raised: radial-gradient(
+    130% 130% at 50% -8%,
+    oklch(1 0 0 / 0.45),
+    oklch(1 0 0 / 0.16) 46%,
+    oklch(0.3 0.02 240 / 0.025)
+  );
+
+  /* Barely there. A moulded keycap on a real panel is matte — it scatters
+	   light rather than reflecting a band of it, so a strong top-to-bottom
+	   sheen reads as glass or as a 2010 gradient button, not as hardware. */
+  --material-tone: linear-gradient(
+    180deg,
+    oklch(1 0 0 / 0.03),
+    oklch(0.15 0.02 240 / 0.05)
+  );
+
+  --elevation-flush:
+    inset 0 1px 0 var(--panel-toplight),
+    inset 0 -1px 0 oklch(0.28 0.03 240 / 0.05),
+    0 1px 2px var(--panel-contact);
+
+  /* Still four layers doing four jobs — the milled top edge, the occlusion
+	   curving away beneath it, the contact line, the ambient drop — but each
+	   held at roughly a third of its first pass. The structure is what reads as
+	   hardware; the strength was only ever reading as heaviness. */
+  --elevation-raised:
+    inset 0 1px 0 oklch(1 0 0 / 0.3),
+    inset 0 -1px 2px var(--panel-occlusion), 0 1px 1px var(--panel-contact),
+    0 2px 5px oklch(0.28 0.03 240 / 0.07);
+
+  --elevation-pressed:
+    inset 0 1px 3px oklch(0.28 0.03 240 / 0.16),
+    inset 0 -1px 0 oklch(1 0 0 / 0.3);
+
+  /* Overlays keep more of their depth than anything else here: a floating
+	   panel has to separate from the page, and that is the one place the
+	   shadow is carrying information rather than texture. */
+  --elevation-overlay:
+    inset 0 1px 0 oklch(1 0 0 / 0.6), 0 2px 8px var(--panel-contact),
+    0 12px 32px oklch(0.28 0.03 240 / 0.16);
+
+  /* Carved, not recessed: the highlight on the *outside* of the bottom edge
+	   is what makes the panel read as material with a hole milled into it,
+	   rather than a box with a dark fill. That outside highlight is doing the
+	   work, so it survives the softening while the inner shadow drops right
+	   back. */
+  --elevation-carved:
+    inset 0 1px 2px oklch(0.28 0.03 240 / 0.11),
+    inset 0 -1px 0 oklch(1 0 0 / 0.45), 0 1px 0 oklch(1 0 0 / 0.45);
+
+  /* Inert, as in console. On a lit panel a glow around every control is
+	   noise — real hardware puts one LED where something is actually
+	   indicating state. The knob arcs keep their light; they run on z-knob's
+	   own glow layer, not on this token. */
+  --emissive-tone: 0 0 transparent;
+
+  --emissive-focus:
+    0 0 0 1px color-mix(in oklch, var(--ring) 70%, transparent),
+    0 0 12px 2px color-mix(in oklch, var(--ring) 32%, transparent);
+
+  --card: oklch(0.96 0.004 220 / 0.72);
+  --popover: var(--material-raised), var(--color-neutral-1);
+  --background-light: var(--material-surface), var(--color-neutral-2);
+
+  /* ---- Type: DM Sans / DM Mono ----
+	   The library's own faces, unchanged from the dark theme. The panel is
+	   already doing the talking through material and depth; a second voice in
+	   the type only competes with it.
+	   Declared rather than inherited all the same — type tokens cascade, so a
+	   studio region pinned inside another theme's page would otherwise pick up
+	   that page's faces. */
+  --base-sans-font-family: "DM Sans";
+  --base-mono-font-family: "DM Mono";
+  --font-heading: var(--font-sans);
+  --font-heading-weight: 700;
+  --font-heading-settings: normal;
+  /* Panel labels are set open, not tight — the negative tracking the sans
+	   scale applies is the opposite of what silkscreen wants. */
+  --font-heading-tracking-scale: 0.15;
+
+  /* Milled aluminium, not moulded plastic: tight radii throughout. Cards take
+	   --radius-lg and fields --radius-md, both derived from this one dial. */
+  --base-radius: 0.25rem;
+
+  --selection-background: oklch(0.8 0.09 275);
+  --selection-foreground: oklch(0.19 0.02 240);
+
+  --syntax-comment: oklch(0.55 0.014 220);
+  --syntax-keyword: oklch(0.48 0.18 275);
+  --syntax-string: oklch(0.45 0.14 148);
+  --syntax-number: oklch(0.5 0.13 62);
+  --syntax-constant: oklch(0.5 0.16 40);
+  --syntax-function: oklch(0.52 0.2 25);
+  --syntax-class: oklch(0.48 0.12 215);
+  --syntax-property: oklch(0.45 0.1 235);
+  --syntax-operator: oklch(0.52 0.014 220);
+  --syntax-punctuation: oklch(0.55 0.014 220);
+  --syntax-tag: oklch(0.52 0.2 25);
+  --syntax-attr: oklch(0.5 0.13 62);
+  --syntax-variable: oklch(0.26 0.014 220);
+  --syntax-regex: oklch(0.45 0.14 168);
+  --syntax-plain: oklch(0.26 0.014 220);
 }
 
 /*
@@ -544,12 +1004,69 @@ body {
  * scroll. In the dark theme --haze-page is `none` and this costs nothing.
  */
 body {
-  background-image: var(--haze-page);
+  background-image: var(--material-page);
   background-attachment: fixed;
   background-repeat: no-repeat;
 }
 
 /*
+ * ===========================================================================
+ * The material system
+ * ===========================================================================
+ *
+ * zest ships themes that disagree about physics. The default dark theme is
+ * flat ink: no shadow, no gradient, depth from surface and border alone. The
+ * hardware themes are the opposite — stacked shadows, directional light,
+ * carved panels, glowing LEDs. Components have to serve both without
+ * branching on which theme is active.
+ *
+ * Two tiers make that possible.
+ *
+ *   Tier 1 — theme-private primitives.
+ *     Whatever a theme needs to describe itself: --haze, --panel-sheen,
+ *     --led-ring. Named for the theme's own vocabulary, never read outside
+ *     the theme block that defines them. Add and rename freely.
+ *
+ *   Tier 2 — semantic, component-facing tokens.
+ *     A fixed vocabulary of eight names, listed in the default block above.
+ *     Components read ONLY these. A theme's job is to map its tier-1
+ *     primitives onto them.
+ *
+ * The vocabulary is deliberately about ROLE, not appearance:
+ *
+ *     --material-page       the backdrop behind everything
+ *     --material-surface    a surface sitting on the page (card, field, well)
+ *     --material-raised     a surface lifted off it (popover, menu, dialog)
+ *     --material-tone       a solid accent fill (button, badge, pressed toggle)
+ *
+ *     --elevation-flush     resting on the page
+ *     --elevation-raised    lifted, pressable
+ *     --elevation-pressed   the moment it is pressed
+ *     --elevation-overlay   floating free of the page
+ *     --elevation-carved    recessed into it
+ *
+ *     --emissive-tone       LED rim behind an active control
+ *     --emissive-focus      the same, for keyboard focus
+ *
+ * Every one has an inert default, so a theme that says nothing about material
+ * gets flat rendering and pays nothing — no shadow is painted, no gradient
+ * composited. Adding a theme is one block of token assignments and no
+ * component changes at all.
+ *
+ * Two rules make the inert defaults work, and both are load-bearing:
+ *
+ *   Elevation tokens are `0 0 transparent`, never `none`, because components
+ *   compose them: `box-shadow: var(--elevation-raised), var(--emissive-tone)`.
+ *   `none` is not a legal layer inside a comma-separated shadow list, so
+ *   `none, none` would invalidate the whole declaration and lose any shadow
+ *   the component wanted. A transparent shadow composes and paints nothing.
+ *
+ *   Material tokens are ordered to be legal `background` shorthand values, so
+ *   a component opts in with a single declaration —
+ *   `background: var(--material-tone), var(--tone-color)` — rather than
+ *   needing a separate background-image rule whose cascade position it would
+ *   then have to defend.
+ *
  * ---------------------------------------------------------------------------
  * Theme transition
  * ---------------------------------------------------------------------------
@@ -560,37 +1077,55 @@ body {
  * card surface, which can't animate from their flat dark-theme equivalents at
  * any price.
  *
- * So the transition happens on pixels instead of values. The View Transition
- * API snapshots the page, lets the attribute swap, and cross-fades the two
- * frames — which covers gradients, translucency and shadow DOM alike, with no
- * per-token work at all. The page never goes blank; the old frame is still
- * there underneath the new one the whole way across.
+ * The transition is therefore a sequence, not a cross-fade: the content fades
+ * out, the theme swaps while nothing is visible, and the content fades back in.
+ *
+ * This deliberately does NOT use the View Transition API, which is the obvious
+ * tool and the wrong one here. Its default root animation cross-fades the two
+ * snapshots with mix-blend-mode: plus-lighter — the two frames are ADDED, not
+ * interpolated. That is invisible when a couple of elements move, and violent
+ * when the entire page changes luminance at once: halfway through a dark-to-
+ * light swap, dark-fading-out plus light-fading-in sums past white and the
+ * whole screen blows out. That bright frame is the flash.
+ *
+ * Fading to nothing and back has no overlap at all, so there is no blend to get
+ * wrong. It costs one thing the cross-fade gave for free — the page is briefly
+ * empty — and the background transition below is what covers that.
  */
 :root {
-  --theme-transition-duration: 0.025s;
-}
-
-::view-transition-old(root),
-::view-transition-new(root) {
-  animation-duration: var(--theme-transition-duration);
-  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  --theme-transition-duration: 0.45s;
 }
 
 /*
- * Fallback for browsers without view transitions: fade the page down, swap
- * underneath, fade back up. Half the budget each way.
+ * The one thing that must NOT fade out: the page colour itself. If the whole
+ * page went transparent the canvas behind it would show through, which is a
+ * white flash on its own and worse than the one we started with.
  *
- * The two classes do different jobs, which is why both exist. isThemeAnimating
- * carries the transition and stays on for the whole exchange — take it off with
- * the opacity and the way back would snap rather than fade. isThemeFading is
- * the opacity itself, and comes off at the halfway point to start the return.
- *
- * Both are driven from shared/theme.ts, which reads the computed value of
- * --theme-transition-duration rather than keeping its own copy — so retiming
- * the token retimes both paths, and the swap always lands at the midpoint.
+ * background-color is a genuinely animatable property, and it does not care
+ * that its value arrived through var(). When --background changes at the swap,
+ * the used colour interpolates on its own over the full duration — so the page
+ * colour is already morphing underneath while the content is faded out, and
+ * has arrived by the time the content comes back.
  */
-html.isThemeAnimating body {
-  transition: opacity calc(var(--theme-transition-duration) / 2) ease;
+html,
+body {
+  transition: background-color var(--theme-transition-duration) ease;
+}
+
+/*
+ * The transition lives on body unconditionally rather than behind the fading
+ * class. Applying a transition and the property it animates in the same style
+ * change is unreliable — browsers may take the new value without animating it —
+ * and gating it on a class would do exactly that on the way out. Nothing else
+ * on the page touches body opacity, so leaving it armed costs nothing.
+ *
+ * Half the budget out, half back. shared/theme.ts swaps the theme at the
+ * midpoint, reading this same token so the two can never drift.
+ */
+body {
+  transition:
+    opacity calc(var(--theme-transition-duration) / 2) ease,
+    background-color var(--theme-transition-duration) ease;
 }
 
 html.isThemeFading body {
@@ -604,12 +1139,8 @@ html.isThemeFading body {
  * the page at zero opacity.
  */
 @media (prefers-reduced-motion: reduce) {
-  ::view-transition-old(root),
-  ::view-transition-new(root) {
-    animation: none;
-  }
-
-  html.isThemeAnimating body {
+  html,
+  body {
     transition: none;
   }
 
@@ -628,7 +1159,12 @@ html.isThemeFading body {
   color-scheme: dark;
 }
 
-[data-theme="light"] {
+[data-theme="console"] {
+  color-scheme: dark;
+}
+
+[data-theme="light"],
+[data-theme="studio"] {
   color-scheme: light;
 }
 

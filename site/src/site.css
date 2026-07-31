@@ -165,82 +165,6 @@ body {
 	min-height: 4rem;
 }
 
-.playgroundControls {
-	display: flex;
-	flex-wrap: wrap;
-	align-items: flex-end;
-	gap: var(--spacing-5);
-	padding: var(--spacing-4) var(--spacing-6);
-	border-top: 1px solid var(--border);
-}
-
-.playgroundControlField {
-	display: flex;
-	flex-direction: column;
-	gap: var(--spacing-1);
-}
-
-.playgroundControlLabel {
-	font-family: var(--font-mono);
-	font-size: var(--font-size-0);
-	font-weight: var(--font-weight-medium);
-	text-transform: uppercase;
-	letter-spacing: 0.06em;
-	color: var(--muted-foreground);
-}
-
-.playgroundControlInput {
-	background: var(--background);
-	border: 1px solid var(--border);
-	border-radius: var(--radius-md);
-	padding: var(--spacing-1) var(--spacing-2);
-	color: var(--foreground);
-	font-family: var(--font-mono);
-	font-size: var(--font-size-2);
-	min-width: 8rem;
-}
-
-.playgroundControlInput:focus {
-	outline: none;
-	border-color: var(--color-neutral-5);
-}
-
-.playgroundToggle {
-	appearance: none;
-	-webkit-appearance: none;
-	width: 2.25rem;
-	height: 1.25rem;
-	margin: 0;
-	background: var(--background);
-	border: 1px solid var(--border);
-	border-radius: var(--radius-xl);
-	position: relative;
-	cursor: pointer;
-	transition: background-color var(--duration-fast) var(--easing-standard), border-color var(--duration-fast) var(--easing-standard);
-}
-
-.playgroundToggle::after {
-	content: '';
-	position: absolute;
-	top: 1px;
-	left: 1px;
-	width: 1rem;
-	height: 1rem;
-	border-radius: var(--radius-full, 999px);
-	background: var(--muted-foreground);
-	transition: transform var(--duration-fast) var(--easing-standard), background-color var(--duration-fast) var(--easing-standard);
-}
-
-.playgroundToggle:checked {
-	background: var(--color-primary-4);
-	border-color: var(--color-primary-4);
-}
-
-.playgroundToggle:checked::after {
-	transform: translateX(1rem);
-	background: var(--color-neutral-9);
-}
-
 .playgroundCodeSection {
 	padding: var(--spacing-4);
 	border-top: 1px solid var(--border);
@@ -259,13 +183,7 @@ body {
 }
 
 .playgroundSetupLabel {
-	margin: 0;
 	font-family: var(--font-mono);
-	font-size: var(--font-size-0);
-	font-weight: var(--font-weight-medium);
-	text-transform: uppercase;
-	letter-spacing: 0.06em;
-	color: var(--muted-foreground);
 }
 
 .playgroundFootnote {
@@ -393,95 +311,12 @@ body {
 
 /* --- examples --- */
 
+/* The example card itself is <z-example>; it owns its frame, preview
+   layout, and source disclosure. Only the list spacing lives here. */
 .exampleList {
 	display: flex;
 	flex-direction: column;
 	gap: var(--spacing-10);
-}
-
-.exampleCard {
-	display: flex;
-	flex-direction: column;
-	gap: var(--spacing-4);
-	scroll-margin-top: var(--spacing-6);
-}
-
-.exampleHeader {
-	display: flex;
-	flex-direction: column;
-	gap: var(--spacing-1);
-}
-
-.exampleFrame {
-	display: flex;
-	flex-direction: column;
-	overflow: hidden;
-}
-
-.examplePreview {
-	display: flex;
-	padding: var(--spacing-10) var(--spacing-6);
-	min-height: 5rem;
-}
-
-.examplePreviewRoot {
-	display: flex;
-	flex-wrap: wrap;
-	align-items: center;
-	gap: var(--spacing-4);
-	min-width: 0;
-}
-
-.examplePreview.is-center {
-	align-items: center;
-	justify-content: center;
-}
-
-.examplePreview.is-center .examplePreviewRoot {
-	justify-content: center;
-}
-
-.examplePreview.is-start {
-	align-items: center;
-	justify-content: flex-start;
-}
-
-/* Stacked previews show several independent rows of the same component,
-   so each row needs its own line rather than wrapping into its neighbour. */
-.examplePreview.is-stack .examplePreviewRoot {
-	flex-direction: column;
-	align-items: center;
-	gap: var(--spacing-5);
-}
-
-.examplePreview.is-stack {
-	justify-content: center;
-}
-
-.examplePreview.is-fill .examplePreviewRoot {
-	flex-direction: column;
-	align-items: stretch;
-	width: 100%;
-}
-
-.exampleToolbar {
-	display: flex;
-	justify-content: flex-end;
-	padding: var(--spacing-2) var(--spacing-3);
-	border-top: 1px solid var(--border);
-}
-
-.exampleSource {
-	border-top: 1px solid var(--border);
-	padding: var(--spacing-4);
-}
-
-.exampleSource[hidden] {
-	display: none;
-}
-
-.exampleSourcePanel {
-	padding-top: var(--spacing-4);
 }
 
 /* --- API reference --- */
@@ -512,31 +347,24 @@ body {
 	min-height: 6rem;
 }
 
+/* 200px, not 160: a select has to fit its longest option plus a chevron, and
+   a number field now carries two stepper buttons. At 160 the track was
+   narrower than the controls standing in it. */
 .playgroundControls {
 	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+	grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
 	gap: var(--spacing-4) var(--spacing-5);
 	padding: var(--spacing-5) var(--spacing-6);
 	border-top: 1px solid var(--border);
 }
 
+/* z-field owns the label band, the control row and the spacing between them,
+   so there is nothing to lay out here — only the grid cell to keep from
+   overflowing. The mono face is inherited: z-field's label sets size, weight
+   and casing but leaves font-family alone, and inheritance crosses the
+   shadow boundary. These are attribute names, so they should read as code. */
 .playgroundField {
-	display: flex;
-	flex-direction: column;
-	gap: var(--spacing-2);
 	min-width: 0;
-}
-
-/* Booleans read better as a label and a switch on one line — a stacked
-   column of half-empty rows wastes the width the grid just handed us. */
-.playgroundField.is-boolean {
-	flex-direction: row;
-	align-items: center;
-	justify-content: space-between;
-	gap: var(--spacing-3);
-}
-
-.playgroundFieldLabel {
 	font-family: var(--font-mono);
 }
 

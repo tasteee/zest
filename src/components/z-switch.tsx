@@ -53,7 +53,10 @@ const styles = css`
 		padding: 2px;
 		border: 1px solid var(--border);
 		border-radius: 999px;
-		background: transparent;
+		/* The track is a channel the knob slides along — carved, not raised.
+		   Inert in the flat themes. */
+		background: var(--material-surface);
+		box-shadow: var(--elevation-carved);
 		box-sizing: border-box;
 		transition: background-color 0.16s ease, border-color 0.16s ease;
 	}
@@ -72,15 +75,20 @@ const styles = css`
 	}
 
 	.track.is-on {
-		background: var(--accent);
+		--emissive-color: var(--accent);
+		background: var(--material-tone), var(--accent);
+		box-shadow: var(--elevation-carved), var(--emissive-tone);
 		border-color: var(--accent);
 	}
 
+	/* The knob is the one part of a switch that is unambiguously an object
+	   sitting on top of something else, so it takes the raised stack. */
 	.knob {
 		width: calc(1.375rem - 6px);
 		height: calc(1.375rem - 6px);
 		border-radius: 999px;
-		background: var(--muted-foreground);
+		background: var(--material-raised), var(--muted-foreground);
+		box-shadow: var(--elevation-raised);
 		transition: transform 0.16s var(--easing-standard, ease-out), background-color 0.16s ease;
 	}
 

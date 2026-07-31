@@ -10,8 +10,10 @@ const styles = css`
 		transition: border-color 0.05s linear;
 		border: 1px solid var(--border);
 		color: var(--foreground);
-		/* transparent in the dark theme, a faint wash in the light one */
-		background: var(--haze);
+		/* Inert in the flat themes, material in the rest. A card rests on the
+		   page rather than floating above it, so it takes the flush stack. */
+		background: var(--material-surface);
+		box-shadow: var(--elevation-flush);
 	}
 
 	:host([is-flex]) {

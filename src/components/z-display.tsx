@@ -29,13 +29,18 @@ const styles = css`
 		color: var(--selection-foreground);
 	}
 
+	/* Same heading tier as z-text's is-heading, and re-faced by the same
+	   tokens — a theme that gives headings a serif has to reach the display
+	   tier too, or the largest type on the page is the one that misses it.
+	   Every token falls back to what this rule used to hardcode. */
 	.display {
 		margin: 0;
 		padding: 0;
-		font-family: inherit;
-		font-weight: 700;
+		font-family: var(--font-heading, inherit);
+		font-weight: var(--z-text-weight, var(--font-heading-weight, 700));
+		font-variation-settings: var(--font-heading-settings, normal);
 		line-height: 0.95;
-		letter-spacing: -0.03em;
+		letter-spacing: calc(-0.03em * var(--font-heading-tracking-scale, 1));
 		color: inherit;
 		text-wrap: balance;
 	}
@@ -67,22 +72,6 @@ const styles = css`
 		color: var(--color-neutral-9);
 	}
 
-	/* weight overrides */
-	.display.is-weight-900 {
-		font-weight: 900;
-	}
-	.display.is-weight-700 {
-		font-weight: 700;
-	}
-	.display.is-weight-600 {
-		font-weight: 600;
-	}
-	.display.is-weight-400 {
-		font-weight: 400;
-	}
-	.display.is-weight-300 {
-		font-weight: 300;
-	}
 `
 
 const SIZE_CLASS: Record<string, string> = {
@@ -90,6 +79,14 @@ const SIZE_CLASS: Record<string, string> = {
 	lg: 'is-lg',
 	md: 'is-md',
 	sm: 'is-sm'
+}
+
+// Same pass-through as z-text: any value the face supports, not a fixed
+// ladder. Empty means "say nothing", so --font-heading-weight keeps deciding.
+const resolveWeightStyle = (props: any): string => {
+	const hasWeight = props.weight != null && String(props.weight).trim() !== ''
+	if (!hasWeight) return ''
+	return String(props.weight).trim()
 }
 
 const resolveDisplayClass = (props: any): string => {
@@ -104,11 +101,8 @@ const resolveDisplayClass = (props: any): string => {
 					: props.color === 'white'
 						? 'is-white'
 						: ''
-	const weightClass = props.weight ? `is-weight-${props.weight}` : ''
-
 	return ['display', sizeClass]
 		.concat(colorClass ? [colorClass] : [])
-		.concat(weightClass ? [weightClass] : [])
 		.join(' ')
 }
 
@@ -116,7 +110,7 @@ export const ZDisplay = c(
 	(props) => {
 		const Tag = (props.tag || 'h1') as any
 		return (
-			<host shadowDom>
+			<host shadowDom style={{ '--z-text-weight': resolveWeightStyle(props) }}>
 				<Tag class={resolveDisplayClass(props)}>
 					<slot />
 				</Tag>

@@ -6,8 +6,8 @@ legibility behind an overlapping heading or toolbar without blurring the
 whole image.
 
 ```html
-<z-progressive-blur direction="bottom" strength="lg" reach="50">
-  <img src="/hero.jpg" alt="" />
+<z-progressive-blur direction="bottom" strength="lg" reach="50" radius="lg">
+  <img src="/hero.svg" alt="" width="600" />
 </z-progressive-blur>
 ```
 
@@ -18,7 +18,7 @@ whole image.
 | `direction` | `top` `bottom` `left` `right` | `bottom` | which edge the blur is strongest at |
 | `strength` | `sm` `md` `lg` `xl` | `md` | max blur radius |
 | `reach` | number (%) | `40` | how far the blur fades in, as a percentage of the content |
-| `radius` | size token / length | — | corner radius of the wrapped content |
+| `radius` | radius token / length | — | corner radius of the wrapped content — `none` `sm` `md` `lg` `xl` `2xl` `full` |
 | `is-hidden` | boolean | — | hide |
 
 ## Slots

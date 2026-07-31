@@ -1,22 +1,29 @@
 import { createElement } from './dom-helpers'
 import { getComponentPlaygroundData } from './docs-data'
-import type { AttributeControlT, DocPageT } from './docs-data'
-
-// z-code-block has no ambient DOM typings — see the note in main.ts.
-type ZCodeBlockElementT = HTMLElement & {
-	code: string
-}
+import { buildControlsBand } from './render/playground-controls'
+import { buildCodeBlock, buildLabel } from './render/zest-elements'
+import type { ZCodeBlockElementT } from './render/zest-elements'
+import type { DocPageT } from './docs-data'
 
 // Pulls the single element matching the page's own tag out of the primary
 // example (e.g. the first `<z-button tone="primary">Save</z-button>` out of
 // z-button.md's five variations) to use as the one instance the playground's
-// controls drive. Falls back to a bare element for the handful of docs whose
-// slug isn't a real tag (e.g. z-drag-drop.md, which documents z-draggable /
-// z-drop-target instead).
-const getCanonicalElement = (primaryExampleHtml: string, tagName: string): Element => {
+// controls drive.
+//
+// Returns null when the slug names nothing real. A few docs are named for a
+// concept rather than a tag — z-drag-drop.md documents z-draggable and
+// z-drop-target, z-comment-thread.md documents z-comment-mark and friends —
+// and those pages have no single instance to drive. Creating the element
+// anyway produced an undefined custom element: an empty inline box sitting
+// under a "Playground" heading, which reads as a broken demo.
+const getCanonicalElement = (primaryExampleHtml: string, tagName: string): Element | null => {
 	const parsedDocument = new DOMParser().parseFromString(primaryExampleHtml, 'text/html')
 	const matchedElement = parsedDocument.body.querySelector(tagName)
 	if (matchedElement) return matchedElement.cloneNode(true) as Element
+
+	const isRealElement = Boolean(customElements.get(tagName))
+	if (!isRealElement) return null
+
 	return document.createElement(tagName)
 }
 
@@ -33,116 +40,17 @@ const runPairedScriptSafely = (script: string): void => {
 	}
 }
 
-const buildBooleanControl = (canonicalElement: Element, control: AttributeControlT, onChange: () => void): HTMLInputElement => {
-	const checkbox = document.createElement('input')
-	checkbox.type = 'checkbox'
-	checkbox.className = 'playgroundToggle'
-	checkbox.checked = canonicalElement.hasAttribute(control.name)
-
-	checkbox.addEventListener('change', () => {
-		const shouldSetAttribute = checkbox.checked
-		if (shouldSetAttribute) canonicalElement.setAttribute(control.name, '')
-		if (!shouldSetAttribute) canonicalElement.removeAttribute(control.name)
-		onChange()
-	})
-
-	return checkbox
-}
-
-const buildEnumControl = (canonicalElement: Element, control: AttributeControlT, onChange: () => void): HTMLSelectElement => {
-	const select = document.createElement('select')
-	select.className = 'playgroundControlInput'
-
-	const unsetOption = document.createElement('option')
-	unsetOption.value = ''
-	unsetOption.textContent = '—'
-	select.append(unsetOption)
-
-	for (const optionValue of control.options) {
-		const option = document.createElement('option')
-		option.value = optionValue
-		option.textContent = optionValue
-		select.append(option)
-	}
-
-	const currentValue = canonicalElement.getAttribute(control.name)
-	select.value = currentValue ?? control.defaultValue ?? ''
-
-	select.addEventListener('change', () => {
-		const hasValue = select.value !== ''
-		if (hasValue) canonicalElement.setAttribute(control.name, select.value)
-		if (!hasValue) canonicalElement.removeAttribute(control.name)
-		onChange()
-	})
-
-	return select
-}
-
-const buildTextOrNumberControl = (canonicalElement: Element, control: AttributeControlT, onChange: () => void): HTMLInputElement => {
-	const input = document.createElement('input')
-	input.type = control.kind === 'number' ? 'number' : 'text'
-	input.className = 'playgroundControlInput'
-
-	const currentValue = canonicalElement.getAttribute(control.name)
-	input.value = currentValue ?? control.defaultValue ?? ''
-	if (control.defaultValue) input.placeholder = control.defaultValue
-
-	input.addEventListener('input', () => {
-		const hasValue = input.value.trim() !== ''
-		if (hasValue) canonicalElement.setAttribute(control.name, input.value)
-		if (!hasValue) canonicalElement.removeAttribute(control.name)
-		onChange()
-	})
-
-	return input
-}
-
-const buildControlField = (canonicalElement: Element, control: AttributeControlT, onChange: () => void): HTMLElement => {
-	const field = createElement('label', 'playgroundControlField')
-
-	const fieldLabel = createElement('span', 'playgroundControlLabel')
-	fieldLabel.textContent = control.name
-	field.append(fieldLabel)
-
-	if (control.kind === 'boolean') {
-		field.append(buildBooleanControl(canonicalElement, control, onChange))
-		return field
-	}
-
-	if (control.kind === 'enum') {
-		field.append(buildEnumControl(canonicalElement, control, onChange))
-		return field
-	}
-
-	field.append(buildTextOrNumberControl(canonicalElement, control, onChange))
-	return field
-}
-
-const buildControlsBar = (canonicalElement: Element, controls: AttributeControlT[], onChange: () => void): HTMLElement => {
-	const controlsBar = createElement('div', 'playgroundControls')
-	for (const control of controls) {
-		controlsBar.append(buildControlField(canonicalElement, control, onChange))
-	}
-	return controlsBar
-}
-
-const buildCodeBlock = (language: string): ZCodeBlockElementT => {
-	const codeBlock = document.createElement('z-code-block') as ZCodeBlockElementT
-	codeBlock.setAttribute('language', language)
-	codeBlock.setAttribute('hide-copy', '')
-	return codeBlock
+const buildPlaygroundCodeBlock = (language: string, code: string): ZCodeBlockElementT => {
+	return buildCodeBlock({ code, language, filename: '', hasCopyButton: false })
 }
 
 const buildSetupSection = (pairedScript: string): HTMLElement => {
 	const wrap = createElement('div', 'playgroundSetup')
 
-	const label = createElement('p', 'playgroundSetupLabel')
-	label.textContent = 'Setup'
+	const label = buildLabel('Setup', 'xs', 'muted')
+	label.classList.add('playgroundSetupLabel')
 
-	const codeBlock = buildCodeBlock('js')
-	codeBlock.code = pairedScript
-
-	wrap.append(label, codeBlock)
+	wrap.append(label, buildPlaygroundCodeBlock('js', pairedScript))
 	return wrap
 }
 
@@ -162,6 +70,8 @@ export const buildPlayground = (page: DocPageT): HTMLElement | null => {
 	if (!page.primaryExampleHtml) return null
 
 	const canonicalElement = getCanonicalElement(page.primaryExampleHtml, page.slug)
+	if (!canonicalElement) return null
+
 	const playgroundData = getComponentPlaygroundData(page.rawMarkdown)
 
 	const playground = createElement('z-surface', 'playground')
@@ -173,7 +83,7 @@ export const buildPlayground = (page: DocPageT): HTMLElement | null => {
 	playground.append(preview)
 
 	const codeSection = createElement('div', 'playgroundCodeSection')
-	const codeBlock = buildCodeBlock('html')
+	const codeBlock = buildPlaygroundCodeBlock('html', '')
 	codeBlock.classList.add('playgroundCode')
 	codeSection.append(codeBlock)
 
@@ -184,7 +94,7 @@ export const buildPlayground = (page: DocPageT): HTMLElement | null => {
 
 	const hasControls = playgroundData.controls.length > 0
 	if (hasControls) {
-		playground.append(buildControlsBar(canonicalElement, playgroundData.controls, refreshCodeOutput))
+		playground.append(buildControlsBand(canonicalElement, playgroundData.controls, refreshCodeOutput))
 	}
 
 	playground.append(codeSection)

@@ -7,11 +7,12 @@ blurred bloom that bleeds outward.
 
 ```html
 <z-aura variant="gold" size="lg">
-  <z-avatar name="Ada Lovelace"></z-avatar>
+  <z-button tone="primary">Upgrade</z-button>
 </z-aura>
 
-<z-aura variant="glow">
-  <z-button tone="primary">Upgrade</z-button>
+<!-- round content needs a matching frame radius -->
+<z-aura variant="glow" style="--aura-radius: 999px">
+  <z-avatar name="Ada Lovelace"></z-avatar>
 </z-aura>
 ```
 
@@ -28,8 +29,20 @@ blurred bloom that bleeds outward.
 - _(default)_ — the wrapped content. Keeps its own background — only the
   frame is added around it.
 
+## CSS variables
+
+| Variable | Default | Description |
+| --- | --- | --- |
+| `--aura-color` | `var(--neon-purple)` | accent the ring and bloom are built from |
+| `--aura-radius` | `var(--radius-lg)` | corner radius of the frame |
+| `--aura-duration` | `4s` | time for one full rotation (or one pulse cycle on `glow`) |
+
 ## Notes
 
-- Override the accent with `--aura-color`, the spin speed with
-  `--aura-duration`.
+- The frame does not inherit its content's radius — it can't read into the
+  slotted element. Match them by hand with `--aura-radius`, or the frame's
+  corners will show past round content. `999px` for a circle,
+  `var(--radius-md)` for a card, and so on.
+- `--aura-size` and `--aura-blur` are set by `size`; override them directly
+  only when a preset doesn't fit.
 - Respects `prefers-reduced-motion` (disables the spin/pulse animation).

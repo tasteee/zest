@@ -1,12 +1,20 @@
 # z-theme-switcher
 
-Switches the page between zest's dark ink and its light haze. Two kinds share one
-piece of state: `segmented` offers Light / Dark / System as a joined control,
-`icon` is a single compact button that flips between light and dark.
+Switches the page between zest's themes. Two kinds share one piece of state:
+`segmented` offers a joined control, `icon` is a single compact button that
+flips between light and dark.
 
 ```html
 <z-theme-switcher></z-theme-switcher>
 <z-theme-switcher kind="icon"></z-theme-switcher>
+```
+
+By default it offers Light, Dark and System. Name a `themes` list to offer any
+other subset — including the material themes described in
+[Theming](../theming.md):
+
+```js
+switcher.themes = ['light', 'dark', 'console', 'studio', 'system']
 ```
 
 ```js
@@ -50,16 +58,27 @@ Three sources can decide the theme on load, in this order:
 
 ## The transition
 
-Changing theme cross-fades the whole page over `0.6s`. Almost none of a theme
-swap can be transitioned in CSS — custom properties don't interpolate unless
-they're registered, and the light theme brings in gradients and a translucent
-card surface that can't animate from their flat dark equivalents at all — so the
-transition runs on pixels instead of values, via the View Transition API. That
-covers gradients, translucency and shadow DOM alike, and the page never goes
-blank: the old frame stays under the new one the whole way across.
+Changing theme fades the page out, swaps while nothing is visible, and fades
+back in — `0.45s` end to end, half each way.
 
-Browsers without view transitions fade the page down, swap underneath, and fade
-back up, splitting the same budget in half.
+Almost none of a theme swap can be transitioned in CSS: custom properties don't
+interpolate unless registered, and the material themes bring in gradients and
+translucent surfaces that can't animate from their flat equivalents at all. So
+the change is sequenced rather than blended.
+
+The page colour is the one thing that doesn't fade. `background-color` is
+genuinely animatable and doesn't care that its value arrived through `var()`, so
+it interpolates on its own across the full duration — the page is already
+morphing underneath while the content is out, and has arrived by the time the
+content returns.
+
+> **Not the View Transition API.** That's the obvious tool and the wrong one
+> here. Its default root animation cross-fades the two snapshots under
+> `mix-blend-mode: plus-lighter` — the frames are *added*, not interpolated.
+> That's invisible when a few elements move, and violent when the whole page
+> changes luminance at once: halfway through a dark-to-light swap the sum blows
+> past white and the screen flashes. Sequencing has no overlap, so there's no
+> blend to get wrong.
 
 Retime it with a token, or turn it off:
 
@@ -88,7 +107,8 @@ values are defined, so a dark region can sit inside a light page and vice versa:
 
 | Attribute | Values | Default | Description |
 | --- | --- | --- | --- |
-| `kind` | `segmented` `icon` | `segmented` | three explicit choices, or one compact toggle |
+| `kind` | `segmented` `icon` | `segmented` | a joined control, or one compact toggle |
+| `themes` | `string[]` (property) | `['light','dark','system']` | which choices to offer, in order |
 | `is-icon-only` | boolean | — | drops the text labels from the segmented kind |
 | `tone` | `primary` `secondary` | — | accent the selection paints with; neutral when unset |
 | _size_ | `is-small` `is-large` | — | density |

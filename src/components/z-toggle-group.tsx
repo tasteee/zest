@@ -87,6 +87,14 @@ const styles = css`
 		z-index: 20;
 	}
 
+	/* NOTE: the --z-toggle-* declarations below (tone, kind, hover/on states)
+	   are inert. z-toggle takes its tone from its own is-purple / is-pink /
+	   is-neutral classes and reads --tone-color, --tone-text and
+	   --tone-on-foreground — none of these names. Setting a tone on the group
+	   therefore does nothing today; the item has to carry the flag itself.
+	   Left in place rather than deleted because fixing it properly means
+	   deciding whether z-toggle should read group-level variables at all, and
+	   that is an API change rather than a rename. */
 	:host([is-purple]) {
 		--z-toggle-color: var(--neon-purple);
 		--z-toggle-accent: var(--neon-purple);
@@ -105,20 +113,24 @@ const styles = css`
 		--z-toggle-accent-foreground: var(--primary-foreground);
 	}
 
+	/* These are named --toggle-*, not --z-toggle-*, because --toggle-* is what
+	   z-toggle actually reads. The --z-toggle- prefix used elsewhere in this
+	   file matches nothing in z-toggle except --z-toggle-radius, so those
+	   declarations have no effect — see the note above the tone block. */
 	:host([is-small]) {
-		--z-toggle-height: 2rem;
-		--z-toggle-padding-inline: 0.75rem;
-		--z-toggle-min-width: 2rem;
-		--z-toggle-font-size: 0.8125rem;
-		--z-toggle-icon-size: 0.875rem;
+		--toggle-height: var(--control-height-sm);
+		--toggle-padding-inline: 0.75rem;
+		--toggle-min-width: var(--control-height-sm);
+		--toggle-font-size: 0.8125rem;
+		--toggle-icon-size: 0.875rem;
 	}
 
 	:host([is-large]) {
-		--z-toggle-height: 3rem;
-		--z-toggle-padding-inline: 1.25rem;
-		--z-toggle-min-width: 3rem;
-		--z-toggle-font-size: 1rem;
-		--z-toggle-icon-size: 1.125rem;
+		--toggle-height: var(--control-height-lg);
+		--toggle-padding-inline: 1.25rem;
+		--toggle-min-width: var(--control-height-lg);
+		--toggle-font-size: 1rem;
+		--toggle-icon-size: 1.125rem;
 	}
 
 	:host([is-ghost]) {

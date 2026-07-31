@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" width="1200" height="600" role="img" aria-label="Mountains at dusk">
+  <rect width="1200" height="600" fill="#2b3a55"/>
+  <circle cx="864" cy="168" r="66" fill="#e8a33d"/>
+  <path d="M0 396 L312 204 L576 396 Z" fill="#3d5175"/>
+  <path d="M408 420 L768 156 L1152 420 Z" fill="#3d5175" opacity="0.72"/>
+  <rect y="396" width="1200" height="204" fill="#1d2739"/>
+  <circle cx="168" cy="492" r="36" fill="#2b3a55" opacity="0.35"/>
+  <circle cx="1032" cy="540" r="54" fill="#2b3a55" opacity="0.22"/>
+</svg>

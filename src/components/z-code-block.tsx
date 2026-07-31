@@ -1,6 +1,7 @@
-import { c, css, event, useState, useMemo } from 'atomico'
+import { c, css, event, useMemo } from 'atomico'
 import { highlight, splitTokenLines, type Token } from '../shared/highlight'
 import { themedScrollbarStyles } from '../shared/scrollbar-styles'
+import './z-copy-button'
 
 /*
  * z-code-block — a monospace code surface with an optional header (filename +
@@ -66,47 +67,7 @@ const styles = css`
 	}
 
 	.copy {
-		display: inline-flex;
-		align-items: center;
-		gap: 0.375rem;
 		flex-shrink: 0;
-		padding: 0.25rem 0.5rem;
-		background: transparent;
-		border: 1px solid var(--border);
-		border-radius: var(--radius-sm);
-		color: var(--muted-foreground);
-		font-family: inherit;
-		font-size: var(--font-size-caption);
-		cursor: pointer;
-		transition:
-			color 0.12s ease,
-			border-color 0.12s ease,
-			background-color 0.12s ease;
-	}
-
-	.copy:hover {
-		color: var(--foreground);
-		border-color: color-mix(in oklch, var(--foreground) 30%, transparent);
-	}
-
-	.copy:focus-visible {
-		outline: 3px solid color-mix(in oklch, var(--ring) 50%, transparent);
-		outline-offset: 2px;
-	}
-
-	.copy.is-copied {
-		color: var(--success);
-		border-color: color-mix(in oklch, var(--success) 50%, transparent);
-	}
-
-	.copy svg {
-		width: 0.875rem;
-		height: 0.875rem;
-		stroke: currentColor;
-		stroke-width: 2;
-		stroke-linecap: round;
-		stroke-linejoin: round;
-		fill: none;
 	}
 
 	.scroll {
@@ -270,8 +231,6 @@ const styles = css`
 
 export const ZCodeBlock = c(
 	(props) => {
-		const [copied, setCopied] = useState(false)
-
 		const code = (props.code as string) ?? ''
 		const language = props.language as string | undefined
 
@@ -287,15 +246,12 @@ export const ZCodeBlock = c(
 				token.value
 			)
 
-		const onCopy = async () => {
-			try {
-				await navigator.clipboard.writeText(code)
-				setCopied(true)
-				props.copy()
-				setTimeout(() => setCopied(false), 1600)
-			} catch {
-				/* clipboard unavailable — no-op */
-			}
+		// z-copy-button's own `copy` is composed, so it would surface to
+		// consumers alongside this element's. Swallow it and re-emit, keeping
+		// z-code-block's long-standing void-detail event intact.
+		const handleCopy = (copyEvent: Event) => {
+			copyEvent.stopPropagation()
+			props.copy()
 		}
 
 		const showHead = props.filename || props.language || !props.hideCopy
@@ -309,21 +265,7 @@ export const ZCodeBlock = c(
 								{props.language && <span class="lang">{props.language}</span>}
 								{props.filename && <span class="filename">{props.filename}</span>}
 							</div>
-							{!props.hideCopy && (
-								<button type="button" class={copied ? 'copy is-copied' : 'copy'} onclick={onCopy}>
-									{copied ? (
-										<svg viewBox="0 0 24 24">
-											<polyline points="4 12 10 18 20 6" />
-										</svg>
-									) : (
-										<svg viewBox="0 0 24 24">
-											<rect x="9" y="9" width="11" height="11" rx="2" />
-											<path d="M5 15V5a2 2 0 0 1 2-2h10" />
-										</svg>
-									)}
-									{copied ? 'Copied' : 'Copy'}
-								</button>
-							)}
+							{!props.hideCopy && <z-copy-button class="copy" value={code} oncopy={handleCopy} />}
 						</div>
 					)}
 					<div class="scroll">

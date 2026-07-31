@@ -41,10 +41,13 @@ const styles = css`
 		background: color-mix(in oklch, var(--tone-color) 10%, transparent);
 	}
 
+	/* On is the lit state, so it takes the tone fill and the LED rim in that
+	   same tone. Both are inert in the flat themes, where this stays a flat
+	   fill exactly as before. */
 	button[data-state='on'] {
-		/* --haze-tone resolves to none in the dark theme, so the pressed fill
-		   stays exactly flat there. */
-		background: var(--haze-tone), var(--tone-color);
+		--emissive-color: var(--tone-color);
+		background: var(--material-tone), var(--tone-color);
+		box-shadow: var(--emissive-tone);
 		border-color: transparent;
 		color: var(--tone-on-foreground, var(--primary-foreground));
 	}
@@ -63,7 +66,7 @@ const styles = css`
 	   (width: var(--toggle-height)) tracks whichever size is active. */
 
 	button.is-small {
-		--toggle-height: 2rem;
+		--toggle-height: var(--control-height-sm);
 		--toggle-padding-inline: 0.75rem;
 		--toggle-min-width: 2rem;
 		--toggle-font-size: 0.8125rem;
@@ -71,7 +74,7 @@ const styles = css`
 	}
 
 	button.is-medium {
-		--toggle-height: 2.5rem;
+		--toggle-height: var(--control-height-md);
 		--toggle-padding-inline: 1rem;
 		--toggle-min-width: 2.5rem;
 		--toggle-font-size: 0.875rem;
@@ -79,7 +82,7 @@ const styles = css`
 	}
 
 	button.is-large {
-		--toggle-height: 3rem;
+		--toggle-height: var(--control-height-lg);
 		--toggle-padding-inline: 1.25rem;
 		--toggle-min-width: 3rem;
 		--toggle-font-size: 1rem;

@@ -30,7 +30,7 @@ const styles = css`
 		color: inherit;
 		font-family: inherit;
 		font-style: normal;
-		font-weight: 400;
+		font-weight: var(--z-text-weight, 400);
 		text-decoration: none;
 		text-transform: none;
 		box-sizing: border-box;
@@ -40,44 +40,52 @@ const styles = css`
 	   heading
 	--------------------------------------------- */
 
+	/* Headings are the one tier a theme may re-face. Everything here defaults
+	   back to the sans stack and its weight, so a theme that says nothing gets
+	   exactly what it always got; the haze theme swaps in a serif.
+	   --font-heading-settings carries variable-font axes, which is how a face
+	   like Fraunces gets its optical size and softness set without this
+	   component knowing either name. */
 	.text.is-heading {
-		font-weight: 700;
+		font-family: var(--font-heading, inherit);
+		font-weight: var(--z-text-weight, var(--font-heading-weight, 700));
+		font-variation-settings: var(--font-heading-settings, normal);
 	}
 
 	.text.is-heading.is-xxl {
 		font-size: calc(var(--base-font-size, 16px) * 4);
 		line-height: 1.125;
-		letter-spacing: calc(var(--base-font-size, 16px) * -0.06);
+		letter-spacing: calc(var(--base-font-size, 16px) * -0.06 * var(--font-heading-tracking-scale, 1));
 	}
 
 	.text.is-heading.is-xl {
 		font-size: calc(var(--base-font-size, 16px) * 3.5);
 		line-height: 1.142857;
-		letter-spacing: calc(var(--base-font-size, 16px) * -0.05);
+		letter-spacing: calc(var(--base-font-size, 16px) * -0.05 * var(--font-heading-tracking-scale, 1));
 	}
 
 	.text.is-heading.is-lg {
 		font-size: calc(var(--base-font-size, 16px) * 3);
 		line-height: 1.166667;
-		letter-spacing: calc(var(--base-font-size, 16px) * -0.04);
+		letter-spacing: calc(var(--base-font-size, 16px) * -0.04 * var(--font-heading-tracking-scale, 1));
 	}
 
 	.text.is-heading.is-md {
 		font-size: calc(var(--base-font-size, 16px) * 2.5);
 		line-height: 1.3;
-		letter-spacing: calc(var(--base-font-size, 16px) * -0.03375);
+		letter-spacing: calc(var(--base-font-size, 16px) * -0.03375 * var(--font-heading-tracking-scale, 1));
 	}
 
 	.text.is-heading.is-sm {
 		font-size: calc(var(--base-font-size, 16px) * 2);
 		line-height: 1.25;
-		letter-spacing: calc(var(--base-font-size, 16px) * -0.03);
+		letter-spacing: calc(var(--base-font-size, 16px) * -0.03 * var(--font-heading-tracking-scale, 1));
 	}
 
 	.text.is-heading.is-xs {
 		font-size: calc(var(--base-font-size, 16px) * 1.5);
 		line-height: 1.333333;
-		letter-spacing: calc(var(--base-font-size, 16px) * -0.00625);
+		letter-spacing: calc(var(--base-font-size, 16px) * -0.00625 * var(--font-heading-tracking-scale, 1));
 	}
 
 	/* ---------------------------------------------
@@ -86,7 +94,7 @@ const styles = css`
 
 	.text.is-subheading {
 		text-transform: uppercase;
-		font-weight: 600;
+		font-weight: var(--z-text-weight, 600);
 	}
 
 	.text.is-subheading.is-xl {
@@ -124,7 +132,7 @@ const styles = css`
 	--------------------------------------------- */
 
 	.text.is-text {
-		font-weight: 400;
+		font-weight: var(--z-text-weight, 400);
 	}
 
 	.text.is-text.is-xxl {
@@ -168,7 +176,7 @@ const styles = css`
 	--------------------------------------------- */
 
 	.text.is-label {
-		font-weight: 500;
+		font-weight: var(--z-text-weight, 500);
 	}
 
 	.text.is-label.is-lg {
@@ -219,29 +227,7 @@ const styles = css`
 		color: var(--color-neutral-9);
 	}
 
-	/* ---------------------------------------------
-	   weight overrides
-	--------------------------------------------- */
 
-	.text.is-weight-900 {
-		font-weight: 900;
-	}
-
-	.text.is-weight-700 {
-		font-weight: 700;
-	}
-
-	.text.is-weight-600 {
-		font-weight: 600;
-	}
-
-	.text.is-weight-400 {
-		font-weight: 400;
-	}
-
-	.text.is-weight-300 {
-		font-weight: 300;
-	}
 
 	/* ---------------------------------------------
 	   decoration overrides
@@ -280,7 +266,7 @@ const styles = css`
 		font-size: inherit;
 		line-height: inherit;
 		letter-spacing: inherit;
-		font-weight: inherit;
+		font-weight: var(--z-text-weight, inherit);
 		font-style: inherit;
 		text-decoration: inherit;
 		text-transform: inherit;
@@ -307,25 +293,10 @@ const styles = css`
 		color: var(--foreground);
 	}
 
-	.inline.is-weight-900 {
-		font-weight: 900;
-	}
 
-	.inline.is-weight-700 {
-		font-weight: 700;
-	}
 
-	.inline.is-weight-600 {
-		font-weight: 600;
-	}
 
-	.inline.is-weight-400 {
-		font-weight: 400;
-	}
 
-	.inline.is-weight-300 {
-		font-weight: 300;
-	}
 
 	.inline.is-italic {
 		font-style: italic;
@@ -362,16 +333,19 @@ const resolveColorClass = (props: any): string => {
 	return 'is-neutral'
 }
 
-const resolveWeightClass = (props: any): string => {
-	if (props.weight === '900') return 'is-weight-900'
-	if (props.weight === '700') return 'is-weight-700'
-	if (props.weight === '600') return 'is-weight-600'
-	if (props.weight === '400') return 'is-weight-400'
-	if (props.weight === '300') return 'is-weight-300'
-	// No explicit weight: emit no override class so each variant keeps its own
-	// base weight (heading 700, label 500, text/subheading per their rules).
-	// Returning is-weight-400 here previously clobbered the heading weight.
-	return ''
+// Weight is passed straight through to CSS rather than mapped onto a fixed
+// ladder of classes. A variable face has a continuous weight axis, so pinning
+// the API to 300/400/600/700/900 would put 850 — a perfectly real weight in DM
+// Sans, which runs to 1000 — out of reach for no reason.
+//
+// An absent weight must resolve to nothing at all, not to a number: each
+// variant carries its own base weight as the var()'s fallback (heading reads
+// the theme's --font-heading-weight, label 500, text 400), and emitting a
+// value here would clobber all of them.
+const resolveWeightStyle = (props: any): string => {
+	const hasWeight = props.weight != null && String(props.weight).trim() !== ''
+	if (!hasWeight) return ''
+	return String(props.weight).trim()
 }
 
 /*
@@ -397,10 +371,8 @@ const resolveHeadingTag = (props: any): string => {
 const resolveTextClass = (props: any, variantClass: string, fallbackSizeClass: string): string => {
 	const sizeClass = resolveSizeClass(props, fallbackSizeClass)
 	const colorClass = resolveColorClass(props)
-	const weightClass = resolveWeightClass(props)
 
 	return ['text', variantClass, sizeClass, colorClass]
-		.concat(weightClass ? [weightClass] : [])
 		.concat(props.isItalic ? ['is-italic'] : [])
 		.concat(props.isUnderlined ? ['is-underlined'] : [])
 		.concat(props.isStrikethrough ? ['is-strikethrough'] : [])
@@ -420,11 +392,9 @@ const resolveInlineColorClass = (props: any): string => {
 
 const resolveInlineClass = (props: any): string => {
 	const colorClass = resolveInlineColorClass(props)
-	const weightClass = resolveWeightClass(props)
 
 	return ['inline']
 		.concat(colorClass ? [colorClass] : [])
-		.concat(weightClass ? [weightClass] : [])
 		.concat(props.isItalic ? ['is-italic'] : [])
 		.concat(props.isUnderlined ? ['is-underlined'] : [])
 		.concat(props.isStrikethrough ? ['is-strikethrough'] : [])
@@ -448,7 +418,7 @@ export const ZHeading = c(
 		const className = resolveTextClass(props, 'is-heading', 'is-md')
 
 		return (
-			<host shadowDom>
+			<host shadowDom style={{ '--z-text-weight': resolveWeightStyle(props) }}>
 				<Tag class={className}>
 					<slot />
 				</Tag>
@@ -467,7 +437,7 @@ export const ZSubheading = c(
 		const className = resolveTextClass(props, 'is-subheading', 'is-md')
 
 		return (
-			<host shadowDom>
+			<host shadowDom style={{ '--z-text-weight': resolveWeightStyle(props) }}>
 				<Tag class={className}>
 					<slot />
 				</Tag>
@@ -486,7 +456,7 @@ export const ZText = c(
 		const className = resolveTextClass(props, 'is-text', 'is-md')
 
 		return (
-			<host shadowDom>
+			<host shadowDom style={{ '--z-text-weight': resolveWeightStyle(props) }}>
 				<Tag class={className}>
 					<slot />
 				</Tag>
@@ -505,7 +475,7 @@ export const ZLabel = c(
 		const className = resolveTextClass(props, 'is-label', 'is-md')
 
 		return (
-			<host shadowDom>
+			<host shadowDom style={{ '--z-text-weight': resolveWeightStyle(props) }}>
 				<Tag class={className}>
 					<slot />
 				</Tag>
@@ -534,7 +504,7 @@ export const ZInline = c(
 		const className = resolveInlineClass(props)
 
 		return (
-			<host shadowDom>
+			<host shadowDom style={{ '--z-text-weight': resolveWeightStyle(props) }}>
 				<Tag class={className}>
 					<slot />
 				</Tag>

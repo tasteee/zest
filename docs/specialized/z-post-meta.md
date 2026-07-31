@@ -7,7 +7,7 @@ clickable tag chips. It only renders — it doesn't know about routing, so it fi
 ```html
 <z-post-meta
   name="Shane Colcleasure"
-  avatar-src="/me.jpg"
+  avatar-src="/me.svg"
   date="June 29, 2026"
 ></z-post-meta>
 ```

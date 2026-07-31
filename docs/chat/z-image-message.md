@@ -5,12 +5,12 @@ One or more images sent in a message. A single image renders full-width
 there are more than four.
 
 ```html
-<z-image-message src="/photo.jpg" alt="Sunset"></z-image-message>
+<z-image-message src="/photos/photo.svg" alt="Sunset"></z-image-message>
 ```
 
 ```js
 const message = document.querySelector('z-image-message')
-message.images = [{ src: '/a.jpg' }, { src: '/b.jpg' }, { src: '/c.jpg' }]
+message.images = [{ src: '/photos/a.svg' }, { src: '/photos/b.svg' }, { src: '/photos/c.svg' }]
 message.addEventListener('open', (e) => e.detail) // { index, src } — wire to a lightbox
 ```
 

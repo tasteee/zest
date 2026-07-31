@@ -20,8 +20,9 @@ const styles = css`
 		display: block;
 		width: 100%;
 		box-sizing: border-box;
-		/* transparent in the dark theme, a faint wash in the light one */
-		background: var(--haze);
+		/* Carved into the surface, like z-input. Inert in the flat themes. */
+		background: var(--material-surface);
+		box-shadow: var(--elevation-carved);
 		border: 1px solid var(--border);
 		border-radius: var(--radius-md);
 		color: var(--foreground);

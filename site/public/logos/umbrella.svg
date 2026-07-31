@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 132 32" width="132" height="32" role="img" aria-label="Umbrella">
+  <g fill="#9aa0a6">
+    <path d="M6 16 A10 10 0 0 1 26 16 Z" /><rect x="14.5" y="16" width="3" height="10" rx="1.5"/>
+    <text x="40" y="21" font-family="system-ui, sans-serif" font-size="15" font-weight="600" letter-spacing="0.2">Umbrella</text>
+  </g>
+</svg>

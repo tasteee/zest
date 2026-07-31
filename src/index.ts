@@ -42,10 +42,15 @@ export * from './components/z-toolbar-group'
 export * from './components/z-swap'
 export * from './components/z-link'
 export * from './components/z-theme-switcher'
+export * from './components/z-copy-button'
 
 // The theme state behind z-theme-switcher, exported so an app can read or set
 // the theme from its own chrome without rendering a switcher.
 export * from './shared/theme'
+
+// The clipboard primitive behind z-copy-button, exported so an app can copy
+// from its own affordances without rendering one.
+export * from './shared/clipboard'
 
 // Form controls
 export * from './components/z-field'
@@ -151,9 +156,13 @@ export * from './components/z-marquee'
 export * from './components/z-progressive-blur'
 export * from './components/z-pointer-follow'
 
+// Documentation
+export * from './components/z-example'
+
 // Music / MIDI
 export * from './components/z-piano-roll'
 export * from './components/z-pattern-roll'
+export * from './components/z-knob'
 
 // Text editor
 export * from './components/z-selection-toolbar'

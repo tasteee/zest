@@ -304,9 +304,15 @@ const buildHeader = (commandPalette: ZCommandElementT): HTMLElement => {
 	})
 
 	const headerActions = createElement('div', 'appHeaderActions')
-	const themeSwitcher = createElement('z-theme-switcher')
+
+	// The docs site offers every theme zest ships, which is more than the
+	// switcher's own default of light/dark/system. Icon-only, because six
+	// labelled segments would dominate the header.
+	const themeSwitcher = createElement('z-theme-switcher') as HTMLElement & { themes: string[] }
 	themeSwitcher.setAttribute('is-small', '')
 	themeSwitcher.setAttribute('is-icon-only', '')
+	themeSwitcher.themes = ['light', 'dark', 'console', 'studio', 'system']
+
 	headerActions.append(searchTrigger, themeSwitcher)
 
 	header.append(logo, headerActions)

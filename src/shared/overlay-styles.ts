@@ -45,6 +45,10 @@ export const floatingSurfaceStyles = css`
 		box-sizing: border-box;
 		background: var(--popover);
 		color: var(--popover-foreground);
+		/* Overlays float clear of the page, so they take the overlay stack —
+		   the one elevation that reads as "not attached to anything". Inert in
+		   the flat themes, where these panels stay borders on a fill. */
+		box-shadow: var(--elevation-overlay);
 		border: 1px solid var(--border);
 		border-radius: var(--radius-md);
 		padding: var(--z-overlay-padding, 1rem);

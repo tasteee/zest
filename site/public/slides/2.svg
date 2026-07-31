@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450" role="img" aria-label="Slide two">
+  <rect width="800" height="450" fill="#1f4038"/>
+  <circle cx="576" cy="126" r="49" fill="#3fb8a4"/>
+  <path d="M0 297 L208 153 L384 297 Z" fill="#2e5b4f"/>
+  <path d="M272 315 L512 117 L768 315 Z" fill="#2e5b4f" opacity="0.72"/>
+  <rect y="297" width="800" height="153" fill="#142a25"/>
+  <circle cx="112" cy="369" r="27" fill="#1f4038" opacity="0.35"/>
+  <circle cx="688" cy="405" r="40" fill="#1f4038" opacity="0.22"/>
+</svg>

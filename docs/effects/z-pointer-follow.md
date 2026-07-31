@@ -9,7 +9,11 @@ children: it listens on `window` and hides the native cursor everywhere.
 ```html
 <!-- scoped: wraps a region -->
 <z-pointer-follow label="Draw" tone="primary">
-  <div class="canvas">…</div>
+  <z-surface level="1" radius="lg">
+    <z-box height="220px" width="100%" aligns-x="center" aligns-y="center">
+      <z-text color="muted">Move the pointer over this panel</z-text>
+    </z-box>
+  </z-surface>
 </z-pointer-follow>
 
 <!-- fixed: one page-level instance, no children -->

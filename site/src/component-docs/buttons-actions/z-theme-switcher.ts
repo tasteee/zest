@@ -11,7 +11,7 @@ const buildPlaygroundSwitcher = (): HTMLElement => {
 // re-points the tokens, it doesn't fill anything — so both panes carry the
 // background and the page wash that <body> would normally provide.
 const PANE_STYLE =
-	'flex: 1 1 240px; padding: var(--space-lg); border-radius: var(--radius-lg); background: var(--background); background-image: var(--haze-page);'
+	'flex: 1 1 240px; padding: var(--space-lg); border-radius: var(--radius-lg); background: var(--background); background-image: var(--material-page);'
 
 export const zThemeSwitcherDoc: ComponentDocT = {
 	tag: 'z-theme-switcher',
@@ -29,7 +29,7 @@ export const zThemeSwitcherDoc: ComponentDocT = {
 	},
 
 	usageGuidance: [
-		'Changing theme cross-fades the whole page over 0.6s. Almost none of a theme swap can be transitioned in CSS, so the transition runs on pixels rather than values — the View Transition API snapshots the page and cross-fades the two frames, which covers gradients, translucency and shadow DOM alike. Retime it with `--theme-transition-duration` on `:root`.',
+		'Changing theme fades the page out, swaps while nothing is visible, and fades back in — 0.45s end to end. Almost none of a theme swap can be transitioned in CSS, so the change is sequenced rather than blended; the page colour is the exception and interpolates on its own underneath, so the gap is never empty. Retime it with `--theme-transition-duration` on `:root`.',
 		'Offer `system` unless you have a reason not to. Most readers have already told their OS what they want, and following it is the answer that needs no thought — which is why the segmented kind is the default.',
 		'Reach for `icon` when the header is genuinely tight. It trades the system option and the visible current state for one button, so it is the weaker control, not the neater one.',
 		'Leave the tone unset in app chrome. A theme switcher is a setting, not a call to action, and a neutral selection keeps it from competing with the actions around it.',
@@ -72,6 +72,26 @@ export const zThemeSwitcherDoc: ComponentDocT = {
 			markup: `
 				<z-theme-switcher is-icon-only></z-theme-switcher>
 			`
+		}),
+
+		defineInteractiveExample({
+			id: 'themes',
+			title: 'Offering the material themes',
+			description:
+				'The `themes` property names which choices to render, and in what order. zest ships four — two flat, two material — and this offers all of them plus System.',
+			layout: ExampleLayout.stack,
+			markup: `
+				<z-theme-switcher id="allThemes" is-small></z-theme-switcher>
+			`,
+			script: `
+				const allThemes = document.querySelector('#allThemes')
+
+				allThemes.themes = ['light', 'dark', 'console', 'studio', 'system']
+			`,
+			wire: (root) => {
+				const allThemes = queryPreview<HTMLElement & { themes: string[] }>(root, '#allThemes')
+				allThemes.themes = ['light', 'dark', 'console', 'studio', 'system']
+			}
 		}),
 
 		defineMarkupExample({
@@ -164,6 +184,12 @@ export const zThemeSwitcherDoc: ComponentDocT = {
 		},
 		{ name: 'is-icon-only', type: 'boolean', defaultValue: '—', description: 'Drops the text labels from the segmented kind.' },
 		{
+			name: 'themes',
+			type: 'string[]',
+			defaultValue: "['light','dark','system']",
+			description: 'Which choices to offer, in order. A property, not an attribute. Unknown names are ignored.'
+		},
+		{
 			name: 'tone',
 			type: 'primary | secondary',
 			defaultValue: '—',
@@ -197,8 +223,8 @@ export const zThemeSwitcherDoc: ComponentDocT = {
 		{ name: '--switcher-icon-size', defaultValue: '0.9375rem', description: 'Glyph size, driven by the size attributes.' },
 		{
 			name: '--theme-transition-duration',
-			defaultValue: '0.6s',
-			description: 'Length of the page cross-fade. Set on :root, not on the switcher.'
+			defaultValue: '0.45s',
+			description: 'Length of the whole fade-out-swap-fade-in. Set on :root, not on the switcher.'
 		}
 	],
 

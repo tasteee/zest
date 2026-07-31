@@ -4,6 +4,29 @@ Expands ROADMAP §5. The goal: a docs site — including *this* repo's site —
 should be buildable end to end out of `z-*` elements, with zero bespoke
 site-level layout CSS.
 
+## Status
+
+| Element | State | Notes |
+|---|---|---|
+| `z-example` | done | `site/src/render/example-card.ts` is now a 33-line adapter; 92 lines cut from `site.css`. Prop is `heading`, not `title` — `title` is a global attribute and would hang a tooltip off the card. |
+| `z-copy-button` | done | `z-code-block` now composes it rather than carrying its own. |
+| `z-clipboard` | done, as `shared/clipboard.ts` | Built as a module, not an element: copying is a function with nothing to render. |
+
+Everything else below is unstarted.
+
+Ordering note: the sequencing rationale at the foot of this file says to ship
+Wave 2 before authoring more content, because content would be written
+against a changing API. That risk turned out to be smaller than assumed —
+`ComponentDocT` in `site/src/component-docs/types.ts` already matches the
+proposed element APIs almost exactly (`ExampleT` ≈ `z-example` props,
+`PlaygroundControlT` ≈ `ControlT`, `ApiRowT` only gains optional fields). The
+work is in the renderers, not the data, so the remaining doc pages can be
+authored in parallel with waves 1–2.
+
+The one exception is `z-anatomy`: pinned numbered callouts need region
+coordinates and `AnatomyPartT` is only `{ name, description }`. Add the
+optional fields before authoring anatomy content, or it needs a second pass.
+
 ## The forcing function
 
 `site/src/` currently hand-rolls the pieces that matter most:

@@ -5,9 +5,11 @@ ticker strips, testimonial loops.
 
 ```html
 <z-marquee duration="30" pause-on-hover has-fade>
-  <img src="/logos/a.svg" alt="" />
-  <img src="/logos/b.svg" alt="" />
-  <img src="/logos/c.svg" alt="" />
+  <img src="/logos/acme.svg" alt="Acme" height="28" />
+  <img src="/logos/globex.svg" alt="Globex" height="28" />
+  <img src="/logos/initech.svg" alt="Initech" height="28" />
+  <img src="/logos/umbrella.svg" alt="Umbrella" height="28" />
+  <img src="/logos/hooli.svg" alt="Hooli" height="28" />
 </z-marquee>
 ```
 

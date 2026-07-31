@@ -37,7 +37,8 @@ const styles = css`
 			opacity 0.05s,
 			border-color 0.05s,
 			background-color 0.05s,
-			color 0.05s;
+			color 0.05s,
+			box-shadow var(--material-press-duration) ease;
 	}
 
 	button.is-full-width {
@@ -48,21 +49,21 @@ const styles = css`
 
 	button.is-small {
 		border-radius: var(--z-button-radius, var(--small-button-radius));
-		height: 2rem;
+		height: var(--control-height-sm);
 		padding-inline: 0.875rem;
 		font-size: 0.75rem;
 	}
 
 	button.is-medium {
 		border-radius: var(--z-button-radius, var(--medium-button-radius));
-		height: 2.5rem;
+		height: var(--control-height-md);
 		padding-inline: 1rem;
 		font-size: 0.875rem;
 	}
 
 	button.is-large {
 		border-radius: var(--z-button-radius, var(--large-button-radius));
-		height: 3rem;
+		height: var(--control-height-lg);
 		padding-inline: 1.5rem;
 		font-size: 1rem;
 	}
@@ -99,14 +100,25 @@ const styles = css`
 
 	/* kinds: paint using --tone-color */
 
+	/* A solid button is the library's most physical object, so it consumes the
+	   full material vocabulary: a lit fill, a raised stack, and an LED rim in
+	   its own tone. Every one of those tokens is inert in the flat themes,
+	   where this paints exactly the flat tone colour it always did.
+	   --emissive-color is the handshake: the theme writes the glow, this
+	   writes which colour it glows. */
 	button.is-solid {
-		/* --haze-tone resolves to none in the dark theme, so this paints exactly
-		   the flat tone colour there and picks up a whisper of light only when
-		   the light theme is active. */
-		background: var(--haze-tone), var(--tone-color);
+		--emissive-color: var(--tone-color);
+		background: var(--material-tone), var(--tone-color);
+		box-shadow: var(--elevation-raised), var(--emissive-tone);
 		border-color: var(--tone-color);
 		color: white;
 		font-weight: 600;
+	}
+
+	/* Pressing swaps the raised stack for the pressed one, which in the
+	   hardware themes reads as the cap travelling into the panel. */
+	button.is-solid:active {
+		box-shadow: var(--elevation-pressed);
 	}
 
 	/* The neutral tone is the one fill that flips with the theme — near-white
@@ -125,7 +137,7 @@ const styles = css`
 	}
 
 	button.is-outline {
-		background: transparent;
+		background: var(--material-surface);
 		border-color: var(--tone-color);
 		color: var(--tone-color);
 	}

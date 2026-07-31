@@ -75,7 +75,9 @@ const styles = css`
 		color: color-mix(in oklch, var(--tone) 80%, white);
 	}
 	.badge.is-solid {
-		background: var(--tone);
+		--emissive-color: var(--tone);
+		background: var(--material-tone), var(--tone);
+		box-shadow: var(--emissive-tone);
 		color: var(--primary-foreground);
 	}
 	/* purple/pink fills are light enough that dark text muddies; use neutral-8. */

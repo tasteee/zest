@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img" aria-label="Green valley">
+  <rect width="800" height="600" fill="#1f4038"/>
+  <circle cx="576" cy="168" r="66" fill="#3fb8a4"/>
+  <path d="M0 396 L208 204 L384 396 Z" fill="#2e5b4f"/>
+  <path d="M272 420 L512 156 L768 420 Z" fill="#2e5b4f" opacity="0.72"/>
+  <rect y="396" width="800" height="204" fill="#142a25"/>
+  <circle cx="112" cy="492" r="36" fill="#1f4038" opacity="0.35"/>
+  <circle cx="688" cy="540" r="54" fill="#1f4038" opacity="0.22"/>
+</svg>

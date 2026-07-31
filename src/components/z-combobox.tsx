@@ -46,15 +46,15 @@ const styles = css`
 	/* matches z-input's scale — a combobox is a text field first, and the two
 	   sit side by side in forms often enough that they must share a baseline. */
 	.field.is-small {
-		height: 2.25rem;
+		height: var(--control-height-sm);
 		padding-inline: 0.75rem;
 	}
 	.field.is-medium {
-		height: 2.75rem;
+		height: var(--control-height-md);
 		padding-inline: 0.875rem;
 	}
 	.field.is-large {
-		height: 3.25rem;
+		height: var(--control-height-lg);
 		padding-inline: 1rem;
 	}
 

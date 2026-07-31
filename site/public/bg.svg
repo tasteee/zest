@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500" role="img" aria-label="Card background">
+  <rect width="800" height="500" fill="#241d33"/>
+  <circle cx="640" cy="120" r="150" fill="#3a2f4f"/>
+  <circle cx="180" cy="420" r="200" fill="#31284a"/>
+  <rect x="0" y="240" width="800" height="4" fill="#52456e" opacity="0.5"/>
+</svg>

@@ -7,9 +7,9 @@ stays declarative.
 
 ```html
 <z-carousel loop autoplay="5000">
-  <img src="/1.jpg" />
-  <img src="/2.jpg" />
-  <img src="/3.jpg" />
+  <img src="/slides/1.svg" alt="Slide one" />
+  <img src="/slides/2.svg" alt="Slide two" />
+  <img src="/slides/3.svg" alt="Slide three" />
 </z-carousel>
 ```
 

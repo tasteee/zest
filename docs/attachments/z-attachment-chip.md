@@ -6,7 +6,7 @@ upload bar. Typically rendered inside a [z-attachment-tray](z-attachment-tray.md
 
 ```html
 <z-attachment-chip name="brief.pdf" size="248000" type="application/pdf"></z-attachment-chip>
-<z-attachment-chip name="photo.png" thumbnail="/thumbs/photo.png" progress="60"></z-attachment-chip>
+<z-attachment-chip name="photo.png" thumbnail="/thumbs/photo.svg" progress="60"></z-attachment-chip>
 ```
 
 ```js

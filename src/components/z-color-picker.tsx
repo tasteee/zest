@@ -31,7 +31,7 @@ const styles = css`
 		background: transparent;
 		border: 1px solid var(--border);
 		border-radius: var(--radius-md);
-		height: 2.75rem;
+		height: var(--control-height-md);
 		padding-inline: 0.625rem 0.875rem;
 		color: var(--foreground);
 		font-family: var(--font-mono);

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" width="96" height="96" role="img" aria-label="Photo thumbnail">
+  <rect width="96" height="96" fill="#2f4858"/>
+  <circle cx="66" cy="28" r="11" fill="#e8a33d"/>
+  <path d="M0 72 L30 40 L54 72 Z" fill="#41677a"/>
+  <path d="M40 78 L66 48 L96 78 Z" fill="#41677a" opacity="0.7"/>
+  <rect y="72" width="96" height="24" fill="#1f2f3a"/>
+</svg>

@@ -13,9 +13,9 @@ const styles = css`
 	:host([tone='primary']) { --accent: var(--purple); }
 	:host([tone='secondary']) { --accent: var(--pink); }
 	.field { display: inline-flex; align-items: stretch; width: 100%; box-sizing: border-box; min-width: 0; background: transparent; border: 1px solid var(--border); border-radius: var(--radius-md); color: var(--foreground); font-family: inherit; overflow: hidden; transition: border-color 0.12s ease, background-color 0.12s ease; }
-	.field.is-small { height: 2rem; font-size: var(--font-size-small); }
-	.field.is-medium { height: 2.5rem; font-size: var(--font-size-body); }
-	.field.is-large { height: 3rem; font-size: var(--font-size-h4); }
+	.field.is-small { height: var(--control-height-sm); font-size: var(--font-size-small); }
+	.field.is-medium { height: var(--control-height-md); font-size: var(--font-size-body); }
+	.field.is-large { height: var(--control-height-lg); font-size: var(--font-size-h4); }
 	.field:hover { border-color: color-mix(in oklch, var(--foreground) 30%, transparent); }
 	.field.is-focused { border-color: var(--accent); background: color-mix(in oklch, var(--accent) 5%, transparent); }
 	.field.is-invalid { border-color: var(--destructive); --accent: var(--destructive); }

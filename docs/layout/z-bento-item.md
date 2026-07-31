@@ -8,7 +8,7 @@ hover/focus — omit it for a static cell.
 
 ```html
 <z-bento-item col-span="2" href="/features">
-  <img slot="background" src="/bg.jpg" alt="" />
+  <img slot="background" src="/bg.svg" alt="" />
   <svg slot="icon">…</svg>
   <z-heading size="xs">Feature name</z-heading>
   <z-text color="muted">A short description.</z-text>
