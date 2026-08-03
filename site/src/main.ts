@@ -44,6 +44,22 @@ type ZCommandElementT = HTMLElement & {
 	isOpen: boolean
 }
 
+type NavNodeT = {
+	label: string
+	route?: string
+	status?: string
+	children?: NavNodeT[]
+}
+
+type ZNavTreeElementT = HTMLElement & {
+	items: NavNodeT[]
+	route: string
+}
+
+type ZDocsShellElementT = HTMLElement & {
+	isNavOpen: boolean
+}
+
 // Tracks whichever doc page is currently rendered, so clicks on markdown-
 // authored cross-reference links (e.g. "z-button-group.md") can be resolved
 // relative to the right folder.
@@ -62,53 +78,30 @@ const buildMarkdown = (content: string): ZMarkdownElementT => {
 	return markdown
 }
 
-const buildNavLink = (label: string, route: string, currentRoute: string): HTMLElement => {
-	const listItem = createElement('li')
-	const link = createElement('a', 'navLink') as HTMLAnchorElement
-	link.href = `#${route}`
-	link.textContent = label
-	const isActive = route === currentRoute
-	if (isActive) link.classList.add('isActive')
-	listItem.append(link)
-	return listItem
+const buildNavLeaf = (page: DocPageT): NavNodeT => {
+	return { label: page.slug, route: page.route }
 }
 
-const buildNavGroup = (label: string, pages: DocPageT[], currentRoute: string): HTMLElement => {
-	const group = createElement('div', 'navGroup')
-
-	const groupLabel = createElement('p', 'navGroupLabel')
-	groupLabel.textContent = label
-	group.append(groupLabel)
-
-	const list = createElement('ul', 'navList')
-	for (const page of pages) {
-		list.append(buildNavLink(page.slug, page.route, currentRoute))
-	}
-	group.append(list)
-
-	return group
-}
-
-// Returns just the group nodes, not a wrapping <nav> — the shell already
-// owns one persistent <nav id="docNav"> and this refills its children on
-// every route change.
-const buildSidebarNavGroups = (currentRoute: string): DocumentFragment => {
-	const fragment = document.createDocumentFragment()
+// One category per branch, in the order docs-data emits them. z-nav-tree does
+// not sort — the author's ordering is the information.
+const buildNavItems = (): NavNodeT[] => {
+	const items: NavNodeT[] = []
 
 	for (const category of siteData.categories) {
-		fragment.append(buildNavGroup(category.label, category.pages, currentRoute))
+		items.push({ label: category.label, children: category.pages.map(buildNavLeaf) })
 	}
 
 	const hasStandalonePages = siteData.standalonePages.length > 0
 	if (hasStandalonePages) {
-		fragment.append(buildNavGroup('More', siteData.standalonePages, currentRoute))
+		items.push({ label: 'More', children: siteData.standalonePages.map(buildNavLeaf) })
 	}
 
-	return fragment
+	return items
 }
 
 const renderHomePage = (contentRoot: HTMLElement): void => {
 	activePage = null
+	setPageOutline(null)
 
 	const breadcrumbs = buildBreadcrumbs([{ label: 'Docs', isCurrent: true }])
 	const markdown = buildMarkdown(siteData.homeMarkdown)
@@ -141,6 +134,22 @@ const buildRenderFailureNotice = (page: DocPageT, renderError: Error): HTMLEleme
 // Pages that have been converted to a TypeScript doc module get the full
 // reference layout. Everything else still renders from its markdown file
 // until it is converted, so the site is never half-broken mid-migration.
+// The outline is slotted into the shell rather than the content column, so a
+// page that has no outline — a markdown page, a splash — simply never puts
+// anything there and the shell drops the track.
+const setPageOutline = (outline: HTMLElement | null): void => {
+	const shell = document.querySelector('#docShell')
+	if (!shell) return
+
+	const previousOutline = shell.querySelector('[slot="toc"]')
+	previousOutline?.remove()
+
+	if (!outline) return
+
+	outline.setAttribute('slot', 'toc')
+	shell.append(outline)
+}
+
 const renderComponentDocPage = (contentRoot: HTMLElement, page: DocPageT): boolean => {
 	const componentDoc = getComponentDoc(page.slug)
 	if (!componentDoc) return false
@@ -148,10 +157,13 @@ const renderComponentDocPage = (contentRoot: HTMLElement, page: DocPageT): boole
 	activePage = page
 
 	try {
-		contentRoot.replaceChildren(buildComponentPage(componentDoc, page.categoryLabel))
+		const componentPage = buildComponentPage(componentDoc, page.categoryLabel)
+		contentRoot.replaceChildren(componentPage.article)
+		setPageOutline(componentPage.outline)
 	} catch (renderError) {
 		console.error(`zest docs: "${page.slug}" failed to render`, renderError)
 		contentRoot.replaceChildren(buildRenderFailureNotice(page, renderError as Error))
+		setPageOutline(null)
 	}
 
 	return true
@@ -159,6 +171,7 @@ const renderComponentDocPage = (contentRoot: HTMLElement, page: DocPageT): boole
 
 const renderMarkdownDocPage = (contentRoot: HTMLElement, page: DocPageT): void => {
 	activePage = page
+	setPageOutline(null)
 
 	const breadcrumbs = buildBreadcrumbs([
 		{ label: 'Docs', href: '#/' },
@@ -193,6 +206,7 @@ const renderMarkdownDocPage = (contentRoot: HTMLElement, page: DocPageT): void =
 
 const renderNotFound = (contentRoot: HTMLElement): void => {
 	activePage = null
+	setPageOutline(null)
 
 	const wrap = createElement('div', 'notFound')
 	const callout = createElement('z-callout')
@@ -215,18 +229,25 @@ const parseCurrentRoute = (): string => {
 	return rawHash
 }
 
+// The shell owns the scroll container now (z-chassis's screen), so landing at
+// the top of a new page goes through it rather than the content element.
+const scrollPageToTop = (): void => {
+	const shell = document.querySelector('#docShell') as (ZDocsShellElementT & { scrollContentToTop?: () => void }) | null
+	shell?.scrollContentToTop?.()
+}
+
 const renderRoute = (): void => {
 	const contentRoot = document.querySelector('#docContent') as HTMLElement | null
-	const sidebarRoot = document.querySelector('#docNav') as HTMLElement | null
-	if (!contentRoot || !sidebarRoot) return
+	const navTree = document.querySelector('#docNav') as ZNavTreeElementT | null
+	if (!contentRoot || !navTree) return
 
 	const currentRoute = parseCurrentRoute()
-	sidebarRoot.replaceChildren(buildSidebarNavGroups(currentRoute))
+	navTree.route = currentRoute
 
 	const isHomeRoute = currentRoute === '/'
 	if (isHomeRoute) {
 		renderHomePage(contentRoot)
-		contentRoot.scrollTo(0, 0)
+		scrollPageToTop()
 		return
 	}
 
@@ -239,7 +260,7 @@ const renderRoute = (): void => {
 	const wasRenderedAsComponentPage = renderComponentDocPage(contentRoot, matchedPage)
 	if (!wasRenderedAsComponentPage) renderMarkdownDocPage(contentRoot, matchedPage)
 
-	contentRoot.scrollTo(0, 0)
+	scrollPageToTop()
 }
 
 // Doc pages link to each other with plain relative markdown paths (e.g.
@@ -275,19 +296,29 @@ const buildCommandPalette = (): ZCommandElementT => {
 	return commandPalette
 }
 
-const buildHeader = (commandPalette: ZCommandElementT): HTMLElement => {
-	const header = createElement('header', 'appHeader')
+// Brand and search sit in the rail's pinned header region, so both stay put
+// while the component categories beneath them scroll. Search stands in for
+// z-nav-tree's own filter: the palette already searches every page, and two
+// find-a-component affordances a few pixels apart is one too many.
+const buildNavHeader = (commandPalette: ZCommandElementT): HTMLElement => {
+	const brand = createElement('div', 'navBrand')
+	brand.setAttribute('slot', 'nav-header')
 
 	const logo = createElement('div', 'appLogo')
 	logo.textContent = 'zest'
 
+	brand.append(logo, buildSearchTrigger(commandPalette))
+	return brand
+}
+
+const buildSearchTrigger = (commandPalette: ZCommandElementT): HTMLElement => {
 	const searchTrigger = document.createElement('button')
 	searchTrigger.type = 'button'
 	searchTrigger.className = 'searchTrigger'
 	searchTrigger.setAttribute('aria-label', 'Search components')
 
 	const searchLabel = createElement('span', 'searchTriggerLabel')
-	searchLabel.textContent = 'Search components'
+	searchLabel.textContent = 'Search'
 
 	const searchKeys = createElement('span', 'searchTriggerKeys')
 	const kbdMeta = createElement('z-kbd')
@@ -303,20 +334,25 @@ const buildHeader = (commandPalette: ZCommandElementT): HTMLElement => {
 		commandPalette.isOpen = true
 	})
 
-	const headerActions = createElement('div', 'appHeaderActions')
+	return searchTrigger
+}
+
+// Theme lives in the rail's pinned footer: always reachable, never scrolled
+// past, and out of the way of the nav itself.
+const buildNavFooter = (): HTMLElement => {
+	const utilities = createElement('div', 'navUtilities')
+	utilities.setAttribute('slot', 'nav-footer')
 
 	// The docs site offers every theme zest ships, which is more than the
 	// switcher's own default of light/dark/system. Icon-only, because six
-	// labelled segments would dominate the header.
+	// labelled segments would dominate the rail.
 	const themeSwitcher = createElement('z-theme-switcher') as HTMLElement & { themes: string[] }
 	themeSwitcher.setAttribute('is-small', '')
 	themeSwitcher.setAttribute('is-icon-only', '')
 	themeSwitcher.themes = ['light', 'dark', 'console', 'studio', 'system']
 
-	headerActions.append(searchTrigger, themeSwitcher)
-
-	header.append(logo, headerActions)
-	return header
+	utilities.append(themeSwitcher)
+	return utilities
 }
 
 const initDocsSite = (): void => {
@@ -325,14 +361,29 @@ const initDocsSite = (): void => {
 
 	const commandPalette = buildCommandPalette()
 
-	const shell = createElement('div', 'appShell')
-	const nav = createElement('nav', 'appNav')
-	nav.id = 'docNav'
-	const content = createElement('div', 'appContent')
+	const shell = createElement('z-docs-shell') as ZDocsShellElementT
+	shell.id = 'docShell'
+	shell.setAttribute('nav-width', '17rem')
+	shell.setAttribute('content-width', '54rem')
+	shell.setAttribute('toc-width', '13rem')
+
+	const navTree = createElement('z-nav-tree') as ZNavTreeElementT
+	navTree.id = 'docNav'
+	navTree.setAttribute('slot', 'nav')
+	navTree.setAttribute('storage-key', 'zest-docs-nav')
+	navTree.items = buildNavItems()
+
+	// The nav navigates itself — its anchors carry real hrefs. This only
+	// closes the mobile drawer behind the reader.
+	navTree.addEventListener('navigate', () => {
+		shell.isNavOpen = false
+	})
+
+	const content = createElement('div')
 	content.id = 'docContent'
 	content.addEventListener('click', handleDocContentClick)
 
-	shell.append(buildHeader(commandPalette), nav, content)
+	shell.append(buildNavHeader(commandPalette), navTree, buildNavFooter(), content)
 	appRoot.replaceChildren(shell, commandPalette)
 
 	document.addEventListener('keydown', (event) => {

@@ -255,9 +255,15 @@ const buildPageOutline = (sections: PageSectionT[]): HTMLElement => {
 	return outline
 }
 
-export const buildComponentPage = (componentDoc: ComponentDocT, categoryLabel: string): HTMLElement => {
-	const layout = createElement('div', 'componentPage')
+// The article and its outline are returned separately because they land in
+// different slots of z-docs-shell — the shell owns the two-column measure and
+// the sticky offset, so the page only has to say what goes in each column.
+export type ComponentPageT = {
+	article: HTMLElement
+	outline: HTMLElement
+}
 
+export const buildComponentPage = (componentDoc: ComponentDocT, categoryLabel: string): ComponentPageT => {
 	const article = createElement('article', 'componentArticle')
 	article.append(buildBreadcrumbs(categoryLabel, componentDoc.title))
 	article.append(buildPageHeader(componentDoc, categoryLabel))
@@ -267,6 +273,5 @@ export const buildComponentPage = (componentDoc: ComponentDocT, categoryLabel: s
 		article.append(section.element)
 	}
 
-	layout.append(article, buildPageOutline(sections))
-	return layout
+	return { article, outline: buildPageOutline(sections) }
 }

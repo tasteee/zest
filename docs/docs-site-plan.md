@@ -11,8 +11,16 @@ site-level layout CSS.
 | `z-example` | done | `site/src/render/example-card.ts` is now a 33-line adapter; 92 lines cut from `site.css`. Prop is `heading`, not `title` — `title` is a global attribute and would hang a tooltip off the card. |
 | `z-copy-button` | done | `z-code-block` now composes it rather than carrying its own. |
 | `z-clipboard` | done, as `shared/clipboard.ts` | Built as a module, not an element: copying is a function with nothing to render. |
+| `z-docs-shell` | done | Composes `z-chassis`. The toc column is slot-driven, not `has-toc` — a page that slots nothing gets a two-column shell, so splash and demo pages carry no dead gutter. Owns the measure, the page padding, and the sticky offset. |
+| `z-nav-tree` | done | Anchor-based and router-agnostic: clicks are never intercepted, `navigate` is a notification. Rows are flattened before render, as in `z-tree`. |
 
 Everything else below is unstarted.
+
+`z-chassis` gained two things the shell needed: `scrollScreenTo(options)` /
+`getScreen()` (the screen is the scroll container, and a routed view landing
+at the top of a new page has no other way to reach it once the shell owns the
+frame), and a `sidebar-header` slot pinned above the scrolling rail body, so a
+brand does not scroll away with the nav under it.
 
 Ordering note: the sequencing rationale at the foot of this file says to ship
 Wave 2 before authoring more content, because content would be written

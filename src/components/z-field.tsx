@@ -33,14 +33,25 @@ const styles = css`
 	   floored at its content's min-content width, so a field in a narrow
 	   container (a grid cell, a split pane) grew past it and overlapped its
 	   neighbour instead of letting the control shrink. */
-	.field { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--field-gap); }
+	/* The padding is the only space the label costs. It is half the label's
+	   height, which is exactly enough for the label to straddle the control's
+	   top border rather than needing a full band above it. Unconditional, so a
+	   field with no label still lines up with its labelled neighbours. */
+	.field { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--field-gap); position: relative; padding-top: calc(var(--field-label-height) / 2); }
 
-	/* Fixed rather than left to line-height: a label that wraps, or one set in
-	   a theme with different metrics, would otherwise change the height of the
-	   whole row and break alignment with its neighbours. */
-	.header { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; height: var(--field-label-height); }
+	/* Out of flow and pinned to the top of the field. Because the field's
+	   padding-top is half the label height, top: 0 centres the label on the
+	   control's top border rather than dropping it into the control's text.
+	   The height stays fixed rather than left to line-height, so a label set in
+	   a theme with different metrics cannot shift the notch.
+	   right is set as well as left so the box is still width-constrained — a
+	   shrink-to-fit header would size to max-content and the label's ellipsis
+	   would never engage. */
+	.header { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; height: var(--field-label-height); position: absolute; top: 0; left: 16px; right: 16px; z-index: 2; }
 
-	.label { color: var(--color-neutral-5); font-size: var(--font-size-small); font-weight: 600; line-height: 1; letter-spacing: 0.04em; text-transform: lowercase; font-variant-caps: all-small-caps; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+	/* The label crosses the control outline, so it needs its own separation
+	   from whatever it lands on rather than relying on the surface behind it. */
+	.label { color: var(--color-neutral-5); font-size: var(--font-size-small); font-weight: 600; line-height: 1; letter-spacing: 0.04em; text-transform: lowercase; font-variant-caps: all-small-caps; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-shadow: 0px 2px 3px black; }
 	.required { color: var(--destructive); }
 
 	/* The band. Whatever is slotted sits vertically centred in a row of the

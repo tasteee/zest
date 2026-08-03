@@ -158,6 +158,8 @@ export * from './components/z-pointer-follow'
 
 // Documentation
 export * from './components/z-example'
+export * from './components/z-docs-shell'
+export * from './components/z-nav-tree'
 
 // Music / MIDI
 export * from './components/z-piano-roll'

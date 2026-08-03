@@ -2,30 +2,42 @@
    the ink.css tokens — nothing hardcoded — so the site inherits whatever
    theme zest ships without drifting from it. */
 
+/* The app owns the viewport exactly — no outer scroll. Scrolling belongs to
+   the nav rail and the page column inside the chassis; letting the body take
+   any of it produces a small drift where the whole app slides up past the
+   top when the reader keeps flicking at the end of an inner list. */
 html,
 body {
 	height: 100%;
+	margin: 0;
+	overflow: hidden;
+	overscroll-behavior: none;
 }
 
 #app {
 	height: 100dvh;
+	overflow: hidden;
 }
 
-.appShell {
-	display: grid;
-	grid-template-columns: 260px 1fr;
-	grid-template-rows: auto 1fr;
-	height: 100%;
-}
+/* The frame is <z-docs-shell> and the rail is <z-nav-tree>; both own their
+   own layout, spacing, and responsive collapse. What remains here is only
+   what the site slots into them. */
 
-.appHeader {
-	grid-column: 1 / -1;
+.navBrand {
 	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	height: 56px;
-	padding: 0 var(--spacing-6);
-	border-bottom: 1px solid var(--border);
+	flex-direction: column;
+	align-items: stretch;
+	gap: var(--spacing-3);
+	padding: var(--spacing-2) var(--spacing-3) var(--spacing-4);
+}
+
+.navUtilities {
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	gap: var(--spacing-2);
+	padding: var(--spacing-3);
+	border-top: 1px solid var(--border);
 }
 
 .appLogo {
@@ -36,23 +48,22 @@ body {
 	letter-spacing: -0.02em;
 }
 
-.appHeaderActions {
-	display: flex;
-	align-items: center;
-	gap: var(--spacing-3);
-}
-
+/* Sits where z-nav-tree's filter input used to, so it reads as the nav's
+   find-a-component field rather than a button bolted above it. */
 .searchTrigger {
 	display: flex;
+	width: 100%;
 	align-items: center;
-	gap: var(--spacing-3);
-	padding: var(--spacing-2) var(--spacing-3);
+	justify-content: space-between;
+	gap: var(--spacing-2);
+	min-width: 0;
+	padding: var(--spacing-1) var(--spacing-2);
 	background: var(--background-light);
 	border: 1px solid var(--border);
-	border-radius: var(--radius-md);
+	border-radius: var(--radius-sm);
 	color: var(--muted-foreground);
 	font-family: var(--font-sans);
-	font-size: var(--font-size-2);
+	font-size: var(--font-size-1);
 	cursor: pointer;
 	transition: border-color var(--duration-fast) var(--easing-standard);
 }
@@ -67,68 +78,7 @@ body {
 	gap: var(--spacing-1);
 }
 
-.appNav {
-	grid-row: 2;
-	overflow-y: auto;
-	padding: var(--spacing-5) var(--spacing-3);
-	border-right: 1px solid var(--border);
-}
-
-.navGroup + .navGroup {
-	margin-top: var(--spacing-5);
-}
-
-.navGroupLabel {
-	margin: 0 0 var(--spacing-2);
-	padding: 0 var(--spacing-3);
-	font-family: var(--font-mono);
-	font-size: var(--font-size-0);
-	font-weight: var(--font-weight-medium);
-	text-transform: uppercase;
-	letter-spacing: 0.06em;
-	color: var(--muted-foreground);
-}
-
-.navList {
-	list-style: none;
-	margin: 0;
-	padding: 0;
-	display: flex;
-	flex-direction: column;
-	gap: var(--spacing-1);
-}
-
-.navLink {
-	display: block;
-	padding: var(--spacing-2) var(--spacing-3);
-	border-radius: var(--radius-md);
-	color: var(--muted-foreground);
-	font-family: var(--font-mono);
-	font-size: var(--font-size-2);
-	text-decoration: none;
-	transition: background-color var(--duration-fast) var(--easing-standard), color var(--duration-fast) var(--easing-standard);
-}
-
-.navLink:hover {
-	color: var(--foreground);
-	background: var(--background-light);
-}
-
-.navLink.isActive {
-	color: var(--foreground);
-	background: var(--card);
-	font-weight: var(--font-weight-medium);
-}
-
-.appContent {
-	grid-row: 2;
-	overflow-y: auto;
-}
-
 .docArticle {
-	max-width: 860px;
-	margin: 0 auto;
-	padding: var(--spacing-10) var(--spacing-8) var(--spacing-24);
 	display: flex;
 	flex-direction: column;
 	gap: var(--spacing-5);
@@ -202,16 +152,8 @@ body {
    Depth comes from surfaces, hairline borders, and space — never shadow.
    --------------------------------------------------------------------- */
 
-.componentPage {
-	display: grid;
-	grid-template-columns: minmax(0, 1fr) 200px;
-	gap: var(--spacing-12);
-	max-width: 1120px;
-	margin: 0 auto;
-	padding: var(--spacing-10) var(--spacing-8) var(--spacing-32);
-	align-items: start;
-}
-
+/* The two-column measure, the page padding, and the outline's sticky offset
+   all belong to z-docs-shell now. */
 .componentArticle {
 	display: flex;
 	flex-direction: column;
@@ -434,8 +376,6 @@ body {
 /* --- on-this-page rail --- */
 
 .pageOutline {
-	position: sticky;
-	top: var(--spacing-10);
 	display: flex;
 	flex-direction: column;
 	gap: var(--spacing-3);
@@ -470,12 +410,5 @@ body {
 	color: var(--foreground);
 }
 
-@media (max-width: 1100px) {
-	.componentPage {
-		grid-template-columns: minmax(0, 1fr);
-	}
-
-	.pageOutline {
-		display: none;
-	}
-}
+/* The outline's responsive drop-out is z-docs-shell's, since the shell owns
+   the track the outline sits in. */

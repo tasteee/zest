@@ -1,4 +1,4 @@
-import { c, css } from 'atomico'
+import { c, css, useEffect, useHost, useRef } from 'atomico'
 import { themedScrollbarStyles } from '../shared/scrollbar-styles'
 
 /*
@@ -13,8 +13,10 @@ import { themedScrollbarStyles } from '../shared/scrollbar-styles'
  *     …main / routed content (the screen)…
  *   </z-chassis>
  *
- * Slots: `sidebar` (rail, top-aligned) · `sidebar-footer` (rail, bottom) ·
- * default (the screen). `rail-side="right"` flips the rail to the right.
+ * Slots: `sidebar-header` (rail, pinned top) · `sidebar` (rail, scrolls) ·
+ * `sidebar-footer` (rail, pinned bottom) · default (the screen). Only the
+ * middle region scrolls, so a logo above and an account row below stay put.
+ * `rail-side="right"` flips the rail to the right.
  *
  * `expand-on-hover` collapses the rail to a slim width and expands it on
  * hovering the rail itself (not the whole chassis), with a fluid, premium
@@ -25,6 +27,9 @@ import { themedScrollbarStyles } from '../shared/scrollbar-styles'
  * --chassis-screen / --chassis-border / --chassis-radius / --chassis-rail-width /
  * --chassis-bezel (frame around the rail) / --chassis-frame (thinner frame
  * around the screen's other three edges).
+ *
+ * Methods: scrollScreenTo(options) · getScreen(). The screen is the scroll
+ * container, so a routed view that wants to land at the top needs these.
  */
 const styles = css`
 	:host {
@@ -80,6 +85,18 @@ const styles = css`
 		--chassis-label-opacity: 1;
 	}
 
+	/* Pinned above the scrolling rail body — a logo or workspace switcher
+	   should not scroll away with the nav beneath it. */
+	.rail-head {
+		flex: 0 0 auto;
+		display: flex;
+		flex-direction: column;
+		align-items: stretch;
+		gap: 0.5rem;
+		padding-top: 8px;
+		overflow: hidden;
+	}
+
 	.rail-main {
 		flex: 1 1 auto;
 		display: flex;
@@ -90,6 +107,9 @@ const styles = css`
 		padding-top: 8px;
 		overflow-y: auto;
 		overflow-x: hidden;
+		/* Keeps a flick past the last nav row from chaining out to the
+		   page or the document beneath it. */
+		overscroll-behavior: contain;
 	}
 	.rail-foot {
 		flex: 0 0 auto;
@@ -107,6 +127,9 @@ const styles = css`
 		min-width: 0;
 		min-height: 0;
 		overflow: auto;
+		/* Same reason as .rail-main: a page that runs to the end of its
+		   scroll shouldn't drag whatever's outside the chassis up with it. */
+		overscroll-behavior: contain;
 		position: relative;
 		background: var(--chassis-screen, var(--bg));
 		border: 1px solid var(--chassis-screen-border, var(--border));
@@ -139,15 +162,30 @@ const styles = css`
 
 export const ZChassis = c(
 	(props) => {
+		const host = useHost()
+		const screenRef = useRef<HTMLElement>()
+
 		const style: Record<string, string> = {}
 		if (props.railWidth) style['--chassis-rail-width'] = props.railWidth as string
 		if (props.railCollapsedWidth) style['--chassis-rail-collapsed'] = props.railCollapsedWidth as string
 		if (props.bezel) style['--chassis-bezel'] = props.bezel as string
 		if (props.frame) style['--chassis-frame'] = props.frame as string
 
+		// Imperative API. The screen is the scroll container, and it lives in
+		// here — a routed view that wants to land at the top of the page has
+		// no other way to reach it.
+		useEffect(() => {
+			const element = host.current as any
+			element.scrollScreenTo = (options: ScrollToOptions) => screenRef.current?.scrollTo(options)
+			element.getScreen = () => screenRef.current ?? null
+		}, [])
+
 		return (
 			<host shadowDom style={style}>
 				<div class="rail" part="rail">
+					<div class="rail-head">
+						<slot name="sidebar-header" />
+					</div>
 					<div class="rail-main">
 						<slot name="sidebar" />
 					</div>
@@ -155,7 +193,7 @@ export const ZChassis = c(
 						<slot name="sidebar-footer" />
 					</div>
 				</div>
-				<div class="screen" part="screen">
+				<div class="screen" part="screen" ref={screenRef}>
 					<slot />
 				</div>
 			</host>

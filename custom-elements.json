@@ -4729,6 +4729,142 @@
         {
           "kind": "class",
           "customElement": true,
+          "tagName": "z-copy-button",
+          "name": "ZCopyButton",
+          "members": [
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "copiedLabel",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "kind",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isDisabled",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "copy",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "error",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "value",
+              "fieldName": "value",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "label",
+              "fieldName": "label",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "copied-label",
+              "fieldName": "copiedLabel",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "kind",
+              "fieldName": "kind",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "size",
+              "fieldName": "size",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "is-disabled",
+              "fieldName": "isDisabled",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "copy",
+              "fieldName": "copy",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "error",
+              "fieldName": "error",
+              "type": {
+                "text": "string"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
           "tagName": "z-date-divider",
           "name": "ZDateDivider",
           "members": [
@@ -5200,6 +5336,100 @@
             {
               "name": "select",
               "fieldName": "select",
+              "type": {
+                "text": "string"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
+          "tagName": "z-docs-shell",
+          "name": "ZDocsShell",
+          "members": [
+            {
+              "kind": "field",
+              "name": "navWidth",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "tocWidth",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "contentWidth",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isNavOpen",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "navClose",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "nav-width",
+              "fieldName": "navWidth",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "toc-width",
+              "fieldName": "tocWidth",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "content-width",
+              "fieldName": "contentWidth",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "is-nav-open",
+              "fieldName": "isNavOpen",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "nav-close",
+              "fieldName": "navClose",
               "type": {
                 "text": "string"
               }
@@ -6118,6 +6348,142 @@
               "fieldName": "isHidden",
               "type": {
                 "text": "boolean"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
+          "tagName": "z-example",
+          "name": "ZExample",
+          "members": [
+            {
+              "kind": "field",
+              "name": "heading",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "description",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "snippets",
+              "type": {
+                "text": "array"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "layout",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isSourceOpen",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "hasBackgroundGrid",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isResizable",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "copy",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "heading",
+              "fieldName": "heading",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "description",
+              "fieldName": "description",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "snippets",
+              "fieldName": "snippets",
+              "type": {
+                "text": "array"
+              }
+            },
+            {
+              "name": "layout",
+              "fieldName": "layout",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "is-source-open",
+              "fieldName": "isSourceOpen",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "has-background-grid",
+              "fieldName": "hasBackgroundGrid",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "is-resizable",
+              "fieldName": "isResizable",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "copy",
+              "fieldName": "copy",
+              "type": {
+                "text": "string"
               }
             }
           ]
@@ -9496,6 +9862,142 @@
             {
               "name": "select",
               "fieldName": "select",
+              "type": {
+                "text": "string"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
+          "tagName": "z-nav-tree",
+          "name": "ZNavTree",
+          "members": [
+            {
+              "kind": "field",
+              "name": "items",
+              "type": {
+                "text": "array"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "route",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "storageKey",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isCollapsedByDefault",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isFiltered",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "filterPlaceholder",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "navigate",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "items",
+              "fieldName": "items",
+              "type": {
+                "text": "array"
+              }
+            },
+            {
+              "name": "route",
+              "fieldName": "route",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "label",
+              "fieldName": "label",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "storage-key",
+              "fieldName": "storageKey",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "is-collapsed-by-default",
+              "fieldName": "isCollapsedByDefault",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "is-filtered",
+              "fieldName": "isFiltered",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "filter-placeholder",
+              "fieldName": "filterPlaceholder",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "navigate",
+              "fieldName": "navigate",
               "type": {
                 "text": "string"
               }
@@ -17432,6 +17934,14 @@
         },
         {
           "kind": "custom-element-definition",
+          "name": "z-copy-button",
+          "declaration": {
+            "name": "ZCopyButton",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
           "name": "z-date-divider",
           "declaration": {
             "name": "ZDateDivider",
@@ -17475,6 +17985,14 @@
           "name": "z-dock-item",
           "declaration": {
             "name": "ZDockItem",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "z-docs-shell",
+          "declaration": {
+            "name": "ZDocsShell",
             "module": "dist/zest.js"
           }
         },
@@ -17547,6 +18065,14 @@
           "name": "z-empty-state",
           "declaration": {
             "name": "ZEmptyState",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "z-example",
+          "declaration": {
+            "name": "ZExample",
             "module": "dist/zest.js"
           }
         },
@@ -17787,6 +18313,14 @@
           "name": "z-nav-menu",
           "declaration": {
             "name": "ZNavMenu",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "z-nav-tree",
+          "declaration": {
+            "name": "ZNavTree",
             "module": "dist/zest.js"
           }
         },
