@@ -1,6 +1,6 @@
 # Zest element API reference
 
-**172 elements.** Every one, as you would write it. Generated from
+**179 elements.** Every one, as you would write it. Generated from
 source by `scripts/build-api-reference.mjs`, so it is current by
 construction rather than by discipline.
 
@@ -33,7 +33,7 @@ short, that is the first place to check.
 - [Navigation & disclosure](#navigation--disclosure) — 8
 - [Overlays](#overlays) — 11
 - [Data display](#data-display) — 14
-- [Canvas, panels & docs](#canvas-panels--docs) — 17
+- [Canvas, panels & docs](#canvas-panels--docs) — 24
 - [Text editor](#text-editor) — 9
 - [Chat](#chat) — 22
 - [Attachments](#attachments) — 4
@@ -1364,6 +1364,20 @@ short, that is the first place to check.
 
 ## Canvas, panels & docs
 
+### `z-announcement-bar`
+
+```jsx
+<z-announcement-bar
+  message={string}
+  label={string}   // default: Announcement
+  accent="dom | sub | success | warning | error"   // default: dom
+  storage-key={string}
+  is-permanent
+  is-hidden
+  ondismiss={(event) => event.detail}   // —
+/>
+```
+
 ### `z-api-table`
 
 ```jsx
@@ -1443,6 +1457,19 @@ short, that is the first place to check.
 />
 ```
 
+### `z-edit-on-github`
+
+```jsx
+<z-edit-on-github
+  repo={string}
+  path={string}
+  branch={string}   // default: main
+  href={string}
+  label={string}
+  is-hidden
+/>
+```
+
 ### `z-editor-canvas`
 
 ```jsx
@@ -1465,6 +1492,17 @@ short, that is the first place to check.
 />
 ```
 
+### `z-external-link`
+
+```jsx
+<z-external-link
+  href={string}
+  label={string}
+  is-same-tab
+  is-hidden
+/>
+```
+
 ### `z-file-tree`
 
 ```jsx
@@ -1472,6 +1510,30 @@ short, that is the first place to check.
   paths={string}
   entries={Array}
   is-hidden
+/>
+```
+
+### `z-last-updated`
+
+```jsx
+<z-last-updated
+  datetime={string}
+  label={string}   // default: Updated
+  commit={string}
+  repo={string}
+  is-hidden
+/>
+```
+
+### `z-mermaid`
+
+```jsx
+<z-mermaid
+  code={string}
+  src={string}
+  theme={string}
+  is-hidden
+  onrender={(event) => event.detail}   // { id: string }
 />
 ```
 
@@ -1511,6 +1573,15 @@ short, that is the first place to check.
   next-label={string}   // default: Next
   is-hidden
   onnavigate={(event) => event.detail}   // { route: string }
+/>
+```
+
+### `z-reading-progress`
+
+```jsx
+<z-reading-progress
+  for={string}
+  is-hidden
 />
 ```
 
@@ -1584,6 +1655,19 @@ short, that is the first place to check.
   value={string}
   kind="primitive | literal | union | function | object"
   is-hidden
+/>
+```
+
+### `z-was-this-helpful`
+
+```jsx
+<z-was-this-helpful
+  page={string}
+  question={string}
+  comment-placeholder={string}
+  thanks-label={string}
+  is-hidden
+  onfeedback={(event) => event.detail}   // { isHelpful: boolean; comment: string; page: string }
 />
 ```
 

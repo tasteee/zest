@@ -174,6 +174,13 @@ export * from './components/z-code-group'
 export * from './components/z-do-dont'
 export * from './components/z-diff'
 export * from './components/z-file-tree'
+export * from './components/z-mermaid'
+export * from './components/z-external-link'
+export * from './components/z-reading-progress'
+export * from './components/z-was-this-helpful'
+export * from './components/z-announcement-bar'
+export * from './components/z-edit-on-github'
+export * from './components/z-last-updated'
 
 // Music / MIDI
 export * from './components/z-piano-roll'

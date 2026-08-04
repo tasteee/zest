@@ -249,6 +249,114 @@
         {
           "kind": "class",
           "customElement": true,
+          "tagName": "z-announcement-bar",
+          "name": "ZAnnouncementBar",
+          "members": [
+            {
+              "kind": "field",
+              "name": "message",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "accent",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "storageKey",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isPermanent",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "dismiss",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "message",
+              "fieldName": "message",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "label",
+              "fieldName": "label",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "accent",
+              "fieldName": "accent",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "storage-key",
+              "fieldName": "storageKey",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "is-permanent",
+              "fieldName": "isPermanent",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "dismiss",
+              "fieldName": "dismiss",
+              "type": {
+                "text": "string"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
           "tagName": "z-api-table",
           "name": "ZApiTable",
           "members": [
@@ -6863,6 +6971,100 @@
         {
           "kind": "class",
           "customElement": true,
+          "tagName": "z-edit-on-github",
+          "name": "ZEditOnGithub",
+          "members": [
+            {
+              "kind": "field",
+              "name": "repo",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "path",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "branch",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "href",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "repo",
+              "fieldName": "repo",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "path",
+              "fieldName": "path",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "branch",
+              "fieldName": "branch",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "href",
+              "fieldName": "href",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "label",
+              "fieldName": "label",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
           "tagName": "z-editor-canvas",
           "name": "ZEditorCanvas",
           "members": [
@@ -7330,6 +7532,72 @@
               "fieldName": "copy",
               "type": {
                 "text": "string"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
+          "tagName": "z-external-link",
+          "name": "ZExternalLink",
+          "members": [
+            {
+              "kind": "field",
+              "name": "href",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isSameTab",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "href",
+              "fieldName": "href",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "label",
+              "fieldName": "label",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "is-same-tab",
+              "fieldName": "isSameTab",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
               }
             }
           ]
@@ -9369,6 +9637,86 @@
         {
           "kind": "class",
           "customElement": true,
+          "tagName": "z-last-updated",
+          "name": "ZLastUpdated",
+          "members": [
+            {
+              "kind": "field",
+              "name": "datetime",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "commit",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "repo",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "datetime",
+              "fieldName": "datetime",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "label",
+              "fieldName": "label",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "commit",
+              "fieldName": "commit",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "repo",
+              "fieldName": "repo",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
           "tagName": "z-line",
           "name": "ZLine",
           "members": [
@@ -10112,6 +10460,86 @@
             {
               "name": "select",
               "fieldName": "select",
+              "type": {
+                "text": "string"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
+          "tagName": "z-mermaid",
+          "name": "ZMermaid",
+          "members": [
+            {
+              "kind": "field",
+              "name": "code",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "src",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "theme",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "render",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "code",
+              "fieldName": "code",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "src",
+              "fieldName": "src",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "theme",
+              "fieldName": "theme",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "render",
+              "fieldName": "render",
               "type": {
                 "text": "string"
               }
@@ -13175,6 +13603,44 @@
             {
               "name": "label",
               "fieldName": "label",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
+          "tagName": "z-reading-progress",
+          "name": "ZReadingProgress",
+          "members": [
+            {
+              "kind": "field",
+              "name": "for",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "for",
+              "fieldName": "for",
               "type": {
                 "text": "string"
               }
@@ -19365,6 +19831,100 @@
               }
             }
           ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
+          "tagName": "z-was-this-helpful",
+          "name": "ZWasThisHelpful",
+          "members": [
+            {
+              "kind": "field",
+              "name": "page",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "question",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "commentPlaceholder",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "thanksLabel",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "feedback",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "page",
+              "fieldName": "page",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "question",
+              "fieldName": "question",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "comment-placeholder",
+              "fieldName": "commentPlaceholder",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "thanks-label",
+              "fieldName": "thanksLabel",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "feedback",
+              "fieldName": "feedback",
+              "type": {
+                "text": "string"
+              }
+            }
+          ]
         }
       ],
       "exports": [
@@ -19389,6 +19949,14 @@
           "name": "z-alert-dialog",
           "declaration": {
             "name": "ZAlertDialog",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "z-announcement-bar",
+          "declaration": {
+            "name": "ZAnnouncementBar",
             "module": "dist/zest.js"
           }
         },
@@ -19858,6 +20426,14 @@
         },
         {
           "kind": "custom-element-definition",
+          "name": "z-edit-on-github",
+          "declaration": {
+            "name": "ZEditOnGithub",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
           "name": "z-editor-canvas",
           "declaration": {
             "name": "ZEditorCanvas",
@@ -19885,6 +20461,14 @@
           "name": "z-example",
           "declaration": {
             "name": "ZExample",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "z-external-link",
+          "declaration": {
+            "name": "ZExternalLink",
             "module": "dist/zest.js"
           }
         },
@@ -20026,6 +20610,14 @@
         },
         {
           "kind": "custom-element-definition",
+          "name": "z-last-updated",
+          "declaration": {
+            "name": "ZLastUpdated",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
           "name": "z-line",
           "declaration": {
             "name": "ZLine",
@@ -20085,6 +20677,14 @@
           "name": "z-menu",
           "declaration": {
             "name": "ZMenu",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "z-mermaid",
+          "declaration": {
+            "name": "ZMermaid",
             "module": "dist/zest.js"
           }
         },
@@ -20301,6 +20901,14 @@
           "name": "z-read-receipt",
           "declaration": {
             "name": "ZReadReceipt",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "z-reading-progress",
+          "declaration": {
+            "name": "ZReadingProgress",
             "module": "dist/zest.js"
           }
         },
@@ -20741,6 +21349,14 @@
           "name": "z-virtual-list",
           "declaration": {
             "name": "ZVirtualList",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "z-was-this-helpful",
+          "declaration": {
+            "name": "ZWasThisHelpful",
             "module": "dist/zest.js"
           }
         }

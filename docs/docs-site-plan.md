@@ -28,6 +28,13 @@ site-level layout CSS.
 | `z-code-annotation` | done, as `z-code-block` attributes | `highlight-lines` / `added-lines` / `removed-lines` / `focus-lines`. Any of them switches the block to per-line rows; a diff mark swaps the gutter count for a sign. No second element was needed. |
 | `z-diff` | done | LCS over lines, no dependency. Each side highlighted with its own pass, because a patch is not valid source in any language. |
 | `z-file-tree` | done | Presentational — not `z-tree` in a costume. Primary API is indented text, so it works on a page with no script. |
+| `z-mermaid` | done | Renderer loaded lazily from a CDN, cached per URL, overridable for self-hosting. A page with no diagram pays nothing. |
+| `z-external-link` | done | Hardens `rel` rather than trusting the author to remember `noopener`. |
+| `z-reading-progress` | done | Scroll captured on document, not window — the page scrolls inside a chassis screen. `aria-hidden`: it measures a position the reader already knows. |
+| `z-was-this-helpful` | done | Reports and forgets; the destination is the host's call. "No" opens a comment field, "yes" does not. |
+| `z-announcement-bar` | done | The storage key is the announcement, not the element. Renders nothing until storage is read, so a dismissed banner never flashes. |
+| `z-edit-on-github` | done | Builds the URL from repo + path, so 150 pages cannot point at 150 wrong branches. |
+| `z-last-updated` | done | Composes `z-relative-time`. The commit link needs both a SHA and a repo — a SHA with nowhere to go is not provenance. |
 
 Waves 1 and 2 are complete. Everything else below is unstarted.
 
@@ -44,9 +51,12 @@ Wave 3 is most of the way through. `z-swatch` and `z-token-table` closed the
 library's largest documentation gap — 411 tokens with no reference page, now
 `docs/foundation/tokens.md`. `z-steps`, `z-code-group` and `z-do-dont` follow.
 
-Remaining in Wave 3: `z-mermaid` alone, which is held back deliberately — it
-has to load its renderer lazily or the zero-runtime-dependency guarantee does
-not survive it.
+Wave 3 is complete. Wave 4's page furniture is done alongside it.
+
+Remaining in Wave 4: `z-search-dialog`, `z-theme-toggle` (largely covered by
+the existing `z-theme-switcher`), and the `z-version-picker` /
+`z-language-switcher` pair. Wave 5 — `z-live-code` and `z-sandbox` — is
+untouched.
 
 `z-chassis` gained two things the shell needed: `scrollScreenTo(options)` /
 `getScreen()` (the screen is the scroll container, and a routed view landing
