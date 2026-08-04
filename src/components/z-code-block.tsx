@@ -145,6 +145,55 @@ const styles = css`
 	}
 
 	/*
+	 * Annotation. These are table-rows, so a background has to be painted on
+	 * the cells rather than the row — a table-row's background sits behind its
+	 * cells and is invisible wherever a cell paints its own.
+	 *
+	 * The marker column is the existing gutter: with added-lines set it
+	 * carries +/- instead of the line number, because a diff reader wants the
+	 * sign more than the count.
+	 */
+	.line.is-highlighted .gutter,
+	.line.is-highlighted .text {
+		background: color-mix(in oklch, var(--purple) 12%, transparent);
+	}
+
+	.line.is-highlighted .text {
+		box-shadow: inset 2px 0 0 var(--purple);
+	}
+
+	.line.is-added .gutter,
+	.line.is-added .text {
+		background: color-mix(in oklch, var(--success) 12%, transparent);
+	}
+
+	.line.is-added .gutter {
+		color: var(--success);
+		opacity: 1;
+	}
+
+	.line.is-removed .gutter,
+	.line.is-removed .text {
+		background: color-mix(in oklch, var(--destructive) 12%, transparent);
+	}
+
+	.line.is-removed .gutter {
+		color: var(--destructive);
+		opacity: 1;
+	}
+
+	/* Focus dims everything else rather than hiding it, so the surrounding
+	   code still gives the excerpt somewhere to sit. */
+	.line.is-dimmed {
+		opacity: 0.35;
+		transition: opacity 0.15s ease;
+	}
+
+	.block:hover .line.is-dimmed {
+		opacity: 1;
+	}
+
+	/*
 	 * highlight.js token classes mapped onto the zest --syntax-* palette.
 	 * Ordering matters: highlight.js nests JSX content inside .hljs-tag (e.g.
 	 * "hljs-tag hljs-attr"), so structural classes (.hljs-tag) are declared
@@ -229,6 +278,65 @@ const styles = css`
 	}
 `
 
+/*
+ * Line annotation. Ranges are authored the way a person writes them —
+ * "3-5,8" — because the alternative is an array property, and the pages that
+ * most want to annotate a snippet are markdown pages with no script.
+ */
+const parseLineRanges = (spec?: string): Set<number> => {
+	const lines = new Set<number>()
+	if (!spec) return lines
+
+	for (const part of spec.split(',')) {
+		const range = part.trim()
+		if (!range) continue
+
+		const bounds = range.split('-')
+		const start = Number(bounds[0])
+		const end = bounds.length > 1 ? Number(bounds[1]) : start
+
+		const isUsable = Number.isFinite(start) && Number.isFinite(end)
+		if (!isUsable) continue
+
+		for (let line = Math.min(start, end); line <= Math.max(start, end); line += 1) {
+			lines.add(line)
+		}
+	}
+
+	return lines
+}
+
+const buildLineClass = (lineNumber: number, marks: MarksT): string => {
+	const classes = ['line']
+
+	if (marks.highlighted.has(lineNumber)) classes.push('is-highlighted')
+	if (marks.added.has(lineNumber)) classes.push('is-added')
+	if (marks.removed.has(lineNumber)) classes.push('is-removed')
+
+	const hasFocus = marks.focused.size > 0
+	const isDimmed = hasFocus && !marks.focused.has(lineNumber)
+	if (isDimmed) classes.push('is-dimmed')
+
+	return classes.join(' ')
+}
+
+type MarksT = {
+	highlighted: Set<number>
+	added: Set<number>
+	removed: Set<number>
+	focused: Set<number>
+}
+
+// With a diff annotation present the gutter carries the sign instead of the
+// count: a reader following a change wants to know which way a line went more
+// than they want its position.
+const buildGutterLabel = (lineNumber: number, marks: MarksT): string => {
+	if (marks.added.has(lineNumber)) return '+'
+	if (marks.removed.has(lineNumber)) return '-'
+	return String(lineNumber)
+}
+
+
 export const ZCodeBlock = c(
 	(props) => {
 		const code = (props.code as string) ?? ''
@@ -236,6 +344,20 @@ export const ZCodeBlock = c(
 
 		const tokens = useMemo(() => highlight(code.replace(/\n$/, ''), language), [code, language])
 		const tokenLines = useMemo(() => splitTokenLines(tokens), [tokens])
+
+		const marks: MarksT = {
+			highlighted: parseLineRanges(props.highlightLines as string),
+			added: parseLineRanges(props.addedLines as string),
+			removed: parseLineRanges(props.removedLines as string),
+			focused: parseLineRanges(props.focusLines as string)
+		}
+
+		// Any annotation needs the per-line rows, whether or not the reader
+		// asked for numbers — there is nowhere else to hang a mark.
+		const hasAnnotation =
+			marks.highlighted.size > 0 || marks.added.size > 0 || marks.removed.size > 0 || marks.focused.size > 0
+		const shouldRenderRows = Boolean(props.hasLineNumbers) || hasAnnotation
+		const hasDiffMarks = marks.added.size > 0 || marks.removed.size > 0
 
 		const renderToken = (token: Token, key: number) =>
 			token.className ? (
@@ -270,14 +392,20 @@ export const ZCodeBlock = c(
 					)}
 					<div class="scroll">
 						<pre>
-							{props.hasLineNumbers ? (
+							{shouldRenderRows ? (
 								<div class="rows">
-									{tokenLines.map((line, i) => (
-										<div class="line" key={i}>
-											<span class="gutter">{i + 1}</span>
-											<span class="text">{line.length ? line.map(renderToken) : ' '}</span>
-										</div>
-									))}
+									{tokenLines.map((line, i) => {
+										const lineNumber = i + 1
+										const gutterLabel = hasDiffMarks ? buildGutterLabel(lineNumber, marks) : String(lineNumber)
+										const showGutter = Boolean(props.hasLineNumbers) || hasDiffMarks
+
+										return (
+											<div class={buildLineClass(lineNumber, marks)} key={i}>
+												{showGutter && <span class="gutter">{gutterLabel}</span>}
+												<span class="text">{line.length ? line.map(renderToken) : ' '}</span>
+											</div>
+										)
+									})}
 								</div>
 							) : (
 								<code>{tokens.map(renderToken)}</code>
@@ -294,6 +422,10 @@ export const ZCodeBlock = c(
 			language: String,
 			filename: String,
 			hasLineNumbers: { type: Boolean, reflect: true },
+			highlightLines: { type: String, reflect: true },
+			addedLines: { type: String, reflect: true },
+			removedLines: { type: String, reflect: true },
+			focusLines: { type: String, reflect: true },
 			hasCopy: { type: Boolean, reflect: true, value: true },
 			accent: { type: String, reflect: true },
 			isHidden: { type: Boolean, reflect: true },

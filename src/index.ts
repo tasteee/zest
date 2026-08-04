@@ -172,6 +172,8 @@ export * from './components/z-token-table'
 export * from './components/z-steps'
 export * from './components/z-code-group'
 export * from './components/z-do-dont'
+export * from './components/z-diff'
+export * from './components/z-file-tree'
 
 // Music / MIDI
 export * from './components/z-piano-roll'

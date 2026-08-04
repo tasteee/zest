@@ -3262,6 +3262,34 @@
             },
             {
               "kind": "field",
+              "name": "highlightLines",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "addedLines",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "removedLines",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "focusLines",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
               "name": "hasCopy",
               "type": {
                 "text": "boolean"
@@ -3316,6 +3344,34 @@
               "fieldName": "hasLineNumbers",
               "type": {
                 "text": "boolean"
+              }
+            },
+            {
+              "name": "highlight-lines",
+              "fieldName": "highlightLines",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "added-lines",
+              "fieldName": "addedLines",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "removed-lines",
+              "fieldName": "removedLines",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "focus-lines",
+              "fieldName": "focusLines",
+              "type": {
+                "text": "string"
               }
             },
             {
@@ -5543,6 +5599,142 @@
         {
           "kind": "class",
           "customElement": true,
+          "tagName": "z-diff",
+          "name": "ZDiff",
+          "members": [
+            {
+              "kind": "field",
+              "name": "before",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "after",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "patch",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "language",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "filename",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "view",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "beforeLabel",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "afterLabel",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "before",
+              "fieldName": "before",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "after",
+              "fieldName": "after",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "patch",
+              "fieldName": "patch",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "language",
+              "fieldName": "language",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "filename",
+              "fieldName": "filename",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "view",
+              "fieldName": "view",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "before-label",
+              "fieldName": "beforeLabel",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "after-label",
+              "fieldName": "afterLabel",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
           "tagName": "z-display",
           "name": "ZDisplay",
           "members": [
@@ -7399,6 +7591,58 @@
               "fieldName": "href",
               "type": {
                 "text": "string"
+              }
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
+          "tagName": "z-file-tree",
+          "name": "ZFileTree",
+          "members": [
+            {
+              "kind": "field",
+              "name": "paths",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "entries",
+              "type": {
+                "text": "array"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "paths",
+              "fieldName": "paths",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "entries",
+              "fieldName": "entries",
+              "type": {
+                "text": "array"
               }
             },
             {
@@ -19510,6 +19754,14 @@
         },
         {
           "kind": "custom-element-definition",
+          "name": "z-diff",
+          "declaration": {
+            "name": "ZDiff",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
           "name": "z-display",
           "declaration": {
             "name": "ZDisplay",
@@ -19657,6 +19909,14 @@
           "name": "z-file-attachment",
           "declaration": {
             "name": "ZFileAttachment",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "z-file-tree",
+          "declaration": {
+            "name": "ZFileTree",
             "module": "dist/zest.js"
           }
         },

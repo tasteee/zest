@@ -1,6 +1,6 @@
 # Zest element API reference
 
-**170 elements.** Every one, as you would write it. Generated from
+**172 elements.** Every one, as you would write it. Generated from
 source by `scripts/build-api-reference.mjs`, so it is current by
 construction rather than by discipline.
 
@@ -33,7 +33,7 @@ short, that is the first place to check.
 - [Navigation & disclosure](#navigation--disclosure) — 8
 - [Overlays](#overlays) — 11
 - [Data display](#data-display) — 14
-- [Canvas, panels & docs](#canvas-panels--docs) — 15
+- [Canvas, panels & docs](#canvas-panels--docs) — 17
 - [Text editor](#text-editor) — 9
 - [Chat](#chat) — 22
 - [Attachments](#attachments) — 4
@@ -1399,6 +1399,22 @@ short, that is the first place to check.
 />
 ```
 
+### `z-diff`
+
+```jsx
+<z-diff
+  before={string}
+  after={string}
+  patch={string}
+  language={string}
+  filename={string}
+  view="unified | split"   // default: unified
+  before-label={string}   // default: Before
+  after-label={string}   // default: After
+  is-hidden
+/>
+```
+
 ### `z-do-dont`
 
 ```jsx
@@ -1446,6 +1462,16 @@ short, that is the first place to check.
   onviewportchange={(event) => event.detail}   // { x: number; y: number; zoom: number }
   onzoomchange={(event) => event.detail}   // { zoom: number }
   onpanchange={(event) => event.detail}   // { x: number; y: number }
+/>
+```
+
+### `z-file-tree`
+
+```jsx
+<z-file-tree
+  paths={string}
+  entries={Array}
+  is-hidden
 />
 ```
 
@@ -2217,6 +2243,10 @@ short, that is the first place to check.
   code={string}
   language={string}
   filename={string}
+  highlight-lines={string}
+  added-lines={string}
+  removed-lines={string}
+  focus-lines={string}
   accent="dom | sub"   // default: dom
   has-line-numbers
   has-copy

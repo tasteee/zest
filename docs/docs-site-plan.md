@@ -25,6 +25,9 @@ site-level layout CSS.
 | `z-steps` + `z-step` | done | The parent assigns the numbering, so reordering the markup renumbers the list. `current` turns a reference list into a guided flow. |
 | `z-code-group` | done | Groups sharing a name sync live through a module registry — a storage event only fires in other tabs, so it cannot carry same-page sync. |
 | `z-do-dont` | done | One element, two slots: the pairing is the content, and two sibling cards would make it possible to ship half the lesson. |
+| `z-code-annotation` | done, as `z-code-block` attributes | `highlight-lines` / `added-lines` / `removed-lines` / `focus-lines`. Any of them switches the block to per-line rows; a diff mark swaps the gutter count for a sign. No second element was needed. |
+| `z-diff` | done | LCS over lines, no dependency. Each side highlighted with its own pass, because a patch is not valid source in any language. |
+| `z-file-tree` | done | Presentational — not `z-tree` in a costume. Primary API is indented text, so it works on a page with no script. |
 
 Waves 1 and 2 are complete. Everything else below is unstarted.
 
@@ -41,8 +44,9 @@ Wave 3 is most of the way through. `z-swatch` and `z-token-table` closed the
 library's largest documentation gap — 411 tokens with no reference page, now
 `docs/foundation/tokens.md`. `z-steps`, `z-code-group` and `z-do-dont` follow.
 
-Remaining in Wave 3: `z-code-annotation` (mostly attributes on
-`z-code-block`), `z-diff`, `z-file-tree`, and `z-mermaid`.
+Remaining in Wave 3: `z-mermaid` alone, which is held back deliberately — it
+has to load its renderer lazily or the zero-runtime-dependency guarantee does
+not survive it.
 
 `z-chassis` gained two things the shell needed: `scrollScreenTo(options)` /
 `getScreen()` (the screen is the scroll container, and a routed view landing
