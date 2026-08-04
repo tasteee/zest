@@ -69,8 +69,8 @@ export const ZQuotedMessage = c(
 			<button
 				class="quote"
 				type="button"
-				disabled={props.noJump}
-				onclick={() => !props.noJump && props.jump({ value: props.value })}
+				disabled={!props.canJump}
+				onclick={() => props.canJump && props.jump({ value: props.value })}
 			>
 				<span class="bar" aria-hidden="true"></span>
 				<span class="body">
@@ -86,7 +86,7 @@ export const ZQuotedMessage = c(
 			text: { type: String, reflect: true },
 			value: { type: String, reflect: true },
 			accent: { type: String, reflect: true },
-			noJump: { type: Boolean, reflect: true },
+			canJump: { type: Boolean, reflect: true, value: true },
 			isHidden: { type: Boolean, reflect: true },
 			jump: event<{ value?: string }>({ bubbles: true, composed: true })
 		},

@@ -63,7 +63,7 @@ const styles = css`
 		flex-direction: column;
 		gap: 1px;
 	}
-	:host([menu-below]) .menu {
+	:host([is-menu-below]) .menu {
 		bottom: auto;
 		top: calc(100% + 0.375rem);
 	}
@@ -179,7 +179,7 @@ export const ZModelPicker = c(
 			models: { type: Array },
 			value: { type: String, reflect: true },
 			placeholder: { type: String, reflect: true },
-			menuBelow: { type: Boolean, reflect: true },
+			isMenuBelow: { type: Boolean, reflect: true },
 			isOpen: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			change: event<{ value: string }>({ bubbles: true, composed: true })

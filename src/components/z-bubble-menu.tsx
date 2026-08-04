@@ -178,8 +178,8 @@ export const ZBubbleMenu = c(
 		)
 
 		const resolveControls = () => {
-			if (props.variant === 'image') return renderImageControls()
-			if (props.variant === 'table-cell') return renderTableCellControls()
+			if (props.kind === 'image') return renderImageControls()
+			if (props.kind === 'table-cell') return renderTableCellControls()
 			return renderLinkControls()
 		}
 
@@ -192,7 +192,7 @@ export const ZBubbleMenu = c(
 
 		return (
 			<host shadowDom>
-				<div ref={floatRef} class={surfaceClass} role="toolbar" aria-label={`${props.variant || 'link'} bubble menu`} onmousedown={(mouseEvent: MouseEvent) => mouseEvent.preventDefault()}>
+				<div ref={floatRef} class={surfaceClass} role="toolbar" aria-label={`${props.kind || 'link'} bubble menu`} onmousedown={(mouseEvent: MouseEvent) => mouseEvent.preventDefault()}>
 					{resolveControls()}
 				</div>
 			</host>
@@ -200,7 +200,7 @@ export const ZBubbleMenu = c(
 	},
 	{
 		props: {
-			variant: { type: String, reflect: true },
+			kind: { type: String, reflect: true },
 			anchorRect: AnyProp,
 			placement: { type: String, reflect: true },
 			offset: { type: Number },

@@ -197,12 +197,12 @@ const styles = css`
 `
 
 const resolveVariantClass = (props: any): string => {
-	if (props.variant === 'dual') return 'is-dual'
-	if (props.variant === 'rainbow') return 'is-rainbow'
-	if (props.variant === 'holo') return 'is-holo'
-	if (props.variant === 'gold') return 'is-gold'
-	if (props.variant === 'silver') return 'is-silver'
-	if (props.variant === 'glow') return 'is-glow'
+	if (props.kind === 'dual') return 'is-dual'
+	if (props.kind === 'rainbow') return 'is-rainbow'
+	if (props.kind === 'holo') return 'is-holo'
+	if (props.kind === 'gold') return 'is-gold'
+	if (props.kind === 'silver') return 'is-silver'
+	if (props.kind === 'glow') return 'is-glow'
 	return 'is-default'
 }
 
@@ -232,7 +232,7 @@ export const ZAura = c(
 	},
 	{
 		props: {
-			variant: { type: String, reflect: true },
+			kind: { type: String, reflect: true },
 			size: { type: String, reflect: true },
 			isHidden: { type: Boolean, reflect: true }
 		},

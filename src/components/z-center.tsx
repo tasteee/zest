@@ -19,15 +19,15 @@ const styles = css`
 		padding-right: var(--z-center-pad-right, 0);
 	}
 
-	:host([text]) {
+	:host([centers-text]) {
 		text-align: center;
 	}
 
-	:host([full-width]) {
+	:host([is-full-width]) {
 		width: 100%;
 	}
 
-	:host([full-height]) {
+	:host([is-full-height]) {
 		height: 100%;
 	}
 
@@ -35,7 +35,7 @@ const styles = css`
 		max-width: var(--z-center-max-width, none);
 	}
 
-	:host([full-width]) .inner {
+	:host([is-full-width]) .inner {
 		width: 100%;
 	}
 `
@@ -43,14 +43,14 @@ const styles = css`
 const getHostStyle = (props: {
 	alignsX?: string
 	alignsY?: string
-	both?: boolean
+	centersBoth?: boolean
 	maxWidth?: string
 	minHeight?: string
 } & Parameters<typeof insetVars>[0]): Record<string, string> => {
 	const style: Record<string, string> = { ...insetVars(props, '--z-center') }
 
-	const justify = props.both ? 'center' : resolveEdge(props.alignsX)
-	const align = props.both ? 'center' : resolveEdge(props.alignsY)
+	const justify = props.centersBoth ? 'center' : resolveEdge(props.alignsX)
+	const align = props.centersBoth ? 'center' : resolveEdge(props.alignsY)
 	if (justify) style['--z-center-justify'] = justify
 	if (align) style['--z-center-align'] = align
 
@@ -72,12 +72,12 @@ export const ZCenter = c(
 		props: {
 			alignsX: String,
 			alignsY: String,
-			both: { type: Boolean, reflect: true },
+			centersBoth: { type: Boolean, reflect: true },
 			maxWidth: String,
-			text: { type: Boolean, reflect: true },
+			centersText: { type: Boolean, reflect: true },
 			minHeight: String,
-			fullWidth: { type: Boolean, reflect: true },
-			fullHeight: { type: Boolean, reflect: true },
+			isFullWidth: { type: Boolean, reflect: true },
+			isFullHeight: { type: Boolean, reflect: true },
 			...insetProps
 		},
 		styles: [baseStyles, styles]

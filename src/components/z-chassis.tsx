@@ -73,13 +73,13 @@ const styles = css`
 			flex-basis var(--chassis-duration, 420ms) var(--chassis-ease, cubic-bezier(0.22, 1, 0.36, 1)),
 			width var(--chassis-duration, 420ms) var(--chassis-ease, cubic-bezier(0.22, 1, 0.36, 1));
 	}
-	:host([expand-on-hover]) .rail {
+	:host([does-expand-on-hover]) .rail {
 		flex-basis: var(--chassis-rail-collapsed, 3.5rem);
 		width: var(--chassis-rail-collapsed, 3.5rem);
 		--chassis-label-opacity: 0;
 	}
-	:host([expand-on-hover]) .rail:hover,
-	:host([expand-on-hover]) .rail:focus-within {
+	:host([does-expand-on-hover]) .rail:hover,
+	:host([does-expand-on-hover]) .rail:focus-within {
 		flex-basis: var(--chassis-rail-width, 4.25rem);
 		width: var(--chassis-rail-width, 4.25rem);
 		--chassis-label-opacity: 1;
@@ -206,7 +206,7 @@ export const ZChassis = c(
 			bezel: { type: String, reflect: true },
 			frame: { type: String, reflect: true },
 			railSide: { type: String, reflect: true },
-			expandOnHover: { type: Boolean, reflect: true },
+			doesExpandOnHover: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true }
 		},
 		styles: [themedScrollbarStyles, styles]

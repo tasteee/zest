@@ -246,11 +246,11 @@ export const ZMarkdown = c(
 			() =>
 				buildHtml(
 					(props.content as string) ?? '',
-					Boolean(props.allowHtml),
-					Boolean(props.noHighlight),
-					Boolean(props.headingAnchors)
+					Boolean(props.doesAllowHtml),
+					!props.doesHighlight,
+					Boolean(props.hasHeadingAnchors)
 				),
-			[props.content, props.allowHtml, props.noHighlight, props.headingAnchors]
+			[props.content, props.doesAllowHtml, props.doesHighlight, props.hasHeadingAnchors]
 		)
 
 		const onClick = (e: MouseEvent) => {
@@ -268,9 +268,9 @@ export const ZMarkdown = c(
 		props: {
 			content: { type: String },
 			isStreaming: { type: Boolean, reflect: true },
-			allowHtml: { type: Boolean, reflect: true },
-			noHighlight: { type: Boolean, reflect: true },
-			headingAnchors: { type: Boolean, reflect: true },
+			doesAllowHtml: { type: Boolean, reflect: true },
+			doesHighlight: { type: Boolean, reflect: true, value: true },
+			hasHeadingAnchors: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			linkclick: event<{ href: string }>({ bubbles: true, composed: true })
 		},

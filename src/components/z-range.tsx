@@ -309,7 +309,7 @@ export const ZRange = c(
 		const leftPct = toPct(leftValue)
 		const rightPct = toPct(rightValue)
 
-		const showHeader = Boolean(props.label) || props.showValue
+		const showHeader = Boolean(props.label) || props.doesShowValue
 
 		// Returns the clamped value of the handle that moved so the caller can snap
 		// the native input's live `.value` synchronously — otherwise the browser
@@ -357,7 +357,7 @@ export const ZRange = c(
 				{showHeader && (
 					<div class="header">
 						{props.label && <span class="label">{props.label}</span>}
-						{props.showValue && (
+						{props.doesShowValue && (
 							<span class="value">
 								<span class="left">
 									{props.valuePrefix}
@@ -414,7 +414,7 @@ export const ZRange = c(
 			max: { type: Number, reflect: true },
 			step: { type: Number, reflect: true },
 			label: String,
-			showValue: { type: Boolean, reflect: true },
+			doesShowValue: { type: Boolean, reflect: true },
 			valuePrefix: String,
 			valueSuffix: String,
 			isDisabled: { type: Boolean, reflect: true },

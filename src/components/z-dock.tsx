@@ -20,7 +20,7 @@ const styles = css`
 		display: none;
 	}
 
-	:host([floating]) {
+	:host([is-floating]) {
 		position: fixed;
 		bottom: 1.25rem;
 		left: 50%;
@@ -115,7 +115,7 @@ export const ZDock = c(
 			distance: Number,
 			itemSize: String,
 			gap: sizeProp,
-			floating: { type: Boolean, reflect: true },
+			isFloating: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true }
 		},
 		styles

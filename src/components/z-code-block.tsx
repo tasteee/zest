@@ -254,7 +254,7 @@ export const ZCodeBlock = c(
 			props.copy()
 		}
 
-		const showHead = props.filename || props.language || !props.hideCopy
+		const showHead = props.filename || props.language || props.hasCopy
 
 		return (
 			<host shadowDom>
@@ -265,7 +265,7 @@ export const ZCodeBlock = c(
 								{props.language && <span class="lang">{props.language}</span>}
 								{props.filename && <span class="filename">{props.filename}</span>}
 							</div>
-							{!props.hideCopy && <z-copy-button class="copy" value={code} oncopy={handleCopy} />}
+							{props.hasCopy && <z-copy-button class="copy" value={code} oncopy={handleCopy} />}
 						</div>
 					)}
 					<div class="scroll">
@@ -294,7 +294,7 @@ export const ZCodeBlock = c(
 			language: String,
 			filename: String,
 			hasLineNumbers: { type: Boolean, reflect: true },
-			hideCopy: { type: Boolean, reflect: true },
+			hasCopy: { type: Boolean, reflect: true, value: true },
 			accent: { type: String, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			copy: event<void>({ bubbles: true, composed: true })

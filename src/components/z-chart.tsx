@@ -126,7 +126,7 @@ export const ZChart = c(
 		const chartW = W - PAD_X * 2
 		const chartH = H - PAD_TOP - PAD_BOTTOM
 		const max = Math.max(1, ...points.map((p) => p.value))
-		const showLabels = !props.hideLabels
+		const showLabels = props.hasLabels
 
 		const yOf = (v: number) => PAD_TOP + chartH - (v / max) * chartH
 		const slot = points.length > 0 ? chartW / points.length : chartW
@@ -147,7 +147,7 @@ export const ZChart = c(
 		return (
 			<host shadowDom style={{ '--z-chart-height': props.height || '' }}>
 				<svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="none" role="img">
-					{props.showGrid &&
+					{props.doesShowGrid &&
 						gridLines.map((y, i) => <line key={`g-${i}`} class="grid" x1={PAD_X} y1={y} x2={W - PAD_X} y2={y} />)}
 
 					{type === 'area' && areaPath && <path class="area" d={areaPath} />}
@@ -194,8 +194,8 @@ export const ZChart = c(
 			type: { type: String, reflect: true },
 			accent: { type: String, reflect: true },
 			height: String,
-			showGrid: { type: Boolean, reflect: true },
-			hideLabels: { type: Boolean, reflect: true },
+			doesShowGrid: { type: Boolean, reflect: true },
+			hasLabels: { type: Boolean, reflect: true, value: true },
 			isHidden: { type: Boolean, reflect: true }
 		},
 		styles

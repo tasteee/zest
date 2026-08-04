@@ -146,14 +146,14 @@ export const ZSlider = c(
 		const current = value ?? min
 		const fill = max > min ? ((current - min) / (max - min)) * 100 : 0
 
-		const showHeader = Boolean(props.label) || props.showValue
+		const showHeader = Boolean(props.label) || props.doesShowValue
 
 		return (
 			<host shadowDom style={{ '--fill': `${fill}%` }}>
 				{showHeader && (
 					<div class="header">
 						{props.label && <span class="label">{props.label}</span>}
-						{props.showValue && (
+						{props.doesShowValue && (
 							<span class="value">
 								{props.valuePrefix}
 								{current}
@@ -191,7 +191,7 @@ export const ZSlider = c(
 			step: { type: Number, reflect: true },
 			name: String,
 			label: String,
-			showValue: { type: Boolean, reflect: true },
+			doesShowValue: { type: Boolean, reflect: true },
 			valuePrefix: String,
 			valueSuffix: String,
 			accent: { type: String, reflect: true },

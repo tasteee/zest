@@ -100,7 +100,7 @@ export const ZComposer = c(
 		}
 
 		const onKeyDown = (e: KeyboardEvent) => {
-			if (e.key === 'Enter' && !e.shiftKey && !props.disableEnterSubmit) {
+			if (e.key === 'Enter' && !e.shiftKey && props.doesSubmitOnEnter) {
 				e.preventDefault()
 				send()
 			}
@@ -148,7 +148,7 @@ export const ZComposer = c(
 			placeholder: { type: String, reflect: true },
 			isFocused: { type: Boolean, reflect: true },
 			isDisabled: { type: Boolean, reflect: true },
-			disableEnterSubmit: { type: Boolean, reflect: true },
+			doesSubmitOnEnter: { type: Boolean, reflect: true, value: true },
 			isHidden: { type: Boolean, reflect: true },
 			input: event<{ value: string }>({ bubbles: true, composed: true }),
 			send: event<{ value: string }>({ bubbles: true, composed: true })

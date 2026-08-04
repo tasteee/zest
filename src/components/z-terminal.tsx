@@ -490,12 +490,12 @@ export const ZTerminal = c(
 		const model = useMemo(() => buildModel(code, marker, props.lines), [code, marker, props.lines])
 		const copyable = useMemo(() => resolveCopyable(props.copyLines, model), [props.copyLines, model])
 
-		const animate = !!props.animate
+		const animate = !!props.doesAnimate
 		const typeSpeed = num(props.typeSpeed, 55)
 		const lineDelay = num(props.lineDelay, 380)
 		const fadeDuration = num(props.fadeDuration, 240)
 		const loopDelay = num(props.loopDelay, 2200)
-		const loop = !!props.loop
+		const loop = !!props.doesLoop
 
 		// Whether the viewer has opted out of motion — resolved once, up front.
 		const reduce = useMemo(
@@ -624,7 +624,7 @@ export const ZTerminal = c(
 
 			// Kick off — immediately, or when scrolled into view.
 			let io: IntersectionObserver | undefined
-			if (props.startOnView && typeof IntersectionObserver === 'function' && el) {
+			if (props.doesStartOnView && typeof IntersectionObserver === 'function' && el) {
 				io = new IntersectionObserver(
 					(entries) => {
 						if (entries.some((e) => e.isIntersecting)) {
@@ -649,11 +649,11 @@ export const ZTerminal = c(
 					delete el.restart
 				}
 			}
-		}, [playing, model, typeSpeed, lineDelay, fadeDuration, loop, loopDelay, props.startOnView])
+		}, [playing, model, typeSpeed, lineDelay, fadeDuration, loop, loopDelay, props.doesStartOnView])
 
 		// Follow the playhead so a height-constrained terminal scrolls its newest
 		// line into view instead of the run disappearing below the fold.
-		const shouldFollowPlayhead = playing && !props.noAutoScroll
+		const shouldFollowPlayhead = playing && props.doesAutoScroll
 
 		useEffect(() => {
 			if (!shouldFollowPlayhead) return
@@ -678,7 +678,7 @@ export const ZTerminal = c(
 			}
 		}
 
-		const showReplay = playing && state.done && !props.hideReplay
+		const showReplay = playing && state.done && props.hasReplay
 
 		const sizing = {
 			'--z-terminal-width': (props.width as string) || '',
@@ -789,16 +789,16 @@ export const ZTerminal = c(
 			height: String,
 			maxHeight: String,
 			// Animation
-			animate: { type: Boolean, reflect: true },
-			startOnView: { type: Boolean },
+			doesAnimate: { type: Boolean, reflect: true },
+			doesStartOnView: { type: Boolean },
 			lines: { type: Array },
 			typeSpeed: { type: Number },
 			lineDelay: { type: Number },
 			fadeDuration: { type: Number },
-			loop: { type: Boolean },
+			doesLoop: { type: Boolean },
 			loopDelay: { type: Number },
-			hideReplay: { type: Boolean },
-			noAutoScroll: { type: Boolean },
+			hasReplay: { type: Boolean, value: true },
+			doesAutoScroll: { type: Boolean, value: true },
 			copy: event<string>({ bubbles: true, composed: true }),
 			done: event<void>({ bubbles: true, composed: true })
 		},

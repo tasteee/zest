@@ -345,7 +345,7 @@ export const ZKnob = c(
 						<span class="pointer" />
 					</span>
 				</button>
-				{props.showValue && <span class="value">{displayValue}</span>}
+				{props.doesShowValue && <span class="value">{displayValue}</span>}
 			</host>
 		)
 	},
@@ -357,7 +357,7 @@ export const ZKnob = c(
 			step: { type: Number, reflect: true },
 			defaultValue: { type: Number, reflect: true },
 			label: String,
-			showValue: { type: Boolean, reflect: true },
+			doesShowValue: { type: Boolean, reflect: true },
 			valuePrefix: String,
 			valueSuffix: String,
 			accent: { type: String, reflect: true },

@@ -67,12 +67,12 @@ const styles = css`
 		animation-name: marquee-y;
 	}
 
-	:host([reverse]) .group {
+	:host([is-reversed]) .group {
 		animation-direction: reverse;
 	}
 
-	:host([pause-on-hover]:hover) .group,
-	:host([pause-on-hover]:focus-within) .group {
+	:host([does-pause-on-hover]:hover) .group,
+	:host([does-pause-on-hover]:focus-within) .group {
 		animation-play-state: paused;
 	}
 
@@ -129,9 +129,9 @@ export const ZMarquee = c(
 		props: {
 			duration: Number,
 			gap: sizeProp,
-			reverse: { type: Boolean, reflect: true },
+			isReversed: { type: Boolean, reflect: true },
 			direction: { type: String, reflect: true },
-			pauseOnHover: { type: Boolean, reflect: true },
+			doesPauseOnHover: { type: Boolean, reflect: true },
 			hasFade: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true }
 		},

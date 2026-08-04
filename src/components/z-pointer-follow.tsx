@@ -32,11 +32,11 @@ const styles = css`
 		display: none;
 	}
 
-	:host(:not([fixed])) {
+	:host(:not([is-fixed])) {
 		cursor: none;
 	}
 
-	:host([fixed]) {
+	:host([is-fixed]) {
 		display: block;
 		position: fixed;
 		inset: 0;
@@ -95,7 +95,7 @@ export const ZPointerFollow = c(
 		const [visible, setVisible] = useState(false)
 
 		useEffect(() => {
-			if (!props.fixed) return
+			if (!props.isFixed) return
 			const handleMove = (nativeEvent: PointerEvent) => {
 				setPos({ x: nativeEvent.clientX, y: nativeEvent.clientY })
 				setVisible(true)
@@ -108,7 +108,7 @@ export const ZPointerFollow = c(
 				document.body.style.cursor = prevCursor
 				setVisible(false)
 			}
-		}, [props.fixed])
+		}, [props.isFixed])
 
 		const handleScopedMove = (nativeEvent: PointerEvent) => {
 			const rect = (host.current as HTMLElement).getBoundingClientRect()
@@ -119,10 +119,10 @@ export const ZPointerFollow = c(
 		return (
 			<host
 				shadowDom
-				onpointermove={props.fixed ? undefined : handleScopedMove}
-				onpointerleave={props.fixed ? undefined : () => setVisible(false)}
+				onpointermove={props.isFixed ? undefined : handleScopedMove}
+				onpointerleave={props.isFixed ? undefined : () => setVisible(false)}
 			>
-				{!props.fixed && <slot />}
+				{!props.isFixed && <slot />}
 				<div class={visible ? 'pointer is-visible' : 'pointer'} style={{ transform: `translate(${pos.x}px, ${pos.y}px)` }}>
 					<span class="dot" aria-hidden="true"></span>
 					{props.label && <span class="tag">{props.label}</span>}
@@ -134,7 +134,7 @@ export const ZPointerFollow = c(
 		props: {
 			label: String,
 			accent: { type: String, reflect: true },
-			fixed: { type: Boolean, reflect: true },
+			isFixed: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true }
 		},
 		styles

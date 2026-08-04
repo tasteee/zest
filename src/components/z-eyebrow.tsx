@@ -27,7 +27,7 @@ const styles = css`
 	}
 
 	/* Full-width lets the trailing rule stretch to the edge instead of a fixed 5rem. */
-	:host([full-width]) {
+	:host([is-full-width]) {
 		display: flex;
 	}
 
@@ -49,7 +49,7 @@ const styles = css`
 		background: var(--border);
 	}
 
-	:host([full-width]) .rule {
+	:host([is-full-width]) .rule {
 		flex: 1 1 auto;
 		width: auto;
 	}
@@ -67,7 +67,7 @@ export const ZEyebrow = c(
 			color: { type: String, reflect: true },
 			label: String,
 			hasRule: { type: Boolean, reflect: true },
-			fullWidth: { type: Boolean, reflect: true },
+			isFullWidth: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true }
 		},
 		styles

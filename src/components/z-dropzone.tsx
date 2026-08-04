@@ -129,7 +129,7 @@ export const ZDropzone = c(
 				const big = files.find((f) => f.size > (props.maxSize as number))
 				if (big) return { files: [], reason: `“${big.name}” exceeds the size limit` }
 			}
-			if (!props.multiple) files = files.slice(0, 1)
+			if (!props.isMultiple) files = files.slice(0, 1)
 			if (props.maxFiles && files.length > (props.maxFiles as number))
 				return { files: [], reason: `Too many files (max ${props.maxFiles})` }
 			return { files }
@@ -209,7 +209,7 @@ export const ZDropzone = c(
 					ref={inputRef}
 					type="file"
 					accept={(props.accept as string) || undefined}
-					multiple={Boolean(props.multiple)}
+					multiple={Boolean(props.isMultiple)}
 					onchange={onPick}
 				/>
 			</host>
@@ -218,7 +218,7 @@ export const ZDropzone = c(
 	{
 		props: {
 			accept: { type: String, reflect: true },
-			multiple: { type: Boolean, reflect: true },
+			isMultiple: { type: Boolean, reflect: true },
 			maxSize: { type: Number, reflect: true },
 			maxFiles: { type: Number, reflect: true },
 			isDisabled: { type: Boolean, reflect: true },

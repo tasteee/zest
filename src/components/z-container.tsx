@@ -17,7 +17,7 @@ const styles = css`
 		padding-right: var(--z-container-gutter, 0);
 	}
 
-	:host([full-height]) {
+	:host([is-full-height]) {
 		min-height: 100%;
 	}
 `
@@ -42,8 +42,8 @@ export const ZContainer = c(
 			size: String,
 			gutter: sizeProp,
 			// Centered by default; declared for API completeness.
-			center: { type: Boolean, reflect: true },
-			fullHeight: { type: Boolean, reflect: true }
+			isCentered: { type: Boolean, reflect: true },
+			isFullHeight: { type: Boolean, reflect: true }
 		},
 		styles: [baseStyles, styles]
 	}

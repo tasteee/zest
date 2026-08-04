@@ -21,7 +21,7 @@ const styles = css`
 		padding-right: var(--z-grid-pad-right, 0);
 	}
 
-	:host([full-width]) {
+	:host([is-full-width]) {
 		width: 100%;
 	}
 `
@@ -74,7 +74,7 @@ export const ZGrid = c(
 			gapY: sizeProp,
 			alignsX: String,
 			alignsY: String,
-			fullWidth: { type: Boolean, reflect: true },
+			isFullWidth: { type: Boolean, reflect: true },
 			...insetProps
 		},
 		styles: [baseStyles, styles]

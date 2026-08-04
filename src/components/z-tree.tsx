@@ -300,7 +300,7 @@ export const ZTree = c(
 			selection: { type: String, reflect: true },
 			selected: { type: Array },
 			expanded: { type: Array },
-			showGuides: { type: Boolean, reflect: true },
+			doesShowGuides: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			select: event<{ ids: string[]; node: TreeNode }>({ bubbles: true, composed: true }),
 			expand: event<{ id: string }>({ bubbles: true, composed: true }),

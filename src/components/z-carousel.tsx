@@ -138,7 +138,7 @@ export const ZCarousel = c(
 		const go = (next: number) => {
 			if (count === 0) return
 			let target = next
-			if (props.loop) target = (next + count) % count
+			if (props.doesLoop) target = (next + count) % count
 			else target = Math.max(0, Math.min(next, count - 1))
 			setIndex(target)
 			props.change({ index: target })
@@ -150,16 +150,16 @@ export const ZCarousel = c(
 			const id = setInterval(() => {
 				if (paused.current) return
 				setIndex((prev) => {
-					const next = props.loop ? (prev + 1) % count : prev + 1 >= count ? 0 : prev + 1
+					const next = props.doesLoop ? (prev + 1) % count : prev + 1 >= count ? 0 : prev + 1
 					props.change({ index: next })
 					return next
 				})
 			}, interval)
 			return () => clearInterval(id)
-		}, [interval, count, props.loop])
+		}, [interval, count, props.doesLoop])
 
-		const atStart = !props.loop && safeIndex === 0
-		const atEnd = !props.loop && safeIndex >= count - 1
+		const atStart = !props.doesLoop && safeIndex === 0
+		const atEnd = !props.doesLoop && safeIndex >= count - 1
 
 		return (
 			<host
@@ -213,7 +213,7 @@ export const ZCarousel = c(
 	{
 		props: {
 			autoplay: { type: Number },
-			loop: { type: Boolean, reflect: true },
+			doesLoop: { type: Boolean, reflect: true },
 			accent: { type: String, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			change: event<{ index: number }>({ bubbles: true, composed: true })

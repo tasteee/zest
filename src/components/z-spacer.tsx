@@ -14,7 +14,7 @@ const styles = css`
 		height: var(--z-spacer-size, 0);
 	}
 
-	:host([grow]) {
+	:host([can-grow]) {
 		flex: 1 1 0;
 		align-self: stretch;
 		width: auto;
@@ -32,7 +32,7 @@ const getHostStyle = (props: { size?: string }): Record<string, string> => {
 export const ZSpacer = c((props) => <host shadowDom style={getHostStyle(props)} />, {
 	props: {
 		size: String,
-		grow: { type: Boolean, reflect: true }
+		canGrow: { type: Boolean, reflect: true }
 	},
 	styles: [baseStyles, styles]
 })
