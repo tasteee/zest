@@ -84,12 +84,6 @@ body {
 	gap: var(--spacing-5);
 }
 
-.docHeader {
-	display: flex;
-	flex-direction: column;
-	gap: var(--spacing-2);
-}
-
 .docPreviewLabel {
 	margin: 0 0 var(--spacing-2);
 	font-family: var(--font-mono);
@@ -159,20 +153,6 @@ body {
 	flex-direction: column;
 	gap: var(--spacing-12);
 	min-width: 0;
-}
-
-.pageHeader {
-	display: flex;
-	flex-direction: column;
-	gap: var(--spacing-3);
-	padding-bottom: var(--spacing-8);
-	border-bottom: 1px solid var(--border);
-}
-
-.pageTitleRow {
-	display: flex;
-	align-items: center;
-	gap: var(--spacing-3);
 }
 
 .pageSection {
@@ -374,41 +354,6 @@ body {
 }
 
 /* --- on-this-page rail --- */
-
-.pageOutline {
-	display: flex;
-	flex-direction: column;
-	gap: var(--spacing-3);
-	padding-left: var(--spacing-5);
-	border-left: 1px solid var(--border);
-}
-
-.pageOutlineLabel {
-	font-family: var(--font-mono);
-	text-transform: uppercase;
-	letter-spacing: 0.06em;
-}
-
-.pageOutlineList {
-	list-style: none;
-	margin: 0;
-	padding: 0;
-	display: flex;
-	flex-direction: column;
-	gap: var(--spacing-2);
-}
-
-.pageOutlineLink {
-	display: block;
-	color: var(--muted-foreground);
-	font-size: var(--font-size-2);
-	text-decoration: none;
-	transition: color var(--duration-fast) var(--easing-standard);
-}
-
-.pageOutlineLink:hover {
-	color: var(--foreground);
-}
 
 /* The outline's responsive drop-out is z-docs-shell's, since the shell owns
    the track the outline sits in. */

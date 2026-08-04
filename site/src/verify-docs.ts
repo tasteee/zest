@@ -84,16 +84,19 @@ const verifyRelatedRoutes = (componentDoc: ComponentDocT, knownRoutes: Set<strin
 	}
 }
 
+// The outline is a z-toc, so its entries live on a property rather than in
+// the light DOM — there are no links to count until the element upgrades,
+// which it never does under a shim.
 const verifyPageRenders = (componentDoc: ComponentDocT, problems: DocProblemT[]): void => {
 	try {
 		const page = buildComponentPage(componentDoc, 'Category')
 
-		const hasArticle = Boolean(page.querySelector('.componentArticle'))
+		const hasArticle = page.article.classList.contains('componentArticle')
 		if (!hasArticle) problems.push({ scope: componentDoc.tag, message: 'page rendered without an article' })
 
-		const outlineLinkCount = page.querySelectorAll('.pageOutlineLink').length
-		const hasOutline = outlineLinkCount > 0
-		if (!hasOutline) problems.push({ scope: componentDoc.tag, message: 'page outline is empty' })
+		const outline = page.outline as HTMLElement & { headings?: unknown[] }
+		const headingCount = Array.isArray(outline.headings) ? outline.headings.length : 0
+		if (!headingCount) problems.push({ scope: componentDoc.tag, message: 'page outline is empty' })
 	} catch (renderError) {
 		problems.push({ scope: componentDoc.tag, message: `buildComponentPage threw: ${(renderError as Error).message}` })
 	}

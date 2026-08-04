@@ -8,10 +8,7 @@ import { buildApiReference } from './api-reference'
 import { buildExampleCard } from './example-card'
 import { buildPlayground } from './playground'
 import {
-	buildBadge,
 	buildCodeBlock,
-	buildEyebrow,
-	buildHeading,
 	buildLabel,
 	buildRichText,
 	buildSectionHeader,
@@ -27,11 +24,7 @@ type PageSectionT = {
 	element: HTMLElement
 }
 
-const STATUS_TONES: Record<string, string> = {
-	stable: 'success',
-	beta: 'warning',
-	experimental: 'secondary'
-}
+const SOURCE_BASE = 'https://github.com/tasteee/zest/blob/main/src/components'
 
 const buildBreadcrumbs = (categoryLabel: string, title: string): ZBreadcrumbsElementT => {
 	const items: ZBreadcrumbItemT[] = [
@@ -46,17 +39,12 @@ const buildBreadcrumbs = (categoryLabel: string, title: string): ZBreadcrumbsEle
 }
 
 const buildPageHeader = (componentDoc: ComponentDocT, categoryLabel: string): HTMLElement => {
-	const header = createElement('header', 'pageHeader')
-	header.append(buildEyebrow(categoryLabel))
-
-	const titleRow = createElement('div', 'pageTitleRow')
-	titleRow.append(buildHeading(componentDoc.title, 'xl', 'h1'))
-
-	const statusTone = STATUS_TONES[componentDoc.status] ?? 'neutral'
-	titleRow.append(buildBadge(componentDoc.status, statusTone, 'soft'))
-	header.append(titleRow)
-
-	header.append(buildText(componentDoc.tagline, 'lg', 'muted'))
+	const header = document.createElement('z-doc-header')
+	header.setAttribute('eyebrow', categoryLabel)
+	header.setAttribute('heading', componentDoc.title)
+	header.setAttribute('tagline', componentDoc.tagline)
+	header.setAttribute('status', componentDoc.status)
+	header.setAttribute('source-href', `${SOURCE_BASE}/${componentDoc.tag}.tsx`)
 	return header
 }
 
@@ -226,32 +214,19 @@ const collectSections = (componentDoc: ComponentDocT): PageSectionT[] => {
 	return presentSections
 }
 
+// The sections are known here, so the outline is authored rather than
+// scraped — z-toc's `for` mode exists for markdown it did not write, which is
+// not this case. Scroll-spy, the active state, and the hash-route-safe click
+// all come from the element.
 const buildPageOutline = (sections: PageSectionT[]): HTMLElement => {
-	const outline = createElement('aside', 'pageOutline')
+	const outline = document.createElement('z-toc') as HTMLElement & { headings: unknown }
 
-	const outlineLabel = buildLabel('On this page', 'xs', 'muted')
-	outlineLabel.classList.add('pageOutlineLabel')
-	outline.append(outlineLabel)
-
-	const list = createElement('ul', 'pageOutlineList')
+	const headings = []
 	for (const section of sections) {
-		const item = createElement('li')
-		const link = createElement('a', 'pageOutlineLink') as HTMLAnchorElement
-		link.href = `#${section.id}`
-		link.textContent = section.label
-
-		// The site is hash-routed, so a bare "#section" href would blow away
-		// the current route. Scroll manually and leave the URL alone.
-		link.addEventListener('click', (clickEvent) => {
-			clickEvent.preventDefault()
-			section.element.scrollIntoView({ behavior: 'smooth', block: 'start' })
-		})
-
-		item.append(link)
-		list.append(item)
+		headings.push({ id: section.id, label: section.label, level: 2 })
 	}
 
-	outline.append(list)
+	outline.headings = headings
 	return outline
 }
 

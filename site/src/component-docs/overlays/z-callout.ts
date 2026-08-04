@@ -4,7 +4,7 @@ import type { ComponentDocT } from '../types'
 
 const buildPlaygroundCallout = (): HTMLElement => {
 	const callout = document.createElement('z-callout')
-	callout.setAttribute('kind', 'note')
+	callout.setAttribute('accent', 'dom')
 	callout.setAttribute('heading', 'Note')
 	callout.textContent = 'Every overlay in this library renders in the browser’s top layer.'
 	return callout

@@ -119,7 +119,7 @@ const buildRenderFailureNotice = (page: DocPageT, renderError: Error): HTMLEleme
 	const wrap = createElement('div', 'notFound')
 
 	const callout = createElement('z-callout')
-	callout.setAttribute('kind', 'caution')
+	callout.setAttribute('accent', 'error')
 	callout.setAttribute('heading', `${page.slug} failed to render`)
 	callout.textContent = renderError.message
 
@@ -150,6 +150,44 @@ const setPageOutline = (outline: HTMLElement | null): void => {
 	shell.append(outline)
 }
 
+type PagerLinkT = {
+	label: string
+	route: string
+}
+
+// The pager reads its neighbours from the same ordered page list the nav is
+// built from, so "next" always means the next thing in the sidebar rather
+// than the next thing alphabetically.
+const findPagerLink = (pages: DocPageT[], index: number): PagerLinkT | null => {
+	const page = pages[index]
+	if (!page) return null
+	return { label: page.title, route: `#${page.route}` }
+}
+
+const buildPager = (currentPage: DocPageT): HTMLElement | null => {
+	const pages = getAllPages(siteData)
+	const currentIndex = pages.findIndex((page) => page.route === currentPage.route)
+
+	const isKnownPage = currentIndex >= 0
+	if (!isKnownPage) return null
+
+	const previous = findPagerLink(pages, currentIndex - 1)
+	const next = findPagerLink(pages, currentIndex + 1)
+
+	const hasEither = Boolean(previous || next)
+	if (!hasEither) return null
+
+	const pager = createElement('z-prev-next') as HTMLElement & { previous: unknown; next: unknown }
+	pager.previous = previous
+	pager.next = next
+	return pager
+}
+
+const appendPager = (article: HTMLElement, page: DocPageT): void => {
+	const pager = buildPager(page)
+	if (pager) article.append(pager)
+}
+
 const renderComponentDocPage = (contentRoot: HTMLElement, page: DocPageT): boolean => {
 	const componentDoc = getComponentDoc(page.slug)
 	if (!componentDoc) return false
@@ -158,6 +196,7 @@ const renderComponentDocPage = (contentRoot: HTMLElement, page: DocPageT): boole
 
 	try {
 		const componentPage = buildComponentPage(componentDoc, page.categoryLabel)
+		appendPager(componentPage.article, page)
 		contentRoot.replaceChildren(componentPage.article)
 		setPageOutline(componentPage.outline)
 	} catch (renderError) {
@@ -171,24 +210,15 @@ const renderComponentDocPage = (contentRoot: HTMLElement, page: DocPageT): boole
 
 const renderMarkdownDocPage = (contentRoot: HTMLElement, page: DocPageT): void => {
 	activePage = page
-	setPageOutline(null)
 
 	const breadcrumbs = buildBreadcrumbs([
 		{ label: 'Docs', href: '#/' },
 		{ label: page.title, isCurrent: true }
 	])
 
-	const header = createElement('div', 'docHeader')
-	if (page.categoryLabel) {
-		const eyebrow = createElement('z-eyebrow')
-		eyebrow.setAttribute('label', page.categoryLabel)
-		header.append(eyebrow)
-	}
-	const heading = createElement('z-heading')
-	heading.setAttribute('size', 'xl')
-	heading.setAttribute('tag', 'h1')
-	heading.textContent = page.title
-	header.append(heading)
+	const header = createElement('z-doc-header')
+	if (page.categoryLabel) header.setAttribute('eyebrow', page.categoryLabel)
+	header.setAttribute('heading', page.title)
 
 	const article = createElement('article', 'docArticle')
 	article.append(breadcrumbs, header)
@@ -201,7 +231,14 @@ const renderMarkdownDocPage = (contentRoot: HTMLElement, page: DocPageT): void =
 	}
 
 	article.append(buildMarkdown(stripLeadingTitleHeading(page.rawMarkdown)))
+	appendPager(article, page)
 	contentRoot.replaceChildren(article)
+
+	// Markdown pages have no authored outline, so the toc scrapes one out of
+	// the rendered z-markdown — including through its shadow root.
+	const outline = createElement('z-toc')
+	outline.setAttribute('for', '.docArticle')
+	setPageOutline(outline)
 }
 
 const renderNotFound = (contentRoot: HTMLElement): void => {
@@ -210,7 +247,7 @@ const renderNotFound = (contentRoot: HTMLElement): void => {
 
 	const wrap = createElement('div', 'notFound')
 	const callout = createElement('z-callout')
-	callout.setAttribute('kind', 'note')
+	callout.setAttribute('accent', 'dom')
 	callout.setAttribute('heading', "Page not found")
 	callout.textContent = "That doc doesn't exist."
 

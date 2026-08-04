@@ -200,9 +200,9 @@ export const buildTabPanel = (slotName: string, className: string): HTMLElement 
 
 // --- callouts -----------------------------------------------------------
 
-export const buildCallout = (kind: string, heading: string, body: string): HTMLElement => {
+export const buildCallout = (accent: string, heading: string, body: string): HTMLElement => {
 	const callout = createElement('z-callout')
-	callout.setAttribute('kind', kind)
+	callout.setAttribute('accent', accent)
 
 	const hasHeading = heading.length > 0
 	if (hasHeading) callout.setAttribute('heading', heading)

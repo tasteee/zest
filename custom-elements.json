@@ -4933,6 +4933,128 @@
         {
           "kind": "class",
           "customElement": true,
+          "tagName": "z-doc-header",
+          "name": "ZDocHeader",
+          "members": [
+            {
+              "kind": "field",
+              "name": "eyebrow",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "heading",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "tagline",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "status",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "sourceHref",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "versionAdded",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "updated",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "eyebrow",
+              "fieldName": "eyebrow",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "heading",
+              "fieldName": "heading",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "tagline",
+              "fieldName": "tagline",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "status",
+              "fieldName": "status",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "source-href",
+              "fieldName": "sourceHref",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "version-added",
+              "fieldName": "versionAdded",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "updated",
+              "fieldName": "updated",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
           "tagName": "z-dock",
           "name": "ZDock",
           "members": [
@@ -11007,6 +11129,100 @@
         {
           "kind": "class",
           "customElement": true,
+          "tagName": "z-prev-next",
+          "name": "ZPrevNext",
+          "members": [
+            {
+              "kind": "field",
+              "name": "previous",
+              "type": {
+                "text": "object"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "next",
+              "type": {
+                "text": "object"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "previousLabel",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "nextLabel",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "navigate",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "previous",
+              "fieldName": "previous",
+              "type": {
+                "text": "object"
+              }
+            },
+            {
+              "name": "next",
+              "fieldName": "next",
+              "type": {
+                "text": "object"
+              }
+            },
+            {
+              "name": "previous-label",
+              "fieldName": "previousLabel",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "next-label",
+              "fieldName": "nextLabel",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "navigate",
+              "fieldName": "navigate",
+              "type": {
+                "text": "string"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
           "tagName": "z-progress",
           "name": "ZProgress",
           "members": [
@@ -16011,6 +16227,128 @@
         {
           "kind": "class",
           "customElement": true,
+          "tagName": "z-toc",
+          "name": "ZToc",
+          "members": [
+            {
+              "kind": "field",
+              "name": "for",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "headings",
+              "type": {
+                "text": "array"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "minLevel",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "maxLevel",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "activeId",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "change",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "for",
+              "fieldName": "for",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "headings",
+              "fieldName": "headings",
+              "type": {
+                "text": "array"
+              }
+            },
+            {
+              "name": "min-level",
+              "fieldName": "minLevel",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "name": "max-level",
+              "fieldName": "maxLevel",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "name": "label",
+              "fieldName": "label",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "active-id",
+              "fieldName": "activeId",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "change",
+              "fieldName": "change",
+              "type": {
+                "text": "string"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
           "tagName": "z-toggle",
           "name": "ZToggle",
           "members": [
@@ -17470,6 +17808,14 @@
         },
         {
           "kind": "custom-element-definition",
+          "name": "z-doc-header",
+          "declaration": {
+            "name": "ZDocHeader",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
           "name": "z-dock",
           "declaration": {
             "name": "ZDock",
@@ -17894,6 +18240,14 @@
         },
         {
           "kind": "custom-element-definition",
+          "name": "z-prev-next",
+          "declaration": {
+            "name": "ZPrevNext",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
           "name": "z-progress",
           "declaration": {
             "name": "ZProgress",
@@ -18265,6 +18619,14 @@
           "name": "z-toast",
           "declaration": {
             "name": "ZToast",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "z-toc",
+          "declaration": {
+            "name": "ZToc",
             "module": "dist/zest.js"
           }
         },

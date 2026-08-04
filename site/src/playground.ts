@@ -56,7 +56,7 @@ const buildSetupSection = (pairedScript: string): HTMLElement => {
 
 const buildJsOnlyFootnote = (propertyNames: string[]): HTMLElement => {
 	const callout = createElement('z-callout', 'playgroundFootnote')
-	callout.setAttribute('kind', 'note')
+	callout.setAttribute('accent', 'dom')
 	callout.textContent = `Also configurable via JS property: ${propertyNames.join(', ')}.`
 	return callout
 }
