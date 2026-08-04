@@ -9,7 +9,7 @@ const styles = css`
 		-webkit-user-select: none;
 	}
 
-	:host([is-vertical]) {
+	:host([direction='vertical']) {
 		flex-direction: column;
 	}
 
@@ -22,27 +22,27 @@ const styles = css`
 		--z-button-radius: var(--radius-md);
 	}
 
-	:host(:not([is-vertical])) ::slotted(:first-child) {
+	:host(:not([direction='vertical'])) ::slotted(:first-child) {
 		--z-button-radius: var(--radius-md) 0 0 var(--radius-md);
 	}
 
-	:host(:not([is-vertical])) ::slotted(:last-child) {
+	:host(:not([direction='vertical'])) ::slotted(:last-child) {
 		--z-button-radius: 0 var(--radius-md) var(--radius-md) 0;
 	}
 
-	:host(:not([is-vertical])) ::slotted(:not(:first-child)) {
+	:host(:not([direction='vertical'])) ::slotted(:not(:first-child)) {
 		margin-left: -1px;
 	}
 
-	:host([is-vertical]) ::slotted(:first-child) {
+	:host([direction='vertical']) ::slotted(:first-child) {
 		--z-button-radius: var(--radius-md) var(--radius-md) 0 0;
 	}
 
-	:host([is-vertical]) ::slotted(:last-child) {
+	:host([direction='vertical']) ::slotted(:last-child) {
 		--z-button-radius: 0 0 var(--radius-md) var(--radius-md);
 	}
 
-	:host([is-vertical]) ::slotted(:not(:first-child)) {
+	:host([direction='vertical']) ::slotted(:not(:first-child)) {
 		margin-top: -1px;
 	}
 
@@ -50,7 +50,7 @@ const styles = css`
 	   the inline-flex button hosts across the column's cross axis, so the widest
 	   label (e.g. "Bottom") would otherwise leave the narrower ones ragged. The
 	   group is width: fit-content, so 100% resolves to the widest item's width. */
-	:host([is-vertical]) ::slotted(*) {
+	:host([direction='vertical']) ::slotted(*) {
 		width: 100%;
 	}
 
@@ -98,7 +98,7 @@ export const ZButtonGroup = c(
 	),
 	{
 		props: {
-			isVertical: { type: Boolean, reflect: true }
+			direction: { type: String, reflect: true }
 		},
 		styles
 	}

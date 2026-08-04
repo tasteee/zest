@@ -46,7 +46,7 @@ const styles = css`
 		display: none;
 	}
 
-	:host([is-small]) {
+	:host([size='sm']) {
 		--switcher-height: var(--control-height-sm);
 		--switcher-padding-inline: 0.5625rem;
 		--switcher-font-size: var(--font-size-1);
@@ -54,7 +54,7 @@ const styles = css`
 		--switcher-gap: 0.375rem;
 	}
 
-	:host([is-large]) {
+	:host([size='lg']) {
 		--switcher-height: var(--control-height-lg);
 		--switcher-padding-inline: 1rem;
 		--switcher-font-size: var(--font-size-3);
@@ -375,8 +375,7 @@ export const ZThemeSwitcher = c(
 			accent: { type: String, reflect: true },
 			themes: { type: Array },
 			isIconOnly: { type: Boolean, reflect: true },
-			isSmall: { type: Boolean, reflect: true },
-			isLarge: { type: Boolean, reflect: true },
+			size: { type: String, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			change: event<{ preference: ThemePreferenceT; theme: ThemeT }>({ bubbles: true, composed: true })
 		},

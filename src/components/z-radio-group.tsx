@@ -17,7 +17,7 @@ const styles = css`
 		gap: var(--space-md);
 	}
 
-	:host([is-horizontal]) {
+	:host([direction='horizontal']) {
 		flex-direction: row;
 		gap: var(--space-lg);
 	}
@@ -98,7 +98,7 @@ export const ZRadioGroup = c(
 		props: {
 			value: { type: String, reflect: true },
 			label: String,
-			isHorizontal: { type: Boolean, reflect: true },
+			direction: { type: String, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			change: event<{ value?: string }>({ bubbles: true, composed: true })
 		},

@@ -39,11 +39,11 @@ const styles = css`
 		display: none;
 	}
 
-	:host([is-small]) {
+	:host([size='sm']) {
 		--knob-size: 2.5rem;
 	}
 
-	:host([is-large]) {
+	:host([size='lg']) {
 		--knob-size: 5rem;
 	}
 
@@ -362,8 +362,7 @@ export const ZKnob = c(
 			valueSuffix: String,
 			accent: { type: String, reflect: true },
 			isGlowing: { type: Boolean, reflect: true },
-			isSmall: { type: Boolean, reflect: true },
-			isLarge: { type: Boolean, reflect: true },
+			size: { type: String, reflect: true },
 			isDisabled: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			input: event<{ value: number }>({ bubbles: true, composed: true }),

@@ -2,8 +2,13 @@ import { c, css } from 'atomico'
 import { coerceSize, sizeProp } from '../shared/layout-schema'
 
 const styles = css`
+	/* A card is a column. If you need a row inside one, slot a z-row — the card
+	   itself no longer switches its own display, which is what is-flex/is-row/
+	   is-column used to do. */
 	:host {
-		display: block;
+		display: flex;
+		flex-direction: column;
+		gap: var(--z-card-gap);
 		box-sizing: border-box;
 		border-radius: var(--radius-lg);
 		padding: var(--space-lg);
@@ -14,20 +19,6 @@ const styles = css`
 		   page rather than floating above it, so it takes the flush stack. */
 		background: var(--material-surface);
 		box-shadow: var(--elevation-flush);
-	}
-
-	:host([is-flex]) {
-		display: flex;
-		flex-direction: row;
-		gap: var(--z-card-gap);
-	}
-
-	:host([is-row]) {
-		flex-direction: row;
-	}
-
-	:host([is-column]) {
-		flex-direction: column;
 	}
 
 	:host([is-reactive]:hover),
@@ -49,9 +40,6 @@ export const ZCard = c(
 	{
 		props: {
 			isHidden: { type: Boolean, reflect: true },
-			isFlex: { type: Boolean, reflect: true },
-			isRow: { type: Boolean, reflect: true },
-			isColumn: { type: Boolean, reflect: true },
 			isReactive: { type: Boolean, reflect: true },
 			gap: sizeProp
 		},

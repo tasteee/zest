@@ -10,12 +10,12 @@ const baseStyles = css`
 
 /*
  * z-row — z-box with the flow direction locked to a horizontal row. A thin
- * wrapper: every other z-box prop (gap, aligns-x/aligns-y, wrap,
- * padding/margin, inset, full-width/full-height, ...) works the same way.
+ * wrapper: every other z-box prop (gap, aligns-x/aligns-y, does-wrap,
+ * padding/margin, inset, is-full-width/is-full-height, ...) works the same way.
  */
 export const ZRow = c(
 	(props) => (
-		<host shadowDom is-row style={getBoxHostStyle(props)}>
+		<host shadowDom direction='horizontal' style={getBoxHostStyle(props)}>
 			<slot />
 		</host>
 	),

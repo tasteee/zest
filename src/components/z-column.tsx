@@ -10,12 +10,12 @@ const baseStyles = css`
 
 /*
  * z-column — z-box with the flow direction locked to a vertical column. A thin
- * wrapper: every other z-box prop (gap, aligns-x/aligns-y, wrap,
- * padding/margin, inset, full-width/full-height, ...) works the same way.
+ * wrapper: every other z-box prop (gap, aligns-x/aligns-y, does-wrap,
+ * padding/margin, inset, is-full-width/is-full-height, ...) works the same way.
  */
 export const ZColumn = c(
 	(props) => (
-		<host shadowDom is-column style={getBoxHostStyle({ ...props, isColumn: true })}>
+		<host shadowDom direction='vertical' style={getBoxHostStyle({ ...props, direction: 'vertical' })}>
 			<slot />
 		</host>
 	),

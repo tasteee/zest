@@ -92,13 +92,18 @@ export const ZMessageGroup = c(
 			return () => mo.disconnect()
 		}, [props.side])
 
+		// `auto` is the default and matches how the two sides read: an incoming
+		// group is identified by its avatar, an outgoing one is already known
+		// to be you. `always` and `never` override that per group.
 		const isEnd = props.side === 'end'
-		const showAvatar = isEnd ? Boolean(props.showAvatar) : !props.hideAvatar
+		const avatarMode = props.avatar || 'auto'
+		const isAutoShown = !isEnd
+		const shouldShowAvatar = avatarMode === 'auto' ? isAutoShown : avatarMode === 'always'
 
 		return (
 			<host shadowDom>
 				<div class='row'>
-					{showAvatar && (
+					{shouldShowAvatar && (
 						<div class='avatar'>
 							<z-avatar
 								size='small'
@@ -129,8 +134,7 @@ export const ZMessageGroup = c(
 			avatarName: { type: String, reflect: true },
 			avatarInitials: { type: String, reflect: true },
 			timestamp: { type: String, reflect: true },
-			hideAvatar: { type: Boolean, reflect: true },
-			showAvatar: { type: Boolean, reflect: true },
+			avatar: { type: String, reflect: true },
 			isHidden: { type: Boolean, reflect: true }
 		},
 		styles

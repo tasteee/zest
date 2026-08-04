@@ -383,7 +383,7 @@ export const ZPianoRoll = c(
 		const scaleName = props.scale || ''
 		const root = ((props.root || 0) % 12 + 12) % 12
 		const defaultVelocity = props.defaultVelocity ?? 100
-		const gutterW = props.hideKeyboard ? 0 : 56
+		const gutterW = !props.hasKeyboard ? 0 : 56
 		const rulerH = 22
 
 		const inScale = (pitch: number): boolean => {
@@ -833,7 +833,7 @@ export const ZPianoRoll = c(
 				role="application"
 				aria-label="Piano roll MIDI editor"
 			>
-				{!props.hideToolbar && (
+				{props.hasToolbar && (
 					<div class="toolbar">
 						<div class="tb-group">
 							<button
@@ -911,7 +911,7 @@ export const ZPianoRoll = c(
 							{barLabels}
 						</div>
 
-						{!props.hideKeyboard && (
+						{props.hasKeyboard && (
 							<div class="keys" style={{ height: `${worldH}px` }} onpointerdown={(e) => startZoomDrag(e, 'vertical')} onpointermove={updateZoomDrag} onpointerup={endZoomDrag} onpointercancel={endZoomDrag}>
 								{visibleRows.map((p) => {
 									const isBlack = BLACK.has(((p % 12) + 12) % 12)
@@ -1016,8 +1016,8 @@ export const ZPianoRoll = c(
 			root: { type: Number, reflect: true },
 			defaultVelocity: { type: Number, reflect: true },
 			playhead: { type: Number, reflect: true },
-			hideToolbar: { type: Boolean, reflect: true },
-			hideKeyboard: { type: Boolean, reflect: true },
+			hasToolbar: { type: Boolean, reflect: true, value: true },
+			hasKeyboard: { type: Boolean, reflect: true, value: true },
 			isDisabled: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			change: event<{ notes: any[] }>({ bubbles: true, composed: true }),

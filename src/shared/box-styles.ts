@@ -1,11 +1,10 @@
 import { css } from 'atomico'
 
 /**
- * Shared flex/grid layout rules, used by <z-box> (and, via the box props +
+ * Shared flex layout rules, used by <z-box> (and, via the box props +
  * this stylesheet, its thin z-row/z-column wrappers). `aligns-x`/`aligns-y`
  * are resolved in JS (see box-schema.ts's getBoxHostStyle) into the
- * --z-box-justify/--z-box-align (flex) or --z-box-justify-items/
- * --z-box-align-items (grid) custom properties consumed below.
+ * --z-box-justify/--z-box-align custom properties consumed below.
  */
 export const boxLayoutStyles = css`
 	:host {
@@ -22,8 +21,6 @@ export const boxLayoutStyles = css`
 		gap: var(--z-box-gap);
 		row-gap: var(--z-box-row-gap, var(--z-box-gap));
 		column-gap: var(--z-box-column-gap, var(--z-box-gap));
-		grid-template-columns: var(--z-box-grid-template-columns);
-		grid-template-rows: var(--z-box-grid-template-rows);
 		width: var(--z-box-width);
 		min-width: var(--z-box-min-width, 0);
 		max-width: var(--z-box-max-width);
@@ -31,102 +28,28 @@ export const boxLayoutStyles = css`
 		min-height: var(--z-box-min-height);
 		max-height: var(--z-box-max-height);
 		display: flex;
-		justify-content: var(--z-box-justify, flex-start);
-		align-items: var(--z-box-align, stretch);
-	}
-
-	:host([is-flex]) {
-		display: flex;
 		flex-direction: row;
-		align-items: var(--z-box-align, stretch);
-		justify-content: var(--z-box-justify, flex-start);
 		flex-wrap: nowrap;
-	}
-
-	:host([is-inline-flex]) {
-		display: inline-flex;
-		flex-direction: row;
-		align-items: var(--z-box-align, stretch);
 		justify-content: var(--z-box-justify, flex-start);
-		flex-wrap: nowrap;
+		align-items: var(--z-box-align, stretch);
 	}
 
-	:host([is-grid]),
-	:host([is-inline-grid]) {
-		justify-items: var(--z-box-justify-items, stretch);
-		align-items: var(--z-box-align-items, stretch);
-	}
-
-	:host([is-grid]) {
-		display: grid;
-	}
-
-	:host([is-inline-grid]) {
-		display: inline-grid;
-	}
-
-	@media (min-width: 40rem) {
-		:host {
-			grid-template-columns: var(--z-box-small-grid-template-columns, var(--z-box-grid-template-columns));
-		}
-	}
-
-	@media (min-width: 48rem) {
-		:host {
-			grid-template-columns: var(
-				--z-box-medium-grid-template-columns,
-				var(--z-box-small-grid-template-columns, var(--z-box-grid-template-columns))
-			);
-		}
-	}
-
-	@media (min-width: 64rem) {
-		:host {
-			grid-template-columns: var(
-				--z-box-large-grid-template-columns,
-				var(--z-box-medium-grid-template-columns, var(--z-box-small-grid-template-columns, var(--z-box-grid-template-columns)))
-			);
-		}
-	}
-
-	@media (min-width: 80rem) {
-		:host {
-			grid-template-columns: var(
-				--z-box-extra-large-grid-template-columns,
-				var(
-					--z-box-large-grid-template-columns,
-					var(--z-box-medium-grid-template-columns, var(--z-box-small-grid-template-columns, var(--z-box-grid-template-columns)))
-				)
-			);
-		}
-	}
-
-	:host([is-block]) {
-		display: block;
-	}
-
-	:host([is-inline-block]) {
-		display: inline-block;
-	}
-
-	:host([is-inline]:not([is-flex]):not([is-inline-flex])) {
-		display: inline;
-	}
-
-	:host([is-flex][is-inline]),
-	:host([is-inline-flex][is-inline]) {
+	/* The one display modifier that composes with flex rather than replacing
+	   it. Everything else — grid, block, inline-block — left with z-box's
+	   display switch; grid belongs to z-grid. */
+	:host([is-inline]) {
 		display: inline-flex;
 	}
 
-	:host([is-row]) {
+	:host([direction='horizontal']) {
 		flex-direction: row;
 	}
 
-	:host([is-column]) {
+	:host([direction='vertical']) {
 		flex-direction: column;
 	}
 
-	:host([wrap]) {
+	:host([does-wrap]) {
 		flex-wrap: wrap;
 	}
 
@@ -134,11 +57,11 @@ export const boxLayoutStyles = css`
 		white-space: normal;
 	}
 
-	:host([full-width]) {
+	:host([is-full-width]) {
 		width: 100%;
 	}
 
-	:host([full-height]) {
+	:host([is-full-height]) {
 		height: 100%;
 	}
 `

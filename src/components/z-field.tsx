@@ -26,8 +26,8 @@ const styles = css`
 		--z-field-control-height: var(--control-height-md);
 	}
 
-	:host([is-small]) { --z-field-control-height: var(--control-height-sm); }
-	:host([is-large]) { --z-field-control-height: var(--control-height-lg); }
+	:host([size='sm']) { --z-field-control-height: var(--control-height-sm); }
+	:host([size='lg']) { --z-field-control-height: var(--control-height-lg); }
 
 	/* minmax(0, 1fr) rather than the implicit auto track: an auto track is
 	   floored at its content's min-content width, so a field in a narrow
@@ -108,8 +108,7 @@ export const ZField = c(
 			isRequired: { type: Boolean, reflect: true },
 			isLabelHidden: { type: Boolean, reflect: true },
 			isLabelReserved: { type: Boolean, reflect: true },
-			isSmall: { type: Boolean, reflect: true },
-			isLarge: { type: Boolean, reflect: true }
+			size: { type: String, reflect: true }
 		},
 		styles
 	}

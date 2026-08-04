@@ -407,7 +407,7 @@ export const ZPatternRoll = c(
 		const curMode = mode || 'select'
 		const defaultVelocity = props.defaultVelocity ?? 100
 		const defaultOctave = props.defaultOctave ?? 0
-		const gutterW = props.hideKeyboard ? 0 : 48
+		const gutterW = !props.hasKeyboard ? 0 : 48
 		const rulerH = 22
 
 		const normalize = (raw: any[]): Signal[] => {
@@ -899,7 +899,7 @@ export const ZPatternRoll = c(
 
 		return (
 			<host shadowDom tabindex="0" onkeydown={onKeyDown} role="application" aria-label="Chord pattern editor">
-				{!props.hideToolbar && (
+				{props.hasToolbar && (
 					<div class="toolbar">
 						<div class="tb-group">
 							<button
@@ -950,7 +950,7 @@ export const ZPatternRoll = c(
 							{beatLabels}
 						</div>
 
-						{!props.hideKeyboard && (
+						{props.hasKeyboard && (
 							<div class="keys" style={{ height: `${worldH}px` }} onpointerdown={(e) => startZoomDrag(e, 'vertical')} onpointermove={updateZoomDrag} onpointerup={endZoomDrag} onpointercancel={endZoomDrag}>
 								{degrees.map((t) => (
 									<div
@@ -1044,8 +1044,8 @@ export const ZPatternRoll = c(
 			defaultVelocity: { type: Number, reflect: true },
 			defaultOctave: { type: Number, reflect: true },
 			playhead: { type: Number, reflect: true },
-			hideToolbar: { type: Boolean, reflect: true },
-			hideKeyboard: { type: Boolean, reflect: true },
+			hasToolbar: { type: Boolean, reflect: true, value: true },
+			hasKeyboard: { type: Boolean, reflect: true, value: true },
 			isDisabled: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			change: event<{ signals: any[] }>({ bubbles: true, composed: true }),

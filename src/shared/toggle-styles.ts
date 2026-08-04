@@ -69,7 +69,7 @@ export const toggleStyles = css`
 		pointer-events: none;
 	}
 
-	button.is-small {
+	button.is-sm {
 		--z-toggle-height: 2rem;
 		--z-toggle-padding-inline: 0.75rem;
 		--z-toggle-min-width: 2rem;
@@ -77,7 +77,7 @@ export const toggleStyles = css`
 		--z-toggle-icon-size: 0.875rem;
 	}
 
-	button.is-large {
+	button.is-lg {
 		--z-toggle-height: 3rem;
 		--z-toggle-padding-inline: 1.25rem;
 		--z-toggle-min-width: 3rem;
@@ -90,13 +90,13 @@ export const toggleStyles = css`
 		width: var(--z-toggle-height, 2.5rem);
 	}
 
-	button.is-purple {
+	button.is-dom {
 		--z-toggle-color: var(--neon-purple);
 		--z-toggle-accent: var(--neon-purple);
 		--z-toggle-accent-foreground: var(--primary-foreground);
 	}
 
-	button.is-pink {
+	button.is-sub {
 		--z-toggle-color: var(--neon-pink);
 		--z-toggle-accent: var(--neon-pink);
 		--z-toggle-accent-foreground: var(--primary-foreground);
@@ -118,7 +118,7 @@ export const toggleStyles = css`
 
 	/* off: tone-colored text (--z-toggle-color) + a dimmed tone border so the two
 	   agree. on: solid tone fill with dark on-foreground text and a solid border. */
-	button.is-outlined {
+	button.is-outline {
 		--z-toggle-border: color-mix(in oklch, var(--z-toggle-accent, var(--foreground)) 50%, transparent);
 		--z-toggle-hover-bg: color-mix(in oklch, var(--z-toggle-accent, var(--foreground)) 10%, transparent);
 		--z-toggle-on-bg: var(--z-toggle-accent, var(--primary));

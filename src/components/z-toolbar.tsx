@@ -29,7 +29,7 @@ const styles = css`
 	:host([size='large']) {
 		gap: var(--space-md);
 	}
-	:host([orientation='vertical']) {
+	:host([direction='vertical']) {
 		flex-direction: column;
 		align-items: stretch;
 	}
@@ -71,7 +71,7 @@ export const ZToolbar = c(
 				if (!list.length) return
 				const cur = list.indexOf(e.target as HTMLElement)
 				if (cur < 0) return
-				const horizontal = props.orientation !== 'vertical'
+				const horizontal = props.direction !== 'vertical'
 				const next = horizontal ? 'ArrowRight' : 'ArrowDown'
 				const prev = horizontal ? 'ArrowLeft' : 'ArrowUp'
 				let to = cur
@@ -103,13 +103,13 @@ export const ZToolbar = c(
 				el.removeEventListener('focusin', onFocusIn)
 				mo.disconnect()
 			}
-		}, [props.orientation, props.overflow])
+		}, [props.direction, props.overflow])
 
 		return (
 			<host
 				shadowDom
 				role='toolbar'
-				aria-orientation={props.orientation === 'vertical' ? 'vertical' : 'horizontal'}
+				aria-orientation={props.direction === 'vertical' ? 'vertical' : 'horizontal'}
 			>
 				<slot />
 				<div class='overflow'>
@@ -120,7 +120,7 @@ export const ZToolbar = c(
 	},
 	{
 		props: {
-			orientation: { type: String, reflect: true },
+			direction: { type: String, reflect: true },
 			size: { type: String, reflect: true },
 			overflow: { type: String, reflect: true },
 			isDisabled: { type: Boolean, reflect: true }

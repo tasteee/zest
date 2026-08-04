@@ -62,7 +62,7 @@ export const ZVirtualList = c(
 			const n = items.length
 			const gap = (props.gap as number) || 0
 			const overscan = (props.overscan as number) ?? 4
-			const horizontal = Boolean(props.isHorizontal)
+			const horizontal = Boolean(props.direction === 'horizontal')
 			const render = props.renderItem as ((item: unknown, i: number) => Node | string) | undefined
 			const keyFn = props.keyFn as ((item: unknown, i: number) => string | number) | undefined
 
@@ -250,7 +250,7 @@ export const ZVirtualList = c(
 			props.estimateSize,
 			props.gap,
 			props.overscan,
-			props.isHorizontal,
+			props.direction === 'horizontal',
 			props.renderItem,
 			props.keyFn
 		])
@@ -269,7 +269,7 @@ export const ZVirtualList = c(
 			itemHeight: { type: Number, reflect: true },
 			estimateSize: { type: Number, reflect: true },
 			overscan: { type: Number, reflect: true },
-			isHorizontal: { type: Boolean, reflect: true },
+			direction: { type: String, reflect: true },
 			gap: { type: Number, reflect: true },
 			renderItem: { type: Function },
 			keyFn: { type: Function },

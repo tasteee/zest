@@ -38,7 +38,7 @@ const styles = css`
 		-webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
 	}
 
-	:host([has-fade][vertical]) .viewport {
+	:host([has-fade][direction='vertical']) .viewport {
 		mask-image: linear-gradient(to bottom, transparent, black 8%, black 92%, transparent);
 		-webkit-mask-image: linear-gradient(to bottom, transparent, black 8%, black 92%, transparent);
 	}
@@ -49,7 +49,7 @@ const styles = css`
 		gap: var(--gap);
 	}
 
-	:host([vertical]) .track {
+	:host([direction='vertical']) .track {
 		flex-direction: column;
 		width: auto;
 		height: max-content;
@@ -62,7 +62,7 @@ const styles = css`
 		animation: marquee-x var(--duration) linear infinite;
 	}
 
-	:host([vertical]) .group {
+	:host([direction='vertical']) .group {
 		flex-direction: column;
 		animation-name: marquee-y;
 	}
@@ -130,7 +130,7 @@ export const ZMarquee = c(
 			duration: Number,
 			gap: sizeProp,
 			reverse: { type: Boolean, reflect: true },
-			vertical: { type: Boolean, reflect: true },
+			direction: { type: String, reflect: true },
 			pauseOnHover: { type: Boolean, reflect: true },
 			hasFade: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true }

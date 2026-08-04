@@ -12,20 +12,21 @@ const resolveGridTemplateValue = (value?: string): string | undefined => {
 	return isPureNumber(value) ? `repeat(${value}, minmax(0, 1fr))` : value
 }
 
+/*
+ * The box family is flex, always. It used to carry seven booleans for one CSS
+ * display value — grid, inline-grid, block, inline-block and the rest — which
+ * made z-box a general display switch rather than a layout primitive. Grid
+ * lives in z-grid, which owns that job properly.
+ *
+ * What survives is the one modifier that genuinely composes with flex:
+ * is-inline upgrades the box to inline-flex.
+ */
 export const boxBooleanProps = {
-	isRow: { type: Boolean, reflect: true },
-	isColumn: { type: Boolean, reflect: true },
-	isFlex: { type: Boolean, reflect: true },
-	isInlineFlex: { type: Boolean, reflect: true },
-	isGrid: { type: Boolean, reflect: true },
-	isInlineGrid: { type: Boolean, reflect: true },
-	isBlock: { type: Boolean, reflect: true },
-	isInlineBlock: { type: Boolean, reflect: true },
 	isInline: { type: Boolean, reflect: true },
-	wrap: { type: Boolean, reflect: true },
+	doesWrap: { type: Boolean, reflect: true },
 	doesWrapText: { type: Boolean, reflect: true },
-	fullWidth: { type: Boolean, reflect: true },
-	fullHeight: { type: Boolean, reflect: true }
+	isFullWidth: { type: Boolean, reflect: true },
+	isFullHeight: { type: Boolean, reflect: true }
 } as const
 
 export const boxValueProps = {
@@ -52,12 +53,7 @@ export const boxValueProps = {
 	height: String,
 	minHeight: String,
 	maxHeight: String,
-	columns: String,
-	rows: String,
-	smallColumns: String,
-	mediumColumns: String,
-	largeColumns: String,
-	extraLargeColumns: String,
+	direction: { type: String, reflect: true },
 	alignsX: String,
 	alignsY: String,
 	...insetProps
@@ -73,27 +69,19 @@ const omitProps = (source: Record<string, unknown>, keys: string[]): Record<stri
 	return result
 }
 
-/* z-row/z-column expose every box prop except is-row/is-column — their own
- * tag name already fixes the flow direction, so reflecting a redundant
- * (or contradictory) direction attribute would just be confusing. */
-export const directionLockedBoxProps = omitProps(boxProps, ['isRow', 'isColumn'])
+/* z-row/z-column expose every box prop except direction — their own tag name
+ * already fixes the flow, so reflecting a redundant (or contradictory)
+ * direction attribute would just be confusing. */
+export const directionLockedBoxProps = omitProps(boxProps, ['direction'])
 
-type BoxHostPropsT = { [K in keyof typeof boxValueProps]?: string } & {
-	isRow?: boolean
-	isColumn?: boolean
-	isGrid?: boolean
-	isInlineGrid?: boolean
-}
+type BoxHostPropsT = { [K in keyof typeof boxValueProps]?: string }
 
 /*
- * z-box is the one generic layout primitive: flex (the default), grid, or
- * block, picked with is-flex/is-grid/is-block etc. `aligns-x`/`aligns-y` are
- * always the horizontal/vertical relationship regardless of flow direction —
- * in flex mode they map to justify-content/align-items (swapped onto the
- * cross axis when is-column is set); in grid mode they map to
- * justify-items/align-items instead (grid alignment is per-cell, so there's
- * no axis swap). z-row/z-column are thin wrappers that just lock is-row/
- * is-column.
+ * z-box is the generic flex primitive. `aligns-x`/`aligns-y` are always the
+ * horizontal/vertical relationship regardless of flow direction, so they swap
+ * which axis they drive: in a horizontal box aligns-x is the main axis, in a
+ * vertical box it's the cross axis. z-row/z-column are thin wrappers that lock
+ * the direction.
  */
 export const getBoxHostStyle = (props: BoxHostPropsT): Record<string, string> => {
 	const style: Record<string, string> = {}
@@ -151,28 +139,14 @@ export const getBoxHostStyle = (props: BoxHostPropsT): Record<string, string> =>
 	set('--z-box-min-height', resolveLengthValue(props.minHeight))
 	set('--z-box-max-height', resolveLengthValue(props.maxHeight))
 
-	set('--z-box-grid-template-columns', resolveGridTemplateValue(props.columns))
-	set('--z-box-grid-template-rows', resolveGridTemplateValue(props.rows))
-	set('--z-box-small-grid-template-columns', resolveGridTemplateValue(props.smallColumns))
-	set('--z-box-medium-grid-template-columns', resolveGridTemplateValue(props.mediumColumns))
-	set('--z-box-large-grid-template-columns', resolveGridTemplateValue(props.largeColumns))
-	set('--z-box-extra-large-grid-template-columns', resolveGridTemplateValue(props.extraLargeColumns))
+	// aligns-x is always horizontal and aligns-y always vertical, so which one
+	// drives the main axis flips with the flow direction.
+	const isHorizontal = props.direction !== 'vertical'
+	const mainAxisAlign = isHorizontal ? props.alignsX : props.alignsY
+	const crossAxisAlign = isHorizontal ? props.alignsY : props.alignsX
 
-	const isGridMode = Boolean(props.isGrid) || Boolean(props.isInlineGrid)
-	if (isGridMode) {
-		set('--z-box-justify-items', resolveGridAlign(props.alignsX))
-		set('--z-box-align-items', resolveGridAlign(props.alignsY))
-		return style
-	}
-
-	// Flex (the default flow, or explicit is-flex/is-row/is-column): aligns-x is
-	// always horizontal and aligns-y always vertical, so they swap which axis
-	// they drive depending on flow direction.
-	const isRow = !props.isColumn
-	const main = isRow ? props.alignsX : props.alignsY
-	const cross = isRow ? props.alignsY : props.alignsX
-	set('--z-box-justify', resolveJustify(main))
-	set('--z-box-align', resolveAlign(cross))
+	set('--z-box-justify', resolveJustify(mainAxisAlign))
+	set('--z-box-align', resolveAlign(crossAxisAlign))
 
 	return style
 }

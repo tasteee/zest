@@ -15,7 +15,7 @@ const styles = css`
 		gap: var(--space-base);
 	}
 
-	:host([is-vertical]) {
+	:host([direction='vertical']) {
 		flex-direction: column;
 		width: auto;
 		height: 100%;
@@ -31,7 +31,7 @@ const styles = css`
 		height: 1px;
 	}
 
-	:host([is-vertical]) .rule {
+	:host([direction='vertical']) .rule {
 		width: 1px;
 		height: auto;
 	}
@@ -76,7 +76,7 @@ export const ZSeparator = c(
 			<host
 				shadowDom
 				role='separator'
-				aria-orientation={props.isVertical ? 'vertical' : 'horizontal'}
+				aria-orientation={props.direction === 'vertical' ? 'vertical' : 'horizontal'}
 				data-labeled={isLabeled ? '' : null}
 			>
 				<span class='rule' aria-hidden='true'></span>
@@ -87,7 +87,7 @@ export const ZSeparator = c(
 	},
 	{
 		props: {
-			isVertical: { type: Boolean, reflect: true },
+			direction: { type: String, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			label: String
 		},
