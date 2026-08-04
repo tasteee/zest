@@ -61,11 +61,11 @@ const styles = css`
 		transition: background-color 0.16s ease, border-color 0.16s ease;
 	}
 
-	label.is-small .track {
+	label.is-sm .track {
 		width: 2.125rem;
 		height: 1.2rem;
 	}
-	label.is-large .track {
+	label.is-lg .track {
 		width: 3rem;
 		height: 1.625rem;
 	}
@@ -92,11 +92,11 @@ const styles = css`
 		transition: transform 0.16s var(--easing-standard, ease-out), background-color 0.16s ease;
 	}
 
-	label.is-small .knob {
+	label.is-sm .knob {
 		width: calc(1.2rem - 6px);
 		height: calc(1.2rem - 6px);
 	}
-	label.is-large .knob {
+	label.is-lg .knob {
 		width: calc(1.625rem - 6px);
 		height: calc(1.625rem - 6px);
 	}
@@ -105,10 +105,10 @@ const styles = css`
 		background: var(--primary-foreground);
 		transform: translateX(calc(2.5rem - 1.375rem));
 	}
-	label.is-small .track.is-on .knob {
+	label.is-sm .track.is-on .knob {
 		transform: translateX(calc(2.125rem - 1.2rem));
 	}
-	label.is-large .track.is-on .knob {
+	label.is-lg .track.is-on .knob {
 		transform: translateX(calc(3rem - 1.625rem));
 	}
 
@@ -127,9 +127,9 @@ const styles = css`
 `
 
 const resolveSizeClass = (props: any): string => {
-	if (props.size === 'small') return 'is-small'
-	if (props.size === 'large') return 'is-large'
-	return 'is-medium'
+	if (props.size === 'sm') return 'is-sm'
+	if (props.size === 'lg') return 'is-lg'
+	return 'is-md'
 }
 
 export const ZSwitch = c(

@@ -57,11 +57,11 @@ const styles = css`
 		transition: border-color 0.12s ease, background-color 0.12s ease;
 	}
 
-	label.is-small .box {
+	label.is-sm .box {
 		width: 1rem;
 		height: 1rem;
 	}
-	label.is-large .box {
+	label.is-lg .box {
 		width: 1.375rem;
 		height: 1.375rem;
 	}
@@ -118,9 +118,9 @@ const styles = css`
 `
 
 const resolveSizeClass = (props: any): string => {
-	if (props.size === 'small') return 'is-small'
-	if (props.size === 'large') return 'is-large'
-	return 'is-medium'
+	if (props.size === 'sm') return 'is-sm'
+	if (props.size === 'lg') return 'is-lg'
+	return 'is-md'
 }
 
 export const ZCheckbox = c(

@@ -59,7 +59,7 @@ export const ZTypingIndicator = c(
 		return (
 			<host shadowDom aria-label={props.name ? `${props.name} is typing` : 'typing'}>
 				{props.name && (
-					<z-avatar size='small' name={props.name} src={props.avatarSrc} />
+					<z-avatar size='sm' name={props.name} src={props.avatarSrc} />
 				)}
 				<span class='bubble'>
 					<span class='dot'></span>

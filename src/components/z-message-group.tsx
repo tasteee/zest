@@ -106,7 +106,7 @@ export const ZMessageGroup = c(
 					{shouldShowAvatar && (
 						<div class='avatar'>
 							<z-avatar
-								size='small'
+								size='sm'
 								name={props.avatarName || props.name}
 								src={props.avatarSrc}
 								initials={props.avatarInitials}

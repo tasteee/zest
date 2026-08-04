@@ -59,12 +59,12 @@ const styles = css`
 	}
 
 	/* sizes */
-	.badge.is-small {
+	.badge.is-sm {
 		font-size: 0.6875rem;
 		padding: 0.25rem 0.5rem;
 		letter-spacing: 0.01em;
 	}
-	.badge.is-medium {
+	.badge.is-md {
 		font-size: 0.75rem;
 		padding: 0.3125rem 0.625rem;
 	}
@@ -218,7 +218,7 @@ const resolveKindClass = (props: any): string => {
 
 export const ZBadge = c(
 	(props) => {
-		const sizeClass = props.size === 'small' ? 'is-small' : 'is-medium'
+		const sizeClass = props.size === 'sm' ? 'is-sm' : 'is-md'
 		const isClickable = props.isSelectable && !props.isDisabled
 
 		const badgeClass = [

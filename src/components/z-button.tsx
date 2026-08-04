@@ -47,21 +47,21 @@ const styles = css`
 
 	/* sizes */
 
-	button.is-small {
+	button.is-sm {
 		border-radius: var(--z-button-radius, var(--small-button-radius));
 		height: var(--control-height-sm);
 		padding-inline: 0.875rem;
 		font-size: 0.75rem;
 	}
 
-	button.is-medium {
+	button.is-md {
 		border-radius: var(--z-button-radius, var(--medium-button-radius));
 		height: var(--control-height-md);
 		padding-inline: 1rem;
 		font-size: 0.875rem;
 	}
 
-	button.is-large {
+	button.is-lg {
 		border-radius: var(--z-button-radius, var(--large-button-radius));
 		height: var(--control-height-lg);
 		padding-inline: 1.5rem;
@@ -221,12 +221,12 @@ const styles = css`
 		flex-shrink: 0;
 	}
 
-	button.is-small ::slotted(svg) {
+	button.is-sm ::slotted(svg) {
 		width: 0.875rem;
 		height: 0.875rem;
 	}
 
-	button.is-large ::slotted(svg) {
+	button.is-lg ::slotted(svg) {
 		width: 1.125rem;
 		height: 1.125rem;
 	}
@@ -260,9 +260,9 @@ const styles = css`
 `
 
 const resolveSizeClass = (props: any): string => {
-	if (props.size === 'small') return 'is-small'
-	if (props.size === 'large') return 'is-large'
-	return 'is-medium'
+	if (props.size === 'sm') return 'is-sm'
+	if (props.size === 'lg') return 'is-lg'
+	return 'is-md'
 }
 
 const resolveKindClass = (props: any): string => {

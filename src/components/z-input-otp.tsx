@@ -52,12 +52,12 @@ const styles = css`
 		box-sizing: border-box;
 	}
 
-	.cell.is-small {
+	.cell.is-sm {
 		width: 2.25rem;
 		height: 2.75rem;
 		font-size: var(--font-size-h4);
 	}
-	.cell.is-large {
+	.cell.is-lg {
 		width: 3.25rem;
 		height: 3.75rem;
 		font-size: var(--font-size-h2);
@@ -92,8 +92,8 @@ const styles = css`
 `
 
 const resolveSizeClass = (props: any): string => {
-	if (props.size === 'small') return 'is-small'
-	if (props.size === 'large') return 'is-large'
+	if (props.size === 'sm') return 'is-sm'
+	if (props.size === 'lg') return 'is-lg'
 	return ''
 }
 

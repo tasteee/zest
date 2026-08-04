@@ -36,10 +36,10 @@ const styles = css`
 		overflow: hidden;
 	}
 
-	:host([size='small']) .track {
+	:host([size='sm']) .track {
 		--bar-height: 0.3125rem;
 	}
-	:host([size='large']) .track {
+	:host([size='lg']) .track {
 		--bar-height: 0.75rem;
 	}
 

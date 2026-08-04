@@ -37,13 +37,13 @@ const styles = css`
 	}
 
 	/* sizes */
-	a.is-small {
+	a.is-sm {
 		font-size: var(--font-size-small);
 	}
-	a.is-medium {
+	a.is-md {
 		font-size: var(--font-size-body);
 	}
-	a.is-large {
+	a.is-lg {
 		font-size: var(--font-size-h4);
 	}
 
@@ -118,9 +118,9 @@ const styles = css`
 `
 
 const resolveSizeClass = (props: any): string => {
-	if (props.size === 'small') return 'is-small'
-	if (props.size === 'large') return 'is-large'
-	return 'is-medium'
+	if (props.size === 'sm') return 'is-sm'
+	if (props.size === 'lg') return 'is-lg'
+	return 'is-md'
 }
 
 const resolveAccentClass = (props: any): string => {

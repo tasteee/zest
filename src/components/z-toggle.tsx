@@ -65,7 +65,7 @@ const styles = css`
 	/* sizes: each sets the dimension vars the base button consumes, so is-icon
 	   (width: var(--toggle-height)) tracks whichever size is active. */
 
-	button.is-small {
+	button.is-sm {
 		--toggle-height: var(--control-height-sm);
 		--toggle-padding-inline: 0.75rem;
 		--toggle-min-width: 2rem;
@@ -73,7 +73,7 @@ const styles = css`
 		--toggle-icon-size: 0.875rem;
 	}
 
-	button.is-medium {
+	button.is-md {
 		--toggle-height: var(--control-height-md);
 		--toggle-padding-inline: 1rem;
 		--toggle-min-width: 2.5rem;
@@ -81,7 +81,7 @@ const styles = css`
 		--toggle-icon-size: 1rem;
 	}
 
-	button.is-large {
+	button.is-lg {
 		--toggle-height: var(--control-height-lg);
 		--toggle-padding-inline: 1.25rem;
 		--toggle-min-width: 3rem;
@@ -141,9 +141,9 @@ const styles = css`
 `
 
 const resolveSizeClass = (props: any): string => {
-	if (props.size === 'small') return 'is-small'
-	if (props.size === 'large') return 'is-large'
-	return 'is-medium'
+	if (props.size === 'sm') return 'is-sm'
+	if (props.size === 'lg') return 'is-lg'
+	return 'is-md'
 }
 
 const resolveKindClass = (props: any): string => {

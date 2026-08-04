@@ -75,11 +75,11 @@ const styles = css`
 		padding: 0.25rem;
 	}
 
-	:host([size='small']) .copy {
+	:host([size='sm']) .copy {
 		padding: 0.125rem 0.375rem;
 	}
 
-	:host([size='small'][kind='icon']) .copy {
+	:host([size='sm'][kind='icon']) .copy {
 		padding: 0.125rem;
 	}
 
@@ -89,7 +89,7 @@ const styles = css`
 		height: 0.875rem;
 	}
 
-	:host([size='small']) .icon {
+	:host([size='sm']) .icon {
 		width: 0.75rem;
 		height: 0.75rem;
 	}

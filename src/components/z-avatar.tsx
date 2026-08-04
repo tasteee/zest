@@ -29,10 +29,10 @@ const styles = css`
 	:host([size='xs']) {
 		--size: 1.5rem;
 	}
-	:host([size='small']) {
+	:host([size='sm']) {
 		--size: 2rem;
 	}
-	:host([size='large']) {
+	:host([size='lg']) {
 		--size: 3.25rem;
 	}
 	:host([size='xl']) {

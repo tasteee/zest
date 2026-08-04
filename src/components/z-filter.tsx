@@ -68,11 +68,11 @@ const styles = css`
 			opacity 0.12s ease;
 	}
 
-	.filter.is-small .pill {
+	.filter.is-sm .pill {
 		font-size: 0.75rem;
 		padding: 0.3125rem 0.6875rem;
 	}
-	.filter.is-medium .pill {
+	.filter.is-md .pill {
 		font-size: 0.8125rem;
 		padding: 0.4375rem 0.875rem;
 	}
@@ -126,11 +126,11 @@ const styles = css`
 			border-color 0.12s ease,
 			color 0.12s ease;
 	}
-	.filter.is-small .reset {
+	.filter.is-sm .reset {
 		width: 1.625rem;
 		height: 1.625rem;
 	}
-	.filter.is-medium .reset {
+	.filter.is-md .reset {
 		width: 1.875rem;
 		height: 1.875rem;
 	}
@@ -247,7 +247,7 @@ export const ZFilter = c(
 			apply([...view.frontierParent, node.value])
 		}
 
-		const filterClass = ['filter', props.size === 'small' ? 'is-small' : 'is-medium'].join(' ')
+		const filterClass = ['filter', props.size === 'sm' ? 'is-sm' : 'is-md'].join(' ')
 
 		return (
 			<host shadowDom role="group" aria-label={props.label}>

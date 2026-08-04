@@ -33,15 +33,15 @@ const styles = css`
 	}
 
 	/* sizes — same scale as z-input */
-	.field.is-small {
+	.field.is-sm {
 		padding: 0.5rem 0.75rem;
 		font-size: var(--font-size-small);
 	}
-	.field.is-medium {
+	.field.is-md {
 		padding: 0.75rem 0.875rem;
 		font-size: var(--font-size-body);
 	}
-	.field.is-large {
+	.field.is-lg {
 		padding: 0.875rem 1rem;
 		font-size: var(--font-size-h4);
 	}
@@ -106,9 +106,9 @@ const autoGrow = (el: HTMLTextAreaElement) => {
 }
 
 const resolveSizeClass = (props: any): string => {
-	if (props.size === 'small') return 'is-small'
-	if (props.size === 'large') return 'is-large'
-	return 'is-medium'
+	if (props.size === 'sm') return 'is-sm'
+	if (props.size === 'lg') return 'is-lg'
+	return 'is-md'
 }
 
 export const ZTextarea = c(

@@ -13,9 +13,9 @@ const styles = css`
 	:host([accent='dom']) { --accent: var(--purple); }
 	:host([accent='sub']) { --accent: var(--pink); }
 	.field { display: inline-flex; align-items: stretch; width: 100%; box-sizing: border-box; min-width: 0; background: transparent; border: 1px solid var(--border); border-radius: var(--radius-md); color: var(--foreground); font-family: inherit; overflow: hidden; transition: border-color 0.12s ease, background-color 0.12s ease; }
-	.field.is-small { height: var(--control-height-sm); font-size: var(--font-size-small); }
-	.field.is-medium { height: var(--control-height-md); font-size: var(--font-size-body); }
-	.field.is-large { height: var(--control-height-lg); font-size: var(--font-size-h4); }
+	.field.is-sm { height: var(--control-height-sm); font-size: var(--font-size-small); }
+	.field.is-md { height: var(--control-height-md); font-size: var(--font-size-body); }
+	.field.is-lg { height: var(--control-height-lg); font-size: var(--font-size-h4); }
 	.field:hover { border-color: color-mix(in oklch, var(--foreground) 30%, transparent); }
 	.field.is-focused { border-color: var(--accent); background: color-mix(in oklch, var(--accent) 5%, transparent); }
 	.field.is-invalid { border-color: var(--destructive); --accent: var(--destructive); }
@@ -29,7 +29,7 @@ const styles = css`
 	.stepper:disabled { cursor: not-allowed; opacity: 0.35; }
 `
 
-const resolveSizeClass = (props: any) => props.size === 'small' ? 'is-small' : props.size === 'large' ? 'is-large' : 'is-medium'
+const resolveSizeClass = (props: any) => props.size === 'sm' ? 'is-sm' : props.size === 'lg' ? 'is-lg' : 'is-md'
 const isNumberText = (value: string) => /^-?(?:\d+|\d*\.\d+)$/.test(value)
 const decimalPlaces = (value: number) => {
 	const text = String(value).toLowerCase()

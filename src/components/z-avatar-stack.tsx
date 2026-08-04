@@ -24,11 +24,11 @@ const styles = css`
 		--size: 1.5rem;
 		--overlap: 0.45rem;
 	}
-	:host([size='small']) {
+	:host([size='sm']) {
 		--size: 2rem;
 		--overlap: 0.55rem;
 	}
-	:host([size='large']) {
+	:host([size='lg']) {
 		--size: 3.25rem;
 		--overlap: 0.9rem;
 	}

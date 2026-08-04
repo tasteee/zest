@@ -301,7 +301,7 @@ export const ZExample = c(
 
 						{hasSource && (
 							<div class="toolbar">
-								<z-button kind="ghost" size="small" onclick={handleToggleSource}>
+								<z-button kind="ghost" size="sm" onclick={handleToggleSource}>
 									{toggleLabel}
 								</z-button>
 							</div>

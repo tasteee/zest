@@ -53,17 +53,17 @@ const styles = css`
 		transition: border-color 0.12s ease, background-color 0.12s ease;
 	}
 
-	.trigger.is-small {
+	.trigger.is-sm {
 		height: var(--control-height-sm);
 		padding-inline: 0.75rem;
 		font-size: var(--font-size-small);
 	}
-	.trigger.is-medium {
+	.trigger.is-md {
 		height: var(--control-height-md);
 		padding-inline: 0.875rem;
 		font-size: var(--font-size-body);
 	}
-	.trigger.is-large {
+	.trigger.is-lg {
 		height: var(--control-height-lg);
 		padding-inline: 1rem;
 		font-size: var(--font-size-h4);
@@ -179,9 +179,9 @@ const styles = css`
 `
 
 const resolveSizeClass = (props: any): string => {
-	if (props.size === 'small') return 'is-small'
-	if (props.size === 'large') return 'is-large'
-	return 'is-medium'
+	if (props.size === 'sm') return 'is-sm'
+	if (props.size === 'lg') return 'is-lg'
+	return 'is-md'
 }
 
 type OptionT = { value: string; label: string; isDisabled?: boolean }

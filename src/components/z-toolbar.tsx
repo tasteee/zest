@@ -23,10 +23,10 @@ const styles = css`
 		gap: var(--space-sm);
 		min-width: 0;
 	}
-	:host([size='small']) {
+	:host([size='sm']) {
 		gap: var(--space-xs);
 	}
-	:host([size='large']) {
+	:host([size='lg']) {
 		gap: var(--space-md);
 	}
 	:host([direction='vertical']) {
