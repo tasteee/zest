@@ -17,16 +17,17 @@ decision document, not a build task.
       `.jpg` → `.svg` asset pass. Deleted.
 - [x] **Commit.** Everything since `a97d175 docs updates`.
 
-## Step 1 — API modernization *(decision pending)*
+## Step 1 — API modernization *(done)*
 
-See `docs/api-modernization.md`. Nothing gets built until the decisions land,
-because every doc page written before then gets written against the old
-vocabulary.
+See `docs/api-modernization.md` for the spec. Landed across six commits
+(`eca7bb2`…`4986cfb`).
 
-- [ ] Decisions marked up
-- [ ] Source renames applied
-- [ ] `site/src/component-docs/` entries updated to match
-- [ ] Structural checker re-run (routes, example ids, attribute↔prop mapping)
+- [x] Decisions marked up
+- [x] Source renames applied — boolean props 370 → 318, none left without an
+      interrogative prefix
+- [x] `site/src/component-docs/` entries updated to match
+- [x] The 146 markdown reference pages updated
+- [x] Typecheck clean, build clean, attribute↔prop cross-check clean
 
 Three items already flagged in `docs/questionable-api-choices.md` that also need
 a product decision, not just wiring:
