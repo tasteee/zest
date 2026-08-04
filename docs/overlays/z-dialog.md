@@ -32,8 +32,7 @@ dialog.addEventListener('close', () => {})
 | `is-open` | boolean | — | open state (reflected, two-way) |
 | `heading` | string | — | title |
 | `description` | string | — | sub-text below the title |
-| `size` | `small` `medium` `large` | `medium` | width (24 / 30 / 42 rem) |
-| `accent` | `primary` `secondary` | — | accent |
+| `size` | `sm` `md` `lg` | `md` | width (24 / 30 / 42 rem) |
 | `has-close` | boolean | — | hide the × close button |
 | `is-static` | boolean | — | disable backdrop-click dismiss |
 | `is-disabled` | boolean | — | prevent the trigger from opening |

@@ -24,7 +24,6 @@ body/header/footer chrome; only the geometry and slide transition differ.
 | `side` | `right` `left` `top` `bottom` | `right` | edge it slides from |
 | `heading` | string | — | title |
 | `description` | string | — | sub-text |
-| `accent` | `primary` `secondary` | — | accent |
 | `has-close` | boolean | — | hide the × button |
 | `is-static` | boolean | — | disable backdrop-click dismiss |
 | `is-disabled` | boolean | — | prevent the trigger from opening |

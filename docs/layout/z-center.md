@@ -19,8 +19,8 @@ full-viewport hero centering.
 
 | Attribute | Values | Default | Description |
 | --- | --- | --- | --- |
-| `aligns-x` | `start` `is-centered` `end` | `is-centered` | horizontal alignment |
-| `aligns-y` | `start` `is-centered` `end` | `is-centered` | vertical alignment |
+| `aligns-x` | `start` `center` `end` | `center` | horizontal alignment |
+| `aligns-y` | `start` `center` `end` | `center` | vertical alignment |
 | `centers-both` | boolean | — | force dead center on both axes |
 | `max-width` | width token / length | — | cap the inner content block (`xs`…`3xl`, `full`, `screen`, or any length) |
 | `centers-text` | boolean | — | `text-align: center` |

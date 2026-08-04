@@ -31,8 +31,8 @@ Keyboard: ↑/↓ move, Enter/Space picks, Esc closes; clicking outside closes.
 | `options` | `{ value, label, isDisabled? }[]` | `[]` | **property** — the option list |
 | `value` | string | — | selected value (reflected attribute, two-way) |
 | `placeholder` | string | `Select…` | empty-state text |
-| `size` | `small` `medium` `large` | `medium` | size |
-| `accent` | `primary` `secondary` | `primary` accent | accent color |
+| `size` | `sm` `md` `lg` | `md` | size |
+| `accent` | `dom` `sub` | `dom` accent | accent color |
 | `is-invalid` | boolean | — | error styling |
 | `is-disabled` | boolean | — | disable |
 | `is-inline` | boolean | — | shrink to content width |

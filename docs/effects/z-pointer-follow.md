@@ -24,7 +24,7 @@ children: it listens on `window` and hides the native cursor everywhere.
 
 | Attribute | Values | Default | Description |
 | --- | --- | --- | --- |
-| `accent` | `secondary` `neutral` | primary/purple | dot and tag color |
+| `accent` | `sub` `neutral` | dom (purple) | dot and tag color |
 | `is-fixed` | boolean | — | page-level mode instead of scoped-to-slot |
 | `label` | string | — | optional trailing text tag next to the dot |
 | `is-hidden` | boolean | — | hide |

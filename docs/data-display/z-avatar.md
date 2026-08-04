@@ -18,8 +18,8 @@ Optional status dot in the corner.
 | `src` | string | — | image URL (falls back to initials on error) |
 | `name` | string | — | used for the alt text and initials |
 | `initials` | string | derived from `name` | explicit initials (max 2 chars) |
-| `size` | `xs` `small` `medium` `large` `xl` | `medium` | size |
-| `accent` | `primary` `secondary` `neutral` | `primary` | initials ground tint |
+| `size` | `xs` `sm` `md` `lg` `xl` | `md` | size |
+| `accent` | `dom` `sub` `neutral` | `dom` | initials ground tint |
 | `status` | `online` `busy` `away` `offline` | — | corner status dot |
 | `is-square` | boolean | — | rounded-square instead of circle |
 | `is-hidden` | boolean | — | hide |

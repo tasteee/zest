@@ -110,7 +110,7 @@ values are defined, so a dark region can sit inside a light page and vice versa:
 | `kind` | `segmented` `icon` | `segmented` | a joined control, or one compact toggle |
 | `themes` | `string[]` (property) | `['light','dark','system']` | which choices to offer, in order |
 | `is-icon-only` | boolean | — | drops the text labels from the segmented kind |
-| `accent` | `primary` `secondary` | — | accent the selection paints with; neutral when unset |
+| `accent` | `dom` `sub` | — | accent the selection paints with; neutral when unset |
 | _size_ | `size` `size` | — | density |
 | `is-hidden` | boolean | — | hide |
 

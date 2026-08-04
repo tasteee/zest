@@ -18,7 +18,7 @@ diverge.
 | --- | --- | --- | --- |
 | `size` | `xxl` `xl` `lg` `md` `sm` `xs` | `md` | type-scale step (also drives the default tag) |
 | `tag` | any HTML tag name | derived from `size` | override the rendered element |
-| `color` | `neutral` `primary` `secondary` `muted` `white` | `neutral` | text color |
+| `color` | `neutral` `dom` `sub` `muted` `strong` | `neutral` | text color |
 | `weight` | `300` `400` `600` `700` `900` | `700` | font weight override |
 | `is-italic` / `is-underlined` / `is-strikethrough` | boolean | — | decorations |
 | `is-hidden` | boolean | — | hide the element |

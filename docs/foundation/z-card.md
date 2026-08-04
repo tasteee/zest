@@ -18,7 +18,6 @@ over shadows — optionally brightens its border on hover/focus.
 
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
-| `is-flex` | boolean | — | lay the card out as a flexbox |
 | `is-row` / `is-column` | boolean | row | flex direction (with `is-flex`) |
 | `gap` | CSS length | — | gap between flex children |
 | `is-reactive` | boolean | — | brighten the border on hover / focus-within |

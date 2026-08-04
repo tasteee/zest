@@ -34,8 +34,8 @@ steps both work. `step` must be positive and defaults to `1`.
 | `has-stepper-buttons` | boolean | — | Shows ghost decrement/increment buttons inside the field. |
 | `is-full-width` | boolean | — | Stretches the normally compact numeric field to its container width. |
 | `is-inline` | boolean | — | Shrinks back to content width (overrides `is-full-width`). |
-| `size` | `small` `medium` `large` | `medium` | Matches the same size of `z-button` and `z-select`. |
-| `accent` | `primary` `secondary` | `primary` accent | Focus accent color. |
+| `size` | `sm` `md` `lg` | `md` | Matches the same size of `z-button` and `z-select`. |
+| `accent` | `dom` `sub` | `dom` accent | Focus accent color. |
 | `label` | string | — | Accessible name for compact contextual use. Prefer `z-field` for a visible label. |
 | `name` | string | — | Form field name. |
 | `placeholder` | string | — | Placeholder text. |

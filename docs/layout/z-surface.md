@@ -19,7 +19,7 @@ hairline ring.
 | Attribute | Values | Default | Description |
 | --- | --- | --- | --- |
 | `level` | `0` `1` `2` `3` | — | neutral elevation step |
-| `accent` | `plain` `neutral` `primary` `secondary` `success` `warning` `danger` | `neutral` | accent color family |
+| `accent` | `plain` `neutral` `dom` `sub` `success` `warning` `error` | `neutral` | accent color family |
 | `kind` | `plain` `filled` `soft` `outlined` `ghost` | — | treatment applied over the accent |
 | `radius` | radius token / length | `lg` | corner radius — `none` `sm` `md` `lg` `xl` `2xl` `full` |
 | `has-border` | boolean | — | force a toned hairline border |

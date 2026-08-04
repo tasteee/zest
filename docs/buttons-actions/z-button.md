@@ -20,9 +20,9 @@ share the same boldness so a solid button reads consistently across hues.
 
 | Attribute | Values | Default | Description |
 | --- | --- | --- | --- |
-| `accent` | `neutral` `primary` `secondary` `success` `warning` `danger` | `neutral` | color family |
+| `accent` | `neutral` `dom` `sub` `success` `warning` `error` | `neutral` | color family |
 | `kind` | `solid` `outline` `ghost` `soft` `plain` | `solid` | visual treatment |
-| `size` | `small` `medium` `large` | `medium` | size |
+| `size` | `sm` `md` `lg` | `md` | size |
 | `label` | string | — | text (alternative to slotting children) |
 | `type` | `button` `submit` `reset` | `button` | native button type |
 | `is-disabled` | boolean | — | disable |

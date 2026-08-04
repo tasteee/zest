@@ -35,7 +35,7 @@ save().then(() => {
 
 ## Properties
 
-- `centers-text` — raw document text; word/char/read-time are recomputed from it, debounced ~500ms
+- `text` — raw document text; word/char/read-time are recomputed from it, debounced ~500ms
 - `cursorLine` / `cursorColumn` — 1-based position, updates immediately (not debounced)
 - `wordsPerMinute` — reading speed used for the read-time estimate (default `200`)
 

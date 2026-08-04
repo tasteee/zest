@@ -7,14 +7,14 @@ the surrounding layout primitive.
 
 ```html
 <z-eyebrow label="Design system" has-rule></z-eyebrow>
-<z-eyebrow color="dom" full-width>Changelog</z-eyebrow>
+<z-eyebrow color="dom" is-full-width>Changelog</z-eyebrow>
 ```
 
 ## Attributes
 
 | Attribute | Values | Default | Description |
 | --- | --- | --- | --- |
-| `color` | `primary` `neutral` | secondary/pink | accent color |
+| `color` | `dom` `neutral` | sub (pink) | accent color |
 | `label` | string | — | text (alternative to slotting children) |
 | `has-rule` | boolean | — | show a trailing hairline rule |
 | `is-full-width` | boolean | — | stretch the rule to fill the container instead of a fixed width |

@@ -24,7 +24,7 @@ popover.addEventListener('toggle', (e) => e.detail.open)
 | --- | --- | --- | --- |
 | `placement` | `top` `bottom` `left` `right` (+ `-start`/`-end`) | `bottom` | preferred side |
 | `offset` | number (px) | `8` | gap from the trigger |
-| `accent` | `primary` `secondary` | — | accent for the surface |
+| `accent` | `dom` `sub` | — | accent for the surface |
 | `is-disabled` | boolean | — | prevent opening |
 | `is-hidden` | boolean | — | hide |
 

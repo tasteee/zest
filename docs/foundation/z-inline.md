@@ -21,7 +21,7 @@ Renders a `<span>` by default; override with `tag`.
 
 | Attribute | Values | Default | Description |
 | --- | --- | --- | --- |
-| `color` | `neutral` `primary` `secondary` `muted` `white` | _(inherit)_ | text color |
+| `color` | `neutral` `dom` `sub` `muted` `strong` | _(inherit)_ | text color |
 | `weight` | `300` `400` `600` `700` `900` | _(inherit)_ | font weight override |
 | `tag` | any HTML tag name | `span` | element to render |
 | `is-italic` | boolean | — | italic |

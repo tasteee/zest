@@ -15,8 +15,8 @@ A slim linear meter — hairline track, accent-filled bar. Determinate
 | --- | --- | --- | --- |
 | `value` | number | `0` | current value (clamped to 0…max) |
 | `max` | number | `100` | maximum |
-| `accent` | `secondary` `success` `danger` | neutral | bar color |
-| `size` | `small` `medium` `large` | `medium` | bar thickness |
+| `accent` | `sub` `success` `error` | neutral | bar color |
+| `size` | `sm` `md` `lg` | `md` | bar thickness |
 | `is-indeterminate` | boolean | — | continuous sweep instead of a value |
 | `is-hidden` | boolean | — | hide |
 

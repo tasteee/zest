@@ -31,7 +31,7 @@ Keyboard: type to filter, ↑/↓ move, Enter commits the active row, Esc closes
 | `options` | `{ value, label, isDisabled? }[]` | `[]` | **property** — the option list |
 | `value` | string | — | selected value (reflected attribute, two-way) |
 | `placeholder` | string | `Search…` | input placeholder |
-| `accent` | `primary` `secondary` | `primary` accent | accent color |
+| `accent` | `dom` `sub` | `dom` accent | accent color |
 | `is-disabled` | boolean | — | disable |
 | `is-inline` | boolean | — | shrink to content width |
 | `is-hidden` | boolean | — | hide |

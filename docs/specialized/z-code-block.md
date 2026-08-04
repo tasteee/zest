@@ -25,7 +25,7 @@ block.addEventListener('copy', () => {})
 | `filename` | string | — | filename shown in the header |
 | `has-line-numbers` | boolean | — | render a line-number gutter |
 | `has-copy` | boolean | — | hide the copy button |
-| `accent` | `secondary` | `primary` (purple) | header language-tag accent |
+| `accent` | `sub` | `dom` (purple) | header language-tag accent |
 | `is-hidden` | boolean | — | hide |
 
 ## Events

@@ -1,11 +1,15 @@
 # z-box
 
-The one generic layout primitive. Flex (the default), grid, or block — picked
-with `is-flex`/`is-grid`/`is-block` etc. — plus alignment, gap, margin,
-padding, inset, and sizing as attributes, all resolved against the
-design-system spacing scale. [z-row](../layout/z-row.md) and
-[z-column](../layout/z-column.md) are thin wrappers over this element with
-the flow direction locked.
+The generic flex primitive: alignment, gap, margin, padding, inset, and
+sizing as attributes, all resolved against the design-system spacing scale.
+[z-row](../layout/z-row.md) and [z-column](../layout/z-column.md) are thin
+wrappers over this element with the flow direction locked.
+
+A box is flex, always. It used to carry seven booleans for one CSS `display`
+value — grid, inline-grid, block, inline-block and the rest — which made it a
+display switch rather than a layout primitive. Grid belongs to
+[z-grid](../layout/z-grid.md), which owns that job properly. The one modifier
+that composes with flex rather than replacing it, `is-inline`, survives.
 
 ```html
 <z-box  gap="md" aligns-x="between" aligns-y="center" padding="lg">
@@ -15,11 +19,8 @@ the flow direction locked.
 ```
 
 `aligns-x`/`aligns-y` are always the horizontal/vertical relationship,
-regardless of flow direction — in flex mode they resolve to
-`justify-content`/`align-items` (swapped onto the cross axis when
-`is-column` is set); in grid mode they resolve to
-`justify-items`/`align-items` instead, since grid alignment is per-cell and
-doesn't swap with direction.
+regardless of flow direction. They resolve to `justify-content`/`align-items`,
+swapping onto the cross axis when `direction="vertical"` is set.
 
 ## Value scale
 
@@ -29,17 +30,14 @@ Spacing props (`gap`, `margin*`, `padding*`, `inset*`) accept:
 - any **CSS length** (`1rem`, `12px`, `2ch`), passed through verbatim
 
 Sizing props (`width`, `height`, …) treat a bare number as `px` and pass any
-other CSS length through. Grid `columns`/`rows` treat a bare number as
-`repeat(n, minmax(0, 1fr))`.
+other CSS length through.
 
 ## Attributes
 
 | Attribute | Values | Default | Description |
 | --- | --- | --- | --- |
-| `is-row` / `is-column` | boolean | — | `flex-direction`; also which axis `aligns-x`/`aligns-y` map to |
-| `is-flex` / `is-inline-flex` | boolean | flex (default) | `display: flex` / `inline-flex` |
-| `is-grid` / `is-inline-grid` | boolean | — | `display: grid` / `inline-grid` |
-| `is-block` / `is-inline-block` / `is-inline` | boolean | — | block display modes |
+| `direction` | `horizontal` `vertical` | `horizontal` | flow direction; also which axis `aligns-x`/`aligns-y` map to |
+| `is-inline` | boolean | — | `display: inline-flex` instead of `flex` |
 | `aligns-x` | alignment | — | horizontal relationship |
 | `aligns-y` | alignment | — | vertical relationship |
 | `does-wrap` | boolean | — | `flex-wrap: wrap` |
@@ -50,12 +48,9 @@ other CSS length through. Grid `columns`/`rows` treat a bare number as
 | `padding` `padding-x` `padding-y` `padding-top/right/bottom/left` | size token / length | — | inner spacing |
 | `inset` `inset-x` `inset-y` | size token / length | — | inner padding shorthand; overridden by the more specific `padding*` props when both are set |
 | `width` `min-width` `max-width` `height` `min-height` `max-height` | length | — | sizing |
-| `columns` `rows` | number / grid-template | — | grid template (number → `repeat(n, …)`) |
-| `small-columns` `medium-columns` `large-columns` `extra-large-columns` | number / grid-template | — | responsive grid columns (breakpoints at 40/48/64/80rem) |
 
-Alignment values: `start` `is-centered` `end` `between` `around` `evenly`
-`stretch` (in grid mode, the distribution-only values collapse to `stretch`,
-matching CSS `justify-items`/`align-items`).
+Alignment values: `start` `center` `end` `between` `around` `evenly`
+`stretch`.
 
 ## Slots
 

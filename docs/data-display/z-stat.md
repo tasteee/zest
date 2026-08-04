@@ -24,7 +24,7 @@ same type scale and colors.
 | `label-size` | `xxl`…`xs` | `sm` | label size (z-text scale) |
 | `color` | text color | — | value color |
 | `label-color` | text color | `muted` | label color |
-| `align` | `start` `is-centered` `end` | `start` | cross-axis alignment |
+| `align` | `start` `center` `end` | `start` | cross-axis alignment |
 | `is-hidden` | boolean | — | hide |
 
 ## Slots

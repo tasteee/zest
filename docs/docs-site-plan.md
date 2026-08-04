@@ -13,8 +13,16 @@ site-level layout CSS.
 | `z-clipboard` | done, as `shared/clipboard.ts` | Built as a module, not an element: copying is a function with nothing to render. |
 | `z-docs-shell` | done | Composes `z-chassis`. The toc column is slot-driven, not `has-toc` — a page that slots nothing gets a two-column shell, so splash and demo pages carry no dead gutter. Owns the measure, the page padding, and the sticky offset. |
 | `z-nav-tree` | done | Anchor-based and router-agnostic: clicks are never intercepted, `navigate` is a notification. Rows are flattened before render, as in `z-tree`. |
+| `z-toc` | done | Sources headings from an authored array or by scraping a container. The scrape descends through shadow roots — without that it cannot see `z-markdown` output, which is the case it exists for. |
+| `z-doc-header` | done | Maps `status` to an accent internally, so `beta` is the same amber everywhere. Meta row only renders when there is provenance to show. |
+| `z-prev-next` | done | Anchor-based like `z-nav-tree`. A missing side keeps its column so the surviving card does not drift to the middle. |
 
-Everything else below is unstarted.
+Wave 1 is complete. Everything else below is unstarted.
+
+Retiring the hand-rolled header and outline took `site.css` from 414 to 359
+lines. `site/src/render/` still holds `example-card.ts` (a 33-line adapter),
+`api-reference.ts`, `playground.ts`, and `playground-controls.ts` — those go
+in Wave 2.
 
 `z-chassis` gained two things the shell needed: `scrollScreenTo(options)` /
 `getScreen()` (the screen is the scroll container, and a routed view landing

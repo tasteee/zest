@@ -14,7 +14,7 @@ default. Renders a `<p>` unless `tag` is set.
 | --- | --- | --- | --- |
 | `size` | `xl` `lg` `md` `sm` `xs` | `md` | type-scale step |
 | `tag` | any HTML tag name | `p` | element to render |
-| `color` | `neutral` `primary` `secondary` `muted` `white` | `neutral` | text color |
+| `color` | `neutral` `dom` `sub` `muted` `strong` | `neutral` | text color |
 | `weight` | `300` `400` `600` `700` `900` | `600` | font weight override |
 | `is-italic` / `is-underlined` / `is-strikethrough` | boolean | — | decorations |
 | `is-hidden` | boolean | — | hide the element |

@@ -1,7 +1,7 @@
 # z-toggle-group
 
 Coordinates a set of [z-toggle-group-item](z-toggle-group-item.md) children. In
-`single` mode (default) selecting one item clears the others; in `is-multiple` mode
+`single` mode (default) selecting one item clears the others; in `multiple` mode
 several can stay pressed. It joins the items into a seamless segmented control and
 sets shared accent/size/kind variant variables that the items inherit.
 
@@ -23,7 +23,7 @@ group.addEventListener('change', (e) => {
 
 | Attribute | Values | Default | Description |
 | --- | --- | --- | --- |
-| `type` | `single` `is-multiple` | `single` | selection mode |
+| `type` | `single` `multiple` | `single` | selection mode |
 | `direction` | boolean | — | stack vertically |
 | `is-hidden` | boolean | — | hide |
 | _color_ | `accent` `accent` `accent` | — | shared accent for items |
@@ -41,4 +41,4 @@ them once on the group rather than on each item.
 
 | Event | `detail` | Description |
 | --- | --- | --- |
-| `change` | `{ value }` | `value` is a string in `single` mode (or `undefined` when cleared) and a `string[]` in `is-multiple` mode |
+| `change` | `{ value }` | `value` is a string in `single` mode (or `undefined` when cleared) and a `string[]` in `multiple` mode |

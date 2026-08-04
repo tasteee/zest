@@ -18,8 +18,8 @@ switchEl.addEventListener('change', (e) => e.detail.checked)
 | Attribute | Values | Default | Description |
 | --- | --- | --- | --- |
 | `is-checked` | boolean | — | on/off state (reflected, two-way) |
-| `size` | `small` `medium` `large` | `medium` | size |
-| `accent` | `primary` `secondary` | `primary` accent | accent color |
+| `size` | `sm` `md` `lg` | `md` | size |
+| `accent` | `dom` `sub` | `dom` accent | accent color |
 | `name` | string | — | form field name |
 | `value` | string | — | form value |
 | `is-disabled` | boolean | — | disable |

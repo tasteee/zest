@@ -16,7 +16,7 @@ Author it declaratively: [z-panel](z-panel.md) children separated by
 ```
 
 Sizes accept `%` or `px` (`min-size` == `max-size` gives a fixed-size panel).
-Panels can be `is-collapsible` (dragging below `collapse-threshold` snaps to
+Panels can be `collapsible` (dragging below `collapse-threshold` snaps to
 `collapsed-size`), added/removed at runtime (the group re-normalizes and
 preserves surviving panes), and persisted via `auto-save-id` (writes to
 `localStorage`).

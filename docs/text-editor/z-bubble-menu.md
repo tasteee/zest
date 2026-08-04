@@ -38,7 +38,7 @@ linkBubble.addEventListener('linkunlink', () => removeLink())
 
 - `anchorRect` — a `DOMRect`-like object to position against
 - `url` — current link URL (`link` variant)
-- `align` — `left` `is-centered` `right` (`image` variant)
+- `align` — `left` `center` `right` (`image` variant)
 - `hasCaption` — boolean (`image` variant)
 
 ## Events

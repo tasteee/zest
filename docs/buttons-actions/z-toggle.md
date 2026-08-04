@@ -18,9 +18,9 @@ related toggles use [z-toggle-group](z-toggle-group.md) +
 
 | Attribute | Values | Default | Description |
 | --- | --- | --- | --- |
-| `accent` | `neutral` `primary` `secondary` | `neutral` | color family |
+| `accent` | `neutral` `dom` `sub` | `neutral` | color family |
 | `kind` | `outline` `ghost` | `outline` | treatment |
-| `size` | `small` `medium` `large` | `medium` | size |
+| `size` | `sm` `md` `lg` | `md` | size |
 | `is-icon` | boolean | — | square icon-only button |
 | `is-pressed` | boolean | — | the on/off state (reflected, two-way) |
 | `is-disabled` | boolean | — | disable |

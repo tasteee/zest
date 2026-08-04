@@ -25,8 +25,8 @@ a responsive auto-fit grid (the latter wins when both are set). `aligns-x` /
 | `gap` | size token / length | — | row + column gap |
 | `gap-x` | size token / length | — | column gap override |
 | `gap-y` | size token / length | — | row gap override |
-| `aligns-x` | `start` `is-centered` `end` `stretch` | `stretch` | item justify within cell |
-| `aligns-y` | `start` `is-centered` `end` `stretch` | `stretch` | item align within cell |
+| `aligns-x` | `start` `center` `end` `stretch` | `stretch` | item justify within cell |
+| `aligns-y` | `start` `center` `end` `stretch` | `stretch` | item align within cell |
 | `is-full-width` | boolean | — | `width: 100%` |
 | `inset` `inset-x` `inset-y` | size token / length | — | inner padding |
 | `hidden` | boolean | — | hide (native attribute) |

@@ -18,7 +18,7 @@ its own — the parent `z-range` reads its `value` plus optional
 | `value` | number | — | this handle's value (mirrored live by the parent) |
 | `min` / `max` | number | inherits from `z-range` | per-handle travel bounds, clamped to the parent's domain |
 | `step` | number | inherits from `z-range` | per-handle step |
-| `accent` | `primary` `secondary` | `primary` accent | this handle's thumb/fill color |
+| `accent` | `dom` `sub` | `dom` accent | this handle's thumb/fill color |
 | `label` | string | — | reserved for a per-handle accessible label |
 
 ## Notes

@@ -21,7 +21,7 @@ picker.addEventListener('change', (e) => e.detail.value)
 | --- | --- | --- | --- |
 | `value` | string (hex) | `#BF40BF` | current color (reflected attribute, two-way) |
 | `presets` | `string[]` | zest palette | **property** — preset swatches |
-| `accent` | `primary` `secondary` | `primary` accent | accent color |
+| `accent` | `dom` `sub` | `dom` accent | accent color |
 | `is-disabled` | boolean | — | disable |
 | `is-hidden` | boolean | — | hide |
 

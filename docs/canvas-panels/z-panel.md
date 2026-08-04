@@ -33,7 +33,7 @@ panel.addEventListener('sizechange', (e) => e.detail.size)
 | `collapsed-size` | `%` or `px` | `0` | size when collapsed |
 | `collapse-threshold` | `%` or `px` | — | drag below this ⇒ snap collapsed |
 | `order` | number | — | stable slot identity for conditional mounting |
-| `is-collapsed` | boolean | — | reflected state, toggled by the parent group |
+| `is-collapsible` | boolean | — | the panel can be collapsed by its handle |
 
 ## Imperative API
 

@@ -21,7 +21,7 @@ prose: a left accent bar tinted by `kind`, a leading icon, an optional
 
 | Attribute | Values | Default | Description |
 | --- | --- | --- | --- |
-| `kind` | `note` `tip` `important` `warning` `caution` | `note` | accent color, icon, and (for `warning`/`caution`) `role="alert"` |
+| `accent` | `dom` `sub` `neutral` `success` `warning` `error` | `dom` | which admonition this is — picks the hue and the icon |
 | `heading` | string | — | bold label above the body. Omit for a compact callout (icon centered, no label row) |
 | `is-expandable` | boolean | — | clamp the body to two lines with a "Show more"/"Show less" toggle (only appears if the copy actually overflows) |
 | `is-expanded` | boolean | — | expanded state (reflected, two-way) |

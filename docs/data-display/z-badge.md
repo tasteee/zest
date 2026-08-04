@@ -25,9 +25,9 @@ badge.addEventListener('remove', (e) => e.detail) // { value }
 
 | Attribute | Values | Default | Description |
 | --- | --- | --- | --- |
-| `accent` | `neutral` `primary` `secondary` `success` `warning` `danger` | `neutral` | color family |
+| `accent` | `neutral` `dom` `sub` `success` `warning` `error` | `neutral` | color family |
 | `kind` | `soft` `solid` `outline` | `soft` | treatment |
-| `size` | `small` `medium` | `medium` | size |
+| `size` | `sm` `md` | `md` | size |
 | `label` | string | — | text (alternative to slotting children) |
 | `value` | string | — | value carried in `select` / `remove` events |
 | `is-dot` | boolean | — | inline status: leading dot + uppercase tracked text |

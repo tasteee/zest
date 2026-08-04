@@ -18,7 +18,7 @@ Renders a `<p>` by default; override with `tag`.
 | Attribute | Values | Default | Description |
 | --- | --- | --- | --- |
 | `size` | `xxl` `xl` `lg` `md` `sm` `xs` | `md` | type-scale step |
-| `color` | `neutral` `primary` `secondary` `muted` `white` | `neutral` | text color |
+| `color` | `neutral` `dom` `sub` `muted` `strong` | `neutral` | text color |
 | `weight` | `300` `400` `600` `700` `900` | variant default | font weight override |
 | `tag` | any HTML tag name | `p` | element to render |
 | `is-italic` | boolean | — | italic |

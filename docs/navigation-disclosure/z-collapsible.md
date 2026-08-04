@@ -21,7 +21,7 @@ so a parent [z-accordion](z-accordion.md) can coordinate open/close behaviour.
 | --- | --- | --- | --- |
 | `label` | string | — | trigger text (when not using the `trigger` slot) |
 | `value` | string | — | identifier carried in the `toggle` event |
-| `accent` | `primary` `secondary` | `primary` accent | accent color |
+| `accent` | `dom` `sub` | `dom` accent | accent color |
 | `is-open` | boolean | — | open state (reflected, two-way) |
 | `is-disabled` | boolean | — | disable |
 | `is-hidden` | boolean | — | hide |

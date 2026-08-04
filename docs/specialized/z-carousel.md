@@ -23,7 +23,7 @@ carousel.addEventListener('change', (e) => e.detail.index)
 | --- | --- | --- | --- |
 | `autoplay` | number (ms) | — | ms between auto-advances (paused on hover/focus); omit to disable |
 | `does-loop` | boolean | — | wrap around at the ends |
-| `accent` | `secondary` | neutral | accent for controls/dots |
+| `accent` | `sub` | neutral | accent for controls/dots |
 | `is-hidden` | boolean | — | hide |
 
 Controls and dots only appear when there's more than one slide.

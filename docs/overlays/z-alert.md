@@ -20,7 +20,7 @@ alert.addEventListener('dismiss', () => {})
 
 | Attribute | Values | Default | Description |
 | --- | --- | --- | --- |
-| `accent` | `info` `success` `warning` `danger` `neutral` | `neutral` | color + icon |
+| `accent` | `dom` `success` `warning` `error` `neutral` | `neutral` | color + icon |
 | `heading` | string | — | optional bold title |
 | `is-dismissable` | boolean | — | show a close button |
 | `is-hidden` | boolean | — | hide (set automatically on dismiss) |

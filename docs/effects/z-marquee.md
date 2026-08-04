@@ -20,7 +20,7 @@ ticker strips, testimonial loops.
 | `duration` | number (seconds) | `40` | time for one full loop |
 | `gap` | size token / length | `var(--spacing-6)` | gap between items (and between the loop seam) |
 | `is-reversed` | boolean | — | reverse scroll direction |
-| `vertical` | boolean | — | scroll as a column instead of a row |
+| `direction` | `horizontal` `vertical` | `horizontal` | scroll axis |
 | `does-pause-on-hover` | boolean | — | pause the scroll on hover/focus-within |
 | `has-fade` | boolean | — | fade the edges with a mask gradient |
 | `is-hidden` | boolean | — | hide |

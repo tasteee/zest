@@ -48,7 +48,7 @@ no way to see where travel begins — the eye reads the gap as the zero mark.
 | `does-show-value` | boolean | — | Renders the current value below the dial. |
 | `value-prefix` | string | — | Prepended to the displayed value. |
 | `value-suffix` | string | — | Appended to the displayed value — `Hz`, `dB`, `%`. |
-| `accent` | `primary` `secondary` `success` `warning` `danger` | — | Colour of the arc and pointer. |
+| `accent` | `dom` `sub` `success` `warning` `error` | — | Colour of the arc and pointer. |
 | `is-glowing` | boolean | — | Lights the arc's bloom. Only visible in themes with an emissive layer. |
 | _size_ | `size` `size` | — | Dial diameter. |
 | `is-disabled` | boolean | — | Non-interactive. |

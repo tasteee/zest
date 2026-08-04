@@ -22,8 +22,7 @@ that on every bubble.
 | `avatar-name` | string | falls back to `name` | name used to derive avatar initials |
 | `avatar-initials` | string | — | explicit initials override |
 | `timestamp` | ISO string | — | rendered via [z-relative-time](../specialized/z-relative-time.md) beneath the group |
-| `hide-avatar` | boolean | — | (`start` side) hide the avatar, which otherwise shows by default |
-| `show-avatar` | boolean | — | (`end` side) show the avatar, which otherwise hides by default |
+| `avatar` | `auto` `always` `never` | `auto` | `auto` shows the avatar on incoming groups and hides it on outgoing ones |
 | `is-hidden` | boolean | — | hide |
 
 ## Slots

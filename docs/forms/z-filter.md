@@ -31,8 +31,8 @@ visible. Crumbs are clickable to step back up.
 
 | Attribute | Values | Default | Description |
 | --- | --- | --- | --- |
-| `accent` | `primary` `secondary` | `primary` accent | pill accent color |
-| `size` | `small` `medium` | `medium` | pill size |
+| `accent` | `dom` `sub` | `dom` accent | pill accent color |
+| `size` | `sm` `md` | `md` | pill size |
 | `label` | string | — | accessible group name |
 | `reset-label` | string | `Clear` | accessible label for the reset (✕) button |
 | `is-drilldown` | boolean | — | enable nested drill-down mode instead of flat single-select |

@@ -30,7 +30,7 @@ dialog.addEventListener('cancel', () => {})
 | `description` | string | — | body text |
 | `confirm-label` | string | `Confirm` | confirm button text |
 | `cancel-label` | string | `Cancel` | cancel button text |
-| `accent` | `danger` `secondary` `primary` | `primary` | confirm-button color |
+| `accent` | `error` `sub` `dom` | `dom` | confirm-button color |
 
 ## Slots
 

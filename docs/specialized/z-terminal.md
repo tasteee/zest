@@ -51,7 +51,7 @@ term.lines = [
 ]
 ```
 
-Each object entry accepts: `centers-text`, `type` (`command` | `output`, inferred from
+Each object entry accepts: `text`, `type` (`command` | `output`, inferred from
 the prompt marker when omitted), `delay`, `typeSpeed`, and `fade`.
 
 ### Controls
@@ -135,7 +135,7 @@ scrolls sideways, so a narrow terminal stays readable.
 | `loop-delay` | number | `2200` | ms to wait before an auto-restart |
 | `has-replay` | boolean | — | suppress the bottom-right replay control |
 | `does-auto-scroll` | boolean | — | don't follow the playhead while an animation plays |
-| `accent` | `secondary` | `primary` (green) | accent color |
+| `accent` | `sub` | `dom` (green) | accent color |
 | `is-hidden` | boolean | — | hide |
 
 ## Methods

@@ -16,8 +16,8 @@ grows from the start on hover.
 | `href` | string | — | destination |
 | `target` | string | — | anchor target (`_blank` implies external rel) |
 | `label` | string | — | text (alternative to slotting children) |
-| `color` | `primary` `secondary` `neutral` | `primary` | color |
-| `size` | `small` `medium` `large` | `medium` | size |
+| `color` | `dom` `sub` `neutral` | `dom` | color |
+| `size` | `sm` `md` `lg` | `md` | size |
 | `underline` | `hover` `always` `none` | `hover` | underline behaviour |
 | `is-external` | boolean | — | open in a new tab with `rel="noopener noreferrer"` |
 | `is-block` | boolean | — | render as a block-level flex link |

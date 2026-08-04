@@ -13,5 +13,5 @@ thread. Like [z-date-divider](z-date-divider.md) but toned to draw the eye.
 | Attribute | Values | Default | Description |
 | --- | --- | --- | --- |
 | `label` | string | `New messages` | divider text |
-| `accent` | `secondary` | primary | accent color |
+| `accent` | `sub` | dom | accent color |
 | `is-hidden` | boolean | — | hide |

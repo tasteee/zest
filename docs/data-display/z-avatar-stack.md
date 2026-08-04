@@ -18,7 +18,7 @@ capping how many render (`max`) and summarizing the rest as a "+N" badge.
 | --- | --- | --- | --- |
 | `max` | number | — | avatars to render before overflowing into the "+N" badge |
 | `total` | number | — | overrides the overflow count for cases where not every avatar is in the DOM (e.g. "+241" for a big roster) |
-| `size` | `xs` `small` `large` `xl` | medium (default) | avatar size and overlap amount |
+| `size` | `xs` `sm` `lg` `xl` | medium (default) | avatar size and overlap amount |
 | `is-hidden` | boolean | — | hide |
 
 ## Slots

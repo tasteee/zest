@@ -40,7 +40,7 @@ sidebar.addEventListener('select', (e) => e.detail.value)
 | --- | --- | --- | --- |
 | `items` | `(Link \| Group)[]` | `[]` | **property** — see shapes below |
 | `value` | string | — | the active entry's value |
-| `accent` | `secondary` | `primary` (purple) | accent color |
+| `accent` | `sub` | `dom` (purple) | accent color |
 | `is-collapsed` | boolean | — | shrink to an icon rail |
 | `is-hidden` | boolean | — | hide |
 | `is-docked` | boolean | — | flush rail (no background/border/radius/inline padding), hairline trailing border — for docking to a page edge |

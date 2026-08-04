@@ -21,9 +21,7 @@ actions.addEventListener('more', () => openMoreMenu())
 
 | Attribute | Values | Default | Description |
 | --- | --- | --- | --- |
-| `no-reply` | boolean | — | hide the reply button |
-| `no-forward` | boolean | — | hide the forward button |
-| `no-more` | boolean | — | hide the "more" (⋯) button |
+| `actions` | token list | all | which buttons render — any of `reply` `forward` `more`, space separated |
 | `is-hidden` | boolean | — | hide |
 
 ## Properties

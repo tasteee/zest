@@ -20,8 +20,8 @@ divided by [z-separator](../foundation/z-separator.md).
 | Attribute | Values | Default | Description |
 | --- | --- | --- | --- |
 | `direction` | `horizontal` `vertical` | `horizontal` | layout axis and arrow-key direction |
-| `size` | `small` `medium` `large` | `medium` | control gap between items |
-| `overflow` | `scroll` `does-wrap` `menu` | — | how to handle a too-narrow bar (`menu` — collapsing extras into a trailing "⋯" — is not implemented yet) |
+| `size` | `sm` `md` `lg` | `md` | control gap between items |
+| `overflow` | `scroll` `wrap` `menu` | — | how to handle a too-narrow bar (`menu` — collapsing extras into a trailing "⋯" — is not implemented yet) |
 | `is-disabled` | boolean | — | disable the whole toolbar |
 
 ## Slots

@@ -1,7 +1,7 @@
 # z-pattern-roll
 
 A **chord-relative pattern editor** — a sibling of [`z-piano-roll`](z-piano-roll.md)
-whose vertical axis is not absolute pitch but **chord-accent degrees** (`N1`, `N2`,
+whose vertical axis is not absolute pitch but **chord-tone degrees** (`N1`, `N2`,
 `N3`, …). You author a rhythmic/melodic *pattern* once, and it produces
 good-sounding MIDI over **any** chord it is later applied to.
 
@@ -105,7 +105,7 @@ per-signal properties.
 ### Layout
 
 - **Degree gutter (left, sticky):** one row per degree, labeled `N1` … `N{tones}`
-  for the core band, plus `accent-margin` extra octave bands above and below,
+  for the core band, plus `tone-margin` extra octave bands above and below,
   labeled with a `+n`/`-n` suffix (`N1+1` … `N{tones}+1`, `N1-1` … `N{tones}-1`,
   …) so wrapped-octave degrees are reachable by scrolling rather than clamped
   away. If `chord-size` is set, the rows that resolve to a chord root (`N1`,
@@ -155,7 +155,7 @@ selection:
 | --- | --- | --- | --- |
 | `signals` | `Signal[]` | `[]` | **property** — the pattern (see model below); two-way via `change` |
 | `tones` | number | `8` | size of the core degree band (`N1…N{tones}`) |
-| `accent-margin` | number | `3` | extra whole octave bands rendered above and below the core band (labeled `N1+1…N{tones}+1`, `N1-1…N{tones}-1`, …), so patterns can wrap an octave without scrolling blind |
+| `tone-margin` | number | `3` | extra whole octave bands rendered above and below the core band (labeled `N1+1…N{tones}+1`, `N1-1…N{tones}-1`, …), so patterns can wrap an octave without scrolling blind |
 | `chord-size` | number | — | if set, bands octave boundaries / marks root-equivalent rows |
 | `length` | number (beats) | `4` | pattern length in beats (grid extends to fit longer signals) |
 | `beats-per-bar` | number | `4` | bar grouping for ruler emphasis |
