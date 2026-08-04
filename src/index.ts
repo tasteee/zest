@@ -169,6 +169,9 @@ export * from './components/z-control-panel'
 export * from './components/z-playground'
 export * from './components/z-swatch'
 export * from './components/z-token-table'
+export * from './components/z-steps'
+export * from './components/z-code-group'
+export * from './components/z-do-dont'
 
 // Music / MIDI
 export * from './components/z-piano-roll'

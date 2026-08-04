@@ -3351,6 +3351,86 @@
         {
           "kind": "class",
           "customElement": true,
+          "tagName": "z-code-group",
+          "name": "ZCodeGroup",
+          "members": [
+            {
+              "kind": "field",
+              "name": "group",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "storageKey",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "change",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "group",
+              "fieldName": "group",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "value",
+              "fieldName": "value",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "storage-key",
+              "fieldName": "storageKey",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "change",
+              "fieldName": "change",
+              "type": {
+                "text": "string"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
           "tagName": "z-collapsible",
           "name": "ZCollapsible",
           "members": [
@@ -5527,6 +5607,100 @@
             {
               "name": "tag",
               "fieldName": "tag",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
+          "tagName": "z-do-dont",
+          "name": "ZDoDont",
+          "members": [
+            {
+              "kind": "field",
+              "name": "doLabel",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "dontLabel",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "doCaption",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "dontCaption",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "layout",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "do-label",
+              "fieldName": "doLabel",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "dont-label",
+              "fieldName": "dontLabel",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "do-caption",
+              "fieldName": "doCaption",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "dont-caption",
+              "fieldName": "dontCaption",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "layout",
+              "fieldName": "layout",
               "type": {
                 "text": "string"
               }
@@ -15307,6 +15481,124 @@
         {
           "kind": "class",
           "customElement": true,
+          "tagName": "z-step",
+          "name": "ZStep",
+          "members": [
+            {
+              "kind": "field",
+              "name": "heading",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "index",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "state",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isLast",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "heading",
+              "fieldName": "heading",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "index",
+              "fieldName": "index",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "name": "state",
+              "fieldName": "state",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "is-last",
+              "fieldName": "isLast",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
+          "tagName": "z-steps",
+          "name": "ZSteps",
+          "members": [
+            {
+              "kind": "field",
+              "name": "current",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "current",
+              "fieldName": "current",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
           "tagName": "z-streaming-text",
           "name": "ZStreamingText",
           "members": [
@@ -19066,6 +19358,14 @@
         },
         {
           "kind": "custom-element-definition",
+          "name": "z-code-group",
+          "declaration": {
+            "name": "ZCodeGroup",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
           "name": "z-collapsible",
           "declaration": {
             "name": "ZCollapsible",
@@ -19213,6 +19513,14 @@
           "name": "z-display",
           "declaration": {
             "name": "ZDisplay",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "z-do-dont",
+          "declaration": {
+            "name": "ZDoDont",
             "module": "dist/zest.js"
           }
         },
@@ -19901,6 +20209,22 @@
           "name": "z-status-dot",
           "declaration": {
             "name": "ZStatusDot",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "z-step",
+          "declaration": {
+            "name": "ZStep",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "z-steps",
+          "declaration": {
+            "name": "ZSteps",
             "module": "dist/zest.js"
           }
         },

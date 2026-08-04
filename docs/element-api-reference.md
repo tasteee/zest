@@ -1,6 +1,6 @@
 # Zest element API reference
 
-**166 elements.** Every one, as you would write it. Generated from
+**170 elements.** Every one, as you would write it. Generated from
 source by `scripts/build-api-reference.mjs`, so it is current by
 construction rather than by discipline.
 
@@ -33,14 +33,14 @@ short, that is the first place to check.
 - [Navigation & disclosure](#navigation--disclosure) — 8
 - [Overlays](#overlays) — 11
 - [Data display](#data-display) — 14
-- [Canvas, panels & docs](#canvas-panels--docs) — 12
+- [Canvas, panels & docs](#canvas-panels--docs) — 15
 - [Text editor](#text-editor) — 9
 - [Chat](#chat) — 22
 - [Attachments](#attachments) — 4
 - [Effects](#effects) — 4
 - [Music](#music) — 3
 - [Specialized](#specialized) — 13
-- [Uncategorised](#uncategorised) — 13
+- [Uncategorised](#uncategorised) — 14
 
 ---
 
@@ -326,7 +326,7 @@ short, that is the first place to check.
 
 ```jsx
 <z-container
-  size="md | xl"   // default: xl
+  size={string}   // default: xl
   gutter={string}
   is-centered
   is-full-height
@@ -432,8 +432,8 @@ short, that is the first place to check.
 ```jsx
 <z-surface
   level="0 | 1 | 2 | 3"
-  accent="dom | sub | neutral | success | warning | error | strong"   // default: neutral
-  kind="outline | ghost | soft | plain | filled"
+  accent="dom | sub | neutral | success | warning | error | strong | plain"   // default: neutral
+  kind="outline | ghost | soft | plain | filled | outlined"
   radius={string}   // default: lg
   inset={string}   // default: md
   inset-x={string}
@@ -518,7 +518,7 @@ short, that is the first place to check.
 ```jsx
 <z-link
   href={string}
-  target={string}
+  target="_blank"
   label={string}
   size="sm | md | lg"   // default: md
   color="dom | sub | neutral"   // default: dom
@@ -609,7 +609,7 @@ short, that is the first place to check.
 <z-toolbar
   direction="horizontal | vertical"   // default: horizontal
   size="sm | md | lg"   // default: md
-  overflow="scroll | wrap"
+  overflow="scroll | wrap | menu"
   is-disabled
 />
 ```
@@ -1045,7 +1045,7 @@ short, that is the first place to check.
 
 ```jsx
 <z-callout
-  accent="dom | sub | success | warning | error"   // default: dom
+  accent="dom | sub | neutral | success | warning | error"   // default: dom
   heading={string}
   is-expandable
   is-expanded
@@ -1262,7 +1262,7 @@ short, that is the first place to check.
 
 ```jsx
 <z-skeleton
-  shape="text | circle"   // default: text
+  shape="text | circle | rect"   // default: text
   width={string}
   height={string}
   lines={number}   // default: 1
@@ -1376,6 +1376,18 @@ short, that is the first place to check.
 />
 ```
 
+### `z-code-group`
+
+```jsx
+<z-code-group
+  group={string}
+  value={string}
+  storage-key={string}
+  is-hidden
+  onchange={(event) => event.detail}   // { value: string }
+/>
+```
+
 ### `z-control-panel`
 
 ```jsx
@@ -1384,6 +1396,19 @@ short, that is the first place to check.
   values={Object}
   is-hidden
   onchange={(event) => event.detail}   // { name: string; value: string | null }
+/>
+```
+
+### `z-do-dont`
+
+```jsx
+<z-do-dont
+  do-label={string}   // default: Do
+  dont-label={string}
+  do-caption={string}
+  dont-caption={string}
+  layout="center"
+  is-hidden
 />
 ```
 
@@ -1412,7 +1437,7 @@ short, that is the first place to check.
   min-zoom={number}   // default: 0.1
   max-zoom={number}
   zoom-speed={number}   // default: 1
-  grid="dots | lines"
+  grid="dots | lines | none"
   grid-size={number}   // default: 24
   snap={number}   // default: 0
   pan-button="auto | middle | space | left"   // default: auto
@@ -1476,12 +1501,21 @@ short, that is the first place to check.
 />
 ```
 
+### `z-steps`
+
+```jsx
+<z-steps
+  current={number}
+  is-hidden
+/>
+```
+
 ### `z-swatch`
 
 ```jsx
 <z-swatch
   token={string}
-  kind="color | space | radius | type"
+  kind="color | space | radius | type | value"
   label={string}
   description={string}
   is-hidden
@@ -1497,7 +1531,7 @@ short, that is the first place to check.
   headings={Array}
   min-level={number}   // default: 2
   max-level={number}   // default: 3
-  label={string}
+  label="string"
   active-id={string}
   is-hidden
   onchange={(event) => event.detail}   // { id: string }
@@ -1512,7 +1546,7 @@ short, that is the first place to check.
   names={string}
   kind="color | space | radius | type | value"
   caption={string}
-  columns={string}
+  columns="1"
   is-hidden
 />
 ```
@@ -1598,7 +1632,7 @@ short, that is the first place to check.
 <z-mention-popover
   trigger={string}
   items={Array}
-  source={string}
+  source="function"
   query={string}
   debounce-ms={number}
   anchor-rect={string}
@@ -1661,8 +1695,8 @@ short, that is the first place to check.
 <z-table-toolbar
   items={Array}
   anchor-rect={string}
-  placement={string}
-  offset={number}
+  placement="top | bottom | left | right | -start | -end"   // default: top
+  offset={number}   // default: 10
   label={string}
   is-open
   onaction={(event) => event.detail}   // { value: string }
@@ -1757,7 +1791,7 @@ short, that is the first place to check.
 
 ```jsx
 <z-delivery-status
-  status="sent | read | error | sending"   // default: sent
+  status="sent | read | error | sending | delivered"   // default: sent
   is-hidden
 />
 ```
@@ -1856,7 +1890,7 @@ short, that is the first place to check.
   name={string}
   text={string}
   value={string}
-  accent={string}
+  accent="sub"
   can-jump
   is-hidden
   onjump={(event) => event.detail}   // { value?: string }
@@ -1937,7 +1971,7 @@ short, that is the first place to check.
 ```jsx
 <z-unread-divider
   label={string}
-  accent={string}
+  accent="sub"
   is-hidden
 />
 ```
@@ -2143,7 +2177,7 @@ short, that is the first place to check.
 ```jsx
 <z-carousel
   autoplay={number}
-  accent={string}
+  accent="sub"
   does-loop
   is-hidden
   onchange={(event) => event.detail}   // { index: number }
@@ -2433,7 +2467,7 @@ short, that is the first place to check.
 ```jsx
 <z-drop-indicator
   anchor-rect={string}
-  orientation={string}
+  orientation="vertical"
   is-open
 />
 ```
@@ -2493,11 +2527,23 @@ short, that is the first place to check.
 />
 ```
 
+### `z-step`
+
+```jsx
+<z-step
+  heading={string}
+  index={number}
+  state="done | current | pending"
+  is-last
+  is-hidden
+/>
+```
+
 ### `z-table-axis-handle`
 
 ```jsx
 <z-table-axis-handle
-  axis={string}
+  axis="column"
   anchor-rect={string}
   is-open
   is-selected

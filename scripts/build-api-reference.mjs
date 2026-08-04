@@ -102,6 +102,11 @@ const buildSourceIndex = (sources) => {
 
 // --- markdown fallbacks -----------------------------------------------------
 
+// Everything that is not one of these is read as an attribute table. A page
+// may head its tables `## z-step` rather than `## Attributes`, so an
+// allow-list on the word "attribute" silently drops them.
+const NON_ATTRIBUTE_SECTIONS = /^## (events?|slots?|css|notes?|specimens?|guided|using|row shape|contents)/i
+
 const readDocTables = () => {
 	const values = new Map()
 	const defaults = new Map()
@@ -125,13 +130,25 @@ const readDocTables = () => {
 			categories.set(tag, categoryName)
 
 			const text = readFileSync(join(categoryPath, fileName), 'utf8')
-			const tagValues = {}
-			const tagDefaults = {}
 			let isInAttributeTable = false
+
+			// A page can document more than one element — z-steps.md heads
+			// z-step's table `## \`z-step\``. Without following that, the child
+			// element's rows get filed under the parent and are never found.
+			let currentTag = tag
+
+			const rowsFor = (name) => {
+				if (!values.has(name)) values.set(name, {})
+				if (!defaults.has(name)) defaults.set(name, {})
+				return { tagValues: values.get(name), tagDefaults: defaults.get(name) }
+			}
+			rowsFor(tag)
 
 			for (const line of text.split('\n')) {
 				if (line.startsWith('## ')) {
-					isInAttributeTable = /attribute|propert/i.test(line)
+					const elementHeading = line.match(/^## `([a-z][\w-]*)`/)
+					currentTag = elementHeading ? elementHeading[1] : tag
+					isInAttributeTable = !NON_ATTRIBUTE_SECTIONS.test(line)
 					continue
 				}
 				if (!isInAttributeTable) continue
@@ -139,15 +156,14 @@ const readDocTables = () => {
 				const row = line.match(/^\| `([a-z][\w-]*)`[^|]*\|([^|]*)\|([^|]*)\|/)
 				if (!row) continue
 
+				const { tagValues, tagDefaults } = rowsFor(currentTag)
+
 				const tokens = [...row[2].matchAll(/`([A-Za-z0-9_.-]+)`/g)].map((match) => match[1])
 				if (tokens.length > 1) tagValues[row[1]] = tokens
 
 				const declaredDefault = row[3].match(/`([A-Za-z0-9_.-]+)`/)
 				if (declaredDefault) tagDefaults[row[1]] = declaredDefault[1]
 			}
-
-			values.set(tag, tagValues)
-			defaults.set(tag, tagDefaults)
 		}
 	}
 
@@ -229,11 +245,23 @@ const renderAttributeValue = (attribute, scraped, docValues, declaredDefault) =>
 	if (type === 'array') return '{Array}'
 	if (type === 'object') return '{Object}'
 
-	const source = scraped.length > 0 ? scraped : docValues || []
-	const values = orderValues(attribute.name, source, declaredDefault)
+	// Union rather than either/or. The scrape catches values the tables never
+	// documented; the tables carry values that only exist as a var() fallback
+	// and so leave no trace to scrape.
+	const merged = [...scraped]
+	for (const value of docValues || []) {
+		if (!merged.includes(value)) merged.push(value)
+	}
 
-	if (values.length > 1) return `"${values.join(' | ')}"`
-	return '{string}'
+	const hasDeclaredValues = merged.length > 0
+	if (!hasDeclaredValues) return '{string}'
+
+	const values = orderValues(attribute.name, merged, declaredDefault)
+
+	// A single declared value is still an enum of one — `layout="center"`
+	// accepts that word and nothing else, which `{string}` would misreport as
+	// free-form. A bare default does not count: it is a fallback, not a union.
+	return `"${values.join(' | ')}"`
 }
 
 const buildSignature = (element, context) => {

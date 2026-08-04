@@ -22,6 +22,9 @@ site-level layout CSS.
 | `z-playground` | done | The instance is slotted, so it is real DOM. Serialization lives in the element, so the snippet cannot drift from the stage. |
 | `z-swatch` | done | Resolves its value with getComputedStyle off itself, so it is correct in whichever of the four themes is active. Copies `var(--token)`, not the value. |
 | `z-token-table` | done | Takes a `names` attribute as well as a `tokens` property, so a token table works on a page with no script. |
+| `z-steps` + `z-step` | done | The parent assigns the numbering, so reordering the markup renumbers the list. `current` turns a reference list into a guided flow. |
+| `z-code-group` | done | Groups sharing a name sync live through a module registry — a storage event only fires in other tabs, so it cannot carry same-page sync. |
+| `z-do-dont` | done | One element, two slots: the pairing is the content, and two sibling cards would make it possible to ship half the lesson. |
 
 Waves 1 and 2 are complete. Everything else below is unstarted.
 
@@ -34,9 +37,12 @@ is gone.
 Still outstanding from Wave 2: `z-api-signature` and `z-anatomy`. `z-anatomy`
 remains blocked on `AnatomyPartT` gaining region coordinates.
 
-Wave 3 has started with `z-swatch` and `z-token-table`, which close the
-library's largest documentation gap: 411 tokens with no reference page. The
-page is `docs/foundation/tokens.md`.
+Wave 3 is most of the way through. `z-swatch` and `z-token-table` closed the
+library's largest documentation gap — 411 tokens with no reference page, now
+`docs/foundation/tokens.md`. `z-steps`, `z-code-group` and `z-do-dont` follow.
+
+Remaining in Wave 3: `z-code-annotation` (mostly attributes on
+`z-code-block`), `z-diff`, `z-file-tree`, and `z-mermaid`.
 
 `z-chassis` gained two things the shell needed: `scrollScreenTo(options)` /
 `getScreen()` (the screen is the scroll container, and a routed view landing
