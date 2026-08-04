@@ -31,13 +31,13 @@ export const zChassisDoc: ComponentDocT = {
 
 	playground: {
 		buildElement: buildPlaygroundChassis,
-		controlNames: ['rail-width', 'rail-collapsed-width', 'bezel', 'frame', 'rail-side', 'expand-on-hover'],
+		controlNames: ['rail-width', 'rail-collapsed-width', 'bezel', 'frame', 'rail-side', 'does-expand-on-hover'],
 		slotLabel: 'Sidebar + screen'
 	},
 
 	usageGuidance: [
 		'One chassis per application, at the root. It frames everything else and is not meant to nest.',
-		'`expand-on-hover` suits tools where screen space is scarce, but a rail that appears on hover is invisible to anyone who never hovers — keep the icons meaningful while collapsed.',
+		'`does-expand-on-hover` suits tools where screen space is scarce, but a rail that appears on hover is invisible to anyone who never hovers — keep the icons meaningful while collapsed.',
 		'Use `--chassis-label-opacity` in slotted nav rows to fade labels out while the rail is collapsed, rather than swapping the markup.',
 		'The screen scrolls its own content. Put a `z-scroll` inside it rather than letting the page scroll behind the frame.'
 	],
@@ -92,7 +92,7 @@ export const zChassisDoc: ComponentDocT = {
 				  </div>
 				  <div slot="sidebar-footer">
 				    <z-row gap="2" aligns-y="center">
-				      <z-avatar name="Ada Lovelace" size="small"></z-avatar>
+				      <z-avatar name="Ada Lovelace" size="sm"></z-avatar>
 				      <z-text size="xs" color="muted">Ada</z-text>
 				    </z-row>
 				  </div>
@@ -125,13 +125,13 @@ export const zChassisDoc: ComponentDocT = {
 		}),
 
 		defineMarkupExample({
-			id: 'expand-on-hover',
+			id: 'does-expand-on-hover',
 			title: 'Collapsing rail',
 			description:
-				'`expand-on-hover` keeps the rail slim until pointer or focus enters it. Hover the left edge to expand it.',
+				'`does-expand-on-hover` keeps the rail slim until pointer or focus enters it. Hover the left edge to expand it.',
 			layout: ExampleLayout.fill,
 			markup: `
-				<z-chassis rail-width="12rem" rail-collapsed-width="3.5rem" expand-on-hover style="height: 16rem">
+				<z-chassis rail-width="12rem" rail-collapsed-width="3.5rem" does-expand-on-hover style="height: 16rem">
 				  <div slot="sidebar">
 				    <z-column gap="3">
 				      <z-row gap="2" aligns-y="center">${Icons.mail}<z-text size="sm" style="opacity: var(--chassis-label-opacity)">Inbox</z-text></z-row>
@@ -172,13 +172,13 @@ export const zChassisDoc: ComponentDocT = {
 			name: 'rail-collapsed-width',
 			type: 'string',
 			defaultValue: '3.5rem',
-			description: 'Width of the collapsed rail. Used with expand-on-hover.'
+			description: 'Width of the collapsed rail. Used with does-expand-on-hover.'
 		},
 		{ name: 'bezel', type: 'string', defaultValue: '0.75rem', description: 'Gap between the rail and the screen.' },
 		{ name: 'frame', type: 'string', defaultValue: '0.375rem', description: 'Outer padding around the chassis edges.' },
 		{ name: 'rail-side', type: 'left | right', defaultValue: 'left', description: 'Which side the rail sits on.' },
 		{
-			name: 'expand-on-hover',
+			name: 'does-expand-on-hover',
 			type: 'boolean',
 			defaultValue: '—',
 			description: 'Collapses the rail, expanding it on hover or focus-within.'

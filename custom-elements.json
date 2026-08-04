@@ -52,7 +52,7 @@
           "members": [
             {
               "kind": "field",
-              "name": "tone",
+              "name": "accent",
               "type": {
                 "text": "string"
               }
@@ -88,8 +88,8 @@
           ],
           "attributes": [
             {
-              "name": "tone",
-              "fieldName": "tone",
+              "name": "accent",
+              "fieldName": "accent",
               "type": {
                 "text": "string"
               }
@@ -167,7 +167,7 @@
             },
             {
               "kind": "field",
-              "name": "tone",
+              "name": "accent",
               "type": {
                 "text": "string"
               }
@@ -224,8 +224,8 @@
               }
             },
             {
-              "name": "tone",
-              "fieldName": "tone",
+              "name": "accent",
+              "fieldName": "accent",
               "type": {
                 "text": "string"
               }
@@ -383,7 +383,7 @@
             },
             {
               "kind": "field",
-              "name": "multiple",
+              "name": "isMultiple",
               "type": {
                 "text": "boolean"
               }
@@ -433,8 +433,8 @@
               }
             },
             {
-              "name": "multiple",
-              "fieldName": "multiple",
+              "name": "is-multiple",
+              "fieldName": "isMultiple",
               "type": {
                 "text": "boolean"
               }
@@ -484,7 +484,7 @@
           "members": [
             {
               "kind": "field",
-              "name": "variant",
+              "name": "kind",
               "type": {
                 "text": "string"
               }
@@ -506,8 +506,8 @@
           ],
           "attributes": [
             {
-              "name": "variant",
-              "fieldName": "variant",
+              "name": "kind",
+              "fieldName": "kind",
               "type": {
                 "text": "string"
               }
@@ -571,7 +571,7 @@
             },
             {
               "kind": "field",
-              "name": "tone",
+              "name": "accent",
               "type": {
                 "text": "string"
               }
@@ -628,8 +628,8 @@
               }
             },
             {
-              "name": "tone",
-              "fieldName": "tone",
+              "name": "accent",
+              "fieldName": "accent",
               "type": {
                 "text": "string"
               }
@@ -724,7 +724,7 @@
           "members": [
             {
               "kind": "field",
-              "name": "tone",
+              "name": "accent",
               "type": {
                 "text": "string"
               }
@@ -816,8 +816,8 @@
           ],
           "attributes": [
             {
-              "name": "tone",
-              "fieldName": "tone",
+              "name": "accent",
+              "fieldName": "accent",
               "type": {
                 "text": "string"
               }
@@ -1062,62 +1062,6 @@
           "members": [
             {
               "kind": "field",
-              "name": "isRow",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "isColumn",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "isFlex",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "isInlineFlex",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "isGrid",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "isInlineGrid",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "isBlock",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "isInlineBlock",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
               "name": "isInline",
               "type": {
                 "text": "boolean"
@@ -1125,7 +1069,7 @@
             },
             {
               "kind": "field",
-              "name": "wrap",
+              "name": "doesWrap",
               "type": {
                 "text": "boolean"
               }
@@ -1139,14 +1083,14 @@
             },
             {
               "kind": "field",
-              "name": "fullWidth",
+              "name": "isFullWidth",
               "type": {
                 "text": "boolean"
               }
             },
             {
               "kind": "field",
-              "name": "fullHeight",
+              "name": "isFullHeight",
               "type": {
                 "text": "boolean"
               }
@@ -1314,42 +1258,7 @@
             },
             {
               "kind": "field",
-              "name": "columns",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "rows",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "smallColumns",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "mediumColumns",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "largeColumns",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "extraLargeColumns",
+              "name": "direction",
               "type": {
                 "text": "string"
               }
@@ -1392,62 +1301,6 @@
           ],
           "attributes": [
             {
-              "name": "is-row",
-              "fieldName": "isRow",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "is-column",
-              "fieldName": "isColumn",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "is-flex",
-              "fieldName": "isFlex",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "is-inline-flex",
-              "fieldName": "isInlineFlex",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "is-grid",
-              "fieldName": "isGrid",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "is-inline-grid",
-              "fieldName": "isInlineGrid",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "is-block",
-              "fieldName": "isBlock",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "is-inline-block",
-              "fieldName": "isInlineBlock",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
               "name": "is-inline",
               "fieldName": "isInline",
               "type": {
@@ -1455,8 +1308,8 @@
               }
             },
             {
-              "name": "wrap",
-              "fieldName": "wrap",
+              "name": "does-wrap",
+              "fieldName": "doesWrap",
               "type": {
                 "text": "boolean"
               }
@@ -1469,15 +1322,15 @@
               }
             },
             {
-              "name": "full-width",
-              "fieldName": "fullWidth",
+              "name": "is-full-width",
+              "fieldName": "isFullWidth",
               "type": {
                 "text": "boolean"
               }
             },
             {
-              "name": "full-height",
-              "fieldName": "fullHeight",
+              "name": "is-full-height",
+              "fieldName": "isFullHeight",
               "type": {
                 "text": "boolean"
               }
@@ -1644,43 +1497,8 @@
               }
             },
             {
-              "name": "columns",
-              "fieldName": "columns",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "name": "rows",
-              "fieldName": "rows",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "name": "small-columns",
-              "fieldName": "smallColumns",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "name": "medium-columns",
-              "fieldName": "mediumColumns",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "name": "large-columns",
-              "fieldName": "largeColumns",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "name": "extra-large-columns",
-              "fieldName": "extraLargeColumns",
+              "name": "direction",
+              "fieldName": "direction",
               "type": {
                 "text": "string"
               }
@@ -1744,7 +1562,7 @@
             },
             {
               "kind": "field",
-              "name": "tone",
+              "name": "accent",
               "type": {
                 "text": "string"
               }
@@ -1780,8 +1598,8 @@
               }
             },
             {
-              "name": "tone",
-              "fieldName": "tone",
+              "name": "accent",
+              "fieldName": "accent",
               "type": {
                 "text": "string"
               }
@@ -1810,7 +1628,7 @@
           "members": [
             {
               "kind": "field",
-              "name": "variant",
+              "name": "kind",
               "type": {
                 "text": "string"
               }
@@ -1951,8 +1769,8 @@
           ],
           "attributes": [
             {
-              "name": "variant",
-              "fieldName": "variant",
+              "name": "kind",
+              "fieldName": "kind",
               "type": {
                 "text": "string"
               }
@@ -2114,7 +1932,7 @@
             },
             {
               "kind": "field",
-              "name": "tone",
+              "name": "accent",
               "type": {
                 "text": "string"
               }
@@ -2178,8 +1996,8 @@
               }
             },
             {
-              "name": "tone",
-              "fieldName": "tone",
+              "name": "accent",
+              "fieldName": "accent",
               "type": {
                 "text": "string"
               }
@@ -2236,18 +2054,18 @@
           "members": [
             {
               "kind": "field",
-              "name": "isVertical",
+              "name": "direction",
               "type": {
-                "text": "boolean"
+                "text": "string"
               }
             }
           ],
           "attributes": [
             {
-              "name": "is-vertical",
-              "fieldName": "isVertical",
+              "name": "direction",
+              "fieldName": "direction",
               "type": {
-                "text": "boolean"
+                "text": "string"
               }
             }
           ]
@@ -2260,7 +2078,7 @@
           "members": [
             {
               "kind": "field",
-              "name": "kind",
+              "name": "accent",
               "type": {
                 "text": "string"
               }
@@ -2296,8 +2114,8 @@
           ],
           "attributes": [
             {
-              "name": "kind",
-              "fieldName": "kind",
+              "name": "accent",
+              "fieldName": "accent",
               "type": {
                 "text": "string"
               }
@@ -2427,27 +2245,6 @@
             },
             {
               "kind": "field",
-              "name": "isFlex",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "isRow",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "isColumn",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
               "name": "isReactive",
               "type": {
                 "text": "boolean"
@@ -2465,27 +2262,6 @@
             {
               "name": "is-hidden",
               "fieldName": "isHidden",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "is-flex",
-              "fieldName": "isFlex",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "is-row",
-              "fieldName": "isRow",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "is-column",
-              "fieldName": "isColumn",
               "type": {
                 "text": "boolean"
               }
@@ -2521,14 +2297,14 @@
             },
             {
               "kind": "field",
-              "name": "loop",
+              "name": "doesLoop",
               "type": {
                 "text": "boolean"
               }
             },
             {
               "kind": "field",
-              "name": "tone",
+              "name": "accent",
               "type": {
                 "text": "string"
               }
@@ -2557,15 +2333,15 @@
               }
             },
             {
-              "name": "loop",
-              "fieldName": "loop",
+              "name": "does-loop",
+              "fieldName": "doesLoop",
               "type": {
                 "text": "boolean"
               }
             },
             {
-              "name": "tone",
-              "fieldName": "tone",
+              "name": "accent",
+              "fieldName": "accent",
               "type": {
                 "text": "string"
               }
@@ -2608,7 +2384,7 @@
             },
             {
               "kind": "field",
-              "name": "both",
+              "name": "centersBoth",
               "type": {
                 "text": "boolean"
               }
@@ -2622,7 +2398,7 @@
             },
             {
               "kind": "field",
-              "name": "text",
+              "name": "centersText",
               "type": {
                 "text": "boolean"
               }
@@ -2636,14 +2412,14 @@
             },
             {
               "kind": "field",
-              "name": "fullWidth",
+              "name": "isFullWidth",
               "type": {
                 "text": "boolean"
               }
             },
             {
               "kind": "field",
-              "name": "fullHeight",
+              "name": "isFullHeight",
               "type": {
                 "text": "boolean"
               }
@@ -2686,8 +2462,8 @@
               }
             },
             {
-              "name": "both",
-              "fieldName": "both",
+              "name": "centers-both",
+              "fieldName": "centersBoth",
               "type": {
                 "text": "boolean"
               }
@@ -2700,8 +2476,8 @@
               }
             },
             {
-              "name": "text",
-              "fieldName": "text",
+              "name": "centers-text",
+              "fieldName": "centersText",
               "type": {
                 "text": "boolean"
               }
@@ -2714,15 +2490,15 @@
               }
             },
             {
-              "name": "full-width",
-              "fieldName": "fullWidth",
+              "name": "is-full-width",
+              "fieldName": "isFullWidth",
               "type": {
                 "text": "boolean"
               }
             },
             {
-              "name": "full-height",
-              "fieldName": "fullHeight",
+              "name": "is-full-height",
+              "fieldName": "isFullHeight",
               "type": {
                 "text": "boolean"
               }
@@ -2772,7 +2548,7 @@
             },
             {
               "kind": "field",
-              "name": "tone",
+              "name": "accent",
               "type": {
                 "text": "string"
               }
@@ -2786,14 +2562,14 @@
             },
             {
               "kind": "field",
-              "name": "showGrid",
+              "name": "doesShowGrid",
               "type": {
                 "text": "boolean"
               }
             },
             {
               "kind": "field",
-              "name": "hideLabels",
+              "name": "hasLabels",
               "type": {
                 "text": "boolean"
               }
@@ -2822,8 +2598,8 @@
               }
             },
             {
-              "name": "tone",
-              "fieldName": "tone",
+              "name": "accent",
+              "fieldName": "accent",
               "type": {
                 "text": "string"
               }
@@ -2836,15 +2612,15 @@
               }
             },
             {
-              "name": "show-grid",
-              "fieldName": "showGrid",
+              "name": "does-show-grid",
+              "fieldName": "doesShowGrid",
               "type": {
                 "text": "boolean"
               }
             },
             {
-              "name": "hide-labels",
-              "fieldName": "hideLabels",
+              "name": "has-labels",
+              "fieldName": "hasLabels",
               "type": {
                 "text": "boolean"
               }
@@ -2901,7 +2677,7 @@
             },
             {
               "kind": "field",
-              "name": "expandOnHover",
+              "name": "doesExpandOnHover",
               "type": {
                 "text": "boolean"
               }
@@ -2951,8 +2727,8 @@
               }
             },
             {
-              "name": "expand-on-hover",
-              "fieldName": "expandOnHover",
+              "name": "does-expand-on-hover",
+              "fieldName": "doesExpandOnHover",
               "type": {
                 "text": "boolean"
               }
@@ -3190,7 +2966,7 @@
             },
             {
               "kind": "field",
-              "name": "tone",
+              "name": "accent",
               "type": {
                 "text": "string"
               }
@@ -3261,8 +3037,8 @@
               }
             },
             {
-              "name": "tone",
-              "fieldName": "tone",
+              "name": "accent",
+              "fieldName": "accent",
               "type": {
                 "text": "string"
               }
@@ -3406,14 +3182,14 @@
             },
             {
               "kind": "field",
-              "name": "hideCopy",
+              "name": "hasCopy",
               "type": {
                 "text": "boolean"
               }
             },
             {
               "kind": "field",
-              "name": "tone",
+              "name": "accent",
               "type": {
                 "text": "string"
               }
@@ -3463,15 +3239,15 @@
               }
             },
             {
-              "name": "hide-copy",
-              "fieldName": "hideCopy",
+              "name": "has-copy",
+              "fieldName": "hasCopy",
               "type": {
                 "text": "boolean"
               }
             },
             {
-              "name": "tone",
-              "fieldName": "tone",
+              "name": "accent",
+              "fieldName": "accent",
               "type": {
                 "text": "string"
               }
@@ -3514,7 +3290,7 @@
             },
             {
               "kind": "field",
-              "name": "tone",
+              "name": "accent",
               "type": {
                 "text": "string"
               }
@@ -3564,8 +3340,8 @@
               }
             },
             {
-              "name": "tone",
-              "fieldName": "tone",
+              "name": "accent",
+              "fieldName": "accent",
               "type": {
                 "text": "string"
               }
@@ -3629,7 +3405,7 @@
             },
             {
               "kind": "field",
-              "name": "tone",
+              "name": "accent",
               "type": {
                 "text": "string"
               }
@@ -3679,8 +3455,8 @@
               }
             },
             {
-              "name": "tone",
-              "fieldName": "tone",
+              "name": "accent",
+              "fieldName": "accent",
               "type": {
                 "text": "string"
               }
@@ -3759,7 +3535,7 @@
             },
             {
               "kind": "field",
-              "name": "tone",
+              "name": "accent",
               "type": {
                 "text": "string"
               }
@@ -3837,8 +3613,8 @@
               }
             },
             {
-              "name": "tone",
-              "fieldName": "tone",
+              "name": "accent",
+              "fieldName": "accent",
               "type": {
                 "text": "string"
               }
@@ -4292,7 +4068,7 @@
             },
             {
               "kind": "field",
-              "name": "disableEnterSubmit",
+              "name": "doesSubmitOnEnter",
               "type": {
                 "text": "boolean"
               }
@@ -4349,8 +4125,8 @@
               }
             },
             {
-              "name": "disable-enter-submit",
-              "fieldName": "disableEnterSubmit",
+              "name": "does-submit-on-enter",
+              "fieldName": "doesSubmitOnEnter",
               "type": {
                 "text": "boolean"
               }
@@ -4400,14 +4176,14 @@
             },
             {
               "kind": "field",
-              "name": "center",
+              "name": "isCentered",
               "type": {
                 "text": "boolean"
               }
             },
             {
               "kind": "field",
-              "name": "fullHeight",
+              "name": "isFullHeight",
               "type": {
                 "text": "boolean"
               }
@@ -4429,15 +4205,15 @@
               }
             },
             {
-              "name": "center",
-              "fieldName": "center",
+              "name": "is-centered",
+              "fieldName": "isCentered",
               "type": {
                 "text": "boolean"
               }
             },
             {
-              "name": "full-height",
-              "fieldName": "fullHeight",
+              "name": "is-full-height",
+              "fieldName": "isFullHeight",
               "type": {
                 "text": "boolean"
               }
@@ -4459,7 +4235,7 @@
             },
             {
               "kind": "field",
-              "name": "tone",
+              "name": "accent",
               "type": {
                 "text": "string"
               }
@@ -4488,8 +4264,8 @@
               }
             },
             {
-              "name": "tone",
-              "fieldName": "tone",
+              "name": "accent",
+              "fieldName": "accent",
               "type": {
                 "text": "string"
               }
@@ -4974,14 +4750,7 @@
             },
             {
               "kind": "field",
-              "name": "tone",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "hideClose",
+              "name": "hasClose",
               "type": {
                 "text": "boolean"
               }
@@ -5045,15 +4814,8 @@
               }
             },
             {
-              "name": "tone",
-              "fieldName": "tone",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "name": "hide-close",
-              "fieldName": "hideClose",
+              "name": "has-close",
+              "fieldName": "hasClose",
               "type": {
                 "text": "boolean"
               }
@@ -5204,7 +4966,7 @@
             },
             {
               "kind": "field",
-              "name": "floating",
+              "name": "isFloating",
               "type": {
                 "text": "boolean"
               }
@@ -5247,8 +5009,8 @@
               }
             },
             {
-              "name": "floating",
-              "fieldName": "floating",
+              "name": "is-floating",
+              "fieldName": "isFloating",
               "type": {
                 "text": "boolean"
               }
@@ -5625,13 +5387,6 @@
             },
             {
               "kind": "field",
-              "name": "tone",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
               "name": "isStatic",
               "type": {
                 "text": "boolean"
@@ -5677,13 +5432,6 @@
             {
               "name": "description",
               "fieldName": "description",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "name": "tone",
-              "fieldName": "tone",
               "type": {
                 "text": "string"
               }
@@ -5893,7 +5641,7 @@
             },
             {
               "kind": "field",
-              "name": "multiple",
+              "name": "isMultiple",
               "type": {
                 "text": "boolean"
               }
@@ -5957,8 +5705,8 @@
               }
             },
             {
-              "name": "multiple",
-              "fieldName": "multiple",
+              "name": "is-multiple",
+              "fieldName": "isMultiple",
               "type": {
                 "text": "boolean"
               }
@@ -6294,7 +6042,7 @@
             },
             {
               "kind": "field",
-              "name": "tone",
+              "name": "accent",
               "type": {
                 "text": "string"
               }
@@ -6330,8 +6078,8 @@
               }
             },
             {
-              "name": "tone",
-              "fieldName": "tone",
+              "name": "accent",
+              "fieldName": "accent",
               "type": {
                 "text": "string"
               }
@@ -6496,7 +6244,7 @@
           "members": [
             {
               "kind": "field",
-              "name": "tone",
+              "name": "color",
               "type": {
                 "text": "string"
               }
@@ -6517,7 +6265,7 @@
             },
             {
               "kind": "field",
-              "name": "fullWidth",
+              "name": "isFullWidth",
               "type": {
                 "text": "boolean"
               }
@@ -6532,8 +6280,8 @@
           ],
           "attributes": [
             {
-              "name": "tone",
-              "fieldName": "tone",
+              "name": "color",
+              "fieldName": "color",
               "type": {
                 "text": "string"
               }
@@ -6553,8 +6301,8 @@
               }
             },
             {
-              "name": "full-width",
-              "fieldName": "fullWidth",
+              "name": "is-full-width",
+              "fieldName": "isFullWidth",
               "type": {
                 "text": "boolean"
               }
@@ -6618,16 +6366,9 @@
             },
             {
               "kind": "field",
-              "name": "isSmall",
+              "name": "size",
               "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "isLarge",
-              "type": {
-                "text": "boolean"
+                "text": "string"
               }
             }
           ],
@@ -6675,17 +6416,10 @@
               }
             },
             {
-              "name": "is-small",
-              "fieldName": "isSmall",
+              "name": "size",
+              "fieldName": "size",
               "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "is-large",
-              "fieldName": "isLarge",
-              "type": {
-                "text": "boolean"
+                "text": "string"
               }
             }
           ]
@@ -6785,7 +6519,7 @@
             },
             {
               "kind": "field",
-              "name": "tone",
+              "name": "accent",
               "type": {
                 "text": "string"
               }
@@ -6849,8 +6583,8 @@
               }
             },
             {
-              "name": "tone",
-              "fieldName": "tone",
+              "name": "accent",
+              "fieldName": "accent",
               "type": {
                 "text": "string"
               }
@@ -7071,7 +6805,7 @@
             },
             {
               "kind": "field",
-              "name": "fullWidth",
+              "name": "isFullWidth",
               "type": {
                 "text": "boolean"
               }
@@ -7149,8 +6883,8 @@
               }
             },
             {
-              "name": "full-width",
-              "fieldName": "fullWidth",
+              "name": "is-full-width",
+              "fieldName": "isFullWidth",
               "type": {
                 "text": "boolean"
               }
@@ -7388,7 +7122,7 @@
             },
             {
               "kind": "field",
-              "name": "tone",
+              "name": "accent",
               "type": {
                 "text": "string"
               }
@@ -7431,8 +7165,8 @@
               }
             },
             {
-              "name": "tone",
-              "fieldName": "tone",
+              "name": "accent",
+              "fieldName": "accent",
               "type": {
                 "text": "string"
               }
@@ -7712,7 +7446,7 @@
             },
             {
               "kind": "field",
-              "name": "tone",
+              "name": "accent",
               "type": {
                 "text": "string"
               }
@@ -7839,8 +7573,8 @@
               }
             },
             {
-              "name": "tone",
-              "fieldName": "tone",
+              "name": "accent",
+              "fieldName": "accent",
               "type": {
                 "text": "string"
               }
@@ -7946,7 +7680,7 @@
             },
             {
               "kind": "field",
-              "name": "tone",
+              "name": "accent",
               "type": {
                 "text": "string"
               }
@@ -8024,8 +7758,8 @@
               }
             },
             {
-              "name": "tone",
-              "fieldName": "tone",
+              "name": "accent",
+              "fieldName": "accent",
               "type": {
                 "text": "string"
               }
@@ -8176,7 +7910,7 @@
             },
             {
               "kind": "field",
-              "name": "showValue",
+              "name": "doesShowValue",
               "type": {
                 "text": "boolean"
               }
@@ -8197,7 +7931,7 @@
             },
             {
               "kind": "field",
-              "name": "tone",
+              "name": "accent",
               "type": {
                 "text": "string"
               }
@@ -8211,16 +7945,9 @@
             },
             {
               "kind": "field",
-              "name": "isSmall",
+              "name": "size",
               "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "isLarge",
-              "type": {
-                "text": "boolean"
+                "text": "string"
               }
             },
             {
@@ -8296,8 +8023,8 @@
               }
             },
             {
-              "name": "show-value",
-              "fieldName": "showValue",
+              "name": "does-show-value",
+              "fieldName": "doesShowValue",
               "type": {
                 "text": "boolean"
               }
@@ -8317,8 +8044,8 @@
               }
             },
             {
-              "name": "tone",
-              "fieldName": "tone",
+              "name": "accent",
+              "fieldName": "accent",
               "type": {
                 "text": "string"
               }
@@ -8331,17 +8058,10 @@
               }
             },
             {
-              "name": "is-small",
-              "fieldName": "isSmall",
+              "name": "size",
+              "fieldName": "size",
               "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "is-large",
-              "fieldName": "isLarge",
-              "type": {
-                "text": "boolean"
+                "text": "string"
               }
             },
             {
@@ -8504,32 +8224,18 @@
           "members": [
             {
               "kind": "field",
-              "name": "isVertical",
+              "name": "direction",
               "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "isHorizontal",
-              "type": {
-                "text": "boolean"
+                "text": "string"
               }
             }
           ],
           "attributes": [
             {
-              "name": "is-vertical",
-              "fieldName": "isVertical",
+              "name": "direction",
+              "fieldName": "direction",
               "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "is-horizontal",
-              "fieldName": "isHorizontal",
-              "type": {
-                "text": "boolean"
+                "text": "string"
               }
             }
           ]
@@ -8570,7 +8276,7 @@
             },
             {
               "kind": "field",
-              "name": "tone",
+              "name": "color",
               "type": {
                 "text": "string"
               }
@@ -8641,8 +8347,8 @@
               }
             },
             {
-              "name": "tone",
-              "fieldName": "tone",
+              "name": "color",
+              "fieldName": "color",
               "type": {
                 "text": "string"
               }
@@ -8796,21 +8502,21 @@
             },
             {
               "kind": "field",
-              "name": "allowHtml",
+              "name": "doesAllowHtml",
               "type": {
                 "text": "boolean"
               }
             },
             {
               "kind": "field",
-              "name": "noHighlight",
+              "name": "doesHighlight",
               "type": {
                 "text": "boolean"
               }
             },
             {
               "kind": "field",
-              "name": "headingAnchors",
+              "name": "hasHeadingAnchors",
               "type": {
                 "text": "boolean"
               }
@@ -8846,22 +8552,22 @@
               }
             },
             {
-              "name": "allow-html",
-              "fieldName": "allowHtml",
+              "name": "does-allow-html",
+              "fieldName": "doesAllowHtml",
               "type": {
                 "text": "boolean"
               }
             },
             {
-              "name": "no-highlight",
-              "fieldName": "noHighlight",
+              "name": "does-highlight",
+              "fieldName": "doesHighlight",
               "type": {
                 "text": "boolean"
               }
             },
             {
-              "name": "heading-anchors",
-              "fieldName": "headingAnchors",
+              "name": "has-heading-anchors",
+              "fieldName": "hasHeadingAnchors",
               "type": {
                 "text": "boolean"
               }
@@ -8904,21 +8610,21 @@
             },
             {
               "kind": "field",
-              "name": "reverse",
+              "name": "isReversed",
               "type": {
                 "text": "boolean"
               }
             },
             {
               "kind": "field",
-              "name": "vertical",
+              "name": "direction",
               "type": {
-                "text": "boolean"
+                "text": "string"
               }
             },
             {
               "kind": "field",
-              "name": "pauseOnHover",
+              "name": "doesPauseOnHover",
               "type": {
                 "text": "boolean"
               }
@@ -8954,22 +8660,22 @@
               }
             },
             {
-              "name": "reverse",
-              "fieldName": "reverse",
+              "name": "is-reversed",
+              "fieldName": "isReversed",
               "type": {
                 "text": "boolean"
               }
             },
             {
-              "name": "vertical",
-              "fieldName": "vertical",
+              "name": "direction",
+              "fieldName": "direction",
               "type": {
-                "text": "boolean"
+                "text": "string"
               }
             },
             {
-              "name": "pause-on-hover",
-              "fieldName": "pauseOnHover",
+              "name": "does-pause-on-hover",
+              "fieldName": "doesPauseOnHover",
               "type": {
                 "text": "boolean"
               }
@@ -9204,7 +8910,7 @@
             },
             {
               "kind": "field",
-              "name": "tone",
+              "name": "accent",
               "type": {
                 "text": "string"
               }
@@ -9240,8 +8946,8 @@
               }
             },
             {
-              "name": "tone",
-              "fieldName": "tone",
+              "name": "accent",
+              "fieldName": "accent",
               "type": {
                 "text": "string"
               }
@@ -9277,23 +8983,9 @@
             },
             {
               "kind": "field",
-              "name": "noReply",
+              "name": "actions",
               "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "noForward",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "noMore",
-              "type": {
-                "text": "boolean"
+                "text": "string"
               }
             },
             {
@@ -9348,24 +9040,10 @@
               }
             },
             {
-              "name": "no-reply",
-              "fieldName": "noReply",
+              "name": "actions",
+              "fieldName": "actions",
               "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "no-forward",
-              "fieldName": "noForward",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "no-more",
-              "fieldName": "noMore",
-              "type": {
-                "text": "boolean"
+                "text": "string"
               }
             },
             {
@@ -9434,7 +9112,7 @@
             },
             {
               "kind": "field",
-              "name": "tone",
+              "name": "accent",
               "type": {
                 "text": "string"
               }
@@ -9463,8 +9141,8 @@
               }
             },
             {
-              "name": "tone",
-              "fieldName": "tone",
+              "name": "accent",
+              "fieldName": "accent",
               "type": {
                 "text": "string"
               }
@@ -9528,16 +9206,9 @@
             },
             {
               "kind": "field",
-              "name": "hideAvatar",
+              "name": "avatar",
               "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "showAvatar",
-              "type": {
-                "text": "boolean"
+                "text": "string"
               }
             },
             {
@@ -9592,17 +9263,10 @@
               }
             },
             {
-              "name": "hide-avatar",
-              "fieldName": "hideAvatar",
+              "name": "avatar",
+              "fieldName": "avatar",
               "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "show-avatar",
-              "fieldName": "showAvatar",
-              "type": {
-                "text": "boolean"
+                "text": "string"
               }
             },
             {
@@ -9709,7 +9373,7 @@
             },
             {
               "kind": "field",
-              "name": "menuBelow",
+              "name": "isMenuBelow",
               "type": {
                 "text": "boolean"
               }
@@ -9759,8 +9423,8 @@
               }
             },
             {
-              "name": "menu-below",
-              "fieldName": "menuBelow",
+              "name": "is-menu-below",
+              "fieldName": "isMenuBelow",
               "type": {
                 "text": "boolean"
               }
@@ -9810,7 +9474,7 @@
             },
             {
               "kind": "field",
-              "name": "tone",
+              "name": "accent",
               "type": {
                 "text": "string"
               }
@@ -9846,8 +9510,8 @@
               }
             },
             {
-              "name": "tone",
-              "fieldName": "tone",
+              "name": "accent",
+              "fieldName": "accent",
               "type": {
                 "text": "string"
               }
@@ -10068,7 +9732,7 @@
             },
             {
               "kind": "field",
-              "name": "tone",
+              "name": "accent",
               "type": {
                 "text": "string"
               }
@@ -10202,8 +9866,8 @@
               }
             },
             {
-              "name": "tone",
-              "fieldName": "tone",
+              "name": "accent",
+              "fieldName": "accent",
               "type": {
                 "text": "string"
               }
@@ -10309,7 +9973,7 @@
             },
             {
               "kind": "field",
-              "name": "tone",
+              "name": "accent",
               "type": {
                 "text": "string"
               }
@@ -10352,8 +10016,8 @@
               }
             },
             {
-              "name": "tone",
-              "fieldName": "tone",
+              "name": "accent",
+              "fieldName": "accent",
               "type": {
                 "text": "string"
               }
@@ -10403,7 +10067,7 @@
             },
             {
               "kind": "field",
-              "name": "collapsible",
+              "name": "isCollapsible",
               "type": {
                 "text": "boolean"
               }
@@ -10453,8 +10117,8 @@
               }
             },
             {
-              "name": "collapsible",
-              "fieldName": "collapsible",
+              "name": "is-collapsible",
+              "fieldName": "isCollapsible",
               "type": {
                 "text": "boolean"
               }
@@ -10619,14 +10283,14 @@
             },
             {
               "kind": "field",
-              "name": "hideToolbar",
+              "name": "hasToolbar",
               "type": {
                 "text": "boolean"
               }
             },
             {
               "kind": "field",
-              "name": "hideKeyboard",
+              "name": "hasKeyboard",
               "type": {
                 "text": "boolean"
               }
@@ -10753,15 +10417,15 @@
               }
             },
             {
-              "name": "hide-toolbar",
-              "fieldName": "hideToolbar",
+              "name": "has-toolbar",
+              "fieldName": "hasToolbar",
               "type": {
                 "text": "boolean"
               }
             },
             {
-              "name": "hide-keyboard",
-              "fieldName": "hideKeyboard",
+              "name": "has-keyboard",
+              "fieldName": "hasKeyboard",
               "type": {
                 "text": "boolean"
               }
@@ -10902,14 +10566,14 @@
             },
             {
               "kind": "field",
-              "name": "hideToolbar",
+              "name": "hasToolbar",
               "type": {
                 "text": "boolean"
               }
             },
             {
               "kind": "field",
-              "name": "hideKeyboard",
+              "name": "hasKeyboard",
               "type": {
                 "text": "boolean"
               }
@@ -11043,15 +10707,15 @@
               }
             },
             {
-              "name": "hide-toolbar",
-              "fieldName": "hideToolbar",
+              "name": "has-toolbar",
+              "fieldName": "hasToolbar",
               "type": {
                 "text": "boolean"
               }
             },
             {
-              "name": "hide-keyboard",
-              "fieldName": "hideKeyboard",
+              "name": "has-keyboard",
+              "fieldName": "hasKeyboard",
               "type": {
                 "text": "boolean"
               }
@@ -11101,14 +10765,14 @@
             },
             {
               "kind": "field",
-              "name": "tone",
+              "name": "accent",
               "type": {
                 "text": "string"
               }
             },
             {
               "kind": "field",
-              "name": "fixed",
+              "name": "isFixed",
               "type": {
                 "text": "boolean"
               }
@@ -11130,15 +10794,15 @@
               }
             },
             {
-              "name": "tone",
-              "fieldName": "tone",
+              "name": "accent",
+              "fieldName": "accent",
               "type": {
                 "text": "string"
               }
             },
             {
-              "name": "fixed",
-              "fieldName": "fixed",
+              "name": "is-fixed",
+              "fieldName": "isFixed",
               "type": {
                 "text": "boolean"
               }
@@ -11174,7 +10838,7 @@
             },
             {
               "kind": "field",
-              "name": "tone",
+              "name": "accent",
               "type": {
                 "text": "string"
               }
@@ -11224,8 +10888,8 @@
               }
             },
             {
-              "name": "tone",
-              "fieldName": "tone",
+              "name": "accent",
+              "fieldName": "accent",
               "type": {
                 "text": "string"
               }
@@ -11362,7 +11026,7 @@
             },
             {
               "kind": "field",
-              "name": "tone",
+              "name": "accent",
               "type": {
                 "text": "string"
               }
@@ -11405,8 +11069,8 @@
               }
             },
             {
-              "name": "tone",
-              "fieldName": "tone",
+              "name": "accent",
+              "fieldName": "accent",
               "type": {
                 "text": "string"
               }
@@ -11543,14 +11207,14 @@
             },
             {
               "kind": "field",
-              "name": "tone",
+              "name": "accent",
               "type": {
                 "text": "string"
               }
             },
             {
               "kind": "field",
-              "name": "noJump",
+              "name": "canJump",
               "type": {
                 "text": "boolean"
               }
@@ -11593,15 +11257,15 @@
               }
             },
             {
-              "name": "tone",
-              "fieldName": "tone",
+              "name": "accent",
+              "fieldName": "accent",
               "type": {
                 "text": "string"
               }
             },
             {
-              "name": "no-jump",
-              "fieldName": "noJump",
+              "name": "can-jump",
+              "fieldName": "canJump",
               "type": {
                 "text": "boolean"
               }
@@ -11651,7 +11315,7 @@
             },
             {
               "kind": "field",
-              "name": "tone",
+              "name": "accent",
               "type": {
                 "text": "string"
               }
@@ -11694,8 +11358,8 @@
               }
             },
             {
-              "name": "tone",
-              "fieldName": "tone",
+              "name": "accent",
+              "fieldName": "accent",
               "type": {
                 "text": "string"
               }
@@ -11738,9 +11402,9 @@
             },
             {
               "kind": "field",
-              "name": "isHorizontal",
+              "name": "direction",
               "type": {
-                "text": "boolean"
+                "text": "string"
               }
             },
             {
@@ -11774,10 +11438,10 @@
               }
             },
             {
-              "name": "is-horizontal",
-              "fieldName": "isHorizontal",
+              "name": "direction",
+              "fieldName": "direction",
               "type": {
-                "text": "boolean"
+                "text": "string"
               }
             },
             {
@@ -11832,7 +11496,7 @@
             },
             {
               "kind": "field",
-              "name": "showValue",
+              "name": "doesShowValue",
               "type": {
                 "text": "boolean"
               }
@@ -11910,8 +11574,8 @@
               }
             },
             {
-              "name": "show-value",
-              "fieldName": "showValue",
+              "name": "does-show-value",
+              "fieldName": "doesShowValue",
               "type": {
                 "text": "boolean"
               }
@@ -11996,7 +11660,7 @@
             },
             {
               "kind": "field",
-              "name": "tone",
+              "name": "accent",
               "type": {
                 "text": "string"
               }
@@ -12039,8 +11703,8 @@
               }
             },
             {
-              "name": "tone",
-              "fieldName": "tone",
+              "name": "accent",
+              "fieldName": "accent",
               "type": {
                 "text": "string"
               }
@@ -12069,7 +11733,7 @@
             },
             {
               "kind": "field",
-              "name": "noAdd",
+              "name": "canAdd",
               "type": {
                 "text": "boolean"
               }
@@ -12105,8 +11769,8 @@
               }
             },
             {
-              "name": "no-add",
-              "fieldName": "noAdd",
+              "name": "can-add",
+              "fieldName": "canAdd",
               "type": {
                 "text": "boolean"
               }
@@ -12512,7 +12176,7 @@
             },
             {
               "kind": "field",
-              "name": "orientation",
+              "name": "direction",
               "type": {
                 "text": "string"
               }
@@ -12541,8 +12205,8 @@
               }
             },
             {
-              "name": "orientation",
-              "fieldName": "orientation",
+              "name": "direction",
+              "fieldName": "direction",
               "type": {
                 "text": "string"
               }
@@ -12679,7 +12343,7 @@
             },
             {
               "kind": "field",
-              "name": "tone",
+              "name": "accent",
               "type": {
                 "text": "string"
               }
@@ -12757,8 +12421,8 @@
               }
             },
             {
-              "name": "tone",
-              "fieldName": "tone",
+              "name": "accent",
+              "fieldName": "accent",
               "type": {
                 "text": "string"
               }
@@ -13010,9 +12674,9 @@
           "members": [
             {
               "kind": "field",
-              "name": "isVertical",
+              "name": "direction",
               "type": {
-                "text": "boolean"
+                "text": "string"
               }
             },
             {
@@ -13032,10 +12696,10 @@
           ],
           "attributes": [
             {
-              "name": "is-vertical",
-              "fieldName": "isVertical",
+              "name": "direction",
+              "fieldName": "direction",
               "type": {
-                "text": "boolean"
+                "text": "string"
               }
             },
             {
@@ -13090,14 +12754,7 @@
             },
             {
               "kind": "field",
-              "name": "tone",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "hideClose",
+              "name": "hasClose",
               "type": {
                 "text": "boolean"
               }
@@ -13161,15 +12818,8 @@
               }
             },
             {
-              "name": "tone",
-              "fieldName": "tone",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "name": "hide-close",
-              "fieldName": "hideClose",
+              "name": "has-close",
+              "fieldName": "hasClose",
               "type": {
                 "text": "boolean"
               }
@@ -13226,7 +12876,7 @@
             },
             {
               "kind": "field",
-              "name": "tone",
+              "name": "accent",
               "type": {
                 "text": "string"
               }
@@ -13276,8 +12926,8 @@
               }
             },
             {
-              "name": "tone",
-              "fieldName": "tone",
+              "name": "accent",
+              "fieldName": "accent",
               "type": {
                 "text": "string"
               }
@@ -13606,7 +13256,7 @@
             },
             {
               "kind": "field",
-              "name": "showValue",
+              "name": "doesShowValue",
               "type": {
                 "text": "boolean"
               }
@@ -13627,7 +13277,7 @@
             },
             {
               "kind": "field",
-              "name": "tone",
+              "name": "accent",
               "type": {
                 "text": "string"
               }
@@ -13705,8 +13355,8 @@
               }
             },
             {
-              "name": "show-value",
-              "fieldName": "showValue",
+              "name": "does-show-value",
+              "fieldName": "doesShowValue",
               "type": {
                 "text": "boolean"
               }
@@ -13726,8 +13376,8 @@
               }
             },
             {
-              "name": "tone",
-              "fieldName": "tone",
+              "name": "accent",
+              "fieldName": "accent",
               "type": {
                 "text": "string"
               }
@@ -13979,7 +13629,7 @@
             },
             {
               "kind": "field",
-              "name": "grow",
+              "name": "canGrow",
               "type": {
                 "text": "boolean"
               }
@@ -13994,8 +13644,8 @@
               }
             },
             {
-              "name": "grow",
-              "fieldName": "grow",
+              "name": "can-grow",
+              "fieldName": "canGrow",
               "type": {
                 "text": "boolean"
               }
@@ -14226,7 +13876,7 @@
             },
             {
               "kind": "field",
-              "name": "pulse",
+              "name": "doesPulse",
               "type": {
                 "text": "boolean"
               }
@@ -14262,8 +13912,8 @@
               }
             },
             {
-              "name": "pulse",
-              "fieldName": "pulse",
+              "name": "does-pulse",
+              "fieldName": "doesPulse",
               "type": {
                 "text": "boolean"
               }
@@ -14306,14 +13956,14 @@
             },
             {
               "kind": "field",
-              "name": "typewriter",
+              "name": "isTypewriter",
               "type": {
                 "text": "boolean"
               }
             },
             {
               "kind": "field",
-              "name": "markdown",
+              "name": "isMarkdown",
               "type": {
                 "text": "boolean"
               }
@@ -14349,15 +13999,15 @@
               }
             },
             {
-              "name": "typewriter",
-              "fieldName": "typewriter",
+              "name": "is-typewriter",
+              "fieldName": "isTypewriter",
               "type": {
                 "text": "boolean"
               }
             },
             {
-              "name": "markdown",
-              "fieldName": "markdown",
+              "name": "is-markdown",
+              "fieldName": "isMarkdown",
               "type": {
                 "text": "boolean"
               }
@@ -14515,7 +14165,7 @@
             },
             {
               "kind": "field",
-              "name": "showArrow",
+              "name": "doesShowArrow",
               "type": {
                 "text": "boolean"
               }
@@ -14544,8 +14194,8 @@
               }
             },
             {
-              "name": "show-arrow",
-              "fieldName": "showArrow",
+              "name": "does-show-arrow",
+              "fieldName": "doesShowArrow",
               "type": {
                 "text": "boolean"
               }
@@ -14581,14 +14231,14 @@
             },
             {
               "kind": "field",
-              "name": "tone",
+              "name": "accent",
               "type": {
                 "text": "string"
               }
             },
             {
               "kind": "field",
-              "name": "variant",
+              "name": "kind",
               "type": {
                 "text": "string"
               }
@@ -14602,28 +14252,28 @@
             },
             {
               "kind": "field",
-              "name": "border",
+              "name": "hasBorder",
               "type": {
                 "text": "boolean"
               }
             },
             {
               "kind": "field",
-              "name": "elevated",
+              "name": "isElevated",
               "type": {
                 "text": "boolean"
               }
             },
             {
               "kind": "field",
-              "name": "interactive",
+              "name": "isInteractive",
               "type": {
                 "text": "boolean"
               }
             },
             {
               "kind": "field",
-              "name": "fullWidth",
+              "name": "isFullWidth",
               "type": {
                 "text": "boolean"
               }
@@ -14659,15 +14309,15 @@
               }
             },
             {
-              "name": "tone",
-              "fieldName": "tone",
+              "name": "accent",
+              "fieldName": "accent",
               "type": {
                 "text": "string"
               }
             },
             {
-              "name": "variant",
-              "fieldName": "variant",
+              "name": "kind",
+              "fieldName": "kind",
               "type": {
                 "text": "string"
               }
@@ -14680,29 +14330,29 @@
               }
             },
             {
-              "name": "border",
-              "fieldName": "border",
+              "name": "has-border",
+              "fieldName": "hasBorder",
               "type": {
                 "text": "boolean"
               }
             },
             {
-              "name": "elevated",
-              "fieldName": "elevated",
+              "name": "is-elevated",
+              "fieldName": "isElevated",
               "type": {
                 "text": "boolean"
               }
             },
             {
-              "name": "interactive",
-              "fieldName": "interactive",
+              "name": "is-interactive",
+              "fieldName": "isInteractive",
               "type": {
                 "text": "boolean"
               }
             },
             {
-              "name": "full-width",
-              "fieldName": "fullWidth",
+              "name": "is-full-width",
+              "fieldName": "isFullWidth",
               "type": {
                 "text": "boolean"
               }
@@ -14895,7 +14545,7 @@
             },
             {
               "kind": "field",
-              "name": "tone",
+              "name": "accent",
               "type": {
                 "text": "string"
               }
@@ -14959,8 +14609,8 @@
               }
             },
             {
-              "name": "tone",
-              "fieldName": "tone",
+              "name": "accent",
+              "fieldName": "accent",
               "type": {
                 "text": "string"
               }
@@ -15372,7 +15022,7 @@
             },
             {
               "kind": "field",
-              "name": "tone",
+              "name": "accent",
               "type": {
                 "text": "string"
               }
@@ -15415,8 +15065,8 @@
               }
             },
             {
-              "name": "tone",
-              "fieldName": "tone",
+              "name": "accent",
+              "fieldName": "accent",
               "type": {
                 "text": "string"
               }
@@ -15487,7 +15137,7 @@
             },
             {
               "kind": "field",
-              "name": "tone",
+              "name": "accent",
               "type": {
                 "text": "string"
               }
@@ -15522,14 +15172,14 @@
             },
             {
               "kind": "field",
-              "name": "animate",
+              "name": "doesAnimate",
               "type": {
                 "text": "boolean"
               }
             },
             {
               "kind": "field",
-              "name": "startOnView",
+              "name": "doesStartOnView",
               "type": {
                 "text": "boolean"
               }
@@ -15564,7 +15214,7 @@
             },
             {
               "kind": "field",
-              "name": "loop",
+              "name": "doesLoop",
               "type": {
                 "text": "boolean"
               }
@@ -15578,14 +15228,14 @@
             },
             {
               "kind": "field",
-              "name": "hideReplay",
+              "name": "hasReplay",
               "type": {
                 "text": "boolean"
               }
             },
             {
               "kind": "field",
-              "name": "noAutoScroll",
+              "name": "doesAutoScroll",
               "type": {
                 "text": "boolean"
               }
@@ -15642,8 +15292,8 @@
               }
             },
             {
-              "name": "tone",
-              "fieldName": "tone",
+              "name": "accent",
+              "fieldName": "accent",
               "type": {
                 "text": "string"
               }
@@ -15677,15 +15327,15 @@
               }
             },
             {
-              "name": "animate",
-              "fieldName": "animate",
+              "name": "does-animate",
+              "fieldName": "doesAnimate",
               "type": {
                 "text": "boolean"
               }
             },
             {
-              "name": "start-on-view",
-              "fieldName": "startOnView",
+              "name": "does-start-on-view",
+              "fieldName": "doesStartOnView",
               "type": {
                 "text": "boolean"
               }
@@ -15719,8 +15369,8 @@
               }
             },
             {
-              "name": "loop",
-              "fieldName": "loop",
+              "name": "does-loop",
+              "fieldName": "doesLoop",
               "type": {
                 "text": "boolean"
               }
@@ -15733,15 +15383,15 @@
               }
             },
             {
-              "name": "hide-replay",
-              "fieldName": "hideReplay",
+              "name": "has-replay",
+              "fieldName": "hasReplay",
               "type": {
                 "text": "boolean"
               }
             },
             {
-              "name": "no-auto-scroll",
-              "fieldName": "noAutoScroll",
+              "name": "does-auto-scroll",
+              "fieldName": "doesAutoScroll",
               "type": {
                 "text": "boolean"
               }
@@ -15934,7 +15584,7 @@
             },
             {
               "kind": "field",
-              "name": "tone",
+              "name": "accent",
               "type": {
                 "text": "string"
               }
@@ -16047,8 +15697,8 @@
               }
             },
             {
-              "name": "tone",
-              "fieldName": "tone",
+              "name": "accent",
+              "fieldName": "accent",
               "type": {
                 "text": "string"
               }
@@ -16133,7 +15783,7 @@
             },
             {
               "kind": "field",
-              "name": "tone",
+              "name": "accent",
               "type": {
                 "text": "string"
               }
@@ -16154,16 +15804,9 @@
             },
             {
               "kind": "field",
-              "name": "isSmall",
+              "name": "size",
               "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "isLarge",
-              "type": {
-                "text": "boolean"
+                "text": "string"
               }
             },
             {
@@ -16190,8 +15833,8 @@
               }
             },
             {
-              "name": "tone",
-              "fieldName": "tone",
+              "name": "accent",
+              "fieldName": "accent",
               "type": {
                 "text": "string"
               }
@@ -16211,17 +15854,10 @@
               }
             },
             {
-              "name": "is-small",
-              "fieldName": "isSmall",
+              "name": "size",
+              "fieldName": "size",
               "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "is-large",
-              "fieldName": "isLarge",
-              "type": {
-                "text": "boolean"
+                "text": "string"
               }
             },
             {
@@ -16394,7 +16030,7 @@
             },
             {
               "kind": "field",
-              "name": "tone",
+              "name": "accent",
               "type": {
                 "text": "string"
               }
@@ -16451,8 +16087,8 @@
               }
             },
             {
-              "name": "tone",
-              "fieldName": "tone",
+              "name": "accent",
+              "fieldName": "accent",
               "type": {
                 "text": "string"
               }
@@ -16502,44 +16138,23 @@
           "members": [
             {
               "kind": "field",
-              "name": "isPurple",
+              "name": "accent",
               "type": {
-                "text": "boolean"
+                "text": "string"
               }
             },
             {
               "kind": "field",
-              "name": "isPink",
+              "name": "size",
               "type": {
-                "text": "boolean"
+                "text": "string"
               }
             },
             {
               "kind": "field",
-              "name": "isNeutral",
+              "name": "kind",
               "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "isSmall",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "isMedium",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "isLarge",
-              "type": {
-                "text": "boolean"
+                "text": "string"
               }
             },
             {
@@ -16551,23 +16166,9 @@
             },
             {
               "kind": "field",
-              "name": "isGhost",
+              "name": "direction",
               "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "isOutlined",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "isVertical",
-              "type": {
-                "text": "boolean"
+                "text": "string"
               }
             },
             {
@@ -16594,45 +16195,24 @@
           ],
           "attributes": [
             {
-              "name": "is-purple",
-              "fieldName": "isPurple",
+              "name": "accent",
+              "fieldName": "accent",
               "type": {
-                "text": "boolean"
+                "text": "string"
               }
             },
             {
-              "name": "is-pink",
-              "fieldName": "isPink",
+              "name": "size",
+              "fieldName": "size",
               "type": {
-                "text": "boolean"
+                "text": "string"
               }
             },
             {
-              "name": "is-neutral",
-              "fieldName": "isNeutral",
+              "name": "kind",
+              "fieldName": "kind",
               "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "is-small",
-              "fieldName": "isSmall",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "is-medium",
-              "fieldName": "isMedium",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "is-large",
-              "fieldName": "isLarge",
-              "type": {
-                "text": "boolean"
+                "text": "string"
               }
             },
             {
@@ -16643,24 +16223,10 @@
               }
             },
             {
-              "name": "is-ghost",
-              "fieldName": "isGhost",
+              "name": "direction",
+              "fieldName": "direction",
               "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "is-outlined",
-              "fieldName": "isOutlined",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "is-vertical",
-              "fieldName": "isVertical",
-              "type": {
-                "text": "boolean"
+                "text": "string"
               }
             },
             {
@@ -16694,63 +16260,28 @@
           "members": [
             {
               "kind": "field",
-              "name": "isPurple",
+              "name": "accent",
               "type": {
-                "text": "boolean"
+                "text": "string"
               }
             },
             {
               "kind": "field",
-              "name": "isPink",
+              "name": "size",
               "type": {
-                "text": "boolean"
+                "text": "string"
               }
             },
             {
               "kind": "field",
-              "name": "isNeutral",
+              "name": "kind",
               "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "isSmall",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "isMedium",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "isLarge",
-              "type": {
-                "text": "boolean"
+                "text": "string"
               }
             },
             {
               "kind": "field",
               "name": "isIcon",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "isGhost",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "isOutlined",
               "type": {
                 "text": "boolean"
               }
@@ -16793,64 +16324,29 @@
           ],
           "attributes": [
             {
-              "name": "is-purple",
-              "fieldName": "isPurple",
+              "name": "accent",
+              "fieldName": "accent",
               "type": {
-                "text": "boolean"
+                "text": "string"
               }
             },
             {
-              "name": "is-pink",
-              "fieldName": "isPink",
+              "name": "size",
+              "fieldName": "size",
               "type": {
-                "text": "boolean"
+                "text": "string"
               }
             },
             {
-              "name": "is-neutral",
-              "fieldName": "isNeutral",
+              "name": "kind",
+              "fieldName": "kind",
               "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "is-small",
-              "fieldName": "isSmall",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "is-medium",
-              "fieldName": "isMedium",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "is-large",
-              "fieldName": "isLarge",
-              "type": {
-                "text": "boolean"
+                "text": "string"
               }
             },
             {
               "name": "is-icon",
               "fieldName": "isIcon",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "is-ghost",
-              "fieldName": "isGhost",
-              "type": {
-                "text": "boolean"
-              }
-            },
-            {
-              "name": "is-outlined",
-              "fieldName": "isOutlined",
               "type": {
                 "text": "boolean"
               }
@@ -17008,7 +16504,7 @@
           "members": [
             {
               "kind": "field",
-              "name": "orientation",
+              "name": "direction",
               "type": {
                 "text": "string"
               }
@@ -17037,8 +16533,8 @@
           ],
           "attributes": [
             {
-              "name": "orientation",
-              "fieldName": "orientation",
+              "name": "direction",
+              "fieldName": "direction",
               "type": {
                 "text": "string"
               }
@@ -17126,7 +16622,7 @@
             },
             {
               "kind": "field",
-              "name": "tone",
+              "name": "accent",
               "type": {
                 "text": "string"
               }
@@ -17176,8 +16672,8 @@
               }
             },
             {
-              "name": "tone",
-              "fieldName": "tone",
+              "name": "accent",
+              "fieldName": "accent",
               "type": {
                 "text": "string"
               }
@@ -17248,7 +16744,7 @@
             },
             {
               "kind": "field",
-              "name": "showGuides",
+              "name": "doesShowGuides",
               "type": {
                 "text": "boolean"
               }
@@ -17319,8 +16815,8 @@
               }
             },
             {
-              "name": "show-guides",
-              "fieldName": "showGuides",
+              "name": "does-show-guides",
+              "fieldName": "doesShowGuides",
               "type": {
                 "text": "boolean"
               }
@@ -17429,7 +16925,7 @@
             },
             {
               "kind": "field",
-              "name": "tone",
+              "name": "accent",
               "type": {
                 "text": "string"
               }
@@ -17451,8 +16947,8 @@
               }
             },
             {
-              "name": "tone",
-              "fieldName": "tone",
+              "name": "accent",
+              "fieldName": "accent",
               "type": {
                 "text": "string"
               }
@@ -17502,9 +16998,9 @@
             },
             {
               "kind": "field",
-              "name": "isHorizontal",
+              "name": "direction",
               "type": {
-                "text": "boolean"
+                "text": "string"
               }
             },
             {
@@ -17566,10 +17062,10 @@
               }
             },
             {
-              "name": "is-horizontal",
-              "fieldName": "isHorizontal",
+              "name": "direction",
+              "fieldName": "direction",
               "type": {
-                "text": "boolean"
+                "text": "string"
               }
             },
             {

@@ -6,9 +6,9 @@ const buildPlaygroundColumn = (): HTMLElement => {
 	const column = document.createElement('z-column')
 	column.setAttribute('gap', 'md')
 	column.innerHTML = `
-		<z-badge label="One" size="small"></z-badge>
-		<z-badge label="Two" size="small"></z-badge>
-		<z-badge label="Three" size="small"></z-badge>
+		<z-badge label="One" size="sm"></z-badge>
+		<z-badge label="Two" size="sm"></z-badge>
+		<z-badge label="Three" size="sm"></z-badge>
 	`
 	return column
 }
@@ -48,9 +48,9 @@ export const zColumnDoc: ComponentDocT = {
 			layout: ExampleLayout.fill,
 			markup: `
 				<z-column gap="3" style="max-width: 20rem">
-				  <z-badge label="One" size="small"></z-badge>
-				  <z-badge label="Two" size="small"></z-badge>
-				  <z-badge label="Three" size="small"></z-badge>
+				  <z-badge label="One" size="sm"></z-badge>
+				  <z-badge label="Two" size="sm"></z-badge>
+				  <z-badge label="Three" size="sm"></z-badge>
 				</z-column>
 			`
 		}),
@@ -63,18 +63,18 @@ export const zColumnDoc: ComponentDocT = {
 			layout: ExampleLayout.fill,
 			markup: `
 				<z-column aligns-x="start" gap="2" padding="3" full-width style="border: 1px solid var(--border)">
-				  <z-badge label="start" size="small"></z-badge>
-				  <z-badge label="start" size="small"></z-badge>
+				  <z-badge label="start" size="sm"></z-badge>
+				  <z-badge label="start" size="sm"></z-badge>
 				</z-column>
 
 				<z-column aligns-x="center" gap="2" padding="3" full-width style="border: 1px solid var(--border)">
-				  <z-badge label="center" size="small"></z-badge>
-				  <z-badge label="center" size="small"></z-badge>
+				  <z-badge label="center" size="sm"></z-badge>
+				  <z-badge label="center" size="sm"></z-badge>
 				</z-column>
 
 				<z-column aligns-x="stretch" gap="2" padding="3" full-width style="border: 1px solid var(--border)">
-				  <z-button kind="outline" size="small">stretch</z-button>
-				  <z-button kind="outline" size="small">stretch</z-button>
+				  <z-button kind="outline" size="sm">stretch</z-button>
+				  <z-button kind="outline" size="sm">stretch</z-button>
 				</z-column>
 			`
 		}),
@@ -112,8 +112,8 @@ export const zColumnDoc: ComponentDocT = {
 			layout: ExampleLayout.fill,
 			markup: `
 				<z-column aligns-y="between" padding="3" full-width style="border: 1px solid var(--border); height: 8rem">
-				  <z-badge label="top" size="small"></z-badge>
-				  <z-badge label="bottom" size="small"></z-badge>
+				  <z-badge label="top" size="sm"></z-badge>
+				  <z-badge label="bottom" size="sm"></z-badge>
 				</z-column>
 			`
 		}),
@@ -131,7 +131,7 @@ export const zColumnDoc: ComponentDocT = {
 				  <z-field label="Password">
 				    <z-input type="password" placeholder="••••••••"></z-input>
 				  </z-field>
-				  <z-button tone="primary" is-full-width>Sign in</z-button>
+				  <z-button accent="dom" is-full-width>Sign in</z-button>
 				</z-column>
 			`
 		}),
@@ -146,7 +146,7 @@ export const zColumnDoc: ComponentDocT = {
 				  <z-heading size="xs" tag="h3">Storage</z-heading>
 				  <z-text size="sm" color="muted">8.2 GB of 20 GB used.</z-text>
 				  <z-spacer grow></z-spacer>
-				  <z-button kind="outline" size="small" is-full-width>Upgrade plan</z-button>
+				  <z-button kind="outline" size="sm" is-full-width>Upgrade plan</z-button>
 				</z-column>
 			`
 		})

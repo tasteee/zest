@@ -19,7 +19,7 @@ export const zCardDoc: ComponentDocT = {
 	status: ComponentStatus.stable,
 
 	description:
-		'The everyday container: a hairline border, a rounded corner, and enough padding that content never touches the edge. Depth comes from the border and the surface underneath rather than from a shadow, which is why a grid of cards reads as a flat plane rather than a pile. It can lay itself out as a flexbox with `is-flex`, saving a wrapper for the common case. For accented or elevated panels — tones, variants, elevation levels — `z-surface` is the fuller instrument.',
+		'The everyday container: a hairline border, a rounded corner, and enough padding that content never touches the edge. Depth comes from the border and the surface underneath rather than from a shadow, which is why a grid of cards reads as a flat plane rather than a pile. It is a column, so `gap` spaces its children directly and saves a wrapper for the common case. For accented or elevated panels — accents, variants, elevation levels — `z-surface` is the fuller instrument.',
 
 	playground: {
 		buildElement: buildPlaygroundCard,
@@ -31,13 +31,13 @@ export const zCardDoc: ComponentDocT = {
 		'Use a card when content is a discrete unit you could reorder or remove without disturbing what is around it.',
 		'`is-reactive` signals that the whole card responds to interaction. Do not set it on a static card — a border that lights up on hover promises a click.',
 		'A card inside a card almost always means the inner one should be a `z-line` and some spacing instead.',
-		'Reach for `z-surface` when you need a tone, a variant, or a specific elevation level; `z-card` deliberately has none of those.'
+		'Reach for `z-surface` when you need a accent, a variant, or a specific elevation level; `z-card` deliberately has none of those.'
 	],
 
 	anatomy: [
 		{ name: 'default slot', description: 'The card contents.' },
 		{ name: 'border', description: 'The hairline that separates the card from the surface beneath it.' },
-		{ name: 'flex mode', description: 'Optional — `is-flex` with `is-row`/`is-column` and `gap` lays out children directly.' }
+		{ name: 'stack', description: 'The card is a column. `gap` spaces its children directly, so simple content needs no wrapper.' }
 	],
 
 	examples: [
@@ -60,11 +60,11 @@ export const zCardDoc: ComponentDocT = {
 			id: 'flex-column',
 			title: 'As a flex column',
 			description:
-				'`is-flex is-column gap` lays out the children directly, which is the common case and saves a wrapper element.',
+				'A card is a column, so `gap` lays the children out directly — the common case, and it saves a wrapper element.',
 			layout: ExampleLayout.fill,
 			markup: `
-				<z-card is-flex is-column gap="3" style="max-width: 24rem">
-				  <z-eyebrow label="Usage" tone="neutral"></z-eyebrow>
+				<z-card gap="3" style="max-width: 24rem">
+				  <z-eyebrow label="Usage" accent="neutral"></z-eyebrow>
 				  <z-heading size="sm" tag="h3">48 of 100 seats</z-heading>
 				  <z-progress value="48"></z-progress>
 				  <z-text size="sm" color="muted">Resets on the first of the month.</z-text>
@@ -78,8 +78,8 @@ export const zCardDoc: ComponentDocT = {
 			description: 'A row card puts a leading element beside its content without any extra layout.',
 			layout: ExampleLayout.fill,
 			markup: `
-				<z-card is-flex is-row gap="4" style="max-width: 26rem">
-				  <z-avatar name="Ada Lovelace" size="medium"></z-avatar>
+				<z-card gap="4" style="max-width: 26rem">
+				  <z-avatar name="Ada Lovelace" size="md"></z-avatar>
 				  <z-column gap="1">
 				    <z-text size="sm" weight="600">Ada Lovelace</z-text>
 				    <z-text size="xs" color="muted">Invited you to the Analytics workspace</z-text>
@@ -114,15 +114,15 @@ export const zCardDoc: ComponentDocT = {
 			layout: ExampleLayout.fill,
 			markup: `
 				<z-grid min-column-width="13rem" gap="3">
-				  <z-card is-flex is-column gap="2">
+				  <z-card gap="2">
 				    <z-label size="xs" color="muted">Requests</z-label>
 				    <z-heading size="sm" tag="h3">1.2M</z-heading>
 				  </z-card>
-				  <z-card is-flex is-column gap="2">
+				  <z-card gap="2">
 				    <z-label size="xs" color="muted">Errors</z-label>
 				    <z-heading size="sm" tag="h3">0.02%</z-heading>
 				  </z-card>
-				  <z-card is-flex is-column gap="2">
+				  <z-card gap="2">
 				    <z-label size="xs" color="muted">p95 latency</z-label>
 				    <z-heading size="sm" tag="h3">84ms</z-heading>
 				  </z-card>
@@ -136,7 +136,7 @@ export const zCardDoc: ComponentDocT = {
 			description: 'A `z-line` splits body from footer without introducing a second nested surface.',
 			layout: ExampleLayout.fill,
 			markup: `
-				<z-card is-flex is-column gap="4" style="max-width: 24rem">
+				<z-card gap="4" style="max-width: 24rem">
 				  <z-column gap="1">
 				    <z-heading size="xs" tag="h3">Danger zone</z-heading>
 				    <z-text size="sm" color="muted">
@@ -145,7 +145,7 @@ export const zCardDoc: ComponentDocT = {
 				  </z-column>
 				  <z-line></z-line>
 				  <z-row aligns-x="end">
-				    <z-button tone="danger" kind="outline" size="small">Delete workspace</z-button>
+				    <z-button accent="error" kind="outline" size="sm">Delete workspace</z-button>
 				  </z-row>
 				</z-card>
 			`
@@ -153,19 +153,6 @@ export const zCardDoc: ComponentDocT = {
 	],
 
 	attributes: [
-		{ name: 'is-flex', type: 'boolean', defaultValue: '—', description: 'Lays the card out as a flexbox.' },
-		{
-			name: 'is-row',
-			type: 'boolean',
-			defaultValue: 'row',
-			description: 'Horizontal flex direction. Only meaningful alongside is-flex.'
-		},
-		{
-			name: 'is-column',
-			type: 'boolean',
-			defaultValue: '—',
-			description: 'Vertical flex direction. Only meaningful alongside is-flex.'
-		},
 		{ name: 'gap', type: 'string', defaultValue: '—', description: 'Gap between flex children. Takes a size token or a length.' },
 		{
 			name: 'is-reactive',

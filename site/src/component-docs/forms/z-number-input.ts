@@ -23,7 +23,7 @@ export const zNumberInputDoc: ComponentDocT = {
 
 	playground: {
 		buildElement: buildPlaygroundNumberInput,
-		controlNames: ['min', 'max', 'step', 'size', 'tone', 'has-stepper-buttons', 'is-invalid', 'is-disabled', 'is-readonly'],
+		controlNames: ['min', 'max', 'step', 'size', 'accent', 'has-stepper-buttons', 'is-invalid', 'is-disabled', 'is-readonly'],
 		slotLabel: 'Seats'
 	},
 
@@ -84,9 +84,9 @@ export const zNumberInputDoc: ComponentDocT = {
 			description: 'Three densities on the shared control scale, so a quantity field lines up with the buttons next to it.',
 			layout: ExampleLayout.stack,
 			markup: `
-				<z-number-input size="small" label="Small" value="1" has-stepper-buttons></z-number-input>
-				<z-number-input size="medium" label="Medium" value="1" has-stepper-buttons></z-number-input>
-				<z-number-input size="large" label="Large" value="1" has-stepper-buttons></z-number-input>
+				<z-number-input size="sm" label="Small" value="1" has-stepper-buttons></z-number-input>
+				<z-number-input size="md" label="Medium" value="1" has-stepper-buttons></z-number-input>
+				<z-number-input size="lg" label="Large" value="1" has-stepper-buttons></z-number-input>
 			`
 		}),
 
@@ -109,7 +109,7 @@ export const zNumberInputDoc: ComponentDocT = {
 				'`input` reports the parsed number, the raw text, and whether it is currently in range — all three, because a half-typed value is none of them cleanly. `change` only speaks once the value has settled.',
 			layout: ExampleLayout.stack,
 			markup: `
-				<z-number-input id="thresholdInput" label="Threshold" value="50" min="0" max="100" has-stepper-buttons tone="primary"></z-number-input>
+				<z-number-input id="thresholdInput" label="Threshold" value="50" min="0" max="100" has-stepper-buttons accent="dom"></z-number-input>
 				<z-text size="sm" color="muted" id="thresholdLive">input: 50 (valid)</z-text>
 				<z-text size="sm" color="muted" id="thresholdCommitted">change: 50</z-text>
 			`,
@@ -155,7 +155,7 @@ export const zNumberInputDoc: ComponentDocT = {
 				    <z-text size="xs" color="muted">$12 per seat, per month</z-text>
 				  </z-column>
 				  <z-row aligns-y="center" gap="md">
-				    <z-number-input id="seatsInput" size="small" label="Seats" value="4" min="1" max="50" has-stepper-buttons is-inline></z-number-input>
+				    <z-number-input id="seatsInput" size="sm" label="Seats" value="4" min="1" max="50" has-stepper-buttons is-inline></z-number-input>
 				    <z-text size="sm" id="seatsTotal">$48 / mo</z-text>
 				  </z-row>
 				</z-row>
@@ -188,8 +188,8 @@ export const zNumberInputDoc: ComponentDocT = {
 		{ name: 'label', type: 'string', defaultValue: '—', description: 'Accessible name applied to the inner input. Set for you inside a z-field.' },
 		{ name: 'name', type: 'string', defaultValue: '—', description: 'Name passed to the inner input.' },
 		{ name: 'placeholder', type: 'string', defaultValue: '—', description: 'Shown while the field is empty.' },
-		{ name: 'size', type: 'small | medium | large', defaultValue: 'medium', description: 'Control density.' },
-		{ name: 'tone', type: 'neutral | primary | secondary', defaultValue: 'neutral', description: 'Which accent the border lifts to on focus.' },
+		{ name: 'size', type: 'sm | md | lg', defaultValue: 'md', description: 'Control density.' },
+		{ name: 'accent', type: 'neutral | dom | sub', defaultValue: 'neutral', description: 'Which accent the border lifts to on focus.' },
 		{ name: 'has-stepper-buttons', type: 'boolean', defaultValue: '—', description: 'Shows the ghost decrease and increase buttons.' },
 		{ name: 'is-invalid', type: 'boolean', defaultValue: '—', description: 'Forces the error state. Out-of-range typing also triggers it on its own.' },
 		{ name: 'is-disabled', type: 'boolean', defaultValue: '—', description: 'Blocks typing and stepping.' },

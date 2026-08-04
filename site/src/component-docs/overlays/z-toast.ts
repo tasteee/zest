@@ -3,7 +3,7 @@ import { ComponentStatus, ExampleLayout } from '../types'
 import type { ComponentDocT } from '../types'
 
 type ToastInputT = {
-	tone?: string
+	accent?: string
 	title?: string
 	description?: string
 	duration?: number
@@ -27,7 +27,7 @@ export const zToastDoc: ComponentDocT = {
 	status: ComponentStatus.stable,
 
 	description:
-		'This element is the toaster, not the toast. Put one on the page, park it in a corner with `position`, and push notifications into it imperatively: `toaster.push({ title, description, tone, duration })` returns an id you can pass to `toaster.dismiss(id)`. Each toast expires on its own after `duration`, or sticks around forever with `duration: 0`. A `dismiss` event fires with the id whenever one leaves.',
+		'This element is the toaster, not the toast. Put one on the page, park it in a corner with `position`, and push notifications into it imperatively: `toaster.push({ title, description, accent, duration })` returns an id you can pass to `toaster.dismiss(id)`. Each toast expires on its own after `duration`, or sticks around forever with `duration: 0`. A `dismiss` event fires with the id whenever one leaves.',
 
 	playground: {
 		buildElement: buildPlaygroundToast,
@@ -46,7 +46,7 @@ export const zToastDoc: ComponentDocT = {
 
 	anatomy: [
 		{ name: 'region', description: 'The host — a fixed, corner-parked stack with role="region".' },
-		{ name: 'toast', description: 'One notification. A bordered card with a tone accent down its edge.' },
+		{ name: 'toast', description: 'One notification. A bordered card with a accent accent down its edge.' },
 		{ name: 'title', description: 'The outcome, in one short line.' },
 		{ name: 'description', description: 'Supporting detail, in muted type.' },
 		{ name: 'close', description: 'Dismisses this toast immediately, ahead of its timer.' }
@@ -80,41 +80,41 @@ export const zToastDoc: ComponentDocT = {
 		}),
 
 		defineInteractiveExample({
-			id: 'tones',
+			id: 'accents',
 			title: 'Tones',
 			description: 'Four accents plus neutral. Keep them honest — a success toast for a failure teaches people to stop reading the colour.',
 			layout: ExampleLayout.stack,
 			markup: `
 				<z-row gap="sm" wrap>
-				  <z-button class="toneButton" data-tone="neutral" size="small" kind="outline">Neutral</z-button>
-				  <z-button class="toneButton" data-tone="info" size="small" kind="outline">Info</z-button>
-				  <z-button class="toneButton" data-tone="success" size="small" kind="outline">Success</z-button>
-				  <z-button class="toneButton" data-tone="warning" size="small" kind="outline">Warning</z-button>
-				  <z-button class="toneButton" data-tone="danger" size="small" kind="outline">Danger</z-button>
+				  <z-button class="accentButton" data-accent="neutral" size="sm" kind="outline">Neutral</z-button>
+				  <z-button class="accentButton" data-accent="dom" size="sm" kind="outline">Info</z-button>
+				  <z-button class="accentButton" data-accent="success" size="sm" kind="outline">Success</z-button>
+				  <z-button class="accentButton" data-accent="warning" size="sm" kind="outline">Warning</z-button>
+				  <z-button class="accentButton" data-accent="error" size="sm" kind="outline">Danger</z-button>
 				</z-row>
-				<z-toast id="toneToaster" position="bottom-end"></z-toast>
+				<z-toast id="accentToaster" position="bottom-end"></z-toast>
 			`,
 			script: `
-				const toneToaster = document.querySelector('#toneToaster')
+				const accentToaster = document.querySelector('#accentToaster')
 
-				toneToaster.push({ tone: 'success', title: 'Deploy finished', description: 'Live in 4 seconds.' })
+				accentToaster.push({ accent: 'success', title: 'Deploy finished', description: 'Live in 4 seconds.' })
 			`,
 			wire: (root) => {
-				const toneToaster = queryPreview<ToastElementT>(root, '#toneToaster')
-				const toneButtons = root.querySelectorAll('.toneButton')
+				const accentToaster = queryPreview<ToastElementT>(root, '#accentToaster')
+				const accentButtons = root.querySelectorAll('.accentButton')
 
-				const messagesByTone: Record<string, ToastInputT> = {
+				const messagesByAccent: Record<string, ToastInputT> = {
 					neutral: { title: 'Draft saved', description: 'Autosaved a moment ago.' },
-					info: { tone: 'info', title: 'Sync started', description: 'This usually takes under a minute.' },
-					success: { tone: 'success', title: 'Deploy finished', description: 'Live in 4 seconds.' },
-					warning: { tone: 'warning', title: 'Approaching your limit', description: '92% of this month’s allowance used.' },
-					danger: { tone: 'danger', title: 'Upload failed', description: 'The connection dropped. Nothing was saved.', duration: 0 }
+					info: { accent: 'dom', title: 'Sync started', description: 'This usually takes under a minute.' },
+					success: { accent: 'success', title: 'Deploy finished', description: 'Live in 4 seconds.' },
+					warning: { accent: 'warning', title: 'Approaching your limit', description: '92% of this month’s allowance used.' },
+					danger: { accent: 'error', title: 'Upload failed', description: 'The connection dropped. Nothing was saved.', duration: 0 }
 				}
 
-				for (const toneButton of toneButtons) {
-					toneButton.addEventListener('click', () => {
-						const requestedTone = (toneButton as HTMLElement).dataset.tone ?? 'neutral'
-						toneToaster.push(messagesByTone[requestedTone])
+				for (const accentButton of accentButtons) {
+					accentButton.addEventListener('click', () => {
+						const requestedAccent = (accentButton as HTMLElement).dataset.accent ?? 'neutral'
+						accentToaster.push(messagesByAccent[requestedAccent])
 					})
 				}
 			}
@@ -128,12 +128,12 @@ export const zToastDoc: ComponentDocT = {
 			layout: ExampleLayout.stack,
 			markup: `
 				<z-row gap="sm" wrap>
-				  <z-button class="positionButton" data-position="top-start" size="small" kind="outline">top-start</z-button>
-				  <z-button class="positionButton" data-position="top-center" size="small" kind="outline">top-center</z-button>
-				  <z-button class="positionButton" data-position="top-end" size="small" kind="outline">top-end</z-button>
-				  <z-button class="positionButton" data-position="bottom-start" size="small" kind="outline">bottom-start</z-button>
-				  <z-button class="positionButton" data-position="bottom-center" size="small" kind="outline">bottom-center</z-button>
-				  <z-button class="positionButton" data-position="bottom-end" size="small" kind="outline">bottom-end</z-button>
+				  <z-button class="positionButton" data-position="top-start" size="sm" kind="outline">top-start</z-button>
+				  <z-button class="positionButton" data-position="top-center" size="sm" kind="outline">top-center</z-button>
+				  <z-button class="positionButton" data-position="top-end" size="sm" kind="outline">top-end</z-button>
+				  <z-button class="positionButton" data-position="bottom-start" size="sm" kind="outline">bottom-start</z-button>
+				  <z-button class="positionButton" data-position="bottom-center" size="sm" kind="outline">bottom-center</z-button>
+				  <z-button class="positionButton" data-position="bottom-end" size="sm" kind="outline">bottom-end</z-button>
 				</z-row>
 				<z-toast id="positionToaster" position="bottom-end"></z-toast>
 			`,
@@ -151,7 +151,7 @@ export const zToastDoc: ComponentDocT = {
 					positionButton.addEventListener('click', () => {
 						const requestedPosition = (positionButton as HTMLElement).dataset.position ?? 'bottom-end'
 						positionToaster.setAttribute('position', requestedPosition)
-						positionToaster.push({ tone: 'info', title: requestedPosition, description: 'The stack parks in this corner.' })
+						positionToaster.push({ accent: 'dom', title: requestedPosition, description: 'The stack parks in this corner.' })
 					})
 				}
 			}
@@ -165,9 +165,9 @@ export const zToastDoc: ComponentDocT = {
 			layout: ExampleLayout.stack,
 			markup: `
 				<z-row gap="sm">
-				  <z-button id="quickToast" size="small" kind="outline">1.5s</z-button>
-				  <z-button id="defaultToast" size="small" kind="outline">Default (4s)</z-button>
-				  <z-button id="stickyToast" size="small" kind="outline">Sticky</z-button>
+				  <z-button id="quickToast" size="sm" kind="outline">1.5s</z-button>
+				  <z-button id="defaultToast" size="sm" kind="outline">Default (4s)</z-button>
+				  <z-button id="stickyToast" size="sm" kind="outline">Sticky</z-button>
 				</z-row>
 				<z-toast id="durationToaster" position="bottom-end"></z-toast>
 			`,
@@ -192,7 +192,7 @@ export const zToastDoc: ComponentDocT = {
 
 				stickyToast.addEventListener('click', () => {
 					durationToaster.push({
-						tone: 'danger',
+						accent: 'error',
 						title: 'Upload failed',
 						description: 'Stays until you dismiss it.',
 						duration: 0
@@ -221,8 +221,8 @@ export const zToastDoc: ComponentDocT = {
 				  const [uploaded, uploadError] = await wrap(uploadFile())
 				  uploadToaster.dismiss(pendingId)
 
-				  if (uploadError) return uploadToaster.push({ tone: 'danger', title: 'Upload failed', duration: 0 })
-				  uploadToaster.push({ tone: 'success', title: 'Upload finished' })
+				  if (uploadError) return uploadToaster.push({ accent: 'error', title: 'Upload failed', duration: 0 })
+				  uploadToaster.push({ accent: 'success', title: 'Upload finished' })
 				})
 			`,
 			wire: (root) => {
@@ -236,7 +236,7 @@ export const zToastDoc: ComponentDocT = {
 
 					setTimeout(() => {
 						uploadToaster.dismiss(pendingId)
-						uploadToaster.push({ tone: 'success', title: 'Upload finished', description: 'sunset.jpg is ready.' })
+						uploadToaster.push({ accent: 'success', title: 'Upload finished', description: 'sunset.jpg is ready.' })
 						uploadStatus.textContent = 'Idle.'
 					}, 1800)
 				})
@@ -266,7 +266,7 @@ export const zToastDoc: ComponentDocT = {
 				const eventStatus = queryPreview<HTMLElement>(root, '#eventStatus')
 
 				notifyButton.addEventListener('click', () => {
-					eventToaster.push({ tone: 'info', title: 'Notification', description: 'Close it, or wait for it to expire.' })
+					eventToaster.push({ accent: 'dom', title: 'Notification', description: 'Close it, or wait for it to expire.' })
 				})
 
 				eventToaster.addEventListener('dismiss', (dismissEvent) => {
@@ -289,7 +289,7 @@ export const zToastDoc: ComponentDocT = {
 	properties: [
 		{
 			name: 'push(input)',
-			type: '(input: { tone?, title?, description?, duration? }) => number',
+			type: '(input: { accent?, title?, description?, duration? }) => number',
 			defaultValue: '—',
 			description: 'Adds a toast and returns its id. duration defaults to 4000ms; 0 makes it sticky.'
 		},
@@ -303,7 +303,7 @@ export const zToastDoc: ComponentDocT = {
 	],
 
 	cssVariables: [
-		{ name: '--toast-accent', defaultValue: 'per tone', description: 'The accent on a toast’s edge, set from its tone.' }
+		{ name: '--toast-accent', defaultValue: 'per accent', description: 'The accent on a toast’s edge, set from its accent.' }
 	],
 
 	accessibilityNotes: [

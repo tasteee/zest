@@ -28,7 +28,7 @@ export const zHoverCardDoc: ComponentDocT = {
 
 	playground: {
 		buildElement: buildPlaygroundHoverCard,
-		controlNames: ['placement', 'offset', 'open-delay', 'close-delay', 'tone'],
+		controlNames: ['placement', 'offset', 'open-delay', 'close-delay', 'accent'],
 		slotLabel: 'trigger and body'
 	},
 
@@ -163,22 +163,22 @@ export const zHoverCardDoc: ComponentDocT = {
 		}),
 
 		defineMarkupExample({
-			id: 'tones',
+			id: 'accents',
 			title: 'Tones',
 			description: 'The accent used inside the card.',
 			layout: ExampleLayout.start,
 			markup: `
-				<z-hover-card tone="neutral">
+				<z-hover-card accent="neutral">
 				  <z-button slot="trigger" kind="outline">Neutral</z-button>
-				  <z-text size="sm">tone="neutral"</z-text>
+				  <z-text size="sm">accent="neutral"</z-text>
 				</z-hover-card>
-				<z-hover-card tone="primary">
+				<z-hover-card accent="dom">
 				  <z-button slot="trigger" kind="outline">Primary</z-button>
-				  <z-text size="sm">tone="primary"</z-text>
+				  <z-text size="sm">accent="dom"</z-text>
 				</z-hover-card>
-				<z-hover-card tone="secondary">
+				<z-hover-card accent="sub">
 				  <z-button slot="trigger" kind="outline">Secondary</z-button>
-				  <z-text size="sm">tone="secondary"</z-text>
+				  <z-text size="sm">accent="sub"</z-text>
 				</z-hover-card>
 			`
 		})
@@ -189,7 +189,7 @@ export const zHoverCardDoc: ComponentDocT = {
 		{ name: 'offset', type: 'number', defaultValue: '8', description: 'Gap in pixels between the trigger and the card.' },
 		{ name: 'open-delay', type: 'number', defaultValue: '200', description: 'Milliseconds of hover before the card opens.' },
 		{ name: 'close-delay', type: 'number', defaultValue: '150', description: 'Grace period after leaving, so the pointer can travel into the card.' },
-		{ name: 'tone', type: 'neutral | primary | secondary', defaultValue: 'neutral', description: 'Accent used inside the card.' },
+		{ name: 'accent', type: 'neutral | dom | sub', defaultValue: 'neutral', description: 'Accent used inside the card.' },
 		{ name: 'is-hidden', type: 'boolean', defaultValue: '—', description: 'Removes the card and its trigger from layout.' }
 	],
 

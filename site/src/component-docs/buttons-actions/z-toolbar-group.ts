@@ -108,7 +108,7 @@ export const zToolbarGroupDoc: ComponentDocT = {
 				    <z-button kind="ghost" aria-label="Insert image">${Icons.plus}</z-button>
 				  </z-toolbar-group>
 
-				  <z-button slot="overflow" tone="primary" size="small">Save</z-button>
+				  <z-button slot="overflow" accent="dom" size="sm">Save</z-button>
 				</z-toolbar>
 			`
 		}),

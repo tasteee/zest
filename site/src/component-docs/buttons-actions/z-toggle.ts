@@ -5,7 +5,7 @@ import type { ComponentDocT } from '../types'
 
 const buildPlaygroundToggle = (): HTMLElement => {
 	const toggle = document.createElement('z-toggle')
-	toggle.setAttribute('tone', 'primary')
+	toggle.setAttribute('accent', 'dom')
 	toggle.innerHTML = `${Icons.bold} Bold`
 	return toggle
 }
@@ -41,7 +41,7 @@ export const zToggleDoc: ComponentDocT = {
 		defineMarkupExample({
 			id: 'basic',
 			title: 'Basic',
-			description: 'Unpressed and pressed, side by side. Pressed fills with the tone; unpressed keeps only its outline.',
+			description: 'Unpressed and pressed, side by side. Pressed fills with the accent; unpressed keeps only its outline.',
 			markup: `
 				<z-toggle>${Icons.bold} Bold</z-toggle>
 				<z-toggle is-pressed>${Icons.bold} Bold</z-toggle>
@@ -49,13 +49,13 @@ export const zToggleDoc: ComponentDocT = {
 		}),
 
 		defineMarkupExample({
-			id: 'tones',
+			id: 'accents',
 			title: 'Tones',
-			description: 'Three colour families. The tone only shows once the toggle is pressed.',
+			description: 'Three colour families. The accent only shows once the toggle is pressed.',
 			markup: `
-				<z-toggle tone="neutral" is-pressed>Neutral</z-toggle>
-				<z-toggle tone="primary" is-pressed>Primary</z-toggle>
-				<z-toggle tone="secondary" is-pressed>Secondary</z-toggle>
+				<z-toggle accent="neutral" is-pressed>Neutral</z-toggle>
+				<z-toggle accent="dom" is-pressed>Primary</z-toggle>
+				<z-toggle accent="sub" is-pressed>Secondary</z-toggle>
 			`
 		}),
 
@@ -77,9 +77,9 @@ export const zToggleDoc: ComponentDocT = {
 			title: 'Sizes',
 			description: 'Three densities, matching the z-button scale so the two sit together cleanly in one strip.',
 			markup: `
-				<z-toggle size="small" is-pressed>Small</z-toggle>
-				<z-toggle size="medium" is-pressed>Medium</z-toggle>
-				<z-toggle size="large" is-pressed>Large</z-toggle>
+				<z-toggle size="sm" is-pressed>Small</z-toggle>
+				<z-toggle size="md" is-pressed>Medium</z-toggle>
+				<z-toggle size="lg" is-pressed>Large</z-toggle>
 			`
 		}),
 
@@ -112,7 +112,7 @@ export const zToggleDoc: ComponentDocT = {
 				'`press` fires with the new value on every change. Because `is-pressed` reflects, reading the attribute afterwards gives you the same answer.',
 			layout: ExampleLayout.stack,
 			markup: `
-				<z-toggle id="muteToggle" tone="primary">Mute notifications</z-toggle>
+				<z-toggle id="muteToggle" accent="dom">Mute notifications</z-toggle>
 				<z-text size="sm" color="muted" id="muteStatus">Notifications are on.</z-text>
 			`,
 			script: `
@@ -178,9 +178,9 @@ export const zToggleDoc: ComponentDocT = {
 	],
 
 	attributes: [
-		{ name: 'tone', type: 'neutral | primary | secondary', defaultValue: 'neutral', description: 'Colour family of the pressed state.' },
+		{ name: 'accent', type: 'neutral | dom | sub', defaultValue: 'neutral', description: 'Colour family of the pressed state.' },
 		{ name: 'kind', type: 'outline | ghost', defaultValue: 'outline', description: 'Whether a border shows at rest.' },
-		{ name: 'size', type: 'small | medium | large', defaultValue: 'medium', description: 'Control density.' },
+		{ name: 'size', type: 'sm | md | lg', defaultValue: 'md', description: 'Control density.' },
 		{ name: 'is-icon', type: 'boolean', defaultValue: '—', description: 'Squares the button for a single icon with no label.' },
 		{
 			name: 'is-pressed',

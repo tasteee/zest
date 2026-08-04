@@ -114,7 +114,7 @@ export const zSectionDoc: ComponentDocT = {
 
 				  <z-section space="xl" container="sm" gutter="lg" style="background: var(--background-light); border-block: 1px solid var(--border)">
 				    <z-column gap="2">
-				      <z-eyebrow label="Details" tone="primary"></z-eyebrow>
+				      <z-eyebrow label="Details" accent="dom"></z-eyebrow>
 				      <z-heading size="md" tag="h3">The next band</z-heading>
 				      <z-text size="sm" color="muted">Tinted, full-bleed, same content measure.</z-text>
 				    </z-column>

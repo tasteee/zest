@@ -8,12 +8,12 @@ const buildPlaygroundDialog = (): HTMLElement => {
 	dialog.setAttribute('description', 'They will get an email with a link to join this workspace.')
 
 	dialog.innerHTML = `
-		<z-button slot="trigger" tone="primary" kind="solid">Open dialog</z-button>
+		<z-button slot="trigger" accent="dom" kind="solid">Open dialog</z-button>
 		<z-field label="Email addresses">
 		  <z-input placeholder="ada@example.com, alan@example.com"></z-input>
 		</z-field>
-		<z-button slot="footer" kind="outline" tone="neutral">Cancel</z-button>
-		<z-button slot="footer" kind="solid" tone="primary">Send invites</z-button>
+		<z-button slot="footer" kind="outline" accent="neutral">Cancel</z-button>
+		<z-button slot="footer" kind="solid" accent="dom">Send invites</z-button>
 	`
 
 	return dialog
@@ -30,7 +30,7 @@ export const zDialogDoc: ComponentDocT = {
 
 	playground: {
 		buildElement: buildPlaygroundDialog,
-		controlNames: ['heading', 'description', 'size', 'tone', 'hide-close', 'is-static'],
+		controlNames: ['heading', 'description', 'size', 'accent', 'has-close', 'is-static'],
 		slotLabel: 'trigger, body, and footer'
 	},
 
@@ -60,12 +60,12 @@ export const zDialogDoc: ComponentDocT = {
 			layout: ExampleLayout.start,
 			markup: `
 				<z-dialog heading="Invite teammates" description="They will get an email with a link to join this workspace.">
-				  <z-button slot="trigger" tone="primary" kind="solid">Invite teammates</z-button>
+				  <z-button slot="trigger" accent="dom" kind="solid">Invite teammates</z-button>
 				  <z-field label="Email addresses">
 				    <z-input placeholder="ada@example.com, alan@example.com"></z-input>
 				  </z-field>
-				  <z-button slot="footer" kind="outline" tone="neutral">Cancel</z-button>
-				  <z-button slot="footer" kind="solid" tone="primary">Send invites</z-button>
+				  <z-button slot="footer" kind="outline" accent="neutral">Cancel</z-button>
+				  <z-button slot="footer" kind="solid" accent="dom">Send invites</z-button>
 				</z-dialog>
 			`
 		}),
@@ -77,20 +77,20 @@ export const zDialogDoc: ComponentDocT = {
 				'Three widths. Small is for a single question, medium for a short form, large for something with structure — a diff, a table, a preview.',
 			layout: ExampleLayout.start,
 			markup: `
-				<z-dialog size="small" heading="Rename project">
+				<z-dialog size="sm" heading="Rename project">
 				  <z-button slot="trigger" kind="outline">Small</z-button>
 				  <z-field label="Name"><z-input value="Untitled"></z-input></z-field>
-				  <z-button slot="footer" kind="solid" tone="primary">Rename</z-button>
+				  <z-button slot="footer" kind="solid" accent="dom">Rename</z-button>
 				</z-dialog>
-				<z-dialog size="medium" heading="Project settings">
+				<z-dialog size="md" heading="Project settings">
 				  <z-button slot="trigger" kind="outline">Medium</z-button>
 				  <z-text size="sm" color="muted">The default width — enough for a short form without feeling empty.</z-text>
-				  <z-button slot="footer" kind="solid" tone="primary">Save</z-button>
+				  <z-button slot="footer" kind="solid" accent="dom">Save</z-button>
 				</z-dialog>
-				<z-dialog size="large" heading="Review changes">
+				<z-dialog size="lg" heading="Review changes">
 				  <z-button slot="trigger" kind="outline">Large</z-button>
 				  <z-text size="sm" color="muted">Room for structured content — a diff, a table, a preview.</z-text>
-				  <z-button slot="footer" kind="solid" tone="primary">Apply</z-button>
+				  <z-button slot="footer" kind="solid" accent="dom">Apply</z-button>
 				</z-dialog>
 			`
 		}),
@@ -118,22 +118,22 @@ export const zDialogDoc: ComponentDocT = {
 				<z-dialog is-static heading="Finish setting up billing" description="Clicking outside will not dismiss this.">
 				  <z-button slot="trigger" kind="outline">Open a static dialog</z-button>
 				  <z-field label="Card number"><z-input placeholder="4242 4242 4242 4242"></z-input></z-field>
-				  <z-button slot="footer" kind="solid" tone="primary">Save card</z-button>
+				  <z-button slot="footer" kind="solid" accent="dom">Save card</z-button>
 				</z-dialog>
 			`
 		}),
 
 		defineMarkupExample({
-			id: 'hide-close',
+			id: 'has-close',
 			title: 'Without the close button',
 			description:
-				'`hide-close` removes the ✕. Only reasonable when the footer already offers a way out — never combine it with `is-static`, or the dialog becomes a trap.',
+				'`has-close` removes the ✕. Only reasonable when the footer already offers a way out — never combine it with `is-static`, or the dialog becomes a trap.',
 			layout: ExampleLayout.start,
 			markup: `
-				<z-dialog hide-close heading="Confirm your email" description="We sent a link to ada@example.com.">
+				<z-dialog has-close heading="Confirm your email" description="We sent a link to ada@example.com.">
 				  <z-button slot="trigger" kind="outline">Open</z-button>
-				  <z-button slot="footer" kind="outline" tone="neutral">Not now</z-button>
-				  <z-button slot="footer" kind="solid" tone="primary">Resend</z-button>
+				  <z-button slot="footer" kind="outline" accent="neutral">Not now</z-button>
+				  <z-button slot="footer" kind="solid" accent="dom">Resend</z-button>
 				</z-dialog>
 			`
 		}),
@@ -147,7 +147,7 @@ export const zDialogDoc: ComponentDocT = {
 				<z-button id="openButton" kind="outline">Open without a trigger slot</z-button>
 				<z-dialog id="codeDialog" heading="Opened from code" description="No trigger slot — isOpen was set directly.">
 				  <z-text size="sm">Setting isOpen back to false closes it, and the close event fires either way.</z-text>
-				  <z-button slot="footer" id="dismissButton" kind="solid" tone="primary">Close</z-button>
+				  <z-button slot="footer" id="dismissButton" kind="solid" accent="dom">Close</z-button>
 				</z-dialog>
 				<z-text size="sm" color="muted" id="dialogStatus">Closed.</z-text>
 			`,
@@ -195,13 +195,13 @@ export const zDialogDoc: ComponentDocT = {
 				'The common shape: collect something, act on it, close. Closing in the handler rather than on the button is what keeps a failed submit from dismissing the work.',
 			layout: ExampleLayout.stack,
 			markup: `
-				<z-dialog id="renameDialog" size="small" heading="Rename project" is-static>
+				<z-dialog id="renameDialog" size="sm" heading="Rename project" is-static>
 				  <z-button slot="trigger" kind="outline">Rename project</z-button>
 				  <z-field label="Project name">
 				    <z-input id="renameInput" value="Untitled project"></z-input>
 				  </z-field>
-				  <z-button slot="footer" id="renameCancel" kind="outline" tone="neutral">Cancel</z-button>
-				  <z-button slot="footer" id="renameConfirm" kind="solid" tone="primary">Rename</z-button>
+				  <z-button slot="footer" id="renameCancel" kind="outline" accent="neutral">Cancel</z-button>
+				  <z-button slot="footer" id="renameConfirm" kind="solid" accent="dom">Rename</z-button>
 				</z-dialog>
 				<z-text size="sm" color="muted" id="renameStatus">Current name: Untitled project</z-text>
 			`,
@@ -249,9 +249,8 @@ export const zDialogDoc: ComponentDocT = {
 		{ name: 'is-open', type: 'boolean', defaultValue: '—', description: 'Whether the dialog is showing. Reflects and is two-way — set it to open or close from code.' },
 		{ name: 'heading', type: 'string', defaultValue: '—', description: 'Title in the header.' },
 		{ name: 'description', type: 'string', defaultValue: '—', description: 'A muted line under the heading.' },
-		{ name: 'size', type: 'small | medium | large', defaultValue: 'medium', description: 'Panel width — 24rem, 30rem, or 42rem, capped to the viewport.' },
-		{ name: 'tone', type: 'neutral | primary | secondary | danger', defaultValue: 'neutral', description: 'Accent used inside the panel chrome.' },
-		{ name: 'hide-close', type: 'boolean', defaultValue: '—', description: 'Removes the ✕. Only safe when the footer offers another way out.' },
+		{ name: 'size', type: 'sm | md | lg', defaultValue: 'md', description: 'Panel width — 24rem, 30rem, or 42rem, capped to the viewport.' },
+		{ name: 'has-close', type: 'boolean', defaultValue: '—', description: 'Removes the ✕. Only safe when the footer offers another way out.' },
 		{ name: 'is-static', type: 'boolean', defaultValue: '—', description: 'Ignores backdrop clicks. Escape still closes.' },
 		{ name: 'is-disabled', type: 'boolean', defaultValue: '—', description: 'Stops the trigger from opening the dialog.' }
 	],
@@ -277,7 +276,7 @@ export const zDialogDoc: ComponentDocT = {
 		'showModal() gives real modality: focus is trapped in the dialog, the rest of the page is inert to assistive technology, and Escape closes — none of it hand-rolled.',
 		'The dialog sits in the browser’s top layer, so it renders above every stacking context on the page regardless of z-index. This is the main reason to build on the platform element.',
 		'Focus returns to the trigger on close, because the native element restores it. Opening from code without a trigger means you own returning focus somewhere sensible.',
-		'Never pair hide-close with is-static. That combination removes every dismissal route except a footer button that may not exist.',
+		'Never pair has-close with is-static. That combination removes every dismissal route except a footer button that may not exist.',
 		'Set a heading. It is the dialog’s accessible name, and a modal announced with no name gives a screen-reader user nothing to orient against.'
 	],
 

@@ -20,7 +20,7 @@ export const zInputOtpDoc: ComponentDocT = {
 
 	playground: {
 		buildElement: buildPlaygroundInputOtp,
-		controlNames: ['label', 'length', 'size', 'tone', 'is-numeric', 'is-invalid', 'is-disabled'],
+		controlNames: ['label', 'length', 'size', 'accent', 'is-numeric', 'is-invalid', 'is-disabled'],
 		slotLabel: 'six numeric cells'
 	},
 
@@ -69,21 +69,21 @@ export const zInputOtpDoc: ComponentDocT = {
 			description: 'Three cell sizes. Large suits a dedicated verification screen; small suits a code tucked inside a dialog.',
 			layout: ExampleLayout.stack,
 			markup: `
-				<z-input-otp size="small" length="6" is-numeric></z-input-otp>
+				<z-input-otp size="sm" length="6" is-numeric></z-input-otp>
 				<z-input-otp length="6" is-numeric></z-input-otp>
-				<z-input-otp size="large" length="6" is-numeric></z-input-otp>
+				<z-input-otp size="lg" length="6" is-numeric></z-input-otp>
 			`
 		}),
 
 		defineMarkupExample({
-			id: 'tones',
+			id: 'accents',
 			title: 'Tones',
 			description: 'The accent that filled and focused cells read in.',
 			layout: ExampleLayout.stack,
 			markup: `
-				<z-input-otp tone="neutral" length="6" is-numeric value="1234"></z-input-otp>
-				<z-input-otp tone="primary" length="6" is-numeric value="1234"></z-input-otp>
-				<z-input-otp tone="secondary" length="6" is-numeric value="1234"></z-input-otp>
+				<z-input-otp accent="neutral" length="6" is-numeric value="1234"></z-input-otp>
+				<z-input-otp accent="dom" length="6" is-numeric value="1234"></z-input-otp>
+				<z-input-otp accent="sub" length="6" is-numeric value="1234"></z-input-otp>
 			`
 		}),
 
@@ -106,7 +106,7 @@ export const zInputOtpDoc: ComponentDocT = {
 				'`complete` fires the instant the last cell fills, however it was filled — typed or pasted. That is the moment to verify, with no button in between.',
 			layout: ExampleLayout.stack,
 			markup: `
-				<z-input-otp id="verifyOtp" length="6" is-numeric tone="primary"></z-input-otp>
+				<z-input-otp id="verifyOtp" length="6" is-numeric accent="dom"></z-input-otp>
 				<z-text size="sm" color="muted" id="verifyStatus">Enter the 6-digit code we sent you.</z-text>
 			`,
 			script: `
@@ -140,7 +140,7 @@ export const zInputOtpDoc: ComponentDocT = {
 				'Mark it invalid, say what went wrong, and leave the digits alone. Clearing the field on failure is the single most common way to make this flow miserable.',
 			layout: ExampleLayout.stack,
 			markup: `
-				<z-input-otp id="checkOtp" length="4" is-numeric tone="primary"></z-input-otp>
+				<z-input-otp id="checkOtp" length="4" is-numeric accent="dom"></z-input-otp>
 				<z-text size="sm" color="muted" id="checkStatus">The code is 1234 — try anything else to see the failure.</z-text>
 			`,
 			script: `
@@ -187,8 +187,8 @@ export const zInputOtpDoc: ComponentDocT = {
 		},
 		{ name: 'label', type: 'string', defaultValue: 'One-time code', description: 'Accessible name for the group of cells. Set for you inside a z-field.' },
 		{ name: 'length', type: 'number', defaultValue: '6', description: 'How many cells to render.' },
-		{ name: 'size', type: 'small | medium | large', defaultValue: 'medium', description: 'Cell size.' },
-		{ name: 'tone', type: 'neutral | primary | secondary', defaultValue: 'neutral', description: 'Accent for filled and focused cells.' },
+		{ name: 'size', type: 'sm | md | lg', defaultValue: 'md', description: 'Cell size.' },
+		{ name: 'accent', type: 'neutral | dom | sub', defaultValue: 'neutral', description: 'Accent for filled and focused cells.' },
 		{ name: 'is-numeric', type: 'boolean', defaultValue: '—', description: 'Digits only. Raises the numeric keypad and strips non-digits from a paste.' },
 		{ name: 'is-invalid', type: 'boolean', defaultValue: '—', description: 'Paints every cell in the error colour, without clearing them.' },
 		{ name: 'is-disabled', type: 'boolean', defaultValue: '—', description: 'Blocks typing and pasting — use while verification is in flight.' },

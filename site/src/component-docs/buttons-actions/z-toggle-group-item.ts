@@ -5,8 +5,8 @@ import type { ComponentDocT } from '../types'
 
 const buildPlaygroundItem = (): HTMLElement => {
 	const group = document.createElement('z-toggle-group')
-	group.setAttribute('is-purple', '')
-	group.setAttribute('is-outlined', '')
+	group.setAttribute('accent', 'dom')
+	group.setAttribute('kind', 'outline')
 
 	const item = document.createElement('z-toggle-group-item')
 	item.setAttribute('value', 'bold')
@@ -34,7 +34,7 @@ export const zToggleGroupItemDoc: ComponentDocT = {
 
 	usageGuidance: [
 		'Always give every item a `value`. Without one the group cannot report which segment changed.',
-		'Let the parent group set tone, size, and kind. Per-item overrides exist for exceptions, not for styling a whole set one item at a time.',
+		'Let the parent group set accent, size, and kind. Per-item overrides exist for exceptions, not for styling a whole set one item at a time.',
 		'Set `is-pressed` in the markup to establish the initial selection rather than pressing it from script after mount.',
 		'The `press` event is plumbing between the item and its group — listen for `change` on the group instead.'
 	],
@@ -51,7 +51,7 @@ export const zToggleGroupItemDoc: ComponentDocT = {
 			title: 'Values and initial state',
 			description: 'Each item declares its `value`; the one marked `is-pressed` is the initial selection.',
 			markup: `
-				<z-toggle-group is-purple is-outlined>
+				<z-toggle-group accent="dom" kind="outline">
 				  <z-toggle-group-item value="bold" is-pressed>Bold</z-toggle-group-item>
 				  <z-toggle-group-item value="italic">Italic</z-toggle-group-item>
 				  <z-toggle-group-item value="underline">Underline</z-toggle-group-item>
@@ -64,7 +64,7 @@ export const zToggleGroupItemDoc: ComponentDocT = {
 			title: 'Icon items',
 			description: '`is-icon` squares the segment for a lone glyph. Each still needs its own `aria-label`.',
 			markup: `
-				<z-toggle-group is-purple is-outlined>
+				<z-toggle-group accent="dom" kind="outline">
 				  <z-toggle-group-item value="bold" is-icon aria-label="Bold" is-pressed>${Icons.bold}</z-toggle-group-item>
 				  <z-toggle-group-item value="italic" is-icon aria-label="Italic">${Icons.italic}</z-toggle-group-item>
 				  <z-toggle-group-item value="underline" is-icon aria-label="Underline">${Icons.underline}</z-toggle-group-item>
@@ -78,7 +78,7 @@ export const zToggleGroupItemDoc: ComponentDocT = {
 			description:
 				'A single unavailable option stays visible and labelled rather than disappearing, so the set does not silently change shape.',
 			markup: `
-				<z-toggle-group is-purple is-outlined>
+				<z-toggle-group accent="dom" kind="outline">
 				  <z-toggle-group-item value="draft" is-pressed>Draft</z-toggle-group-item>
 				  <z-toggle-group-item value="review">In review</z-toggle-group-item>
 				  <z-toggle-group-item value="published" is-disabled>Published</z-toggle-group-item>
@@ -90,13 +90,13 @@ export const zToggleGroupItemDoc: ComponentDocT = {
 			id: 'overrides',
 			title: 'Per-item overrides',
 			description:
-				'An item can override any inherited axis. Here the last segment breaks tone deliberately — use this sparingly, or the seam stops reading as one control.',
+				'An item can override any inherited axis. Here the last segment breaks accent deliberately — use this sparingly, or the seam stops reading as one control.',
 			layout: ExampleLayout.stack,
 			markup: `
-				<z-toggle-group is-neutral is-outlined>
+				<z-toggle-group accent="neutral" kind="outline">
 				  <z-toggle-group-item value="keep" is-pressed>Keep</z-toggle-group-item>
 				  <z-toggle-group-item value="archive">Archive</z-toggle-group-item>
-				  <z-toggle-group-item value="delete" is-pink>Delete</z-toggle-group-item>
+				  <z-toggle-group-item value="delete" accent="sub">Delete</z-toggle-group-item>
 				</z-toggle-group>
 			`
 		}),
@@ -108,7 +108,7 @@ export const zToggleGroupItemDoc: ComponentDocT = {
 				'Items emit `press` and the group turns that into its own `change`. Listening at the item level is only worth it when you need to know which specific segment moved, independent of the resulting selection.',
 			layout: ExampleLayout.stack,
 			markup: `
-				<z-toggle-group id="densityGroup" type="multiple" is-purple is-outlined>
+				<z-toggle-group id="densityGroup" type="multiple" accent="dom" kind="outline">
 				  <z-toggle-group-item value="compact">Compact</z-toggle-group-item>
 				  <z-toggle-group-item value="comfortable" is-pressed>Comfortable</z-toggle-group-item>
 				</z-toggle-group>
@@ -140,14 +140,9 @@ export const zToggleGroupItemDoc: ComponentDocT = {
 		{ name: 'is-pressed', type: 'boolean', defaultValue: '—', description: 'Pressed state. Reflects, and is managed by the parent group.' },
 		{ name: 'is-disabled', type: 'boolean', defaultValue: '—', description: 'Blocks pointer and keyboard interaction for this segment.' },
 		{ name: 'is-icon', type: 'boolean', defaultValue: '—', description: 'Squares the segment for a single icon with no label.' },
-		{ name: 'is-neutral', type: 'boolean', defaultValue: 'inherit', description: 'Overrides the inherited tone with neutral.' },
-		{ name: 'is-purple', type: 'boolean', defaultValue: 'inherit', description: 'Overrides the inherited tone with purple.' },
-		{ name: 'is-pink', type: 'boolean', defaultValue: 'inherit', description: 'Overrides the inherited tone with pink.' },
-		{ name: 'is-small', type: 'boolean', defaultValue: 'inherit', description: 'Overrides the inherited density with small.' },
-		{ name: 'is-medium', type: 'boolean', defaultValue: 'inherit', description: 'Overrides the inherited density with medium.' },
-		{ name: 'is-large', type: 'boolean', defaultValue: 'inherit', description: 'Overrides the inherited density with large.' },
-		{ name: 'is-ghost', type: 'boolean', defaultValue: 'inherit', description: 'Overrides the inherited treatment with ghost.' },
-		{ name: 'is-outlined', type: 'boolean', defaultValue: 'inherit', description: 'Overrides the inherited treatment with outlined.' },
+		{ name: 'accent', type: 'dom | sub | neutral | success | warning | error', defaultValue: '—', description: 'Shared accent for every item.' },
+		{ name: 'size', type: 'xs | sm | md | lg | xl', defaultValue: 'md', description: 'Shared density for every item.' },
+		{ name: 'kind', type: 'solid | outline | ghost | soft | plain', defaultValue: 'ghost', description: 'Shared treatment for every item.' },
 		{ name: 'is-hidden', type: 'boolean', defaultValue: '—', description: 'Removes the item from layout.' }
 	],
 

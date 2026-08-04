@@ -76,13 +76,13 @@ export const zScrollDoc: ComponentDocT = {
 			markup: `
 				<z-scroll direction="horizontal" inset="sm" style="border: 1px solid var(--border); border-radius: var(--radius-md)">
 				  <z-row gap="2" style="width: max-content">
-				    <z-badge label="typescript" size="small"></z-badge>
-				    <z-badge label="web-components" size="small"></z-badge>
-				    <z-badge label="design-system" size="small"></z-badge>
-				    <z-badge label="shadow-dom" size="small"></z-badge>
-				    <z-badge label="custom-elements" size="small"></z-badge>
-				    <z-badge label="css-tokens" size="small"></z-badge>
-				    <z-badge label="atomico" size="small"></z-badge>
+				    <z-badge label="typescript" size="sm"></z-badge>
+				    <z-badge label="web-components" size="sm"></z-badge>
+				    <z-badge label="design-system" size="sm"></z-badge>
+				    <z-badge label="shadow-dom" size="sm"></z-badge>
+				    <z-badge label="custom-elements" size="sm"></z-badge>
+				    <z-badge label="css-tokens" size="sm"></z-badge>
+				    <z-badge label="atomico" size="sm"></z-badge>
 				  </z-row>
 				</z-scroll>
 			`

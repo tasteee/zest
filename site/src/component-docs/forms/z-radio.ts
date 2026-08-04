@@ -21,7 +21,7 @@ export const zRadioDoc: ComponentDocT = {
 
 	playground: {
 		buildElement: buildPlaygroundRadio,
-		controlNames: ['tone', 'is-checked', 'is-disabled'],
+		controlNames: ['accent', 'is-checked', 'is-disabled'],
 		slotLabel: 'Monthly'
 	},
 
@@ -54,15 +54,15 @@ export const zRadioDoc: ComponentDocT = {
 		}),
 
 		defineMarkupExample({
-			id: 'tones',
+			id: 'accents',
 			title: 'Tones',
-			description: 'Three accent families for the chosen state. Set the tone on each radio — the group does not push one down.',
+			description: 'Three accent families for the chosen state. Set the accent on each radio — the group does not push one down.',
 			layout: ExampleLayout.stack,
 			markup: `
 				<z-radio-group label="Tone demo" value="neutral">
-				  <z-radio tone="neutral" value="neutral" is-checked>Neutral</z-radio>
-				  <z-radio tone="primary" value="primary">Primary</z-radio>
-				  <z-radio tone="secondary" value="secondary">Secondary</z-radio>
+				  <z-radio accent="neutral" value="neutral" is-checked>Neutral</z-radio>
+				  <z-radio accent="dom" value="primary">Primary</z-radio>
+				  <z-radio accent="sub" value="secondary">Secondary</z-radio>
 				</z-radio-group>
 			`
 		}),
@@ -90,13 +90,13 @@ export const zRadioDoc: ComponentDocT = {
 			layout: ExampleLayout.stack,
 			markup: `
 				<z-radio-group label="Visibility" value="private">
-				  <z-radio value="private" tone="primary" is-checked>
+				  <z-radio value="private" accent="dom" is-checked>
 				    <z-column gap="2xs">
 				      <z-text size="sm">Private</z-text>
 				      <z-text size="xs" color="muted">Only you and people you invite.</z-text>
 				    </z-column>
 				  </z-radio>
-				  <z-radio value="workspace" tone="primary">
+				  <z-radio value="workspace" accent="dom">
 				    <z-column gap="2xs">
 				      <z-text size="sm">Workspace</z-text>
 				      <z-text size="xs" color="muted">Anyone in your workspace can find it.</z-text>
@@ -114,9 +114,9 @@ export const zRadioDoc: ComponentDocT = {
 			layout: ExampleLayout.stack,
 			markup: `
 				<z-radio-group id="speedGroup" label="Playback speed" value="1">
-				  <z-radio value="0.5" tone="primary">0.5×</z-radio>
-				  <z-radio value="1" tone="primary" is-checked>1×</z-radio>
-				  <z-radio value="2" tone="primary">2×</z-radio>
+				  <z-radio value="0.5" accent="dom">0.5×</z-radio>
+				  <z-radio value="1" accent="dom" is-checked>1×</z-radio>
+				  <z-radio value="2" accent="dom">2×</z-radio>
 				</z-radio-group>
 				<z-text size="sm" color="muted" id="speedStatus">Speed: 1×</z-text>
 			`,
@@ -143,7 +143,7 @@ export const zRadioDoc: ComponentDocT = {
 	attributes: [
 		{ name: 'is-checked', type: 'boolean', defaultValue: '—', description: 'The chosen state. Reflects, and is cleared by the parent group when a sibling wins.' },
 		{ name: 'is-disabled', type: 'boolean', defaultValue: '—', description: 'Blocks pointer and keyboard interaction.' },
-		{ name: 'tone', type: 'neutral | primary | secondary', defaultValue: 'neutral', description: 'Accent family of the chosen ring and dot.' },
+		{ name: 'accent', type: 'neutral | dom | sub', defaultValue: 'neutral', description: 'Accent family of the chosen ring and dot.' },
 		{ name: 'value', type: 'string', defaultValue: '—', description: 'The value this option stands for. Reported by the group and carried in the select event.' },
 		{ name: 'is-hidden', type: 'boolean', defaultValue: '—', description: 'Removes the option from layout.' }
 	],

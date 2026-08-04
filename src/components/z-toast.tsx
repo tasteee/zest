@@ -4,9 +4,9 @@ import { c, css, event, useRef, useState, useEffect, useHost } from 'atomico'
  * z-toast — a toaster region that stacks transient notifications. Place one on
  * the page, then push toasts imperatively:
  *   const t = document.querySelector('z-toast')
- *   t.push({ title: 'Saved', description: '…', tone: 'success', duration: 4000 })
+ *   t.push({ title: 'Saved', description: '…', accent: 'success', duration: 4000 })
  *   t.dismiss(id)            // or let them auto-expire (duration: 0 = sticky)
- * `position` parks the stack in a corner. Each toast carries a tone accent and a
+ * `position` parks the stack in a corner. Each toast carries an accent and a
  * close button. Fires `dismiss` with { id } when one leaves.
  */
 const styles = css`
@@ -62,7 +62,7 @@ const styles = css`
 		animation: toast-in 0.18s ease;
 	}
 
-	.toast.is-info {
+	.toast.is-dom {
 		--toast-accent: var(--purple);
 	}
 	.toast.is-success {
@@ -71,7 +71,7 @@ const styles = css`
 	.toast.is-warning {
 		--toast-accent: var(--warning);
 	}
-	.toast.is-danger {
+	.toast.is-error {
 		--toast-accent: var(--destructive);
 	}
 
@@ -137,8 +137,8 @@ const styles = css`
 	}
 `
 
-type ToastT = { id: number; tone?: string; title?: string; description?: string }
-type ToastInput = { tone?: string; title?: string; description?: string; duration?: number }
+type ToastT = { id: number; accent?: string; title?: string; description?: string }
+type ToastInput = { accent?: string; title?: string; description?: string; duration?: number }
 
 export const ZToast = c(
 	(props) => {
@@ -163,7 +163,7 @@ export const ZToast = c(
 			el.push = (input: ToastInput = {}) => {
 				const id = (idRef.current ?? 0) + 1
 				idRef.current = id
-				setToasts((prev) => [...prev, { id, tone: input.tone, title: input.title, description: input.description }])
+				setToasts((prev) => [...prev, { id, accent: input.accent, title: input.title, description: input.description }])
 				const duration = input.duration ?? 4000
 				if (duration > 0) timers.current!.set(id, setTimeout(() => dismiss(id), duration))
 				return id
@@ -179,7 +179,7 @@ export const ZToast = c(
 		return (
 			<host shadowDom role="region" aria-label="Notifications">
 				{toasts.map((toast) => (
-					<div key={toast.id} class={`toast is-${toast.tone || 'neutral'}`} role="status">
+					<div key={toast.id} class={`toast is-${toast.accent || 'neutral'}`} role="status">
 						<div class="content">
 							{toast.title && <span class="title">{toast.title}</span>}
 							{toast.description && <span class="description">{toast.description}</span>}

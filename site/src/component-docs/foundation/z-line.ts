@@ -16,7 +16,7 @@ export const zLineDoc: ComponentDocT = {
 	status: ComponentStatus.stable,
 
 	description:
-		'One rule, nothing else. It has no label, no spacing, and no options beyond its orientation, which is what makes it the right choice inside dense layouts where a divider should be invisible until you look for it. It still exposes `role="separator"` with the matching `aria-orientation`, so it divides content structurally rather than only visually. When the divider needs a centred label, `z-separator` is the same idea with room for one.',
+		'One rule, nothing else. It has no label, no spacing, and no options beyond its direction, which is what makes it the right choice inside dense layouts where a divider should be invisible until you look for it. It still exposes `role="separator"` with the matching `aria-direction`, so it divides content structurally rather than only visually. When the divider needs a centred label, `z-separator` is the same idea with room for one.',
 
 	playground: {
 		buildElement: buildPlaygroundLine,
@@ -51,14 +51,14 @@ export const zLineDoc: ComponentDocT = {
 		defineMarkupExample({
 			id: 'vertical',
 			title: 'Vertical',
-			description: '`is-vertical` fills the height instead — the divider between clusters in a row.',
+			description: '`direction` fills the height instead — the divider between clusters in a row.',
 			layout: ExampleLayout.center,
 			markup: `
 				<z-row gap="3" aligns-y="center">
 				  <z-text size="sm">Drafts</z-text>
-				  <z-line is-vertical></z-line>
+				  <z-line direction></z-line>
 				  <z-text size="sm">Sent</z-text>
-				  <z-line is-vertical></z-line>
+				  <z-line direction></z-line>
 				  <z-text size="sm">Archived</z-text>
 				</z-row>
 			`
@@ -73,17 +73,17 @@ export const zLineDoc: ComponentDocT = {
 				<z-column style="width: 26rem">
 				  <z-row aligns-x="between" aligns-y="center" padding-y="3">
 				    <z-text size="sm">Production</z-text>
-				    <z-badge tone="success" kind="soft" size="small" label="Healthy"></z-badge>
+				    <z-badge accent="success" kind="soft" size="sm" label="Healthy"></z-badge>
 				  </z-row>
 				  <z-line></z-line>
 				  <z-row aligns-x="between" aligns-y="center" padding-y="3">
 				    <z-text size="sm">Staging</z-text>
-				    <z-badge tone="warning" kind="soft" size="small" label="Degraded"></z-badge>
+				    <z-badge accent="warning" kind="soft" size="sm" label="Degraded"></z-badge>
 				  </z-row>
 				  <z-line></z-line>
 				  <z-row aligns-x="between" aligns-y="center" padding-y="3">
 				    <z-text size="sm">Preview</z-text>
-				    <z-badge tone="neutral" kind="soft" size="small" label="Idle"></z-badge>
+				    <z-badge accent="neutral" kind="soft" size="sm" label="Idle"></z-badge>
 				  </z-row>
 				</z-column>
 			`
@@ -104,7 +104,7 @@ export const zLineDoc: ComponentDocT = {
 				    <z-line></z-line>
 				    <z-row aligns-x="between" aligns-y="center">
 				      <z-text size="xs" color="muted">Resets 1 August</z-text>
-				      <z-link href="#" size="small">Manage seats</z-link>
+				      <z-link href="#" size="sm">Manage seats</z-link>
 				    </z-row>
 				  </z-column>
 				</z-card>
@@ -113,24 +113,24 @@ export const zLineDoc: ComponentDocT = {
 
 		defineMarkupExample({
 			id: 'explicit-horizontal',
-			title: 'Explicit orientation',
+			title: 'Explicit direction',
 			description:
-				'`is-horizontal` states the default outright. Worth setting when the orientation is toggled from script, so both branches read the same.',
+				'`direction` states the default outright. Worth setting when the direction is toggled from script, so both branches read the same.',
 			layout: ExampleLayout.fill,
 			markup: `
-				<z-line is-horizontal></z-line>
+				<z-line direction></z-line>
 			`
 		})
 	],
 
 	attributes: [
 		{
-			name: 'is-vertical',
+			name: 'direction',
 			type: 'boolean',
 			defaultValue: '—',
 			description: 'Renders a full-height vertical rule instead of a horizontal one.'
 		},
-		{ name: 'is-horizontal', type: 'boolean', defaultValue: '—', description: 'States the default horizontal orientation explicitly.' }
+		{ name: 'direction', type: 'boolean', defaultValue: '—', description: 'States the default horizontal direction explicitly.' }
 	],
 
 	properties: [],
@@ -139,7 +139,7 @@ export const zLineDoc: ComponentDocT = {
 	cssVariables: [],
 
 	accessibilityNotes: [
-		'Exposes role="separator" with aria-orientation matching the direction, so the division is announced rather than merely drawn.',
+		'Exposes role="separator" with aria-direction matching the direction, so the division is announced rather than merely drawn.',
 		'A separator is not focusable and not interactive — it only marks a boundary between groups of content.',
 		'Do not scatter lines where whitespace would do. Every announced separator is one more thing between a screen reader user and the content.',
 		'A vertical line inside a container with no resolvable height renders as nothing. That is a layout bug, not a styling one.'

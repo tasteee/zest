@@ -38,7 +38,7 @@ export const zFilterDoc: ComponentDocT = {
 
 	playground: {
 		buildElement: buildPlaygroundFilter,
-		controlNames: ['label', 'size', 'tone', 'reset-label', 'is-drilldown', 'is-disabled'],
+		controlNames: ['label', 'size', 'accent', 'reset-label', 'is-drilldown', 'is-disabled'],
 		slotLabel: 'options set as a property'
 	},
 
@@ -149,7 +149,7 @@ export const zFilterDoc: ComponentDocT = {
 				'Crumbs accumulate as you descend, and each one is clickable to jump back to that level. Three levels is about where a pill row stops being the right shape.',
 			layout: ExampleLayout.start,
 			markup: `
-				<z-filter id="catalogFilter" is-drilldown tone="primary" label="Catalog"></z-filter>
+				<z-filter id="catalogFilter" is-drilldown accent="dom" label="Catalog"></z-filter>
 			`,
 			script: `
 				const catalogFilter = document.querySelector('#catalogFilter')
@@ -247,7 +247,7 @@ export const zFilterDoc: ComponentDocT = {
 			description: 'Two densities. Small suits a filter bar sitting directly above a dense table.',
 			layout: ExampleLayout.stack,
 			markup: `
-				<z-filter id="smallFilter" size="small" label="Small"></z-filter>
+				<z-filter id="smallFilter" size="sm" label="Small"></z-filter>
 				<z-filter id="mediumFilter" label="Medium"></z-filter>
 			`,
 			script: `
@@ -269,7 +269,7 @@ export const zFilterDoc: ComponentDocT = {
 			description: 'The whole point of the control — reading `change` and narrowing what is underneath. The reset clears the path, which is your cue to show everything.',
 			layout: ExampleLayout.stack,
 			markup: `
-				<z-filter id="tableFilter" tone="primary" size="small" label="Status"></z-filter>
+				<z-filter id="tableFilter" accent="dom" size="sm" label="Status"></z-filter>
 				<z-text size="sm" color="muted" id="tableStatus">Showing all 12 pull requests.</z-text>
 			`,
 			script: `
@@ -310,8 +310,8 @@ export const zFilterDoc: ComponentDocT = {
 
 	attributes: [
 		{ name: 'label', type: 'string', defaultValue: '—', description: 'Accessible name for the pill group.' },
-		{ name: 'size', type: 'small | medium', defaultValue: 'medium', description: 'Pill density.' },
-		{ name: 'tone', type: 'neutral | primary | secondary', defaultValue: 'neutral', description: 'Accent family of the active pill.' },
+		{ name: 'size', type: 'sm | md', defaultValue: 'md', description: 'Pill density.' },
+		{ name: 'accent', type: 'neutral | dom | sub', defaultValue: 'neutral', description: 'Accent family of the active pill.' },
 		{ name: 'reset-label', type: 'string', defaultValue: 'Clear', description: 'Accessible name for the ✕ button.' },
 		{ name: 'is-drilldown', type: 'boolean', defaultValue: '—', description: 'Switches to hierarchical mode: a leaf keeps its siblings visible instead of collapsing them.' },
 		{ name: 'is-disabled', type: 'boolean', defaultValue: '—', description: 'Freezes the whole row — no selection, no reset — while keeping the current answer readable.' },

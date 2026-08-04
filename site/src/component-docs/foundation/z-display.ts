@@ -60,7 +60,7 @@ export const zDisplayDoc: ComponentDocT = {
 			layout: ExampleLayout.fill,
 			markup: `
 				<z-display size="sm" color="neutral">Neutral</z-display>
-				<z-display size="sm" color="primary">Primary</z-display>
+				<z-display size="sm" color="dom">Primary</z-display>
 				<z-display size="sm" color="muted">Muted</z-display>
 			`
 		}),
@@ -94,7 +94,7 @@ export const zDisplayDoc: ComponentDocT = {
 				    runtime dependencies.
 				  </z-text>
 				  <z-row gap="3">
-				    <z-button tone="primary">Get started</z-button>
+				    <z-button color="dom">Get started</z-button>
 				    <z-button kind="outline">Browse components</z-button>
 				  </z-row>
 				</z-column>
@@ -102,14 +102,14 @@ export const zDisplayDoc: ComponentDocT = {
 		}),
 
 		defineMarkupExample({
-			id: 'two-tone',
-			title: 'Two-tone titles',
+			id: 'two-accent',
+			title: 'Two-accent titles',
 			description: 'A `z-inline` inside a display title recolours a phrase while inheriting the fluid size.',
 			layout: ExampleLayout.fill,
 			markup: `
 				<z-display size="sm" style="max-width: 34rem">
 				  Ship interfaces that
-				  <z-inline color="primary">feel inevitable</z-inline>
+				  <z-inline color="dom">feel inevitable</z-inline>
 				</z-display>
 			`
 		}),

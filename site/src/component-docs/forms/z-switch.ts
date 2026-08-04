@@ -5,7 +5,7 @@ import type { ComponentDocT } from '../types'
 const buildPlaygroundSwitch = (): HTMLElement => {
 	const toggle = document.createElement('z-switch')
 	toggle.setAttribute('is-checked', '')
-	toggle.setAttribute('tone', 'primary')
+	toggle.setAttribute('accent', 'dom')
 	toggle.textContent = 'Two-factor authentication'
 	return toggle
 }
@@ -21,7 +21,7 @@ export const zSwitchDoc: ComponentDocT = {
 
 	playground: {
 		buildElement: buildPlaygroundSwitch,
-		controlNames: ['size', 'tone', 'is-checked', 'is-disabled', 'is-block'],
+		controlNames: ['size', 'accent', 'is-checked', 'is-disabled', 'is-block'],
 		slotLabel: 'Two-factor authentication'
 	},
 
@@ -52,13 +52,13 @@ export const zSwitchDoc: ComponentDocT = {
 		}),
 
 		defineMarkupExample({
-			id: 'tones',
+			id: 'accents',
 			title: 'Tones',
 			description: 'The accent that fills the track. Only visible in the on state.',
 			markup: `
-				<z-switch tone="neutral" is-checked>Neutral</z-switch>
-				<z-switch tone="primary" is-checked>Primary</z-switch>
-				<z-switch tone="secondary" is-checked>Secondary</z-switch>
+				<z-switch accent="neutral" is-checked>Neutral</z-switch>
+				<z-switch accent="dom" is-checked>Primary</z-switch>
+				<z-switch accent="sub" is-checked>Secondary</z-switch>
 			`
 		}),
 
@@ -67,9 +67,9 @@ export const zSwitchDoc: ComponentDocT = {
 			title: 'Sizes',
 			description: 'Three densities. Small suits a dense settings table; large suits a single prominent setting.',
 			markup: `
-				<z-switch size="small" is-checked>Small</z-switch>
-				<z-switch size="medium" is-checked>Medium</z-switch>
-				<z-switch size="large" is-checked>Large</z-switch>
+				<z-switch size="sm" is-checked>Small</z-switch>
+				<z-switch size="md" is-checked>Medium</z-switch>
+				<z-switch size="lg" is-checked>Large</z-switch>
 			`
 		}),
 
@@ -96,7 +96,7 @@ export const zSwitchDoc: ComponentDocT = {
 				      <z-text size="sm">Two-factor authentication</z-text>
 				      <z-text size="xs" color="muted">Require a code from your authenticator app.</z-text>
 				    </z-column>
-				    <z-switch tone="primary" is-checked aria-label="Two-factor authentication"></z-switch>
+				    <z-switch accent="dom" is-checked aria-label="Two-factor authentication"></z-switch>
 				  </z-row>
 				  <z-separator></z-separator>
 				  <z-row aligns-x="between" aligns-y="center" gap="md" style="padding: 0.875rem 0">
@@ -104,7 +104,7 @@ export const zSwitchDoc: ComponentDocT = {
 				      <z-text size="sm">Public profile</z-text>
 				      <z-text size="xs" color="muted">Anyone with the link can see your work.</z-text>
 				    </z-column>
-				    <z-switch tone="primary" aria-label="Public profile"></z-switch>
+				    <z-switch accent="dom" aria-label="Public profile"></z-switch>
 				  </z-row>
 				</z-column>
 			`
@@ -117,7 +117,7 @@ export const zSwitchDoc: ComponentDocT = {
 				'`change` fires with the new state. Because the switch means "already applied", the work belongs right here in the handler — not behind a later Save.',
 			layout: ExampleLayout.stack,
 			markup: `
-				<z-switch id="previewSwitch" tone="primary" is-block>Show previews in the sidebar</z-switch>
+				<z-switch id="previewSwitch" accent="dom" is-block>Show previews in the sidebar</z-switch>
 				<z-text size="sm" color="muted" id="previewStatus">Previews are off.</z-text>
 			`,
 			script: `
@@ -145,10 +145,10 @@ export const zSwitchDoc: ComponentDocT = {
 				'A master switch that disables what it governs. Disabling the dependents is more honest than hiding them — the user can still see what they would get.',
 			layout: ExampleLayout.stack,
 			markup: `
-				<z-switch id="notificationsSwitch" tone="primary" is-block is-checked>Email notifications</z-switch>
+				<z-switch id="notificationsSwitch" accent="dom" is-block is-checked>Email notifications</z-switch>
 				<z-column gap="xs" style="padding-left: 1rem">
-				  <z-switch is-block size="small" class="notificationChannel" is-checked>Mentions</z-switch>
-				  <z-switch is-block size="small" class="notificationChannel">Weekly digest</z-switch>
+				  <z-switch is-block size="sm" class="notificationChannel" is-checked>Mentions</z-switch>
+				  <z-switch is-block size="sm" class="notificationChannel">Weekly digest</z-switch>
 				</z-column>
 			`,
 			script: `
@@ -179,8 +179,8 @@ export const zSwitchDoc: ComponentDocT = {
 		{ name: 'is-checked', type: 'boolean', defaultValue: '—', description: 'The on state. Reflects, so it is both the initial value and the live one.' },
 		{ name: 'is-disabled', type: 'boolean', defaultValue: '—', description: 'Blocks pointer and keyboard interaction.' },
 		{ name: 'is-block', type: 'boolean', defaultValue: '—', description: 'Makes the switch fill its row rather than sit inline.' },
-		{ name: 'size', type: 'small | medium | large', defaultValue: 'medium', description: 'Size of the track and knob. The label scale is unchanged.' },
-		{ name: 'tone', type: 'neutral | primary | secondary', defaultValue: 'neutral', description: 'Accent family of the on state.' },
+		{ name: 'size', type: 'sm | md | lg', defaultValue: 'md', description: 'Size of the track and knob. The label scale is unchanged.' },
+		{ name: 'accent', type: 'neutral | dom | sub', defaultValue: 'neutral', description: 'Accent family of the on state.' },
 		{ name: 'name', type: 'string', defaultValue: '—', description: 'Name passed to the inner input.' },
 		{ name: 'value', type: 'string', defaultValue: '—', description: 'Value echoed back in the change event, for one handler serving several switches.' },
 		{ name: 'is-hidden', type: 'boolean', defaultValue: '—', description: 'Removes the switch from layout.' }

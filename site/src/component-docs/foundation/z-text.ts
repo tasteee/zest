@@ -60,9 +60,9 @@ export const zTextDoc: ComponentDocT = {
 			markup: `
 				<z-text color="neutral">Neutral — default body colour</z-text>
 				<z-text color="muted">Muted — secondary and supporting copy</z-text>
-				<z-text color="primary">Primary — accent</z-text>
-				<z-text color="secondary">Secondary — the other accent</z-text>
-				<z-text color="white">White — for use on filled surfaces</z-text>
+				<z-text color="dom">Primary — accent</z-text>
+				<z-text color="sub">Secondary — the other accent</z-text>
+				<z-text color="strong">White — for use on filled surfaces</z-text>
 			`
 		}),
 
@@ -136,7 +136,7 @@ export const zTextDoc: ComponentDocT = {
 			markup: `
 				<z-text size="lg" style="max-width: 44rem">
 				  A lede-sized sentence with
-				  <z-inline color="primary" weight="600">an emphasised phrase</z-inline>
+				  <z-inline color="dom" weight="600">an emphasised phrase</z-inline>
 				  and <z-inline color="muted">a quieter aside</z-inline>, both holding the
 				  surrounding size.
 				</z-text>

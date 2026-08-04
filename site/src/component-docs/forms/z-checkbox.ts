@@ -20,7 +20,7 @@ export const zCheckboxDoc: ComponentDocT = {
 
 	playground: {
 		buildElement: buildPlaygroundCheckbox,
-		controlNames: ['size', 'tone', 'is-checked', 'is-indeterminate', 'is-disabled', 'is-block'],
+		controlNames: ['size', 'accent', 'is-checked', 'is-indeterminate', 'is-disabled', 'is-block'],
 		slotLabel: 'Email me about product updates'
 	},
 
@@ -53,13 +53,13 @@ export const zCheckboxDoc: ComponentDocT = {
 		}),
 
 		defineMarkupExample({
-			id: 'tones',
+			id: 'accents',
 			title: 'Tones',
-			description: 'Three accent families for the fill. The tone is invisible until the box is checked.',
+			description: 'Three accent families for the fill. The accent is invisible until the box is checked.',
 			markup: `
-				<z-checkbox tone="neutral" is-checked>Neutral</z-checkbox>
-				<z-checkbox tone="primary" is-checked>Primary</z-checkbox>
-				<z-checkbox tone="secondary" is-checked>Secondary</z-checkbox>
+				<z-checkbox accent="neutral" is-checked>Neutral</z-checkbox>
+				<z-checkbox accent="dom" is-checked>Primary</z-checkbox>
+				<z-checkbox accent="sub" is-checked>Secondary</z-checkbox>
 			`
 		}),
 
@@ -68,9 +68,9 @@ export const zCheckboxDoc: ComponentDocT = {
 			title: 'Sizes',
 			description: 'Three densities. The label type scale stays constant — only the box changes — so a dense list still reads at full size.',
 			markup: `
-				<z-checkbox size="small" is-checked>Small</z-checkbox>
-				<z-checkbox size="medium" is-checked>Medium</z-checkbox>
-				<z-checkbox size="large" is-checked>Large</z-checkbox>
+				<z-checkbox size="sm" is-checked>Small</z-checkbox>
+				<z-checkbox size="md" is-checked>Medium</z-checkbox>
+				<z-checkbox size="lg" is-checked>Large</z-checkbox>
 			`
 		}),
 
@@ -102,7 +102,7 @@ export const zCheckboxDoc: ComponentDocT = {
 			description: '`change` carries the new checked state and the checkbox’s `value`, which is what lets one handler serve a whole group.',
 			layout: ExampleLayout.stack,
 			markup: `
-				<z-checkbox id="termsCheckbox" tone="primary" value="terms">I accept the terms of service</z-checkbox>
+				<z-checkbox id="termsCheckbox" accent="dom" value="terms">I accept the terms of service</z-checkbox>
 				<z-text size="sm" color="muted" id="termsStatus">Not accepted.</z-text>
 			`,
 			script: `
@@ -130,7 +130,7 @@ export const zCheckboxDoc: ComponentDocT = {
 				'The reason indeterminate exists. The parent is checked when every child is, unchecked when none are, and indeterminate in between — and clicking it forces every child to match.',
 			layout: ExampleLayout.stack,
 			markup: `
-				<z-checkbox id="allScopes" is-block tone="primary">All scopes</z-checkbox>
+				<z-checkbox id="allScopes" is-block accent="dom">All scopes</z-checkbox>
 				<z-column gap="xs" style="padding-left: 1.75rem">
 				  <z-checkbox is-block class="scope" value="read">Read</z-checkbox>
 				  <z-checkbox is-block class="scope" value="write">Write</z-checkbox>
@@ -188,8 +188,8 @@ export const zCheckboxDoc: ComponentDocT = {
 		{ name: 'is-indeterminate', type: 'boolean', defaultValue: '—', description: 'The third state, for a parent whose children disagree. Sets aria-checked="mixed".' },
 		{ name: 'is-disabled', type: 'boolean', defaultValue: '—', description: 'Blocks pointer and keyboard interaction.' },
 		{ name: 'is-block', type: 'boolean', defaultValue: '—', description: 'Makes the checkbox fill its row rather than sit inline.' },
-		{ name: 'size', type: 'small | medium | large', defaultValue: 'medium', description: 'Size of the box. The label scale is unchanged.' },
-		{ name: 'tone', type: 'neutral | primary | secondary', defaultValue: 'neutral', description: 'Accent family of the checked fill.' },
+		{ name: 'size', type: 'sm | md | lg', defaultValue: 'md', description: 'Size of the box. The label scale is unchanged.' },
+		{ name: 'accent', type: 'neutral | dom | sub', defaultValue: 'neutral', description: 'Accent family of the checked fill.' },
 		{ name: 'name', type: 'string', defaultValue: '—', description: 'Name passed to the inner input for form submission.' },
 		{ name: 'value', type: 'string', defaultValue: '—', description: 'The value submitted when checked, and echoed back in the change event.' },
 		{ name: 'is-hidden', type: 'boolean', defaultValue: '—', description: 'Removes the checkbox from layout.' }

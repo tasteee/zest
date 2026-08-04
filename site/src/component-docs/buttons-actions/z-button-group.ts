@@ -57,9 +57,9 @@ export const zButtonGroupDoc: ComponentDocT = {
 		defineMarkupExample({
 			id: 'vertical',
 			title: 'Vertical',
-			description: '`is-vertical` stacks the children and equalises their widths, so labels of different lengths still line up.',
+			description: '`direction` stacks the children and equalises their widths, so labels of different lengths still line up.',
 			markup: `
-				<z-button-group is-vertical>
+				<z-button-group direction>
 				  <z-button kind="outline">Duplicate</z-button>
 				  <z-button kind="outline">Move to…</z-button>
 				  <z-button kind="outline">Archive</z-button>
@@ -85,11 +85,11 @@ export const zButtonGroupDoc: ComponentDocT = {
 			id: 'split-action',
 			title: 'Split action',
 			description:
-				'The classic primary-plus-overflow pairing. The two segments carry different weights but the same tone and kind, so the seam survives.',
+				'The classic primary-plus-overflow pairing. The two segments carry different weights but the same accent and kind, so the seam survives.',
 			markup: `
 				<z-button-group>
-				  <z-button tone="primary">${Icons.check} Approve</z-button>
-				  <z-button tone="primary" aria-label="More approval options">⋯</z-button>
+				  <z-button accent="dom">${Icons.check} Approve</z-button>
+				  <z-button accent="dom" aria-label="More approval options">⋯</z-button>
 				</z-button-group>
 			`
 		}),
@@ -101,15 +101,15 @@ export const zButtonGroupDoc: ComponentDocT = {
 			layout: ExampleLayout.stack,
 			markup: `
 				<z-button-group>
-				  <z-button kind="outline" size="small">Small</z-button>
-				  <z-button kind="outline" size="small">Small</z-button>
-				  <z-button kind="outline" size="small">Small</z-button>
+				  <z-button kind="outline" size="sm">Small</z-button>
+				  <z-button kind="outline" size="sm">Small</z-button>
+				  <z-button kind="outline" size="sm">Small</z-button>
 				</z-button-group>
 
 				<z-button-group>
-				  <z-button kind="outline" size="large">Large</z-button>
-				  <z-button kind="outline" size="large">Large</z-button>
-				  <z-button kind="outline" size="large">Large</z-button>
+				  <z-button kind="outline" size="lg">Large</z-button>
+				  <z-button kind="outline" size="lg">Large</z-button>
+				  <z-button kind="outline" size="lg">Large</z-button>
 				</z-button-group>
 			`
 		}),
@@ -122,7 +122,7 @@ export const zButtonGroupDoc: ComponentDocT = {
 			layout: ExampleLayout.center,
 			markup: `
 				<z-button-group id="rangeGroup">
-				  <z-button kind="solid" tone="primary">Day</z-button>
+				  <z-button kind="solid" accent="dom">Day</z-button>
 				  <z-button kind="outline">Week</z-button>
 				  <z-button kind="outline">Month</z-button>
 				</z-button-group>
@@ -134,10 +134,10 @@ export const zButtonGroupDoc: ComponentDocT = {
 				  rangeButton.addEventListener('click', () => {
 				    for (const sibling of rangeButtons) {
 				      sibling.setAttribute('kind', 'outline')
-				      sibling.removeAttribute('tone')
+				      sibling.removeAttribute('accent')
 				    }
 				    rangeButton.setAttribute('kind', 'solid')
-				    rangeButton.setAttribute('tone', 'primary')
+				    rangeButton.setAttribute('accent', 'dom')
 				  })
 				}
 			`,
@@ -148,10 +148,10 @@ export const zButtonGroupDoc: ComponentDocT = {
 					rangeButton.addEventListener('click', () => {
 						for (const sibling of rangeButtons) {
 							sibling.setAttribute('kind', 'outline')
-							sibling.removeAttribute('tone')
+							sibling.removeAttribute('accent')
 						}
 						rangeButton.setAttribute('kind', 'solid')
-						rangeButton.setAttribute('tone', 'primary')
+						rangeButton.setAttribute('accent', 'dom')
 					})
 				}
 			}
@@ -160,7 +160,7 @@ export const zButtonGroupDoc: ComponentDocT = {
 
 	attributes: [
 		{
-			name: 'is-vertical',
+			name: 'direction',
 			type: 'boolean',
 			defaultValue: '—',
 			description: 'Stacks the children vertically at equal width instead of laying them out in a row.'

@@ -19,7 +19,7 @@ export const buildTextFamilyAttributes = (options: TextFamilyOptionsT): ApiRowT[
 		{ name: 'size', type: options.sizes, defaultValue: options.defaultSize, description: options.sizeDescription },
 		{
 			name: 'color',
-			type: 'neutral | primary | secondary | muted | white',
+			type: 'neutral | dom | sub | muted | white',
 			defaultValue: options.defaultColor,
 			description: 'Text colour, drawn from the theme rather than a raw value.'
 		},

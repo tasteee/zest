@@ -21,7 +21,7 @@ export const zTextareaDoc: ComponentDocT = {
 
 	playground: {
 		buildElement: buildPlaygroundTextarea,
-		controlNames: ['placeholder', 'rows', 'size', 'tone', 'is-auto-resize', 'is-invalid', 'is-disabled', 'is-readonly'],
+		controlNames: ['placeholder', 'rows', 'size', 'accent', 'is-auto-resize', 'is-invalid', 'is-disabled', 'is-readonly'],
 		slotLabel: 'Notes'
 	},
 
@@ -76,21 +76,21 @@ export const zTextareaDoc: ComponentDocT = {
 			description: 'Type scale and padding, matched to z-input so a form of mixed controls stays on one rhythm.',
 			layout: ExampleLayout.stack,
 			markup: `
-				<z-textarea size="small" rows="2" placeholder="Small" label="Small"></z-textarea>
-				<z-textarea size="medium" rows="2" placeholder="Medium" label="Medium"></z-textarea>
-				<z-textarea size="large" rows="2" placeholder="Large" label="Large"></z-textarea>
+				<z-textarea size="sm" rows="2" placeholder="Small" label="Small"></z-textarea>
+				<z-textarea size="md" rows="2" placeholder="Medium" label="Medium"></z-textarea>
+				<z-textarea size="lg" rows="2" placeholder="Large" label="Large"></z-textarea>
 			`
 		}),
 
 		defineMarkupExample({
-			id: 'tones',
+			id: 'accents',
 			title: 'Tones',
 			description: 'Which accent the border lifts to on focus. Click into each to see the difference.',
 			layout: ExampleLayout.stack,
 			markup: `
-				<z-textarea tone="neutral" rows="2" placeholder="Neutral focus" label="Neutral"></z-textarea>
-				<z-textarea tone="primary" rows="2" placeholder="Primary focus" label="Primary"></z-textarea>
-				<z-textarea tone="secondary" rows="2" placeholder="Secondary focus" label="Secondary"></z-textarea>
+				<z-textarea accent="neutral" rows="2" placeholder="Neutral focus" label="Neutral"></z-textarea>
+				<z-textarea accent="dom" rows="2" placeholder="Primary focus" label="Primary"></z-textarea>
+				<z-textarea accent="sub" rows="2" placeholder="Secondary focus" label="Secondary"></z-textarea>
 			`
 		}),
 
@@ -135,7 +135,7 @@ export const zTextareaDoc: ComponentDocT = {
 
 					const overageNote = isOverLimit ? ` — ${usedCharacters - characterLimit} over` : ''
 					bioCount.textContent = `${usedCharacters} / ${characterLimit}${overageNote}`
-					bioCount.setAttribute('color', isOverLimit ? 'secondary' : 'muted')
+					bioCount.setAttribute('color', isOverLimit ? 'sub' : 'muted')
 
 					if (isOverLimit) bioInput.setAttribute('is-invalid', '')
 					if (!isOverLimit) bioInput.removeAttribute('is-invalid')
@@ -195,8 +195,8 @@ export const zTextareaDoc: ComponentDocT = {
 		{ name: 'placeholder', type: 'string', defaultValue: '—', description: 'Example text shown while the field is empty.' },
 		{ name: 'name', type: 'string', defaultValue: '—', description: 'Name passed to the inner textarea for form submission.' },
 		{ name: 'rows', type: 'number', defaultValue: '3', description: 'Resting height in lines. Ignored once the content grows under is-auto-resize.' },
-		{ name: 'size', type: 'small | medium | large', defaultValue: 'medium', description: 'Control density.' },
-		{ name: 'tone', type: 'neutral | primary | secondary', defaultValue: 'neutral', description: 'Which accent the border lifts to on focus.' },
+		{ name: 'size', type: 'sm | md | lg', defaultValue: 'md', description: 'Control density.' },
+		{ name: 'accent', type: 'neutral | dom | sub', defaultValue: 'neutral', description: 'Which accent the border lifts to on focus.' },
 		{ name: 'is-auto-resize', type: 'boolean', defaultValue: '—', description: 'Grows the field to fit its content instead of scrolling.' },
 		{ name: 'is-focused', type: 'boolean', defaultValue: '—', description: 'Reflects the focus state.' },
 		{ name: 'is-invalid', type: 'boolean', defaultValue: '—', description: 'Paints the error border and sets aria-invalid.' },

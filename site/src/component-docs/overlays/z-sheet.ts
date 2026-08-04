@@ -10,8 +10,8 @@ const buildPlaygroundSheet = (): HTMLElement => {
 	sheet.innerHTML = `
 		<z-button slot="trigger" kind="outline">Open sheet</z-button>
 		<z-field label="Search"><z-input placeholder="Anything"></z-input></z-field>
-		<z-button slot="footer" kind="outline" tone="neutral">Reset</z-button>
-		<z-button slot="footer" kind="solid" tone="primary">Apply</z-button>
+		<z-button slot="footer" kind="outline" accent="neutral">Reset</z-button>
+		<z-button slot="footer" kind="solid" accent="dom">Apply</z-button>
 	`
 
 	return sheet
@@ -28,7 +28,7 @@ export const zSheetDoc: ComponentDocT = {
 
 	playground: {
 		buildElement: buildPlaygroundSheet,
-		controlNames: ['heading', 'description', 'side', 'tone', 'hide-close', 'is-static'],
+		controlNames: ['heading', 'description', 'side', 'accent', 'has-close', 'is-static'],
 		slotLabel: 'trigger, body, and footer'
 	},
 
@@ -62,14 +62,14 @@ export const zSheetDoc: ComponentDocT = {
 				    <z-field label="Search"><z-input placeholder="Anything"></z-input></z-field>
 				    <z-field label="Status">
 				      <z-radio-group label="Status" value="any">
-				        <z-radio value="any" tone="primary" is-checked>Any</z-radio>
-				        <z-radio value="open" tone="primary">Open</z-radio>
-				        <z-radio value="closed" tone="primary">Closed</z-radio>
+				        <z-radio value="any" accent="dom" is-checked>Any</z-radio>
+				        <z-radio value="open" accent="dom">Open</z-radio>
+				        <z-radio value="closed" accent="dom">Closed</z-radio>
 				      </z-radio-group>
 				    </z-field>
 				  </z-column>
-				  <z-button slot="footer" kind="outline" tone="neutral">Reset</z-button>
-				  <z-button slot="footer" kind="solid" tone="primary">Apply</z-button>
+				  <z-button slot="footer" kind="outline" accent="neutral">Reset</z-button>
+				  <z-button slot="footer" kind="solid" accent="dom">Apply</z-button>
 				</z-sheet>
 			`
 		}),
@@ -148,7 +148,7 @@ export const zSheetDoc: ComponentDocT = {
 				    <z-field label="Client"><z-input placeholder="Acme Inc."></z-input></z-field>
 				    <z-field label="Amount"><z-number-input min="0" step="0.01" value="0"></z-number-input></z-field>
 				  </z-column>
-				  <z-button slot="footer" kind="solid" tone="primary">Create invoice</z-button>
+				  <z-button slot="footer" kind="solid" accent="dom">Create invoice</z-button>
 				</z-sheet>
 			`
 		}),
@@ -197,8 +197,7 @@ export const zSheetDoc: ComponentDocT = {
 		{ name: 'side', type: 'right | left | top | bottom', defaultValue: 'right', description: 'Which edge it is pinned to and slides in from.' },
 		{ name: 'heading', type: 'string', defaultValue: '—', description: 'Title in the header, and the sheet’s accessible name.' },
 		{ name: 'description', type: 'string', defaultValue: '—', description: 'A muted line under the heading.' },
-		{ name: 'tone', type: 'neutral | primary | secondary | danger', defaultValue: 'neutral', description: 'Accent used inside the panel chrome.' },
-		{ name: 'hide-close', type: 'boolean', defaultValue: '—', description: 'Removes the ✕. Only safe when there is another way out.' },
+		{ name: 'has-close', type: 'boolean', defaultValue: '—', description: 'Removes the ✕. Only safe when there is another way out.' },
 		{ name: 'is-static', type: 'boolean', defaultValue: '—', description: 'Ignores backdrop clicks. Escape still closes.' },
 		{ name: 'is-disabled', type: 'boolean', defaultValue: '—', description: 'Stops the trigger from opening the sheet.' }
 	],

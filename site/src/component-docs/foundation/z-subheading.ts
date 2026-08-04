@@ -17,7 +17,7 @@ export const zSubheadingDoc: ComponentDocT = {
 	status: ComponentStatus.stable,
 
 	description:
-		'The `z-text` family at weight 600 with `text-transform: uppercase` and widened tracking. It is the overline that sits above a title or opens a group of settings — short, quiet, and structural rather than something anyone reads as prose. Renders a `<p>` by default. For the mono, accent-toned kicker with an optional trailing rule, `z-eyebrow` is the more decorative sibling.',
+		'The `z-text` family at weight 600 with `text-transform: uppercase` and widened tracking. It is the overline that sits above a title or opens a group of settings — short, quiet, and structural rather than something anyone reads as prose. Renders a `<p>` by default. For the mono, accent-tinted kicker with an optional trailing rule, `z-eyebrow` is the more decorative sibling.',
 
 	playground: {
 		buildElement: buildPlaygroundSubheading,
@@ -28,7 +28,7 @@ export const zSubheadingDoc: ComponentDocT = {
 	usageGuidance: [
 		'Keep it to a few words. Uppercase at wide tracking is markedly slower to read, which is fine for two words and hostile for a sentence.',
 		'It is a label, not a heading. If it belongs in the document outline, use `z-heading` with a small size instead.',
-		'Choose between this and `z-eyebrow` by texture: `z-subheading` follows the body typeface, `z-eyebrow` is mono with an accent tone and an optional rule.',
+		'Choose between this and `z-eyebrow` by texture: `z-subheading` follows the body typeface, `z-eyebrow` is mono with an accent accent and an optional rule.',
 		'Do not uppercase the source text yourself — the transform handles it, and leaving the original casing keeps it readable to screen readers and to whoever edits it next.'
 	],
 
@@ -60,8 +60,8 @@ export const zSubheadingDoc: ComponentDocT = {
 			markup: `
 				<z-subheading color="neutral">Neutral</z-subheading>
 				<z-subheading color="muted">Muted</z-subheading>
-				<z-subheading color="primary">Primary</z-subheading>
-				<z-subheading color="secondary">Secondary</z-subheading>
+				<z-subheading color="dom">Primary</z-subheading>
+				<z-subheading color="sub">Secondary</z-subheading>
 			`
 		}),
 
@@ -72,7 +72,7 @@ export const zSubheadingDoc: ComponentDocT = {
 			layout: ExampleLayout.fill,
 			markup: `
 				<z-column gap="1" style="max-width: 38rem">
-				  <z-subheading size="sm" color="primary">Now in beta</z-subheading>
+				  <z-subheading size="sm" color="dom">Now in beta</z-subheading>
 				  <z-heading size="xl">Collaborative editing</z-heading>
 				  <z-text color="muted">Multiple cursors, presence, and conflict-free merges.</z-text>
 				</z-column>

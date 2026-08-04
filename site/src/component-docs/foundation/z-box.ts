@@ -10,8 +10,8 @@ const buildPlaygroundBox = (): HTMLElement => {
 	box.setAttribute('aligns-y', 'center')
 	box.setAttribute('padding', 'lg')
 	box.innerHTML = `
-		<z-badge label="Left" size="small"></z-badge>
-		<z-badge label="Right" size="small"></z-badge>
+		<z-badge label="Left" size="sm"></z-badge>
+		<z-badge label="Right" size="sm"></z-badge>
 	`
 	return box
 }
@@ -57,15 +57,15 @@ export const zBoxDoc: ComponentDocT = {
 			layout: ExampleLayout.fill,
 			markup: `
 				<z-box is-row gap="3" padding="4" style="border: 1px solid var(--border); border-radius: var(--radius-md)">
-				  <z-badge label="One" size="small"></z-badge>
-				  <z-badge label="Two" size="small"></z-badge>
-				  <z-badge label="Three" size="small"></z-badge>
+				  <z-badge label="One" size="sm"></z-badge>
+				  <z-badge label="Two" size="sm"></z-badge>
+				  <z-badge label="Three" size="sm"></z-badge>
 				</z-box>
 
 				<z-box is-column gap="3" padding="4" style="border: 1px solid var(--border); border-radius: var(--radius-md)">
-				  <z-badge label="One" size="small"></z-badge>
-				  <z-badge label="Two" size="small"></z-badge>
-				  <z-badge label="Three" size="small"></z-badge>
+				  <z-badge label="One" size="sm"></z-badge>
+				  <z-badge label="Two" size="sm"></z-badge>
+				  <z-badge label="Three" size="sm"></z-badge>
 				</z-box>
 			`
 		}),
@@ -78,23 +78,23 @@ export const zBoxDoc: ComponentDocT = {
 			layout: ExampleLayout.fill,
 			markup: `
 				<z-box is-row aligns-x="start" gap="2" padding="3" full-width style="border: 1px solid var(--border)">
-				  <z-badge label="start" size="small"></z-badge>
-				  <z-badge label="start" size="small"></z-badge>
+				  <z-badge label="start" size="sm"></z-badge>
+				  <z-badge label="start" size="sm"></z-badge>
 				</z-box>
 
 				<z-box is-row aligns-x="center" gap="2" padding="3" full-width style="border: 1px solid var(--border)">
-				  <z-badge label="center" size="small"></z-badge>
-				  <z-badge label="center" size="small"></z-badge>
+				  <z-badge label="center" size="sm"></z-badge>
+				  <z-badge label="center" size="sm"></z-badge>
 				</z-box>
 
 				<z-box is-row aligns-x="between" gap="2" padding="3" full-width style="border: 1px solid var(--border)">
-				  <z-badge label="between" size="small"></z-badge>
-				  <z-badge label="between" size="small"></z-badge>
+				  <z-badge label="between" size="sm"></z-badge>
+				  <z-badge label="between" size="sm"></z-badge>
 				</z-box>
 
 				<z-box is-row aligns-x="evenly" gap="2" padding="3" full-width style="border: 1px solid var(--border)">
-				  <z-badge label="evenly" size="small"></z-badge>
-				  <z-badge label="evenly" size="small"></z-badge>
+				  <z-badge label="evenly" size="sm"></z-badge>
+				  <z-badge label="evenly" size="sm"></z-badge>
 				</z-box>
 			`
 		}),
@@ -107,13 +107,13 @@ export const zBoxDoc: ComponentDocT = {
 			layout: ExampleLayout.fill,
 			markup: `
 				<z-box is-row aligns-x="center" gap="2" padding="4" full-width style="border: 1px solid var(--border)">
-				  <z-badge label="row" size="small"></z-badge>
-				  <z-badge label="row" size="small"></z-badge>
+				  <z-badge label="row" size="sm"></z-badge>
+				  <z-badge label="row" size="sm"></z-badge>
 				</z-box>
 
 				<z-box is-column aligns-x="center" gap="2" padding="4" full-width style="border: 1px solid var(--border)">
-				  <z-badge label="column" size="small"></z-badge>
-				  <z-badge label="column" size="small"></z-badge>
+				  <z-badge label="column" size="sm"></z-badge>
+				  <z-badge label="column" size="sm"></z-badge>
 				</z-box>
 			`
 		}),
@@ -159,12 +159,12 @@ export const zBoxDoc: ComponentDocT = {
 			layout: ExampleLayout.fill,
 			markup: `
 				<z-box is-row wrap gap="2" style="max-width: 22rem">
-				  <z-badge label="typescript" size="small"></z-badge>
-				  <z-badge label="web-components" size="small"></z-badge>
-				  <z-badge label="design-system" size="small"></z-badge>
-				  <z-badge label="atomico" size="small"></z-badge>
-				  <z-badge label="shadow-dom" size="small"></z-badge>
-				  <z-badge label="css-tokens" size="small"></z-badge>
+				  <z-badge label="typescript" size="sm"></z-badge>
+				  <z-badge label="web-components" size="sm"></z-badge>
+				  <z-badge label="design-system" size="sm"></z-badge>
+				  <z-badge label="atomico" size="sm"></z-badge>
+				  <z-badge label="shadow-dom" size="sm"></z-badge>
+				  <z-badge label="css-tokens" size="sm"></z-badge>
 				</z-box>
 			`
 		}),
@@ -177,18 +177,18 @@ export const zBoxDoc: ComponentDocT = {
 			layout: ExampleLayout.fill,
 			markup: `
 				<z-box is-row gap="xs" padding="3" full-width style="border: 1px solid var(--border)">
-				  <z-badge label="gap=xs" size="small"></z-badge>
-				  <z-badge label="token" size="small"></z-badge>
+				  <z-badge label="gap=xs" size="sm"></z-badge>
+				  <z-badge label="token" size="sm"></z-badge>
 				</z-box>
 
 				<z-box is-row gap="6" padding="3" full-width style="border: 1px solid var(--border)">
-				  <z-badge label="gap=6" size="small"></z-badge>
-				  <z-badge label="spacing scale" size="small"></z-badge>
+				  <z-badge label="gap=6" size="sm"></z-badge>
+				  <z-badge label="spacing scale" size="sm"></z-badge>
 				</z-box>
 
 				<z-box is-row gap="2rem" padding="3" full-width style="border: 1px solid var(--border)">
-				  <z-badge label="gap=2rem" size="small"></z-badge>
-				  <z-badge label="raw length" size="small"></z-badge>
+				  <z-badge label="gap=2rem" size="sm"></z-badge>
+				  <z-badge label="raw length" size="sm"></z-badge>
 				</z-box>
 			`
 		}),
@@ -216,8 +216,8 @@ export const zBoxDoc: ComponentDocT = {
 				       style="border: 1px solid var(--border); border-radius: var(--radius-md)">
 				  <z-heading size="xs" tag="h3">Analytics</z-heading>
 				  <z-row gap="2">
-				    <z-button kind="ghost" size="small">Export</z-button>
-				    <z-button tone="primary" size="small">New report</z-button>
+				    <z-button kind="ghost" size="sm">Export</z-button>
+				    <z-button accent="dom" size="sm">New report</z-button>
 				  </z-row>
 				</z-box>
 			`

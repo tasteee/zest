@@ -10,7 +10,7 @@ const buildPlaygroundDrawer = (): HTMLElement => {
 	drawer.innerHTML = `
 		<z-button slot="trigger" kind="outline">Open drawer</z-button>
 		<z-field label="Link"><z-input is-readonly value="https://zest.app/f/8f2Ka91"></z-input></z-field>
-		<z-button slot="footer" kind="solid" tone="primary">Copy link</z-button>
+		<z-button slot="footer" kind="solid" accent="dom">Copy link</z-button>
 	`
 
 	return drawer
@@ -27,7 +27,7 @@ export const zDrawerDoc: ComponentDocT = {
 
 	playground: {
 		buildElement: buildPlaygroundDrawer,
-		controlNames: ['heading', 'description', 'tone', 'is-static'],
+		controlNames: ['heading', 'description', 'accent', 'is-static'],
 		slotLabel: 'trigger, body, and footer'
 	},
 
@@ -60,8 +60,8 @@ export const zDrawerDoc: ComponentDocT = {
 				  <z-field label="Link">
 				    <z-input is-readonly value="https://zest.app/f/8f2Ka91"></z-input>
 				  </z-field>
-				  <z-button slot="footer" kind="outline" tone="neutral">Change access</z-button>
-				  <z-button slot="footer" kind="solid" tone="primary">Copy link</z-button>
+				  <z-button slot="footer" kind="outline" accent="neutral">Change access</z-button>
+				  <z-button slot="footer" kind="solid" accent="dom">Copy link</z-button>
 				</z-drawer>
 			`
 		}),
@@ -76,11 +76,11 @@ export const zDrawerDoc: ComponentDocT = {
 				<z-drawer heading="Photo options">
 				  <z-button slot="trigger" kind="outline">Photo options</z-button>
 				  <z-column gap="2xs">
-				    <z-button kind="ghost" tone="neutral" is-full-width>Add to album</z-button>
-				    <z-button kind="ghost" tone="neutral" is-full-width>Duplicate</z-button>
-				    <z-button kind="ghost" tone="neutral" is-full-width>Download original</z-button>
+				    <z-button kind="ghost" accent="neutral" is-full-width>Add to album</z-button>
+				    <z-button kind="ghost" accent="neutral" is-full-width>Duplicate</z-button>
+				    <z-button kind="ghost" accent="neutral" is-full-width>Download original</z-button>
 				    <z-separator></z-separator>
-				    <z-button kind="ghost" tone="danger" is-full-width>Delete photo</z-button>
+				    <z-button kind="ghost" accent="error" is-full-width>Delete photo</z-button>
 				  </z-column>
 				</z-drawer>
 			`
@@ -94,7 +94,7 @@ export const zDrawerDoc: ComponentDocT = {
 			markup: `
 				<z-drawer heading="Now playing" description="Nocturne in E-flat major — Chopin">
 				  <z-button slot="trigger" kind="outline">Now playing</z-button>
-				  <z-slider label="Position" min="0" max="270" value="96" show-value value-suffix="s" tone="primary" style="width: 100%"></z-slider>
+				  <z-slider label="Position" min="0" max="270" value="96" show-value value-suffix="s" accent="dom" style="width: 100%"></z-slider>
 				</z-drawer>
 			`
 		}),
@@ -109,7 +109,7 @@ export const zDrawerDoc: ComponentDocT = {
 				<z-drawer is-static heading="Confirm your address" description="Tapping outside will not dismiss this.">
 				  <z-button slot="trigger" kind="outline">Confirm address</z-button>
 				  <z-field label="Street"><z-input placeholder="12 Rue de Rivoli"></z-input></z-field>
-				  <z-button slot="footer" kind="solid" tone="primary">Save address</z-button>
+				  <z-button slot="footer" kind="solid" accent="dom">Save address</z-button>
 				</z-drawer>
 			`
 		}),
@@ -124,9 +124,9 @@ export const zDrawerDoc: ComponentDocT = {
 				<z-drawer id="filtersDrawer" heading="Sort by">
 				  <z-button slot="trigger" kind="outline">Sort</z-button>
 				  <z-radio-group label="Sort by" value="recent">
-				    <z-radio value="recent" tone="primary" is-checked>Most recent</z-radio>
-				    <z-radio value="popular" tone="primary">Most popular</z-radio>
-				    <z-radio value="name" tone="primary">Name</z-radio>
+				    <z-radio value="recent" accent="dom" is-checked>Most recent</z-radio>
+				    <z-radio value="popular" accent="dom">Most popular</z-radio>
+				    <z-radio value="name" accent="dom">Name</z-radio>
 				  </z-radio-group>
 				</z-drawer>
 				<z-text size="sm" color="muted" id="drawerStatus">Closed.</z-text>
@@ -164,13 +164,13 @@ export const zDrawerDoc: ComponentDocT = {
 			layout: ExampleLayout.stack,
 			markup: `
 				<z-row gap="sm">
-				  <z-button id="rowOne" size="small" kind="outline">Tap “Sunset.jpg”</z-button>
-				  <z-button id="rowTwo" size="small" kind="outline">Tap “Notes.pdf”</z-button>
+				  <z-button id="rowOne" size="sm" kind="outline">Tap “Sunset.jpg”</z-button>
+				  <z-button id="rowTwo" size="sm" kind="outline">Tap “Notes.pdf”</z-button>
 				</z-row>
 				<z-drawer id="fileDrawer" heading="File options">
 				  <z-column gap="2xs">
-				    <z-button kind="ghost" tone="neutral" is-full-width>Rename</z-button>
-				    <z-button kind="ghost" tone="neutral" is-full-width>Move</z-button>
+				    <z-button kind="ghost" accent="neutral" is-full-width>Rename</z-button>
+				    <z-button kind="ghost" accent="neutral" is-full-width>Move</z-button>
 				  </z-column>
 				</z-drawer>
 			`,
@@ -204,7 +204,6 @@ export const zDrawerDoc: ComponentDocT = {
 		{ name: 'is-open', type: 'boolean', defaultValue: '—', description: 'Whether the drawer is showing. Reflects and is two-way.' },
 		{ name: 'heading', type: 'string', defaultValue: '—', description: 'Title in the header, and the drawer’s accessible name.' },
 		{ name: 'description', type: 'string', defaultValue: '—', description: 'A muted line under the heading.' },
-		{ name: 'tone', type: 'neutral | primary | secondary | danger', defaultValue: 'neutral', description: 'Accent used inside the panel chrome.' },
 		{ name: 'is-static', type: 'boolean', defaultValue: '—', description: 'Ignores backdrop clicks. The drag and Escape still dismiss.' },
 		{ name: 'is-disabled', type: 'boolean', defaultValue: '—', description: 'Stops the trigger from opening the drawer.' }
 	],

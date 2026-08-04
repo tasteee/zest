@@ -28,7 +28,7 @@ export const zPopoverDoc: ComponentDocT = {
 
 	playground: {
 		buildElement: buildPlaygroundPopover,
-		controlNames: ['placement', 'offset', 'tone', 'is-open', 'is-disabled'],
+		controlNames: ['placement', 'offset', 'accent', 'is-open', 'is-disabled'],
 		slotLabel: 'trigger and body'
 	},
 
@@ -120,7 +120,7 @@ export const zPopoverDoc: ComponentDocT = {
 				  <z-column gap="sm">
 				    <z-field label="Task"><z-input placeholder="Something to do"></z-input></z-field>
 				    <z-field label="Due"><z-input type="date"></z-input></z-field>
-				    <z-button kind="solid" tone="primary" size="small">Add task</z-button>
+				    <z-button kind="solid" accent="dom" size="sm">Add task</z-button>
 				  </z-column>
 				</z-popover>
 			`
@@ -149,7 +149,7 @@ export const zPopoverDoc: ComponentDocT = {
 			description: '`toggle` fires with the new open state whichever way it changed — the trigger, an outside click, or Escape.',
 			layout: ExampleLayout.stack,
 			markup: `
-				<z-popover id="statsPopover" tone="primary">
+				<z-popover id="statsPopover" accent="dom">
 				  <z-button slot="trigger" kind="outline">Usage this month</z-button>
 				  <z-column gap="xs">
 				    <z-text size="sm">128,400 requests</z-text>
@@ -184,9 +184,9 @@ export const zPopoverDoc: ComponentDocT = {
 			layout: ExampleLayout.stack,
 			markup: `
 				<z-row aligns-y="center" gap="sm">
-				  <z-button id="hintButton" size="small" kind="outline">Show the hint</z-button>
-				  <z-popover id="hintPopover" placement="right" tone="primary">
-				    <z-badge slot="trigger" tone="primary">New</z-badge>
+				  <z-button id="hintButton" size="sm" kind="outline">Show the hint</z-button>
+				  <z-popover id="hintPopover" placement="right" accent="dom">
+				    <z-badge slot="trigger" accent="dom">New</z-badge>
 				    <z-column gap="xs">
 				      <z-text size="sm">Filters moved here</z-text>
 				      <z-text size="xs" color="muted">Everything from the old sidebar, one click away.</z-text>
@@ -234,7 +234,7 @@ export const zPopoverDoc: ComponentDocT = {
 				  <z-column gap="md">
 				    <z-text size="sm" color="muted">Scroll this box — the panel follows its trigger.</z-text>
 				    <z-popover placement="right">
-				      <z-button slot="trigger" kind="outline" size="small">Open in here</z-button>
+				      <z-button slot="trigger" kind="outline" size="sm">Open in here</z-button>
 				      <z-text size="sm">Not clipped by the scroller.</z-text>
 				    </z-popover>
 				    <z-text size="sm" color="muted">More content.</z-text>
@@ -250,7 +250,7 @@ export const zPopoverDoc: ComponentDocT = {
 		{ name: 'placement', type: 'top | bottom | left | right | top-start | top-end | bottom-start | bottom-end | left-start | left-end | right-start | right-end', defaultValue: 'bottom', description: 'Preferred side and cross-axis alignment. Flips when there is no room.' },
 		{ name: 'offset', type: 'number', defaultValue: '8', description: 'Gap in pixels between the trigger and the panel.' },
 		{ name: 'is-open', type: 'boolean', defaultValue: '—', description: 'Whether the panel is showing. Reflects and is two-way — assign it to open or close from code.' },
-		{ name: 'tone', type: 'neutral | primary | secondary', defaultValue: 'neutral', description: 'Accent used inside the panel.' },
+		{ name: 'accent', type: 'neutral | dom | sub', defaultValue: 'neutral', description: 'Accent used inside the panel.' },
 		{ name: 'is-disabled', type: 'boolean', defaultValue: '—', description: 'Stops the trigger from opening the panel.' },
 		{ name: 'is-hidden', type: 'boolean', defaultValue: '—', description: 'Removes the popover and its trigger from layout.' }
 	],

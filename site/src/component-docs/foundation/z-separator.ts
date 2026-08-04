@@ -77,7 +77,7 @@ export const zSeparatorDoc: ComponentDocT = {
 			markup: `
 				<z-column gap="5" style="width: 24rem">
 				  <z-separator>
-				    <z-badge tone="primary" kind="soft" size="small" label="New"></z-badge>
+				    <z-badge accent="dom" kind="soft" size="sm" label="New"></z-badge>
 				  </z-separator>
 				  <z-separator>
 				    <z-label size="xs" color="muted">3 unread</z-label>
@@ -94,9 +94,9 @@ export const zSeparatorDoc: ComponentDocT = {
 			markup: `
 				<z-row gap="4" aligns-y="center" style="height: 3rem">
 				  <z-text size="sm">Overview</z-text>
-				  <z-separator is-vertical></z-separator>
+				  <z-separator direction></z-separator>
 				  <z-text size="sm">Activity</z-text>
-				  <z-separator is-vertical></z-separator>
+				  <z-separator direction></z-separator>
 				  <z-text size="sm">Settings</z-text>
 				</z-row>
 			`
@@ -109,7 +109,7 @@ export const zSeparatorDoc: ComponentDocT = {
 			layout: ExampleLayout.fill,
 			markup: `
 				<z-column gap="4" style="width: 20rem">
-				  <z-button tone="primary" is-full-width>Continue with email</z-button>
+				  <z-button accent="dom" is-full-width>Continue with email</z-button>
 				  <z-separator label="or"></z-separator>
 				  <z-button kind="outline" is-full-width>Continue with SSO</z-button>
 				</z-column>
@@ -134,7 +134,7 @@ export const zSeparatorDoc: ComponentDocT = {
 
 	attributes: [
 		{ name: 'label', type: 'string', defaultValue: '—', description: 'Text centred in the rule. Used when nothing is slotted.' },
-		{ name: 'is-vertical', type: 'boolean', defaultValue: '—', description: 'Renders a full-height vertical divider.' },
+		{ name: 'direction', type: 'boolean', defaultValue: '—', description: 'Renders a full-height vertical divider.' },
 		{ name: 'is-hidden', type: 'boolean', defaultValue: '—', description: 'Removes the separator from layout.' }
 	],
 
@@ -144,7 +144,7 @@ export const zSeparatorDoc: ComponentDocT = {
 	cssVariables: [],
 
 	accessibilityNotes: [
-		'Exposes role="separator" with aria-orientation matching the direction.',
+		'Exposes role="separator" with aria-direction matching the direction.',
 		'A labelled separator is announced with its label, so the text should describe the boundary — "Today" or "or", not decoration.',
 		'It is not focusable and not interactive; it marks a boundary and nothing more.',
 		'A separator carrying a date or an unread count is meaningful content sitting in a decorative element. If losing it would confuse a screen reader user, put it in a real heading instead.'

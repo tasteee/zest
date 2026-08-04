@@ -42,7 +42,7 @@ export const zComboboxDoc: ComponentDocT = {
 
 	playground: {
 		buildElement: buildPlaygroundCombobox,
-		controlNames: ['placeholder', 'size', 'tone', 'is-invalid', 'is-disabled', 'is-inline'],
+		controlNames: ['placeholder', 'size', 'accent', 'is-invalid', 'is-disabled', 'is-inline'],
 		slotLabel: 'options set as a property'
 	},
 
@@ -116,7 +116,7 @@ export const zComboboxDoc: ComponentDocT = {
 				'The case the component is for. Thirty-odd rows are a scroll in a select and two keystrokes here — try typing "gm" or "asia".',
 			layout: ExampleLayout.stack,
 			markup: `
-				<z-combobox id="timezoneCombobox" tone="primary" label="Timezone" placeholder="Search timezones…"></z-combobox>
+				<z-combobox id="timezoneCombobox" accent="dom" label="Timezone" placeholder="Search timezones…"></z-combobox>
 				<z-text size="sm" color="muted" id="timezoneStatus">No timezone selected.</z-text>
 			`,
 			script: `
@@ -163,14 +163,14 @@ export const zComboboxDoc: ComponentDocT = {
 		}),
 
 		defineInteractiveExample({
-			id: 'tones',
+			id: 'accents',
 			title: 'Tones',
 			description: 'Which accent the field border lifts to on focus, and which tint marks the selected row.',
 			layout: ExampleLayout.stack,
 			markup: `
-				<z-combobox id="neutralCombobox" tone="neutral" label="Neutral" placeholder="Neutral"></z-combobox>
-				<z-combobox id="primaryCombobox" tone="primary" label="Primary" placeholder="Primary"></z-combobox>
-				<z-combobox id="secondaryCombobox" tone="secondary" label="Secondary" placeholder="Secondary"></z-combobox>
+				<z-combobox id="neutralCombobox" accent="neutral" label="Neutral" placeholder="Neutral"></z-combobox>
+				<z-combobox id="primaryCombobox" accent="dom" label="Primary" placeholder="Primary"></z-combobox>
+				<z-combobox id="secondaryCombobox" accent="sub" label="Secondary" placeholder="Secondary"></z-combobox>
 			`,
 			script: `
 				for (const combobox of document.querySelectorAll('z-combobox')) {
@@ -196,9 +196,9 @@ export const zComboboxDoc: ComponentDocT = {
 			description: 'Three densities on the same scale as z-input, so a combobox and a text field sit on one baseline in a mixed form.',
 			layout: ExampleLayout.stack,
 			markup: `
-				<z-combobox class="sizedCombobox" size="small" label="Small" placeholder="Small"></z-combobox>
-				<z-combobox class="sizedCombobox" size="medium" label="Medium" placeholder="Medium"></z-combobox>
-				<z-combobox class="sizedCombobox" size="large" label="Large" placeholder="Large"></z-combobox>
+				<z-combobox class="sizedCombobox" size="sm" label="Small" placeholder="Small"></z-combobox>
+				<z-combobox class="sizedCombobox" size="md" label="Medium" placeholder="Medium"></z-combobox>
+				<z-combobox class="sizedCombobox" size="lg" label="Large" placeholder="Large"></z-combobox>
 			`,
 			script: `
 				for (const combobox of document.querySelectorAll('.sizedCombobox')) {
@@ -247,7 +247,7 @@ export const zComboboxDoc: ComponentDocT = {
 			layout: ExampleLayout.stack,
 			markup: `
 				<z-field label="Primary framework" description="Used to pick which starter templates we show you.">
-				  <z-combobox id="fieldCombobox" tone="primary" placeholder="Search frameworks…"></z-combobox>
+				  <z-combobox id="fieldCombobox" accent="dom" placeholder="Search frameworks…"></z-combobox>
 				</z-field>
 			`,
 			script: `
@@ -264,8 +264,8 @@ export const zComboboxDoc: ComponentDocT = {
 		{ name: 'value', type: 'string', defaultValue: '—', description: 'The committed option’s value. Reflects, so it is both the seed and the live answer.' },
 		{ name: 'label', type: 'string', defaultValue: '—', description: 'Accessible name for the field. Set for you inside a z-field.' },
 		{ name: 'placeholder', type: 'string', defaultValue: 'Search…', description: 'Shown while the field is empty and nothing is selected.' },
-		{ name: 'size', type: 'small | medium | large', defaultValue: 'medium', description: 'Control density, on the same scale as z-input.' },
-		{ name: 'tone', type: 'neutral | primary | secondary', defaultValue: 'neutral', description: 'Accent family for the focus border and the selected row.' },
+		{ name: 'size', type: 'sm | md | lg', defaultValue: 'md', description: 'Control density, on the same scale as z-input.' },
+		{ name: 'accent', type: 'neutral | dom | sub', defaultValue: 'neutral', description: 'Accent family for the focus border and the selected row.' },
 		{ name: 'is-invalid', type: 'boolean', defaultValue: '—', description: 'Paints the error border and sets aria-invalid on the field.' },
 		{ name: 'is-disabled', type: 'boolean', defaultValue: '—', description: 'Blocks typing and opening, and removes the field from the tab order.' },
 		{ name: 'is-inline', type: 'boolean', defaultValue: '—', description: 'Shrinks the field to its natural width instead of filling its container.' },

@@ -18,11 +18,11 @@ export const zContainerDoc: ComponentDocT = {
 	status: ComponentStatus.stable,
 
 	description:
-		'The element that stops a page from spanning the full width of a large monitor. It caps its own width, centres itself, and adds horizontal gutters so content never touches the viewport edge. Centring is the default rather than an opt-in — the `center` attribute exists for API completeness, not because you need to set it. When a page band already exists, `z-section` can fold this behaviour in through its own `container` prop and save you the nested element.',
+		'The element that stops a page from spanning the full width of a large monitor. It caps its own width, centres itself, and adds horizontal gutters so content never touches the viewport edge. Centring is the default rather than an opt-in — the `isCentered` attribute exists for API completeness, not because you need to set it. When a page band already exists, `z-section` can fold this behaviour in through its own `container` prop and save you the nested element.',
 
 	playground: {
 		buildElement: buildPlaygroundContainer,
-		controlNames: ['size', 'gutter', 'full-height'],
+		controlNames: ['size', 'gutter', 'is-full-height'],
 		slotLabel: 'Page content'
 	},
 
@@ -150,12 +150,12 @@ export const zContainerDoc: ComponentDocT = {
 		},
 		{ name: 'gutter', type: 'string', defaultValue: '—', description: 'Left and right padding. Size token, bare number, or length.' },
 		{
-			name: 'center',
+			name: 'isCentered',
 			type: 'boolean',
 			defaultValue: 'centered',
 			description: 'Declared for API completeness — the container is centred already.'
 		},
-		{ name: 'full-height', type: 'boolean', defaultValue: '—', description: 'min-height: 100%.' }
+		{ name: 'is-full-height', type: 'boolean', defaultValue: '—', description: 'min-height: 100%.' }
 	],
 
 	properties: [],
@@ -172,7 +172,7 @@ export const zContainerDoc: ComponentDocT = {
 
 	related: [
 		{ tag: 'z-section', route: '/c/layout/z-section', description: 'A page band that can fold this in.' },
-		{ tag: 'z-center', route: '/c/layout/z-center', description: 'Caps the content rather than the container.' },
+		{ tag: 'z-isCentered', route: '/c/layout/z-isCentered', description: 'Caps the content rather than the container.' },
 		{ tag: 'z-column', route: '/c/layout/z-column', description: 'Stacking the content inside.' }
 	]
 }

@@ -7,10 +7,10 @@ const buildPlaygroundAlertDialog = (): HTMLElement => {
 	alertDialog.setAttribute('heading', 'Delete this project?')
 	alertDialog.setAttribute('description', 'Everything in it will be removed. This cannot be undone.')
 	alertDialog.setAttribute('confirm-label', 'Delete project')
-	alertDialog.setAttribute('tone', 'danger')
+	alertDialog.setAttribute('accent', 'error')
 
 	alertDialog.innerHTML = `
-		<z-button slot="trigger" kind="outline" tone="neutral">Delete project</z-button>
+		<z-button slot="trigger" kind="outline" accent="neutral">Delete project</z-button>
 	`
 
 	return alertDialog
@@ -23,11 +23,11 @@ export const zAlertDialogDoc: ComponentDocT = {
 	status: ComponentStatus.stable,
 
 	description:
-		'Same native `<dialog>` foundation as `z-dialog`, with two deliberate differences. It owns its actions — a cancel and a confirm, no free-form footer — and it refuses light dismissal: a backdrop click does nothing, and Escape resolves as an explicit cancel rather than an ambiguous close. That is the right shape for a consequential choice, because "the user clicked somewhere" should never be recorded as an answer. `tone="danger"` paints the confirm in the destructive colour.',
+		'Same native `<dialog>` foundation as `z-dialog`, with two deliberate differences. It owns its actions — a cancel and a confirm, no free-form footer — and it refuses light dismissal: a backdrop click does nothing, and Escape resolves as an explicit cancel rather than an ambiguous close. That is the right shape for a consequential choice, because "the user clicked somewhere" should never be recorded as an answer. `accent="error"` paints the confirm in the destructive colour.',
 
 	playground: {
 		buildElement: buildPlaygroundAlertDialog,
-		controlNames: ['heading', 'description', 'confirm-label', 'cancel-label', 'tone'],
+		controlNames: ['heading', 'description', 'confirm-label', 'cancel-label', 'accent'],
 		slotLabel: 'trigger slot'
 	},
 
@@ -35,7 +35,7 @@ export const zAlertDialogDoc: ComponentDocT = {
 		'Reserve it for decisions that are hard or impossible to undo — deleting, revoking, discarding unsaved work, anything that leaves the building.',
 		'Name the consequence in the confirm button. "Delete project" is answerable; "OK" makes the user re-read the heading to find out what they are agreeing to.',
 		'Ask the question in the heading, and put the consequence in the description. "Delete this project?" then "Everything in it will be removed. This cannot be undone."',
-		'Use `tone="danger"` when the action destroys something. Save the red for cases that deserve it — a red button on every confirmation teaches people to ignore red.',
+		'Use `accent="error"` when the action destroys something. Save the red for cases that deserve it — a red button on every confirmation teaches people to ignore red.',
 		'If the action is undoable, do not ask at all. Perform it and offer an undo in a `z-toast`; that is faster for the ninety-nine per cent who meant it.',
 		'One question per dialog. If confirming needs a form — typing a project name, choosing what to keep — that is a `z-dialog`, not this.'
 	],
@@ -59,31 +59,31 @@ export const zAlertDialogDoc: ComponentDocT = {
 				  heading="Delete this project?"
 				  description="Everything in it will be removed. This cannot be undone."
 				  confirm-label="Delete project"
-				  tone="danger">
-				  <z-button slot="trigger" kind="outline" tone="neutral">Delete project</z-button>
+				  accent="error">
+				  <z-button slot="trigger" kind="outline" accent="neutral">Delete project</z-button>
 				</z-alert-dialog>
 			`
 		}),
 
 		defineMarkupExample({
-			id: 'tones',
+			id: 'accents',
 			title: 'Tones',
 			description:
-				'The tone paints the confirm button. Danger for destruction, primary for a consequential but constructive choice — publishing, sending, going live.',
+				'The accent paints the confirm button. Danger for destruction, primary for a consequential but constructive choice — publishing, sending, going live.',
 			layout: ExampleLayout.start,
 			markup: `
 				<z-alert-dialog
 				  heading="Publish to production?"
 				  description="Everyone on the plan will see this change immediately."
 				  confirm-label="Publish"
-				  tone="primary">
+				  accent="dom">
 				  <z-button slot="trigger" kind="outline">Primary</z-button>
 				</z-alert-dialog>
 				<z-alert-dialog
 				  heading="Revoke this API key?"
 				  description="Anything using it will stop working within a minute."
 				  confirm-label="Revoke key"
-				  tone="danger">
+				  accent="error">
 				  <z-button slot="trigger" kind="outline">Danger</z-button>
 				</z-alert-dialog>
 			`
@@ -101,8 +101,8 @@ export const zAlertDialogDoc: ComponentDocT = {
 				  description="You have unsaved edits to three files."
 				  cancel-label="Keep editing"
 				  confirm-label="Discard changes"
-				  tone="danger">
-				  <z-button slot="trigger" kind="outline" tone="neutral">Close without saving</z-button>
+				  accent="error">
+				  <z-button slot="trigger" kind="outline" accent="neutral">Close without saving</z-button>
 				</z-alert-dialog>
 			`
 		}),
@@ -117,8 +117,8 @@ export const zAlertDialogDoc: ComponentDocT = {
 				  heading="Remove Ada from this workspace?"
 				  description="She will lose access immediately."
 				  confirm-label="Remove member"
-				  tone="danger">
-				  <z-button slot="trigger" kind="outline" tone="neutral">Remove member</z-button>
+				  accent="error">
+				  <z-button slot="trigger" kind="outline" accent="neutral">Remove member</z-button>
 				  <z-text size="sm" color="muted">Her 14 open issues stay assigned to her and will need reassigning.</z-text>
 				</z-alert-dialog>
 			`
@@ -136,8 +136,8 @@ export const zAlertDialogDoc: ComponentDocT = {
 				  heading="Revoke this API key?"
 				  description="Anything using it will stop working within a minute."
 				  confirm-label="Revoke key"
-				  tone="danger">
-				  <z-button slot="trigger" kind="outline" tone="neutral">Revoke key</z-button>
+				  accent="error">
+				  <z-button slot="trigger" kind="outline" accent="neutral">Revoke key</z-button>
 				</z-alert-dialog>
 				<z-text size="sm" color="muted" id="revokeStatus">Key is active.</z-text>
 			`,
@@ -175,10 +175,10 @@ export const zAlertDialogDoc: ComponentDocT = {
 			layout: ExampleLayout.stack,
 			markup: `
 				<z-row gap="sm">
-				  <z-button id="deleteRowOne" size="small" kind="outline" tone="neutral">Delete “Q3 report”</z-button>
-				  <z-button id="deleteRowTwo" size="small" kind="outline" tone="neutral">Delete “Roadmap”</z-button>
+				  <z-button id="deleteRowOne" size="sm" kind="outline" accent="neutral">Delete “Q3 report”</z-button>
+				  <z-button id="deleteRowTwo" size="sm" kind="outline" accent="neutral">Delete “Roadmap”</z-button>
 				</z-row>
-				<z-alert-dialog id="deleteDialog" heading="Delete this file?" confirm-label="Delete" tone="danger"></z-alert-dialog>
+				<z-alert-dialog id="deleteDialog" heading="Delete this file?" confirm-label="Delete" accent="error"></z-alert-dialog>
 				<z-text size="sm" color="muted" id="deleteStatus">Nothing deleted.</z-text>
 			`,
 			script: `
@@ -231,7 +231,7 @@ export const zAlertDialogDoc: ComponentDocT = {
 		{ name: 'description', type: 'string', defaultValue: '—', description: 'The consequence, in muted type under the heading.' },
 		{ name: 'confirm-label', type: 'string', defaultValue: 'Confirm', description: 'Label of the confirming action. Name the consequence here.' },
 		{ name: 'cancel-label', type: 'string', defaultValue: 'Cancel', description: 'Label of the declining action.' },
-		{ name: 'tone', type: 'primary | secondary | danger', defaultValue: 'primary', description: 'Colour of the confirm button.' }
+		{ name: 'accent', type: 'dom | sub | error', defaultValue: 'dom', description: 'Colour of the confirm button.' }
 	],
 
 	properties: [],

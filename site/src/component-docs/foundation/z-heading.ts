@@ -76,8 +76,8 @@ export const zHeadingDoc: ComponentDocT = {
 			layout: ExampleLayout.fill,
 			markup: `
 				<z-heading size="lg" color="neutral">Neutral</z-heading>
-				<z-heading size="lg" color="primary">Primary</z-heading>
-				<z-heading size="lg" color="secondary">Secondary</z-heading>
+				<z-heading size="lg" color="dom">Primary</z-heading>
+				<z-heading size="lg" color="sub">Secondary</z-heading>
 				<z-heading size="lg" color="muted">Muted</z-heading>
 			`
 		}),

@@ -26,7 +26,7 @@ export const zGridDoc: ComponentDocT = {
 
 	playground: {
 		buildElement: buildPlaygroundGrid,
-		controlNames: ['columns', 'min-column-width', 'gap', 'aligns-x', 'aligns-y', 'full-width'],
+		controlNames: ['columns', 'min-column-width', 'gap', 'aligns-x', 'aligns-y', 'is-full-width'],
 		slotLabel: 'Three cards'
 	},
 
@@ -185,7 +185,7 @@ export const zGridDoc: ComponentDocT = {
 			defaultValue: 'stretch',
 			description: 'Item alignment within its cell, vertically.'
 		},
-		{ name: 'full-width', type: 'boolean', defaultValue: '—', description: 'width: 100%.' },
+		{ name: 'is-full-width', type: 'boolean', defaultValue: '—', description: 'width: 100%.' },
 		{ name: 'inset', type: 'string', defaultValue: '—', description: 'Inner padding on every edge.' },
 		{ name: 'inset-x', type: 'string', defaultValue: '—', description: 'Inner padding on the left and right.' },
 		{ name: 'inset-y', type: 'string', defaultValue: '—', description: 'Inner padding on the top and bottom.' }

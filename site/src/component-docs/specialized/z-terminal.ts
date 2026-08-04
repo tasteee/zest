@@ -64,19 +64,19 @@ export const zTerminalDoc: ComponentDocT = {
 	status: ComponentStatus.stable,
 
 	description:
-		'A chrome-styled shell window for install steps and CLI usage — no line numbers, no syntax highlighting, and a seamless header, so it reads as a session rather than a source file. Lines opening with the `prompt` marker are treated as commands: they copy on hover, minus the marker. Add `animate` and the same content plays back as a live session, commands typing out under a blinking caret and output fading in behind them. Give the window a `width` and `height` and it holds that footprint — a long run scrolls inside it instead of pushing the page around.',
+		'A chrome-styled shell window for install steps and CLI usage — no line numbers, no syntax highlighting, and a seamless header, so it reads as a session rather than a source file. Lines opening with the `prompt` marker are treated as commands: they copy on hover, minus the marker. Add `doesAnimate` and the same content plays back as a live session, commands typing out under a blinking caret and output fading in behind them. Give the window a `width` and `height` and it holds that footprint — a long run scrolls inside it instead of pushing the page around.',
 
 	playground: {
 		buildElement: buildPlaygroundTerminal,
-		controlNames: ['shell', 'cwd', 'prompt', 'copy-lines', 'width', 'height', 'max-height', 'animate', 'loop', 'hide-replay', 'no-auto-scroll', 'tone'],
+		controlNames: ['shell', 'cwd', 'prompt', 'copy-lines', 'width', 'height', 'max-height', 'doesAnimate', 'doesLoop', 'has-replay', 'does-auto-scroll', 'accent'],
 		slotLabel: 'code set as a property'
 	},
 
 	usageGuidance: [
 		'Set `code` as a **property**, not an attribute. Whitespace is the content here, and an attribute round-trips it through HTML parsing.',
 		'Reach for this over `z-code-block` when the subject is a session — things you type and what comes back. For a file you would open in an editor, the code block is the honest frame.',
-		'`animate` is for the top of a landing or getting-started page, where the point is what the tool feels like. Inside reference docs it costs the reader time they did not ask to spend.',
-		'Pair `animate` with `start-on-view` so a run below the fold does not finish before anyone sees it.',
+		'`doesAnimate` is for the top of a landing or getting-started page, where the point is what the tool feels like. Inside reference docs it costs the reader time they did not ask to spend.',
+		'Pair `doesAnimate` with `does-start-on-view` so a run below the fold does not finish before anyone sees it.',
 		'Give an animated terminal a `height`. Without one, the window grows line by line and shoves the page down mid-read.',
 		'`copy-lines="none"` suits pasted output — a log or a stack trace has nothing worth copying line by line.'
 	],
@@ -176,10 +176,10 @@ export const zTerminalDoc: ComponentDocT = {
 			id: 'animated',
 			title: 'Animated session',
 			description:
-				'`animate` plays the content back: commands type out under a blinking caret, output fades in, and only one line reveals at a time. The replay control appears bottom-right when the run ends.',
+				'`doesAnimate` plays the content back: commands type out under a blinking caret, output fades in, and only one line reveals at a time. The replay control appears bottom-right when the run ends.',
 			layout: ExampleLayout.fill,
 			markup: `
-				<z-terminal id="animatedTerminal" shell="zsh" cwd="~/app" animate start-on-view loop></z-terminal>
+				<z-terminal id="animatedTerminal" shell="zsh" cwd="~/app" doesAnimate does-start-on-view doesLoop></z-terminal>
 			`,
 			script: `
 				const animatedTerminal = document.querySelector('#animatedTerminal')
@@ -201,10 +201,10 @@ export const zTerminalDoc: ComponentDocT = {
 			id: 'animated-in-a-box',
 			title: 'A long run in a sized window',
 			description:
-				'A sized terminal never grows as an animated run reveals lines — it scrolls, following the playhead so the newest line stays in view. Add `no-auto-scroll` to leave the scroll position to the reader.',
+				'A sized terminal never grows as an animated run reveals lines — it scrolls, following the playhead so the newest line stays in view. Add `does-auto-scroll` to leave the scroll position to the reader.',
 			layout: ExampleLayout.fill,
 			markup: `
-				<z-terminal id="scrollingTerminal" shell="zsh" cwd="~/app" width="34rem" height="9rem" animate loop start-on-view></z-terminal>
+				<z-terminal id="scrollingTerminal" shell="zsh" cwd="~/app" width="34rem" height="9rem" doesAnimate doesLoop does-start-on-view></z-terminal>
 			`,
 			script: `
 				const scrollingTerminal = document.querySelector('#scrollingTerminal')
@@ -234,7 +234,7 @@ export const zTerminalDoc: ComponentDocT = {
 				'Set `lines` instead of `code` to control each step. `delay` is the pause **before** a line begins, so a slow build can hold while the rest of the run stays brisk.',
 			layout: ExampleLayout.fill,
 			markup: `
-				<z-terminal id="timedTerminal" shell="zsh" cwd="~/app" width="34rem" height="9rem" animate loop start-on-view></z-terminal>
+				<z-terminal id="timedTerminal" shell="zsh" cwd="~/app" width="34rem" height="9rem" doesAnimate doesLoop does-start-on-view></z-terminal>
 			`,
 			script: `
 				const timedTerminal = document.querySelector('#timedTerminal')
@@ -264,12 +264,12 @@ export const zTerminalDoc: ComponentDocT = {
 			description: 'Playback is exposed as methods, so a run can be driven by your own UI instead of the built-in replay control.',
 			layout: ExampleLayout.stack,
 			markup: `
-				<z-terminal id="controlledTerminal" shell="zsh" cwd="~/app" width="34rem" height="9rem" animate loop hide-replay></z-terminal>
+				<z-terminal id="controlledTerminal" shell="zsh" cwd="~/app" width="34rem" height="9rem" doesAnimate doesLoop has-replay></z-terminal>
 
 				<z-row gap="2">
-				  <z-button id="playButton" size="small" kind="outline" label="Play"></z-button>
-				  <z-button id="pauseButton" size="small" kind="outline" label="Pause"></z-button>
-				  <z-button id="restartButton" size="small" kind="outline" label="Restart"></z-button>
+				  <z-button id="playButton" size="sm" kind="outline" label="Play"></z-button>
+				  <z-button id="pauseButton" size="sm" kind="outline" label="Pause"></z-button>
+				  <z-button id="restartButton" size="sm" kind="outline" label="Restart"></z-button>
 				</z-row>
 			`,
 			script: `
@@ -297,21 +297,21 @@ export const zTerminalDoc: ComponentDocT = {
 		}),
 
 		defineInteractiveExample({
-			id: 'tones',
+			id: 'accents',
 			title: 'Tones',
 			description: 'The accent colors the prompt marker, the shell label, and the typing caret. Green by default; `secondary` swaps in purple.',
 			layout: ExampleLayout.fill,
 			markup: `
-				<z-terminal class="tonedTerminal" shell="zsh" cwd="~/app" width="34rem"></z-terminal>
-				<z-terminal class="tonedTerminal" shell="zsh" cwd="~/app" width="34rem" tone="secondary"></z-terminal>
+				<z-terminal class="accentedTerminal" shell="zsh" cwd="~/app" width="34rem"></z-terminal>
+				<z-terminal class="accentedTerminal" shell="zsh" cwd="~/app" width="34rem" accent="sub"></z-terminal>
 			`,
 			script: `
-				for (const terminal of document.querySelectorAll('.tonedTerminal')) {
+				for (const terminal of document.querySelectorAll('.accentedTerminal')) {
 				  terminal.code = installSource
 				}
 			`,
 			wire: (root) => {
-				const terminals = queryAllPreview<TerminalElementT>(root, '.tonedTerminal')
+				const terminals = queryAllPreview<TerminalElementT>(root, '.accentedTerminal')
 				for (const terminal of terminals) {
 					terminal.code = INSTALL_SOURCE
 				}
@@ -327,16 +327,16 @@ export const zTerminalDoc: ComponentDocT = {
 		{ name: 'width', type: 'string', defaultValue: '—', description: 'CSS length for the window width.' },
 		{ name: 'height', type: 'string', defaultValue: '—', description: 'CSS length that pins the window height; the body scrolls inside it.' },
 		{ name: 'max-height', type: 'string', defaultValue: '—', description: 'CSS length that caps growth rather than fixing the height.' },
-		{ name: 'animate', type: 'boolean', defaultValue: '—', description: 'Play the content back as a typed and faded simulation.' },
-		{ name: 'start-on-view', type: 'boolean', defaultValue: '—', description: 'Wait until the terminal scrolls into view before playing.' },
+		{ name: 'doesAnimate', type: 'boolean', defaultValue: '—', description: 'Play the content back as a typed and faded simulation.' },
+		{ name: 'does-start-on-view', type: 'boolean', defaultValue: '—', description: 'Wait until the terminal scrolls into view before playing.' },
 		{ name: 'type-speed', type: 'number', defaultValue: '55', description: 'Milliseconds per character for typed commands.' },
 		{ name: 'line-delay', type: 'number', defaultValue: '380', description: 'Milliseconds of gap before each line reveals.' },
 		{ name: 'fade-duration', type: 'number', defaultValue: '240', description: 'Milliseconds for an output line to fade in.' },
-		{ name: 'loop', type: 'boolean', defaultValue: '—', description: 'Restart automatically after the last line.' },
+		{ name: 'doesLoop', type: 'boolean', defaultValue: '—', description: 'Restart automatically after the last line.' },
 		{ name: 'loop-delay', type: 'number', defaultValue: '2200', description: 'Milliseconds to wait before an auto-restart.' },
-		{ name: 'hide-replay', type: 'boolean', defaultValue: '—', description: 'Suppress the bottom-right replay control.' },
-		{ name: 'no-auto-scroll', type: 'boolean', defaultValue: '—', description: 'Do not follow the playhead while an animated run plays.' },
-		{ name: 'tone', type: 'primary | secondary', defaultValue: 'primary', description: 'Accent color for the prompt, shell label, and caret.' },
+		{ name: 'has-replay', type: 'boolean', defaultValue: '—', description: 'Suppress the bottom-right replay control.' },
+		{ name: 'does-auto-scroll', type: 'boolean', defaultValue: '—', description: 'Do not follow the playhead while an animated run plays.' },
+		{ name: 'accent', type: 'dom | sub', defaultValue: 'dom', description: 'Accent color for the prompt, shell label, and caret.' },
 		{ name: 'is-hidden', type: 'boolean', defaultValue: '—', description: 'Hide the element.' }
 	],
 

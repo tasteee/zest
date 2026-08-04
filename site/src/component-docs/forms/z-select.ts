@@ -39,7 +39,7 @@ export const zSelectDoc: ComponentDocT = {
 
 	playground: {
 		buildElement: buildPlaygroundSelect,
-		controlNames: ['placeholder', 'size', 'tone', 'is-invalid', 'is-disabled', 'is-inline'],
+		controlNames: ['placeholder', 'size', 'accent', 'is-invalid', 'is-disabled', 'is-inline'],
 		slotLabel: 'options set as a property'
 	},
 
@@ -111,9 +111,9 @@ export const zSelectDoc: ComponentDocT = {
 			description: 'Three densities, matched to z-input and z-button so a row of mixed controls sits on one baseline.',
 			layout: ExampleLayout.stack,
 			markup: `
-				<z-select class="sizedSelect" size="small" label="Small" placeholder="Small"></z-select>
-				<z-select class="sizedSelect" size="medium" label="Medium" placeholder="Medium"></z-select>
-				<z-select class="sizedSelect" size="large" label="Large" placeholder="Large"></z-select>
+				<z-select class="sizedSelect" size="sm" label="Small" placeholder="Small"></z-select>
+				<z-select class="sizedSelect" size="md" label="Medium" placeholder="Medium"></z-select>
+				<z-select class="sizedSelect" size="lg" label="Large" placeholder="Large"></z-select>
 			`,
 			script: `
 				for (const select of document.querySelectorAll('.sizedSelect')) {
@@ -189,7 +189,7 @@ export const zSelectDoc: ComponentDocT = {
 			description: '`change` fires once, when an option is committed — not while arrowing through the list. Moving the highlight is not choosing.',
 			layout: ExampleLayout.stack,
 			markup: `
-				<z-select id="regionSelect" tone="primary" label="Region" placeholder="Choose a region"></z-select>
+				<z-select id="regionSelect" accent="dom" label="Region" placeholder="Choose a region"></z-select>
 				<z-text size="sm" color="muted" id="regionStatus">No region selected.</z-text>
 			`,
 			script: `
@@ -228,8 +228,8 @@ export const zSelectDoc: ComponentDocT = {
 				'The second list is rebuilt from the first answer. Clearing its value on every change matters — a stale selection that no longer exists in the new list is worse than an empty one.',
 			layout: ExampleLayout.stack,
 			markup: `
-				<z-select id="countrySelect" tone="primary" label="Country" placeholder="Choose a country"></z-select>
-				<z-select id="citySelect" tone="primary" label="City" placeholder="Choose a country first" is-disabled></z-select>
+				<z-select id="countrySelect" accent="dom" label="Country" placeholder="Choose a country"></z-select>
+				<z-select id="citySelect" accent="dom" label="City" placeholder="Choose a country first" is-disabled></z-select>
 			`,
 			script: `
 				const countrySelect = document.querySelector('#countrySelect')
@@ -278,8 +278,8 @@ export const zSelectDoc: ComponentDocT = {
 		{ name: 'value', type: 'string', defaultValue: '—', description: 'The selected option’s value. Reflects, so it is both the seed and the live answer.' },
 		{ name: 'label', type: 'string', defaultValue: '—', description: 'Accessible name for the trigger. Set for you inside a z-field.' },
 		{ name: 'placeholder', type: 'string', defaultValue: 'Select…', description: 'Shown in muted type while nothing is selected.' },
-		{ name: 'size', type: 'small | medium | large', defaultValue: 'medium', description: 'Control density.' },
-		{ name: 'tone', type: 'neutral | primary | secondary', defaultValue: 'neutral', description: 'Accent family for the focus border and the selected row.' },
+		{ name: 'size', type: 'sm | md | lg', defaultValue: 'md', description: 'Control density.' },
+		{ name: 'accent', type: 'neutral | dom | sub', defaultValue: 'neutral', description: 'Accent family for the focus border and the selected row.' },
 		{ name: 'is-invalid', type: 'boolean', defaultValue: '—', description: 'Paints the error border on the trigger.' },
 		{ name: 'is-disabled', type: 'boolean', defaultValue: '—', description: 'Blocks opening and removes the trigger from the tab order.' },
 		{ name: 'is-inline', type: 'boolean', defaultValue: '—', description: 'Shrinks the trigger to its natural width instead of filling its container.' },

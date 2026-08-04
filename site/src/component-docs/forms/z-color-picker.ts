@@ -24,7 +24,7 @@ export const zColorPickerDoc: ComponentDocT = {
 
 	playground: {
 		buildElement: buildPlaygroundColorPicker,
-		controlNames: ['value', 'label', 'tone', 'is-disabled'],
+		controlNames: ['value', 'label', 'accent', 'is-disabled'],
 		slotLabel: 'swatch trigger'
 	},
 
@@ -76,14 +76,14 @@ export const zColorPickerDoc: ComponentDocT = {
 		}),
 
 		defineMarkupExample({
-			id: 'tones',
+			id: 'accents',
 			title: 'Tones',
-			description: 'The tone colours the trigger’s focus treatment — not the swatch, which always shows the actual value.',
+			description: 'The accent colours the trigger’s focus treatment — not the swatch, which always shows the actual value.',
 			layout: ExampleLayout.start,
 			markup: `
-				<z-color-picker tone="neutral" value="#A0A0A0"></z-color-picker>
-				<z-color-picker tone="primary" value="#BF40BF"></z-color-picker>
-				<z-color-picker tone="secondary" value="#FF1493"></z-color-picker>
+				<z-color-picker accent="neutral" value="#A0A0A0"></z-color-picker>
+				<z-color-picker accent="dom" value="#BF40BF"></z-color-picker>
+				<z-color-picker accent="sub" value="#FF1493"></z-color-picker>
 			`
 		}),
 
@@ -161,7 +161,7 @@ export const zColorPickerDoc: ComponentDocT = {
 			defaultValue: '—',
 			description: 'Names what is being coloured. Announced ahead of the hex, so the value is not lost. Set for you inside a z-field.'
 		},
-		{ name: 'tone', type: 'neutral | primary | secondary', defaultValue: 'neutral', description: 'Accent for the trigger’s focus treatment.' },
+		{ name: 'accent', type: 'neutral | dom | sub', defaultValue: 'neutral', description: 'Accent for the trigger’s focus treatment.' },
 		{ name: 'is-disabled', type: 'boolean', defaultValue: '—', description: 'Blocks opening the panel.' },
 		{ name: 'is-hidden', type: 'boolean', defaultValue: '—', description: 'Removes the picker from layout.' }
 	],

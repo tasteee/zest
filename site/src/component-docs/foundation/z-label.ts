@@ -58,8 +58,8 @@ export const zLabelDoc: ComponentDocT = {
 			markup: `
 				<z-label color="neutral">Neutral</z-label>
 				<z-label color="muted">Muted</z-label>
-				<z-label color="primary">Primary</z-label>
-				<z-label color="secondary">Secondary</z-label>
+				<z-label color="dom">Primary</z-label>
+				<z-label color="sub">Secondary</z-label>
 			`
 		}),
 
@@ -94,7 +94,7 @@ export const zLabelDoc: ComponentDocT = {
 			markup: `
 				<z-row gap="2" aligns-y="center">
 				  <z-label size="sm">Deployment</z-label>
-				  <z-badge tone="success" kind="soft" label="Live" size="small"></z-badge>
+				  <z-badge color="success" kind="soft" label="Live" size="sm"></z-badge>
 				</z-row>
 			`
 		}),

@@ -24,7 +24,7 @@ export const zTooltipDoc: ComponentDocT = {
 
 	playground: {
 		buildElement: buildPlaygroundTooltip,
-		controlNames: ['content', 'placement', 'offset', 'open-delay', 'tone', 'is-disabled'],
+		controlNames: ['content', 'placement', 'offset', 'open-delay', 'accent', 'is-disabled'],
 		slotLabel: 'the trigger element'
 	},
 
@@ -118,18 +118,18 @@ export const zTooltipDoc: ComponentDocT = {
 		}),
 
 		defineMarkupExample({
-			id: 'tones',
+			id: 'accents',
 			title: 'Tones',
 			description: 'The accent used inside the label. Neutral suits almost everything; reserve the others for a tooltip that carries a warning.',
 			layout: ExampleLayout.start,
 			markup: `
-				<z-tooltip content="Neutral" tone="neutral">
+				<z-tooltip content="Neutral" accent="neutral">
 				  <z-button kind="outline">Neutral</z-button>
 				</z-tooltip>
-				<z-tooltip content="Primary" tone="primary">
+				<z-tooltip content="Primary" accent="dom">
 				  <z-button kind="outline">Primary</z-button>
 				</z-tooltip>
-				<z-tooltip content="Secondary" tone="secondary">
+				<z-tooltip content="Secondary" accent="sub">
 				  <z-button kind="outline">Secondary</z-button>
 				</z-tooltip>
 			`
@@ -146,7 +146,7 @@ export const zTooltipDoc: ComponentDocT = {
 				  <z-text size="sm" style="max-width: 12rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; display: block">ada.lovelace@analytical-engine.example.com</z-text>
 				</z-tooltip>
 				<z-tooltip content="Deployed 4 minutes ago">
-				  <z-badge tone="success">Live</z-badge>
+				  <z-badge accent="success">Live</z-badge>
 				</z-tooltip>
 			`
 		}),
@@ -192,7 +192,7 @@ export const zTooltipDoc: ComponentDocT = {
 		{ name: 'placement', type: 'top | bottom | left | right | top-start | top-end | bottom-start | bottom-end | left-start | left-end | right-start | right-end', defaultValue: 'top', description: 'Preferred side and alignment. Flips when there is no room.' },
 		{ name: 'offset', type: 'number', defaultValue: '8', description: 'Gap in pixels between the trigger and the label.' },
 		{ name: 'open-delay', type: 'number', defaultValue: '150', description: 'Milliseconds to wait before opening.' },
-		{ name: 'tone', type: 'neutral | primary | secondary', defaultValue: 'neutral', description: 'Accent used inside the label.' },
+		{ name: 'accent', type: 'neutral | dom | sub', defaultValue: 'neutral', description: 'Accent used inside the label.' },
 		{ name: 'is-disabled', type: 'boolean', defaultValue: '—', description: 'Stops the tooltip from opening at all.' },
 		{ name: 'is-hidden', type: 'boolean', defaultValue: '—', description: 'Removes the tooltip and its trigger from layout.' }
 	],

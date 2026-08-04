@@ -5,8 +5,8 @@ import type { ComponentDocT } from '../types'
 
 const buildPlaygroundGroup = (): HTMLElement => {
 	const group = document.createElement('z-toggle-group')
-	group.setAttribute('is-purple', '')
-	group.setAttribute('is-outlined', '')
+	group.setAttribute('accent', 'dom')
+	group.setAttribute('kind', 'outline')
 	group.innerHTML = `
 		<z-toggle-group-item value="left" aria-label="Align left" is-pressed>${Icons.alignLeft}</z-toggle-group-item>
 		<z-toggle-group-item value="center" aria-label="Align center">${Icons.alignCenter}</z-toggle-group-item>
@@ -22,17 +22,17 @@ export const zToggleGroupDoc: ComponentDocT = {
 	status: ComponentStatus.stable,
 
 	description:
-		'Coordinates a set of `z-toggle-group-item` children and reports the result as a single value. In `single` mode — the default — pressing one item releases the others, which is the right model for a set of alternatives like text alignment. In `multiple` mode any number can stay pressed, which suits filters and formatting marks. The group also owns the shared appearance: the tone, size, and kind flags set CSS variables the items read, so you style the group once instead of every item.',
+		'Coordinates a set of `z-toggle-group-item` children and reports the result as a single value. In `single` mode — the default — pressing one item releases the others, which is the right model for a set of alternatives like text alignment. In `multiple` mode any number can stay pressed, which suits filters and formatting marks. The group also owns the shared appearance: the accent, size, and kind flags set CSS variables the items read, so you style the group once instead of every item.',
 
 	playground: {
 		buildElement: buildPlaygroundGroup,
-		controlNames: ['type', 'is-vertical', 'is-purple', 'is-pink', 'is-neutral', 'is-small', 'is-large', 'is-ghost', 'is-outlined'],
+		controlNames: ['type', 'direction', 'accent', 'size', 'kind'],
 		slotLabel: 'Alignment items'
 	},
 
 	usageGuidance: [
 		'Single mode is for alternatives — exactly one answer is correct at a time. Multiple mode is for independent flags that happen to be displayed together.',
-		'Set tone, size, and kind on the group rather than on each item. That is what the shared variables are for, and it keeps the seam consistent.',
+		'Set accent, size, and kind on the group rather than on each item. That is what the shared variables are for, and it keeps the seam consistent.',
 		'Keep the item count low enough to see at a glance. Past roughly six segments, a `z-select` is easier to scan than a wall of buttons.',
 		'`z-button-group` is the right choice when the segments are actions rather than a selection.'
 	],
@@ -49,7 +49,7 @@ export const zToggleGroupDoc: ComponentDocT = {
 			title: 'Single selection',
 			description: 'The default. Pressing one item releases whichever was pressed before.',
 			markup: `
-				<z-toggle-group is-purple is-outlined>
+				<z-toggle-group accent="dom" kind="outline">
 				  <z-toggle-group-item value="left" aria-label="Align left" is-pressed>${Icons.alignLeft}</z-toggle-group-item>
 				  <z-toggle-group-item value="center" aria-label="Align center">${Icons.alignCenter}</z-toggle-group-item>
 				  <z-toggle-group-item value="right" aria-label="Align right">${Icons.alignRight}</z-toggle-group-item>
@@ -63,7 +63,7 @@ export const zToggleGroupDoc: ComponentDocT = {
 			description:
 				'`type="multiple"` lets any number stay pressed at once, and `change` reports a `string[]` instead of a single value.',
 			markup: `
-				<z-toggle-group type="multiple" is-purple is-outlined>
+				<z-toggle-group type="multiple" accent="dom" kind="outline">
 				  <z-toggle-group-item value="bold" aria-label="Bold" is-pressed>${Icons.bold}</z-toggle-group-item>
 				  <z-toggle-group-item value="italic" aria-label="Italic" is-pressed>${Icons.italic}</z-toggle-group-item>
 				  <z-toggle-group-item value="underline" aria-label="Underline">${Icons.underline}</z-toggle-group-item>
@@ -76,7 +76,7 @@ export const zToggleGroupDoc: ComponentDocT = {
 			title: 'Text segments',
 			description: 'Items take text as readily as icons. Text is the safer default when the options are not universally recognisable.',
 			markup: `
-				<z-toggle-group is-purple is-outlined>
+				<z-toggle-group accent="dom" kind="outline">
 				  <z-toggle-group-item value="day" is-pressed>Day</z-toggle-group-item>
 				  <z-toggle-group-item value="week">Week</z-toggle-group-item>
 				  <z-toggle-group-item value="month">Month</z-toggle-group-item>
@@ -85,22 +85,22 @@ export const zToggleGroupDoc: ComponentDocT = {
 		}),
 
 		defineMarkupExample({
-			id: 'tones',
-			title: 'Shared tones',
-			description: 'One flag on the group re-tones every item inside it.',
+			id: 'accents',
+			title: 'Shared accents',
+			description: 'One flag on the group re-accents every item inside it.',
 			layout: ExampleLayout.stack,
 			markup: `
-				<z-toggle-group is-neutral is-outlined>
+				<z-toggle-group accent="neutral" kind="outline">
 				  <z-toggle-group-item value="a" is-pressed>Neutral</z-toggle-group-item>
 				  <z-toggle-group-item value="b">Neutral</z-toggle-group-item>
 				</z-toggle-group>
 
-				<z-toggle-group is-purple is-outlined>
+				<z-toggle-group accent="dom" kind="outline">
 				  <z-toggle-group-item value="a" is-pressed>Purple</z-toggle-group-item>
 				  <z-toggle-group-item value="b">Purple</z-toggle-group-item>
 				</z-toggle-group>
 
-				<z-toggle-group is-pink is-outlined>
+				<z-toggle-group accent="sub" kind="outline">
 				  <z-toggle-group-item value="a" is-pressed>Pink</z-toggle-group-item>
 				  <z-toggle-group-item value="b">Pink</z-toggle-group-item>
 				</z-toggle-group>
@@ -110,15 +110,15 @@ export const zToggleGroupDoc: ComponentDocT = {
 		defineMarkupExample({
 			id: 'kinds-sizes',
 			title: 'Shared kind and size',
-			description: '`is-ghost` drops the resting borders; `is-small` and `is-large` shift the whole group at once.',
+			description: '`kind` drops the resting borders; `size` and `size` shift the whole group at once.',
 			layout: ExampleLayout.stack,
 			markup: `
-				<z-toggle-group is-purple is-ghost is-small>
+				<z-toggle-group accent="dom" kind="ghost" size="sm">
 				  <z-toggle-group-item value="a" is-pressed>Ghost small</z-toggle-group-item>
 				  <z-toggle-group-item value="b">Ghost small</z-toggle-group-item>
 				</z-toggle-group>
 
-				<z-toggle-group is-purple is-outlined is-large>
+				<z-toggle-group accent="dom" kind="outline" size="lg">
 				  <z-toggle-group-item value="a" is-pressed>Outlined large</z-toggle-group-item>
 				  <z-toggle-group-item value="b">Outlined large</z-toggle-group-item>
 				</z-toggle-group>
@@ -130,7 +130,7 @@ export const zToggleGroupDoc: ComponentDocT = {
 			title: 'Vertical',
 			description: 'Stacks the segments and shares the vertical seam instead of the horizontal one.',
 			markup: `
-				<z-toggle-group is-vertical is-purple is-outlined>
+				<z-toggle-group direction="vertical" accent="dom" kind="outline">
 				  <z-toggle-group-item value="list" is-pressed>List</z-toggle-group-item>
 				  <z-toggle-group-item value="board">Board</z-toggle-group-item>
 				  <z-toggle-group-item value="timeline">Timeline</z-toggle-group-item>
@@ -145,7 +145,7 @@ export const zToggleGroupDoc: ComponentDocT = {
 				'`change.detail.value` is a string in single mode, and `undefined` when the pressed item is released and nothing takes its place.',
 			layout: ExampleLayout.stack,
 			markup: `
-				<z-toggle-group id="viewGroup" is-purple is-outlined>
+				<z-toggle-group id="viewGroup" accent="dom" kind="outline">
 				  <z-toggle-group-item value="list" is-pressed>List</z-toggle-group-item>
 				  <z-toggle-group-item value="board">Board</z-toggle-group-item>
 				  <z-toggle-group-item value="timeline">Timeline</z-toggle-group-item>
@@ -177,7 +177,7 @@ export const zToggleGroupDoc: ComponentDocT = {
 			description: 'The same event, but `value` arrives as an array of every currently pressed item.',
 			layout: ExampleLayout.stack,
 			markup: `
-				<z-toggle-group id="filterGroup" type="multiple" is-purple is-outlined>
+				<z-toggle-group id="filterGroup" type="multiple" accent="dom" kind="outline">
 				  <z-toggle-group-item value="open" is-pressed>Open</z-toggle-group-item>
 				  <z-toggle-group-item value="in-review">In review</z-toggle-group-item>
 				  <z-toggle-group-item value="merged">Merged</z-toggle-group-item>
@@ -208,15 +208,10 @@ export const zToggleGroupDoc: ComponentDocT = {
 
 	attributes: [
 		{ name: 'type', type: 'single | multiple', defaultValue: 'single', description: 'Whether one item or many can be pressed at once.' },
-		{ name: 'is-vertical', type: 'boolean', defaultValue: '—', description: 'Stacks the items instead of laying them out in a row.' },
-		{ name: 'is-neutral', type: 'boolean', defaultValue: '—', description: 'Shared neutral tone for every item.' },
-		{ name: 'is-purple', type: 'boolean', defaultValue: '—', description: 'Shared purple tone for every item.' },
-		{ name: 'is-pink', type: 'boolean', defaultValue: '—', description: 'Shared pink tone for every item.' },
-		{ name: 'is-small', type: 'boolean', defaultValue: '—', description: 'Shared small density.' },
-		{ name: 'is-medium', type: 'boolean', defaultValue: '—', description: 'Shared medium density.' },
-		{ name: 'is-large', type: 'boolean', defaultValue: '—', description: 'Shared large density.' },
-		{ name: 'is-ghost', type: 'boolean', defaultValue: '—', description: 'Shared ghost treatment — no resting border.' },
-		{ name: 'is-outlined', type: 'boolean', defaultValue: '—', description: 'Shared outlined treatment.' },
+		{ name: 'direction', type: 'boolean', defaultValue: '—', description: 'Stacks the items instead of laying them out in a row.' },
+		{ name: 'accent', type: 'dom | sub | neutral | success | warning | error', defaultValue: '—', description: 'Shared accent for every item.' },
+		{ name: 'size', type: 'xs | sm | md | lg | xl', defaultValue: 'md', description: 'Shared density for every item.' },
+		{ name: 'kind', type: 'solid | outline | ghost | soft | plain', defaultValue: 'ghost', description: 'Shared treatment for every item.' },
 		{ name: 'is-hidden', type: 'boolean', defaultValue: '—', description: 'Removes the group from layout.' }
 	],
 

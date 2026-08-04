@@ -17,7 +17,7 @@ export const zEyebrowDoc: ComponentDocT = {
 	status: ComponentStatus.stable,
 
 	description:
-		'A small uppercase kicker set in the mono face, letter-tracked and drawn in an accent tone, with an optional rule trailing off to the right. It differs from `z-subheading` in texture rather than role: the mono typeface and accent colour make it read as a system marker rather than as text, which is why it works above a large title without competing with it. It owns no outer margin — space it with whatever layout primitive it sits in.',
+		'A small uppercase kicker set in the mono face, letter-tracked and drawn in an accent accent, with an optional rule trailing off to the right. It differs from `z-subheading` in texture rather than role: the mono typeface and accent colour make it read as a system marker rather than as text, which is why it works above a large title without competing with it. It owns no outer margin — space it with whatever layout primitive it sits in.',
 
 	playground: {
 		buildElement: buildPlaygroundEyebrow,
@@ -27,7 +27,7 @@ export const zEyebrowDoc: ComponentDocT = {
 
 	usageGuidance: [
 		'One or two words. The mono face and tracking make it wide fast, and a long eyebrow steals attention from the title beneath it.',
-		'`has-rule` suits a full-width section header; without it the eyebrow is compact enough to sit in a card.',
+		'`has-rule` suits a is-full-width section header; without it the eyebrow is compact enough to sit in a card.',
 		'Choose `z-subheading` instead when you want the body typeface — same job, different texture.',
 		'It carries no margin of its own. Put it in a `z-column` with a small gap rather than reaching for a margin on the element.'
 	],
@@ -35,7 +35,7 @@ export const zEyebrowDoc: ComponentDocT = {
 	anatomy: [
 		{ name: 'label', description: 'The kicker text, set through `label` or by slotting children.' },
 		{ name: 'rule', description: 'An optional hairline trailing the label, shown with `has-rule`.' },
-		{ name: 'tone', description: 'The accent colour of both the label and the rule.' }
+		{ name: 'color', description: 'The accent colour of both the label and the rule.' }
 	],
 
 	examples: [
@@ -51,25 +51,25 @@ export const zEyebrowDoc: ComponentDocT = {
 		}),
 
 		defineMarkupExample({
-			id: 'tones',
+			id: 'accents',
 			title: 'Tones',
 			description: 'Secondary is the default. Neutral suits dense interfaces where an accent would be too loud.',
 			layout: ExampleLayout.fill,
 			markup: `
 				<z-eyebrow label="Secondary — the default" has-rule></z-eyebrow>
-				<z-eyebrow label="Primary" tone="primary" has-rule></z-eyebrow>
-				<z-eyebrow label="Neutral" tone="neutral" has-rule></z-eyebrow>
+				<z-eyebrow label="Primary" color="dom" has-rule></z-eyebrow>
+				<z-eyebrow label="Neutral" color="neutral" has-rule></z-eyebrow>
 			`
 		}),
 
 		defineMarkupExample({
-			id: 'full-width',
+			id: 'is-full-width',
 			title: 'Full width',
-			description: 'By default the rule runs a fixed length. `full-width` stretches it to fill the container instead.',
+			description: 'By default the rule runs a fixed length. `is-full-width` stretches it to fill the container instead.',
 			layout: ExampleLayout.fill,
 			markup: `
 				<z-eyebrow label="Fixed rule" has-rule></z-eyebrow>
-				<z-eyebrow label="Stretched rule" has-rule full-width></z-eyebrow>
+				<z-eyebrow label="Stretched rule" has-rule is-full-width></z-eyebrow>
 			`
 		}),
 
@@ -79,7 +79,7 @@ export const zEyebrowDoc: ComponentDocT = {
 			description: 'Slotting instead of using `label` lets the kicker carry more than plain text.',
 			layout: ExampleLayout.fill,
 			markup: `
-				<z-eyebrow tone="primary" has-rule>Changelog</z-eyebrow>
+				<z-eyebrow color="dom" has-rule>Changelog</z-eyebrow>
 			`
 		}),
 
@@ -90,7 +90,7 @@ export const zEyebrowDoc: ComponentDocT = {
 			layout: ExampleLayout.fill,
 			markup: `
 				<z-column gap="3" style="max-width: 42rem">
-				  <z-eyebrow label="Components" has-rule full-width></z-eyebrow>
+				  <z-eyebrow label="Components" has-rule is-full-width></z-eyebrow>
 				  <z-heading size="xl">Everything, encapsulated</z-heading>
 				  <z-text color="muted">
 				    Each element carries its own styles inside a shadow root, so nothing
@@ -108,7 +108,7 @@ export const zEyebrowDoc: ComponentDocT = {
 			markup: `
 				<z-card style="max-width: 22rem">
 				  <z-column gap="2">
-				    <z-eyebrow label="Usage" tone="neutral"></z-eyebrow>
+				    <z-eyebrow label="Usage" color="neutral"></z-eyebrow>
 				    <z-heading size="sm" tag="h3">48 of 100 seats</z-heading>
 				    <z-text size="sm" color="muted">Resets on the first of the month.</z-text>
 				  </z-column>
@@ -118,11 +118,11 @@ export const zEyebrowDoc: ComponentDocT = {
 	],
 
 	attributes: [
-		{ name: 'tone', type: 'primary | neutral', defaultValue: 'secondary', description: 'Accent colour of the label and rule.' },
+		{ name: 'color', type: 'dom | neutral', defaultValue: 'sub', description: 'Accent colour of the label and rule.' },
 		{ name: 'label', type: 'string', defaultValue: '—', description: 'Kicker text. Takes precedence over slotted children.' },
 		{ name: 'has-rule', type: 'boolean', defaultValue: '—', description: 'Draws a hairline rule trailing the label.' },
 		{
-			name: 'full-width',
+			name: 'is-full-width',
 			type: 'boolean',
 			defaultValue: '—',
 			description: 'Stretches the rule to fill the container rather than running a fixed length.'

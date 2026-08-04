@@ -53,13 +53,13 @@ export const zLinkDoc: ComponentDocT = {
 		}),
 
 		defineMarkupExample({
-			id: 'tones',
+			id: 'accents',
 			title: 'Tones',
 			description: 'Neutral is for links inside dense UI, where a coloured link would compete with the content.',
 			markup: `
-				<z-link href="#" tone="primary">Primary</z-link>
-				<z-link href="#" tone="secondary">Secondary</z-link>
-				<z-link href="#" tone="neutral">Neutral</z-link>
+				<z-link href="#" color="dom">Primary</z-link>
+				<z-link href="#" color="sub">Secondary</z-link>
+				<z-link href="#" color="neutral">Neutral</z-link>
 			`
 		}),
 
@@ -80,9 +80,9 @@ export const zLinkDoc: ComponentDocT = {
 			title: 'Sizes',
 			description: 'Three sizes matching the type scale, so a link can sit inline in any of them without shifting the line height.',
 			markup: `
-				<z-link href="#" size="small">Small</z-link>
-				<z-link href="#" size="medium">Medium</z-link>
-				<z-link href="#" size="large">Large</z-link>
+				<z-link href="#" size="sm">Small</z-link>
+				<z-link href="#" size="md">Medium</z-link>
+				<z-link href="#" size="lg">Large</z-link>
 			`
 		}),
 
@@ -106,9 +106,9 @@ export const zLinkDoc: ComponentDocT = {
 			layout: ExampleLayout.fill,
 			markup: `
 				<z-column gap="2" style="width: 340px">
-				  <z-link href="#" is-block tone="neutral">${Icons.mail} Inbox</z-link>
-				  <z-link href="#" is-block tone="neutral">${Icons.calendar} Schedule</z-link>
-				  <z-link href="#" is-block tone="neutral">${Icons.settings} Settings</z-link>
+				  <z-link href="#" is-block color="neutral">${Icons.mail} Inbox</z-link>
+				  <z-link href="#" is-block color="neutral">${Icons.calendar} Schedule</z-link>
+				  <z-link href="#" is-block color="neutral">${Icons.settings} Settings</z-link>
 				</z-column>
 			`
 		}),
@@ -119,7 +119,7 @@ export const zLinkDoc: ComponentDocT = {
 			description: 'For plain text links, `label` is shorter than slotting. It wins over children, so never set both.',
 			markup: `
 				<z-link href="#" label="Pricing"></z-link>
-				<z-link href="#" label="Changelog" tone="neutral"></z-link>
+				<z-link href="#" label="Changelog" color="neutral"></z-link>
 			`
 		}),
 
@@ -139,8 +139,8 @@ export const zLinkDoc: ComponentDocT = {
 		{ name: 'href', type: 'string', defaultValue: '—', description: 'Destination. Removed entirely while is-disabled is set.' },
 		{ name: 'target', type: 'string', defaultValue: '—', description: 'Anchor target. A value of _blank implies the external rel.' },
 		{ name: 'label', type: 'string', defaultValue: '—', description: 'Text content. Takes precedence over slotted children.' },
-		{ name: 'tone', type: 'primary | secondary | neutral', defaultValue: 'primary', description: 'Colour family.' },
-		{ name: 'size', type: 'small | medium | large', defaultValue: 'medium', description: 'Type size.' },
+		{ name: 'color', type: 'dom | sub | neutral', defaultValue: 'dom', description: 'Colour family.' },
+		{ name: 'size', type: 'sm | md | lg', defaultValue: 'md', description: 'Type size.' },
 		{ name: 'underline', type: 'hover | always | none', defaultValue: 'hover', description: 'When the underline is drawn.' },
 		{
 			name: 'is-external',

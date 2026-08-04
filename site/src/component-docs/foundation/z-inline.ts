@@ -8,7 +8,7 @@ const buildPlaygroundInline = (): HTMLElement => {
 	text.setAttribute('size', 'lg')
 
 	const inline = document.createElement('z-inline')
-	inline.setAttribute('color', 'primary')
+	inline.setAttribute('color', 'dom')
 	inline.textContent = 'an emphasised phrase'
 
 	text.append('A lede-sized sentence with ', inline, ' inside it.')
@@ -52,13 +52,13 @@ export const zInlineDoc: ComponentDocT = {
 			layout: ExampleLayout.fill,
 			markup: `
 				<z-text size="xl">
-				  Extra large, with <z-inline color="primary">an inline patch</z-inline> that holds the size.
+				  Extra large, with <z-inline color="dom">an inline patch</z-inline> that holds the size.
 				</z-text>
 				<z-text size="md">
-				  Medium, with <z-inline color="primary">an inline patch</z-inline> that holds the size.
+				  Medium, with <z-inline color="dom">an inline patch</z-inline> that holds the size.
 				</z-text>
 				<z-text size="xs">
-				  Extra small, with <z-inline color="primary">an inline patch</z-inline> that holds the size.
+				  Extra small, with <z-inline color="dom">an inline patch</z-inline> that holds the size.
 				</z-text>
 			`
 		}),
@@ -70,8 +70,8 @@ export const zInlineDoc: ComponentDocT = {
 			layout: ExampleLayout.fill,
 			markup: `
 				<z-text>
-				  Neutral running text with <z-inline color="primary">primary</z-inline>,
-				  <z-inline color="secondary">secondary</z-inline>, and
+				  Neutral running text with <z-inline color="dom">primary</z-inline>,
+				  <z-inline color="sub">secondary</z-inline>, and
 				  <z-inline color="muted">muted</z-inline> fragments inside it.
 				</z-text>
 			`
@@ -95,12 +95,12 @@ export const zInlineDoc: ComponentDocT = {
 			id: 'inside-headings',
 			title: 'Inside a heading',
 			description:
-				'A two-tone headline. The second half inherits every metric from the heading and only swaps its colour and weight.',
+				'A two-accent headline. The second half inherits every metric from the heading and only swaps its colour and weight.',
 			layout: ExampleLayout.fill,
 			markup: `
 				<z-heading size="xxl" style="max-width: 30rem">
 				  Build interfaces
-				  <z-inline color="primary" weight="400">that feel inevitable</z-inline>
+				  <z-inline color="dom" weight="400">that feel inevitable</z-inline>
 				</z-heading>
 			`
 		}),
@@ -115,7 +115,7 @@ export const zInlineDoc: ComponentDocT = {
 				<z-text>
 				  This is <z-inline tag="strong" weight="700">strongly emphasised</z-inline>,
 				  this is <z-inline tag="em" is-italic>stressed</z-inline>, and this is
-				  <z-inline color="primary">only coloured</z-inline> — decorative, and silent
+				  <z-inline color="dom">only coloured</z-inline> — decorative, and silent
 				  when read aloud.
 				</z-text>
 			`
@@ -138,7 +138,7 @@ export const zInlineDoc: ComponentDocT = {
 	attributes: [
 		{
 			name: 'color',
-			type: 'neutral | primary | secondary | muted | white',
+			type: 'neutral | dom | sub | muted | strong',
 			defaultValue: 'inherit',
 			description: 'Text colour. Inherits when unset, unlike the rest of the family.'
 		},

@@ -8,8 +8,8 @@ const buildPlaygroundRadioGroup = (): HTMLElement => {
 	group.setAttribute('value', 'monthly')
 
 	group.innerHTML = `
-		<z-radio value="monthly" tone="primary" is-checked>Monthly</z-radio>
-		<z-radio value="annual" tone="primary">Annual</z-radio>
+		<z-radio value="monthly" accent="dom" is-checked>Monthly</z-radio>
+		<z-radio value="annual" accent="dom">Annual</z-radio>
 	`
 
 	return group
@@ -26,7 +26,7 @@ export const zRadioGroupDoc: ComponentDocT = {
 
 	playground: {
 		buildElement: buildPlaygroundRadioGroup,
-		controlNames: ['label', 'is-horizontal'],
+		controlNames: ['label', 'direction'],
 		slotLabel: 'Two z-radio children'
 	},
 
@@ -34,7 +34,7 @@ export const zRadioGroupDoc: ComponentDocT = {
 		'Bind to `change` on the group, not to each radio. One handler, one value — that is the reason the group exists.',
 		'Set `label`. It becomes the group’s accessible name, which is the difference between hearing "Billing period, Monthly" and just "Monthly".',
 		'Seed the initial answer either way — `value` on the group or `is-checked` on a child. Prefer `value` when the answer comes from your data, and `is-checked` when the markup is static.',
-		'Stack vertically by default. `is-horizontal` is for two or three short labels — anything longer becomes a line the eye has to hunt across.',
+		'Stack vertically by default. `direction` is for two or three short labels — anything longer becomes a line the eye has to hunt across.',
 		'Always give the user a real default when one exists. A group where nothing is chosen forces a decision before the user has read the options.',
 		'Past five or so options, switch to `z-select`. Radios spend vertical space to make every option visible; that trade stops paying off quickly.'
 	],
@@ -54,8 +54,8 @@ export const zRadioGroupDoc: ComponentDocT = {
 			layout: ExampleLayout.stack,
 			markup: `
 				<z-radio-group label="Billing period" value="monthly">
-				  <z-radio value="monthly" tone="primary" is-checked>Monthly</z-radio>
-				  <z-radio value="annual" tone="primary">Annual — save 20%</z-radio>
+				  <z-radio value="monthly" accent="dom" is-checked>Monthly</z-radio>
+				  <z-radio value="annual" accent="dom">Annual — save 20%</z-radio>
 				</z-radio-group>
 			`
 		}),
@@ -68,13 +68,13 @@ export const zRadioGroupDoc: ComponentDocT = {
 			layout: ExampleLayout.stack,
 			markup: `
 				<z-radio-group id="themeGroup" label="Theme">
-				  <z-radio value="system" tone="primary">Match system</z-radio>
-				  <z-radio value="light" tone="primary">Light</z-radio>
-				  <z-radio value="dark" tone="primary">Dark</z-radio>
+				  <z-radio value="system" accent="dom">Match system</z-radio>
+				  <z-radio value="light" accent="dom">Light</z-radio>
+				  <z-radio value="dark" accent="dom">Dark</z-radio>
 				</z-radio-group>
 				<z-row gap="sm">
-				  <z-button id="pickLight" size="small" kind="outline">Set to light</z-button>
-				  <z-button id="pickDark" size="small" kind="outline">Set to dark</z-button>
+				  <z-button id="pickLight" size="sm" kind="outline">Set to light</z-button>
+				  <z-button id="pickDark" size="sm" kind="outline">Set to dark</z-button>
 				</z-row>
 			`,
 			script: `
@@ -105,13 +105,13 @@ export const zRadioGroupDoc: ComponentDocT = {
 		defineMarkupExample({
 			id: 'horizontal',
 			title: 'Horizontal',
-			description: '`is-horizontal` lays the options in a row. Reserve it for short labels — a wrapped row is harder to scan than a column.',
+			description: '`direction` lays the options in a row. Reserve it for short labels — a wrapped row is harder to scan than a column.',
 			layout: ExampleLayout.stack,
 			markup: `
-				<z-radio-group label="Alignment" value="left" is-horizontal>
-				  <z-radio value="left" tone="primary" is-checked>Left</z-radio>
-				  <z-radio value="center" tone="primary">Center</z-radio>
-				  <z-radio value="right" tone="primary">Right</z-radio>
+				<z-radio-group label="Alignment" value="left" direction>
+				  <z-radio value="left" accent="dom" is-checked>Left</z-radio>
+				  <z-radio value="center" accent="dom">Center</z-radio>
+				  <z-radio value="right" accent="dom">Right</z-radio>
 				</z-radio-group>
 			`
 		}),
@@ -125,9 +125,9 @@ export const zRadioGroupDoc: ComponentDocT = {
 			markup: `
 				<z-field label="Default branch protection" description="Applies to every new repository in this workspace.">
 				  <z-radio-group label="Default branch protection" value="review">
-				    <z-radio value="none" tone="primary">No protection</z-radio>
-				    <z-radio value="review" tone="primary" is-checked>Require a review</z-radio>
-				    <z-radio value="checks" tone="primary">Require a review and passing checks</z-radio>
+				    <z-radio value="none" accent="dom">No protection</z-radio>
+				    <z-radio value="review" accent="dom" is-checked>Require a review</z-radio>
+				    <z-radio value="checks" accent="dom">Require a review and passing checks</z-radio>
 				  </z-radio-group>
 				</z-field>
 			`
@@ -141,9 +141,9 @@ export const zRadioGroupDoc: ComponentDocT = {
 			layout: ExampleLayout.stack,
 			markup: `
 				<z-radio-group id="planGroup" label="Plan" value="team">
-				  <z-radio value="personal" tone="primary">Personal</z-radio>
-				  <z-radio value="team" tone="primary" is-checked>Team</z-radio>
-				  <z-radio value="enterprise" tone="primary">Enterprise</z-radio>
+				  <z-radio value="personal" accent="dom">Personal</z-radio>
+				  <z-radio value="team" accent="dom" is-checked>Team</z-radio>
+				  <z-radio value="enterprise" accent="dom">Enterprise</z-radio>
 				</z-radio-group>
 				<z-text size="sm" color="muted" id="planStatus">Selected: team</z-text>
 			`,
@@ -173,8 +173,8 @@ export const zRadioGroupDoc: ComponentDocT = {
 			layout: ExampleLayout.stack,
 			markup: `
 				<z-radio-group id="deliveryGroup" label="Delivery" value="email">
-				  <z-radio value="email" tone="primary" is-checked>Email</z-radio>
-				  <z-radio value="webhook" tone="primary">Webhook</z-radio>
+				  <z-radio value="email" accent="dom" is-checked>Email</z-radio>
+				  <z-radio value="webhook" accent="dom">Webhook</z-radio>
 				</z-radio-group>
 				<z-field id="targetField" label="Email address">
 				  <z-input id="targetInput" type="email" placeholder="alerts@example.com"></z-input>
@@ -218,7 +218,7 @@ export const zRadioGroupDoc: ComponentDocT = {
 			description: 'The chosen value. Reflects, two-way — assigning it checks the matching child, and it updates as the selection changes.'
 		},
 		{ name: 'label', type: 'string', defaultValue: '—', description: 'Accessible name for the group. Set this even when a z-field already shows a visible label.' },
-		{ name: 'is-horizontal', type: 'boolean', defaultValue: '—', description: 'Lays the options in a row instead of a column.' },
+		{ name: 'direction', type: 'boolean', defaultValue: '—', description: 'Lays the options in a row instead of a column.' },
 		{ name: 'is-hidden', type: 'boolean', defaultValue: '—', description: 'Removes the group from layout.' }
 	],
 

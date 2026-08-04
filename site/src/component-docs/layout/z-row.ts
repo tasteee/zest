@@ -7,9 +7,9 @@ const buildPlaygroundRow = (): HTMLElement => {
 	row.setAttribute('gap', 'md')
 	row.setAttribute('aligns-y', 'center')
 	row.innerHTML = `
-		<z-badge label="One" size="small"></z-badge>
-		<z-badge label="Two" size="small"></z-badge>
-		<z-badge label="Three" size="small"></z-badge>
+		<z-badge label="One" size="sm"></z-badge>
+		<z-badge label="Two" size="sm"></z-badge>
+		<z-badge label="Three" size="sm"></z-badge>
 	`
 	return row
 }
@@ -49,9 +49,9 @@ export const zRowDoc: ComponentDocT = {
 			layout: ExampleLayout.fill,
 			markup: `
 				<z-row gap="3">
-				  <z-badge label="One" size="small"></z-badge>
-				  <z-badge label="Two" size="small"></z-badge>
-				  <z-badge label="Three" size="small"></z-badge>
+				  <z-badge label="One" size="sm"></z-badge>
+				  <z-badge label="Two" size="sm"></z-badge>
+				  <z-badge label="Three" size="sm"></z-badge>
 				</z-row>
 			`
 		}),
@@ -63,18 +63,18 @@ export const zRowDoc: ComponentDocT = {
 			layout: ExampleLayout.fill,
 			markup: `
 				<z-row aligns-x="start" gap="2" padding="3" full-width style="border: 1px solid var(--border)">
-				  <z-badge label="start" size="small"></z-badge>
-				  <z-badge label="start" size="small"></z-badge>
+				  <z-badge label="start" size="sm"></z-badge>
+				  <z-badge label="start" size="sm"></z-badge>
 				</z-row>
 
 				<z-row aligns-x="center" gap="2" padding="3" full-width style="border: 1px solid var(--border)">
-				  <z-badge label="center" size="small"></z-badge>
-				  <z-badge label="center" size="small"></z-badge>
+				  <z-badge label="center" size="sm"></z-badge>
+				  <z-badge label="center" size="sm"></z-badge>
 				</z-row>
 
 				<z-row aligns-x="between" gap="2" padding="3" full-width style="border: 1px solid var(--border)">
-				  <z-badge label="between" size="small"></z-badge>
-				  <z-badge label="between" size="small"></z-badge>
+				  <z-badge label="between" size="sm"></z-badge>
+				  <z-badge label="between" size="sm"></z-badge>
 				</z-row>
 			`
 		}),
@@ -86,17 +86,17 @@ export const zRowDoc: ComponentDocT = {
 			layout: ExampleLayout.fill,
 			markup: `
 				<z-row aligns-y="start" gap="3" padding="3" full-width style="border: 1px solid var(--border); height: 5rem">
-				  <z-badge label="start" size="small"></z-badge>
+				  <z-badge label="start" size="sm"></z-badge>
 				  <z-card><z-text size="xs">Taller</z-text></z-card>
 				</z-row>
 
 				<z-row aligns-y="center" gap="3" padding="3" full-width style="border: 1px solid var(--border); height: 5rem">
-				  <z-badge label="center" size="small"></z-badge>
+				  <z-badge label="center" size="sm"></z-badge>
 				  <z-card><z-text size="xs">Taller</z-text></z-card>
 				</z-row>
 
 				<z-row aligns-y="end" gap="3" padding="3" full-width style="border: 1px solid var(--border); height: 5rem">
-				  <z-badge label="end" size="small"></z-badge>
+				  <z-badge label="end" size="sm"></z-badge>
 				  <z-card><z-text size="xs">Taller</z-text></z-card>
 				</z-row>
 			`
@@ -109,11 +109,11 @@ export const zRowDoc: ComponentDocT = {
 			layout: ExampleLayout.fill,
 			markup: `
 				<z-row wrap gap="2" style="max-width: 20rem">
-				  <z-badge label="typescript" size="small"></z-badge>
-				  <z-badge label="web-components" size="small"></z-badge>
-				  <z-badge label="design-system" size="small"></z-badge>
-				  <z-badge label="shadow-dom" size="small"></z-badge>
-				  <z-badge label="tokens" size="small"></z-badge>
+				  <z-badge label="typescript" size="sm"></z-badge>
+				  <z-badge label="web-components" size="sm"></z-badge>
+				  <z-badge label="design-system" size="sm"></z-badge>
+				  <z-badge label="shadow-dom" size="sm"></z-badge>
+				  <z-badge label="tokens" size="sm"></z-badge>
 				</z-row>
 			`
 		}),
@@ -127,9 +127,9 @@ export const zRowDoc: ComponentDocT = {
 			markup: `
 				<z-row gap="3" aligns-y="center" padding="3" full-width style="border: 1px solid var(--border)">
 				  <z-heading size="xs" tag="h3">Project</z-heading>
-				  <z-badge tone="success" kind="soft" size="small" label="Live"></z-badge>
+				  <z-badge accent="success" kind="soft" size="sm" label="Live"></z-badge>
 				  <z-spacer grow></z-spacer>
-				  <z-button kind="ghost" size="small">Settings</z-button>
+				  <z-button kind="ghost" size="sm">Settings</z-button>
 				</z-row>
 			`
 		}),
@@ -147,8 +147,8 @@ export const zRowDoc: ComponentDocT = {
 				    <z-text size="xs" color="muted">Invoices and payment methods</z-text>
 				  </z-column>
 				  <z-row gap="2">
-				    <z-button kind="ghost" size="small">Download</z-button>
-				    <z-button tone="primary" size="small">Add method</z-button>
+				    <z-button kind="ghost" size="sm">Download</z-button>
+				    <z-button accent="dom" size="sm">Add method</z-button>
 				  </z-row>
 				</z-row>
 			`

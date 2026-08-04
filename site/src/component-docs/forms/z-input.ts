@@ -21,7 +21,7 @@ export const zInputDoc: ComponentDocT = {
 
 	playground: {
 		buildElement: buildPlaygroundInput,
-		controlNames: ['placeholder', 'size', 'tone', 'is-invalid', 'is-disabled', 'is-readonly', 'is-inline'],
+		controlNames: ['placeholder', 'size', 'accent', 'is-invalid', 'is-disabled', 'is-readonly', 'is-inline'],
 		slotLabel: 'Email'
 	},
 
@@ -37,7 +37,7 @@ export const zInputDoc: ComponentDocT = {
 		{ name: 'prefix slot', description: 'Leading adornment — a search glyph, a currency mark. Sits inside the border, never pushes the text.' },
 		{ name: 'input', description: 'The native control. Owns focus, selection, autofill, and the caret.' },
 		{ name: 'suffix slot', description: 'Trailing adornment — a unit, a clear button, a validation tick.' },
-		{ name: 'focus ring', description: 'The border shifts to the accent colour; the tone attribute chooses which accent.' }
+		{ name: 'focus ring', description: 'The border shifts to the accent colour; the accent attribute chooses which accent.' }
 	],
 
 	examples: [
@@ -57,21 +57,21 @@ export const zInputDoc: ComponentDocT = {
 			description: 'Three densities on the same scale as z-button, so a field and its submit button line up without adjustment.',
 			layout: ExampleLayout.stack,
 			markup: `
-				<z-input size="small" placeholder="Small" label="Small"></z-input>
-				<z-input size="medium" placeholder="Medium" label="Medium"></z-input>
-				<z-input size="large" placeholder="Large" label="Large"></z-input>
+				<z-input size="sm" placeholder="Small" label="Small"></z-input>
+				<z-input size="md" placeholder="Medium" label="Medium"></z-input>
+				<z-input size="lg" placeholder="Large" label="Large"></z-input>
 			`
 		}),
 
 		defineMarkupExample({
-			id: 'tones',
+			id: 'accents',
 			title: 'Tones',
-			description: 'The tone only shows on focus — it picks which accent the border lifts to. Click into each one to see it.',
+			description: 'The accent only shows on focus — it picks which accent the border lifts to. Click into each one to see it.',
 			layout: ExampleLayout.stack,
 			markup: `
-				<z-input tone="neutral" placeholder="Neutral focus" label="Neutral"></z-input>
-				<z-input tone="primary" placeholder="Primary focus" label="Primary"></z-input>
-				<z-input tone="secondary" placeholder="Secondary focus" label="Secondary"></z-input>
+				<z-input accent="neutral" placeholder="Neutral focus" label="Neutral"></z-input>
+				<z-input accent="dom" placeholder="Primary focus" label="Primary"></z-input>
+				<z-input accent="sub" placeholder="Secondary focus" label="Secondary"></z-input>
 			`
 		}),
 
@@ -210,7 +210,7 @@ export const zInputDoc: ComponentDocT = {
 			description: '`is-inline` stops the field filling its container, for search boxes and toolbar fields that should only be as wide as they need to be.',
 			layout: ExampleLayout.start,
 			markup: `
-				<z-input is-inline size="small" placeholder="Filter rows" label="Filter">
+				<z-input is-inline size="sm" placeholder="Filter rows" label="Filter">
 				  <span slot="prefix">${Icons.finder}</span>
 				</z-input>
 			`
@@ -225,8 +225,8 @@ export const zInputDoc: ComponentDocT = {
 		{ name: 'name', type: 'string', defaultValue: '—', description: 'Name passed to the inner input for form submission.' },
 		{ name: 'autocomplete', type: 'string', defaultValue: '—', description: 'Native autocomplete token, forwarded verbatim.' },
 		{ name: 'inputmode', type: 'string', defaultValue: '—', description: 'Which soft keyboard to raise on touch devices.' },
-		{ name: 'size', type: 'small | medium | large', defaultValue: 'medium', description: 'Control density.' },
-		{ name: 'tone', type: 'neutral | primary | secondary', defaultValue: 'neutral', description: 'Which accent the border lifts to on focus.' },
+		{ name: 'size', type: 'sm | md | lg', defaultValue: 'md', description: 'Control density.' },
+		{ name: 'accent', type: 'neutral | dom | sub', defaultValue: 'neutral', description: 'Which accent the border lifts to on focus.' },
 		{ name: 'is-focused', type: 'boolean', defaultValue: '—', description: 'Reflects the focus state, so a parent can style around the field.' },
 		{ name: 'is-invalid', type: 'boolean', defaultValue: '—', description: 'Paints the error border and sets aria-invalid.' },
 		{ name: 'is-disabled', type: 'boolean', defaultValue: '—', description: 'Blocks interaction and removes the field from the tab order.' },
