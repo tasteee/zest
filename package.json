@@ -48,7 +48,7 @@
     "README.md"
   ],
   "scripts": {
-    "build": "vite build && tsc -p tsconfig.build.json && node scripts/build-cem.mjs",
+    "build": "vite build && tsc -p tsconfig.build.json && node scripts/build-cem.mjs && node scripts/build-api-reference.mjs",
     "dev": "vite build --watch",
     "demo": "pnpm run build && vite --config vite.demo.config.ts",
     "docs": "pnpm run build && vite --config vite.site.config.ts",

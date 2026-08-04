@@ -11,7 +11,10 @@
 //   props: { size: { type: String, reflect: true }, label: String }   // inline
 //   props: textProps                                                   // local const
 //   props: toggleVariantProps                                          // imported const
-// ...and a props object may `...spread` another props object.
+//   props: directionLockedBoxProps                                     // derived
+// ...and a props object may `...spread` another props object. A derived one is
+// built by a call — `omitProps(boxProps, ['direction'])` — which is resolved
+// too; without that, z-row and z-column shipped with no attributes at all.
 
 import { readFileSync, writeFileSync, readdirSync } from 'node:fs'
 import { join, dirname, relative } from 'node:path'
@@ -45,6 +48,7 @@ const programs = sourceFiles.map((file) => ({
 // `const NAME = { ... }` (or `{ ... } as const`) across the whole library, so we
 // can resolve `props: textProps` regardless of which file it lives in.
 const propObjectsByName = new Map()
+const derivedPropsByName = new Map()
 
 const unwrap = (node) => {
 	let n = node
@@ -62,6 +66,14 @@ for (const { sf } of programs) {
 			const init = unwrap(decl.initializer)
 			if (init && ts.isObjectLiteralExpression(init)) {
 				propObjectsByName.set(decl.name.text, init)
+				continue
+			}
+
+			// A props object can also be derived rather than written out —
+			// `omitProps(boxProps, ['direction'])`. Index the expression so an
+			// identifier pointing at it still resolves.
+			if (init && ts.isCallExpression(init)) {
+				derivedPropsByName.set(decl.name.text, init)
 			}
 		}
 	})
@@ -84,11 +96,37 @@ const resolveProps = (node, seen = new Set()) => {
 	const target = unwrap(node)
 	if (!target) return out
 
+	// `omitProps(boxProps, ['direction'])` — a props object derived by dropping
+	// keys from another. Without this, z-row and z-column resolve to nothing
+	// and ship with an empty attribute list.
+	if (ts.isCallExpression(target) && ts.isIdentifier(target.expression) && target.expression.text === 'omitProps') {
+		const sourceArgument = target.arguments[0]
+		const omittedArgument = target.arguments[1]
+
+		const resolved = sourceArgument ? resolveProps(sourceArgument, seen) : {}
+		const omitted = new Set()
+
+		if (omittedArgument && ts.isArrayLiteralExpression(omittedArgument)) {
+			for (const element of omittedArgument.elements) {
+				if (ts.isStringLiteral(element)) omitted.add(element.text)
+			}
+		}
+
+		for (const key of Object.keys(resolved)) {
+			if (!omitted.has(key)) out[key] = resolved[key]
+		}
+		return out
+	}
+
 	let objectLiteral = null
 	if (ts.isObjectLiteralExpression(target)) objectLiteral = target
 	else if (ts.isIdentifier(target)) {
 		if (seen.has(target.text)) return out
 		seen.add(target.text)
+
+		const derived = derivedPropsByName.get(target.text)
+		if (derived) return resolveProps(derived, seen)
+
 		objectLiteral = propObjectsByName.get(target.text) ?? null
 	}
 	if (!objectLiteral) return out

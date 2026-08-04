@@ -3569,8 +3569,472 @@
           "customElement": true,
           "tagName": "z-column",
           "name": "ZColumn",
-          "members": [],
-          "attributes": []
+          "members": [
+            {
+              "kind": "field",
+              "name": "isInline",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "doesWrap",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "doesWrapText",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isFullWidth",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isFullHeight",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "gap",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "rowGap",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "columnGap",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "margin",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "marginTop",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "marginRight",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "marginBottom",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "marginLeft",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "marginX",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "marginY",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "padding",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "paddingTop",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "paddingRight",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "paddingBottom",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "paddingLeft",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "paddingX",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "paddingY",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "width",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "minWidth",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "maxWidth",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "height",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "minHeight",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "maxHeight",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "alignsX",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "alignsY",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "inset",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "insetX",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "insetY",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "is-inline",
+              "fieldName": "isInline",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "does-wrap",
+              "fieldName": "doesWrap",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "does-wrap-text",
+              "fieldName": "doesWrapText",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "is-full-width",
+              "fieldName": "isFullWidth",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "is-full-height",
+              "fieldName": "isFullHeight",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "gap",
+              "fieldName": "gap",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "row-gap",
+              "fieldName": "rowGap",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "column-gap",
+              "fieldName": "columnGap",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "margin",
+              "fieldName": "margin",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "margin-top",
+              "fieldName": "marginTop",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "margin-right",
+              "fieldName": "marginRight",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "margin-bottom",
+              "fieldName": "marginBottom",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "margin-left",
+              "fieldName": "marginLeft",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "margin-x",
+              "fieldName": "marginX",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "margin-y",
+              "fieldName": "marginY",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "padding",
+              "fieldName": "padding",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "padding-top",
+              "fieldName": "paddingTop",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "padding-right",
+              "fieldName": "paddingRight",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "padding-bottom",
+              "fieldName": "paddingBottom",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "padding-left",
+              "fieldName": "paddingLeft",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "padding-x",
+              "fieldName": "paddingX",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "padding-y",
+              "fieldName": "paddingY",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "width",
+              "fieldName": "width",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "min-width",
+              "fieldName": "minWidth",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "max-width",
+              "fieldName": "maxWidth",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "height",
+              "fieldName": "height",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "min-height",
+              "fieldName": "minHeight",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "max-height",
+              "fieldName": "maxHeight",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "aligns-x",
+              "fieldName": "alignsX",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "aligns-y",
+              "fieldName": "alignsY",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "inset",
+              "fieldName": "inset",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "inset-x",
+              "fieldName": "insetX",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "inset-y",
+              "fieldName": "insetY",
+              "type": {
+                "text": "string"
+              }
+            }
+          ]
         },
         {
           "kind": "class",
@@ -12471,8 +12935,472 @@
           "customElement": true,
           "tagName": "z-row",
           "name": "ZRow",
-          "members": [],
-          "attributes": []
+          "members": [
+            {
+              "kind": "field",
+              "name": "isInline",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "doesWrap",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "doesWrapText",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isFullWidth",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isFullHeight",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "gap",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "rowGap",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "columnGap",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "margin",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "marginTop",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "marginRight",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "marginBottom",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "marginLeft",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "marginX",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "marginY",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "padding",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "paddingTop",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "paddingRight",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "paddingBottom",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "paddingLeft",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "paddingX",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "paddingY",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "width",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "minWidth",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "maxWidth",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "height",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "minHeight",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "maxHeight",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "alignsX",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "alignsY",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "inset",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "insetX",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "insetY",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "is-inline",
+              "fieldName": "isInline",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "does-wrap",
+              "fieldName": "doesWrap",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "does-wrap-text",
+              "fieldName": "doesWrapText",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "is-full-width",
+              "fieldName": "isFullWidth",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "is-full-height",
+              "fieldName": "isFullHeight",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "gap",
+              "fieldName": "gap",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "row-gap",
+              "fieldName": "rowGap",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "column-gap",
+              "fieldName": "columnGap",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "margin",
+              "fieldName": "margin",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "margin-top",
+              "fieldName": "marginTop",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "margin-right",
+              "fieldName": "marginRight",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "margin-bottom",
+              "fieldName": "marginBottom",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "margin-left",
+              "fieldName": "marginLeft",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "margin-x",
+              "fieldName": "marginX",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "margin-y",
+              "fieldName": "marginY",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "padding",
+              "fieldName": "padding",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "padding-top",
+              "fieldName": "paddingTop",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "padding-right",
+              "fieldName": "paddingRight",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "padding-bottom",
+              "fieldName": "paddingBottom",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "padding-left",
+              "fieldName": "paddingLeft",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "padding-x",
+              "fieldName": "paddingX",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "padding-y",
+              "fieldName": "paddingY",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "width",
+              "fieldName": "width",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "min-width",
+              "fieldName": "minWidth",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "max-width",
+              "fieldName": "maxWidth",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "height",
+              "fieldName": "height",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "min-height",
+              "fieldName": "minHeight",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "max-height",
+              "fieldName": "maxHeight",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "aligns-x",
+              "fieldName": "alignsX",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "aligns-y",
+              "fieldName": "alignsY",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "inset",
+              "fieldName": "inset",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "inset-x",
+              "fieldName": "insetX",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "inset-y",
+              "fieldName": "insetY",
+              "type": {
+                "text": "string"
+              }
+            }
+          ]
         },
         {
           "kind": "class",
