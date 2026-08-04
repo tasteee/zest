@@ -177,10 +177,10 @@ export const applyPosition = (floating: HTMLElement, pos: PositionResult): void 
 	floating.dataset.side = pos.side
 }
 
-/** Shared prop surface for anchored overlays (placement / offset / tone). */
+/** Shared prop surface for anchored overlays (placement / offset / accent). */
 export const overlayPositionProps = {
 	placement: { type: String, reflect: true },
 	offset: { type: Number },
-	tone: { type: String, reflect: true },
+	accent: { type: String, reflect: true },
 	isHidden: { type: Boolean, reflect: true }
 }

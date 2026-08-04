@@ -26,11 +26,11 @@ const styles = css`
 		--accent: var(--primary);
 	}
 
-	:host([tone='primary']) label {
+	:host([accent='dom']) label {
 		--accent: var(--purple);
 	}
 
-	:host([tone='secondary']) label {
+	:host([accent='sub']) label {
 		--accent: var(--pink);
 	}
 
@@ -122,7 +122,7 @@ export const ZRadio = c(
 			isChecked: { type: Boolean, reflect: true },
 			isDisabled: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
-			tone: { type: String, reflect: true },
+			accent: { type: String, reflect: true },
 			value: String,
 			select: event<{ value?: string }>({ bubbles: true, composed: true })
 		},

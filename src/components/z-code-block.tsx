@@ -17,7 +17,7 @@ const styles = css`
 		--accent: var(--purple);
 	}
 
-	:host([tone='secondary']) {
+	:host([accent='sub']) {
 		--accent: var(--pink);
 	}
 
@@ -295,7 +295,7 @@ export const ZCodeBlock = c(
 			filename: String,
 			hasLineNumbers: { type: Boolean, reflect: true },
 			hideCopy: { type: Boolean, reflect: true },
-			tone: { type: String, reflect: true },
+			accent: { type: String, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			copy: event<void>({ bubbles: true, composed: true })
 		},

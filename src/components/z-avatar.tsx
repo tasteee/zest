@@ -19,10 +19,10 @@ const styles = css`
 		display: none;
 	}
 
-	:host([tone='secondary']) {
+	:host([accent='sub']) {
 		--tone: var(--pink);
 	}
-	:host([tone='neutral']) {
+	:host([accent='neutral']) {
 		--tone: var(--color-neutral-5);
 	}
 
@@ -128,7 +128,7 @@ export const ZAvatar = c(
 			initials: String,
 			status: { type: String, reflect: true },
 			size: { type: String, reflect: true },
-			tone: { type: String, reflect: true },
+			accent: { type: String, reflect: true },
 			isSquare: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true }
 		},

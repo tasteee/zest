@@ -74,11 +74,11 @@ const styles = css`
 	   button of any tone reads with the same boldness, hue aside. They're all
 	   light enough to pair with --primary-foreground for solid-kind text. */
 
-	button.is-primary {
+	button.is-dom {
 		--tone-color: var(--purple);
 	}
 
-	button.is-secondary {
+	button.is-sub {
 		--tone-color: var(--pink);
 	}
 
@@ -94,7 +94,7 @@ const styles = css`
 		--tone-color: var(--warning);
 	}
 
-	button.is-danger {
+	button.is-error {
 		--tone-color: var(--destructive);
 	}
 
@@ -241,8 +241,8 @@ const styles = css`
 		}
 	}
 
-	.is-solid.is-primary .label,
-	.is-solid.is-secondary .label {
+	.is-solid.is-dom .label,
+	.is-solid.is-sub .label {
 		text-shadow: 0 0px 18px var(--primary-foreground);
 	}
 
@@ -273,12 +273,12 @@ const resolveKindClass = (props: any): string => {
 	return 'is-solid'
 }
 
-const resolveToneClass = (props: any): string => {
-	if (props.tone === 'primary') return 'is-primary'
-	if (props.tone === 'secondary') return 'is-secondary'
-	if (props.tone === 'success') return 'is-success'
-	if (props.tone === 'warning') return 'is-warning'
-	if (props.tone === 'danger') return 'is-danger'
+const resolveAccentClass = (props: any): string => {
+	if (props.accent === 'dom') return 'is-dom'
+	if (props.accent === 'sub') return 'is-sub'
+	if (props.accent === 'success') return 'is-success'
+	if (props.accent === 'warning') return 'is-warning'
+	if (props.accent === 'error') return 'is-error'
 	return 'is-neutral'
 }
 
@@ -287,11 +287,11 @@ export const ZButton = c(
 		const buttonType = (props.type as any) || 'button'
 
 		const kindClass = resolveKindClass(props)
-		const toneClass = resolveToneClass(props)
+		const accentClass = resolveAccentClass(props)
 		const sizeClass = resolveSizeClass(props)
 		const isButtonDisabled = props.isDisabled || props.isLoading
 
-		const buttonClass = [kindClass, toneClass, sizeClass]
+		const buttonClass = [kindClass, accentClass, sizeClass]
 			.concat(props.isLoading ? ['is-loading'] : [])
 			.concat(props.isDisabled ? ['is-disabled'] : [])
 			.concat(props.isFullWidth ? ['is-full-width'] : [])
@@ -310,7 +310,7 @@ export const ZButton = c(
 		props: {
 			size: { type: String, reflect: true },
 			kind: { type: String, reflect: true },
-			tone: { type: String, reflect: true },
+			accent: { type: String, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			isDisabled: { type: Boolean, reflect: true },
 			isLoading: { type: Boolean, reflect: true },

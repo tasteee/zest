@@ -2,7 +2,7 @@ import { c, css, event, useProp } from 'atomico'
 
 /*
  * z-alert — an inline, in-flow status banner (not a floating overlay). A
- * bordered box tinted by `tone` (info / success / warning / danger / neutral),
+ * bordered box tinted by `accent` (dom / success / warning / error / neutral),
  * with a leading status icon, an optional `heading`, slotted body copy, and an
  * optional close button (`is-dismissable`). Red/amber/green are reserved for
  * their semantic tones — everything else reads through the neutral border.
@@ -13,16 +13,16 @@ const styles = css`
 		--alert-color: var(--muted-foreground);
 	}
 
-	:host([tone='info']) {
+	:host([accent='dom']) {
 		--alert-color: var(--purple);
 	}
-	:host([tone='success']) {
+	:host([accent='success']) {
 		--alert-color: var(--success);
 	}
-	:host([tone='warning']) {
+	:host([accent='warning']) {
 		--alert-color: var(--warning);
 	}
-	:host([tone='danger']) {
+	:host([accent='error']) {
 		--alert-color: var(--destructive);
 	}
 
@@ -123,17 +123,23 @@ const styles = css`
 `
 
 const ICONS: Record<string, any> = {
-	info: <circle cx="12" cy="12" r="9" />,
+	dom: <circle cx="12" cy="12" r="9" />,
 	success: <polyline points="5 13 10 18 19 6" />,
 	warning: <path d="M12 3 2 20h20L12 3Z M12 10v5 M12 17.5v.5" />,
-	danger: <path d="M12 3 2 20h20L12 3Z M12 10v5 M12 17.5v.5" />,
+	error: <path d="M12 3 2 20h20L12 3Z M12 10v5 M12 17.5v.5" />,
 	neutral: <circle cx="12" cy="12" r="9" />
 }
+
+// Only the two accents that carry urgency interrupt a screen reader; the
+// rest are ambient and announce politely.
+const URGENT_ACCENTS = ['error', 'warning']
 
 export const ZAlert = c(
 	(props) => {
 		const [isHidden, setIsHidden] = useProp<boolean>('isHidden')
-		const tone = (props.tone as string) || 'neutral'
+		const accent = (props.accent as string) || 'neutral'
+		const isUrgent = URGENT_ACCENTS.includes(accent)
+		const liveRole = isUrgent ? 'alert' : 'status'
 
 		const dismiss = () => {
 			setIsHidden(true)
@@ -142,9 +148,9 @@ export const ZAlert = c(
 
 		return (
 			<host shadowDom>
-				<div class="alert" role={tone === 'danger' || tone === 'warning' ? 'alert' : 'status'}>
+				<div class="alert" role={liveRole}>
 					<span class="icon" aria-hidden="true">
-						<svg viewBox="0 0 24 24">{ICONS[tone] || ICONS.neutral}</svg>
+						<svg viewBox="0 0 24 24">{ICONS[accent] || ICONS.neutral}</svg>
 					</span>
 					<div class="content">
 						{props.heading && <p class="title">{props.heading}</p>}
@@ -166,7 +172,7 @@ export const ZAlert = c(
 	},
 	{
 		props: {
-			tone: { type: String, reflect: true },
+			accent: { type: String, reflect: true },
 			heading: String,
 			isDismissable: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },

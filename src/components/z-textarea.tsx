@@ -46,11 +46,11 @@ const styles = css`
 		font-size: var(--font-size-h4);
 	}
 
-	:host([tone='primary']) .field {
+	:host([accent='dom']) .field {
 		--accent: var(--purple);
 	}
 
-	:host([tone='secondary']) .field {
+	:host([accent='sub']) .field {
 		--accent: var(--pink);
 	}
 
@@ -163,7 +163,7 @@ export const ZTextarea = c(
 			name: String,
 			rows: Number,
 			size: { type: String, reflect: true },
-			tone: { type: String, reflect: true },
+			accent: { type: String, reflect: true },
 			isFocused: { type: Boolean, reflect: true },
 			isInvalid: { type: Boolean, reflect: true },
 			isDisabled: { type: Boolean, reflect: true },

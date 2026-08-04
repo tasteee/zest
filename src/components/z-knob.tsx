@@ -47,23 +47,23 @@ const styles = css`
 		--knob-size: 5rem;
 	}
 
-	:host([tone='primary']) {
+	:host([accent='dom']) {
 		--knob-tone: var(--purple);
 	}
 
-	:host([tone='secondary']) {
+	:host([accent='sub']) {
 		--knob-tone: var(--pink);
 	}
 
-	:host([tone='success']) {
+	:host([accent='success']) {
 		--knob-tone: var(--success);
 	}
 
-	:host([tone='warning']) {
+	:host([accent='warning']) {
 		--knob-tone: var(--warning);
 	}
 
-	:host([tone='danger']) {
+	:host([accent='error']) {
 		--knob-tone: var(--destructive);
 	}
 
@@ -360,7 +360,7 @@ export const ZKnob = c(
 			showValue: { type: Boolean, reflect: true },
 			valuePrefix: String,
 			valueSuffix: String,
-			tone: { type: String, reflect: true },
+			accent: { type: String, reflect: true },
 			isGlowing: { type: Boolean, reflect: true },
 			isSmall: { type: Boolean, reflect: true },
 			isLarge: { type: Boolean, reflect: true },

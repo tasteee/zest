@@ -211,11 +211,11 @@ const styles = css`
 		color: var(--foreground);
 	}
 
-	.text.is-primary {
+	.text.is-dom {
 		color: var(--purple);
 	}
 
-	.text.is-secondary {
+	.text.is-sub {
 		color: var(--pink);
 	}
 
@@ -223,7 +223,7 @@ const styles = css`
 		color: var(--muted-foreground);
 	}
 
-	.text.is-white {
+	.text.is-strong {
 		color: var(--color-neutral-9);
 	}
 
@@ -273,11 +273,11 @@ const styles = css`
 		box-sizing: border-box;
 	}
 
-	.inline.is-primary {
+	.inline.is-dom {
 		color: var(--purple);
 	}
 
-	.inline.is-secondary {
+	.inline.is-sub {
 		color: var(--pink);
 	}
 
@@ -285,7 +285,7 @@ const styles = css`
 		color: var(--muted-foreground);
 	}
 
-	.inline.is-white {
+	.inline.is-strong {
 		color: var(--color-neutral-9);
 	}
 
@@ -326,10 +326,10 @@ const resolveSizeClass = (props: any, fallback: string): string => {
 }
 
 const resolveColorClass = (props: any): string => {
-	if (props.color === 'primary') return 'is-primary'
-	if (props.color === 'secondary') return 'is-secondary'
+	if (props.color === 'dom') return 'is-dom'
+	if (props.color === 'sub') return 'is-sub'
 	if (props.color === 'muted') return 'is-muted'
-	if (props.color === 'white') return 'is-white'
+	if (props.color === 'strong') return 'is-strong'
 	return 'is-neutral'
 }
 
@@ -380,10 +380,10 @@ const resolveTextClass = (props: any, variantClass: string, fallbackSizeClass: s
 }
 
 const resolveInlineColorClass = (props: any): string => {
-	if (props.color === 'primary') return 'is-primary'
-	if (props.color === 'secondary') return 'is-secondary'
+	if (props.color === 'dom') return 'is-dom'
+	if (props.color === 'sub') return 'is-sub'
 	if (props.color === 'muted') return 'is-muted'
-	if (props.color === 'white') return 'is-white'
+	if (props.color === 'strong') return 'is-strong'
 	if (props.color === 'neutral') return 'is-neutral'
 	// No explicit color: emit no override class so color inherits from
 	// whatever context this is dropped into, instead of forcing --foreground.

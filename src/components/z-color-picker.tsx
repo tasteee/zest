@@ -12,11 +12,11 @@ const styles = css`
 		--accent: var(--primary);
 	}
 
-	:host([tone='primary']) {
+	:host([accent='dom']) {
 		--accent: var(--purple);
 	}
 
-	:host([tone='secondary']) {
+	:host([accent='sub']) {
 		--accent: var(--pink);
 	}
 
@@ -246,7 +246,7 @@ export const ZColorPicker = c(
 			value: { type: String, reflect: true },
 			label: String,
 			presets: { type: Array },
-			tone: { type: String, reflect: true },
+			accent: { type: String, reflect: true },
 			isDisabled: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			change: event<{ value: string }>({ bubbles: true, composed: true })

@@ -21,10 +21,10 @@ const styles = css`
 		--tone: var(--purple);
 	}
 
-	:host([tone='secondary']) {
+	:host([accent='sub']) {
 		--tone: var(--pink);
 	}
-	:host([tone='neutral']) {
+	:host([accent='neutral']) {
 		--tone: var(--color-neutral-6);
 	}
 
@@ -133,7 +133,7 @@ export const ZPointerFollow = c(
 	{
 		props: {
 			label: String,
-			tone: { type: String, reflect: true },
+			accent: { type: String, reflect: true },
 			fixed: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true }
 		},

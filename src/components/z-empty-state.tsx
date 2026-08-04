@@ -18,7 +18,7 @@ const styles = css`
 		--accent: var(--purple);
 	}
 
-	:host([tone='secondary']) {
+	:host([accent='sub']) {
 		--accent: var(--pink);
 	}
 
@@ -103,7 +103,7 @@ export const ZEmptyState = c(
 		props: {
 			heading: String,
 			description: String,
-			tone: { type: String, reflect: true },
+			accent: { type: String, reflect: true },
 			isBordered: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true }
 		},

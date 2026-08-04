@@ -14,11 +14,11 @@ const styles = css`
 		-webkit-user-select: none;
 	}
 
-	:host([tone='primary']) {
+	:host([accent='dom']) {
 		--accent: var(--purple);
 	}
 
-	:host([tone='secondary']) {
+	:host([accent='sub']) {
 		--accent: var(--pink);
 	}
 
@@ -174,7 +174,7 @@ export const ZPagination = c(
 			page: { type: Number, reflect: true },
 			total: { type: Number, reflect: true },
 			siblingCount: { type: Number, reflect: true },
-			tone: { type: String, reflect: true },
+			accent: { type: String, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			change: event<{ page: number }>({ bubbles: true, composed: true })
 		},

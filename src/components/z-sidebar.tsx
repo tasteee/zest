@@ -41,7 +41,7 @@ const styles = css`
 		-webkit-user-select: none;
 	}
 
-	:host([tone='secondary']) {
+	:host([accent='sub']) {
 		--accent: var(--pink);
 	}
 
@@ -383,7 +383,7 @@ export const ZSidebar = c(
 		props: {
 			items: { type: Array },
 			value: { type: String, reflect: true },
-			tone: { type: String, reflect: true },
+			accent: { type: String, reflect: true },
 			isCollapsed: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			isDocked: { type: Boolean, reflect: true },

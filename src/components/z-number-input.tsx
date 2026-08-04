@@ -10,8 +10,8 @@ const styles = css`
 	:host([is-full-width]) { width: 100%; }
 	:host([is-inline]) { width: auto; }
 	:host([is-hidden]) { display: none; }
-	:host([tone='primary']) { --accent: var(--purple); }
-	:host([tone='secondary']) { --accent: var(--pink); }
+	:host([accent='dom']) { --accent: var(--purple); }
+	:host([accent='sub']) { --accent: var(--pink); }
 	.field { display: inline-flex; align-items: stretch; width: 100%; box-sizing: border-box; min-width: 0; background: transparent; border: 1px solid var(--border); border-radius: var(--radius-md); color: var(--foreground); font-family: inherit; overflow: hidden; transition: border-color 0.12s ease, background-color 0.12s ease; }
 	.field.is-small { height: var(--control-height-sm); font-size: var(--font-size-small); }
 	.field.is-medium { height: var(--control-height-md); font-size: var(--font-size-body); }
@@ -119,7 +119,7 @@ export const ZNumberInput = c(
 			name: String,
 			placeholder: String,
 			size: { type: String, reflect: true },
-			tone: { type: String, reflect: true },
+			accent: { type: String, reflect: true },
 			isInvalid: { type: Boolean, reflect: true },
 			isDisabled: { type: Boolean, reflect: true },
 			isReadonly: { type: Boolean, reflect: true },

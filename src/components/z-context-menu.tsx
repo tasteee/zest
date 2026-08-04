@@ -15,10 +15,10 @@ const styles = css`
 		display: contents;
 	}
 
-	:host([tone='primary']) {
+	:host([accent='dom']) {
 		--accent: var(--purple);
 	}
-	:host([tone='secondary']) {
+	:host([accent='sub']) {
 		--accent: var(--pink);
 	}
 
@@ -73,10 +73,10 @@ const styles = css`
 		color: var(--accent);
 	}
 
-	.item.is-danger {
+	.item.is-error {
 		color: var(--destructive);
 	}
-	.item.is-danger.is-active {
+	.item.is-error.is-active {
 		background: color-mix(in oklch, var(--destructive) 14%, transparent);
 	}
 
@@ -233,7 +233,7 @@ export const ZContextMenu = c(
 						if (item.isSeparator) return <div key={`sep-${index}`} class="sep" role="separator" />
 						const cls = ['item']
 							.concat(index === activeIndex ? ['is-active'] : [])
-							.concat(item.isDanger ? ['is-danger'] : [])
+							.concat(item.isDanger ? ['is-error'] : [])
 							.concat(item.isDisabled ? ['is-disabled'] : [])
 							.join(' ')
 						return (
@@ -258,7 +258,7 @@ export const ZContextMenu = c(
 	{
 		props: {
 			items: { type: Array },
-			tone: { type: String, reflect: true },
+			accent: { type: String, reflect: true },
 			isDisabled: { type: Boolean, reflect: true },
 			select: event<{ value: string }>({ bubbles: true, composed: true })
 		},

@@ -70,12 +70,12 @@ const styles = css`
 		--switcher-accent-foreground: var(--primary-foreground);
 	}
 
-	:host([tone='primary']) {
+	:host([accent='dom']) {
 		--switcher-accent: var(--purple);
 		--switcher-accent-foreground: white;
 	}
 
-	:host([tone='secondary']) {
+	:host([accent='sub']) {
 		--switcher-accent: var(--pink);
 		--switcher-accent-foreground: white;
 	}
@@ -372,7 +372,7 @@ export const ZThemeSwitcher = c(
 	{
 		props: {
 			kind: { type: String, reflect: true },
-			tone: { type: String, reflect: true },
+			accent: { type: String, reflect: true },
 			themes: { type: Array },
 			isIconOnly: { type: Boolean, reflect: true },
 			isSmall: { type: Boolean, reflect: true },

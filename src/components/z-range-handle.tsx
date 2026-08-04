@@ -24,7 +24,7 @@ export const ZRangeHandle = c(
 			min: { type: Number, reflect: true },
 			max: { type: Number, reflect: true },
 			step: { type: Number, reflect: true },
-			tone: { type: String, reflect: true },
+			accent: { type: String, reflect: true },
 			label: String
 		},
 		styles

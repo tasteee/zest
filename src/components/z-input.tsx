@@ -42,11 +42,11 @@ const styles = css`
 		--accent: var(--primary);
 	}
 
-	:host([tone='primary']) .field {
+	:host([accent='dom']) .field {
 		--accent: var(--purple);
 	}
 
-	:host([tone='secondary']) .field {
+	:host([accent='sub']) .field {
 		--accent: var(--pink);
 	}
 
@@ -196,7 +196,7 @@ export const ZInput = c(
 			autocomplete: String,
 			inputmode: String,
 			size: { type: String, reflect: true },
-			tone: { type: String, reflect: true },
+			accent: { type: String, reflect: true },
 			isFocused: { type: Boolean, reflect: true },
 			isInvalid: { type: Boolean, reflect: true },
 			isDisabled: { type: Boolean, reflect: true },

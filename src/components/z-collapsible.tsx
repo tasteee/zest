@@ -13,11 +13,11 @@ const styles = css`
 		--accent: var(--primary);
 	}
 
-	:host([tone='primary']) {
+	:host([accent='dom']) {
 		--accent: var(--purple);
 	}
 
-	:host([tone='secondary']) {
+	:host([accent='sub']) {
 		--accent: var(--pink);
 	}
 
@@ -131,7 +131,7 @@ export const ZCollapsible = c(
 		props: {
 			value: { type: String, reflect: true },
 			label: String,
-			tone: { type: String, reflect: true },
+			accent: { type: String, reflect: true },
 			isOpen: { type: Boolean, reflect: true },
 			isDisabled: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },

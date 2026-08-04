@@ -15,7 +15,7 @@ const styles = css`
 		margin: var(--space-sm) 0;
 		--tone: var(--primary);
 	}
-	:host([tone='secondary']) {
+	:host([accent='sub']) {
 		--tone: var(--pink);
 	}
 	:host([is-hidden]) {
@@ -47,7 +47,7 @@ export const ZUnreadDivider = c(
 	{
 		props: {
 			label: { type: String, reflect: true },
-			tone: { type: String, reflect: true },
+			accent: { type: String, reflect: true },
 			isHidden: { type: Boolean, reflect: true }
 		},
 		styles

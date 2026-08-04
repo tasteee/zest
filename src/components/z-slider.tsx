@@ -46,11 +46,11 @@ const styles = css`
 		white-space: nowrap;
 	}
 
-	:host([tone='primary']) {
+	:host([accent='dom']) {
 		--accent: var(--purple);
 	}
 
-	:host([tone='secondary']) {
+	:host([accent='sub']) {
 		--accent: var(--pink);
 	}
 
@@ -194,7 +194,7 @@ export const ZSlider = c(
 			showValue: { type: Boolean, reflect: true },
 			valuePrefix: String,
 			valueSuffix: String,
-			tone: { type: String, reflect: true },
+			accent: { type: String, reflect: true },
 			isDisabled: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			input: event<{ value: number }>({ bubbles: true, composed: true }),

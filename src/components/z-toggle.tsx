@@ -104,13 +104,13 @@ const styles = css`
 		--tone-on-foreground: var(--primary-foreground);
 	}
 
-	button.is-primary {
+	button.is-dom {
 		--tone-color: var(--neon-purple);
 		--tone-text: var(--neon-purple);
 		--tone-on-foreground: var(--primary-foreground);
 	}
 
-	button.is-secondary {
+	button.is-sub {
 		--tone-color: var(--neon-pink);
 		--tone-text: var(--neon-pink);
 		--tone-on-foreground: var(--primary-foreground);
@@ -151,9 +151,9 @@ const resolveKindClass = (props: any): string => {
 	return 'is-outline'
 }
 
-const resolveToneClass = (props: any): string => {
-	if (props.tone === 'primary') return 'is-primary'
-	if (props.tone === 'secondary') return 'is-secondary'
+const resolveAccentClass = (props: any): string => {
+	if (props.accent === 'dom') return 'is-dom'
+	if (props.accent === 'sub') return 'is-sub'
 	return 'is-neutral'
 }
 
@@ -162,10 +162,10 @@ export const ZToggle = c(
 		const [isPressed, setIsPressed] = useProp<boolean>('isPressed')
 
 		const kindClass = resolveKindClass(props)
-		const toneClass = resolveToneClass(props)
+		const accentClass = resolveAccentClass(props)
 		const sizeClass = resolveSizeClass(props)
 
-		const buttonClass = [kindClass, toneClass, sizeClass].concat(props.isIcon ? ['is-icon'] : []).join(' ')
+		const buttonClass = [kindClass, accentClass, sizeClass].concat(props.isIcon ? ['is-icon'] : []).join(' ')
 
 		return (
 			<host shadowDom>
@@ -190,7 +190,7 @@ export const ZToggle = c(
 		props: {
 			size: { type: String, reflect: true },
 			kind: { type: String, reflect: true },
-			tone: { type: String, reflect: true },
+			accent: { type: String, reflect: true },
 			isIcon: { type: Boolean, reflect: true },
 			isPressed: { type: Boolean, reflect: true },
 			isDisabled: { type: Boolean, reflect: true },

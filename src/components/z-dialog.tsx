@@ -101,7 +101,6 @@ export const ZDialog = c(
 			heading: String,
 			description: String,
 			size: { type: String, reflect: true },
-			tone: { type: String, reflect: true },
 			hideClose: { type: Boolean, reflect: true },
 			isStatic: { type: Boolean, reflect: true },
 			isDisabled: { type: Boolean, reflect: true },

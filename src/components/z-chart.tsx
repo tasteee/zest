@@ -3,7 +3,7 @@ import { c, css, useState, useEffect, useHost } from 'atomico'
 /*
  * z-chart — a small, dependency-free SVG chart for a single series. Feed it a
  * `data` array (numbers, or { label, value }) and pick a `type`: bar | line |
- * area. Draws on a responsive viewBox, tints with the chart palette via `tone`,
+ * area. Draws on a responsive viewBox, tints with the chart palette via `accent`,
  * and shows the value on hover. Deliberately minimal — for dashboards and
  * inline stats, not heavy analytics.
  */
@@ -13,10 +13,10 @@ const styles = css`
 		--accent: var(--chart-1);
 	}
 
-	:host([tone='secondary']) {
+	:host([accent='sub']) {
 		--accent: var(--chart-2);
 	}
-	:host([tone='success']) {
+	:host([accent='success']) {
 		--accent: var(--success);
 	}
 
@@ -192,7 +192,7 @@ export const ZChart = c(
 		props: {
 			data: { type: Array },
 			type: { type: String, reflect: true },
-			tone: { type: String, reflect: true },
+			accent: { type: String, reflect: true },
 			height: String,
 			showGrid: { type: Boolean, reflect: true },
 			hideLabels: { type: Boolean, reflect: true },

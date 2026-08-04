@@ -59,16 +59,16 @@ const styles = css`
 	}
 
 	/* colors — same vocabulary as z-text (neutral default = --foreground) */
-	.display.is-primary {
+	.display.is-dom {
 		color: var(--purple);
 	}
-	.display.is-secondary {
+	.display.is-sub {
 		color: var(--pink);
 	}
 	.display.is-muted {
 		color: var(--muted-foreground);
 	}
-	.display.is-white {
+	.display.is-strong {
 		color: var(--color-neutral-9);
 	}
 
@@ -92,14 +92,14 @@ const resolveWeightStyle = (props: any): string => {
 const resolveDisplayClass = (props: any): string => {
 	const sizeClass = SIZE_CLASS[props.size] || 'is-lg'
 	const colorClass =
-		props.color === 'primary'
-			? 'is-primary'
-			: props.color === 'secondary'
-				? 'is-secondary'
+		props.color === 'dom'
+			? 'is-dom'
+			: props.color === 'sub'
+				? 'is-sub'
 				: props.color === 'muted'
 					? 'is-muted'
-					: props.color === 'white'
-						? 'is-white'
+					: props.color === 'strong'
+						? 'is-strong'
 						: ''
 	return ['display', sizeClass]
 		.concat(colorClass ? [colorClass] : [])

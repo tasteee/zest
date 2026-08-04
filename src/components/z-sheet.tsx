@@ -175,7 +175,6 @@ export const ZSheet = c(
 			side: { type: String, reflect: true },
 			heading: String,
 			description: String,
-			tone: { type: String, reflect: true },
 			hideClose: { type: Boolean, reflect: true },
 			isStatic: { type: Boolean, reflect: true },
 			isDisabled: { type: Boolean, reflect: true },

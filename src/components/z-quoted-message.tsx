@@ -13,7 +13,7 @@ const styles = css`
 		display: block;
 		--bar: var(--primary);
 	}
-	:host([tone='secondary']) {
+	:host([accent='sub']) {
 		--bar: var(--pink);
 	}
 	:host([is-hidden]) {
@@ -85,7 +85,7 @@ export const ZQuotedMessage = c(
 			name: { type: String, reflect: true },
 			text: { type: String, reflect: true },
 			value: { type: String, reflect: true },
-			tone: { type: String, reflect: true },
+			accent: { type: String, reflect: true },
 			noJump: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			jump: event<{ value?: string }>({ bubbles: true, composed: true })

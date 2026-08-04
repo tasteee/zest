@@ -15,11 +15,11 @@ const styles = css`
 		--accent: var(--primary);
 	}
 
-	:host([tone='primary']) {
+	:host([accent='dom']) {
 		--accent: var(--purple);
 	}
 
-	:host([tone='secondary']) {
+	:host([accent='sub']) {
 		--accent: var(--pink);
 	}
 
@@ -160,7 +160,7 @@ export const ZTabs = c(
 		props: {
 			value: { type: String, reflect: true },
 			tabs: { type: Array },
-			tone: { type: String, reflect: true },
+			accent: { type: String, reflect: true },
 			isFitted: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			change: event<{ value: string }>({ bubbles: true, composed: true })

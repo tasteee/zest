@@ -2,7 +2,7 @@ import { c, css, event } from 'atomico'
 
 /*
  * z-badge — a compact pill for status, metadata, and tags. Three kinds (soft
- * tint, solid fill, outline) across the full tone set, in two sizes, plus an
+ * tint, solid fill, outline) across the full accent set, in two sizes, plus an
  * `is-dot` inline-status mode (a leading colored dot + uppercase tracked text,
  * e.g. • ONLINE). No shadows.
  *
@@ -39,10 +39,10 @@ const styles = css`
 	}
 
 	/* tones set --tone */
-	.badge.is-primary {
+	.badge.is-dom {
 		--tone: var(--purple);
 	}
-	.badge.is-secondary {
+	.badge.is-sub {
 		--tone: var(--pink);
 	}
 	.badge.is-neutral {
@@ -54,7 +54,7 @@ const styles = css`
 	.badge.is-warning {
 		--tone: var(--warning);
 	}
-	.badge.is-danger {
+	.badge.is-error {
 		--tone: var(--destructive);
 	}
 
@@ -81,8 +81,8 @@ const styles = css`
 		color: var(--primary-foreground);
 	}
 	/* purple/pink fills are light enough that dark text muddies; use neutral-8. */
-	.badge.is-solid.is-primary,
-	.badge.is-solid.is-secondary {
+	.badge.is-solid.is-dom,
+	.badge.is-solid.is-sub {
 		color: var(--color-neutral-8);
 	}
 	.badge.is-outline {
@@ -116,8 +116,8 @@ const styles = css`
 		flex-shrink: 0;
 	}
 
-	.is-solid.is-primary .label,
-	.is-solid.is-secondary .label {
+	.is-solid.is-dom .label,
+	.is-solid.is-sub .label {
 		text-shadow: 0 0px 18px var(--primary-foreground);
 	}
 
@@ -201,12 +201,12 @@ const styles = css`
 	}
 `
 
-const resolveToneClass = (props: any): string => {
-	if (props.tone === 'primary') return 'is-primary'
-	if (props.tone === 'secondary') return 'is-secondary'
-	if (props.tone === 'success') return 'is-success'
-	if (props.tone === 'warning') return 'is-warning'
-	if (props.tone === 'danger') return 'is-danger'
+const resolveAccentClass = (props: any): string => {
+	if (props.accent === 'dom') return 'is-dom'
+	if (props.accent === 'sub') return 'is-sub'
+	if (props.accent === 'success') return 'is-success'
+	if (props.accent === 'warning') return 'is-warning'
+	if (props.accent === 'error') return 'is-error'
 	return 'is-neutral'
 }
 
@@ -223,7 +223,7 @@ export const ZBadge = c(
 
 		const badgeClass = [
 			'badge',
-			resolveToneClass(props),
+			resolveAccentClass(props),
 			props.isDot ? 'is-dot' : resolveKindClass(props),
 			sizeClass
 		]
@@ -275,7 +275,7 @@ export const ZBadge = c(
 	},
 	{
 		props: {
-			tone: { type: String, reflect: true },
+			accent: { type: String, reflect: true },
 			kind: { type: String, reflect: true },
 			size: { type: String, reflect: true },
 			label: String,

@@ -9,7 +9,7 @@ import { c, css } from 'atomico'
  *   <z-message-bubble>Hey! How's it going?</z-message-bubble>
  *
  * Content is slotted, so a bubble can hold plain text, a z-markdown, an image,
- * or any other z-* payload. `tone` (primary/secondary/success/warning/danger)
+ * or any other z-* payload. `accent` (primary/secondary/success/warning/danger)
  * overrides the side-based background for status/system bubbles.
  */
 const styles = css`
@@ -44,23 +44,23 @@ const styles = css`
 
 	/* tone overrides the side-based background — for status/system bubbles
 	   (a payment failure, a success confirmation, …) regardless of who "sent" it. */
-	:host([tone='primary']) .bubble {
+	:host([accent='dom']) .bubble {
 		background: color-mix(in oklch, var(--purple) 16%, var(--card));
 		color: var(--foreground);
 	}
-	:host([tone='secondary']) .bubble {
+	:host([accent='sub']) .bubble {
 		background: color-mix(in oklch, var(--pink) 16%, var(--card));
 		color: var(--foreground);
 	}
-	:host([tone='success']) .bubble {
+	:host([accent='success']) .bubble {
 		background: color-mix(in oklch, var(--success) 16%, var(--card));
 		color: var(--foreground);
 	}
-	:host([tone='warning']) .bubble {
+	:host([accent='warning']) .bubble {
 		background: color-mix(in oklch, var(--warning) 16%, var(--card));
 		color: var(--foreground);
 	}
-	:host([tone='danger']) .bubble {
+	:host([accent='error']) .bubble {
 		background: color-mix(in oklch, var(--destructive) 16%, var(--card));
 		color: var(--foreground);
 	}
@@ -109,7 +109,7 @@ export const ZMessageBubble = c(
 		props: {
 			side: { type: String, reflect: true },
 			group: { type: String, reflect: true },
-			tone: { type: String, reflect: true },
+			accent: { type: String, reflect: true },
 			isHidden: { type: Boolean, reflect: true }
 		},
 		styles

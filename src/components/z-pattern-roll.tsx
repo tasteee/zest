@@ -378,7 +378,7 @@ export const ZPatternRoll = c(
 		const tones = Math.max(1, props.tones || 8)
 		// rows extend past the core N1…N{tones} band with `toneMargin` extra whole
 		// bands above and below (N1+1…N{tones}+1, N1-1…N{tones}-1, …) so patterns
-		// can wrap an octave without scrolling blind. `tone` values keep counting
+		// can wrap an octave without scrolling blind. `accent` values keep counting
 		// up/down linearly (N{tones}+1 is stored as tones+1); only the on-screen
 		// label folds it back into a core degree + band suffix.
 		const toneMargin = Math.max(0, props.toneMargin ?? 3)

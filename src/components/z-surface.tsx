@@ -4,10 +4,10 @@ import { baseStyles, insetProps, insetVars, resolveRadius } from '../shared/layo
 /*
  * z-surface — a themed container panel. `level` is the everyday path: a neutral
  * elevation stepped from the theme ramp (0 = page base … 3 = overlay). For
- * accented surfaces, `tone` picks the colour family and `variant` the treatment
+ * accented surfaces, `accent` picks the colour family and `variant` the treatment
  * (filled / soft / outlined / ghost / plain) layered on top of it. `radius` and
  * `inset` are tokenized; `border`, `elevated` and `interactive` are explicit
- * toggles. Tone drives a single `--tone` custom property that the variants
+ * toggles. Accent drives a single `--tone` custom property that the variants
  * compose against (same pattern as z-badge).
  */
 const styles = css`
@@ -29,25 +29,25 @@ const styles = css`
 	}
 
 	/* tones set --tone */
-	:host([tone='plain']) {
+	:host([accent='strong']) {
 		--tone: var(--foreground);
 	}
-	:host([tone='neutral']) {
+	:host([accent='neutral']) {
 		--tone: var(--color-neutral-6);
 	}
-	:host([tone='primary']) {
+	:host([accent='dom']) {
 		--tone: var(--purple);
 	}
-	:host([tone='secondary']) {
+	:host([accent='sub']) {
 		--tone: var(--pink);
 	}
-	:host([tone='success']) {
+	:host([accent='success']) {
 		--tone: var(--success);
 	}
-	:host([tone='warning']) {
+	:host([accent='warning']) {
 		--tone: var(--warning);
 	}
-	:host([tone='danger']) {
+	:host([accent='error']) {
 		--tone: var(--destructive);
 	}
 
@@ -60,8 +60,8 @@ const styles = css`
 		color: var(--primary-foreground);
 	}
 	/* purple/pink fills are light; dark text reads better on them */
-	:host([variant='filled'][tone='primary']),
-	:host([variant='filled'][tone='secondary']) {
+	:host([variant='filled'][accent='dom']),
+	:host([variant='filled'][accent='sub']) {
 		color: var(--color-neutral-8);
 	}
 	/* Tone tints are mixed with transparent, NOT the background: the neutral
@@ -137,7 +137,7 @@ export const ZSurface = c(
 	{
 		props: {
 			level: { type: String, reflect: true },
-			tone: { type: String, reflect: true },
+			accent: { type: String, reflect: true },
 			variant: { type: String, reflect: true },
 			radius: String,
 			border: { type: Boolean, reflect: true },

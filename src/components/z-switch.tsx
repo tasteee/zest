@@ -30,11 +30,11 @@ const styles = css`
 		--accent: var(--primary);
 	}
 
-	:host([tone='primary']) label {
+	:host([accent='dom']) label {
 		--accent: var(--purple);
 	}
 
-	:host([tone='secondary']) label {
+	:host([accent='sub']) label {
 		--accent: var(--pink);
 	}
 
@@ -174,7 +174,7 @@ export const ZSwitch = c(
 			isHidden: { type: Boolean, reflect: true },
 			isBlock: { type: Boolean, reflect: true },
 			size: { type: String, reflect: true },
-			tone: { type: String, reflect: true },
+			accent: { type: String, reflect: true },
 			name: String,
 			value: String,
 			change: event<{ checked: boolean; value?: string }>({ bubbles: true, composed: true })

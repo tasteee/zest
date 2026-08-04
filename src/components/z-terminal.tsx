@@ -52,7 +52,7 @@ const styles = css`
 		--accent: var(--success);
 	}
 
-	:host([tone='secondary']) {
+	:host([accent='sub']) {
 		--accent: var(--purple);
 	}
 
@@ -782,7 +782,7 @@ export const ZTerminal = c(
 			cwd: String,
 			prompt: String,
 			copyLines: String,
-			tone: { type: String, reflect: true },
+			accent: { type: String, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			// Sizing — any CSS length; height pins the window and scrolls the body.
 			width: String,

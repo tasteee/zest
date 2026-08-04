@@ -18,11 +18,11 @@ const styles = css`
 		-webkit-user-select: none;
 	}
 
-	:host([tone='primary']) {
+	:host([accent='dom']) {
 		--accent: var(--purple);
 	}
 
-	:host([tone='secondary']) {
+	:host([accent='sub']) {
 		--accent: var(--pink);
 	}
 
@@ -76,11 +76,11 @@ const styles = css`
 		color: var(--accent);
 	}
 
-	.item.is-danger {
+	.item.is-error {
 		color: var(--destructive);
 	}
 
-	.item.is-danger.is-active {
+	.item.is-error.is-active {
 		background: color-mix(in oklch, var(--destructive) 14%, transparent);
 		color: var(--destructive);
 	}
@@ -207,7 +207,7 @@ export const ZMenu = c(
 							if (item.isSeparator) return <div key={`sep-${index}`} class="sep" role="separator" />
 							const cls = ['item']
 								.concat(index === activeIndex ? ['is-active'] : [])
-								.concat(item.isDanger ? ['is-danger'] : [])
+								.concat(item.isDanger ? ['is-error'] : [])
 								.concat(item.isDisabled ? ['is-disabled'] : [])
 								.join(' ')
 							return (
@@ -235,7 +235,7 @@ export const ZMenu = c(
 		props: {
 			items: { type: Array },
 			align: { type: String, reflect: true },
-			tone: { type: String, reflect: true },
+			accent: { type: String, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			select: event<{ value: string }>({ bubbles: true, composed: true })
 		},

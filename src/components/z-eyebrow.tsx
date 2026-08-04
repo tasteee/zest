@@ -19,10 +19,10 @@ const styles = css`
 		display: none;
 	}
 
-	:host([tone='primary']) {
+	:host([color='dom']) {
 		--eyebrow-tone: var(--purple);
 	}
-	:host([tone='neutral']) {
+	:host([color='neutral']) {
 		--eyebrow-tone: var(--muted-foreground);
 	}
 
@@ -64,7 +64,7 @@ export const ZEyebrow = c(
 	),
 	{
 		props: {
-			tone: { type: String, reflect: true },
+			color: { type: String, reflect: true },
 			label: String,
 			hasRule: { type: Boolean, reflect: true },
 			fullWidth: { type: Boolean, reflect: true },

@@ -12,14 +12,14 @@ const styles = css`
 		--accent: var(--color-neutral-8);
 	}
 
-	:host([tone='secondary']) {
+	:host([accent='sub']) {
 		--accent: var(--pink);
 	}
 
-	:host([tone='success']) {
+	:host([accent='success']) {
 		--accent: var(--success);
 	}
-	:host([tone='danger']) {
+	:host([accent='error']) {
 		--accent: var(--destructive);
 	}
 
@@ -92,7 +92,7 @@ export const ZProgress = c(
 		props: {
 			value: { type: Number, reflect: true },
 			max: { type: Number, reflect: true },
-			tone: { type: String, reflect: true },
+			accent: { type: String, reflect: true },
 			size: { type: String, reflect: true },
 			isIndeterminate: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true }

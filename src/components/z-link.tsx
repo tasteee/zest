@@ -48,10 +48,10 @@ const styles = css`
 	}
 
 	/* tones */
-	a.is-primary {
+	a.is-dom {
 		--tone-color: var(--purple);
 	}
-	a.is-secondary {
+	a.is-sub {
 		--tone-color: var(--pink);
 	}
 	a.is-neutral {
@@ -123,10 +123,10 @@ const resolveSizeClass = (props: any): string => {
 	return 'is-medium'
 }
 
-const resolveToneClass = (props: any): string => {
-	if (props.tone === 'secondary') return 'is-secondary'
-	if (props.tone === 'neutral') return 'is-neutral'
-	return 'is-primary'
+const resolveAccentClass = (props: any): string => {
+	if (props.color === 'sub') return 'is-sub'
+	if (props.color === 'neutral') return 'is-neutral'
+	return 'is-dom'
 }
 
 const resolveUnderlineClass = (props: any): string => {
@@ -137,7 +137,7 @@ const resolveUnderlineClass = (props: any): string => {
 
 export const ZLink = c(
 	(props) => {
-		const linkClass = [resolveToneClass(props), resolveSizeClass(props), resolveUnderlineClass(props)].join(' ')
+		const linkClass = [resolveAccentClass(props), resolveSizeClass(props), resolveUnderlineClass(props)].join(' ')
 		const isExternal = props.isExternal || props.target === '_blank'
 
 		return (
@@ -167,7 +167,7 @@ export const ZLink = c(
 			target: String,
 			label: String,
 			size: { type: String, reflect: true },
-			tone: { type: String, reflect: true },
+			color: { type: String, reflect: true },
 			underline: { type: String, reflect: true },
 			isExternal: { type: Boolean, reflect: true },
 			isBlock: { type: Boolean, reflect: true },

@@ -202,7 +202,6 @@ export const ZDrawer = c(
 			isOpen: { type: Boolean, reflect: true },
 			heading: String,
 			description: String,
-			tone: { type: String, reflect: true },
 			isStatic: { type: Boolean, reflect: true },
 			isDisabled: { type: Boolean, reflect: true },
 			open: event<void>({ bubbles: true, composed: true }),

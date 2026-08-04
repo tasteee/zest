@@ -6,7 +6,7 @@ import { dialogSurfaceStyles } from '../shared/overlay-styles'
  * choices. Same native-<dialog> foundation and chrome as z-dialog, but it owns
  * its two actions (cancel + confirm) instead of a free-form footer, and it is
  * intentionally non-light-dismissable: clicking the backdrop does nothing, and
- * Esc resolves as an explicit cancel. `tone="danger"` paints the confirm button
+ * Esc resolves as an explicit cancel. `accent="error"` paints the confirm button
  * with the destructive color. Fires `confirm` and `cancel`.
  */
 const styles = css`
@@ -37,7 +37,9 @@ export const ZAlertDialog = c(
 			else props.cancel()
 		}
 
-		const confirmTone = props.tone === 'danger' ? 'danger' : props.tone === 'secondary' ? 'secondary' : 'primary'
+		// The dialog and its confirm button now share one accent vocabulary, so
+		// the value passes straight through instead of being remapped.
+		const confirmAccent = props.accent || 'dom'
 
 		return (
 			<host shadowDom style={{ '--z-dialog-width': '26rem' }}>
@@ -60,10 +62,10 @@ export const ZAlertDialog = c(
 						<slot />
 					</div>
 					<div class="footer">
-						<z-button kind="outline" tone="neutral" onclick={() => resolve(false)}>
+						<z-button kind="outline" accent="neutral" onclick={() => resolve(false)}>
 							{props.cancelLabel || 'Cancel'}
 						</z-button>
-						<z-button kind="solid" tone={confirmTone} onclick={() => resolve(true)}>
+						<z-button kind="solid" accent={confirmAccent} onclick={() => resolve(true)}>
 							{props.confirmLabel || 'Confirm'}
 						</z-button>
 					</div>
@@ -78,7 +80,7 @@ export const ZAlertDialog = c(
 			description: String,
 			confirmLabel: String,
 			cancelLabel: String,
-			tone: { type: String, reflect: true },
+			accent: { type: String, reflect: true },
 			confirm: event<void>({ bubbles: true, composed: true }),
 			cancel: event<void>({ bubbles: true, composed: true })
 		},
