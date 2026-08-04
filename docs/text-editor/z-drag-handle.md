@@ -52,7 +52,7 @@ A singleton line, teleported the same way as `z-gutter-handle`.
 
 | Attribute | Values | Default | Description |
 | --- | --- | --- | --- |
-| `orientation` | `horizontal` `vertical` | `horizontal` | line direction |
+| `direction` | `horizontal` `vertical` | `horizontal` | line direction |
 | `is-open` | boolean | — | show/hide |
 
 ### Properties

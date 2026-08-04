@@ -9,7 +9,7 @@ zoom, a sticky piano-keyboard gutter, and a bar ruler.
 
 See [z-pattern-roll](z-pattern-roll.md) for the chord-relative sibling of
 this editor, which shares the entire interaction engine but expresses pitch
-as chord-tone degrees instead of absolute MIDI numbers.
+as chord-accent degrees instead of absolute MIDI numbers.
 
 ```html
 <z-piano-roll bars="4" beats-per-bar="4"></z-piano-roll>
@@ -40,8 +40,8 @@ roll.addEventListener('change', (e) => save(e.detail.notes))
 | `root` | MIDI number | — | scale root |
 | `default-velocity` | number (1–127) | `100` | velocity for newly drawn notes |
 | `playhead` | number (beats) | — | draws a playhead line at this beat |
-| `hide-toolbar` | boolean | — | hide the toolbar |
-| `hide-keyboard` | boolean | — | hide the piano-keyboard gutter |
+| `has-toolbar` | boolean | — | hide the toolbar |
+| `has-keyboard` | boolean | — | hide the piano-keyboard gutter |
 | `is-disabled` | boolean | — | disable interaction |
 | `is-hidden` | boolean | — | hide |
 

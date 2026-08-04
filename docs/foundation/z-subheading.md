@@ -5,7 +5,7 @@ An uppercase, letter-spaced eyebrow / overline label. Part of the text family
 default. Renders a `<p>` unless `tag` is set.
 
 ```html
-<z-subheading size="sm" color="primary">Now in beta</z-subheading>
+<z-subheading size="sm" color="dom">Now in beta</z-subheading>
 ```
 
 ## Attributes

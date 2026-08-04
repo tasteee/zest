@@ -12,8 +12,8 @@ the body; a `[slot="footer"]` holds actions.
   <z-input placeholder="Name"></z-input>
 
   <div slot="footer">
-    <z-button kind="outline" tone="neutral">Cancel</z-button>
-    <z-button tone="primary">Save</z-button>
+    <z-button kind="outline" accent="neutral">Cancel</z-button>
+    <z-button accent="dom">Save</z-button>
   </div>
 </z-dialog>
 ```
@@ -33,8 +33,8 @@ dialog.addEventListener('close', () => {})
 | `heading` | string | — | title |
 | `description` | string | — | sub-text below the title |
 | `size` | `small` `medium` `large` | `medium` | width (24 / 30 / 42 rem) |
-| `tone` | `primary` `secondary` | — | accent |
-| `hide-close` | boolean | — | hide the × close button |
+| `accent` | `primary` `secondary` | — | accent |
+| `has-close` | boolean | — | hide the × close button |
 | `is-static` | boolean | — | disable backdrop-click dismiss |
 | `is-disabled` | boolean | — | prevent the trigger from opening |
 

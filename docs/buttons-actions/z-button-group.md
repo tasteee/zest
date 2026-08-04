@@ -11,14 +11,14 @@ focus stacking so adjacent borders collapse into a single seam.
   <z-button kind="outline">Month</z-button>
 </z-button-group>
 
-<z-button-group is-vertical>…</z-button-group>
+<z-button-group direction="vertical">…</z-button-group>
 ```
 
 ## Attributes
 
 | Attribute | Type | Description |
 | --- | --- | --- |
-| `is-vertical` | boolean | stack the buttons vertically (equal width) instead of in a row |
+| `direction` | boolean | stack the buttons vertically (equal width) instead of in a row |
 
 Exposes `role="group"`.
 

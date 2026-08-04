@@ -21,10 +21,10 @@ chart.data = [12, 19, 7, 22, 15]
 | --- | --- | --- | --- |
 | `data` | `number[] \| { label, value }[]` | `[]` | **property** — the series |
 | `type` | `bar` `line` `area` | `bar` | chart type |
-| `tone` | `secondary` `success` | `chart-1` | accent color |
+| `accent` | `secondary` `success` | `chart-1` | accent color |
 | `height` | CSS length | `240px` | chart height |
-| `show-grid` | boolean | — | draw horizontal grid lines |
-| `hide-labels` | boolean | — | hide the x-axis labels |
+| `does-show-grid` | boolean | — | draw horizontal grid lines |
+| `has-labels` | boolean | — | hide the x-axis labels |
 | `is-hidden` | boolean | — | hide |
 
 ## Slots

@@ -6,12 +6,12 @@ layers spin behind the slotted content: a crisp ring at the edge and a
 blurred bloom that bleeds outward.
 
 ```html
-<z-aura variant="gold" size="lg">
-  <z-button tone="primary">Upgrade</z-button>
+<z-aura kind="gold" size="lg">
+  <z-button accent="dom">Upgrade</z-button>
 </z-aura>
 
 <!-- round content needs a matching frame radius -->
-<z-aura variant="glow" style="--aura-radius: 999px">
+<z-aura kind="glow" style="--aura-radius: 999px">
   <z-avatar name="Ada Lovelace"></z-avatar>
 </z-aura>
 ```
@@ -20,7 +20,7 @@ blurred bloom that bleeds outward.
 
 | Attribute | Values | Default | Description |
 | --- | --- | --- | --- |
-| `variant` | `default` `dual` `rainbow` `holo` `gold` `silver` `glow` | `default` | color palette / comet pattern (`glow` drops the crisp ring for a soft pulsing halo) |
+| `kind` | `default` `dual` `rainbow` `holo` `gold` `silver` `glow` | `default` | color palette / comet pattern (`glow` drops the crisp ring for a soft pulsing halo) |
 | `size` | `xs` `sm` `md` `lg` `xl` | `md` | frame thickness and bloom spread |
 | `is-hidden` | boolean | — | hide |
 

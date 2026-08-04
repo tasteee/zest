@@ -8,7 +8,7 @@ children: it listens on `window` and hides the native cursor everywhere.
 
 ```html
 <!-- scoped: wraps a region -->
-<z-pointer-follow label="Draw" tone="primary">
+<z-pointer-follow label="Draw" accent="dom">
   <z-surface level="1" radius="lg">
     <z-box height="220px" width="100%" aligns-x="center" aligns-y="center">
       <z-text color="muted">Move the pointer over this panel</z-text>
@@ -17,24 +17,24 @@ children: it listens on `window` and hides the native cursor everywhere.
 </z-pointer-follow>
 
 <!-- fixed: one page-level instance, no children -->
-<z-pointer-follow fixed tone="secondary"></z-pointer-follow>
+<z-pointer-follow fixed accent="sub"></z-pointer-follow>
 ```
 
 ## Attributes
 
 | Attribute | Values | Default | Description |
 | --- | --- | --- | --- |
-| `tone` | `secondary` `neutral` | primary/purple | dot and tag color |
-| `fixed` | boolean | — | page-level mode instead of scoped-to-slot |
+| `accent` | `secondary` `neutral` | primary/purple | dot and tag color |
+| `is-fixed` | boolean | — | page-level mode instead of scoped-to-slot |
 | `label` | string | — | optional trailing text tag next to the dot |
 | `is-hidden` | boolean | — | hide |
 
 ## Slots
 
-- _(default)_ — wrapped content (scoped mode only; ignored when `fixed`).
+- _(default)_ — wrapped content (scoped mode only; ignored when `is-fixed`).
 
 ## Notes
 
-- In `fixed` mode, `cursor: none` is toggled on `document.body` for as long
+- In `is-fixed` mode, `cursor: none` is toggled on `document.body` for as long
   as the element is connected (cleaned up on disconnect) — the same pattern a
   modal uses for scroll locking.

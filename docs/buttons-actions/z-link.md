@@ -1,12 +1,12 @@
 # z-link
 
-An inline text link. Accent-colored by `tone`, with an animated underline that
+An inline text link. Accent-colored by `color`, with an animated underline that
 grows from the start on hover.
 
 ```html
 <z-link href="/docs">Read the docs</z-link>
 <z-link href="https://example.com" is-external>External ↗</z-link>
-<z-link href="/x" tone="neutral" underline="always">Always underlined</z-link>
+<z-link href="/x" color="neutral" underline="always">Always underlined</z-link>
 ```
 
 ## Attributes
@@ -16,7 +16,7 @@ grows from the start on hover.
 | `href` | string | — | destination |
 | `target` | string | — | anchor target (`_blank` implies external rel) |
 | `label` | string | — | text (alternative to slotting children) |
-| `tone` | `primary` `secondary` `neutral` | `primary` | color |
+| `color` | `primary` `secondary` `neutral` | `primary` | color |
 | `size` | `small` `medium` `large` | `medium` | size |
 | `underline` | `hover` `always` `none` | `hover` | underline behaviour |
 | `is-external` | boolean | — | open in a new tab with `rel="noopener noreferrer"` |

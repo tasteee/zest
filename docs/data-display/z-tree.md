@@ -27,8 +27,8 @@ tree.expandAll()
 
 | Attribute | Values | Default | Description |
 | --- | --- | --- | --- |
-| `selection` | `single` `multiple` `none` | `single` | selection mode (⌘/Ctrl-click adds in `multiple`) |
-| `show-guides` | boolean | — | draw indent guide lines |
+| `selection` | `single` `is-multiple` `none` | `single` | selection mode (⌘/Ctrl-click adds in `is-multiple`) |
+| `does-show-guides` | boolean | — | draw indent guide lines |
 | `is-hidden` | boolean | — | hide |
 
 ## Properties

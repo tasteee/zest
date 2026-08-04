@@ -23,7 +23,7 @@ composer.addEventListener('send', (e) => e.detail.value) // fires, then the fiel
 | `placeholder` | string | `Message…` | placeholder text |
 | `is-focused` | boolean | — | focus state (reflected, two-way) |
 | `is-disabled` | boolean | — | disable the whole composer |
-| `disable-enter-submit` | boolean | — | make Enter insert a newline instead of sending |
+| `does-submit-on-enter` | boolean | — | make Enter insert a newline instead of sending |
 | `is-hidden` | boolean | — | hide |
 
 ## Slots

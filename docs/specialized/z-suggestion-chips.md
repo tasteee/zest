@@ -21,7 +21,7 @@ chips.addEventListener('select', (e) => e.detail) // { value, label }
 
 | Attribute | Values | Default | Description |
 | --- | --- | --- | --- |
-| `show-arrow` | boolean | — | show a trailing arrow icon on each chip |
+| `does-show-arrow` | boolean | — | show a trailing arrow icon on each chip |
 | `is-hidden` | boolean | — | hide |
 
 ## Properties

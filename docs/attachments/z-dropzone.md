@@ -15,7 +15,7 @@ zone.addEventListener('reject', (e) => e.detail)               // { files, reaso
 zone.addEventListener('clear', () => {})
 ```
 
-Files are validated against `accept` / `max-size` / `max-files` / `multiple`
+Files are validated against `accept` / `max-size` / `max-files` / `is-multiple`
 before `drop` fires; anything rejected comes back on `reject` with a reason
 instead.
 
@@ -24,7 +24,7 @@ instead.
 | Attribute | Values | Default | Description |
 | --- | --- | --- | --- |
 | `accept` | comma-separated MIME types / extensions | — | e.g. `image/*,.pdf` |
-| `multiple` | boolean | — | allow more than one file |
+| `is-multiple` | boolean | — | allow more than one file |
 | `max-size` | number (bytes) | — | reject files larger than this |
 | `max-files` | number | — | reject drops with more files than this |
 | `is-disabled` | boolean | — | disable the zone |

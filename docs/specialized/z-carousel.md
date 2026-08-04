@@ -2,7 +2,7 @@
 
 A one-per-view slider over slotted children. Each direct child is a slide; the
 track translates by whole steps. Includes prev/next controls and dot indicators,
-optional `loop`, and `autoplay`. Slide count is read from the slot, so markup
+optional `does-loop`, and `autoplay`. Slide count is read from the slot, so markup
 stays declarative.
 
 ```html
@@ -22,8 +22,8 @@ carousel.addEventListener('change', (e) => e.detail.index)
 | Attribute | Values | Default | Description |
 | --- | --- | --- | --- |
 | `autoplay` | number (ms) | — | ms between auto-advances (paused on hover/focus); omit to disable |
-| `loop` | boolean | — | wrap around at the ends |
-| `tone` | `secondary` | neutral | accent for controls/dots |
+| `does-loop` | boolean | — | wrap around at the ends |
+| `accent` | `secondary` | neutral | accent for controls/dots |
 | `is-hidden` | boolean | — | hide |
 
 Controls and dots only appear when there's more than one slide.

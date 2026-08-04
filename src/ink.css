@@ -224,7 +224,7 @@
   --accent-alt: var(--color-pink);
   /* button-tone colors: exact per-tone colors with hand-tuned lightness/chroma.
 	   Deliberately decoupled from --color-purple/--color-pink above (which stay
-	   tied to the raw base accent colors z-toggle's is-purple/is-pink rely on). */
+	   tied to the raw base accent colors z-toggle's dom/sub accents rely on). */
   --purple: var(--base-accent-color-1);
   --pink: var(--base-accent-color-0);
   --success: var(--base-success-color);

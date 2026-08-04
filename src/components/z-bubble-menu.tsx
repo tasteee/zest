@@ -8,7 +8,7 @@ import { useVisibilityPhase } from '../shared/transition'
  * `variant`. One instance per variant is the simplest setup (a singleton per
  * variant, same shape as z-toast/z-selection-toolbar); show whichever variant
  * applies and hide the rest:
- *   <z-bubble-menu variant="link"></z-bubble-menu>
+ *   <z-bubble-menu kind="link"></z-bubble-menu>
  * Positioned the same way as z-selection-toolbar (anchorRect + isOpen). When a
  * link is under the cursor, show the "link" bubble instead of
  * z-selection-toolbar — this component doesn't coordinate that on its own,

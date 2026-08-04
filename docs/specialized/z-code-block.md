@@ -24,8 +24,8 @@ block.addEventListener('copy', () => {})
 | `language` | string | auto | highlight.js language id (also shown in the header) |
 | `filename` | string | — | filename shown in the header |
 | `has-line-numbers` | boolean | — | render a line-number gutter |
-| `hide-copy` | boolean | — | hide the copy button |
-| `tone` | `secondary` | `primary` (purple) | header language-tag accent |
+| `has-copy` | boolean | — | hide the copy button |
+| `accent` | `secondary` | `primary` (purple) | header language-tag accent |
 | `is-hidden` | boolean | — | hide |
 
 ## Events

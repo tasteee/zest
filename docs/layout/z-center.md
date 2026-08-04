@@ -1,8 +1,8 @@
 # z-center
 
 Centers its content on both axes by default. Override either axis with
-`aligns-x` / `aligns-y`, force dead center with `both`, constrain the inner
-content with `max-width`, center text with `text`, and use `min-height` for
+`aligns-x` / `aligns-y`, force dead center with `centers-both`, constrain the inner
+content with `max-width`, center text with `centers-text`, and use `min-height` for
 full-viewport hero centering.
 
 ```html
@@ -19,13 +19,13 @@ full-viewport hero centering.
 
 | Attribute | Values | Default | Description |
 | --- | --- | --- | --- |
-| `aligns-x` | `start` `center` `end` | `center` | horizontal alignment |
-| `aligns-y` | `start` `center` `end` | `center` | vertical alignment |
-| `both` | boolean | — | force dead center on both axes |
+| `aligns-x` | `start` `is-centered` `end` | `is-centered` | horizontal alignment |
+| `aligns-y` | `start` `is-centered` `end` | `is-centered` | vertical alignment |
+| `centers-both` | boolean | — | force dead center on both axes |
 | `max-width` | width token / length | — | cap the inner content block (`xs`…`3xl`, `full`, `screen`, or any length) |
-| `text` | boolean | — | `text-align: center` |
+| `centers-text` | boolean | — | `text-align: center` |
 | `min-height` | CSS length | — | minimum height (e.g. `100dvh`) |
-| `full-width` / `full-height` | boolean | — | stretch to fill |
+| `is-full-width` / `is-full-height` | boolean | — | stretch to fill |
 | `inset` `inset-x` `inset-y` | size token / length | — | inner padding |
 | `hidden` | boolean | — | hide (native attribute) |
 

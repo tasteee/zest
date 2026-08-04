@@ -11,7 +11,7 @@ with the default slot reserved for actions.
   is-bordered
 >
   <svg slot="icon">…</svg>
-  <z-button tone="primary">Clear filters</z-button>
+  <z-button accent="dom">Clear filters</z-button>
 </z-empty-state>
 ```
 
@@ -21,7 +21,7 @@ with the default slot reserved for actions.
 | --- | --- | --- | --- |
 | `heading` | string | — | the headline |
 | `description` | string | — | supporting copy |
-| `tone` | `secondary` | `primary` (purple) | icon tint |
+| `accent` | `secondary` | `primary` (purple) | icon tint |
 | `is-bordered` | boolean | — | dashed border around the block |
 | `is-hidden` | boolean | — | hide |
 

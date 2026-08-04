@@ -6,7 +6,7 @@ label sits to the right.
 
 ```html
 <z-switch is-checked>Dark mode</z-switch>
-<z-switch tone="primary" name="notifications">Notifications</z-switch>
+<z-switch accent="dom" name="notifications">Notifications</z-switch>
 ```
 
 ```js
@@ -19,7 +19,7 @@ switchEl.addEventListener('change', (e) => e.detail.checked)
 | --- | --- | --- | --- |
 | `is-checked` | boolean | — | on/off state (reflected, two-way) |
 | `size` | `small` `medium` `large` | `medium` | size |
-| `tone` | `primary` `secondary` | `primary` accent | accent color |
+| `accent` | `primary` `secondary` | `primary` accent | accent color |
 | `name` | string | — | form field name |
 | `value` | string | — | form value |
 | `is-disabled` | boolean | — | disable |

@@ -8,7 +8,7 @@ design-system spacing scale. [z-row](../layout/z-row.md) and
 the flow direction locked.
 
 ```html
-<z-box is-row gap="md" aligns-x="between" aligns-y="center" padding="lg">
+<z-box  gap="md" aligns-x="between" aligns-y="center" padding="lg">
   <span>Left</span>
   <span>Right</span>
 </z-box>
@@ -42,9 +42,9 @@ other CSS length through. Grid `columns`/`rows` treat a bare number as
 | `is-block` / `is-inline-block` / `is-inline` | boolean | — | block display modes |
 | `aligns-x` | alignment | — | horizontal relationship |
 | `aligns-y` | alignment | — | vertical relationship |
-| `wrap` | boolean | — | `flex-wrap: wrap` |
+| `does-wrap` | boolean | — | `flex-wrap: wrap` |
 | `does-wrap-text` | boolean | — | allow text wrapping |
-| `full-width` / `full-height` | boolean | — | `width`/`height: 100%` |
+| `is-full-width` / `is-full-height` | boolean | — | `width`/`height: 100%` |
 | `gap` `row-gap` `column-gap` | size token / length | — | spacing between children |
 | `margin` `margin-x` `margin-y` `margin-top/right/bottom/left` | size token / length | — | outer spacing |
 | `padding` `padding-x` `padding-y` `padding-top/right/bottom/left` | size token / length | — | inner spacing |
@@ -53,7 +53,7 @@ other CSS length through. Grid `columns`/`rows` treat a bare number as
 | `columns` `rows` | number / grid-template | — | grid template (number → `repeat(n, …)`) |
 | `small-columns` `medium-columns` `large-columns` `extra-large-columns` | number / grid-template | — | responsive grid columns (breakpoints at 40/48/64/80rem) |
 
-Alignment values: `start` `center` `end` `between` `around` `evenly`
+Alignment values: `start` `is-centered` `end` `between` `around` `evenly`
 `stretch` (in grid mode, the distribution-only values collapse to `stretch`,
 matching CSS `justify-items`/`align-items`).
 

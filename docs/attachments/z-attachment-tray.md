@@ -20,7 +20,7 @@ tray.addEventListener('reject', (e) => e.detail) // { files, reason }
 | Attribute | Values | Default | Description |
 | --- | --- | --- | --- |
 | `accept` | comma-separated MIME types / extensions | — | e.g. `image/*,.pdf` |
-| `multiple` | boolean | — | allow more than one file |
+| `is-multiple` | boolean | — | allow more than one file |
 | `max-size` | number (bytes) | — | reject files larger than this |
 | `max-files` | number | — | reject drops with more files than this |
 | `is-hidden` | boolean | — | hide |

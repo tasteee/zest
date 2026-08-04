@@ -22,7 +22,7 @@ group.addEventListener('change', (e) => e.detail.value)
 | --- | --- | --- | --- |
 | `value` | string | — | selected value (reflected, two-way) |
 | `label` | string | — | accessible group label (`aria-label`) |
-| `is-horizontal` | boolean | — | lay items out in a row |
+| `direction` | boolean | — | lay items out in a row |
 | `is-hidden` | boolean | — | hide |
 
 Exposes `role="radiogroup"`.

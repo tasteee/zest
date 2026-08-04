@@ -18,7 +18,7 @@ added 42 packages"></z-terminal>
 
 ## Animated simulation
 
-Add `animate` to play the content back like a live session: **command lines type
+Add `does-animate` to play the content back like a live session: **command lines type
 out** character-by-character with a blinking caret, **output lines fade in**
 quickly, and reveals are staggered so only one line animates at a time.
 
@@ -28,10 +28,10 @@ quickly, and reveals are staggered so only one line animates at a time.
 $ zesty deploy"></z-terminal>
 ```
 
-- `start-on-view` waits until the terminal scrolls into view before playing.
-- `loop` auto-restarts `loop-delay` ms after the last line reveals.
+- `does-start-on-view` waits until the terminal scrolls into view before playing.
+- `does-loop` auto-restarts `loop-delay` ms after the last line reveals.
 - A **replay control** appears in the bottom-right once a run completes (suppress
-  with `hide-replay`). It's available whether or not `loop` is set.
+  with `has-replay`). It's available whether or not `does-loop` is set.
 - `prefers-reduced-motion` skips the animation and renders the final state.
 
 ### Per-line timing (the `lines` property)
@@ -51,7 +51,7 @@ term.lines = [
 ]
 ```
 
-Each object entry accepts: `text`, `type` (`command` | `output`, inferred from
+Each object entry accepts: `centers-text`, `type` (`command` | `output`, inferred from
 the prompt marker when omitted), `delay`, `typeSpeed`, and `fade`.
 
 ### Controls
@@ -107,7 +107,7 @@ running 64 specs
 ✓ 64 passed"></z-terminal>
 ```
 
-Add `no-auto-scroll` to leave the scroll position alone during playback — the
+Add `does-auto-scroll` to leave the scroll position alone during playback — the
 run then reveals below the fold and the reader scrolls it themselves.
 
 Long lines don't wrap or truncate: they keep their natural width and the body
@@ -126,16 +126,16 @@ scrolls sideways, so a narrow terminal stays readable.
 | `width` | string | — | CSS length for the window's width |
 | `height` | string | — | CSS length that pins the window's height; the body scrolls |
 | `max-height` | string | — | CSS length that caps growth instead of fixing the height |
-| `animate` | boolean | — | play the content back as a typed/faded simulation |
-| `start-on-view` | boolean | — | begin only when scrolled into view |
+| `does-animate` | boolean | — | play the content back as a typed/faded simulation |
+| `does-start-on-view` | boolean | — | begin only when scrolled into view |
 | `type-speed` | number | `55` | ms per character for typed commands |
 | `line-delay` | number | `380` | ms gap before each line reveals |
 | `fade-duration` | number | `240` | ms for output lines to fade in |
-| `loop` | boolean | — | restart automatically after finishing |
+| `does-loop` | boolean | — | restart automatically after finishing |
 | `loop-delay` | number | `2200` | ms to wait before an auto-restart |
-| `hide-replay` | boolean | — | suppress the bottom-right replay control |
-| `no-auto-scroll` | boolean | — | don't follow the playhead while an animation plays |
-| `tone` | `secondary` | `primary` (green) | accent color |
+| `has-replay` | boolean | — | suppress the bottom-right replay control |
+| `does-auto-scroll` | boolean | — | don't follow the playhead while an animation plays |
+| `accent` | `secondary` | `primary` (green) | accent color |
 | `is-hidden` | boolean | — | hide |
 
 ## Methods

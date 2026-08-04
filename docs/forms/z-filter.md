@@ -31,7 +31,7 @@ visible. Crumbs are clickable to step back up.
 
 | Attribute | Values | Default | Description |
 | --- | --- | --- | --- |
-| `tone` | `primary` `secondary` | `primary` accent | pill accent color |
+| `accent` | `primary` `secondary` | `primary` accent | pill accent color |
 | `size` | `small` `medium` | `medium` | pill size |
 | `label` | string | — | accessible group name |
 | `reset-label` | string | `Clear` | accessible label for the reset (✕) button |

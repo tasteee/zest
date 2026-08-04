@@ -17,11 +17,11 @@ surface, like the shell of a device; the main content sits in a darker, inset
 | Attribute | Values | Default | Description |
 | --- | --- | --- | --- |
 | `rail-width` | length | `4.25rem` | expanded rail width |
-| `rail-collapsed-width` | length | `3.5rem` | collapsed rail width (with `expand-on-hover`) |
+| `rail-collapsed-width` | length | `3.5rem` | collapsed rail width (with `does-expand-on-hover`) |
 | `bezel` | length | `0.75rem` | gap between rail and screen |
 | `frame` | length | `0.375rem` | outer padding around the chassis edges |
 | `rail-side` | `left` `right` | `left` | which side the rail sits on |
-| `expand-on-hover` | boolean | — | collapse the rail to a slim width, expanding on hover/focus-within |
+| `does-expand-on-hover` | boolean | — | collapse the rail to a slim width, expanding on hover/focus-within |
 | `is-hidden` | boolean | — | hide |
 
 ## Slots

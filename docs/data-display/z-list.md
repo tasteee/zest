@@ -13,7 +13,7 @@ first/last sit flush with the card corners.
       <z-text weight="600">Project Alpha</z-text>
       <z-text color="muted" size="sm">Updated 2h ago</z-text>
     </div>
-    <z-badge tone="success">Active</z-badge>
+    <z-badge accent="success">Active</z-badge>
   </z-list-row>
 </z-list>
 ```

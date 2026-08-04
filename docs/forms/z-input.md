@@ -8,7 +8,7 @@ the accent on focus. Optional leading/trailing slots for icons or adornments.
   <svg slot="prefix">…</svg>
 </z-input>
 
-<z-input type="email" name="email" is-required tone="primary"></z-input>
+<z-input type="email" name="email" is-required accent="dom"></z-input>
 ```
 
 ```js
@@ -21,13 +21,13 @@ input.addEventListener('change', (e) => e.detail.value)  // on blur
 | Attribute | Values | Default | Description |
 | --- | --- | --- | --- |
 | `value` | string | — | current value (reflected, two-way) |
-| `type` | any input type | `text` | native input type |
+| `type` | any input type | `centers-text` | native input type |
 | `placeholder` | string | — | placeholder text |
 | `name` | string | — | form field name |
 | `autocomplete` | string | — | native autocomplete hint |
 | `inputmode` | string | — | virtual keyboard hint |
 | `size` | `small` `medium` `large` | `medium` | size |
-| `tone` | `primary` `secondary` | `primary` accent | focus accent color |
+| `accent` | `primary` `secondary` | `primary` accent | focus accent color |
 | `label` | string | — | accessible name for compact contextual use (falls back to a surrounding `aria-label`) |
 | `is-focused` | boolean | — | focus state (reflected, two-way; driven internally on focus/blur) |
 | `is-invalid` | boolean | — | error styling |

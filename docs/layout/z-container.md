@@ -15,8 +15,8 @@ default.
 | --- | --- | --- | --- |
 | `size` | width token / length | `xl` (80rem) | max content width — `xs` `sm` `md` `lg` `xl` `2xl` `3xl` `full` `screen`, or any length |
 | `gutter` | size token / length | — | left/right padding |
-| `center` | boolean | centered | declared for API completeness (centered by default) |
-| `full-height` | boolean | — | `min-height: 100%` |
+| `is-centered` | boolean | centered | declared for API completeness (centered by default) |
+| `is-full-height` | boolean | — | `min-height: 100%` |
 | `hidden` | boolean | — | hide (native attribute) |
 
 ## Slots

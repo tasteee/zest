@@ -5,7 +5,7 @@ related toggles use [z-toggle-group](z-toggle-group.md) +
 [z-toggle-group-item](z-toggle-group-item.md).
 
 ```html
-<z-toggle tone="primary">
+<z-toggle accent="dom">
   <svg>…</svg> Bold
 </z-toggle>
 
@@ -18,7 +18,7 @@ related toggles use [z-toggle-group](z-toggle-group.md) +
 
 | Attribute | Values | Default | Description |
 | --- | --- | --- | --- |
-| `tone` | `neutral` `primary` `secondary` | `neutral` | color family |
+| `accent` | `neutral` `primary` `secondary` | `neutral` | color family |
 | `kind` | `outline` `ghost` | `outline` | treatment |
 | `size` | `small` `medium` `large` | `medium` | size |
 | `is-icon` | boolean | — | square icon-only button |

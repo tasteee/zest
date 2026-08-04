@@ -29,7 +29,7 @@ panel.addEventListener('sizechange', (e) => e.detail.size)
 | --- | --- | --- | --- |
 | `default-size` | `%` or `px` | — | initial size |
 | `min-size` / `max-size` | `%` or `px` | — | clamps (equal values ⇒ fixed-size panel) |
-| `collapsible` | boolean | — | can collapse to `collapsed-size` |
+| `is-collapsible` | boolean | — | can collapse to `collapsed-size` |
 | `collapsed-size` | `%` or `px` | `0` | size when collapsed |
 | `collapse-threshold` | `%` or `px` | — | drag below this ⇒ snap collapsed |
 | `order` | number | — | stable slot identity for conditional mounting |

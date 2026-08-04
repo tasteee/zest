@@ -11,7 +11,7 @@ body/header/footer chrome; only the geometry and slide transition differ.
   <!-- filter controls -->
 
   <div slot="footer">
-    <z-button tone="primary">Apply</z-button>
+    <z-button accent="dom">Apply</z-button>
   </div>
 </z-sheet>
 ```
@@ -24,8 +24,8 @@ body/header/footer chrome; only the geometry and slide transition differ.
 | `side` | `right` `left` `top` `bottom` | `right` | edge it slides from |
 | `heading` | string | — | title |
 | `description` | string | — | sub-text |
-| `tone` | `primary` `secondary` | — | accent |
-| `hide-close` | boolean | — | hide the × button |
+| `accent` | `primary` `secondary` | — | accent |
+| `has-close` | boolean | — | hide the × button |
 | `is-static` | boolean | — | disable backdrop-click dismiss |
 | `is-disabled` | boolean | — | prevent the trigger from opening |
 

@@ -1,14 +1,14 @@
 # z-badge
 
 A compact pill for status, metadata, and tags. Three kinds (soft tint, solid
-fill, outline) across the full tone set, in two sizes, plus an `is-dot`
+fill, outline) across the full accent set, in two sizes, plus an `is-dot`
 inline-status mode. Static by default — opt into interactivity to make it a
 selectable chip or a removable tag (this absorbs what used to be `z-chip`).
 
 ```html
-<z-badge tone="success">Active</z-badge>
-<z-badge tone="primary" kind="solid">New</z-badge>
-<z-badge is-dot tone="success">Online</z-badge>
+<z-badge accent="success">Active</z-badge>
+<z-badge accent="dom" kind="solid">New</z-badge>
+<z-badge is-dot accent="success">Online</z-badge>
 
 <!-- selectable chip -->
 <z-badge is-selectable value="react">React</z-badge>
@@ -25,7 +25,7 @@ badge.addEventListener('remove', (e) => e.detail) // { value }
 
 | Attribute | Values | Default | Description |
 | --- | --- | --- | --- |
-| `tone` | `neutral` `primary` `secondary` `success` `warning` `danger` | `neutral` | color family |
+| `accent` | `neutral` `primary` `secondary` `success` `warning` `danger` | `neutral` | color family |
 | `kind` | `soft` `solid` `outline` | `soft` | treatment |
 | `size` | `small` `medium` | `medium` | size |
 | `label` | string | — | text (alternative to slotting children) |

@@ -17,7 +17,7 @@ payload.
 | --- | --- | --- | --- |
 | `side` | `start` `end` | `start` | `start` = them (left), `end` = you (right, primary-colored) |
 | `group` | `single` `first` `middle` `last` | `single` | which corners tuck — set automatically by the parent `z-message-group` |
-| `tone` | `primary` `secondary` `success` `warning` `danger` | — | overrides the `side`-based background, for status/system bubbles |
+| `accent` | `primary` `secondary` `success` `warning` `danger` | — | overrides the `side`-based background, for status/system bubbles |
 | `is-hidden` | boolean | — | hide |
 
 ## Slots

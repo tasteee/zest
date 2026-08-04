@@ -16,7 +16,7 @@ the bar with `scrollbar`, and set overscroll behaviour with `overscroll`.
 
 | Attribute | Values | Default | Description |
 | --- | --- | --- | --- |
-| `direction` | `vertical` `horizontal` `both` | `vertical` | scroll axis |
+| `direction` | `vertical` `horizontal` `centers-both` | `vertical` | scroll axis |
 | `max-height` | CSS length | — | viewport max height |
 | `max-width` | CSS length | — | viewport max width |
 | `scrollbar` | `auto` `thin` `hidden` | `thin` | scrollbar treatment |

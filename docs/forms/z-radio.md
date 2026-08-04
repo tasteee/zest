@@ -18,7 +18,7 @@ which coordinates single-selection across siblings.
 | --- | --- | --- | --- |
 | `value` | string | — | this option's value |
 | `is-checked` | boolean | — | selected state (reflected; usually managed by the group) |
-| `tone` | `primary` `secondary` | `primary` accent | accent color |
+| `accent` | `primary` `secondary` | `primary` accent | accent color |
 | `is-disabled` | boolean | — | disable |
 | `is-hidden` | boolean | — | hide |
 

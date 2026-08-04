@@ -6,8 +6,8 @@ Optional status dot in the corner.
 
 ```html
 <z-avatar src="/me.svg" name="Shane Colcleasure"></z-avatar>
-<z-avatar name="Ada Lovelace" tone="secondary"></z-avatar>
-<z-avatar initials="ZL" size="large" status="online"></z-avatar>
+<z-avatar name="Ada Lovelace" accent="sub"></z-avatar>
+<z-avatar initials="ZL" size="lg" status="online"></z-avatar>
 <z-avatar name="Box" is-square></z-avatar>
 ```
 
@@ -19,7 +19,7 @@ Optional status dot in the corner.
 | `name` | string | — | used for the alt text and initials |
 | `initials` | string | derived from `name` | explicit initials (max 2 chars) |
 | `size` | `xs` `small` `medium` `large` `xl` | `medium` | size |
-| `tone` | `primary` `secondary` `neutral` | `primary` | initials ground tint |
+| `accent` | `primary` `secondary` `neutral` | `primary` | initials ground tint |
 | `status` | `online` `busy` `away` `offline` | — | corner status dot |
 | `is-square` | boolean | — | rounded-square instead of circle |
 | `is-hidden` | boolean | — | hide |

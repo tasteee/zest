@@ -5,7 +5,7 @@ A slim linear meter — hairline track, accent-filled bar. Determinate
 
 ```html
 <z-progress value="60"></z-progress>
-<z-progress value="3" max="5" tone="success"></z-progress>
+<z-progress value="3" max="5" accent="success"></z-progress>
 <z-progress is-indeterminate></z-progress>
 ```
 
@@ -15,7 +15,7 @@ A slim linear meter — hairline track, accent-filled bar. Determinate
 | --- | --- | --- | --- |
 | `value` | number | `0` | current value (clamped to 0…max) |
 | `max` | number | `100` | maximum |
-| `tone` | `secondary` `success` `danger` | neutral | bar color |
+| `accent` | `secondary` `success` `danger` | neutral | bar color |
 | `size` | `small` `medium` `large` | `medium` | bar thickness |
 | `is-indeterminate` | boolean | — | continuous sweep instead of a value |
 | `is-hidden` | boolean | — | hide |

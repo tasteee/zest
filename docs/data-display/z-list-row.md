@@ -12,7 +12,7 @@ then trailing actions).
     <z-text weight="600">Title</z-text>
     <z-text color="muted" size="sm">Subtitle</z-text>
   </div>
-  <z-button kind="ghost" size="small">Edit</z-button>
+  <z-button kind="ghost" size="sm">Edit</z-button>
 </z-list-row>
 ```
 

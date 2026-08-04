@@ -9,10 +9,10 @@ backdrop does nothing, and Esc resolves as an explicit cancel.
 <z-alert-dialog
   heading="Delete project?"
   description="This action cannot be undone."
-  tone="danger"
+  accent="error"
   confirm-label="Delete"
 >
-  <z-button slot="trigger" tone="danger">Delete</z-button>
+  <z-button slot="trigger" accent="error">Delete</z-button>
 </z-alert-dialog>
 ```
 
@@ -30,7 +30,7 @@ dialog.addEventListener('cancel', () => {})
 | `description` | string | — | body text |
 | `confirm-label` | string | `Confirm` | confirm button text |
 | `cancel-label` | string | `Cancel` | cancel button text |
-| `tone` | `danger` `secondary` `primary` | `primary` | confirm-button color |
+| `accent` | `danger` `secondary` `primary` | `primary` | confirm-button color |
 
 ## Slots
 

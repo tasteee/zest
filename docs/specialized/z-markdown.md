@@ -17,7 +17,7 @@ md.addEventListener('linkclick', (e) => e.detail.href)
 
 Set `is-streaming` while tokens are still arriving (chat/AI use). Sanitization
 is on by default — it strips dangerous tags/attributes and neutralizes
-`javascript:` URLs; `allow-html` opts out. This is a minimal, purpose-built
+`javascript:` URLs; `does-allow-html` opts out. This is a minimal, purpose-built
 sanitizer, not a full DOMPurify integration.
 
 ## Attributes
@@ -25,9 +25,9 @@ sanitizer, not a full DOMPurify integration.
 | Attribute | Values | Default | Description |
 | --- | --- | --- | --- |
 | `is-streaming` | boolean | — | mark content as still-arriving (for streaming/typing styling) |
-| `allow-html` | boolean | — | skip sanitization of the parsed output |
-| `no-highlight` | boolean | — | render fenced code as plain `<pre><code>` instead of `z-code-block` |
-| `heading-anchors` | boolean | — | give every heading a stable id and a hover-revealed "#" permalink |
+| `does-allow-html` | boolean | — | skip sanitization of the parsed output |
+| `does-highlight` | boolean | — | render fenced code as plain `<pre><code>` instead of `z-code-block` |
+| `has-heading-anchors` | boolean | — | give every heading a stable id and a hover-revealed "#" permalink |
 | `is-hidden` | boolean | — | hide |
 
 ## Properties

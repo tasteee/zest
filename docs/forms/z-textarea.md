@@ -21,7 +21,7 @@ with clear surrounding context.
 | `placeholder` | string | — | placeholder text |
 | `name` | string | — | form field name |
 | `rows` | number | `3` | initial visible rows |
-| `tone` | `primary` `secondary` | `primary` accent | focus accent color |
+| `accent` | `primary` `secondary` | `primary` accent | focus accent color |
 | `label` | string | — | accessible name for compact contextual use (falls back to a surrounding `aria-label`) |
 | `size` | `small` `medium` `large` | `medium` | field padding and font size (same scale as [z-input](z-input.md)) |
 | `is-focused` | boolean | — | focus state (reflected, two-way; driven internally on focus/blur) |

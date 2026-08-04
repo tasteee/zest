@@ -23,7 +23,7 @@ short to snap back.
 | `is-open` | boolean | — | open state (reflected, two-way) |
 | `heading` | string | — | title |
 | `description` | string | — | sub-text |
-| `tone` | `primary` `secondary` | — | accent |
+| `accent` | `primary` `secondary` | — | accent |
 | `is-static` | boolean | — | disable backdrop-click dismiss |
 | `is-disabled` | boolean | — | prevent the trigger from opening |
 

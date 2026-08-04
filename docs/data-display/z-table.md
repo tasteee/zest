@@ -26,7 +26,7 @@ table.addEventListener('rowclick', (e) => e.detail) // { row, index }
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `columns` | `{ key, label, align?, isMono? }[]` | `[]` | **property** — column defs (`align`: `start`/`center`/`end`) |
+| `columns` | `{ key, label, align?, isMono? }[]` | `[]` | **property** — column defs (`align`: `start`/`is-centered`/`end`) |
 | `rows` | `Record<string, unknown>[]` | `[]` | **property** — row objects (optional `id` for keys) |
 | `empty-label` | string | `No data` | text shown when there are no rows |
 | `is-striped` | boolean | — | alternate-row tint |

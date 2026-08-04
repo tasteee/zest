@@ -7,9 +7,9 @@ For a divider with a centered label, use [z-separator](z-separator.md) instead.
 <z-line></z-line>
 
 <!-- inside a horizontal row -->
-<z-box is-flex is-row gap="2">
+<z-box   gap="2">
   <span>A</span>
-  <z-line is-vertical></z-line>
+  <z-line direction="vertical"></z-line>
   <span>B</span>
 </z-box>
 ```
@@ -18,8 +18,8 @@ For a divider with a centered label, use [z-separator](z-separator.md) instead.
 
 | Attribute | Type | Description |
 | --- | --- | --- |
-| `is-vertical` | boolean | render a vertical 1px rule (full height) instead of horizontal |
-| `is-horizontal` | boolean | explicit horizontal (the default) |
+| `direction` | boolean | render a vertical 1px rule (full height) instead of horizontal |
+| `direction` | boolean | explicit horizontal (the default) |
 
 Exposes `role="separator"` with the matching `aria-orientation`.
 

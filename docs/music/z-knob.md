@@ -5,7 +5,7 @@ Drag vertically to turn, hold `Shift` for fine adjustment, double-click to
 return to `default-value`.
 
 ```html
-<z-knob label="Cutoff" value="40" min="0" max="100" show-value tone="primary"></z-knob>
+<z-knob label="Cutoff" value="40" min="0" max="100" show-value accent="dom"></z-knob>
 ```
 
 ```js
@@ -45,12 +45,12 @@ no way to see where travel begins — the eye reads the gap as the zero mark.
 | `step` | number | `1` | Granularity. `0` is continuous. |
 | `default-value` | number | — | Value restored on double-click. |
 | `label` | string | — | Rendered above the dial, and used as the accessible name. |
-| `show-value` | boolean | — | Renders the current value below the dial. |
+| `does-show-value` | boolean | — | Renders the current value below the dial. |
 | `value-prefix` | string | — | Prepended to the displayed value. |
 | `value-suffix` | string | — | Appended to the displayed value — `Hz`, `dB`, `%`. |
-| `tone` | `primary` `secondary` `success` `warning` `danger` | — | Colour of the arc and pointer. |
+| `accent` | `primary` `secondary` `success` `warning` `danger` | — | Colour of the arc and pointer. |
 | `is-glowing` | boolean | — | Lights the arc's bloom. Only visible in themes with an emissive layer. |
-| _size_ | `is-small` `is-large` | — | Dial diameter. |
+| _size_ | `size` `size` | — | Dial diameter. |
 | `is-disabled` | boolean | — | Non-interactive. |
 | `is-hidden` | boolean | — | Hide. |
 
@@ -75,7 +75,7 @@ no way to see where travel begins — the eye reads the gap as the zero mark.
 | Variable | Default | Description |
 | --- | --- | --- |
 | `--knob-size` | `3.5rem` | Dial diameter, driven by the size attributes. |
-| `--knob-tone` | `var(--accent)` | Arc and pointer colour, driven by `tone`. |
+| `--knob-accent` | `var(--accent)` | Arc and pointer colour, driven by `accent`. |
 | `--knob-track` | `var(--color-neutral-3)` | The unlit portion of the arc. |
 
 ## Accessibility

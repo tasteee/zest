@@ -24,7 +24,7 @@ picker.addEventListener('change', (e) => e.detail.value)
 | --- | --- | --- | --- |
 | `value` | string | — | selected model value |
 | `placeholder` | string | `Select model` | shown when nothing matches `value` |
-| `menu-below` | boolean | — | open the dropdown below the trigger instead of above |
+| `is-menu-below` | boolean | — | open the dropdown below the trigger instead of above |
 | `is-open` | boolean | — | open state (reflected, two-way) |
 | `is-hidden` | boolean | — | hide |
 

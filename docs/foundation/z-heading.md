@@ -9,7 +9,7 @@ diverge.
 ```html
 <z-heading size="xxl">Big bold title</z-heading>
 <z-heading size="md" tag="h2">Looks like h4, is an h2</z-heading>
-<z-heading size="lg" color="primary">Accent heading</z-heading>
+<z-heading size="lg" color="dom">Accent heading</z-heading>
 ```
 
 ## Attributes

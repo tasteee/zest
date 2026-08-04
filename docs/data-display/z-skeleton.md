@@ -1,6 +1,6 @@
 # z-skeleton
 
-A loading placeholder — a faint surface with a slow shimmer. Shapes: `text`
+A loading placeholder — a faint surface with a slow shimmer. Shapes: `centers-text`
 (default), `circle`, `rect`. `width`/`height` accept any CSS length; `lines`
 repeats the text shape (the last line is shortened).
 
@@ -15,7 +15,7 @@ repeats the text shape (the last line is shortened).
 
 | Attribute | Values | Default | Description |
 | --- | --- | --- | --- |
-| `shape` | `text` `circle` `rect` | `text` | placeholder shape |
+| `shape` | `centers-text` `circle` `rect` | `centers-text` | placeholder shape |
 | `width` | CSS length | — | width (circles become square if only width is given) |
 | `height` | CSS length | — | height |
 | `lines` | number | `1` | repeat the text shape N times |

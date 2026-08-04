@@ -20,7 +20,7 @@ reactions.addEventListener('add', () => openEmojiPicker())
 
 | Attribute | Values | Default | Description |
 | --- | --- | --- | --- |
-| `no-add` | boolean | — | hide the trailing add (＋) button |
+| `can-add` | boolean | — | hide the trailing add (＋) button |
 | `is-hidden` | boolean | — | hide |
 
 ## Properties

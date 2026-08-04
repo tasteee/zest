@@ -85,7 +85,7 @@ export const zToolbarDoc: ComponentDocT = {
 			layout: ExampleLayout.fill,
 			markup: `
 				<z-toolbar>
-				  <z-toggle-group is-purple is-ghost>
+				  <z-toggle-group accent="dom" kind="ghost">
 				    <z-toggle-group-item value="left" is-icon aria-label="Align left" is-pressed>${Icons.alignLeft}</z-toggle-group-item>
 				    <z-toggle-group-item value="center" is-icon aria-label="Align center">${Icons.alignCenter}</z-toggle-group-item>
 				    <z-toggle-group-item value="right" is-icon aria-label="Align right">${Icons.alignRight}</z-toggle-group-item>

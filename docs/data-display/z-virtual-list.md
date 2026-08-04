@@ -35,7 +35,7 @@ correctly. Unmeasured rows use the estimate until they scroll into view.
 | `item-height` | number | — | fixed row height in px — enables the fixed fast path |
 | `estimate-size` | number | `40` | estimated row height for dynamic mode (used when `item-height` is unset) |
 | `overscan` | number | `4` | extra rows rendered beyond the viewport on each side |
-| `is-horizontal` | boolean | — | lay out as a horizontal row instead of a vertical column |
+| `direction` | boolean | — | lay out as a horizontal row instead of a vertical column |
 | `gap` | number | `0` | px gap between rows |
 
 ## Properties

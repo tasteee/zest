@@ -19,7 +19,7 @@ scaled by linear falloff from cursor distance.
 | `distance` | number (px) | `96` | pointer falloff reach |
 | `item-size` | length | `3rem` | base item size, read by children via `--dock-item-size` |
 | `gap` | size token / length | `0.75rem` | gap between items |
-| `floating` | boolean | — | dock to the bottom-center of the viewport (fixed position) |
+| `is-floating` | boolean | — | dock to the bottom-center of the viewport (fixed position) |
 | `is-hidden` | boolean | — | hide |
 
 ## Slots

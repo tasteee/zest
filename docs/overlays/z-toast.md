@@ -13,7 +13,7 @@ const toaster = document.querySelector('z-toast')
 const id = toaster.push({
   title: 'Saved',
   description: 'Your changes are live.',
-  tone: 'success',
+  accent: 'success',
   duration: 4000   // 0 = sticky (no auto-dismiss)
 })
 
@@ -25,7 +25,7 @@ toaster.addEventListener('dismiss', (e) => e.detail.id)
 
 | Method | Description |
 | --- | --- |
-| `push(input)` | show a toast; returns its numeric id. `input`: `{ title?, description?, tone?, duration? }` (tone: `info` `success` `warning` `danger`; default `duration` 4000ms) |
+| `push(input)` | show a toast; returns its numeric id. `input`: `{ title?, description?, accent?, duration? }` (accent: `info` `success` `warning` `danger`; default `duration` 4000ms) |
 | `dismiss(id)` | remove a toast by id |
 
 ## Attributes

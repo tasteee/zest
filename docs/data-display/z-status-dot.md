@@ -15,13 +15,13 @@ trailing label. Sits on avatars, chat headers, and member lists.
 | --- | --- | --- | --- |
 | `status` | `online` `away` `dnd` `busy` `offline` | — | color |
 | `size` | `md` `lg` | small (default) | dot size |
-| `pulse` | boolean | — | animate an outward "ping" ring |
+| `does-pulse` | boolean | — | animate an outward "ping" ring |
 | `label` | string | — | trailing text label |
 | `is-hidden` | boolean | — | hide |
 
 ## Notes
 
-- Colors come from the ink tone tokens; override `--color` per instance for
+- Colors come from the ink accent tokens; override `--color` per instance for
   custom statuses.
 - Exposes `part="dot"` so a consumer (e.g. [z-avatar](z-avatar.md)) can
   position it precisely.

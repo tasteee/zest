@@ -1,22 +1,22 @@
 # z-pattern-roll
 
 A **chord-relative pattern editor** — a sibling of [`z-piano-roll`](z-piano-roll.md)
-whose vertical axis is not absolute pitch but **chord-tone degrees** (`N1`, `N2`,
+whose vertical axis is not absolute pitch but **chord-accent degrees** (`N1`, `N2`,
 `N3`, …). You author a rhythmic/melodic *pattern* once, and it produces
 good-sounding MIDI over **any** chord it is later applied to.
 
 ```html
-<z-pattern-roll tones="8" length="4" chord-size="3"></z-pattern-roll>
+<z-pattern-roll accents="8" length="4" chord-size="3"></z-pattern-roll>
 ```
 
 ```js
 const roll = document.querySelector('z-pattern-roll')
 roll.signals = [
-  // tone = 1-based chord degree, octave = octave shift, start/duration in beats
-  { tone: 1, octave: 0, start: 0,   duration: 0.5, velocity: 110 },
-  { tone: 3, octave: 0, start: 0.5, duration: 0.5, velocity: 90  },
-  { tone: 5, octave: 0, start: 1,   duration: 1,   velocity: 100 },
-  { tone: 1, octave: 1, start: 2,   duration: 1,   velocity: 100, probability: 0.75 }
+  // accent = 1-based chord degree, octave = octave shift, start/duration in beats
+  { accent: 1, octave: 0, start: 0,   duration: 0.5, velocity: 110 },
+  { accent: 3, octave: 0, start: 0.5, duration: 0.5, velocity: 90  },
+  { accent: 5, octave: 0, start: 1,   duration: 1,   velocity: 100 },
+  { accent: 1, octave: 1, start: 2,   duration: 1,   velocity: 100, probability: 0.75 }
 ]
 roll.addEventListener('change', (e) => save(e.detail.signals))
 ```
@@ -32,25 +32,25 @@ only fits the chord it was written over. Transpose to a different chord and it
 clashes — every note has to be re-drawn.
 
 A **pattern** stores **relative positions within a chord** instead. Rather than
-"play E4", it says "play the **2nd tone** of whatever chord is sounding right
-now." Apply that same pattern over a C‑major chord and the 2nd tone is `E`; apply
-it over an F‑minor chord and the 2nd tone is `Ab`. The *shape* (rhythm, contour,
+"play E4", it says "play the **2nd accent** of whatever chord is sounding right
+now." Apply that same pattern over a C‑major chord and the 2nd accent is `E`; apply
+it over an F‑minor chord and the 2nd accent is `Ab`. The *shape* (rhythm, contour,
 dynamics) is preserved; the *pitches* adapt. One pattern → musical results across
 an entire progression, in any key.
 
 This is the same idea as the **Nashville Number System**, where songs are written
 as numbers relative to the key so they transpose to any key instantly — except
 here the numbers are relative to the **chord**, not the key. Related theory:
-scale degrees, chord tones (1‑3‑5‑7), figured bass, and Roman‑numeral analysis.
+scale degrees, chord accents (1‑3‑5‑7), figured bass, and Roman‑numeral analysis.
 
 ### The vocabulary
 
 - **Signal** — one cell in the pattern. The pattern analog of a "note". It has a
   time position + length (like a note) but its pitch is expressed as a **degree**.
-- **`N` degree (`tone`)** — a 1-based index into the *active chord's* notes. `N1`
-  is the root, `N2` the second chord tone, and so on. When the index exceeds the
+- **`N` degree (`accent`)** — a 1-based index into the *active chord's* notes. `N1`
+  is the root, `N2` the second chord accent, and so on. When the index exceeds the
   chord size it **wraps up an octave**: over a triad (3 notes), `N4` is the root
-  one octave up, `N5` the second tone up an octave, etc.
+  one octave up, `N5` the second accent up an octave, etc.
 - **Octave modifier (`octave`)** — an extra whole-octave shift applied on top of
   the degree, so the same degree can be voiced low or high independent of wrap.
 - **velocity / probability / enabled** — per-signal expression: loudness (1–127),
@@ -61,8 +61,8 @@ scale degrees, chord tones (1‑3‑5‑7), figured bass, and Roman‑numeral an
 This is exactly amore's `resolveSignalToMidi` (`apps/amore/src/music/theory.ts`):
 
 ```
-zeroBased   = tone - 1
-index       = zeroBased mod chordNotes.length      // which chord tone
+zeroBased   = accent - 1
+index       = zeroBased mod chordNotes.length      // which chord accent
 wrapOctaves = floor(zeroBased / chordNotes.length)  // octaves gained by wrapping
 midi        = chordNotes[index] + (wrapOctaves + octave) * 12
 ```
@@ -90,7 +90,7 @@ Chord-relative / degree-based sequencing is a well-established idea:
 Music-theory background (useful reading):
 
 - **Nashville Number System** — numbers relative to a key: <https://en.wikipedia.org/wiki/Nashville_Number_System>
-- **Chord tones / scale degrees** — <https://en.wikipedia.org/wiki/Factor_(chord)> · <https://en.wikipedia.org/wiki/Degree_(music)>
+- **Chord accents / scale degrees** — <https://en.wikipedia.org/wiki/Factor_(chord)> · <https://en.wikipedia.org/wiki/Degree_(music)>
 - **Figured bass** (historical relative-interval notation) — <https://en.wikipedia.org/wiki/Figured_bass>
 
 ---
@@ -105,7 +105,7 @@ per-signal properties.
 ### Layout
 
 - **Degree gutter (left, sticky):** one row per degree, labeled `N1` … `N{tones}`
-  for the core band, plus `tone-margin` extra octave bands above and below,
+  for the core band, plus `accent-margin` extra octave bands above and below,
   labeled with a `+n`/`-n` suffix (`N1+1` … `N{tones}+1`, `N1-1` … `N{tones}-1`,
   …) so wrapped-octave degrees are reachable by scrolling rather than clamped
   away. If `chord-size` is set, the rows that resolve to a chord root (`N1`,
@@ -155,7 +155,7 @@ selection:
 | --- | --- | --- | --- |
 | `signals` | `Signal[]` | `[]` | **property** — the pattern (see model below); two-way via `change` |
 | `tones` | number | `8` | size of the core degree band (`N1…N{tones}`) |
-| `tone-margin` | number | `3` | extra whole octave bands rendered above and below the core band (labeled `N1+1…N{tones}+1`, `N1-1…N{tones}-1`, …), so patterns can wrap an octave without scrolling blind |
+| `accent-margin` | number | `3` | extra whole octave bands rendered above and below the core band (labeled `N1+1…N{tones}+1`, `N1-1…N{tones}-1`, …), so patterns can wrap an octave without scrolling blind |
 | `chord-size` | number | — | if set, bands octave boundaries / marks root-equivalent rows |
 | `length` | number (beats) | `4` | pattern length in beats (grid extends to fit longer signals) |
 | `beats-per-bar` | number | `4` | bar grouping for ruler emphasis |
@@ -166,8 +166,8 @@ selection:
 | `default-velocity` | number | `100` | velocity for newly drawn signals |
 | `default-octave` | number | `0` | octave modifier for newly drawn signals |
 | `playhead` | number (beats) | — | draws a playhead line at this beat |
-| `hide-toolbar` | boolean | — | hide the toolbar |
-| `hide-keyboard` | boolean | — | hide the degree gutter |
+| `has-toolbar` | boolean | — | hide the toolbar |
+| `has-keyboard` | boolean | — | hide the degree gutter |
 | `is-disabled` | boolean | — | disable interaction |
 | `is-hidden` | boolean | — | hide the element |
 
@@ -176,7 +176,7 @@ selection:
 ```ts
 type Signal = {
   id?: number         // assigned if omitted
-  tone: number        // 1-based chord degree (N1 = root)
+  accent: number        // 1-based chord degree (N1 = root)
   octave?: number     // octave modifier, default 0
   start: number       // beats
   duration: number    // beats
@@ -222,7 +222,7 @@ while Convex stays the source of truth):
 | amore `PatternSignalT` | `z-pattern-roll` `Signal` | Conversion |
 | --- | --- | --- |
 | `_id` | `id` | keep a string↔number map, or use numeric ids |
-| `chordToneIndex` | `tone` | identical (1-based) |
+| `chordToneIndex` | `accent` | identical (1-based) |
 | `octaveModifier` | `octave` | identical |
 | `startTicks` | `start` | `ticksToBeats` / `beatsToTicks` |
 | `durationTicks` | `duration` | `ticksToBeats` / `beatsToTicks` |
@@ -236,5 +236,5 @@ Convex), set `length` = `ticksToBeats(patternLengthTicks)`, `snap` =
 server state to drive `addSignal` / `updateSignal` / `removeSignal` mutations
 (keeping the existing optimistic-update layer). `loopMode` and pattern-length
 selection stay in amore's surrounding UI, or are passed through as-is. Playback is
-unchanged: `resolveSignalToMidi` already consumes exactly this `{ tone, octave }`
+unchanged: `resolveSignalToMidi` already consumes exactly this `{ accent, octave }`
 shape.

@@ -17,7 +17,7 @@ root so it never leaks to the page.
 | --- | --- | --- | --- |
 | `max-height` | CSS length | — | viewport max height |
 | `height` | CSS length | — | fixed viewport height |
-| `orientation` | `vertical` `horizontal` | both | which axis scrolls |
+| `direction` | `vertical` `horizontal` | both | which axis scrolls |
 | `is-hidden` | boolean | — | hide |
 
 ## Slots

@@ -24,7 +24,7 @@ range.addEventListener('change', (e) => e.detail) // { left, right } — on rele
 | `min` / `max` | number | `0` / `100` | the domain both handles share |
 | `step` | number | `1` | default step, inherited by handles that don't set their own |
 | `label` | string | — | visible label |
-| `show-value` | boolean | — | show a "left – right" value pill |
+| `does-show-value` | boolean | — | show a "left – right" value pill |
 | `value-prefix` / `value-suffix` | string | — | decorate the shown values (e.g. `$`, `%`) |
 | `is-disabled` | boolean | — | disable both handles |
 | `is-hidden` | boolean | — | hide |
@@ -45,5 +45,5 @@ range.addEventListener('change', (e) => e.detail) // { left, right } — on rele
 
 - Each handle's live value is mirrored back onto its `z-range-handle` element,
   so reading `handleEl.value` after an interaction is always accurate.
-- Each handle can set its own `min`/`max`/`step`/`tone`, clamped to the parent
+- Each handle can set its own `min`/`max`/`step`/`accent`, clamped to the parent
   domain; omitted values inherit from it.

@@ -11,7 +11,7 @@ A hairline divider that can carry a centered label — the richer sibling of
   <z-badge>Section</z-badge>
 </z-separator>
 
-<z-separator is-vertical></z-separator>
+<z-separator direction="vertical"></z-separator>
 ```
 
 ## Attributes
@@ -19,7 +19,7 @@ A hairline divider that can carry a centered label — the richer sibling of
 | Attribute | Type | Description |
 | --- | --- | --- |
 | `label` | string | text shown centered in the rule |
-| `is-vertical` | boolean | vertical orientation (full height) |
+| `direction` | boolean | vertical orientation (full height) |
 | `is-hidden` | boolean | hide the separator |
 
 Exposes `role="separator"` with the matching `aria-orientation`.
