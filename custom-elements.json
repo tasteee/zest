@@ -9637,6 +9637,86 @@
         {
           "kind": "class",
           "customElement": true,
+          "tagName": "z-language-switcher",
+          "name": "ZLanguageSwitcher",
+          "members": [
+            {
+              "kind": "field",
+              "name": "locales",
+              "type": {
+                "text": "array"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isManaged",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "change",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "locales",
+              "fieldName": "locales",
+              "type": {
+                "text": "array"
+              }
+            },
+            {
+              "name": "value",
+              "fieldName": "value",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "is-managed",
+              "fieldName": "isManaged",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "change",
+              "fieldName": "change",
+              "type": {
+                "text": "string"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
           "tagName": "z-last-updated",
           "name": "ZLastUpdated",
           "members": [
@@ -14470,6 +14550,114 @@
               "fieldName": "isHidden",
               "type": {
                 "text": "boolean"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
+          "tagName": "z-search-dialog",
+          "name": "ZSearchDialog",
+          "members": [
+            {
+              "kind": "field",
+              "name": "index",
+              "type": {
+                "text": "array"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "search",
+              "type": {
+                "text": "object"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isOpen",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "placeholder",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "emptyText",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "recentKey",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "select",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "index",
+              "fieldName": "index",
+              "type": {
+                "text": "array"
+              }
+            },
+            {
+              "name": "search",
+              "fieldName": "search",
+              "type": {
+                "text": "object"
+              }
+            },
+            {
+              "name": "is-open",
+              "fieldName": "isOpen",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "placeholder",
+              "fieldName": "placeholder",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "empty-text",
+              "fieldName": "emptyText",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "recent-key",
+              "fieldName": "recentKey",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "select",
+              "fieldName": "select",
+              "type": {
+                "text": "string"
               }
             }
           ]
@@ -19699,6 +19887,86 @@
         {
           "kind": "class",
           "customElement": true,
+          "tagName": "z-version-picker",
+          "name": "ZVersionPicker",
+          "members": [
+            {
+              "kind": "field",
+              "name": "versions",
+              "type": {
+                "text": "array"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isManaged",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "change",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "versions",
+              "fieldName": "versions",
+              "type": {
+                "text": "array"
+              }
+            },
+            {
+              "name": "value",
+              "fieldName": "value",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "is-managed",
+              "fieldName": "isManaged",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "change",
+              "fieldName": "change",
+              "type": {
+                "text": "string"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
           "tagName": "z-virtual-list",
           "name": "ZVirtualList",
           "members": [
@@ -20610,6 +20878,14 @@
         },
         {
           "kind": "custom-element-definition",
+          "name": "z-language-switcher",
+          "declaration": {
+            "name": "ZLanguageSwitcher",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
           "name": "z-last-updated",
           "declaration": {
             "name": "ZLastUpdated",
@@ -20949,6 +21225,14 @@
           "name": "z-scroll-area",
           "declaration": {
             "name": "ZScrollArea",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "z-search-dialog",
+          "declaration": {
+            "name": "ZSearchDialog",
             "module": "dist/zest.js"
           }
         },
@@ -21341,6 +21625,14 @@
           "name": "z-unread-divider",
           "declaration": {
             "name": "ZUnreadDivider",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "z-version-picker",
+          "declaration": {
+            "name": "ZVersionPicker",
             "module": "dist/zest.js"
           }
         },

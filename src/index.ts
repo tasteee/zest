@@ -181,6 +181,9 @@ export * from './components/z-was-this-helpful'
 export * from './components/z-announcement-bar'
 export * from './components/z-edit-on-github'
 export * from './components/z-last-updated'
+export * from './components/z-search-dialog'
+export * from './components/z-version-picker'
+export * from './components/z-language-switcher'
 
 // Music / MIDI
 export * from './components/z-piano-roll'

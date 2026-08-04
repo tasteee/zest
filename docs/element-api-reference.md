@@ -1,6 +1,6 @@
 # Zest element API reference
 
-**179 elements.** Every one, as you would write it. Generated from
+**182 elements.** Every one, as you would write it. Generated from
 source by `scripts/build-api-reference.mjs`, so it is current by
 construction rather than by discipline.
 
@@ -33,7 +33,7 @@ short, that is the first place to check.
 - [Navigation & disclosure](#navigation--disclosure) — 8
 - [Overlays](#overlays) — 11
 - [Data display](#data-display) — 14
-- [Canvas, panels & docs](#canvas-panels--docs) — 24
+- [Canvas, panels & docs](#canvas-panels--docs) — 27
 - [Text editor](#text-editor) — 9
 - [Chat](#chat) — 22
 - [Attachments](#attachments) — 4
@@ -1513,6 +1513,18 @@ short, that is the first place to check.
 />
 ```
 
+### `z-language-switcher`
+
+```jsx
+<z-language-switcher
+  locales={Array}
+  value="string"
+  is-managed
+  is-hidden
+  onchange={(event) => event.detail}   // { value: string; route: string }
+/>
+```
+
 ### `z-last-updated`
 
 ```jsx
@@ -1598,6 +1610,20 @@ short, that is the first place to check.
 />
 ```
 
+### `z-search-dialog`
+
+```jsx
+<z-search-dialog
+  index={Array}
+  search={Object}
+  placeholder={string}
+  empty-text={string}
+  recent-key={string}
+  is-open
+  onselect={(event) => event.detail}   // { route: string; id: string }
+/>
+```
+
 ### `z-steps`
 
 ```jsx
@@ -1655,6 +1681,18 @@ short, that is the first place to check.
   value={string}
   kind="primitive | literal | union | function | object"
   is-hidden
+/>
+```
+
+### `z-version-picker`
+
+```jsx
+<z-version-picker
+  versions={Array}
+  value="string"
+  is-managed
+  is-hidden
+  onchange={(event) => event.detail}   // { value: string; route: string }
 />
 ```
 

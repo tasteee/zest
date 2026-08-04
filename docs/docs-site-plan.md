@@ -35,6 +35,10 @@ site-level layout CSS.
 | `z-announcement-bar` | done | The storage key is the announcement, not the element. Renders nothing until storage is read, so a dismissed banner never flashes. |
 | `z-edit-on-github` | done | Builds the URL from repo + path, so 150 pages cannot point at 150 wrong branches. |
 | `z-last-updated` | done | Composes `z-relative-time`. The commit link needs both a SHA and a repo — a SHA with nowhere to go is not provenance. |
+| `z-search-dialog` | done | Local ranked scoring by default, `search` for a real backend. Group headings emit on change down the ranked list rather than re-sorting into sections. |
+| `z-version-picker` | done | Swaps the version segment in place, so a reader three pages deep stays there. |
+| `z-language-switcher` | done | Locale as the first path segment. Labels are authored in their own language. |
+| `z-theme-toggle` | **dropped** | `z-theme-switcher` already does the whole job — tri-state including system, shared module state, persistence, an `icon` kind for a crowded header. A second element for one job is how a library grows two ways to do everything. |
 
 Waves 1 and 2 are complete. Everything else below is unstarted.
 
@@ -51,12 +55,12 @@ Wave 3 is most of the way through. `z-swatch` and `z-token-table` closed the
 library's largest documentation gap — 411 tokens with no reference page, now
 `docs/foundation/tokens.md`. `z-steps`, `z-code-group` and `z-do-dont` follow.
 
-Wave 3 is complete. Wave 4's page furniture is done alongside it.
+Waves 3 and 4 are complete. `z-theme-toggle` was dropped rather than built —
+see the table above.
 
-Remaining in Wave 4: `z-search-dialog`, `z-theme-toggle` (largely covered by
-the existing `z-theme-switcher`), and the `z-version-picker` /
-`z-language-switcher` pair. Wave 5 — `z-live-code` and `z-sandbox` — is
-untouched.
+Wave 5 — `z-live-code` and `z-sandbox` — is untouched, and deliberately last:
+a sandbox has to inherit the theme story, which only settled with the light
+themes.
 
 `z-chassis` gained two things the shell needed: `scrollScreenTo(options)` /
 `getScreen()` (the screen is the scroll container, and a routed view landing
