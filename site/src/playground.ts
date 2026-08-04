@@ -1,7 +1,10 @@
 import { createElement } from './dom-helpers'
 import { getComponentPlaygroundData } from './docs-data'
-import { buildControlsBand } from './render/playground-controls'
 import { buildCodeBlock, buildLabel } from './render/zest-elements'
+
+type ZPlaygroundElementT = HTMLElement & {
+	controls: unknown[]
+}
 import type { ZCodeBlockElementT } from './render/zest-elements'
 import type { DocPageT } from './docs-data'
 
@@ -73,48 +76,32 @@ export const buildPlayground = (page: DocPageT): HTMLElement | null => {
 	if (!canonicalElement) return null
 
 	const playgroundData = getComponentPlaygroundData(page.rawMarkdown)
+	canonicalElement.setAttribute('slot', 'stage')
 
-	const playground = createElement('z-surface', 'playground')
-	playground.setAttribute('level', '1')
-	playground.setAttribute('radius', 'lg')
+	const playground = createElement('z-playground') as ZPlaygroundElementT
+	playground.setAttribute('tag-name', page.slug)
+	playground.controls = playgroundData.controls
+	playground.append(canonicalElement)
 
-	const preview = createElement('div', 'playgroundPreview')
-	preview.append(canonicalElement)
-	playground.append(preview)
-
-	const codeSection = createElement('div', 'playgroundCodeSection')
-	const codeBlock = buildPlaygroundCodeBlock('html', '')
-	codeBlock.classList.add('playgroundCode')
-	codeSection.append(codeBlock)
-
-	const refreshCodeOutput = (): void => {
-		codeBlock.code = canonicalElement.outerHTML
-	}
-	refreshCodeOutput()
-
-	const hasControls = playgroundData.controls.length > 0
-	if (hasControls) {
-		playground.append(buildControlsBand(canonicalElement, playgroundData.controls, refreshCodeOutput))
-	}
-
-	playground.append(codeSection)
+	// The markdown path has two things the TypeScript pages do not: a paired
+	// setup script, and properties that can only be set from JS. Both hang off
+	// the playground rather than inside it, since neither is a knob.
+	const wrap = createElement('div', 'playgroundGroup')
+	wrap.append(playground)
 
 	if (playgroundData.pairedScript) {
 		const pairedScript = playgroundData.pairedScript
-		playground.append(buildSetupSection(pairedScript))
+		wrap.append(buildSetupSection(pairedScript))
 
 		// Runs after this element is connected to the live document (the
 		// caller appends the returned node synchronously; microtasks flush
 		// right after), since these scripts do `document.querySelector(...)`.
-		queueMicrotask(() => {
-			runPairedScriptSafely(pairedScript)
-			refreshCodeOutput()
-		})
+		queueMicrotask(() => runPairedScriptSafely(pairedScript))
 	}
 
 	if (playgroundData.jsOnlyPropertyNames.length > 0) {
-		playground.append(buildJsOnlyFootnote(playgroundData.jsOnlyPropertyNames))
+		wrap.append(buildJsOnlyFootnote(playgroundData.jsOnlyPropertyNames))
 	}
 
-	return playground
+	return wrap
 }

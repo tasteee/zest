@@ -249,6 +249,86 @@
         {
           "kind": "class",
           "customElement": true,
+          "tagName": "z-api-table",
+          "name": "ZApiTable",
+          "members": [
+            {
+              "kind": "field",
+              "name": "rows",
+              "type": {
+                "text": "array"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "kind",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "caption",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isDense",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "rows",
+              "fieldName": "rows",
+              "type": {
+                "text": "array"
+              }
+            },
+            {
+              "name": "kind",
+              "fieldName": "kind",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "caption",
+              "fieldName": "caption",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "is-dense",
+              "fieldName": "isDense",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
           "tagName": "z-attachment-chip",
           "name": "ZAttachmentChip",
           "members": [
@@ -4280,6 +4360,72 @@
             {
               "name": "select",
               "fieldName": "select",
+              "type": {
+                "text": "string"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
+          "tagName": "z-control-panel",
+          "name": "ZControlPanel",
+          "members": [
+            {
+              "kind": "field",
+              "name": "controls",
+              "type": {
+                "text": "array"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "values",
+              "type": {
+                "text": "object"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "change",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "controls",
+              "fieldName": "controls",
+              "type": {
+                "text": "array"
+              }
+            },
+            {
+              "name": "values",
+              "fieldName": "values",
+              "type": {
+                "text": "object"
+              }
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "change",
+              "fieldName": "change",
               "type": {
                 "text": "string"
               }
@@ -10875,6 +11021,86 @@
         {
           "kind": "class",
           "customElement": true,
+          "tagName": "z-playground",
+          "name": "ZPlayground",
+          "members": [
+            {
+              "kind": "field",
+              "name": "controls",
+              "type": {
+                "text": "array"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "tagName",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "layout",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "reset",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "controls",
+              "fieldName": "controls",
+              "type": {
+                "text": "array"
+              }
+            },
+            {
+              "name": "tag-name",
+              "fieldName": "tagName",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "layout",
+              "fieldName": "layout",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "reset",
+              "fieldName": "reset",
+              "type": {
+                "text": "string"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
           "tagName": "z-pointer-follow",
           "name": "ZPointerFollow",
           "members": [
@@ -17199,6 +17425,58 @@
         {
           "kind": "class",
           "customElement": true,
+          "tagName": "z-type-badge",
+          "name": "ZTypeBadge",
+          "members": [
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "kind",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "value",
+              "fieldName": "value",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "kind",
+              "fieldName": "kind",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
           "tagName": "z-typing-indicator",
           "name": "ZTypingIndicator",
           "members": [
@@ -17459,6 +17737,14 @@
           "name": "z-alert-dialog",
           "declaration": {
             "name": "ZAlertDialog",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "z-api-table",
+          "declaration": {
+            "name": "ZApiTable",
             "module": "dist/zest.js"
           }
         },
@@ -17747,6 +18033,14 @@
           "name": "z-context-menu",
           "declaration": {
             "name": "ZContextMenu",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "z-control-panel",
+          "declaration": {
+            "name": "ZControlPanel",
             "module": "dist/zest.js"
           }
         },
@@ -18211,6 +18505,14 @@
           "name": "z-piano-roll",
           "declaration": {
             "name": "ZPianoRoll",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "z-playground",
+          "declaration": {
+            "name": "ZPlayground",
             "module": "dist/zest.js"
           }
         },
@@ -18691,6 +18993,14 @@
           "name": "z-tree",
           "declaration": {
             "name": "ZTree",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "z-type-badge",
+          "declaration": {
+            "name": "ZTypeBadge",
             "module": "dist/zest.js"
           }
         },

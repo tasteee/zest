@@ -1,83 +1,44 @@
-// The API reference block: one z-tabs strip over a z-table per API surface.
+// The API reference block: one z-tabs strip over a z-api-table per surface.
 // Tabs with nothing to show are dropped rather than rendered empty, so a
 // component with no events never advertises an "Events" tab.
+//
+// The tables themselves used to be built here out of z-table plus a column
+// definition per surface. z-api-table owns that now — it needs typed type
+// cells, inline code in descriptions, and deep-linkable rows, none of which a
+// general data grid can give you without being handed HTML.
 
-import { buildTabPanel, buildTable, buildTabs, createElement } from './zest-elements'
-import type { ZTabT, ZTableColumnT, ZTableRowT } from './zest-elements'
-import type { ApiRowT, ComponentDocT, CssVariableRowT, EventRowT, SlotRowT } from '../component-docs/types'
-
-const ATTRIBUTE_COLUMNS: ZTableColumnT[] = [
-	{ key: 'name', label: 'Attribute', isMono: true },
-	{ key: 'type', label: 'Type', isMono: true },
-	{ key: 'defaultValue', label: 'Default', isMono: true },
-	{ key: 'description', label: 'Description' }
-]
-
-const PROPERTY_COLUMNS: ZTableColumnT[] = [
-	{ key: 'name', label: 'Property', isMono: true },
-	{ key: 'type', label: 'Type', isMono: true },
-	{ key: 'defaultValue', label: 'Default', isMono: true },
-	{ key: 'description', label: 'Description' }
-]
-
-const SLOT_COLUMNS: ZTableColumnT[] = [
-	{ key: 'name', label: 'Slot', isMono: true },
-	{ key: 'description', label: 'Description' }
-]
-
-const EVENT_COLUMNS: ZTableColumnT[] = [
-	{ key: 'name', label: 'Event', isMono: true },
-	{ key: 'detail', label: 'detail', isMono: true },
-	{ key: 'description', label: 'Description' }
-]
-
-const CSS_VARIABLE_COLUMNS: ZTableColumnT[] = [
-	{ key: 'name', label: 'Custom property', isMono: true },
-	{ key: 'defaultValue', label: 'Default', isMono: true },
-	{ key: 'description', label: 'Description' }
-]
-
-const toApiTableRows = (rows: ApiRowT[]): ZTableRowT[] => {
-	return rows.map((row) => {
-		return { name: row.name, type: row.type, defaultValue: row.defaultValue, description: row.description }
-	})
-}
-
-const toSlotTableRows = (rows: SlotRowT[]): ZTableRowT[] => {
-	return rows.map((row) => {
-		return { name: row.name, description: row.description }
-	})
-}
-
-const toEventTableRows = (rows: EventRowT[]): ZTableRowT[] => {
-	return rows.map((row) => {
-		return { name: row.name, detail: row.detail, description: row.description }
-	})
-}
-
-const toCssVariableTableRows = (rows: CssVariableRowT[]): ZTableRowT[] => {
-	return rows.map((row) => {
-		return { name: row.name, defaultValue: row.defaultValue, description: row.description }
-	})
-}
+import { buildTabPanel, buildTabs, createElement } from './zest-elements'
+import type { ZTabT } from './zest-elements'
+import type { ComponentDocT } from '../component-docs/types'
 
 type ApiSectionT = {
 	value: string
 	label: string
-	columns: ZTableColumnT[]
-	rows: ZTableRowT[]
+	kind: string
+	rows: unknown[]
 }
 
 const collectApiSections = (componentDoc: ComponentDocT): ApiSectionT[] => {
 	const candidateSections: ApiSectionT[] = [
-		{ value: 'attributes', label: 'Attributes', columns: ATTRIBUTE_COLUMNS, rows: toApiTableRows(componentDoc.attributes) },
-		{ value: 'properties', label: 'Properties', columns: PROPERTY_COLUMNS, rows: toApiTableRows(componentDoc.properties) },
-		{ value: 'slots', label: 'Slots', columns: SLOT_COLUMNS, rows: toSlotTableRows(componentDoc.slots) },
-		{ value: 'events', label: 'Events', columns: EVENT_COLUMNS, rows: toEventTableRows(componentDoc.events) },
-		{ value: 'css', label: 'CSS', columns: CSS_VARIABLE_COLUMNS, rows: toCssVariableTableRows(componentDoc.cssVariables) }
+		{ value: 'attributes', label: 'Attributes', kind: 'attributes', rows: componentDoc.attributes },
+		{ value: 'properties', label: 'Properties', kind: 'properties', rows: componentDoc.properties },
+		{ value: 'slots', label: 'Slots', kind: 'slots', rows: componentDoc.slots },
+		{ value: 'events', label: 'Events', kind: 'events', rows: componentDoc.events },
+		{ value: 'css', label: 'CSS', kind: 'css', rows: componentDoc.cssVariables }
 	]
 
 	return candidateSections.filter((section) => section.rows.length > 0)
+}
+
+type ZApiTableElementT = HTMLElement & {
+	rows: unknown[]
+}
+
+const buildApiTable = (section: ApiSectionT): ZApiTableElementT => {
+	const table = createElement('z-api-table') as ZApiTableElementT
+	table.setAttribute('kind', section.kind)
+	table.rows = section.rows
+	return table
 }
 
 export const buildApiReference = (componentDoc: ComponentDocT): HTMLElement | null => {
@@ -94,7 +55,7 @@ export const buildApiReference = (componentDoc: ComponentDocT): HTMLElement | nu
 
 	for (const section of sections) {
 		const panel = buildTabPanel(section.value, 'apiPanel')
-		panel.append(buildTable(section.columns, section.rows, 'Nothing here'))
+		panel.append(buildApiTable(section))
 		tabs.append(panel)
 	}
 

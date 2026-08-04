@@ -163,6 +163,10 @@ export * from './components/z-nav-tree'
 export * from './components/z-toc'
 export * from './components/z-doc-header'
 export * from './components/z-prev-next'
+export * from './components/z-type-badge'
+export * from './components/z-api-table'
+export * from './components/z-control-panel'
+export * from './components/z-playground'
 
 // Music / MIDI
 export * from './components/z-piano-roll'

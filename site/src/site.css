@@ -94,30 +94,6 @@ body {
 	color: var(--muted-foreground);
 }
 
-.playground {
-	display: flex;
-	flex-direction: column;
-}
-
-.playgroundPreview {
-	display: flex;
-	flex-wrap: wrap;
-	align-items: center;
-	justify-content: center;
-	gap: var(--spacing-4);
-	padding: var(--spacing-10) var(--spacing-6);
-	min-height: 4rem;
-}
-
-.playgroundCodeSection {
-	padding: var(--spacing-4);
-	border-top: 1px solid var(--border);
-}
-
-.playgroundCode {
-	width: 100%;
-}
-
 .playgroundSetup {
 	display: flex;
 	flex-direction: column;
@@ -243,57 +219,17 @@ body {
 
 /* --- API reference --- */
 
-.apiReference {
-	min-width: 0;
-}
-
-.apiPanel {
-	padding-top: var(--spacing-5);
-}
-
 /* --- playground --- */
-
-.playground {
-	display: flex;
-	flex-direction: column;
-	overflow: hidden;
-}
-
-.playgroundStage {
-	display: flex;
-	flex-wrap: wrap;
-	align-items: center;
-	justify-content: center;
-	gap: var(--spacing-4);
-	padding: var(--spacing-12) var(--spacing-6);
-	min-height: 6rem;
-}
 
 /* 200px, not 160: a select has to fit its longest option plus a chevron, and
    a number field now carries two stepper buttons. At 160 the track was
    narrower than the controls standing in it. */
-.playgroundControls {
-	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-	gap: var(--spacing-4) var(--spacing-5);
-	padding: var(--spacing-5) var(--spacing-6);
-	border-top: 1px solid var(--border);
-}
 
 /* z-field owns the label band, the control row and the spacing between them,
    so there is nothing to lay out here — only the grid cell to keep from
    overflowing. The mono face is inherited: z-field's label sets size, weight
    and casing but leaves font-family alone, and inheritance crosses the
    shadow boundary. These are attribute names, so they should read as code. */
-.playgroundField {
-	min-width: 0;
-	font-family: var(--font-mono);
-}
-
-.playgroundOutput {
-	padding: var(--spacing-4);
-	border-top: 1px solid var(--border);
-}
 
 /* Demo scaffolding for playground stages: a few layout primitives are
    invisible on their own (a spacer, a bare grid), so the stage frames them
@@ -357,3 +293,9 @@ body {
 
 /* The outline's responsive drop-out is z-docs-shell's, since the shell owns
    the track the outline sits in. */
+
+.playgroundGroup {
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-3);
+}

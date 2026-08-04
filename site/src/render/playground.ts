@@ -1,14 +1,14 @@
-// The playground: one live instance of the component with a control per
-// documented attribute, and the resulting markup echoed underneath.
+// The playground, now an adapter over z-playground.
 //
-// Controls are derived from the page's own attribute table, so the knobs and
-// the API reference can never disagree. This module only decides *which*
-// control each attribute deserves; building them is playground-controls.ts,
-// shared with the markdown fallback.
+// What survives here is the one thing the element cannot know: which of a
+// page's documented attributes deserve a knob, and what kind each one gets.
+// That is derived from the page's own attribute table, so the controls and
+// the API reference can never disagree.
+//
+// Everything else — building the controls, binding them to the instance,
+// re-serializing the markup — moved into z-playground and z-control-panel.
 
-import { buildCodeBlock, createElement } from './zest-elements'
-import type { ZCodeBlockElementT } from './zest-elements'
-import { buildControlsBand } from './playground-controls'
+import { createElement } from './zest-elements'
 import type { ApiRowT, ComponentDocT, PlaygroundControlKindT, PlaygroundControlT } from '../component-docs/types'
 
 // Attribute types are authored as human-readable unions ("solid | outline |
@@ -63,43 +63,20 @@ const buildControls = (componentDoc: ComponentDocT): PlaygroundControlT[] => {
 	return controllableAttributes.map(toPlaygroundControl)
 }
 
-// The stage element's own markup is the output, minus the class the docs put
-// on it for layout — readers should see what they'd paste, not our plumbing.
-const getStageMarkup = (stageElement: HTMLElement): string => {
-	const copy = stageElement.cloneNode(true) as HTMLElement
-	copy.removeAttribute('class')
-	return copy.outerHTML
+type ZPlaygroundElementT = HTMLElement & {
+	controls: PlaygroundControlT[]
 }
 
 export const buildPlayground = (componentDoc: ComponentDocT): HTMLElement | null => {
 	if (!componentDoc.playground) return null
 
 	const stageElement = componentDoc.playground.buildElement()
-	const controls = buildControls(componentDoc)
+	stageElement.setAttribute('slot', 'stage')
 
-	const playground = createElement('z-surface', 'playground')
-	playground.setAttribute('level', '1')
-	playground.setAttribute('radius', 'lg')
-	playground.setAttribute('inset', '0')
-	playground.setAttribute('has-border', '')
+	const playground = createElement('z-playground') as ZPlaygroundElementT
+	playground.setAttribute('tag-name', componentDoc.tag)
+	playground.controls = buildControls(componentDoc)
+	playground.append(stageElement)
 
-	const stage = createElement('div', 'playgroundStage')
-	stage.append(stageElement)
-
-	const output = createElement('div', 'playgroundOutput')
-	const codeBlock = buildCodeBlock({ code: '', language: 'html', filename: '', hasCopyButton: true }) as ZCodeBlockElementT
-	output.append(codeBlock)
-
-	const refreshOutput = (): void => {
-		codeBlock.code = getStageMarkup(stageElement)
-	}
-	refreshOutput()
-
-	playground.append(stage)
-
-	const hasControls = controls.length > 0
-	if (hasControls) playground.append(buildControlsBand(stageElement, controls, refreshOutput))
-
-	playground.append(output)
 	return playground
 }
