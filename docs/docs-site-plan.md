@@ -16,13 +16,21 @@ site-level layout CSS.
 | `z-toc` | done | Sources headings from an authored array or by scraping a container. The scrape descends through shadow roots — without that it cannot see `z-markdown` output, which is the case it exists for. |
 | `z-doc-header` | done | Maps `status` to an accent internally, so `beta` is the same amber everywhere. Meta row only renders when there is provenance to show. |
 | `z-prev-next` | done | Anchor-based like `z-nav-tree`. A missing side keeps its column so the surviving card does not drift to the middle. |
+| `z-api-table` | done | One element for all five surfaces via `kind`. Retired `render/api-reference.ts`'s column definitions. |
+| `z-type-badge` | done | Infers its category from the token; `kind` overrides. Union and function tests run before the object test. |
+| `z-control-panel` | done | Controlled — renders `values`, emits `change`. `null` means unset, distinct from the empty string. |
+| `z-playground` | done | The instance is slotted, so it is real DOM. Serialization lives in the element, so the snippet cannot drift from the stage. |
 
-Wave 1 is complete. Everything else below is unstarted.
+Waves 1 and 2 are complete. Everything else below is unstarted.
 
-Retiring the hand-rolled header and outline took `site.css` from 414 to 359
-lines. `site/src/render/` still holds `example-card.ts` (a 33-line adapter),
-`api-reference.ts`, `playground.ts`, and `playground-controls.ts` — those go
-in Wave 2.
+`site.css` is down from 414 to 295 lines. `site/src/render/` now holds only
+adapters: `example-card.ts` (33 lines), `api-reference.ts` (65, down from
+104), and `playground.ts` (80, and all of it is deciding *which* attributes
+deserve a knob — the one thing the element cannot know). `playground-controls.ts`
+is gone.
+
+Still outstanding from Wave 2: `z-api-signature` and `z-anatomy`. `z-anatomy`
+remains blocked on `AnatomyPartT` gaining region coordinates.
 
 `z-chassis` gained two things the shell needed: `scrollScreenTo(options)` /
 `getScreen()` (the screen is the scroll container, and a routed view landing
