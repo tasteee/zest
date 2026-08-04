@@ -167,6 +167,8 @@ export * from './components/z-type-badge'
 export * from './components/z-api-table'
 export * from './components/z-control-panel'
 export * from './components/z-playground'
+export * from './components/z-swatch'
+export * from './components/z-token-table'
 
 // Music / MIDI
 export * from './components/z-piano-roll'

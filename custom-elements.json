@@ -14947,6 +14947,100 @@
         {
           "kind": "class",
           "customElement": true,
+          "tagName": "z-swatch",
+          "name": "ZSwatch",
+          "members": [
+            {
+              "kind": "field",
+              "name": "token",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "kind",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "description",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "copy",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "token",
+              "fieldName": "token",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "kind",
+              "fieldName": "kind",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "label",
+              "fieldName": "label",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "description",
+              "fieldName": "description",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "copy",
+              "fieldName": "copy",
+              "type": {
+                "text": "string"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
           "tagName": "z-switch",
           "name": "ZSwitch",
           "members": [
@@ -16955,6 +17049,100 @@
         {
           "kind": "class",
           "customElement": true,
+          "tagName": "z-token-table",
+          "name": "ZTokenTable",
+          "members": [
+            {
+              "kind": "field",
+              "name": "tokens",
+              "type": {
+                "text": "array"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "names",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "kind",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "caption",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "columns",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "tokens",
+              "fieldName": "tokens",
+              "type": {
+                "text": "array"
+              }
+            },
+            {
+              "name": "names",
+              "fieldName": "names",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "kind",
+              "fieldName": "kind",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "caption",
+              "fieldName": "caption",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "columns",
+              "fieldName": "columns",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
           "tagName": "z-tool-call",
           "name": "ZToolCall",
           "members": [
@@ -18830,6 +19018,14 @@
         },
         {
           "kind": "custom-element-definition",
+          "name": "z-swatch",
+          "declaration": {
+            "name": "ZSwatch",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
           "name": "z-switch",
           "declaration": {
             "name": "ZSwitch",
@@ -18953,6 +19149,14 @@
           "name": "z-toggle-group-item",
           "declaration": {
             "name": "ZToggleGroupItem",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "z-token-table",
+          "declaration": {
+            "name": "ZTokenTable",
             "module": "dist/zest.js"
           }
         },
