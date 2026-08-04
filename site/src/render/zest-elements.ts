@@ -137,7 +137,7 @@ export const buildSectionHeader = (title: string, description: string): HTMLElem
 // itself into bordered bands that need to own their own spacing.
 export const buildSurface = (level: string, className: string): HTMLElement => {
 	const surface = createElement('z-surface', className)
-	applyAttributes(surface, { level, radius: 'lg', inset: '0', border: '' })
+	applyAttributes(surface, { level, radius: 'lg', inset: '0', 'has-border': '' })
 	return surface
 }
 
@@ -145,9 +145,9 @@ export const buildSeparator = (): HTMLElement => {
 	return createElement('z-separator')
 }
 
-export const buildBadge = (label: string, tone: string, kind: string): HTMLElement => {
+export const buildBadge = (label: string, accent: string, kind: string): HTMLElement => {
 	const badge = createElement('z-badge')
-	applyAttributes(badge, { label, tone, kind, size: 'small' })
+	applyAttributes(badge, { label, accent, kind, size: 'sm' })
 	return badge
 }
 
@@ -166,7 +166,9 @@ export const buildCodeBlock = (options: CodeBlockOptionsT): ZCodeBlockElementT =
 
 	const hasFilename = options.filename.length > 0
 	if (hasFilename) codeBlock.setAttribute('filename', options.filename)
-	if (!options.hasCopyButton) codeBlock.setAttribute('hide-copy', '')
+
+	// has-copy defaults to true on the element, so this only ever removes it.
+	if (!options.hasCopyButton) codeBlock.removeAttribute('has-copy')
 
 	codeBlock.code = options.code
 	return codeBlock
@@ -215,6 +217,6 @@ export const buildCallout = (accent: string, heading: string, body: string): HTM
 
 export const buildLink = (label: string, href: string): HTMLElement => {
 	const link = createElement('z-link')
-	applyAttributes(link, { href, label, size: 'small' })
+	applyAttributes(link, { href, label, size: 'sm' })
 	return link
 }

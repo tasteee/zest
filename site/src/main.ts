@@ -73,7 +73,7 @@ const buildBreadcrumbs = (items: ZBreadcrumbsItemT[]): ZBreadcrumbsElementT => {
 
 const buildMarkdown = (content: string): ZMarkdownElementT => {
 	const markdown = document.createElement('z-markdown') as ZMarkdownElementT
-	markdown.setAttribute('heading-anchors', '')
+	markdown.setAttribute('has-heading-anchors', '')
 	markdown.content = content
 	return markdown
 }
@@ -384,7 +384,7 @@ const buildNavFooter = (): HTMLElement => {
 	// switcher's own default of light/dark/system. Icon-only, because six
 	// labelled segments would dominate the rail.
 	const themeSwitcher = createElement('z-theme-switcher') as HTMLElement & { themes: string[] }
-	themeSwitcher.setAttribute('is-small', '')
+	themeSwitcher.setAttribute('size', 'sm')
 	themeSwitcher.setAttribute('is-icon-only', '')
 	themeSwitcher.themes = ['light', 'dark', 'console', 'studio', 'system']
 

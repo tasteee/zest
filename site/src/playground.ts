@@ -6,7 +6,7 @@ import type { ZCodeBlockElementT } from './render/zest-elements'
 import type { DocPageT } from './docs-data'
 
 // Pulls the single element matching the page's own tag out of the primary
-// example (e.g. the first `<z-button tone="primary">Save</z-button>` out of
+// example (e.g. the first `<z-button accent="dom">Save</z-button>` out of
 // z-button.md's five variations) to use as the one instance the playground's
 // controls drive.
 //

@@ -81,7 +81,7 @@ export const buildPlayground = (componentDoc: ComponentDocT): HTMLElement | null
 	playground.setAttribute('level', '1')
 	playground.setAttribute('radius', 'lg')
 	playground.setAttribute('inset', '0')
-	playground.setAttribute('border', '')
+	playground.setAttribute('has-border', '')
 
 	const stage = createElement('div', 'playgroundStage')
 	stage.append(stageElement)

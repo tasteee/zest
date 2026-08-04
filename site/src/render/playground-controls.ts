@@ -72,7 +72,7 @@ const applyStageValue = (stageElement: Element, control: PlaygroundControlInputT
 
 const buildSwitchControl = (stageElement: Element, control: PlaygroundControlInputT, onChange: () => void): HTMLElement => {
 	const toggle = createElement('z-switch') as ZSwitchElementT
-	toggle.setAttribute('size', 'small')
+	toggle.setAttribute('size', 'sm')
 	toggle.isChecked = stageElement.hasAttribute(control.name)
 
 	// z-field names its control by assigning a `label` property, which every
@@ -93,7 +93,7 @@ const buildSwitchControl = (stageElement: Element, control: PlaygroundControlInp
 
 const buildSelectControl = (stageElement: Element, control: PlaygroundControlInputT, onChange: () => void): HTMLElement => {
 	const select = createElement('z-select') as ZSelectElementT
-	select.setAttribute('size', 'small')
+	select.setAttribute('size', 'sm')
 
 	const unsetOption: ZSelectOptionT = { value: '', label: 'unset' }
 	const valueOptions: ZSelectOptionT[] = control.options.map((option) => {
@@ -114,7 +114,7 @@ const buildSelectControl = (stageElement: Element, control: PlaygroundControlInp
 
 const buildNumberControl = (stageElement: Element, control: PlaygroundControlInputT, onChange: () => void): HTMLElement => {
 	const input = createElement('z-number-input') as ZNumberInputElementT
-	input.setAttribute('size', 'small')
+	input.setAttribute('size', 'sm')
 
 	// Nudging a value one step at a time is most of what a reader does with a
 	// numeric knob, and the field is compact by default — stretch it so the
@@ -141,7 +141,7 @@ const buildNumberControl = (stageElement: Element, control: PlaygroundControlInp
 
 const buildTextControl = (stageElement: Element, control: PlaygroundControlInputT, onChange: () => void): HTMLElement => {
 	const input = createElement('z-input') as ZInputElementT
-	input.setAttribute('size', 'small')
+	input.setAttribute('size', 'sm')
 
 	const declaredDefault = readDeclaredDefault(control.defaultValue)
 	input.setAttribute('placeholder', declaredDefault || control.name)
@@ -176,7 +176,7 @@ const buildControlField = (stageElement: Element, control: PlaygroundControlInpu
 
 	// Every control in the band is size="small"; without this the field
 	// reserves a medium control row and each knob floats in its own gap.
-	field.setAttribute('is-small', '')
+	field.setAttribute('size', 'sm')
 
 	field.append(buildControlInput(stageElement, control, onChange))
 	return field
