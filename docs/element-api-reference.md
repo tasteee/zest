@@ -33,14 +33,14 @@ short, that is the first place to check.
 - [Navigation & disclosure](#navigation--disclosure) — 8
 - [Overlays](#overlays) — 11
 - [Data display](#data-display) — 14
-- [Canvas, panels & docs](#canvas-panels--docs) — 29
-- [Text editor](#text-editor) — 9
+- [Canvas, panels & docs](#canvas-panels--docs) — 32
+- [Text editor](#text-editor) — 10
 - [Chat](#chat) — 22
 - [Attachments](#attachments) — 4
 - [Effects](#effects) — 4
 - [Music](#music) — 3
 - [Specialized](#specialized) — 13
-- [Uncategorised](#uncategorised) — 14
+- [Uncategorised](#uncategorised) — 10
 
 ---
 
@@ -1457,6 +1457,19 @@ short, that is the first place to check.
 />
 ```
 
+### `z-docs-shell`
+
+```jsx
+<z-docs-shell
+  nav-width={string}   // default: 17rem
+  toc-width={string}   // default: 13rem
+  content-width={string}   // default: 54rem
+  is-nav-open
+  is-hidden
+  onnavClose={(event) => event.detail}   // —
+/>
+```
+
 ### `z-edit-on-github`
 
 ```jsx
@@ -1489,6 +1502,22 @@ short, that is the first place to check.
   onviewportchange={(event) => event.detail}   // { x: number; y: number; zoom: number }
   onzoomchange={(event) => event.detail}   // { zoom: number }
   onpanchange={(event) => event.detail}   // { x: number; y: number }
+/>
+```
+
+### `z-example`
+
+```jsx
+<z-example
+  heading={string}
+  description={string}
+  snippets={Array}
+  layout="center | start | stack | fill"   // default: center
+  is-source-open
+  has-background-grid
+  is-resizable
+  is-hidden
+  oncopy={(event) => event.detail}   // { code: string; label: string }
 />
 ```
 
@@ -1563,6 +1592,22 @@ short, that is the first place to check.
   theme={string}
   is-hidden
   onrender={(event) => event.detail}   // { id: string }
+/>
+```
+
+### `z-nav-tree`
+
+```jsx
+<z-nav-tree
+  items={Array}
+  route={string}
+  label={string}
+  storage-key={string}
+  filter-placeholder={string}
+  is-collapsed-by-default
+  is-filtered
+  is-hidden
+  onnavigate={(event) => event.detail}   // { route: string; node: NavNodeT }
 />
 ```
 
@@ -1770,6 +1815,22 @@ short, that is the first place to check.
   ontableinsertcolumn={(event) => event.detail}   // { position: RowColPositionT }
   ontabledeletecolumn={(event) => event.detail}   // —
   ontablemerge={(event) => event.detail}   // —
+/>
+```
+
+### `z-copy-button`
+
+```jsx
+<z-copy-button
+  value={string}
+  label={string}   // default: Copy
+  copied-label={string}   // default: Copied
+  kind="ghost | icon"   // default: ghost
+  size="sm | md"   // default: md
+  is-disabled
+  is-hidden
+  oncopy={(event) => event.detail}   // { value: string }
+  onerror={(event) => event.detail}   // { error: Error | null }
 />
 ```
 
@@ -2599,35 +2660,6 @@ short, that is the first place to check.
 />
 ```
 
-### `z-copy-button`
-
-```jsx
-<z-copy-button
-  value={string}
-  label={string}
-  copied-label={string}
-  kind="ghost | icon"
-  size="sm | md"
-  is-disabled
-  is-hidden
-  oncopy={(event) => event.detail}   // { value: string }
-  onerror={(event) => event.detail}   // { error: Error | null }
-/>
-```
-
-### `z-docs-shell`
-
-```jsx
-<z-docs-shell
-  nav-width={string}
-  toc-width={string}
-  content-width={string}
-  is-nav-open
-  is-hidden
-  onnavClose={(event) => event.detail}   // —
-/>
-```
-
 ### `z-draggable`
 
 ```jsx
@@ -2668,38 +2700,6 @@ short, that is the first place to check.
   ondragover={(event) => event.detail}   // unknown
   ondragleave={(event) => event.detail}   // unknown
   ondropitem={(event) => event.detail}   // { data: unknown; type: string; source: Element; x: number; y: number }
-/>
-```
-
-### `z-example`
-
-```jsx
-<z-example
-  heading={string}
-  description={string}
-  snippets={Array}
-  layout="center | start | stack | fill"
-  is-source-open
-  has-background-grid
-  is-resizable
-  is-hidden
-  oncopy={(event) => event.detail}   // { code: string; label: string }
-/>
-```
-
-### `z-nav-tree`
-
-```jsx
-<z-nav-tree
-  items={Array}
-  route={string}
-  label={string}
-  storage-key={string}
-  filter-placeholder={string}
-  is-collapsed-by-default
-  is-filtered
-  is-hidden
-  onnavigate={(event) => event.detail}   // { route: string; node: NavNodeT }
 />
 ```
 
