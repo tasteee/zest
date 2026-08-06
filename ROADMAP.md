@@ -4,9 +4,20 @@ A domain-driven plan for growing `@tasteee/zest` from a general UI kit into a
 library that can build whole application classes — dashboards, blogs, AI chat,
 editors, and documentation sites — end to end.
 
+## Where this stands
+
+**184 elements shipped.** §5 (documentation sites) is complete; §0
+(foundational primitives) is all but done. Chat §3a is largely built, §3b
+partly. Dashboards, blog and editors are where the remaining bulk is.
+
+Two things this document is not: it is not a record of what exists — that is
+[`docs/element-api-reference.md`](./docs/element-api-reference.md), generated
+from source — and it is not a commitment. An unchecked box here is a candidate,
+not a promise.
+
 ## Principles
 
-- **Additive, not duplicative.** The 74 shipped elements are the base. Everything
+- **Additive, not duplicative.** The shipped elements are the base. Everything
   here builds on them; a new element earns its place only when the pattern can't
   already be expressed by composing existing `z-*` primitives.
 - **Prefer new elements over overloading old ones.** (Per project convention.)
@@ -37,7 +48,7 @@ These repay themselves across 3–5 domains each. The reuse map:
 | `z-dropzone` | ● import | ● | ● attach | ● assets | |
 | `z-toolbar` | ● | | ● | ● | |
 
-- [ ] **`z-editor-canvas`** ⭐ — infinite pan/zoom/pinch canvas; DOM-controllable
+- [x] **`z-editor-canvas`** ⭐ — infinite pan/zoom/pinch canvas; DOM-controllable
   (`zoomTo`/`panTo`/`fit`, `viewportchange` event). See `docs/foundational-primitives.md`.
 - [x] **`z-resizable-panels`** ⭐ + `z-panel` + `z-panel-handle` — react-resizable-panels-style
   group: %/px + fixed sizes, custom separators, persistence *(collapse snapping polish TODO)*.
@@ -61,11 +72,11 @@ These repay themselves across 3–5 domains each. The reuse map:
 
 **Shell & layout**
 - [ ] `z-dashboard-shell` — topbar + sidebar + content frame
-- [ ] `z-panel` — titled widget container (header / actions / body)
+- [x] `z-panel` — titled widget container (header / actions / body)
 - [ ] `z-widget-grid` — draggable/resizable tile layout
 - [ ] `z-tile` / `z-widget`
 - [ ] `z-page-header` — title + breadcrumbs + actions + tabs
-- [ ] `z-toolbar` *(foundational)*
+- [x] `z-toolbar` *(foundational)*
 - [ ] `z-filter-bar`
 - [x] `z-toggle-group` (segmented control)
 
@@ -117,7 +128,7 @@ These repay themselves across 3–5 domains each. The reuse map:
 - [x] `z-post-meta`
 - [ ] `z-byline` / `z-author` · `z-author-card`
 - [ ] `z-reading-time` · `z-reading-progress`
-- [ ] `z-toc` — auto from headings, scroll-spy
+- [x] `z-toc` — auto from headings, scroll-spy
 - [ ] `z-lede` / `z-dek` · `z-drop-cap` · `z-pull-quote` · `z-blockquote`
 - [ ] `z-figure` (+caption) · `z-cover` / `z-hero-image`
 - [ ] `z-footnote` · `z-aside` / `z-margin-note`
@@ -241,9 +252,9 @@ Same list/thread/composer as 3a; adds only the AI differentiators.
 - [x] `z-tool-call` / `z-tool-result` — expandable args + result (status states; composes `z-collapsible` + `z-code-block`)
 - [x] `z-citation` (inline marker) · [x] `z-sources` / `z-references` (grounding cards)
 - [ ] `z-artifact` — side-panel output (composes `z-resizable-panels` + `z-editor-canvas`)
-- [ ] `z-diff` — code diff
-- [ ] `z-message-actions` gains retry / 👍👎 / edit-and-resend *(extends 3a)*
-- [ ] `z-send-button` gains stop-streaming state *(extends 3a)*
+- [x] `z-diff` — code diff
+- [x] `z-message-actions` gains retry / 👍👎 / edit-and-resend *(extends 3a)*
+- [x] `z-send-button` gains stop-streaming state *(extends 3a)*
 - [x] composer add-ons: `z-model-picker` · `z-suggestion-chips` · [ ] `z-token-counter`
 - [ ] session rail: `z-new-chat-button` *(shared)* · `z-prompt-library` · `z-feedback` · `z-agent-step` · `z-task-list` / `z-plan`
 
@@ -256,12 +267,12 @@ Same list/thread/composer as 3a; adds only the AI differentiators.
 - [ ] `z-menubar` — File / Edit / View app menu
 - [ ] `z-toolbar` *(foundational)* + `z-tool-button` / `z-tool-group`
 - [ ] `z-panel` (dockable: titlebar / collapse / close) · `z-dock` / `z-panel-group`
-- [ ] `z-resizable-panels` *(foundational)*
+- [x] `z-resizable-panels` *(foundational)*
 - [ ] `z-document-tabs` (closeable, dirty dot) · `z-statusbar` · `z-inspector`
 - [x] `z-sidebar`
 
 **The canvas**
-- [ ] `z-editor-canvas` *(foundational)*
+- [x] `z-editor-canvas` *(foundational)*
 - [ ] `z-ruler` · `z-guides` · `z-grid-overlay`
 - [ ] `z-minimap` / `z-navigator` · `z-zoom-controls`
 - [ ] `z-marquee` / `z-selection-box` · `z-transform-handles` / `z-bounding-box`
@@ -284,28 +295,56 @@ Same list/thread/composer as 3a; adds only the AI differentiators.
 
 ---
 
-## 5. Documentation sites
+## 5. Documentation sites — **complete**
+
+Built out in full against [`docs/docs-site-plan.md`](./docs/docs-site-plan.md),
+which expands this section and records the design decisions. 35 elements were
+planned; 33 were built, and the two that were not are listed at the foot of
+this section.
+
+The docs site is now assembled almost entirely from `z-*` elements —
+`site/src/render/` holds only adapters, and `site.css` went from 414 lines to
+295. That was the point of the exercise: the site stops being a special-case
+app and becomes the largest proof that the library works.
 
 **Shell / nav**
-- [ ] `z-docs-shell` — 3-col: nav | content | toc
-- [ ] `z-nav-tree` (composes `z-tree`) · `z-toc` (scroll-spy)
-- [ ] `z-prev-next` (page footer nav)
+- [x] `z-docs-shell` — 3-col: nav | content | toc
+- [x] `z-nav-tree` (composes `z-tree`) · `z-toc` (scroll-spy)
+- [x] `z-prev-next` (page footer nav)
 - [x] `z-breadcrumbs`
-- [ ] `z-version-picker` · `z-language-switcher` · `z-announcement-bar`
+- [x] `z-version-picker` · `z-language-switcher` · `z-announcement-bar`
 
 **Content**
-- [x] `z-callout` (note/warn/tip/danger) · `z-code-block` · `z-terminal` · `z-kbd` · `z-tabs`
-- [ ] `z-code-group` / `z-code-tabs` (npm/yarn/pnpm)
-- [ ] `z-steps` (numbered instructions)
-- [ ] `z-api-table` / `z-property-table` · `z-api-signature` · `z-type-badge`
-- [ ] `z-heading-anchor` (# on hover) · `z-file-tree` · `z-diff` · `z-code-annotation`
+- [x] `z-callout` · `z-code-block` · `z-terminal` · `z-kbd` · `z-tabs`
+- [x] `z-code-group` (npm/yarn/pnpm) — `z-code-tabs` merged into it
+- [x] `z-steps` (+ `z-step`)
+- [x] `z-api-table` · `z-type-badge` — `z-property-table` is the same element with a different `kind`
+- [x] `z-file-tree` · `z-diff`
 - [x] `z-accordion` / `z-collapsible` (FAQ)
-- [ ] `z-mermaid` / `z-diagram` · `z-playground` / `z-live-code` · `z-sandbox`
+- [x] `z-mermaid` · `z-playground` (+ `z-control-panel`) · `z-live-code` · `z-sandbox`
+- [x] `z-swatch` · `z-token-table` · `z-do-dont` · `z-doc-header`
+- [ ] `z-api-signature` — the imperative APIs (`canvas.fit()`) an attribute table cannot express
+- [ ] `z-anatomy` — **blocked**: `AnatomyPartT` is `{ name, description }`; pinned
+      numbered callouts need region coordinates. Add the optional fields before
+      authoring anatomy content or it is a guaranteed second pass.
+
+Folded away rather than built, each because the job turned out to belong
+somewhere that already existed:
+
+- **`z-code-annotation`** → `highlight-lines` / `added-lines` / `removed-lines` /
+  `focus-lines` attributes on `z-code-block`. The tethered-note element was
+  never needed.
+- **`z-heading-anchor`** → `z-markdown`'s `has-heading-anchors`. A standalone
+  element would be a third way to do one thing.
+- **`z-diagram`** → `z-mermaid` plus `z-editor-canvas`. A generic diagram
+  element has no coherent API.
+- **`z-theme-toggle`** → `z-theme-switcher` already covers tri-state including
+  system, shared module state, persistence, and a compact `icon` kind.
 
 **Discovery aids**
 - [x] `z-command` (⌘K palette)
-- [ ] `z-search-dialog` · `z-copy-button` · `z-external-link` (↗)
-- [ ] `z-was-this-helpful` (👍👎) · `z-edit-on-github` · `z-last-updated` · `z-reading-progress`
+- [x] `z-search-dialog` · `z-copy-button` · `z-external-link` (↗)
+- [x] `z-was-this-helpful` (👍👎) · `z-edit-on-github` · `z-last-updated` · `z-reading-progress`
 
 ---
 

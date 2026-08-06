@@ -483,9 +483,17 @@ is settled, since a sandbox has to inherit it.
 
 ## Counting
 
-35 new elements across waves 1–5, plus 4 cross-cutting primitives and one
-set of `z-code-block` attribute additions. That takes the library from 151
-to ~190 elements.
+Planned: 35 new elements across waves 1–5, plus 4 cross-cutting primitives and
+one set of `z-code-block` attribute additions, taking the library from 151 to
+roughly 190.
+
+**Actual: 33 built, landing at 184.** Two were dropped rather than built —
+`z-theme-toggle`, because `z-theme-switcher` already did the job, and
+`z-code-annotation`, because the attributes on `z-code-block` carried it
+without needing an element. Two of the four cross-cutting primitives turned
+out not to be needed either: `z-scroll-spy` stayed internal to `z-toc` as the
+plan allowed, and `z-hotkeys` and `z-lazy` were never reached for. The
+estimate was close, and it was high for the right reasons.
 
 Nine of the 35 — `z-example`, `z-playground`, `z-control-panel`,
 `z-api-table`, `z-anatomy`, `z-docs-shell`, `z-doc-header`, `z-nav-tree`,
