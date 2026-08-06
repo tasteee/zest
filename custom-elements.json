@@ -10061,6 +10061,156 @@
         {
           "kind": "class",
           "customElement": true,
+          "tagName": "z-live-code",
+          "name": "ZLiveCode",
+          "members": [
+            {
+              "kind": "field",
+              "name": "code",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "assets",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "theme",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "height",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "layout",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "editorLabel",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "previewLabel",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "change",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "reset",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "code",
+              "fieldName": "code",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "assets",
+              "fieldName": "assets",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "theme",
+              "fieldName": "theme",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "height",
+              "fieldName": "height",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "layout",
+              "fieldName": "layout",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "editor-label",
+              "fieldName": "editorLabel",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "preview-label",
+              "fieldName": "previewLabel",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "change",
+              "fieldName": "change",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "reset",
+              "fieldName": "reset",
+              "type": {
+                "text": "string"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
           "tagName": "z-markdown",
           "name": "ZMarkdown",
           "members": [
@@ -14360,6 +14510,142 @@
             {
               "name": "inset-y",
               "fieldName": "insetY",
+              "type": {
+                "text": "string"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
+          "tagName": "z-sandbox",
+          "name": "ZSandbox",
+          "members": [
+            {
+              "kind": "field",
+              "name": "html",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "assets",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "device",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "theme",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "height",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "title",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isBare",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "open",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "html",
+              "fieldName": "html",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "assets",
+              "fieldName": "assets",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "device",
+              "fieldName": "device",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "theme",
+              "fieldName": "theme",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "height",
+              "fieldName": "height",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "title",
+              "fieldName": "title",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "is-bare",
+              "fieldName": "isBare",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "open",
+              "fieldName": "open",
               "type": {
                 "text": "string"
               }
@@ -20926,6 +21212,14 @@
         },
         {
           "kind": "custom-element-definition",
+          "name": "z-live-code",
+          "declaration": {
+            "name": "ZLiveCode",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
           "name": "z-markdown",
           "declaration": {
             "name": "ZMarkdown",
@@ -21209,6 +21503,14 @@
           "name": "z-row",
           "declaration": {
             "name": "ZRow",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "z-sandbox",
+          "declaration": {
+            "name": "ZSandbox",
             "module": "dist/zest.js"
           }
         },

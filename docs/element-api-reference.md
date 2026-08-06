@@ -1,6 +1,6 @@
 # Zest element API reference
 
-**182 elements.** Every one, as you would write it. Generated from
+**184 elements.** Every one, as you would write it. Generated from
 source by `scripts/build-api-reference.mjs`, so it is current by
 construction rather than by discipline.
 
@@ -33,7 +33,7 @@ short, that is the first place to check.
 - [Navigation & disclosure](#navigation--disclosure) — 8
 - [Overlays](#overlays) — 11
 - [Data display](#data-display) — 14
-- [Canvas, panels & docs](#canvas-panels--docs) — 27
+- [Canvas, panels & docs](#canvas-panels--docs) — 29
 - [Text editor](#text-editor) — 9
 - [Chat](#chat) — 22
 - [Attachments](#attachments) — 4
@@ -1537,6 +1537,23 @@ short, that is the first place to check.
 />
 ```
 
+### `z-live-code`
+
+```jsx
+<z-live-code
+  code={string}
+  assets={string}
+  theme={string}
+  height={string}   // default: 20rem
+  layout="stacked"
+  editor-label={string}   // default: Edit
+  preview-label={string}   // default: Result
+  is-hidden
+  onchange={(event) => event.detail}   // { code: string }
+  onreset={(event) => event.detail}   // —
+/>
+```
+
 ### `z-mermaid`
 
 ```jsx
@@ -1607,6 +1624,22 @@ short, that is the first place to check.
   is-disabled
   onlayout={(event) => event.detail}   // { sizes: number[] }
   ondragging={(event) => event.detail}   // { isDragging: boolean }
+/>
+```
+
+### `z-sandbox`
+
+```jsx
+<z-sandbox
+  html={string}
+  assets={string}
+  device="desktop | tablet | phone"   // default: desktop
+  theme={string}
+  height={string}   // default: 20rem
+  title={string}   // default: Example
+  is-bare
+  is-hidden
+  onopen={(event) => event.detail}   // { url: string }
 />
 ```
 

@@ -39,6 +39,8 @@ site-level layout CSS.
 | `z-version-picker` | done | Swaps the version segment in place, so a reader three pages deep stays there. |
 | `z-language-switcher` | done | Locale as the first path segment. Labels are authored in their own language. |
 | `z-theme-toggle` | **dropped** | `z-theme-switcher` already does the whole job — tri-state including system, shared module state, persistence, an `icon` kind for a crowded header. A second element for one job is how a library grows two ways to do everything. |
+| `z-sandbox` | done | Opaque origin — no `allow-same-origin` — so an example cannot read the host page's storage or DOM. Device presets are widths, not user-agent lies. |
+| `z-live-code` | done | Textarea, not an editor: a tokenizer and an undo model to serve six lines of markup is the wrong trade. Preview is a z-sandbox, debounced 400ms. |
 
 Waves 1 and 2 are complete. Everything else below is unstarted.
 
@@ -55,12 +57,10 @@ Wave 3 is most of the way through. `z-swatch` and `z-token-table` closed the
 library's largest documentation gap — 411 tokens with no reference page, now
 `docs/foundation/tokens.md`. `z-steps`, `z-code-group` and `z-do-dont` follow.
 
-Waves 3 and 4 are complete. `z-theme-toggle` was dropped rather than built —
-see the table above.
-
-Wave 5 — `z-live-code` and `z-sandbox` — is untouched, and deliberately last:
-a sandbox has to inherit the theme story, which only settled with the light
-themes.
+**All five waves are complete.** `z-theme-toggle` was dropped rather than
+built, and `z-code-annotation` turned out to need no element of its own — the
+attributes on `z-code-block` carry the whole job. 35 planned, 33 built, and
+the count is lower for the right reasons.
 
 `z-chassis` gained two things the shell needed: `scrollScreenTo(options)` /
 `getScreen()` (the screen is the scroll container, and a routed view landing

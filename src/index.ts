@@ -184,6 +184,8 @@ export * from './components/z-last-updated'
 export * from './components/z-search-dialog'
 export * from './components/z-version-picker'
 export * from './components/z-language-switcher'
+export * from './components/z-sandbox'
+export * from './components/z-live-code'
 
 // Music / MIDI
 export * from './components/z-piano-roll'
