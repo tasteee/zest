@@ -6,7 +6,7 @@ children each own their own value plus an optional min/max that clamps how
 far that handle can travel. The handles can never cross.
 
 ```html
-<z-range min="0" max="100" label="Price" show-value value-prefix="$">
+<z-range min="0" max="100" label="Price" does-show-value value-prefix="$">
   <z-range-handle value="20"></z-range-handle>
   <z-range-handle value="80"></z-range-handle>
 </z-range>

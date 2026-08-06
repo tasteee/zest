@@ -22,14 +22,14 @@ export const zSurfaceDoc: ComponentDocT = {
 
 	playground: {
 		buildElement: buildPlaygroundSurface,
-		controlNames: ['level', 'accent', 'kind', 'radius', 'hasBorder', 'isElevated', 'isInteractive', 'inset', 'is-full-width'],
+		controlNames: ['level', 'accent', 'kind', 'radius', 'has-border', 'is-elevated', 'is-interactive', 'inset', 'is-full-width'],
 		slotLabel: 'Panel content'
 	},
 
 	usageGuidance: [
 		'Use `level` unless the panel needs a colour. Neutral elevation is the default vocabulary and keeps a dense interface calm.',
 		'Reach for `accent` plus `kind` when the panel carries status — a `danger` `soft` surface for a destructive zone, `success` for a confirmation.',
-		'`isInteractive` adds a pointer cursor and a hover hasBorder. It does not make the panel clickable — put a real control inside.',
+		'`is-interactive` adds a pointer cursor and a hover hasBorder. It does not make the panel clickable — put a real control inside.',
 		'Do not stack more than two levels in one region. Beyond that the steps stop reading as depth and start reading as inconsistency.'
 	],
 
@@ -130,10 +130,10 @@ export const zSurfaceDoc: ComponentDocT = {
 			id: 'isInteractive',
 			title: 'Interactive',
 			description:
-				'`isInteractive` adds the cursor and hover hasBorder. It signals interactivity — the real control still has to be inside.',
+				'`is-interactive` adds the cursor and hover hasBorder. It signals interactivity — the real control still has to be inside.',
 			layout: ExampleLayout.fill,
 			markup: `
-				<z-surface level="1" radius="md" inset="md" is-full-width isInteractive>
+				<z-surface level="1" radius="md" inset="md" is-full-width is-interactive>
 				  <z-row aligns-x="between" aligns-y="center">
 				    <z-text size="sm">Hover me</z-text>
 				    <z-link href="#" size="sm">Open</z-link>
@@ -201,10 +201,10 @@ export const zSurfaceDoc: ComponentDocT = {
 			defaultValue: 'lg',
 			description: 'Corner radius. Also accepts a length.'
 		},
-		{ name: 'hasBorder', type: 'boolean', defaultValue: '—', description: 'Forces an accented hairline border.' },
-		{ name: 'isElevated', type: 'boolean', defaultValue: '—', description: 'A lighter surface plus a ring — shadowless elevation.' },
+		{ name: 'has-border', type: 'boolean', defaultValue: '—', description: 'Forces an accented hairline border.' },
+		{ name: 'is-elevated', type: 'boolean', defaultValue: '—', description: 'A lighter surface plus a ring — shadowless elevation.' },
 		{
-			name: 'isInteractive',
+			name: 'is-interactive',
 			type: 'boolean',
 			defaultValue: '—',
 			description: 'Pointer cursor and hover border. Adds no actual interactivity.'

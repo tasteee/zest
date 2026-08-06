@@ -100,7 +100,7 @@ export const zSendButtonDoc: ComponentDocT = {
 				'The standard composer rule: the button stays disabled while the input is empty, and enables as soon as there is content.',
 			layout: ExampleLayout.fill,
 			markup: `
-				<z-row gap="3" align="end" style="width: 420px">
+				<z-row gap="3" aligns-y="end" style="width: 420px">
 				  <z-input id="composerInput" placeholder="Ask anything…"></z-input>
 				  <z-send-button id="guardedButton" is-disabled></z-send-button>
 				</z-row>

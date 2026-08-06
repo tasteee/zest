@@ -232,11 +232,22 @@ const isTableSeparatorRow = (cells: string[]): boolean => {
 	return cells.every((cell) => /^:?-+:?$/.test(cell))
 }
 
-// Collects every `| ... |` line following the first "## Attributes" (or
-// "## Properties & attributes") heading, stopping at the next heading.
+// A page that documents more than one element heads each table with the tag
+// rather than the word "Attributes" — z-drag-drop.md has "## z-draggable" and
+// "## z-drop-target". Six pages did that and silently got no playground knobs
+// at all, because the heading did not match.
+//
+// The first such table is the page's primary element, which is the one the
+// playground drives.
+// The optional leading number is for pages that number their sections —
+// z-pattern-roll.md heads its table "## 4. Properties & attributes".
+const ATTRIBUTE_HEADING = /^##\s+(?:\d+\.\s*)?(attributes|properties\s*&\s*attributes|properties|`?z-[a-z-]+`?)\s*$/i
+
+// Collects every `| ... |` line following the first attribute-table heading,
+// stopping at the next heading.
 const findAttributesTableLines = (rawMarkdown: string): string[] => {
 	const lines = rawMarkdown.split('\n')
-	const headingIndex = lines.findIndex((line) => /^##\s+(attributes|properties\s*&\s*attributes|properties)\s*$/i.test(line.trim()))
+	const headingIndex = lines.findIndex((line) => ATTRIBUTE_HEADING.test(line.trim()))
 	if (headingIndex === -1) return []
 
 	const tableLines: string[] = []

@@ -27,7 +27,7 @@ export const zDrawerDoc: ComponentDocT = {
 
 	playground: {
 		buildElement: buildPlaygroundDrawer,
-		controlNames: ['heading', 'description', 'accent', 'is-static'],
+		controlNames: ['heading', 'description', 'is-static'],
 		slotLabel: 'trigger, body, and footer'
 	},
 
@@ -94,7 +94,7 @@ export const zDrawerDoc: ComponentDocT = {
 			markup: `
 				<z-drawer heading="Now playing" description="Nocturne in E-flat major — Chopin">
 				  <z-button slot="trigger" kind="outline">Now playing</z-button>
-				  <z-slider label="Position" min="0" max="270" value="96" show-value value-suffix="s" accent="dom" style="width: 100%"></z-slider>
+				  <z-slider label="Position" min="0" max="270" value="96" does-show-value value-suffix="s" accent="dom" style="width: 100%"></z-slider>
 				</z-drawer>
 			`
 		}),

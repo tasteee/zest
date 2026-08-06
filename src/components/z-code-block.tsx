@@ -421,6 +421,8 @@ export const ZCodeBlock = c(
 			code: String,
 			language: String,
 			filename: String,
+			// Read by z-code-group to label this block's tab.
+			label: String,
 			hasLineNumbers: { type: Boolean, reflect: true },
 			highlightLines: { type: String, reflect: true },
 			addedLines: { type: String, reflect: true },

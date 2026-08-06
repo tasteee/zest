@@ -64,19 +64,19 @@ export const zTerminalDoc: ComponentDocT = {
 	status: ComponentStatus.stable,
 
 	description:
-		'A chrome-styled shell window for install steps and CLI usage — no line numbers, no syntax highlighting, and a seamless header, so it reads as a session rather than a source file. Lines opening with the `prompt` marker are treated as commands: they copy on hover, minus the marker. Add `doesAnimate` and the same content plays back as a live session, commands typing out under a blinking caret and output fading in behind them. Give the window a `width` and `height` and it holds that footprint — a long run scrolls inside it instead of pushing the page around.',
+		'A chrome-styled shell window for install steps and CLI usage — no line numbers, no syntax highlighting, and a seamless header, so it reads as a session rather than a source file. Lines opening with the `prompt` marker are treated as commands: they copy on hover, minus the marker. Add `does-animate` and the same content plays back as a live session, commands typing out under a blinking caret and output fading in behind them. Give the window a `width` and `height` and it holds that footprint — a long run scrolls inside it instead of pushing the page around.',
 
 	playground: {
 		buildElement: buildPlaygroundTerminal,
-		controlNames: ['shell', 'cwd', 'prompt', 'copy-lines', 'width', 'height', 'max-height', 'doesAnimate', 'doesLoop', 'has-replay', 'does-auto-scroll', 'accent'],
+		controlNames: ['shell', 'cwd', 'prompt', 'copy-lines', 'width', 'height', 'max-height', 'does-animate', 'does-loop', 'has-replay', 'does-auto-scroll', 'accent'],
 		slotLabel: 'code set as a property'
 	},
 
 	usageGuidance: [
 		'Set `code` as a **property**, not an attribute. Whitespace is the content here, and an attribute round-trips it through HTML parsing.',
 		'Reach for this over `z-code-block` when the subject is a session — things you type and what comes back. For a file you would open in an editor, the code block is the honest frame.',
-		'`doesAnimate` is for the top of a landing or getting-started page, where the point is what the tool feels like. Inside reference docs it costs the reader time they did not ask to spend.',
-		'Pair `doesAnimate` with `does-start-on-view` so a run below the fold does not finish before anyone sees it.',
+		'`does-animate` is for the top of a landing or getting-started page, where the point is what the tool feels like. Inside reference docs it costs the reader time they did not ask to spend.',
+		'Pair `does-animate` with `does-start-on-view` so a run below the fold does not finish before anyone sees it.',
 		'Give an animated terminal a `height`. Without one, the window grows line by line and shoves the page down mid-read.',
 		'`copy-lines="none"` suits pasted output — a log or a stack trace has nothing worth copying line by line.'
 	],
@@ -176,10 +176,10 @@ export const zTerminalDoc: ComponentDocT = {
 			id: 'animated',
 			title: 'Animated session',
 			description:
-				'`doesAnimate` plays the content back: commands type out under a blinking caret, output fades in, and only one line reveals at a time. The replay control appears bottom-right when the run ends.',
+				'`does-animate` plays the content back: commands type out under a blinking caret, output fades in, and only one line reveals at a time. The replay control appears bottom-right when the run ends.',
 			layout: ExampleLayout.fill,
 			markup: `
-				<z-terminal id="animatedTerminal" shell="zsh" cwd="~/app" doesAnimate does-start-on-view doesLoop></z-terminal>
+				<z-terminal id="animatedTerminal" shell="zsh" cwd="~/app" does-animate does-start-on-view does-loop></z-terminal>
 			`,
 			script: `
 				const animatedTerminal = document.querySelector('#animatedTerminal')
@@ -204,7 +204,7 @@ export const zTerminalDoc: ComponentDocT = {
 				'A sized terminal never grows as an animated run reveals lines — it scrolls, following the playhead so the newest line stays in view. Add `does-auto-scroll` to leave the scroll position to the reader.',
 			layout: ExampleLayout.fill,
 			markup: `
-				<z-terminal id="scrollingTerminal" shell="zsh" cwd="~/app" width="34rem" height="9rem" doesAnimate doesLoop does-start-on-view></z-terminal>
+				<z-terminal id="scrollingTerminal" shell="zsh" cwd="~/app" width="34rem" height="9rem" does-animate does-loop does-start-on-view></z-terminal>
 			`,
 			script: `
 				const scrollingTerminal = document.querySelector('#scrollingTerminal')
@@ -234,7 +234,7 @@ export const zTerminalDoc: ComponentDocT = {
 				'Set `lines` instead of `code` to control each step. `delay` is the pause **before** a line begins, so a slow build can hold while the rest of the run stays brisk.',
 			layout: ExampleLayout.fill,
 			markup: `
-				<z-terminal id="timedTerminal" shell="zsh" cwd="~/app" width="34rem" height="9rem" doesAnimate doesLoop does-start-on-view></z-terminal>
+				<z-terminal id="timedTerminal" shell="zsh" cwd="~/app" width="34rem" height="9rem" does-animate does-loop does-start-on-view></z-terminal>
 			`,
 			script: `
 				const timedTerminal = document.querySelector('#timedTerminal')
@@ -264,7 +264,7 @@ export const zTerminalDoc: ComponentDocT = {
 			description: 'Playback is exposed as methods, so a run can be driven by your own UI instead of the built-in replay control.',
 			layout: ExampleLayout.stack,
 			markup: `
-				<z-terminal id="controlledTerminal" shell="zsh" cwd="~/app" width="34rem" height="9rem" doesAnimate doesLoop has-replay></z-terminal>
+				<z-terminal id="controlledTerminal" shell="zsh" cwd="~/app" width="34rem" height="9rem" does-animate does-loop has-replay></z-terminal>
 
 				<z-row gap="2">
 				  <z-button id="playButton" size="sm" kind="outline" label="Play"></z-button>
@@ -327,12 +327,12 @@ export const zTerminalDoc: ComponentDocT = {
 		{ name: 'width', type: 'string', defaultValue: '—', description: 'CSS length for the window width.' },
 		{ name: 'height', type: 'string', defaultValue: '—', description: 'CSS length that pins the window height; the body scrolls inside it.' },
 		{ name: 'max-height', type: 'string', defaultValue: '—', description: 'CSS length that caps growth rather than fixing the height.' },
-		{ name: 'doesAnimate', type: 'boolean', defaultValue: '—', description: 'Play the content back as a typed and faded simulation.' },
+		{ name: 'does-animate', type: 'boolean', defaultValue: '—', description: 'Play the content back as a typed and faded simulation.' },
 		{ name: 'does-start-on-view', type: 'boolean', defaultValue: '—', description: 'Wait until the terminal scrolls into view before playing.' },
 		{ name: 'type-speed', type: 'number', defaultValue: '55', description: 'Milliseconds per character for typed commands.' },
 		{ name: 'line-delay', type: 'number', defaultValue: '380', description: 'Milliseconds of gap before each line reveals.' },
 		{ name: 'fade-duration', type: 'number', defaultValue: '240', description: 'Milliseconds for an output line to fade in.' },
-		{ name: 'doesLoop', type: 'boolean', defaultValue: '—', description: 'Restart automatically after the last line.' },
+		{ name: 'does-loop', type: 'boolean', defaultValue: '—', description: 'Restart automatically after the last line.' },
 		{ name: 'loop-delay', type: 'number', defaultValue: '2200', description: 'Milliseconds to wait before an auto-restart.' },
 		{ name: 'has-replay', type: 'boolean', defaultValue: '—', description: 'Suppress the bottom-right replay control.' },
 		{ name: 'does-auto-scroll', type: 'boolean', defaultValue: '—', description: 'Do not follow the playhead while an animated run plays.' },

@@ -5,7 +5,7 @@ a composer, doubling as a file drop/browse target (it composes
 [z-dropzone](z-dropzone.md) internally).
 
 ```html
-<z-attachment-tray accept="image/*,.pdf" multiple max-size="5000000">
+<z-attachment-tray accept="image/*,.pdf" is-multiple max-size="5000000">
   <z-attachment-chip name="brief.pdf" size="248000"></z-attachment-chip>
 </z-attachment-tray>
 ```

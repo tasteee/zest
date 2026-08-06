@@ -28,7 +28,7 @@ export const zSheetDoc: ComponentDocT = {
 
 	playground: {
 		buildElement: buildPlaygroundSheet,
-		controlNames: ['heading', 'description', 'side', 'accent', 'has-close', 'is-static'],
+		controlNames: ['heading', 'description', 'side', 'has-close', 'is-static'],
 		slotLabel: 'trigger, body, and footer'
 	},
 

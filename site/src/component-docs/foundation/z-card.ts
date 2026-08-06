@@ -64,7 +64,7 @@ export const zCardDoc: ComponentDocT = {
 			layout: ExampleLayout.fill,
 			markup: `
 				<z-card gap="3" style="max-width: 24rem">
-				  <z-eyebrow label="Usage" accent="neutral"></z-eyebrow>
+				  <z-eyebrow label="Usage" color="neutral"></z-eyebrow>
 				  <z-heading size="sm" tag="h3">48 of 100 seats</z-heading>
 				  <z-progress value="48"></z-progress>
 				  <z-text size="sm" color="muted">Resets on the first of the month.</z-text>

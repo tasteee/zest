@@ -21,7 +21,7 @@ export const zCalloutDoc: ComponentDocT = {
 
 	playground: {
 		buildElement: buildPlaygroundCallout,
-		controlNames: ['kind', 'heading', 'is-expandable', 'is-expanded'],
+		controlNames: ['accent', 'heading', 'is-expandable', 'is-expanded'],
 		slotLabel: 'Every overlay renders in the top layer.'
 	},
 

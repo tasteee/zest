@@ -5,7 +5,7 @@ Drag vertically to turn, hold `Shift` for fine adjustment, double-click to
 return to `default-value`.
 
 ```html
-<z-knob label="Cutoff" value="40" min="0" max="100" show-value accent="dom"></z-knob>
+<z-knob label="Cutoff" value="40" min="0" max="100" does-show-value accent="dom"></z-knob>
 ```
 
 ```js

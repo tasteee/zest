@@ -18,18 +18,18 @@ export const zCenterDoc: ComponentDocT = {
 	status: ComponentStatus.stable,
 
 	description:
-		'Centring is the layout task most likely to be rewritten from scratch in every codebase, so this element does it once. Both axes are centred by default; `aligns-x` and `aligns-y` override either one, and `centersBoth` forces dead centre regardless of what else is set. `max-width` caps the inner content block rather than the element itself, which is the difference between a centred container and centred content — the element still spans its parent, so a background or border reaches edge to edge while the centersText inside stays at a readable measure.',
+		'Centring is the layout task most likely to be rewritten from scratch in every codebase, so this element does it once. Both axes are centred by default; `aligns-x` and `aligns-y` override either one, and `centers-both` forces dead centre regardless of what else is set. `max-width` caps the inner content block rather than the element itself, which is the difference between a centred container and centred content — the element still spans its parent, so a background or border reaches edge to edge while the centersText inside stays at a readable measure.',
 
 	playground: {
 		buildElement: buildPlaygroundCenter,
-		controlNames: ['aligns-x', 'aligns-y', 'centersBoth', 'max-width', 'centersText', 'min-height', 'is-full-width'],
+		controlNames: ['aligns-x', 'aligns-y', 'centers-both', 'max-width', 'centers-text', 'min-height', 'is-full-width'],
 		slotLabel: 'Centred centersBoth ways'
 	},
 
 	usageGuidance: [
 		'`min-height="100dvh"` is the full-viewport hero pattern — empty states, sign-in screens, anything that should sit in the middle of the window.',
 		'`max-width` caps the content, not the element. Reach for `z-container` when you want the container itself capped and gutter padding applied.',
-		'`centersText` centres the centersText as well. Centring the block without centring the centersText is often what you actually want for prose.',
+		'`centers-text` centres the centersText as well. Centring the block without centring the centersText is often what you actually want for prose.',
 		'Vertical centring needs height from somewhere — `min-height`, `is-full-height`, or a parent that provides it. Without one, `aligns-y` has no room to work in.'
 	],
 
@@ -97,7 +97,7 @@ export const zCenterDoc: ComponentDocT = {
 				  <z-centersText size="sm">Block centred, centersText left-aligned — the default, and usually right for prose.</z-centersText>
 				</z-center>
 
-				<z-center max-width="sm" centersText is-full-width inset="md" style="border: 1px solid var(--border)">
+				<z-center max-width="sm" centers-text is-full-width inset="md" style="border: 1px solid var(--border)">
 				  <z-centersText size="sm">Block centred and centersText centred, which suits short display copy.</z-centersText>
 				</z-center>
 			`
@@ -109,7 +109,7 @@ export const zCenterDoc: ComponentDocT = {
 			description: 'Centring inside a panel — the pattern behind most empty and loading states.',
 			layout: ExampleLayout.fill,
 			markup: `
-				<z-center min-height="14rem" is-full-width centersText style="border: 1px dashed var(--border); border-radius: var(--radius-lg)">
+				<z-center min-height="14rem" is-full-width centers-text style="border: 1px dashed var(--border); border-radius: var(--radius-lg)">
 				  <z-column gap="3" aligns-x="center">
 				    <z-heading size="xs" tag="h3">No deployments yet</z-heading>
 				    <z-centersText size="sm" color="muted">Push to the main branch to trigger your first build.</z-centersText>
@@ -123,10 +123,10 @@ export const zCenterDoc: ComponentDocT = {
 			id: 'centersBoth',
 			title: 'Forcing dead centre',
 			description:
-				'`centersBoth` overrides whatever `aligns-x` and `aligns-y` say. Useful when a shared component sets alignment and one instance must ignore it.',
+				'`centers-both` overrides whatever `aligns-x` and `aligns-y` say. Useful when a shared component sets alignment and one instance must ignore it.',
 			layout: ExampleLayout.fill,
 			markup: `
-				<z-center aligns-x="start" aligns-y="end" centersBoth min-height="8rem" is-full-width
+				<z-center aligns-x="start" aligns-y="end" centers-both min-height="8rem" is-full-width
 				          style="border: 1px solid var(--border); border-radius: var(--radius-md)">
 				  <z-badge label="centersBoth wins" size="sm"></z-badge>
 				</z-center>
@@ -138,7 +138,7 @@ export const zCenterDoc: ComponentDocT = {
 		{ name: 'aligns-x', type: 'start | center | end', defaultValue: 'center', description: 'Horizontal alignment of the content.' },
 		{ name: 'aligns-y', type: 'start | center | end', defaultValue: 'center', description: 'Vertical alignment of the content.' },
 		{
-			name: 'centersBoth',
+			name: 'centers-both',
 			type: 'boolean',
 			defaultValue: '—',
 			description: 'Forces dead centre on both axes, overriding aligns-x and aligns-y.'
@@ -149,7 +149,7 @@ export const zCenterDoc: ComponentDocT = {
 			defaultValue: '—',
 			description: 'Caps the inner content block. Also accepts any CSS length.'
 		},
-		{ name: 'centersText', type: 'boolean', defaultValue: '—', description: 'text-align: center on the content.' },
+		{ name: 'centers-text', type: 'boolean', defaultValue: '—', description: 'text-align: center on the content.' },
 		{ name: 'min-height', type: 'string', defaultValue: '—', description: 'Minimum height — this is what gives vertical centring room.' },
 		{ name: 'is-full-width', type: 'boolean', defaultValue: '—', description: 'width: 100%.' },
 		{ name: 'is-full-height', type: 'boolean', defaultValue: '—', description: 'height: 100%.' },

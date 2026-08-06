@@ -7,7 +7,7 @@ reveals `content` progressively at `speed`, cursor on until it catches up).
 
 ```html
 <z-streaming-text is-streaming></z-streaming-text>
-<z-streaming-text typewriter speed="40" markdown></z-streaming-text>
+<z-streaming-text is-typewriter speed="40" is-markdown></z-streaming-text>
 ```
 
 ```js

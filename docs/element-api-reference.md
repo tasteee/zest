@@ -309,8 +309,8 @@ short, that is the first place to check.
   height={string}
   min-height={string}
   max-height={string}
-  aligns-x={string}
-  aligns-y={string}
+  aligns-x="start | center | end | between | around | evenly | stretch"
+  aligns-y="start | center | end | between | around | evenly | stretch"
   inset={string}
   inset-x={string}
   inset-y={string}
@@ -378,8 +378,8 @@ short, that is the first place to check.
   height={string}
   min-height={string}
   max-height={string}
-  aligns-x={string}
-  aligns-y={string}
+  aligns-x="start | center | end | between | around | evenly | stretch"
+  aligns-y="start | center | end | between | around | evenly | stretch"
   inset={string}
   inset-x={string}
   inset-y={string}
@@ -2459,6 +2459,7 @@ short, that is the first place to check.
   code={string}
   language={string}
   filename={string}
+  label={string}
   highlight-lines={string}
   added-lines={string}
   removed-lines={string}

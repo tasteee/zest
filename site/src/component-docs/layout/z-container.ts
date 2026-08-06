@@ -18,7 +18,7 @@ export const zContainerDoc: ComponentDocT = {
 	status: ComponentStatus.stable,
 
 	description:
-		'The element that stops a page from spanning the full width of a large monitor. It caps its own width, centres itself, and adds horizontal gutters so content never touches the viewport edge. Centring is the default rather than an opt-in — the `isCentered` attribute exists for API completeness, not because you need to set it. When a page band already exists, `z-section` can fold this behaviour in through its own `container` prop and save you the nested element.',
+		'The element that stops a page from spanning the full width of a large monitor. It caps its own width, centres itself, and adds horizontal gutters so content never touches the viewport edge. Centring is the default rather than an opt-in — the `is-centered` attribute exists for API completeness, not because you need to set it. When a page band already exists, `z-section` can fold this behaviour in through its own `container` prop and save you the nested element.',
 
 	playground: {
 		buildElement: buildPlaygroundContainer,
@@ -150,7 +150,7 @@ export const zContainerDoc: ComponentDocT = {
 		},
 		{ name: 'gutter', type: 'string', defaultValue: '—', description: 'Left and right padding. Size token, bare number, or length.' },
 		{
-			name: 'isCentered',
+			name: 'is-centered',
 			type: 'boolean',
 			defaultValue: 'centered',
 			description: 'Declared for API completeness — the container is centred already.'

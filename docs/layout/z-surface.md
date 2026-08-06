@@ -11,7 +11,7 @@ hairline ring.
 
 <z-surface accent="dom" kind="soft">Accented soft panel</z-surface>
 
-<z-surface accent="error" kind="outlined" interactive>Clickable</z-surface>
+<z-surface accent="error" kind="outlined" is-interactive>Clickable</z-surface>
 ```
 
 ## Attributes

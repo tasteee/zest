@@ -4,7 +4,7 @@ A wrapping row of tappable prompt suggestions: starter prompts on an empty
 thread, or follow-up questions after an answer.
 
 ```html
-<z-suggestion-chips show-arrow></z-suggestion-chips>
+<z-suggestion-chips does-show-arrow></z-suggestion-chips>
 ```
 
 ```js

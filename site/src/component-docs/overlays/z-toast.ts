@@ -85,7 +85,7 @@ export const zToastDoc: ComponentDocT = {
 			description: 'Four accents plus neutral. Keep them honest — a success toast for a failure teaches people to stop reading the colour.',
 			layout: ExampleLayout.stack,
 			markup: `
-				<z-row gap="sm" wrap>
+				<z-row gap="sm" does-wrap>
 				  <z-button class="accentButton" data-accent="neutral" size="sm" kind="outline">Neutral</z-button>
 				  <z-button class="accentButton" data-accent="dom" size="sm" kind="outline">Info</z-button>
 				  <z-button class="accentButton" data-accent="success" size="sm" kind="outline">Success</z-button>
@@ -127,7 +127,7 @@ export const zToastDoc: ComponentDocT = {
 				'Six corners. Bottom-end is the quiet default; top-center is the loudest, and worth reserving for something that genuinely interrupts.',
 			layout: ExampleLayout.stack,
 			markup: `
-				<z-row gap="sm" wrap>
+				<z-row gap="sm" does-wrap>
 				  <z-button class="positionButton" data-position="top-start" size="sm" kind="outline">top-start</z-button>
 				  <z-button class="positionButton" data-position="top-center" size="sm" kind="outline">top-center</z-button>
 				  <z-button class="positionButton" data-position="top-end" size="sm" kind="outline">top-end</z-button>

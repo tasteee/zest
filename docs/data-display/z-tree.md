@@ -6,7 +6,7 @@ navigation. Feed it a recursive `items` array — rows are flattened internally
 [z-virtual-list](z-virtual-list.md) for very large trees.
 
 ```html
-<z-tree selection="single" show-guides></z-tree>
+<z-tree selection="single" does-show-guides></z-tree>
 ```
 
 ```js

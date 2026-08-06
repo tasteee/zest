@@ -9,7 +9,7 @@ const buildPlaygroundSpacer = (): HTMLElement => {
 	row.className = 'demoFrame demoPadded'
 	row.innerHTML = `
 		<z-badge label="Start" size="sm"></z-badge>
-		<z-spacer canGrow></z-spacer>
+		<z-spacer can-grow></z-spacer>
 		<z-badge label="End" size="sm"></z-badge>
 	`
 	return row
@@ -22,16 +22,16 @@ export const zSpacerDoc: ComponentDocT = {
 	status: ComponentStatus.stable,
 
 	description:
-		'An empty element whose only job is to take up room. `canGrow` is the interesting mode: it soaks up whatever space is left, which pushes everything after it to the end of the container. That is more precise than `aligns-x="between"` once a row has more than two children, because it puts the break exactly where you place it rather than spreading every gap equally. A fixed `size` applies to both axes, so the same element works in a row or a column without knowing which it is in.',
+		'An empty element whose only job is to take up room. `can-grow` is the interesting mode: it soaks up whatever space is left, which pushes everything after it to the end of the container. That is more precise than `aligns-x="between"` once a row has more than two children, because it puts the break exactly where you place it rather than spreading every gap equally. A fixed `size` applies to both axes, so the same element works in a row or a column without knowing which it is in.',
 
 	playground: {
 		buildElement: buildPlaygroundSpacer,
-		controlNames: ['size', 'canGrow'],
+		controlNames: ['size', 'can-grow'],
 		slotLabel: '(no slot)'
 	},
 
 	usageGuidance: [
-		'`canGrow` is the main use — pushing trailing items to the end of a toolbar, header, or sidebar.',
+		'`can-grow` is the main use — pushing trailing items to the end of a toolbar, header, or sidebar.',
 		'Prefer a `gap` on the parent for even spacing between all children. A fixed spacer is for one deliberate exception to that rhythm.',
 		'Two growing spacers split the leftover space evenly, which centres whatever sits between them.',
 		'It only works in a flex container. Inside a grid or a block, it does nothing.'
@@ -46,9 +46,9 @@ export const zSpacerDoc: ComponentDocT = {
 			description: 'Everything after the spacer is pushed to the end of the row.',
 			layout: ExampleLayout.fill,
 			markup: `
-				<z-row aligns-y="center" padding="3" full-width style="border: 1px solid var(--border); border-radius: var(--radius-md)">
+				<z-row aligns-y="center" padding="3" is-full-width style="border: 1px solid var(--border); border-radius: var(--radius-md)">
 				  <z-heading size="xs" tag="h3">Project</z-heading>
-				  <z-spacer canGrow></z-spacer>
+				  <z-spacer can-grow></z-spacer>
 				  <z-button kind="ghost" size="sm">Settings</z-button>
 				</z-row>
 			`
@@ -61,16 +61,16 @@ export const zSpacerDoc: ComponentDocT = {
 				'`between` spreads every gap equally. A spacer puts the whole gap in one place, which keeps the first two items together.',
 			layout: ExampleLayout.fill,
 			markup: `
-				<z-row aligns-x="between" aligns-y="center" gap="2" padding="3" full-width style="border: 1px solid var(--border)">
+				<z-row aligns-x="between" aligns-y="center" gap="2" padding="3" is-full-width style="border: 1px solid var(--border)">
 				  <z-badge label="One" size="sm"></z-badge>
 				  <z-badge label="Two" size="sm"></z-badge>
 				  <z-badge label="Three" size="sm"></z-badge>
 				</z-row>
 
-				<z-row aligns-y="center" gap="2" padding="3" full-width style="border: 1px solid var(--border)">
+				<z-row aligns-y="center" gap="2" padding="3" is-full-width style="border: 1px solid var(--border)">
 				  <z-badge label="One" size="sm"></z-badge>
 				  <z-badge label="Two" size="sm"></z-badge>
-				  <z-spacer canGrow></z-spacer>
+				  <z-spacer can-grow></z-spacer>
 				  <z-badge label="Three" size="sm"></z-badge>
 				</z-row>
 			`
@@ -82,11 +82,11 @@ export const zSpacerDoc: ComponentDocT = {
 			description: 'A growing spacer on each side splits the leftover space evenly, centring what sits between them.',
 			layout: ExampleLayout.fill,
 			markup: `
-				<z-row aligns-y="center" gap="2" padding="3" full-width style="border: 1px solid var(--border); border-radius: var(--radius-md)">
+				<z-row aligns-y="center" gap="2" padding="3" is-full-width style="border: 1px solid var(--border); border-radius: var(--radius-md)">
 				  <z-badge label="Left" size="sm"></z-badge>
-				  <z-spacer canGrow></z-spacer>
+				  <z-spacer can-grow></z-spacer>
 				  <z-badge accent="dom" label="Centred" size="sm"></z-badge>
-				  <z-spacer canGrow></z-spacer>
+				  <z-spacer can-grow></z-spacer>
 				  <z-badge label="Right" size="sm"></z-badge>
 				</z-row>
 			`
@@ -98,11 +98,11 @@ export const zSpacerDoc: ComponentDocT = {
 			description: 'The same element, pinning content to the bottom instead of the end of a row.',
 			layout: ExampleLayout.fill,
 			markup: `
-				<z-column gap="3" padding="4" full-width
+				<z-column gap="3" padding="4" is-full-width
 				          style="border: 1px solid var(--border); border-radius: var(--radius-md); height: 12rem">
 				  <z-heading size="xs" tag="h3">Storage</z-heading>
 				  <z-text size="sm" color="muted">8.2 GB of 20 GB used.</z-text>
-				  <z-spacer canGrow></z-spacer>
+				  <z-spacer can-grow></z-spacer>
 				  <z-button kind="outline" size="sm" is-full-width>Upgrade plan</z-button>
 				</z-column>
 			`
@@ -115,7 +115,7 @@ export const zSpacerDoc: ComponentDocT = {
 				'`size` applies to both axes, so the same value works whichever direction the parent runs. This is the exception to `gap`, not a replacement for it.',
 			layout: ExampleLayout.fill,
 			markup: `
-				<z-row aligns-y="center" padding="3" full-width style="border: 1px solid var(--border)">
+				<z-row aligns-y="center" padding="3" is-full-width style="border: 1px solid var(--border)">
 				  <z-badge label="One" size="sm"></z-badge>
 				  <z-spacer size="xs"></z-spacer>
 				  <z-badge label="Close" size="sm"></z-badge>
@@ -133,7 +133,7 @@ export const zSpacerDoc: ComponentDocT = {
 			defaultValue: '—',
 			description: 'Fixed size on both axes. Size token, bare number, or length.'
 		},
-		{ name: 'canGrow', type: 'boolean', defaultValue: '—', description: 'flex-grow, soaking up the remaining space.' }
+		{ name: 'can-grow', type: 'boolean', defaultValue: '—', description: 'flex-grow, soaking up the remaining space.' }
 	],
 
 	properties: [],

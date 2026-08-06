@@ -5,7 +5,7 @@ A macOS-style dock. Tracks the pointer over the strip and pushes a per-item
 scaled by linear falloff from cursor distance.
 
 ```html
-<z-dock floating magnification="1.1" distance="96">
+<z-dock is-floating magnification="1.1" distance="96">
   <z-dock-item label="Finder"><svg>…</svg></z-dock-item>
   <z-dock-item label="Mail" is-active><svg>…</svg></z-dock-item>
 </z-dock>

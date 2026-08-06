@@ -5,7 +5,7 @@ A file drop area with click-to-browse and validation. Unlike the pointer-based
 purpose, since that's the only way to receive files dragged in from the OS.
 
 ```html
-<z-dropzone accept="image/*,.pdf" multiple max-size="5000000"></z-dropzone>
+<z-dropzone accept="image/*,.pdf" is-multiple max-size="5000000"></z-dropzone>
 ```
 
 ```js

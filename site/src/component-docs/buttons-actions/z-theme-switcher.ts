@@ -125,9 +125,9 @@ export const zThemeSwitcherDoc: ComponentDocT = {
 				'`data-theme` is not a document-wide switch. Both values are defined as plain attribute selectors, so either theme can be pinned onto any subtree — which is how these two specimens render side by side no matter what the page is set to.',
 			layout: ExampleLayout.stack,
 			markup: `
-				<z-row gap="lg" wrap>
+				<z-row gap="lg" does-wrap>
 				  <div data-theme="light" style="${PANE_STYLE}">
-				    <z-card is-column gap="md">
+				    <z-card gap="md">
 				      <z-heading size="sm" tag="h3">Haze</z-heading>
 				      <z-text size="sm" color="muted">Light surfaces, lit rather than filled.</z-text>
 				      <z-input placeholder="Search"></z-input>
@@ -135,7 +135,7 @@ export const zThemeSwitcherDoc: ComponentDocT = {
 				    </z-card>
 				  </div>
 				  <div data-theme="dark" style="${PANE_STYLE}">
-				    <z-card is-column gap="md">
+				    <z-card gap="md">
 				      <z-heading size="sm" tag="h3">Ink</z-heading>
 				      <z-text size="sm" color="muted">Flat surfaces, no gradient anywhere.</z-text>
 				      <z-input placeholder="Search"></z-input>

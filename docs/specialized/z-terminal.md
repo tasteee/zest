@@ -23,7 +23,7 @@ out** character-by-character with a blinking caret, **output lines fade in**
 quickly, and reveals are staggered so only one line animates at a time.
 
 ```html
-<z-terminal shell="zsh" cwd="~/app" animate start-on-view loop
+<z-terminal shell="zsh" cwd="~/app" does-animate does-start-on-view does-loop
   code="$ zesty build
 $ zesty deploy"></z-terminal>
 ```
@@ -98,7 +98,7 @@ scrolls, following the playhead so the newest line stays in view. That makes a
 long simulation safe to drop into a fixed layout slot.
 
 ```html
-<z-terminal shell="zsh" cwd="~/app" width="32rem" height="10rem" animate loop start-on-view
+<z-terminal shell="zsh" cwd="~/app" width="32rem" height="10rem" does-animate does-loop does-start-on-view
   code="$ zesty build
 compiling 128 modules
 ✓ bundled in 1.2s

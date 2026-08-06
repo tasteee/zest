@@ -212,6 +212,7 @@ export const zToggleGroupDoc: ComponentDocT = {
 		{ name: 'accent', type: 'dom | sub | neutral | success | warning | error', defaultValue: '—', description: 'Shared accent for every item.' },
 		{ name: 'size', type: 'xs | sm | md | lg | xl', defaultValue: 'md', description: 'Shared density for every item.' },
 		{ name: 'kind', type: 'solid | outline | ghost | soft | plain', defaultValue: 'ghost', description: 'Shared treatment for every item.' },
+		{ name: 'is-icon', type: 'boolean', defaultValue: '—', description: 'Square icon-only items. Composes with any kind, which is why it stayed a boolean when the other flags became enums.' },
 		{ name: 'is-hidden', type: 'boolean', defaultValue: '—', description: 'Removes the group from layout.' }
 	],
 

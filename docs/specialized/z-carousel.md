@@ -6,7 +6,7 @@ optional `does-loop`, and `autoplay`. Slide count is read from the slot, so mark
 stays declarative.
 
 ```html
-<z-carousel loop autoplay="5000">
+<z-carousel does-loop autoplay="5000">
   <img src="/slides/1.svg" alt="Slide one" />
   <img src="/slides/2.svg" alt="Slide two" />
   <img src="/slides/3.svg" alt="Slide three" />

@@ -15,7 +15,7 @@ const buildPlaygroundChassis = (): HTMLElement => {
 		    <z-label size="sm" color="muted">Sent</z-label>
 		  </z-column>
 		</div>
-		<z-center full-height><z-text size="sm" color="muted">Screen content</z-text></z-center>
+		<z-center is-full-height><z-text size="sm" color="muted">Screen content</z-text></z-center>
 	`
 	return chassis
 }
@@ -69,7 +69,7 @@ export const zChassisDoc: ComponentDocT = {
 				      </z-column>
 				    </z-column>
 				  </div>
-				  <z-center full-height>
+				  <z-center is-full-height>
 				    <z-text size="sm" color="muted">The routed view renders here.</z-text>
 				  </z-center>
 				</z-chassis>
@@ -96,7 +96,7 @@ export const zChassisDoc: ComponentDocT = {
 				      <z-text size="xs" color="muted">Ada</z-text>
 				    </z-row>
 				  </div>
-				  <z-center full-height>
+				  <z-center is-full-height>
 				    <z-text size="sm" color="muted">Screen</z-text>
 				  </z-center>
 				</z-chassis>
@@ -117,7 +117,7 @@ export const zChassisDoc: ComponentDocT = {
 				      <z-label size="sm" color="muted">History</z-label>
 				    </z-column>
 				  </div>
-				  <z-center full-height>
+				  <z-center is-full-height>
 				    <z-text size="sm" color="muted">Canvas</z-text>
 				  </z-center>
 				</z-chassis>
@@ -139,7 +139,7 @@ export const zChassisDoc: ComponentDocT = {
 				      <z-row gap="2" aligns-y="center">${Icons.settings}<z-text size="sm" style="opacity: var(--chassis-label-opacity)">Settings</z-text></z-row>
 				    </z-column>
 				  </div>
-				  <z-center full-height>
+				  <z-center is-full-height>
 				    <z-text size="sm" color="muted">Hover the rail to expand it.</z-text>
 				  </z-center>
 				</z-chassis>
@@ -155,12 +155,12 @@ export const zChassisDoc: ComponentDocT = {
 			markup: `
 				<z-chassis rail-width="9rem" frame="0.125rem" bezel="0.25rem" style="height: 12rem">
 				  <div slot="sidebar"><z-label size="sm">Tight</z-label></div>
-				  <z-center full-height><z-text size="xs" color="muted">Minimal frame and bezel</z-text></z-center>
+				  <z-center is-full-height><z-text size="xs" color="muted">Minimal frame and bezel</z-text></z-center>
 				</z-chassis>
 
 				<z-chassis rail-width="9rem" frame="1rem" bezel="1.25rem" style="height: 12rem">
 				  <div slot="sidebar"><z-label size="sm">Roomy</z-label></div>
-				  <z-center full-height><z-text size="xs" color="muted">Generous frame and bezel</z-text></z-center>
+				  <z-center is-full-height><z-text size="xs" color="muted">Generous frame and bezel</z-text></z-center>
 				</z-chassis>
 			`
 		})

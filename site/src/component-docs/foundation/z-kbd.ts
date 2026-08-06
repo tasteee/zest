@@ -114,13 +114,13 @@ export const zKbdDoc: ComponentDocT = {
 				  <z-column gap="1">
 				    <z-row aligns-y="center" gap="3">
 				      <z-text size="sm">Search</z-text>
-				      <z-spacer grow></z-spacer>
+				      <z-spacer can-grow></z-spacer>
 				      <z-kbd size="xs" label="⌘"></z-kbd>
 				      <z-kbd size="xs" label="K"></z-kbd>
 				    </z-row>
 				    <z-row aligns-y="center" gap="3">
 				      <z-text size="sm">Save</z-text>
-				      <z-spacer grow></z-spacer>
+				      <z-spacer can-grow></z-spacer>
 				      <z-kbd size="xs" label="⌘"></z-kbd>
 				      <z-kbd size="xs" label="S"></z-kbd>
 				    </z-row>

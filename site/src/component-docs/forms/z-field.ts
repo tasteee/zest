@@ -108,7 +108,7 @@ export const zFieldDoc: ComponentDocT = {
 				  <z-textarea is-auto-resize rows="2" placeholder="Anything the team should know"></z-textarea>
 				</z-field>
 				<z-field label="Retention" description="How long we keep deleted items.">
-				  <z-slider min="1" max="90" value="30" show-value value-suffix=" days"></z-slider>
+				  <z-slider min="1" max="90" value="30" does-show-value value-suffix=" days"></z-slider>
 				</z-field>
 			`
 		}),
@@ -200,6 +200,8 @@ export const zFieldDoc: ComponentDocT = {
 		{ name: 'description', type: 'string', defaultValue: '—', description: 'Standing help text under the control. Hidden while an error is set.' },
 		{ name: 'error', type: 'string', defaultValue: '—', description: 'The failure message. Replaces the description while present.' },
 		{ name: 'is-required', type: 'boolean', defaultValue: '—', description: 'Renders the required marker after the label.' },
+		{ name: 'size', type: 'sm | md | lg', defaultValue: 'md', description: 'Control-row height. Match it to the size of the slotted control.' },
+		{ name: 'is-label-reserved', type: 'boolean', defaultValue: '—', description: 'Keeps the label band when there is no label, so an unlabelled field still lines up with labelled neighbours.' },
 		{ name: 'is-label-hidden', type: 'boolean', defaultValue: '—', description: 'Hides the label visually while still forwarding it as the accessible name.' }
 	],
 

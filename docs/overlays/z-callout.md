@@ -7,11 +7,11 @@ prose: a left accent bar tinted by `kind`, a leading icon, an optional
 `heading`, and slotted body copy.
 
 ```html
-<z-callout kind="tip" heading="Pro tip">
+<z-callout accent="tip" heading="Pro tip">
   You can also drag files directly into the composer.
 </z-callout>
 
-<z-callout kind="warning" is-expandable>
+<z-callout accent="warning" is-expandable>
   A long paragraph of caveats that clamps to two lines with a
   "Show more" toggle once it actually overflows…
 </z-callout>

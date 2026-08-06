@@ -94,7 +94,7 @@ export const zLabelDoc: ComponentDocT = {
 			markup: `
 				<z-row gap="2" aligns-y="center">
 				  <z-label size="sm">Deployment</z-label>
-				  <z-badge color="success" kind="soft" label="Live" size="sm"></z-badge>
+				  <z-badge accent="success" kind="soft" label="Live" size="sm"></z-badge>
 				</z-row>
 			`
 		}),

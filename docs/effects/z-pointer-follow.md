@@ -17,7 +17,7 @@ children: it listens on `window` and hides the native cursor everywhere.
 </z-pointer-follow>
 
 <!-- fixed: one page-level instance, no children -->
-<z-pointer-follow fixed accent="sub"></z-pointer-follow>
+<z-pointer-follow is-fixed accent="sub"></z-pointer-follow>
 ```
 
 ## Attributes

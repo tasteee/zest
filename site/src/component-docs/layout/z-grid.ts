@@ -123,19 +123,19 @@ export const zGridDoc: ComponentDocT = {
 			layout: ExampleLayout.fill,
 			markup: `
 				<z-grid min-column-width="11rem" gap="3">
-				  <z-card is-flex is-column gap="1">
+				  <z-card gap="1">
 				    <z-label size="xs" color="muted">Requests</z-label>
 				    <z-heading size="sm" tag="h3">1.2M</z-heading>
 				  </z-card>
-				  <z-card is-flex is-column gap="1">
+				  <z-card gap="1">
 				    <z-label size="xs" color="muted">Errors</z-label>
 				    <z-heading size="sm" tag="h3">0.02%</z-heading>
 				  </z-card>
-				  <z-card is-flex is-column gap="1">
+				  <z-card gap="1">
 				    <z-label size="xs" color="muted">p95 latency</z-label>
 				    <z-heading size="sm" tag="h3">84ms</z-heading>
 				  </z-card>
-				  <z-card is-flex is-column gap="1">
+				  <z-card gap="1">
 				    <z-label size="xs" color="muted">Uptime</z-label>
 				    <z-heading size="sm" tag="h3">99.98%</z-heading>
 				  </z-card>

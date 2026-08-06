@@ -25,14 +25,14 @@ export const zDockDoc: ComponentDocT = {
 
 	playground: {
 		buildElement: buildPlaygroundDock,
-		controlNames: ['magnification', 'distance', 'item-size', 'gap', 'isFloating'],
+		controlNames: ['magnification', 'distance', 'item-size', 'gap', 'is-floating'],
 		slotLabel: 'Dock items'
 	},
 
 	usageGuidance: [
 		'A dock is for a small, stable set of destinations the user returns to constantly. It is not a nav menu and it does not scale past a dozen or so items.',
 		'`magnification` is clamped to 1–1.12 on purpose. The effect should register as responsiveness, not as an animation the user has to wait out.',
-		'`isFloating` fixes the dock to the bottom-centre of the viewport. Leave it off when the dock belongs to a panel rather than to the window.',
+		'`is-floating` fixes the dock to the bottom-centre of the viewport. Leave it off when the dock belongs to a panel rather than to the window.',
 		'Raise `distance` for a soft, wide swell across several neighbours; lower it so only the item directly under the cursor responds.'
 	],
 
@@ -189,7 +189,7 @@ export const zDockDoc: ComponentDocT = {
 		},
 		{ name: 'gap', type: 'string', defaultValue: '0.75rem', description: 'Gap between items. Takes a size token or a raw length.' },
 		{
-			name: 'isFloating',
+			name: 'is-floating',
 			type: 'boolean',
 			defaultValue: '—',
 			description: 'Fixes the dock to the bottom-centre of the viewport.'

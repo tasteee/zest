@@ -30,7 +30,7 @@ export const zDialogDoc: ComponentDocT = {
 
 	playground: {
 		buildElement: buildPlaygroundDialog,
-		controlNames: ['heading', 'description', 'size', 'accent', 'has-close', 'is-static'],
+		controlNames: ['heading', 'description', 'size', 'has-close', 'is-static'],
 		slotLabel: 'trigger, body, and footer'
 	},
 

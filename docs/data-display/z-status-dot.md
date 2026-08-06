@@ -6,7 +6,7 @@ trailing label. Sits on avatars, chat headers, and member lists.
 ```html
 <z-status-dot status="online"></z-status-dot>
 <z-status-dot status="dnd" label="Do not disturb"></z-status-dot>
-<z-status-dot status="online" pulse></z-status-dot>
+<z-status-dot status="online" does-pulse></z-status-dot>
 ```
 
 ## Attributes

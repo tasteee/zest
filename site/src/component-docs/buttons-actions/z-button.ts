@@ -266,7 +266,7 @@ export const zButtonDoc: ComponentDocT = {
 			layout: ExampleLayout.fill,
 			markup: `
 				<form id="inviteForm">
-				  <z-row gap="3" align="end">
+				  <z-row gap="3" aligns-y="end">
 				    <z-input placeholder="teammate@company.com" label="Email"></z-input>
 				    <z-button accent="dom" type="submit">Send invite</z-button>
 				  </z-row>

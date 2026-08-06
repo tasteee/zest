@@ -6,7 +6,7 @@ whose vertical axis is not absolute pitch but **chord-tone degrees** (`N1`, `N2`
 good-sounding MIDI over **any** chord it is later applied to.
 
 ```html
-<z-pattern-roll accents="8" length="4" chord-size="3"></z-pattern-roll>
+<z-pattern-roll tones="8" length="4" chord-size="3"></z-pattern-roll>
 ```
 
 ```js

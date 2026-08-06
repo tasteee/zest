@@ -5,7 +5,7 @@ surface, like the shell of a device; the main content sits in a darker, inset
 "screen" with its own border — where a routed view renders.
 
 ```html
-<z-chassis rail-width="14rem" expand-on-hover>
+<z-chassis rail-width="14rem" does-expand-on-hover>
   <div slot="sidebar">…logo + nav rows…</div>
   <div slot="sidebar-footer">…avatar…</div>
   …main / routed content (the screen)…

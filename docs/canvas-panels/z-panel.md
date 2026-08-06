@@ -6,7 +6,7 @@ but exposes an imperative API that delegates back to the group.
 
 ```html
 <z-resizable-panels>
-  <z-panel default-size="30%" min-size="160px" collapsible collapsed-size="0">
+  <z-panel default-size="30%" min-size="160px" is-collapsible collapsed-size="0">
     …
   </z-panel>
   <z-panel-handle></z-panel-handle>

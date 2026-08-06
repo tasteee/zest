@@ -24,7 +24,7 @@ export const zColumnDoc: ComponentDocT = {
 
 	playground: {
 		buildElement: buildPlaygroundColumn,
-		controlNames: ['gap', 'aligns-x', 'aligns-y', 'padding', 'full-width'],
+		controlNames: ['gap', 'aligns-x', 'aligns-y', 'padding', 'is-full-width'],
 		slotLabel: 'Three badges'
 	},
 
@@ -62,17 +62,17 @@ export const zColumnDoc: ComponentDocT = {
 				'`aligns-x` moves children across the column. Note `stretch` — it widens each child to the full width, which is how a stack of full-width buttons is built.',
 			layout: ExampleLayout.fill,
 			markup: `
-				<z-column aligns-x="start" gap="2" padding="3" full-width style="border: 1px solid var(--border)">
+				<z-column aligns-x="start" gap="2" padding="3" is-full-width style="border: 1px solid var(--border)">
 				  <z-badge label="start" size="sm"></z-badge>
 				  <z-badge label="start" size="sm"></z-badge>
 				</z-column>
 
-				<z-column aligns-x="center" gap="2" padding="3" full-width style="border: 1px solid var(--border)">
+				<z-column aligns-x="center" gap="2" padding="3" is-full-width style="border: 1px solid var(--border)">
 				  <z-badge label="center" size="sm"></z-badge>
 				  <z-badge label="center" size="sm"></z-badge>
 				</z-column>
 
-				<z-column aligns-x="stretch" gap="2" padding="3" full-width style="border: 1px solid var(--border)">
+				<z-column aligns-x="stretch" gap="2" padding="3" is-full-width style="border: 1px solid var(--border)">
 				  <z-button kind="outline" size="sm">stretch</z-button>
 				  <z-button kind="outline" size="sm">stretch</z-button>
 				</z-column>
@@ -111,7 +111,7 @@ export const zColumnDoc: ComponentDocT = {
 			description: '`aligns-y` needs the column to be taller than its content — here a fixed height provides the room.',
 			layout: ExampleLayout.fill,
 			markup: `
-				<z-column aligns-y="between" padding="3" full-width style="border: 1px solid var(--border); height: 8rem">
+				<z-column aligns-y="between" padding="3" is-full-width style="border: 1px solid var(--border); height: 8rem">
 				  <z-badge label="top" size="sm"></z-badge>
 				  <z-badge label="bottom" size="sm"></z-badge>
 				</z-column>
@@ -142,10 +142,10 @@ export const zColumnDoc: ComponentDocT = {
 			description: 'A growing spacer pushes everything after it to the end of the column.',
 			layout: ExampleLayout.fill,
 			markup: `
-				<z-column gap="3" padding="4" full-width style="border: 1px solid var(--border); border-radius: var(--radius-md); height: 12rem">
+				<z-column gap="3" padding="4" is-full-width style="border: 1px solid var(--border); border-radius: var(--radius-md); height: 12rem">
 				  <z-heading size="xs" tag="h3">Storage</z-heading>
 				  <z-text size="sm" color="muted">8.2 GB of 20 GB used.</z-text>
-				  <z-spacer grow></z-spacer>
+				  <z-spacer can-grow></z-spacer>
 				  <z-button kind="outline" size="sm" is-full-width>Upgrade plan</z-button>
 				</z-column>
 			`
@@ -153,30 +153,39 @@ export const zColumnDoc: ComponentDocT = {
 	],
 
 	attributes: [
-		{ name: 'gap', type: 'string', defaultValue: '—', description: 'Spacing between children. Size token, bare number, or length.' },
-		{
-			name: 'aligns-x',
-			type: 'start | center | end | stretch',
-			defaultValue: '—',
-			description: 'Alignment across the column.'
-		},
-		{
-			name: 'aligns-y',
-			type: 'start | center | end | between | around | evenly | stretch',
-			defaultValue: '—',
-			description: 'Distribution along the column. Needs the column to be taller than its content.'
-		},
-		{ name: 'wrap', type: 'boolean', defaultValue: '—', description: 'Allows children to break into more columns.' },
+		{ name: 'is-inline', type: 'boolean', defaultValue: '—', description: 'inline-flex instead of flex. The one display modifier that composes rather than replaces.' },
+		{ name: 'aligns-x', type: 'start | center | end | between | around | evenly | stretch', defaultValue: '—', description: 'Horizontal relationship, whatever the flow direction.' },
+		{ name: 'aligns-y', type: 'start | center | end | between | around | evenly | stretch', defaultValue: '—', description: 'Vertical relationship, whatever the flow direction.' },
+		{ name: 'does-wrap', type: 'boolean', defaultValue: '—', description: 'flex-wrap: wrap.' },
+		{ name: 'does-wrap-text', type: 'boolean', defaultValue: '—', description: 'Allows text inside to wrap.' },
+		{ name: 'gap', type: 'string', defaultValue: '—', description: 'Spacing between children. Size token, bare number, or any CSS length.' },
+		{ name: 'row-gap', type: 'string', defaultValue: '—', description: 'Row gap only.' },
+		{ name: 'column-gap', type: 'string', defaultValue: '—', description: 'Column gap only.' },
 		{ name: 'padding', type: 'string', defaultValue: '—', description: 'Inner spacing on every edge.' },
-		{ name: 'padding-x', type: 'string', defaultValue: '—', description: 'Inner spacing on the left and right.' },
-		{ name: 'padding-y', type: 'string', defaultValue: '—', description: 'Inner spacing on the top and bottom.' },
+		{ name: 'padding-x', type: 'string', defaultValue: '—', description: 'Inner spacing, left and right.' },
+		{ name: 'padding-y', type: 'string', defaultValue: '—', description: 'Inner spacing, top and bottom.' },
+		{ name: 'padding-top', type: 'string', defaultValue: '—', description: 'Inner spacing, top edge.' },
+		{ name: 'padding-right', type: 'string', defaultValue: '—', description: 'Inner spacing, right edge.' },
+		{ name: 'padding-bottom', type: 'string', defaultValue: '—', description: 'Inner spacing, bottom edge.' },
+		{ name: 'padding-left', type: 'string', defaultValue: '—', description: 'Inner spacing, left edge.' },
 		{ name: 'margin', type: 'string', defaultValue: '—', description: 'Outer spacing on every edge.' },
-		{ name: 'inset', type: 'string', defaultValue: '—', description: 'Padding shorthand, overridden by the specific padding props.' },
-		{ name: 'full-width', type: 'boolean', defaultValue: '—', description: 'width: 100%.' },
-		{ name: 'full-height', type: 'boolean', defaultValue: '—', description: 'height: 100%.' },
+		{ name: 'margin-x', type: 'string', defaultValue: '—', description: 'Outer spacing, left and right.' },
+		{ name: 'margin-y', type: 'string', defaultValue: '—', description: 'Outer spacing, top and bottom.' },
+		{ name: 'margin-top', type: 'string', defaultValue: '—', description: 'Outer spacing, top edge.' },
+		{ name: 'margin-right', type: 'string', defaultValue: '—', description: 'Outer spacing, right edge.' },
+		{ name: 'margin-bottom', type: 'string', defaultValue: '—', description: 'Outer spacing, bottom edge.' },
+		{ name: 'margin-left', type: 'string', defaultValue: '—', description: 'Outer spacing, left edge.' },
+		{ name: 'inset', type: 'string', defaultValue: '—', description: 'Padding shorthand. The specific padding props win when both are set.' },
+		{ name: 'inset-x', type: 'string', defaultValue: '—', description: 'Padding shorthand, left and right.' },
+		{ name: 'inset-y', type: 'string', defaultValue: '—', description: 'Padding shorthand, top and bottom.' },
 		{ name: 'width', type: 'string', defaultValue: '—', description: 'Width. A bare number is treated as px.' },
+		{ name: 'min-width', type: 'string', defaultValue: '—', description: 'Minimum width.' },
 		{ name: 'max-width', type: 'string', defaultValue: '—', description: 'Maximum width.' },
-		{ name: 'height', type: 'string', defaultValue: '—', description: 'Height. A bare number is treated as px.' }
+		{ name: 'height', type: 'string', defaultValue: '—', description: 'Height. A bare number is treated as px.' },
+		{ name: 'min-height', type: 'string', defaultValue: '—', description: 'Minimum height.' },
+		{ name: 'max-height', type: 'string', defaultValue: '—', description: 'Maximum height.' },
+		{ name: 'is-full-width', type: 'boolean', defaultValue: '—', description: 'width: 100%.' },
+		{ name: 'is-full-height', type: 'boolean', defaultValue: '—', description: 'height: 100%.' }
 	],
 
 	properties: [],

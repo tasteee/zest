@@ -94,7 +94,7 @@ export const zDisplayDoc: ComponentDocT = {
 				    runtime dependencies.
 				  </z-text>
 				  <z-row gap="3">
-				    <z-button color="dom">Get started</z-button>
+				    <z-button accent="dom">Get started</z-button>
 				    <z-button kind="outline">Browse components</z-button>
 				  </z-row>
 				</z-column>

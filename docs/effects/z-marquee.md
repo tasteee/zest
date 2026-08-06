@@ -4,7 +4,7 @@ An infinite auto-scrolling row (or column) over slotted content — logo walls,
 ticker strips, testimonial loops.
 
 ```html
-<z-marquee duration="30" pause-on-hover has-fade>
+<z-marquee duration="30" does-pause-on-hover has-fade>
   <img src="/logos/acme.svg" alt="Acme" height="28" />
   <img src="/logos/globex.svg" alt="Globex" height="28" />
   <img src="/logos/initech.svg" alt="Initech" height="28" />
