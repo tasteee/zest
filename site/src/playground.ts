@@ -1,4 +1,4 @@
-import { createElement } from './dom-helpers'
+import { applySiteBaseUrl, createElement } from './dom-helpers'
 import { getComponentPlaygroundData } from './docs-data'
 import { buildCodeBlock, buildLabel } from './render/zest-elements'
 
@@ -22,7 +22,12 @@ import type { DocPageT } from './docs-data'
 const getCanonicalElement = (primaryExampleHtml: string, tagName: string): Element | null => {
 	const parsedDocument = new DOMParser().parseFromString(primaryExampleHtml, 'text/html')
 	const matchedElement = parsedDocument.body.querySelector(tagName)
-	if (matchedElement) return matchedElement.cloneNode(true) as Element
+
+	if (matchedElement) {
+		const clonedElement = matchedElement.cloneNode(true) as Element
+		applySiteBaseUrl(clonedElement)
+		return clonedElement
+	}
 
 	const isRealElement = Boolean(customElements.get(tagName))
 	if (!isRealElement) return null

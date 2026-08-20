@@ -58,6 +58,7 @@
 		"dev": "vite build --watch",
 		"demo": "npm run build && vite --config vite.demo.config.ts",
 		"docs": "npm run build && vite --config vite.site.config.ts",
+		"docs:build": "npm run build && vite build --config vite.site.config.ts",
 		"typecheck": "tsc --noEmit -p tsconfig.json",
 		"prepublishOnly": "npm run build"
 	},

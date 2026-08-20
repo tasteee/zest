@@ -1,0 +1,61 @@
+# Builds the docs site (site/) and publishes it to GitHub Pages at
+# https://tasteee.github.io/zest/.
+#
+# Pages is served from a Pages-managed deployment, not a gh-pages branch, so
+# nothing built here is ever committed — site/dist stays gitignored. For this
+# to run, the repo's Settings > Pages > "Source" must be set to "GitHub
+# Actions".
+name: Deploy docs
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# The three permissions actions/deploy-pages needs: read the repo, write the
+# Pages deployment, and mint the OIDC token that authorizes it.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Let an in-flight deploy finish rather than cancelling it — a half-applied
+# Pages deployment is worse than a slightly stale one.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      # Runs the library build first (the site imports src/ directly and the
+      # generator scripts refresh docs/element-api-reference.md), then the
+      # site build. The /zest/ base path lives in vite.site.config.ts, so a
+      # local `npm run docs:build` produces exactly what CI does.
+      - run: npm run docs:build
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site/dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

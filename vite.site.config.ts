@@ -72,8 +72,23 @@ const serveSampleAssets = (): Plugin => {
 // to "/dist/zest.js" — a path that doesn't exist under site/, so Vite's SPA
 // fallback quietly serves index.html instead (200 OK, wrong content, no
 // error). `publicDir` sidesteps that by serving dist/'s contents at "/".
-export default defineConfig({
+//
+// `base` is set for builds only. GitHub Pages serves this site from
+// https://tasteee.github.io/zest/ rather than a domain root, so every emitted
+// asset URL needs the /zest/ prefix baked in. It lives here instead of as a
+// `--base` CLI flag because Git Bash on Windows rewrites a bare /zest/
+// argument into a filesystem path ("/Program Files/Git/zest/") before Vite
+// ever sees it.
+//
+// `vite preview` opts in too (it reports `command: "serve"`, but it serves
+// the built output, whose HTML already points at /zest/assets/...), so a
+// local preview reproduces the deployed site exactly. Only the dev server
+// stays at "/".
+const DEPLOYED_BASE_PATH = '/zest/'
+
+export default defineConfig(({ command, isPreview }) => ({
 	root: SITE_DIR,
+	base: command === 'build' || isPreview ? DEPLOYED_BASE_PATH : '/',
 	publicDir: resolve(__dirname, 'dist'),
 	plugins: [serveSampleAssets()]
-})
+}))

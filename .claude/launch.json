@@ -1,0 +1,12 @@
+{
+	"version": "0.0.1",
+	"configurations": [
+		{
+			"name": "zest-docs-preview",
+			"runtimeExecutable": "npx",
+			"runtimeArgs": ["vite", "preview", "--config", "vite.site.config.ts", "--port", "4173", "--strictPort"],
+			"port": 4173,
+			"url": "http://localhost:4173"
+		}
+	]
+}
