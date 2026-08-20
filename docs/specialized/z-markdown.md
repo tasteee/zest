@@ -26,7 +26,7 @@ sanitizer, not a full DOMPurify integration.
 | --- | --- | --- | --- |
 | `is-streaming` | boolean | — | mark content as still-arriving (for streaming/typing styling) |
 | `does-allow-html` | boolean | — | skip sanitization of the parsed output |
-| `does-highlight` | boolean | — | render fenced code as plain `<pre><code>` instead of `z-code-block` |
+| `does-highlight` | boolean | `true` | route fenced code through `z-code-block`; `does-highlight="false"` leaves it a plain `<pre><code>` |
 | `has-heading-anchors` | boolean | — | give every heading a stable id and a hover-revealed "#" permalink |
 | `is-hidden` | boolean | — | hide |
 

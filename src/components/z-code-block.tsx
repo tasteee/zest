@@ -7,10 +7,12 @@ import './z-copy-button'
 /*
  * z-code-block — a monospace code surface with an optional header (filename +
  * language tag) and a copy-to-clipboard button. Pass the source via the `code`
- * property (preserves whitespace); `line-numbers` adds a gutter and `highlight`
- * enables lowlight (highlight.js) syntax colour via shared/highlight.ts
- * and themed against the zest `--syntax-*` palette, so it renders synchronously
- * inside the shadow root. Fires `copy` after a successful copy.
+ * property (preserves whitespace) and `line-numbers` adds a gutter. Syntax
+ * colour is on by default — lowlight (highlight.js) via shared/highlight.ts,
+ * themed against the zest `--syntax-*` palette, so it renders synchronously
+ * inside the shadow root. Code is what this element is for, so highlighting is
+ * the baseline rather than something every caller has to remember to ask for;
+ * `highlight="false"` opts a block out. Fires `copy` after a successful copy.
  */
 const styles = css`
 	:host {
@@ -417,7 +419,7 @@ export const ZCodeBlock = c(
 			// Read by z-code-group to label this block's tab.
 			label: String,
 			lineNumbers: { type: Boolean, reflect: true },
-			highlight: { type: Boolean, reflect: true },
+			highlight: { type: Boolean, reflect: true, value: () => true },
 			addedLines: { type: String, reflect: true },
 			removedLines: { type: String, reflect: true },
 			focusLines: { type: String, reflect: true },

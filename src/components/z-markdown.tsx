@@ -13,11 +13,12 @@ import { Marked } from 'marked'
  *
  * Set `is-streaming` while tokens are still arriving (chat / AI). Sanitization is
  * on by default (strips dangerous tags/attributes, neutralizes javascript: URLs);
- * `allow-html` opts out. Code fences route through z-code-block unless
- * `no-highlight`. `heading-anchors` gives every heading a stable id and a
- * hover-revealed "#" permalink. Emits `linkclick` {href} when a rendered link
- * is clicked; a fenced code block's own copy button dispatches z-code-block's
- * `copy` event, which bubbles through this component untouched.
+ * `allow-html` opts out. Code fences route through z-code-block, which
+ * highlights them, unless `does-highlight="false"`. `heading-anchors` gives
+ * every heading a stable id and a hover-revealed "#" permalink. Emits
+ * `linkclick` {href} when a rendered link is clicked; a fenced code block's own
+ * copy button dispatches z-code-block's `copy` event, which bubbles through
+ * this component untouched.
  */
 const styles = css`
 	:host {
@@ -225,7 +226,6 @@ const buildHtml = (
 			const lang = (code.getAttribute('class') || '').match(/language-([\w-]+)/)?.[1]
 			const block = document.createElement('z-code-block')
 			if (lang) block.setAttribute('language', lang)
-			block.setAttribute('highlight', '')
 			block.setAttribute('code', code.textContent ?? '')
 			code.closest('pre')?.replaceWith(block)
 		})

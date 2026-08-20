@@ -162,13 +162,13 @@ type CodeBlockOptionsT = {
 export const buildCodeBlock = (options: CodeBlockOptionsT): ZCodeBlockElementT => {
 	const codeBlock = createElement('z-code-block') as ZCodeBlockElementT
 	codeBlock.setAttribute('language', options.language)
-	codeBlock.setAttribute('highlight', '')
 
 	const hasFilename = options.filename.length > 0
 	if (hasFilename) codeBlock.setAttribute('filename', options.filename)
 
-	// has-copy defaults to true on the element, so this only ever removes it.
-	if (!options.hasCopyButton) codeBlock.removeAttribute('has-copy')
+	// has-copy defaults to true on the element. Removing the attribute does not
+	// clear it — atomico reflects the default straight back — so opt out by value.
+	if (!options.hasCopyButton) codeBlock.setAttribute('has-copy', 'false')
 
 	codeBlock.code = options.code
 	return codeBlock

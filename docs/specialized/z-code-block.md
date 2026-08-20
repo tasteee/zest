@@ -2,11 +2,12 @@
 
 A monospace code surface with an optional header (language tag + filename) and a
 copy-to-clipboard button. Pass the source via the `code` **property** (preserves
-whitespace). Turn on `highlight` for synchronous lowlight/highlight.js syntax
-colouring against the zest `--syntax-*` palette.
+whitespace). Syntax colouring is on by default — synchronous
+lowlight/highlight.js against the zest `--syntax-*` palette — so a block is
+coloured without asking; `highlight="false"` turns it off.
 
 ```html
-<z-code-block language="ts" filename="index.ts" line-numbers highlight></z-code-block>
+<z-code-block language="ts" filename="index.ts" line-numbers></z-code-block>
 ```
 
 ```js
@@ -44,11 +45,11 @@ code still gives the excerpt somewhere to sit. Hovering the block restores it.
 | `language` | string | auto | highlight.js language id (also shown in the header) |
 | `filename` | string | — | filename shown in the header |
 | `line-numbers` | boolean | — | render a line-number gutter |
-| `highlight` | boolean | — | apply syntax highlighting |
+| `highlight` | boolean | `true` | syntax highlighting; set `highlight="false"` to opt out |
 | `added-lines` | range list | — | mark as added; gutter shows `+` |
 | `removed-lines` | range list | — | mark as removed; gutter shows `-` |
 | `focus-lines` | range list | — | dim every line outside this range |
-| `has-copy` | boolean | — | hide the copy button |
+| `has-copy` | boolean | `true` | show the copy button; set `has-copy="false"` to hide it |
 | `accent` | `sub` | `dom` (purple) | header language-tag accent |
 | `is-hidden` | boolean | — | hide |
 
