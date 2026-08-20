@@ -24,7 +24,7 @@ export const zSwapDoc: ComponentDocT = {
 
 	playground: {
 		buildElement: buildPlaygroundSwap,
-		controlNames: ['kind', 'effect', 'has-ghost', 'is-active', 'is-disabled', 'label'],
+		controlNames: ['kind', 'effect', 'has-ghost', 'is-active', 'disabled', 'label'],
 		slotLabel: 'Two icon faces'
 	},
 
@@ -106,7 +106,7 @@ export const zSwapDoc: ComponentDocT = {
 		defineMarkupExample({
 			id: 'states',
 			title: 'Initial and disabled states',
-			description: '`is-active` sets the starting face and reflects as it changes. `is-disabled` freezes it.',
+			description: '`is-active` sets the starting face and reflects as it changes. `disabled` freezes it.',
 			layout: ExampleLayout.center,
 			markup: `
 				<z-swap label="Starts off">
@@ -119,7 +119,7 @@ export const zSwapDoc: ComponentDocT = {
 				  <span slot="on">${Icons.check}</span>
 				</z-swap>
 
-				<z-swap is-disabled label="Disabled">
+				<z-swap disabled label="Disabled">
 				  <span slot="off">${Icons.settings}</span>
 				  <span slot="on">${Icons.check}</span>
 				</z-swap>
@@ -185,7 +185,7 @@ export const zSwapDoc: ComponentDocT = {
 			description: 'Keeps the inactive face as a faint silhouette. Applies to the beside kind only.'
 		},
 		{ name: 'is-active', type: 'boolean', defaultValue: '—', description: 'The on/off state. Reflects, so it is both initial and live.' },
-		{ name: 'is-disabled', type: 'boolean', defaultValue: '—', description: 'Blocks interaction.' },
+		{ name: 'disabled', type: 'boolean', defaultValue: '—', description: 'Blocks interaction.' },
 		{
 			name: 'label',
 			type: 'string',
@@ -220,6 +220,6 @@ export const zSwapDoc: ComponentDocT = {
 	related: [
 		{ tag: 'z-toggle', route: '/c/buttons-actions/z-toggle', description: 'A pressed-state button rather than two faces.' },
 		{ tag: 'z-switch', route: '/c/forms/z-switch', description: 'The settings-row on/off control.' },
-		{ tag: 'z-send-button', route: '/c/buttons-actions/z-send-button', description: 'A purpose-built two-state control.' }
+		{ tag: 'z-button', route: '/c/buttons-actions/z-button', description: 'A standard action control.' }
 	]
 }

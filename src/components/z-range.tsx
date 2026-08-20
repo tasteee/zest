@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event, useHost, useState, useEffect } from 'atomico'
 
 /*
@@ -31,7 +32,7 @@ const styles = css`
 		display: none;
 	}
 
-	:host([is-disabled]) {
+	:host([disabled]) {
 		opacity: 0.5;
 		pointer-events: none;
 	}
@@ -204,7 +205,7 @@ type HandleElementT = HTMLElement & {
 	min?: number
 	max?: number
 	step?: number
-	tone?: string
+	accent?: string
 	label?: string
 }
 
@@ -235,8 +236,14 @@ const num = (value: unknown, fallback: number): number => {
 
 const clamp = (value: number, lo: number, hi: number): number => Math.min(Math.max(value, lo), hi)
 
-const accentFor = (tone: unknown): string =>
-	tone === 'primary' ? 'var(--purple)' : tone === 'secondary' ? 'var(--pink)' : 'var(--primary)'
+const accentFor = (accent: unknown): string => {
+	if (accent === 'dom') return 'var(--purple)'
+	if (accent === 'sub') return 'var(--pink)'
+	if (accent === 'success') return 'var(--success)'
+	if (accent === 'warning') return 'var(--warning)'
+	if (accent === 'error') return 'var(--destructive)'
+	return 'var(--primary)'
+}
 
 export const ZRange = c(
 	(props) => {
@@ -260,7 +267,7 @@ export const ZRange = c(
 				const step = num(el.step ?? el.getAttribute('step'), domainStep) || domainStep
 				const value = clamp(num(el.value ?? el.getAttribute('value'), domainMin), min, max)
 				const label = el.label ?? el.getAttribute('label') ?? ''
-				return { min, max, step, value, label, accent: accentFor(el.tone ?? el.getAttribute('tone')) }
+				return { min, max, step, value, label, accent: accentFor(el.accent ?? el.getAttribute('accent')) }
 			}
 
 			const left = read(handles[0])
@@ -309,7 +316,7 @@ export const ZRange = c(
 		const leftPct = toPct(leftValue)
 		const rightPct = toPct(rightValue)
 
-		const showHeader = Boolean(props.label) || props.doesShowValue
+		const showHeader = Boolean(props.label) || props.showValue
 
 		// Returns the clamped value of the handle that moved so the caller can snap
 		// the native input's live `.value` synchronously — otherwise the browser
@@ -357,7 +364,7 @@ export const ZRange = c(
 				{showHeader && (
 					<div class="header">
 						{props.label && <span class="label">{props.label}</span>}
-						{props.doesShowValue && (
+						{props.showValue && (
 							<span class="value">
 								<span class="left">
 									{props.valuePrefix}
@@ -386,7 +393,7 @@ export const ZRange = c(
 						max={config.domainMax}
 						step={config.leftStep}
 						value={leftValue}
-						disabled={props.isDisabled}
+						disabled={props.disabled}
 						aria-label={config.leftLabel}
 						oninput={(e: any) => commit(e.target, 'left', 'input')}
 						onchange={(e: any) => commit(e.target, 'left', 'change')}
@@ -398,7 +405,7 @@ export const ZRange = c(
 						max={config.domainMax}
 						step={config.rightStep}
 						value={rightValue}
-						disabled={props.isDisabled}
+						disabled={props.disabled}
 						aria-label={config.rightLabel}
 						oninput={(e: any) => commit(e.target, 'right', 'input')}
 						onchange={(e: any) => commit(e.target, 'right', 'change')}
@@ -414,10 +421,10 @@ export const ZRange = c(
 			max: { type: Number, reflect: true },
 			step: { type: Number, reflect: true },
 			label: String,
-			doesShowValue: { type: Boolean, reflect: true },
+			showValue: { type: Boolean, reflect: true },
 			valuePrefix: String,
 			valueSuffix: String,
-			isDisabled: { type: Boolean, reflect: true },
+			disabled: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			input: event<RangeDetailT>({ bubbles: true, composed: true }),
 			change: event<RangeDetailT>({ bubbles: true, composed: true })
@@ -426,4 +433,4 @@ export const ZRange = c(
 	}
 )
 
-customElements.define('z-range', ZRange)
+defineElement('z-range', ZRange)

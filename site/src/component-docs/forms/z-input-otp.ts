@@ -20,7 +20,7 @@ export const zInputOtpDoc: ComponentDocT = {
 
 	playground: {
 		buildElement: buildPlaygroundInputOtp,
-		controlNames: ['label', 'length', 'size', 'accent', 'is-numeric', 'is-invalid', 'is-disabled'],
+		controlNames: ['label', 'length', 'size', 'accent', 'is-numeric', 'invalid', 'disabled'],
 		slotLabel: 'six numeric cells'
 	},
 
@@ -30,7 +30,7 @@ export const zInputOtpDoc: ComponentDocT = {
 		'Do not submit on `change` and do not trim it yourself. A partially filled code can contain a hole, and `complete` is the only signal that the value is a whole code.',
 		'Set `is-numeric` for digit-only codes. It raises the numeric keypad and drops non-digits out of a pasted string rather than refusing the paste.',
 		'Six is the convention; four reads as a PIN. Going past eight turns transcription into work — if the code is that long, let people paste it into a plain field instead.',
-		'On failure, mark it `is-invalid` and leave the digits in place. Clearing the field forces a re-type of a code the user may no longer have on screen.',
+		'On failure, mark it `invalid` and leave the digits in place. Clearing the field forces a re-type of a code the user may no longer have on screen.',
 		'Pair it with `autocomplete="one-time-code"` handling in your own flow where the platform supports it — the fastest OTP entry is the one the user never types.'
 	],
 
@@ -77,7 +77,7 @@ export const zInputOtpDoc: ComponentDocT = {
 
 		defineMarkupExample({
 			id: 'accents',
-			title: 'Tones',
+			title: 'Accents',
 			description: 'The accent that filled and focused cells read in.',
 			layout: ExampleLayout.stack,
 			markup: `
@@ -94,8 +94,8 @@ export const zInputOtpDoc: ComponentDocT = {
 				'Invalid keeps the digits visible — the user needs to compare what they typed against what they were sent. Disabled is for while the check is in flight.',
 			layout: ExampleLayout.stack,
 			markup: `
-				<z-input-otp length="6" is-numeric value="123456" is-invalid></z-input-otp>
-				<z-input-otp length="6" is-numeric value="123456" is-disabled></z-input-otp>
+				<z-input-otp length="6" is-numeric value="123456" invalid></z-input-otp>
+				<z-input-otp length="6" is-numeric value="123456" disabled></z-input-otp>
 			`
 		}),
 
@@ -150,7 +150,7 @@ export const zInputOtpDoc: ComponentDocT = {
 				  const [isAccepted, checkError] = await wrap(checkCode(completeEvent.detail.value))
 				  if (checkError) return showError('We could not reach the server.')
 
-				  checkOtp.isInvalid = !isAccepted
+				  checkOtp.invalid = !isAccepted
 				})
 			`,
 			wire: (root) => {
@@ -162,17 +162,17 @@ export const zInputOtpDoc: ComponentDocT = {
 					const isAccepted = detail.value === '1234'
 
 					if (isAccepted) {
-						checkOtp.removeAttribute('is-invalid')
+						checkOtp.removeAttribute('invalid')
 						checkStatus.textContent = 'Verified.'
 						return
 					}
 
-					checkOtp.setAttribute('is-invalid', '')
+					checkOtp.setAttribute('invalid', '')
 					checkStatus.textContent = 'That code did not match. Check it and edit the digits above.'
 				})
 
 				checkOtp.addEventListener('change', () => {
-					checkOtp.removeAttribute('is-invalid')
+					checkOtp.removeAttribute('invalid')
 				})
 			}
 		})
@@ -190,8 +190,8 @@ export const zInputOtpDoc: ComponentDocT = {
 		{ name: 'size', type: 'sm | md | lg', defaultValue: 'md', description: 'Cell size.' },
 		{ name: 'accent', type: 'neutral | dom | sub', defaultValue: 'neutral', description: 'Accent for filled and focused cells.' },
 		{ name: 'is-numeric', type: 'boolean', defaultValue: '—', description: 'Digits only. Raises the numeric keypad and strips non-digits from a paste.' },
-		{ name: 'is-invalid', type: 'boolean', defaultValue: '—', description: 'Paints every cell in the error colour, without clearing them.' },
-		{ name: 'is-disabled', type: 'boolean', defaultValue: '—', description: 'Blocks typing and pasting — use while verification is in flight.' },
+		{ name: 'invalid', type: 'boolean', defaultValue: '—', description: 'Paints every cell in the error colour, without clearing them.' },
+		{ name: 'disabled', type: 'boolean', defaultValue: '—', description: 'Blocks typing and pasting — use while verification is in flight.' },
 		{ name: 'is-hidden', type: 'boolean', defaultValue: '—', description: 'Removes the control from layout.' }
 	],
 
@@ -215,7 +215,7 @@ export const zInputOtpDoc: ComponentDocT = {
 		'Each cell is labelled by position ("Digit 1", "Digit 2"), which is what makes the code navigable when you cannot see where the focus is.',
 		'ArrowLeft and ArrowRight move between cells, and Backspace on an empty cell steps back and clears — the behaviour people already expect from every other OTP field they have used.',
 		'Paste is handled on the group, so a code pasted into any cell fills the whole row. Forcing one character at a time is a real barrier for switch and voice-control users.',
-		'On failure, keep the digits and set is-invalid. Wiping the field is an accessibility problem as much as a usability one — the user may have no way to recover what they typed.'
+		'On failure, keep the digits and set invalid. Wiping the field is an accessibility problem as much as a usability one — the user may have no way to recover what they typed.'
 	],
 
 	related: [

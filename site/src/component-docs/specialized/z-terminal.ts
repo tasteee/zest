@@ -266,11 +266,11 @@ export const zTerminalDoc: ComponentDocT = {
 			markup: `
 				<z-terminal id="controlledTerminal" shell="zsh" cwd="~/app" width="34rem" height="9rem" does-animate does-loop has-replay></z-terminal>
 
-				<z-row gap="2">
+				<wired-row gap="xs">
 				  <z-button id="playButton" size="sm" kind="outline" label="Play"></z-button>
 				  <z-button id="pauseButton" size="sm" kind="outline" label="Pause"></z-button>
 				  <z-button id="restartButton" size="sm" kind="outline" label="Restart"></z-button>
-				</z-row>
+				</wired-row>
 			`,
 			script: `
 				const controlledTerminal = document.querySelector('#controlledTerminal')
@@ -298,7 +298,7 @@ export const zTerminalDoc: ComponentDocT = {
 
 		defineInteractiveExample({
 			id: 'accents',
-			title: 'Tones',
+			title: 'Accents',
 			description: 'The accent colors the prompt marker, the shell label, and the typing caret. Green by default; `secondary` swaps in purple.',
 			layout: ExampleLayout.fill,
 			markup: `
@@ -373,7 +373,6 @@ export const zTerminalDoc: ComponentDocT = {
 
 	related: [
 		{ tag: 'z-code-block', route: '/c/specialized/z-code-block', description: 'For source files: line numbers and syntax highlighting.' },
-		{ tag: 'z-streaming-text', route: '/c/specialized/z-streaming-text', description: 'The same typed-out feel for prose.' },
 		{ tag: 'z-scroll', route: '/c/layout/z-scroll', description: 'The general-purpose scroll container.' }
 	]
 }

@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css } from 'atomico'
 
 /*
@@ -79,4 +80,4 @@ export const ZTypingIndicator = c(
 	}
 )
 
-customElements.define('z-typing-indicator', ZTypingIndicator)
+defineElement('z-typing-indicator', ZTypingIndicator)

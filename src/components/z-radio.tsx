@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event, useProp } from 'atomico'
 
 /*
@@ -23,7 +24,7 @@ const styles = css`
 		font-size: var(--font-size-small);
 		color: var(--foreground);
 		user-select: none;
-		--accent: var(--primary);
+		--accent: var(--z-radio-group-accent, var(--primary));
 	}
 
 	:host([accent='dom']) label {
@@ -92,7 +93,7 @@ export const ZRadio = c(
 	(props) => {
 		const [isChecked, setIsChecked] = useProp<boolean>('isChecked')
 
-		const labelClass = ['label'].concat(props.isDisabled ? ['is-disabled'] : []).join(' ')
+		const labelClass = ['label'].concat(props.disabled ? ['is-disabled'] : []).join(' ')
 		const ringClass = ['ring'].concat(isChecked ? ['is-checked'] : []).join(' ')
 
 		return (
@@ -101,10 +102,11 @@ export const ZRadio = c(
 					<input
 						type="radio"
 						checked={isChecked}
-						disabled={props.isDisabled}
+						disabled={props.disabled}
 						value={props.value}
 						aria-checked={isChecked ? 'true' : 'false'}
-						onchange={() => {
+						onchange={(changeEvent: Event) => {
+							changeEvent.stopPropagation()
 							setIsChecked(true)
 							props.select({ value: props.value })
 						}}
@@ -120,7 +122,7 @@ export const ZRadio = c(
 	{
 		props: {
 			isChecked: { type: Boolean, reflect: true },
-			isDisabled: { type: Boolean, reflect: true },
+			disabled: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			accent: { type: String, reflect: true },
 			value: String,
@@ -130,4 +132,4 @@ export const ZRadio = c(
 	}
 )
 
-customElements.define('z-radio', ZRadio)
+defineElement('z-radio', ZRadio)

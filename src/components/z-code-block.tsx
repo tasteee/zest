@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event, useMemo } from 'atomico'
 import { highlight, splitTokenLines, type Token } from '../shared/highlight'
 import { themedScrollbarStyles } from '../shared/scrollbar-styles'
@@ -6,8 +7,8 @@ import './z-copy-button'
 /*
  * z-code-block — a monospace code surface with an optional header (filename +
  * language tag) and a copy-to-clipboard button. Pass the source via the `code`
- * property (preserves whitespace); `has-line-numbers` adds a gutter. Syntax
- * highlighting is provided by lowlight (highlight.js) via shared/highlight.ts
+ * property (preserves whitespace); `line-numbers` adds a gutter and `highlight`
+ * enables lowlight (highlight.js) syntax colour via shared/highlight.ts
  * and themed against the zest `--syntax-*` palette, so it renders synchronously
  * inside the shadow root. Fires `copy` after a successful copy.
  */
@@ -15,6 +16,8 @@ const styles = css`
 	:host {
 		display: block;
 		--accent: var(--purple);
+		width: 100%;
+		min-width: 0;
 	}
 
 	:host([accent='sub']) {
@@ -153,15 +156,6 @@ const styles = css`
 	 * carries +/- instead of the line number, because a diff reader wants the
 	 * sign more than the count.
 	 */
-	.line.is-highlighted .gutter,
-	.line.is-highlighted .text {
-		background: color-mix(in oklch, var(--purple) 12%, transparent);
-	}
-
-	.line.is-highlighted .text {
-		box-shadow: inset 2px 0 0 var(--purple);
-	}
-
 	.line.is-added .gutter,
 	.line.is-added .text {
 		background: color-mix(in oklch, var(--success) 12%, transparent);
@@ -309,7 +303,6 @@ const parseLineRanges = (spec?: string): Set<number> => {
 const buildLineClass = (lineNumber: number, marks: MarksT): string => {
 	const classes = ['line']
 
-	if (marks.highlighted.has(lineNumber)) classes.push('is-highlighted')
 	if (marks.added.has(lineNumber)) classes.push('is-added')
 	if (marks.removed.has(lineNumber)) classes.push('is-removed')
 
@@ -321,7 +314,6 @@ const buildLineClass = (lineNumber: number, marks: MarksT): string => {
 }
 
 type MarksT = {
-	highlighted: Set<number>
 	added: Set<number>
 	removed: Set<number>
 	focused: Set<number>
@@ -342,11 +334,13 @@ export const ZCodeBlock = c(
 		const code = (props.code as string) ?? ''
 		const language = props.language as string | undefined
 
-		const tokens = useMemo(() => highlight(code.replace(/\n$/, ''), language), [code, language])
+		const tokens = useMemo(
+			() => props.highlight ? highlight(code.replace(/\n$/, ''), language) : [{ value: code.replace(/\n$/, ''), className: '' }],
+			[code, language, props.highlight]
+		)
 		const tokenLines = useMemo(() => splitTokenLines(tokens), [tokens])
 
 		const marks: MarksT = {
-			highlighted: parseLineRanges(props.highlightLines as string),
 			added: parseLineRanges(props.addedLines as string),
 			removed: parseLineRanges(props.removedLines as string),
 			focused: parseLineRanges(props.focusLines as string)
@@ -354,9 +348,8 @@ export const ZCodeBlock = c(
 
 		// Any annotation needs the per-line rows, whether or not the reader
 		// asked for numbers — there is nowhere else to hang a mark.
-		const hasAnnotation =
-			marks.highlighted.size > 0 || marks.added.size > 0 || marks.removed.size > 0 || marks.focused.size > 0
-		const shouldRenderRows = Boolean(props.hasLineNumbers) || hasAnnotation
+		const hasAnnotation = marks.added.size > 0 || marks.removed.size > 0 || marks.focused.size > 0
+		const shouldRenderRows = Boolean(props.lineNumbers) || hasAnnotation
 		const hasDiffMarks = marks.added.size > 0 || marks.removed.size > 0
 
 		const renderToken = (token: Token, key: number) =>
@@ -397,7 +390,7 @@ export const ZCodeBlock = c(
 									{tokenLines.map((line, i) => {
 										const lineNumber = i + 1
 										const gutterLabel = hasDiffMarks ? buildGutterLabel(lineNumber, marks) : String(lineNumber)
-										const showGutter = Boolean(props.hasLineNumbers) || hasDiffMarks
+										const showGutter = Boolean(props.lineNumbers) || hasDiffMarks
 
 										return (
 											<div class={buildLineClass(lineNumber, marks)} key={i}>
@@ -423,12 +416,12 @@ export const ZCodeBlock = c(
 			filename: String,
 			// Read by z-code-group to label this block's tab.
 			label: String,
-			hasLineNumbers: { type: Boolean, reflect: true },
-			highlightLines: { type: String, reflect: true },
+			lineNumbers: { type: Boolean, reflect: true },
+			highlight: { type: Boolean, reflect: true },
 			addedLines: { type: String, reflect: true },
 			removedLines: { type: String, reflect: true },
 			focusLines: { type: String, reflect: true },
-			hasCopy: { type: Boolean, reflect: true, value: true },
+			hasCopy: { type: Boolean, reflect: true, value: () => true },
 			accent: { type: String, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			copy: event<void>({ bubbles: true, composed: true })
@@ -437,4 +430,4 @@ export const ZCodeBlock = c(
 	}
 )
 
-customElements.define('z-code-block', ZCodeBlock)
+defineElement('z-code-block', ZCodeBlock)

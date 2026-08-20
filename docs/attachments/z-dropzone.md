@@ -27,7 +27,7 @@ instead.
 | `is-multiple` | boolean | — | allow more than one file |
 | `max-size` | number (bytes) | — | reject files larger than this |
 | `max-files` | number | — | reject drops with more files than this |
-| `is-disabled` | boolean | — | disable the zone |
+| `disabled` | boolean | — | disable the zone |
 
 ## Properties
 

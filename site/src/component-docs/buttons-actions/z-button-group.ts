@@ -57,9 +57,9 @@ export const zButtonGroupDoc: ComponentDocT = {
 		defineMarkupExample({
 			id: 'vertical',
 			title: 'Vertical',
-			description: '`direction` stacks the children and equalises their widths, so labels of different lengths still line up.',
+			description: '`vertical` stacks the children and equalises their widths, so labels of different lengths still line up.',
 			markup: `
-				<z-button-group direction>
+				<z-button-group vertical>
 				  <z-button kind="outline">Duplicate</z-button>
 				  <z-button kind="outline">Move to…</z-button>
 				  <z-button kind="outline">Archive</z-button>
@@ -160,7 +160,7 @@ export const zButtonGroupDoc: ComponentDocT = {
 
 	attributes: [
 		{
-			name: 'direction',
+			name: 'vertical',
 			type: 'boolean',
 			defaultValue: '—',
 			description: 'Stacks the children vertically at equal width instead of laying them out in a row.'

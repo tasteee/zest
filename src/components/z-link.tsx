@@ -1,7 +1,8 @@
+import { defineElement } from '../shared/define-element'
 import { c, css } from 'atomico'
 
 /*
- * z-link — an inline text link. Accent-colored by tone (purple/pink/neutral),
+ * z-link — an inline text link. Accent-colored (purple/pink/neutral),
  * with an animated underline that grows from the start on hover. No shadows,
  * no fills — emphasis comes from color and the underline motion alone.
  */
@@ -93,7 +94,7 @@ const styles = css`
 		border-radius: 2px;
 	}
 
-	:host([is-disabled]) a {
+	:host([disabled]) a {
 		color: var(--muted-foreground);
 		pointer-events: none;
 		opacity: 0.6;
@@ -144,10 +145,10 @@ export const ZLink = c(
 			<host shadowDom>
 				<a
 					class={linkClass}
-					href={props.isDisabled ? undefined : props.href}
+					href={props.disabled ? undefined : props.href}
 					target={props.target || (props.isExternal ? '_blank' : undefined)}
 					rel={isExternal ? 'noopener noreferrer' : undefined}
-					aria-disabled={props.isDisabled ? 'true' : undefined}
+					aria-disabled={props.disabled ? 'true' : undefined}
 				>
 					{props.label ? props.label : <slot />}
 					{isExternal && (
@@ -171,11 +172,11 @@ export const ZLink = c(
 			underline: { type: String, reflect: true },
 			isExternal: { type: Boolean, reflect: true },
 			isBlock: { type: Boolean, reflect: true },
-			isDisabled: { type: Boolean, reflect: true },
+			disabled: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true }
 		},
 		styles
 	}
 )
 
-customElements.define('z-link', ZLink)
+defineElement('z-link', ZLink)

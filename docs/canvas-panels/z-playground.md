@@ -13,7 +13,7 @@ produces echoed underneath.
 const playground = document.querySelector('z-playground')
 playground.controls = [
   { name: 'kind', kind: 'enum', options: ['solid', 'outline', 'ghost'], defaultValue: 'solid' },
-  { name: 'is-disabled', kind: 'boolean' }
+  { name: 'disabled', kind: 'boolean' }
 ]
 ```
 

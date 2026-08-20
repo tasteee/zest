@@ -19,7 +19,7 @@ export const zCardDoc: ComponentDocT = {
 	status: ComponentStatus.stable,
 
 	description:
-		'The everyday container: a hairline border, a rounded corner, and enough padding that content never touches the edge. Depth comes from the border and the surface underneath rather than from a shadow, which is why a grid of cards reads as a flat plane rather than a pile. It is a column, so `gap` spaces its children directly and saves a wrapper for the common case. For accented or elevated panels — accents, variants, elevation levels — `z-surface` is the fuller instrument.',
+		'The everyday container: a hairline border, a rounded corner, and enough padding that content never touches the edge. Depth comes from the border and the surface underneath rather than from a shadow, which is why a grid of cards reads as a flat plane rather than a pile. Use the layout primitives inside it when its content needs spacing. For accented or elevated panels — accents, variants, elevation levels — `z-surface` is the fuller instrument.',
 
 	playground: {
 		buildElement: buildPlaygroundCard,
@@ -37,7 +37,7 @@ export const zCardDoc: ComponentDocT = {
 	anatomy: [
 		{ name: 'default slot', description: 'The card contents.' },
 		{ name: 'border', description: 'The hairline that separates the card from the surface beneath it.' },
-		{ name: 'stack', description: 'The card is a column. `gap` spaces its children directly, so simple content needs no wrapper.' }
+		{ name: 'stack', description: 'The card is a column; a wired-column or wired-row inside it owns content spacing.' }
 	],
 
 	examples: [
@@ -48,42 +48,12 @@ export const zCardDoc: ComponentDocT = {
 			layout: ExampleLayout.fill,
 			markup: `
 				<z-card style="max-width: 24rem">
-				  <z-heading size="xs" tag="h3">Deploy previews</z-heading>
-				  <z-text size="sm" color="muted">
-				    Every pull request gets its own URL, torn down when the branch merges.
-				  </z-text>
-				</z-card>
-			`
-		}),
-
-		defineMarkupExample({
-			id: 'flex-column',
-			title: 'As a flex column',
-			description:
-				'A card is a column, so `gap` lays the children out directly — the common case, and it saves a wrapper element.',
-			layout: ExampleLayout.fill,
-			markup: `
-				<z-card gap="3" style="max-width: 24rem">
-				  <z-eyebrow label="Usage" color="neutral"></z-eyebrow>
-				  <z-heading size="sm" tag="h3">48 of 100 seats</z-heading>
-				  <z-progress value="48"></z-progress>
-				  <z-text size="sm" color="muted">Resets on the first of the month.</z-text>
-				</z-card>
-			`
-		}),
-
-		defineMarkupExample({
-			id: 'flex-row',
-			title: 'As a flex row',
-			description: 'A row card puts a leading element beside its content without any extra layout.',
-			layout: ExampleLayout.fill,
-			markup: `
-				<z-card gap="4" style="max-width: 26rem">
-				  <z-avatar name="Ada Lovelace" size="md"></z-avatar>
-				  <z-column gap="1">
-				    <z-text size="sm" weight="600">Ada Lovelace</z-text>
-				    <z-text size="xs" color="muted">Invited you to the Analytics workspace</z-text>
-				  </z-column>
+				  <wired-column gap="xs">
+				    <z-heading size="xs" tag="h3">Deploy previews</z-heading>
+				    <z-text size="sm" color="muted">
+				      Every pull request gets its own URL, torn down when the branch merges.
+				    </z-text>
+				  </wired-column>
 				</z-card>
 			`
 		}),
@@ -95,14 +65,14 @@ export const zCardDoc: ComponentDocT = {
 				'`is-reactive` brightens the border on hover and focus-within. Hover both to feel the difference — and only use it when the card really is interactive.',
 			layout: ExampleLayout.fill,
 			markup: `
-				<z-column gap="3" style="max-width: 24rem">
+				<wired-column gap="sm" style="max-width: 24rem">
 				  <z-card>
 				    <z-text size="sm">Static — the border never changes.</z-text>
 				  </z-card>
 				  <z-card is-reactive>
 				    <z-text size="sm">Reactive — hover me.</z-text>
 				  </z-card>
-				</z-column>
+				</wired-column>
 			`
 		}),
 
@@ -113,20 +83,17 @@ export const zCardDoc: ComponentDocT = {
 				'Where the flat treatment pays off: many cards at once read as one plane, with the borders doing all the separating.',
 			layout: ExampleLayout.fill,
 			markup: `
-				<z-grid min-column-width="13rem" gap="3">
-				  <z-card gap="2">
-				    <z-label size="xs" color="muted">Requests</z-label>
-				    <z-heading size="sm" tag="h3">1.2M</z-heading>
+				<wired-grid min="13rem" gap="sm">
+				  <z-card>
+				    <wired-column gap="xs"><z-label>Requests</z-label><z-heading size="sm" tag="h3">1.2M</z-heading></wired-column>
 				  </z-card>
-				  <z-card gap="2">
-				    <z-label size="xs" color="muted">Errors</z-label>
-				    <z-heading size="sm" tag="h3">0.02%</z-heading>
+				  <z-card>
+				    <wired-column gap="xs"><z-label>Errors</z-label><z-heading size="sm" tag="h3">0.02%</z-heading></wired-column>
 				  </z-card>
-				  <z-card gap="2">
-				    <z-label size="xs" color="muted">p95 latency</z-label>
-				    <z-heading size="sm" tag="h3">84ms</z-heading>
+				  <z-card>
+				    <wired-column gap="xs"><z-label>p95 latency</z-label><z-heading size="sm" tag="h3">84ms</z-heading></wired-column>
 				  </z-card>
-				</z-grid>
+				</wired-grid>
 			`
 		}),
 
@@ -136,31 +103,31 @@ export const zCardDoc: ComponentDocT = {
 			description: 'A `z-line` splits body from footer without introducing a second nested surface.',
 			layout: ExampleLayout.fill,
 			markup: `
-				<z-card gap="4" style="max-width: 24rem">
-				  <z-column gap="1">
+				<z-card style="max-width: 24rem">
+				  <wired-column gap="md">
+				  <wired-column gap="2xs">
 				    <z-heading size="xs" tag="h3">Danger zone</z-heading>
 				    <z-text size="sm" color="muted">
 				      Deleting a workspace removes every project inside it.
 				    </z-text>
-				  </z-column>
+				  </wired-column>
 				  <z-line></z-line>
-				  <z-row aligns-x="end">
+				  <wired-row x="end">
 				    <z-button accent="error" kind="outline" size="sm">Delete workspace</z-button>
-				  </z-row>
+				  </wired-row>
+				  </wired-column>
 				</z-card>
 			`
 		})
 	],
 
 	attributes: [
-		{ name: 'gap', type: 'string', defaultValue: '—', description: 'Gap between flex children. Takes a size token or a length.' },
 		{
 			name: 'is-reactive',
 			type: 'boolean',
 			defaultValue: '—',
 			description: 'Brightens the border on hover and focus-within.'
-		},
-		{ name: 'is-hidden', type: 'boolean', defaultValue: '—', description: 'Removes the card from layout.' }
+		}
 	],
 
 	properties: [],
@@ -176,7 +143,7 @@ export const zCardDoc: ComponentDocT = {
 	],
 
 	related: [
-		{ tag: 'z-surface', route: '/c/layout/z-surface', description: 'Toned and elevated panels.' },
+		{ tag: 'z-surface', route: '/c/layout/z-surface', description: 'Neutral surface treatments and outlined panels.' },
 		{ tag: 'z-bento-item', route: '/c/layout/z-bento-item', description: 'A richer card cell for feature grids.' },
 		{ tag: 'z-list-row', route: '/c/data-display/z-list-row', description: 'For rows rather than blocks.' },
 		{ tag: 'z-line', route: '/c/foundation/z-line', description: 'Dividing a card internally.' }

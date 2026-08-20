@@ -7,10 +7,7 @@
 
 import { zButtonDoc } from './buttons-actions/z-button'
 import { zButtonGroupDoc } from './buttons-actions/z-button-group'
-import { zDockDoc } from './buttons-actions/z-dock'
-import { zDockItemDoc } from './buttons-actions/z-dock-item'
 import { zLinkDoc } from './buttons-actions/z-link'
-import { zSendButtonDoc } from './buttons-actions/z-send-button'
 import { zThemeSwitcherDoc } from './buttons-actions/z-theme-switcher'
 import { zToggleDoc } from './buttons-actions/z-toggle'
 import { zToggleGroupDoc } from './buttons-actions/z-toggle-group'
@@ -50,14 +47,11 @@ import { zTextareaDoc } from './forms/z-textarea'
 
 import { zBentoGridDoc } from './layout/z-bento-grid'
 import { zBentoItemDoc } from './layout/z-bento-item'
-import { zCenterDoc } from './layout/z-center'
 import { zChassisDoc } from './layout/z-chassis'
-import { zColumnDoc } from './layout/z-column'
-import { zContainerDoc } from './layout/z-container'
-import { zGridDoc } from './layout/z-grid'
-import { zRowDoc } from './layout/z-row'
+import { wiredColumnDoc } from './layout/wired-column'
+import { wiredGridDoc } from './layout/wired-grid'
+import { wiredRowDoc } from './layout/wired-row'
 import { zScrollDoc } from './layout/z-scroll'
-import { zSectionDoc } from './layout/z-section'
 import { zSpacerDoc } from './layout/z-spacer'
 import { zSurfaceDoc } from './layout/z-surface'
 import { zSwapDoc } from './layout/z-swap'
@@ -81,10 +75,7 @@ import type { ComponentDocT } from './types'
 const ALL_COMPONENT_DOCS: ComponentDocT[] = [
 	zButtonDoc,
 	zButtonGroupDoc,
-	zDockDoc,
-	zDockItemDoc,
 	zLinkDoc,
-	zSendButtonDoc,
 	zThemeSwitcherDoc,
 	zToggleDoc,
 	zToggleGroupDoc,
@@ -107,14 +98,11 @@ const ALL_COMPONENT_DOCS: ComponentDocT[] = [
 
 	zBentoGridDoc,
 	zBentoItemDoc,
-	zCenterDoc,
 	zChassisDoc,
-	zColumnDoc,
-	zContainerDoc,
-	zGridDoc,
-	zRowDoc,
+	wiredColumnDoc,
+	wiredGridDoc,
+	wiredRowDoc,
 	zScrollDoc,
-	zSectionDoc,
 	zSpacerDoc,
 	zSurfaceDoc,
 	zSwapDoc,

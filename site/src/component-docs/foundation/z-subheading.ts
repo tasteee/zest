@@ -71,11 +71,11 @@ export const zSubheadingDoc: ComponentDocT = {
 			description: 'The primary use: categorising the heading directly beneath it.',
 			layout: ExampleLayout.fill,
 			markup: `
-				<z-column gap="1" style="max-width: 38rem">
+				<wired-column gap="2xs" style="max-width: 38rem">
 				  <z-subheading size="sm" color="dom">Now in beta</z-subheading>
 				  <z-heading size="xl">Collaborative editing</z-heading>
 				  <z-text color="muted">Multiple cursors, presence, and conflict-free merges.</z-text>
-				</z-column>
+				</wired-column>
 			`
 		}),
 
@@ -86,22 +86,22 @@ export const zSubheadingDoc: ComponentDocT = {
 				'Splitting a long form or settings panel into named runs. Small, muted, and repeated is exactly the right register here.',
 			layout: ExampleLayout.fill,
 			markup: `
-				<z-column gap="5" style="max-width: 32rem">
-				  <z-column gap="2">
+				<wired-column gap="5" style="max-width: 32rem">
+				  <wired-column gap="xs">
 				    <z-subheading size="xs" color="muted">Account</z-subheading>
 				    <z-text size="sm">Name, email, and password.</z-text>
-				  </z-column>
+				  </wired-column>
 
-				  <z-column gap="2">
+				  <wired-column gap="xs">
 				    <z-subheading size="xs" color="muted">Notifications</z-subheading>
 				    <z-text size="sm">What we send you, and how often.</z-text>
-				  </z-column>
+				  </wired-column>
 
-				  <z-column gap="2">
+				  <wired-column gap="xs">
 				    <z-subheading size="xs" color="muted">Danger zone</z-subheading>
 				    <z-text size="sm">Transfer ownership or delete the workspace.</z-text>
-				  </z-column>
-				</z-column>
+				  </wired-column>
+				</wired-column>
 			`
 		}),
 

@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event, useHost } from 'atomico'
 
 /*
@@ -87,4 +88,4 @@ export const ZAttachmentTray = c(
 	}
 )
 
-customElements.define('z-attachment-tray', ZAttachmentTray)
+defineElement('z-attachment-tray', ZAttachmentTray)

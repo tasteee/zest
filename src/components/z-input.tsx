@@ -1,8 +1,10 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event, useHost, useProp } from 'atomico'
 
 /*
  * z-input — single-line text field. Transparent fill, hairline border that
- * lifts to the accent on focus (purple by default, pink via tone). Optional
+ * lifts to the accent on focus (theme primary by default, with explicit
+ * `dom` and `sub` accents). Optional
  * leading/trailing slots for icons or adornments. No shadows.
  */
 const styles = css`
@@ -15,7 +17,7 @@ const styles = css`
 		display: none;
 	}
 
-	:host([is-inline]) {
+	:host([inline]) {
 		width: auto;
 	}
 
@@ -53,17 +55,17 @@ const styles = css`
 	/* sizes */
 	.field.is-sm {
 		height: var(--control-height-sm);
-		padding-inline: 0.75rem;
+		padding-inline: 0.625rem;
 		font-size: var(--font-size-small);
 	}
 	.field.is-md {
 		height: var(--control-height-md);
-		padding-inline: 0.875rem;
+		padding-inline: 0.75rem;
 		font-size: var(--font-size-body);
 	}
 	.field.is-lg {
 		height: var(--control-height-lg);
-		padding-inline: 1rem;
+		padding-inline: 0.875rem;
 		font-size: var(--font-size-h4);
 	}
 
@@ -146,8 +148,8 @@ export const ZInput = c(
 
 		const fieldClass = ['field', resolveSizeClass(props)]
 			.concat(isFocused ? ['is-focused'] : [])
-			.concat(props.isInvalid ? ['is-invalid'] : [])
-			.concat(props.isDisabled ? ['is-disabled'] : [])
+			.concat(props.invalid ? ['is-invalid'] : [])
+			.concat(props.disabled ? ['is-disabled'] : [])
 			.join(' ')
 
 		return (
@@ -161,12 +163,12 @@ export const ZInput = c(
 						value={value ?? ''}
 						placeholder={props.placeholder}
 						name={props.name}
-						disabled={props.isDisabled}
+						disabled={props.disabled}
 						readonly={props.isReadonly}
 						required={props.isRequired}
 						autocomplete={props.autocomplete as any}
 						inputmode={props.inputmode}
-						aria-invalid={props.isInvalid ? 'true' : undefined}
+						aria-invalid={props.invalid ? 'true' : undefined}
 						aria-label={props.label || host.current?.getAttribute('aria-label') || undefined}
 						onfocus={() => setIsFocused(true)}
 						onblur={() => {
@@ -198,11 +200,11 @@ export const ZInput = c(
 			size: { type: String, reflect: true },
 			accent: { type: String, reflect: true },
 			isFocused: { type: Boolean, reflect: true },
-			isInvalid: { type: Boolean, reflect: true },
-			isDisabled: { type: Boolean, reflect: true },
+			invalid: { type: Boolean, reflect: true },
+			disabled: { type: Boolean, reflect: true },
 			isReadonly: { type: Boolean, reflect: true },
 			isRequired: { type: Boolean, reflect: true },
-			isInline: { type: Boolean, reflect: true },
+			inline: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			input: event<{ value: string }>({ bubbles: true, composed: true }),
 			change: event<{ value: string }>({ bubbles: true, composed: true })
@@ -211,4 +213,4 @@ export const ZInput = c(
 	}
 )
 
-customElements.define('z-input', ZInput)
+defineElement('z-input', ZInput)

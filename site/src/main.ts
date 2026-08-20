@@ -1,4 +1,11 @@
+// The docs site must load Zest through Vite rather than the static published
+// bundle. The package deliberately leaves @tasteee/wired external so consuming
+// apps preserve its package identity, but browsers cannot resolve that bare
+// specifier from a public /zest.js file. Vite resolves and bundles it here.
+import '../../src/index'
+
 import './site.css'
+import './internal-doc-elements'
 import { buildDocSiteData, getAllPages, resolveDocLinkToRoute, stripLeadingTitleHeading } from './docs-data'
 import type { DocPageT } from './docs-data'
 import { createElement } from './dom-helpers'
@@ -89,11 +96,6 @@ const buildNavItems = (): NavNodeT[] => {
 
 	for (const category of siteData.categories) {
 		items.push({ label: category.label, children: category.pages.map(buildNavLeaf) })
-	}
-
-	const hasStandalonePages = siteData.standalonePages.length > 0
-	if (hasStandalonePages) {
-		items.push({ label: 'More', children: siteData.standalonePages.map(buildNavLeaf) })
 	}
 
 	return items

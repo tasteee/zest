@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event, useHost, useProp } from 'atomico'
 import { themedScrollbarStyles } from '../shared/scrollbar-styles'
 
@@ -119,8 +120,8 @@ export const ZTextarea = c(
 
 		const fieldClass = ['field', resolveSizeClass(props)]
 			.concat(isFocused ? ['is-focused'] : [])
-			.concat(props.isInvalid ? ['is-invalid'] : [])
-			.concat(props.isDisabled ? ['is-disabled'] : [])
+			.concat(props.invalid ? ['is-invalid'] : [])
+			.concat(props.disabled ? ['is-disabled'] : [])
 			.join(' ')
 
 		const textareaClass = props.isAutoResize ? 'is-auto-resize' : ''
@@ -134,10 +135,10 @@ export const ZTextarea = c(
 						placeholder={props.placeholder}
 						name={props.name}
 						rows={props.rows || 3}
-						disabled={props.isDisabled}
+						disabled={props.disabled}
 						readonly={props.isReadonly}
 						required={props.isRequired}
-						aria-invalid={props.isInvalid ? 'true' : undefined}
+						aria-invalid={props.invalid ? 'true' : undefined}
 						aria-label={props.label || host.current?.getAttribute('aria-label') || undefined}
 						onfocus={() => setIsFocused(true)}
 						onblur={() => {
@@ -165,8 +166,8 @@ export const ZTextarea = c(
 			size: { type: String, reflect: true },
 			accent: { type: String, reflect: true },
 			isFocused: { type: Boolean, reflect: true },
-			isInvalid: { type: Boolean, reflect: true },
-			isDisabled: { type: Boolean, reflect: true },
+			invalid: { type: Boolean, reflect: true },
+			disabled: { type: Boolean, reflect: true },
 			isReadonly: { type: Boolean, reflect: true },
 			isRequired: { type: Boolean, reflect: true },
 			isAutoResize: { type: Boolean, reflect: true },
@@ -178,4 +179,4 @@ export const ZTextarea = c(
 	}
 )
 
-customElements.define('z-textarea', ZTextarea)
+defineElement('z-textarea', ZTextarea)

@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css } from 'atomico'
 
 /*
@@ -138,4 +139,4 @@ export const ZTokenTable = c(
 	}
 )
 
-customElements.define('z-token-table', ZTokenTable)
+defineElement('z-token-table', ZTokenTable)

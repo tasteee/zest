@@ -21,7 +21,7 @@ grows from the start on hover.
 | `underline` | `hover` `always` `none` | `hover` | underline behaviour |
 | `is-external` | boolean | — | open in a new tab with `rel="noopener noreferrer"` |
 | `is-block` | boolean | — | render as a block-level flex link |
-| `is-disabled` | boolean | — | disable (removes `href`) |
+| `disabled` | boolean | — | disable (removes `href`) |
 | `is-hidden` | boolean | — | hide |
 
 ## Slots

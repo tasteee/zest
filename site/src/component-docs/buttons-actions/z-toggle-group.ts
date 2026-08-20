@@ -39,7 +39,7 @@ export const zToggleGroupDoc: ComponentDocT = {
 
 	anatomy: [
 		{ name: 'default slot', description: 'The `z-toggle-group-item` children.' },
-		{ name: 'shared variant variables', description: 'Tone, size, and kind flags on the group become CSS variables each item inherits.' },
+		{ name: 'shared variant variables', description: 'Accent, size, and kind flags on the group become CSS variables each item inherits.' },
 		{ name: 'seam', description: 'Items are joined into one control, with the outer radii applied to the first and last.' }
 	],
 
@@ -208,7 +208,7 @@ export const zToggleGroupDoc: ComponentDocT = {
 
 	attributes: [
 		{ name: 'type', type: 'single | multiple', defaultValue: 'single', description: 'Whether one item or many can be pressed at once.' },
-		{ name: 'direction', type: 'boolean', defaultValue: '—', description: 'Stacks the items instead of laying them out in a row.' },
+		{ name: 'direction', type: 'horizontal | vertical', defaultValue: 'horizontal', description: 'Sets the segment layout axis.' },
 		{ name: 'accent', type: 'dom | sub | neutral | success | warning | error', defaultValue: '—', description: 'Shared accent for every item.' },
 		{ name: 'size', type: 'xs | sm | md | lg | xl', defaultValue: 'md', description: 'Shared density for every item.' },
 		{ name: 'kind', type: 'solid | outline | ghost | soft | plain', defaultValue: 'ghost', description: 'Shared treatment for every item.' },

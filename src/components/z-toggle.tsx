@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event, useProp } from 'atomico'
 
 const styles = css`
@@ -174,7 +175,7 @@ export const ZToggle = c(
 					class={buttonClass}
 					data-state={isPressed ? 'on' : 'off'}
 					aria-pressed={isPressed ? 'true' : 'false'}
-					disabled={props.isDisabled}
+					disabled={props.disabled}
 					onclick={() => {
 						const nextPressed = !isPressed
 						setIsPressed(nextPressed)
@@ -193,7 +194,7 @@ export const ZToggle = c(
 			accent: { type: String, reflect: true },
 			isIcon: { type: Boolean, reflect: true },
 			isPressed: { type: Boolean, reflect: true },
-			isDisabled: { type: Boolean, reflect: true },
+			disabled: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			press: event<{ pressed: boolean }>({ bubbles: true, composed: true })
 		},
@@ -201,4 +202,4 @@ export const ZToggle = c(
 	}
 )
 
-customElements.define('z-toggle', ZToggle)
+defineElement('z-toggle', ZToggle)

@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event, useMemo, useState } from 'atomico'
 
 /*
@@ -499,4 +500,4 @@ export const ZNavTree = c(
 	}
 )
 
-customElements.define('z-nav-tree', ZNavTree)
+defineElement('z-nav-tree', ZNavTree)

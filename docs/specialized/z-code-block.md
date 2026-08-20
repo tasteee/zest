@@ -2,12 +2,11 @@
 
 A monospace code surface with an optional header (language tag + filename) and a
 copy-to-clipboard button. Pass the source via the `code` **property** (preserves
-whitespace). Syntax highlighting is built in (lowlight / highlight.js, themed
-against the zest `--syntax-*` palette) and renders synchronously in the shadow
-root.
+whitespace). Turn on `highlight` for synchronous lowlight/highlight.js syntax
+colouring against the zest `--syntax-*` palette.
 
 ```html
-<z-code-block language="ts" filename="index.ts" has-line-numbers></z-code-block>
+<z-code-block language="ts" filename="index.ts" line-numbers highlight></z-code-block>
 ```
 
 ```js
@@ -18,21 +17,18 @@ block.addEventListener('copy', () => {})
 
 ## Annotation
 
-Four attributes mark lines. Ranges are written the way a person writes them —
-`3-5,8` — because the alternative is an array property, and the pages that
-most want to annotate a snippet are markdown pages with no script.
+Diff and focus annotations use human-readable ranges such as `3-5,8`.
 
 ```html
 <z-code-block
   language="ts"
-  highlight-lines="3-5"
   focus-lines="2-8"
   code="..."
 ></z-code-block>
 ```
 
 Any annotation switches the block to per-line rows whether or not
-`has-line-numbers` is set — there is nowhere else to hang a mark. With
+`line-numbers` is set — there is nowhere else to hang a mark. With
 `added-lines` or `removed-lines` present the gutter carries `+`/`-` instead of
 the line number, because a reader following a change wants the sign more than
 the position.
@@ -47,8 +43,8 @@ code still gives the excerpt somewhere to sit. Hovering the block restores it.
 | `code` | string | — | the source (set as a property to preserve whitespace) |
 | `language` | string | auto | highlight.js language id (also shown in the header) |
 | `filename` | string | — | filename shown in the header |
-| `has-line-numbers` | boolean | — | render a line-number gutter |
-| `highlight-lines` | range list | — | emphasise these lines, e.g. `3-5,8` |
+| `line-numbers` | boolean | — | render a line-number gutter |
+| `highlight` | boolean | — | apply syntax highlighting |
 | `added-lines` | range list | — | mark as added; gutter shows `+` |
 | `removed-lines` | range list | — | mark as removed; gutter shows `-` |
 | `focus-lines` | range list | — | dim every line outside this range |

@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event, useEffect, useState } from 'atomico'
 import {
 	Theme,
@@ -383,4 +384,4 @@ export const ZThemeSwitcher = c(
 	}
 )
 
-customElements.define('z-theme-switcher', ZThemeSwitcher)
+defineElement('z-theme-switcher', ZThemeSwitcher)

@@ -22,9 +22,9 @@ swap.addEventListener('change', (e) => e.detail.active)
 | --- | --- | --- | --- |
 | `kind` | `stack` `beside` | `stack` | `stack` overlaps both faces in one footprint and crossfades; `beside` places them side by side, each holding its own space |
 | `effect` | `fade` `rotate` `flip` | `fade` | transition style |
-| `has-ghost` | boolean | — | (`beside` only) keep the inactive face visible as a faint grayscale silhouette instead of hiding it |
+| `has-ghost` | boolean | — | place both faces side by side and mute the inactive one |
 | `is-active` | boolean | — | on/off state (reflected, two-way) |
-| `is-disabled` | boolean | — | disable |
+| `disabled` | boolean | — | disable |
 | `label` | string | — | accessible label for the hidden checkbox |
 | `is-hidden` | boolean | — | hide |
 

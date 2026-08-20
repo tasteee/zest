@@ -8,10 +8,10 @@ const buildPlaygroundPopover = (): HTMLElement => {
 
 	popover.innerHTML = `
 		<z-button slot="trigger" kind="outline">Open popover</z-button>
-		<z-column gap="xs">
+		<wired-column gap="xs">
 		  <z-text size="sm">Anything can live in here.</z-text>
 		  <z-text size="xs" color="muted">Forms, lists, a small chart — it is a panel, not a tooltip.</z-text>
-		</z-column>
+		</wired-column>
 	`
 
 	return popover
@@ -28,7 +28,7 @@ export const zPopoverDoc: ComponentDocT = {
 
 	playground: {
 		buildElement: buildPlaygroundPopover,
-		controlNames: ['placement', 'offset', 'accent', 'is-open', 'is-disabled'],
+		controlNames: ['placement', 'offset', 'accent', 'is-open', 'disabled'],
 		slotLabel: 'trigger and body'
 	},
 
@@ -57,10 +57,10 @@ export const zPopoverDoc: ComponentDocT = {
 			markup: `
 				<z-popover>
 				  <z-button slot="trigger" kind="outline">Show details</z-button>
-				  <z-column gap="xs">
+				  <wired-column gap="xs">
 				    <z-text size="sm">Deployed 4 minutes ago</z-text>
 				    <z-text size="xs" color="muted">Commit 8f2ka91 by Ada Lovelace</z-text>
-				  </z-column>
+				  </wired-column>
 				</z-popover>
 			`
 		}),
@@ -117,11 +117,11 @@ export const zPopoverDoc: ComponentDocT = {
 			markup: `
 				<z-popover placement="bottom-start" style="--z-overlay-max-width: 22rem">
 				  <z-button slot="trigger" kind="outline">Quick add</z-button>
-				  <z-column gap="sm">
+				  <wired-column gap="sm">
 				    <z-field label="Task"><z-input placeholder="Something to do"></z-input></z-field>
 				    <z-field label="Due"><z-input type="date"></z-input></z-field>
 				    <z-button kind="solid" accent="dom" size="sm">Add task</z-button>
-				  </z-column>
+				  </wired-column>
 				</z-popover>
 			`
 		}),
@@ -151,10 +151,10 @@ export const zPopoverDoc: ComponentDocT = {
 			markup: `
 				<z-popover id="statsPopover" accent="dom">
 				  <z-button slot="trigger" kind="outline">Usage this month</z-button>
-				  <z-column gap="xs">
+				  <wired-column gap="xs">
 				    <z-text size="sm">128,400 requests</z-text>
 				    <z-text size="xs" color="muted">64% of your plan’s allowance.</z-text>
-				  </z-column>
+				  </wired-column>
 				</z-popover>
 				<z-text size="sm" color="muted" id="popoverStatus">Closed.</z-text>
 			`,
@@ -183,16 +183,16 @@ export const zPopoverDoc: ComponentDocT = {
 				'`isOpen` is two-way, so a popover can be raised by something other than its own trigger — a first-run hint, a validation failure, a keyboard shortcut. Assigning it fires the same `toggle` a click would.',
 			layout: ExampleLayout.stack,
 			markup: `
-				<z-row aligns-y="center" gap="sm">
+				<wired-row y="center" gap="sm">
 				  <z-button id="hintButton" size="sm" kind="outline">Show the hint</z-button>
 				  <z-popover id="hintPopover" placement="right" accent="dom">
 				    <z-badge slot="trigger" accent="dom">New</z-badge>
-				    <z-column gap="xs">
+				    <wired-column gap="xs">
 				      <z-text size="sm">Filters moved here</z-text>
 				      <z-text size="xs" color="muted">Everything from the old sidebar, one click away.</z-text>
-				    </z-column>
+				    </wired-column>
 				  </z-popover>
-				</z-row>
+				</wired-row>
 				<z-text size="sm" color="muted" id="hintStatus">Closed.</z-text>
 			`,
 			script: `
@@ -231,7 +231,7 @@ export const zPopoverDoc: ComponentDocT = {
 			layout: ExampleLayout.fill,
 			markup: `
 				<div style="height: 8rem; overflow: auto; border: 1px solid var(--border); border-radius: var(--radius-md); padding: var(--space-md)">
-				  <z-column gap="md">
+				  <wired-column gap="md">
 				    <z-text size="sm" color="muted">Scroll this box — the panel follows its trigger.</z-text>
 				    <z-popover placement="right">
 				      <z-button slot="trigger" kind="outline" size="sm">Open in here</z-button>
@@ -240,7 +240,7 @@ export const zPopoverDoc: ComponentDocT = {
 				    <z-text size="sm" color="muted">More content.</z-text>
 				    <z-text size="sm" color="muted">And more, so the box actually scrolls.</z-text>
 				    <z-text size="sm" color="muted">And a little more.</z-text>
-				  </z-column>
+				  </wired-column>
 				</div>
 			`
 		})
@@ -251,7 +251,7 @@ export const zPopoverDoc: ComponentDocT = {
 		{ name: 'offset', type: 'number', defaultValue: '8', description: 'Gap in pixels between the trigger and the panel.' },
 		{ name: 'is-open', type: 'boolean', defaultValue: '—', description: 'Whether the panel is showing. Reflects and is two-way — assign it to open or close from code.' },
 		{ name: 'accent', type: 'neutral | dom | sub', defaultValue: 'neutral', description: 'Accent used inside the panel.' },
-		{ name: 'is-disabled', type: 'boolean', defaultValue: '—', description: 'Stops the trigger from opening the panel.' },
+		{ name: 'disabled', type: 'boolean', defaultValue: '—', description: 'Stops the trigger from opening the panel.' },
 		{ name: 'is-hidden', type: 'boolean', defaultValue: '—', description: 'Removes the popover and its trigger from layout.' }
 	],
 

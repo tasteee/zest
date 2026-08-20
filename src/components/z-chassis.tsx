@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, useEffect, useHost, useRef } from 'atomico'
 import { themedScrollbarStyles } from '../shared/scrollbar-styles'
 
@@ -213,4 +214,4 @@ export const ZChassis = c(
 	}
 )
 
-customElements.define('z-chassis', ZChassis)
+defineElement('z-chassis', ZChassis)

@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event, useEffect, useState } from 'atomico'
 
 /*
@@ -350,4 +351,4 @@ export const ZToc = c(
 	}
 )
 
-customElements.define('z-toc', ZToc)
+defineElement('z-toc', ZToc)

@@ -21,7 +21,7 @@ export const zTextareaDoc: ComponentDocT = {
 
 	playground: {
 		buildElement: buildPlaygroundTextarea,
-		controlNames: ['placeholder', 'rows', 'size', 'accent', 'is-auto-resize', 'is-invalid', 'is-disabled', 'is-readonly'],
+		controlNames: ['placeholder', 'rows', 'size', 'accent', 'is-auto-resize', 'invalid', 'disabled', 'is-readonly'],
 		slotLabel: 'Notes'
 	},
 
@@ -84,7 +84,7 @@ export const zTextareaDoc: ComponentDocT = {
 
 		defineMarkupExample({
 			id: 'accents',
-			title: 'Tones',
+			title: 'Accents',
 			description: 'Which accent the border lifts to on focus. Click into each to see the difference.',
 			layout: ExampleLayout.stack,
 			markup: `
@@ -100,8 +100,8 @@ export const zTextareaDoc: ComponentDocT = {
 			description: 'Invalid, disabled, and readonly. Readonly keeps the text selectable, which matters when the content is something to copy.',
 			layout: ExampleLayout.stack,
 			markup: `
-				<z-textarea is-invalid rows="2" value="Too short." label="Invalid"></z-textarea>
-				<z-textarea is-disabled rows="2" placeholder="Disabled" label="Disabled"></z-textarea>
+				<z-textarea invalid rows="2" value="Too short." label="Invalid"></z-textarea>
+				<z-textarea disabled rows="2" placeholder="Disabled" label="Disabled"></z-textarea>
 				<z-textarea is-readonly rows="2" value="Generated summary — read only." label="Readonly"></z-textarea>
 			`
 		}),
@@ -137,8 +137,8 @@ export const zTextareaDoc: ComponentDocT = {
 					bioCount.textContent = `${usedCharacters} / ${characterLimit}${overageNote}`
 					bioCount.setAttribute('color', isOverLimit ? 'sub' : 'muted')
 
-					if (isOverLimit) bioInput.setAttribute('is-invalid', '')
-					if (!isOverLimit) bioInput.removeAttribute('is-invalid')
+					if (isOverLimit) bioInput.setAttribute('invalid', '')
+					if (!isOverLimit) bioInput.removeAttribute('invalid')
 				})
 			}
 		}),
@@ -199,8 +199,8 @@ export const zTextareaDoc: ComponentDocT = {
 		{ name: 'accent', type: 'neutral | dom | sub', defaultValue: 'neutral', description: 'Which accent the border lifts to on focus.' },
 		{ name: 'is-auto-resize', type: 'boolean', defaultValue: '—', description: 'Grows the field to fit its content instead of scrolling.' },
 		{ name: 'is-focused', type: 'boolean', defaultValue: '—', description: 'Reflects the focus state.' },
-		{ name: 'is-invalid', type: 'boolean', defaultValue: '—', description: 'Paints the error border and sets aria-invalid.' },
-		{ name: 'is-disabled', type: 'boolean', defaultValue: '—', description: 'Blocks interaction and removes the field from the tab order.' },
+		{ name: 'invalid', type: 'boolean', defaultValue: '—', description: 'Paints the error border and sets aria-invalid.' },
+		{ name: 'disabled', type: 'boolean', defaultValue: '—', description: 'Blocks interaction and removes the field from the tab order.' },
 		{ name: 'is-readonly', type: 'boolean', defaultValue: '—', description: 'Focusable and selectable, but not editable.' },
 		{ name: 'is-required', type: 'boolean', defaultValue: '—', description: 'Marks the inner textarea required for native form validation.' },
 		{ name: 'is-hidden', type: 'boolean', defaultValue: '—', description: 'Removes the field from layout.' }
@@ -227,7 +227,6 @@ export const zTextareaDoc: ComponentDocT = {
 
 	related: [
 		{ tag: 'z-input', route: '/c/forms/z-input', description: 'The single-line sibling, with the same event shape.' },
-		{ tag: 'z-field', route: '/c/forms/z-field', description: 'Label, help text, and error treatment.' },
-		{ tag: 'z-composer', route: '/c/chat/z-composer', description: 'A full message composer built around this field.' }
+		{ tag: 'z-field', route: '/c/forms/z-field', description: 'Label, help text, and error treatment.' }
 	]
 }

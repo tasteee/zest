@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event, useHost, useProp, useState } from 'atomico'
 
 /*
@@ -67,7 +68,7 @@ const styles = css`
 		--knob-tone: var(--destructive);
 	}
 
-	:host([is-disabled]) {
+	:host([disabled]) {
 		opacity: 0.5;
 		pointer-events: none;
 	}
@@ -330,7 +331,7 @@ export const ZKnob = c(
 					aria-valuenow={current}
 					aria-valuetext={displayValue}
 					aria-orientation="vertical"
-					disabled={props.isDisabled}
+					disabled={props.disabled}
 					onpointerdown={handlePointerDown}
 					onpointermove={handlePointerMove}
 					onpointerup={handlePointerUp}
@@ -363,7 +364,7 @@ export const ZKnob = c(
 			accent: { type: String, reflect: true },
 			isGlowing: { type: Boolean, reflect: true },
 			size: { type: String, reflect: true },
-			isDisabled: { type: Boolean, reflect: true },
+			disabled: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			input: event<{ value: number }>({ bubbles: true, composed: true }),
 			change: event<{ value: number }>({ bubbles: true, composed: true })
@@ -384,4 +385,4 @@ const getKeyedDelta = (key: string, step: number, coarseStep: number): number | 
 	return null
 }
 
-customElements.define('z-knob', ZKnob)
+defineElement('z-knob', ZKnob)

@@ -39,7 +39,7 @@ export const zSelectDoc: ComponentDocT = {
 
 	playground: {
 		buildElement: buildPlaygroundSelect,
-		controlNames: ['placeholder', 'size', 'accent', 'is-invalid', 'is-disabled', 'is-inline'],
+		controlNames: ['placeholder', 'size', 'accent', 'invalid', 'disabled', 'inline'],
 		slotLabel: 'options set as a property'
 	},
 
@@ -163,8 +163,8 @@ export const zSelectDoc: ComponentDocT = {
 			description: 'Invalid and disabled. An empty option list is a state too, and says so rather than opening onto nothing.',
 			layout: ExampleLayout.stack,
 			markup: `
-				<z-select id="invalidSelect" label="Invalid" is-invalid placeholder="Pick one"></z-select>
-				<z-select id="disabledSelect" label="Disabled" is-disabled placeholder="Unavailable"></z-select>
+				<z-select id="invalidSelect" label="Invalid" invalid placeholder="Pick one"></z-select>
+				<z-select id="disabledSelect" label="Disabled" disabled placeholder="Unavailable"></z-select>
 				<z-select id="emptySelect" label="No options" placeholder="Nothing to choose"></z-select>
 			`,
 			script: `
@@ -229,7 +229,7 @@ export const zSelectDoc: ComponentDocT = {
 			layout: ExampleLayout.stack,
 			markup: `
 				<z-select id="countrySelect" accent="dom" label="Country" placeholder="Choose a country"></z-select>
-				<z-select id="citySelect" accent="dom" label="City" placeholder="Choose a country first" is-disabled></z-select>
+				<z-select id="citySelect" accent="dom" label="City" placeholder="Choose a country first" disabled></z-select>
 			`,
 			script: `
 				const countrySelect = document.querySelector('#countrySelect')
@@ -238,7 +238,7 @@ export const zSelectDoc: ComponentDocT = {
 				countrySelect.addEventListener('change', (changeEvent) => {
 				  citySelect.options = citiesByCountry[changeEvent.detail.value]
 				  citySelect.value = ''
-				  citySelect.isDisabled = false
+				  citySelect.disabled = false
 				})
 			`,
 			wire: (root) => {
@@ -267,7 +267,7 @@ export const zSelectDoc: ComponentDocT = {
 
 					citySelect.options = citiesByCountry[detail.value] ?? []
 					citySelect.value = ''
-					citySelect.removeAttribute('is-disabled')
+					citySelect.removeAttribute('disabled')
 					citySelect.setAttribute('placeholder', 'Choose a city')
 				})
 			}
@@ -280,9 +280,9 @@ export const zSelectDoc: ComponentDocT = {
 		{ name: 'placeholder', type: 'string', defaultValue: 'Select…', description: 'Shown in muted type while nothing is selected.' },
 		{ name: 'size', type: 'sm | md | lg', defaultValue: 'md', description: 'Control density.' },
 		{ name: 'accent', type: 'neutral | dom | sub', defaultValue: 'neutral', description: 'Accent family for the focus border and the selected row.' },
-		{ name: 'is-invalid', type: 'boolean', defaultValue: '—', description: 'Paints the error border on the trigger.' },
-		{ name: 'is-disabled', type: 'boolean', defaultValue: '—', description: 'Blocks opening and removes the trigger from the tab order.' },
-		{ name: 'is-inline', type: 'boolean', defaultValue: '—', description: 'Shrinks the trigger to its natural width instead of filling its container.' },
+		{ name: 'invalid', type: 'boolean', defaultValue: '—', description: 'Paints the error border on the trigger.' },
+		{ name: 'disabled', type: 'boolean', defaultValue: '—', description: 'Blocks opening and removes the trigger from the tab order.' },
+		{ name: 'inline', type: 'boolean', defaultValue: '—', description: 'Shrinks the trigger to its natural width instead of filling its container.' },
 		{ name: 'is-hidden', type: 'boolean', defaultValue: '—', description: 'Removes the select from layout.' }
 	],
 

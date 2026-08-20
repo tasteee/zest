@@ -16,7 +16,7 @@ export const zTextDoc: ComponentDocT = {
 	status: ComponentStatus.stable,
 
 	description:
-		'`z-text` and its siblings `z-heading`, `z-subheading`, and `z-label` are one component with four defaults. They take the same `size`, `color`, `weight`, and `tag` props and share one type scale; what separates them is the weight they start at, whether they uppercase, and which element they render. Learning the props here means you already know the other three. Renders a `<p>` unless `tag` says otherwise.',
+		'`z-text`, `z-heading`, and `z-subheading` share the same flexible typography API. `z-label` is intentionally narrower: it has one fixed small-caps treatment matching `z-field`. `z-text` renders a `<p>` unless `tag` says otherwise.',
 
 	playground: {
 		buildElement: buildPlaygroundText,
@@ -27,7 +27,7 @@ export const zTextDoc: ComponentDocT = {
 	usageGuidance: [
 		'Pick `size` for the visual scale and `tag` for the semantics. They default to matching, and should only diverge when you have a specific reason.',
 		'`color="muted"` is the workhorse for secondary copy. Reaching for a lower `weight` to make text recede usually reads as a rendering bug instead.',
-		'Cap measure with the layout, not the type — a `z-container` or a `max-width` on the parent. Long lines are a layout problem.',
+		'Cap measure with the layout, not the type — use a constrained parent. Long lines are a layout problem.',
 		'Use `z-inline` for a styled fragment inside a paragraph. Nesting a `z-text` inside another resets the size and breaks the rhythm.'
 	],
 
@@ -113,7 +113,7 @@ export const zTextDoc: ComponentDocT = {
 				'The everyday pairing: one size up and muted for the lede, default for the body. Two sizes is usually the whole hierarchy a block of prose needs.',
 			layout: ExampleLayout.fill,
 			markup: `
-				<z-column gap="4" style="max-width: 44rem">
+				<wired-column gap="md" style="max-width: 44rem">
 				  <z-text size="lg" color="muted">
 				    Every component ships its own encapsulated styles, so dropping one into
 				    an existing page never inherits anything you did not ask for.
@@ -123,7 +123,7 @@ export const zTextDoc: ComponentDocT = {
 				    You can put a single control into a page built with something else
 				    entirely and it will look exactly as it does here.
 				  </z-text>
-				</z-column>
+				</wired-column>
 			`
 		}),
 

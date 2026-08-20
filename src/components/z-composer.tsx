@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event, useProp, useRef } from 'atomico'
 import { themedScrollbarStyles } from '../shared/scrollbar-styles'
 
@@ -71,6 +72,26 @@ const styles = css`
 	textarea::placeholder {
 		color: var(--muted-foreground);
 	}
+
+	.send {
+		display: inline-grid;
+		place-items: center;
+		width: 2.25rem;
+		height: 2.25rem;
+		padding: 0;
+		border: 0;
+		border-radius: 999px;
+		background: var(--primary);
+		color: var(--primary-foreground);
+		cursor: pointer;
+		user-select: none;
+		-webkit-user-select: none;
+		transition: opacity 0.12s ease, transform 0.08s ease;
+	}
+	.send:hover:not(:disabled) { transform: scale(1.05); }
+	.send:active:not(:disabled) { transform: scale(0.95); }
+	.send:disabled { opacity: 0.4; cursor: default; }
+	.send svg { width: 1.1rem; height: 1.1rem; stroke: currentColor; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
 `
 
 export const ZComposer = c(
@@ -90,7 +111,7 @@ export const ZComposer = c(
 		}
 
 		const send = () => {
-			if (!hasText || props.isDisabled) return
+			if (!hasText || props.disabled) return
 			props.send({ value: text })
 			setValue('')
 			requestAnimationFrame(() => {
@@ -108,7 +129,7 @@ export const ZComposer = c(
 
 		const composerClass = ['composer']
 			.concat(isFocused ? ['is-focused'] : [])
-			.concat(props.isDisabled ? ['is-disabled'] : [])
+			.concat(props.disabled ? ['is-disabled'] : [])
 			.join(' ')
 
 		return (
@@ -122,7 +143,7 @@ export const ZComposer = c(
 						rows={1}
 						value={text}
 						placeholder={props.placeholder || 'Message…'}
-						disabled={props.isDisabled}
+						disabled={props.disabled}
 						aria-label={props.placeholder || 'Message'}
 						onfocus={() => setIsFocused(true)}
 						onblur={() => setIsFocused(false)}
@@ -135,7 +156,9 @@ export const ZComposer = c(
 					/>
 					<span class='trailing'>
 						<slot name='trailing'>
-							<z-send-button is-disabled={!hasText} onsend={send} />
+							<button class='send' type='button' disabled={!hasText || props.disabled} aria-label='Send' onclick={send}>
+								<svg viewBox='0 0 24 24' aria-hidden='true'><path d='M12 19V5M5 12l7-7 7 7' /></svg>
+							</button>
 						</slot>
 					</span>
 				</div>
@@ -147,8 +170,8 @@ export const ZComposer = c(
 			value: { type: String, reflect: true },
 			placeholder: { type: String, reflect: true },
 			isFocused: { type: Boolean, reflect: true },
-			isDisabled: { type: Boolean, reflect: true },
-			doesSubmitOnEnter: { type: Boolean, reflect: true, value: true },
+			disabled: { type: Boolean, reflect: true },
+			doesSubmitOnEnter: { type: Boolean, reflect: true, value: () => true },
 			isHidden: { type: Boolean, reflect: true },
 			input: event<{ value: string }>({ bubbles: true, composed: true }),
 			send: event<{ value: string }>({ bubbles: true, composed: true })
@@ -157,4 +180,4 @@ export const ZComposer = c(
 	}
 )
 
-customElements.define('z-composer', ZComposer)
+defineElement('z-composer', ZComposer)

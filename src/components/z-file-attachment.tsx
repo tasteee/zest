@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css } from 'atomico'
 
 /*
@@ -199,4 +200,4 @@ export const ZFileAttachment = c(
 	}
 )
 
-customElements.define('z-file-attachment', ZFileAttachment)
+defineElement('z-file-attachment', ZFileAttachment)

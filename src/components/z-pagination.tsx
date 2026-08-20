@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event, useProp } from 'atomico'
 
 /*
@@ -182,4 +183,4 @@ export const ZPagination = c(
 	}
 )
 
-customElements.define('z-pagination', ZPagination)
+defineElement('z-pagination', ZPagination)

@@ -1,8 +1,9 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event, useProp } from 'atomico'
 
 /*
  * z-checkbox — square control. Unchecked is a hairline outline; checked fills
- * with the accent and reveals a stroked checkmark. Supports indeterminate.
+ * with the accent and reveals a stroked checkmark.
  * Optional slotted label sits to the right and is fully clickable.
  */
 const styles = css`
@@ -14,21 +15,23 @@ const styles = css`
 		display: none;
 	}
 
-	:host([is-block]) {
-		display: flex;
-	}
-
 	label {
 		display: inline-flex;
 		align-items: center;
 		gap: 0.625rem;
+		min-height: var(--control-height-md);
 		cursor: pointer;
 		font-family: inherit;
 		font-size: var(--font-size-small);
 		color: var(--foreground);
 		user-select: none;
+		-webkit-user-select: none;
 		--accent: var(--primary);
 	}
+
+	label.is-sm { min-height: var(--control-height-sm); font-size: var(--font-size-caption); }
+	label.is-md { font-size: var(--font-size-small); }
+	label.is-lg { min-height: var(--control-height-lg); font-size: var(--font-size-body); }
 
 	:host([accent='dom']) label {
 		--accent: var(--purple);
@@ -70,8 +73,7 @@ const styles = css`
 		border-color: color-mix(in oklch, var(--foreground) 40%, transparent);
 	}
 
-	.box.is-checked,
-	.box.is-indeterminate {
+	.box.is-checked {
 		background: var(--accent);
 		border-color: var(--accent);
 	}
@@ -109,12 +111,6 @@ const styles = css`
 		transform: scale(1);
 	}
 
-	.dash {
-		width: 60%;
-		height: 2px;
-		border-radius: 1px;
-		background: var(--primary-foreground);
-	}
 `
 
 const resolveSizeClass = (props: any): string => {
@@ -128,13 +124,10 @@ export const ZCheckbox = c(
 		const [isChecked, setIsChecked] = useProp<boolean>('isChecked')
 
 		const labelClass = ['label', resolveSizeClass(props)]
-			.concat(props.isDisabled ? ['is-disabled'] : [])
+			.concat(props.disabled ? ['is-disabled'] : [])
 			.join(' ')
 
-		const boxClass = ['box']
-			.concat(isChecked && !props.isIndeterminate ? ['is-checked'] : [])
-			.concat(props.isIndeterminate ? ['is-indeterminate'] : [])
-			.join(' ')
+		const boxClass = ['box'].concat(isChecked ? ['is-checked'] : []).join(' ')
 
 		return (
 			<host shadowDom>
@@ -144,22 +137,19 @@ export const ZCheckbox = c(
 						checked={isChecked}
 						name={props.name}
 						value={props.value}
-						disabled={props.isDisabled}
-						aria-checked={props.isIndeterminate ? 'mixed' : isChecked ? 'true' : 'false'}
-						onchange={() => {
+						disabled={props.disabled}
+						aria-checked={isChecked ? 'true' : 'false'}
+						onchange={(changeEvent: Event) => {
+							changeEvent.stopPropagation()
 							const next = !isChecked
 							setIsChecked(next)
 							props.change({ checked: next, value: props.value })
 						}}
 					/>
 					<span class={boxClass} aria-hidden="true">
-						{props.isIndeterminate ? (
-							<span class="dash"></span>
-						) : (
-							<svg class="check" viewBox="0 0 24 24">
-								<polyline points="4 12 10 18 20 6" />
-							</svg>
-						)}
+						<svg class="check" viewBox="0 0 24 24">
+							<polyline points="4 12 10 18 20 6" />
+						</svg>
 					</span>
 					<slot />
 				</label>
@@ -169,10 +159,8 @@ export const ZCheckbox = c(
 	{
 		props: {
 			isChecked: { type: Boolean, reflect: true },
-			isIndeterminate: { type: Boolean, reflect: true },
-			isDisabled: { type: Boolean, reflect: true },
+			disabled: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
-			isBlock: { type: Boolean, reflect: true },
 			size: { type: String, reflect: true },
 			accent: { type: String, reflect: true },
 			name: String,
@@ -183,4 +171,4 @@ export const ZCheckbox = c(
 	}
 )
 
-customElements.define('z-checkbox', ZCheckbox)
+defineElement('z-checkbox', ZCheckbox)

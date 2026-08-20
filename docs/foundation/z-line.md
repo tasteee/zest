@@ -9,17 +9,16 @@ For a divider with a centered label, use [z-separator](z-separator.md) instead.
 <!-- inside a horizontal row -->
 <z-box   gap="2">
   <span>A</span>
-  <z-line direction="vertical"></z-line>
+  <z-line vertical></z-line>
   <span>B</span>
 </z-box>
 ```
 
 ## Attributes
 
-| Attribute | Type | Description |
-| --- | --- | --- |
-| `direction` | boolean | render a vertical 1px rule (full height) instead of horizontal |
-| `direction` | boolean | explicit horizontal (the default) |
+| Attribute | Type | Default | Description |
+| --- | --- | --- | --- |
+| `vertical` | boolean | `false` | fills the available height instead of width |
 
 Exposes `role="separator"` with the matching `aria-orientation`.
 

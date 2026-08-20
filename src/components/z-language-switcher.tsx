@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event } from 'atomico'
 
 /*
@@ -100,4 +101,4 @@ export const ZLanguageSwitcher = c(
 	}
 )
 
-customElements.define('z-language-switcher', ZLanguageSwitcher)
+defineElement('z-language-switcher', ZLanguageSwitcher)

@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event, useHost, useRef, useEffect } from 'atomico'
 import { themedScrollbarStyles } from '../shared/scrollbar-styles'
 
@@ -282,4 +283,4 @@ export const ZVirtualList = c(
 	}
 )
 
-customElements.define('z-virtual-list', ZVirtualList)
+defineElement('z-virtual-list', ZVirtualList)

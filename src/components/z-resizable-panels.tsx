@@ -5,7 +5,7 @@ import { c, css, event, useHost, useRef, useEffect } from 'atomico'
  * react-resizable-panels. Author it declaratively (same shape as z-range /
  * z-range-handle): z-panel children separated by z-panel-handle separators.
  *
- *   <z-resizable-panels direction="row" auto-save-id="editor">
+ *   <z-resizable-panels direction="horizontal" auto-save-id="editor">
  *     <z-panel default-size="20%" min-size="160px" collapsible>…</z-panel>
  *     <z-panel-handle></z-panel-handle>
  *     <z-panel min-size="30%">…</z-panel>
@@ -28,7 +28,7 @@ const styles = css`
 		height: 100%;
 		overflow: hidden;
 	}
-	:host([direction='column']) {
+	:host([direction='vertical']) {
 		flex-direction: column;
 	}
 	::slotted(z-panel) {
@@ -77,7 +77,7 @@ export const ZResizablePanels = c(
 		const panels = () =>
 			[...el().querySelectorAll(':scope > z-panel')] as HTMLElement[]
 		const extent = () =>
-			props.direction === 'column' ? el().clientHeight : el().clientWidth
+			props.direction === 'vertical' ? el().clientHeight : el().clientWidth
 		const isCollapsed = (p: Element) => p.hasAttribute('is-collapsed')
 
 		const cons = (p: HTMLElement, g: number): Cons => {
@@ -200,7 +200,7 @@ export const ZResizablePanels = c(
 			// Engine surface consumed by z-panel-handle / z-panel.
 			g.__resizeAt = resizeAt
 			g.__extent = extent
-			g.__isDisabled = () => Boolean(props.isDisabled)
+			g.__isDisabled = () => Boolean(props.disabled)
 			g.__keyboardStep = () => props.keyboardStep ?? 5
 			g.__panelIndexOfHandle = (handle: Element) => {
 				let i = -1
@@ -242,7 +242,7 @@ export const ZResizablePanels = c(
 				mo.disconnect()
 				ro.disconnect()
 			}
-		}, [props.direction, props.autoSaveId, props.isDisabled])
+		}, [props.direction, props.autoSaveId, props.disabled])
 
 		return (
 			<host shadowDom>
@@ -255,19 +255,18 @@ export const ZResizablePanels = c(
 			direction: { type: String, reflect: true },
 			autoSaveId: { type: String, reflect: true },
 			keyboardStep: { type: Number, reflect: true },
-			isDisabled: { type: Boolean, reflect: true },
+			disabled: { type: Boolean, reflect: true },
 			layout: event<{ sizes: number[] }>({ bubbles: true, composed: true })
 		},
 		styles
 	}
 )
 
-customElements.define('z-resizable-panels', ZResizablePanels)
 
 /*
  * z-panel-handle — the draggable separator between two panels. Renders a hairline
  * grip by default, but its slot lets you drop in a custom separator that stays the
- * drag target. Pointer drag moves the adjacent boundary; ←/→ (or ↑/↓ in a column
+ * drag target. Pointer drag moves the adjacent boundary; ←/→ (or ↑/↓ in a vertical
  * group) resize by the group's keyboard-step. Styleable via part="grip".
  */
 const handleStyles = css`
@@ -288,7 +287,7 @@ const handleStyles = css`
 		cursor: row-resize;
 		padding: 5px 0;
 	}
-	:host([is-disabled]) {
+	:host([disabled]) {
 		cursor: default;
 		pointer-events: none;
 	}
@@ -331,19 +330,19 @@ export const ZPanelHandle = c(
 		const s = useRef({ active: false, last: 0 }).current!
 
 		const group = () => (host.current as HTMLElement).parentElement as any
-		const isColumn = () => group()?.getAttribute('direction') === 'column'
+		const isVertical = () => group()?.getAttribute('direction') === 'vertical'
 
 		// Mirror the group's orientation onto the host so CSS can flip the grip +
 		// cursor without :host-context (which Firefox doesn't support).
 		useEffect(() => {
-			;(host.current as HTMLElement).toggleAttribute('is-column', isColumn())
+			;(host.current as HTMLElement).toggleAttribute('is-column', isVertical())
 		})
 
 		const onDown = (e: PointerEvent) => {
 			const g = group()
-			if (props.isDisabled || g?.__isDisabled?.()) return
+			if (props.disabled || g?.__isDisabled?.()) return
 			s.active = true
-			s.last = isColumn() ? e.clientY : e.clientX
+			s.last = isVertical() ? e.clientY : e.clientX
 			;(e.currentTarget as HTMLElement).setPointerCapture(e.pointerId)
 			;(host.current as HTMLElement).classList.add('is-dragging')
 			props.dragging({ isDragging: true })
@@ -351,7 +350,7 @@ export const ZPanelHandle = c(
 		const onMove = (e: PointerEvent) => {
 			if (!s.active) return
 			const g = group()
-			const pos = isColumn() ? e.clientY : e.clientX
+			const pos = isVertical() ? e.clientY : e.clientX
 			g.__resizeAt(g.__panelIndexOfHandle(host.current), pos - s.last)
 			s.last = pos
 		}
@@ -363,8 +362,8 @@ export const ZPanelHandle = c(
 		}
 		const onKey = (e: KeyboardEvent) => {
 			const g = group()
-			if (props.isDisabled || !g) return
-			const col = isColumn()
+			if (props.disabled || !g) return
+			const col = isVertical()
 			const forward = col ? 'ArrowDown' : 'ArrowRight'
 			const back = col ? 'ArrowUp' : 'ArrowLeft'
 			if (e.key !== forward && e.key !== back) return
@@ -377,8 +376,8 @@ export const ZPanelHandle = c(
 			<host
 				shadowDom
 				role="separator"
-				tabindex={props.isDisabled ? '-1' : '0'}
-				aria-orientation={group()?.getAttribute('direction') === 'column' ? 'horizontal' : 'vertical'}
+				tabindex={props.disabled ? '-1' : '0'}
+				aria-orientation={group()?.getAttribute('direction') === 'vertical' ? 'horizontal' : 'vertical'}
 				onpointerdown={onDown}
 				onpointermove={onMove}
 				onpointerup={onUp}
@@ -393,11 +392,9 @@ export const ZPanelHandle = c(
 	},
 	{
 		props: {
-			isDisabled: { type: Boolean, reflect: true },
+			disabled: { type: Boolean, reflect: true },
 			dragging: event<{ isDragging: boolean }>({ bubbles: true, composed: true })
 		},
 		styles: handleStyles
 	}
 )
-
-customElements.define('z-panel-handle', ZPanelHandle)

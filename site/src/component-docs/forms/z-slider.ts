@@ -23,7 +23,7 @@ export const zSliderDoc: ComponentDocT = {
 
 	playground: {
 		buildElement: buildPlaygroundSlider,
-		controlNames: ['label', 'min', 'max', 'step', 'accent', 'does-show-value', 'value-prefix', 'value-suffix', 'is-disabled'],
+		controlNames: ['label', 'min', 'max', 'step', 'accent', 'does-show-value', 'value-prefix', 'value-suffix', 'disabled'],
 		slotLabel: 'Volume'
 	},
 
@@ -78,7 +78,7 @@ export const zSliderDoc: ComponentDocT = {
 
 		defineMarkupExample({
 			id: 'accents',
-			title: 'Tones',
+			title: 'Accents',
 			description: 'The accent used by the fill, the thumb, and the value pill.',
 			layout: ExampleLayout.stack,
 			markup: `
@@ -106,7 +106,7 @@ export const zSliderDoc: ComponentDocT = {
 			description: 'The value stays legible — a disabled slider still has to report where things stand.',
 			layout: ExampleLayout.fill,
 			markup: `
-				<z-slider label="Disabled" value="65" does-show-value value-suffix="%" is-disabled style="width: 100%"></z-slider>
+				<z-slider label="Disabled" value="65" does-show-value value-suffix="%" disabled style="width: 100%"></z-slider>
 			`
 		}),
 
@@ -189,7 +189,7 @@ export const zSliderDoc: ComponentDocT = {
 		{ name: 'value-suffix', type: 'string', defaultValue: '—', description: 'Text after the value — a unit.' },
 		{ name: 'accent', type: 'neutral | dom | sub', defaultValue: 'neutral', description: 'Accent for the fill, the thumb, and the value pill.' },
 		{ name: 'name', type: 'string', defaultValue: '—', description: 'Name passed to the inner range input.' },
-		{ name: 'is-disabled', type: 'boolean', defaultValue: '—', description: 'Blocks dragging and keyboard changes.' },
+		{ name: 'disabled', type: 'boolean', defaultValue: '—', description: 'Blocks dragging and keyboard changes.' },
 		{ name: 'is-hidden', type: 'boolean', defaultValue: '—', description: 'Removes the slider from layout.' }
 	],
 

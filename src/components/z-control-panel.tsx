@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event } from 'atomico'
 
 /*
@@ -5,7 +6,7 @@ import { c, css, event } from 'atomico'
  *
  *   panel.controls = [
  *     { name: 'size', kind: 'enum', options: ['xs', 'sm', 'md'], defaultValue: 'md' },
- *     { name: 'is-disabled', kind: 'boolean' }
+ *     { name: 'disabled', kind: 'boolean' }
  *   ]
  *   panel.values = { size: 'sm' }
  *   panel.addEventListener('change', (e) => e.detail)  // { name, value }
@@ -96,14 +97,17 @@ export const ZControlPanel = c(
 		}
 
 		const buildBooleanControl = (control: ControlT) => {
-			const isChecked = Boolean(values[control.name])
+			// Boolean HTML attributes are true by presence. Their serialized value
+			// is intentionally the empty string, so truthiness would read them as off.
+			const isChecked = Object.prototype.hasOwnProperty.call(values, control.name)
 
 			return (
 				<z-switch
 					size='sm'
 					aria-label={control.name}
-					is-checked={isChecked}
+					isChecked={isChecked}
 					onchange={(changeEvent: CustomEvent<{ checked: boolean }>) => {
+						changeEvent.stopPropagation()
 						emit(control.name, changeEvent.detail.checked ? '' : null)
 					}}
 				/>
@@ -123,6 +127,7 @@ export const ZControlPanel = c(
 					options={options}
 					value={current}
 					onchange={(changeEvent: CustomEvent<{ value: string }>) => {
+						changeEvent.stopPropagation()
 						emit(control.name, changeEvent.detail.value)
 					}}
 				/>
@@ -143,6 +148,7 @@ export const ZControlPanel = c(
 					placeholder={declaredDefault}
 					value={isUsable ? parsed : undefined}
 					oninput={(inputEvent: CustomEvent<{ value: number | null }>) => {
+						inputEvent.stopPropagation()
 						const next = inputEvent.detail.value
 						emit(control.name, next === null ? '' : String(next))
 					}}
@@ -160,6 +166,7 @@ export const ZControlPanel = c(
 					placeholder={declaredDefault || control.name}
 					value={current}
 					oninput={(inputEvent: CustomEvent<{ value: string }>) => {
+						inputEvent.stopPropagation()
 						emit(control.name, inputEvent.detail.value)
 					}}
 				/>
@@ -194,4 +201,4 @@ export const ZControlPanel = c(
 	}
 )
 
-customElements.define('z-control-panel', ZControlPanel)
+defineElement('z-control-panel', ZControlPanel)

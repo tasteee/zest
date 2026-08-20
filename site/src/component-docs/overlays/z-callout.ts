@@ -195,7 +195,6 @@ export const zCalloutDoc: ComponentDocT = {
 
 	related: [
 		{ tag: 'z-alert', route: '/c/overlays/z-alert', description: 'For system state rather than prose emphasis.' },
-		{ tag: 'z-markdown', route: '/c/specialized/z-markdown', description: 'Where callouts usually end up rendered.' },
 		{ tag: 'z-collapsible', route: '/c/navigation-disclosure/z-collapsible', description: 'For hiding a whole section rather than clamping copy.' }
 	]
 }

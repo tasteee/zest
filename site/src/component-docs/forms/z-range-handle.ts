@@ -49,7 +49,7 @@ export const zRangeHandleDoc: ComponentDocT = {
 			description: 'Two handles with nothing but a value. Everything else is inherited from the parent domain.',
 			layout: ExampleLayout.fill,
 			markup: `
-				<z-range min="0" max="100" does-show-value style="width: 100%">
+				<z-range min="0" max="100" show-value style="width: 100%">
 				  <z-range-handle value="30"></z-range-handle>
 				  <z-range-handle value="70"></z-range-handle>
 				</z-range>
@@ -63,7 +63,7 @@ export const zRangeHandleDoc: ComponentDocT = {
 				'The lower handle cannot fall below 25; the upper cannot rise above 85. The shaded ends are the stretches neither handle can ever occupy.',
 			layout: ExampleLayout.fill,
 			markup: `
-				<z-range label="Threshold band" min="0" max="100" does-show-value value-suffix="%" style="width: 100%">
+				<z-range label="Threshold band" min="0" max="100" show-value value-suffix="%" style="width: 100%">
 				  <z-range-handle value="40" min="25" accent="dom"></z-range-handle>
 				  <z-range-handle value="70" max="85" accent="dom"></z-range-handle>
 				</z-range>
@@ -72,11 +72,11 @@ export const zRangeHandleDoc: ComponentDocT = {
 
 		defineMarkupExample({
 			id: 'accents',
-			title: 'Tones',
+			title: 'Accents',
 			description: 'Each handle paints its own thumb. Differing accents are worth it when the two ends carry different meaning.',
 			layout: ExampleLayout.fill,
 			markup: `
-				<z-range label="Soft and hard limit" min="0" max="100" does-show-value style="width: 100%">
+				<z-range label="Soft and hard limit" min="0" max="100" show-value style="width: 100%">
 				  <z-range-handle value="45" accent="dom"></z-range-handle>
 				  <z-range-handle value="80" accent="sub"></z-range-handle>
 				</z-range>
@@ -90,7 +90,7 @@ export const zRangeHandleDoc: ComponentDocT = {
 				'`label` becomes the accessible name of that end’s input. Tab into the track and each handle announces what it actually controls instead of "Lower value".',
 			layout: ExampleLayout.fill,
 			markup: `
-				<z-range label="Price range" min="0" max="500" step="10" does-show-value value-prefix="$" style="width: 100%">
+				<z-range label="Price range" min="0" max="500" step="10" show-value value-prefix="$" style="width: 100%">
 				  <z-range-handle value="120" label="Minimum price" accent="dom"></z-range-handle>
 				  <z-range-handle value="380" label="Maximum price" accent="dom"></z-range-handle>
 				</z-range>
@@ -104,7 +104,7 @@ export const zRangeHandleDoc: ComponentDocT = {
 				'The upper handle steps in fives while the lower moves freely. Useful when one end is a rough ceiling and the other needs precision.',
 			layout: ExampleLayout.fill,
 			markup: `
-				<z-range label="Mixed precision" min="0" max="100" does-show-value style="width: 100%">
+				<z-range label="Mixed precision" min="0" max="100" show-value style="width: 100%">
 				  <z-range-handle value="22" accent="dom"></z-range-handle>
 				  <z-range-handle value="75" step="5" accent="dom"></z-range-handle>
 				</z-range>
@@ -118,7 +118,7 @@ export const zRangeHandleDoc: ComponentDocT = {
 				'The parent writes each live value back onto its handle, so the elements stay truthful. Prefer the parent’s event detail, but this is the fallback when you only have the handle in hand.',
 			layout: ExampleLayout.stack,
 			markup: `
-				<z-range id="readbackRange" label="Span" min="0" max="100" does-show-value style="width: 100%">
+				<z-range id="readbackRange" label="Span" min="0" max="100" show-value style="width: 100%">
 				  <z-range-handle class="readbackHandle" value="20" accent="dom"></z-range-handle>
 				  <z-range-handle class="readbackHandle" value="60" accent="dom"></z-range-handle>
 				</z-range>

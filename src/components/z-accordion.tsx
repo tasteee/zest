@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, useHost, useEffect } from 'atomico'
 
 /*
@@ -60,4 +61,4 @@ export const ZAccordion = c(
 	}
 )
 
-customElements.define('z-accordion', ZAccordion)
+defineElement('z-accordion', ZAccordion)

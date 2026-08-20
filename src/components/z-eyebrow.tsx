@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css } from 'atomico'
 
 /*
@@ -29,6 +30,8 @@ const styles = css`
 	/* Full-width lets the trailing rule stretch to the edge instead of a fixed 5rem. */
 	:host([is-full-width]) {
 		display: flex;
+		width: 100%;
+		min-width: 0;
 	}
 
 	.label {
@@ -43,6 +46,7 @@ const styles = css`
 	}
 
 	.rule {
+		min-width: 0;
 		flex-shrink: 0;
 		width: var(--eyebrow-rule-width, 5rem);
 		height: 1px;
@@ -74,4 +78,4 @@ export const ZEyebrow = c(
 	}
 )
 
-customElements.define('z-eyebrow', ZEyebrow)
+defineElement('z-eyebrow', ZEyebrow)

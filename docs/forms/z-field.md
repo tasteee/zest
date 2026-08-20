@@ -5,6 +5,10 @@ Use it for standalone inputs, textareas, selects, and comboboxes. `z-field`
 forwards its `label` to the first slotted Zest control as its accessible name,
 which keeps the label working across the control's shadow DOM.
 
+The visible label sits above the control, flush with its outer edge. It stays in
+normal flow and uses no shadow, so the treatment remains legible on every theme
+and surface.
+
 ```html
 <z-field label="Email address" description="Used for account notifications.">
   <z-input type="email" placeholder="you@example.com"></z-input>
@@ -45,7 +49,7 @@ document.querySelector('z-select').options = [
 
 ```html
 <z-field label="Project name" is-required error="Use at least 3 characters.">
-  <z-input value="Hi" is-invalid is-required></z-input>
+  <z-input value="Hi" invalid></z-input>
 </z-field>
 ```
 
@@ -67,6 +71,23 @@ When a full field wrapper would be visual noise, name the control directly.
 <z-combobox label="Filter framework" placeholder="Filter"></z-combobox>
 ```
 
+### Mixed input and switch row
+
+Keep the switch label beside its track. Reserve the empty label band so its
+40px interaction row aligns with the input's 40px control row.
+
+```html
+<wired-row y="start" gap="md">
+  <z-field label="Server address">
+    <z-input placeholder="api.example.com"></z-input>
+  </z-field>
+
+  <z-field is-label-reserved>
+    <z-switch>Use TLS</z-switch>
+  </z-field>
+</wired-row>
+```
+
 ## Properties & attributes
 
 | Name | Type | Description |
@@ -74,8 +95,9 @@ When a full field wrapper would be visual noise, name the control directly.
 | `label` | string | Visible field name; forwarded to the first slotted Zest control as its accessible name. |
 | `description` | string | Optional concise guidance below the control. |
 | `error` | string | Optional actionable validation message; replaces `description` when supplied. |
-| `is-required` | boolean | Shows a required marker beside the label. Add `is-required` to the control as well when native validation is required. |
+| `is-required` | boolean | Shows a required marker and forwards required state to a supporting slotted control for native validation. |
 | `is-label-hidden` | boolean | Visually hides the label while retaining it as the control's accessible name. |
+| `is-label-reserved` | boolean | Reserves an empty label band so inline-labelled controls align with top-labelled fields. |
 
 ## Slots
 

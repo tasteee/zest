@@ -6,10 +6,11 @@ const buildPlaygroundRadioGroup = (): HTMLElement => {
 	const group = document.createElement('z-radio-group')
 	group.setAttribute('label', 'Billing period')
 	group.setAttribute('value', 'monthly')
+	group.setAttribute('accent', 'dom')
 
 	group.innerHTML = `
-		<z-radio value="monthly" accent="dom" is-checked>Monthly</z-radio>
-		<z-radio value="annual" accent="dom">Annual</z-radio>
+		<z-radio value="monthly" is-checked>Monthly</z-radio>
+		<z-radio value="annual">Annual</z-radio>
 	`
 
 	return group
@@ -26,13 +27,14 @@ export const zRadioGroupDoc: ComponentDocT = {
 
 	playground: {
 		buildElement: buildPlaygroundRadioGroup,
-		controlNames: ['label', 'direction'],
+		controlNames: ['label', 'direction', 'accent'],
 		slotLabel: 'Two z-radio children'
 	},
 
 	usageGuidance: [
 		'Bind to `change` on the group, not to each radio. One handler, one value — that is the reason the group exists.',
 		'Set `label`. It becomes the group’s accessible name, which is the difference between hearing "Billing period, Monthly" and just "Monthly".',
+		'Set `accent` on the group when its radios should share neutral, dom, or sub emphasis. An accent on an individual radio can still override it.',
 		'Seed the initial answer either way — `value` on the group or `is-checked` on a child. Prefer `value` when the answer comes from your data, and `is-checked` when the markup is static.',
 		'Stack vertically by default. `direction` is for two or three short labels — anything longer becomes a line the eye has to hunt across.',
 		'Always give the user a real default when one exists. A group where nothing is chosen forces a decision before the user has read the options.',
@@ -53,9 +55,27 @@ export const zRadioGroupDoc: ComponentDocT = {
 			description: 'A label, two options, one answer. `is-checked` on a child sets where the group starts.',
 			layout: ExampleLayout.stack,
 			markup: `
-				<z-radio-group label="Billing period" value="monthly">
-				  <z-radio value="monthly" accent="dom" is-checked>Monthly</z-radio>
-				  <z-radio value="annual" accent="dom">Annual — save 20%</z-radio>
+				<z-radio-group label="Billing period" value="monthly" accent="dom">
+				  <z-radio value="monthly" is-checked>Monthly</z-radio>
+				  <z-radio value="annual">Annual — save 20%</z-radio>
+				</z-radio-group>
+			`
+		}),
+
+		defineMarkupExample({
+			id: 'accents',
+			title: 'Accents',
+			description: 'Accent belongs to the group, so every option uses the same selection colour.',
+			layout: ExampleLayout.stack,
+			markup: `
+				<z-radio-group label="Neutral choice" value="a" accent="neutral" direction="horizontal">
+				  <z-radio value="a">A</z-radio><z-radio value="b">B</z-radio>
+				</z-radio-group>
+				<z-radio-group label="Dom choice" value="a" accent="dom" direction="horizontal">
+				  <z-radio value="a">A</z-radio><z-radio value="b">B</z-radio>
+				</z-radio-group>
+				<z-radio-group label="Sub choice" value="a" accent="sub" direction="horizontal">
+				  <z-radio value="a">A</z-radio><z-radio value="b">B</z-radio>
 				</z-radio-group>
 			`
 		}),
@@ -72,10 +92,10 @@ export const zRadioGroupDoc: ComponentDocT = {
 				  <z-radio value="light" accent="dom">Light</z-radio>
 				  <z-radio value="dark" accent="dom">Dark</z-radio>
 				</z-radio-group>
-				<z-row gap="sm">
+				<wired-row gap="sm">
 				  <z-button id="pickLight" size="sm" kind="outline">Set to light</z-button>
 				  <z-button id="pickDark" size="sm" kind="outline">Set to dark</z-button>
-				</z-row>
+				</wired-row>
 			`,
 			script: `
 				const themeGroup = document.querySelector('#themeGroup')
@@ -108,7 +128,7 @@ export const zRadioGroupDoc: ComponentDocT = {
 			description: '`direction` lays the options in a row. Reserve it for short labels — a wrapped row is harder to scan than a column.',
 			layout: ExampleLayout.stack,
 			markup: `
-				<z-radio-group label="Alignment" value="left" direction>
+				<z-radio-group label="Alignment" value="left" direction="horizontal">
 				  <z-radio value="left" accent="dom" is-checked>Left</z-radio>
 				  <z-radio value="center" accent="dom">Center</z-radio>
 				  <z-radio value="right" accent="dom">Right</z-radio>
@@ -218,7 +238,8 @@ export const zRadioGroupDoc: ComponentDocT = {
 			description: 'The chosen value. Reflects, two-way — assigning it checks the matching child, and it updates as the selection changes.'
 		},
 		{ name: 'label', type: 'string', defaultValue: '—', description: 'Accessible name for the group. Set this even when a z-field already shows a visible label.' },
-		{ name: 'direction', type: 'boolean', defaultValue: '—', description: 'Lays the options in a row instead of a column.' },
+		{ name: 'accent', type: 'neutral | dom | sub | success | warning | error', defaultValue: 'neutral', description: 'Shared selection accent for the radios in the group.' },
+		{ name: 'direction', type: 'vertical | horizontal', defaultValue: 'vertical', description: 'Sets the option layout axis.' },
 		{ name: 'is-hidden', type: 'boolean', defaultValue: '—', description: 'Removes the group from layout.' }
 	],
 

@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event, useEffect, useRef, useState } from 'atomico'
 
 /*
@@ -227,4 +228,4 @@ export const ZMermaid = c(
 	}
 )
 
-customElements.define('z-mermaid', ZMermaid)
+defineElement('z-mermaid', ZMermaid)

@@ -108,7 +108,7 @@ export const zThemeSwitcherDoc: ComponentDocT = {
 
 		defineMarkupExample({
 			id: 'accents',
-			title: 'Tones',
+			title: 'Accents',
 			description: 'The selection paints neutral by default. A accent is available when the switcher is the subject of the screen rather than chrome around it.',
 			layout: ExampleLayout.stack,
 			markup: `
@@ -125,24 +125,24 @@ export const zThemeSwitcherDoc: ComponentDocT = {
 				'`data-theme` is not a document-wide switch. Both values are defined as plain attribute selectors, so either theme can be pinned onto any subtree — which is how these two specimens render side by side no matter what the page is set to.',
 			layout: ExampleLayout.stack,
 			markup: `
-				<z-row gap="lg" does-wrap>
+				<wired-row gap="lg" wrap>
 				  <div data-theme="light" style="${PANE_STYLE}">
-				    <z-card gap="md">
+				    <z-card><wired-column gap="md">
 				      <z-heading size="sm" tag="h3">Haze</z-heading>
 				      <z-text size="sm" color="muted">Light surfaces, lit rather than filled.</z-text>
 				      <z-input placeholder="Search"></z-input>
 				      <z-button kind="solid" accent="dom" size="sm">Primary</z-button>
-				    </z-card>
+				    </wired-column></z-card>
 				  </div>
 				  <div data-theme="dark" style="${PANE_STYLE}">
-				    <z-card gap="md">
+				    <z-card><wired-column gap="md">
 				      <z-heading size="sm" tag="h3">Ink</z-heading>
 				      <z-text size="sm" color="muted">Flat surfaces, no gradient anywhere.</z-text>
 				      <z-input placeholder="Search"></z-input>
 				      <z-button kind="solid" accent="dom" size="sm">Primary</z-button>
-				    </z-card>
+				    </wired-column></z-card>
 				  </div>
-				</z-row>
+				</wired-row>
 			`
 		}),
 

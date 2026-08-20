@@ -9,6 +9,11 @@ label sits to the right.
 <z-switch accent="dom" name="notifications">Notifications</z-switch>
 ```
 
+The track stays visually compact while the clickable label occupies the shared
+control height. When a switch shares a row with a top-labelled input, wrap it
+in `<z-field is-label-reserved>` so both controls use the same label and control
+bands.
+
 ```js
 switchEl.addEventListener('change', (e) => e.detail.checked)
 ```
@@ -22,7 +27,7 @@ switchEl.addEventListener('change', (e) => e.detail.checked)
 | `accent` | `dom` `sub` | `dom` accent | accent color |
 | `name` | string | — | form field name |
 | `value` | string | — | form value |
-| `is-disabled` | boolean | — | disable |
+| `disabled` | boolean | — | disable |
 | `is-block` | boolean | — | render as a block element |
 | `is-hidden` | boolean | — | hide |
 

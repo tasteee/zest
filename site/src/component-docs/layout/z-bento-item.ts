@@ -188,6 +188,6 @@ export const zBentoItemDoc: ComponentDocT = {
 	related: [
 		{ tag: 'z-bento-grid', route: '/c/layout/z-bento-grid', description: 'The grid these cells fill.' },
 		{ tag: 'z-card', route: '/c/foundation/z-card', description: 'The simpler content block.' },
-		{ tag: 'z-surface', route: '/c/layout/z-surface', description: 'Toned and elevated panels.' }
+		{ tag: 'z-surface', route: '/c/layout/z-surface', description: 'Neutral surface treatments and outlined panels.' }
 	]
 }

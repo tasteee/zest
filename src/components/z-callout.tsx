@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, useProp, useState, useRef, useEffect } from 'atomico'
 
 /*
@@ -283,4 +284,4 @@ export const ZCallout = c(
 	}
 )
 
-customElements.define('z-callout', ZCallout)
+defineElement('z-callout', ZCallout)

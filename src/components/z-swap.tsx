@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event, useProp } from 'atomico'
 
 /*
@@ -162,7 +163,7 @@ const styles = css`
 `
 
 const resolveKindClass = (props: any): string => {
-	if (props.kind === 'beside') return 'is-beside'
+	if (props.hasGhost || props.kind === 'beside') return 'is-beside'
 	return 'is-stack'
 }
 
@@ -176,7 +177,7 @@ export const ZSwap = c(
 	(props) => {
 		const [isActive, setIsActive] = useProp<boolean>('isActive')
 
-		const labelClass = ['label'].concat(props.isDisabled ? ['is-disabled'] : []).join(' ')
+		const labelClass = ['label'].concat(props.disabled ? ['is-disabled'] : []).join(' ')
 		const swapClass = ['swap', resolveKindClass(props), resolveEffectClass(props)]
 			.concat(props.hasGhost ? ['has-ghost'] : [])
 			.concat(isActive ? ['is-active'] : [])
@@ -188,7 +189,7 @@ export const ZSwap = c(
 					<input
 						type="checkbox"
 						checked={isActive}
-						disabled={props.isDisabled}
+						disabled={props.disabled}
 						aria-label={props.label}
 						onchange={() => {
 							const next = !isActive
@@ -214,7 +215,7 @@ export const ZSwap = c(
 			effect: { type: String, reflect: true },
 			hasGhost: { type: Boolean, reflect: true },
 			isActive: { type: Boolean, reflect: true },
-			isDisabled: { type: Boolean, reflect: true },
+			disabled: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			label: String,
 			change: event<{ active: boolean }>({ bubbles: true, composed: true })
@@ -223,4 +224,4 @@ export const ZSwap = c(
 	}
 )
 
-customElements.define('z-swap', ZSwap)
+defineElement('z-swap', ZSwap)

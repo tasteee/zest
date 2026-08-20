@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event } from 'atomico'
 
 /*
@@ -137,4 +138,4 @@ export const ZDockItem = c(
 	}
 )
 
-customElements.define('z-dock-item', ZDockItem)
+defineElement('z-dock-item', ZDockItem)

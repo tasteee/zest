@@ -197,6 +197,16 @@
   --spacing-32: calc(var(--base-spacing) * 32);
   --spacing-36: calc(var(--base-spacing) * 36);
   --spacing-40: calc(var(--base-spacing) * 40);
+
+  /* @tasteee/wired uses the same semantic spacing scale when it is consumed
+     through Zest, so layout and component spacing stay visually aligned. */
+  --wired-space-2xs: var(--spacing-1);
+  --wired-space-xs: var(--spacing-2);
+  --wired-space-sm: var(--spacing-3);
+  --wired-space-md: var(--spacing-4);
+  --wired-space-lg: var(--spacing-6);
+  --wired-space-xl: var(--spacing-8);
+  --wired-space-2xl: var(--spacing-12);
 }
 
 @supports (color: lab(0% 0 0)) {
@@ -1168,6 +1178,13 @@ html.isThemeFading body {
   color-scheme: light;
 }
 
+/* Action copy and form labels are interface chrome, not selectable content. */
+button,
+label {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
 /*
  * Opt back into selection. `user-select` is inherited and crosses shadow
  * boundaries, so marking a host (e.g. <z-text is-selectable>) re-enables
@@ -1207,4 +1224,8 @@ textarea,
 ::-moz-selection {
   background: var(--selection-background);
   color: var(--selection-foreground);
+}
+
+label, button {
+  user-select: none;
 }

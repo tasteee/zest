@@ -25,9 +25,7 @@ sortable.addEventListener('sort', (e) => e.detail) // { oldIndex, newIndex }
 | --- | --- | --- | --- |
 | `axis` | `x` `y` | `y` | drag axis |
 | `handle` | CSS selector | — | restrict picking up to pointerdown within this selector |
-| `group` | string | — | declared for cross-list dragging; not wired up yet (see [questionable API choices](../questionable-api-choices.md)) |
-| `animation` | number | — | declared, not currently used (no FLIP easing yet) |
-| `is-disabled` | boolean | — | disable reordering |
+| `disabled` | boolean | — | disable reordering |
 
 ## Slots
 
@@ -43,5 +41,5 @@ sortable.addEventListener('sort', (e) => e.detail) // { oldIndex, newIndex }
 
 ## Notes
 
-- Cross-list dragging (shared `group`) and FLIP easing are future enhancements
-  — the `group` and `animation` attributes are placeholders for them today.
+- Cross-list dragging and FLIP easing are future enhancements. They are not
+  exposed as props until they have working behavior.

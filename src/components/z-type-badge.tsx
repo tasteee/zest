@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css } from 'atomico'
 
 /*
@@ -126,4 +127,4 @@ export const ZTypeBadge = c(
 	}
 )
 
-customElements.define('z-type-badge', ZTypeBadge)
+defineElement('z-type-badge', ZTypeBadge)

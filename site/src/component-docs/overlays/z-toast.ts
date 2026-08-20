@@ -15,9 +15,18 @@ type ToastElementT = HTMLElement & {
 }
 
 const buildPlaygroundToast = (): HTMLElement => {
-	const toaster = document.createElement('z-toast')
-	toaster.setAttribute('position', 'bottom-end')
-	return toaster
+	const wrapper = document.createElement('div')
+	wrapper.className = 'demoConstrained'
+	wrapper.innerHTML = `
+		<z-button kind="outline">Fire toast</z-button>
+		<z-toast position="bottom-end"></z-toast>
+	`
+	const button = wrapper.querySelector('z-button') as HTMLElement
+	const toaster = wrapper.querySelector('z-toast') as ToastElementT
+	button.addEventListener('click', () => {
+		toaster.push({ title: 'Changes saved', description: 'Everything is up to date.' })
+	})
+	return wrapper
 }
 
 export const zToastDoc: ComponentDocT = {
@@ -31,8 +40,8 @@ export const zToastDoc: ComponentDocT = {
 
 	playground: {
 		buildElement: buildPlaygroundToast,
-		controlNames: ['position'],
-		slotLabel: 'toasts are pushed imperatively'
+		controlNames: ['__none'],
+		slotLabel: 'button and toaster'
 	},
 
 	usageGuidance: [
@@ -46,7 +55,7 @@ export const zToastDoc: ComponentDocT = {
 
 	anatomy: [
 		{ name: 'region', description: 'The host — a fixed, corner-parked stack with role="region".' },
-		{ name: 'toast', description: 'One notification. A bordered card with a accent accent down its edge.' },
+		{ name: 'toast', description: 'One notification. A bordered card with an accent stripe down its edge.' },
 		{ name: 'title', description: 'The outcome, in one short line.' },
 		{ name: 'description', description: 'Supporting detail, in muted type.' },
 		{ name: 'close', description: 'Dismisses this toast immediately, ahead of its timer.' }
@@ -81,17 +90,17 @@ export const zToastDoc: ComponentDocT = {
 
 		defineInteractiveExample({
 			id: 'accents',
-			title: 'Tones',
+			title: 'Accents',
 			description: 'Four accents plus neutral. Keep them honest — a success toast for a failure teaches people to stop reading the colour.',
 			layout: ExampleLayout.stack,
 			markup: `
-				<z-row gap="sm" does-wrap>
+				<wired-row gap="sm" wrap>
 				  <z-button class="accentButton" data-accent="neutral" size="sm" kind="outline">Neutral</z-button>
 				  <z-button class="accentButton" data-accent="dom" size="sm" kind="outline">Info</z-button>
 				  <z-button class="accentButton" data-accent="success" size="sm" kind="outline">Success</z-button>
 				  <z-button class="accentButton" data-accent="warning" size="sm" kind="outline">Warning</z-button>
 				  <z-button class="accentButton" data-accent="error" size="sm" kind="outline">Danger</z-button>
-				</z-row>
+				</wired-row>
 				<z-toast id="accentToaster" position="bottom-end"></z-toast>
 			`,
 			script: `
@@ -127,14 +136,14 @@ export const zToastDoc: ComponentDocT = {
 				'Six corners. Bottom-end is the quiet default; top-center is the loudest, and worth reserving for something that genuinely interrupts.',
 			layout: ExampleLayout.stack,
 			markup: `
-				<z-row gap="sm" does-wrap>
+				<wired-row gap="sm" wrap>
 				  <z-button class="positionButton" data-position="top-start" size="sm" kind="outline">top-start</z-button>
 				  <z-button class="positionButton" data-position="top-center" size="sm" kind="outline">top-center</z-button>
 				  <z-button class="positionButton" data-position="top-end" size="sm" kind="outline">top-end</z-button>
 				  <z-button class="positionButton" data-position="bottom-start" size="sm" kind="outline">bottom-start</z-button>
 				  <z-button class="positionButton" data-position="bottom-center" size="sm" kind="outline">bottom-center</z-button>
 				  <z-button class="positionButton" data-position="bottom-end" size="sm" kind="outline">bottom-end</z-button>
-				</z-row>
+				</wired-row>
 				<z-toast id="positionToaster" position="bottom-end"></z-toast>
 			`,
 			script: `
@@ -164,11 +173,11 @@ export const zToastDoc: ComponentDocT = {
 				'Four seconds by default. `duration: 0` makes it sticky, which is the right choice for a failure the user may need to read twice.',
 			layout: ExampleLayout.stack,
 			markup: `
-				<z-row gap="sm">
+				<wired-row gap="sm">
 				  <z-button id="quickToast" size="sm" kind="outline">1.5s</z-button>
 				  <z-button id="defaultToast" size="sm" kind="outline">Default (4s)</z-button>
 				  <z-button id="stickyToast" size="sm" kind="outline">Sticky</z-button>
-				</z-row>
+				</wired-row>
 				<z-toast id="durationToaster" position="bottom-end"></z-toast>
 			`,
 			script: `

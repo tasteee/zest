@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event, useEffect, useMemo, useProp, useRef, useState } from 'atomico'
 
 /*
@@ -466,4 +467,4 @@ export const ZSearchDialog = c(
 	}
 )
 
-customElements.define('z-search-dialog', ZSearchDialog)
+defineElement('z-search-dialog', ZSearchDialog)

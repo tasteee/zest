@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event, useProp, useHost } from 'atomico'
 
 /*
@@ -196,7 +197,7 @@ export const ZInputOtp = c(
 						const cellClass = ['cell', sizeClass]
 							.filter(Boolean)
 							.concat(ch ? ['is-filled'] : [])
-							.concat(props.isInvalid ? ['is-invalid'] : [])
+							.concat(props.invalid ? ['is-invalid'] : [])
 							.join(' ')
 						return (
 							<input
@@ -206,7 +207,7 @@ export const ZInputOtp = c(
 								inputmode={props.isNumeric ? 'numeric' : 'text'}
 								maxlength={1}
 								value={ch}
-								disabled={props.isDisabled}
+								disabled={props.disabled}
 								aria-label={`Digit ${index + 1}`}
 								oninput={onInput(index)}
 								onkeydown={onKeyDown(index)}
@@ -226,8 +227,8 @@ export const ZInputOtp = c(
 			size: { type: String, reflect: true },
 			accent: { type: String, reflect: true },
 			isNumeric: { type: Boolean, reflect: true },
-			isInvalid: { type: Boolean, reflect: true },
-			isDisabled: { type: Boolean, reflect: true },
+			invalid: { type: Boolean, reflect: true },
+			disabled: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			change: event<{ value: string }>({ bubbles: true, composed: true }),
 			complete: event<{ value: string }>({ bubbles: true, composed: true })
@@ -236,4 +237,4 @@ export const ZInputOtp = c(
 	}
 )
 
-customElements.define('z-input-otp', ZInputOtp)
+defineElement('z-input-otp', ZInputOtp)

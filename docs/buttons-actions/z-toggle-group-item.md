@@ -17,7 +17,7 @@ override any of them with its own variant flags.
 | --- | --- | --- | --- |
 | `value` | string | — | identifies this item in the group's `change` event |
 | `is-pressed` | boolean | — | pressed state (reflected, two-way) |
-| `is-disabled` | boolean | — | disable |
+| `disabled` | boolean | — | disable |
 | `is-hidden` | boolean | — | hide |
 | _color_ | `accent` `accent` `accent` | inherit | override accent |
 | _size_ | `size` `is-medium` `size` | inherit | override size |

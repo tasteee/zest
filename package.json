@@ -1,6 +1,6 @@
 {
 	"name": "@tasteee/zest",
-	"version": "0.7.0",
+	"version": "0.8.0",
 	"description": "Zest is a gorgeous, fully featured, framework-agnostic web component library. Use it in plain HTML, React, or anywhere else.",
 	"type": "module",
 	"license": "MIT",
@@ -26,6 +26,7 @@
 	],
 	"sideEffects": [
 		"./dist/zest.js",
+		"./dist/elements/*.js",
 		"./dist/ink.css"
 	],
 	"main": "./dist/zest.js",
@@ -36,6 +37,10 @@
 		".": {
 			"types": "./dist/index.d.ts",
 			"import": "./dist/zest.js"
+		},
+		"./*": {
+			"types": "./dist/elements/*.d.ts",
+			"import": "./dist/elements/*.js"
 		},
 		"./zest.js": "./dist/zest.js",
 		"./ink.css": "./dist/ink.css",
@@ -49,18 +54,21 @@
 		"LICENSE"
 	],
 	"scripts": {
-		"build": "node scripts/check-css-templates.mjs && vite build && tsc -p tsconfig.build.json && node scripts/build-cem.mjs && node scripts/build-api-reference.mjs && node scripts/build-readme-catalog.mjs",
+		"build": "node scripts/check-css-templates.mjs && vite build && tsc -p tsconfig.build.json && node scripts/build-element-types.mjs && node scripts/build-cem.mjs && node scripts/build-api-reference.mjs && node scripts/build-readme-catalog.mjs && node scripts/check-release-surface.mjs",
 		"dev": "vite build --watch",
 		"demo": "npm run build && vite --config vite.demo.config.ts",
 		"docs": "npm run build && vite --config vite.site.config.ts",
 		"typecheck": "tsc --noEmit -p tsconfig.json",
 		"prepublishOnly": "npm run build"
 	},
-	"comment": "atomico/highlight.js/lowlight are bundled into dist/zest.js at build time, so the published package ships with zero runtime dependencies.",
+	"comment": "Atomico is bundled into dist/zest.js; it remains a dependency because the public declaration files reference its types.",
+	"dependencies": {
+		"@tasteee/wired": "^0.1.0",
+		"atomico": "^2.1.0"
+	},
 	"devDependencies": {
 		"@types/hast": "^3.0.4",
 		"@types/node": "^26.0.0",
-		"atomico": "^2.1.0",
 		"highlight.js": "^11.11.1",
 		"lowlight": "^3.3.0",
 		"marked": "^18.0.5",

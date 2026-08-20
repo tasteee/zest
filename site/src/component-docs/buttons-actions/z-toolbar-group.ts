@@ -71,14 +71,14 @@ export const zToolbarGroupDoc: ComponentDocT = {
 				    <z-button kind="ghost" aria-label="Redo">${Icons.redo}</z-button>
 				  </z-toolbar-group>
 
-				  <z-separator direction="vertical"></z-separator>
+				  <z-line vertical></z-line>
 
 				  <z-toolbar-group label="Text style">
 				    <z-toggle is-icon kind="ghost" aria-label="Bold">${Icons.bold}</z-toggle>
 				    <z-toggle is-icon kind="ghost" aria-label="Italic">${Icons.italic}</z-toggle>
 				  </z-toolbar-group>
 
-				  <z-separator direction="vertical"></z-separator>
+				  <z-line vertical></z-line>
 
 				  <z-toolbar-group label="Alignment">
 				    <z-toggle is-icon kind="ghost" aria-label="Align left" is-pressed>${Icons.alignLeft}</z-toggle>
@@ -101,7 +101,7 @@ export const zToolbarGroupDoc: ComponentDocT = {
 				    <z-toggle is-icon kind="ghost" aria-label="Italic">${Icons.italic}</z-toggle>
 				  </z-toolbar-group>
 
-				  <z-separator direction="vertical"></z-separator>
+				  <z-line vertical></z-line>
 
 				  <z-toolbar-group label="Insert">
 				    <z-button kind="ghost" aria-label="Insert link">${Icons.link}</z-button>
@@ -109,26 +109,6 @@ export const zToolbarGroupDoc: ComponentDocT = {
 				  </z-toolbar-group>
 
 				  <z-button slot="overflow" accent="dom" size="sm">Save</z-button>
-				</z-toolbar>
-			`
-		}),
-
-		defineMarkupExample({
-			id: 'vertical-toolbar',
-			title: 'Inside a vertical toolbar',
-			description: 'Groups follow the parent bar\'s axis, so the same markup works in either orientation.',
-			markup: `
-				<z-toolbar direction="vertical">
-				  <z-toolbar-group label="Text style">
-				    <z-button kind="ghost" aria-label="Bold">${Icons.bold}</z-button>
-				    <z-button kind="ghost" aria-label="Italic">${Icons.italic}</z-button>
-				  </z-toolbar-group>
-
-				  <z-separator></z-separator>
-
-				  <z-toolbar-group label="Insert">
-				    <z-button kind="ghost" aria-label="Insert link">${Icons.link}</z-button>
-				  </z-toolbar-group>
 				</z-toolbar>
 			`
 		})

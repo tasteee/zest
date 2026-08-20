@@ -8,7 +8,7 @@ const buildPlaygroundToolbar = (): HTMLElement => {
 	toolbar.innerHTML = `
 		<z-button kind="ghost">Bold</z-button>
 		<z-button kind="ghost">Italic</z-button>
-		<z-separator direction></z-separator>
+		<z-line vertical></z-line>
 		<z-button kind="ghost">Link</z-button>
 	`
 	return toolbar
@@ -31,7 +31,7 @@ export const zToolbarDoc: ComponentDocT = {
 
 	usageGuidance: [
 		'Reach for a toolbar once a cluster has enough controls that tabbing through them individually would be tedious — roughly four or more.',
-		'Divide unrelated clusters with `z-separator direction`, or name them with `z-toolbar-group` when the grouping needs to be announced rather than just seen.',
+		'Divide unrelated clusters with `z-line vertical`, or name them with `z-toolbar-group` when the grouping needs to be announced rather than just seen.',
 		'`kind="ghost"` on the children is the usual choice; a strip of outlined buttons turns into a grid of boxes.',
 		'A toolbar is for actions on the current context. It is not navigation — use `z-nav-menu` for that.'
 	],
@@ -52,7 +52,7 @@ export const zToolbarDoc: ComponentDocT = {
 				<z-toolbar>
 				  <z-button kind="ghost">${Icons.bold} Bold</z-button>
 				  <z-button kind="ghost">${Icons.italic} Italic</z-button>
-				  <z-separator direction></z-separator>
+				  <z-line vertical></z-line>
 				  <z-button kind="ghost">${Icons.link} Link</z-button>
 				</z-toolbar>
 			`
@@ -67,11 +67,11 @@ export const zToolbarDoc: ComponentDocT = {
 				<z-toolbar>
 				  <z-button kind="ghost" aria-label="Undo">${Icons.undo}</z-button>
 				  <z-button kind="ghost" aria-label="Redo">${Icons.redo}</z-button>
-				  <z-separator direction></z-separator>
+				  <z-line vertical></z-line>
 				  <z-toggle is-icon kind="ghost" aria-label="Bold">${Icons.bold}</z-toggle>
 				  <z-toggle is-icon kind="ghost" aria-label="Italic">${Icons.italic}</z-toggle>
 				  <z-toggle is-icon kind="ghost" aria-label="Underline">${Icons.underline}</z-toggle>
-				  <z-separator direction></z-separator>
+				  <z-line vertical></z-line>
 				  <z-button kind="ghost" aria-label="Insert link">${Icons.link}</z-button>
 				</z-toolbar>
 			`
@@ -90,7 +90,7 @@ export const zToolbarDoc: ComponentDocT = {
 				    <z-toggle-group-item value="center" is-icon aria-label="Align center">${Icons.alignCenter}</z-toggle-group-item>
 				    <z-toggle-group-item value="right" is-icon aria-label="Align right">${Icons.alignRight}</z-toggle-group-item>
 				  </z-toggle-group>
-				  <z-separator direction></z-separator>
+				  <z-line vertical></z-line>
 				  <z-button kind="ghost" size="sm">${Icons.plus} Insert</z-button>
 				</z-toolbar>
 			`
@@ -107,20 +107,6 @@ export const zToolbarDoc: ComponentDocT = {
 				  <z-button kind="ghost">${Icons.bold} Bold</z-button>
 				  <z-button kind="ghost">${Icons.italic} Italic</z-button>
 				  <z-button slot="overflow" accent="dom" size="sm">Publish</z-button>
-				</z-toolbar>
-			`
-		}),
-
-		defineMarkupExample({
-			id: 'vertical',
-			title: 'Vertical',
-			description:
-				'`direction="vertical"` stacks the controls and swaps the arrow keys to up and down, matching what the axis implies.',
-			markup: `
-				<z-toolbar direction="vertical">
-				  <z-button kind="ghost" aria-label="Bold">${Icons.bold}</z-button>
-				  <z-button kind="ghost" aria-label="Italic">${Icons.italic}</z-button>
-				  <z-button kind="ghost" aria-label="Underline">${Icons.underline}</z-button>
 				</z-toolbar>
 			`
 		}),
@@ -169,10 +155,10 @@ export const zToolbarDoc: ComponentDocT = {
 		defineMarkupExample({
 			id: 'disabled',
 			title: 'Disabled',
-			description: '`is-disabled` on the bar takes every control in it out of service at once.',
+			description: '`disabled` on the bar takes every control in it out of service at once.',
 			layout: ExampleLayout.fill,
 			markup: `
-				<z-toolbar is-disabled>
+				<z-toolbar disabled>
 				  <z-button kind="ghost">${Icons.bold} Bold</z-button>
 				  <z-button kind="ghost">${Icons.italic} Italic</z-button>
 				  <z-button kind="ghost">${Icons.link} Link</z-button>
@@ -182,12 +168,6 @@ export const zToolbarDoc: ComponentDocT = {
 	],
 
 	attributes: [
-		{
-			name: 'direction',
-			type: 'horizontal | vertical',
-			defaultValue: 'horizontal',
-			description: 'Layout axis, and which arrow keys move focus.'
-		},
 		{ name: 'size', type: 'sm | md | lg', defaultValue: 'md', description: 'Gap between controls.' },
 		{
 			name: 'overflow',
@@ -195,7 +175,7 @@ export const zToolbarDoc: ComponentDocT = {
 			defaultValue: '—',
 			description: 'How a too-narrow bar behaves. The menu value is not implemented yet.'
 		},
-		{ name: 'is-disabled', type: 'boolean', defaultValue: '—', description: 'Disables every control in the bar.' }
+		{ name: 'disabled', type: 'boolean', defaultValue: '—', description: 'Disables every control in the bar.' }
 	],
 
 	properties: [],
@@ -220,6 +200,6 @@ export const zToolbarDoc: ComponentDocT = {
 		{ tag: 'z-toolbar-group', route: '/c/buttons-actions/z-toolbar-group', description: 'A labelled cluster inside a toolbar.' },
 		{ tag: 'z-button', route: '/c/buttons-actions/z-button', description: 'The usual toolbar control.' },
 		{ tag: 'z-toggle', route: '/c/buttons-actions/z-toggle', description: 'Stateful toolbar controls.' },
-		{ tag: 'z-separator', route: '/c/foundation/z-separator', description: 'Divides clusters within the bar.' }
+		{ tag: 'z-line', route: '/c/foundation/z-line', description: 'Draws a vertical rule between clusters.' }
 	]
 }

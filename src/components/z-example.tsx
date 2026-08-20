@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event, useProp, useRef, useState } from 'atomico'
 
 /*
@@ -322,7 +323,7 @@ export const ZExample = c(
 			heading: { type: String, reflect: true },
 			description: { type: String, reflect: true },
 			snippets: { type: Array },
-			layout: { type: String, reflect: true, value: 'center' },
+			layout: { type: String, reflect: true, value: () => 'center' },
 			isSourceOpen: { type: Boolean, reflect: true },
 			hasBackgroundGrid: { type: Boolean, reflect: true },
 			isResizable: { type: Boolean, reflect: true },
@@ -333,4 +334,4 @@ export const ZExample = c(
 	}
 )
 
-customElements.define('z-example', ZExample)
+defineElement('z-example', ZExample)

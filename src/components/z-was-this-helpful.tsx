@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event, useState } from 'atomico'
 
 /*
@@ -189,4 +190,4 @@ export const ZWasThisHelpful = c(
 	}
 )
 
-customElements.define('z-was-this-helpful', ZWasThisHelpful)
+defineElement('z-was-this-helpful', ZWasThisHelpful)

@@ -32,7 +32,7 @@ slider.addEventListener('change', (event) => event.detail.value)  // on release
 | `value-prefix` | string | — | text before the displayed value (e.g. `$`) |
 | `value-suffix` | string | — | text after the displayed value (e.g. `%`) |
 | `accent` | `dom` `sub` | `dom` accent | accent color |
-| `is-disabled` | boolean | — | disable |
+| `disabled` | boolean | — | disable |
 | `is-hidden` | boolean | — | hide |
 
 ## Events

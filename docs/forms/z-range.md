@@ -6,7 +6,7 @@ children each own their own value plus an optional min/max that clamps how
 far that handle can travel. The handles can never cross.
 
 ```html
-<z-range min="0" max="100" label="Price" does-show-value value-prefix="$">
+<z-range min="0" max="100" label="Price" show-value value-prefix="$">
   <z-range-handle value="20"></z-range-handle>
   <z-range-handle value="80"></z-range-handle>
 </z-range>
@@ -24,9 +24,9 @@ range.addEventListener('change', (e) => e.detail) // { left, right } — on rele
 | `min` / `max` | number | `0` / `100` | the domain both handles share |
 | `step` | number | `1` | default step, inherited by handles that don't set their own |
 | `label` | string | — | visible label |
-| `does-show-value` | boolean | — | show a "left – right" value pill |
+| `show-value` | boolean | — | show a "left – right" value pill |
 | `value-prefix` / `value-suffix` | string | — | decorate the shown values (e.g. `$`, `%`) |
-| `is-disabled` | boolean | — | disable both handles |
+| `disabled` | boolean | — | disable both handles |
 | `is-hidden` | boolean | — | hide |
 
 ## Slots

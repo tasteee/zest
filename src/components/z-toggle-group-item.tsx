@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, event, useProp } from 'atomico'
 import { toggleVariantProps, resolveToggleButtonClass } from '../shared/toggle-schema'
 import { toggleStyles } from '../shared/toggle-styles'
@@ -14,7 +15,7 @@ export const ZToggleGroupItem = c(
 					class={buttonClass}
 					data-state={isPressed ? 'on' : 'off'}
 					aria-pressed={isPressed ? 'true' : 'false'}
-					disabled={props.isDisabled}
+					disabled={props.disabled}
 					onclick={() => {
 						const nextPressed = !isPressed
 						setIsPressed(nextPressed)
@@ -30,7 +31,7 @@ export const ZToggleGroupItem = c(
 		props: {
 			...toggleVariantProps,
 			isPressed: { type: Boolean, reflect: true },
-			isDisabled: { type: Boolean, reflect: true },
+			disabled: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			value: String,
 			press: event<{ pressed: boolean; value?: string }>({ bubbles: true, composed: true })
@@ -39,4 +40,4 @@ export const ZToggleGroupItem = c(
 	}
 )
 
-customElements.define('z-toggle-group-item', ZToggleGroupItem)
+defineElement('z-toggle-group-item', ZToggleGroupItem)

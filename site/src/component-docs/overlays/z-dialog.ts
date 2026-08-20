@@ -233,11 +233,11 @@ export const zDialogDoc: ComponentDocT = {
 					const nextName = (renameInput.value || '').trim()
 					const isEmpty = nextName.length === 0
 					if (isEmpty) {
-						renameInput.setAttribute('is-invalid', '')
+						renameInput.setAttribute('invalid', '')
 						return
 					}
 
-					renameInput.removeAttribute('is-invalid')
+					renameInput.removeAttribute('invalid')
 					renameStatus.textContent = `Current name: ${nextName}`
 					renameDialog.isOpen = false
 				})
@@ -252,7 +252,7 @@ export const zDialogDoc: ComponentDocT = {
 		{ name: 'size', type: 'sm | md | lg', defaultValue: 'md', description: 'Panel width — 24rem, 30rem, or 42rem, capped to the viewport.' },
 		{ name: 'has-close', type: 'boolean', defaultValue: '—', description: 'Removes the ✕. Only safe when the footer offers another way out.' },
 		{ name: 'is-static', type: 'boolean', defaultValue: '—', description: 'Ignores backdrop clicks. Escape still closes.' },
-		{ name: 'is-disabled', type: 'boolean', defaultValue: '—', description: 'Stops the trigger from opening the dialog.' }
+		{ name: 'disabled', type: 'boolean', defaultValue: '—', description: 'Stops the trigger from opening the dialog.' }
 	],
 
 	properties: [],

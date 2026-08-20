@@ -29,7 +29,7 @@ export const zEyebrowDoc: ComponentDocT = {
 		'One or two words. The mono face and tracking make it wide fast, and a long eyebrow steals attention from the title beneath it.',
 		'`has-rule` suits a is-full-width section header; without it the eyebrow is compact enough to sit in a card.',
 		'Choose `z-subheading` instead when you want the body typeface — same job, different texture.',
-		'It carries no margin of its own. Put it in a `z-column` with a small gap rather than reaching for a margin on the element.'
+		'It carries no margin of its own. Put it in a `wired-column` with a small gap rather than reaching for a margin on the element.'
 	],
 
 	anatomy: [
@@ -52,7 +52,7 @@ export const zEyebrowDoc: ComponentDocT = {
 
 		defineMarkupExample({
 			id: 'accents',
-			title: 'Tones',
+			title: 'Accents',
 			description: 'Secondary is the default. Neutral suits dense interfaces where an accent would be too loud.',
 			layout: ExampleLayout.fill,
 			markup: `
@@ -89,14 +89,14 @@ export const zEyebrowDoc: ComponentDocT = {
 			description: 'The pattern it exists for — category, title, supporting copy, in that order.',
 			layout: ExampleLayout.fill,
 			markup: `
-				<z-column gap="3" style="max-width: 42rem">
+				<wired-column gap="sm" style="max-width: 42rem">
 				  <z-eyebrow label="Components" has-rule is-full-width></z-eyebrow>
 				  <z-heading size="xl">Everything, encapsulated</z-heading>
 				  <z-text color="muted">
 				    Each element carries its own styles inside a shadow root, so nothing
 				    leaks in and nothing leaks out.
 				  </z-text>
-				</z-column>
+				</wired-column>
 			`
 		}),
 
@@ -107,11 +107,11 @@ export const zEyebrowDoc: ComponentDocT = {
 			layout: ExampleLayout.fill,
 			markup: `
 				<z-card style="max-width: 22rem">
-				  <z-column gap="2">
+				  <wired-column gap="xs">
 				    <z-eyebrow label="Usage" color="neutral"></z-eyebrow>
 				    <z-heading size="sm" tag="h3">48 of 100 seats</z-heading>
 				    <z-text size="sm" color="muted">Resets on the first of the month.</z-text>
-				  </z-column>
+				  </wired-column>
 				</z-card>
 			`
 		})

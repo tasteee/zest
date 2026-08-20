@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css } from 'atomico'
 
 /*
@@ -144,4 +145,4 @@ export const ZToolCall = c(
 	}
 )
 
-customElements.define('z-tool-call', ZToolCall)
+defineElement('z-tool-call', ZToolCall)

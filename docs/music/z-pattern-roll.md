@@ -168,7 +168,7 @@ selection:
 | `playhead` | number (beats) | — | draws a playhead line at this beat |
 | `has-toolbar` | boolean | — | hide the toolbar |
 | `has-keyboard` | boolean | — | hide the degree gutter |
-| `is-disabled` | boolean | — | disable interaction |
+| `disabled` | boolean | — | disable interaction |
 | `is-hidden` | boolean | — | hide the element |
 
 ### Signal model

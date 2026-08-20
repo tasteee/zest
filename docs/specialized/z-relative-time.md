@@ -13,7 +13,6 @@ conversation-list row leans on it.
 | Attribute | Values | Default | Description |
 | --- | --- | --- | --- |
 | `datetime` | ISO string or epoch ms | — | the timestamp to render |
-| `format` | — | — | declared, not currently read (output format isn't customizable yet — see [questionable API choices](../questionable-api-choices.md)) |
 | `threshold` | number (ms) | `7 days` | age at which display switches from relative ("3d") to an absolute date |
 | `refresh` | number (ms) | `60000` | how often the display re-evaluates |
 | `is-hidden` | boolean | — | hide |

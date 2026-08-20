@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, useState } from 'atomico'
 
 /*
@@ -15,11 +16,26 @@ const styles = css`
 		text-align: center;
 		gap: 0.75rem;
 		padding: var(--space-2xl) var(--space-lg);
-		--accent: var(--purple);
+		--accent: var(--color-neutral-6);
 	}
 
+	:host([accent='dom']) {
+		--accent: var(--purple);
+	}
 	:host([accent='sub']) {
 		--accent: var(--pink);
+	}
+	:host([accent='neutral']) {
+		--accent: var(--color-neutral-6);
+	}
+	:host([accent='success']) {
+		--accent: var(--success);
+	}
+	:host([accent='warning']) {
+		--accent: var(--warning);
+	}
+	:host([accent='error']) {
+		--accent: var(--destructive);
 	}
 
 	:host([is-bordered]) {
@@ -111,4 +127,4 @@ export const ZEmptyState = c(
 	}
 )
 
-customElements.define('z-empty-state', ZEmptyState)
+defineElement('z-empty-state', ZEmptyState)

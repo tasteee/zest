@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event, useEffect, useHost, useListener, useProp } from 'atomico'
 
 /*
@@ -15,7 +16,14 @@ const styles = css`
 		display: flex;
 		flex-direction: column;
 		gap: var(--space-md);
+		--z-radio-group-accent: var(--primary);
 	}
+
+	:host([accent='dom']) { --z-radio-group-accent: var(--purple); }
+	:host([accent='sub']) { --z-radio-group-accent: var(--pink); }
+	:host([accent='success']) { --z-radio-group-accent: var(--success); }
+	:host([accent='warning']) { --z-radio-group-accent: var(--warning); }
+	:host([accent='error']) { --z-radio-group-accent: var(--destructive); }
 
 	:host([direction='horizontal']) {
 		flex-direction: row;
@@ -99,6 +107,7 @@ export const ZRadioGroup = c(
 			value: { type: String, reflect: true },
 			label: String,
 			direction: { type: String, reflect: true },
+			accent: { type: String, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			change: event<{ value?: string }>({ bubbles: true, composed: true })
 		},
@@ -106,4 +115,4 @@ export const ZRadioGroup = c(
 	}
 )
 
-customElements.define('z-radio-group', ZRadioGroup)
+defineElement('z-radio-group', ZRadioGroup)

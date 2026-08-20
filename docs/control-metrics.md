@@ -44,35 +44,37 @@ The awkward case: a switch track is 22px and labels *beside* itself, while a
 select is 40px and labels *above*. Dropped into the same row they don't align at
 all — one occupies ~22px, the other 64.
 
-`z-field` is what resolves this. Anything inside it gets the same three bands,
-and the control band is a fixed-height flex row, so a 22px switch centres inside
-the same 40px a select fills:
+`z-field` is what resolves this. A top-labelled field uses all three bands. A
+switch keeps its label beside the track and uses `is-label-reserved` to leave
+the first band empty. Both controls then land in the same fixed-height control
+band, so the compact switch track centres inside the same 40px a select fills:
 
 ```html
-<z-row gap="4" align="start">
+<wired-row gap="md" align="start">
   <z-field label="Region">
     <z-select placeholder="Choose…"></z-select>
   </z-field>
 
-  <z-field label="Notifications">
-    <z-switch label="Enabled"></z-switch>
+  <z-field is-label-reserved>
+    <z-switch>Notifications</z-switch>
   </z-field>
 
   <z-field is-label-reserved>
     <z-button kind="solid" tone="primary">Save</z-button>
   </z-field>
-</z-row>
+</wired-row>
 ```
 
 All three are 64px tall and their controls share one 40px band.
 
-A bare `<z-switch>` outside a `z-field` stays compact exactly as before — the
-wrapper is what opts into row coherence, so no existing layout shifts.
+The switch track stays compact, but its clickable label occupies the full
+control height. That gives it the same vertical rhythm and target size as the
+input without making the track itself look oversized.
 
 ### Reserving the label row
 
-`is-label-reserved` renders the label band empty. Without it an unlabelled field
-— the Save button above — rides 24px high in a row of labelled ones.
+`is-label-reserved` renders the label band empty. Without it an inline-labelled
+switch or an unlabelled button rides 24px high in a row of top-labelled fields.
 
 It renders an empty band rather than a blank label, so nothing is announced to a
 screen reader that isn't there. Use `is-label-hidden` instead when the control

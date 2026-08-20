@@ -11,7 +11,7 @@ const buildPlaygroundScroll = (): HTMLElement => {
 	const lines = Array.from({ length: 14 }, (_unused, index) => {
 		return `<z-text size="sm">Scrollable line ${index + 1}</z-text>`
 	})
-	scroll.innerHTML = `<z-column gap="2">${lines.join('')}</z-column>`
+	scroll.innerHTML = `<wired-column gap="xs">${lines.join('')}</wired-column>`
 
 	return scroll
 }
@@ -35,7 +35,7 @@ export const zScrollDoc: ComponentDocT = {
 		'Bound it with `max-height` or `max-width`. Without a bound there is no overflow, and the element does nothing.',
 		'`overscroll="contain"` belongs on any scroller inside an overlay — it stops the page behind from scrolling once the inner one hits its end.',
 		'`scrollbar="hidden"` hides the bar but keeps the scrolling. Only use it where another affordance makes the overflow obvious, since a hidden bar hides the fact that there is more.',
-		'For a long list of rows, `z-virtual-list` renders only what is visible; this element scrolls everything you give it.'
+		'This element scrolls everything you give it; use application-level windowing for very large datasets.'
 	],
 
 	anatomy: [
@@ -52,7 +52,7 @@ export const zScrollDoc: ComponentDocT = {
 			layout: ExampleLayout.fill,
 			markup: `
 				<z-scroll max-height="12rem" inset="sm" style="border: 1px solid var(--border); border-radius: var(--radius-md)">
-				  <z-column gap="2">
+				  <wired-column gap="xs">
 				    <z-text size="sm">Deployment 1 — succeeded</z-text>
 				    <z-text size="sm">Deployment 2 — succeeded</z-text>
 				    <z-text size="sm">Deployment 3 — failed</z-text>
@@ -63,7 +63,7 @@ export const zScrollDoc: ComponentDocT = {
 				    <z-text size="sm">Deployment 8 — succeeded</z-text>
 				    <z-text size="sm">Deployment 9 — succeeded</z-text>
 				    <z-text size="sm">Deployment 10 — succeeded</z-text>
-				  </z-column>
+				  </wired-column>
 				</z-scroll>
 			`
 		}),
@@ -75,7 +75,7 @@ export const zScrollDoc: ComponentDocT = {
 			layout: ExampleLayout.fill,
 			markup: `
 				<z-scroll direction="horizontal" inset="sm" style="border: 1px solid var(--border); border-radius: var(--radius-md)">
-				  <z-row gap="2" style="width: max-content">
+				  <wired-row gap="xs" style="width: max-content">
 				    <z-badge label="typescript" size="sm"></z-badge>
 				    <z-badge label="web-components" size="sm"></z-badge>
 				    <z-badge label="design-system" size="sm"></z-badge>
@@ -83,7 +83,7 @@ export const zScrollDoc: ComponentDocT = {
 				    <z-badge label="custom-elements" size="sm"></z-badge>
 				    <z-badge label="css-tokens" size="sm"></z-badge>
 				    <z-badge label="atomico" size="sm"></z-badge>
-				  </z-row>
+				  </wired-row>
 				</z-scroll>
 			`
 		}),
@@ -96,23 +96,23 @@ export const zScrollDoc: ComponentDocT = {
 			layout: ExampleLayout.fill,
 			markup: `
 				<z-scroll max-height="7rem" scrollbar="thin" inset="sm" style="border: 1px solid var(--border)">
-				  <z-column gap="2">
+				  <wired-column gap="xs">
 				    <z-text size="sm">thin — the default</z-text>
 				    <z-text size="sm">More content</z-text>
 				    <z-text size="sm">More content</z-text>
 				    <z-text size="sm">More content</z-text>
 				    <z-text size="sm">More content</z-text>
-				  </z-column>
+				  </wired-column>
 				</z-scroll>
 
 				<z-scroll max-height="7rem" scrollbar="hidden" inset="sm" style="border: 1px solid var(--border)">
-				  <z-column gap="2">
+				  <wired-column gap="xs">
 				    <z-text size="sm">hidden — still scrolls</z-text>
 				    <z-text size="sm">More content</z-text>
 				    <z-text size="sm">More content</z-text>
 				    <z-text size="sm">More content</z-text>
 				    <z-text size="sm">More content</z-text>
-				  </z-column>
+				  </wired-column>
 				</z-scroll>
 			`
 		}),
@@ -125,7 +125,7 @@ export const zScrollDoc: ComponentDocT = {
 			layout: ExampleLayout.fill,
 			markup: `
 				<z-scroll max-height="9rem" overscroll="contain" inset="sm" style="border: 1px solid var(--border); border-radius: var(--radius-md)">
-				  <z-column gap="2">
+				  <wired-column gap="xs">
 				    <z-text size="sm">Scroll to the bottom of this panel…</z-text>
 				    <z-text size="sm">…and the page behind it stays put.</z-text>
 				    <z-text size="sm">Line three</z-text>
@@ -133,7 +133,7 @@ export const zScrollDoc: ComponentDocT = {
 				    <z-text size="sm">Line five</z-text>
 				    <z-text size="sm">Line six</z-text>
 				    <z-text size="sm">Line seven</z-text>
-				  </z-column>
+				  </wired-column>
 				</z-scroll>
 			`
 		}),
@@ -146,7 +146,7 @@ export const zScrollDoc: ComponentDocT = {
 			markup: `
 				<z-scroll direction="both" max-height="10rem" inset="sm" style="border: 1px solid var(--border); border-radius: var(--radius-md)">
 				  <div style="width: 46rem">
-				    <z-column gap="2">
+				    <wired-column gap="xs">
 				      <z-text size="sm">This content is both wider and taller than its viewport.</z-text>
 				      <z-text size="sm">Row two, also stretching well past the right-hand edge.</z-text>
 				      <z-text size="sm">Row three</z-text>
@@ -154,7 +154,7 @@ export const zScrollDoc: ComponentDocT = {
 				      <z-text size="sm">Row five</z-text>
 				      <z-text size="sm">Row six</z-text>
 				      <z-text size="sm">Row seven</z-text>
-				    </z-column>
+				    </wired-column>
 				  </div>
 				</z-scroll>
 			`
@@ -191,7 +191,6 @@ export const zScrollDoc: ComponentDocT = {
 
 	related: [
 		{ tag: 'z-scroll-area', route: '/c/specialized/z-scroll-area', description: 'A lighter pure-CSS variant.' },
-		{ tag: 'z-virtual-list', route: '/c/data-display/z-virtual-list', description: 'Renders only the visible rows.' },
 		{ tag: 'z-dialog', route: '/c/overlays/z-dialog', description: 'Where overscroll containment matters most.' }
 	]
 }

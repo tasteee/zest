@@ -86,18 +86,18 @@ export const zDisplayDoc: ComponentDocT = {
 				'Eyebrow, display title, supporting copy, actions. Capping the measure is what keeps the title from running the full width of a large monitor.',
 			layout: ExampleLayout.fill,
 			markup: `
-				<z-column gap="5" style="max-width: 46rem">
+				<wired-column gap="5" style="max-width: 46rem">
 				  <z-eyebrow label="Zest" has-rule></z-eyebrow>
 				  <z-display size="md">Components that stay out of your way.</z-display>
 				  <z-text size="lg" color="muted">
 				    Framework-agnostic web components with encapsulated styles and zero
 				    runtime dependencies.
 				  </z-text>
-				  <z-row gap="3">
+				  <wired-row gap="sm">
 				    <z-button accent="dom">Get started</z-button>
 				    <z-button kind="outline">Browse components</z-button>
-				  </z-row>
-				</z-column>
+				  </wired-row>
+				</wired-column>
 			`
 		}),
 
@@ -151,6 +151,6 @@ export const zDisplayDoc: ComponentDocT = {
 		TEXT_FAMILY_RELATED.heading,
 		TEXT_FAMILY_RELATED.eyebrow,
 		TEXT_FAMILY_RELATED.text,
-		{ tag: 'z-section', route: '/c/layout/z-section', description: 'The band a hero usually sits in.' }
+		{ tag: 'wired-column', route: '/c/layout/wired-column', description: 'Stacks display copy with supporting content.' }
 	]
 }

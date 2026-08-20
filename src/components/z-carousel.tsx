@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event, useState, useEffect, useRef } from 'atomico'
 
 /*
@@ -11,6 +12,8 @@ const styles = css`
 	:host {
 		display: block;
 		position: relative;
+		width: 100%;
+		min-width: 0;
 		--accent: var(--color-neutral-8);
 	}
 
@@ -25,15 +28,21 @@ const styles = css`
 	.viewport {
 		overflow: hidden;
 		border-radius: var(--radius-lg);
+		width: 100%;
+		min-width: 0;
 	}
 
 	.track {
 		display: flex;
+		width: 100%;
+		min-width: 0;
 		transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 	}
 
 	::slotted(*) {
 		flex: 0 0 100%;
+		width: 100%;
+		max-width: 100%;
 		min-width: 0;
 		box-sizing: border-box;
 	}
@@ -222,4 +231,4 @@ export const ZCarousel = c(
 	}
 )
 
-customElements.define('z-carousel', ZCarousel)
+defineElement('z-carousel', ZCarousel)

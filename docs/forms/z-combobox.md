@@ -32,8 +32,8 @@ Keyboard: type to filter, ↑/↓ move, Enter commits the active row, Esc closes
 | `value` | string | — | selected value (reflected attribute, two-way) |
 | `placeholder` | string | `Search…` | input placeholder |
 | `accent` | `dom` `sub` | `dom` accent | accent color |
-| `is-disabled` | boolean | — | disable |
-| `is-inline` | boolean | — | shrink to content width |
+| `disabled` | boolean | — | disable |
+| `inline` | boolean | — | shrink to content width |
 | `is-hidden` | boolean | — | hide |
 
 ## Events

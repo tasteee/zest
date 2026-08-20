@@ -44,7 +44,7 @@ export const zAlertDoc: ComponentDocT = {
 	examples: [
 		defineMarkupExample({
 			id: 'accents',
-			title: 'Tones',
+			title: 'Accents',
 			description: 'Five accents, each with its own icon. The border and tint carry the meaning together with the copy — never colour alone.',
 			layout: ExampleLayout.stack,
 			markup: `

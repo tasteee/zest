@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event, useEffect, useState } from 'atomico'
 
 /*
@@ -211,4 +212,4 @@ export const ZLiveCode = c(
 	}
 )
 
-customElements.define('z-live-code', ZLiveCode)
+defineElement('z-live-code', ZLiveCode)

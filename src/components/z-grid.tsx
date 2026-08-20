@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css } from 'atomico'
 import { baseStyles, insetProps, insetVars, resolveGridAlign, coerceSize, sizeProp } from '../shared/layout-schema'
 
@@ -81,4 +82,4 @@ export const ZGrid = c(
 	}
 )
 
-customElements.define('z-grid', ZGrid)
+defineElement('z-grid', ZGrid)

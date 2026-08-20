@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, useRef, useState, useEffect, useHost } from 'atomico'
 import { floatingSurfaceStyles } from '../shared/overlay-styles'
 import {
@@ -20,16 +21,20 @@ import {
  */
 const styles = css`
 	.surface {
-		padding: 0.375rem 0.625rem;
+		padding: 0.4375rem 0.625rem;
 		max-width: 16rem;
 		font-size: var(--font-size-caption);
+		font-weight: 500;
+		line-height: 1.35;
 		pointer-events: none;
 		width: max-content;
 		user-select: none;
 		-webkit-user-select: none;
-		background: var(--color-neutral-4);
-		border: 1px solid var(--color-neutral-6);
-		box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.6);
+		background: var(--foreground);
+		color: var(--background);
+		border: 1px solid color-mix(in srgb, var(--foreground) 78%, var(--background));
+		border-radius: var(--radius-sm);
+		box-shadow: none;
 	}
 `
 
@@ -63,7 +68,7 @@ export const ZTooltip = c(
 		}, [isOpen, props.placement, props.offset])
 
 		const open = () => {
-			if (props.isDisabled || !props.content) return
+			if (props.disabled || !props.content) return
 			clearTimeout(timer.current)
 			timer.current = setTimeout(() => setIsOpen(true), props.openDelay ?? 150)
 		}
@@ -93,10 +98,10 @@ export const ZTooltip = c(
 			...overlayPositionProps,
 			content: String,
 			openDelay: { type: Number },
-			isDisabled: { type: Boolean, reflect: true }
+			disabled: { type: Boolean, reflect: true }
 		},
 		styles: [floatingSurfaceStyles, styles]
 	}
 )
 
-customElements.define('z-tooltip', ZTooltip)
+defineElement('z-tooltip', ZTooltip)

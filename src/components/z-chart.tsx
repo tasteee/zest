@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, useState, useEffect, useHost } from 'atomico'
 
 /*
@@ -195,11 +196,11 @@ export const ZChart = c(
 			accent: { type: String, reflect: true },
 			height: String,
 			doesShowGrid: { type: Boolean, reflect: true },
-			hasLabels: { type: Boolean, reflect: true, value: true },
+			hasLabels: { type: Boolean, reflect: true, value: () => true },
 			isHidden: { type: Boolean, reflect: true }
 		},
 		styles
 	}
 )
 
-customElements.define('z-chart', ZChart)
+defineElement('z-chart', ZChart)

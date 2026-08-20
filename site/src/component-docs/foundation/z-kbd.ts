@@ -55,23 +55,23 @@ export const zKbdDoc: ComponentDocT = {
 			description: 'Several caps with plain text between them. The separator is yours to choose.',
 			layout: ExampleLayout.stack,
 			markup: `
-				<z-row gap="2" aligns-y="center">
+				<wired-row gap="xs" y="center">
 				  <z-kbd label="⌘"></z-kbd>
 				  <z-text size="sm" color="muted">+</z-text>
 				  <z-kbd label="K"></z-kbd>
-				</z-row>
+				</wired-row>
 
-				<z-row gap="2" aligns-y="center">
+				<wired-row gap="xs" y="center">
 				  <z-kbd label="⌘"></z-kbd>
 				  <z-kbd label="⇧"></z-kbd>
 				  <z-kbd label="P"></z-kbd>
-				</z-row>
+				</wired-row>
 
-				<z-row gap="2" aligns-y="center">
+				<wired-row gap="xs" y="center">
 				  <z-kbd label="Ctrl"></z-kbd>
 				  <z-text size="sm" color="muted">then</z-text>
 				  <z-kbd label="S"></z-kbd>
-				</z-row>
+				</wired-row>
 			`
 		}),
 
@@ -110,21 +110,21 @@ export const zKbdDoc: ComponentDocT = {
 				'The common interface use: the action on the left, its shortcut pushed to the right by a growing spacer.',
 			layout: ExampleLayout.fill,
 			markup: `
-				<z-surface level="1" inset="sm" radius="md" style="max-width: 22rem">
-				  <z-column gap="1">
-				    <z-row aligns-y="center" gap="3">
+				<z-surface level="1" radius="md" style="max-width: 22rem">
+				  <wired-column gap="2xs">
+				    <wired-row y="center" gap="sm">
 				      <z-text size="sm">Search</z-text>
 				      <z-spacer can-grow></z-spacer>
 				      <z-kbd size="xs" label="⌘"></z-kbd>
 				      <z-kbd size="xs" label="K"></z-kbd>
-				    </z-row>
-				    <z-row aligns-y="center" gap="3">
+				    </wired-row>
+				    <wired-row y="center" gap="sm">
 				      <z-text size="sm">Save</z-text>
 				      <z-spacer can-grow></z-spacer>
 				      <z-kbd size="xs" label="⌘"></z-kbd>
 				      <z-kbd size="xs" label="S"></z-kbd>
-				    </z-row>
-				  </z-column>
+				    </wired-row>
+				  </wired-column>
 				</z-surface>
 			`
 		}),

@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css } from 'atomico'
 
 /*
@@ -10,7 +11,7 @@ import { c, css } from 'atomico'
  *     status="stable"
  *     source-href="https://github.com/tasteee/zest/blob/main/src/components/z-checkbox.tsx"
  *     version-added="0.4.0"
- *     updated="2026-07-30"
+ *     last-updated="2026-07-30"
  *   ></z-doc-header>
  *
  * This exists as one element rather than a composition each page repeats
@@ -113,8 +114,8 @@ export const ZDocHeader = c(
 
 		const sourceHref = props.sourceHref as string | undefined
 		const versionAdded = props.versionAdded as string | undefined
-		const updated = props.updated as string | undefined
-		const hasMeta = Boolean(sourceHref || versionAdded || updated)
+		const lastUpdated = props.lastUpdated as string | undefined
+		const hasMeta = Boolean(sourceHref || versionAdded || lastUpdated)
 
 		return (
 			<host shadowDom>
@@ -134,9 +135,9 @@ export const ZDocHeader = c(
 					{hasMeta && (
 						<div class='meta'>
 							{versionAdded && <span>Added in v{versionAdded}</span>}
-							{updated && (
+							{lastUpdated && (
 								<span>
-									Updated <z-relative-time datetime={updated} />
+									Updated <z-relative-time datetime={lastUpdated} />
 								</span>
 							)}
 							{sourceHref && (
@@ -158,11 +159,11 @@ export const ZDocHeader = c(
 			status: { type: String, reflect: true },
 			sourceHref: { type: String, reflect: true },
 			versionAdded: { type: String, reflect: true },
-			updated: { type: String, reflect: true },
+			lastUpdated: { type: String, reflect: true },
 			isHidden: { type: Boolean, reflect: true }
 		},
 		styles
 	}
 )
 
-customElements.define('z-doc-header', ZDocHeader)
+defineElement('z-doc-header', ZDocHeader)

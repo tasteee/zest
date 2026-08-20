@@ -21,7 +21,7 @@ export const zFieldDoc: ComponentDocT = {
 	status: ComponentStatus.stable,
 
 	description:
-		'A form control on its own is only half a field. The other half is the label above it, the guidance underneath, and the error that replaces that guidance when something is wrong. `z-field` owns all three, and — critically — forwards its `label` onto the slotted control as an accessible name, because a shadow boundary breaks the ordinary `<label for>` association that would otherwise do this for free. Set `error` and the description gives way; clear it and the description returns.',
+		'A form control on its own is only half a field. The other half is the flush-left label above it, the guidance underneath, and the error that replaces that guidance when something is wrong. `z-field` owns all three without overlaying the control or adding a shadow, and — critically — forwards its `label` onto the slotted control as an accessible name, because a shadow boundary breaks the ordinary `<label for>` association that would otherwise do this for free. Set `error` and the description gives way; clear it and the description returns.',
 
 	playground: {
 		buildElement: buildPlaygroundField,
@@ -34,7 +34,8 @@ export const zFieldDoc: ComponentDocT = {
 		'`description` is standing guidance — why the field exists, what format it wants. It should be true before the user has typed anything.',
 		'`error` replaces the description rather than stacking under it. Keep the message specific: "Must be at least 8 characters", not "Invalid".',
 		'The label should name the thing, not instruct. "Email", not "Enter your email". The field already implies the verb.',
-		'`is-required` renders the asterisk, but the control still needs `is-required` of its own for native validation — the marker and the constraint are separate decisions.',
+		'When an inline-labelled switch or checkbox shares a row with a top-labelled field, wrap it in `z-field is-label-reserved`. The empty label band aligns the controls without moving the compact label above its track.',
+		'Set `is-required` once on z-field. It renders the asterisk and forwards the required state to controls that support native validation.',
 		'One field, one control. If two inputs belong together — a date range, a first and last name — give each its own z-field rather than slotting both into one.'
 	],
 
@@ -75,11 +76,11 @@ export const zFieldDoc: ComponentDocT = {
 			id: 'required',
 			title: 'Required',
 			description:
-				'The asterisk marks the field; `is-required` on the control enforces it. Set both — one is the promise, the other is the constraint.',
+				'One attribute owns both signals: the field renders the asterisk and forwards the required state to the input for native validation.',
 			layout: ExampleLayout.stack,
 			markup: `
 				<z-field label="Full name" is-required>
-				  <z-input is-required placeholder="Ada Lovelace"></z-input>
+				  <z-input placeholder="Ada Lovelace"></z-input>
 				</z-field>
 			`
 		}),
@@ -88,11 +89,11 @@ export const zFieldDoc: ComponentDocT = {
 			id: 'error',
 			title: 'Error',
 			description:
-				'Setting `error` replaces the description. Pair it with `is-invalid` on the control so the border and the message agree with each other.',
+				'Setting `error` replaces the description. Pair it with `invalid` on the control so the border and the message agree with each other.',
 			layout: ExampleLayout.stack,
 			markup: `
 				<z-field label="Password" description="At least 8 characters." error="Must be at least 8 characters.">
-				  <z-input type="password" is-invalid value="short"></z-input>
+				  <z-input type="password" invalid value="short"></z-input>
 				</z-field>
 			`
 		}),
@@ -113,6 +114,24 @@ export const zFieldDoc: ComponentDocT = {
 			`
 		}),
 
+		defineMarkupExample({
+			id: 'mixed-control-row',
+			title: 'Mixed control row',
+			description:
+				'The input uses the visible label band. The switch keeps its label beside the track and reserves that same band empty, so both interactive rows start and end together.',
+			layout: ExampleLayout.fill,
+			markup: `
+				<wired-row y="start" gap="md" style="width: 100%">
+				  <z-field label="Server address">
+				    <z-input placeholder="api.example.com"></z-input>
+				  </z-field>
+				  <z-field is-label-reserved>
+				    <z-switch>Use TLS</z-switch>
+				  </z-field>
+				</wired-row>
+			`
+		}),
+
 		defineInteractiveExample({
 			id: 'live-validation',
 			title: 'Driving the error from code',
@@ -130,7 +149,7 @@ export const zFieldDoc: ComponentDocT = {
 
 				slugInput.addEventListener('change', (changeEvent) => {
 				  const isValidSlug = /^[a-z0-9-]+$/.test(changeEvent.detail.value)
-				  slugInput.isInvalid = !isValidSlug
+				  slugInput.invalid = !isValidSlug
 				  slugField.error = isValidSlug ? '' : 'Lowercase letters, numbers, and hyphens only.'
 				})
 			`,
@@ -148,13 +167,13 @@ export const zFieldDoc: ComponentDocT = {
 					const detail = (changeEvent as CustomEvent<{ value: string }>).detail
 					const isValidSlug = checkSlug(detail.value)
 
-					if (isValidSlug) slugInput.removeAttribute('is-invalid')
-					if (!isValidSlug) slugInput.setAttribute('is-invalid', '')
+					if (isValidSlug) slugInput.removeAttribute('invalid')
+					if (!isValidSlug) slugInput.setAttribute('invalid', '')
 					slugField.error = isValidSlug ? '' : 'Lowercase letters, numbers, and hyphens only.'
 				})
 
 				slugInput.addEventListener('input', () => {
-					slugInput.removeAttribute('is-invalid')
+					slugInput.removeAttribute('invalid')
 					slugField.error = ''
 				})
 			}
@@ -180,17 +199,17 @@ export const zFieldDoc: ComponentDocT = {
 			description: 'Several fields stacked. Consistent label placement is what makes a form scannable — the eye only has to learn the rhythm once.',
 			layout: ExampleLayout.stack,
 			markup: `
-				<z-column gap="md">
+				<wired-column gap="md">
 				  <z-field label="Name" is-required>
-				    <z-input is-required placeholder="Ada Lovelace"></z-input>
+				    <z-input placeholder="Ada Lovelace"></z-input>
 				  </z-field>
 				  <z-field label="Email" description="We only use this for billing receipts." is-required>
-				    <z-input type="email" is-required placeholder="ada@example.com"></z-input>
+				    <z-input type="email" placeholder="ada@example.com"></z-input>
 				  </z-field>
 				  <z-field label="Role">
 				    <z-input placeholder="Engineering"></z-input>
 				  </z-field>
-				</z-column>
+				</wired-column>
 			`
 		})
 	],
@@ -199,9 +218,9 @@ export const zFieldDoc: ComponentDocT = {
 		{ name: 'label', type: 'string', defaultValue: '—', description: 'The visible name, also forwarded onto the slotted control as its accessible name.' },
 		{ name: 'description', type: 'string', defaultValue: '—', description: 'Standing help text under the control. Hidden while an error is set.' },
 		{ name: 'error', type: 'string', defaultValue: '—', description: 'The failure message. Replaces the description while present.' },
-		{ name: 'is-required', type: 'boolean', defaultValue: '—', description: 'Renders the required marker after the label.' },
+		{ name: 'is-required', type: 'boolean', defaultValue: '—', description: 'Renders the required marker and forwards required state to a supporting slotted control.' },
 		{ name: 'size', type: 'sm | md | lg', defaultValue: 'md', description: 'Control-row height. Match it to the size of the slotted control.' },
-		{ name: 'is-label-reserved', type: 'boolean', defaultValue: '—', description: 'Keeps the label band when there is no label, so an unlabelled field still lines up with labelled neighbours.' },
+		{ name: 'is-label-reserved', type: 'boolean', defaultValue: '—', description: 'Keeps an empty label band so an inline-labelled control or unlabelled action lines up with top-labelled fields.' },
 		{ name: 'is-label-hidden', type: 'boolean', defaultValue: '—', description: 'Hides the label visually while still forwarding it as the accessible name.' }
 	],
 

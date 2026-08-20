@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event } from 'atomico'
 
 /*
@@ -150,4 +151,4 @@ export const ZPrevNext = c(
 	}
 )
 
-customElements.define('z-prev-next', ZPrevNext)
+defineElement('z-prev-next', ZPrevNext)

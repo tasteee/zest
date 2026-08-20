@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event, useEffect, useHost, useProp, useRef, useState } from 'atomico'
 import './z-chassis'
 
@@ -362,4 +363,4 @@ export const ZDocsShell = c(
 	}
 )
 
-customElements.define('z-docs-shell', ZDocsShell)
+defineElement('z-docs-shell', ZDocsShell)

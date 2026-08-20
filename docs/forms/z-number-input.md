@@ -33,13 +33,13 @@ steps both work. `step` must be positive and defaults to `1`.
 | `step` | number | `1` | Positive increment/decrement amount; decimal values are supported. |
 | `has-stepper-buttons` | boolean | — | Shows ghost decrement/increment buttons inside the field. |
 | `is-full-width` | boolean | — | Stretches the normally compact numeric field to its container width. |
-| `is-inline` | boolean | — | Shrinks back to content width (overrides `is-full-width`). |
+| `inline` | boolean | — | Shrinks back to content width (overrides `is-full-width`). |
 | `size` | `sm` `md` `lg` | `md` | Matches the same size of `z-button` and `z-select`. |
 | `accent` | `dom` `sub` | `dom` accent | Focus accent color. |
 | `label` | string | — | Accessible name for compact contextual use. Prefer `z-field` for a visible label. |
 | `name` | string | — | Form field name. |
 | `placeholder` | string | — | Placeholder text. |
-| `is-invalid` / `is-disabled` / `is-readonly` / `is-required` | boolean | — | External invalid state, disabled state, read-only state, or required state. |
+| `invalid` / `disabled` / `is-readonly` / `is-required` | boolean | — | External invalid state, disabled state, read-only state, or required state. |
 | `is-hidden` | boolean | — | Hide. |
 
 ## Events

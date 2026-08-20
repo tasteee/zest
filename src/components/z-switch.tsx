@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event, useProp } from 'atomico'
 
 /*
@@ -19,9 +20,11 @@ const styles = css`
 	}
 
 	label {
+		position: relative;
 		display: inline-flex;
 		align-items: center;
 		gap: 0.625rem;
+		min-height: var(--control-height-md);
 		cursor: pointer;
 		font-family: inherit;
 		font-size: var(--font-size-small);
@@ -29,6 +32,9 @@ const styles = css`
 		user-select: none;
 		--accent: var(--primary);
 	}
+
+	label.is-sm { min-height: var(--control-height-sm); }
+	label.is-lg { min-height: var(--control-height-lg); }
 
 	:host([accent='dom']) label {
 		--accent: var(--purple);
@@ -114,10 +120,13 @@ const styles = css`
 
 	input {
 		position: absolute;
+		inset: 0;
+		z-index: 1;
 		opacity: 0;
-		width: 0;
-		height: 0;
+		width: 100%;
+		height: 100%;
 		margin: 0;
+		cursor: inherit;
 	}
 
 	input:focus-visible + .track {
@@ -137,13 +146,19 @@ export const ZSwitch = c(
 		const [isChecked, setIsChecked] = useProp<boolean>('isChecked')
 
 		const labelClass = ['label', resolveSizeClass(props)]
-			.concat(props.isDisabled ? ['is-disabled'] : [])
+			.concat(props.disabled ? ['is-disabled'] : [])
 			.join(' ')
 
 		const trackClass = ['track'].concat(isChecked ? ['is-on'] : []).join(' ')
+		const handleClick = () => {
+			if (props.disabled) return
+			const next = !isChecked
+			setIsChecked(next)
+			props.change({ checked: next, value: props.value })
+		}
 
 		return (
-			<host shadowDom>
+			<host shadowDom onclick={handleClick}>
 				<label class={labelClass}>
 					<input
 						type="checkbox"
@@ -151,13 +166,9 @@ export const ZSwitch = c(
 						checked={isChecked}
 						name={props.name}
 						value={props.value}
-						disabled={props.isDisabled}
+						disabled={props.disabled}
 						aria-checked={isChecked ? 'true' : 'false'}
-						onchange={() => {
-							const next = !isChecked
-							setIsChecked(next)
-							props.change({ checked: next, value: props.value })
-						}}
+						onchange={(changeEvent: Event) => changeEvent.stopPropagation()}
 					/>
 					<span class={trackClass} aria-hidden="true">
 						<span class="knob"></span>
@@ -170,7 +181,7 @@ export const ZSwitch = c(
 	{
 		props: {
 			isChecked: { type: Boolean, reflect: true },
-			isDisabled: { type: Boolean, reflect: true },
+			disabled: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			isBlock: { type: Boolean, reflect: true },
 			size: { type: String, reflect: true },
@@ -183,4 +194,4 @@ export const ZSwitch = c(
 	}
 )
 
-customElements.define('z-switch', ZSwitch)
+defineElement('z-switch', ZSwitch)

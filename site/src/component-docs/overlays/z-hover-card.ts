@@ -8,10 +8,10 @@ const buildPlaygroundHoverCard = (): HTMLElement => {
 
 	hoverCard.innerHTML = `
 		<z-link slot="trigger" href="#">@ada</z-link>
-		<z-column gap="xs">
+		<wired-column gap="xs">
 		  <z-text size="sm">Ada Lovelace</z-text>
 		  <z-text size="xs" color="muted">Works on the analytical engine. Joined in 1843.</z-text>
-		</z-column>
+		</wired-column>
 	`
 
 	return hoverCard
@@ -58,11 +58,11 @@ export const zHoverCardDoc: ComponentDocT = {
 				  Reviewed by
 				  <z-hover-card placement="bottom-start">
 				    <z-link slot="trigger" href="#">@ada</z-link>
-				    <z-column gap="xs">
+				    <wired-column gap="xs">
 				      <z-text size="sm">Ada Lovelace</z-text>
 				      <z-text size="xs" color="muted">Works on the analytical engine. Joined in 1843.</z-text>
 				      <z-link href="#" size="sm">View profile</z-link>
-				    </z-column>
+				    </wired-column>
 				  </z-hover-card>
 				  earlier today.
 				</z-text>
@@ -78,14 +78,14 @@ export const zHoverCardDoc: ComponentDocT = {
 			markup: `
 				<z-hover-card placement="bottom-start" style="--z-overlay-max-width: 22rem">
 				  <z-link slot="trigger" href="#">zest/components</z-link>
-				  <z-column gap="sm">
+				  <wired-column gap="sm">
 				    <z-text size="sm">zest/components</z-text>
 				    <z-text size="xs" color="muted">A flat, premium web component library. No shadows, no gradients.</z-text>
-				    <z-row gap="md">
+				    <wired-row gap="md">
 				      <z-text size="xs" color="muted">TypeScript</z-text>
 				      <z-text size="xs" color="muted">140 components</z-text>
-				    </z-row>
-				  </z-column>
+				    </wired-row>
+				  </wired-column>
 				</z-hover-card>
 			`
 		}),
@@ -144,18 +144,18 @@ export const zHoverCardDoc: ComponentDocT = {
 				  The change was proposed by
 				  <z-hover-card placement="top-start">
 				    <z-link slot="trigger" href="#">@grace</z-link>
-				    <z-column gap="xs">
+				    <wired-column gap="xs">
 				      <z-text size="sm">Grace Hopper</z-text>
 				      <z-text size="xs" color="muted">Compilers, standards, and a strong view on nanoseconds.</z-text>
-				    </z-column>
+				    </wired-column>
 				  </z-hover-card>
 				  and landed in
 				  <z-hover-card placement="top-start">
 				    <z-link slot="trigger" href="#">v2.4.0</z-link>
-				    <z-column gap="xs">
+				    <wired-column gap="xs">
 				      <z-text size="sm">v2.4.0</z-text>
 				      <z-text size="xs" color="muted">Released three weeks ago. 14 commits, 2 breaking changes.</z-text>
-				    </z-column>
+				    </wired-column>
 				  </z-hover-card>
 				  without any migration work.
 				</z-text>
@@ -164,7 +164,7 @@ export const zHoverCardDoc: ComponentDocT = {
 
 		defineMarkupExample({
 			id: 'accents',
-			title: 'Tones',
+			title: 'Accents',
 			description: 'The accent used inside the card.',
 			layout: ExampleLayout.start,
 			markup: `

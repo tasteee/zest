@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css } from 'atomico'
 
 /*
@@ -159,4 +160,4 @@ export const ZDoDont = c(
 	}
 )
 
-customElements.define('z-do-dont', ZDoDont)
+defineElement('z-do-dont', ZDoDont)

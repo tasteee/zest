@@ -24,7 +24,7 @@ export const zTooltipDoc: ComponentDocT = {
 
 	playground: {
 		buildElement: buildPlaygroundTooltip,
-		controlNames: ['content', 'placement', 'offset', 'open-delay', 'accent', 'is-disabled'],
+		controlNames: ['content', 'placement', 'offset', 'open-delay', 'disabled'],
 		slotLabel: 'the trigger element'
 	},
 
@@ -118,24 +118,6 @@ export const zTooltipDoc: ComponentDocT = {
 		}),
 
 		defineMarkupExample({
-			id: 'accents',
-			title: 'Tones',
-			description: 'The accent used inside the label. Neutral suits almost everything; reserve the others for a tooltip that carries a warning.',
-			layout: ExampleLayout.start,
-			markup: `
-				<z-tooltip content="Neutral" accent="neutral">
-				  <z-button kind="outline">Neutral</z-button>
-				</z-tooltip>
-				<z-tooltip content="Primary" accent="dom">
-				  <z-button kind="outline">Primary</z-button>
-				</z-tooltip>
-				<z-tooltip content="Secondary" accent="sub">
-				  <z-button kind="outline">Secondary</z-button>
-				</z-tooltip>
-			`
-		}),
-
-		defineMarkupExample({
 			id: 'any-trigger',
 			title: 'Any trigger',
 			description:
@@ -192,8 +174,7 @@ export const zTooltipDoc: ComponentDocT = {
 		{ name: 'placement', type: 'top | bottom | left | right | top-start | top-end | bottom-start | bottom-end | left-start | left-end | right-start | right-end', defaultValue: 'top', description: 'Preferred side and alignment. Flips when there is no room.' },
 		{ name: 'offset', type: 'number', defaultValue: '8', description: 'Gap in pixels between the trigger and the label.' },
 		{ name: 'open-delay', type: 'number', defaultValue: '150', description: 'Milliseconds to wait before opening.' },
-		{ name: 'accent', type: 'neutral | dom | sub', defaultValue: 'neutral', description: 'Accent used inside the label.' },
-		{ name: 'is-disabled', type: 'boolean', defaultValue: '—', description: 'Stops the tooltip from opening at all.' },
+		{ name: 'disabled', type: 'boolean', defaultValue: '—', description: 'Stops the tooltip from opening at all.' },
 		{ name: 'is-hidden', type: 'boolean', defaultValue: '—', description: 'Removes the tooltip and its trigger from layout.' }
 	],
 

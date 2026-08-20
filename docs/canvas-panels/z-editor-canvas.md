@@ -36,10 +36,9 @@ canvas.addEventListener('viewportchange', (e) => e.detail) // { x, y, zoom }
 | `zoom-speed` | number | `1` | wheel sensitivity multiplier |
 | `grid` | `none` `dots` `lines` | — | background grid style |
 | `grid-size` | number | `24` | canvas-space px between grid lines |
-| `snap` | number | `0` | grid snap step — declared, not yet wired up (see [questionable API choices](../questionable-api-choices.md)) |
 | `pan-button` | `auto` `middle` `space` `left` | `auto` | which pointer button pans (middle always pans; Space-held always pans) |
 | `wheel` | `zoom` `pan` | `zoom` | plain-wheel behavior (Ctrl/pinch always zooms) |
-| `is-disabled` | boolean | — | freeze all interaction |
+| `disabled` | boolean | — | freeze all interaction |
 
 ## Imperative API
 

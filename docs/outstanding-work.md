@@ -48,7 +48,7 @@ kind:
   silently ends it and surfaces as a syntax error dozens of lines away. It
   caught me three times before this existed.
 - Fixed a pre-existing bug in `build-cem.mjs`: it could not resolve a props
-  object built by a call, so `z-row` and `z-column` shipped with **zero**
+  object built by a call, so `wired-row` and `wired-column` shipped with **zero**
   attributes in the published `custom-elements.json`. They now carry 33 each.
 
 ---
@@ -111,8 +111,6 @@ Each is a known gap noted inline in `ROADMAP.md`:
 - [ ] `z-markdown` — block-cache for streaming (re-parses whole content today);
       `z-table` / `z-link` upgrades
 - [ ] `z-toolbar` — overflow-to-menu
-- [ ] `z-conversation-list` — `z-virtual-list` handoff for huge inboxes
-- [ ] `z-message-list` — `z-virtual-list` handoff for huge histories
 
 ## Open — the rest of `ROADMAP.md`
 
@@ -121,11 +119,6 @@ Each is a known gap noted inline in `ROADMAP.md`:
   owns its own scroll-spy and nothing yet needs a shortcut registry. They are
   still worth building for their own sake. `z-minimap` and `z-zoom-controls`
   wait on nothing; `z-editor-canvas` exists but is unfinished.
-- **Chat 3a gaps:** `z-scroll-to-latest`, `z-link-preview`, `z-voice-message`,
-  `z-video-message`, `z-mention-pill`, `z-pinned-banner`,
-  `z-conversation-details`, `z-member-list`, `z-composer-context-bar`
-- **Chat 3b gaps:** `z-artifact`, retry/👍👎 on `z-message-actions`,
-  `z-token-counter`, `z-prompt-library`, `z-agent-step`, `z-task-list`
 - **Dashboards:** `z-data-grid` and the chart family — the heaviest builds,
   worth doing once the primitives they lean on are stable
 - **Blog and Editors:** essentially unstarted

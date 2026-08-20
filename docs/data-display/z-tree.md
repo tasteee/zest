@@ -3,7 +3,7 @@
 A data-driven hierarchical tree with expand/collapse, selection, and keyboard
 navigation. Feed it a recursive `items` array — rows are flattened internally
 (only expanded branches render), keeping it flat enough to hand off to
-[z-virtual-list](z-virtual-list.md) for very large trees.
+Use application-level windowing for very large trees.
 
 ```html
 <z-tree selection="single" does-show-guides></z-tree>

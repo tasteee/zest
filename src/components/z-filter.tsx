@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event, useState } from 'atomico'
 
 /*
@@ -35,7 +36,7 @@ const styles = css`
 		display: none;
 	}
 
-	:host([is-disabled]) .filter {
+	:host([disabled]) .filter {
 		opacity: 0.55;
 		pointer-events: none;
 	}
@@ -92,8 +93,8 @@ const styles = css`
 		font-weight: 600;
 	}
 	/* neutral accent === foreground, which reads fine as text on the faint tint */
-	:host(:not([tone])) .pill.is-active,
-	:host(:not([tone])) .pill.is-crumb,
+	:host(:not([accent])) .pill.is-active,
+	:host(:not([accent])) .pill.is-crumb,
 	:host([accent='neutral']) .pill.is-active,
 	:host([accent='neutral']) .pill.is-crumb {
 		color: var(--foreground);
@@ -237,7 +238,7 @@ export const ZFilter = c(
 		const view = resolveView(options, path, collapseLeaf)
 
 		const apply = (next: string[]) => {
-			if (props.isDisabled) return
+			if (props.disabled) return
 			setPath(next)
 			props.change({ value: next.length ? next[next.length - 1] : undefined, path: next })
 		}
@@ -309,7 +310,7 @@ export const ZFilter = c(
 			label: String,
 			resetLabel: String,
 			isDrilldown: { type: Boolean, reflect: true },
-			isDisabled: { type: Boolean, reflect: true },
+			disabled: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			change: event<{ value?: string; path: string[] }>({ bubbles: true, composed: true })
 		},
@@ -317,4 +318,4 @@ export const ZFilter = c(
 	}
 )
 
-customElements.define('z-filter', ZFilter)
+defineElement('z-filter', ZFilter)

@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event, useEffect, useRef, useState } from 'atomico'
 
 /*
@@ -263,4 +264,4 @@ export const ZCodeGroup = c(
 	}
 )
 
-customElements.define('z-code-group', ZCodeGroup)
+defineElement('z-code-group', ZCodeGroup)

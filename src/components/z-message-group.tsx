@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, useHost, useEffect } from 'atomico'
 
 /*
@@ -141,4 +142,4 @@ export const ZMessageGroup = c(
 	}
 )
 
-customElements.define('z-message-group', ZMessageGroup)
+defineElement('z-message-group', ZMessageGroup)

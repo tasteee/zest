@@ -54,7 +54,7 @@ export const zLinkDoc: ComponentDocT = {
 
 		defineMarkupExample({
 			id: 'accents',
-			title: 'Tones',
+			title: 'Accents',
 			description: 'Neutral is for links inside dense UI, where a coloured link would compete with the content.',
 			markup: `
 				<z-link href="#" color="dom">Primary</z-link>
@@ -105,11 +105,11 @@ export const zLinkDoc: ComponentDocT = {
 				'`is-block` turns the link into a block-level flex container — useful for list rows or cards where the whole area should be the target.',
 			layout: ExampleLayout.fill,
 			markup: `
-				<z-column gap="2" style="width: 340px">
+				<wired-column gap="xs" style="width: 340px">
 				  <z-link href="#" is-block color="neutral">${Icons.mail} Inbox</z-link>
 				  <z-link href="#" is-block color="neutral">${Icons.calendar} Schedule</z-link>
 				  <z-link href="#" is-block color="neutral">${Icons.settings} Settings</z-link>
-				</z-column>
+				</wired-column>
 			`
 		}),
 
@@ -127,16 +127,16 @@ export const zLinkDoc: ComponentDocT = {
 			id: 'disabled',
 			title: 'Disabled',
 			description:
-				'`is-disabled` strips the `href` entirely, so the element stops being a navigation target rather than merely looking inert.',
+				'`disabled` strips the `href` entirely, so the element stops being a navigation target rather than merely looking inert.',
 			markup: `
-				<z-link href="#" is-disabled>Unavailable</z-link>
+				<z-link href="#" disabled>Unavailable</z-link>
 				<z-link href="#">Available</z-link>
 			`
 		})
 	],
 
 	attributes: [
-		{ name: 'href', type: 'string', defaultValue: '—', description: 'Destination. Removed entirely while is-disabled is set.' },
+		{ name: 'href', type: 'string', defaultValue: '—', description: 'Destination. Removed entirely while disabled is set.' },
 		{ name: 'target', type: 'string', defaultValue: '—', description: 'Anchor target. A value of _blank implies the external rel.' },
 		{ name: 'label', type: 'string', defaultValue: '—', description: 'Text content. Takes precedence over slotted children.' },
 		{ name: 'color', type: 'dom | sub | neutral', defaultValue: 'dom', description: 'Colour family.' },
@@ -149,7 +149,7 @@ export const zLinkDoc: ComponentDocT = {
 			description: 'Opens in a new tab with rel="noopener noreferrer".'
 		},
 		{ name: 'is-block', type: 'boolean', defaultValue: '—', description: 'Renders as a block-level flex link.' },
-		{ name: 'is-disabled', type: 'boolean', defaultValue: '—', description: 'Removes the href and blocks interaction.' },
+		{ name: 'disabled', type: 'boolean', defaultValue: '—', description: 'Removes the href and blocks interaction.' },
 		{ name: 'is-hidden', type: 'boolean', defaultValue: '—', description: 'Removes the link from layout.' }
 	],
 

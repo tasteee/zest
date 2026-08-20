@@ -25,6 +25,7 @@ type PageSectionT = {
 }
 
 const SOURCE_BASE = 'https://github.com/tasteee/zest/blob/main/src/components'
+const isWiredLayout = (tag: string): boolean => tag.startsWith('wired-')
 
 const buildBreadcrumbs = (categoryLabel: string, title: string): ZBreadcrumbsElementT => {
 	const items: ZBreadcrumbItemT[] = [
@@ -44,7 +45,9 @@ const buildPageHeader = (componentDoc: ComponentDocT, categoryLabel: string): HT
 	header.setAttribute('heading', componentDoc.title)
 	header.setAttribute('tagline', componentDoc.tagline)
 	header.setAttribute('status', componentDoc.status)
-	header.setAttribute('source-href', `${SOURCE_BASE}/${componentDoc.tag}.tsx`)
+	if (!isWiredLayout(componentDoc.tag)) {
+		header.setAttribute('source-href', `${SOURCE_BASE}/${componentDoc.tag}.tsx`)
+	}
 	return header
 }
 
@@ -52,9 +55,12 @@ const buildIntroSection = (componentDoc: ComponentDocT): HTMLElement => {
 	const section = createElement('section', 'pageSection')
 	section.append(buildRichText(componentDoc.description, 'md', 'neutral'))
 
-	const importSnippet = `import '@tasteee/zest'\nimport '@tasteee/zest/ink.css'`
+	const elementImport = isWiredLayout(componentDoc.tag)
+		? "import '@tasteee/zest'"
+		: `import '@tasteee/zest/${componentDoc.tag}'`
+	const importSnippet = `${elementImport}\nimport '@tasteee/zest/ink.css'`
 	section.append(
-		buildCodeBlock({ code: importSnippet, language: 'js', filename: 'Registers every z-* element', hasCopyButton: true })
+		buildCodeBlock({ code: importSnippet, language: 'js', filename: `Registers ${componentDoc.tag}`, hasCopyButton: true })
 	)
 
 	return section
@@ -81,7 +87,7 @@ const buildUsageSection = (componentDoc: ComponentDocT): HTMLElement | null => {
 const buildAnatomyRow = (part: AnatomyPartT): HTMLElement => {
 	const row = createElement('div', 'anatomyRow')
 
-	const name = buildLabel(part.name, 'sm', 'neutral')
+	const name = buildLabel(part.name)
 	name.classList.add('anatomyName')
 
 	row.append(name, buildRichText(part.description, 'sm', 'muted'))
@@ -152,7 +158,7 @@ const buildRelatedCard = (related: RelatedComponentT): HTMLElement => {
 	const card = createElement('a', 'relatedCard') as HTMLAnchorElement
 	card.href = `#${related.route}`
 
-	const name = buildLabel(related.tag, 'sm', 'neutral')
+	const name = buildLabel(related.tag)
 	name.classList.add('relatedName')
 
 	card.append(name, buildText(related.description, 'xs', 'muted'))

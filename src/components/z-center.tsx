@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css } from 'atomico'
 import { baseStyles, insetProps, insetVars, resolveEdge, resolveWidth } from '../shared/layout-schema'
 
@@ -84,4 +85,4 @@ export const ZCenter = c(
 	}
 )
 
-customElements.define('z-center', ZCenter)
+defineElement('z-center', ZCenter)

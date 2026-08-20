@@ -16,8 +16,8 @@ on a wide screen while staying readable on a phone. Shares
 | Attribute | Values | Default | Description |
 | --- | --- | --- | --- |
 | `size` | `sm` `md` `lg` `xl` | `lg` | viewport-clamped size |
-| `color` | `neutral` `dom` `sub` `muted` `strong` | `neutral` | text color |
-| `weight` | `300` `400` `600` `700` `900` | `700` | font weight override |
+| `color` | `neutral` `dom` `sub` `muted` `strong` `success` `warning` `error` | `neutral` | text color |
+| `weight` | number (1–1000) | `700` | font weight override, including variable-font values |
 | `tag` | any tag name | `h1` | element rendered |
 | `is-hidden` | boolean | — | hide |
 

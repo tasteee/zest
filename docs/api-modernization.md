@@ -85,7 +85,7 @@ This also fixes live dead code: the group's `--z-toggle-*` custom properties are
 inert because the item reads `--tone-*` and takes its color from its own flag.
 An inherited enum is what makes group-level color work at all.
 
-### 2b. z-box, z-row, z-column, z-card — flex only
+### 2b. z-box, wired-row, wired-column, z-card — flex only
 
 `display` doesn't get an enum; it gets deleted. These are flex containers by
 definition and z-box is already flex by default.
@@ -97,8 +97,8 @@ z-box   isRow | isColumn  →  direction="horizontal | vertical"
 z-card  DELETE isFlex, isRow, isColumn — a card is a column, full stop
 ```
 
-Grid mode leaves z-box entirely; `z-grid` already owns that with `columns`,
-`minColumnWidth`, and `gap`. A row inside a card is a slotted `z-row`.
+Grid mode leaves z-box entirely; `wired-grid` already owns that with `columns`,
+`minColumnWidth`, and `gap`. A row inside a card is a slotted `wired-row`.
 
 One consequence to expect: `getBoxHostStyle`'s alignment logic branches on grid
 mode for `alignsX`/`alignsY` (grid aligns per-cell with no axis swap). That
@@ -122,16 +122,11 @@ branch comes out with it.
 
 Also covers z-box's new `direction` (§2b), so one word means one thing library-wide.
 
-### 2e. `z-message-group` avatar
-
-`hideAvatar` + `showAvatar` → `avatar="auto | always | never"`.
-
-### 2f. Chrome visibility — split by shape
+### 2e. Chrome visibility — split by shape
 
 Token list where the set is open-ended, positive booleans where it's two things:
 
 ```
-z-message-actions   noReply|noForward|noMore   →  actions="reply forward more"
 z-piano-roll        hideToolbar|hideKeyboard   →  hasToolbar|hasKeyboard  (default true)
 z-pattern-roll      same
 z-chart, z-code-block, z-terminal              →  positive booleans
@@ -185,7 +180,7 @@ library.
 ### 3c. `kind` fixes
 
 - `outlined` → `outline` (z-toggle; z-button and z-badge already say `outline`)
-- `variant` → `kind` on `z-aura`, `z-bubble-menu`, `z-surface`
+- `variant` → `kind` on `z-bubble-menu`, `z-surface`
 - `z-callout`'s `kind` is a color, not a treatment. It moves to `accent`:
 
 | `kind` today | Resolves to | Becomes |

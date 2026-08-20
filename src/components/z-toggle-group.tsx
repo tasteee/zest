@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event, useHost, useListener } from 'atomico'
 import { toggleVariantProps } from '../shared/toggle-schema'
 
@@ -207,4 +208,4 @@ const getPressedValues = (root: HTMLElement): string[] => {
 	return pressedValues
 }
 
-customElements.define('z-toggle-group', ZToggleGroup)
+defineElement('z-toggle-group', ZToggleGroup)

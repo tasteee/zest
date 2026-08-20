@@ -35,7 +35,7 @@ export const zBentoGridDoc: ComponentDocT = {
 		'Design the composition first. Bento layouts work when the spans are chosen deliberately; a random assortment just looks broken.',
 		'Keep the total span per row equal to the column count, or the grid will leave gaps where cells could not fit.',
 		'`row-height` is a fixed unit, so content that overflows will spill. Size the row for the tallest cell you actually have.',
-		'For a uniform list of cards, `z-grid` is the simpler tool. Bento is for when the cells are meant to differ.'
+		'For a uniform list of cards, `wired-grid` is the simpler tool. Bento is for when the cells are meant to differ.'
 	],
 
 	anatomy: [
@@ -188,7 +188,7 @@ export const zBentoGridDoc: ComponentDocT = {
 
 	related: [
 		{ tag: 'z-bento-item', route: '/c/layout/z-bento-item', description: 'The cells this grid arranges.' },
-		{ tag: 'z-grid', route: '/c/layout/z-grid', description: 'For uniform cells.' },
+		{ tag: 'wired-grid', route: '/c/layout/wired-grid', description: 'For uniform cells.' },
 		{ tag: 'z-card', route: '/c/foundation/z-card', description: 'The simpler content block.' }
 	]
 }

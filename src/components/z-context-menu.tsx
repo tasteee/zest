@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event, useRef, useState, useEffect, useHost } from 'atomico'
 
 /*
@@ -183,7 +184,7 @@ export const ZContextMenu = c(
 		}, [isOpen, point])
 
 		const openAt = (e: MouseEvent) => {
-			if (props.isDisabled) return
+			if (props.disabled) return
 			e.preventDefault()
 			setPoint({ x: e.clientX, y: e.clientY })
 			setActiveIndex(-1)
@@ -259,11 +260,11 @@ export const ZContextMenu = c(
 		props: {
 			items: { type: Array },
 			accent: { type: String, reflect: true },
-			isDisabled: { type: Boolean, reflect: true },
+			disabled: { type: Boolean, reflect: true },
 			select: event<{ value: string }>({ bubbles: true, composed: true })
 		},
 		styles
 	}
 )
 
-customElements.define('z-context-menu', ZContextMenu)
+defineElement('z-context-menu', ZContextMenu)

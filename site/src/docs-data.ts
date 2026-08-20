@@ -2,6 +2,8 @@
 // into a navigable site model: categories, pages, and route strings.
 // Kept free of DOM APIs so it can be reasoned about and tested in isolation.
 
+import customElementsManifest from '../../custom-elements.json'
+
 export type DocPageT = {
 	slug: string
 	title: string
@@ -33,7 +35,6 @@ const CATEGORY_LABELS: Record<string, string> = {
 	'data-display': 'Data Display',
 	'navigation-disclosure': 'Navigation & Disclosure',
 	overlays: 'Overlays',
-	chat: 'Chat',
 	'text-editor': 'Text Editor',
 	attachments: 'Attachments',
 	'canvas-panels': 'Canvas & Panels',
@@ -50,7 +51,6 @@ const CATEGORY_ORDER = [
 	'data-display',
 	'navigation-disclosure',
 	'overlays',
-	'chat',
 	'text-editor',
 	'attachments',
 	'canvas-panels',
@@ -58,6 +58,15 @@ const CATEGORY_ORDER = [
 	'music',
 	'specialized'
 ]
+
+const PUBLIC_ELEMENT_TAGS = new Set(
+	customElementsManifest.modules.flatMap((module) =>
+		module.declarations.filter((declaration) => declaration.customElement).map((declaration) => declaration.tagName)
+	)
+)
+
+// Concept pages describe a family rather than a same-named custom element.
+const PUBLIC_CONCEPT_PAGES = new Set(['z-drag-drop'])
 
 const getCategoryLabel = (categorySlug: string): string => {
 	const knownLabel = CATEGORY_LABELS[categorySlug]
@@ -133,6 +142,10 @@ export const buildDocSiteData = (rawDocsByPath: Record<string, string>): DocSite
 			homeMarkdown = rawMarkdown
 			continue
 		}
+
+		const isComponentPage = parsedPath.categorySlug !== '' && parsedPath.slug.startsWith('z-')
+		const isPublicComponentPage = PUBLIC_ELEMENT_TAGS.has(parsedPath.slug) || PUBLIC_CONCEPT_PAGES.has(parsedPath.slug)
+		if (isComponentPage && !isPublicComponentPage) continue
 
 		const isStandalone = parsedPath.categorySlug === ''
 		const categoryLabel = isStandalone ? '' : getCategoryLabel(parsedPath.categorySlug)

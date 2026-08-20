@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event, useProp, useHost, useEffect } from 'atomico'
 
 /*
@@ -188,4 +189,4 @@ export const ZModelPicker = c(
 	}
 )
 
-customElements.define('z-model-picker', ZModelPicker)
+defineElement('z-model-picker', ZModelPicker)

@@ -35,7 +35,7 @@ dialog.addEventListener('close', () => {})
 | `size` | `sm` `md` `lg` | `md` | width (24 / 30 / 42 rem) |
 | `has-close` | boolean | — | hide the × close button |
 | `is-static` | boolean | — | disable backdrop-click dismiss |
-| `is-disabled` | boolean | — | prevent the trigger from opening |
+| `disabled` | boolean | — | prevent the trigger from opening |
 
 ## Slots
 

@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css } from 'atomico'
 
 /*
@@ -87,4 +88,4 @@ export const ZExternalLink = c(
 	}
 )
 
-customElements.define('z-external-link', ZExternalLink)
+defineElement('z-external-link', ZExternalLink)

@@ -75,13 +75,13 @@ export const zDrawerDoc: ComponentDocT = {
 			markup: `
 				<z-drawer heading="Photo options">
 				  <z-button slot="trigger" kind="outline">Photo options</z-button>
-				  <z-column gap="2xs">
+				  <wired-column gap="2xs">
 				    <z-button kind="ghost" accent="neutral" is-full-width>Add to album</z-button>
 				    <z-button kind="ghost" accent="neutral" is-full-width>Duplicate</z-button>
 				    <z-button kind="ghost" accent="neutral" is-full-width>Download original</z-button>
 				    <z-separator></z-separator>
 				    <z-button kind="ghost" accent="error" is-full-width>Delete photo</z-button>
-				  </z-column>
+				  </wired-column>
 				</z-drawer>
 			`
 		}),
@@ -163,15 +163,15 @@ export const zDrawerDoc: ComponentDocT = {
 			description: 'A drawer raised in response to something else — a long press, a row tap, a selection. `isOpen` is two-way, so it is one assignment.',
 			layout: ExampleLayout.stack,
 			markup: `
-				<z-row gap="sm">
+				<wired-row gap="sm">
 				  <z-button id="rowOne" size="sm" kind="outline">Tap “Sunset.jpg”</z-button>
 				  <z-button id="rowTwo" size="sm" kind="outline">Tap “Notes.pdf”</z-button>
-				</z-row>
+				</wired-row>
 				<z-drawer id="fileDrawer" heading="File options">
-				  <z-column gap="2xs">
+				  <wired-column gap="2xs">
 				    <z-button kind="ghost" accent="neutral" is-full-width>Rename</z-button>
 				    <z-button kind="ghost" accent="neutral" is-full-width>Move</z-button>
-				  </z-column>
+				  </wired-column>
 				</z-drawer>
 			`,
 			script: `
@@ -205,7 +205,7 @@ export const zDrawerDoc: ComponentDocT = {
 		{ name: 'heading', type: 'string', defaultValue: '—', description: 'Title in the header, and the drawer’s accessible name.' },
 		{ name: 'description', type: 'string', defaultValue: '—', description: 'A muted line under the heading.' },
 		{ name: 'is-static', type: 'boolean', defaultValue: '—', description: 'Ignores backdrop clicks. The drag and Escape still dismiss.' },
-		{ name: 'is-disabled', type: 'boolean', defaultValue: '—', description: 'Stops the trigger from opening the drawer.' }
+		{ name: 'disabled', type: 'boolean', defaultValue: '—', description: 'Stops the trigger from opening the drawer.' }
 	],
 
 	properties: [],

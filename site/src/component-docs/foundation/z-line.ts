@@ -3,10 +3,7 @@ import { ComponentStatus, ExampleLayout } from '../types'
 import type { ComponentDocT } from '../types'
 
 const buildPlaygroundLine = (): HTMLElement => {
-	const wrapper = document.createElement('div')
-	wrapper.className = 'demoConstrained demoFullWidth'
-	wrapper.append(document.createElement('z-line'))
-	return wrapper
+	return document.createElement('z-line')
 }
 
 export const zLineDoc: ComponentDocT = {
@@ -16,11 +13,11 @@ export const zLineDoc: ComponentDocT = {
 	status: ComponentStatus.stable,
 
 	description:
-		'One rule, nothing else. It has no label, no spacing, and no options beyond its direction, which is what makes it the right choice inside dense layouts where a divider should be invisible until you look for it. It still exposes `role="separator"` with the matching `aria-direction`, so it divides content structurally rather than only visually. When the divider needs a centred label, `z-separator` is the same idea with room for one.',
+		'One rule, nothing else. It has no label, no spacing, and no options beyond its direction, which is what makes it the right choice inside dense layouts where a divider should be invisible until you look for it. It still exposes `role="separator"` with the matching `aria-orientation`, so it divides content structurally rather than only visually. When the divider needs a centred label, `z-separator` is the same idea with room for one.',
 
 	playground: {
 		buildElement: buildPlaygroundLine,
-		controlNames: [],
+		controlNames: ['vertical'],
 		slotLabel: '(no slot)'
 	},
 
@@ -40,27 +37,27 @@ export const zLineDoc: ComponentDocT = {
 			description: 'The default. It fills the width of whatever contains it.',
 			layout: ExampleLayout.fill,
 			markup: `
-				<z-column gap="4" style="width: 22rem">
+				<wired-column gap="md" style="width: 22rem">
 				  <z-text size="sm">Above the line</z-text>
 				  <z-line></z-line>
 				  <z-text size="sm">Below the line</z-text>
-				</z-column>
+				</wired-column>
 			`
 		}),
 
 		defineMarkupExample({
 			id: 'vertical',
 			title: 'Vertical',
-			description: '`direction` fills the height instead — the divider between clusters in a row.',
+			description: '`vertical` fills the height instead — the divider between clusters in a row.',
 			layout: ExampleLayout.center,
 			markup: `
-				<z-row gap="3" aligns-y="center">
+				<wired-row gap="sm" y="center">
 				  <z-text size="sm">Drafts</z-text>
-				  <z-line direction></z-line>
+				  <z-line vertical></z-line>
 				  <z-text size="sm">Sent</z-text>
-				  <z-line direction></z-line>
+				  <z-line vertical></z-line>
 				  <z-text size="sm">Archived</z-text>
-				</z-row>
+				</wired-row>
 			`
 		}),
 
@@ -70,22 +67,22 @@ export const zLineDoc: ComponentDocT = {
 			description: 'The densest use, and the one it is really for — a hairline between each row and nothing else.',
 			layout: ExampleLayout.fill,
 			markup: `
-				<z-column style="width: 26rem">
-				  <z-row aligns-x="between" aligns-y="center" padding-y="3">
+				<wired-column style="width: 26rem">
+				  <wired-row x="between" y="center" style="padding-block: var(--spacing-3)">
 				    <z-text size="sm">Production</z-text>
 				    <z-badge accent="success" kind="soft" size="sm" label="Healthy"></z-badge>
-				  </z-row>
+				  </wired-row>
 				  <z-line></z-line>
-				  <z-row aligns-x="between" aligns-y="center" padding-y="3">
+				  <wired-row x="between" y="center" style="padding-block: var(--spacing-3)">
 				    <z-text size="sm">Staging</z-text>
 				    <z-badge accent="warning" kind="soft" size="sm" label="Degraded"></z-badge>
-				  </z-row>
+				  </wired-row>
 				  <z-line></z-line>
-				  <z-row aligns-x="between" aligns-y="center" padding-y="3">
+				  <wired-row x="between" y="center" style="padding-block: var(--spacing-3)">
 				    <z-text size="sm">Preview</z-text>
 				    <z-badge accent="neutral" kind="soft" size="sm" label="Idle"></z-badge>
-				  </z-row>
-				</z-column>
+				  </wired-row>
+				</wired-column>
 			`
 		}),
 
@@ -96,41 +93,29 @@ export const zLineDoc: ComponentDocT = {
 			layout: ExampleLayout.fill,
 			markup: `
 				<z-card style="max-width: 24rem">
-				  <z-column gap="4">
-				    <z-column gap="1">
+				  <wired-column gap="md">
+				    <wired-column gap="2xs">
 				      <z-heading size="xs" tag="h3">Monthly usage</z-heading>
 				      <z-text size="sm" color="muted">48 of 100 seats in use.</z-text>
-				    </z-column>
+				    </wired-column>
 				    <z-line></z-line>
-				    <z-row aligns-x="between" aligns-y="center">
+				    <wired-row x="between" y="center">
 				      <z-text size="xs" color="muted">Resets 1 August</z-text>
 				      <z-link href="#" size="sm">Manage seats</z-link>
-				    </z-row>
-				  </z-column>
+				    </wired-row>
+				  </wired-column>
 				</z-card>
 			`
 		}),
-
-		defineMarkupExample({
-			id: 'explicit-horizontal',
-			title: 'Explicit direction',
-			description:
-				'`direction` states the default outright. Worth setting when the direction is toggled from script, so both branches read the same.',
-			layout: ExampleLayout.fill,
-			markup: `
-				<z-line direction></z-line>
-			`
-		})
 	],
 
 	attributes: [
 		{
-			name: 'direction',
+			name: 'vertical',
 			type: 'boolean',
-			defaultValue: '—',
-			description: 'Renders a full-height vertical rule instead of a horizontal one.'
-		},
-		{ name: 'direction', type: 'boolean', defaultValue: '—', description: 'States the default horizontal direction explicitly.' }
+			defaultValue: 'false',
+			description: 'Makes the rule fill the available height instead of width.'
+		}
 	],
 
 	properties: [],
@@ -139,7 +124,7 @@ export const zLineDoc: ComponentDocT = {
 	cssVariables: [],
 
 	accessibilityNotes: [
-		'Exposes role="separator" with aria-direction matching the direction, so the division is announced rather than merely drawn.',
+		'Exposes role="separator" with aria-orientation matching its axis, so the division is announced rather than merely drawn.',
 		'A separator is not focusable and not interactive — it only marks a boundary between groups of content.',
 		'Do not scatter lines where whitespace would do. Every announced separator is one more thing between a screen reader user and the content.',
 		'A vertical line inside a container with no resolvable height renders as nothing. That is a layout bug, not a styling one.'

@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event, useProp } from 'atomico'
 
 /*
@@ -101,7 +102,7 @@ export const ZCollapsible = c(
 		const [isOpen, setIsOpen] = useProp<boolean>('isOpen')
 
 		const toggle = () => {
-			if (props.isDisabled) return
+			if (props.disabled) return
 			const next = !isOpen
 			setIsOpen(next)
 			props.toggle({ value: props.value || '', open: next })
@@ -112,7 +113,7 @@ export const ZCollapsible = c(
 				<button
 					type="button"
 					class="trigger"
-					disabled={props.isDisabled}
+					disabled={props.disabled}
 					aria-expanded={isOpen ? 'true' : 'false'}
 					onclick={toggle}
 				>
@@ -133,7 +134,7 @@ export const ZCollapsible = c(
 			label: String,
 			accent: { type: String, reflect: true },
 			isOpen: { type: Boolean, reflect: true },
-			isDisabled: { type: Boolean, reflect: true },
+			disabled: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			toggle: event<{ value: string; open: boolean }>({ bubbles: true, composed: true })
 		},
@@ -141,4 +142,4 @@ export const ZCollapsible = c(
 	}
 )
 
-customElements.define('z-collapsible', ZCollapsible)
+defineElement('z-collapsible', ZCollapsible)

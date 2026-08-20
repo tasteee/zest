@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event, useProp, useState, useRef, useHost, useEffect, useMemo } from 'atomico'
 import { themedScrollbarStyles } from '../shared/scrollbar-styles'
 
@@ -46,7 +47,7 @@ const styles = css`
 	:host([is-hidden]) {
 		display: none;
 	}
-	:host([is-disabled]) {
+	:host([disabled]) {
 		opacity: 0.55;
 		pointer-events: none;
 	}
@@ -555,7 +556,7 @@ export const ZPatternRoll = c(
 		// The timing ruler adjusts beat width vertically; the degree gutter adjusts
 		// row height horizontally so the labels stay a direct, discoverable control.
 		const startZoomDrag = (e: PointerEvent, axis: 'horizontal' | 'vertical') => {
-			if (props.isDisabled || e.button !== 0) return
+			if (props.disabled || e.button !== 0) return
 			e.preventDefault()
 			const surface = e.currentTarget as HTMLElement
 			surface.setPointerCapture(e.pointerId)
@@ -595,7 +596,7 @@ export const ZPatternRoll = c(
 
 		// --- pointer down: decide the gesture ---
 		const onPointerDown = (e: PointerEvent) => {
-			if (props.isDisabled || e.button === 2) return
+			if (props.disabled || e.button === 2) return
 			;(host.current as HTMLElement).focus?.()
 			const { beat, tone } = pointToBeatTone(e)
 			const hit = signalAt(beat, tone)
@@ -735,7 +736,7 @@ export const ZPatternRoll = c(
 
 		// --- double-click: create (empty) or delete (on a signal) ---
 		const onDblClick = (e: MouseEvent) => {
-			if (props.isDisabled) return
+			if (props.disabled) return
 			const { beat, tone } = pointToBeatTone(e)
 			const hit = signalAt(beat, tone)
 			if (hit) {
@@ -761,7 +762,7 @@ export const ZPatternRoll = c(
 
 		// --- right-click: delete signal under cursor (or whole selection) ---
 		const onContextMenu = (e: MouseEvent) => {
-			if (props.isDisabled) return
+			if (props.disabled) return
 			e.preventDefault()
 			const { beat, tone } = pointToBeatTone(e)
 			const hit = signalAt(beat, tone)
@@ -802,7 +803,7 @@ export const ZPatternRoll = c(
 		const resetModifiers = () => patchSelection((s) => ({ ...s, octave: 0, velocity: defaultVelocity, probability: 1 }))
 
 		const onKeyDown = (e: KeyboardEvent) => {
-			if (props.isDisabled) return
+			if (props.disabled) return
 			const mod = e.metaKey || e.ctrlKey
 			const k = e.key
 			if (k === 'Delete' || k === 'Backspace') {
@@ -1044,9 +1045,9 @@ export const ZPatternRoll = c(
 			defaultVelocity: { type: Number, reflect: true },
 			defaultOctave: { type: Number, reflect: true },
 			playhead: { type: Number, reflect: true },
-			hasToolbar: { type: Boolean, reflect: true, value: true },
-			hasKeyboard: { type: Boolean, reflect: true, value: true },
-			isDisabled: { type: Boolean, reflect: true },
+			hasToolbar: { type: Boolean, reflect: true, value: () => true },
+			hasKeyboard: { type: Boolean, reflect: true, value: () => true },
+			disabled: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			change: event<{ signals: any[] }>({ bubbles: true, composed: true }),
 			select: event<{ ids: number[] }>({ bubbles: true, composed: true })
@@ -1055,4 +1056,4 @@ export const ZPatternRoll = c(
 	}
 )
 
-customElements.define('z-pattern-roll', ZPatternRoll)
+defineElement('z-pattern-roll', ZPatternRoll)

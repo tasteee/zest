@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event, useRef, useProp, useState, useEffect } from 'atomico'
 import { dialogSurfaceStyles } from '../shared/overlay-styles'
 
@@ -61,7 +62,7 @@ export const ZDialog = c(
 
 		return (
 			<host shadowDom style={{ '--z-dialog-width': width }}>
-				<div class="trigger" onclick={() => !props.isDisabled && setIsOpen(true)}>
+				<div class="trigger" onclick={() => !props.disabled && setIsOpen(true)}>
 					<slot name="trigger" />
 				</div>
 
@@ -101,9 +102,9 @@ export const ZDialog = c(
 			heading: String,
 			description: String,
 			size: { type: String, reflect: true },
-			hasClose: { type: Boolean, reflect: true, value: true },
+			hasClose: { type: Boolean, reflect: true, value: () => true },
 			isStatic: { type: Boolean, reflect: true },
-			isDisabled: { type: Boolean, reflect: true },
+			disabled: { type: Boolean, reflect: true },
 			open: event<void>({ bubbles: true, composed: true }),
 			close: event<void>({ bubbles: true, composed: true })
 		},
@@ -111,4 +112,4 @@ export const ZDialog = c(
 	}
 )
 
-customElements.define('z-dialog', ZDialog)
+defineElement('z-dialog', ZDialog)

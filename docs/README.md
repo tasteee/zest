@@ -58,11 +58,8 @@ these docs, flagged for discussion rather than fixed silently.
 
 ### Layout primitives
 - [z-box](foundation/z-box.md) — the canonical layout primitive (flex/grid/block)
-- [z-row](layout/z-row.md) / [z-column](layout/z-column.md) — thin, direction-locked z-box wrappers
-- [z-grid](layout/z-grid.md) — CSS grid
-- [z-center](layout/z-center.md) — centering box
-- [z-container](layout/z-container.md) — max-width page wrapper
-- [z-section](layout/z-section.md) — vertical page band
+- [wired-row](layout/wired-row.md) / [wired-column](layout/wired-column.md) — thin, direction-locked z-box wrappers
+- [wired-grid](layout/wired-grid.md) — CSS grid
 - [z-surface](layout/z-surface.md) — themed panel
 - [z-scroll](layout/z-scroll.md) — themed overflow container
 - [z-spacer](layout/z-spacer.md) — flex spacing
@@ -77,9 +74,7 @@ these docs, flagged for discussion rather than fixed silently.
 - [z-toggle-group](buttons-actions/z-toggle-group.md) — toggle set
 - [z-toggle-group-item](buttons-actions/z-toggle-group-item.md) — toggle set item
 - [z-link](buttons-actions/z-link.md) — text link
-- [z-send-button](buttons-actions/z-send-button.md) — composer send/stop control
 - [z-toolbar](buttons-actions/z-toolbar.md) / [z-toolbar-group](buttons-actions/z-toolbar-group.md) — action strip with roving-tabindex semantics
-- [z-dock](buttons-actions/z-dock.md) / [z-dock-item](buttons-actions/z-dock-item.md) — macOS-style magnifying dock
 
 ### Form controls
 - [z-input](forms/z-input.md) — text field
@@ -120,7 +115,6 @@ these docs, flagged for discussion rather than fixed silently.
 - [z-stat](data-display/z-stat.md) — statistic block
 - [z-list](data-display/z-list.md) / [z-list-row](data-display/z-list-row.md) — divided row list on a card
 - [z-tree](data-display/z-tree.md) — hierarchical disclosure tree
-- [z-virtual-list](data-display/z-virtual-list.md) — windowed list rendering
 - [z-sortable](data-display/z-sortable.md) — drag-to-reorder children
 
 ### Navigation & disclosure
@@ -161,14 +155,8 @@ these docs, flagged for discussion rather than fixed silently.
 - [z-empty-state](specialized/z-empty-state.md) — empty placeholder
 - [z-scroll-area](specialized/z-scroll-area.md) — styled scroll area
 - [z-code-block](specialized/z-code-block.md) — code block
-- [z-markdown](specialized/z-markdown.md) — shared markdown renderer
-- [z-streaming-text](specialized/z-streaming-text.md) — token-streaming/typewriter text reveal
-- [z-post-meta](specialized/z-post-meta.md) — blog byline
 - [z-carousel](specialized/z-carousel.md) — carousel
-- [z-chart](specialized/z-chart.md) — minimal chart
 - [z-terminal](specialized/z-terminal.md) — animated terminal/code demo
-- [z-citation](specialized/z-citation.md) — inline AI-answer citation marker
-- [z-sources](specialized/z-sources.md) — AI-answer grounding source list
 - [z-suggestion-chips](specialized/z-suggestion-chips.md) — tappable prompt suggestions
 - [z-relative-time](specialized/z-relative-time.md) — auto-updating relative timestamp
 
@@ -179,7 +167,6 @@ these docs, flagged for discussion rather than fixed silently.
 - [z-message-list](chat/z-message-list.md) — pin-to-bottom message scroll surface
 - [z-message-group](chat/z-message-group.md) / [z-message-bubble](chat/z-message-bubble.md) — sender-grouped bubbles
 - [z-composer](chat/z-composer.md) — message input row
-- [z-send-button](buttons-actions/z-send-button.md) — composer send/stop control
 - [z-model-picker](chat/z-model-picker.md) — AI model selector
 - [z-emoji-picker](chat/z-emoji-picker.md) — categorized emoji panel
 - [z-reactions](chat/z-reactions.md) — emoji-count reaction pills
@@ -191,7 +178,6 @@ these docs, flagged for discussion rather than fixed silently.
 - [z-typing-indicator](chat/z-typing-indicator.md) — "…" typing bubble
 - [z-date-divider](chat/z-date-divider.md) / [z-unread-divider](chat/z-unread-divider.md) — thread dividers
 - [z-system-message](chat/z-system-message.md) — centered muted status line
-- [z-thinking](chat/z-thinking.md) — collapsible chain-of-thought block
 - [z-tool-call](chat/z-tool-call.md) — agent tool-invocation card
 
 ### Music

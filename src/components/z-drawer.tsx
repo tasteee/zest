@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event, useRef, useProp, useState, useEffect } from 'atomico'
 import { dialogSurfaceStyles } from '../shared/overlay-styles'
 
@@ -164,7 +165,7 @@ export const ZDrawer = c(
 
 		return (
 			<host shadowDom>
-				<div class="trigger" onclick={() => !props.isDisabled && setIsOpen(true)}>
+				<div class="trigger" onclick={() => !props.disabled && setIsOpen(true)}>
 					<slot name="trigger" />
 				</div>
 
@@ -203,7 +204,7 @@ export const ZDrawer = c(
 			heading: String,
 			description: String,
 			isStatic: { type: Boolean, reflect: true },
-			isDisabled: { type: Boolean, reflect: true },
+			disabled: { type: Boolean, reflect: true },
 			open: event<void>({ bubbles: true, composed: true }),
 			close: event<void>({ bubbles: true, composed: true })
 		},
@@ -211,4 +212,4 @@ export const ZDrawer = c(
 	}
 )
 
-customElements.define('z-drawer', ZDrawer)
+defineElement('z-drawer', ZDrawer)

@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event } from 'atomico'
 
 /*
@@ -104,7 +105,7 @@ export const ZReactions = c(
 	{
 		props: {
 			reactions: { type: Array },
-			canAdd: { type: Boolean, reflect: true, value: true },
+			canAdd: { type: Boolean, reflect: true, value: () => true },
 			isHidden: { type: Boolean, reflect: true },
 			toggle: event<{ emoji: string; isMine: boolean }>({ bubbles: true, composed: true }),
 			add: event<void>({ bubbles: true, composed: true })
@@ -113,4 +114,4 @@ export const ZReactions = c(
 	}
 )
 
-customElements.define('z-reactions', ZReactions)
+defineElement('z-reactions', ZReactions)

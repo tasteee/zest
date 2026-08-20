@@ -67,7 +67,7 @@ export const zAlertDialogDoc: ComponentDocT = {
 
 		defineMarkupExample({
 			id: 'accents',
-			title: 'Tones',
+			title: 'Accents',
 			description:
 				'The accent paints the confirm button. Danger for destruction, primary for a consequential but constructive choice — publishing, sending, going live.',
 			layout: ExampleLayout.start,
@@ -174,10 +174,10 @@ export const zAlertDialogDoc: ComponentDocT = {
 				'`isOpen` is two-way, so a confirmation can be raised from anywhere — a keyboard shortcut, a drag that would overwrite something, a row action in a table.',
 			layout: ExampleLayout.stack,
 			markup: `
-				<z-row gap="sm">
+				<wired-row gap="sm">
 				  <z-button id="deleteRowOne" size="sm" kind="outline" accent="neutral">Delete “Q3 report”</z-button>
 				  <z-button id="deleteRowTwo" size="sm" kind="outline" accent="neutral">Delete “Roadmap”</z-button>
-				</z-row>
+				</wired-row>
 				<z-alert-dialog id="deleteDialog" heading="Delete this file?" confirm-label="Delete" accent="error"></z-alert-dialog>
 				<z-text size="sm" color="muted" id="deleteStatus">Nothing deleted.</z-text>
 			`,

@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event, useProp, useState, useHost, useEffect } from 'atomico'
 
 /*
@@ -196,7 +197,7 @@ export const ZColorPicker = c(
 				<button
 					type="button"
 					class={isOpen ? 'trigger is-open' : 'trigger'}
-					disabled={props.isDisabled}
+					disabled={props.disabled}
 					aria-haspopup="dialog"
 					aria-label={triggerLabel}
 					aria-expanded={isOpen ? 'true' : 'false'}
@@ -247,7 +248,7 @@ export const ZColorPicker = c(
 			label: String,
 			presets: { type: Array },
 			accent: { type: String, reflect: true },
-			isDisabled: { type: Boolean, reflect: true },
+			disabled: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			change: event<{ value: string }>({ bubbles: true, composed: true })
 		},
@@ -255,4 +256,4 @@ export const ZColorPicker = c(
 	}
 )
 
-customElements.define('z-color-picker', ZColorPicker)
+defineElement('z-color-picker', ZColorPicker)

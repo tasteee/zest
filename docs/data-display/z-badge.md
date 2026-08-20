@@ -11,9 +11,9 @@ selectable chip or a removable tag (this absorbs what used to be `z-chip`).
 <z-badge is-dot accent="success">Online</z-badge>
 
 <!-- selectable chip -->
-<z-badge is-selectable value="react">React</z-badge>
+<z-badge selectable value="react">React</z-badge>
 <!-- removable tag -->
-<z-badge is-removable value="draft">Draft</z-badge>
+<z-badge removable value="draft">Draft</z-badge>
 ```
 
 ```js
@@ -31,10 +31,10 @@ badge.addEventListener('remove', (e) => e.detail) // { value }
 | `label` | string | — | text (alternative to slotting children) |
 | `value` | string | — | value carried in `select` / `remove` events |
 | `is-dot` | boolean | — | inline status: leading dot + uppercase tracked text |
-| `is-selectable` | boolean | — | make it a toggle (`role="button"`) |
-| `is-selected` | boolean | — | selected state (with `is-selectable`) |
-| `is-removable` | boolean | — | render a × remove button |
-| `is-disabled` | boolean | — | disable |
+| `selectable` | boolean | — | make it a toggle (`role="button"`) |
+| `selected` | boolean | — | selected state (with `selectable`) |
+| `removable` | boolean | — | render a × remove button |
+| `disabled` | boolean | — | disable |
 | `is-hidden` | boolean | — | hide |
 
 ## Slots
@@ -46,5 +46,5 @@ badge.addEventListener('remove', (e) => e.detail) // { value }
 
 | Event | `detail` | Description |
 | --- | --- | --- |
-| `select` | `{ value, selected }` | when an `is-selectable` badge is toggled |
-| `remove` | `{ value }` | when the × on an `is-removable` badge is clicked |
+| `select` | `{ value, selected }` | when a selectable badge is toggled |
+| `remove` | `{ value }` | when the × on a removable badge is clicked |

@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event, useProp } from 'atomico'
 
 /*
@@ -182,4 +183,4 @@ export const ZAlert = c(
 	}
 )
 
-customElements.define('z-alert', ZAlert)
+defineElement('z-alert', ZAlert)

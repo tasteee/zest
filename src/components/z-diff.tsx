@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, useMemo } from 'atomico'
 import { highlight, type Token } from '../shared/highlight'
 
@@ -392,4 +393,4 @@ export const ZDiff = c(
 	}
 )
 
-customElements.define('z-diff', ZDiff)
+defineElement('z-diff', ZDiff)

@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css } from 'atomico'
 import { directionLockedBoxProps, getBoxHostStyle } from '../shared/box-schema'
 import { boxLayoutStyles } from '../shared/box-styles'
@@ -25,4 +26,4 @@ export const ZColumn = c(
 	}
 )
 
-customElements.define('z-column', ZColumn)
+defineElement('z-column', ZColumn)

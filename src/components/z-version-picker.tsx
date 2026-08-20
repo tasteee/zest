@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event } from 'atomico'
 
 /*
@@ -104,4 +105,4 @@ export const ZVersionPicker = c(
 	}
 )
 
-customElements.define('z-version-picker', ZVersionPicker)
+defineElement('z-version-picker', ZVersionPicker)

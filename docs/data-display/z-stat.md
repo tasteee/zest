@@ -20,10 +20,9 @@ same type scale and colors.
 | --- | --- | --- | --- |
 | `value` | string | — | the headline value |
 | `label` | string | — | the caption below |
-| `size` | `xxl`…`xs` | `xs` | value size (z-heading scale) |
-| `label-size` | `xxl`…`xs` | `sm` | label size (z-text scale) |
-| `color` | text color | — | value color |
-| `label-color` | text color | `muted` | label color |
+| `size` | `xxl` `xl` `lg` `md` `sm` `xs` | `xs` | value size (z-heading scale) |
+| `label-size` | `xxl` `xl` `lg` `md` `sm` `xs` | `sm` | label size (z-text scale) |
+| `color` | `neutral` `dom` `sub` `muted` `strong` `success` `warning` `error` | — | value color |
 | `align` | `start` `center` `end` | `start` | cross-axis alignment |
 | `is-hidden` | boolean | — | hide |
 

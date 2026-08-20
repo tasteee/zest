@@ -13,7 +13,7 @@ does.
 const panel = document.querySelector('z-control-panel')
 panel.controls = [
   { name: 'size', kind: 'enum', options: ['xs', 'sm', 'md'], defaultValue: 'md' },
-  { name: 'is-disabled', kind: 'boolean' },
+  { name: 'disabled', kind: 'boolean' },
   { name: 'columns', kind: 'number', defaultValue: '3' },
   { name: 'label', kind: 'text' }
 ]

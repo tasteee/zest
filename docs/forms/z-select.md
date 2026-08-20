@@ -33,9 +33,9 @@ Keyboard: ↑/↓ move, Enter/Space picks, Esc closes; clicking outside closes.
 | `placeholder` | string | `Select…` | empty-state text |
 | `size` | `sm` `md` `lg` | `md` | size |
 | `accent` | `dom` `sub` | `dom` accent | accent color |
-| `is-invalid` | boolean | — | error styling |
-| `is-disabled` | boolean | — | disable |
-| `is-inline` | boolean | — | shrink to content width |
+| `invalid` | boolean | — | error styling |
+| `disabled` | boolean | — | disable |
+| `inline` | boolean | — | shrink to content width |
 | `is-hidden` | boolean | — | hide |
 
 ## Events

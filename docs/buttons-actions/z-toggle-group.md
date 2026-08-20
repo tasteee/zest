@@ -24,7 +24,7 @@ group.addEventListener('change', (e) => {
 | Attribute | Values | Default | Description |
 | --- | --- | --- | --- |
 | `type` | `single` `multiple` | `single` | selection mode |
-| `direction` | boolean | — | stack vertically |
+| `direction` | `horizontal` `vertical` | `horizontal` | layout axis |
 | `is-hidden` | boolean | — | hide |
 | _color_ | `accent` `accent` `accent` | — | shared accent for items |
 | _size_ | `size` `is-medium` `size` | — | shared size for items |

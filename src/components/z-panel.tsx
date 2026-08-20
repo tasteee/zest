@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, useHost, useEffect } from 'atomico'
 
 /*
@@ -74,4 +75,4 @@ export const ZPanel = c(
 	}
 )
 
-customElements.define('z-panel', ZPanel)
+defineElement('z-panel', ZPanel)

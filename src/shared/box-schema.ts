@@ -19,10 +19,10 @@ const resolveGridTemplateValue = (value?: string): string | undefined => {
  * lives in z-grid, which owns that job properly.
  *
  * What survives is the one modifier that genuinely composes with flex:
- * is-inline upgrades the box to inline-flex.
+ * inline upgrades the box to inline-flex.
  */
 export const boxBooleanProps = {
-	isInline: { type: Boolean, reflect: true },
+	inline: { type: Boolean, reflect: true },
 	doesWrap: { type: Boolean, reflect: true },
 	doesWrapText: { type: Boolean, reflect: true },
 	isFullWidth: { type: Boolean, reflect: true },

@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css } from 'atomico'
 import { baseStyles, coerceSize, resolveWidth, sizeProp } from '../shared/layout-schema'
 
@@ -49,4 +50,4 @@ export const ZContainer = c(
 	}
 )
 
-customElements.define('z-container', ZContainer)
+defineElement('z-container', ZContainer)

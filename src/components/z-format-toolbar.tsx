@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event, useHost, useState, useEffect } from 'atomico'
 import { floatingIconButtonStyles } from '../shared/editor-overlay-styles'
 import { createMenuKeyDownHandler } from '../shared/menu-nav'
@@ -238,4 +239,4 @@ export const ZFormatToolbar = c(
 	}
 )
 
-customElements.define('z-format-toolbar', ZFormatToolbar)
+defineElement('z-format-toolbar', ZFormatToolbar)

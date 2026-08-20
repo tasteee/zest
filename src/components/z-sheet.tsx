@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event, useRef, useProp, useState, useEffect } from 'atomico'
 import { dialogSurfaceStyles } from '../shared/overlay-styles'
 
@@ -137,7 +138,7 @@ export const ZSheet = c(
 
 		return (
 			<host shadowDom>
-				<div class="trigger" onclick={() => !props.isDisabled && setIsOpen(true)}>
+				<div class="trigger" onclick={() => !props.disabled && setIsOpen(true)}>
 					<slot name="trigger" />
 				</div>
 
@@ -175,9 +176,9 @@ export const ZSheet = c(
 			side: { type: String, reflect: true },
 			heading: String,
 			description: String,
-			hasClose: { type: Boolean, reflect: true, value: true },
+			hasClose: { type: Boolean, reflect: true, value: () => true },
 			isStatic: { type: Boolean, reflect: true },
-			isDisabled: { type: Boolean, reflect: true },
+			disabled: { type: Boolean, reflect: true },
 			open: event<void>({ bubbles: true, composed: true }),
 			close: event<void>({ bubbles: true, composed: true })
 		},
@@ -185,4 +186,4 @@ export const ZSheet = c(
 	}
 )
 
-customElements.define('z-sheet', ZSheet)
+defineElement('z-sheet', ZSheet)

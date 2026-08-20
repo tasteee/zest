@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event } from 'atomico'
 import { themedScrollbarStyles } from '../shared/scrollbar-styles'
 
@@ -155,4 +156,4 @@ export const ZTable = c(
 	}
 )
 
-customElements.define('z-table', ZTable)
+defineElement('z-table', ZTable)

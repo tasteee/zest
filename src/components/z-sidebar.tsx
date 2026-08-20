@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event, useState } from 'atomico'
 import { themedScrollbarStyles } from '../shared/scrollbar-styles'
 
@@ -393,4 +394,4 @@ export const ZSidebar = c(
 	}
 )
 
-customElements.define('z-sidebar', ZSidebar)
+defineElement('z-sidebar', ZSidebar)

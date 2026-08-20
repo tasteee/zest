@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css } from 'atomico'
 
 /*
@@ -77,4 +78,4 @@ export const ZEditOnGithub = c(
 	}
 )
 
-customElements.define('z-edit-on-github', ZEditOnGithub)
+defineElement('z-edit-on-github', ZEditOnGithub)

@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event, useHost, useRef, useState } from 'atomico'
 
 /*
@@ -43,7 +44,7 @@ const styles = css`
 		border-color: var(--destructive);
 		background: color-mix(in oklch, var(--destructive) 10%, transparent);
 	}
-	:host([is-disabled]) .zone {
+	:host([disabled]) .zone {
 		opacity: 0.5;
 		pointer-events: none;
 	}
@@ -143,7 +144,7 @@ export const ZDropzone = c(
 
 		const onDragEnter = (e: DragEvent) => {
 			e.preventDefault()
-			if (props.isDisabled) return
+			if (props.disabled) return
 			setDepth((d) => d + 1)
 			// dataTransfer.items types aren't file contents yet, so optimistically show "over"
 			setState('over')
@@ -163,12 +164,12 @@ export const ZDropzone = c(
 			e.preventDefault()
 			setDepth(0)
 			setState(null)
-			if (props.isDisabled) return
+			if (props.disabled) return
 			if (e.dataTransfer?.files?.length) commit(e.dataTransfer.files)
 		}
 
 		const openPicker = () => {
-			if (props.isDisabled) return
+			if (props.disabled) return
 			inputRef.current?.click()
 		}
 		const onPick = (e: Event) => {
@@ -178,7 +179,7 @@ export const ZDropzone = c(
 		}
 		const clear = (e: MouseEvent) => {
 			e.stopPropagation()
-			if (props.isDisabled) return
+			if (props.disabled) return
 			props.clear()
 		}
 
@@ -221,7 +222,7 @@ export const ZDropzone = c(
 			isMultiple: { type: Boolean, reflect: true },
 			maxSize: { type: Number, reflect: true },
 			maxFiles: { type: Number, reflect: true },
-			isDisabled: { type: Boolean, reflect: true },
+			disabled: { type: Boolean, reflect: true },
 			files: { type: Array },
 			drop: event<{ files: File[] }>({ bubbles: true, composed: true }),
 			clear: event<void>({ bubbles: true, composed: true }),
@@ -231,4 +232,4 @@ export const ZDropzone = c(
 	}
 )
 
-customElements.define('z-dropzone', ZDropzone)
+defineElement('z-dropzone', ZDropzone)

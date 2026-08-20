@@ -58,7 +58,7 @@ axis.addEventListener('remove', () => deleteColumn(hoveredColumnIndex))
 | --- | --- | --- | --- |
 | `axis` | `row` `column` | `row` | which axis this handle represents |
 | `is-open` | boolean | — | show/hide |
-| `is-selected` | boolean | — | highlight the grip as the active selection |
+| `selected` | boolean | — | highlight the grip as the active selection |
 
 ### Properties
 

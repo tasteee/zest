@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css } from 'atomico'
 
 const styles = css`
@@ -45,6 +46,11 @@ const styles = css`
 		width: 100%;
 	}
 
+	button:focus-visible {
+		outline: 3px solid color-mix(in oklch, var(--ring) 55%, transparent);
+		outline-offset: 2px;
+	}
+
 	/* sizes */
 
 	button.is-sm {
@@ -68,11 +74,9 @@ const styles = css`
 		font-size: 1rem;
 	}
 
-	/* tones: each one sets --tone-color, the single color every kind below
-	   paints with. primary/secondary/success/warning/danger share the same
-	   oklch lightness/chroma (see --tone-accent-l/-c in tokens.css) so a solid
-	   button of any tone reads with the same boldness, hue aside. They're all
-	   light enough to pair with --primary-foreground for solid-kind text. */
+	button.is-neutral {
+		--tone-color: var(--color-neutral-8);
+	}
 
 	button.is-dom {
 		--tone-color: var(--purple);
@@ -80,10 +84,6 @@ const styles = css`
 
 	button.is-sub {
 		--tone-color: var(--pink);
-	}
-
-	button.is-neutral {
-		--tone-color: var(--color-neutral-8);
 	}
 
 	button.is-success {
@@ -241,11 +241,6 @@ const styles = css`
 		}
 	}
 
-	.is-solid.is-dom .label,
-	.is-solid.is-sub .label {
-		text-shadow: 0 0px 18px var(--primary-foreground);
-	}
-
 	.label {
 		display: inline-flex;
 		align-items: center;
@@ -289,11 +284,11 @@ export const ZButton = c(
 		const kindClass = resolveKindClass(props)
 		const accentClass = resolveAccentClass(props)
 		const sizeClass = resolveSizeClass(props)
-		const isButtonDisabled = props.isDisabled || props.isLoading
+		const isButtonDisabled = props.disabled || props.isLoading
 
 		const buttonClass = [kindClass, accentClass, sizeClass]
 			.concat(props.isLoading ? ['is-loading'] : [])
-			.concat(props.isDisabled ? ['is-disabled'] : [])
+			.concat(props.disabled ? ['is-disabled'] : [])
 			.concat(props.isFullWidth ? ['is-full-width'] : [])
 			.join(' ')
 
@@ -312,7 +307,7 @@ export const ZButton = c(
 			kind: { type: String, reflect: true },
 			accent: { type: String, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
-			isDisabled: { type: Boolean, reflect: true },
+			disabled: { type: Boolean, reflect: true },
 			isLoading: { type: Boolean, reflect: true },
 			isFullWidth: { type: Boolean, reflect: true },
 			label: String,
@@ -322,4 +317,4 @@ export const ZButton = c(
 	}
 )
 
-customElements.define('z-button', ZButton)
+defineElement('z-button', ZButton)

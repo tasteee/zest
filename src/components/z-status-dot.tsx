@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css } from 'atomico'
 
 /*
@@ -103,4 +104,4 @@ export const ZStatusDot = c(
 	}
 )
 
-customElements.define('z-status-dot', ZStatusDot)
+defineElement('z-status-dot', ZStatusDot)

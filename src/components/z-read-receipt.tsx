@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css } from 'atomico'
 
 /*
@@ -72,4 +73,4 @@ export const ZReadReceipt = c(
 	}
 )
 
-customElements.define('z-read-receipt', ZReadReceipt)
+defineElement('z-read-receipt', ZReadReceipt)

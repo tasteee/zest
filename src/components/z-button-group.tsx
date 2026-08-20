@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css } from 'atomico'
 
 const styles = css`
@@ -9,7 +10,7 @@ const styles = css`
 		-webkit-user-select: none;
 	}
 
-	:host([direction='vertical']) {
+	:host([vertical]) {
 		flex-direction: column;
 	}
 
@@ -22,27 +23,27 @@ const styles = css`
 		--z-button-radius: var(--radius-md);
 	}
 
-	:host(:not([direction='vertical'])) ::slotted(:first-child) {
+	:host(:not([vertical])) ::slotted(:first-child) {
 		--z-button-radius: var(--radius-md) 0 0 var(--radius-md);
 	}
 
-	:host(:not([direction='vertical'])) ::slotted(:last-child) {
+	:host(:not([vertical])) ::slotted(:last-child) {
 		--z-button-radius: 0 var(--radius-md) var(--radius-md) 0;
 	}
 
-	:host(:not([direction='vertical'])) ::slotted(:not(:first-child)) {
+	:host(:not([vertical])) ::slotted(:not(:first-child)) {
 		margin-left: -1px;
 	}
 
-	:host([direction='vertical']) ::slotted(:first-child) {
+	:host([vertical]) ::slotted(:first-child) {
 		--z-button-radius: var(--radius-md) var(--radius-md) 0 0;
 	}
 
-	:host([direction='vertical']) ::slotted(:last-child) {
+	:host([vertical]) ::slotted(:last-child) {
 		--z-button-radius: 0 0 var(--radius-md) var(--radius-md);
 	}
 
-	:host([direction='vertical']) ::slotted(:not(:first-child)) {
+	:host([vertical]) ::slotted(:not(:first-child)) {
 		margin-top: -1px;
 	}
 
@@ -50,7 +51,7 @@ const styles = css`
 	   the inline-flex button hosts across the column's cross axis, so the widest
 	   label (e.g. "Bottom") would otherwise leave the narrower ones ragged. The
 	   group is width: fit-content, so 100% resolves to the widest item's width. */
-	:host([direction='vertical']) ::slotted(*) {
+	:host([vertical]) ::slotted(*) {
 		width: 100%;
 	}
 
@@ -98,10 +99,10 @@ export const ZButtonGroup = c(
 	),
 	{
 		props: {
-			direction: { type: String, reflect: true }
+			vertical: { type: Boolean, reflect: true }
 		},
 		styles
 	}
 )
 
-customElements.define('z-button-group', ZButtonGroup)
+defineElement('z-button-group', ZButtonGroup)

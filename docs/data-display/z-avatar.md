@@ -19,7 +19,7 @@ Optional status dot in the corner.
 | `name` | string | — | used for the alt text and initials |
 | `initials` | string | derived from `name` | explicit initials (max 2 chars) |
 | `size` | `xs` `sm` `md` `lg` `xl` | `md` | size |
-| `accent` | `dom` `sub` `neutral` | `dom` | initials ground tint |
+| `accent` | `neutral` `dom` `sub` `success` `warning` `error` | `neutral` | initials ground tint |
 | `status` | `online` `busy` `away` `offline` | — | corner status dot |
 | `is-square` | boolean | — | rounded-square instead of circle |
 | `is-hidden` | boolean | — | hide |

@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event } from 'atomico'
 
 /*
@@ -146,4 +147,4 @@ export const ZSources = c(
 	}
 )
 
-customElements.define('z-sources', ZSources)
+defineElement('z-sources', ZSources)

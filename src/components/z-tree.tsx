@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event, useHost, useRef, useState, useEffect } from 'atomico'
 
 /*
@@ -311,4 +312,4 @@ export const ZTree = c(
 	}
 )
 
-customElements.define('z-tree', ZTree)
+defineElement('z-tree', ZTree)

@@ -30,7 +30,7 @@ Keyboard: ↑/↓ move, Enter picks, Esc closes; outside-click and scroll close.
 | --- | --- | --- | --- |
 | `items` | `MenuItem[]` | `[]` | **property** — `{ value?, label?, shortcut?, isDisabled?, isSeparator?, isDanger? }` |
 | `accent` | `dom` `sub` | `dom` accent | active-item accent |
-| `is-disabled` | boolean | — | disable the gesture |
+| `disabled` | boolean | — | disable the gesture |
 
 ## Slots
 

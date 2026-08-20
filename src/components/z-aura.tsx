@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css } from 'atomico'
 
 /*
@@ -240,4 +241,4 @@ export const ZAura = c(
 	}
 )
 
-customElements.define('z-aura', ZAura)
+defineElement('z-aura', ZAura)

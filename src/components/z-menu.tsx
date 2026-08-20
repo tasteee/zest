@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event, useState, useHost, useEffect } from 'atomico'
 
 /*
@@ -243,4 +244,4 @@ export const ZMenu = c(
 	}
 )
 
-customElements.define('z-menu', ZMenu)
+defineElement('z-menu', ZMenu)

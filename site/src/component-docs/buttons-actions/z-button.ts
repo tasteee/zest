@@ -13,11 +13,11 @@ const buildPlaygroundButton = (): HTMLElement => {
 export const zButtonDoc: ComponentDocT = {
 	tag: 'z-button',
 	title: 'z-button',
-	tagline: 'The primary action control — three independent axes of accent, treatment, and size.',
+	tagline: 'The action control — neutral by default, with explicit accents when emphasis requires them.',
 	status: ComponentStatus.stable,
 
 	description:
-		'z-button separates what a button means from how loud it looks. `accent` picks the colour family, `kind` picks the visual treatment, and `size` picks the density. The three compose freely, so a quiet destructive action and a loud one are the same component with a different `kind`. Every accent carries the same weight at the same `kind`, which is what keeps a row of mixed-accent buttons from looking like it was assembled by accident.',
+		'z-button separates meaning from emphasis. `kind` picks the visual treatment and `size` picks the density. With no accent it is neutral; explicit `dom` and `sub` accents use their purple and pink families, while status accents communicate success, warning, or error.',
 
 	playground: {
 		buildElement: buildPlaygroundButton,
@@ -27,7 +27,7 @@ export const zButtonDoc: ComponentDocT = {
 
 	usageGuidance: [
 		'Exactly one solid button per view or per dialog. The moment a screen has two, neither is the primary action anymore.',
-		'Reach for accent to encode meaning, not decoration: danger for anything destructive, success only for a confirming action, neutral for everything else.',
+		'Leave temporary and supporting actions neutral. Use dom or sub for deliberate brand emphasis, and status accents only when they communicate status.',
 		'Outline and ghost are the workhorses. Most buttons in a dense interface should be one of the two, with a single solid button carrying the main action.',
 		'Use z-link, not a ghost button, when the target is a destination rather than an action. Navigation should look like navigation.'
 	],
@@ -45,13 +45,13 @@ export const zButtonDoc: ComponentDocT = {
 	examples: [
 		defineMarkupExample({
 			id: 'accents',
-			title: 'Tones',
+			title: 'Action accents',
 			description:
-				'Six colour families. All of them are the same weight at the same kind, so accent reads as meaning rather than emphasis.',
+				'Neutral is the default. Explicit dom and sub values use the purple and pink accent families.',
 			markup: `
 				<z-button accent="neutral">Neutral</z-button>
-				<z-button accent="dom">Primary</z-button>
-				<z-button accent="sub">Secondary</z-button>
+				<z-button accent="dom">Dom</z-button>
+				<z-button accent="sub">Sub</z-button>
 				<z-button accent="success">Success</z-button>
 				<z-button accent="warning">Warning</z-button>
 				<z-button accent="error">Danger</z-button>
@@ -74,35 +74,35 @@ export const zButtonDoc: ComponentDocT = {
 
 		defineMarkupExample({
 			id: 'accent-kind-matrix',
-			title: 'Tone and kind together',
+			title: 'Accent and kind together',
 			description:
 				'The two axes are fully independent. This is the whole surface of the component in one grid — every cell is a valid combination.',
 			layout: ExampleLayout.stack,
 			markup: `
-				<z-row gap="3">
+				<wired-row gap="sm">
 				  <z-button accent="neutral" kind="solid">Neutral</z-button>
 				  <z-button accent="neutral" kind="outline">Neutral</z-button>
 				  <z-button accent="neutral" kind="soft">Neutral</z-button>
 				  <z-button accent="neutral" kind="ghost">Neutral</z-button>
-				</z-row>
-				<z-row gap="3">
+				</wired-row>
+				<wired-row gap="sm">
 				  <z-button accent="dom" kind="solid">Primary</z-button>
 				  <z-button accent="dom" kind="outline">Primary</z-button>
 				  <z-button accent="dom" kind="soft">Primary</z-button>
 				  <z-button accent="dom" kind="ghost">Primary</z-button>
-				</z-row>
-				<z-row gap="3">
+				</wired-row>
+				<wired-row gap="sm">
 				  <z-button accent="success" kind="solid">Success</z-button>
 				  <z-button accent="success" kind="outline">Success</z-button>
 				  <z-button accent="success" kind="soft">Success</z-button>
 				  <z-button accent="success" kind="ghost">Success</z-button>
-				</z-row>
-				<z-row gap="3">
+				</wired-row>
+				<wired-row gap="sm">
 				  <z-button accent="error" kind="solid">Danger</z-button>
 				  <z-button accent="error" kind="outline">Danger</z-button>
 				  <z-button accent="error" kind="soft">Danger</z-button>
 				  <z-button accent="error" kind="ghost">Danger</z-button>
-				</z-row>
+				</wired-row>
 			`
 		}),
 
@@ -154,9 +154,9 @@ export const zButtonDoc: ComponentDocT = {
 			description:
 				'Disabled buttons drop their fill and stop taking pointer or keyboard events. Prefer explaining why an action is unavailable over silently disabling it.',
 			markup: `
-				<z-button accent="dom" is-disabled>Solid</z-button>
-				<z-button kind="outline" is-disabled>Outline</z-button>
-				<z-button kind="ghost" is-disabled>Ghost</z-button>
+				<z-button accent="dom" disabled>Solid</z-button>
+				<z-button kind="outline" disabled>Outline</z-button>
+				<z-button kind="ghost" disabled>Ghost</z-button>
 			`
 		}),
 
@@ -164,7 +164,7 @@ export const zButtonDoc: ComponentDocT = {
 			id: 'loading',
 			title: 'Loading',
 			description:
-				'`is-loading` adds a spinner ahead of the label and disables the underlying button, so you never need to also set `is-disabled`. Keep the label meaningful — it stays visible. Click Save to watch a round trip.',
+				'`is-loading` adds a spinner ahead of the label and disables the underlying button, so you never need to also set `disabled`. Keep the label meaningful — it stays visible. Click Save to watch a round trip.',
 			layout: ExampleLayout.center,
 			markup: `
 				<z-button accent="dom" id="saveButton">Save changes</z-button>
@@ -200,10 +200,10 @@ export const zButtonDoc: ComponentDocT = {
 				'`is-full-width` stretches the button to its container. Standard for the submit action in a narrow form or a mobile sheet.',
 			layout: ExampleLayout.fill,
 			markup: `
-				<z-column gap="3" style="width: 320px">
+				<wired-column gap="sm" style="width: 320px">
 				  <z-button accent="dom" is-full-width>Create account</z-button>
 				  <z-button kind="ghost" is-full-width>I already have one</z-button>
-				</z-column>
+				</wired-column>
 			`
 		}),
 
@@ -214,11 +214,11 @@ export const zButtonDoc: ComponentDocT = {
 				'The pattern behind every "are you sure": the danger action is the quiet one until it is confirmed, and cancel stays visually available throughout.',
 			layout: ExampleLayout.center,
 			markup: `
-				<z-row gap="3" id="confirmRow">
+				<wired-row gap="sm" id="confirmRow">
 				  <z-button accent="error" kind="outline" id="deleteButton">
 				    ${Icons.trash} Delete workspace
 				  </z-button>
-				</z-row>
+				</wired-row>
 			`,
 			script: `
 				const deleteButton = document.querySelector('#deleteButton')
@@ -266,10 +266,10 @@ export const zButtonDoc: ComponentDocT = {
 			layout: ExampleLayout.fill,
 			markup: `
 				<form id="inviteForm">
-				  <z-row gap="3" aligns-y="end">
+				  <wired-row gap="sm" y="end">
 				    <z-input placeholder="teammate@company.com" label="Email"></z-input>
 				    <z-button accent="dom" type="submit">Send invite</z-button>
-				  </z-row>
+				  </wired-row>
 				</form>
 			`,
 			script: `
@@ -303,7 +303,7 @@ export const zButtonDoc: ComponentDocT = {
 			name: 'accent',
 			type: 'neutral | dom | sub | success | warning | error',
 			defaultValue: 'neutral',
-			description: 'Colour family. Encodes what the action means, not how loud it is.'
+			description: 'Accent family. Defaults to neutral; dom and sub apply purple and pink explicitly.'
 		},
 		{
 			name: 'kind',
@@ -314,7 +314,7 @@ export const zButtonDoc: ComponentDocT = {
 		{ name: 'size', type: 'sm | md | lg', defaultValue: 'md', description: 'Control density.' },
 		{ name: 'label', type: 'string', defaultValue: '—', description: 'Text content. Takes precedence over slotted children.' },
 		{ name: 'type', type: 'button | submit | reset', defaultValue: 'button', description: 'Native button type for form participation.' },
-		{ name: 'is-disabled', type: 'boolean', defaultValue: '—', description: 'Blocks pointer and keyboard interaction.' },
+		{ name: 'disabled', type: 'boolean', defaultValue: '—', description: 'Blocks pointer and keyboard interaction.' },
 		{
 			name: 'is-loading',
 			type: 'boolean',
@@ -338,7 +338,7 @@ export const zButtonDoc: ComponentDocT = {
 		{
 			name: 'click',
 			detail: '—',
-			description: 'The native click event. Suppressed while is-loading or is-disabled is set.'
+			description: 'The native click event. Suppressed while is-loading or disabled is set.'
 		}
 	],
 
@@ -348,7 +348,7 @@ export const zButtonDoc: ComponentDocT = {
 		'Renders a real native button, so Enter and Space activate it and it lands in the tab order without any extra work.',
 		'An icon-only button has no accessible name from its SVG — give it an aria-label, or keep a text label alongside the icon.',
 		'is-loading sets the native disabled attribute. That blocks the click, but it also drops the button out of the tab order and announces nothing about why — if the wait is long enough to notice, put the status in a live region nearby.',
-		'The component draws no focus style of its own, so keyboard focus falls back to the browser default ring. That default is not guaranteed to have adequate contrast against every accent, and unlike z-toggle there is no :focus-visible rule here to lean on.'
+		'Keyboard focus uses a theme-aware focus-visible ring without showing the ring for pointer clicks.'
 	],
 
 	related: [

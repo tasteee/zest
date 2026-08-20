@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event, useEffect, useHost, useState } from 'atomico'
 import { COPY_FEEDBACK_DURATION, copyText } from '../shared/clipboard'
 
@@ -239,4 +240,4 @@ export const ZSwatch = c(
 	}
 )
 
-customElements.define('z-swatch', ZSwatch)
+defineElement('z-swatch', ZSwatch)

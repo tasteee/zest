@@ -1,14 +1,13 @@
+import { defineElement } from '../shared/define-element'
 import { c, css } from 'atomico'
-import { coerceSize, sizeProp } from '../shared/layout-schema'
 
 const styles = css`
-	/* A card is a column. If you need a row inside one, slot a z-row — the card
+	/* A card is a column. If you need a row inside one, slot a wired-row — the card
 	   itself no longer switches its own display, which is what is-flex/is-row/
 	   is-column used to do. */
 	:host {
 		display: flex;
 		flex-direction: column;
-		gap: var(--z-card-gap);
 		box-sizing: border-box;
 		border-radius: var(--radius-lg);
 		padding: var(--space-lg);
@@ -26,25 +25,20 @@ const styles = css`
 		border-color: color-mix(in oklch, var(--foreground) 50%, transparent);
 	}
 
-	:host([is-hidden]) {
-		display: none;
-	}
 `
 
 export const ZCard = c(
-	(props) => (
-		<host shadowDom style={{ '--z-card-gap': coerceSize((props as any).gap) || '' }}>
+	() => (
+		<host shadowDom>
 			<slot />
 		</host>
 	),
 	{
 		props: {
-			isHidden: { type: Boolean, reflect: true },
-			isReactive: { type: Boolean, reflect: true },
-			gap: sizeProp
+			isReactive: { type: Boolean, reflect: true }
 		},
 		styles
 	}
 )
 
-customElements.define('z-card', ZCard)
+defineElement('z-card', ZCard)

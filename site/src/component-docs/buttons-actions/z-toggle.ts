@@ -50,7 +50,7 @@ export const zToggleDoc: ComponentDocT = {
 
 		defineMarkupExample({
 			id: 'accents',
-			title: 'Tones',
+			title: 'Accents',
 			description: 'Three colour families. The accent only shows once the toggle is pressed.',
 			markup: `
 				<z-toggle accent="neutral" is-pressed>Neutral</z-toggle>
@@ -100,8 +100,8 @@ export const zToggleDoc: ComponentDocT = {
 			title: 'Disabled',
 			description: 'Disabled in either state. The pressed state stays legible so the user can still see what is set.',
 			markup: `
-				<z-toggle is-disabled>Off and disabled</z-toggle>
-				<z-toggle is-pressed is-disabled>On and disabled</z-toggle>
+				<z-toggle disabled>Off and disabled</z-toggle>
+				<z-toggle is-pressed disabled>On and disabled</z-toggle>
 			`
 		}),
 
@@ -188,7 +188,7 @@ export const zToggleDoc: ComponentDocT = {
 			defaultValue: '—',
 			description: 'The on/off state. Reflects, so it is both the initial value and the live one.'
 		},
-		{ name: 'is-disabled', type: 'boolean', defaultValue: '—', description: 'Blocks pointer and keyboard interaction.' },
+		{ name: 'disabled', type: 'boolean', defaultValue: '—', description: 'Blocks pointer and keyboard interaction.' },
 		{ name: 'is-hidden', type: 'boolean', defaultValue: '—', description: 'Removes the toggle from layout.' }
 	],
 

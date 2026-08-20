@@ -21,7 +21,7 @@ with the default slot reserved for actions.
 | --- | --- | --- | --- |
 | `heading` | string | — | the headline |
 | `description` | string | — | supporting copy |
-| `accent` | `sub` | `dom` (purple) | icon tint |
+| `accent` | `neutral` `dom` `sub` `success` `warning` `error` | `neutral` | icon tint |
 | `is-bordered` | boolean | — | dashed border around the block |
 | `is-hidden` | boolean | — | hide |
 

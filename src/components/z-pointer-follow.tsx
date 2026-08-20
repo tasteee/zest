@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, useEffect, useHost, useState } from 'atomico'
 
 /*
@@ -141,4 +142,4 @@ export const ZPointerFollow = c(
 	}
 )
 
-customElements.define('z-pointer-follow', ZPointerFollow)
+defineElement('z-pointer-follow', ZPointerFollow)

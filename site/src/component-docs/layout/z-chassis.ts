@@ -9,13 +9,13 @@ const buildPlaygroundChassis = (): HTMLElement => {
 	chassis.className = 'demoFullWidth demoTall'
 	chassis.innerHTML = `
 		<div slot="sidebar">
-		  <z-column gap="2">
-		    <z-label size="sm">Inbox</z-label>
-		    <z-label size="sm" color="muted">Drafts</z-label>
-		    <z-label size="sm" color="muted">Sent</z-label>
-		  </z-column>
+		  <wired-column gap="xs">
+		    <z-label>Inbox</z-label>
+		    <z-label>Drafts</z-label>
+		    <z-label>Sent</z-label>
+		  </wired-column>
 		</div>
-		<z-center is-full-height><z-text size="sm" color="muted">Screen content</z-text></z-center>
+		<div style="display:grid; place-items:center; height:100%"><z-text size="sm" color="muted">Screen content</z-text></div>
 	`
 	return chassis
 }
@@ -59,19 +59,19 @@ export const zChassisDoc: ComponentDocT = {
 			markup: `
 				<z-chassis rail-width="12rem" style="height: 18rem">
 				  <div slot="sidebar">
-				    <z-column gap="3">
+				    <wired-column gap="sm">
 				      <z-heading size="xs" tag="h3">Mailbox</z-heading>
-				      <z-column gap="2">
-				        <z-label size="sm">Inbox</z-label>
-				        <z-label size="sm" color="muted">Drafts</z-label>
-				        <z-label size="sm" color="muted">Sent</z-label>
-				        <z-label size="sm" color="muted">Archive</z-label>
-				      </z-column>
-				    </z-column>
+				      <wired-column gap="xs">
+				        <z-label>Inbox</z-label>
+				        <z-label>Drafts</z-label>
+				        <z-label>Sent</z-label>
+				        <z-label>Archive</z-label>
+				      </wired-column>
+				    </wired-column>
 				  </div>
-				  <z-center is-full-height>
+				  <div style="display:grid; place-items:center; height:100%">
 				    <z-text size="sm" color="muted">The routed view renders here.</z-text>
-				  </z-center>
+				  </div>
 				</z-chassis>
 			`
 		}),
@@ -84,21 +84,21 @@ export const zChassisDoc: ComponentDocT = {
 			markup: `
 				<z-chassis rail-width="12rem" style="height: 18rem">
 				  <div slot="sidebar">
-				    <z-column gap="2">
-				      <z-label size="sm">Overview</z-label>
-				      <z-label size="sm" color="muted">Projects</z-label>
-				      <z-label size="sm" color="muted">Settings</z-label>
-				    </z-column>
+				    <wired-column gap="xs">
+				      <z-label>Overview</z-label>
+				      <z-label>Projects</z-label>
+				      <z-label>Settings</z-label>
+				    </wired-column>
 				  </div>
 				  <div slot="sidebar-footer">
-				    <z-row gap="2" aligns-y="center">
+				    <wired-row gap="xs" y="center">
 				      <z-avatar name="Ada Lovelace" size="sm"></z-avatar>
 				      <z-text size="xs" color="muted">Ada</z-text>
-				    </z-row>
+				    </wired-row>
 				  </div>
-				  <z-center is-full-height>
+				  <div style="display:grid; place-items:center; height:100%">
 				    <z-text size="sm" color="muted">Screen</z-text>
-				  </z-center>
+				  </div>
 				</z-chassis>
 			`
 		}),
@@ -111,15 +111,15 @@ export const zChassisDoc: ComponentDocT = {
 			markup: `
 				<z-chassis rail-width="11rem" rail-side="right" style="height: 15rem">
 				  <div slot="sidebar">
-				    <z-column gap="2">
-				      <z-label size="sm">Properties</z-label>
-				      <z-label size="sm" color="muted">Layers</z-label>
-				      <z-label size="sm" color="muted">History</z-label>
-				    </z-column>
+				    <wired-column gap="xs">
+				      <z-label>Properties</z-label>
+				      <z-label>Layers</z-label>
+				      <z-label>History</z-label>
+				    </wired-column>
 				  </div>
-				  <z-center is-full-height>
+				  <div style="display:grid; place-items:center; height:100%">
 				    <z-text size="sm" color="muted">Canvas</z-text>
-				  </z-center>
+				  </div>
 				</z-chassis>
 			`
 		}),
@@ -133,15 +133,15 @@ export const zChassisDoc: ComponentDocT = {
 			markup: `
 				<z-chassis rail-width="12rem" rail-collapsed-width="3.5rem" does-expand-on-hover style="height: 16rem">
 				  <div slot="sidebar">
-				    <z-column gap="3">
-				      <z-row gap="2" aligns-y="center">${Icons.mail}<z-text size="sm" style="opacity: var(--chassis-label-opacity)">Inbox</z-text></z-row>
-				      <z-row gap="2" aligns-y="center">${Icons.calendar}<z-text size="sm" style="opacity: var(--chassis-label-opacity)">Schedule</z-text></z-row>
-				      <z-row gap="2" aligns-y="center">${Icons.settings}<z-text size="sm" style="opacity: var(--chassis-label-opacity)">Settings</z-text></z-row>
-				    </z-column>
+				    <wired-column gap="sm">
+				      <wired-row gap="xs" y="center">${Icons.mail}<z-text size="sm" style="opacity: var(--chassis-label-opacity)">Inbox</z-text></wired-row>
+				      <wired-row gap="xs" y="center">${Icons.calendar}<z-text size="sm" style="opacity: var(--chassis-label-opacity)">Schedule</z-text></wired-row>
+				      <wired-row gap="xs" y="center">${Icons.settings}<z-text size="sm" style="opacity: var(--chassis-label-opacity)">Settings</z-text></wired-row>
+				    </wired-column>
 				  </div>
-				  <z-center is-full-height>
+				  <div style="display:grid; place-items:center; height:100%">
 				    <z-text size="sm" color="muted">Hover the rail to expand it.</z-text>
-				  </z-center>
+				  </div>
 				</z-chassis>
 			`
 		}),
@@ -154,13 +154,13 @@ export const zChassisDoc: ComponentDocT = {
 			layout: ExampleLayout.fill,
 			markup: `
 				<z-chassis rail-width="9rem" frame="0.125rem" bezel="0.25rem" style="height: 12rem">
-				  <div slot="sidebar"><z-label size="sm">Tight</z-label></div>
-				  <z-center is-full-height><z-text size="xs" color="muted">Minimal frame and bezel</z-text></z-center>
+				  <div slot="sidebar"><z-label>Tight</z-label></div>
+				  <div style="display:grid; place-items:center; height:100%"><z-text size="xs" color="muted">Minimal frame and bezel</z-text></div>
 				</z-chassis>
 
 				<z-chassis rail-width="9rem" frame="1rem" bezel="1.25rem" style="height: 12rem">
-				  <div slot="sidebar"><z-label size="sm">Roomy</z-label></div>
-				  <z-center is-full-height><z-text size="xs" color="muted">Generous frame and bezel</z-text></z-center>
+				  <div slot="sidebar"><z-label>Roomy</z-label></div>
+				  <div style="display:grid; place-items:center; height:100%"><z-text size="xs" color="muted">Generous frame and bezel</z-text></div>
 				</z-chassis>
 			`
 		})
@@ -222,6 +222,5 @@ export const zChassisDoc: ComponentDocT = {
 		{ tag: 'z-sidebar', route: '/c/navigation-disclosure/z-sidebar', description: 'A data-driven nav for the rail.' },
 		{ tag: 'z-resizable-panels', route: '/c/canvas-panels/z-resizable-panels', description: 'When the split should be draggable.' },
 		{ tag: 'z-scroll', route: '/c/layout/z-scroll', description: 'Scrolling the screen content.' },
-		{ tag: 'z-dock', route: '/c/buttons-actions/z-dock', description: 'Another application-shell navigation pattern.' }
 	]
 }

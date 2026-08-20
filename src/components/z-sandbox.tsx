@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event, useEffect, useMemo, useState } from 'atomico'
 
 /*
@@ -247,4 +248,4 @@ export const ZSandbox = c(
 	}
 )
 
-customElements.define('z-sandbox', ZSandbox)
+defineElement('z-sandbox', ZSandbox)

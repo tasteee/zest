@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event, useRef, useProp, useState, useEffect } from 'atomico'
 import { themedScrollbarStyles } from '../shared/scrollbar-styles'
 
@@ -300,4 +301,4 @@ export const ZCommand = c(
 	}
 )
 
-customElements.define('z-command', ZCommand)
+defineElement('z-command', ZCommand)

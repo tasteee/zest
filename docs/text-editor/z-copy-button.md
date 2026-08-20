@@ -24,7 +24,7 @@ response to all of them: leave the affordance unconfirmed.
 | `copied-label` | string | `Copied` | label held after a successful copy |
 | `kind` | `ghost` `icon` | `ghost` | treatment; `icon` drops the label |
 | `size` | `sm` `md` | `md` | density |
-| `is-disabled` | boolean | — | disable |
+| `disabled` | boolean | — | disable |
 | `is-hidden` | boolean | — | hide |
 
 ## Events

@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event, useRef, useProp, useEffect } from 'atomico'
 import { dialogSurfaceStyles } from '../shared/overlay-styles'
 
@@ -88,4 +89,4 @@ export const ZAlertDialog = c(
 	}
 )
 
-customElements.define('z-alert-dialog', ZAlertDialog)
+defineElement('z-alert-dialog', ZAlertDialog)

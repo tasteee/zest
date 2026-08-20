@@ -1,9 +1,11 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, useEffect, useRef } from 'atomico'
 
 /*
  * z-field — the standard visible label, guidance, and error treatment for a
- * single form control. It forwards its label to the slotted Zest control as an
- * accessible name, so custom-element shadow boundaries do not break labeling.
+ * single form control. It forwards its label and required state to the slotted
+ * Zest control, so custom-element shadow boundaries do not break the field's
+ * accessible name or native validation contract.
  *
  * It is also what makes a row of mixed controls line up. Controls disagree
  * about their own height by nature — a switch track is 22px, a select is 40 —
@@ -33,25 +35,15 @@ const styles = css`
 	   floored at its content's min-content width, so a field in a narrow
 	   container (a grid cell, a split pane) grew past it and overlapped its
 	   neighbour instead of letting the control shrink. */
-	/* The padding is the only space the label costs. It is half the label's
-	   height, which is exactly enough for the label to straddle the control's
-	   top border rather than needing a full band above it. Unconditional, so a
-	   field with no label still lines up with its labelled neighbours. */
-	.field { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--field-gap); position: relative; padding-top: calc(var(--field-label-height) / 2); }
+	.field { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--field-gap); }
 
-	/* Out of flow and pinned to the top of the field. Because the field's
-	   padding-top is half the label height, top: 0 centres the label on the
-	   control's top border rather than dropping it into the control's text.
-	   The height stays fixed rather than left to line-height, so a label set in
-	   a theme with different metrics cannot shift the notch.
-	   right is set as well as left so the box is still width-constrained — a
-	   shrink-to-fit header would size to max-content and the label's ellipsis
-	   would never engage. */
-	.header { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; height: var(--field-label-height); position: absolute; top: 0; left: 16px; right: 16px; z-index: 2; }
+	/* Labels stay in normal flow and align with the control's outer edge. This
+	   works on every surface and for every control shape without painting a
+	   theme-dependent patch or shadow over a border. The fixed height keeps
+	   mixed rows aligned even when a theme uses different font metrics. */
+	.header { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; height: var(--field-label-height); min-width: 0; }
 
-	/* The label crosses the control outline, so it needs its own separation
-	   from whatever it lands on rather than relying on the surface behind it. */
-	.label { color: var(--color-neutral-5); font-size: var(--font-size-small); font-weight: 600; line-height: 1; letter-spacing: 0.04em; text-transform: lowercase; font-variant-caps: all-small-caps; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-shadow: 0px 2px 3px black; }
+	.label { color: var(--color-neutral-5); font-size: var(--font-size-small); font-weight: 600; line-height: 1; letter-spacing: 0.04em; text-transform: lowercase; font-variant-caps: all-small-caps; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; user-select: none; -webkit-user-select: none; }
 	.required { color: var(--destructive); }
 
 	/* The band. Whatever is slotted sits vertically centred in a row of the
@@ -66,6 +58,7 @@ const styles = css`
 
 	.description, .error { font-size: var(--font-size-small); line-height: 1.45; }
 	.description { color: var(--muted-foreground); }
+	.description ::slotted(*) { color: var(--muted-foreground); }
 	.error { color: var(--destructive); }
 
 	:host([is-label-hidden]) .header { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
@@ -74,14 +67,33 @@ const styles = css`
 export const ZField = c(
 	(props) => {
 		const slotRef = useRef<HTMLSlotElement>()
-		const syncLabel = () => {
+		const forwardedRequiredControl = useRef<HTMLElement>()
+		const syncControl = () => {
 			const control = slotRef.current?.assignedElements({ flatten: true })[0] as HTMLElement | undefined
-			if (!control || !props.label) return
-			const alreadyNamed = control.hasAttribute('label') || control.hasAttribute('aria-label') || control.hasAttribute('aria-labelledby')
-			if (!alreadyNamed) (control as HTMLElement & { label?: string }).label = props.label
+			if (!control) return
+
+			if (props.label) {
+				const alreadyNamed = control.hasAttribute('label') || control.hasAttribute('aria-label') || control.hasAttribute('aria-labelledby')
+				if (!alreadyNamed) (control as HTMLElement & { label?: string }).label = props.label
+			}
+
+			const supportsRequired = 'isRequired' in control
+			if (!supportsRequired) return
+
+			const requiredControl = control as HTMLElement & { isRequired: boolean }
+			if (props.isRequired && !requiredControl.isRequired) {
+				requiredControl.isRequired = true
+				forwardedRequiredControl.current = control
+			}
+
+			const wasForwardedByField = forwardedRequiredControl.current === control
+			if (!props.isRequired && wasForwardedByField) {
+				requiredControl.isRequired = false
+				forwardedRequiredControl.current = undefined
+			}
 		}
 
-		useEffect(() => syncLabel(), [props.label])
+		useEffect(() => syncControl(), [props.label, props.isRequired])
 
 		// An unlabelled field standing next to labelled ones has to keep the
 		// label band or it rides 24px high in the row. Reserving renders the
@@ -94,7 +106,7 @@ export const ZField = c(
 				<div class="field">
 					{props.label && <div class="header"><span class="label">{props.label}{props.isRequired && <span class="required" aria-hidden="true"> *</span>}</span></div>}
 					{shouldReserveLabel && <div class="header" aria-hidden="true" />}
-					<div class="control"><slot ref={slotRef} onslotchange={syncLabel} /></div>
+					<div class="control"><slot ref={slotRef} onslotchange={syncControl} /></div>
 					{props.error ? <div class="error"><slot name="error">{props.error}</slot></div> : props.description ? <div class="description"><slot name="description">{props.description}</slot></div> : null}
 				</div>
 			</host>
@@ -114,4 +126,4 @@ export const ZField = c(
 	}
 )
 
-customElements.define('z-field', ZField)
+defineElement('z-field', ZField)

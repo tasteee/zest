@@ -112,9 +112,8 @@ export const buildRichText = (text: string, size: string, color: string): HTMLEl
 	return paragraph
 }
 
-export const buildLabel = (text: string, size: string, color: string): HTMLElement => {
+export const buildLabel = (text: string): HTMLElement => {
 	const label = createElement('z-label')
-	applyAttributes(label, { size, color })
 	label.textContent = text
 	return label
 }
@@ -163,6 +162,7 @@ type CodeBlockOptionsT = {
 export const buildCodeBlock = (options: CodeBlockOptionsT): ZCodeBlockElementT => {
 	const codeBlock = createElement('z-code-block') as ZCodeBlockElementT
 	codeBlock.setAttribute('language', options.language)
+	codeBlock.setAttribute('highlight', '')
 
 	const hasFilename = options.filename.length > 0
 	if (hasFilename) codeBlock.setAttribute('filename', options.filename)

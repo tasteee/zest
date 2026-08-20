@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, useRef } from 'atomico'
 import { coerceSize, sizeProp } from '../shared/layout-schema'
 
@@ -122,4 +123,4 @@ export const ZDock = c(
 	}
 )
 
-customElements.define('z-dock', ZDock)
+defineElement('z-dock', ZDock)

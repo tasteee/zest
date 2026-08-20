@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event, useState, useMemo, useEffect, useRef, useHost } from 'atomico'
 import { themedScrollbarStyles } from '../shared/scrollbar-styles'
 
@@ -797,8 +798,8 @@ export const ZTerminal = c(
 			fadeDuration: { type: Number },
 			doesLoop: { type: Boolean },
 			loopDelay: { type: Number },
-			hasReplay: { type: Boolean, value: true },
-			doesAutoScroll: { type: Boolean, value: true },
+			hasReplay: { type: Boolean, value: () => true },
+			doesAutoScroll: { type: Boolean, value: () => true },
 			copy: event<string>({ bubbles: true, composed: true }),
 			done: event<void>({ bubbles: true, composed: true })
 		},
@@ -806,4 +807,4 @@ export const ZTerminal = c(
 	}
 )
 
-customElements.define('z-terminal', ZTerminal)
+defineElement('z-terminal', ZTerminal)

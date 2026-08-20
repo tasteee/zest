@@ -19,11 +19,18 @@ repeats the text shape (the last line is shortened).
 | `width` | CSS length | — | width (circles become square if only width is given) |
 | `height` | CSS length | — | height |
 | `lines` | number | `1` | repeat the text shape N times |
-| `is-inline` | boolean | — | `display: inline-block` |
+| `inline` | boolean | — | `display: inline-block` |
 | `is-hidden` | boolean | — | hide |
 
 Exposes `aria-busy="true"`. The shimmer is disabled under
 `prefers-reduced-motion`.
+
+## CSS variables
+
+| Variable | Default | Description |
+| --- | --- | --- |
+| `--skeleton` | `--color-neutral-3` | placeholder surface |
+| `--skeleton-shimmer` | the surface lifted `0.09` in oklch lightness | peak color of the sweep |
 
 ## Slots
 

@@ -38,7 +38,7 @@ Targets match when their `group` equals the draggable's `group` **and** their
 | `type` | string | — | what kind of thing this is, matched against a target's `accept` |
 | `group` | string | — | must equal the target's `group` to be droppable there |
 | `handle` | CSS selector | — | restrict picking up to pointerdown within this selector |
-| `is-disabled` | boolean | — | disable dragging |
+| `disabled` | boolean | — | disable dragging |
 
 ### Properties
 
@@ -65,7 +65,7 @@ Targets match when their `group` equals the draggable's `group` **and** their
 | --- | --- | --- | --- |
 | `accept` | space-separated types, or `*` | `*` | which draggable `type`s this accepts |
 | `group` | string | — | must equal the draggable's `group` |
-| `is-disabled` | boolean | — | reject all drags |
+| `disabled` | boolean | — | reject all drags |
 
 ### Slots
 

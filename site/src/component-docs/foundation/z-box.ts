@@ -23,24 +23,24 @@ export const zBoxDoc: ComponentDocT = {
 	status: ComponentStatus.stable,
 
 	description:
-		'Everything else in the layout category is either a specialisation of this or built on it. `z-box` is a flex container: direction, alignment on both axes, gap, margin, padding and sizing, all as attributes resolved against the design system scale, so a layout never hardcodes a pixel value. The idea worth internalising is that `aligns-x` and `aligns-y` always mean horizontal and vertical, regardless of flow direction. In a vertical box, `aligns-x` still means horizontal even though CSS would call that the cross axis. You describe the result you want, and the component works out which CSS property that maps to. For a grid, reach for `z-grid` — a box used to switch between seven display modes and that made it a display switch rather than a layout primitive.',
+		'Everything else in the layout category is either a specialisation of this or built on it. `z-box` is a flex container: direction, alignment on both axes, gap, margin, padding and sizing, all as attributes resolved against the design system scale, so a layout never hardcodes a pixel value. The idea worth internalising is that `aligns-x` and `aligns-y` always mean horizontal and vertical, regardless of flow direction. In a vertical box, `aligns-x` still means horizontal even though CSS would call that the cross axis. You describe the result you want, and the component works out which CSS property that maps to. For a grid, reach for `wired-grid` — a box used to switch between seven display modes and that made it a display switch rather than a layout primitive.',
 
 	playground: {
 		buildElement: buildPlaygroundBox,
-		controlNames: ['direction', 'is-inline', 'does-wrap', 'gap', 'aligns-x', 'aligns-y', 'padding', 'is-full-width'],
+		controlNames: ['direction', 'inline', 'does-wrap', 'gap', 'aligns-x', 'aligns-y', 'padding', 'is-full-width'],
 		slotLabel: 'Two badges'
 	},
 
 	usageGuidance: [
-		'Prefer `z-row` and `z-column` for the everyday cases. They are this element with the direction locked, and the tag name says what the layout does.',
-		'Reach for `z-box` directly when the direction is conditional. For a grid, use `z-grid`; for inline flow, add `is-inline`.',
+		'Prefer `wired-row` and `wired-column` for the everyday cases. They are this element with the direction locked, and the tag name says what the layout does.',
+		'Reach for `z-box` directly when the direction is conditional. For a grid, use `wired-grid`; for inline flow, add `inline`.',
 		'Spacing values should be tokens (`sm`, `md`, `lg`) or bare numbers off the spacing scale. A raw length works, but it steps outside the system.',
 		'`inset` is a padding shorthand and the explicit `padding*` props win over it, which is what makes "inset everywhere, override one edge" work.'
 	],
 
 	anatomy: [
 		{ name: 'default slot', description: 'The box contents.' },
-		{ name: 'direction', description: 'Horizontal by default. `is-inline` upgrades the box to inline-flex without changing anything else.' },
+		{ name: 'direction', description: 'Horizontal by default. `inline` upgrades the box to inline-flex without changing anything else.' },
 		{
 			name: 'aligns-x / aligns-y',
 			description:
@@ -183,10 +183,10 @@ export const zBoxDoc: ComponentDocT = {
 				<z-box direction="horizontal" aligns-x="between" aligns-y="center" padding="4" is-full-width
 				       style="border: 1px solid var(--border); border-radius: var(--radius-md)">
 				  <z-heading size="xs" tag="h3">Analytics</z-heading>
-				  <z-row gap="2">
+				  <wired-row gap="xs">
 				    <z-button kind="ghost" size="sm">Export</z-button>
 				    <z-button accent="dom" size="sm">New report</z-button>
-				  </z-row>
+				  </wired-row>
 				</z-box>
 			`
 		})
@@ -194,7 +194,7 @@ export const zBoxDoc: ComponentDocT = {
 
 	attributes: [
 		{ name: 'direction', type: 'horizontal | vertical', defaultValue: 'horizontal', description: 'Flow direction. Also decides which axis aligns-x and aligns-y drive.' },
-		{ name: 'is-inline', type: 'boolean', defaultValue: '—', description: 'inline-flex instead of flex. The one display modifier that composes rather than replaces.' },
+		{ name: 'inline', type: 'boolean', defaultValue: '—', description: 'inline-flex instead of flex. The one display modifier that composes rather than replaces.' },
 		{ name: 'aligns-x', type: 'start | center | end | between | around | evenly | stretch', defaultValue: '—', description: 'Horizontal relationship, whatever the flow direction.' },
 		{ name: 'aligns-y', type: 'start | center | end | between | around | evenly | stretch', defaultValue: '—', description: 'Vertical relationship, whatever the flow direction.' },
 		{ name: 'does-wrap', type: 'boolean', defaultValue: '—', description: 'flex-wrap: wrap.' },
@@ -242,9 +242,9 @@ export const zBoxDoc: ComponentDocT = {
 	],
 
 	related: [
-		{ tag: 'z-row', route: '/c/layout/z-row', description: 'This element with the direction locked to a row.' },
-		{ tag: 'z-column', route: '/c/layout/z-column', description: 'This element with the direction locked to a column.' },
-		{ tag: 'z-grid', route: '/c/layout/z-grid', description: 'A dedicated grid with responsive auto-fit.' },
-		{ tag: 'z-center', route: '/c/layout/z-center', description: 'Centring, without spelling it out each time.' }
+		{ tag: 'wired-row', route: '/c/layout/wired-row', description: 'This element with the direction locked to a row.' },
+		{ tag: 'wired-column', route: '/c/layout/wired-column', description: 'This element with the direction locked to a column.' },
+		{ tag: 'wired-grid', route: '/c/layout/wired-grid', description: 'A dedicated grid with responsive auto-fit.' },
+		{ tag: 'wired-row', route: '/c/layout/wired-row', description: 'The dedicated horizontal layout primitive.' }
 	]
 }

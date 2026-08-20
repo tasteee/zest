@@ -138,13 +138,13 @@ export const zInlineDoc: ComponentDocT = {
 	attributes: [
 		{
 			name: 'color',
-			type: 'neutral | dom | sub | muted | strong',
+			type: 'neutral | dom | sub | muted | strong | success | warning | error',
 			defaultValue: 'inherit',
 			description: 'Text colour. Inherits when unset, unlike the rest of the family.'
 		},
 		{
 			name: 'weight',
-			type: '300 | 400 | 600 | 700 | 900',
+			type: 'number (1–1000)',
 			defaultValue: 'inherit',
 			description: 'Font weight. Inherits when unset.'
 		},

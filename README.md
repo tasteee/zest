@@ -3,9 +3,8 @@
 A gorgeous, fully-featured, framework-agnostic web component library. Use it in
 plain HTML, React, Vue, Svelte, or anywhere else.
 
-Built with [Atomico](https://atomicojs.dev) and shipped as a single
-self-contained bundle with **zero runtime dependencies** — Atomico and the
-syntax-highlighting libraries are bundled in at build time.
+Built with [Atomico](https://atomicojs.dev). The root entry registers the whole
+library, while element subpaths let applications load only what they use.
 
 Four themes, two dark and two light. Depth comes from surface and border rather
 than shadow, which is why a grid of cards reads as a flat plane rather than a
@@ -24,9 +23,20 @@ import '@tasteee/zest' // registers every <z-*> element
 import '@tasteee/zest/ink.css' // design tokens: CSS custom properties + fonts
 ```
 
+Or register one element:
+
+```js
+import '@tasteee/zest/z-button' // registers only <z-button>
+import '@tasteee/zest/ink.css'
+```
+
 - **`@tasteee/zest`** runs the side-effectful registration. Importing it calls
-  `customElements.define(...)` for every element. There is nothing else to wire
-  up — each component carries its own encapsulated styles inside its shadow DOM.
+  `customElements.define(...)` for every public element.
+
+- **`@tasteee/zest/<name>`** registers just that named element. Composed
+  controls do not implicitly register their related elements, so import each
+  tag you render or use the root entry. Each component carries its own
+  encapsulated styles inside its shadow DOM.
 
 - **`@tasteee/zest/ink.css`** defines the document-level design tokens (colour,
   spacing, typography) that components read through `var(--token)`. It also
@@ -76,7 +86,7 @@ Three axes cover most components, and they compose freely.
 	accent="dom | sub | neutral | success | warning | error"
 	kind="solid | outline | ghost | soft | plain"
 	size="xs | sm | md | lg | xl"
-	is-disabled
+	disabled
 />
 ```
 
@@ -86,7 +96,7 @@ Three axes cover most components, and they compose freely.
   because there the value *is* the glyph colour.
 - **`kind`** picks the visual treatment.
 - **`size`** picks the density.
-- **Booleans read as questions** — `is-disabled`, `has-copy`, `can-jump`,
+- **Booleans read as questions** — `disabled`, `has-copy`, `can-jump`,
   `does-loop`. Present is true, absent is false.
 
 Attributes are kebab-case in markup and camelCase as JS properties:
@@ -130,7 +140,7 @@ autocompletion for every `<z-*>` element.
 
 <!-- catalog:start -->
 
-**184 elements.** Generated from `custom-elements.json`.
+**114 elements.** Generated from `custom-elements.json`.
 
 Every element has a reference page under [`docs/`](./docs), and
 [`docs/element-api-reference.md`](./docs/element-api-reference.md) lists all
@@ -142,11 +152,11 @@ of their attributes in one place.
 
 #### Layout
 
-`z-bento-grid` `z-bento-item` `z-center` `z-chassis` `z-column` `z-container` `z-grid` `z-row` `z-scroll` `z-section` `z-spacer` `z-surface` `z-swap`
+`z-bento-grid` `z-bento-item` `z-chassis` `z-scroll` `z-spacer` `z-surface` `z-swap`
 
 #### Buttons & actions
 
-`z-button` `z-button-group` `z-dock` `z-dock-item` `z-link` `z-send-button` `z-theme-switcher` `z-toggle` `z-toggle-group` `z-toggle-group-item` `z-toolbar` `z-toolbar-group`
+`z-button` `z-button-group` `z-link` `z-theme-switcher` `z-toggle` `z-toggle-group` `z-toggle-group-item` `z-toolbar` `z-toolbar-group`
 
 #### Forms
 
@@ -162,27 +172,23 @@ of their attributes in one place.
 
 #### Data display
 
-`z-avatar` `z-avatar-stack` `z-badge` `z-list` `z-list-row` `z-pagination` `z-progress` `z-skeleton` `z-sortable` `z-stat` `z-status-dot` `z-table` `z-tree` `z-virtual-list`
+`z-avatar` `z-avatar-stack` `z-badge` `z-list` `z-list-row` `z-pagination` `z-progress` `z-skeleton` `z-sortable` `z-stat` `z-status-dot` `z-table` `z-tree`
 
 #### Canvas, panels & docs
 
-`z-announcement-bar` `z-api-table` `z-canvas-item` `z-code-group` `z-control-panel` `z-diff` `z-do-dont` `z-doc-header` `z-docs-shell` `z-edit-on-github` `z-editor-canvas` `z-example` `z-external-link` `z-file-tree` `z-language-switcher` `z-last-updated` `z-live-code` `z-mermaid` `z-nav-tree` `z-panel` `z-panel-handle` `z-playground` `z-prev-next` `z-reading-progress` `z-resizable-panels` `z-sandbox` `z-search-dialog` `z-step` `z-steps` `z-swatch` `z-toc` `z-token-table` `z-type-badge` `z-version-picker` `z-was-this-helpful`
+`z-editor-canvas` `z-panel` `z-resizable-panels`
 
 #### Text editor
 
-`z-bubble-menu` `z-comment-gutter-icon` `z-comment-mark` `z-comment-thread-panel` `z-copy-button` `z-drag-handle` `z-drop-indicator` `z-format-toolbar` `z-gutter-handle` `z-mention-popover` `z-selection-toolbar` `z-slash-menu` `z-status-bar` `z-table-axis-handle` `z-table-toolbar`
-
-#### Chat
-
-`z-chat-header` `z-chat-shell` `z-composer` `z-conversation-item` `z-conversation-list` `z-date-divider` `z-delivery-status` `z-emoji-picker` `z-image-message` `z-message-actions` `z-message-bubble` `z-message-group` `z-message-list` `z-model-picker` `z-quoted-message` `z-reactions` `z-read-receipt` `z-system-message` `z-thinking` `z-tool-call` `z-typing-indicator` `z-unread-divider`
+`z-bubble-menu` `z-copy-button` `z-drag-handle` `z-format-toolbar` `z-gutter-handle` `z-mention-popover` `z-selection-toolbar` `z-slash-menu` `z-status-bar` `z-table-toolbar`
 
 #### Attachments
 
-`z-attachment-chip` `z-attachment-tray` `z-draggable` `z-drop-target` `z-dropzone` `z-file-attachment`
+`z-attachment-chip` `z-attachment-tray` `z-dropzone` `z-file-attachment`
 
 #### Effects
 
-`z-aura` `z-marquee` `z-pointer-follow` `z-progressive-blur`
+`z-marquee` `z-pointer-follow`
 
 #### Music
 
@@ -190,7 +196,11 @@ of their attributes in one place.
 
 #### Specialized
 
-`z-carousel` `z-chart` `z-citation` `z-code-block` `z-empty-state` `z-markdown` `z-post-meta` `z-relative-time` `z-scroll-area` `z-sources` `z-streaming-text` `z-suggestion-chips` `z-terminal`
+`z-carousel` `z-code-block` `z-empty-state` `z-relative-time` `z-scroll-area` `z-suggestion-chips` `z-terminal`
+
+#### Uncategorised
+
+`z-canvas-item` `z-comment-gutter-icon` `z-comment-mark` `z-comment-thread-panel` `z-draggable` `z-drop-indicator` `z-drop-target` `z-panel-handle` `z-table-axis-handle`
 
 <!-- catalog:end -->
 

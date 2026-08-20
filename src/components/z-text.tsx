@@ -176,31 +176,15 @@ const styles = css`
 	--------------------------------------------- */
 
 	.text.is-label {
-		font-weight: var(--z-text-weight, 500);
-	}
-
-	.text.is-label.is-lg {
-		font-size: calc(var(--base-font-size, 16px) * 1.125);
-		line-height: 1.333333;
-		letter-spacing: calc(var(--base-font-size, 16px) * -0.015);
-	}
-
-	.text.is-label.is-md {
-		font-size: var(--base-font-size, 16px);
-		line-height: 1.5;
-		letter-spacing: calc(var(--base-font-size, 16px) * -0.01125);
-	}
-
-	.text.is-label.is-sm {
-		font-size: calc(var(--base-font-size, 16px) * 0.875);
-		line-height: 1.428571;
-		letter-spacing: calc(var(--base-font-size, 16px) * -0.005);
-	}
-
-	.text.is-label.is-xs {
-		font-size: calc(var(--base-font-size, 16px) * 0.75);
-		line-height: 1.333333;
-		letter-spacing: 0;
+		color: var(--color-neutral-5);
+		font-size: var(--font-size-small);
+		font-weight: 600;
+		line-height: 1;
+		letter-spacing: 0.04em;
+		text-transform: lowercase;
+		font-variant-caps: all-small-caps;
+		user-select: none;
+		-webkit-user-select: none;
 	}
 
 	/* ---------------------------------------------
@@ -225,6 +209,18 @@ const styles = css`
 
 	.text.is-strong {
 		color: var(--color-neutral-9);
+	}
+
+	.text.is-success {
+		color: var(--success);
+	}
+
+	.text.is-warning {
+		color: var(--warning);
+	}
+
+	.text.is-error {
+		color: var(--destructive);
 	}
 
 
@@ -293,6 +289,18 @@ const styles = css`
 		color: var(--foreground);
 	}
 
+	.inline.is-success {
+		color: var(--success);
+	}
+
+	.inline.is-warning {
+		color: var(--warning);
+	}
+
+	.inline.is-error {
+		color: var(--destructive);
+	}
+
 
 
 
@@ -330,6 +338,9 @@ const resolveColorClass = (props: any): string => {
 	if (props.color === 'sub') return 'is-sub'
 	if (props.color === 'muted') return 'is-muted'
 	if (props.color === 'strong') return 'is-strong'
+	if (props.color === 'success') return 'is-success'
+	if (props.color === 'warning') return 'is-warning'
+	if (props.color === 'error') return 'is-error'
 	return 'is-neutral'
 }
 
@@ -340,7 +351,7 @@ const resolveColorClass = (props: any): string => {
 //
 // An absent weight must resolve to nothing at all, not to a number: each
 // variant carries its own base weight as the var()'s fallback (heading reads
-// the theme's --font-heading-weight, label 500, text 400), and emitting a
+// the theme's --font-heading-weight and text reads 400), and emitting a
 // value here would clobber all of them.
 const resolveWeightStyle = (props: any): string => {
 	const hasWeight = props.weight != null && String(props.weight).trim() !== ''
@@ -472,18 +483,20 @@ export const ZText = c(
 export const ZLabel = c(
 	(props) => {
 		const Tag = (props.tag || 'span') as any
-		const className = resolveTextClass(props, 'is-label', 'is-md')
 
 		return (
-			<host shadowDom style={{ '--z-text-weight': resolveWeightStyle(props) }}>
-				<Tag class={className}>
+			<host shadowDom>
+				<Tag class="text is-label">
 					<slot />
 				</Tag>
 			</host>
 		)
 	},
 	{
-		props: textProps,
+		props: {
+			tag: String,
+			isHidden: { type: Boolean, reflect: true }
+		},
 		styles
 	}
 )
@@ -516,9 +529,3 @@ export const ZInline = c(
 		styles
 	}
 )
-
-customElements.define('z-heading', ZHeading)
-customElements.define('z-subheading', ZSubheading)
-customElements.define('z-text', ZText)
-customElements.define('z-label', ZLabel)
-customElements.define('z-inline', ZInline)

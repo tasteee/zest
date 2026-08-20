@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event } from 'atomico'
 
 /*
@@ -85,4 +86,4 @@ export const ZSuggestionChips = c(
 	}
 )
 
-customElements.define('z-suggestion-chips', ZSuggestionChips)
+defineElement('z-suggestion-chips', ZSuggestionChips)

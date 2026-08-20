@@ -9,10 +9,10 @@ short to snap back.
 <z-drawer heading="Quick actions">
   <z-button slot="trigger">Open drawer</z-button>
 
-  <z-column gap="sm">
+  <wired-column gap="sm">
     <z-button kind="ghost">Share</z-button>
     <z-button kind="ghost">Duplicate</z-button>
-  </z-column>
+  </wired-column>
 </z-drawer>
 ```
 
@@ -24,7 +24,7 @@ short to snap back.
 | `heading` | string | — | title |
 | `description` | string | — | sub-text |
 | `is-static` | boolean | — | disable backdrop-click dismiss |
-| `is-disabled` | boolean | — | prevent the trigger from opening |
+| `disabled` | boolean | — | prevent the trigger from opening |
 
 ## Slots
 

@@ -20,7 +20,7 @@ Opens after `open-delay` ms on pointerenter/focusin; closes on leave/blur or Esc
 | `placement` | `top` `bottom` `left` `right` (+ `-start`/`-end`) | `top` | preferred side |
 | `offset` | number (px) | `8` | gap from the trigger |
 | `open-delay` | number (ms) | `150` | delay before showing |
-| `is-disabled` | boolean | — | suppress the tooltip |
+| `disabled` | boolean | — | suppress the tooltip |
 | `is-hidden` | boolean | — | hide |
 
 ## Slots

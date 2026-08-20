@@ -141,10 +141,10 @@ export const zCommandDoc: ComponentDocT = {
 				'How a palette is actually opened in production. `isOpen` is two-way, so a global key handler is the whole integration.',
 			layout: ExampleLayout.stack,
 			markup: `
-				<z-row aligns-y="center" gap="sm">
+				<wired-row y="center" gap="sm">
 				  <z-button id="shortcutButton" kind="outline">Open</z-button>
 				  <z-text size="sm" color="muted">or press <z-kbd>⌘</z-kbd> <z-kbd>K</z-kbd> while this page has focus</z-text>
-				</z-row>
+				</wired-row>
 				<z-command id="shortcutCommand" placeholder="Type a command or search…"></z-command>
 			`,
 			script: `

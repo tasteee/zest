@@ -21,7 +21,7 @@ export const zSwitchDoc: ComponentDocT = {
 
 	playground: {
 		buildElement: buildPlaygroundSwitch,
-		controlNames: ['size', 'accent', 'is-checked', 'is-disabled', 'is-block'],
+		controlNames: ['size', 'accent', 'is-checked', 'disabled', 'is-block'],
 		slotLabel: 'Two-factor authentication'
 	},
 
@@ -29,6 +29,7 @@ export const zSwitchDoc: ComponentDocT = {
 		'Use a switch for settings that apply on the spot. If the value only matters once a form is submitted, use `z-checkbox`.',
 		'Never put a switch in a form with a Save button. The user cannot tell whether the switch already took effect or is waiting on the button — and neither reading is safe to assume.',
 		'Label the setting, not the state. "Two-factor authentication" with the switch showing on; not "Enable two-factor authentication" that becomes a lie once it is on.',
+		'The track stays compact, but its clickable label occupies the shared control height. Beside a top-labelled input, use `z-field is-label-reserved` around the switch to align their control bands.',
 		'For a settings row, `is-block` plus a row layout puts the label on the left and the switch on the right, which is where the eye looks for it.',
 		'A switch is not for toolbars — that is `z-toggle`, which reads as a pressed button rather than a setting.',
 		'If flipping it is destructive or slow, confirm afterwards rather than making the switch pending. A switch that snaps back is worse than one that asks.'
@@ -53,7 +54,7 @@ export const zSwitchDoc: ComponentDocT = {
 
 		defineMarkupExample({
 			id: 'accents',
-			title: 'Tones',
+			title: 'Accents',
 			description: 'The accent that fills the track. Only visible in the on state.',
 			markup: `
 				<z-switch accent="neutral" is-checked>Neutral</z-switch>
@@ -78,8 +79,8 @@ export const zSwitchDoc: ComponentDocT = {
 			title: 'Disabled',
 			description: 'Disabled in both states. The on state stays readable so the user can still see what is configured.',
 			markup: `
-				<z-switch is-disabled>Off and disabled</z-switch>
-				<z-switch is-checked is-disabled>On and disabled</z-switch>
+				<z-switch disabled>Off and disabled</z-switch>
+				<z-switch is-checked disabled>On and disabled</z-switch>
 			`
 		}),
 
@@ -90,23 +91,23 @@ export const zSwitchDoc: ComponentDocT = {
 				'The canonical layout: the label and its explanation on the left, the switch pinned right. The switch column is what makes a list of settings scannable.',
 			layout: ExampleLayout.fill,
 			markup: `
-				<z-column gap="0" style="width: 100%">
-				  <z-row aligns-x="between" aligns-y="center" gap="md" style="padding: 0.875rem 0">
-				    <z-column gap="2xs">
+				<wired-column gap="none" style="width: 100%">
+				  <wired-row x="between" y="center" gap="md" style="padding: 0.875rem 0">
+				    <wired-column gap="2xs">
 				      <z-text size="sm">Two-factor authentication</z-text>
 				      <z-text size="xs" color="muted">Require a code from your authenticator app.</z-text>
-				    </z-column>
+				    </wired-column>
 				    <z-switch accent="dom" is-checked aria-label="Two-factor authentication"></z-switch>
-				  </z-row>
+				  </wired-row>
 				  <z-separator></z-separator>
-				  <z-row aligns-x="between" aligns-y="center" gap="md" style="padding: 0.875rem 0">
-				    <z-column gap="2xs">
+				  <wired-row x="between" y="center" gap="md" style="padding: 0.875rem 0">
+				    <wired-column gap="2xs">
 				      <z-text size="sm">Public profile</z-text>
 				      <z-text size="xs" color="muted">Anyone with the link can see your work.</z-text>
-				    </z-column>
+				    </wired-column>
 				    <z-switch accent="dom" aria-label="Public profile"></z-switch>
-				  </z-row>
-				</z-column>
+				  </wired-row>
+				</wired-column>
 			`
 		}),
 
@@ -146,17 +147,17 @@ export const zSwitchDoc: ComponentDocT = {
 			layout: ExampleLayout.stack,
 			markup: `
 				<z-switch id="notificationsSwitch" accent="dom" is-block is-checked>Email notifications</z-switch>
-				<z-column gap="xs" style="padding-left: 1rem">
+				<wired-column gap="xs" style="padding-left: 1rem">
 				  <z-switch is-block size="sm" class="notificationChannel" is-checked>Mentions</z-switch>
 				  <z-switch is-block size="sm" class="notificationChannel">Weekly digest</z-switch>
-				</z-column>
+				</wired-column>
 			`,
 			script: `
 				const notificationsSwitch = document.querySelector('#notificationsSwitch')
 				const channels = document.querySelectorAll('.notificationChannel')
 
 				notificationsSwitch.addEventListener('change', (changeEvent) => {
-				  for (const channel of channels) channel.isDisabled = !changeEvent.detail.checked
+				  for (const channel of channels) channel.disabled = !changeEvent.detail.checked
 				})
 			`,
 			wire: (root) => {
@@ -167,8 +168,8 @@ export const zSwitchDoc: ComponentDocT = {
 					const channels = root.querySelectorAll('.notificationChannel')
 
 					for (const channel of channels) {
-						if (detail.checked) channel.removeAttribute('is-disabled')
-						if (!detail.checked) channel.setAttribute('is-disabled', '')
+						if (detail.checked) channel.removeAttribute('disabled')
+						if (!detail.checked) channel.setAttribute('disabled', '')
 					}
 				})
 			}
@@ -177,7 +178,7 @@ export const zSwitchDoc: ComponentDocT = {
 
 	attributes: [
 		{ name: 'is-checked', type: 'boolean', defaultValue: '—', description: 'The on state. Reflects, so it is both the initial value and the live one.' },
-		{ name: 'is-disabled', type: 'boolean', defaultValue: '—', description: 'Blocks pointer and keyboard interaction.' },
+		{ name: 'disabled', type: 'boolean', defaultValue: '—', description: 'Blocks pointer and keyboard interaction.' },
 		{ name: 'is-block', type: 'boolean', defaultValue: '—', description: 'Makes the switch fill its row rather than sit inline.' },
 		{ name: 'size', type: 'sm | md | lg', defaultValue: 'md', description: 'Size of the track and knob. The label scale is unchanged.' },
 		{ name: 'accent', type: 'neutral | dom | sub', defaultValue: 'neutral', description: 'Accent family of the on state.' },

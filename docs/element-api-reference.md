@@ -1,6 +1,6 @@
 # Zest element API reference
 
-**184 elements.** Every one, as you would write it. Generated from
+**114 elements.** Every one, as you would write it. Generated from
 source by `scripts/build-api-reference.mjs`, so it is current by
 construction rather than by discipline.
 
@@ -27,20 +27,19 @@ short, that is the first place to check.
 ## Contents
 
 - [Foundation](#foundation) — 12
-- [Layout](#layout) — 13
-- [Buttons & actions](#buttons--actions) — 12
+- [Layout](#layout) — 7
+- [Buttons & actions](#buttons--actions) — 9
 - [Forms](#forms) — 16
 - [Navigation & disclosure](#navigation--disclosure) — 8
 - [Overlays](#overlays) — 11
-- [Data display](#data-display) — 14
-- [Canvas, panels & docs](#canvas-panels--docs) — 32
+- [Data display](#data-display) — 13
+- [Canvas, panels & docs](#canvas-panels--docs) — 3
 - [Text editor](#text-editor) — 10
-- [Chat](#chat) — 22
 - [Attachments](#attachments) — 4
-- [Effects](#effects) — 4
+- [Effects](#effects) — 2
 - [Music](#music) — 3
-- [Specialized](#specialized) — 13
-- [Uncategorised](#uncategorised) — 10
+- [Specialized](#specialized) — 7
+- [Uncategorised](#uncategorised) — 9
 
 ---
 
@@ -79,7 +78,7 @@ short, that is the first place to check.
   inset={string}
   inset-x={string}
   inset-y={string}
-  is-inline
+  inline
   does-wrap
   does-wrap-text
   is-full-width
@@ -91,9 +90,7 @@ short, that is the first place to check.
 
 ```jsx
 <z-card
-  gap={string}
   is-reactive
-  is-hidden
 />
 ```
 
@@ -102,8 +99,8 @@ short, that is the first place to check.
 ```jsx
 <z-display
   size="sm | md | lg | xl"   // default: lg
-  color="dom | sub | neutral | strong | muted"   // default: neutral
-  weight="700 | 300 | 400 | 600 | 900"   // default: 700
+  color="dom | sub | neutral | strong | muted | success | warning | error"   // default: neutral
+  weight={string}   // default: 700
   tag={string}   // default: h1
   is-hidden
 />
@@ -126,8 +123,8 @@ short, that is the first place to check.
 ```jsx
 <z-heading
   size="xs | sm | md | lg | xl | xxl"   // default: md
-  color="dom | sub | neutral | strong | muted"   // default: neutral
-  weight="700 | 300 | 400 | 600 | 900"   // default: 700
+  color="dom | sub | neutral | strong | muted | success | warning | error"   // default: neutral
+  weight={string}   // default: 700
   tag={string}   // default: size
   is-italic
   is-underlined
@@ -140,8 +137,8 @@ short, that is the first place to check.
 
 ```jsx
 <z-inline
-  color="dom | sub | neutral | strong | muted"
-  weight="300 | 400 | 600 | 700 | 900"
+  color="dom | sub | neutral | strong | muted | success | warning | error"
+  weight={string}
   tag={string}   // default: span
   is-italic
   is-underlined
@@ -164,13 +161,7 @@ short, that is the first place to check.
 
 ```jsx
 <z-label
-  size="xs | sm | md | lg | xl | xxl"   // default: md
-  color="dom | sub | neutral | strong | muted"   // default: neutral
-  weight="500 | 300 | 400 | 600 | 700 | 900"   // default: 500
   tag={string}   // default: span
-  is-italic
-  is-underlined
-  is-strikethrough
   is-hidden
 />
 ```
@@ -179,7 +170,7 @@ short, that is the first place to check.
 
 ```jsx
 <z-line
-  direction="horizontal | vertical"
+  vertical
 />
 ```
 
@@ -187,7 +178,6 @@ short, that is the first place to check.
 
 ```jsx
 <z-separator
-  direction="horizontal | vertical"
   label={string}
   is-hidden
 />
@@ -197,9 +187,9 @@ short, that is the first place to check.
 
 ```jsx
 <z-subheading
-  size="xs | sm | md | lg | xl | xxl"   // default: md
-  color="dom | sub | neutral | strong | muted"   // default: neutral
-  weight="600 | 300 | 400 | 700 | 900"   // default: 600
+  size="xs | sm | md | lg | xl"   // default: md
+  color="dom | sub | neutral | strong | muted | success | warning | error"   // default: neutral
+  weight={string}   // default: 600
   tag={string}   // default: p
   is-italic
   is-underlined
@@ -213,8 +203,8 @@ short, that is the first place to check.
 ```jsx
 <z-text
   size="xs | sm | md | lg | xl | xxl"   // default: md
-  color="dom | sub | neutral | strong | muted"   // default: neutral
-  weight="300 | 400 | 600 | 700 | 900"
+  color="dom | sub | neutral | strong | muted | success | warning | error"   // default: neutral
+  weight={string}
   tag={string}   // default: p
   is-italic
   is-underlined
@@ -250,24 +240,6 @@ short, that is the first place to check.
 />
 ```
 
-### `z-center`
-
-```jsx
-<z-center
-  aligns-x="center | start | end"   // default: center
-  aligns-y="center | start | end"   // default: center
-  max-width={string}
-  min-height={string}
-  inset={string}
-  inset-x={string}
-  inset-y={string}
-  centers-both
-  centers-text
-  is-full-width
-  is-full-height
-/>
-```
-
 ### `z-chassis`
 
 ```jsx
@@ -279,115 +251,6 @@ short, that is the first place to check.
   rail-side="left | right"   // default: left
   does-expand-on-hover
   is-hidden
-/>
-```
-
-### `z-column`
-
-```jsx
-<z-column
-  gap={string}
-  row-gap={string}
-  column-gap={string}
-  margin={string}
-  margin-top={string}
-  margin-right={string}
-  margin-bottom={string}
-  margin-left={string}
-  margin-x={string}
-  margin-y={string}
-  padding={string}
-  padding-top={string}
-  padding-right={string}
-  padding-bottom={string}
-  padding-left={string}
-  padding-x={string}
-  padding-y={string}
-  width={string}
-  min-width={string}
-  max-width={string}
-  height={string}
-  min-height={string}
-  max-height={string}
-  aligns-x="start | center | end | between | around | evenly | stretch"
-  aligns-y="start | center | end | between | around | evenly | stretch"
-  inset={string}
-  inset-x={string}
-  inset-y={string}
-  is-inline
-  does-wrap
-  does-wrap-text
-  is-full-width
-  is-full-height
-/>
-```
-
-### `z-container`
-
-```jsx
-<z-container
-  size={string}   // default: xl
-  gutter={string}
-  is-centered
-  is-full-height
-/>
-```
-
-### `z-grid`
-
-```jsx
-<z-grid
-  columns={string}
-  min-column-width={string}
-  gap={string}
-  gap-x={string}
-  gap-y={string}
-  aligns-x="stretch | start | center | end"   // default: stretch
-  aligns-y="stretch | start | center | end"   // default: stretch
-  inset={string}
-  inset-x={string}
-  inset-y={string}
-  is-full-width
-/>
-```
-
-### `z-row`
-
-```jsx
-<z-row
-  gap={string}
-  row-gap={string}
-  column-gap={string}
-  margin={string}
-  margin-top={string}
-  margin-right={string}
-  margin-bottom={string}
-  margin-left={string}
-  margin-x={string}
-  margin-y={string}
-  padding={string}
-  padding-top={string}
-  padding-right={string}
-  padding-bottom={string}
-  padding-left={string}
-  padding-x={string}
-  padding-y={string}
-  width={string}
-  min-width={string}
-  max-width={string}
-  height={string}
-  min-height={string}
-  max-height={string}
-  aligns-x="start | center | end | between | around | evenly | stretch"
-  aligns-y="start | center | end | between | around | evenly | stretch"
-  inset={string}
-  inset-x={string}
-  inset-y={string}
-  is-inline
-  does-wrap
-  does-wrap-text
-  is-full-width
-  is-full-height
 />
 ```
 
@@ -406,18 +269,6 @@ short, that is the first place to check.
 />
 ```
 
-### `z-section`
-
-```jsx
-<z-section
-  space={string}
-  space-top={string}
-  space-bottom={string}
-  container={string}
-  gutter={string}
-/>
-```
-
 ### `z-spacer`
 
 ```jsx
@@ -432,15 +283,9 @@ short, that is the first place to check.
 ```jsx
 <z-surface
   level="0 | 1 | 2 | 3"
-  accent="dom | sub | neutral | success | warning | error | strong | plain"   // default: neutral
-  kind="outline | ghost | soft | plain | filled | outlined"
+  kind="outline | ghost | soft | plain | filled"
   radius={string}   // default: lg
-  inset={string}   // default: md
-  inset-x={string}
-  inset-y={string}
-  has-border
-  is-elevated
-  is-interactive
+  interactive
   is-full-width
 />
 ```
@@ -449,14 +294,13 @@ short, that is the first place to check.
 
 ```jsx
 <z-swap
-  kind="beside | stack"   // default: stack
+  kind="stack | beside"   // default: stack
   effect="fade | rotate | flip"   // default: fade
   label={string}
   has-ghost
   is-active
-  is-disabled
+  disabled
   is-hidden
-  onchange={(event) => event.detail}   // { active: boolean }
 />
 ```
 
@@ -473,7 +317,7 @@ short, that is the first place to check.
   accent="dom | sub | neutral | success | warning | error"   // default: neutral
   label={string}
   type="button | submit | reset"   // default: button
-  is-disabled
+  disabled
   is-loading
   is-full-width
   is-hidden
@@ -484,32 +328,7 @@ short, that is the first place to check.
 
 ```jsx
 <z-button-group
-  direction="horizontal | vertical"
-/>
-```
-
-### `z-dock`
-
-```jsx
-<z-dock
-  magnification={number}   // default: 1.08
-  distance={number}   // default: 96
-  item-size={string}   // default: 3rem
-  gap={string}   // default: 0.75rem
-  is-floating
-  is-hidden
-/>
-```
-
-### `z-dock-item`
-
-```jsx
-<z-dock-item
-  label={string}
-  href={string}
-  is-active
-  is-hidden
-  onselect={(event) => event.detail}   // —
+  vertical
 />
 ```
 
@@ -518,28 +337,15 @@ short, that is the first place to check.
 ```jsx
 <z-link
   href={string}
-  target="_blank"
+  target={string}
   label={string}
   size="sm | md | lg"   // default: md
   color="dom | sub | neutral"   // default: dom
   underline="hover | always | none"   // default: hover
   is-external
   is-block
-  is-disabled
+  disabled
   is-hidden
-/>
-```
-
-### `z-send-button`
-
-```jsx
-<z-send-button
-  label={string}   // default: Send
-  is-streaming
-  is-disabled
-  is-hidden
-  onsend={(event) => event.detail}   // —
-  onstop={(event) => event.detail}   // —
 />
 ```
 
@@ -547,13 +353,11 @@ short, that is the first place to check.
 
 ```jsx
 <z-theme-switcher
-  kind="icon | segmented"   // default: segmented
+  kind="segmented | icon"   // default: segmented
   accent="dom | sub"
-  themes={Array}
-  size="sm | md | lg"
+  size={string}
   is-icon-only
   is-hidden
-  onchange={(event) => event.detail}   // { preference: ThemePreferenceT; theme: ThemeT }
 />
 ```
 
@@ -566,9 +370,8 @@ short, that is the first place to check.
   accent="dom | sub | neutral"   // default: neutral
   is-icon
   is-pressed
-  is-disabled
+  disabled
   is-hidden
-  onpress={(event) => event.detail}   // { pressed: boolean }
 />
 ```
 
@@ -576,14 +379,13 @@ short, that is the first place to check.
 
 ```jsx
 <z-toggle-group
-  accent="dom | sub | neutral"
-  size="sm | md | lg"
-  kind="outline | ghost"
-  direction="horizontal | vertical"
+  accent={string}
+  size={string}
+  kind={string}
+  direction="horizontal | vertical"   // default: horizontal
   type="single | multiple"   // default: single
   is-icon
   is-hidden
-  onchange={(event) => event.detail}   // { value?: string | string[] }
 />
 ```
 
@@ -597,9 +399,8 @@ short, that is the first place to check.
   value={string}
   is-icon
   is-pressed
-  is-disabled
+  disabled
   is-hidden
-  onpress={(event) => event.detail}   // { pressed: boolean; value?: string }
 />
 ```
 
@@ -607,10 +408,9 @@ short, that is the first place to check.
 
 ```jsx
 <z-toolbar
-  direction="horizontal | vertical"   // default: horizontal
   size="sm | md | lg"   // default: md
   overflow="scroll | wrap | menu"
-  is-disabled
+  disabled
 />
 ```
 
@@ -636,11 +436,8 @@ short, that is the first place to check.
   name={string}
   value={string}
   is-checked
-  is-indeterminate
-  is-disabled
-  is-block
+  disabled
   is-hidden
-  onchange={(event) => event.detail}   // { checked: boolean; value?: string }
 />
 ```
 
@@ -650,11 +447,9 @@ short, that is the first place to check.
 <z-color-picker
   value={string}
   label={string}
-  presets={Array}
   accent="dom | sub"   // default: dom
-  is-disabled
+  disabled
   is-hidden
-  onchange={(event) => event.detail}   // { value: string }
 />
 ```
 
@@ -665,14 +460,12 @@ short, that is the first place to check.
   value={string}
   label={string}
   placeholder={string}
-  options={Array}
-  size="sm | md | lg"
+  size={string}
   accent="dom | sub"   // default: dom
-  is-invalid
-  is-disabled
-  is-inline
+  invalid
+  disabled
+  inline
   is-hidden
-  onchange={(event) => event.detail}   // { value: string }
 />
 ```
 
@@ -683,7 +476,7 @@ short, that is the first place to check.
   label={string}
   description={string}
   error={string}   // default: description
-  size="sm | md | lg"
+  size={string}
   is-required
   is-label-hidden
   is-label-reserved
@@ -694,15 +487,13 @@ short, that is the first place to check.
 
 ```jsx
 <z-filter
-  options={Array}
-  accent="dom | sub | neutral"   // default: dom
+  accent="dom | sub"   // default: dom
   size="sm | md"   // default: md
   label={string}
   reset-label={string}   // default: Clear
   is-drilldown
-  is-disabled
+  disabled
   is-hidden
-  onchange={(event) => event.detail}   // { value?: string; path: string[] }
 />
 ```
 
@@ -712,7 +503,7 @@ short, that is the first place to check.
 <z-input
   value={string}
   label={string}
-  type="text | search"   // default: text
+  type={string}   // default: text
   placeholder={string}
   name={string}
   autocomplete={string}
@@ -720,14 +511,12 @@ short, that is the first place to check.
   size="sm | md | lg"   // default: md
   accent="dom | sub"   // default: dom
   is-focused
-  is-invalid
-  is-disabled
+  invalid
+  disabled
   is-readonly
   is-required
-  is-inline
+  inline
   is-hidden
-  oninput={(event) => event.detail}   // { value: string }
-  onchange={(event) => event.detail}   // { value: string }
 />
 ```
 
@@ -741,11 +530,9 @@ short, that is the first place to check.
   size="sm | md | lg"   // default: md
   accent="dom | sub"   // default: dom
   is-numeric
-  is-invalid
-  is-disabled
+  invalid
+  disabled
   is-hidden
-  onchange={(event) => event.detail}   // { value: string }
-  oncomplete={(event) => event.detail}   // { value: string }
 />
 ```
 
@@ -762,16 +549,14 @@ short, that is the first place to check.
   placeholder={string}
   size="sm | md | lg"   // default: md
   accent="dom | sub"   // default: dom
-  is-invalid
-  is-disabled
+  invalid
+  disabled
   is-readonly
   is-required
   has-stepper-buttons
   is-full-width
-  is-inline
+  inline
   is-hidden
-  oninput={(event) => event.detail}   // { value: number | null; rawValue: string; isValid: boolean }
-  onchange={(event) => event.detail}   // { value: number }
 />
 ```
 
@@ -782,9 +567,8 @@ short, that is the first place to check.
   accent="dom | sub"   // default: dom
   value={string}
   is-checked
-  is-disabled
+  disabled
   is-hidden
-  onselect={(event) => event.detail}   // { value?: string }
 />
 ```
 
@@ -794,9 +578,9 @@ short, that is the first place to check.
 <z-radio-group
   value={string}
   label={string}
-  direction="horizontal | vertical"
+  direction="horizontal | vertical"   // default: vertical
+  accent="dom | sub | neutral | success | warning | error"   // default: neutral
   is-hidden
-  onchange={(event) => event.detail}   // { value?: string }
 />
 ```
 
@@ -810,11 +594,9 @@ short, that is the first place to check.
   label={string}
   value-prefix={string}
   value-suffix={string}
-  does-show-value
-  is-disabled
+  show-value
+  disabled
   is-hidden
-  oninput={(event) => event.detail}   // RangeDetailT
-  onchange={(event) => event.detail}   // RangeDetailT
 />
 ```
 
@@ -838,14 +620,12 @@ short, that is the first place to check.
   value={string}
   label={string}
   placeholder={string}
-  options={Array}
   size="sm | md | lg"   // default: md
   accent="dom | sub"   // default: dom
-  is-invalid
-  is-disabled
-  is-inline
+  invalid
+  disabled
+  inline
   is-hidden
-  onchange={(event) => event.detail}   // { value: string }
 />
 ```
 
@@ -863,10 +643,8 @@ short, that is the first place to check.
   value-suffix={string}
   accent="dom | sub"   // default: dom
   does-show-value
-  is-disabled
+  disabled
   is-hidden
-  oninput={(event) => event.detail}   // { value: number }
-  onchange={(event) => event.detail}   // { value: number }
 />
 ```
 
@@ -879,10 +657,9 @@ short, that is the first place to check.
   name={string}
   value={string}
   is-checked
-  is-disabled
+  disabled
   is-block
   is-hidden
-  onchange={(event) => event.detail}   // { checked: boolean; value?: string }
 />
 ```
 
@@ -898,14 +675,12 @@ short, that is the first place to check.
   size="sm | md | lg"   // default: md
   accent="dom | sub"   // default: dom
   is-focused
-  is-invalid
-  is-disabled
+  invalid
+  disabled
   is-readonly
   is-required
   is-auto-resize
   is-hidden
-  oninput={(event) => event.detail}   // { value: string }
-  onchange={(event) => event.detail}   // { value: string }
 />
 ```
 
@@ -926,11 +701,9 @@ short, that is the first place to check.
 
 ```jsx
 <z-breadcrumbs
-  items={Array}
   max={number}
-  accent="dom | sub"   // default: dom
+  accent={string}   // default: dom
   is-hidden
-  onnavigate={(event) => event.detail}   // { value: string; index: number }
 />
 ```
 
@@ -942,9 +715,8 @@ short, that is the first place to check.
   label={string}
   accent="dom | sub"   // default: dom
   is-open
-  is-disabled
+  disabled
   is-hidden
-  ontoggle={(event) => event.detail}   // { value: string; open: boolean }
 />
 ```
 
@@ -952,10 +724,8 @@ short, that is the first place to check.
 
 ```jsx
 <z-context-menu
-  items={Array}
   accent="dom | sub"   // default: dom
-  is-disabled
-  onselect={(event) => event.detail}   // { value: string }
+  disabled
 />
 ```
 
@@ -963,11 +733,9 @@ short, that is the first place to check.
 
 ```jsx
 <z-menu
-  items={Array}
   align="start | end"   // default: start
   accent="dom | sub"   // default: dom
   is-hidden
-  onselect={(event) => event.detail}   // { value: string }
 />
 ```
 
@@ -975,11 +743,9 @@ short, that is the first place to check.
 
 ```jsx
 <z-nav-menu
-  items={Array}
   value={string}
-  accent="dom | sub"   // default: dom
+  accent={string}   // default: dom
   is-hidden
-  onselect={(event) => event.detail}   // { value: string }
 />
 ```
 
@@ -987,13 +753,11 @@ short, that is the first place to check.
 
 ```jsx
 <z-sidebar
-  items={Array}
   value={string}
-  accent="dom | sub"   // default: dom
+  accent={string}   // default: dom
   is-collapsed
   is-docked
   is-hidden
-  onselect={(event) => event.detail}   // { value: string }
 />
 ```
 
@@ -1002,11 +766,9 @@ short, that is the first place to check.
 ```jsx
 <z-tabs
   value={string}
-  tabs={Array}
   accent="dom | sub"   // default: dom
   is-fitted
   is-hidden
-  onchange={(event) => event.detail}   // { value: string }
 />
 ```
 
@@ -1022,7 +784,6 @@ short, that is the first place to check.
   heading={string}
   is-dismissable
   is-hidden
-  ondismiss={(event) => event.detail}   // —
 />
 ```
 
@@ -1036,8 +797,6 @@ short, that is the first place to check.
   cancel-label={string}   // default: Cancel
   accent="dom | sub | error"   // default: dom
   is-open
-  onconfirm={(event) => event.detail}   // —
-  oncancel={(event) => event.detail}   // —
 />
 ```
 
@@ -1057,13 +816,9 @@ short, that is the first place to check.
 
 ```jsx
 <z-command
-  items={Array}
   placeholder={string}
   empty-text={string}
   is-open
-  onselect={(event) => event.detail}   // { value: string }
-  onopen={(event) => event.detail}   // —
-  onclose={(event) => event.detail}   // —
 />
 ```
 
@@ -1077,9 +832,7 @@ short, that is the first place to check.
   is-open
   has-close
   is-static
-  is-disabled
-  onopen={(event) => event.detail}   // —
-  onclose={(event) => event.detail}   // —
+  disabled
 />
 ```
 
@@ -1091,9 +844,7 @@ short, that is the first place to check.
   description={string}
   is-open
   is-static
-  is-disabled
-  onopen={(event) => event.detail}   // —
-  onclose={(event) => event.detail}   // —
+  disabled
 />
 ```
 
@@ -1118,9 +869,8 @@ short, that is the first place to check.
   offset={number}   // default: 8
   accent="dom | sub"
   is-open
-  is-disabled
+  disabled
   is-hidden
-  ontoggle={(event) => event.detail}   // { open: boolean }
 />
 ```
 
@@ -1134,9 +884,7 @@ short, that is the first place to check.
   is-open
   has-close
   is-static
-  is-disabled
-  onopen={(event) => event.detail}   // —
-  onclose={(event) => event.detail}   // —
+  disabled
 />
 ```
 
@@ -1145,7 +893,6 @@ short, that is the first place to check.
 ```jsx
 <z-toast
   position="bottom-end | bottom-start | bottom-center | top-end | top-start | top-center"   // default: bottom-end
-  ondismiss={(event) => event.detail}   // { id: number }
 />
 ```
 
@@ -1158,7 +905,7 @@ short, that is the first place to check.
   accent={string}
   content={string}
   open-delay={number}   // default: 150
-  is-disabled
+  disabled
   is-hidden
 />
 ```
@@ -1176,7 +923,7 @@ short, that is the first place to check.
   initials={string}   // default: name
   status="online | busy | away | offline"
   size="xs | sm | md | lg | xl"   // default: md
-  accent="dom | sub | neutral"   // default: dom
+  accent="dom | sub | neutral | success | warning | error"   // default: neutral
   is-square
   is-hidden
 />
@@ -1203,13 +950,11 @@ short, that is the first place to check.
   label={string}
   value={string}
   is-dot
-  is-selectable
-  is-selected
-  is-removable
-  is-disabled
+  selectable
+  selected
+  removable
+  disabled
   is-hidden
-  onselect={(event) => event.detail}   // { value?: string; selected: boolean }
-  onremove={(event) => event.detail}   // { value?: string }
 />
 ```
 
@@ -1241,7 +986,6 @@ short, that is the first place to check.
   sibling-count={number}   // default: 1
   accent="dom | sub"   // default: dom
   is-hidden
-  onchange={(event) => event.detail}   // { page: number }
 />
 ```
 
@@ -1266,7 +1010,7 @@ short, that is the first place to check.
   width={string}
   height={string}
   lines={number}   // default: 1
-  is-inline
+  inline
   is-hidden
 />
 ```
@@ -1277,12 +1021,7 @@ short, that is the first place to check.
 <z-sortable
   axis="y | x"   // default: y
   handle={string}
-  group={string}
-  animation={number}
-  is-disabled
-  onstart={(event) => event.detail}   // { index: number }
-  onsort={(event) => event.detail}   // { oldIndex: number; newIndex: number }
-  onend={(event) => event.detail}   // —
+  disabled
 />
 ```
 
@@ -1292,10 +1031,9 @@ short, that is the first place to check.
 <z-stat
   value={string}
   label={string}
-  size="xs | md | xxl"   // default: xs
-  label-size="sm | xxl | xs"   // default: sm
-  color={string}
-  label-color={string}   // default: muted
+  size="xs | sm | md | lg | xl | xxl"   // default: xs
+  label-size="sm | xxl | xl | lg | md | xs"   // default: sm
+  color="dom | sub | neutral | strong | muted | success | warning | error"
   align="start | center | end"   // default: start
   is-hidden
 />
@@ -1317,13 +1055,10 @@ short, that is the first place to check.
 
 ```jsx
 <z-table
-  columns={Array}
-  rows={Array}
   empty-label={string}
   is-striped
   is-clickable
   is-hidden
-  onrowclick={(event) => event.detail}   // { row: RowT; index: number }
 />
 ```
 
@@ -1331,157 +1066,15 @@ short, that is the first place to check.
 
 ```jsx
 <z-tree
-  items={Array}
   selection="single | multiple | none"   // default: single
-  selected={Array}
-  expanded={Array}
   does-show-guides
   is-hidden
-  onselect={(event) => event.detail}   // { ids: string[]; node: TreeNode }
-  onexpand={(event) => event.detail}   // { id: string }
-  oncollapse={(event) => event.detail}   // { id: string }
-  onactivate={(event) => event.detail}   // { id: string; node: TreeNode }
-/>
-```
-
-### `z-virtual-list`
-
-```jsx
-<z-virtual-list
-  items={Array}
-  item-height={number}
-  estimate-size={number}   // default: 40
-  overscan={number}   // default: 4
-  direction="horizontal | vertical"
-  gap={number}   // default: 0
-  render-item={string}
-  key-fn={string}
-  onvisiblerangechange={(event) => event.detail}   // { start: number; end: number }
 />
 ```
 
 ---
 
 ## Canvas, panels & docs
-
-### `z-announcement-bar`
-
-```jsx
-<z-announcement-bar
-  message={string}
-  label={string}   // default: Announcement
-  accent="dom | sub | success | warning | error"   // default: dom
-  storage-key={string}
-  is-permanent
-  is-hidden
-  ondismiss={(event) => event.detail}   // —
-/>
-```
-
-### `z-api-table`
-
-```jsx
-<z-api-table
-  rows={Array}
-  kind="attributes | properties | slots | events | css"   // default: attributes
-  caption={string}
-  is-dense
-  is-hidden
-/>
-```
-
-### `z-code-group`
-
-```jsx
-<z-code-group
-  group={string}
-  value={string}
-  storage-key={string}
-  is-hidden
-  onchange={(event) => event.detail}   // { value: string }
-/>
-```
-
-### `z-control-panel`
-
-```jsx
-<z-control-panel
-  controls={Array}
-  values={Object}
-  is-hidden
-  onchange={(event) => event.detail}   // { name: string; value: string | null }
-/>
-```
-
-### `z-diff`
-
-```jsx
-<z-diff
-  before={string}
-  after={string}
-  patch={string}
-  language={string}
-  filename={string}
-  view="unified | split"   // default: unified
-  before-label={string}   // default: Before
-  after-label={string}   // default: After
-  is-hidden
-/>
-```
-
-### `z-do-dont`
-
-```jsx
-<z-do-dont
-  do-label={string}   // default: Do
-  dont-label={string}
-  do-caption={string}
-  dont-caption={string}
-  layout="center"
-  is-hidden
-/>
-```
-
-### `z-doc-header`
-
-```jsx
-<z-doc-header
-  eyebrow={string}
-  heading={string}
-  tagline={string}
-  status="stable | beta | experimental | new | deprecated"
-  source-href={string}
-  version-added={string}
-  updated={string}
-  is-hidden
-/>
-```
-
-### `z-docs-shell`
-
-```jsx
-<z-docs-shell
-  nav-width={string}   // default: 17rem
-  toc-width={string}   // default: 13rem
-  content-width={string}   // default: 54rem
-  is-nav-open
-  is-hidden
-  onnavClose={(event) => event.detail}   // —
-/>
-```
-
-### `z-edit-on-github`
-
-```jsx
-<z-edit-on-github
-  repo={string}
-  path={string}
-  branch={string}   // default: main
-  href={string}
-  label={string}
-  is-hidden
-/>
-```
 
 ### `z-editor-canvas`
 
@@ -1493,121 +1086,11 @@ short, that is the first place to check.
   min-zoom={number}   // default: 0.1
   max-zoom={number}
   zoom-speed={number}   // default: 1
-  grid="dots | lines | none"
+  grid="none | dots | lines"
   grid-size={number}   // default: 24
-  snap={number}   // default: 0
   pan-button="auto | middle | space | left"   // default: auto
   wheel="zoom | pan"   // default: zoom
-  is-disabled
-  onviewportchange={(event) => event.detail}   // { x: number; y: number; zoom: number }
-  onzoomchange={(event) => event.detail}   // { zoom: number }
-  onpanchange={(event) => event.detail}   // { x: number; y: number }
-/>
-```
-
-### `z-example`
-
-```jsx
-<z-example
-  heading={string}
-  description={string}
-  snippets={Array}
-  layout="center | start | stack | fill"   // default: center
-  is-source-open
-  has-background-grid
-  is-resizable
-  is-hidden
-  oncopy={(event) => event.detail}   // { code: string; label: string }
-/>
-```
-
-### `z-external-link`
-
-```jsx
-<z-external-link
-  href={string}
-  label={string}
-  is-same-tab
-  is-hidden
-/>
-```
-
-### `z-file-tree`
-
-```jsx
-<z-file-tree
-  paths={string}
-  entries={Array}
-  is-hidden
-/>
-```
-
-### `z-language-switcher`
-
-```jsx
-<z-language-switcher
-  locales={Array}
-  value="string"
-  is-managed
-  is-hidden
-  onchange={(event) => event.detail}   // { value: string; route: string }
-/>
-```
-
-### `z-last-updated`
-
-```jsx
-<z-last-updated
-  datetime={string}
-  label={string}   // default: Updated
-  commit={string}
-  repo={string}
-  is-hidden
-/>
-```
-
-### `z-live-code`
-
-```jsx
-<z-live-code
-  code={string}
-  assets={string}
-  theme={string}
-  height={string}   // default: 20rem
-  layout="stacked"
-  editor-label={string}   // default: Edit
-  preview-label={string}   // default: Result
-  is-hidden
-  onchange={(event) => event.detail}   // { code: string }
-  onreset={(event) => event.detail}   // —
-/>
-```
-
-### `z-mermaid`
-
-```jsx
-<z-mermaid
-  code={string}
-  src={string}
-  theme={string}
-  is-hidden
-  onrender={(event) => event.detail}   // { id: string }
-/>
-```
-
-### `z-nav-tree`
-
-```jsx
-<z-nav-tree
-  items={Array}
-  route={string}
-  label={string}
-  storage-key={string}
-  filter-placeholder={string}
-  is-collapsed-by-default
-  is-filtered
-  is-hidden
-  onnavigate={(event) => event.detail}   // { route: string; node: NavNodeT }
+  disabled
 />
 ```
 
@@ -1625,165 +1108,14 @@ short, that is the first place to check.
 />
 ```
 
-### `z-playground`
-
-```jsx
-<z-playground
-  controls={Array}
-  tag-name={string}
-  layout="center | stack | fill"
-  is-hidden
-  onreset={(event) => event.detail}   // —
-/>
-```
-
-### `z-prev-next`
-
-```jsx
-<z-prev-next
-  previous={Object}
-  next={Object}
-  previous-label={string}   // default: Previous
-  next-label={string}   // default: Next
-  is-hidden
-  onnavigate={(event) => event.detail}   // { route: string }
-/>
-```
-
-### `z-reading-progress`
-
-```jsx
-<z-reading-progress
-  for={string}
-  is-hidden
-/>
-```
-
 ### `z-resizable-panels`
 
 ```jsx
 <z-resizable-panels
-  direction="column | row"   // default: row
+  direction="horizontal | vertical"   // default: horizontal
   auto-save-id={string}
   keyboard-step={number}   // default: 5
-  is-disabled
-  onlayout={(event) => event.detail}   // { sizes: number[] }
-  ondragging={(event) => event.detail}   // { isDragging: boolean }
-/>
-```
-
-### `z-sandbox`
-
-```jsx
-<z-sandbox
-  html={string}
-  assets={string}
-  device="desktop | tablet | phone"   // default: desktop
-  theme={string}
-  height={string}   // default: 20rem
-  title={string}   // default: Example
-  is-bare
-  is-hidden
-  onopen={(event) => event.detail}   // { url: string }
-/>
-```
-
-### `z-search-dialog`
-
-```jsx
-<z-search-dialog
-  index={Array}
-  search={Object}
-  placeholder={string}
-  empty-text={string}
-  recent-key={string}
-  is-open
-  onselect={(event) => event.detail}   // { route: string; id: string }
-/>
-```
-
-### `z-steps`
-
-```jsx
-<z-steps
-  current={number}
-  is-hidden
-/>
-```
-
-### `z-swatch`
-
-```jsx
-<z-swatch
-  token={string}
-  kind="color | space | radius | type | value"
-  label={string}
-  description={string}
-  is-hidden
-  oncopy={(event) => event.detail}   // { token: string; value: string }
-/>
-```
-
-### `z-toc`
-
-```jsx
-<z-toc
-  for={string}
-  headings={Array}
-  min-level={number}   // default: 2
-  max-level={number}   // default: 3
-  label="string"
-  active-id={string}
-  is-hidden
-  onchange={(event) => event.detail}   // { id: string }
-/>
-```
-
-### `z-token-table`
-
-```jsx
-<z-token-table
-  tokens={Array}
-  names={string}
-  kind="color | space | radius | type | value"
-  caption={string}
-  columns="1"
-  is-hidden
-/>
-```
-
-### `z-type-badge`
-
-```jsx
-<z-type-badge
-  value={string}
-  kind="primitive | literal | union | function | object"
-  is-hidden
-/>
-```
-
-### `z-version-picker`
-
-```jsx
-<z-version-picker
-  versions={Array}
-  value="string"
-  is-managed
-  is-hidden
-  onchange={(event) => event.detail}   // { value: string; route: string }
-/>
-```
-
-### `z-was-this-helpful`
-
-```jsx
-<z-was-this-helpful
-  page={string}
-  question={string}
-  comment-placeholder={string}
-  thanks-label={string}
-  is-hidden
-  onfeedback={(event) => event.detail}   // { isHelpful: boolean; comment: string; page: string }
+  disabled
 />
 ```
 
@@ -1795,7 +1127,7 @@ short, that is the first place to check.
 
 ```jsx
 <z-bubble-menu
-  kind="image | table-cell | link"   // default: link
+  kind="link | image | table-cell"   // default: link
   anchor-rect={string}
   placement="top | bottom | left | right | -start | -end"   // default: top
   offset={number}   // default: 10
@@ -1803,18 +1135,6 @@ short, that is the first place to check.
   align={string}
   is-open
   has-caption
-  onlinkchange={(event) => event.detail}   // { url: string }
-  onlinkopen={(event) => event.detail}   // —
-  onlinkunlink={(event) => event.detail}   // —
-  onimagealign={(event) => event.detail}   // { align: AlignT }
-  onimagecaptiontoggle={(event) => event.detail}   // —
-  onimagereplace={(event) => event.detail}   // —
-  onimagedelete={(event) => event.detail}   // —
-  ontableinsertrow={(event) => event.detail}   // { position: RowColPositionT }
-  ontabledeleterow={(event) => event.detail}   // —
-  ontableinsertcolumn={(event) => event.detail}   // { position: RowColPositionT }
-  ontabledeletecolumn={(event) => event.detail}   // —
-  ontablemerge={(event) => event.detail}   // —
 />
 ```
 
@@ -1827,10 +1147,8 @@ short, that is the first place to check.
   copied-label={string}   // default: Copied
   kind="ghost | icon"   // default: ghost
   size="sm | md"   // default: md
-  is-disabled
+  disabled
   is-hidden
-  oncopy={(event) => event.detail}   // { value: string }
-  onerror={(event) => event.detail}   // { error: Error | null }
 />
 ```
 
@@ -1839,7 +1157,7 @@ short, that is the first place to check.
 ```jsx
 <z-drag-handle
   label={string}
-  is-disabled
+  disabled
 />
 ```
 
@@ -1847,13 +1165,9 @@ short, that is the first place to check.
 
 ```jsx
 <z-format-toolbar
-  items={Array}
-  heading-options={Array}
   heading-value={string}
   heading-placeholder={string}
   label={string}   // default: Formatting
-  onaction={(event) => event.detail}   // { value: string }
-  onheadingchange={(event) => event.detail}   // { value: string }
 />
 ```
 
@@ -1864,7 +1178,6 @@ short, that is the first place to check.
   anchor-rect={string}
   width={number}
   is-open
-  onadd={(event) => event.detail}   // —
 />
 ```
 
@@ -1873,8 +1186,7 @@ short, that is the first place to check.
 ```jsx
 <z-mention-popover
   trigger={string}
-  items={Array}
-  source="function"
+  source={string}
   query={string}
   debounce-ms={number}
   anchor-rect={string}
@@ -1882,9 +1194,6 @@ short, that is the first place to check.
   offset={number}   // default: 8
   empty-text={string}
   is-open
-  onselect={(event) => event.detail}   // { value: string; label: string }
-  onempty={(event) => event.detail}   // —
-  ondismiss={(event) => event.detail}   // —
 />
 ```
 
@@ -1892,13 +1201,11 @@ short, that is the first place to check.
 
 ```jsx
 <z-selection-toolbar
-  items={Array}
   anchor-rect={string}
   placement="top | bottom | left | right | -start | -end"   // default: top
   offset={number}   // default: 10
   label={string}
   is-open
-  onaction={(event) => event.detail}   // { value: string }
 />
 ```
 
@@ -1906,16 +1213,12 @@ short, that is the first place to check.
 
 ```jsx
 <z-slash-menu
-  items={Array}
   query={string}
   anchor-rect={string}
   placement="top | bottom | left | right | -start | -end | bottom-start"   // default: bottom-start
   offset={number}   // default: 8
   empty-text={string}
   is-open
-  onselect={(event) => event.detail}   // { value: string }
-  onempty={(event) => event.detail}   // —
-  ondismiss={(event) => event.detail}   // —
 />
 ```
 
@@ -1935,286 +1238,11 @@ short, that is the first place to check.
 
 ```jsx
 <z-table-toolbar
-  items={Array}
   anchor-rect={string}
   placement="top | bottom | left | right | -start | -end"   // default: top
   offset={number}   // default: 10
   label={string}
   is-open
-  onaction={(event) => event.detail}   // { value: string }
-  onselect={(event) => event.detail}   // —
-  oninsertafter={(event) => event.detail}   // —
-  onremove={(event) => event.detail}   // —
-/>
-```
-
----
-
-## Chat
-
-### `z-chat-header`
-
-```jsx
-<z-chat-header
-  name={string}
-  subtitle={string}
-  avatar-src={string}
-  avatar-name={string}   // default: name
-  status={string}
-  is-hidden
-/>
-```
-
-### `z-chat-shell`
-
-```jsx
-<z-chat-shell
-  list-size={string}   // default: 320px
-  details-size={string}   // default: 300px
-  auto-save-id={string}
-  has-details
-  is-hidden
-/>
-```
-
-### `z-composer`
-
-```jsx
-<z-composer
-  value={string}
-  placeholder={string}
-  is-focused
-  is-disabled
-  does-submit-on-enter
-  is-hidden
-  oninput={(event) => event.detail}   // { value: string }
-  onsend={(event) => event.detail}   // { value: string }
-/>
-```
-
-### `z-conversation-item`
-
-```jsx
-<z-conversation-item
-  value={string}
-  name={string}
-  preview={string}
-  timestamp={string}
-  avatar-src={string}
-  avatar-name={string}   // default: name
-  status={string}
-  unread={number}   // default: 0
-  is-active
-  is-muted
-  is-pinned
-  is-hidden
-  onselect={(event) => event.detail}   // { value?: string }
-/>
-```
-
-### `z-conversation-list`
-
-```jsx
-<z-conversation-list
-  is-hidden
-/>
-```
-
-### `z-date-divider`
-
-```jsx
-<z-date-divider
-  label={string}
-  is-hidden
-/>
-```
-
-### `z-delivery-status`
-
-```jsx
-<z-delivery-status
-  status="sent | read | error | sending | delivered"   // default: sent
-  is-hidden
-/>
-```
-
-### `z-emoji-picker`
-
-```jsx
-<z-emoji-picker
-  emojis={Array}
-  onselect={(event) => event.detail}   // { emoji: string }
-/>
-```
-
-### `z-image-message`
-
-```jsx
-<z-image-message
-  images={Array}
-  src={string}
-  alt={string}
-  is-hidden
-  onopen={(event) => event.detail}   // { index: number; src: string }
-/>
-```
-
-### `z-message-actions`
-
-```jsx
-<z-message-actions
-  quick-reactions={Array}
-  actions={string}
-  is-hidden
-  onreact={(event) => event.detail}   // { emoji: string }
-  onaddreaction={(event) => event.detail}   // —
-  onreply={(event) => event.detail}   // —
-  onforward={(event) => event.detail}   // —
-  onmore={(event) => event.detail}   // —
-/>
-```
-
-### `z-message-bubble`
-
-```jsx
-<z-message-bubble
-  side="start | end"   // default: start
-  group="single | first | middle | last"   // default: single
-  accent="dom | sub | success | warning | error"
-  is-hidden
-/>
-```
-
-### `z-message-group`
-
-```jsx
-<z-message-group
-  side="start | end"   // default: start
-  name={string}
-  avatar-src={string}
-  avatar-name={string}   // default: name
-  avatar-initials={string}
-  timestamp={string}
-  avatar="auto | always | never"   // default: auto
-  is-hidden
-/>
-```
-
-### `z-message-list`
-
-```jsx
-<z-message-list
-  pin-threshold={number}   // default: 80
-  is-pinned
-  is-hidden
-  onpinnedchange={(event) => event.detail}   // { isPinned: boolean }
-/>
-```
-
-### `z-model-picker`
-
-```jsx
-<z-model-picker
-  models={Array}
-  value={string}
-  placeholder={string}
-  is-menu-below
-  is-open
-  is-hidden
-  onchange={(event) => event.detail}   // { value: string }
-/>
-```
-
-### `z-quoted-message`
-
-```jsx
-<z-quoted-message
-  name={string}
-  text={string}
-  value={string}
-  accent="sub"
-  can-jump
-  is-hidden
-  onjump={(event) => event.detail}   // { value?: string }
-/>
-```
-
-### `z-reactions`
-
-```jsx
-<z-reactions
-  reactions={Array}
-  can-add
-  is-hidden
-  ontoggle={(event) => event.detail}   // { emoji: string; isMine: boolean }
-  onadd={(event) => event.detail}   // —
-/>
-```
-
-### `z-read-receipt`
-
-```jsx
-<z-read-receipt
-  avatars={Array}
-  max={number}   // default: 3
-  label={string}
-  is-hidden
-/>
-```
-
-### `z-system-message`
-
-```jsx
-<z-system-message
-  label={string}
-  is-hidden
-/>
-```
-
-### `z-thinking`
-
-```jsx
-<z-thinking
-  label={string}   // default: Thinking
-  duration={string}
-  content={string}
-  is-active
-  is-expanded
-  is-hidden
-/>
-```
-
-### `z-tool-call`
-
-```jsx
-<z-tool-call
-  name={string}
-  status="running | success | error"   // default: running
-  args={string}
-  result={string}
-  result-language={string}
-  is-expanded
-  is-hidden
-/>
-```
-
-### `z-typing-indicator`
-
-```jsx
-<z-typing-indicator
-  name={string}
-  avatar-src={string}
-  is-hidden
-/>
-```
-
-### `z-unread-divider`
-
-```jsx
-<z-unread-divider
-  label={string}
-  accent="sub"
-  is-hidden
 />
 ```
 
@@ -2233,7 +1261,6 @@ short, that is the first place to check.
   value={string}
   progress={number}
   is-hidden
-  onremove={(event) => event.detail}   // { value?: string }
 />
 ```
 
@@ -2246,8 +1273,6 @@ short, that is the first place to check.
   max-files={number}
   is-multiple
   is-hidden
-  onfiles={(event) => event.detail}   // { files: File[] }
-  onreject={(event) => event.detail}   // { files: File[]; reason?: string }
 />
 ```
 
@@ -2258,12 +1283,8 @@ short, that is the first place to check.
   accept={string}
   max-size={number}
   max-files={number}
-  files={Array}
   is-multiple
-  is-disabled
-  ondrop={(event) => event.detail}   // { files: File[] }
-  onclear={(event) => event.detail}   // —
-  onreject={(event) => event.detail}   // { files: File[]; reason: string }
+  disabled
 />
 ```
 
@@ -2282,16 +1303,6 @@ short, that is the first place to check.
 ---
 
 ## Effects
-
-### `z-aura`
-
-```jsx
-<z-aura
-  kind="dual | rainbow | holo | gold | silver | glow | default"   // default: default
-  size="xs | sm | md | lg | xl"   // default: md
-  is-hidden
-/>
-```
 
 ### `z-marquee`
 
@@ -2318,18 +1329,6 @@ short, that is the first place to check.
 />
 ```
 
-### `z-progressive-blur`
-
-```jsx
-<z-progressive-blur
-  direction="top | bottom | left | right"   // default: bottom
-  strength="md | sm | lg | xl"   // default: md
-  reach={number}   // default: 40
-  radius={string}
-  is-hidden
-/>
-```
-
 ---
 
 ## Music
@@ -2347,13 +1346,11 @@ short, that is the first place to check.
   value-prefix={string}
   value-suffix={string}
   accent="dom | sub | success | warning | error"
-  size="sm | md | lg"
+  size={string}
   does-show-value
   is-glowing
-  is-disabled
+  disabled
   is-hidden
-  oninput={(event) => event.detail}   // { value: number }
-  onchange={(event) => event.detail}   // { value: number }
 />
 ```
 
@@ -2361,7 +1358,6 @@ short, that is the first place to check.
 
 ```jsx
 <z-pattern-roll
-  signals={Array}
   tones={number}   // default: 8
   tone-margin={number}   // default: 3
   chord-size={number}
@@ -2376,10 +1372,8 @@ short, that is the first place to check.
   playhead={number}
   has-toolbar
   has-keyboard
-  is-disabled
+  disabled
   is-hidden
-  onchange={(event) => event.detail}   // { signals: any[] }
-  onselect={(event) => event.detail}   // { ids: number[] }
 />
 ```
 
@@ -2387,7 +1381,6 @@ short, that is the first place to check.
 
 ```jsx
 <z-piano-roll
-  notes={Array}
   bars={number}
   beats-per-bar={number}   // default: 4
   snap={number}
@@ -2403,10 +1396,8 @@ short, that is the first place to check.
   playhead={number}
   has-toolbar
   has-keyboard
-  is-disabled
+  disabled
   is-hidden
-  onchange={(event) => event.detail}   // { notes: any[] }
-  onselect={(event) => event.detail}   // { ids: number[] }
 />
 ```
 
@@ -2419,36 +1410,9 @@ short, that is the first place to check.
 ```jsx
 <z-carousel
   autoplay={number}
-  accent="sub"
+  accent={string}
   does-loop
   is-hidden
-  onchange={(event) => event.detail}   // { index: number }
-/>
-```
-
-### `z-chart`
-
-```jsx
-<z-chart
-  data={Array}
-  type="bar | area | line"   // default: bar
-  accent="sub | success | chart-1"   // default: chart-1
-  height={string}   // default: 240px
-  does-show-grid
-  has-labels
-  is-hidden
-/>
-```
-
-### `z-citation`
-
-```jsx
-<z-citation
-  index={number}
-  label={string}
-  href={string}
-  is-hidden
-  onactivate={(event) => event.detail}   // { index: number; href?: string }
 />
 ```
 
@@ -2460,15 +1424,14 @@ short, that is the first place to check.
   language={string}
   filename={string}
   label={string}
-  highlight-lines={string}
   added-lines={string}
   removed-lines={string}
   focus-lines={string}
-  accent="dom | sub"   // default: dom
-  has-line-numbers
+  accent={string}   // default: dom
+  line-numbers
+  highlight
   has-copy
   is-hidden
-  oncopy={(event) => event.detail}   // —
 />
 ```
 
@@ -2478,35 +1441,9 @@ short, that is the first place to check.
 <z-empty-state
   heading={string}
   description={string}
-  accent="dom | sub"   // default: dom
+  accent="dom | sub | neutral | success | warning | error"   // default: neutral
   is-bordered
   is-hidden
-/>
-```
-
-### `z-markdown`
-
-```jsx
-<z-markdown
-  content={string}
-  is-streaming
-  does-allow-html
-  does-highlight
-  has-heading-anchors
-  is-hidden
-  onlinkclick={(event) => event.detail}   // { href: string }
-/>
-```
-
-### `z-post-meta`
-
-```jsx
-<z-post-meta
-  name={string}
-  avatar-src={string}
-  date={string}
-  tags={Array}
-  ontagclick={(event) => event.detail}   // { tag: string }
 />
 ```
 
@@ -2515,7 +1452,6 @@ short, that is the first place to check.
 ```jsx
 <z-relative-time
   datetime={string}
-  format={string}
   threshold={number}
   refresh={number}   // default: 60000
   is-hidden
@@ -2533,39 +1469,12 @@ short, that is the first place to check.
 />
 ```
 
-### `z-sources`
-
-```jsx
-<z-sources
-  sources={Array}
-  label={string}   // default: Sources
-  columns={number}
-  is-hidden
-  onselect={(event) => event.detail}   // { index: number; url?: string }
-/>
-```
-
-### `z-streaming-text`
-
-```jsx
-<z-streaming-text
-  content={string}
-  speed={number}   // default: 40
-  is-streaming
-  is-typewriter
-  is-markdown
-  is-hidden
-/>
-```
-
 ### `z-suggestion-chips`
 
 ```jsx
 <z-suggestion-chips
-  suggestions={Array}
   does-show-arrow
   is-hidden
-  onselect={(event) => event.detail}   // { value: string; label: string }
 />
 ```
 
@@ -2578,11 +1487,10 @@ short, that is the first place to check.
   cwd={string}
   prompt={string}
   copy-lines={string}   // default: commands
-  accent="dom | sub"   // default: dom
+  accent={string}   // default: dom
   width={string}
   height={string}
   max-height={string}
-  lines={Array}
   type-speed={number}   // default: 55
   line-delay={number}   // default: 380
   fade-duration={number}   // default: 240
@@ -2593,8 +1501,6 @@ short, that is the first place to check.
   has-replay
   does-auto-scroll
   is-hidden
-  oncopy={(event) => event.detail}   // string
-  ondone={(event) => event.detail}   // —
 />
 ```
 
@@ -2623,11 +1529,6 @@ short, that is the first place to check.
   count={number}
   is-active
   is-open
-  onopen={(event) => event.detail}   // { threadId: string }
-  onselect={(event) => event.detail}   // { threadId: string }
-  onreply={(event) => event.detail}   // { threadId: string; text: string }
-  onresolve={(event) => event.detail}   // { threadId: string }
-  onclose={(event) => event.detail}   // —
 />
 ```
 
@@ -2638,12 +1539,6 @@ short, that is the first place to check.
   thread-id={string}
   is-active
   is-resolved
-  onactivate={(event) => event.detail}   // { threadId: string }
-  onopen={(event) => event.detail}   // { threadId: string }
-  onselect={(event) => event.detail}   // { threadId: string }
-  onreply={(event) => event.detail}   // { threadId: string; text: string }
-  onresolve={(event) => event.detail}   // { threadId: string }
-  onclose={(event) => event.detail}   // —
 />
 ```
 
@@ -2651,13 +1546,8 @@ short, that is the first place to check.
 
 ```jsx
 <z-comment-thread-panel
-  threads={Array}
   active-thread-id={string}
   is-hidden
-  onselect={(event) => event.detail}   // { threadId: string }
-  onreply={(event) => event.detail}   // { threadId: string; text: string }
-  onresolve={(event) => event.detail}   // { threadId: string }
-  onclose={(event) => event.detail}   // —
 />
 ```
 
@@ -2666,17 +1556,9 @@ short, that is the first place to check.
 ```jsx
 <z-draggable
   type={string}
-  data={Object}
   group={string}
   handle={string}
-  is-disabled
-  ondragstart={(event) => event.detail}   // { type: string; data: unknown }
-  ondragmove={(event) => event.detail}   // { x: number; y: number; over: Element | null }
-  ondragend={(event) => event.detail}   // { dropped: boolean; target: Element | null }
-  ondragenter={(event) => event.detail}   // unknown
-  ondragover={(event) => event.detail}   // unknown
-  ondragleave={(event) => event.detail}   // unknown
-  ondropitem={(event) => event.detail}   // { data: unknown; type: string; source: Element; x: number; y: number }
+  disabled
 />
 ```
 
@@ -2685,7 +1567,7 @@ short, that is the first place to check.
 ```jsx
 <z-drop-indicator
   anchor-rect={string}
-  orientation="vertical"
+  orientation={string}
   is-open
 />
 ```
@@ -2696,11 +1578,7 @@ short, that is the first place to check.
 <z-drop-target
   accept={string}
   group={string}
-  is-disabled
-  ondragenter={(event) => event.detail}   // unknown
-  ondragover={(event) => event.detail}   // unknown
-  ondragleave={(event) => event.detail}   // unknown
-  ondropitem={(event) => event.detail}   // { data: unknown; type: string; source: Element; x: number; y: number }
+  disabled
 />
 ```
 
@@ -2708,20 +1586,7 @@ short, that is the first place to check.
 
 ```jsx
 <z-panel-handle
-  is-disabled
-  ondragging={(event) => event.detail}   // { isDragging: boolean }
-/>
-```
-
-### `z-step`
-
-```jsx
-<z-step
-  heading={string}
-  index={number}
-  state="done | current | pending"
-  is-last
-  is-hidden
+  disabled
 />
 ```
 
@@ -2729,12 +1594,9 @@ short, that is the first place to check.
 
 ```jsx
 <z-table-axis-handle
-  axis="column"
+  axis={string}
   anchor-rect={string}
   is-open
-  is-selected
-  onselect={(event) => event.detail}   // —
-  oninsertafter={(event) => event.detail}   // —
-  onremove={(event) => event.detail}   // —
+  selected
 />
 ```

@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, useRef, useState } from 'atomico'
 
 /*
@@ -108,4 +109,4 @@ export const ZAvatarStack = c(
 	}
 )
 
-customElements.define('z-avatar-stack', ZAvatarStack)
+defineElement('z-avatar-stack', ZAvatarStack)

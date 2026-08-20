@@ -50,7 +50,7 @@ const buildPlaygroundCodeBlock = (language: string, code: string): ZCodeBlockEle
 const buildSetupSection = (pairedScript: string): HTMLElement => {
 	const wrap = createElement('div', 'playgroundSetup')
 
-	const label = buildLabel('Setup', 'xs', 'muted')
+	const label = buildLabel('Setup')
 	label.classList.add('playgroundSetupLabel')
 
 	wrap.append(label, buildPlaygroundCodeBlock('js', pairedScript))

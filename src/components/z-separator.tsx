@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, useRef, useState, useEffect } from 'atomico'
 
 /*
@@ -15,12 +16,6 @@ const styles = css`
 		gap: var(--space-base);
 	}
 
-	:host([direction='vertical']) {
-		flex-direction: column;
-		width: auto;
-		height: 100%;
-	}
-
 	:host([is-hidden]) {
 		display: none;
 	}
@@ -29,11 +24,6 @@ const styles = css`
 		flex: 1 1 auto;
 		background: var(--border);
 		height: 1px;
-	}
-
-	:host([direction='vertical']) .rule {
-		width: 1px;
-		height: auto;
 	}
 
 	.label {
@@ -76,7 +66,7 @@ export const ZSeparator = c(
 			<host
 				shadowDom
 				role='separator'
-				aria-orientation={props.direction === 'vertical' ? 'vertical' : 'horizontal'}
+				aria-orientation='horizontal'
 				data-labeled={isLabeled ? '' : null}
 			>
 				<span class='rule' aria-hidden='true'></span>
@@ -87,7 +77,6 @@ export const ZSeparator = c(
 	},
 	{
 		props: {
-			direction: { type: String, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			label: String
 		},
@@ -95,4 +84,4 @@ export const ZSeparator = c(
 	}
 )
 
-customElements.define('z-separator', ZSeparator)
+defineElement('z-separator', ZSeparator)

@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event } from 'atomico'
 
 /*
@@ -86,7 +87,7 @@ export const ZQuotedMessage = c(
 			text: { type: String, reflect: true },
 			value: { type: String, reflect: true },
 			accent: { type: String, reflect: true },
-			canJump: { type: Boolean, reflect: true, value: true },
+			canJump: { type: Boolean, reflect: true, value: () => true },
 			isHidden: { type: Boolean, reflect: true },
 			jump: event<{ value?: string }>({ bubbles: true, composed: true })
 		},
@@ -94,4 +95,4 @@ export const ZQuotedMessage = c(
 	}
 )
 
-customElements.define('z-quoted-message', ZQuotedMessage)
+defineElement('z-quoted-message', ZQuotedMessage)

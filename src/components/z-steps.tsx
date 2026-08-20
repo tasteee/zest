@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, useEffect, useRef } from 'atomico'
 
 /*
@@ -177,7 +178,7 @@ export const ZStep = c(
 	}
 )
 
-customElements.define('z-step', ZStep)
+defineElement('z-step', ZStep)
 
 const readStepState = (stepIndex: number, current?: number): string => {
 	const hasCurrent = typeof current === 'number' && current > 0
@@ -230,4 +231,4 @@ export const ZSteps = c(
 	}
 )
 
-customElements.define('z-steps', ZSteps)
+defineElement('z-steps', ZSteps)

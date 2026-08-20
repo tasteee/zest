@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event, useEffect, useRef, useState } from 'atomico'
 
 /*
@@ -134,6 +135,7 @@ const readCurrentValues = (stageElement: Element | null, controls: ControlT[]): 
 export const ZPlayground = c(
 	(props) => {
 		const slotRef = useRef<HTMLSlotElement>()
+		const panelRef = useRef<HTMLElement>()
 		const [markup, setMarkup] = useState<string>('')
 		const [values, setValues] = useState<Record<string, string>>({})
 
@@ -155,18 +157,34 @@ export const ZPlayground = c(
 
 		useEffect(() => sync(), [props.controls])
 
-		const handleControlChange = (changeEvent: CustomEvent<{ name: string; value: string | null }>) => {
+		const handleControlChange = (changeEvent: CustomEvent<{ name: string; value: unknown }>) => {
 			const stageElement = readStage()
 			if (!stageElement) return
 
-			const nextValue = changeEvent.detail.value
-			const shouldRemove = nextValue === null || nextValue.trim() === ''
+			const rawValue = changeEvent.detail.value
+			const nextValue = rawValue == null ? null : String(rawValue)
+			const changedControl = controls.find((control) => control.name === changeEvent.detail.name)
+			const isBooleanControl = changedControl?.kind === 'boolean'
+			// A present boolean attribute intentionally has an empty-string value.
+			// Other control kinds use an empty string to mean "unset".
+			const shouldRemove = nextValue === null || (!isBooleanControl && nextValue.trim() === '')
 
 			if (shouldRemove) stageElement.removeAttribute(changeEvent.detail.name)
 			if (!shouldRemove) stageElement.setAttribute(changeEvent.detail.name, nextValue as string)
 
 			sync()
 		}
+
+		useEffect(() => {
+			const panel = panelRef.current
+			if (!panel) return
+
+			const listener = (changeEvent: Event) => {
+				handleControlChange(changeEvent as CustomEvent<{ name: string; value: unknown }>)
+			}
+			panel.addEventListener('change', listener)
+			return () => panel.removeEventListener('change', listener)
+		}, [props.controls])
 
 		// Reset means "back to the element as authored", which is every
 		// controlled attribute removed — the component's own defaults are the
@@ -190,7 +208,7 @@ export const ZPlayground = c(
 
 				{hasControls && (
 					<div class='controls'>
-						<z-control-panel controls={controls} values={values} onchange={handleControlChange} />
+						<z-control-panel ref={panelRef} controls={controls} values={values} />
 						<button type='button' class='reset' onclick={handleReset}>
 							Reset
 						</button>
@@ -215,4 +233,4 @@ export const ZPlayground = c(
 	}
 )
 
-customElements.define('z-playground', ZPlayground)
+defineElement('z-playground', ZPlayground)

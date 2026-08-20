@@ -26,8 +26,8 @@ with clear surrounding context.
 | `size` | `sm` `md` `lg` | `md` | field padding and font size (same scale as [z-input](z-input.md)) |
 | `is-focused` | boolean | — | focus state (reflected, two-way; driven internally on focus/blur) |
 | `is-auto-resize` | boolean | — | grow to fit content (disables manual resize) |
-| `is-invalid` | boolean | — | error styling |
-| `is-disabled` | boolean | — | disable |
+| `invalid` | boolean | — | error styling |
+| `disabled` | boolean | — | disable |
 | `is-readonly` | boolean | — | read-only |
 | `is-required` | boolean | — | required |
 | `is-hidden` | boolean | — | hide |

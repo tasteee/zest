@@ -14,8 +14,8 @@ A UI label. Part of the text family (see [z-text](z-text.md)); medium weight
 | --- | --- | --- | --- |
 | `size` | `lg` `md` `sm` `xs` | `md` | type-scale step |
 | `tag` | any HTML tag name | `span` | element to render |
-| `color` | `neutral` `dom` `sub` `muted` `strong` | `neutral` | text color |
-| `weight` | `300` `400` `600` `700` `900` | `500` | font weight override |
+| `color` | `neutral` `dom` `sub` `muted` `strong` `success` `warning` `error` | `neutral` | text color |
+| `weight` | number (1–1000) | `500` | font weight override, including variable-font values |
 | `is-italic` / `is-underlined` / `is-strikethrough` | boolean | — | decorations |
 | `is-hidden` | boolean | — | hide the element |
 

@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css } from 'atomico'
 
 /*
@@ -214,4 +215,4 @@ export const ZFileTree = c(
 	}
 )
 
-customElements.define('z-file-tree', ZFileTree)
+defineElement('z-file-tree', ZFileTree)

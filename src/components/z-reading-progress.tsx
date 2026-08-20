@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, useEffect, useState } from 'atomico'
 
 /*
@@ -87,4 +88,4 @@ export const ZReadingProgress = c(
 	}
 )
 
-customElements.define('z-reading-progress', ZReadingProgress)
+defineElement('z-reading-progress', ZReadingProgress)

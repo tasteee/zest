@@ -42,7 +42,7 @@ export const zToggleGroupItemDoc: ComponentDocT = {
 	anatomy: [
 		{ name: 'default slot', description: 'The label, the icon, or both.' },
 		{ name: 'value', description: 'The identifier reported in the parent group\'s change event.' },
-		{ name: 'inherited variables', description: 'Tone, size, and kind read from the parent group unless overridden locally.' }
+		{ name: 'inherited variables', description: 'Accent, size, and kind read from the parent group unless overridden locally.' }
 	],
 
 	examples: [
@@ -81,7 +81,7 @@ export const zToggleGroupItemDoc: ComponentDocT = {
 				<z-toggle-group accent="dom" kind="outline">
 				  <z-toggle-group-item value="draft" is-pressed>Draft</z-toggle-group-item>
 				  <z-toggle-group-item value="review">In review</z-toggle-group-item>
-				  <z-toggle-group-item value="published" is-disabled>Published</z-toggle-group-item>
+				  <z-toggle-group-item value="published" disabled>Published</z-toggle-group-item>
 				</z-toggle-group>
 			`
 		}),
@@ -138,7 +138,7 @@ export const zToggleGroupItemDoc: ComponentDocT = {
 	attributes: [
 		{ name: 'value', type: 'string', defaultValue: '—', description: 'Identifies this item in the parent group\'s change event.' },
 		{ name: 'is-pressed', type: 'boolean', defaultValue: '—', description: 'Pressed state. Reflects, and is managed by the parent group.' },
-		{ name: 'is-disabled', type: 'boolean', defaultValue: '—', description: 'Blocks pointer and keyboard interaction for this segment.' },
+		{ name: 'disabled', type: 'boolean', defaultValue: '—', description: 'Blocks pointer and keyboard interaction for this segment.' },
 		{ name: 'is-icon', type: 'boolean', defaultValue: '—', description: 'Squares the segment for a single icon with no label.' },
 		{ name: 'accent', type: 'dom | sub | neutral | success | warning | error', defaultValue: '—', description: 'Shared accent for every item.' },
 		{ name: 'size', type: 'xs | sm | md | lg | xl', defaultValue: 'md', description: 'Shared density for every item.' },

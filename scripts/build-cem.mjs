@@ -2,7 +2,7 @@
 // the Zest library.
 //
 // Atomico defines components with a factory — `c(render, { props })` followed by
-// `customElements.define('tag', Component)` — which the official CEM analyzer
+// `defineElement('tag', Component)` — which the official CEM analyzer
 // doesn't understand. So we parse the source ourselves with the TypeScript AST
 // and extract, for each defined element: its tag name, its class/constructor
 // name, and the reflected props (which become both fields and attributes).
@@ -14,12 +14,13 @@
 //   props: directionLockedBoxProps                                     // derived
 // ...and a props object may `...spread` another props object. A derived one is
 // built by a call — `omitProps(boxProps, ['direction'])` — which is resolved
-// too; without that, z-row and z-column shipped with no attributes at all.
+// too; this remains necessary for derived prop objects used by z-box helpers.
 
 import { readFileSync, writeFileSync, readdirSync } from 'node:fs'
 import { join, dirname, relative } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import ts from 'typescript'
+import { getPublicElementEntries } from './public-element-entries.mjs'
 
 const here = dirname(fileURLToPath(import.meta.url))
 const root = join(here, '..')
@@ -36,6 +37,11 @@ const walk = (dir) => {
 	}
 }
 walk(srcDir)
+
+// The same inventory drives the root bundle, package subpaths, declarations,
+// and this manifest. Source files may remain in the repository while an
+// experimental element is held back from a release.
+const publicElements = getPublicElementEntries()
 
 const programs = sourceFiles.map((file) => ({
 	file,
@@ -87,6 +93,41 @@ const ATOMICO_TYPE_TO_CEM = {
 	Array: 'array'
 }
 
+const buildPropDescriptor = (type, options = {}) => ({
+	type,
+	isAttribute: ['string', 'boolean', 'number'].includes(type),
+	isEvent: false,
+	eventDetail: '',
+	...options
+})
+
+const resolvePropDescriptor = (node) => {
+	const value = unwrap(node)
+	if (!value) return buildPropDescriptor('string')
+
+	if (ts.isIdentifier(value)) {
+		const type = ATOMICO_TYPE_TO_CEM[value.text] ?? (value.text === 'Function' ? 'function' : 'string')
+		return buildPropDescriptor(type)
+	}
+
+	if (ts.isCallExpression(value) && ts.isIdentifier(value.expression)) {
+		if (value.expression.text === 'event') {
+			const eventDetail = value.typeArguments?.[0]?.getText() ?? 'void'
+			return buildPropDescriptor('function', { isAttribute: false, isEvent: true, eventDetail })
+		}
+		if (value.expression.text === 'callback') return buildPropDescriptor('function', { isAttribute: false })
+	}
+
+	if (ts.isObjectLiteralExpression(value)) {
+		const typeProp = value.properties.find(
+			(prop) => ts.isPropertyAssignment(prop) && ts.isIdentifier(prop.name) && prop.name.text === 'type'
+		)
+		if (typeProp && ts.isPropertyAssignment(typeProp)) return resolvePropDescriptor(typeProp.initializer)
+	}
+
+	return buildPropDescriptor('string')
+}
+
 const camelToKebab = (name) => name.replace(/([a-z0-9])([A-Z])/g, '$1-$2').replace(/([A-Z]+)([A-Z][a-z])/g, '$1-$2').toLowerCase()
 
 // Resolve a value that should be a props object (object literal or identifier)
@@ -97,8 +138,7 @@ const resolveProps = (node, seen = new Set()) => {
 	if (!target) return out
 
 	// `omitProps(boxProps, ['direction'])` — a props object derived by dropping
-	// keys from another. Without this, z-row and z-column resolve to nothing
-	// and ship with an empty attribute list.
+	// keys from another. This keeps derived prop objects visible to the manifest.
 	if (ts.isCallExpression(target) && ts.isIdentifier(target.expression) && target.expression.text === 'omitProps') {
 		const sourceArgument = target.arguments[0]
 		const omittedArgument = target.arguments[1]
@@ -140,35 +180,20 @@ const resolveProps = (node, seen = new Set()) => {
 		const key = prop.name && (ts.isIdentifier(prop.name) || ts.isStringLiteral(prop.name)) ? prop.name.text : null
 		if (!key) continue
 
-		// Shorthand: `label: String`
-		const value = unwrap(prop.initializer)
-		let cemType = 'string'
-		if (ts.isIdentifier(value)) {
-			cemType = ATOMICO_TYPE_TO_CEM[value.text] ?? 'string'
-		} else if (ts.isObjectLiteralExpression(value)) {
-			// Long form: `{ type: Boolean, reflect: true }`
-			const typeProp = value.properties.find(
-				(p) => ts.isPropertyAssignment(p) && ts.isIdentifier(p.name) && p.name.text === 'type'
-			)
-			if (typeProp && ts.isIdentifier(typeProp.initializer)) {
-				cemType = ATOMICO_TYPE_TO_CEM[typeProp.initializer.text] ?? 'string'
-			}
-		}
-		out[key] = cemType
+		out[key] = resolvePropDescriptor(prop.initializer)
 	}
 	return out
 }
 
 // --- find component definitions ------------------------------------------------
 
-// For each file, map the variable name passed to c(...) to its props object, so
-// that when we hit `customElements.define('tag', ZButton)` we can look up props.
+// Map every constructor passed through Atomico's c(...) factory to its props.
+// Some source modules contain multiple constructors whose registrations live
+// in separate element entry files, so this lookup intentionally spans files.
 const declarations = []
-const exportsList = []
+const propsByClassName = new Map()
 
 for (const { file, sf } of programs) {
-	const propsByVar = new Map()
-
 	const collectFactories = (node) => {
 		if (ts.isVariableStatement(node)) {
 			for (const decl of node.declarationList.declarations) {
@@ -184,61 +209,50 @@ for (const { file, sf } of programs) {
 						)
 						if (propsProp) props = resolveProps(propsProp.initializer)
 					}
-					propsByVar.set(decl.name.text, props)
+					propsByClassName.set(decl.name.text, props)
 				}
 			}
 		}
 		ts.forEachChild(node, collectFactories)
 	}
 	collectFactories(sf)
+}
 
-	const collectDefines = (node) => {
-		if (
-			ts.isCallExpression(node) &&
-			ts.isPropertyAccessExpression(node.expression) &&
-			ts.isIdentifier(node.expression.expression) &&
-			node.expression.expression.text === 'customElements' &&
-			node.expression.name.text === 'define'
-		) {
-			const [tagArg, ctorArg] = node.arguments
-			if (tagArg && ts.isStringLiteral(tagArg) && ctorArg && ts.isIdentifier(ctorArg)) {
-				const tagName = tagArg.text
-				const className = ctorArg.text
-				const props = propsByVar.get(className) ?? {}
-				const modulePath = 'dist/zest.js'
+for (const { tag: tagName, className, sourceFile } of publicElements) {
+	const props = propsByClassName.get(className) ?? {}
+	const modulePath = 'dist/zest.js'
+	const members = Object.entries(props).filter(([, descriptor]) => !descriptor.isEvent).map(([name, descriptor]) => ({
+		kind: 'field',
+		name,
+		type: { text: descriptor.type }
+	}))
+	const attributes = Object.entries(props).filter(([, descriptor]) => descriptor.isAttribute).map(([name, descriptor]) => ({
+		name: camelToKebab(name),
+		fieldName: name,
+		type: { text: descriptor.type }
+	}))
+	const events = Object.entries(props).filter(([, descriptor]) => descriptor.isEvent).map(([name, descriptor]) => ({
+		name,
+		type: { text: descriptor.eventDetail === 'void' ? 'CustomEvent' : `CustomEvent<${descriptor.eventDetail}>` }
+	}))
 
-				const members = Object.entries(props).map(([name, type]) => ({
-					kind: 'field',
-					name,
-					type: { text: type }
-				}))
-				const attributes = Object.entries(props).map(([name, type]) => ({
-					name: camelToKebab(name),
-					fieldName: name,
-					type: { text: type }
-				}))
-
-				declarations.push({
-					sourceFile: relative(root, file).replace(/\\/g, '/'),
-					declaration: {
-						kind: 'class',
-						customElement: true,
-						tagName,
-						name: className,
-						members,
-						attributes
-					},
-					export: {
-						kind: 'custom-element-definition',
-						name: tagName,
-						declaration: { name: className, module: modulePath }
-					}
-				})
-			}
+	declarations.push({
+		sourceFile: relative(root, sourceFile).replace(/\\/g, '/'),
+		declaration: {
+			kind: 'class',
+			customElement: true,
+			tagName,
+			name: className,
+			members,
+			attributes,
+			events
+		},
+		export: {
+			kind: 'custom-element-definition',
+			name: tagName,
+			declaration: { name: className, module: modulePath }
 		}
-		ts.forEachChild(node, collectDefines)
-	}
-	collectDefines(sf)
+	})
 }
 
 // Stable order by tag name.
@@ -258,5 +272,9 @@ const manifest = {
 	]
 }
 
-writeFileSync(join(root, 'custom-elements.json'), JSON.stringify(manifest, null, 2) + '\n')
+const manifestPath = join(root, 'custom-elements.json')
+const manifestSource = JSON.stringify(manifest, null, 2) + '\n'
+if (readFileSync(manifestPath, 'utf8') !== manifestSource) {
+	writeFileSync(manifestPath, manifestSource)
+}
 console.log(`custom-elements.json: ${declarations.length} elements`)

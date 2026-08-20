@@ -1,15 +1,14 @@
 # z-spacer
 
-Empty spacing inside a flex layout. Give it a fixed `size` (applied to both axes,
-so it works in a row or a column), or set `can-grow` to soak up the remaining space —
-handy for pushing trailing items to the end of a toolbar.
+An empty, non-semantic spacing element. Give it a fixed `size` on both axes, or
+set `can-grow` when the parent layout should let it absorb remaining space.
 
 ```html
-<z-row>
+<wired-row>
   <span>Brand</span>
   <z-spacer can-grow></z-spacer>
   <z-button>Sign in</z-button>
-</z-row>
+</wired-row>
 
 <z-spacer size="lg"></z-spacer>
 ```
@@ -19,7 +18,7 @@ handy for pushing trailing items to the end of a toolbar.
 | Attribute | Values | Description |
 | --- | --- | --- |
 | `size` | size token / length | fixed size on both axes |
-| `can-grow` | boolean | flex-grow to fill remaining space |
+| `can-grow` | boolean | absorb remaining space in a compatible parent layout |
 
 See [z-box](../foundation/z-box.md) for the size token scale.
 

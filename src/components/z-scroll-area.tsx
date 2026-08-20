@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css } from 'atomico'
 import { themedScrollbarStyles } from '../shared/scrollbar-styles'
 
@@ -95,4 +96,4 @@ export const ZScrollArea = c(
 	}
 )
 
-customElements.define('z-scroll-area', ZScrollArea)
+defineElement('z-scroll-area', ZScrollArea)

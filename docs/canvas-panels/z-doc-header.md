@@ -13,7 +13,7 @@ colour subtly wrong.
   tagline="A single binary choice."
   status="stable"
   version-added="0.4.0"
-  updated="2026-07-30"
+  last-updated="2026-07-30"
   source-href="https://github.com/tasteee/zest/blob/main/src/components/z-checkbox.tsx"
 ></z-doc-header>
 ```
@@ -40,7 +40,7 @@ documenting their own system.
 | `status` | `stable` `beta` `experimental` `new` `deprecated` | — | maturity badge |
 | `source-href` | url | — | adds a "View source" link to the meta row |
 | `version-added` | string | — | adds "Added in vX" to the meta row |
-| `updated` | date string | — | adds a relative "Updated …" to the meta row |
+| `last-updated` | date string | — | adds a relative "Updated …" to the meta row |
 | `is-hidden` | boolean | — | hide |
 
 ## Slots
@@ -52,6 +52,6 @@ documenting their own system.
 ## Notes
 
 The meta row only renders when at least one of `source-href`, `version-added`,
-or `updated` is set, so a page without provenance carries no empty strip.
+or `last-updated` is set, so a page without provenance carries no empty strip.
 
 Composes `z-eyebrow`, `z-badge`, and `z-relative-time`.

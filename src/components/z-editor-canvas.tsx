@@ -31,7 +31,7 @@ const styles = css`
 		cursor: grab;
 		--grid-color: color-mix(in oklch, var(--border) 60%, transparent);
 	}
-	:host([is-disabled]) {
+	:host([disabled]) {
 		cursor: default;
 	}
 	:host(.is-panning) {
@@ -111,7 +111,7 @@ export const ZEditorCanvas = c(
 
 		// --- wheel: zoom-to-cursor, or pan (trackpad / wheel="pan") ---
 		const onWheel = (e: WheelEvent) => {
-			if (props.isDisabled) return
+			if (props.disabled) return
 			e.preventDefault()
 			const zoomGesture = e.ctrlKey || (props.wheel ?? 'zoom') === 'zoom'
 			if (zoomGesture) {
@@ -144,7 +144,7 @@ export const ZEditorCanvas = c(
 			(host.current as HTMLElement).classList.toggle('is-panning', on)
 
 		const onPointerDown = (e: PointerEvent) => {
-			if (props.isDisabled) return
+			if (props.disabled) return
 			;(e.currentTarget as HTMLElement).setPointerCapture(e.pointerId)
 			s.pointers.set(e.pointerId, { x: e.clientX, y: e.clientY })
 
@@ -312,10 +312,9 @@ export const ZEditorCanvas = c(
 			zoomSpeed: { type: Number, reflect: true },
 			grid: { type: String, reflect: true },
 			gridSize: { type: Number, reflect: true },
-			snap: { type: Number, reflect: true },
 			panButton: { type: String, reflect: true },
 			wheel: { type: String, reflect: true },
-			isDisabled: { type: Boolean, reflect: true },
+			disabled: { type: Boolean, reflect: true },
 			viewportchange: event<{ x: number; y: number; zoom: number }>({
 				bubbles: true,
 				composed: true
@@ -327,7 +326,6 @@ export const ZEditorCanvas = c(
 	}
 )
 
-customElements.define('z-editor-canvas', ZEditorCanvas)
 
 /*
  * z-canvas-item — declarative positioning sugar. Lives inside the canvas's
@@ -367,5 +365,3 @@ export const ZCanvasItem = c(
 		styles: itemStyles
 	}
 )
-
-customElements.define('z-canvas-item', ZCanvasItem)

@@ -42,7 +42,7 @@ export const zComboboxDoc: ComponentDocT = {
 
 	playground: {
 		buildElement: buildPlaygroundCombobox,
-		controlNames: ['placeholder', 'size', 'accent', 'is-invalid', 'is-disabled', 'is-inline'],
+		controlNames: ['placeholder', 'size', 'accent', 'invalid', 'disabled', 'inline'],
 		slotLabel: 'options set as a property'
 	},
 
@@ -164,7 +164,7 @@ export const zComboboxDoc: ComponentDocT = {
 
 		defineInteractiveExample({
 			id: 'accents',
-			title: 'Tones',
+			title: 'Accents',
 			description: 'Which accent the field border lifts to on focus, and which tint marks the selected row.',
 			layout: ExampleLayout.stack,
 			markup: `
@@ -220,8 +220,8 @@ export const zComboboxDoc: ComponentDocT = {
 				'Invalid, disabled, and the empty-match state. Search for "zzz" in the last one to see what a fruitless query looks like.',
 			layout: ExampleLayout.stack,
 			markup: `
-				<z-combobox id="invalidCombobox" label="Invalid" is-invalid placeholder="Pick a framework"></z-combobox>
-				<z-combobox id="disabledCombobox" label="Disabled" is-disabled placeholder="Unavailable"></z-combobox>
+				<z-combobox id="invalidCombobox" label="Invalid" invalid placeholder="Pick a framework"></z-combobox>
+				<z-combobox id="disabledCombobox" label="Disabled" disabled placeholder="Unavailable"></z-combobox>
 				<z-combobox id="matchCombobox" label="Try searching zzz" placeholder="Search frameworks…"></z-combobox>
 			`,
 			script: `
@@ -266,9 +266,9 @@ export const zComboboxDoc: ComponentDocT = {
 		{ name: 'placeholder', type: 'string', defaultValue: 'Search…', description: 'Shown while the field is empty and nothing is selected.' },
 		{ name: 'size', type: 'sm | md | lg', defaultValue: 'md', description: 'Control density, on the same scale as z-input.' },
 		{ name: 'accent', type: 'neutral | dom | sub', defaultValue: 'neutral', description: 'Accent family for the focus border and the selected row.' },
-		{ name: 'is-invalid', type: 'boolean', defaultValue: '—', description: 'Paints the error border and sets aria-invalid on the field.' },
-		{ name: 'is-disabled', type: 'boolean', defaultValue: '—', description: 'Blocks typing and opening, and removes the field from the tab order.' },
-		{ name: 'is-inline', type: 'boolean', defaultValue: '—', description: 'Shrinks the field to its natural width instead of filling its container.' },
+		{ name: 'invalid', type: 'boolean', defaultValue: '—', description: 'Paints the error border and sets aria-invalid on the field.' },
+		{ name: 'disabled', type: 'boolean', defaultValue: '—', description: 'Blocks typing and opening, and removes the field from the tab order.' },
+		{ name: 'inline', type: 'boolean', defaultValue: '—', description: 'Shrinks the field to its natural width instead of filling its container.' },
 		{ name: 'is-hidden', type: 'boolean', defaultValue: '—', description: 'Removes the combobox from layout.' }
 	],
 
@@ -293,7 +293,7 @@ export const zComboboxDoc: ComponentDocT = {
 		'The field carries role="combobox" with aria-expanded and aria-autocomplete="list"; the panel is a listbox of role="option" rows with aria-selected.',
 		'Keyboard: typing filters, ↑/↓ move the active row, Enter commits it, Escape closes and clears the query without changing the value.',
 		'Set `label` (or nest it in a z-field). A combobox with only a placeholder is unlabelled to a screen reader.',
-		'is-invalid sets aria-invalid on the field as well as painting the border, so the failure is announced rather than only drawn.',
+		'invalid sets aria-invalid on the field as well as painting the border, so the failure is announced rather than only drawn.',
 		'Filtering is case-insensitive substring matching on the visible label — the same text a user reads is the text they can search, with no hidden keyword index to guess at.',
 		'The "No matches" row is real content rather than an empty panel, so the outcome of a search is always announced.'
 	],

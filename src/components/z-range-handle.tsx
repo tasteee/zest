@@ -1,8 +1,9 @@
+import { defineElement } from '../shared/define-element'
 import { c, css } from 'atomico'
 
 /*
  * z-range-handle — a declarative handle for z-range. It renders nothing on its
- * own; z-range reads its value plus optional min/max/step/tone and paints the
+ * own; z-range reads its value plus optional min/max/step/accent and paints the
  * unified track. The first handle is the left/lower one, the second is the
  * right/upper one. When min/max are omitted they inherit the parent z-range's
  * domain; when set they are clamped to that domain. z-range mirrors the live
@@ -31,4 +32,4 @@ export const ZRangeHandle = c(
 	}
 )
 
-customElements.define('z-range-handle', ZRangeHandle)
+defineElement('z-range-handle', ZRangeHandle)

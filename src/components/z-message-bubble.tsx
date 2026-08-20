@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css } from 'atomico'
 
 /*
@@ -116,4 +117,4 @@ export const ZMessageBubble = c(
 	}
 )
 
-customElements.define('z-message-bubble', ZMessageBubble)
+defineElement('z-message-bubble', ZMessageBubble)

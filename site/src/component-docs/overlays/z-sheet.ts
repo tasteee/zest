@@ -58,7 +58,7 @@ export const zSheetDoc: ComponentDocT = {
 			markup: `
 				<z-sheet heading="Filters" description="Narrow the list without leaving the page.">
 				  <z-button slot="trigger" kind="outline">Filters</z-button>
-				  <z-column gap="md">
+				  <wired-column gap="md">
 				    <z-field label="Search"><z-input placeholder="Anything"></z-input></z-field>
 				    <z-field label="Status">
 				      <z-radio-group label="Status" value="any">
@@ -67,7 +67,7 @@ export const zSheetDoc: ComponentDocT = {
 				        <z-radio value="closed" accent="dom">Closed</z-radio>
 				      </z-radio-group>
 				    </z-field>
-				  </z-column>
+				  </wired-column>
 				  <z-button slot="footer" kind="outline" accent="neutral">Reset</z-button>
 				  <z-button slot="footer" kind="solid" accent="dom">Apply</z-button>
 				</z-sheet>
@@ -125,13 +125,13 @@ export const zSheetDoc: ComponentDocT = {
 			markup: `
 				<z-sheet heading="Activity" description="Everything that happened to this record.">
 				  <z-button slot="trigger" kind="outline">View activity</z-button>
-				  <z-column gap="sm">
+				  <wired-column gap="sm">
 				    <z-text size="sm">Ada renamed the project — 2 hours ago</z-text>
 				    <z-separator></z-separator>
 				    <z-text size="sm">Alan added three files — yesterday</z-text>
 				    <z-separator></z-separator>
 				    <z-text size="sm">Grace created the project — last week</z-text>
-				  </z-column>
+				  </wired-column>
 				</z-sheet>
 			`
 		}),
@@ -144,10 +144,10 @@ export const zSheetDoc: ComponentDocT = {
 			markup: `
 				<z-sheet is-static heading="New invoice" description="Clicking outside will not dismiss this.">
 				  <z-button slot="trigger" kind="outline">New invoice</z-button>
-				  <z-column gap="md">
+				  <wired-column gap="md">
 				    <z-field label="Client"><z-input placeholder="Acme Inc."></z-input></z-field>
 				    <z-field label="Amount"><z-number-input min="0" step="0.01" value="0"></z-number-input></z-field>
-				  </z-column>
+				  </wired-column>
 				  <z-button slot="footer" kind="solid" accent="dom">Create invoice</z-button>
 				</z-sheet>
 			`
@@ -199,7 +199,7 @@ export const zSheetDoc: ComponentDocT = {
 		{ name: 'description', type: 'string', defaultValue: '—', description: 'A muted line under the heading.' },
 		{ name: 'has-close', type: 'boolean', defaultValue: '—', description: 'Removes the ✕. Only safe when there is another way out.' },
 		{ name: 'is-static', type: 'boolean', defaultValue: '—', description: 'Ignores backdrop clicks. Escape still closes.' },
-		{ name: 'is-disabled', type: 'boolean', defaultValue: '—', description: 'Stops the trigger from opening the sheet.' }
+		{ name: 'disabled', type: 'boolean', defaultValue: '—', description: 'Stops the trigger from opening the sheet.' }
 	],
 
 	properties: [],

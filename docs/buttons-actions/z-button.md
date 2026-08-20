@@ -1,7 +1,7 @@
 # z-button
 
-A button. Combine `accent` (color), `kind` (treatment), and `size`. All accents
-share the same boldness so a solid button reads consistently across hues.
+A button. Combine `accent` (tone), `kind` (treatment), and `size`. The default is
+neutral; explicit `dom` and `sub` values use purple and pink.
 
 ```html
 <z-button accent="dom">Save</z-button>
@@ -20,12 +20,12 @@ share the same boldness so a solid button reads consistently across hues.
 
 | Attribute | Values | Default | Description |
 | --- | --- | --- | --- |
-| `accent` | `neutral` `dom` `sub` `success` `warning` `error` | `neutral` | color family |
+| `accent` | `neutral` `dom` `sub` `success` `warning` `error` | `neutral` | tone family; dom and sub apply their colour explicitly |
 | `kind` | `solid` `outline` `ghost` `soft` `plain` | `solid` | visual treatment |
 | `size` | `sm` `md` `lg` | `md` | size |
 | `label` | string | — | text (alternative to slotting children) |
 | `type` | `button` `submit` `reset` | `button` | native button type |
-| `is-disabled` | boolean | — | disable |
+| `disabled` | boolean | — | disable |
 | `is-loading` | boolean | — | show a spinner and block interaction |
 | `is-full-width` | boolean | — | stretch to fill its container |
 | `is-hidden` | boolean | — | hide |

@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event, useHost, useRef, useState, useEffect } from 'atomico'
 import { floatingSurfaceStyles, floatingToolbarStyles, floatingIconButtonStyles } from '../shared/editor-overlay-styles'
 import { computePosition, autoUpdate, rectAnchor, AnyProp, type Placement } from '../shared/overlay'
@@ -225,4 +226,4 @@ export const ZBubbleMenu = c(
 	}
 )
 
-customElements.define('z-bubble-menu', ZBubbleMenu)
+defineElement('z-bubble-menu', ZBubbleMenu)

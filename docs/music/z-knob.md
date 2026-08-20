@@ -51,7 +51,7 @@ no way to see where travel begins — the eye reads the gap as the zero mark.
 | `accent` | `dom` `sub` `success` `warning` `error` | — | Colour of the arc and pointer. |
 | `is-glowing` | boolean | — | Lights the arc's bloom. Only visible in themes with an emissive layer. |
 | _size_ | `size` `size` | — | Dial diameter. |
-| `is-disabled` | boolean | — | Non-interactive. |
+| `disabled` | boolean | — | Non-interactive. |
 | `is-hidden` | boolean | — | Hide. |
 
 ## Events

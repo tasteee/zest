@@ -32,7 +32,7 @@ export const zSeparatorDoc: ComponentDocT = {
 		'Label it when the boundary means something — "OR" between two sign-in methods, a date between runs of messages. Leave it bare when the boundary is purely visual.',
 		'Keep labels to a word or two. The label sits inside the rule, and a long one turns the divider into a heading.',
 		'Use `z-line` when you know there will never be a label; it is the smaller primitive and says so.',
-		'A vertical separator needs a parent with a resolvable height, the same as a vertical line.'
+		'Use `z-line vertical` for a vertical rule. Labelled separators are always horizontal.'
 	],
 
 	anatomy: [
@@ -47,11 +47,11 @@ export const zSeparatorDoc: ComponentDocT = {
 			description: 'With nothing to centre, it collapses to a single continuous rule.',
 			layout: ExampleLayout.fill,
 			markup: `
-				<z-column gap="4" style="width: 24rem">
+				<wired-column gap="md" style="width: 24rem">
 				  <z-text size="sm">Above</z-text>
 				  <z-separator></z-separator>
 				  <z-text size="sm">Below</z-text>
-				</z-column>
+				</wired-column>
 			`
 		}),
 
@@ -61,11 +61,11 @@ export const zSeparatorDoc: ComponentDocT = {
 			description: 'The rule splits and the label sits in the gap.',
 			layout: ExampleLayout.fill,
 			markup: `
-				<z-column gap="4" style="width: 24rem">
+				<wired-column gap="md" style="width: 24rem">
 				  <z-separator label="OR"></z-separator>
 				  <z-separator label="Yesterday"></z-separator>
 				  <z-separator label="Archived items"></z-separator>
-				</z-column>
+				</wired-column>
 			`
 		}),
 
@@ -75,30 +75,14 @@ export const zSeparatorDoc: ComponentDocT = {
 			description: 'Slotting instead of using `label` lets the divider carry a badge, an icon, or anything else.',
 			layout: ExampleLayout.fill,
 			markup: `
-				<z-column gap="5" style="width: 24rem">
+				<wired-column gap="5" style="width: 24rem">
 				  <z-separator>
 				    <z-badge accent="dom" kind="soft" size="sm" label="New"></z-badge>
 				  </z-separator>
 				  <z-separator>
-				    <z-label size="xs" color="muted">3 unread</z-label>
+				    <z-label>3 unread</z-label>
 				  </z-separator>
-				</z-column>
-			`
-		}),
-
-		defineMarkupExample({
-			id: 'vertical',
-			title: 'Vertical',
-			description: 'Fills the height instead of the width, for dividing clusters within a row.',
-			layout: ExampleLayout.center,
-			markup: `
-				<z-row gap="4" aligns-y="center" style="height: 3rem">
-				  <z-text size="sm">Overview</z-text>
-				  <z-separator direction></z-separator>
-				  <z-text size="sm">Activity</z-text>
-				  <z-separator direction></z-separator>
-				  <z-text size="sm">Settings</z-text>
-				</z-row>
+				</wired-column>
 			`
 		}),
 
@@ -108,11 +92,11 @@ export const zSeparatorDoc: ComponentDocT = {
 			description: 'The canonical labelled divider — two ways to do the same thing, with the choice made explicit.',
 			layout: ExampleLayout.fill,
 			markup: `
-				<z-column gap="4" style="width: 20rem">
+				<wired-column gap="md" style="width: 20rem">
 				  <z-button accent="dom" is-full-width>Continue with email</z-button>
 				  <z-separator label="or"></z-separator>
 				  <z-button kind="outline" is-full-width>Continue with SSO</z-button>
-				</z-column>
+				</wired-column>
 			`
 		}),
 
@@ -122,19 +106,18 @@ export const zSeparatorDoc: ComponentDocT = {
 			description: 'A labelled separator marking where one day of messages ends and the next begins.',
 			layout: ExampleLayout.fill,
 			markup: `
-				<z-column gap="3" style="width: 26rem">
+				<wired-column gap="sm" style="width: 26rem">
 				  <z-text size="sm" color="muted">…earlier messages</z-text>
 				  <z-separator label="Today"></z-separator>
 				  <z-text size="sm">Morning — did the deploy finish?</z-text>
 				  <z-text size="sm">Yes, about an hour ago.</z-text>
-				</z-column>
+				</wired-column>
 			`
 		})
 	],
 
 	attributes: [
 		{ name: 'label', type: 'string', defaultValue: '—', description: 'Text centred in the rule. Used when nothing is slotted.' },
-		{ name: 'direction', type: 'boolean', defaultValue: '—', description: 'Renders a full-height vertical divider.' },
 		{ name: 'is-hidden', type: 'boolean', defaultValue: '—', description: 'Removes the separator from layout.' }
 	],
 
@@ -144,7 +127,7 @@ export const zSeparatorDoc: ComponentDocT = {
 	cssVariables: [],
 
 	accessibilityNotes: [
-		'Exposes role="separator" with aria-direction matching the direction.',
+		'Exposes role="separator" with horizontal orientation.',
 		'A labelled separator is announced with its label, so the text should describe the boundary — "Today" or "or", not decoration.',
 		'It is not focusable and not interactive; it marks a boundary and nothing more.',
 		'A separator carrying a date or an unread count is meaningful content sitting in a decorative element. If losing it would confuse a screen reader user, put it in a real heading instead.'
@@ -152,7 +135,6 @@ export const zSeparatorDoc: ComponentDocT = {
 
 	related: [
 		{ tag: 'z-line', route: '/c/foundation/z-line', description: 'The same divider without a label.' },
-		{ tag: 'z-date-divider', route: '/c/chat/z-date-divider', description: 'The purpose-built version for message lists.' },
-		{ tag: 'z-toolbar', route: '/c/buttons-actions/z-toolbar', description: 'Where vertical separators divide clusters.' }
+		{ tag: 'z-toolbar', route: '/c/buttons-actions/z-toolbar', description: 'A common home for vertical z-line dividers.' }
 	]
 }

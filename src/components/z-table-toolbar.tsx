@@ -94,7 +94,6 @@ export const ZTableToolbar = c(
 	}
 )
 
-customElements.define('z-table-toolbar', ZTableToolbar)
 
 const axisHandleStyles = css`
 	:host {
@@ -170,9 +169,9 @@ export const ZTableAxisHandle = c(
 			<host shadowDom>
 				<button
 					type="button"
-					class={['icon-button', 'grip'].concat(props.isSelected ? ['is-active'] : []).join(' ')}
+					class={['icon-button', 'grip'].concat(props.selected ? ['is-active'] : []).join(' ')}
 					aria-label={`Select ${axisLabel}`}
-					aria-pressed={props.isSelected ? 'true' : 'false'}
+					aria-pressed={props.selected ? 'true' : 'false'}
 					onclick={() => props.select()}
 				>
 					⋮⋮
@@ -191,7 +190,7 @@ export const ZTableAxisHandle = c(
 			axis: { type: String, reflect: true },
 			anchorRect: AnyProp,
 			isOpen: { type: Boolean, reflect: true },
-			isSelected: { type: Boolean, reflect: true },
+			selected: { type: Boolean, reflect: true },
 			select: event<void>({ bubbles: true, composed: true }),
 			insertafter: event<void>({ bubbles: true, composed: true }),
 			remove: event<void>({ bubbles: true, composed: true })
@@ -199,5 +198,3 @@ export const ZTableAxisHandle = c(
 		styles: [floatingIconButtonStyles, axisHandleStyles]
 	}
 )
-
-customElements.define('z-table-axis-handle', ZTableAxisHandle)

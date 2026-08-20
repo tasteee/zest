@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event, useEffect, useState } from 'atomico'
 import { COPY_FEEDBACK_DURATION, copyText } from '../shared/clipboard'
 
@@ -162,7 +163,7 @@ export const ZCopyButton = c(
 				<button
 					type="button"
 					class={isCopied ? 'copy is-copied' : 'copy'}
-					disabled={props.isDisabled}
+					disabled={props.disabled}
 					title={restingTitle}
 					aria-label={restingTitle}
 					aria-live="polite"
@@ -183,7 +184,7 @@ export const ZCopyButton = c(
 			copiedLabel: { type: String, reflect: true },
 			kind: { type: String, reflect: true },
 			size: { type: String, reflect: true },
-			isDisabled: { type: Boolean, reflect: true },
+			disabled: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			copy: event<{ value: string }>({ bubbles: true, composed: true }),
 			error: event<{ error: Error | null }>({ bubbles: true, composed: true })
@@ -192,4 +193,4 @@ export const ZCopyButton = c(
 	}
 )
 
-customElements.define('z-copy-button', ZCopyButton)
+defineElement('z-copy-button', ZCopyButton)

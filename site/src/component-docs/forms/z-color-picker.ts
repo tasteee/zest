@@ -24,7 +24,7 @@ export const zColorPickerDoc: ComponentDocT = {
 
 	playground: {
 		buildElement: buildPlaygroundColorPicker,
-		controlNames: ['value', 'label', 'accent', 'is-disabled'],
+		controlNames: ['value', 'label', 'accent', 'disabled'],
 		slotLabel: 'swatch trigger'
 	},
 
@@ -77,7 +77,7 @@ export const zColorPickerDoc: ComponentDocT = {
 
 		defineMarkupExample({
 			id: 'accents',
-			title: 'Tones',
+			title: 'Accents',
 			description: 'The accent colours the trigger’s focus treatment — not the swatch, which always shows the actual value.',
 			layout: ExampleLayout.start,
 			markup: `
@@ -93,7 +93,7 @@ export const zColorPickerDoc: ComponentDocT = {
 			description: 'The swatch and hex stay legible, because a locked colour still needs to be readable.',
 			layout: ExampleLayout.start,
 			markup: `
-				<z-color-picker value="#FF3B30" is-disabled></z-color-picker>
+				<z-color-picker value="#FF3B30" disabled></z-color-picker>
 			`
 		}),
 
@@ -134,13 +134,13 @@ export const zColorPickerDoc: ComponentDocT = {
 			description: 'A labelled row, which is how a colour usually appears in a settings panel — named on the left, picked on the right.',
 			layout: ExampleLayout.fill,
 			markup: `
-				<z-row aligns-x="between" aligns-y="center" gap="md" style="width: 100%">
-				  <z-column gap="2xs">
+				<wired-row x="between" y="center" gap="md" style="width: 100%">
+				  <wired-column gap="2xs">
 				    <z-text size="sm">Label colour</z-text>
 				    <z-text size="xs" color="muted">Used on the board and in every export.</z-text>
-				  </z-column>
+				  </wired-column>
 				  <z-color-picker id="labelPicker" label="Label colour" value="#30D158"></z-color-picker>
-				</z-row>
+				</wired-row>
 			`,
 			script: `
 				const labelPicker = document.querySelector('#labelPicker')
@@ -162,7 +162,7 @@ export const zColorPickerDoc: ComponentDocT = {
 			description: 'Names what is being coloured. Announced ahead of the hex, so the value is not lost. Set for you inside a z-field.'
 		},
 		{ name: 'accent', type: 'neutral | dom | sub', defaultValue: 'neutral', description: 'Accent for the trigger’s focus treatment.' },
-		{ name: 'is-disabled', type: 'boolean', defaultValue: '—', description: 'Blocks opening the panel.' },
+		{ name: 'disabled', type: 'boolean', defaultValue: '—', description: 'Blocks opening the panel.' },
 		{ name: 'is-hidden', type: 'boolean', defaultValue: '—', description: 'Removes the picker from layout.' }
 	],
 

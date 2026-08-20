@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event, useMemo } from 'atomico'
 import { Marked } from 'marked'
 
@@ -224,6 +225,7 @@ const buildHtml = (
 			const lang = (code.getAttribute('class') || '').match(/language-([\w-]+)/)?.[1]
 			const block = document.createElement('z-code-block')
 			if (lang) block.setAttribute('language', lang)
+			block.setAttribute('highlight', '')
 			block.setAttribute('code', code.textContent ?? '')
 			code.closest('pre')?.replaceWith(block)
 		})
@@ -269,7 +271,7 @@ export const ZMarkdown = c(
 			content: { type: String },
 			isStreaming: { type: Boolean, reflect: true },
 			doesAllowHtml: { type: Boolean, reflect: true },
-			doesHighlight: { type: Boolean, reflect: true, value: true },
+			doesHighlight: { type: Boolean, reflect: true, value: () => true },
 			hasHeadingAnchors: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			linkclick: event<{ href: string }>({ bubbles: true, composed: true })
@@ -278,4 +280,4 @@ export const ZMarkdown = c(
 	}
 )
 
-customElements.define('z-markdown', ZMarkdown)
+defineElement('z-markdown', ZMarkdown)

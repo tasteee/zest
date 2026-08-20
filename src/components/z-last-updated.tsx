@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css } from 'atomico'
 
 /*
@@ -65,4 +66,4 @@ export const ZLastUpdated = c(
 	}
 )
 
-customElements.define('z-last-updated', ZLastUpdated)
+defineElement('z-last-updated', ZLastUpdated)

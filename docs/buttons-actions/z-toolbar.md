@@ -10,7 +10,7 @@ divided by [z-separator](../foundation/z-separator.md).
 <z-toolbar>
   <z-button kind="ghost">Bold</z-button>
   <z-button kind="ghost">Italic</z-button>
-  <z-separator direction="vertical"></z-separator>
+  <z-line vertical></z-line>
   <z-button kind="ghost">Link</z-button>
 </z-toolbar>
 ```
@@ -22,7 +22,7 @@ divided by [z-separator](../foundation/z-separator.md).
 | `direction` | `horizontal` `vertical` | `horizontal` | layout axis and arrow-key direction |
 | `size` | `sm` `md` `lg` | `md` | control gap between items |
 | `overflow` | `scroll` `wrap` `menu` | — | how to handle a too-narrow bar (`menu` — collapsing extras into a trailing "⋯" — is not implemented yet) |
-| `is-disabled` | boolean | — | disable the whole toolbar |
+| `disabled` | boolean | — | disable the whole toolbar |
 
 ## Slots
 

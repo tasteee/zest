@@ -23,7 +23,7 @@ export const zNumberInputDoc: ComponentDocT = {
 
 	playground: {
 		buildElement: buildPlaygroundNumberInput,
-		controlNames: ['min', 'max', 'step', 'size', 'accent', 'has-stepper-buttons', 'is-invalid', 'is-disabled', 'is-readonly'],
+		controlNames: ['min', 'max', 'step', 'size', 'accent', 'has-stepper-buttons', 'invalid', 'disabled', 'is-readonly'],
 		slotLabel: 'Seats'
 	},
 
@@ -33,7 +33,7 @@ export const zNumberInputDoc: ComponentDocT = {
 		'`step` sets the precision as well as the increment: `step="0.01"` means the field rounds to two decimals on blur, so a pasted 1.005 settles honestly.',
 		'Add `has-stepper-buttons` when the values are small and adjustments are frequent — seats, quantity, retries. Leave them off for wide ranges where clicking to 500 is absurd.',
 		'For a bounded value with no meaningful precision — a volume, an opacity — a `z-slider` communicates the range better than a field ever will.',
-		'The field goes invalid on its own when the typed value is out of range. `is-invalid` is for errors your server knows about, and it is honoured on top of the internal check.'
+		'The field goes invalid on its own when the typed value is out of range. `invalid` is for errors your server knows about, and it is honoured on top of the internal check.'
 	],
 
 	anatomy: [
@@ -96,8 +96,8 @@ export const zNumberInputDoc: ComponentDocT = {
 			description: 'Invalid, disabled, and readonly. Readonly keeps the value selectable and blocks the steppers.',
 			layout: ExampleLayout.stack,
 			markup: `
-				<z-number-input label="Invalid" value="99" min="0" max="10" is-invalid></z-number-input>
-				<z-number-input label="Disabled" value="4" is-disabled has-stepper-buttons></z-number-input>
+				<z-number-input label="Invalid" value="99" min="0" max="10" invalid></z-number-input>
+				<z-number-input label="Disabled" value="4" disabled has-stepper-buttons></z-number-input>
 				<z-number-input label="Readonly" value="4" is-readonly has-stepper-buttons></z-number-input>
 			`
 		}),
@@ -149,16 +149,16 @@ export const zNumberInputDoc: ComponentDocT = {
 			description: 'The everyday use: a small bounded number next to what it counts, with the running total derived from it.',
 			layout: ExampleLayout.fill,
 			markup: `
-				<z-row aligns-x="between" aligns-y="center" gap="md" style="width: 100%">
-				  <z-column gap="2xs">
+				<wired-row x="between" y="center" gap="md" style="width: 100%">
+				  <wired-column gap="2xs">
 				    <z-text size="sm">Team seats</z-text>
 				    <z-text size="xs" color="muted">$12 per seat, per month</z-text>
-				  </z-column>
-				  <z-row aligns-y="center" gap="md">
-				    <z-number-input id="seatsInput" size="sm" label="Seats" value="4" min="1" max="50" has-stepper-buttons is-inline></z-number-input>
+				  </wired-column>
+				  <wired-row y="center" gap="md">
+				    <z-number-input id="seatsInput" size="sm" label="Seats" value="4" min="1" max="50" has-stepper-buttons inline></z-number-input>
 				    <z-text size="sm" id="seatsTotal">$48 / mo</z-text>
-				  </z-row>
-				</z-row>
+				  </wired-row>
+				</wired-row>
 			`,
 			script: `
 				const seatsInput = document.querySelector('#seatsInput')
@@ -191,12 +191,12 @@ export const zNumberInputDoc: ComponentDocT = {
 		{ name: 'size', type: 'sm | md | lg', defaultValue: 'md', description: 'Control density.' },
 		{ name: 'accent', type: 'neutral | dom | sub', defaultValue: 'neutral', description: 'Which accent the border lifts to on focus.' },
 		{ name: 'has-stepper-buttons', type: 'boolean', defaultValue: '—', description: 'Shows the ghost decrease and increase buttons.' },
-		{ name: 'is-invalid', type: 'boolean', defaultValue: '—', description: 'Forces the error state. Out-of-range typing also triggers it on its own.' },
-		{ name: 'is-disabled', type: 'boolean', defaultValue: '—', description: 'Blocks typing and stepping.' },
+		{ name: 'invalid', type: 'boolean', defaultValue: '—', description: 'Forces the error state. Out-of-range typing also triggers it on its own.' },
+		{ name: 'disabled', type: 'boolean', defaultValue: '—', description: 'Blocks typing and stepping.' },
 		{ name: 'is-readonly', type: 'boolean', defaultValue: '—', description: 'Selectable but not editable; the steppers are inert.' },
 		{ name: 'is-required', type: 'boolean', defaultValue: '—', description: 'Marks the inner input required for native form validation.' },
 		{ name: 'is-full-width', type: 'boolean', defaultValue: '—', description: 'Stretches the field to fill its container.' },
-		{ name: 'is-inline', type: 'boolean', defaultValue: '—', description: 'Shrinks the field to its natural width.' },
+		{ name: 'inline', type: 'boolean', defaultValue: '—', description: 'Shrinks the field to its natural width.' },
 		{ name: 'is-hidden', type: 'boolean', defaultValue: '—', description: 'Removes the field from layout.' }
 	],
 

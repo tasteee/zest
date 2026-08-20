@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event, useEffect, useState } from 'atomico'
 
 /*
@@ -175,4 +176,4 @@ export const ZAnnouncementBar = c(
 	}
 )
 
-customElements.define('z-announcement-bar', ZAnnouncementBar)
+defineElement('z-announcement-bar', ZAnnouncementBar)

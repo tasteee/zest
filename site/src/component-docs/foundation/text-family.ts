@@ -1,7 +1,6 @@
-// z-text, z-heading, z-subheading, z-label, and z-display are one component
-// family sharing a single prop surface — they differ only in default weight,
-// transform, and rendered tag. Their attribute tables are generated from here
-// so the five pages cannot drift apart from each other.
+// Flexible text variants share this attribute builder. z-label deliberately
+// has a smaller, fixed API matching z-field and documents its attributes
+// separately.
 
 import type { ApiRowT } from '../types'
 
@@ -19,15 +18,15 @@ export const buildTextFamilyAttributes = (options: TextFamilyOptionsT): ApiRowT[
 		{ name: 'size', type: options.sizes, defaultValue: options.defaultSize, description: options.sizeDescription },
 		{
 			name: 'color',
-			type: 'neutral | dom | sub | muted | white',
+			type: 'neutral | dom | sub | muted | strong | success | warning | error',
 			defaultValue: options.defaultColor,
 			description: 'Text colour, drawn from the theme rather than a raw value.'
 		},
 		{
 			name: 'weight',
-			type: '300 | 400 | 600 | 700 | 900',
+			type: 'number (1–1000)',
 			defaultValue: options.defaultWeight,
-			description: 'Overrides the variant default weight.'
+			description: 'Overrides the variant default weight, including continuous variable-font values.'
 		},
 		{
 			name: 'tag',

@@ -21,7 +21,7 @@ export const zInputDoc: ComponentDocT = {
 
 	playground: {
 		buildElement: buildPlaygroundInput,
-		controlNames: ['placeholder', 'size', 'accent', 'is-invalid', 'is-disabled', 'is-readonly', 'is-inline'],
+		controlNames: ['placeholder', 'size', 'accent', 'invalid', 'disabled', 'is-readonly', 'inline'],
 		slotLabel: 'Email'
 	},
 
@@ -30,7 +30,7 @@ export const zInputDoc: ComponentDocT = {
 		'Listen to `input` when you need live feedback — a character counter, a search-as-you-type. Listen to `change` when the work is expensive, because it only fires once the user has moved on.',
 		'`placeholder` is an example, not a label. "you@example.com" is a placeholder; "Email" is a label. Never use one as the other — the placeholder disappears the moment typing starts.',
 		'Set `type="email"`, `type="tel"`, or `inputmode` so mobile keyboards come up correct. This costs one attribute and saves the user a keyboard switch on every field.',
-		'Use `is-invalid` only after the user has had a chance to be wrong. Validating on the first keystroke marks an empty field red before it was ever filled in.'
+		'Use `invalid` only after the user has had a chance to be wrong. Validating on the first keystroke marks an empty field red before it was ever filled in.'
 	],
 
 	anatomy: [
@@ -65,7 +65,7 @@ export const zInputDoc: ComponentDocT = {
 
 		defineMarkupExample({
 			id: 'accents',
-			title: 'Tones',
+			title: 'Accents',
 			description: 'The accent only shows on focus — it picks which accent the border lifts to. Click into each one to see it.',
 			layout: ExampleLayout.stack,
 			markup: `
@@ -99,8 +99,8 @@ export const zInputDoc: ComponentDocT = {
 				'Invalid, disabled, and readonly. Disabled means "not available to you"; readonly means "available, but not yours to change" — a readonly field is still focusable and copyable.',
 			layout: ExampleLayout.stack,
 			markup: `
-				<z-input is-invalid value="not-an-email" label="Invalid"></z-input>
-				<z-input is-disabled placeholder="Disabled" label="Disabled"></z-input>
+				<z-input invalid value="not-an-email" label="Invalid"></z-input>
+				<z-input disabled placeholder="Disabled" label="Disabled"></z-input>
 				<z-input is-readonly value="acct_8f2Ka91" label="Readonly"></z-input>
 			`
 		}),
@@ -174,7 +174,7 @@ export const zInputDoc: ComponentDocT = {
 
 				emailInput.addEventListener('change', (changeEvent) => {
 				  const isValidEmail = /.+@.+\\..+/.test(changeEvent.detail.value)
-				  emailInput.isInvalid = !isValidEmail
+				  emailInput.invalid = !isValidEmail
 				  emailField.error = isValidEmail ? '' : 'That does not look like an email address.'
 				})
 			`,
@@ -192,13 +192,13 @@ export const zInputDoc: ComponentDocT = {
 					const detail = (changeEvent as CustomEvent<{ value: string }>).detail
 					const isValidEmail = checkEmail(detail.value)
 
-					if (isValidEmail) emailInput.removeAttribute('is-invalid')
-					if (!isValidEmail) emailInput.setAttribute('is-invalid', '')
+					if (isValidEmail) emailInput.removeAttribute('invalid')
+					if (!isValidEmail) emailInput.setAttribute('invalid', '')
 					emailField.error = isValidEmail ? '' : 'That does not look like an email address.'
 				})
 
 				emailInput.addEventListener('input', () => {
-					emailInput.removeAttribute('is-invalid')
+					emailInput.removeAttribute('invalid')
 					emailField.error = ''
 				})
 			}
@@ -207,10 +207,10 @@ export const zInputDoc: ComponentDocT = {
 		defineMarkupExample({
 			id: 'inline',
 			title: 'Inline',
-			description: '`is-inline` stops the field filling its container, for search boxes and toolbar fields that should only be as wide as they need to be.',
+			description: '`inline` stops the field filling its container, for search boxes and toolbar fields that should only be as wide as they need to be.',
 			layout: ExampleLayout.start,
 			markup: `
-				<z-input is-inline size="sm" placeholder="Filter rows" label="Filter">
+				<z-input inline size="sm" placeholder="Filter rows" label="Filter">
 				  <span slot="prefix">${Icons.finder}</span>
 				</z-input>
 			`
@@ -228,11 +228,11 @@ export const zInputDoc: ComponentDocT = {
 		{ name: 'size', type: 'sm | md | lg', defaultValue: 'md', description: 'Control density.' },
 		{ name: 'accent', type: 'neutral | dom | sub', defaultValue: 'neutral', description: 'Which accent the border lifts to on focus.' },
 		{ name: 'is-focused', type: 'boolean', defaultValue: '—', description: 'Reflects the focus state, so a parent can style around the field.' },
-		{ name: 'is-invalid', type: 'boolean', defaultValue: '—', description: 'Paints the error border and sets aria-invalid.' },
-		{ name: 'is-disabled', type: 'boolean', defaultValue: '—', description: 'Blocks interaction and removes the field from the tab order.' },
+		{ name: 'invalid', type: 'boolean', defaultValue: '—', description: 'Paints the error border and sets aria-invalid.' },
+		{ name: 'disabled', type: 'boolean', defaultValue: '—', description: 'Blocks interaction and removes the field from the tab order.' },
 		{ name: 'is-readonly', type: 'boolean', defaultValue: '—', description: 'Focusable and selectable, but not editable.' },
 		{ name: 'is-required', type: 'boolean', defaultValue: '—', description: 'Marks the inner input required for native form validation.' },
-		{ name: 'is-inline', type: 'boolean', defaultValue: '—', description: 'Shrinks the field to its natural width instead of filling its container.' },
+		{ name: 'inline', type: 'boolean', defaultValue: '—', description: 'Shrinks the field to its natural width instead of filling its container.' },
 		{ name: 'is-hidden', type: 'boolean', defaultValue: '—', description: 'Removes the field from layout.' }
 	],
 
@@ -253,7 +253,7 @@ export const zInputDoc: ComponentDocT = {
 	accessibilityNotes: [
 		'The inner element is a native input, so autofill, password managers, spellcheck, and the platform caret all work untouched.',
 		'A shadow boundary breaks the usual for/id label association — this is why `label` exists. Set it directly, or let z-field forward its own label for you.',
-		'is-invalid sets aria-invalid on the input. The message itself still needs to be associated with the field, which z-field handles.',
+		'invalid sets aria-invalid on the input. The message itself still needs to be associated with the field, which z-field handles.',
 		'A placeholder is not an accessible name. A field with only a placeholder is unlabelled to a screen reader.',
 		'The focus border is a colour change, so it also carries a visible outline for users who cannot distinguish the two accents.'
 	],

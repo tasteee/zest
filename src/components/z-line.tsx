@@ -1,9 +1,9 @@
+import { defineElement } from '../shared/define-element'
 import { c, css } from 'atomico'
 
 /*
- * z-line — a one-pixel rule. It used to carry both is-vertical and
- * is-horizontal, which could be set at the same time with no defined result.
- * One `direction` says the same thing and can only mean one of them.
+ * z-line — a one-pixel rule. Horizontal is the default; the presence of the
+ * `vertical` attribute switches its axis.
  */
 const styles = css`
 	:host {
@@ -14,25 +14,25 @@ const styles = css`
 		width: 100%;
 	}
 
-	:host([direction='vertical']) {
-		height: 100%;
+	:host([vertical]) {
+		align-self: stretch;
+		height: auto;
 		width: 1px;
 	}
 `
 
 export const ZLine = c(
 	(props) => {
-		const isVertical = props.direction === 'vertical'
-		const ariaOrientation = isVertical ? 'vertical' : 'horizontal'
+		const ariaOrientation = props.vertical ? 'vertical' : 'horizontal'
 
 		return <host shadowDom role='separator' aria-orientation={ariaOrientation}></host>
 	},
 	{
 		props: {
-			direction: { type: String, reflect: true }
+			vertical: { type: Boolean, reflect: true }
 		},
 		styles
 	}
 )
 
-customElements.define('z-line', ZLine)
+defineElement('z-line', ZLine)

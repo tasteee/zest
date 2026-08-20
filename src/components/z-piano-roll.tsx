@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event, useProp, useState, useRef, useHost, useEffect, useMemo } from 'atomico'
 import { themedScrollbarStyles } from '../shared/scrollbar-styles'
 
@@ -51,7 +52,7 @@ const styles = css`
 	:host([is-hidden]) {
 		display: none;
 	}
-	:host([is-disabled]) {
+	:host([disabled]) {
 		opacity: 0.55;
 		pointer-events: none;
 	}
@@ -521,7 +522,7 @@ export const ZPianoRoll = c(
 		// The timing ruler adjusts beat width vertically; drag the keyboard gutter
 		// left/right to make every pitch row shorter/taller.
 		const startZoomDrag = (e: PointerEvent, axis: 'horizontal' | 'vertical') => {
-			if (props.isDisabled || e.button !== 0) return
+			if (props.disabled || e.button !== 0) return
 			e.preventDefault()
 			const surface = e.currentTarget as HTMLElement
 			surface.setPointerCapture(e.pointerId)
@@ -561,7 +562,7 @@ export const ZPianoRoll = c(
 
 		// --- pointer down: decide the gesture ---
 		const onPointerDown = (e: PointerEvent) => {
-			if (props.isDisabled || e.button === 2) return
+			if (props.disabled || e.button === 2) return
 			;(host.current as HTMLElement).focus?.()
 			const { beat, pitch } = pointToBeatPitch(e)
 			const hit = noteAt(beat, pitch)
@@ -699,7 +700,7 @@ export const ZPianoRoll = c(
 
 		// --- double-click: create (empty) or delete (on a note) ---
 		const onDblClick = (e: MouseEvent) => {
-			if (props.isDisabled) return
+			if (props.disabled) return
 			const r = worldRef.current!.getBoundingClientRect()
 			const beat = Math.max(0, (e.clientX - r.left) / beatWidth)
 			const pitch = pitchFromY(e.clientY - r.top)
@@ -716,7 +717,7 @@ export const ZPianoRoll = c(
 
 		// --- right-click: delete note under cursor (or whole selection) ---
 		const onContextMenu = (e: MouseEvent) => {
-			if (props.isDisabled) return
+			if (props.disabled) return
 			e.preventDefault()
 			const r = worldRef.current!.getBoundingClientRect()
 			const beat = Math.max(0, (e.clientX - r.left) / beatWidth)
@@ -750,7 +751,7 @@ export const ZPianoRoll = c(
 		}
 
 		const onKeyDown = (e: KeyboardEvent) => {
-			if (props.isDisabled) return
+			if (props.disabled) return
 			const mod = e.metaKey || e.ctrlKey
 			if (e.key === 'Delete' || e.key === 'Backspace') {
 				e.preventDefault()
@@ -1016,9 +1017,9 @@ export const ZPianoRoll = c(
 			root: { type: Number, reflect: true },
 			defaultVelocity: { type: Number, reflect: true },
 			playhead: { type: Number, reflect: true },
-			hasToolbar: { type: Boolean, reflect: true, value: true },
-			hasKeyboard: { type: Boolean, reflect: true, value: true },
-			isDisabled: { type: Boolean, reflect: true },
+			hasToolbar: { type: Boolean, reflect: true, value: () => true },
+			hasKeyboard: { type: Boolean, reflect: true, value: () => true },
+			disabled: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			change: event<{ notes: any[] }>({ bubbles: true, composed: true }),
 			select: event<{ ids: number[] }>({ bubbles: true, composed: true })
@@ -1027,4 +1028,4 @@ export const ZPianoRoll = c(
 	}
 )
 
-customElements.define('z-piano-roll', ZPianoRoll)
+defineElement('z-piano-roll', ZPianoRoll)

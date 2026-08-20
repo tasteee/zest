@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, useState, useEffect, useRef } from 'atomico'
 
 /*
@@ -95,4 +96,4 @@ export const ZStreamingText = c(
 	}
 )
 
-customElements.define('z-streaming-text', ZStreamingText)
+defineElement('z-streaming-text', ZStreamingText)

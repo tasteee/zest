@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css } from 'atomico'
 
 /*
@@ -296,4 +297,4 @@ export const ZApiTable = c(
 	}
 )
 
-customElements.define('z-api-table', ZApiTable)
+defineElement('z-api-table', ZApiTable)

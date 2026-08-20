@@ -5,7 +5,7 @@ for each radio's `select` event, clears the others, and re-emits a `change` with
 the chosen value.
 
 ```html
-<z-radio-group value="medium" label="Size">
+<z-radio-group value="medium" label="Size" accent="dom">
   <z-radio value="small">Small</z-radio>
   <z-radio value="medium">Medium</z-radio>
   <z-radio value="large">Large</z-radio>
@@ -22,7 +22,8 @@ group.addEventListener('change', (e) => e.detail.value)
 | --- | --- | --- | --- |
 | `value` | string | — | selected value (reflected, two-way) |
 | `label` | string | — | accessible group label (`aria-label`) |
-| `direction` | boolean | — | lay items out in a row |
+| `accent` | `neutral` `dom` `sub` `success` `warning` `error` | `neutral` | shared selection accent for child radios |
+| `direction` | `vertical` `horizontal` | `vertical` | option layout axis |
 | `is-hidden` | boolean | — | hide |
 
 Exposes `role="radiogroup"`.

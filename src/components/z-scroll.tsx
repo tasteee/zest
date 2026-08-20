@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css } from 'atomico'
 import { baseStyles, insetProps, insetVars } from '../shared/layout-schema'
 import { themedScrollbarStyles } from '../shared/scrollbar-styles'
@@ -121,4 +122,4 @@ export const ZScroll = c(
 	}
 )
 
-customElements.define('z-scroll', ZScroll)
+defineElement('z-scroll', ZScroll)

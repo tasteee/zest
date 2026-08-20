@@ -37,7 +37,7 @@ export const boxLayoutStyles = css`
 	/* The one display modifier that composes with flex rather than replacing
 	   it. Everything else — grid, block, inline-block — left with z-box's
 	   display switch; grid belongs to z-grid. */
-	:host([is-inline]) {
+	:host([inline]) {
 		display: inline-flex;
 	}
 

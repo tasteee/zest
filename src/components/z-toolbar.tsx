@@ -1,8 +1,9 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, useHost, useEffect } from 'atomico'
 import { themedScrollbarStyles } from '../shared/scrollbar-styles'
 
 /*
- * z-toolbar — a horizontal (or vertical) action strip with real toolbar
+ * z-toolbar — a horizontal action strip with real toolbar
  * semantics: role="toolbar" + roving tabindex, so the whole bar is a single tab
  * stop and arrow keys (Home/End) move focus across its controls. Holds slotted
  * z-button / z-toggle / z-toolbar-group, divided by z-separator.
@@ -29,10 +30,6 @@ const styles = css`
 	:host([size='lg']) {
 		gap: var(--space-md);
 	}
-	:host([direction='vertical']) {
-		flex-direction: column;
-		align-items: stretch;
-	}
 	:host([overflow='scroll']) {
 		overflow: auto;
 		scrollbar-width: none;
@@ -43,7 +40,7 @@ const styles = css`
 	:host([overflow='wrap']) {
 		flex-wrap: wrap;
 	}
-	:host([is-disabled]) {
+	:host([disabled]) {
 		opacity: 0.5;
 		pointer-events: none;
 	}
@@ -71,9 +68,8 @@ export const ZToolbar = c(
 				if (!list.length) return
 				const cur = list.indexOf(e.target as HTMLElement)
 				if (cur < 0) return
-				const horizontal = props.direction !== 'vertical'
-				const next = horizontal ? 'ArrowRight' : 'ArrowDown'
-				const prev = horizontal ? 'ArrowLeft' : 'ArrowUp'
+				const next = 'ArrowRight'
+				const prev = 'ArrowLeft'
 				let to = cur
 				if (e.key === next) to = (cur + 1) % list.length
 				else if (e.key === prev) to = (cur - 1 + list.length) % list.length
@@ -103,13 +99,13 @@ export const ZToolbar = c(
 				el.removeEventListener('focusin', onFocusIn)
 				mo.disconnect()
 			}
-		}, [props.direction, props.overflow])
+		}, [props.overflow])
 
 		return (
 			<host
 				shadowDom
 				role='toolbar'
-				aria-orientation={props.direction === 'vertical' ? 'vertical' : 'horizontal'}
+				aria-orientation='horizontal'
 			>
 				<slot />
 				<div class='overflow'>
@@ -120,13 +116,12 @@ export const ZToolbar = c(
 	},
 	{
 		props: {
-			direction: { type: String, reflect: true },
 			size: { type: String, reflect: true },
 			overflow: { type: String, reflect: true },
-			isDisabled: { type: Boolean, reflect: true }
+			disabled: { type: Boolean, reflect: true }
 		},
 		styles: [themedScrollbarStyles, styles]
 	}
 )
 
-customElements.define('z-toolbar', ZToolbar)
+defineElement('z-toolbar', ZToolbar)

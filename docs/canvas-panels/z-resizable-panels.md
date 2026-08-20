@@ -6,7 +6,7 @@ Author it declaratively: [z-panel](z-panel.md) children separated by
 `z-panel-handle` separators.
 
 ```html
-<z-resizable-panels direction="row" auto-save-id="editor">
+<z-resizable-panels direction="horizontal" auto-save-id="editor">
   <z-panel default-size="20%" min-size="160px" is-collapsible>…sidebar…</z-panel>
   <z-panel-handle></z-panel-handle>
   <z-panel min-size="30%">…main…</z-panel>
@@ -33,10 +33,10 @@ group.addEventListener('layout', (e) => e.detail.sizes)
 
 | Attribute | Values | Default | Description |
 | --- | --- | --- | --- |
-| `direction` | `row` `column` | `row` | layout axis |
+| `direction` | `horizontal` `vertical` | `horizontal` | layout axis |
 | `auto-save-id` | string | — | `localStorage` persistence key |
 | `keyboard-step` | number | `5` | % moved per arrow key on a focused handle |
-| `is-disabled` | boolean | — | lock all handles |
+| `disabled` | boolean | — | lock all handles |
 
 ## Imperative API
 
@@ -58,13 +58,13 @@ group.addEventListener('layout', (e) => e.detail.sizes)
 
 The draggable separator between two panels. Renders a hairline grip by
 default; slot custom content and it stays the drag target. Arrow keys (or
-↑/↓ in a column group) resize by the group's `keyboard-step`.
+↑/↓ in a vertical group) resize by the group's `keyboard-step`.
 
 ### Attributes
 
 | Attribute | Values | Default | Description |
 | --- | --- | --- | --- |
-| `is-disabled` | boolean | — | non-draggable |
+| `disabled` | boolean | — | non-draggable |
 
 ### Slots
 

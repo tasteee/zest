@@ -21,7 +21,7 @@ export const zRadioDoc: ComponentDocT = {
 
 	playground: {
 		buildElement: buildPlaygroundRadio,
-		controlNames: ['accent', 'is-checked', 'is-disabled'],
+		controlNames: ['accent', 'is-checked', 'disabled'],
 		slotLabel: 'Monthly'
 	},
 
@@ -55,11 +55,11 @@ export const zRadioDoc: ComponentDocT = {
 
 		defineMarkupExample({
 			id: 'accents',
-			title: 'Tones',
+			title: 'Accents',
 			description: 'Three accent families for the chosen state. Set the accent on each radio — the group does not push one down.',
 			layout: ExampleLayout.stack,
 			markup: `
-				<z-radio-group label="Tone demo" value="neutral">
+				<z-radio-group label="Accent demo" value="neutral">
 				  <z-radio accent="neutral" value="neutral" is-checked>Neutral</z-radio>
 				  <z-radio accent="dom" value="primary">Primary</z-radio>
 				  <z-radio accent="sub" value="secondary">Secondary</z-radio>
@@ -77,7 +77,7 @@ export const zRadioDoc: ComponentDocT = {
 				<z-radio-group label="Plan" value="team">
 				  <z-radio value="personal">Personal</z-radio>
 				  <z-radio value="team" is-checked>Team</z-radio>
-				  <z-radio value="enterprise" is-disabled>Enterprise — contact sales</z-radio>
+				  <z-radio value="enterprise" disabled>Enterprise — contact sales</z-radio>
 				</z-radio-group>
 			`
 		}),
@@ -91,16 +91,16 @@ export const zRadioDoc: ComponentDocT = {
 			markup: `
 				<z-radio-group label="Visibility" value="private">
 				  <z-radio value="private" accent="dom" is-checked>
-				    <z-column gap="2xs">
+				    <wired-column gap="2xs">
 				      <z-text size="sm">Private</z-text>
 				      <z-text size="xs" color="muted">Only you and people you invite.</z-text>
-				    </z-column>
+				    </wired-column>
 				  </z-radio>
 				  <z-radio value="workspace" accent="dom">
-				    <z-column gap="2xs">
+				    <wired-column gap="2xs">
 				      <z-text size="sm">Workspace</z-text>
 				      <z-text size="xs" color="muted">Anyone in your workspace can find it.</z-text>
-				    </z-column>
+				    </wired-column>
 				  </z-radio>
 				</z-radio-group>
 			`
@@ -142,7 +142,7 @@ export const zRadioDoc: ComponentDocT = {
 
 	attributes: [
 		{ name: 'is-checked', type: 'boolean', defaultValue: '—', description: 'The chosen state. Reflects, and is cleared by the parent group when a sibling wins.' },
-		{ name: 'is-disabled', type: 'boolean', defaultValue: '—', description: 'Blocks pointer and keyboard interaction.' },
+		{ name: 'disabled', type: 'boolean', defaultValue: '—', description: 'Blocks pointer and keyboard interaction.' },
 		{ name: 'accent', type: 'neutral | dom | sub', defaultValue: 'neutral', description: 'Accent family of the chosen ring and dot.' },
 		{ name: 'value', type: 'string', defaultValue: '—', description: 'The value this option stands for. Reported by the group and carried in the select event.' },
 		{ name: 'is-hidden', type: 'boolean', defaultValue: '—', description: 'Removes the option from layout.' }

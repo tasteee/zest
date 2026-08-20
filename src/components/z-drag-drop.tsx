@@ -38,7 +38,7 @@ const fire = (el: Element, name: string, detail: unknown) =>
 	el.dispatchEvent(new CustomEvent(name, { detail, bubbles: true, composed: true }))
 
 const accepts = (target: HTMLElement, type: string, group: string): boolean => {
-	if (target.hasAttribute('is-disabled')) return false
+	if (target.hasAttribute('disabled')) return false
 	if ((target.getAttribute('group') || '') !== group) return false
 	const accept = (target.getAttribute('accept') || '*').trim()
 	if (accept === '' || accept === '*') return true
@@ -84,7 +84,7 @@ const draggableStyles = css`
 		display: block;
 		touch-action: none;
 	}
-	:host([is-disabled]) {
+	:host([disabled]) {
 		touch-action: auto;
 	}
 	:host(.is-dragging) {
@@ -129,7 +129,7 @@ export const ZDraggable = c(
 		}
 
 		const onDown = (e: PointerEvent) => {
-			if (props.isDisabled) return
+			if (props.disabled) return
 			if (props.handle && !(e.target as HTMLElement).closest(props.handle as string)) return
 			;(e.currentTarget as HTMLElement).setPointerCapture(e.pointerId)
 			s.downX = e.clientX
@@ -200,7 +200,7 @@ export const ZDraggable = c(
 			data: { type: Object },
 			group: { type: String, reflect: true },
 			handle: { type: String },
-			isDisabled: { type: Boolean, reflect: true },
+			disabled: { type: Boolean, reflect: true },
 			dragstart: event<{ type: string; data: unknown }>({ bubbles: true, composed: true }),
 			dragmove: event<{ x: number; y: number; over: Element | null }>({
 				bubbles: true,
@@ -215,7 +215,6 @@ export const ZDraggable = c(
 	}
 )
 
-customElements.define('z-draggable', ZDraggable)
 
 // ── z-drop-target ────────────────────────────────────────────────────────────
 const dropTargetStyles = css`
@@ -255,7 +254,7 @@ export const ZDropTarget = c(
 		props: {
 			accept: { type: String, reflect: true },
 			group: { type: String, reflect: true },
-			isDisabled: { type: Boolean, reflect: true },
+			disabled: { type: Boolean, reflect: true },
 			dragenter: event<unknown>({ bubbles: true, composed: true }),
 			dragover: event<unknown>({ bubbles: true, composed: true }),
 			dragleave: event<unknown>({ bubbles: true, composed: true }),
@@ -267,5 +266,3 @@ export const ZDropTarget = c(
 		styles: dropTargetStyles
 	}
 )
-
-customElements.define('z-drop-target', ZDropTarget)

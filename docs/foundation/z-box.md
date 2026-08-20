@@ -2,14 +2,14 @@
 
 The generic flex primitive: alignment, gap, margin, padding, inset, and
 sizing as attributes, all resolved against the design-system spacing scale.
-[z-row](../layout/z-row.md) and [z-column](../layout/z-column.md) are thin
+[wired-row](../layout/wired-row.md) and [wired-column](../layout/wired-column.md) are thin
 wrappers over this element with the flow direction locked.
 
 A box is flex, always. It used to carry seven booleans for one CSS `display`
 value — grid, inline-grid, block, inline-block and the rest — which made it a
 display switch rather than a layout primitive. Grid belongs to
-[z-grid](../layout/z-grid.md), which owns that job properly. The one modifier
-that composes with flex rather than replacing it, `is-inline`, survives.
+[wired-grid](../layout/wired-grid.md), which owns that job properly. The one modifier
+that composes with flex rather than replacing it, `inline`, survives.
 
 ```html
 <z-box  gap="md" aligns-x="between" aligns-y="center" padding="lg">
@@ -37,7 +37,7 @@ other CSS length through.
 | Attribute | Values | Default | Description |
 | --- | --- | --- | --- |
 | `direction` | `horizontal` `vertical` | `horizontal` | flow direction; also which axis `aligns-x`/`aligns-y` map to |
-| `is-inline` | boolean | — | `display: inline-flex` instead of `flex` |
+| `inline` | boolean | — | `display: inline-flex` instead of `flex` |
 | `aligns-x` | alignment | — | horizontal relationship |
 | `aligns-y` | alignment | — | vertical relationship |
 | `does-wrap` | boolean | — | `flex-wrap: wrap` |

@@ -102,14 +102,14 @@ export const zHeadingDoc: ComponentDocT = {
 				'The standard three-part header: an eyebrow for category, a heading for the title, and muted body copy underneath.',
 			layout: ExampleLayout.fill,
 			markup: `
-				<z-column gap="2" style="max-width: 40rem">
+				<wired-column gap="xs" style="max-width: 40rem">
 				  <z-eyebrow label="Design system"></z-eyebrow>
 				  <z-heading size="xl">Built on tokens, not values</z-heading>
 				  <z-text color="muted">
 				    Every colour, space, and radius in the library resolves through a
 				    custom property, so retheming never means touching a component.
 				  </z-text>
-				</z-column>
+				</wired-column>
 			`
 		}),
 
@@ -120,7 +120,7 @@ export const zHeadingDoc: ComponentDocT = {
 				'Sizes descend, levels descend with them, and nothing is skipped. This is what the derivation gives you for free.',
 			layout: ExampleLayout.fill,
 			markup: `
-				<z-column gap="4" style="max-width: 40rem">
+				<wired-column gap="md" style="max-width: 40rem">
 				  <z-heading size="xxl">Getting started</z-heading>
 				  <z-text color="muted">Install the package and import two files.</z-text>
 
@@ -132,7 +132,7 @@ export const zHeadingDoc: ComponentDocT = {
 
 				  <z-heading size="md">From a CDN</z-heading>
 				  <z-text color="muted">No build step required.</z-text>
-				</z-column>
+				</wired-column>
 			`
 		})
 	],

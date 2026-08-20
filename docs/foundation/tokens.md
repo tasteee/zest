@@ -65,6 +65,3 @@ Two rules cover most of it. Depth comes from surface and border, never from a
 shadow or a gradient — see [theming](../theming.md) for how the hardware
 themes get away with looking otherwise. And red is reserved: if it is not
 destructive, it is not `--destructive`.
-
-See also [z-swatch](../canvas-panels/z-swatch.md) and
-[z-token-table](../canvas-panels/z-token-table.md) for documenting your own.

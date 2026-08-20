@@ -38,7 +38,7 @@ export const zFilterDoc: ComponentDocT = {
 
 	playground: {
 		buildElement: buildPlaygroundFilter,
-		controlNames: ['label', 'size', 'accent', 'reset-label', 'is-drilldown', 'is-disabled'],
+		controlNames: ['label', 'size', 'accent', 'reset-label', 'is-drilldown', 'disabled'],
 		slotLabel: 'options set as a property'
 	},
 
@@ -225,15 +225,15 @@ export const zFilterDoc: ComponentDocT = {
 			id: 'disabled',
 			title: 'Disabled',
 			description:
-				'`is-disabled` freezes the whole row while a query is in flight. The current answer stays readable, which is the point — a filter that blanks itself while loading tells the user nothing.',
+				'`disabled` freezes the whole row while a query is in flight. The current answer stays readable, which is the point — a filter that blanks itself while loading tells the user nothing.',
 			layout: ExampleLayout.start,
 			markup: `
-				<z-filter id="frozenFilter" is-disabled label="Status"></z-filter>
+				<z-filter id="frozenFilter" disabled label="Status"></z-filter>
 			`,
 			script: `
 				const frozenFilter = document.querySelector('#frozenFilter')
 				frozenFilter.options = statusOptions
-				frozenFilter.isDisabled = isLoading
+				frozenFilter.disabled = isLoading
 			`,
 			wire: (root) => {
 				const frozenFilter = queryPreview<FilterElementT>(root, '#frozenFilter')
@@ -314,7 +314,7 @@ export const zFilterDoc: ComponentDocT = {
 		{ name: 'accent', type: 'neutral | dom | sub', defaultValue: 'neutral', description: 'Accent family of the active pill.' },
 		{ name: 'reset-label', type: 'string', defaultValue: 'Clear', description: 'Accessible name for the ✕ button.' },
 		{ name: 'is-drilldown', type: 'boolean', defaultValue: '—', description: 'Switches to hierarchical mode: a leaf keeps its siblings visible instead of collapsing them.' },
-		{ name: 'is-disabled', type: 'boolean', defaultValue: '—', description: 'Freezes the whole row — no selection, no reset — while keeping the current answer readable.' },
+		{ name: 'disabled', type: 'boolean', defaultValue: '—', description: 'Freezes the whole row — no selection, no reset — while keeping the current answer readable.' },
 		{ name: 'is-hidden', type: 'boolean', defaultValue: '—', description: 'Removes the filter from layout.' }
 	],
 

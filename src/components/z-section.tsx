@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css } from 'atomico'
 import { baseStyles, coerceSize, resolveWidth, sizeProp } from '../shared/layout-schema'
 
@@ -68,4 +69,4 @@ export const ZSection = c(
 	}
 )
 
-customElements.define('z-section', ZSection)
+defineElement('z-section', ZSection)

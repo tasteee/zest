@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event, useProp, useState, useHost, useEffect, useRef } from 'atomico'
 import { themedScrollbarStyles } from '../shared/scrollbar-styles'
 
@@ -23,7 +24,7 @@ const styles = css`
 		--accent: var(--pink);
 	}
 
-	:host([is-inline]) {
+	:host([inline]) {
 		width: auto;
 	}
 
@@ -237,8 +238,8 @@ export const ZCombobox = c(
 
 		const fieldClass = ['field', resolveSizeClass(props)]
 			.concat(isOpen ? ['is-open'] : [])
-			.concat(props.isInvalid ? ['is-invalid'] : [])
-			.concat(props.isDisabled ? ['is-disabled'] : [])
+			.concat(props.invalid ? ['is-invalid'] : [])
+			.concat(props.disabled ? ['is-disabled'] : [])
 			.join(' ')
 
 		const displayValue = isOpen ? query : selected ? selected.label : ''
@@ -251,11 +252,11 @@ export const ZCombobox = c(
 						type="text"
 						value={displayValue}
 						placeholder={props.placeholder || 'Search…'}
-						disabled={props.isDisabled}
+						disabled={props.disabled}
 						role="combobox"
 						aria-label={props.label || host.current?.getAttribute('aria-label') || undefined}
 						aria-expanded={isOpen ? 'true' : 'false'}
-						aria-invalid={props.isInvalid ? 'true' : undefined}
+						aria-invalid={props.invalid ? 'true' : undefined}
 						aria-autocomplete="list"
 						onfocus={() => setIsOpen(true)}
 						oninput={(e: any) => {
@@ -312,9 +313,9 @@ export const ZCombobox = c(
 			options: { type: Array },
 			size: { type: String, reflect: true },
 			accent: { type: String, reflect: true },
-			isInvalid: { type: Boolean, reflect: true },
-			isDisabled: { type: Boolean, reflect: true },
-			isInline: { type: Boolean, reflect: true },
+			invalid: { type: Boolean, reflect: true },
+			disabled: { type: Boolean, reflect: true },
+			inline: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			change: event<{ value: string }>({ bubbles: true, composed: true })
 		},
@@ -322,4 +323,4 @@ export const ZCombobox = c(
 	}
 )
 
-customElements.define('z-combobox', ZCombobox)
+defineElement('z-combobox', ZCombobox)

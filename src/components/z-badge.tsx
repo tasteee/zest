@@ -1,3 +1,4 @@
+import { defineElement } from '../shared/define-element'
 import { c, css, event } from 'atomico'
 
 /*
@@ -7,9 +8,9 @@ import { c, css, event } from 'atomico'
  * e.g. • ONLINE). No shadows.
  *
  * Static by default. Opt into interactivity — this is what used to be z-chip:
- *   - `is-selectable` / `is-selected` makes it a toggle (role=button), emitting
+ *   - `selectable` / `selected` makes it a toggle (role=button), emitting
  *     `select` with { value, selected }.
- *   - `is-removable` renders a × that emits `remove` with { value }.
+ *   - `removable` renders a × that emits `remove` with { value }.
  *   - the `prefix` slot holds a leading avatar/icon.
  * A badge with none of these stays purely presentational (no role, no tabstop).
  */
@@ -101,12 +102,12 @@ const styles = css`
 	.badge.is-dot {
 		background: transparent;
 		border-color: transparent;
-		padding: 0;
+		padding: 0.25rem 0.375rem;
 		text-transform: uppercase;
 		letter-spacing: 0.1em;
 		font-size: 0.6875rem;
 		color: var(--tone);
-		gap: 0.4375rem;
+		gap: 0.375rem;
 	}
 	.dot {
 		width: 0.4375rem;
@@ -121,7 +122,7 @@ const styles = css`
 		text-shadow: 0 0px 18px var(--primary-foreground);
 	}
 
-	/* ── interactive states (opt-in via is-selectable / is-selected) ────────── */
+	/* ── interactive states (opt-in via selectable / selected) ─────────────── */
 
 	.badge.is-clickable {
 		cursor: pointer;
@@ -155,7 +156,7 @@ const styles = css`
 		outline-offset: 2px;
 	}
 
-	/* ── remove affordance (is-removable) ───────────────────────────────────── */
+	/* ── remove affordance (removable) ──────────────────────────────────────── */
 
 	.remove {
 		display: inline-flex;
@@ -186,6 +187,10 @@ const styles = css`
 		stroke-width: 2.5;
 		stroke-linecap: round;
 		fill: none;
+	}
+	.badge.is-dot .remove {
+		margin-left: -0.125rem;
+		margin-right: -0.125rem;
 	}
 
 	::slotted(svg) {
@@ -219,7 +224,7 @@ const resolveKindClass = (props: any): string => {
 export const ZBadge = c(
 	(props) => {
 		const sizeClass = props.size === 'sm' ? 'is-sm' : 'is-md'
-		const isClickable = props.isSelectable && !props.isDisabled
+		const isClickable = props.selectable && !props.disabled
 
 		const badgeClass = [
 			'badge',
@@ -228,12 +233,12 @@ export const ZBadge = c(
 			sizeClass
 		]
 			.concat(isClickable ? ['is-clickable'] : [])
-			.concat(props.isSelected ? ['is-selected'] : [])
-			.concat(props.isDisabled ? ['is-disabled'] : [])
+			.concat(props.selected ? ['is-selected'] : [])
+			.concat(props.disabled ? ['is-disabled'] : [])
 			.join(' ')
 
 		const toggle = () => {
-			if (isClickable) props.select({ value: props.value, selected: !props.isSelected })
+			if (isClickable) props.select({ value: props.value, selected: !props.selected })
 		}
 
 		return (
@@ -241,8 +246,8 @@ export const ZBadge = c(
 				<span
 					class={badgeClass}
 					tabindex={isClickable ? 0 : undefined}
-					role={props.isSelectable ? 'button' : undefined}
-					aria-pressed={props.isSelectable ? (props.isSelected ? 'true' : 'false') : undefined}
+					role={props.selectable ? 'button' : undefined}
+					aria-pressed={props.selectable ? (props.selected ? 'true' : 'false') : undefined}
 					onclick={toggle}
 					onkeydown={(e: KeyboardEvent) => {
 						if (isClickable && (e.key === 'Enter' || e.key === ' ')) {
@@ -254,7 +259,7 @@ export const ZBadge = c(
 					{props.isDot && <span class='dot' aria-hidden='true'></span>}
 					<slot name='prefix' />
 					<span class='label'>{props.label ? props.label : <slot />}</span>
-					{props.isRemovable && (
+					{props.removable && (
 						<button
 							class='remove'
 							type='button'
@@ -281,10 +286,10 @@ export const ZBadge = c(
 			label: String,
 			value: String,
 			isDot: { type: Boolean, reflect: true },
-			isSelectable: { type: Boolean, reflect: true },
-			isSelected: { type: Boolean, reflect: true },
-			isRemovable: { type: Boolean, reflect: true },
-			isDisabled: { type: Boolean, reflect: true },
+			selectable: { type: Boolean, reflect: true },
+			selected: { type: Boolean, reflect: true },
+			removable: { type: Boolean, reflect: true },
+			disabled: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			select: event<{ value?: string; selected: boolean }>({ bubbles: true, composed: true }),
 			remove: event<{ value?: string }>({ bubbles: true, composed: true })
@@ -293,4 +298,4 @@ export const ZBadge = c(
 	}
 )
 
-customElements.define('z-badge', ZBadge)
+defineElement('z-badge', ZBadge)
