@@ -7,6 +7,13 @@
 			"runtimeArgs": ["vite", "preview", "--config", "vite.site.config.ts", "--port", "4173", "--strictPort"],
 			"port": 4173,
 			"url": "http://localhost:4173"
+		},
+		{
+			"name": "zest-docs-dev",
+			"runtimeExecutable": "npx",
+			"runtimeArgs": ["vite", "--config", "vite.site.config.ts", "--port", "5174", "--strictPort"],
+			"port": 5174,
+			"url": "http://localhost:5174"
 		}
 	]
 }

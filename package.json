@@ -27,7 +27,9 @@
 	"sideEffects": [
 		"./dist/zest.js",
 		"./dist/elements/*.js",
-		"./dist/ink.css"
+		"./dist/ink.css",
+		"./src/**",
+		"./site/**"
 	],
 	"main": "./dist/zest.js",
 	"module": "./dist/zest.js",
