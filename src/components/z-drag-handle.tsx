@@ -95,7 +95,7 @@ export const ZDragHandle = c(
 
 		return (
 			<host shadowDom>
-				<button type="button" class="grip" draggable={true} disabled={props.disabled} aria-label="Drag to reorder" ondragstart={onDragStart}>
+				<button type="button" class="grip" draggable={true} disabled={props.isDisabled} aria-label="Drag to reorder" ondragstart={onDragStart}>
 					<svg viewBox="0 0 24 24">
 						<circle cx="9" cy="6" r="1" />
 						<circle cx="9" cy="12" r="1" />
@@ -114,7 +114,7 @@ export const ZDragHandle = c(
 	{
 		props: {
 			label: String,
-			disabled: { type: Boolean, reflect: true }
+			isDisabled: { type: Boolean, reflect: true }
 		},
 		styles: dragHandleStyles
 	}

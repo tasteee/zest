@@ -98,7 +98,7 @@ export const ZPopover = c(
 					class="trigger"
 					aria-haspopup="dialog"
 					aria-expanded={isOpen ? 'true' : 'false'}
-					onclick={() => !props.disabled && setIsOpen(!isOpen)}
+					onclick={() => !props.isDisabled && setIsOpen(!isOpen)}
 				>
 					<slot name="trigger" />
 				</div>
@@ -112,7 +112,7 @@ export const ZPopover = c(
 		props: {
 			...overlayPositionProps,
 			isOpen: { type: Boolean, reflect: true },
-			disabled: { type: Boolean, reflect: true },
+			isDisabled: { type: Boolean, reflect: true },
 			toggle: event<{ open: boolean }>({ bubbles: true, composed: true })
 		},
 		styles: [floatingSurfaceStyles, styles]

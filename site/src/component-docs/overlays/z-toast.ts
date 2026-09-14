@@ -324,8 +324,8 @@ export const zToastDoc: ComponentDocT = {
 	],
 
 	related: [
-		{ tag: 'z-alert', route: '/c/overlays/z-alert', description: 'An in-flow banner for something that should not disappear.' },
-		{ tag: 'z-alert-dialog', route: '/c/overlays/z-alert-dialog', description: 'When you must ask first rather than offer an undo.' },
-		{ tag: 'z-status-dot', route: '/c/data-display/z-status-dot', description: 'For persistent state rather than a moment.' }
+		{ tag: 'z-alert', route: '/elements/overlays/z-alert', description: 'An in-flow banner for something that should not disappear.' },
+		{ tag: 'z-alert-dialog', route: '/elements/overlays/z-alert-dialog', description: 'When you must ask first rather than offer an undo.' },
+		{ tag: 'z-status-dot', route: '/elements/data-display/z-status-dot', description: 'For persistent state rather than a moment.' }
 	]
 }

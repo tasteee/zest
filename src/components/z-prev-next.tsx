@@ -4,8 +4,8 @@ import { c, css, event } from 'atomico'
 /*
  * z-prev-next — the footer pager at the bottom of a documentation page.
  *
- *   el.previous = { label: 'z-checkbox', route: '/c/forms/z-checkbox' }
- *   el.next = { label: 'z-select', route: '/c/forms/z-select' }
+ *   el.previous = { label: 'z-checkbox', route: '/elements/actionables/z-checkbox' }
+ *   el.next = { label: 'z-select', route: '/elements/actionables/z-select' }
  *
  * Two cards that read as a pair: previous points left and sits left, next
  * points right and sits right, and a missing side leaves its space rather

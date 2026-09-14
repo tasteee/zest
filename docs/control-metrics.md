@@ -2,7 +2,7 @@
 
 Controls that sit next to each other have to agree about height. Before this
 existed they didn't: `z-input` and `z-combobox` were 44px at medium while
-`z-button`, `z-select`, `z-toggle` and `z-number-input` were 40, and nothing in
+`z-button`, `z-select`, `z-toggle-button` and `z-number-input` were 40, and nothing in
 the codebase said which was correct.
 
 ## One height scale
@@ -14,7 +14,7 @@ the codebase said which was correct.
 | `--control-height-lg` | `3rem` | 48px |
 
 Consumed by `z-button`, `z-input`, `z-select`, `z-combobox`, `z-number-input`,
-`z-toggle`, `z-toggle-group`, `z-color-picker`, `z-theme-switcher` and
+`z-toggle-button`, `z-toggle-button-group`, `z-color-picker`, `z-theme-switcher` and
 `z-field`. Retiming the scale moves all of them together.
 
 Padding deliberately stays per-component. A button wants more inline room than

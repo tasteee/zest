@@ -15,7 +15,7 @@ const styles = css`
 		display: none;
 	}
 
-	:host([is-block]) {
+	:host([is-full-width]) {
 		display: flex;
 	}
 
@@ -146,12 +146,12 @@ export const ZSwitch = c(
 		const [isChecked, setIsChecked] = useProp<boolean>('isChecked')
 
 		const labelClass = ['label', resolveSizeClass(props)]
-			.concat(props.disabled ? ['is-disabled'] : [])
+			.concat(props.isDisabled ? ['is-disabled'] : [])
 			.join(' ')
 
 		const trackClass = ['track'].concat(isChecked ? ['is-on'] : []).join(' ')
 		const handleClick = () => {
-			if (props.disabled) return
+			if (props.isDisabled) return
 			const next = !isChecked
 			setIsChecked(next)
 			props.change({ checked: next, value: props.value })
@@ -166,7 +166,7 @@ export const ZSwitch = c(
 						checked={isChecked}
 						name={props.name}
 						value={props.value}
-						disabled={props.disabled}
+						disabled={props.isDisabled}
 						aria-checked={isChecked ? 'true' : 'false'}
 						onchange={(changeEvent: Event) => changeEvent.stopPropagation()}
 					/>
@@ -181,9 +181,9 @@ export const ZSwitch = c(
 	{
 		props: {
 			isChecked: { type: Boolean, reflect: true },
-			disabled: { type: Boolean, reflect: true },
+			isDisabled: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
-			isBlock: { type: Boolean, reflect: true },
+			isFullWidth: { type: Boolean, reflect: true },
 			size: { type: String, reflect: true },
 			accent: { type: String, reflect: true },
 			name: String,

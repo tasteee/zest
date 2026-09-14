@@ -177,6 +177,35 @@ export const applyPosition = (floating: HTMLElement, pos: PositionResult): void 
 	floating.dataset.side = pos.side
 }
 
+/**
+ * Point an arrow at the anchor's centre along whichever edge the panel ended
+ * up on. Writes `--arrow-x` / `--arrow-y` in the floating element's own
+ * coordinates; the component's CSS reads whichever one its current side uses,
+ * so the two never have to agree about which axis is live.
+ *
+ * The result stops `arrowSize` short of both ends, because a panel that has
+ * been shifted along its cross axis can leave the anchor's centre outside the
+ * panel entirely — unclamped, the arrow walks off the corner.
+ */
+export const applyArrowPosition = (
+	floating: HTMLElement,
+	anchor: AnchorT,
+	position: PositionResult,
+	arrowSize: number
+): void => {
+	const anchorRect = anchor.getBoundingClientRect()
+	const isVerticalSide = position.side === 'top' || position.side === 'bottom'
+
+	const anchorCenter = isVerticalSide ? anchorRect.left + anchorRect.width / 2 : anchorRect.top + anchorRect.height / 2
+	const floatingStart = isVerticalSide ? position.x : position.y
+	const floatingExtent = isVerticalSide ? floating.offsetWidth : floating.offsetHeight
+
+	const furthest = Math.max(arrowSize, floatingExtent - arrowSize)
+	const offset = clamp(anchorCenter - floatingStart, arrowSize, furthest)
+
+	floating.style.setProperty(isVerticalSide ? '--arrow-x' : '--arrow-y', `${Math.round(offset)}px`)
+}
+
 /** Shared prop surface for anchored overlays (placement / offset / accent). */
 export const overlayPositionProps = {
 	placement: { type: String, reflect: true },

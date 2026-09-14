@@ -79,6 +79,8 @@ const styles = css`
 
 	textarea::placeholder {
 		color: var(--muted-foreground);
+		user-select: none;
+		-webkit-user-select: none;
 	}
 
 	.field:hover {
@@ -120,8 +122,8 @@ export const ZTextarea = c(
 
 		const fieldClass = ['field', resolveSizeClass(props)]
 			.concat(isFocused ? ['is-focused'] : [])
-			.concat(props.invalid ? ['is-invalid'] : [])
-			.concat(props.disabled ? ['is-disabled'] : [])
+			.concat(props.isInvalid ? ['is-invalid'] : [])
+			.concat(props.isDisabled ? ['is-disabled'] : [])
 			.join(' ')
 
 		const textareaClass = props.isAutoResize ? 'is-auto-resize' : ''
@@ -135,10 +137,10 @@ export const ZTextarea = c(
 						placeholder={props.placeholder}
 						name={props.name}
 						rows={props.rows || 3}
-						disabled={props.disabled}
+						disabled={props.isDisabled}
 						readonly={props.isReadonly}
 						required={props.isRequired}
-						aria-invalid={props.invalid ? 'true' : undefined}
+						aria-invalid={props.isInvalid ? 'true' : undefined}
 						aria-label={props.label || host.current?.getAttribute('aria-label') || undefined}
 						onfocus={() => setIsFocused(true)}
 						onblur={() => {
@@ -166,8 +168,8 @@ export const ZTextarea = c(
 			size: { type: String, reflect: true },
 			accent: { type: String, reflect: true },
 			isFocused: { type: Boolean, reflect: true },
-			invalid: { type: Boolean, reflect: true },
-			disabled: { type: Boolean, reflect: true },
+			isInvalid: { type: Boolean, reflect: true },
+			isDisabled: { type: Boolean, reflect: true },
 			isReadonly: { type: Boolean, reflect: true },
 			isRequired: { type: Boolean, reflect: true },
 			isAutoResize: { type: Boolean, reflect: true },

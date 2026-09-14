@@ -87,6 +87,10 @@ type InteractiveExampleInputT = {
 	description: string
 	markup: string
 	script: string
+	// The React-authored equivalent of `markup` + `script`, shown as a third
+	// tab when supplied. Optional because backfilling every existing example
+	// is a separate pass — new interactive examples should include one.
+	react?: string
 	wire: (root: HTMLElement) => void
 	layout?: ExampleLayoutT
 }
@@ -102,6 +106,8 @@ export const defineInteractiveExample = (input: InteractiveExampleInputT): Examp
 		{ label: 'HTML', language: 'html', code: markup },
 		{ label: 'JavaScript', language: 'js', code: script }
 	]
+
+	if (input.react) snippets.push({ label: 'React', language: 'jsx', code: dedent(input.react) })
 
 	const buildPreview = (): HTMLElement => {
 		const root = buildPreviewRoot(markup)

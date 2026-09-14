@@ -62,7 +62,7 @@ export const ZDialog = c(
 
 		return (
 			<host shadowDom style={{ '--z-dialog-width': width }}>
-				<div class="trigger" onclick={() => !props.disabled && setIsOpen(true)}>
+				<div class="trigger" onclick={() => !props.isDisabled && setIsOpen(true)}>
 					<slot name="trigger" />
 				</div>
 
@@ -104,7 +104,7 @@ export const ZDialog = c(
 			size: { type: String, reflect: true },
 			hasClose: { type: Boolean, reflect: true, value: () => true },
 			isStatic: { type: Boolean, reflect: true },
-			disabled: { type: Boolean, reflect: true },
+			isDisabled: { type: Boolean, reflect: true },
 			open: event<void>({ bubbles: true, composed: true }),
 			close: event<void>({ bubbles: true, composed: true })
 		},

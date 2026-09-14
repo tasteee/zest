@@ -78,7 +78,7 @@ These repay themselves across 3–5 domains each. The reuse map:
 - [ ] `z-page-header` — title + breadcrumbs + actions + tabs
 - [x] `z-toolbar` *(foundational)*
 - [ ] `z-filter-bar`
-- [x] `z-toggle-group` (segmented control)
+- [x] `z-toggle-button-group` (segmented control)
 
 **Metrics / KPIs**
 - [x] `z-stat`
@@ -185,7 +185,7 @@ Chat can't ship without these; pull them forward. See
 - [x] `z-conversation-list` — scrolling rail w/ sticky header slot *(z-virtual-list handoff for huge inboxes TODO)*
 - [x] `z-conversation-item` — avatar + name + last-message preview + `z-relative-time` + unread + muted/pinned
 - [ ] `z-conversation-search` (composes `z-input`/`z-command`) · `z-new-chat-button`
-- [x] `z-tabs` / `z-toggle-group` — folder filters (All / Unread / Groups)
+- [x] `z-tabs` / `z-toggle-button-group` — folder filters (All / Unread / Groups)
 
 **Thread surface**
 - [x] `z-message-list` / `z-thread` — declarative scroll surface w/ pin-to-bottom *(virtual-list handoff for huge histories TODO)*

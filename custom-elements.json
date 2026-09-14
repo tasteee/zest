@@ -684,7 +684,7 @@
             },
             {
               "kind": "field",
-              "name": "selected",
+              "name": "isSelected",
               "type": {
                 "text": "boolean"
               }
@@ -698,7 +698,7 @@
             },
             {
               "kind": "field",
-              "name": "disabled",
+              "name": "isDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -762,8 +762,8 @@
               }
             },
             {
-              "name": "selected",
-              "fieldName": "selected",
+              "name": "is-selected",
+              "fieldName": "isSelected",
               "type": {
                 "text": "boolean"
               }
@@ -776,8 +776,8 @@
               }
             },
             {
-              "name": "disabled",
-              "fieldName": "disabled",
+              "name": "is-disabled",
+              "fieldName": "isDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -1739,7 +1739,7 @@
             },
             {
               "kind": "field",
-              "name": "disabled",
+              "name": "isDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -1803,8 +1803,8 @@
               }
             },
             {
-              "name": "disabled",
-              "fieldName": "disabled",
+              "name": "is-disabled",
+              "fieldName": "isDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -2035,6 +2035,20 @@
           "members": [
             {
               "kind": "field",
+              "name": "heading",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "description",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
               "name": "isReactive",
               "type": {
                 "text": "boolean"
@@ -2042,6 +2056,20 @@
             }
           ],
           "attributes": [
+            {
+              "name": "heading",
+              "fieldName": "heading",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "description",
+              "fieldName": "description",
+              "type": {
+                "text": "string"
+              }
+            },
             {
               "name": "is-reactive",
               "fieldName": "isReactive",
@@ -2250,7 +2278,7 @@
             },
             {
               "kind": "field",
-              "name": "disabled",
+              "name": "isDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -2300,8 +2328,8 @@
               }
             },
             {
-              "name": "disabled",
-              "fieldName": "disabled",
+              "name": "is-disabled",
+              "fieldName": "isDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -2573,7 +2601,7 @@
             },
             {
               "kind": "field",
-              "name": "disabled",
+              "name": "isDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -2616,8 +2644,8 @@
               }
             },
             {
-              "name": "disabled",
-              "fieldName": "disabled",
+              "name": "is-disabled",
+              "fieldName": "isDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -2675,7 +2703,7 @@
             },
             {
               "kind": "field",
-              "name": "disabled",
+              "name": "isDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -2711,8 +2739,8 @@
               }
             },
             {
-              "name": "disabled",
-              "fieldName": "disabled",
+              "name": "is-disabled",
+              "fieldName": "isDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -2784,14 +2812,14 @@
             },
             {
               "kind": "field",
-              "name": "invalid",
+              "name": "isInvalid",
               "type": {
                 "text": "boolean"
               }
             },
             {
               "kind": "field",
-              "name": "disabled",
+              "name": "isDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -2848,15 +2876,15 @@
               }
             },
             {
-              "name": "invalid",
-              "fieldName": "invalid",
+              "name": "is-invalid",
+              "fieldName": "isInvalid",
               "type": {
                 "text": "boolean"
               }
             },
             {
-              "name": "disabled",
-              "fieldName": "disabled",
+              "name": "is-disabled",
+              "fieldName": "isDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -3205,7 +3233,7 @@
             },
             {
               "kind": "field",
-              "name": "disabled",
+              "name": "isDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -3220,8 +3248,8 @@
               }
             },
             {
-              "name": "disabled",
-              "fieldName": "disabled",
+              "name": "is-disabled",
+              "fieldName": "isDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -3279,7 +3307,7 @@
             },
             {
               "kind": "field",
-              "name": "disabled",
+              "name": "isDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -3329,8 +3357,8 @@
               }
             },
             {
-              "name": "disabled",
-              "fieldName": "disabled",
+              "name": "is-disabled",
+              "fieldName": "isDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -3408,7 +3436,7 @@
             },
             {
               "kind": "field",
-              "name": "disabled",
+              "name": "isDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -3458,8 +3486,8 @@
               }
             },
             {
-              "name": "disabled",
-              "fieldName": "disabled",
+              "name": "is-disabled",
+              "fieldName": "isDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -3576,7 +3604,7 @@
             },
             {
               "kind": "field",
-              "name": "disabled",
+              "name": "isDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -3591,8 +3619,8 @@
               }
             },
             {
-              "name": "disabled",
-              "fieldName": "disabled",
+              "name": "is-disabled",
+              "fieldName": "isDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -3636,7 +3664,7 @@
             },
             {
               "kind": "field",
-              "name": "disabled",
+              "name": "isDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -3665,8 +3693,8 @@
               }
             },
             {
-              "name": "disabled",
-              "fieldName": "disabled",
+              "name": "is-disabled",
+              "fieldName": "isDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -3729,7 +3757,7 @@
             },
             {
               "kind": "field",
-              "name": "disabled",
+              "name": "isDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -3765,8 +3793,8 @@
               }
             },
             {
-              "name": "disabled",
-              "fieldName": "disabled",
+              "name": "is-disabled",
+              "fieldName": "isDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -3862,7 +3890,7 @@
             },
             {
               "kind": "field",
-              "name": "disabled",
+              "name": "isDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -3884,8 +3912,8 @@
               }
             },
             {
-              "name": "disabled",
-              "fieldName": "disabled",
+              "name": "is-disabled",
+              "fieldName": "isDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -3954,7 +3982,7 @@
             },
             {
               "kind": "field",
-              "name": "disabled",
+              "name": "isDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -3997,8 +4025,8 @@
               }
             },
             {
-              "name": "disabled",
-              "fieldName": "disabled",
+              "name": "is-disabled",
+              "fieldName": "isDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -4103,7 +4131,7 @@
             },
             {
               "kind": "field",
-              "name": "disabled",
+              "name": "isDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -4181,8 +4209,8 @@
               }
             },
             {
-              "name": "disabled",
-              "fieldName": "disabled",
+              "name": "is-disabled",
+              "fieldName": "isDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -4611,7 +4639,7 @@
             },
             {
               "kind": "field",
-              "name": "disabled",
+              "name": "isDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -4661,8 +4689,8 @@
               }
             },
             {
-              "name": "disabled",
-              "fieldName": "disabled",
+              "name": "is-disabled",
+              "fieldName": "isDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -5229,14 +5257,14 @@
             },
             {
               "kind": "field",
-              "name": "invalid",
+              "name": "isInvalid",
               "type": {
                 "text": "boolean"
               }
             },
             {
               "kind": "field",
-              "name": "disabled",
+              "name": "isDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -5342,15 +5370,15 @@
               }
             },
             {
-              "name": "invalid",
-              "fieldName": "invalid",
+              "name": "is-invalid",
+              "fieldName": "isInvalid",
               "type": {
                 "text": "boolean"
               }
             },
             {
-              "name": "disabled",
-              "fieldName": "disabled",
+              "name": "is-disabled",
+              "fieldName": "isDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -5449,14 +5477,14 @@
             },
             {
               "kind": "field",
-              "name": "invalid",
+              "name": "isInvalid",
               "type": {
                 "text": "boolean"
               }
             },
             {
               "kind": "field",
-              "name": "disabled",
+              "name": "isDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -5513,15 +5541,15 @@
               }
             },
             {
-              "name": "invalid",
-              "fieldName": "invalid",
+              "name": "is-invalid",
+              "fieldName": "isInvalid",
               "type": {
                 "text": "boolean"
               }
             },
             {
-              "name": "disabled",
-              "fieldName": "disabled",
+              "name": "is-disabled",
+              "fieldName": "isDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -5694,7 +5722,7 @@
             },
             {
               "kind": "field",
-              "name": "disabled",
+              "name": "isDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -5793,8 +5821,8 @@
               }
             },
             {
-              "name": "disabled",
-              "fieldName": "disabled",
+              "name": "is-disabled",
+              "fieldName": "isDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -5864,31 +5892,6 @@
         {
           "kind": "class",
           "customElement": true,
-          "tagName": "z-line",
-          "name": "ZLine",
-          "members": [
-            {
-              "kind": "field",
-              "name": "vertical",
-              "type": {
-                "text": "boolean"
-              }
-            }
-          ],
-          "attributes": [
-            {
-              "name": "vertical",
-              "fieldName": "vertical",
-              "type": {
-                "text": "boolean"
-              }
-            }
-          ],
-          "events": []
-        },
-        {
-          "kind": "class",
-          "customElement": true,
           "tagName": "z-link",
           "name": "ZLink",
           "members": [
@@ -5943,14 +5946,14 @@
             },
             {
               "kind": "field",
-              "name": "isBlock",
+              "name": "isFullWidth",
               "type": {
                 "text": "boolean"
               }
             },
             {
               "kind": "field",
-              "name": "disabled",
+              "name": "isDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -6014,15 +6017,15 @@
               }
             },
             {
-              "name": "is-block",
-              "fieldName": "isBlock",
+              "name": "is-full-width",
+              "fieldName": "isFullWidth",
               "type": {
                 "text": "boolean"
               }
             },
             {
-              "name": "disabled",
-              "fieldName": "disabled",
+              "name": "is-disabled",
+              "fieldName": "isDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -6606,14 +6609,14 @@
             },
             {
               "kind": "field",
-              "name": "invalid",
+              "name": "isInvalid",
               "type": {
                 "text": "boolean"
               }
             },
             {
               "kind": "field",
-              "name": "disabled",
+              "name": "isDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -6726,15 +6729,15 @@
               }
             },
             {
-              "name": "invalid",
-              "fieldName": "invalid",
+              "name": "is-invalid",
+              "fieldName": "isInvalid",
               "type": {
                 "text": "boolean"
               }
             },
             {
-              "name": "disabled",
-              "fieldName": "disabled",
+              "name": "is-disabled",
+              "fieldName": "isDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -7002,7 +7005,7 @@
           "members": [
             {
               "kind": "field",
-              "name": "disabled",
+              "name": "isDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -7010,8 +7013,8 @@
           ],
           "attributes": [
             {
-              "name": "disabled",
-              "fieldName": "disabled",
+              "name": "is-disabled",
+              "fieldName": "isDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -7139,7 +7142,7 @@
             },
             {
               "kind": "field",
-              "name": "disabled",
+              "name": "isDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -7252,8 +7255,8 @@
               }
             },
             {
-              "name": "disabled",
-              "fieldName": "disabled",
+              "name": "is-disabled",
+              "fieldName": "isDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -7401,7 +7404,7 @@
             },
             {
               "kind": "field",
-              "name": "disabled",
+              "name": "isDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -7521,8 +7524,8 @@
               }
             },
             {
-              "name": "disabled",
-              "fieldName": "disabled",
+              "name": "is-disabled",
+              "fieldName": "isDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -7660,7 +7663,7 @@
             },
             {
               "kind": "field",
-              "name": "disabled",
+              "name": "isDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -7703,8 +7706,8 @@
               }
             },
             {
-              "name": "disabled",
-              "fieldName": "disabled",
+              "name": "is-disabled",
+              "fieldName": "isDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -7829,7 +7832,7 @@
             },
             {
               "kind": "field",
-              "name": "disabled",
+              "name": "isDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -7865,8 +7868,8 @@
               }
             },
             {
-              "name": "disabled",
-              "fieldName": "disabled",
+              "name": "is-disabled",
+              "fieldName": "isDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -8047,7 +8050,7 @@
             },
             {
               "kind": "field",
-              "name": "disabled",
+              "name": "isDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -8111,8 +8114,8 @@
               }
             },
             {
-              "name": "disabled",
-              "fieldName": "disabled",
+              "name": "is-disabled",
+              "fieldName": "isDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -8331,7 +8334,7 @@
             },
             {
               "kind": "field",
-              "name": "disabled",
+              "name": "isDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -8360,8 +8363,8 @@
               }
             },
             {
-              "name": "disabled",
-              "fieldName": "disabled",
+              "name": "is-disabled",
+              "fieldName": "isDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -8616,14 +8619,14 @@
             },
             {
               "kind": "field",
-              "name": "invalid",
+              "name": "isInvalid",
               "type": {
                 "text": "boolean"
               }
             },
             {
               "kind": "field",
-              "name": "disabled",
+              "name": "isDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -8680,15 +8683,15 @@
               }
             },
             {
-              "name": "invalid",
-              "fieldName": "invalid",
+              "name": "is-invalid",
+              "fieldName": "isInvalid",
               "type": {
                 "text": "boolean"
               }
             },
             {
-              "name": "disabled",
-              "fieldName": "disabled",
+              "name": "is-disabled",
+              "fieldName": "isDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -8827,6 +8830,13 @@
             },
             {
               "kind": "field",
+              "name": "vertical",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
               "name": "label",
               "type": {
                 "text": "string"
@@ -8837,6 +8847,13 @@
             {
               "name": "is-hidden",
               "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "vertical",
+              "fieldName": "vertical",
               "type": {
                 "text": "boolean"
               }
@@ -8901,7 +8918,7 @@
             },
             {
               "kind": "field",
-              "name": "disabled",
+              "name": "isDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -8951,8 +8968,8 @@
               }
             },
             {
-              "name": "disabled",
-              "fieldName": "disabled",
+              "name": "is-disabled",
+              "fieldName": "isDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -9362,7 +9379,7 @@
             },
             {
               "kind": "field",
-              "name": "disabled",
+              "name": "isDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -9447,8 +9464,8 @@
               }
             },
             {
-              "name": "disabled",
-              "fieldName": "disabled",
+              "name": "is-disabled",
+              "fieldName": "isDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -9498,7 +9515,7 @@
             },
             {
               "kind": "field",
-              "name": "disabled",
+              "name": "isDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -9520,8 +9537,8 @@
               }
             },
             {
-              "name": "disabled",
-              "fieldName": "disabled",
+              "name": "is-disabled",
+              "fieldName": "isDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -10151,7 +10168,7 @@
             },
             {
               "kind": "field",
-              "name": "disabled",
+              "name": "isDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -10201,8 +10218,8 @@
               }
             },
             {
-              "name": "disabled",
-              "fieldName": "disabled",
+              "name": "is-disabled",
+              "fieldName": "isDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -10246,7 +10263,7 @@
             },
             {
               "kind": "field",
-              "name": "disabled",
+              "name": "isDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -10260,7 +10277,7 @@
             },
             {
               "kind": "field",
-              "name": "isBlock",
+              "name": "isFullWidth",
               "type": {
                 "text": "boolean"
               }
@@ -10303,8 +10320,8 @@
               }
             },
             {
-              "name": "disabled",
-              "fieldName": "disabled",
+              "name": "is-disabled",
+              "fieldName": "isDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -10317,8 +10334,8 @@
               }
             },
             {
-              "name": "is-block",
-              "fieldName": "isBlock",
+              "name": "is-full-width",
+              "fieldName": "isFullWidth",
               "type": {
                 "text": "boolean"
               }
@@ -10478,7 +10495,7 @@
             },
             {
               "kind": "field",
-              "name": "selected",
+              "name": "isSelected",
               "type": {
                 "text": "boolean"
               }
@@ -10507,8 +10524,8 @@
               }
             },
             {
-              "name": "selected",
-              "fieldName": "selected",
+              "name": "is-selected",
+              "fieldName": "isSelected",
               "type": {
                 "text": "boolean"
               }
@@ -11195,14 +11212,14 @@
             },
             {
               "kind": "field",
-              "name": "invalid",
+              "name": "isInvalid",
               "type": {
                 "text": "boolean"
               }
             },
             {
               "kind": "field",
-              "name": "disabled",
+              "name": "isDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -11294,15 +11311,15 @@
               }
             },
             {
-              "name": "invalid",
-              "fieldName": "invalid",
+              "name": "is-invalid",
+              "fieldName": "isInvalid",
               "type": {
                 "text": "boolean"
               }
             },
             {
-              "name": "disabled",
-              "fieldName": "disabled",
+              "name": "is-disabled",
+              "fieldName": "isDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -11481,8 +11498,8 @@
         {
           "kind": "class",
           "customElement": true,
-          "tagName": "z-toggle",
-          "name": "ZToggle",
+          "tagName": "z-toggle-button",
+          "name": "ZToggleButton",
           "members": [
             {
               "kind": "field",
@@ -11521,7 +11538,7 @@
             },
             {
               "kind": "field",
-              "name": "disabled",
+              "name": "isDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -11571,8 +11588,8 @@
               }
             },
             {
-              "name": "disabled",
-              "fieldName": "disabled",
+              "name": "is-disabled",
+              "fieldName": "isDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -11597,8 +11614,8 @@
         {
           "kind": "class",
           "customElement": true,
-          "tagName": "z-toggle-group",
-          "name": "ZToggleGroup",
+          "tagName": "z-toggle-button-group",
+          "name": "ZToggleButtonGroup",
           "members": [
             {
               "kind": "field",
@@ -11644,9 +11661,9 @@
             },
             {
               "kind": "field",
-              "name": "type",
+              "name": "isMultiple",
               "type": {
-                "text": "string"
+                "text": "boolean"
               }
             }
           ],
@@ -11694,10 +11711,10 @@
               }
             },
             {
-              "name": "type",
-              "fieldName": "type",
+              "name": "is-multiple",
+              "fieldName": "isMultiple",
               "type": {
-                "text": "string"
+                "text": "boolean"
               }
             }
           ],
@@ -11713,8 +11730,8 @@
         {
           "kind": "class",
           "customElement": true,
-          "tagName": "z-toggle-group-item",
-          "name": "ZToggleGroupItem",
+          "tagName": "z-toggle-button-group-item",
+          "name": "ZToggleButtonGroupItem",
           "members": [
             {
               "kind": "field",
@@ -11753,7 +11770,7 @@
             },
             {
               "kind": "field",
-              "name": "disabled",
+              "name": "isDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -11810,8 +11827,8 @@
               }
             },
             {
-              "name": "disabled",
-              "fieldName": "disabled",
+              "name": "is-disabled",
+              "fieldName": "isDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -11862,7 +11879,7 @@
             },
             {
               "kind": "field",
-              "name": "disabled",
+              "name": "isDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -11884,8 +11901,8 @@
               }
             },
             {
-              "name": "disabled",
-              "fieldName": "disabled",
+              "name": "is-disabled",
+              "fieldName": "isDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -11982,7 +11999,14 @@
             },
             {
               "kind": "field",
-              "name": "disabled",
+              "name": "doesHideArrow",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -12032,8 +12056,15 @@
               }
             },
             {
-              "name": "disabled",
-              "fieldName": "disabled",
+              "name": "does-hide-arrow",
+              "fieldName": "doesHideArrow",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "is-disabled",
+              "fieldName": "isDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -12584,14 +12615,6 @@
         },
         {
           "kind": "custom-element-definition",
-          "name": "z-line",
-          "declaration": {
-            "name": "ZLine",
-            "module": "dist/zest.js"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
           "name": "z-link",
           "declaration": {
             "name": "ZLink",
@@ -13000,25 +13023,25 @@
         },
         {
           "kind": "custom-element-definition",
-          "name": "z-toggle",
+          "name": "z-toggle-button",
           "declaration": {
-            "name": "ZToggle",
+            "name": "ZToggleButton",
             "module": "dist/zest.js"
           }
         },
         {
           "kind": "custom-element-definition",
-          "name": "z-toggle-group",
+          "name": "z-toggle-button-group",
           "declaration": {
-            "name": "ZToggleGroup",
+            "name": "ZToggleButtonGroup",
             "module": "dist/zest.js"
           }
         },
         {
           "kind": "custom-element-definition",
-          "name": "z-toggle-group-item",
+          "name": "z-toggle-button-group-item",
           "declaration": {
-            "name": "ZToggleGroupItem",
+            "name": "ZToggleButtonGroupItem",
             "module": "dist/zest.js"
           }
         },

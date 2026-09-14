@@ -62,7 +62,7 @@ for (const member of labelDeclaration?.members ?? []) {
 
 for (const declaration of declarations) {
 	const legacyBooleanNames = new Set([
-		'isDisabled', 'isInvalid', 'isInline', 'isSelected', 'isSelectable', 'isRemovable'
+		'isInline', 'isSelectable', 'isRemovable'
 	])
 	for (const member of declaration.members ?? []) {
 		if (legacyBooleanNames.has(member.name)) failures.push(`${declaration.tagName} still exposes ${member.name}`)

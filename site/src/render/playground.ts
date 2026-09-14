@@ -21,12 +21,17 @@ const parseUnionMembers = (type: string): string[] => {
 	return members.filter((member) => member.length > 0)
 }
 
-const getControlKind = (type: string): PlaygroundControlKindT => {
-	const normalizedType = type.trim().toLowerCase()
+const getControlKind = (attribute: ApiRowT): PlaygroundControlKindT => {
+	// An explicit option list wins over the declared type: it is there precisely
+	// because the type is wider than the useful choices.
+	const hasControlOptions = Boolean(attribute.controlOptions && attribute.controlOptions.length > 0)
+	if (hasControlOptions) return 'enum'
+
+	const normalizedType = attribute.type.trim().toLowerCase()
 	if (normalizedType === 'boolean') return 'boolean'
 	if (normalizedType === 'number') return 'number'
 
-	const hasUnionMembers = parseUnionMembers(type).length > 0
+	const hasUnionMembers = parseUnionMembers(attribute.type).length > 0
 	if (hasUnionMembers) return 'enum'
 
 	return 'text'
@@ -45,8 +50,9 @@ const isControllable = (attribute: ApiRowT, allowedNames: string[]): boolean => 
 }
 
 const toPlaygroundControl = (attribute: ApiRowT): PlaygroundControlT => {
-	const kind = getControlKind(attribute.type)
-	const options = kind === 'enum' ? parseUnionMembers(attribute.type) : []
+	const kind = getControlKind(attribute)
+	const unionOptions = kind === 'enum' ? parseUnionMembers(attribute.type) : []
+	const options = attribute.controlOptions ?? unionOptions
 
 	return {
 		name: attribute.name,
@@ -65,17 +71,32 @@ const buildControls = (componentDoc: ComponentDocT): PlaygroundControlT[] => {
 
 type ZPlaygroundElementT = HTMLElement & {
 	controls: PlaygroundControlT[]
+	authoredAttributes: string[]
+	authoredAttributeValues: Record<string, string>
 }
 
 export const buildPlayground = (componentDoc: ComponentDocT): HTMLElement | null => {
 	if (!componentDoc.playground) return null
 
+	// Read before the element is in the document: an unconnected custom element
+	// has not rendered yet, so whatever it carries here is what the example
+	// author wrote. Anything it grows later — z-separator's own role and
+	// aria-orientation — is the component's business, not the snippet's.
 	const stageElement = componentDoc.playground.buildElement()
+	const authoredAttributes = stageElement.getAttributeNames()
+	// The values ride along too — z-playground's Reset restores each control
+	// to what buildElement() actually set (z-terminal's shell/cwd, say), not
+	// just to "gone", which used to strip them along with reader-added ones.
+	const authoredAttributeValues = Object.fromEntries(
+		authoredAttributes.map((name) => [name, stageElement.getAttribute(name) ?? ''])
+	)
 	stageElement.setAttribute('slot', 'stage')
 
 	const playground = createElement('z-playground') as ZPlaygroundElementT
 	playground.setAttribute('tag-name', componentDoc.tag)
 	playground.controls = buildControls(componentDoc)
+	playground.authoredAttributes = authoredAttributes
+	playground.authoredAttributeValues = authoredAttributeValues
 	playground.append(stageElement)
 
 	return playground

@@ -73,6 +73,8 @@ const styles = css`
 
 	.search input::placeholder {
 		color: var(--muted-foreground);
+		user-select: none;
+		-webkit-user-select: none;
 	}
 
 	.list {

@@ -59,7 +59,7 @@ const styles = css`
 		display: none;
 	}
 
-	:host([disabled]) {
+	:host([is-disabled]) {
 		opacity: 0.5;
 		pointer-events: none;
 	}
@@ -170,7 +170,7 @@ export const ZSlider = c(
 					step={props.step ?? 1}
 					value={current}
 					name={props.name}
-					disabled={props.disabled}
+					disabled={props.isDisabled}
 					aria-label={props.label}
 					oninput={(e: any) => {
 						const next = Number(e.target.value)
@@ -196,7 +196,7 @@ export const ZSlider = c(
 			valuePrefix: String,
 			valueSuffix: String,
 			accent: { type: String, reflect: true },
-			disabled: { type: Boolean, reflect: true },
+			isDisabled: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			input: event<{ value: number }>({ bubbles: true, composed: true }),
 			change: event<{ value: number }>({ bubbles: true, composed: true })

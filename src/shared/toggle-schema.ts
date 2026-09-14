@@ -1,5 +1,5 @@
 /*
- * Shared variant surface for z-toggle-group and z-toggle-group-item.
+ * Shared variant surface for z-toggle-button-group and z-toggle-button-group-item.
  *
  * These used to be nine booleans — is-purple/is-pink/is-neutral,
  * is-small/is-medium/is-large, is-ghost/is-outlined — one flag per value,
@@ -38,8 +38,7 @@ const SIZE_CLASSES: Record<string, string> = {
 	xs: 'is-xs',
 	sm: 'is-sm',
 	md: 'is-md',
-	lg: 'is-lg',
-	xl: 'is-xl'
+	lg: 'is-lg'
 }
 
 const KIND_CLASSES: Record<string, string> = {
@@ -54,7 +53,7 @@ const KIND_CLASSES: Record<string, string> = {
  * Unlike z-button's resolvers, these return undefined when the prop is unset
  * rather than falling back to a default class. Absence means "defer to
  * whatever the var() fallback chain resolves to" — an inherited
- * z-toggle-group value, or the built-in ghost/neutral/md default baked into
+ * z-toggle-button-group value, or the built-in ghost/neutral/md default baked into
  * toggle-styles.ts.
  */
 export const resolveOwnToggleAccentClass = (props: ToggleVariantPropsT): string | undefined => {

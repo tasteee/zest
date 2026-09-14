@@ -140,43 +140,23 @@ autocompletion for every `<z-*>` element.
 
 <!-- catalog:start -->
 
-**114 elements.** Generated from `custom-elements.json`.
+**113 elements.** Generated from `custom-elements.json`.
 
 Every element has a reference page under [`docs/`](./docs), and
 [`docs/element-api-reference.md`](./docs/element-api-reference.md) lists all
 of their attributes in one place.
 
-#### Foundation
-
-`z-box` `z-card` `z-display` `z-eyebrow` `z-heading` `z-inline` `z-kbd` `z-label` `z-line` `z-separator` `z-subheading` `z-text`
-
-#### Layout
-
-`z-bento-grid` `z-bento-item` `z-chassis` `z-scroll` `z-spacer` `z-surface` `z-swap`
-
-#### Buttons & actions
-
-`z-button` `z-button-group` `z-link` `z-theme-switcher` `z-toggle` `z-toggle-group` `z-toggle-group-item` `z-toolbar` `z-toolbar-group`
-
-#### Forms
-
-`z-checkbox` `z-color-picker` `z-combobox` `z-field` `z-filter` `z-input` `z-input-otp` `z-number-input` `z-radio` `z-radio-group` `z-range` `z-range-handle` `z-select` `z-slider` `z-switch` `z-textarea`
-
-#### Navigation & disclosure
-
-`z-accordion` `z-breadcrumbs` `z-collapsible` `z-context-menu` `z-menu` `z-nav-menu` `z-sidebar` `z-tabs`
-
 #### Overlays
 
-`z-alert` `z-alert-dialog` `z-callout` `z-command` `z-dialog` `z-drawer` `z-hover-card` `z-popover` `z-sheet` `z-toast` `z-tooltip`
+`z-alert` `z-alert-dialog` `z-command` `z-context-menu` `z-dialog` `z-drawer` `z-hover-card` `z-popover` `z-sheet` `z-toast` `z-tooltip`
 
 #### Data display
 
-`z-avatar` `z-avatar-stack` `z-badge` `z-list` `z-list-row` `z-pagination` `z-progress` `z-skeleton` `z-sortable` `z-stat` `z-status-dot` `z-table` `z-tree`
+`z-avatar` `z-avatar-stack` `z-badge` `z-callout` `z-empty-state` `z-list` `z-list-row` `z-progress` `z-skeleton` `z-stat` `z-status-dot` `z-suggestion-chips` `z-table` `z-tree`
 
 #### Canvas, panels & docs
 
-`z-editor-canvas` `z-panel` `z-resizable-panels`
+`z-editor-canvas` `z-panel`
 
 #### Text editor
 
@@ -192,15 +172,15 @@ of their attributes in one place.
 
 #### Music
 
-`z-knob` `z-pattern-roll` `z-piano-roll`
+`z-pattern-roll` `z-piano-roll`
 
 #### Specialized
 
-`z-carousel` `z-code-block` `z-empty-state` `z-relative-time` `z-scroll-area` `z-suggestion-chips` `z-terminal`
+`z-code-block` `z-relative-time` `z-terminal`
 
 #### Uncategorised
 
-`z-canvas-item` `z-comment-gutter-icon` `z-comment-mark` `z-comment-thread-panel` `z-draggable` `z-drop-indicator` `z-drop-target` `z-panel-handle` `z-table-axis-handle`
+`z-button` `z-button-group` `z-canvas-item` `z-checkbox` `z-color-picker` `z-combobox` `z-comment-gutter-icon` `z-comment-mark` `z-comment-thread-panel` `z-draggable` `z-drop-indicator` `z-drop-target` `z-field` `z-filter` `z-input` `z-input-otp` `z-number-input` `z-panel-handle` `z-radio` `z-radio-group` `z-range` `z-range-handle` `z-select` `z-slider` `z-swap` `z-switch` `z-table-axis-handle` `z-textarea` `z-theme-switcher` `z-toggle-button` `z-toggle-button-group` `z-toggle-button-group-item` `z-toolbar` `z-toolbar-group`
 
 <!-- catalog:end -->
 

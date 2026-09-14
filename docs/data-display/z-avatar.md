@@ -5,10 +5,11 @@ back to initials (from `name`, or given via `initials`) on a tinted ground.
 Optional status dot in the corner.
 
 ```html
-<z-avatar src="/me.svg" name="Shane Colcleasure"></z-avatar>
+<z-avatar name="Shane Colcleasure" accent="dom"></z-avatar>
 <z-avatar name="Ada Lovelace" accent="sub"></z-avatar>
 <z-avatar initials="ZL" size="lg" status="online"></z-avatar>
 <z-avatar name="Box" is-square></z-avatar>
+<z-avatar src="/me.svg" name="Shane Colcleasure"></z-avatar>
 ```
 
 ## Attributes

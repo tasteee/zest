@@ -93,7 +93,7 @@ export const ZRadio = c(
 	(props) => {
 		const [isChecked, setIsChecked] = useProp<boolean>('isChecked')
 
-		const labelClass = ['label'].concat(props.disabled ? ['is-disabled'] : []).join(' ')
+		const labelClass = ['label'].concat(props.isDisabled ? ['is-disabled'] : []).join(' ')
 		const ringClass = ['ring'].concat(isChecked ? ['is-checked'] : []).join(' ')
 
 		return (
@@ -102,7 +102,7 @@ export const ZRadio = c(
 					<input
 						type="radio"
 						checked={isChecked}
-						disabled={props.disabled}
+						disabled={props.isDisabled}
 						value={props.value}
 						aria-checked={isChecked ? 'true' : 'false'}
 						onchange={(changeEvent: Event) => {
@@ -122,7 +122,7 @@ export const ZRadio = c(
 	{
 		props: {
 			isChecked: { type: Boolean, reflect: true },
-			disabled: { type: Boolean, reflect: true },
+			isDisabled: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			accent: { type: String, reflect: true },
 			value: String,

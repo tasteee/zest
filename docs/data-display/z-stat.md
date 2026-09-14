@@ -1,7 +1,7 @@
 # z-stat
 
 A stacked statistic: a prominent value over a small muted label. Composes
-[z-heading](../foundation/z-heading.md) and [z-text](../foundation/z-text.md) internally, so it inherits the
+[z-heading](../typography/z-heading.md) and [z-text](../typography/z-text.md) internally, so it inherits the
 same type scale and colors.
 
 ```html

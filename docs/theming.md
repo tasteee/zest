@@ -10,7 +10,7 @@ zest ships four themes that disagree about physics.
 | `studio` | light | Bead-blasted aluminium synth panel. Carved paneling, silkscreen labels, tight radii. |
 
 Apply one by writing `data-theme` onto `<html>`, or onto any element to theme a
-region. See [z-theme-switcher](buttons-actions/z-theme-switcher.md) for the
+region. See [z-theme-switcher](actionables/buttons/z-theme-switcher.md) for the
 control, persistence, and the 0.45s fade between them.
 
 ```html

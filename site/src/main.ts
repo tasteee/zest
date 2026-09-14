@@ -89,13 +89,30 @@ const buildNavLeaf = (page: DocPageT): NavNodeT => {
 	return { label: page.slug, route: page.route }
 }
 
+// Where the page sits, for the eyebrow above its title and the group heading
+// in search. A grouped page names both levels — "Foundation" alone would put
+// z-text and z-box in the same place when the nav does not.
+const getPageSectionLabel = (page: DocPageT): string => {
+	if (!page.subcategoryLabel) return page.categoryLabel
+	return `${page.categoryLabel} · ${page.subcategoryLabel}`
+}
+
 // One category per branch, in the order docs-data emits them. z-nav-tree does
 // not sort — the author's ordering is the information.
+//
+// Grouped runs come before loose pages, the way a file tree puts folders above
+// files: a sub-section heading sitting halfway down a list of leaves is one
+// nobody finds.
 const buildNavItems = (): NavNodeT[] => {
 	const items: NavNodeT[] = []
 
 	for (const category of siteData.categories) {
-		items.push({ label: category.label, children: category.pages.map(buildNavLeaf) })
+		const groupNodes = category.subcategories.map((subcategory) => ({
+			label: subcategory.label,
+			children: subcategory.pages.map(buildNavLeaf)
+		}))
+
+		items.push({ label: category.label, children: [...groupNodes, ...category.pages.map(buildNavLeaf)] })
 	}
 
 	return items
@@ -197,7 +214,7 @@ const renderComponentDocPage = (contentRoot: HTMLElement, page: DocPageT): boole
 	activePage = page
 
 	try {
-		const componentPage = buildComponentPage(componentDoc, page.categoryLabel)
+		const componentPage = buildComponentPage(componentDoc, getPageSectionLabel(page))
 		appendPager(componentPage.article, page)
 		contentRoot.replaceChildren(componentPage.article)
 		setPageOutline(componentPage.outline)
@@ -219,7 +236,8 @@ const renderMarkdownDocPage = (contentRoot: HTMLElement, page: DocPageT): void =
 	])
 
 	const header = createElement('z-doc-header')
-	if (page.categoryLabel) header.setAttribute('eyebrow', page.categoryLabel)
+	const sectionLabel = getPageSectionLabel(page)
+	if (sectionLabel) header.setAttribute('eyebrow', sectionLabel)
 	header.setAttribute('heading', page.title)
 
 	const article = createElement('article', 'docArticle')
@@ -323,7 +341,7 @@ const handleDocContentClick = (event: MouseEvent): void => {
 const buildCommandPalette = (): ZCommandElementT => {
 	const commandPalette = document.createElement('z-command') as ZCommandElementT
 	commandPalette.items = getAllPages(siteData).map((page) => {
-		const group = page.categoryLabel || 'Pages'
+		const group = getPageSectionLabel(page) || 'Pages'
 		return { value: page.route, label: page.title, group, keywords: page.slug }
 	})
 

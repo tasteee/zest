@@ -163,7 +163,7 @@ export const ZCopyButton = c(
 				<button
 					type="button"
 					class={isCopied ? 'copy is-copied' : 'copy'}
-					disabled={props.disabled}
+					disabled={props.isDisabled}
 					title={restingTitle}
 					aria-label={restingTitle}
 					aria-live="polite"
@@ -184,7 +184,7 @@ export const ZCopyButton = c(
 			copiedLabel: { type: String, reflect: true },
 			kind: { type: String, reflect: true },
 			size: { type: String, reflect: true },
-			disabled: { type: Boolean, reflect: true },
+			isDisabled: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			copy: event<{ value: string }>({ bubbles: true, composed: true }),
 			error: event<{ error: Error | null }>({ bubbles: true, composed: true })

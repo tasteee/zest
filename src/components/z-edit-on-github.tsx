@@ -4,7 +4,7 @@ import { c, css } from 'atomico'
 /*
  * z-edit-on-github — the "fix this page" link at the foot of a doc.
  *
- *   <z-edit-on-github repo="tasteee/zest" path="docs/forms/z-input.md"></z-edit-on-github>
+ *   <z-edit-on-github repo="tasteee/zest" path="docs/actionables/inputs/z-input.md"></z-edit-on-github>
  *
  * The URL is built from a repo and a path rather than authored per page,
  * because ~150 pages hand-writing their own blob URL is ~150 chances to point

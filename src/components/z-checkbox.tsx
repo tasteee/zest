@@ -124,7 +124,7 @@ export const ZCheckbox = c(
 		const [isChecked, setIsChecked] = useProp<boolean>('isChecked')
 
 		const labelClass = ['label', resolveSizeClass(props)]
-			.concat(props.disabled ? ['is-disabled'] : [])
+			.concat(props.isDisabled ? ['is-disabled'] : [])
 			.join(' ')
 
 		const boxClass = ['box'].concat(isChecked ? ['is-checked'] : []).join(' ')
@@ -137,7 +137,7 @@ export const ZCheckbox = c(
 						checked={isChecked}
 						name={props.name}
 						value={props.value}
-						disabled={props.disabled}
+						disabled={props.isDisabled}
 						aria-checked={isChecked ? 'true' : 'false'}
 						onchange={(changeEvent: Event) => {
 							changeEvent.stopPropagation()
@@ -159,7 +159,7 @@ export const ZCheckbox = c(
 	{
 		props: {
 			isChecked: { type: Boolean, reflect: true },
-			disabled: { type: Boolean, reflect: true },
+			isDisabled: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			size: { type: String, reflect: true },
 			accent: { type: String, reflect: true },

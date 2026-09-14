@@ -28,7 +28,7 @@ export const zPopoverDoc: ComponentDocT = {
 
 	playground: {
 		buildElement: buildPlaygroundPopover,
-		controlNames: ['placement', 'offset', 'accent', 'is-open', 'disabled'],
+		controlNames: ['placement', 'offset', 'accent', 'is-open', 'is-disabled'],
 		slotLabel: 'trigger and body'
 	},
 
@@ -251,7 +251,7 @@ export const zPopoverDoc: ComponentDocT = {
 		{ name: 'offset', type: 'number', defaultValue: '8', description: 'Gap in pixels between the trigger and the panel.' },
 		{ name: 'is-open', type: 'boolean', defaultValue: '—', description: 'Whether the panel is showing. Reflects and is two-way — assign it to open or close from code.' },
 		{ name: 'accent', type: 'neutral | dom | sub', defaultValue: 'neutral', description: 'Accent used inside the panel.' },
-		{ name: 'disabled', type: 'boolean', defaultValue: '—', description: 'Stops the trigger from opening the panel.' },
+		{ name: 'is-disabled', type: 'boolean', defaultValue: '—', description: 'Stops the trigger from opening the panel.' },
 		{ name: 'is-hidden', type: 'boolean', defaultValue: '—', description: 'Removes the popover and its trigger from layout.' }
 	],
 
@@ -284,9 +284,9 @@ export const zPopoverDoc: ComponentDocT = {
 	],
 
 	related: [
-		{ tag: 'z-tooltip', route: '/c/overlays/z-tooltip', description: 'A hover label rather than a panel.' },
-		{ tag: 'z-hover-card', route: '/c/overlays/z-hover-card', description: 'The same panel, opened by hover.' },
-		{ tag: 'z-menu', route: '/c/navigation-disclosure/z-menu', description: 'For a list of actions.' },
-		{ tag: 'z-dialog', route: '/c/overlays/z-dialog', description: 'When the content must block.' }
+		{ tag: 'z-tooltip', route: '/elements/overlays/z-tooltip', description: 'A hover label rather than a panel.' },
+		{ tag: 'z-hover-card', route: '/elements/overlays/z-hover-card', description: 'The same panel, opened by hover.' },
+		{ tag: 'z-menu', route: '/elements/navigation/z-menu', description: 'For a list of actions.' },
+		{ tag: 'z-dialog', route: '/elements/overlays/z-dialog', description: 'When the content must block.' }
 	]
 }

@@ -7,7 +7,7 @@ import { c, css, useHost, useEffect } from 'atomico'
  * time; type="multiple" lets several stay open. Coordination is done by
  * listening for the bubbling `toggle` event each z-collapsible fires, then
  * closing siblings as needed — the same parent/child pattern as
- * z-toggle-group / z-toggle-group-item.
+ * z-toggle-button-group / z-toggle-button-group-item.
  */
 const styles = css`
 	:host {

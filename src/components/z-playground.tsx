@@ -112,22 +112,116 @@ const readControls = (value: unknown): ControlT[] => {
 	return controls
 }
 
-// The instance's own markup is the output, minus the slot attribute the
-// playground put on it — readers should see what they would paste, not the
-// plumbing that got it onto the stage.
-const readStageMarkup = (stageElement: Element): string => {
-	const copy = stageElement.cloneNode(true) as HTMLElement
-	copy.removeAttribute('slot')
-	return copy.outerHTML
+// The stage element is what the reader sees and what the snippet shows, but it
+// is not always what the knobs drive. An example whose subject only makes sense
+// in context — z-inline, which has no size of its own and has to sit inside a
+// sized z-text — slots the wrapper. `tag-name` names the element the controls
+// belong to, so they find it inside the stage instead of writing z-inline's
+// attributes onto its parent.
+const readControlledElement = (stageElement: Element, tagName: string): Element => {
+	if (!tagName) return stageElement
+
+	const isStageItself = stageElement.tagName.toLowerCase() === tagName.toLowerCase()
+	if (isStageItself) return stageElement
+
+	return stageElement.querySelector(tagName) ?? stageElement
 }
 
-const readCurrentValues = (stageElement: Element | null, controls: ControlT[]): Record<string, string> => {
-	if (!stageElement) return {}
+// The snippet is what a reader would paste, so it carries what the example
+// author wrote plus whatever the reader has since turned — and nothing the
+// component wrote onto itself while rendering. z-separator sets role="separator"
+// and a matching aria-orientation on its own host; echoing those back reads as
+// markup you are supposed to type, when in fact typing them is exactly what
+// the component exists to save you from.
+//
+// Only the stage root is filtered, and only when an authored list was actually
+// supplied. Everything deeper is left whole: an icon-only z-button inside an
+// example carries an aria-label the author really did write, and really does
+// have to write.
+const readAuthoredNames = (value: unknown): Set<string> | null => {
+	if (!Array.isArray(value)) return null
+
+	const names = value.filter((entry) => typeof entry === 'string')
+	return new Set(names)
+}
+
+// Reset means "back to the element as authored" — which, for an attribute
+// the example itself set (z-terminal's `shell`, z-marquee's `duration`), is
+// that authored value, not gone entirely. Only an attribute a reader turned
+// on that the example never had should disappear. Keyed by name because that
+// is all `readAuthoredNames` above ever had; this carries the value too.
+const readAuthoredAttributeValues = (value: unknown): Record<string, string> => {
+	const isRecord = value && typeof value === 'object' && !Array.isArray(value)
+	if (!isRecord) return {}
+
+	const entries = Object.entries(value as Record<string, unknown>)
+	const stringEntries = entries.filter((entry): entry is [string, string] => typeof entry[1] === 'string')
+	return Object.fromEntries(stringEntries)
+}
+
+// Void elements never carry children, so they never get a closing tag or an
+// indented body — just the one open tag, same as a reader would type it.
+const VOID_ELEMENT_NAMES = new Set([
+	'area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'source', 'track', 'wbr'
+])
+
+const buildAttributePart = (attribute: Attr): string => {
+	const hasEmptyValue = attribute.value === ''
+	if (hasEmptyValue) return attribute.name
+	return `${attribute.name}="${attribute.value}"`
+}
+
+const buildOpenTag = (element: Element): string => {
+	const tagName = element.tagName.toLowerCase()
+	const attributeParts = [...element.attributes].map((attribute) => buildAttributePart(attribute))
+	const attributeText = attributeParts.length ? ` ${attributeParts.join(' ')}` : ''
+	return `<${tagName}${attributeText}>`
+}
+
+const buildCloseTag = (element: Element): string => `</${element.tagName.toLowerCase()}>`
+
+const hasElementChildren = (element: Element): boolean => element.children.length > 0
+
+// A reader pastes this snippet, so it has to read the way the rest of the
+// library's own example markup does: one attribute line for the tag, one
+// line per child, never a wall of nested elements run together. An element
+// with only text (a label, an icon-free leaf) stays on its own single line —
+// breaking "Bold" onto three lines would be noise, not clarity.
+const formatMarkupElement = (element: Element, depth: number): string => {
+	const indent = '	'.repeat(depth)
+	const tagName = element.tagName.toLowerCase()
+	const isVoid = VOID_ELEMENT_NAMES.has(tagName)
+	if (isVoid) return `${indent}${buildOpenTag(element)}`
+
+	const isTextOnly = !hasElementChildren(element)
+	if (isTextOnly) return `${indent}${buildOpenTag(element)}${element.textContent ?? ''}${buildCloseTag(element)}`
+
+	const childLines = [...element.children].map((child) => formatMarkupElement(child, depth + 1))
+	return [`${indent}${buildOpenTag(element)}`, ...childLines, `${indent}${buildCloseTag(element)}`].join('\n')
+}
+
+const readStageMarkup = (stageElement: Element, controls: ControlT[], authoredNames: Set<string> | null): string => {
+	const copy = stageElement.cloneNode(true) as HTMLElement
+	copy.removeAttribute('slot')
+
+	const hasAuthoredNames = Boolean(authoredNames)
+	if (hasAuthoredNames) {
+		const keptNames = new Set([...(authoredNames as Set<string>), ...controls.map((control) => control.name)])
+		for (const name of copy.getAttributeNames()) {
+			if (!keptNames.has(name)) copy.removeAttribute(name)
+		}
+	}
+
+	return formatMarkupElement(copy, 0)
+}
+
+const readCurrentValues = (controlledElement: Element | null, controls: ControlT[]): Record<string, string> => {
+	if (!controlledElement) return {}
 
 	const values: Record<string, string> = {}
 	for (const control of controls) {
-		const isPresent = stageElement.hasAttribute(control.name)
-		if (isPresent) values[control.name] = stageElement.getAttribute(control.name) || ''
+		const isPresent = controlledElement.hasAttribute(control.name)
+		if (isPresent) values[control.name] = controlledElement.getAttribute(control.name) || ''
 	}
 	return values
 }
@@ -147,30 +241,63 @@ export const ZPlayground = c(
 			return assigned[0]
 		}
 
-		const sync = () => {
-			const stageElement = readStage()
-			if (!stageElement) return
+		// A concept page — z-drag-drop.md (z-draggable + z-drop-target),
+		// z-comment-thread.md (z-comment-mark and friends) — has no single tag
+		// matching its own slug, so it slots every root element from its example
+		// as an uncontrolled stage instead of one driveable instance (see
+		// buildStaticLiveDemo in playground.ts). The single-element case below is
+		// just the one-item version of this same list.
+		const readStageElements = (): Element[] => {
+			return slotRef.current?.assignedElements({ flatten: true }) ?? []
+		}
 
-			setMarkup(readStageMarkup(stageElement))
-			setValues(readCurrentValues(stageElement, controls))
+		const readControlled = (): Element | null => {
+			const stageElement = readStage()
+			if (!stageElement) return null
+			return readControlledElement(stageElement, props.tagName as string)
+		}
+
+		const sync = () => {
+			const stageElements = readStageElements()
+			if (!stageElements.length) return
+
+			const authoredNames = readAuthoredNames(props.authoredAttributes)
+			const stageMarkup = stageElements.map((stageElement) => readStageMarkup(stageElement, controls, authoredNames)).join('\n')
+			setMarkup(stageMarkup)
+			setValues(readCurrentValues(readControlledElement(stageElements[0], props.tagName as string), controls))
 		}
 
 		useEffect(() => sync(), [props.controls])
 
 		const handleControlChange = (changeEvent: CustomEvent<{ name: string; value: unknown }>) => {
-			const stageElement = readStage()
-			if (!stageElement) return
+			const controlledElement = readControlled()
+			if (!controlledElement) return
+
+			const changedControl = controls.find((control) => control.name === changeEvent.detail.name)
+			// Only a z-control-panel's own { name, value } change is a real control
+			// change. A stray `change` from an inner form control (e.g. z-input or
+			// z-number-input firing their own on-blur `change`, shaped { value }
+			// with no `name`) also bubbles out of the panel; matching it against a
+			// known control name rejects that instead of writing an attribute
+			// literally named "undefined".
+			if (!changedControl) return
+
+			// Every panel change carries a `value` key — `null` when the reader
+			// unset the control. A detail without one is some other event that
+			// happens to share the name, and acting on it would read as "unset"
+			// and silently strip an attribute the reader is still editing.
+			const hasValueKey = Object.prototype.hasOwnProperty.call(changeEvent.detail, 'value')
+			if (!hasValueKey) return
 
 			const rawValue = changeEvent.detail.value
 			const nextValue = rawValue == null ? null : String(rawValue)
-			const changedControl = controls.find((control) => control.name === changeEvent.detail.name)
-			const isBooleanControl = changedControl?.kind === 'boolean'
+			const isBooleanControl = changedControl.kind === 'boolean'
 			// A present boolean attribute intentionally has an empty-string value.
 			// Other control kinds use an empty string to mean "unset".
 			const shouldRemove = nextValue === null || (!isBooleanControl && nextValue.trim() === '')
 
-			if (shouldRemove) stageElement.removeAttribute(changeEvent.detail.name)
-			if (!shouldRemove) stageElement.setAttribute(changeEvent.detail.name, nextValue as string)
+			if (shouldRemove) controlledElement.removeAttribute(changeEvent.detail.name)
+			if (!shouldRemove) controlledElement.setAttribute(changeEvent.detail.name, nextValue as string)
 
 			sync()
 		}
@@ -186,14 +313,21 @@ export const ZPlayground = c(
 			return () => panel.removeEventListener('change', listener)
 		}, [props.controls])
 
-		// Reset means "back to the element as authored", which is every
-		// controlled attribute removed — the component's own defaults are the
-		// baseline, not whatever the last reader left behind.
+		// Reset means "back to the element as authored": a control the example
+		// itself set (z-terminal's `shell`, z-marquee's `duration`) goes back to
+		// that authored value, and a control the reader turned on that the
+		// example never had is removed outright — the component's own defaults
+		// are the baseline only for the second group, not the first.
 		const handleReset = () => {
-			const stageElement = readStage()
-			if (!stageElement) return
+			const controlledElement = readControlled()
+			if (!controlledElement) return
 
-			for (const control of controls) stageElement.removeAttribute(control.name)
+			const authoredValues = readAuthoredAttributeValues(props.authoredAttributeValues)
+			for (const control of controls) {
+				const wasAuthored = Object.prototype.hasOwnProperty.call(authoredValues, control.name)
+				if (wasAuthored) controlledElement.setAttribute(control.name, authoredValues[control.name])
+				if (!wasAuthored) controlledElement.removeAttribute(control.name)
+			}
 			sync()
 			props.reset()
 		}
@@ -224,6 +358,8 @@ export const ZPlayground = c(
 	{
 		props: {
 			controls: { type: Array },
+			authoredAttributes: { type: Array },
+			authoredAttributeValues: { type: Object },
 			tagName: { type: String, reflect: true },
 			layout: { type: String, reflect: true },
 			isHidden: { type: Boolean, reflect: true },

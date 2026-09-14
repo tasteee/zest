@@ -199,7 +199,7 @@ export const zSheetDoc: ComponentDocT = {
 		{ name: 'description', type: 'string', defaultValue: '—', description: 'A muted line under the heading.' },
 		{ name: 'has-close', type: 'boolean', defaultValue: '—', description: 'Removes the ✕. Only safe when there is another way out.' },
 		{ name: 'is-static', type: 'boolean', defaultValue: '—', description: 'Ignores backdrop clicks. Escape still closes.' },
-		{ name: 'disabled', type: 'boolean', defaultValue: '—', description: 'Stops the trigger from opening the sheet.' }
+		{ name: 'is-disabled', type: 'boolean', defaultValue: '—', description: 'Stops the trigger from opening the sheet.' }
 	],
 
 	properties: [],
@@ -228,8 +228,8 @@ export const zSheetDoc: ComponentDocT = {
 	],
 
 	related: [
-		{ tag: 'z-drawer', route: '/c/overlays/z-drawer', description: 'A bottom sheet with a grab handle and drag-to-dismiss.' },
-		{ tag: 'z-dialog', route: '/c/overlays/z-dialog', description: 'The centred version, for short content.' },
-		{ tag: 'z-panel', route: '/c/canvas-panels/z-panel', description: 'A non-modal side panel that lives in the layout.' }
+		{ tag: 'z-drawer', route: '/elements/overlays/z-drawer', description: 'A bottom sheet with a grab handle and drag-to-dismiss.' },
+		{ tag: 'z-dialog', route: '/elements/overlays/z-dialog', description: 'The centred version, for short content.' },
+		{ tag: 'z-panel', route: '/elements/canvas-panels/z-panel', description: 'A non-modal side panel that lives in the layout.' }
 	]
 }

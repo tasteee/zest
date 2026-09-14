@@ -5,7 +5,7 @@ Recursive, route-aware documentation navigation.
 ```js
 document.querySelector('z-nav-tree').items = [
   { label: 'Forms', children: [
-    { label: 'z-checkbox', route: '/c/forms/z-checkbox', status: 'stable' }
+    { label: 'z-checkbox', route: '/elements/actionables/z-checkbox', status: 'stable' }
   ]}
 ]
 ```

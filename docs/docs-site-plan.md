@@ -55,7 +55,7 @@ remains blocked on `AnatomyPartT` gaining region coordinates.
 
 Wave 3 is most of the way through. `z-swatch` and `z-token-table` closed the
 library's largest documentation gap — 411 tokens with no reference page, now
-`docs/foundation/tokens.md`. `z-steps`, `z-code-group` and `z-do-dont` follow.
+`docs/structure/tokens.md`. `z-steps`, `z-code-group` and `z-do-dont` follow.
 
 **All five waves are complete.** `z-theme-toggle` was dropped rather than
 built, and `z-code-annotation` turned out to need no element of its own — the

@@ -5,60 +5,58 @@
 // registry is keyed by tag so the router can look one up straight from the
 // route slug.
 
-import { zButtonDoc } from './buttons-actions/z-button'
-import { zButtonGroupDoc } from './buttons-actions/z-button-group'
-import { zLinkDoc } from './buttons-actions/z-link'
-import { zThemeSwitcherDoc } from './buttons-actions/z-theme-switcher'
-import { zToggleDoc } from './buttons-actions/z-toggle'
-import { zToggleGroupDoc } from './buttons-actions/z-toggle-group'
-import { zToggleGroupItemDoc } from './buttons-actions/z-toggle-group-item'
-import { zToolbarDoc } from './buttons-actions/z-toolbar'
-import { zToolbarGroupDoc } from './buttons-actions/z-toolbar-group'
+import { zButtonDoc } from './actionables/z-button'
+import { zButtonGroupDoc } from './actionables/z-button-group'
+import { zThemeSwitcherDoc } from './actionables/z-theme-switcher'
+import { zToggleButtonDoc } from './actionables/z-toggle-button'
+import { zToggleButtonGroupDoc } from './actionables/z-toggle-button-group'
+import { zToggleButtonGroupItemDoc } from './actionables/z-toggle-button-group-item'
+import { zToolbarDoc } from './actionables/z-toolbar'
+import { zToolbarGroupDoc } from './actionables/z-toolbar-group'
+import { zSwapDoc } from './actionables/z-swap'
+import { zCheckboxDoc } from './actionables/z-checkbox'
+import { zColorPickerDoc } from './actionables/z-color-picker'
+import { zComboboxDoc } from './actionables/z-combobox'
+import { zFieldDoc } from './actionables/z-field'
+import { zFilterDoc } from './actionables/z-filter'
+import { zInputDoc } from './actionables/z-input'
+import { zInputOtpDoc } from './actionables/z-input-otp'
+import { zNumberInputDoc } from './actionables/z-number-input'
+import { zRadioDoc } from './actionables/z-radio'
+import { zRadioGroupDoc } from './actionables/z-radio-group'
+import { zRangeDoc } from './actionables/z-range'
+import { zRangeHandleDoc } from './actionables/z-range-handle'
+import { zSelectDoc } from './actionables/z-select'
+import { zSliderDoc } from './actionables/z-slider'
+import { zSwitchDoc } from './actionables/z-switch'
+import { zTextareaDoc } from './actionables/z-textarea'
 
-import { zBoxDoc } from './foundation/z-box'
-import { zCardDoc } from './foundation/z-card'
-import { zDisplayDoc } from './foundation/z-display'
-import { zEyebrowDoc } from './foundation/z-eyebrow'
-import { zHeadingDoc } from './foundation/z-heading'
-import { zInlineDoc } from './foundation/z-inline'
-import { zKbdDoc } from './foundation/z-kbd'
-import { zLabelDoc } from './foundation/z-label'
-import { zLineDoc } from './foundation/z-line'
-import { zSeparatorDoc } from './foundation/z-separator'
-import { zSubheadingDoc } from './foundation/z-subheading'
-import { zTextDoc } from './foundation/z-text'
+import { zLinkDoc } from './navigation/z-link'
 
-import { zCheckboxDoc } from './forms/z-checkbox'
-import { zColorPickerDoc } from './forms/z-color-picker'
-import { zComboboxDoc } from './forms/z-combobox'
-import { zFieldDoc } from './forms/z-field'
-import { zFilterDoc } from './forms/z-filter'
-import { zInputDoc } from './forms/z-input'
-import { zInputOtpDoc } from './forms/z-input-otp'
-import { zNumberInputDoc } from './forms/z-number-input'
-import { zRadioDoc } from './forms/z-radio'
-import { zRadioGroupDoc } from './forms/z-radio-group'
-import { zRangeDoc } from './forms/z-range'
-import { zRangeHandleDoc } from './forms/z-range-handle'
-import { zSelectDoc } from './forms/z-select'
-import { zSliderDoc } from './forms/z-slider'
-import { zSwitchDoc } from './forms/z-switch'
-import { zTextareaDoc } from './forms/z-textarea'
+import { zBoxDoc } from './structure/z-box'
+import { zCardDoc } from './structure/z-card'
+import { zSeparatorDoc } from './structure/z-separator'
+import { zBentoGridDoc } from './structure/z-bento-grid'
+import { zBentoItemDoc } from './structure/z-bento-item'
+import { zChassisDoc } from './structure/z-chassis'
+import { wiredColumnDoc } from './structure/wired-column'
+import { wiredGridDoc } from './structure/wired-grid'
+import { wiredRowDoc } from './structure/wired-row'
+import { zScrollDoc } from './structure/z-scroll'
+import { zSpacerDoc } from './structure/z-spacer'
+import { zSurfaceDoc } from './structure/z-surface'
 
-import { zBentoGridDoc } from './layout/z-bento-grid'
-import { zBentoItemDoc } from './layout/z-bento-item'
-import { zChassisDoc } from './layout/z-chassis'
-import { wiredColumnDoc } from './layout/wired-column'
-import { wiredGridDoc } from './layout/wired-grid'
-import { wiredRowDoc } from './layout/wired-row'
-import { zScrollDoc } from './layout/z-scroll'
-import { zSpacerDoc } from './layout/z-spacer'
-import { zSurfaceDoc } from './layout/z-surface'
-import { zSwapDoc } from './layout/z-swap'
+import { zDisplayDoc } from './typography/z-display'
+import { zEyebrowDoc } from './typography/z-eyebrow'
+import { zHeadingDoc } from './typography/z-heading'
+import { zInlineDoc } from './typography/z-inline'
+import { zKbdDoc } from './typography/z-kbd'
+import { zLabelDoc } from './typography/z-label'
+import { zSubheadingDoc } from './typography/z-subheading'
+import { zTextDoc } from './typography/z-text'
 
 import { zAlertDoc } from './overlays/z-alert'
 import { zAlertDialogDoc } from './overlays/z-alert-dialog'
-import { zCalloutDoc } from './overlays/z-callout'
 import { zCommandDoc } from './overlays/z-command'
 import { zDialogDoc } from './overlays/z-dialog'
 import { zDrawerDoc } from './overlays/z-drawer'
@@ -67,6 +65,8 @@ import { zPopoverDoc } from './overlays/z-popover'
 import { zSheetDoc } from './overlays/z-sheet'
 import { zToastDoc } from './overlays/z-toast'
 import { zTooltipDoc } from './overlays/z-tooltip'
+
+import { zCalloutDoc } from './data-display/z-callout'
 
 import { zTerminalDoc } from './specialized/z-terminal'
 
@@ -77,9 +77,9 @@ const ALL_COMPONENT_DOCS: ComponentDocT[] = [
 	zButtonGroupDoc,
 	zLinkDoc,
 	zThemeSwitcherDoc,
-	zToggleDoc,
-	zToggleGroupDoc,
-	zToggleGroupItemDoc,
+	zToggleButtonDoc,
+	zToggleButtonGroupDoc,
+	zToggleButtonGroupItemDoc,
 	zToolbarDoc,
 	zToolbarGroupDoc,
 
@@ -91,7 +91,6 @@ const ALL_COMPONENT_DOCS: ComponentDocT[] = [
 	zInlineDoc,
 	zKbdDoc,
 	zLabelDoc,
-	zLineDoc,
 	zSeparatorDoc,
 	zSubheadingDoc,
 	zTextDoc,

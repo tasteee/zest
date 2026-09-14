@@ -103,6 +103,13 @@ export const dialogSurfaceStyles = css`
 		--accent: var(--destructive);
 	}
 
+	/* Everything except display lives on the base rule rather than on [open],
+	   and that split is the whole exit animation. Closing removes [open] on the
+	   very first frame, while the allow-discrete display transition keeps the
+	   panel on screen for the fade that follows. Any property gated on [open]
+	   therefore snaps at frame zero of the exit — flex-direction was, so the
+	   column relaid itself as a row and the panel visibly rearranged while
+	   fading out. */
 	.dialog {
 		box-sizing: border-box;
 		width: min(var(--z-dialog-width, 30rem), calc(100vw - 2rem));
@@ -113,6 +120,12 @@ export const dialogSurfaceStyles = css`
 		border: 1px solid var(--border);
 		border-radius: var(--radius-lg);
 		overflow: hidden;
+		flex-direction: column;
+		box-shadow:
+			0 1px 1px color-mix(in oklch, black 28%, transparent),
+			0 6px 14px -8px color-mix(in oklch, black 42%, transparent),
+			0 28px 64px -36px color-mix(in oklch, black 48%, transparent),
+			0 72px 180px -112px color-mix(in oklch, var(--accent) 20%, transparent);
 	}
 
 	.dialog::backdrop {
@@ -120,14 +133,11 @@ export const dialogSurfaceStyles = css`
 		backdrop-filter: blur(3px);
 	}
 
+	/* The UA rule for a dialog without [open] supplies display: none, which is
+	   the closed half of the pair the allow-discrete display transition animates
+	   between. */
 	.dialog[open] {
 		display: flex;
-		flex-direction: column;
-		box-shadow:
-			0 1px 1px color-mix(in oklch, black 28%, transparent),
-			0 6px 14px -8px color-mix(in oklch, black 42%, transparent),
-			0 28px 64px -36px color-mix(in oklch, black 48%, transparent),
-			0 72px 180px -112px color-mix(in oklch, var(--accent) 20%, transparent);
 	}
 
 	.body {

@@ -47,7 +47,7 @@ const styles = css`
 	:host([is-hidden]) {
 		display: none;
 	}
-	:host([disabled]) {
+	:host([is-disabled]) {
 		opacity: 0.55;
 		pointer-events: none;
 	}
@@ -556,7 +556,7 @@ export const ZPatternRoll = c(
 		// The timing ruler adjusts beat width vertically; the degree gutter adjusts
 		// row height horizontally so the labels stay a direct, discoverable control.
 		const startZoomDrag = (e: PointerEvent, axis: 'horizontal' | 'vertical') => {
-			if (props.disabled || e.button !== 0) return
+			if (props.isDisabled || e.button !== 0) return
 			e.preventDefault()
 			const surface = e.currentTarget as HTMLElement
 			surface.setPointerCapture(e.pointerId)
@@ -596,7 +596,7 @@ export const ZPatternRoll = c(
 
 		// --- pointer down: decide the gesture ---
 		const onPointerDown = (e: PointerEvent) => {
-			if (props.disabled || e.button === 2) return
+			if (props.isDisabled || e.button === 2) return
 			;(host.current as HTMLElement).focus?.()
 			const { beat, tone } = pointToBeatTone(e)
 			const hit = signalAt(beat, tone)
@@ -736,7 +736,7 @@ export const ZPatternRoll = c(
 
 		// --- double-click: create (empty) or delete (on a signal) ---
 		const onDblClick = (e: MouseEvent) => {
-			if (props.disabled) return
+			if (props.isDisabled) return
 			const { beat, tone } = pointToBeatTone(e)
 			const hit = signalAt(beat, tone)
 			if (hit) {
@@ -762,7 +762,7 @@ export const ZPatternRoll = c(
 
 		// --- right-click: delete signal under cursor (or whole selection) ---
 		const onContextMenu = (e: MouseEvent) => {
-			if (props.disabled) return
+			if (props.isDisabled) return
 			e.preventDefault()
 			const { beat, tone } = pointToBeatTone(e)
 			const hit = signalAt(beat, tone)
@@ -803,7 +803,7 @@ export const ZPatternRoll = c(
 		const resetModifiers = () => patchSelection((s) => ({ ...s, octave: 0, velocity: defaultVelocity, probability: 1 }))
 
 		const onKeyDown = (e: KeyboardEvent) => {
-			if (props.disabled) return
+			if (props.isDisabled) return
 			const mod = e.metaKey || e.ctrlKey
 			const k = e.key
 			if (k === 'Delete' || k === 'Backspace') {
@@ -1047,7 +1047,7 @@ export const ZPatternRoll = c(
 			playhead: { type: Number, reflect: true },
 			hasToolbar: { type: Boolean, reflect: true, value: () => true },
 			hasKeyboard: { type: Boolean, reflect: true, value: () => true },
-			disabled: { type: Boolean, reflect: true },
+			isDisabled: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			change: event<{ signals: any[] }>({ bubbles: true, composed: true }),
 			select: event<{ ids: number[] }>({ bubbles: true, composed: true })

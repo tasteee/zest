@@ -20,11 +20,11 @@ export const zTooltipDoc: ComponentDocT = {
 	status: ComponentStatus.stable,
 
 	description:
-		'Wrap anything: `<z-tooltip content="Save"><z-button>…</z-button></z-tooltip>`. The label opens on hover or focus after `open-delay` and closes on leave, blur, or Escape. Like every anchored overlay here it uses the shared positioning core — a top-layer `[popover]` surface that escapes overflow and flips near an edge — with tighter padding and a plain-text body, because a tooltip that holds anything more than a phrase is the wrong component.',
+		'Wrap anything: `<z-tooltip content="Save"><z-button>…</z-button></z-tooltip>`. The label opens on hover or focus after `open-delay` and closes on leave, blur, or Escape. Like every anchored overlay here it uses the shared positioning core — a top-layer `[popover]` surface that escapes overflow and flips near an edge — with tighter padding and a plain-text body, because a tooltip that holds anything more than a phrase is the wrong component. An arrow points back at the trigger by default, tracking the side the label flipped to and stopping short of the corners when a near-edge shift moves the label off centre; `does-hide-arrow` removes it.',
 
 	playground: {
 		buildElement: buildPlaygroundTooltip,
-		controlNames: ['content', 'placement', 'offset', 'open-delay', 'disabled'],
+		controlNames: ['content', 'placement', 'offset', 'open-delay', 'does-hide-arrow', 'is-disabled'],
 		slotLabel: 'the trigger element'
 	},
 
@@ -40,6 +40,7 @@ export const zTooltipDoc: ComponentDocT = {
 	anatomy: [
 		{ name: 'default slot', description: 'The trigger. The host hugs it and acts as the positioning anchor.' },
 		{ name: 'surface', description: 'The label — a small top-layer panel with role="tooltip".' },
+		{ name: 'arrow', description: 'The point back at the trigger, on the side the label settled on. Decorative, and hidden from assistive technology.' },
 		{ name: 'open delay', description: 'The pause before opening, so passing over a toolbar does not set off a chain of labels.' }
 	],
 
@@ -65,13 +66,13 @@ export const zTooltipDoc: ComponentDocT = {
 			markup: `
 				<z-toolbar>
 				  <z-tooltip content="Bold">
-				    <z-toggle kind="ghost" is-icon aria-label="Bold">${Icons.bold}</z-toggle>
+				    <z-toggle-button kind="ghost" is-icon aria-label="Bold">${Icons.bold}</z-toggle-button>
 				  </z-tooltip>
 				  <z-tooltip content="Italic">
-				    <z-toggle kind="ghost" is-icon aria-label="Italic">${Icons.italic}</z-toggle>
+				    <z-toggle-button kind="ghost" is-icon aria-label="Italic">${Icons.italic}</z-toggle-button>
 				  </z-tooltip>
 				  <z-tooltip content="Insert link">
-				    <z-toggle kind="ghost" is-icon aria-label="Insert link">${Icons.link}</z-toggle>
+				    <z-toggle-button kind="ghost" is-icon aria-label="Insert link">${Icons.link}</z-toggle-button>
 				  </z-tooltip>
 				</z-toolbar>
 			`
@@ -174,7 +175,8 @@ export const zTooltipDoc: ComponentDocT = {
 		{ name: 'placement', type: 'top | bottom | left | right | top-start | top-end | bottom-start | bottom-end | left-start | left-end | right-start | right-end', defaultValue: 'top', description: 'Preferred side and alignment. Flips when there is no room.' },
 		{ name: 'offset', type: 'number', defaultValue: '8', description: 'Gap in pixels between the trigger and the label.' },
 		{ name: 'open-delay', type: 'number', defaultValue: '150', description: 'Milliseconds to wait before opening.' },
-		{ name: 'disabled', type: 'boolean', defaultValue: '—', description: 'Stops the tooltip from opening at all.' },
+		{ name: 'does-hide-arrow', type: 'boolean', defaultValue: '—', description: 'Drops the arrow. It is drawn by default — the arrow is what ties the label to the control it names.' },
+		{ name: 'is-disabled', type: 'boolean', defaultValue: '—', description: 'Stops the tooltip from opening at all.' },
 		{ name: 'is-hidden', type: 'boolean', defaultValue: '—', description: 'Removes the tooltip and its trigger from layout.' }
 	],
 
@@ -198,8 +200,8 @@ export const zTooltipDoc: ComponentDocT = {
 	],
 
 	related: [
-		{ tag: 'z-hover-card', route: '/c/overlays/z-hover-card', description: 'When the hover content needs to be reachable.' },
-		{ tag: 'z-popover', route: '/c/overlays/z-popover', description: 'Click-opened, and interactive.' },
-		{ tag: 'z-kbd', route: '/c/foundation/z-kbd', description: 'For showing the shortcut a tooltip mentions.' }
+		{ tag: 'z-hover-card', route: '/elements/overlays/z-hover-card', description: 'When the hover content needs to be reachable.' },
+		{ tag: 'z-popover', route: '/elements/overlays/z-popover', description: 'Click-opened, and interactive.' },
+		{ tag: 'z-kbd', route: '/elements/typography/z-kbd', description: 'For showing the shortcut a tooltip mentions.' }
 	]
 }

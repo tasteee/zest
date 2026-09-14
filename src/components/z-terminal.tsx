@@ -30,8 +30,8 @@ import { themedScrollbarStyles } from '../shared/scrollbar-styles'
  * view before playing; `prefers-reduced-motion` skips straight to the final
  * state. Fires `done` when the sequence finishes.
  *
- * Loop it with `loop` (auto-restart after `loop-delay` ms). A replay control
- * appears in the bottom-right once a run completes (suppress with `hide-replay`).
+ * Loop it with `does-loop` (auto-restart after `loop-delay` ms). A replay control
+ * appears in the bottom-right once a run completes (suppress with `has-replay`).
  * Imperative controls are exposed as methods: `.play()`, `.pause()`, `.restart()`.
  *
  * For per-line timing control, set the `lines` property to an array instead of
@@ -679,7 +679,7 @@ export const ZTerminal = c(
 			}
 		}
 
-		const showReplay = playing && state.done && props.hasReplay
+		const showReplay = playing && state.done && !props.hasReplay
 
 		const sizing = {
 			'--z-terminal-width': (props.width as string) || '',
@@ -798,7 +798,7 @@ export const ZTerminal = c(
 			fadeDuration: { type: Number },
 			doesLoop: { type: Boolean },
 			loopDelay: { type: Number },
-			hasReplay: { type: Boolean, value: () => true },
+			hasReplay: { type: Boolean, value: () => false },
 			doesAutoScroll: { type: Boolean, value: () => true },
 			copy: event<string>({ bubbles: true, composed: true }),
 			done: event<void>({ bubbles: true, composed: true })

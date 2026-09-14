@@ -11,6 +11,7 @@ and flips near viewport edges.
 ```
 
 Opens after `open-delay` ms on pointerenter/focusin; closes on leave/blur or Esc.
+An arrow points back at the trigger by default; `does-hide-arrow` removes it.
 
 ## Attributes
 
@@ -20,7 +21,8 @@ Opens after `open-delay` ms on pointerenter/focusin; closes on leave/blur or Esc
 | `placement` | `top` `bottom` `left` `right` (+ `-start`/`-end`) | `top` | preferred side |
 | `offset` | number (px) | `8` | gap from the trigger |
 | `open-delay` | number (ms) | `150` | delay before showing |
-| `disabled` | boolean | — | suppress the tooltip |
+| `does-hide-arrow` | boolean | — | drop the arrow (drawn by default) |
+| `is-disabled` | boolean | — | suppress the tooltip |
 | `is-hidden` | boolean | — | hide |
 
 ## Slots

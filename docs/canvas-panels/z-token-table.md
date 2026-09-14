@@ -40,4 +40,4 @@ Columns collapse on their own rather than at a breakpoint, because the useful
 width of a swatch depends on its kind — a colour ramp wants many narrow
 columns, a font-family list wants one wide one. `columns="1"` overrides.
 
-See [tokens](../foundation/tokens.md) for the reference this element renders.
+See [tokens](../structure/tokens.md) for the reference this element renders.

@@ -233,11 +233,11 @@ export const zDialogDoc: ComponentDocT = {
 					const nextName = (renameInput.value || '').trim()
 					const isEmpty = nextName.length === 0
 					if (isEmpty) {
-						renameInput.setAttribute('invalid', '')
+						renameInput.setAttribute('is-invalid', '')
 						return
 					}
 
-					renameInput.removeAttribute('invalid')
+					renameInput.removeAttribute('is-invalid')
 					renameStatus.textContent = `Current name: ${nextName}`
 					renameDialog.isOpen = false
 				})
@@ -252,7 +252,7 @@ export const zDialogDoc: ComponentDocT = {
 		{ name: 'size', type: 'sm | md | lg', defaultValue: 'md', description: 'Panel width — 24rem, 30rem, or 42rem, capped to the viewport.' },
 		{ name: 'has-close', type: 'boolean', defaultValue: '—', description: 'Removes the ✕. Only safe when the footer offers another way out.' },
 		{ name: 'is-static', type: 'boolean', defaultValue: '—', description: 'Ignores backdrop clicks. Escape still closes.' },
-		{ name: 'disabled', type: 'boolean', defaultValue: '—', description: 'Stops the trigger from opening the dialog.' }
+		{ name: 'is-disabled', type: 'boolean', defaultValue: '—', description: 'Stops the trigger from opening the dialog.' }
 	],
 
 	properties: [],
@@ -281,9 +281,9 @@ export const zDialogDoc: ComponentDocT = {
 	],
 
 	related: [
-		{ tag: 'z-alert-dialog', route: '/c/overlays/z-alert-dialog', description: 'For destructive confirmations — two actions, no light dismiss.' },
-		{ tag: 'z-sheet', route: '/c/overlays/z-sheet', description: 'The same foundation, sliding in from an edge.' },
-		{ tag: 'z-drawer', route: '/c/overlays/z-drawer', description: 'A bottom sheet with drag-to-dismiss.' },
-		{ tag: 'z-popover', route: '/c/overlays/z-popover', description: 'For content that does not need to block.' }
+		{ tag: 'z-alert-dialog', route: '/elements/overlays/z-alert-dialog', description: 'For destructive confirmations — two actions, no light dismiss.' },
+		{ tag: 'z-sheet', route: '/elements/overlays/z-sheet', description: 'The same foundation, sliding in from an edge.' },
+		{ tag: 'z-drawer', route: '/elements/overlays/z-drawer', description: 'A bottom sheet with drag-to-dismiss.' },
+		{ tag: 'z-popover', route: '/elements/overlays/z-popover', description: 'For content that does not need to block.' }
 	]
 }

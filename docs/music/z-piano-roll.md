@@ -1,11 +1,19 @@
 # z-piano-roll
 
 A full MIDI note editor / piano roll in the spirit of Ableton's, built as a
-single self-contained element. It owns a list of notes and every common
-authoring gesture: draw/place, delete, move (time + pitch), resize, collision
-handling (latest wins), marquee multi-select, duplicate, select-all, and
-arrow-key nudge — plus scale highlighting, two fold modes, snap-to-grid,
-zoom, a sticky piano-keyboard gutter, and a bar ruler.
+single self-contained element. It owns a list of signals and every common
+authoring gesture: place (double-click empty space), delete, move (time +
+pitch), resize, clone (Ctrl+drag), scrub velocity (Alt+drag), collision
+handling (latest wins), marquee multi-select, duplicate, select-all,
+arrow-key nudge, and click-a-row-label to select every signal on that row —
+plus scale highlighting, two fold modes, snap-to-grid, zoom, a sticky
+piano-keyboard gutter, and a bar ruler.
+
+**Terminology.** A *note* is a row — a pitch lane, the space you place
+things on (what the keyboard gutter on the left labels). A *signal* is one
+placed thing on a note: a pitch/start/duration/velocity tuple. The API below
+still calls a signal a `Note` and the list a `notes` property, for
+compatibility with existing consumers and with z-pattern-roll.
 
 See [z-pattern-roll](z-pattern-roll.md) for the chord-relative sibling of
 this editor, which shares the entire interaction engine but expresses pitch
@@ -34,18 +42,19 @@ roll.addEventListener('change', (e) => save(e.detail.notes))
 | `beat-width` | number (px) | — | horizontal zoom (px per beat) |
 | `row-height` | number (px) | — | vertical zoom (px per pitch row) |
 | `min-pitch` / `max-pitch` | MIDI number (0–127) | — | visible pitch range |
-| `mode` | `select` `draw` | `select` | interaction mode |
 | `fold` | fold mode | — | fold the keyboard to used pitches or to `scale` |
 | `scale` | scale name | — | scale used for highlighting and `fold="scale"` |
 | `root` | MIDI number | — | scale root |
-| `default-velocity` | number (1–127) | `100` | velocity for newly drawn notes |
+| `default-velocity` | number (1–127) | `100` | velocity for newly placed signals |
 | `playhead` | number (beats) | — | draws a playhead line at this beat |
 | `has-toolbar` | boolean | — | hide the toolbar |
 | `has-keyboard` | boolean | — | hide the piano-keyboard gutter |
-| `disabled` | boolean | — | disable interaction |
+| `is-disabled` | boolean | — | disable interaction |
 | `is-hidden` | boolean | — | hide |
 
-## Note model
+## Signal model
+
+What the API still calls a `Note` (see Terminology above):
 
 ```ts
 type Note = {
@@ -71,10 +80,14 @@ type Note = {
 
 | Event | `detail` | Description |
 | --- | --- | --- |
-| `change` | `{ notes }` | whenever notes are drawn, moved, resized, deleted, or duplicated |
+| `change` | `{ notes }` | whenever notes are placed, moved, resized, deleted, or duplicated |
 | `select` | `{ ids }` | whenever the selection changes |
 
 ## Notes
 
 - Keyboard: Delete removes the selection, Ctrl/⌘+D duplicates,
   Ctrl/⌘+A selects all, arrows nudge.
+- Mouse: Shift/⌘+click adds to the selection; Ctrl+drag on a signal's body
+  clones it and drags the clone, leaving the original in place; Alt+drag a
+  signal (anywhere on it) to scrub its velocity vertically; click a row
+  label in the keyboard gutter to select every signal on that note.

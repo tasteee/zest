@@ -4,7 +4,7 @@ import { c, css, event, useEffect, useHost, useListener, useProp } from 'atomico
 /*
  * z-radio-group — coordinates single-selection across slotted z-radio items.
  * Listens for the bubbling `select` event, clears every other radio, and
- * re-emits a `change` with the chosen value. Mirrors z-toggle-group's model.
+ * re-emits a `change` with the chosen value. Mirrors z-toggle-button-group's model.
  *
  * `value` is the single source of truth in both directions. Set it and the
  * matching child is checked for you; leave it unset and the group adopts

@@ -205,7 +205,7 @@ export const zDrawerDoc: ComponentDocT = {
 		{ name: 'heading', type: 'string', defaultValue: '—', description: 'Title in the header, and the drawer’s accessible name.' },
 		{ name: 'description', type: 'string', defaultValue: '—', description: 'A muted line under the heading.' },
 		{ name: 'is-static', type: 'boolean', defaultValue: '—', description: 'Ignores backdrop clicks. The drag and Escape still dismiss.' },
-		{ name: 'disabled', type: 'boolean', defaultValue: '—', description: 'Stops the trigger from opening the drawer.' }
+		{ name: 'is-disabled', type: 'boolean', defaultValue: '—', description: 'Stops the trigger from opening the drawer.' }
 	],
 
 	properties: [],
@@ -232,8 +232,8 @@ export const zDrawerDoc: ComponentDocT = {
 	],
 
 	related: [
-		{ tag: 'z-sheet', route: '/c/overlays/z-sheet', description: 'The same idea from any edge, without the drag.' },
-		{ tag: 'z-dialog', route: '/c/overlays/z-dialog', description: 'The centred modal, better suited to desktop.' },
-		{ tag: 'z-menu', route: '/c/navigation-disclosure/z-menu', description: 'For an action list that does not need to be modal.' }
+		{ tag: 'z-sheet', route: '/elements/overlays/z-sheet', description: 'The same idea from any edge, without the drag.' },
+		{ tag: 'z-dialog', route: '/elements/overlays/z-dialog', description: 'The centred modal, better suited to desktop.' },
+		{ tag: 'z-menu', route: '/elements/navigation/z-menu', description: 'For an action list that does not need to be modal.' }
 	]
 }

@@ -3,7 +3,7 @@
 The two-button feedback prompt at the foot of a page.
 
 ```html
-<z-was-this-helpful page="/c/forms/z-input"></z-was-this-helpful>
+<z-was-this-helpful page="/elements/actionables/z-input"></z-was-this-helpful>
 ```
 
 ```js

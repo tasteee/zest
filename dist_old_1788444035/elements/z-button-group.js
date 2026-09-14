@@ -1,0 +1,102 @@
+import { c as e, a as s, j as t, d as i } from "../chunks/define-element-BWC3wEPr.js";
+const o = e`
+	:host {
+		display: flex;
+		width: fit-content;
+		align-items: stretch;
+		user-select: none;
+		-webkit-user-select: none;
+	}
+
+	:host([vertical]) {
+		flex-direction: column;
+	}
+
+	::slotted(*) {
+		--z-button-radius: 0;
+		flex-shrink: 0;
+	}
+
+	::slotted(:only-child) {
+		--z-button-radius: var(--radius-md);
+	}
+
+	:host(:not([vertical])) ::slotted(:first-child) {
+		--z-button-radius: var(--radius-md) 0 0 var(--radius-md);
+	}
+
+	:host(:not([vertical])) ::slotted(:last-child) {
+		--z-button-radius: 0 var(--radius-md) var(--radius-md) 0;
+	}
+
+	:host(:not([vertical])) ::slotted(:not(:first-child)) {
+		margin-left: -1px;
+	}
+
+	:host([vertical]) ::slotted(:first-child) {
+		--z-button-radius: var(--radius-md) var(--radius-md) 0 0;
+	}
+
+	:host([vertical]) ::slotted(:last-child) {
+		--z-button-radius: 0 0 var(--radius-md) var(--radius-md);
+	}
+
+	:host([vertical]) ::slotted(:not(:first-child)) {
+		margin-top: -1px;
+	}
+
+	/* Equal width down the stack. align-items: stretch doesn't reliably stretch
+	   the inline-flex button hosts across the column's cross axis, so the widest
+	   label (e.g. "Bottom") would otherwise leave the narrower ones ragged. The
+	   group is width: fit-content, so 100% resolves to the widest item's width. */
+	:host([vertical]) ::slotted(*) {
+		width: 100%;
+	}
+
+	/* Stacking ladder: earlier items paint above later ones so each item shows
+	   its own trailing border at the seam instead of being covered by the next
+	   item. The focused item jumps above all so its full border is never clipped. */
+	::slotted(*) {
+		position: relative;
+		z-index: 1;
+	}
+	::slotted(:nth-child(1)) {
+		z-index: 9;
+	}
+	::slotted(:nth-child(2)) {
+		z-index: 8;
+	}
+	::slotted(:nth-child(3)) {
+		z-index: 7;
+	}
+	::slotted(:nth-child(4)) {
+		z-index: 6;
+	}
+	::slotted(:nth-child(5)) {
+		z-index: 5;
+	}
+	::slotted(:nth-child(6)) {
+		z-index: 4;
+	}
+	::slotted(:nth-child(7)) {
+		z-index: 3;
+	}
+	::slotted(:nth-child(8)) {
+		z-index: 2;
+	}
+	::slotted(:focus-visible) {
+		z-index: 20;
+	}
+`, d = s(
+  (l) => /* @__PURE__ */ t("host", { shadowDom: !0, role: "group", children: /* @__PURE__ */ t("slot", {}) }),
+  {
+    props: {
+      vertical: { type: Boolean, reflect: !0 }
+    },
+    styles: o
+  }
+);
+i("z-button-group", d);
+export {
+  d as ZButtonGroup
+};

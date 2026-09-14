@@ -90,5 +90,9 @@ export default defineConfig(({ command, isPreview }) => ({
 	root: SITE_DIR,
 	base: command === 'build' || isPreview ? DEPLOYED_BASE_PATH : '/',
 	publicDir: resolve(__dirname, 'dist'),
+	server: {
+		port: 3124,
+		strictPort: true
+	},
 	plugins: [serveSampleAssets()]
 }))

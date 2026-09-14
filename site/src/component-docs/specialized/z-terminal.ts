@@ -372,7 +372,7 @@ export const zTerminalDoc: ComponentDocT = {
 	],
 
 	related: [
-		{ tag: 'z-code-block', route: '/c/specialized/z-code-block', description: 'For source files: line numbers and syntax highlighting.' },
-		{ tag: 'z-scroll', route: '/c/layout/z-scroll', description: 'The general-purpose scroll container.' }
+		{ tag: 'z-code-block', route: '/elements/specialized/z-code-block', description: 'For source files: line numbers and syntax highlighting.' },
+		{ tag: 'z-scroll', route: '/elements/structure/z-scroll', description: 'The general-purpose scroll container.' }
 	]
 }

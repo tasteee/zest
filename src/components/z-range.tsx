@@ -32,7 +32,7 @@ const styles = css`
 		display: none;
 	}
 
-	:host([disabled]) {
+	:host([is-disabled]) {
 		opacity: 0.5;
 		pointer-events: none;
 	}
@@ -393,7 +393,7 @@ export const ZRange = c(
 						max={config.domainMax}
 						step={config.leftStep}
 						value={leftValue}
-						disabled={props.disabled}
+						disabled={props.isDisabled}
 						aria-label={config.leftLabel}
 						oninput={(e: any) => commit(e.target, 'left', 'input')}
 						onchange={(e: any) => commit(e.target, 'left', 'change')}
@@ -405,7 +405,7 @@ export const ZRange = c(
 						max={config.domainMax}
 						step={config.rightStep}
 						value={rightValue}
-						disabled={props.disabled}
+						disabled={props.isDisabled}
 						aria-label={config.rightLabel}
 						oninput={(e: any) => commit(e.target, 'right', 'input')}
 						onchange={(e: any) => commit(e.target, 'right', 'change')}
@@ -424,7 +424,7 @@ export const ZRange = c(
 			showValue: { type: Boolean, reflect: true },
 			valuePrefix: String,
 			valueSuffix: String,
-			disabled: { type: Boolean, reflect: true },
+			isDisabled: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			input: event<RangeDetailT>({ bubbles: true, composed: true }),
 			change: event<RangeDetailT>({ bubbles: true, composed: true })

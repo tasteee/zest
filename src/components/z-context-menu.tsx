@@ -184,7 +184,7 @@ export const ZContextMenu = c(
 		}, [isOpen, point])
 
 		const openAt = (e: MouseEvent) => {
-			if (props.disabled) return
+			if (props.isDisabled) return
 			e.preventDefault()
 			setPoint({ x: e.clientX, y: e.clientY })
 			setActiveIndex(-1)
@@ -260,7 +260,7 @@ export const ZContextMenu = c(
 		props: {
 			items: { type: Array },
 			accent: { type: String, reflect: true },
-			disabled: { type: Boolean, reflect: true },
+			isDisabled: { type: Boolean, reflect: true },
 			select: event<{ value: string }>({ bubbles: true, composed: true })
 		},
 		styles

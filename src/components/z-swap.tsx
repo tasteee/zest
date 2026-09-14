@@ -25,7 +25,7 @@ const styles = css`
 		display: inline-flex;
 		--swap-duration: 0.2s;
 		--swap-gap: 0.5rem;
-		--swap-ghost-opacity: 0.2;
+		--swap-ghost-opacity: 0.4;
 	}
 
 	:host([is-hidden]) {
@@ -177,7 +177,7 @@ export const ZSwap = c(
 	(props) => {
 		const [isActive, setIsActive] = useProp<boolean>('isActive')
 
-		const labelClass = ['label'].concat(props.disabled ? ['is-disabled'] : []).join(' ')
+		const labelClass = ['label'].concat(props.isDisabled ? ['is-disabled'] : []).join(' ')
 		const swapClass = ['swap', resolveKindClass(props), resolveEffectClass(props)]
 			.concat(props.hasGhost ? ['has-ghost'] : [])
 			.concat(isActive ? ['is-active'] : [])
@@ -189,7 +189,7 @@ export const ZSwap = c(
 					<input
 						type="checkbox"
 						checked={isActive}
-						disabled={props.disabled}
+						disabled={props.isDisabled}
 						aria-label={props.label}
 						onchange={() => {
 							const next = !isActive
@@ -215,7 +215,7 @@ export const ZSwap = c(
 			effect: { type: String, reflect: true },
 			hasGhost: { type: Boolean, reflect: true },
 			isActive: { type: Boolean, reflect: true },
-			disabled: { type: Boolean, reflect: true },
+			isDisabled: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			label: String,
 			change: event<{ active: boolean }>({ bubbles: true, composed: true })

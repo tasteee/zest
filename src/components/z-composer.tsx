@@ -111,7 +111,7 @@ export const ZComposer = c(
 		}
 
 		const send = () => {
-			if (!hasText || props.disabled) return
+			if (!hasText || props.isDisabled) return
 			props.send({ value: text })
 			setValue('')
 			requestAnimationFrame(() => {
@@ -129,7 +129,7 @@ export const ZComposer = c(
 
 		const composerClass = ['composer']
 			.concat(isFocused ? ['is-focused'] : [])
-			.concat(props.disabled ? ['is-disabled'] : [])
+			.concat(props.isDisabled ? ['is-disabled'] : [])
 			.join(' ')
 
 		return (
@@ -143,7 +143,7 @@ export const ZComposer = c(
 						rows={1}
 						value={text}
 						placeholder={props.placeholder || 'Message…'}
-						disabled={props.disabled}
+						disabled={props.isDisabled}
 						aria-label={props.placeholder || 'Message'}
 						onfocus={() => setIsFocused(true)}
 						onblur={() => setIsFocused(false)}
@@ -156,7 +156,7 @@ export const ZComposer = c(
 					/>
 					<span class='trailing'>
 						<slot name='trailing'>
-							<button class='send' type='button' disabled={!hasText || props.disabled} aria-label='Send' onclick={send}>
+							<button class='send' type='button' disabled={!hasText || props.isDisabled} aria-label='Send' onclick={send}>
 								<svg viewBox='0 0 24 24' aria-hidden='true'><path d='M12 19V5M5 12l7-7 7 7' /></svg>
 							</button>
 						</slot>
@@ -170,7 +170,7 @@ export const ZComposer = c(
 			value: { type: String, reflect: true },
 			placeholder: { type: String, reflect: true },
 			isFocused: { type: Boolean, reflect: true },
-			disabled: { type: Boolean, reflect: true },
+			isDisabled: { type: Boolean, reflect: true },
 			doesSubmitOnEnter: { type: Boolean, reflect: true, value: () => true },
 			isHidden: { type: Boolean, reflect: true },
 			input: event<{ value: string }>({ bubbles: true, composed: true }),

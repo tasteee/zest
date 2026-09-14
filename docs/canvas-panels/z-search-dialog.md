@@ -6,7 +6,7 @@ so focus trapping, Esc, and the backdrop come free.
 ```js
 const dialog = document.querySelector('z-search-dialog')
 dialog.index = [
-  { id: 'z-input', route: '#/c/forms/z-input', title: 'z-input', group: 'Forms', body: 'A single-line text field…' }
+  { id: 'z-input', route: '#/elements/actionables/z-input', title: 'z-input', group: 'Forms', body: 'A single-line text field…' }
 ]
 dialog.isOpen = true
 dialog.addEventListener('select', (e) => e.detail) // { route, id }

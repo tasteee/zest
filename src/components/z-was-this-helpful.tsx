@@ -4,7 +4,7 @@ import { c, css, event, useState } from 'atomico'
 /*
  * z-was-this-helpful — the two-button feedback prompt at the foot of a page.
  *
- *   <z-was-this-helpful page="/c/forms/z-input"></z-was-this-helpful>
+ *   <z-was-this-helpful page="/elements/actionables/z-input"></z-was-this-helpful>
  *   el.addEventListener('feedback', (e) => e.detail) // { isHelpful, comment, page }
  *
  * It reports and forgets. Where the answer goes — an analytics call, an

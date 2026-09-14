@@ -23,7 +23,7 @@ const styles = css`
 	:host([axis='x']) {
 		display: flex;
 	}
-	:host([disabled]) {
+	:host([is-disabled]) {
 		opacity: 0.6;
 	}
 	::slotted(*) {
@@ -61,7 +61,7 @@ export const ZSortable = c(
 		}
 
 		const onDown = (e: PointerEvent) => {
-			if (props.disabled) return
+			if (props.isDisabled) return
 			const child = childOf(e)
 			if (!child || child.classList.contains('placeholder')) return
 			if (props.handle && !(e.target as HTMLElement).closest(props.handle as string)) return
@@ -150,7 +150,7 @@ export const ZSortable = c(
 		props: {
 			axis: { type: String, reflect: true },
 			handle: { type: String },
-			disabled: { type: Boolean, reflect: true },
+			isDisabled: { type: Boolean, reflect: true },
 			start: event<{ index: number }>({ bubbles: true, composed: true }),
 			sort: event<{ oldIndex: number; newIndex: number }>({ bubbles: true, composed: true }),
 			end: event<void>({ bubbles: true, composed: true })

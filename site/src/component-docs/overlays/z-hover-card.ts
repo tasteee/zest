@@ -216,8 +216,8 @@ export const zHoverCardDoc: ComponentDocT = {
 	],
 
 	related: [
-		{ tag: 'z-popover', route: '/c/overlays/z-popover', description: 'The same panel, opened by a click.' },
-		{ tag: 'z-tooltip', route: '/c/overlays/z-tooltip', description: 'When the content is one line of plain text.' },
-		{ tag: 'z-mention-popover', route: '/c/text-editor/z-mention-popover', description: 'For picking a mention rather than previewing one.' }
+		{ tag: 'z-popover', route: '/elements/overlays/z-popover', description: 'The same panel, opened by a click.' },
+		{ tag: 'z-tooltip', route: '/elements/overlays/z-tooltip', description: 'When the content is one line of plain text.' },
+		{ tag: 'z-mention-popover', route: '/elements/text-editor/z-mention-popover', description: 'For picking a mention rather than previewing one.' }
 	]
 }

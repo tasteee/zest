@@ -1,6 +1,7 @@
 import { defineElement } from '../shared/define-element'
-import { c, css, event, useProp, useState, useHost, useEffect } from 'atomico'
+import { c, css, event, useProp, useState, useHost, useEffect, useRef } from 'atomico'
 import { themedScrollbarStyles } from '../shared/scrollbar-styles'
+import { computePosition, autoUpdate, applyPosition, showFloating, hideFloating } from '../shared/overlay'
 
 /*
  * z-select — a custom dropdown. Trigger shows the selected label (or a
@@ -51,6 +52,8 @@ const styles = css`
 		font-family: inherit;
 		cursor: pointer;
 		text-align: left;
+		user-select: none;
+		-webkit-user-select: none;
 		transition: border-color 0.12s ease, background-color 0.12s ease;
 	}
 
@@ -115,11 +118,20 @@ const styles = css`
 		color: var(--accent);
 	}
 
+	/* Fixed + top-layer (via [popover]) rather than absolute-in-:host, so the
+	   panel escapes any scrollable ancestor (e.g. a dialog body) instead of
+	   enlarging its scrollable overflow. The display property is left unset
+	   here (outside :popover-open) so the UA's popover stylesheet still hides
+	   it when closed — an author display declaration would out-cascade that
+	   regardless of specificity, since origin wins first. See shared/overlay.ts. */
 	.panel {
-		position: absolute;
-		top: calc(100% + 6px);
+		position: fixed;
+		box-sizing: border-box;
+		margin: 0;
 		left: 0;
-		right: 0;
+		top: 0;
+		right: auto;
+		bottom: auto;
 		z-index: 50;
 		background: var(--popover);
 		border: 1px solid var(--border);
@@ -127,9 +139,12 @@ const styles = css`
 		padding: 0.3125rem;
 		max-height: 16rem;
 		overflow-y: auto;
+		gap: 1px;
+	}
+
+	.panel:popover-open {
 		display: flex;
 		flex-direction: column;
-		gap: 1px;
 	}
 
 	.option {
@@ -190,6 +205,7 @@ type OptionT = { value: string; label: string; isDisabled?: boolean }
 export const ZSelect = c(
 	(props) => {
 		const host = useHost()
+		const panelRef = useRef<HTMLDivElement>()
 		const [value, setValue] = useProp<string>('value')
 		const [isOpen, setIsOpen] = useState(false)
 		const [activeIndex, setActiveIndex] = useState(-1)
@@ -206,6 +222,25 @@ export const ZSelect = c(
 			return () => document.removeEventListener('pointerdown', onDocumentPointerDown)
 		}, [isOpen])
 
+		useEffect(() => {
+			const panel = panelRef.current
+			if (!panel) return
+			if (!isOpen) {
+				hideFloating(panel)
+				return
+			}
+			showFloating(panel)
+			const update = () => {
+				panel.style.width = `${host.current.getBoundingClientRect().width}px`
+				applyPosition(panel, computePosition(host.current, panel, { placement: 'bottom-start', offset: 6, padding: 8 }))
+			}
+			const cleanup = autoUpdate(host.current, panel, update)
+			return () => {
+				cleanup()
+				hideFloating(panel)
+			}
+		}, [isOpen])
+
 		const commit = (opt: OptionT) => {
 			if (opt.isDisabled) return
 			setValue(opt.value)
@@ -214,7 +249,7 @@ export const ZSelect = c(
 		}
 
 		const onKeyDown = (e: KeyboardEvent) => {
-			if (props.disabled) return
+			if (props.isDisabled) return
 			if (e.key === 'Escape') {
 				setIsOpen(false)
 				return
@@ -243,8 +278,8 @@ export const ZSelect = c(
 
 		const triggerClass = ['trigger', resolveSizeClass(props)]
 			.concat(isOpen ? ['is-open'] : [])
-			.concat(props.invalid ? ['is-invalid'] : [])
-			.concat(props.disabled ? ['is-disabled'] : [])
+			.concat(props.isInvalid ? ['is-invalid'] : [])
+			.concat(props.isDisabled ? ['is-disabled'] : [])
 			.join(' ')
 
 		return (
@@ -252,7 +287,7 @@ export const ZSelect = c(
 				<button
 					type="button"
 					class={triggerClass}
-					disabled={props.disabled}
+					disabled={props.isDisabled}
 					aria-haspopup="listbox"
 					aria-label={props.label || host.current?.getAttribute('aria-label') || undefined}
 					aria-expanded={isOpen ? 'true' : 'false'}
@@ -267,35 +302,33 @@ export const ZSelect = c(
 					</svg>
 				</button>
 
-				{isOpen && (
-					<div class="panel" role="listbox">
-						{options.length === 0 && <div class="empty">No options</div>}
-						{options.map((opt, index) => {
-							const optClass = ['option']
-								.concat(index === activeIndex ? ['is-active'] : [])
-								.concat(opt.value === value ? ['is-selected'] : [])
-								.concat(opt.isDisabled ? ['is-disabled'] : [])
-								.join(' ')
-							return (
-								<div
-									key={opt.value}
-									class={optClass}
-									role="option"
-									aria-selected={opt.value === value ? 'true' : 'false'}
-									onmouseenter={() => setActiveIndex(index)}
-									onclick={() => commit(opt)}
-								>
-									<span>{opt.label}</span>
-									{opt.value === value && (
-										<svg class="tick" viewBox="0 0 24 24">
-											<polyline points="4 12 10 18 20 6" />
-										</svg>
-									)}
-								</div>
-							)
-						})}
-					</div>
-				)}
+				<div ref={panelRef} class="panel" role="listbox" popover="manual">
+					{options.length === 0 && <div class="empty">No options</div>}
+					{options.map((opt, index) => {
+						const optClass = ['option']
+							.concat(index === activeIndex ? ['is-active'] : [])
+							.concat(opt.value === value ? ['is-selected'] : [])
+							.concat(opt.isDisabled ? ['is-disabled'] : [])
+							.join(' ')
+						return (
+							<div
+								key={opt.value}
+								class={optClass}
+								role="option"
+								aria-selected={opt.value === value ? 'true' : 'false'}
+								onmouseenter={() => setActiveIndex(index)}
+								onclick={() => commit(opt)}
+							>
+								<span>{opt.label}</span>
+								{opt.value === value && (
+									<svg class="tick" viewBox="0 0 24 24">
+										<polyline points="4 12 10 18 20 6" />
+									</svg>
+								)}
+							</div>
+						)
+					})}
+				</div>
 			</host>
 		)
 	},
@@ -307,8 +340,8 @@ export const ZSelect = c(
 			options: { type: Array },
 			size: { type: String, reflect: true },
 			accent: { type: String, reflect: true },
-			invalid: { type: Boolean, reflect: true },
-			disabled: { type: Boolean, reflect: true },
+			isInvalid: { type: Boolean, reflect: true },
+			isDisabled: { type: Boolean, reflect: true },
 			inline: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			change: event<{ value: string }>({ bubbles: true, composed: true })

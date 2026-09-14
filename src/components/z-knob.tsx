@@ -68,7 +68,7 @@ const styles = css`
 		--knob-tone: var(--destructive);
 	}
 
-	:host([disabled]) {
+	:host([is-disabled]) {
 		opacity: 0.5;
 		pointer-events: none;
 	}
@@ -331,7 +331,7 @@ export const ZKnob = c(
 					aria-valuenow={current}
 					aria-valuetext={displayValue}
 					aria-orientation="vertical"
-					disabled={props.disabled}
+					disabled={props.isDisabled}
 					onpointerdown={handlePointerDown}
 					onpointermove={handlePointerMove}
 					onpointerup={handlePointerUp}
@@ -364,7 +364,7 @@ export const ZKnob = c(
 			accent: { type: String, reflect: true },
 			isGlowing: { type: Boolean, reflect: true },
 			size: { type: String, reflect: true },
-			disabled: { type: Boolean, reflect: true },
+			isDisabled: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			input: event<{ value: number }>({ bubbles: true, composed: true }),
 			change: event<{ value: number }>({ bubbles: true, composed: true })

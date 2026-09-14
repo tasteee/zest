@@ -36,7 +36,7 @@ const styles = css`
 		display: none;
 	}
 
-	:host([disabled]) .filter {
+	:host([is-disabled]) .filter {
 		opacity: 0.55;
 		pointer-events: none;
 	}
@@ -238,7 +238,7 @@ export const ZFilter = c(
 		const view = resolveView(options, path, collapseLeaf)
 
 		const apply = (next: string[]) => {
-			if (props.disabled) return
+			if (props.isDisabled) return
 			setPath(next)
 			props.change({ value: next.length ? next[next.length - 1] : undefined, path: next })
 		}
@@ -310,7 +310,7 @@ export const ZFilter = c(
 			label: String,
 			resetLabel: String,
 			isDrilldown: { type: Boolean, reflect: true },
-			disabled: { type: Boolean, reflect: true },
+			isDisabled: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			change: event<{ value?: string; path: string[] }>({ bubbles: true, composed: true })
 		},

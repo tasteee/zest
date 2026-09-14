@@ -81,6 +81,22 @@ const readControls = (value: unknown): ControlT[] => {
 	return controls
 }
 
+// Two `input` events reach these listeners for every keystroke: the
+// component's own CustomEvent (detail `{ value }`), and the native `input`
+// from the plain <input> inside its shadow root — native input events are
+// composed, so they cross the boundary and arrive retargeted at the host.
+// The native one carries a UIEvent detail of 0, so reading `.value` off it
+// yields undefined, which the host reads as "unset" and strips the attribute
+// the reader is mid-way through typing. Only a component event carries an
+// object detail, so that is what separates them.
+const readComponentDetail = <DetailT,>(candidateEvent: Event): DetailT | null => {
+	const detail = (candidateEvent as CustomEvent).detail
+	const isComponentDetail = Boolean(detail) && typeof detail === 'object'
+	if (!isComponentDetail) return null
+
+	return detail as DetailT
+}
+
 const readValues = (value: unknown): Record<string, string> => {
 	const isObject = value && typeof value === 'object'
 	if (!isObject) return {}
@@ -116,10 +132,16 @@ export const ZControlPanel = c(
 
 		const buildEnumControl = (control: ControlT) => {
 			const optionValues = control.options || []
-			const options = [{ value: '', label: 'unset' }]
+			const declaredDefault = readDeclaredDefault(control.defaultValue)
+			// The unset option must show as selected when the attribute is
+			// genuinely absent — falling back to the default *value* here would
+			// make the control look like it forced itself back to that option,
+			// rather than showing that unset resolves to it.
+			const unsetLabel = declaredDefault ? `unset (${declaredDefault})` : 'unset'
+			const options = [{ value: '', label: unsetLabel }]
 			for (const option of optionValues) options.push({ value: option, label: option })
 
-			const current = values[control.name] ?? readDeclaredDefault(control.defaultValue)
+			const current = values[control.name] ?? ''
 
 			return (
 				<z-select
@@ -147,11 +169,20 @@ export const ZControlPanel = c(
 					is-full-width
 					placeholder={declaredDefault}
 					value={isUsable ? parsed : undefined}
-					oninput={(inputEvent: CustomEvent<{ value: number | null }>) => {
+					oninput={(inputEvent: Event) => {
 						inputEvent.stopPropagation()
-						const next = inputEvent.detail.value
+						const detail = readComponentDetail<{ value: number | null }>(inputEvent)
+						if (!detail) return
+
+						const next = detail.value
 						emit(control.name, next === null ? '' : String(next))
 					}}
+					// z-number-input also fires its own `change` on blur (real-form
+					// semantics, shaped { value } with no `name`). Left unstopped it
+					// bubbles past z-playground's generic panel change listener, which
+					// reads changeEvent.detail.name and would call
+					// setAttribute(undefined, value) on the stage element.
+					onchange={(changeEvent: Event) => changeEvent.stopPropagation()}
 				/>
 			)
 		}
@@ -165,10 +196,16 @@ export const ZControlPanel = c(
 					size='sm'
 					placeholder={declaredDefault || control.name}
 					value={current}
-					oninput={(inputEvent: CustomEvent<{ value: string }>) => {
+					oninput={(inputEvent: Event) => {
 						inputEvent.stopPropagation()
-						emit(control.name, inputEvent.detail.value)
+						const detail = readComponentDetail<{ value: string }>(inputEvent)
+						if (!detail) return
+
+						emit(control.name, detail.value)
 					}}
+					// z-input also fires its own `change` on blur (real-form semantics,
+					// shaped { value } with no `name`). Same leak as z-number-input above.
+					onchange={(changeEvent: Event) => changeEvent.stopPropagation()}
 				/>
 			)
 		}

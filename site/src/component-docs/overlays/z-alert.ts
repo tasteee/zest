@@ -26,12 +26,12 @@ export const zAlertDoc: ComponentDocT = {
 	},
 
 	usageGuidance: [
+		'Alert reacts to what the app just did; `z-callout` annotates what you\'re reading. Reach for this one when you\'re reporting a system event, not emphasising prose.',
 		'Use an alert for a condition that persists — a degraded service, an expiring plan, a form that failed to submit. For a moment that passes, use `z-toast`.',
 		'Put it where the condition applies. A billing warning belongs above the billing form, not pinned to the top of every page in the application.',
 		'Match the accent to the consequence honestly. Danger for something broken, warning for something about to break, info for something worth knowing. A page of red alerts communicates nothing.',
 		'Write the heading as the situation and the body as what to do about it. "Payment failed" then "Update your card to keep your projects running."',
-		'`is-dismissable` for anything the user can reasonably acknowledge and move past. Never for a condition that is still true after the close button — the alert will just be gone, and the problem will not.',
-		'For a note inside documentation or prose, use `z-callout`. An alert reports a system state; a callout emphasises a piece of writing.'
+		'`is-dismissable` for anything the user can reasonably acknowledge and move past. Never for a condition that is still true after the close button — the alert will just be gone, and the problem will not.'
 	],
 
 	anatomy: [
@@ -132,7 +132,7 @@ export const zAlertDoc: ComponentDocT = {
 			id: 'form-error',
 			title: 'A form-level error',
 			description:
-				'The case field-level errors cannot cover: the submission failed as a whole. Put it directly above the form, where the user is already looking.',
+				'The case field-level errors cannot cover: the submission failed as a whole. Put it directly above the form, where the user is already looking. The alert starts hidden — try clicking Save with the pre-filled name; it is one of the two already taken.',
 			layout: ExampleLayout.stack,
 			markup: `
 				<z-alert id="submitAlert" accent="error" heading="Could not save your changes" is-hidden>
@@ -199,9 +199,9 @@ export const zAlertDoc: ComponentDocT = {
 	],
 
 	related: [
-		{ tag: 'z-callout', route: '/c/overlays/z-callout', description: 'The prose equivalent — emphasis inside documentation.' },
-		{ tag: 'z-toast', route: '/c/overlays/z-toast', description: 'For a moment rather than a condition.' },
-		{ tag: 'z-field', route: '/c/forms/z-field', description: 'For an error about one field rather than the whole form.' },
-		{ tag: 'z-badge', route: '/c/data-display/z-badge', description: 'For status attached to a single item.' }
+		{ tag: 'z-callout', route: '/elements/data-display/z-callout', description: 'The prose equivalent — emphasis inside documentation.' },
+		{ tag: 'z-toast', route: '/elements/overlays/z-toast', description: 'For a moment rather than a condition.' },
+		{ tag: 'z-field', route: '/elements/actionables/z-field', description: 'For an error about one field rather than the whole form.' },
+		{ tag: 'z-badge', route: '/elements/data-display/z-badge', description: 'For status attached to a single item.' }
 	]
 }

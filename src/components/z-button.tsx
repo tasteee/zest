@@ -187,6 +187,8 @@ const styles = css`
 
 	button.is-plain:hover {
 		text-decoration: underline;
+		text-underline-offset: 0.25em;
+		text-decoration-thickness: 1px;
 	}
 
 	button.is-plain:active {
@@ -284,11 +286,11 @@ export const ZButton = c(
 		const kindClass = resolveKindClass(props)
 		const accentClass = resolveAccentClass(props)
 		const sizeClass = resolveSizeClass(props)
-		const isButtonDisabled = props.disabled || props.isLoading
+		const isButtonDisabled = props.isDisabled || props.isLoading
 
 		const buttonClass = [kindClass, accentClass, sizeClass]
 			.concat(props.isLoading ? ['is-loading'] : [])
-			.concat(props.disabled ? ['is-disabled'] : [])
+			.concat(props.isDisabled ? ['is-disabled'] : [])
 			.concat(props.isFullWidth ? ['is-full-width'] : [])
 			.join(' ')
 
@@ -307,7 +309,7 @@ export const ZButton = c(
 			kind: { type: String, reflect: true },
 			accent: { type: String, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
-			disabled: { type: Boolean, reflect: true },
+			isDisabled: { type: Boolean, reflect: true },
 			isLoading: { type: Boolean, reflect: true },
 			isFullWidth: { type: Boolean, reflect: true },
 			label: String,

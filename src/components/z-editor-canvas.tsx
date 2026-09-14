@@ -31,7 +31,7 @@ const styles = css`
 		cursor: grab;
 		--grid-color: color-mix(in oklch, var(--border) 60%, transparent);
 	}
-	:host([disabled]) {
+	:host([is-disabled]) {
 		cursor: default;
 	}
 	:host(.is-panning) {
@@ -111,7 +111,7 @@ export const ZEditorCanvas = c(
 
 		// --- wheel: zoom-to-cursor, or pan (trackpad / wheel="pan") ---
 		const onWheel = (e: WheelEvent) => {
-			if (props.disabled) return
+			if (props.isDisabled) return
 			e.preventDefault()
 			const zoomGesture = e.ctrlKey || (props.wheel ?? 'zoom') === 'zoom'
 			if (zoomGesture) {
@@ -144,7 +144,7 @@ export const ZEditorCanvas = c(
 			(host.current as HTMLElement).classList.toggle('is-panning', on)
 
 		const onPointerDown = (e: PointerEvent) => {
-			if (props.disabled) return
+			if (props.isDisabled) return
 			;(e.currentTarget as HTMLElement).setPointerCapture(e.pointerId)
 			s.pointers.set(e.pointerId, { x: e.clientX, y: e.clientY })
 
@@ -314,7 +314,7 @@ export const ZEditorCanvas = c(
 			gridSize: { type: Number, reflect: true },
 			panButton: { type: String, reflect: true },
 			wheel: { type: String, reflect: true },
-			disabled: { type: Boolean, reflect: true },
+			isDisabled: { type: Boolean, reflect: true },
 			viewportchange: event<{ x: number; y: number; zoom: number }>({
 				bubbles: true,
 				composed: true

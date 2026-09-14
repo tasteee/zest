@@ -138,7 +138,7 @@ export const ZSheet = c(
 
 		return (
 			<host shadowDom>
-				<div class="trigger" onclick={() => !props.disabled && setIsOpen(true)}>
+				<div class="trigger" onclick={() => !props.isDisabled && setIsOpen(true)}>
 					<slot name="trigger" />
 				</div>
 
@@ -178,7 +178,7 @@ export const ZSheet = c(
 			description: String,
 			hasClose: { type: Boolean, reflect: true, value: () => true },
 			isStatic: { type: Boolean, reflect: true },
-			disabled: { type: Boolean, reflect: true },
+			isDisabled: { type: Boolean, reflect: true },
 			open: event<void>({ bubbles: true, composed: true }),
 			close: event<void>({ bubbles: true, composed: true })
 		},

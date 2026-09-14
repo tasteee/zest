@@ -5,7 +5,7 @@ import { c, css, event, useEffect, useMemo, useProp, useRef, useState } from 'at
  * z-search-dialog — full-text search over a prebuilt index.
  *
  *   dialog.index = [
- *     { id: 'z-input', route: '/c/forms/z-input', title: 'z-input', group: 'Forms', body: '…' }
+ *     { id: 'z-input', route: '/elements/actionables/z-input', title: 'z-input', group: 'Forms', body: '…' }
  *   ]
  *
  * Not z-command with a filter. A command palette is a fixed list of actions

@@ -224,7 +224,7 @@ const resolveKindClass = (props: any): string => {
 export const ZBadge = c(
 	(props) => {
 		const sizeClass = props.size === 'sm' ? 'is-sm' : 'is-md'
-		const isClickable = props.selectable && !props.disabled
+		const isClickable = props.selectable && !props.isDisabled
 
 		const badgeClass = [
 			'badge',
@@ -233,12 +233,12 @@ export const ZBadge = c(
 			sizeClass
 		]
 			.concat(isClickable ? ['is-clickable'] : [])
-			.concat(props.selected ? ['is-selected'] : [])
-			.concat(props.disabled ? ['is-disabled'] : [])
+			.concat(props.isSelected ? ['is-selected'] : [])
+			.concat(props.isDisabled ? ['is-disabled'] : [])
 			.join(' ')
 
 		const toggle = () => {
-			if (isClickable) props.select({ value: props.value, selected: !props.selected })
+			if (isClickable) props.select({ value: props.value, selected: !props.isSelected })
 		}
 
 		return (
@@ -247,7 +247,7 @@ export const ZBadge = c(
 					class={badgeClass}
 					tabindex={isClickable ? 0 : undefined}
 					role={props.selectable ? 'button' : undefined}
-					aria-pressed={props.selectable ? (props.selected ? 'true' : 'false') : undefined}
+					aria-pressed={props.selectable ? (props.isSelected ? 'true' : 'false') : undefined}
 					onclick={toggle}
 					onkeydown={(e: KeyboardEvent) => {
 						if (isClickable && (e.key === 'Enter' || e.key === ' ')) {
@@ -287,9 +287,9 @@ export const ZBadge = c(
 			value: String,
 			isDot: { type: Boolean, reflect: true },
 			selectable: { type: Boolean, reflect: true },
-			selected: { type: Boolean, reflect: true },
+			isSelected: { type: Boolean, reflect: true },
 			removable: { type: Boolean, reflect: true },
-			disabled: { type: Boolean, reflect: true },
+			isDisabled: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			select: event<{ value?: string; selected: boolean }>({ bubbles: true, composed: true }),
 			remove: event<{ value?: string }>({ bubbles: true, composed: true })

@@ -169,9 +169,9 @@ export const ZTableAxisHandle = c(
 			<host shadowDom>
 				<button
 					type="button"
-					class={['icon-button', 'grip'].concat(props.selected ? ['is-active'] : []).join(' ')}
+					class={['icon-button', 'grip'].concat(props.isSelected ? ['is-active'] : []).join(' ')}
 					aria-label={`Select ${axisLabel}`}
-					aria-pressed={props.selected ? 'true' : 'false'}
+					aria-pressed={props.isSelected ? 'true' : 'false'}
 					onclick={() => props.select()}
 				>
 					⋮⋮
@@ -190,7 +190,7 @@ export const ZTableAxisHandle = c(
 			axis: { type: String, reflect: true },
 			anchorRect: AnyProp,
 			isOpen: { type: Boolean, reflect: true },
-			selected: { type: Boolean, reflect: true },
+			isSelected: { type: Boolean, reflect: true },
 			select: event<void>({ bubbles: true, composed: true }),
 			insertafter: event<void>({ bubbles: true, composed: true }),
 			remove: event<void>({ bubbles: true, composed: true })

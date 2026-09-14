@@ -76,12 +76,12 @@ is-ghost | is-outlined            →  kind="solid | outline | ghost | soft | pl
 is-icon                           →  stays boolean — composes with any kind
 ```
 
-`kind` takes z-button's full set, not just the two the flags covered — z-toggle
+`kind` takes z-button's full set, not just the two the flags covered — z-toggle-button
 today declares `kind` as a string that only handles `ghost`, with `isOutlined`
 as a separate boolean beside it. One prop, one vocabulary, shared with z-button
 and z-badge.
 
-This also fixes live dead code: the group's `--z-toggle-*` custom properties are
+This also fixes live dead code: the group's `--z-toggle-button-*` custom properties are
 inert because the item reads `--tone-*` and takes its color from its own flag.
 An inherited enum is what makes group-level color work at all.
 
@@ -115,7 +115,7 @@ branch comes out with it.
 | Today | Components |
 |---|---|
 | `orientation` | z-scroll-area, z-toolbar |
-| `isVertical` | z-separator, z-toggle-group, z-button-group |
+| `isVertical` | z-separator, z-toggle-button-group, z-button-group |
 | `isHorizontal` | z-radio-group, z-virtual-list |
 | `vertical` | z-marquee |
 | `isVertical` **and** `isHorizontal` | z-line — settable together, undefined result |
@@ -179,7 +179,7 @@ library.
 
 ### 3c. `kind` fixes
 
-- `outlined` → `outline` (z-toggle; z-button and z-badge already say `outline`)
+- `outlined` → `outline` (z-toggle-button; z-button and z-badge already say `outline`)
 - `variant` → `kind` on `z-bubble-menu`, `z-surface`
 - `z-callout`'s `kind` is a color, not a treatment. It moves to `accent`:
 

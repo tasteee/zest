@@ -5,6 +5,7 @@ import {
 	computePosition,
 	autoUpdate,
 	applyPosition,
+	applyArrowPosition,
 	showFloating,
 	hideFloating,
 	overlayPositionProps,
@@ -18,9 +19,18 @@ import {
  * shared/overlay.ts, so it escapes overflow/stacking and flips near edges.
  * Opens after `open-delay` ms on pointerenter/focusin; closes on leave/blur or
  * Esc. Reuses the floating-surface chrome, just tighter.
+ *
+ * The arrow is on by default — a tooltip that does not point at anything is
+ * just a floating box, and at this size the tie to the trigger is the whole
+ * job. `does-hide-arrow` drops it for the rare dense cluster where several
+ * tooltips share an edge.
  */
+const ARROW_SIZE = 8
+
 const styles = css`
 	.surface {
+		--tooltip-surface: var(--foreground);
+		--tooltip-edge: color-mix(in srgb, var(--foreground) 78%, var(--background));
 		padding: 0.4375rem 0.625rem;
 		max-width: 16rem;
 		font-size: var(--font-size-caption);
@@ -30,11 +40,55 @@ const styles = css`
 		width: max-content;
 		user-select: none;
 		-webkit-user-select: none;
-		background: var(--foreground);
+		background: var(--tooltip-surface);
 		color: var(--background);
-		border: 1px solid color-mix(in srgb, var(--foreground) 78%, var(--background));
+		border: 1px solid var(--tooltip-edge);
 		border-radius: var(--radius-sm);
 		box-shadow: none;
+	}
+
+	/* A square rotated onto its corner, centred exactly on the surface edge:
+	   the outer half is the point, and the inner half's own background covers
+	   the 1px border it straddles, so the two read as one shape. Only two of
+	   its borders are drawn — the pair that meets at the leading corner. */
+	.arrow {
+		position: absolute;
+		width: 8px;
+		height: 8px;
+		background: var(--tooltip-surface);
+		rotate: 45deg;
+	}
+
+	.surface[data-side='top'] .arrow {
+		bottom: -4px;
+		left: var(--arrow-x, 50%);
+		margin-left: -4px;
+		border-right: 1px solid var(--tooltip-edge);
+		border-bottom: 1px solid var(--tooltip-edge);
+	}
+
+	.surface[data-side='bottom'] .arrow {
+		top: -4px;
+		left: var(--arrow-x, 50%);
+		margin-left: -4px;
+		border-left: 1px solid var(--tooltip-edge);
+		border-top: 1px solid var(--tooltip-edge);
+	}
+
+	.surface[data-side='left'] .arrow {
+		right: -4px;
+		top: var(--arrow-y, 50%);
+		margin-top: -4px;
+		border-top: 1px solid var(--tooltip-edge);
+		border-right: 1px solid var(--tooltip-edge);
+	}
+
+	.surface[data-side='right'] .arrow {
+		left: -4px;
+		top: var(--arrow-y, 50%);
+		margin-top: -4px;
+		border-bottom: 1px solid var(--tooltip-edge);
+		border-left: 1px solid var(--tooltip-edge);
 	}
 `
 
@@ -52,14 +106,14 @@ export const ZTooltip = c(
 				return
 			}
 			showFloating(floating)
-			const update = () =>
-				applyPosition(
-					floating,
-					computePosition(host.current, floating, {
-						placement: (props.placement as Placement) || 'top',
-						offset: props.offset ?? 8
-					})
-				)
+			const update = () => {
+				const position = computePosition(host.current, floating, {
+					placement: (props.placement as Placement) || 'top',
+					offset: props.offset ?? 8
+				})
+				applyPosition(floating, position)
+				applyArrowPosition(floating, host.current, position, ARROW_SIZE)
+			}
 			const cleanup = autoUpdate(host.current, floating, update)
 			return () => {
 				cleanup()
@@ -68,7 +122,7 @@ export const ZTooltip = c(
 		}, [isOpen, props.placement, props.offset])
 
 		const open = () => {
-			if (props.disabled || !props.content) return
+			if (props.isDisabled || !props.content) return
 			clearTimeout(timer.current)
 			timer.current = setTimeout(() => setIsOpen(true), props.openDelay ?? 150)
 		}
@@ -89,6 +143,7 @@ export const ZTooltip = c(
 				<slot />
 				<div ref={floatRef} class="surface" popover="manual" role="tooltip">
 					{props.content}
+					{!props.doesHideArrow && <span class="arrow" aria-hidden="true" />}
 				</div>
 			</host>
 		)
@@ -98,7 +153,8 @@ export const ZTooltip = c(
 			...overlayPositionProps,
 			content: String,
 			openDelay: { type: Number },
-			disabled: { type: Boolean, reflect: true }
+			doesHideArrow: { type: Boolean, reflect: true },
+			isDisabled: { type: Boolean, reflect: true }
 		},
 		styles: [floatingSurfaceStyles, styles]
 	}

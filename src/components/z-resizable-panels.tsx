@@ -86,7 +86,7 @@ export const ZResizablePanels = c(
 			return {
 				min,
 				max: toPct(p.getAttribute('max-size'), g, 100),
-				collapsible: p.hasAttribute('collapsible'),
+				collapsible: p.hasAttribute('is-collapsible'),
 				collapsed,
 				threshold: p.hasAttribute('collapse-threshold')
 					? toPct(p.getAttribute('collapse-threshold'), g, min)
@@ -200,7 +200,7 @@ export const ZResizablePanels = c(
 			// Engine surface consumed by z-panel-handle / z-panel.
 			g.__resizeAt = resizeAt
 			g.__extent = extent
-			g.__isDisabled = () => Boolean(props.disabled)
+			g.__isDisabled = () => Boolean(props.isDisabled)
 			g.__keyboardStep = () => props.keyboardStep ?? 5
 			g.__panelIndexOfHandle = (handle: Element) => {
 				let i = -1
@@ -242,7 +242,7 @@ export const ZResizablePanels = c(
 				mo.disconnect()
 				ro.disconnect()
 			}
-		}, [props.direction, props.autoSaveId, props.disabled])
+		}, [props.direction, props.autoSaveId, props.isDisabled])
 
 		return (
 			<host shadowDom>
@@ -255,7 +255,7 @@ export const ZResizablePanels = c(
 			direction: { type: String, reflect: true },
 			autoSaveId: { type: String, reflect: true },
 			keyboardStep: { type: Number, reflect: true },
-			disabled: { type: Boolean, reflect: true },
+			isDisabled: { type: Boolean, reflect: true },
 			layout: event<{ sizes: number[] }>({ bubbles: true, composed: true })
 		},
 		styles
@@ -287,7 +287,7 @@ const handleStyles = css`
 		cursor: row-resize;
 		padding: 5px 0;
 	}
-	:host([disabled]) {
+	:host([is-disabled]) {
 		cursor: default;
 		pointer-events: none;
 	}
@@ -340,7 +340,7 @@ export const ZPanelHandle = c(
 
 		const onDown = (e: PointerEvent) => {
 			const g = group()
-			if (props.disabled || g?.__isDisabled?.()) return
+			if (props.isDisabled || g?.__isDisabled?.()) return
 			s.active = true
 			s.last = isVertical() ? e.clientY : e.clientX
 			;(e.currentTarget as HTMLElement).setPointerCapture(e.pointerId)
@@ -362,7 +362,7 @@ export const ZPanelHandle = c(
 		}
 		const onKey = (e: KeyboardEvent) => {
 			const g = group()
-			if (props.disabled || !g) return
+			if (props.isDisabled || !g) return
 			const col = isVertical()
 			const forward = col ? 'ArrowDown' : 'ArrowRight'
 			const back = col ? 'ArrowUp' : 'ArrowLeft'
@@ -376,7 +376,7 @@ export const ZPanelHandle = c(
 			<host
 				shadowDom
 				role="separator"
-				tabindex={props.disabled ? '-1' : '0'}
+				tabindex={props.isDisabled ? '-1' : '0'}
 				aria-orientation={group()?.getAttribute('direction') === 'vertical' ? 'horizontal' : 'vertical'}
 				onpointerdown={onDown}
 				onpointermove={onMove}
@@ -392,7 +392,7 @@ export const ZPanelHandle = c(
 	},
 	{
 		props: {
-			disabled: { type: Boolean, reflect: true },
+			isDisabled: { type: Boolean, reflect: true },
 			dragging: event<{ isDragging: boolean }>({ bubbles: true, composed: true })
 		},
 		styles: handleStyles

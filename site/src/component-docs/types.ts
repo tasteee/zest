@@ -42,11 +42,18 @@ export type ExampleT = {
 }
 
 // One row of an attribute or property reference table.
+//
+// `controlOptions` exists for the attributes whose documented type is honest
+// but unhelpful as a knob: `weight` really does accept any value from 1 to
+// 1000, and a text box is the only control that can express that — while the
+// values anyone actually reaches for are the nine hundreds. Listing them here
+// gives the playground a select without narrowing what the table claims.
 export type ApiRowT = {
 	name: string
 	type: string
 	defaultValue: string
 	description: string
+	controlOptions?: string[]
 }
 
 export type SlotRowT = {

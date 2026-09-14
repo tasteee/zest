@@ -7,10 +7,14 @@ import { themedScrollbarStyles } from '../shared/scrollbar-styles'
  * built as a single self-contained element. It owns a list of notes and every
  * common authoring gesture:
  *
- *   • draw / place notes (draw mode: click-drag; select mode: double-click)
- *   • delete (Delete key, right-click, or double-click a note)
+ *   • place notes (double-click empty space) and delete (Delete key, right-click,
+ *     or double-click a note)
  *   • move in time (drag horizontally) and to other pitches (drag vertically)
- *   • resize from either edge (grab the note's left/right ~6px)
+ *   • resize from either edge (grab the note's left/right edge; the hit zone
+ *     scales down for very short notes so it's always grabbable)
+ *   • Ctrl+drag a note's body to clone it and place the clone
+ *   • Alt+drag a note (anywhere on it) to scrub its velocity vertically
+ *   • click a keyboard-gutter row label to select every signal on that row
  *   • collision handling — a moved/placed note is the "winner"; any older note it
  *     overlaps on the same pitch is trimmed, split, or removed (latest wins)
  *   • marquee multi-select, then multi-move / multi-resize / multi-delete
@@ -18,12 +22,28 @@ import { themedScrollbarStyles } from '../shared/scrollbar-styles'
  *   • scale highlight + two fold modes (fold to used pitches, fold to scale)
  *   • snap-to-grid, zoom, a sticky piano keyboard gutter and bar ruler
  *
+ * Terminology. A *note* is a row — a pitch lane, the valid space along which
+ * things can be placed (what the keyboard gutter on the left labels). A
+ * *signal* is one placed thing on a note: a pitch/start/duration/velocity
+ * tuple — what the code below still types as `Note` and exposes as the
+ * `notes` property, for compatibility with existing consumers and with
+ * z-pattern-roll (its chord-relative sibling, which shares this whole
+ * interaction engine). Renaming the type/prop/event names to match would
+ * ripple into that public API, so it's left as a deliberate follow-up —
+ * comments below use "signal" for the placed thing and "note"/"row" for
+ * the pitch lane it lives on.
+ *
  * Coordinate model. Time lives in *beats* (float); pitch is a MIDI number 0-127.
- * A note is { id, pitch, start, duration, velocity }. Screen space is derived:
+ * A signal is { id, pitch, start, duration, velocity }. Screen space is derived:
  *   x = start * beatWidth        width = duration * beatWidth
  *   y = rowIndex(pitch) * rowHeight   (row 0 is the highest visible pitch)
- * All mutation flows through pure helpers (shift/resize/resolveCollisions) so the
+ * All mutation flows through pure helpers (transform/resolveCollisions) so the
  * live drag *preview* and the committed result share one code path.
+ *
+ * Snapping is absolute, not relative: a move/resize always rounds the dragged
+ * signal's own edge to the nearest grid line (anchor-snap), then carries every
+ * other selected signal by that same delta — so a signal moves exactly one grid
+ * column per grid step, and always lands on-grid even if it started off it.
  *
  * State is two-way via the `notes` property and the `change` event; the element
  * also exposes an imperative API (getNotes/setNotes/selectAll/deleteSelection/…).
@@ -42,17 +62,18 @@ const styles = css`
 		color: var(--foreground);
 		--pr-white-key: color-mix(in oklch, var(--background) 88%, var(--foreground));
 		--pr-black-key: color-mix(in oklch, var(--background) 96%, var(--foreground));
-		--pr-line: color-mix(in oklch, var(--border) 55%, transparent);
-		--pr-bar-line: color-mix(in oklch, var(--border) 100%, transparent);
+		--pr-line: color-mix(in oklch, var(--border) 35%, transparent);
+		--pr-bar-line: color-mix(in oklch, var(--border) 55%, transparent);
+		--pr-snap-line: color-mix(in oklch, var(--foreground) 45%, transparent);
 		--pr-scale-row: color-mix(in oklch, var(--accent) 8%, transparent);
-		--pr-note: var(--accent);
-		--pr-note-sel: var(--accent-alt);
+		--pr-note: color-mix(in oklch, var(--foreground) 42%, var(--background));
+		--pr-note-sel: color-mix(in oklch, var(--foreground) 82%, var(--background));
 		outline: none;
 	}
 	:host([is-hidden]) {
 		display: none;
 	}
-	:host([disabled]) {
+	:host([is-disabled]) {
 		opacity: 0.55;
 		pointer-events: none;
 	}
@@ -208,8 +229,11 @@ const styles = css`
 	.key.is-c {
 		color: var(--foreground);
 	}
-	.key:hover {
-		background: color-mix(in oklch, var(--accent) 22%, var(--pr-white-key));
+	.key.is-white:hover {
+		background: color-mix(in oklch, var(--foreground) 10%, var(--pr-white-key));
+	}
+	.key.is-black:hover {
+		background: color-mix(in oklch, var(--foreground) 14%, var(--pr-black-key));
 	}
 
 	/* --- the note world --- */
@@ -217,9 +241,6 @@ const styles = css`
 		position: relative;
 		z-index: 1;
 		touch-action: none;
-	}
-	.world.mode-draw {
-		cursor: crosshair;
 	}
 	.rowbg {
 		position: absolute;
@@ -254,6 +275,11 @@ const styles = css`
 		overflow: hidden;
 		box-shadow: inset 0 1px 0 color-mix(in oklch, white 25%, transparent);
 	}
+	/* applied one render after a note first mounts (see seenNoteIdsRef) so a
+	   just-placed note appears instantly instead of growing in from nothing */
+	.note.is-animatable {
+		transition: left 40ms ease-out, top 40ms ease-out, width 40ms ease-out, height 40ms ease-out;
+	}
 	.note.is-selected {
 		background: var(--pr-note-sel);
 		border-color: color-mix(in oklch, white 70%, var(--pr-note-sel));
@@ -284,6 +310,8 @@ const styles = css`
 	}
 `
 
+// A placed signal (see Terminology above) — kept named `Note` for API
+// compatibility with the `notes` prop/`change` event and z-pattern-roll.
 type Note = {
 	id: number
 	pitch: number
@@ -293,11 +321,13 @@ type Note = {
 }
 
 type Gesture = {
-	type: 'move' | 'resize-l' | 'resize-r' | 'draw' | 'marquee'
+	type: 'move' | 'resize-l' | 'resize-r' | 'velocity' | 'marquee'
 	startBeat: number
 	startPitch: number
+	startY: number // raw pointer Y in world px at gesture start, for velocity-drag
 	movingIds: Set<number>
-	orig: Note[] // snapshot of the notes being transformed (draw: the new note)
+	anchorId: number // the signal under the cursor at gesture start — its edge is what snaps to the grid
+	orig: Note[] // snapshot of the signals being transformed
 	additive: boolean
 	baseSelection: Set<number>
 }
@@ -305,6 +335,7 @@ type Gesture = {
 const NOTE_NAMES = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
 const BLACK = new Set([1, 3, 6, 8, 10])
 const EDGE = 6 // px hit zone for edge-resize
+const VELOCITY_PX_PER_UNIT = 2 // px of vertical alt-drag per velocity unit (1-127)
 const EPS = 1e-6
 
 const SCALES: Record<string, number[]> = {
@@ -354,6 +385,7 @@ export const ZPianoRoll = c(
 		const idRef = useRef(1)
 		const gestureRef = useRef<Gesture | null>(null)
 		const zoomDragRef = useRef<{ pointerId: number; startX: number; startY: number; startValue: number; axis: 'horizontal' | 'vertical' } | null>(null)
+		const seenNoteIdsRef = useRef<Set<number>>(new Set())
 		const nextId = () => {
 			const id = idRef.current ?? 1
 			idRef.current = id + 1
@@ -364,7 +396,6 @@ export const ZPianoRoll = c(
 		const [selection, setSelection] = useState<Set<number>>(() => new Set())
 		const [preview, setPreview] = useState<Note[] | null>(null)
 		const [marquee, setMarquee] = useState<{ x: number; y: number; w: number; h: number } | null>(null)
-		const [mode, setMode] = useProp<string>('mode')
 		const [fold, setFold] = useProp<string>('fold')
 		const [snap, setSnap] = useProp<number>('snap')
 		const [beatWidthProp, setBeatWidth] = useProp<number>('beatWidth')
@@ -379,7 +410,6 @@ export const ZPianoRoll = c(
 		const maxPitch = props.maxPitch ?? 96
 		const snapUnit = snap ?? 0.25
 		const minLen = snapUnit > 0 ? snapUnit : 0.0625
-		const curMode = mode || 'select'
 		const curFold = fold || 'none'
 		const scaleName = props.scale || ''
 		const root = ((props.root || 0) % 12 + 12) % 12
@@ -414,6 +444,14 @@ export const ZPianoRoll = c(
 		}, [props.notes])
 
 		const displayed = preview ?? notes
+
+		// Notes get the transition-bearing "is-animatable" class only after they've
+		// rendered once, so a brand-new note appears instantly instead of animating
+		// in from a default/zero size.
+		useEffect(() => {
+			for (const n of displayed) seenNoteIdsRef.current.add(n.id)
+		}, [displayed])
+
 		const totalBeats = Math.max(
 			bars * beatsPerBar,
 			displayed.reduce((m, n) => Math.max(m, n.start + n.duration), 0)
@@ -450,7 +488,11 @@ export const ZPianoRoll = c(
 		const pitchFromY = (y: number) => visibleRows[clamp(Math.floor(y / rowHeight), 0, visibleRows.length - 1)]
 
 		// --- snapping ---
+		// snapDelta: round a relative distance to the nearest grid multiple (durations/offsets).
+		// snapRound: round an absolute beat position to the nearest grid line (dragged edges).
+		// snapFloor: round an absolute beat position down to the grid line at/before it (new notes).
 		const snapDelta = (d: number) => (snapUnit > 0 ? Math.round(d / snapUnit) * snapUnit : d)
+		const snapRound = (v: number) => (snapUnit > 0 ? Math.round(v / snapUnit) * snapUnit : v)
 		const snapFloor = (v: number) => (snapUnit > 0 ? Math.floor(v / snapUnit) * snapUnit : v)
 
 		// --- collision resolution: `winners` overwrite overlapping same-pitch notes ---
@@ -472,24 +514,37 @@ export const ZPianoRoll = c(
 		}
 
 		// --- transform a gesture's snapshot into moved notes at the current pointer ---
-		const transform = (g: Gesture, curBeat: number, curPitch: number): Note[] => {
-			if (g.type === 'draw' || g.type === 'resize-r') {
-				return g.orig.map((o) => {
-					if (g.type === 'draw') return { ...o, duration: Math.max(minLen, snapDelta(curBeat - g.startBeat)) }
-					const dBeat = snapDelta(curBeat - g.startBeat)
-					return { ...o, duration: Math.max(minLen, o.duration + dBeat) }
-				})
+		// Snapping is anchored on the note under the cursor at gesture start: its own
+		// edge rounds to the nearest grid line, and every other selected note is
+		// carried by that same delta. That keeps a drag moving exactly one grid step
+		// per grid step, and guarantees the anchor note lands on-grid even when it
+		// started off-grid (e.g. it was placed while a finer grid was active).
+		const transform = (g: Gesture, curBeat: number, curPitch: number, curY: number): Note[] => {
+			const anchor = g.orig.find((o) => o.id === g.anchorId) ?? g.orig[0]
+			const rawDelta = curBeat - g.startBeat
+
+			if (g.type === 'velocity') {
+				const dVelocity = Math.round((g.startY - curY) / VELOCITY_PX_PER_UNIT)
+				return g.orig.map((o) => ({ ...o, velocity: clamp(o.velocity + dVelocity, 1, 127) }))
+			}
+			if (g.type === 'resize-r') {
+				const snappedEnd = snapRound(anchor.start + anchor.duration + rawDelta)
+				const dDuration = snappedEnd - (anchor.start + anchor.duration)
+				return g.orig.map((o) => ({ ...o, duration: Math.max(minLen, o.duration + dDuration) }))
 			}
 			if (g.type === 'resize-l') {
-				const dBeat = snapDelta(curBeat - g.startBeat)
+				const anchorEnd = anchor.start + anchor.duration
+				const snappedStart = clamp(snapRound(anchor.start + rawDelta), 0, anchorEnd - minLen)
+				const dStart = snappedStart - anchor.start
 				return g.orig.map((o) => {
 					const end = o.start + o.duration
-					const ns = clamp(o.start + dBeat, 0, end - minLen)
+					const ns = clamp(o.start + dStart, 0, end - minLen)
 					return { ...o, start: ns, duration: end - ns }
 				})
 			}
 			// move
-			const dBeat = snapDelta(curBeat - g.startBeat)
+			const snappedStart = snapRound(anchor.start + rawDelta)
+			const dBeat = snappedStart - anchor.start
 			const dPitch = curPitch - g.startPitch
 			return g.orig.map((o) => ({
 				...o,
@@ -498,8 +553,8 @@ export const ZPianoRoll = c(
 			}))
 		}
 
-		const buildResult = (g: Gesture, curBeat: number, curPitch: number): Note[] => {
-			const moved = transform(g, curBeat, curPitch)
+		const buildResult = (g: Gesture, curBeat: number, curPitch: number, curY: number): Note[] => {
+			const moved = transform(g, curBeat, curPitch, curY)
 			const rest = notes.filter((n) => !g.movingIds.has(n.id))
 			return resolveCollisions([...rest, ...moved], g.movingIds)
 		}
@@ -522,7 +577,7 @@ export const ZPianoRoll = c(
 		// The timing ruler adjusts beat width vertically; drag the keyboard gutter
 		// left/right to make every pitch row shorter/taller.
 		const startZoomDrag = (e: PointerEvent, axis: 'horizontal' | 'vertical') => {
-			if (props.disabled || e.button !== 0) return
+			if (props.isDisabled || e.button !== 0) return
 			e.preventDefault()
 			const surface = e.currentTarget as HTMLElement
 			surface.setPointerCapture(e.pointerId)
@@ -560,13 +615,26 @@ export const ZPianoRoll = c(
 			return null
 		}
 
+		// edge vs body hit test. The edge zone scales down for short notes so it
+		// never disappears, but never exceeds a third of the note (so the two
+		// edges can't overlap) — grabbing near an edge always resizes, never moves.
+		const edgeHitType = (beat: number, note: Note): Gesture['type'] => {
+			const intoPx = (beat - note.start) * beatWidth
+			const widthPx = note.duration * beatWidth
+			const edgePx = Math.min(EDGE, widthPx / 3)
+			if (intoPx < edgePx) return 'resize-l'
+			if (widthPx - intoPx < edgePx) return 'resize-r'
+			return 'move'
+		}
+
 		// --- pointer down: decide the gesture ---
+		// Shift/Cmd click is additive multi-select; Ctrl is reserved for clone-drag below.
 		const onPointerDown = (e: PointerEvent) => {
-			if (props.disabled || e.button === 2) return
+			if (props.isDisabled || e.button === 2) return
 			;(host.current as HTMLElement).focus?.()
-			const { beat, pitch } = pointToBeatPitch(e)
+			const { beat, pitch, y } = pointToBeatPitch(e)
 			const hit = noteAt(beat, pitch)
-			const additive = e.shiftKey || e.metaKey || e.ctrlKey
+			const additive = e.shiftKey || e.metaKey
 			worldRef.current!.setPointerCapture(e.pointerId)
 
 			if (hit) {
@@ -578,18 +646,55 @@ export const ZPianoRoll = c(
 					sel = new Set([hit.id])
 				}
 				setSelection(sel)
-				// edge vs body
-				const intoPx = (beat - hit.start) * beatWidth
-				const widthPx = hit.duration * beatWidth
-				let type: Gesture['type'] = 'move'
-				if (widthPx > 3 * EDGE && intoPx < EDGE) type = 'resize-l'
-				else if (widthPx > 3 * EDGE && widthPx - intoPx < EDGE) type = 'resize-r'
+				const type = edgeHitType(beat, hit)
 				const movingIds = sel.has(hit.id) ? sel : new Set([hit.id])
+
+				// Alt+drag anywhere on a signal scrubs its velocity vertically instead
+				// of moving/resizing it — edge vs body doesn't matter here.
+				if (e.altKey) {
+					gestureRef.current = {
+						type: 'velocity',
+						startBeat: beat,
+						startPitch: pitch,
+						startY: y,
+						movingIds,
+						anchorId: hit.id,
+						orig: notes.filter((n) => movingIds.has(n.id)).map((n) => ({ ...n })),
+						additive,
+						baseSelection: sel
+					}
+					return
+				}
+
+				// Ctrl+drag on a note's body clones the moving signal(s) and drags the
+				// clones instead, leaving the originals exactly where they were.
+				if (e.ctrlKey && type === 'move') {
+					const sourceNotes = notes.filter((n) => movingIds.has(n.id))
+					const clones = sourceNotes.map((n) => ({ ...n, id: nextId() }))
+					const cloneIdByOriginal = new Map(sourceNotes.map((n, i) => [n.id, clones[i].id]))
+					const cloneIds = new Set(clones.map((clone) => clone.id))
+					commit([...notes, ...clones], cloneIds)
+					gestureRef.current = {
+						type: 'move',
+						startBeat: beat,
+						startPitch: pitch,
+						startY: y,
+						movingIds: cloneIds,
+						anchorId: cloneIdByOriginal.get(hit.id)!,
+						orig: clones.map((clone) => ({ ...clone })),
+						additive: false,
+						baseSelection: cloneIds
+					}
+					return
+				}
+
 				gestureRef.current = {
 					type,
 					startBeat: beat,
 					startPitch: pitch,
+					startY: y,
 					movingIds,
+					anchorId: hit.id,
 					orig: notes.filter((n) => movingIds.has(n.id)).map((n) => ({ ...n })),
 					additive,
 					baseSelection: sel
@@ -597,34 +702,19 @@ export const ZPianoRoll = c(
 				return
 			}
 
-			// empty space
-			if (curMode === 'draw') {
-				const start = snapFloor(beat)
-				const newNote: Note = { id: nextId(), pitch, start, duration: minLen, velocity: defaultVelocity }
-				const ids = new Set([newNote.id])
-				setSelection(ids)
-				gestureRef.current = {
-					type: 'draw',
-					startBeat: start,
-					startPitch: pitch,
-					movingIds: ids,
-					orig: [newNote],
-					additive: false,
-					baseSelection: ids
-				}
-				setPreview(buildResult(gestureRef.current, beat, pitch))
-			} else {
-				const base = additive ? new Set(selection) : new Set<number>()
-				if (!additive) setSelection(base)
-				gestureRef.current = {
-					type: 'marquee',
-					startBeat: beat,
-					startPitch: pitch,
-					movingIds: new Set(),
-					orig: [],
-					additive,
-					baseSelection: base
-				}
+			// empty space — start a marquee select (notes are placed via double-click)
+			const base = additive ? new Set(selection) : new Set<number>()
+			if (!additive) setSelection(base)
+			gestureRef.current = {
+				type: 'marquee',
+				startBeat: beat,
+				startPitch: pitch,
+				startY: y,
+				movingIds: new Set(),
+				anchorId: -1,
+				orig: [],
+				additive,
+				baseSelection: base
 			}
 		}
 
@@ -655,7 +745,7 @@ export const ZPianoRoll = c(
 				setSelection(sel)
 				return
 			}
-			setPreview(buildResult(g, beat, pitch))
+			setPreview(buildResult(g, beat, pitch, y))
 		}
 
 		const onPointerUp = (e: PointerEvent) => {
@@ -670,37 +760,30 @@ export const ZPianoRoll = c(
 				props.select({ ids: [...selection] })
 				return
 			}
-			const { beat, pitch } = pointToBeatPitch(e)
-			const next = buildResult(g, beat, pitch)
+			const { beat, pitch, y } = pointToBeatPitch(e)
+			const next = buildResult(g, beat, pitch, y)
 			setPreview(null)
 			gestureRef.current = null
 			commit(next, new Set(g.movingIds))
 			props.select({ ids: [...g.movingIds] })
 		}
 
-		// hover cursor over the world (edge = resize, body = move, else default/crosshair)
+		// hover cursor over the world (edge = resize, body = move, else default)
 		const updateHoverCursor = (e: PointerEvent) => {
 			const world = worldRef.current
 			if (!world) return
-			if (curMode === 'draw') {
-				world.style.cursor = 'crosshair'
-				return
-			}
 			const { beat, pitch } = pointToBeatPitch(e)
 			const hit = noteAt(beat, pitch)
 			if (!hit) {
 				world.style.cursor = 'default'
 				return
 			}
-			const intoPx = (beat - hit.start) * beatWidth
-			const widthPx = hit.duration * beatWidth
-			if (widthPx > 3 * EDGE && (intoPx < EDGE || widthPx - intoPx < EDGE)) world.style.cursor = 'ew-resize'
-			else world.style.cursor = 'move'
+			world.style.cursor = edgeHitType(beat, hit) === 'move' ? 'move' : 'ew-resize'
 		}
 
 		// --- double-click: create (empty) or delete (on a note) ---
 		const onDblClick = (e: MouseEvent) => {
-			if (props.disabled) return
+			if (props.isDisabled) return
 			const r = worldRef.current!.getBoundingClientRect()
 			const beat = Math.max(0, (e.clientX - r.left) / beatWidth)
 			const pitch = pitchFromY(e.clientY - r.top)
@@ -717,7 +800,7 @@ export const ZPianoRoll = c(
 
 		// --- right-click: delete note under cursor (or whole selection) ---
 		const onContextMenu = (e: MouseEvent) => {
-			if (props.disabled) return
+			if (props.isDisabled) return
 			e.preventDefault()
 			const r = worldRef.current!.getBoundingClientRect()
 			const beat = Math.max(0, (e.clientX - r.left) / beatWidth)
@@ -726,6 +809,17 @@ export const ZPianoRoll = c(
 			if (!hit) return
 			const ids = selection.has(hit.id) ? selection : new Set([hit.id])
 			commit(notes.filter((n) => !ids.has(n.id)), new Set())
+		}
+
+		// --- click a keyboard-gutter row label: select every signal on that note ---
+		const selectRow = (pitch: number, e: MouseEvent) => {
+			if (props.isDisabled) return
+			;(host.current as HTMLElement).focus?.()
+			const rowIds = new Set(notes.filter((n) => n.pitch === pitch).map((n) => n.id))
+			const additive = e.shiftKey || e.metaKey
+			const next = additive ? new Set([...selection, ...rowIds]) : rowIds
+			setSelection(next)
+			props.select({ ids: [...next] })
 		}
 
 		// --- keyboard operations ---
@@ -751,7 +845,7 @@ export const ZPianoRoll = c(
 		}
 
 		const onKeyDown = (e: KeyboardEvent) => {
-			if (props.disabled) return
+			if (props.isDisabled) return
 			const mod = e.metaKey || e.ctrlKey
 			if (e.key === 'Delete' || e.key === 'Backspace') {
 				e.preventDefault()
@@ -806,13 +900,17 @@ export const ZPianoRoll = c(
 			el.getSelection = () => [...selection]
 		}, [notes, selection])
 
-		// --- vertical grid lines: subdivisions, beats, bars via layered gradients ---
+		// --- vertical grid lines: active snap grid, beats, bars via layered gradients ---
+		// The snap layer is drawn on top and in the strongest color of the three —
+		// it's the grid dragging actually respects, so it needs to read as the
+		// active one even where its lines land on a beat/bar line underneath
+		// (e.g. a 1/4 snap coincides with every beat line; 1/1 with every bar line).
 		const subPx = snapUnit > 0 ? snapUnit * beatWidth : beatWidth
 		const beatPx = beatWidth
 		const barPx = beatsPerBar * beatWidth
 		const gridBg = [
-			`repeating-linear-gradient(90deg, var(--pr-line) 0 1px, transparent 1px ${subPx}px)`,
-			`repeating-linear-gradient(90deg, color-mix(in oklch, var(--border) 80%, transparent) 0 1px, transparent 1px ${beatPx}px)`,
+			`repeating-linear-gradient(90deg, var(--pr-snap-line) 0 1px, transparent 1px ${subPx}px)`,
+			`repeating-linear-gradient(90deg, var(--pr-line) 0 1px, transparent 1px ${beatPx}px)`,
 			`repeating-linear-gradient(90deg, var(--pr-bar-line) 0 1px, transparent 1px ${barPx}px)`
 		].join(', ')
 
@@ -836,23 +934,6 @@ export const ZPianoRoll = c(
 			>
 				{props.hasToolbar && (
 					<div class="toolbar">
-						<div class="tb-group">
-							<button
-								class={curMode !== 'draw' ? 'tb-btn is-active' : 'tb-btn'}
-								onclick={() => setMode('select')}
-								title="Select / edit (V)"
-							>
-								Select
-							</button>
-							<button
-								class={curMode === 'draw' ? 'tb-btn is-active' : 'tb-btn'}
-								onclick={() => setMode('draw')}
-								title="Draw notes (B)"
-							>
-								Draw
-							</button>
-						</div>
-						<div class="tb-sep" />
 						<span class="tb-label">Grid</span>
 						<select
 							class="tb-select"
@@ -921,6 +1002,7 @@ export const ZPianoRoll = c(
 										<div
 											class={`key ${isBlack ? 'is-black' : 'is-white'} ${isC ? 'is-c' : ''}`}
 											style={{ top: `${yOf(p)}px`, height: `${rowHeight}px` }}
+											onclick={(e: MouseEvent) => selectRow(p, e)}
 										>
 											{isC || rowHeight >= 16 ? noteName(p) : ''}
 										</div>
@@ -930,7 +1012,7 @@ export const ZPianoRoll = c(
 						)}
 
 						<div
-							class={`world mode-${curMode}`}
+							class="world"
 							ref={worldRef}
 							style={{ width: `${worldW}px`, height: `${worldH}px` }}
 							onpointerdown={onPointerDown}
@@ -963,9 +1045,13 @@ export const ZPianoRoll = c(
 								if (ri == null) return null
 								const selected = selection.has(n.id)
 								const velFrac = 1 - clamp(n.velocity, 1, 127) / 127
+								const isAnimatable = seenNoteIdsRef.current.has(n.id)
+								let noteClass = isAnimatable ? 'note is-animatable' : 'note'
+								if (selected) noteClass += ' is-selected'
 								return (
 									<div
-										class={selected ? 'note is-selected' : 'note'}
+										key={n.id}
+										class={noteClass}
 										style={{
 											left: `${n.start * beatWidth}px`,
 											top: `${ri * rowHeight}px`,
@@ -1011,7 +1097,6 @@ export const ZPianoRoll = c(
 			rowHeight: { type: Number, reflect: true },
 			minPitch: { type: Number, reflect: true },
 			maxPitch: { type: Number, reflect: true },
-			mode: { type: String, reflect: true },
 			fold: { type: String, reflect: true },
 			scale: { type: String, reflect: true },
 			root: { type: Number, reflect: true },
@@ -1019,7 +1104,7 @@ export const ZPianoRoll = c(
 			playhead: { type: Number, reflect: true },
 			hasToolbar: { type: Boolean, reflect: true, value: () => true },
 			hasKeyboard: { type: Boolean, reflect: true, value: () => true },
-			disabled: { type: Boolean, reflect: true },
+			isDisabled: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			change: event<{ notes: any[] }>({ bubbles: true, composed: true }),
 			select: event<{ ids: number[] }>({ bubbles: true, composed: true })

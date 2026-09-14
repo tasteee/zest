@@ -4,6 +4,8 @@ import { buildCodeBlock, buildLabel } from './render/zest-elements'
 
 type ZPlaygroundElementT = HTMLElement & {
 	controls: unknown[]
+	authoredAttributes: string[]
+	authoredAttributeValues: Record<string, string>
 }
 import type { ZCodeBlockElementT } from './render/zest-elements'
 import type { DocPageT } from './docs-data'
@@ -18,7 +20,8 @@ import type { DocPageT } from './docs-data'
 // z-drop-target, z-comment-thread.md documents z-comment-mark and friends —
 // and those pages have no single instance to drive. Creating the element
 // anyway produced an undefined custom element: an empty inline box sitting
-// under a "Playground" heading, which reads as a broken demo.
+// under a "Playground" heading, which reads as a broken demo. Those pages
+// fall through to getConceptStageElements below instead.
 const getCanonicalElement = (primaryExampleHtml: string, tagName: string): Element | null => {
 	const parsedDocument = new DOMParser().parseFromString(primaryExampleHtml, 'text/html')
 	const matchedElement = parsedDocument.body.querySelector(tagName)
@@ -33,6 +36,23 @@ const getCanonicalElement = (primaryExampleHtml: string, tagName: string): Eleme
 	if (!isRealElement) return null
 
 	return document.createElement(tagName)
+}
+
+// A concept page has no single canonical tag, so there is nothing for the
+// controls to drive — but the example markup still names real, registered
+// elements (z-draggable, z-drop-target) that are worth more than a static
+// code block. Clones every root element of the primary example so the
+// playground can slot them all in as one uncontrolled, but genuinely live
+// and working, demo.
+const getConceptStageElements = (primaryExampleHtml: string): Element[] => {
+	const parsedDocument = new DOMParser().parseFromString(primaryExampleHtml, 'text/html')
+	const rootElements = [...parsedDocument.body.children]
+
+	return rootElements.map((rootElement) => {
+		const clonedElement = rootElement.cloneNode(true) as Element
+		applySiteBaseUrl(clonedElement)
+		return clonedElement
+	})
 }
 
 // The paired ```js block (e.g. z-select's `.options = [...]`) is trusted,
@@ -69,6 +89,28 @@ const buildJsOnlyFootnote = (propertyNames: string[]): HTMLElement => {
 	return callout
 }
 
+// Builds a z-playground with no controls and no single driven instance —
+// every root element of the example slotted in side by side, live and
+// wired up. This is the concept-page fallback: z-playground already skips
+// its controls panel when `controls` is empty, and already reads every
+// slotted stage element (not just one) into the output snippet, so an empty
+// controls array is all it takes to get an honest, uncontrolled demo instead
+// of the broken "no demo at all" a canonical-element mismatch used to leave
+// behind.
+const buildConceptPlayground = (page: DocPageT): HTMLElement | null => {
+	const stageElements = getConceptStageElements(page.primaryExampleHtml)
+	if (!stageElements.length) return null
+
+	for (const stageElement of stageElements) stageElement.setAttribute('slot', 'stage')
+
+	const playground = createElement('z-playground') as ZPlaygroundElementT
+	playground.setAttribute('tag-name', page.slug)
+	playground.controls = []
+	playground.append(...stageElements)
+
+	return playground
+}
+
 // Builds the whole "Playground" card for a component doc page: a live,
 // controllable instance on top, a controls toolbar generated from the doc's
 // own Attributes table, and the resulting HTML underneath — kept in sync on
@@ -77,23 +119,42 @@ const buildJsOnlyFootnote = (propertyNames: string[]): HTMLElement => {
 export const buildPlayground = (page: DocPageT): HTMLElement | null => {
 	if (!page.primaryExampleHtml) return null
 
-	const canonicalElement = getCanonicalElement(page.primaryExampleHtml, page.slug)
-	if (!canonicalElement) return null
-
 	const playgroundData = getComponentPlaygroundData(page.rawMarkdown)
-	canonicalElement.setAttribute('slot', 'stage')
 
-	const playground = createElement('z-playground') as ZPlaygroundElementT
-	playground.setAttribute('tag-name', page.slug)
-	playground.controls = playgroundData.controls
-	playground.append(canonicalElement)
+	const canonicalElement = getCanonicalElement(page.primaryExampleHtml, page.slug)
+
+	const wrap = createElement('div', 'playgroundGroup')
+
+	if (canonicalElement) {
+		// Snapshotted before the element joins the document and renders, so the
+		// snippet shows the markdown's own markup rather than the attributes the
+		// component adds to itself. See buildPlayground in render/playground.ts.
+		// The values ride along too — z-playground's Reset restores each control
+		// to what the markdown actually wrote, not just to "gone".
+		const authoredAttributes = canonicalElement.getAttributeNames()
+		const authoredAttributeValues = Object.fromEntries(
+			authoredAttributes.map((name) => [name, canonicalElement.getAttribute(name) ?? ''])
+		)
+		canonicalElement.setAttribute('slot', 'stage')
+
+		const playground = createElement('z-playground') as ZPlaygroundElementT
+		playground.setAttribute('tag-name', page.slug)
+		playground.controls = playgroundData.controls
+		playground.authoredAttributes = authoredAttributes
+		playground.authoredAttributeValues = authoredAttributeValues
+		playground.append(canonicalElement)
+		wrap.append(playground)
+	}
+
+	if (!canonicalElement) {
+		const conceptPlayground = buildConceptPlayground(page)
+		if (!conceptPlayground) return null
+		wrap.append(conceptPlayground)
+	}
 
 	// The markdown path has two things the TypeScript pages do not: a paired
 	// setup script, and properties that can only be set from JS. Both hang off
 	// the playground rather than inside it, since neither is a knob.
-	const wrap = createElement('div', 'playgroundGroup')
-	wrap.append(playground)
-
 	if (playgroundData.pairedScript) {
 		const pairedScript = playgroundData.pairedScript
 		wrap.append(buildSetupSection(pairedScript))

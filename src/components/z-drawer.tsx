@@ -165,7 +165,7 @@ export const ZDrawer = c(
 
 		return (
 			<host shadowDom>
-				<div class="trigger" onclick={() => !props.disabled && setIsOpen(true)}>
+				<div class="trigger" onclick={() => !props.isDisabled && setIsOpen(true)}>
 					<slot name="trigger" />
 				</div>
 
@@ -204,7 +204,7 @@ export const ZDrawer = c(
 			heading: String,
 			description: String,
 			isStatic: { type: Boolean, reflect: true },
-			disabled: { type: Boolean, reflect: true },
+			isDisabled: { type: Boolean, reflect: true },
 			open: event<void>({ bubbles: true, composed: true }),
 			close: event<void>({ bubbles: true, composed: true })
 		},

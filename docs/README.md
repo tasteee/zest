@@ -34,7 +34,10 @@ Custom events are dispatched as bubbling, composed `CustomEvent`s. In plain DOM
 listen with `el.addEventListener('change', e => e.detail)`; in React use the
 `onEventName` convention where supported.
 
-Docs are organized into folders by category (`docs/<category>/z-*.md`). A few
+Docs are organized into folders by category (`docs/<category>/z-*.md`), with a
+folder one level deeper for a named run inside a category
+(`docs/actionables/buttons/z-swap.md`). Grouping is a nav concern only — a
+page's route stays `/elements/<category>/<slug>` wherever its file sits. A few
 docs cover more than one custom element defined in the same source file (e.g.
 `z-text.md` also covers `z-heading`/`z-subheading`/`z-label`/`z-inline`;
 `z-drag-drop.md` covers both `z-draggable` and `z-drop-target`) — those are
@@ -46,62 +49,79 @@ these docs, flagged for discussion rather than fixed silently.
 
 ## Components
 
-### Foundation
-- [z-box](foundation/z-box.md) — flexible layout primitive
-- [z-text](foundation/z-text.md) — body text, plus [z-heading](foundation/z-heading.md), [z-subheading](foundation/z-subheading.md), [z-label](foundation/z-label.md), [z-inline](foundation/z-inline.md)
-- [z-display](foundation/z-display.md) — oversized fluid hero type
-- [z-eyebrow](foundation/z-eyebrow.md) — small mono kicker above a title
-- [z-kbd](foundation/z-kbd.md) — keyboard key cap
-- [z-card](foundation/z-card.md) — bordered content card
-- [z-line](foundation/z-line.md) — hairline rule
-- [z-separator](foundation/z-separator.md) — labeled divider
+### Typography
+- [z-text](typography/z-text.md) — body copy and paragraphs
+- [z-heading](typography/z-heading.md) — bold display headings
+- [z-subheading](typography/z-subheading.md) — uppercase tracked overlines
+- [z-label](typography/z-label.md) — short UI labels
+- [z-inline](typography/z-inline.md) — style a fragment without resetting its size
+- [z-display](typography/z-display.md) — oversized fluid hero type
+- [z-eyebrow](typography/z-eyebrow.md) — small mono kicker above a title
+- [z-kbd](typography/z-kbd.md) — keyboard key cap
 
-### Layout primitives
-- [z-box](foundation/z-box.md) — the canonical layout primitive (flex/grid/block)
-- [wired-row](layout/wired-row.md) / [wired-column](layout/wired-column.md) — thin, direction-locked z-box wrappers
-- [wired-grid](layout/wired-grid.md) — CSS grid
-- [z-surface](layout/z-surface.md) — themed panel
-- [z-scroll](layout/z-scroll.md) — themed overflow container
-- [z-spacer](layout/z-spacer.md) — flex spacing
-- [z-swap](layout/z-swap.md) — crossfade/rotate/flip between two faces
-- [z-chassis](layout/z-chassis.md) — device-like app shell (rail + screen)
-- [z-bento-grid](layout/z-bento-grid.md) / [z-bento-item](layout/z-bento-item.md) — fixed-row-height marketing grid
+### Structure
+- [z-box](structure/z-box.md) — the canonical layout primitive (flex/grid/block)
+- [z-card](structure/z-card.md) — bordered content card
+- [z-separator](structure/z-separator.md) — the divider: hairline rule, optionally labeled, optionally vertical
+- [wired-row](structure/wired-row.md) / [wired-column](structure/wired-column.md) — thin, direction-locked z-box wrappers
+- [wired-grid](structure/wired-grid.md) — CSS grid
+- [z-surface](structure/z-surface.md) — themed panel
+- [z-scroll](structure/z-scroll.md) — themed overflow container
+- [z-scroll-area](structure/z-scroll-area.md) — styled scroll area
+- [z-spacer](structure/z-spacer.md) — flex spacing
+- [z-chassis](structure/z-chassis.md) — device-like app shell (rail + screen)
+- [z-bento-grid](structure/z-bento-grid.md) / [z-bento-item](structure/z-bento-item.md) — fixed-row-height marketing grid
 
-### Buttons & actions
-- [z-button](buttons-actions/z-button.md) — button
-- [z-button-group](buttons-actions/z-button-group.md) — segmented button row
-- [z-toggle](buttons-actions/z-toggle.md) — toggle button
-- [z-toggle-group](buttons-actions/z-toggle-group.md) — toggle set
-- [z-toggle-group-item](buttons-actions/z-toggle-group-item.md) — toggle set item
-- [z-link](buttons-actions/z-link.md) — text link
-- [z-toolbar](buttons-actions/z-toolbar.md) / [z-toolbar-group](buttons-actions/z-toolbar-group.md) — action strip with roving-tabindex semantics
+### Actionables
 
-### Form controls
-- [z-input](forms/z-input.md) — text field
-- [z-textarea](forms/z-textarea.md) — multi-line field
-- [z-number-input](forms/z-number-input.md) — numeric field with stepper
-- [z-checkbox](forms/z-checkbox.md) — checkbox
-- [z-switch](forms/z-switch.md) — switch
-- [z-radio](forms/z-radio.md) — radio option
-- [z-radio-group](forms/z-radio-group.md) — radio set
-- [z-slider](forms/z-slider.md) — single-thumb range slider
-- [z-range](forms/z-range.md) / [z-range-handle](forms/z-range-handle.md) — dual-thumb range slider
-- [z-select](forms/z-select.md) — dropdown select
-- [z-combobox](forms/z-combobox.md) — searchable select
-- [z-color-picker](forms/z-color-picker.md) — color picker
-- [z-input-otp](forms/z-input-otp.md) — one-time-code input
-- [z-field](forms/z-field.md) — label/description/error wrapper
-- [z-filter](forms/z-filter.md) — pill-based faceting control
+#### Buttons
+- [z-button](actionables/buttons/z-button.md) — button
+- [z-button-group](actionables/buttons/z-button-group.md) — segmented button row
+- [z-toggle-button](actionables/buttons/z-toggle-button.md) — toggle button
+- [z-toggle-button-group](actionables/buttons/z-toggle-button-group.md) — toggle set
+- [z-toggle-button-group-item](actionables/buttons/z-toggle-button-group-item.md) — toggle set item
+- [z-swap](actionables/buttons/z-swap.md) — crossfade/rotate/flip between two faces
+- [z-theme-switcher](actionables/buttons/z-theme-switcher.md) — light/dark theme toggle
+- [z-toolbar](actionables/buttons/z-toolbar.md) / [z-toolbar-group](actionables/buttons/z-toolbar-group.md) — action strip with roving-tabindex semantics
 
-### Attachments & files
-- [z-dropzone](attachments/z-dropzone.md) — native file drop area with validation
-- [z-drag-drop](attachments/z-drag-drop.md) — pointer-based drag/drop engine (`z-draggable` + `z-drop-target`)
-- [z-attachment-chip](attachments/z-attachment-chip.md) — staged file in a composer
-- [z-attachment-tray](attachments/z-attachment-tray.md) — composer's attachment strip + drop target
-- [z-file-attachment](attachments/z-file-attachment.md) — sent file inside a message
+#### Inputs
+- [z-input](actionables/inputs/z-input.md) — text field
+- [z-textarea](actionables/inputs/z-textarea.md) — multi-line field
+- [z-number-input](actionables/inputs/z-number-input.md) — numeric field with stepper
+- [z-checkbox](actionables/inputs/z-checkbox.md) — checkbox
+- [z-switch](actionables/inputs/z-switch.md) — switch
+- [z-radio](actionables/inputs/z-radio.md) — radio option
+- [z-radio-group](actionables/inputs/z-radio-group.md) — radio set
+- [z-slider](actionables/inputs/z-slider.md) — single-thumb range slider
+- [z-range](actionables/inputs/z-range.md) / [z-range-handle](actionables/inputs/z-range-handle.md) — dual-thumb range slider
+- [z-select](actionables/inputs/z-select.md) — dropdown select
+- [z-combobox](actionables/inputs/z-combobox.md) — searchable select
+- [z-color-picker](actionables/inputs/z-color-picker.md) — color picker
+- [z-input-otp](actionables/inputs/z-input-otp.md) — one-time-code input
+- [z-field](actionables/inputs/z-field.md) — label/description/error wrapper
+- [z-filter](actionables/inputs/z-filter.md) — pill-based faceting control
 
-> Three different drag paradigms live side by side here and in Data display
-> (`z-sortable`) — see [questionable-api-choices.md](questionable-api-choices.md).
+### Overlays
+- [z-tooltip](overlays/z-tooltip.md) — tooltip
+- [z-popover](overlays/z-popover.md) — popover
+- [z-hover-card](overlays/z-hover-card.md) — hover card
+- [z-dialog](overlays/z-dialog.md) — modal dialog
+- [z-alert-dialog](overlays/z-alert-dialog.md) — confirmation dialog
+- [z-alert](overlays/z-alert.md) — inline alert banner reacting to what the app just did
+- [z-sheet](overlays/z-sheet.md) — edge sheet
+- [z-drawer](overlays/z-drawer.md) — bottom drawer
+- [z-toast](overlays/z-toast.md) — toast notifications
+- [z-command](overlays/z-command.md) — command palette
+- [z-context-menu](overlays/z-context-menu.md) — right-click menu
+
+### Navigation
+- [z-link](navigation/z-link.md) — text link
+- [z-breadcrumbs](navigation/z-breadcrumbs.md) — breadcrumb trail
+- [z-tabs](navigation/z-tabs.md) — tabs
+- [z-menu](navigation/z-menu.md) — dropdown menu
+- [z-nav-menu](navigation/z-nav-menu.md) — navigation bar
+- [z-sidebar](navigation/z-sidebar.md) — sidebar nav rail
+- [z-pagination](navigation/z-pagination.md) — page navigation
 
 ### Data display
 - [z-badge](data-display/z-badge.md) — pill / tag / chip
@@ -111,38 +131,34 @@ these docs, flagged for discussion rather than fixed silently.
 - [z-progress](data-display/z-progress.md) — progress meter
 - [z-skeleton](data-display/z-skeleton.md) — loading placeholder
 - [z-table](data-display/z-table.md) — data table
-- [z-pagination](data-display/z-pagination.md) — page navigation
+- [z-chart](data-display/z-chart.md) — chart
 - [z-stat](data-display/z-stat.md) — statistic block
 - [z-list](data-display/z-list.md) / [z-list-row](data-display/z-list-row.md) — divided row list on a card
 - [z-tree](data-display/z-tree.md) — hierarchical disclosure tree
-- [z-sortable](data-display/z-sortable.md) — drag-to-reorder children
+- [z-empty-state](data-display/z-empty-state.md) — empty placeholder
+- [z-suggestion-chips](data-display/z-suggestion-chips.md) — tappable prompt suggestions
+- [z-callout](data-display/z-callout.md) — in-flow documentation admonition, annotating what you're reading
 
-### Navigation & disclosure
-- [z-breadcrumbs](navigation-disclosure/z-breadcrumbs.md) — breadcrumb trail
-- [z-tabs](navigation-disclosure/z-tabs.md) — tabs
-- [z-collapsible](navigation-disclosure/z-collapsible.md) — disclosure section
-- [z-accordion](navigation-disclosure/z-accordion.md) — accordion
-- [z-menu](navigation-disclosure/z-menu.md) — dropdown menu
-- [z-nav-menu](navigation-disclosure/z-nav-menu.md) — navigation bar
-- [z-sidebar](navigation-disclosure/z-sidebar.md) — sidebar nav rail
-- [z-context-menu](navigation-disclosure/z-context-menu.md) — right-click menu
+### Interactive
+- [z-sortable](interactive/z-sortable.md) — drag-to-reorder children
+- [z-drag-drop](interactive/z-drag-drop.md) — pointer-based drag/drop engine (`z-draggable` + `z-drop-target`)
+- [z-resizable-panels](interactive/z-resizable-panels.md) — resizable pane group (+ `z-panel-handle`)
+- [z-collapsible](interactive/z-collapsible.md) — disclosure section
+- [z-accordion](interactive/z-accordion.md) — accordion
+- [z-carousel](interactive/z-carousel.md) — carousel
+- [z-knob](interactive/z-knob.md) — rotary knob control
 
-### Overlays
-- [z-tooltip](overlays/z-tooltip.md) — tooltip
-- [z-popover](overlays/z-popover.md) — popover
-- [z-hover-card](overlays/z-hover-card.md) — hover card
-- [z-dialog](overlays/z-dialog.md) — modal dialog
-- [z-alert-dialog](overlays/z-alert-dialog.md) — confirmation dialog
-- [z-alert](overlays/z-alert.md) — inline alert banner
-- [z-callout](overlays/z-callout.md) — in-flow documentation admonition
-- [z-sheet](overlays/z-sheet.md) — edge sheet
-- [z-drawer](overlays/z-drawer.md) — bottom drawer
-- [z-toast](overlays/z-toast.md) — toast notifications
-- [z-command](overlays/z-command.md) — command palette
+> Three different drag paradigms live side by side in Interactive
+> (`z-drag-drop`, `z-sortable`) — see [questionable-api-choices.md](questionable-api-choices.md).
+
+### Attachments & files
+- [z-dropzone](attachments/z-dropzone.md) — native file drop area with validation
+- [z-attachment-chip](attachments/z-attachment-chip.md) — staged file in a composer
+- [z-attachment-tray](attachments/z-attachment-tray.md) — composer's attachment strip + drop target
+- [z-file-attachment](attachments/z-file-attachment.md) — sent file inside a message
 
 ### Canvas & panels
 - [z-editor-canvas](canvas-panels/z-editor-canvas.md) — infinite pannable/zoomable surface (+ `z-canvas-item`)
-- [z-resizable-panels](canvas-panels/z-resizable-panels.md) — resizable pane group (+ `z-panel-handle`)
 - [z-panel](canvas-panels/z-panel.md) — a pane inside `z-resizable-panels`
 
 ### Effects & motion
@@ -152,12 +168,8 @@ these docs, flagged for discussion rather than fixed silently.
 - [z-progressive-blur](effects/z-progressive-blur.md) — edge-fading blur over content
 
 ### Specialized
-- [z-empty-state](specialized/z-empty-state.md) — empty placeholder
-- [z-scroll-area](specialized/z-scroll-area.md) — styled scroll area
 - [z-code-block](specialized/z-code-block.md) — code block
-- [z-carousel](specialized/z-carousel.md) — carousel
 - [z-terminal](specialized/z-terminal.md) — animated terminal/code demo
-- [z-suggestion-chips](specialized/z-suggestion-chips.md) — tappable prompt suggestions
 - [z-relative-time](specialized/z-relative-time.md) — auto-updating relative timestamp
 
 ### Chat & messaging

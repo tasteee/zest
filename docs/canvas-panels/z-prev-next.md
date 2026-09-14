@@ -9,8 +9,8 @@ a pair: previous points left and sits left, next points right and sits right.
 
 ```js
 const pager = document.querySelector('z-prev-next')
-pager.previous = { label: 'z-checkbox', route: '#/c/forms/z-checkbox' }
-pager.next = { label: 'z-select', route: '#/c/forms/z-select' }
+pager.previous = { label: 'z-checkbox', route: '#/elements/actionables/z-checkbox' }
+pager.next = { label: 'z-select', route: '#/elements/actionables/z-select' }
 pager.addEventListener('navigate', (e) => e.detail) // { route }
 ```
 

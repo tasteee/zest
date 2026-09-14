@@ -102,7 +102,7 @@ export const ZCollapsible = c(
 		const [isOpen, setIsOpen] = useProp<boolean>('isOpen')
 
 		const toggle = () => {
-			if (props.disabled) return
+			if (props.isDisabled) return
 			const next = !isOpen
 			setIsOpen(next)
 			props.toggle({ value: props.value || '', open: next })
@@ -113,7 +113,7 @@ export const ZCollapsible = c(
 				<button
 					type="button"
 					class="trigger"
-					disabled={props.disabled}
+					disabled={props.isDisabled}
 					aria-expanded={isOpen ? 'true' : 'false'}
 					onclick={toggle}
 				>
@@ -134,7 +134,7 @@ export const ZCollapsible = c(
 			label: String,
 			accent: { type: String, reflect: true },
 			isOpen: { type: Boolean, reflect: true },
-			disabled: { type: Boolean, reflect: true },
+			isDisabled: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			toggle: event<{ value: string; open: boolean }>({ bubbles: true, composed: true })
 		},

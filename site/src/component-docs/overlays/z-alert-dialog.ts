@@ -259,8 +259,8 @@ export const zAlertDialogDoc: ComponentDocT = {
 	],
 
 	related: [
-		{ tag: 'z-dialog', route: '/c/overlays/z-dialog', description: 'When the modal needs a form or a free-form footer.' },
-		{ tag: 'z-toast', route: '/c/overlays/z-toast', description: 'Offer an undo instead of asking, when the action is reversible.' },
-		{ tag: 'z-alert', route: '/c/overlays/z-alert', description: 'An in-flow warning that does not interrupt.' }
+		{ tag: 'z-dialog', route: '/elements/overlays/z-dialog', description: 'When the modal needs a form or a free-form footer.' },
+		{ tag: 'z-toast', route: '/elements/overlays/z-toast', description: 'Offer an undo instead of asking, when the action is reversible.' },
+		{ tag: 'z-alert', route: '/elements/overlays/z-alert', description: 'An in-flow warning that does not interrupt.' }
 	]
 }

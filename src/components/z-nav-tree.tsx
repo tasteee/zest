@@ -6,7 +6,7 @@ import { c, css, event, useMemo, useState } from 'atomico'
  *
  *   el.items = [
  *     { label: 'Forms', children: [
- *       { label: 'z-checkbox', route: '/c/forms/z-checkbox', status: 'stable' }
+ *       { label: 'z-checkbox', route: '/elements/actionables/z-checkbox', status: 'stable' }
  *     ]}
  *   ]
  *

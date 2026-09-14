@@ -13,7 +13,7 @@ const styles = css`
 		-webkit-user-select: none;
 	}
 
-	:host([is-block]) {
+	:host([is-full-width]) {
 		display: flex;
 	}
 
@@ -94,7 +94,7 @@ const styles = css`
 		border-radius: 2px;
 	}
 
-	:host([disabled]) a {
+	:host([is-disabled]) a {
 		color: var(--muted-foreground);
 		pointer-events: none;
 		opacity: 0.6;
@@ -145,10 +145,10 @@ export const ZLink = c(
 			<host shadowDom>
 				<a
 					class={linkClass}
-					href={props.disabled ? undefined : props.href}
+					href={props.isDisabled ? undefined : props.href}
 					target={props.target || (props.isExternal ? '_blank' : undefined)}
 					rel={isExternal ? 'noopener noreferrer' : undefined}
-					aria-disabled={props.disabled ? 'true' : undefined}
+					aria-disabled={props.isDisabled ? 'true' : undefined}
 				>
 					{props.label ? props.label : <slot />}
 					{isExternal && (
@@ -171,8 +171,8 @@ export const ZLink = c(
 			color: { type: String, reflect: true },
 			underline: { type: String, reflect: true },
 			isExternal: { type: Boolean, reflect: true },
-			isBlock: { type: Boolean, reflect: true },
-			disabled: { type: Boolean, reflect: true },
+			isFullWidth: { type: Boolean, reflect: true },
+			isDisabled: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true }
 		},
 		styles

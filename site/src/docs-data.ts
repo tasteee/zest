@@ -9,15 +9,28 @@ export type DocPageT = {
 	title: string
 	categorySlug: string
 	categoryLabel: string
+	subcategorySlug: string
+	subcategoryLabel: string
 	rawMarkdown: string
 	primaryExampleHtml: string | null
 	route: string
+}
+
+// A named run of pages inside a category — the text family gathered under
+// Typography inside Foundation. It is a nesting of the nav only: a page's
+// route is still /elements/<category>/<slug>, so grouping pages after the fact costs
+// nobody a redirect and no cross-reference has to change.
+export type DocSubcategoryT = {
+	slug: string
+	label: string
+	pages: DocPageT[]
 }
 
 export type DocCategoryT = {
 	slug: string
 	label: string
 	pages: DocPageT[]
+	subcategories: DocSubcategoryT[]
 }
 
 export type DocSiteDataT = {
@@ -28,13 +41,13 @@ export type DocSiteDataT = {
 }
 
 const CATEGORY_LABELS: Record<string, string> = {
-	foundation: 'Foundation',
-	layout: 'Layout',
-	'buttons-actions': 'Buttons & Actions',
-	forms: 'Forms',
-	'data-display': 'Data Display',
-	'navigation-disclosure': 'Navigation & Disclosure',
+	typography: 'Typography',
+	structure: 'Structure',
+	actionables: 'Actionables',
 	overlays: 'Overlays',
+	navigation: 'Navigation',
+	'data-display': 'Data Display',
+	interactive: 'Interactive',
 	'text-editor': 'Text Editor',
 	attachments: 'Attachments',
 	'canvas-panels': 'Canvas & Panels',
@@ -44,13 +57,13 @@ const CATEGORY_LABELS: Record<string, string> = {
 }
 
 const CATEGORY_ORDER = [
-	'foundation',
-	'layout',
-	'buttons-actions',
-	'forms',
-	'data-display',
-	'navigation-disclosure',
+	'typography',
+	'structure',
+	'actionables',
 	'overlays',
+	'navigation',
+	'data-display',
+	'interactive',
 	'text-editor',
 	'attachments',
 	'canvas-panels',
@@ -108,9 +121,13 @@ export const stripLeadingTitleHeading = (rawMarkdown: string): string => {
 
 type ParsedDocPathT = {
 	categorySlug: string
+	subcategorySlug: string
 	slug: string
 }
 
+// docs/<category>/<slug>.md, or docs/<category>/<subcategory>/<slug>.md for a
+// grouped run. The category is always the first segment either way, which is
+// what keeps the route stable when a page is moved into a group.
 const parseDocPath = (path: string): ParsedDocPathT | null => {
 	const docsMarker = '/docs/'
 	const docsIndex = path.lastIndexOf(docsMarker)
@@ -122,8 +139,32 @@ const parseDocPath = (path: string): ParsedDocPathT | null => {
 	const slug = fileName.replace(/\.md$/, '')
 	const isStandalone = segments.length === 1
 
-	if (isStandalone) return { categorySlug: '', slug }
-	return { categorySlug: segments[0], slug }
+	if (isStandalone) return { categorySlug: '', subcategorySlug: '', slug }
+
+	const isGrouped = segments.length > 2
+	return { categorySlug: segments[0], subcategorySlug: isGrouped ? segments[1] : '', slug }
+}
+
+const getOrCreateCategory = (
+	categoriesBySlug: Map<string, DocCategoryT>,
+	slug: string,
+	label: string
+): DocCategoryT => {
+	const existing = categoriesBySlug.get(slug)
+	if (existing) return existing
+
+	const created: DocCategoryT = { slug, label, pages: [], subcategories: [] }
+	categoriesBySlug.set(slug, created)
+	return created
+}
+
+const getOrCreateSubcategory = (category: DocCategoryT, slug: string, label: string): DocSubcategoryT => {
+	const existing = category.subcategories.find((subcategory) => subcategory.slug === slug)
+	if (existing) return existing
+
+	const created: DocSubcategoryT = { slug, label, pages: [] }
+	category.subcategories.push(created)
+	return created
 }
 
 export const buildDocSiteData = (rawDocsByPath: Record<string, string>): DocSiteDataT => {
@@ -153,13 +194,17 @@ export const buildDocSiteData = (rawDocsByPath: Record<string, string>): DocSite
 		// Standalone/meta pages (e.g. "questionable API choices") aren't live
 		// component demos, so they never get a live-preview panel.
 		const primaryExampleHtml = isStandalone ? null : getPrimaryExampleHtml(rawMarkdown)
-		const route = isStandalone ? `/p/${parsedPath.slug}` : `/c/${parsedPath.categorySlug}/${parsedPath.slug}`
+		const route = isStandalone ? `/p/${parsedPath.slug}` : `/elements/${parsedPath.categorySlug}/${parsedPath.slug}`
+
+		const subcategoryLabel = parsedPath.subcategorySlug ? getCategoryLabel(parsedPath.subcategorySlug) : ''
 
 		const page: DocPageT = {
 			slug: parsedPath.slug,
 			title,
 			categorySlug: parsedPath.categorySlug,
 			categoryLabel,
+			subcategorySlug: parsedPath.subcategorySlug,
+			subcategoryLabel,
 			rawMarkdown,
 			primaryExampleHtml,
 			route
@@ -172,21 +217,23 @@ export const buildDocSiteData = (rawDocsByPath: Record<string, string>): DocSite
 			continue
 		}
 
-		const existingCategory = categoriesBySlug.get(parsedPath.categorySlug)
-		if (existingCategory) {
-			existingCategory.pages.push(page)
+		const category = getOrCreateCategory(categoriesBySlug, parsedPath.categorySlug, categoryLabel)
+		const isGrouped = parsedPath.subcategorySlug !== ''
+		if (!isGrouped) {
+			category.pages.push(page)
 			continue
 		}
 
-		categoriesBySlug.set(parsedPath.categorySlug, {
-			slug: parsedPath.categorySlug,
-			label: categoryLabel,
-			pages: [page]
-		})
+		const subcategory = getOrCreateSubcategory(category, parsedPath.subcategorySlug, subcategoryLabel)
+		subcategory.pages.push(page)
 	}
 
 	for (const category of categoriesBySlug.values()) {
 		category.pages.sort((pageA, pageB) => pageA.slug.localeCompare(pageB.slug))
+		category.subcategories.sort((groupA, groupB) => groupA.slug.localeCompare(groupB.slug))
+		for (const subcategory of category.subcategories) {
+			subcategory.pages.sort((pageA, pageB) => pageA.slug.localeCompare(pageB.slug))
+		}
 	}
 
 	standalonePages.sort((pageA, pageB) => pageA.slug.localeCompare(pageB.slug))
@@ -203,8 +250,14 @@ export const buildDocSiteData = (rawDocsByPath: Record<string, string>): DocSite
 	return { homeMarkdown, categories: orderedCategories, standalonePages, pagesByRoute }
 }
 
+// Order matters here: this is what drives search, prev/next, and the page
+// ordering readers walk through, so it has to match the nav — each category's
+// grouped runs first, then its loose pages, exactly as the tree renders them.
 export const getAllPages = (siteData: DocSiteDataT): DocPageT[] => {
-	const categoryPages = siteData.categories.flatMap((category) => category.pages)
+	const categoryPages = siteData.categories.flatMap((category) => [
+		...category.subcategories.flatMap((subcategory) => subcategory.pages),
+		...category.pages
+	])
 	return [...categoryPages, ...siteData.standalonePages]
 }
 
@@ -378,8 +431,12 @@ const getDefaultValue = (defaultCell: string): string | null => {
 	const isEmptyDefault = trimmedCell === '' || trimmedCell === '—' || trimmedCell === '-'
 	if (isEmptyDefault) return null
 
+	// A backtick token only counts as a literal default when it's the whole
+	// cell (or a bare list of tokens) — "derived from `name`" names another
+	// attribute in prose, it isn't literally defaulting to the string "name".
 	const backtickTokens = getBacktickTokens(trimmedCell)
-	if (backtickTokens.length > 0) return backtickTokens[0]
+	const hasLeadingProse = trimmedCell.split('`')[0].trim().length > 0
+	if (backtickTokens.length > 0 && !hasLeadingProse) return backtickTokens[0]
 
 	const looksLikeBareToken = /^[\w.%-]+$/.test(trimmedCell)
 	if (looksLikeBareToken) return trimmedCell
@@ -461,6 +518,9 @@ export const resolveDocLinkToRoute = (currentPage: DocPageT | null, href: string
 	const isStandaloneLink = resolvedSegments.length === 1
 	if (isStandaloneLink) return `/p/${slug}`
 
-	const categorySlug = resolvedSegments[resolvedSegments.length - 2]
-	return `/c/${categorySlug}/${slug}`
+	// First segment, not second-to-last: a link into a grouped page reads
+	// ../actionables/buttons/z-swap.md on disk, but its route has only ever
+	// been /elements/actionables/z-swap.
+	const categorySlug = resolvedSegments[0]
+	return `/elements/${categorySlug}/${slug}`
 }

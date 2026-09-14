@@ -295,9 +295,9 @@ export const zCommandDoc: ComponentDocT = {
 	],
 
 	related: [
-		{ tag: 'z-combobox', route: '/c/forms/z-combobox', description: 'The same filtering idea, for choosing a value.' },
-		{ tag: 'z-menu', route: '/c/navigation-disclosure/z-menu', description: 'A short action list anchored to a trigger.' },
-		{ tag: 'z-kbd', route: '/c/foundation/z-kbd', description: 'For rendering the shortcuts a palette advertises.' },
-		{ tag: 'z-dialog', route: '/c/overlays/z-dialog', description: 'The general modal on the same foundation.' }
+		{ tag: 'z-combobox', route: '/elements/actionables/z-combobox', description: 'The same filtering idea, for choosing a value.' },
+		{ tag: 'z-menu', route: '/elements/navigation/z-menu', description: 'A short action list anchored to a trigger.' },
+		{ tag: 'z-kbd', route: '/elements/typography/z-kbd', description: 'For rendering the shortcuts a palette advertises.' },
+		{ tag: 'z-dialog', route: '/elements/overlays/z-dialog', description: 'The general modal on the same foundation.' }
 	]
 }

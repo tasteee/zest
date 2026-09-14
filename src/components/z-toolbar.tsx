@@ -6,7 +6,7 @@ import { themedScrollbarStyles } from '../shared/scrollbar-styles'
  * z-toolbar — a horizontal action strip with real toolbar
  * semantics: role="toolbar" + roving tabindex, so the whole bar is a single tab
  * stop and arrow keys (Home/End) move focus across its controls. Holds slotted
- * z-button / z-toggle / z-toolbar-group, divided by z-separator.
+ * z-button / z-toggle-button / z-toolbar-group, divided by z-separator.
  *
  *   <z-toolbar>
  *     <z-button kind="ghost">Bold</z-button>
@@ -40,7 +40,7 @@ const styles = css`
 	:host([overflow='wrap']) {
 		flex-wrap: wrap;
 	}
-	:host([disabled]) {
+	:host([is-disabled]) {
 		opacity: 0.5;
 		pointer-events: none;
 	}
@@ -50,7 +50,7 @@ const styles = css`
 `
 
 // Controls that participate in roving tabindex (light-DOM slotted children).
-const FOCUSABLE = 'z-button, z-toggle, z-toggle-group-item, z-tool-button, [role="button"], button, a[href]'
+const FOCUSABLE = 'z-button, z-toggle-button, z-toggle-button-group-item, z-tool-button, [role="button"], button, a[href]'
 
 export const ZToolbar = c(
 	(props) => {
@@ -118,7 +118,7 @@ export const ZToolbar = c(
 		props: {
 			size: { type: String, reflect: true },
 			overflow: { type: String, reflect: true },
-			disabled: { type: Boolean, reflect: true }
+			isDisabled: { type: Boolean, reflect: true }
 		},
 		styles: [themedScrollbarStyles, styles]
 	}
