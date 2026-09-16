@@ -26,7 +26,7 @@ range.addEventListener('change', (e) => e.detail) // { left, right } — on rele
 | `label` | string | — | visible label |
 | `show-value` | boolean | — | show a "left – right" value pill |
 | `value-prefix` / `value-suffix` | string | — | decorate the shown values (e.g. `$`, `%`) |
-| `disabled` | boolean | — | disable both handles |
+| `is-disabled` | boolean | — | disable both handles |
 | `is-hidden` | boolean | — | hide |
 
 ## Slots

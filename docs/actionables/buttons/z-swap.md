@@ -24,7 +24,7 @@ swap.addEventListener('change', (e) => e.detail.active)
 | `effect` | `fade` `rotate` `flip` | `fade` | transition style |
 | `has-ghost` | boolean | — | place both faces side by side and mute the inactive one |
 | `is-active` | boolean | — | on/off state (reflected, two-way) |
-| `disabled` | boolean | — | disable |
+| `is-disabled` | boolean | — | disable |
 | `label` | string | — | accessible label for the hidden checkbox |
 | `is-hidden` | boolean | — | hide |
 

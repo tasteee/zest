@@ -1,3 +1,4 @@
+import { interactionStyles } from '../shared/interaction-styles'
 import { defineElement } from '../shared/define-element'
 import { c, css, event, useRef, useProp, useState, useEffect } from 'atomico'
 import { dialogSurfaceStyles } from '../shared/overlay-styles'
@@ -66,11 +67,14 @@ export const ZDialog = c(
 					<slot name="trigger" />
 				</div>
 
-				<dialog class="dialog" ref={dialogRef} onclick={onDialogClick}>
+				<dialog class="dialog" ref={dialogRef} onclick={onDialogClick}
+					aria-labelledby={props.heading ? 'dialog-title' : undefined}
+					aria-label={props.label}
+					aria-describedby={props.description ? 'dialog-description' : undefined}>
 					<div class="body">
 						{(props.heading || props.hasClose) && (
 							<div class="header">
-								{props.heading ? <h2 class="title">{props.heading}</h2> : <span />}
+								{props.heading ? <h2 id="dialog-title" class="title">{props.heading}</h2> : <span />}
 								{props.hasClose && (
 									<button type="button" class="close" aria-label="Close" onclick={close}>
 										<svg viewBox="0 0 24 24">
@@ -81,7 +85,7 @@ export const ZDialog = c(
 								)}
 							</div>
 						)}
-						{props.description && <p class="description">{props.description}</p>}
+						{props.description && <p id="dialog-description" class="description">{props.description}</p>}
 						<slot />
 					</div>
 					<div class="footer" style={hasFooter ? '' : 'display: none'}>
@@ -100,6 +104,7 @@ export const ZDialog = c(
 		props: {
 			isOpen: { type: Boolean, reflect: true },
 			heading: String,
+			label: String,
 			description: String,
 			size: { type: String, reflect: true },
 			hasClose: { type: Boolean, reflect: true, value: () => true },
@@ -108,7 +113,7 @@ export const ZDialog = c(
 			open: event<void>({ bubbles: true, composed: true }),
 			close: event<void>({ bubbles: true, composed: true })
 		},
-		styles: [dialogSurfaceStyles, styles]
+		styles: [dialogSurfaceStyles, styles, interactionStyles]
 	}
 )
 

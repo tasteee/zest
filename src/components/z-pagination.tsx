@@ -48,7 +48,7 @@ const styles = css`
 		font-size: 0.875rem;
 		font-weight: 500;
 		cursor: pointer;
-		transition: border-color 0.12s ease, background-color 0.12s ease, color 0.12s ease;
+		transition: border-color var(--duration-fast) var(--easing-standard), background-color var(--duration-fast) var(--easing-standard), color var(--duration-fast) var(--easing-standard);
 	}
 
 	button:hover:not(:disabled):not(.is-current) {

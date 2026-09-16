@@ -55,7 +55,7 @@ const styles = css`
 		font-family: inherit;
 		font-size: var(--font-size-small);
 		cursor: pointer;
-		transition: background-color 0.12s ease;
+		transition: background-color var(--duration-fast) var(--easing-standard);
 	}
 
 	.heading-trigger:hover {

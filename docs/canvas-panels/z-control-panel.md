@@ -13,7 +13,7 @@ does.
 const panel = document.querySelector('z-control-panel')
 panel.controls = [
   { name: 'size', kind: 'enum', options: ['xs', 'sm', 'md'], defaultValue: 'md' },
-  { name: 'disabled', kind: 'boolean' },
+  { name: 'is-disabled', kind: 'boolean' },
   { name: 'columns', kind: 'number', defaultValue: '3' },
   { name: 'label', kind: 'text' }
 ]
@@ -59,3 +59,5 @@ instead of hanging off to one side.
 
 An em dash in `defaultValue` means "no default" and never reaches a control as
 a literal value.
+
+Text and number defaults appear as placeholders, keeping an unset value distinct from an explicit one. Clearing text emits `null`. Number steppers and committed numeric edits emit values; incomplete numeric text does not erase the last valid setting.

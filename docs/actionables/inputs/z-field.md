@@ -49,7 +49,7 @@ document.querySelector('z-select').options = [
 
 ```html
 <z-field label="Project name" is-required error="Use at least 3 characters.">
-  <z-input value="Hi" invalid></z-input>
+  <z-input value="Hi" is-invalid></z-input>
 </z-field>
 ```
 
@@ -106,3 +106,11 @@ Keep the switch label beside its track. Reserve the empty label band so its
 | default | One form control. The first slotted element receives the forwarded label when it does not already declare a name. |
 | `description` | Rich supporting content in place of the `description` string. |
 | `error` | Rich validation content in place of the `error` string. |
+
+## Dynamic labels
+
+Changing or clearing the field label updates the accessible name it supplied.
+An explicit control `label`, `aria-label`, or `aria-labelledby` is preserved.
+Required state follows the same ownership rule: the field clears only a state
+it set. Replacing the slotted control releases forwarded state on the old control.
+Clicking the visible field label focuses the inner control.

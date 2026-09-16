@@ -22,7 +22,7 @@ divided by [z-separator](../structure/z-separator.md).
 | `direction` | `horizontal` `vertical` | `horizontal` | layout axis and arrow-key direction |
 | `size` | `sm` `md` `lg` | `md` | control gap between items |
 | `overflow` | `scroll` `wrap` `menu` | — | how to handle a too-narrow bar (`menu` — collapsing extras into a trailing "⋯" — is not implemented yet) |
-| `disabled` | boolean | — | disable the whole toolbar |
+| `is-disabled` | boolean | — | disable the whole toolbar |
 
 ## Slots
 

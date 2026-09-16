@@ -1,3 +1,4 @@
+import { interactionStyles } from '../shared/interaction-styles'
 import { defineElement } from '../shared/define-element'
 import { c, css, event, useHost, useListener } from 'atomico'
 import { toggleVariantProps } from '../shared/toggle-schema'
@@ -101,13 +102,13 @@ const styles = css`
 	:host([accent='dom']) {
 		--z-toggle-button-color: var(--neon-purple);
 		--z-toggle-button-accent: var(--neon-purple);
-		--z-toggle-button-accent-foreground: var(--primary-foreground);
+		--z-toggle-button-accent-foreground: var(--on-accent);
 	}
 
 	:host([accent='sub']) {
 		--z-toggle-button-color: var(--neon-pink);
 		--z-toggle-button-accent: var(--neon-pink);
-		--z-toggle-button-accent-foreground: var(--primary-foreground);
+		--z-toggle-button-accent-foreground: var(--on-accent);
 	}
 
 	:host([accent='neutral']) {
@@ -119,19 +120,19 @@ const styles = css`
 	:host([accent='success']) {
 		--z-toggle-button-color: var(--success);
 		--z-toggle-button-accent: var(--success);
-		--z-toggle-button-accent-foreground: var(--primary-foreground);
+		--z-toggle-button-accent-foreground: var(--on-accent);
 	}
 
 	:host([accent='warning']) {
 		--z-toggle-button-color: var(--warning);
 		--z-toggle-button-accent: var(--warning);
-		--z-toggle-button-accent-foreground: var(--primary-foreground);
+		--z-toggle-button-accent-foreground: var(--on-accent);
 	}
 
 	:host([accent='error']) {
 		--z-toggle-button-color: var(--destructive);
 		--z-toggle-button-accent: var(--destructive);
-		--z-toggle-button-accent-foreground: var(--primary-foreground);
+		--z-toggle-button-accent-foreground: var(--on-accent);
 	}
 
 
@@ -255,7 +256,7 @@ export const ZToggleButtonGroup = c(
 			isMultiple: { type: Boolean, reflect: true },
 			change: event<{ value?: string | string[] }>({ bubbles: true, composed: true })
 		},
-		styles
+		styles: [styles, interactionStyles]
 	}
 )
 

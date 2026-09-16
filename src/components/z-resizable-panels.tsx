@@ -296,8 +296,8 @@ const handleStyles = css`
 		border-radius: 999px;
 		transition:
 			background var(--duration-fast) var(--easing-standard),
-			width var(--duration-fast) var(--easing-standard),
-			height var(--duration-fast) var(--easing-standard);
+			width var(--duration-move) var(--easing-standard),
+			height var(--duration-move) var(--easing-standard);
 	}
 	:host(:not([is-column])) .grip {
 		width: 1px;

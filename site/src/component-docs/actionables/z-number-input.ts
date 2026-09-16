@@ -19,7 +19,7 @@ export const zNumberInputDoc: ComponentDocT = {
 	status: ComponentStatus.stable,
 
 	description:
-		'A typed numeric field with optional ghost steppers. The important behaviour is the timing: while you type, the raw text is left alone — half-typed values like `-` or `1.` are not fought with — and the field only normalises on blur, clamping to `min`/`max` and rounding to the precision `step` implies. `input` fires per keystroke with both the parsed number and the raw text; `change` fires with the settled number. Arrow keys step, and the steppers disable themselves at the bounds.',
+		'A typed numeric field with optional ghost steppers. The important behaviour is the timing: while you type, the raw text is left alone — half-typed values like `-` or `1.` are not fought with — and the field only normalises on blur, clamping to `min`/`max` while preserving typed decimals and fractional bounds. `input` fires per keystroke with both the parsed number and the raw text; `change` fires with the settled number. Arrow keys step, and the steppers disable themselves at the bounds.',
 
 	playground: {
 		buildElement: buildPlaygroundNumberInput,
@@ -30,7 +30,7 @@ export const zNumberInputDoc: ComponentDocT = {
 	usageGuidance: [
 		'Use it when the value is a quantity you do arithmetic on. A year, a PIN, or a phone number is text that happens to be digits — use `z-input` with an `inputmode` for those.',
 		'Set `min` and `max` whenever real bounds exist. They are what make the steppers disable at the ends and what the blur correction clamps against.',
-		'`step` sets the precision as well as the increment: `step="0.01"` means the field rounds to two decimals on blur, so a pasted 1.005 settles honestly.',
+		'`step` sets the increment, not display precision. With `step="0.01"`, a typed 1.005 stays 1.005 unless a bound clamps it.',
 		'Add `has-stepper-buttons` when the values are small and adjustments are frequent — seats, quantity, retries. Leave them off for wide ranges where clicking to 500 is absurd.',
 		'For a bounded value with no meaningful precision — a volume, an opacity — a `z-slider` communicates the range better than a field ever will.',
 		'The field goes invalid on its own when the typed value is out of range. `is-invalid` is for errors your server knows about, and it is honoured on top of the internal check.'
@@ -39,7 +39,7 @@ export const zNumberInputDoc: ComponentDocT = {
 	anatomy: [
 		{ name: 'field', description: 'The bordered box. Owns focus, invalid, and disabled treatment.' },
 		{ name: 'decrease stepper', description: 'Ghost button on the left. Disables itself once the value sits at min.' },
-		{ name: 'input', description: 'A text input with inputmode="decimal", so the raw string is yours until blur.' },
+		{ name: 'input', description: 'A text input with role="spinbutton", inputmode="decimal", and accessible numeric bounds; raw text stays editable until blur.' },
 		{ name: 'increase stepper', description: 'Ghost button on the right. Disables itself once the value sits at max.' }
 	],
 
@@ -69,7 +69,7 @@ export const zNumberInputDoc: ComponentDocT = {
 			id: 'bounds',
 			title: 'Bounds and step',
 			description:
-				'Type 500 into the first field and click away — it settles at 10. `step` on the third field is both the increment and the rounding precision.',
+				'Type 500 into the first field and click away — it settles at 10. `step` on the third field sets the increment while preserving typed decimal precision.',
 			layout: ExampleLayout.stack,
 			markup: `
 				<z-number-input label="Clamped 1–10" value="5" min="1" max="10" has-stepper-buttons></z-number-input>
@@ -184,7 +184,7 @@ export const zNumberInputDoc: ComponentDocT = {
 		{ name: 'value', type: 'number', defaultValue: '—', description: 'The current number. Reflects, and is rewritten on blur once the raw text has been normalised.' },
 		{ name: 'min', type: 'number', defaultValue: '—', description: 'Lower bound. Clamped to on blur; disables the decrease stepper at the limit.' },
 		{ name: 'max', type: 'number', defaultValue: '—', description: 'Upper bound. Clamped to on blur; disables the increase stepper at the limit.' },
-		{ name: 'step', type: 'number', defaultValue: '1', description: 'Stepper increment, and the decimal precision the value rounds to.' },
+		{ name: 'step', type: 'number', defaultValue: '1', description: 'Positive stepper increment. Does not round typed values to its decimal precision.' },
 		{ name: 'label', type: 'string', defaultValue: '—', description: 'Accessible name applied to the inner input. Set for you inside a z-field.' },
 		{ name: 'name', type: 'string', defaultValue: '—', description: 'Name passed to the inner input.' },
 		{ name: 'placeholder', type: 'string', defaultValue: '—', description: 'Shown while the field is empty.' },

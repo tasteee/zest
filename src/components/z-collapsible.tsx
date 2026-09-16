@@ -1,3 +1,4 @@
+import { interactionStyles } from '../shared/interaction-styles'
 import { defineElement } from '../shared/define-element'
 import { c, css, event, useProp } from 'atomico'
 
@@ -42,7 +43,7 @@ const styles = css`
 		color: var(--foreground);
 		text-align: left;
 		cursor: pointer;
-		transition: color 0.12s ease;
+		transition: color var(--duration-fast) var(--easing-standard);
 	}
 
 	.trigger:hover {
@@ -50,7 +51,7 @@ const styles = css`
 	}
 
 	.trigger:focus-visible {
-		outline: 3px solid color-mix(in oklch, var(--ring) 50%, transparent);
+		outline: 3px solid var(--focus-ring);
 		outline-offset: 2px;
 		border-radius: var(--radius-sm);
 	}
@@ -66,8 +67,8 @@ const styles = css`
 		flex-shrink: 0;
 		color: var(--muted-foreground);
 		transition:
-			transform 0.18s ease,
-			color 0.12s ease;
+			transform var(--duration-move) var(--easing-standard),
+			color var(--duration-fast) var(--easing-standard);
 		stroke: currentColor;
 		stroke-width: 2;
 		stroke-linecap: round;
@@ -138,7 +139,7 @@ export const ZCollapsible = c(
 			isHidden: { type: Boolean, reflect: true },
 			toggle: event<{ value: string; open: boolean }>({ bubbles: true, composed: true })
 		},
-		styles
+		styles: [styles, interactionStyles]
 	}
 )
 

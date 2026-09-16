@@ -10,6 +10,13 @@ const buildIcon = (paths: string): string => {
 }
 
 export const Icons = {
+	search: buildIcon('<circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" />'),
+	compose: buildIcon('<path d="M12 20h9" /><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z" />'),
+	phone: buildIcon('<path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.6a2 2 0 0 1-.5 2.1L8.1 9.7a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.8.3 1.7.5 2.6.7a2 2 0 0 1 1.7 2z" />'),
+	video: buildIcon('<path d="m22 8-6 4 6 4V8Z" /><rect x="2" y="6" width="14" height="12" rx="2" />'),
+	info: buildIcon('<circle cx="12" cy="12" r="9" /><path d="M12 16v-4M12 8h.01" />'),
+	paperclip: buildIcon('<path d="m21 11.5-8.5 8.5a5.5 5.5 0 0 1-7.8-7.8l9-9a3.5 3.5 0 0 1 5 5l-9 9a1.5 1.5 0 0 1-2.1-2.1l8-8" />'),
+	smile: buildIcon('<circle cx="12" cy="12" r="9" /><path d="M8.5 14a4 4 0 0 0 7 0M9 9h.01M15 9h.01" />'),
 	plus: buildIcon('<path d="M12 5v14M5 12h14" />'),
 	check: buildIcon('<polyline points="20 6 9 17 4 12" />'),
 	trash: buildIcon('<path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6" />'),

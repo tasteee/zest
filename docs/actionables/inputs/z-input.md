@@ -27,11 +27,11 @@ input.addEventListener('change', (e) => e.detail.value)  // on blur
 | `autocomplete` | string | — | native autocomplete hint |
 | `inputmode` | string | — | virtual keyboard hint |
 | `size` | `sm` `md` `lg` | `md` | size |
-| `accent` | `dom` `sub` | `dom` accent | focus accent color |
+| `accent` | `dom` `sub` | neutral | focus accent color |
 | `label` | string | — | accessible name for compact contextual use (falls back to a surrounding `aria-label`) |
 | `is-focused` | boolean | — | focus state (reflected, two-way; driven internally on focus/blur) |
-| `invalid` | boolean | — | error styling |
-| `disabled` | boolean | — | disable |
+| `is-invalid` | boolean | — | error styling |
+| `is-disabled` | boolean | — | disable |
 | `is-readonly` | boolean | — | read-only |
 | `is-required` | boolean | — | required |
 | `inline` | boolean | — | shrink to content width instead of full width |
@@ -47,4 +47,4 @@ input.addEventListener('change', (e) => e.detail.value)  // on blur
 | Event | `detail` | Description |
 | --- | --- | --- |
 | `input` | `{ value }` | on every keystroke |
-| `change` | `{ value }` | on blur |
+| `change` | `{ value }` | on blur, when the value changed during editing |

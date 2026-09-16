@@ -1,4 +1,5 @@
-import { defineElement } from '../shared/define-element'
+import { interactionStyles } from '../shared/interaction-styles'
+import { defineFormElement, useFormControl } from '../shared/form-control'
 import { c, css, event, useProp, useState, useHost, useEffect, useRef } from 'atomico'
 import { themedScrollbarStyles } from '../shared/scrollbar-styles'
 import { computePosition, autoUpdate, applyPosition, showFloating, hideFloating } from '../shared/overlay'
@@ -54,23 +55,23 @@ const styles = css`
 		text-align: left;
 		user-select: none;
 		-webkit-user-select: none;
-		transition: border-color 0.12s ease, background-color 0.12s ease;
+		transition: border-color var(--duration-fast) var(--easing-standard), background-color var(--duration-fast) var(--easing-standard);
 	}
 
 	.trigger.is-sm {
 		height: var(--control-height-sm);
 		padding-inline: 0.75rem;
-		font-size: var(--font-size-small);
+		font-size: var(--control-font-size-sm);
 	}
 	.trigger.is-md {
 		height: var(--control-height-md);
 		padding-inline: 0.875rem;
-		font-size: var(--font-size-body);
+		font-size: var(--control-font-size-md);
 	}
 	.trigger.is-lg {
 		height: var(--control-height-lg);
 		padding-inline: 1rem;
-		font-size: var(--font-size-h4);
+		font-size: var(--control-font-size-lg);
 	}
 
 	.trigger:hover {
@@ -87,14 +88,16 @@ const styles = css`
 	}
 
 	.trigger.is-disabled {
-		opacity: 0.55;
+		opacity: var(--control-disabled-opacity);
 		pointer-events: none;
 	}
 
 	.trigger:focus-visible {
-		outline: 3px solid color-mix(in oklch, var(--ring) 50%, transparent);
+		outline: 3px solid var(--focus-ring);
 		outline-offset: 2px;
 	}
+
+	.value { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
 	.value.is-placeholder {
 		color: var(--muted-foreground);
@@ -105,7 +108,7 @@ const styles = css`
 		height: 1rem;
 		flex-shrink: 0;
 		color: var(--muted-foreground);
-		transition: transform 0.15s ease;
+		transition: transform var(--duration-move) var(--easing-standard);
 		stroke: currentColor;
 		stroke-width: 2;
 		stroke-linecap: round;
@@ -206,12 +209,28 @@ export const ZSelect = c(
 	(props) => {
 		const host = useHost()
 		const panelRef = useRef<HTMLDivElement>()
+		const triggerRef = useRef<HTMLButtonElement>()
 		const [value, setValue] = useProp<string>('value')
+		const defaultValue = useRef(value)
 		const [isOpen, setIsOpen] = useState(false)
 		const [activeIndex, setActiveIndex] = useState(-1)
 
 		const options: OptionT[] = Array.isArray(props.options) ? (props.options as OptionT[]) : []
 		const selected = options.find((o) => o.value === value)
+		const hasValue = value != null && value !== ''
+		// The trigger is a <button>, which has no validity of its own, so
+		// `required` is decided here and anchored to it for the browser's bubble.
+		const { isFormDisabled } = useFormControl({
+			value: value ?? '',
+			isDisabled: props.isDisabled,
+			control: triggerRef,
+			validity: props.isRequired && !hasValue
+				? { flags: { valueMissing: true }, message: 'Please select an item in the list.' }
+				: { flags: {} },
+			onReset: () => setValue(defaultValue.current),
+			onRestore: (state) => { if (typeof state === 'string') setValue(state) }
+		})
+		const isDisabled = Boolean(props.isDisabled) || isFormDisabled
 
 		useEffect(() => {
 			if (!isOpen) return
@@ -241,57 +260,95 @@ export const ZSelect = c(
 			}
 		}, [isOpen])
 
+		const enabledIndices = options.flatMap((option, index) => option.isDisabled ? [] : [index])
+		const open = (fromEnd = false) => {
+			if (isDisabled) return
+			const selectedIndex = options.findIndex((option) => option.value === value && !option.isDisabled)
+			setActiveIndex(selectedIndex >= 0 ? selectedIndex : (fromEnd ? enabledIndices.at(-1) : enabledIndices[0]) ?? -1)
+			setIsOpen(true)
+		}
 		const commit = (opt: OptionT) => {
-			if (opt.isDisabled) return
-			setValue(opt.value)
+			if (isDisabled || opt.isDisabled) return
 			setIsOpen(false)
-			props.change({ value: opt.value })
+			if (opt.value !== value) {
+				setValue(opt.value)
+				props.change({ value: opt.value })
+			}
+			host.current.shadowRoot?.querySelector<HTMLButtonElement>('.trigger')?.focus()
 		}
 
+		useEffect(() => {
+			if (isDisabled) setIsOpen(false)
+		}, [isDisabled])
+
+		useEffect(() => {
+			if (!isOpen) return
+			if (!options[activeIndex] || options[activeIndex].isDisabled) {
+				setActiveIndex(enabledIndices[0] ?? -1)
+				return
+			}
+			panelRef.current?.querySelector<HTMLElement>(`#option-${activeIndex}`)?.scrollIntoView({ block: 'nearest' })
+		}, [isOpen, activeIndex, props.options])
+
+		const search = useRef({ text: '', time: 0 })
 		const onKeyDown = (e: KeyboardEvent) => {
-			if (props.isDisabled) return
-			if (e.key === 'Escape') {
+			if (isDisabled) return
+			if (e.key === 'Tab' || e.key === 'Escape') {
+				if (e.key === 'Escape' && isOpen) { e.preventDefault(); e.stopPropagation() }
 				setIsOpen(false)
 				return
 			}
 			if (e.key === 'Enter' || e.key === ' ') {
 				e.preventDefault()
-				if (!isOpen) {
-					setIsOpen(true)
-				} else if (activeIndex >= 0 && options[activeIndex]) {
-					commit(options[activeIndex])
-				}
+				if (!isOpen) open()
+				else if (activeIndex >= 0 && options[activeIndex]) commit(options[activeIndex])
 				return
 			}
-			if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+			if (['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(e.key)) {
 				e.preventDefault()
-				if (!isOpen) setIsOpen(true)
-				const dir = e.key === 'ArrowDown' ? 1 : -1
-				let next = activeIndex
-				for (let i = 0; i < options.length; i++) {
-					next = (next + dir + options.length) % options.length
-					if (!options[next].isDisabled) break
-				}
-				setActiveIndex(next)
+				if (!isOpen) { open(e.key === 'ArrowUp' || e.key === 'End'); return }
+				const position = enabledIndices.indexOf(activeIndex)
+				const next = e.key === 'Home' ? enabledIndices[0]
+					: e.key === 'End' ? enabledIndices.at(-1)
+					: enabledIndices[(position + (e.key === 'ArrowDown' ? 1 : -1) + enabledIndices.length) % enabledIndices.length]
+				setActiveIndex(next ?? -1)
+				return
+			}
+			if (e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey) {
+				e.preventDefault()
+				const now = Date.now()
+				const text = (now - search.current.time < 600 ? search.current.text : '') + e.key.toLowerCase()
+				search.current = { text, time: now }
+				const query = [...text].every((char) => char === text[0]) ? text[0] : text
+				const start = enabledIndices.indexOf(activeIndex)
+				const ordered = [...enabledIndices.slice(start + 1), ...enabledIndices.slice(0, start + 1)]
+				const match = ordered.find((index) => options[index].label.toLowerCase().startsWith(query))
+				if (match !== undefined) { setIsOpen(true); setActiveIndex(match) }
 			}
 		}
 
 		const triggerClass = ['trigger', resolveSizeClass(props)]
 			.concat(isOpen ? ['is-open'] : [])
 			.concat(props.isInvalid ? ['is-invalid'] : [])
-			.concat(props.isDisabled ? ['is-disabled'] : [])
+			.concat(isDisabled ? ['is-disabled'] : [])
 			.join(' ')
 
 		return (
-			<host shadowDom>
+			<host shadowDom={{ delegatesFocus: true }}>
 				<button
+					ref={triggerRef}
 					type="button"
 					class={triggerClass}
-					disabled={props.isDisabled}
+					disabled={isDisabled}
+					role="combobox"
+					aria-required={props.isRequired ? 'true' : undefined}
 					aria-haspopup="listbox"
+					aria-controls="select-options"
+					aria-activedescendant={isOpen && activeIndex >= 0 ? `option-${activeIndex}` : undefined}
+					aria-invalid={props.isInvalid ? 'true' : undefined}
 					aria-label={props.label || host.current?.getAttribute('aria-label') || undefined}
 					aria-expanded={isOpen ? 'true' : 'false'}
-					onclick={() => setIsOpen(!isOpen)}
+					onclick={() => isOpen ? setIsOpen(false) : open()}
 					onkeydown={onKeyDown}
 				>
 					<span class={selected ? 'value' : 'value is-placeholder'}>
@@ -302,7 +359,7 @@ export const ZSelect = c(
 					</svg>
 				</button>
 
-				<div ref={panelRef} class="panel" role="listbox" popover="manual">
+				<div ref={panelRef} id="select-options" class="panel" role="listbox" aria-label={props.label || props.placeholder || 'Options'} popover="manual">
 					{options.length === 0 && <div class="empty">No options</div>}
 					{options.map((opt, index) => {
 						const optClass = ['option']
@@ -315,8 +372,11 @@ export const ZSelect = c(
 								key={opt.value}
 								class={optClass}
 								role="option"
+								id={`option-${index}`}
+								aria-disabled={opt.isDisabled ? 'true' : undefined}
 								aria-selected={opt.value === value ? 'true' : 'false'}
-								onmouseenter={() => setActiveIndex(index)}
+								onmouseenter={() => !opt.isDisabled && setActiveIndex(index)}
+								onmousedown={(e: MouseEvent) => e.preventDefault()}
 								onclick={() => commit(opt)}
 							>
 								<span>{opt.label}</span>
@@ -335,19 +395,22 @@ export const ZSelect = c(
 	{
 		props: {
 			value: { type: String, reflect: true },
+			name: { type: String, reflect: true },
 			label: String,
 			placeholder: String,
 			options: { type: Array },
 			size: { type: String, reflect: true },
 			accent: { type: String, reflect: true },
+			isRequired: { type: Boolean, reflect: true },
 			isInvalid: { type: Boolean, reflect: true },
 			isDisabled: { type: Boolean, reflect: true },
 			inline: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			change: event<{ value: string }>({ bubbles: true, composed: true })
 		},
-		styles: [themedScrollbarStyles, styles]
+		styles: [themedScrollbarStyles, styles, interactionStyles],
+		form: true
 	}
 )
 
-defineElement('z-select', ZSelect)
+defineFormElement('z-select', ZSelect)

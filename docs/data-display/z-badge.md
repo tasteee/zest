@@ -34,7 +34,7 @@ badge.addEventListener('remove', (e) => e.detail) // { value }
 | `selectable` | boolean | — | make it a toggle (`role="button"`) |
 | `selected` | boolean | — | selected state (with `selectable`) |
 | `removable` | boolean | — | render a × remove button |
-| `disabled` | boolean | — | disable |
+| `is-disabled` | boolean | — | disable |
 | `is-hidden` | boolean | — | hide |
 
 ## Slots

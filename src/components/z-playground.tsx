@@ -89,7 +89,7 @@ const styles = css`
 	}
 
 	.reset:focus-visible {
-		outline: 3px solid color-mix(in oklch, var(--ring) 50%, transparent);
+		outline: 2px solid var(--focus-ring);
 		outline-offset: 2px;
 	}
 `
@@ -165,10 +165,13 @@ const VOID_ELEMENT_NAMES = new Set([
 	'area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'source', 'track', 'wbr'
 ])
 
+const escapeText = (value: string): string => value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+const propertyName = (name: string): string => name.replace(/-([a-z])/g, (_, letter: string) => letter.toUpperCase())
+
 const buildAttributePart = (attribute: Attr): string => {
 	const hasEmptyValue = attribute.value === ''
 	if (hasEmptyValue) return attribute.name
-	return `${attribute.name}="${attribute.value}"`
+	return `${attribute.name}="${escapeText(attribute.value).replace(/"/g, '&quot;')}"`
 }
 
 const buildOpenTag = (element: Element): string => {
@@ -193,10 +196,17 @@ const formatMarkupElement = (element: Element, depth: number): string => {
 	const isVoid = VOID_ELEMENT_NAMES.has(tagName)
 	if (isVoid) return `${indent}${buildOpenTag(element)}`
 
-	const isTextOnly = !hasElementChildren(element)
-	if (isTextOnly) return `${indent}${buildOpenTag(element)}${element.textContent ?? ''}${buildCloseTag(element)}`
-
-	const childLines = [...element.children].map((child) => formatMarkupElement(child, depth + 1))
+	// Keep mixed inline content and whitespace-sensitive content byte-for-byte
+	// as HTML. Pretty-print only element-only structure.
+	const hasText = [...element.childNodes].some((node) => node.nodeType === 3 && Boolean(node.textContent?.trim()))
+	if (hasText || !hasElementChildren(element) || ['pre', 'textarea', 'script', 'style'].includes(tagName)) {
+		return `${indent}${buildOpenTag(element)}${element.innerHTML}${buildCloseTag(element)}`
+	}
+	const childLines = [...element.childNodes].map((child) => {
+		if (child.nodeType === 1) return formatMarkupElement(child as Element, depth + 1)
+		if (child.nodeType === 8) return `${indent}\t<!--${child.textContent}-->`
+		return ''
+	}).filter(Boolean)
 	return [`${indent}${buildOpenTag(element)}`, ...childLines, `${indent}${buildCloseTag(element)}`].join('\n')
 }
 
@@ -231,6 +241,10 @@ export const ZPlayground = c(
 		const slotRef = useRef<HTMLSlotElement>()
 		const panelRef = useRef<HTMLElement>()
 		const [markup, setMarkup] = useState<string>('')
+		const [setup, setSetup] = useState<string>('')
+		const initial = useRef<{ element: Element; values: Record<string, string> }>()
+		const booleanOverrides = useRef<Record<string, boolean>>({})
+		const observerRef = useRef<MutationObserver>()
 		const [values, setValues] = useState<Record<string, string>>({})
 
 		const controls = readControls(props.controls)
@@ -259,19 +273,53 @@ export const ZPlayground = c(
 
 		const sync = () => {
 			const stageElements = readStageElements()
-			if (!stageElements.length) return
+			if (!stageElements.length) {
+				setMarkup('')
+				setValues({})
+				setSetup('')
+				return
+			}
+			const controlled = readControlled()
+			if (!controlled) return
+			if (initial.current?.element !== controlled) {
+				initial.current = { element: controlled, values: Object.fromEntries([...controlled.attributes].map((a) => [a.name, a.value])) }
+				booleanOverrides.current = {}
+			}
 
 			const authoredNames = readAuthoredNames(props.authoredAttributes)
 			const stageMarkup = stageElements.map((stageElement) => readStageMarkup(stageElement, controls, authoredNames)).join('\n')
 			setMarkup(stageMarkup)
-			setValues(readCurrentValues(readControlledElement(stageElements[0], props.tagName as string), controls))
+			const currentValues = readCurrentValues(controlled, controls)
+			const assignments: string[] = []
+			for (const control of controls) {
+				if (control.kind !== 'boolean' || control.defaultValue !== 'true') continue
+				const overridden = booleanOverrides.current?.[control.name]
+				if (overridden === false && !controlled.hasAttribute(control.name)) {
+					delete currentValues[control.name]
+					assignments.push(`document.querySelector(${JSON.stringify(controlled.localName)}).${propertyName(control.name)} = false`)
+				} else currentValues[control.name] = ''
+			}
+			setSetup(assignments.join('\n'))
+			setValues(currentValues)
 		}
 
-		useEffect(() => sync(), [props.controls])
+		useEffect(() => {
+			const observer = new MutationObserver(sync)
+			observerRef.current = observer
+			for (const element of readStageElements()) observer.observe(element, { attributes: true, childList: true, characterData: true, subtree: true })
+			sync()
+			return () => observer.disconnect()
+		}, [props.controls, props.tagName, props.authoredAttributes])
+
+		const handleSlotChange = () => {
+			observerRef.current?.disconnect()
+			for (const element of readStageElements()) observerRef.current?.observe(element, { attributes: true, childList: true, characterData: true, subtree: true })
+			sync()
+		}
 
 		const handleControlChange = (changeEvent: CustomEvent<{ name: string; value: unknown }>) => {
 			const controlledElement = readControlled()
-			if (!controlledElement) return
+			if (!controlledElement || !changeEvent.detail || typeof changeEvent.detail !== 'object') return
 
 			const changedControl = controls.find((control) => control.name === changeEvent.detail.name)
 			// Only a z-control-panel's own { name, value } change is a real control
@@ -296,6 +344,10 @@ export const ZPlayground = c(
 			// Other control kinds use an empty string to mean "unset".
 			const shouldRemove = nextValue === null || (!isBooleanControl && nextValue.trim() === '')
 
+			if (isBooleanControl && changedControl.defaultValue === 'true') {
+				booleanOverrides.current![changedControl.name] = !shouldRemove
+				Reflect.set(controlledElement, propertyName(changedControl.name), !shouldRemove)
+			}
 			if (shouldRemove) controlledElement.removeAttribute(changeEvent.detail.name)
 			if (!shouldRemove) controlledElement.setAttribute(changeEvent.detail.name, nextValue as string)
 
@@ -322,11 +374,18 @@ export const ZPlayground = c(
 			const controlledElement = readControlled()
 			if (!controlledElement) return
 
-			const authoredValues = readAuthoredAttributeValues(props.authoredAttributeValues)
+			const stage = readStage()
+			const authoredValues = stage === controlledElement && props.authoredAttributeValues
+				? readAuthoredAttributeValues(props.authoredAttributeValues)
+				: initial.current?.values ?? {}
+			booleanOverrides.current = {}
 			for (const control of controls) {
 				const wasAuthored = Object.prototype.hasOwnProperty.call(authoredValues, control.name)
 				if (wasAuthored) controlledElement.setAttribute(control.name, authoredValues[control.name])
-				if (!wasAuthored) controlledElement.removeAttribute(control.name)
+				if (!wasAuthored) {
+					controlledElement.removeAttribute(control.name)
+					if (control.kind === 'boolean' && control.defaultValue === 'true') Reflect.set(controlledElement, propertyName(control.name), true)
+				}
 			}
 			sync()
 			props.reset()
@@ -337,7 +396,7 @@ export const ZPlayground = c(
 		return (
 			<host shadowDom>
 				<div class='stage'>
-					<slot name='stage' ref={slotRef} onslotchange={sync} />
+					<slot name='stage' ref={slotRef} onslotchange={handleSlotChange} />
 				</div>
 
 				{hasControls && (
@@ -351,6 +410,7 @@ export const ZPlayground = c(
 
 				<div class='output'>
 					<z-code-block language='html' code={markup} />
+					{setup && <z-code-block language='js' code={setup} />}
 				</div>
 			</host>
 		)

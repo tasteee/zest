@@ -99,8 +99,8 @@ const styles = css`
 		color: var(--muted-foreground);
 		cursor: pointer;
 		transition:
-			color 0.12s ease,
-			background-color 0.12s ease;
+			color var(--duration-fast) var(--easing-standard),
+			background-color var(--duration-fast) var(--easing-standard);
 	}
 
 	.close:hover {

@@ -24,7 +24,7 @@ const markStyles = css`
 		border-bottom: 2px solid color-mix(in oklch, var(--warning) 55%, transparent);
 		border-radius: 2px;
 		cursor: pointer;
-		transition: background-color 0.12s ease;
+		transition: background-color var(--duration-fast) var(--easing-standard);
 	}
 
 	:host(:hover) {

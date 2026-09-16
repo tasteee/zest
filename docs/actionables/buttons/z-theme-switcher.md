@@ -58,8 +58,9 @@ Three sources can decide the theme on load, in this order:
 
 ## The transition
 
-Changing theme fades the page out, swaps while nothing is visible, and fades
-back in — `0.45s` end to end, half each way.
+Changing theme fades the page out over `0.5s`, swaps while nothing is visible,
+and fades back in over `0.2s`. Out is slow so the click visibly lands; in is
+quick because by then there is nothing left to wait for.
 
 Almost none of a theme swap can be transitioned in CSS: custom properties don't
 interpolate unless registered, and the material themes bring in gradients and
@@ -68,9 +69,8 @@ the change is sequenced rather than blended.
 
 The page colour is the one thing that doesn't fade. `background-color` is
 genuinely animatable and doesn't care that its value arrived through `var()`, so
-it interpolates on its own across the full duration — the page is already
-morphing underneath while the content is out, and has arrived by the time the
-content returns.
+it interpolates on its own, timed to the fade in — so the page colour and the
+content arrive together.
 
 > **Not the View Transition API.** That's the obvious tool and the wrong one
 > here. Its default root animation cross-fades the two snapshots under
@@ -80,17 +80,22 @@ content returns.
 > past white and the screen flashes. Sequencing has no overlap, so there's no
 > blend to get wrong.
 
-Retime it with a token, or turn it off:
+Retime either leg with a token, or set the fade out to zero to turn it off:
 
 ```css
 :root {
-  --theme-transition-duration: 0.3s;
+  --theme-fade-out-duration: 0.3s;
+  --theme-fade-in-duration: 0.15s;
 }
 ```
 
 Selecting `system` when the system already agrees changes the preference but not
-a single pixel, and is committed without animating. A `prefers-reduced-motion`
-request swaps instantly.
+a single pixel, and is committed without animating.
+
+The fade deliberately ignores `prefers-reduced-motion`. That preference is about
+movement, and WCAG's definition of motion animation explicitly excludes changes
+of opacity and colour. Nothing here moves — and the alternative is a full-screen
+luminance snap, which is the harsher experience for everyone.
 
 ## Theming a region
 

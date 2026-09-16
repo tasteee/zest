@@ -64,9 +64,9 @@ const styles = css`
 		color: var(--foreground);
 		cursor: pointer;
 		transition:
-			border-color 0.12s ease,
-			background-color 0.12s ease,
-			opacity 0.12s ease;
+			border-color var(--duration-fast) var(--easing-standard),
+			background-color var(--duration-fast) var(--easing-standard),
+			opacity var(--duration-fast) var(--easing-standard);
 	}
 
 	.btn:hover {
@@ -117,8 +117,8 @@ const styles = css`
 		background: var(--color-neutral-3);
 		cursor: pointer;
 		transition:
-			background-color 0.15s ease,
-			width 0.15s ease;
+			background-color var(--duration-fast) var(--easing-standard),
+			width var(--duration-move) var(--easing-standard);
 	}
 
 	.dot:hover {

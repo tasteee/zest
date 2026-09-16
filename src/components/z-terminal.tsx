@@ -294,10 +294,10 @@ const styles = css`
 		transform: scale(0.9);
 		pointer-events: none;
 		transition:
-			opacity 0.18s ease,
-			transform 0.18s ease,
-			color 0.12s ease,
-			background-color 0.12s ease;
+			opacity var(--duration-move) var(--easing-standard),
+			transform var(--duration-move) var(--easing-standard),
+			color var(--duration-fast) var(--easing-standard),
+			background-color var(--duration-fast) var(--easing-standard);
 	}
 
 	.replay.show {
@@ -340,9 +340,9 @@ const styles = css`
 		cursor: pointer;
 		opacity: 0;
 		transition:
-			opacity 0.12s ease,
-			color 0.12s ease,
-			background-color 0.12s ease;
+			opacity var(--duration-fast) var(--easing-standard),
+			color var(--duration-fast) var(--easing-standard),
+			background-color var(--duration-fast) var(--easing-standard);
 	}
 
 	.line.copyable:hover .copy,

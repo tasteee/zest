@@ -1,3 +1,4 @@
+import { interactionStyles } from '../shared/interaction-styles'
 import { defineElement } from '../shared/define-element'
 import { c, css, event, useProp } from 'atomico'
 
@@ -111,7 +112,7 @@ const styles = css`
 		background: var(--material-raised), var(--accent);
 		box-shadow: var(--elevation-raised), var(--emissive-tone);
 		border: 2px solid var(--background);
-		transition: transform 0.1s ease;
+		transition: transform var(--duration-move) var(--easing-standard);
 	}
 	input::-webkit-slider-thumb:active {
 		transform: scale(1.15);
@@ -129,11 +130,11 @@ const styles = css`
 	}
 
 	input:focus-visible::-webkit-slider-thumb {
-		outline: 3px solid color-mix(in oklch, var(--ring) 50%, transparent);
+		outline: 3px solid var(--focus-ring);
 		outline-offset: 2px;
 	}
 	input:focus-visible::-moz-range-thumb {
-		outline: 3px solid color-mix(in oklch, var(--ring) 50%, transparent);
+		outline: 3px solid var(--focus-ring);
 		outline-offset: 2px;
 	}
 `
@@ -144,7 +145,7 @@ export const ZSlider = c(
 
 		const min = props.min ?? 0
 		const max = props.max ?? 100
-		const current = value ?? min
+		const current = Math.min(max, Math.max(min, value ?? min))
 		const fill = max > min ? ((current - min) / (max - min)) * 100 : 0
 
 		const showHeader = Boolean(props.label) || props.doesShowValue
@@ -173,11 +174,13 @@ export const ZSlider = c(
 					disabled={props.isDisabled}
 					aria-label={props.label}
 					oninput={(e: any) => {
+						e.stopPropagation()
 						const next = Number(e.target.value)
 						setValue(next)
 						props.input({ value: next })
 					}}
 					onchange={(e: any) => {
+						e.stopPropagation()
 						props.change({ value: Number(e.target.value) })
 					}}
 				/>
@@ -201,7 +204,7 @@ export const ZSlider = c(
 			input: event<{ value: number }>({ bubbles: true, composed: true }),
 			change: event<{ value: number }>({ bubbles: true, composed: true })
 		},
-		styles
+		styles: [styles, interactionStyles]
 	}
 )
 

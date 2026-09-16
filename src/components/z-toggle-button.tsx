@@ -1,3 +1,4 @@
+import { interactionStyles } from '../shared/interaction-styles'
 import { defineElement } from '../shared/define-element'
 import { c, css, event, useProp } from 'atomico'
 
@@ -32,10 +33,10 @@ const styles = css`
 		min-width: var(--toggle-min-width, 2.5rem);
 		font-size: var(--toggle-font-size, 0.875rem);
 		transition:
-			opacity 0.1s ease,
-			border-color 0.1s ease,
-			background-color 0.1s ease,
-			color 0.1s ease;
+			opacity var(--duration-fast) var(--easing-standard),
+			border-color var(--duration-fast) var(--easing-standard),
+			background-color var(--duration-fast) var(--easing-standard),
+			color var(--duration-fast) var(--easing-standard);
 	}
 
 	button:hover {
@@ -54,7 +55,7 @@ const styles = css`
 	}
 
 	button:focus-visible {
-		outline: 3px solid color-mix(in oklch, var(--ring) 50%, transparent);
+		outline: 3px solid var(--focus-ring);
 		outline-offset: 2px;
 	}
 
@@ -116,13 +117,13 @@ const styles = css`
 	button.is-dom {
 		--tone-color: var(--neon-purple);
 		--tone-text: var(--neon-purple);
-		--tone-on-foreground: var(--primary-foreground);
+		--tone-on-foreground: var(--on-accent);
 	}
 
 	button.is-sub {
 		--tone-color: var(--neon-pink);
 		--tone-text: var(--neon-pink);
-		--tone-on-foreground: var(--primary-foreground);
+		--tone-on-foreground: var(--on-accent);
 	}
 
 	/* kinds: paint using --tone-color */
@@ -207,7 +208,7 @@ export const ZToggleButton = c(
 			isHidden: { type: Boolean, reflect: true },
 			press: event<{ pressed: boolean }>({ bubbles: true, composed: true })
 		},
-		styles
+		styles: [styles, interactionStyles]
 	}
 )
 

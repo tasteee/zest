@@ -176,7 +176,7 @@ export const zButtonDoc: ComponentDocT = {
 			id: 'loading',
 			title: 'Loading',
 			description:
-				'`is-loading` adds a spinner ahead of the label and disables the underlying button, so you never need to also set `is-disabled`. Keep the label meaningful — it stays visible. Click Save to watch a round trip.',
+				'`is-loading` adds a spinner, exposes aria-busy, and disables the underlying button, so you never need to also set `is-disabled`. Keep the label meaningful — it stays visible. Click Save to watch a round trip.',
 			layout: ExampleLayout.center,
 			markup: `
 				<z-button accent="dom" id="saveButton">Save changes</z-button>

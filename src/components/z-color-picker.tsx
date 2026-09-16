@@ -38,7 +38,7 @@ const styles = css`
 		font-family: var(--font-mono);
 		font-size: var(--font-size-small);
 		cursor: pointer;
-		transition: border-color 0.12s ease;
+		transition: border-color var(--duration-fast) var(--easing-standard);
 	}
 
 	.trigger:hover {
@@ -134,7 +134,7 @@ const styles = css`
 		border: 1px solid color-mix(in oklch, var(--foreground) 20%, transparent);
 		cursor: pointer;
 		padding: 0;
-		transition: transform 0.1s ease;
+		transition: transform var(--duration-move) var(--easing-standard);
 	}
 	.preset:hover {
 		transform: scale(1.15);

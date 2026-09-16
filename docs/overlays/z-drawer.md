@@ -24,7 +24,7 @@ short to snap back.
 | `heading` | string | — | title |
 | `description` | string | — | sub-text |
 | `is-static` | boolean | — | disable backdrop-click dismiss |
-| `disabled` | boolean | — | prevent the trigger from opening |
+| `is-disabled` | boolean | — | prevent the trigger from opening |
 
 ## Slots
 

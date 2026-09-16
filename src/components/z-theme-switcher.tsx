@@ -113,7 +113,7 @@ const styles = css`
 		line-height: 1;
 		white-space: nowrap;
 		cursor: pointer;
-		transition: color 0.12s ease, background-color 0.12s ease, border-color 0.12s ease;
+		transition: color var(--duration-fast) var(--easing-standard), background-color var(--duration-fast) var(--easing-standard), border-color var(--duration-fast) var(--easing-standard);
 	}
 
 	.segment:hover {
@@ -148,8 +148,8 @@ const styles = css`
 		color: var(--muted-foreground);
 		cursor: pointer;
 		transition:
-			color 0.12s ease,
-			border-color 0.12s ease,
+			color var(--duration-fast) var(--easing-standard),
+			border-color var(--duration-fast) var(--easing-standard),
 			box-shadow var(--material-press-duration) ease;
 	}
 
@@ -180,7 +180,7 @@ const styles = css`
 	.glyph {
 		grid-area: 1 / 1;
 		display: inline-flex;
-		transition: opacity 0.18s ease, transform 0.18s ease;
+		transition: opacity var(--duration-move) var(--easing-standard), transform var(--duration-move) var(--easing-standard);
 	}
 
 	.glyph.is-hidden {

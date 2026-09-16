@@ -228,8 +228,8 @@ export const zFieldDoc: ComponentDocT = {
 
 	slots: [
 		{ name: '(default)', description: 'The control this field wraps.' },
-		{ name: 'description', description: 'Rich help text, overriding the description attribute.' },
-		{ name: 'error', description: 'A rich error message, overriding the error attribute.' }
+		{ name: 'description', description: 'Rich help text; works without a description attribute. Hidden while an error is present.' },
+		{ name: 'error', description: 'Rich error content; works without an error attribute and takes precedence over the description.' }
 	],
 
 	events: [],
@@ -238,6 +238,7 @@ export const zFieldDoc: ComponentDocT = {
 
 	accessibilityNotes: [
 		'Label forwarding is the whole point: a custom element’s shadow root means an external <label for="…"> never reaches the real input, so the field assigns its label to the control directly.',
+		'Clicking the label focuses the control. Changes to the field label and required state update owned control properties; replacing the control releases the old forwarded state.',
 		'Forwarding is polite — if the control already carries a label, aria-label, or aria-labelledby, that wins and the field leaves it alone.',
 		'The required asterisk is aria-hidden. Screen readers should learn the constraint from the control’s own required state, not from punctuation.',
 		'Use is-label-hidden rather than dropping the label when the surrounding layout already names the field. A hidden label is still an announced one.',

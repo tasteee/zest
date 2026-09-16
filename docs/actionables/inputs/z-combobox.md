@@ -9,7 +9,7 @@ its visible and accessible label. Use `label` directly only for compact controls
 with clear surrounding context.
 
 ```html
-<z-combobox placeholder="Search frameworks…"></z-combobox>
+<z-combobox label="Framework" placeholder="Search frameworks…"></z-combobox>
 ```
 
 ```js
@@ -22,7 +22,7 @@ combo.options = [
 combo.addEventListener('change', (e) => e.detail.value)
 ```
 
-Keyboard: type to filter, ↑/↓ move, Enter commits the active row, Esc closes.
+Keyboard: type to filter, ↑/↓ move between enabled results, Enter commits the active row, and Escape or Tab closes. Blur restores the selected label. The panel uses the browser top layer so scroll containers do not clip it. `change` fires only when the selected value changes.
 
 ## Properties & attributes
 
@@ -31,8 +31,8 @@ Keyboard: type to filter, ↑/↓ move, Enter commits the active row, Esc closes
 | `options` | `{ value, label, isDisabled? }[]` | `[]` | **property** — the option list |
 | `value` | string | — | selected value (reflected attribute, two-way) |
 | `placeholder` | string | `Search…` | input placeholder |
-| `accent` | `dom` `sub` | `dom` accent | accent color |
-| `disabled` | boolean | — | disable |
+| `accent` | `dom` `sub` | neutral | accent color |
+| `is-disabled` | boolean | — | disable |
 | `inline` | boolean | — | shrink to content width |
 | `is-hidden` | boolean | — | hide |
 
@@ -40,4 +40,4 @@ Keyboard: type to filter, ↑/↓ move, Enter commits the active row, Esc closes
 
 | Event | `detail` | Description |
 | --- | --- | --- |
-| `change` | `{ value }` | on selection |
+| `change` | `{ value }` | when a committed selection changes the value |

@@ -12,7 +12,7 @@ heights as Zest selects and buttons.
 
 `value`, `min`, `max`, and `step` are numeric properties. Their HTML attributes
 are strings as usual, but Zest coerces them to numbers; integer and decimal
-steps both work. `step` must be positive and defaults to `1`.
+steps both work. `step` must be positive and defaults to `1`. It controls the increment, not rounding: typed decimals and fractional bounds are preserved.
 
 ## Behavior
 
@@ -35,11 +35,11 @@ steps both work. `step` must be positive and defaults to `1`.
 | `is-full-width` | boolean | — | Stretches the normally compact numeric field to its container width. |
 | `inline` | boolean | — | Shrinks back to content width (overrides `is-full-width`). |
 | `size` | `sm` `md` `lg` | `md` | Matches the same size of `z-button` and `z-select`. |
-| `accent` | `dom` `sub` | `dom` accent | Focus accent color. |
+| `accent` | `dom` `sub` | neutral | Focus accent color. |
 | `label` | string | — | Accessible name for compact contextual use. Prefer `z-field` for a visible label. |
 | `name` | string | — | Form field name. |
 | `placeholder` | string | — | Placeholder text. |
-| `invalid` / `disabled` / `is-readonly` / `is-required` | boolean | — | External invalid state, disabled state, read-only state, or required state. |
+| `is-invalid` / `is-disabled` / `is-readonly` / `is-required` | boolean | — | External invalid state, disabled state, read-only state, or required state. |
 | `is-hidden` | boolean | — | Hide. |
 
 ## Events

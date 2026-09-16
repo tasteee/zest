@@ -27,7 +27,7 @@ const getCanonicalElement = (primaryExampleHtml: string, tagName: string): Eleme
 	const matchedElement = parsedDocument.body.querySelector(tagName)
 
 	if (matchedElement) {
-		const clonedElement = matchedElement.cloneNode(true) as Element
+		const clonedElement = document.importNode(matchedElement, true) as Element
 		applySiteBaseUrl(clonedElement)
 		return clonedElement
 	}
@@ -49,7 +49,7 @@ const getConceptStageElements = (primaryExampleHtml: string): Element[] => {
 	const rootElements = [...parsedDocument.body.children]
 
 	return rootElements.map((rootElement) => {
-		const clonedElement = rootElement.cloneNode(true) as Element
+		const clonedElement = document.importNode(rootElement, true) as Element
 		applySiteBaseUrl(clonedElement)
 		return clonedElement
 	})
@@ -59,10 +59,20 @@ const getConceptStageElements = (primaryExampleHtml: string): Element[] => {
 // repo-authored content, same as the HTML it sits next to — safe to execute
 // so property-driven components actually show real content instead of an
 // empty shell. Never let one bad snippet take the whole page down with it.
-const runPairedScriptSafely = (script: string): void => {
+const runPairedScriptSafely = (script: string, root: HTMLElement): void => {
+	if (!root.isConnected) return
 	try {
-		const runScript = new Function(script)
-		runScript()
+		const scopedDocument = new Proxy(document, {
+			get(target, key) {
+				if (key === 'querySelector') return root.querySelector.bind(root)
+				if (key === 'querySelectorAll') return root.querySelectorAll.bind(root)
+				if (key === 'getElementById') return (id: string) => root.querySelector(`#${CSS.escape(id)}`)
+				const value = Reflect.get(target, key, target)
+				return typeof value === 'function' ? value.bind(target) : value
+			}
+		})
+		const runScript = new Function('document', script)
+		runScript(scopedDocument)
 	} catch (scriptError) {
 		console.warn('zest docs: paired example script failed to run', scriptError)
 	}
@@ -162,7 +172,7 @@ export const buildPlayground = (page: DocPageT): HTMLElement | null => {
 		// Runs after this element is connected to the live document (the
 		// caller appends the returned node synchronously; microtasks flush
 		// right after), since these scripts do `document.querySelector(...)`.
-		queueMicrotask(() => runPairedScriptSafely(pairedScript))
+		queueMicrotask(() => runPairedScriptSafely(pairedScript, wrap))
 	}
 
 	if (playgroundData.jsOnlyPropertyNames.length > 0) {

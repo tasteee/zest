@@ -63,10 +63,10 @@ const styles = css`
 		color: var(--muted-foreground);
 		cursor: pointer;
 		transition:
-			background-color 0.12s ease,
-			border-color 0.12s ease,
-			color 0.12s ease,
-			opacity 0.12s ease;
+			background-color var(--duration-fast) var(--easing-standard),
+			border-color var(--duration-fast) var(--easing-standard),
+			color var(--duration-fast) var(--easing-standard),
+			opacity var(--duration-fast) var(--easing-standard);
 	}
 
 	.filter.is-sm .pill {
@@ -124,8 +124,8 @@ const styles = css`
 		cursor: pointer;
 		padding: 0;
 		transition:
-			border-color 0.12s ease,
-			color 0.12s ease;
+			border-color var(--duration-fast) var(--easing-standard),
+			color var(--duration-fast) var(--easing-standard);
 	}
 	.filter.is-sm .reset {
 		width: 1.625rem;

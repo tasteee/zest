@@ -88,8 +88,9 @@ short, that is the first place to check.
 ```jsx
 <z-dialog
   heading={string}
+  label={string}
   description={string}
-  size="sm | md | lg"   // default: md
+  size="small | medium | large"   // default: medium
   is-open
   has-close
   is-static
@@ -629,7 +630,6 @@ short, that is the first place to check.
   row-height={number}
   min-pitch={number}
   max-pitch={number}
-  mode="select | draw"   // default: select
   fold={string}
   scale={string}
   root={number}
@@ -750,7 +750,9 @@ short, that is the first place to check.
   accent={string}
   name={string}
   value={string}
+  label={string}
   is-checked
+  is-required
   is-disabled
   is-hidden
 />
@@ -951,6 +953,7 @@ short, that is the first place to check.
 <z-radio
   accent={string}
   value={string}
+  label={string}
   is-checked
   is-disabled
   is-hidden
@@ -1055,6 +1058,7 @@ short, that is the first place to check.
   accent={string}
   name={string}
   value={string}
+  label={string}
   is-checked
   is-disabled
   is-full-width

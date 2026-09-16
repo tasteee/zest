@@ -1,5 +1,6 @@
+import { interactionStyles } from '../shared/interaction-styles'
 import { defineElement } from '../shared/define-element'
-import { c, css, event, useProp } from 'atomico'
+import { c, css, event, useProp, useHost } from 'atomico'
 
 /*
  * z-radio — a single radio option. Circular control: hairline ring when off,
@@ -84,26 +85,28 @@ const styles = css`
 	}
 
 	input:focus-visible + .ring {
-		outline: 3px solid color-mix(in oklch, var(--ring) 50%, transparent);
+		outline: 3px solid var(--focus-ring);
 		outline-offset: 2px;
 	}
 `
 
 export const ZRadio = c(
 	(props) => {
+		const host = useHost()
 		const [isChecked, setIsChecked] = useProp<boolean>('isChecked')
 
 		const labelClass = ['label'].concat(props.isDisabled ? ['is-disabled'] : []).join(' ')
 		const ringClass = ['ring'].concat(isChecked ? ['is-checked'] : []).join(' ')
 
 		return (
-			<host shadowDom>
+			<host shadowDom={{ delegatesFocus: true }}>
 				<label class={labelClass}>
 					<input
 						type="radio"
 						checked={isChecked}
 						disabled={props.isDisabled}
 						value={props.value}
+						aria-label={props.label || host.current?.getAttribute('aria-label') || undefined}
 						aria-checked={isChecked ? 'true' : 'false'}
 						onchange={(changeEvent: Event) => {
 							changeEvent.stopPropagation()
@@ -126,9 +129,10 @@ export const ZRadio = c(
 			isHidden: { type: Boolean, reflect: true },
 			accent: { type: String, reflect: true },
 			value: String,
+			label: String,
 			select: event<{ value?: string }>({ bubbles: true, composed: true })
 		},
-		styles
+		styles: [styles, interactionStyles]
 	}
 )
 

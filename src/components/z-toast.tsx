@@ -1,3 +1,4 @@
+import { interactionStyles } from '../shared/interaction-styles'
 import { defineElement } from '../shared/define-element'
 import { c, css, event, useRef, useState, useEffect, useHost } from 'atomico'
 
@@ -60,7 +61,7 @@ const styles = css`
 		border: 1px solid var(--border);
 		border-left: 3px solid var(--toast-accent, var(--border));
 		border-radius: var(--radius-md);
-		animation: toast-in 0.18s ease;
+		animation: toast-in var(--duration-move) var(--easing-standard);
 	}
 
 	.toast.is-dom {
@@ -121,7 +122,7 @@ const styles = css`
 		border-radius: var(--radius-sm);
 		color: var(--muted-foreground);
 		cursor: pointer;
-		transition: color 0.12s ease;
+		transition: color var(--duration-fast) var(--easing-standard);
 	}
 
 	.close:hover {
@@ -201,7 +202,7 @@ export const ZToast = c(
 			position: { type: String, reflect: true },
 			dismiss: event<{ id: number }>({ bubbles: true, composed: true })
 		},
-		styles
+		styles: [styles, interactionStyles]
 	}
 )
 

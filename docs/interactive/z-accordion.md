@@ -3,7 +3,7 @@
 Wraps slotted [z-collapsible](z-collapsible.md) items and draws hairline dividers
 between them. `type="single"` (default) keeps at most one section open at a time;
 `type="multiple"` lets several stay open. Coordination is automatic — it listens
-for each item's bubbling `toggle` event.
+for each direct child’s bubbling `toggle` event. Nested accordions coordinate their own items independently; opening a nested section does not close its parent.
 
 ```html
 <z-accordion type="single">

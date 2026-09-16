@@ -1,13 +1,20 @@
-import { defineElement } from '../shared/define-element'
-import { c, css, event, useHost, useProp } from 'atomico'
+import { interactionStyles } from '../shared/interaction-styles'
+import { defineFormElement, useFormControl } from '../shared/form-control'
+import { c, css, event, useHost, useProp, useRef } from 'atomico'
 
 /*
  * z-input — single-line text field. Transparent fill, hairline border that
  * lifts to the accent on focus (theme primary by default, with explicit
  * `dom` and `sub` accents). Optional
  * leading/trailing slots for icons or adornments. No shadows.
+ *
+ * Form-associated: the host carries `name`, submits `value`, mirrors the
+ * inner input's validity, resets to its initial value, and Enter submits the
+ * owning form. See ../shared/form-control.ts.
  */
 const styles = css`
+	.field:focus-within { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
+
 	:host {
 		display: inline-flex;
 		width: 100%;
@@ -39,8 +46,8 @@ const styles = css`
 		   input natively, so there are no dead zones on the sides. */
 		cursor: text;
 		transition:
-			border-color 0.12s ease,
-			background-color 0.12s ease;
+			border-color var(--duration-fast) var(--easing-standard),
+			background-color var(--duration-fast) var(--easing-standard);
 		--accent: var(--primary);
 	}
 
@@ -56,17 +63,17 @@ const styles = css`
 	.field.is-sm {
 		height: var(--control-height-sm);
 		padding-inline: 0.625rem;
-		font-size: var(--font-size-small);
+		font-size: var(--control-font-size-sm);
 	}
 	.field.is-md {
 		height: var(--control-height-md);
 		padding-inline: 0.75rem;
-		font-size: var(--font-size-body);
+		font-size: var(--control-font-size-md);
 	}
 	.field.is-lg {
 		height: var(--control-height-lg);
 		padding-inline: 0.875rem;
-		font-size: var(--font-size-h4);
+		font-size: var(--control-font-size-lg);
 	}
 
 	.field:hover {
@@ -84,7 +91,7 @@ const styles = css`
 	}
 
 	.field.is-disabled {
-		opacity: 0.55;
+		opacity: var(--control-disabled-opacity);
 		pointer-events: none;
 	}
 
@@ -145,39 +152,55 @@ const resolveSizeClass = (props: any): string => {
 export const ZInput = c(
 	(props) => {
 		const host = useHost()
+		const inputRef = useRef<HTMLInputElement>()
 		const [value, setValue] = useProp<string>('value')
+		const defaultValue = useRef(value ?? '')
+		const committedValue = useRef(value ?? '')
 		const [isFocused, setIsFocused] = useProp<boolean>('isFocused')
+		const { isFormDisabled } = useFormControl({
+			value: value ?? '',
+			isDisabled: props.isDisabled,
+			isReadonly: props.isReadonly,
+			control: inputRef,
+			submitsOnEnter: true,
+			onReset: () => setValue(defaultValue.current),
+			onRestore: (state) => { if (typeof state === 'string') setValue(state) }
+		})
+		const isDisabled = props.isDisabled || isFormDisabled
 
 		const fieldClass = ['field', resolveSizeClass(props)]
 			.concat(isFocused ? ['is-focused'] : [])
 			.concat(props.isInvalid ? ['is-invalid'] : [])
-			.concat(props.isDisabled ? ['is-disabled'] : [])
+			.concat(isDisabled ? ['is-disabled'] : [])
 			.join(' ')
 
 		return (
-			<host shadowDom>
+			<host shadowDom={{ delegatesFocus: true }}>
 				<label class={fieldClass}>
 					<span class='adornment'>
 						<slot name='prefix' />
 					</span>
 					<input
+						ref={inputRef}
 						type={props.type || 'text'}
 						value={value ?? ''}
 						placeholder={props.placeholder}
-						name={props.name}
-						disabled={props.isDisabled}
+						disabled={isDisabled}
 						readonly={props.isReadonly}
 						required={props.isRequired}
 						autocomplete={props.autocomplete as any}
 						inputmode={props.inputmode}
 						aria-invalid={props.isInvalid ? 'true' : undefined}
 						aria-label={props.label || host.current?.getAttribute('aria-label') || undefined}
-						onfocus={() => setIsFocused(true)}
+						onfocus={() => { committedValue.current = value ?? ''; setIsFocused(true) }}
 						onblur={() => {
 							setIsFocused(false)
-							props.change({ value: value ?? '' })
+							const next = value ?? ''
+							if (next !== committedValue.current) { committedValue.current = next; props.change({ value: next }) }
 						}}
+						onchange={(e: Event) => e.stopPropagation()}
 						oninput={(e: any) => {
+							e.stopPropagation()
 							const next = e.target.value
 							setValue(next)
 							props.input({ value: next })
@@ -196,7 +219,7 @@ export const ZInput = c(
 			label: String,
 			type: String,
 			placeholder: String,
-			name: String,
+			name: { type: String, reflect: true },
 			autocomplete: String,
 			inputmode: String,
 			size: { type: String, reflect: true },
@@ -211,8 +234,9 @@ export const ZInput = c(
 			input: event<{ value: string }>({ bubbles: true, composed: true }),
 			change: event<{ value: string }>({ bubbles: true, composed: true })
 		},
-		styles
+		styles: [styles, interactionStyles],
+		form: true
 	}
 )
 
-defineElement('z-input', ZInput)
+defineFormElement('z-input', ZInput)

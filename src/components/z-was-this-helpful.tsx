@@ -58,7 +58,7 @@ const styles = css`
 		font: inherit;
 		font-size: var(--font-size-caption);
 		cursor: pointer;
-		transition: color 0.12s ease, border-color 0.12s ease;
+		transition: color var(--duration-fast) var(--easing-standard), border-color var(--duration-fast) var(--easing-standard);
 	}
 
 	.choice:hover {

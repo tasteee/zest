@@ -1,5 +1,6 @@
-import { defineElement } from '../shared/define-element'
-import { c, css, event, useProp } from 'atomico'
+import { interactionStyles } from '../shared/interaction-styles'
+import { defineFormElement, useFormControl } from '../shared/form-control'
+import { c, css, event, useHost, useProp, useRef } from 'atomico'
 
 /*
  * z-switch — a binary toggle rendered as a track + sliding knob. Off is a
@@ -64,7 +65,7 @@ const styles = css`
 		background: var(--material-surface);
 		box-shadow: var(--elevation-carved);
 		box-sizing: border-box;
-		transition: background-color 0.16s ease, border-color 0.16s ease;
+		transition: background-color var(--duration-fast) var(--easing-standard), border-color var(--duration-fast) var(--easing-standard);
 	}
 
 	label.is-sm .track {
@@ -95,7 +96,7 @@ const styles = css`
 		border-radius: 999px;
 		background: var(--material-raised), var(--muted-foreground);
 		box-shadow: var(--elevation-raised);
-		transition: transform 0.16s var(--easing-standard, ease-out), background-color 0.16s ease;
+		transition: transform var(--duration-move) var(--easing-standard), background-color var(--duration-fast) var(--easing-standard);
 	}
 
 	label.is-sm .knob {
@@ -130,7 +131,7 @@ const styles = css`
 	}
 
 	input:focus-visible + .track {
-		outline: 3px solid color-mix(in oklch, var(--ring) 50%, transparent);
+		outline: 3px solid var(--focus-ring);
 		outline-offset: 2px;
 	}
 `
@@ -143,32 +144,55 @@ const resolveSizeClass = (props: any): string => {
 
 export const ZSwitch = c(
 	(props) => {
+		const host = useHost()
+		const inputRef = useRef<HTMLInputElement>()
 		const [isChecked, setIsChecked] = useProp<boolean>('isChecked')
+		const defaultChecked = useRef(Boolean(isChecked))
+		// Submits like a checkbox: `value` (or "on") while on, nothing while off.
+		const { isFormDisabled } = useFormControl({
+			value: isChecked ? (props.value ?? 'on') : null,
+			isDisabled: props.isDisabled,
+			control: inputRef,
+			onReset: () => setIsChecked(defaultChecked.current),
+			onRestore: (state) => setIsChecked(state != null && state !== '')
+		})
+		const isDisabled = props.isDisabled || isFormDisabled
 
 		const labelClass = ['label', resolveSizeClass(props)]
-			.concat(props.isDisabled ? ['is-disabled'] : [])
+			.concat(isDisabled ? ['is-disabled'] : [])
 			.join(' ')
 
 		const trackClass = ['track'].concat(isChecked ? ['is-on'] : []).join(' ')
 		const handleClick = () => {
-			if (props.isDisabled) return
+			if (isDisabled) return
 			const next = !isChecked
 			setIsChecked(next)
 			props.change({ checked: next, value: props.value })
 		}
 
 		return (
-			<host shadowDom onclick={handleClick}>
+			<host shadowDom={{ delegatesFocus: true }} onclick={(e: MouseEvent) => {
+				// Preserve host.click(), while native label activation owns user clicks.
+				if (e.composedPath()[0] === host.current) handleClick()
+			}}>
 				<label class={labelClass}>
 					<input
+						ref={inputRef}
 						type="checkbox"
 						role="switch"
 						checked={isChecked}
-						name={props.name}
 						value={props.value}
-						disabled={props.isDisabled}
+						disabled={isDisabled}
+						required={props.isRequired}
+						aria-label={props.label || host.current?.getAttribute('aria-label') || undefined}
 						aria-checked={isChecked ? 'true' : 'false'}
-						onchange={(changeEvent: Event) => changeEvent.stopPropagation()}
+						onchange={(changeEvent: Event) => {
+							changeEvent.stopPropagation()
+							if (isDisabled) return
+							const next = (changeEvent.target as HTMLInputElement).checked
+							setIsChecked(next)
+							props.change({ checked: next, value: props.value })
+						}}
 					/>
 					<span class={trackClass} aria-hidden="true">
 						<span class="knob"></span>
@@ -181,17 +205,20 @@ export const ZSwitch = c(
 	{
 		props: {
 			isChecked: { type: Boolean, reflect: true },
+			isRequired: { type: Boolean, reflect: true },
 			isDisabled: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			isFullWidth: { type: Boolean, reflect: true },
 			size: { type: String, reflect: true },
 			accent: { type: String, reflect: true },
-			name: String,
+			name: { type: String, reflect: true },
 			value: String,
+			label: String,
 			change: event<{ checked: boolean; value?: string }>({ bubbles: true, composed: true })
 		},
-		styles
+		styles: [styles, interactionStyles],
+		form: true
 	}
 )
 
-defineElement('z-switch', ZSwitch)
+defineFormElement('z-switch', ZSwitch)

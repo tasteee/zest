@@ -39,7 +39,7 @@ const styles = css`
 
 	.bar {
 		fill: var(--accent);
-		transition: opacity 0.12s ease;
+		transition: opacity var(--duration-fast) var(--easing-standard);
 	}
 
 	.bar.is-dim {

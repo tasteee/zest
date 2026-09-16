@@ -85,7 +85,7 @@ const styles = css`
 		color: var(--muted-foreground);
 		text-decoration: none;
 		border-bottom: 1px solid var(--border);
-		transition: color 0.12s ease, border-color 0.12s ease;
+		transition: color var(--duration-fast) var(--easing-standard), border-color var(--duration-fast) var(--easing-standard);
 	}
 
 	.meta a:hover {

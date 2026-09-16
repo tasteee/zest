@@ -26,9 +26,9 @@ group.addEventListener('change', (e) => {
 | `is-multiple` | boolean | — | let any number stay pressed at once |
 | `direction` | `horizontal` `vertical` | `horizontal` | layout axis |
 | `is-hidden` | boolean | — | hide |
-| _color_ | `accent` `accent` `accent` | — | shared accent for items |
-| _size_ | `size` `is-medium` `size` | — | shared size for items |
-| _kind_ | `kind` `kind` | — | shared treatment for items |
+| `accent` | `neutral` `dom` `sub` `success` `warning` `error` | — | shared accent for items |
+| `size` | `xs` `sm` `md` `lg` | — | shared size for items |
+| `kind` | `solid` `outline` `ghost` `soft` `plain` | — | shared treatment for items |
 
 The color/size/kind flags set CSS variables the items read, so you usually set
 them once on the group rather than on each item.

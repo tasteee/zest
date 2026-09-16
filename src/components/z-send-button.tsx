@@ -30,9 +30,9 @@ const styles = css`
 		color: var(--primary-foreground);
 		padding: 0;
 		transition:
-			opacity 0.12s ease,
+			opacity var(--duration-fast) var(--easing-standard),
 			transform 0.08s ease,
-			background-color 0.12s ease;
+			background-color var(--duration-fast) var(--easing-standard);
 	}
 	button:hover:not(:disabled) {
 		transform: scale(1.05);

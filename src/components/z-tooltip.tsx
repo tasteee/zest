@@ -1,3 +1,4 @@
+import { interactionStyles } from '../shared/interaction-styles'
 import { defineElement } from '../shared/define-element'
 import { c, css, useRef, useState, useEffect, useHost } from 'atomico'
 import { floatingSurfaceStyles } from '../shared/overlay-styles'
@@ -156,7 +157,7 @@ export const ZTooltip = c(
 			doesHideArrow: { type: Boolean, reflect: true },
 			isDisabled: { type: Boolean, reflect: true }
 		},
-		styles: [floatingSurfaceStyles, styles]
+		styles: [floatingSurfaceStyles, styles, interactionStyles]
 	}
 )
 

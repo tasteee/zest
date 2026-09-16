@@ -9,7 +9,7 @@ its visible and accessible label. Use `label` directly only for compact controls
 with clear surrounding context.
 
 ```html
-<z-select placeholder="Pick a fruit"></z-select>
+<z-select label="Fruit" placeholder="Pick a fruit"></z-select>
 ```
 
 ```js
@@ -22,7 +22,7 @@ select.options = [
 select.addEventListener('change', (e) => e.detail.value)
 ```
 
-Keyboard: ↑/↓ move, Enter/Space picks, Esc closes; clicking outside closes.
+Keyboard: ↑/↓ move between enabled options; Home/End jump to the first/last enabled option; typing searches by label. Enter/Space opens or commits. Escape, Tab, and clicking outside close. Opening starts at the selected option. `change` fires only when the selected value changes.
 
 ## Properties & attributes
 
@@ -32,9 +32,9 @@ Keyboard: ↑/↓ move, Enter/Space picks, Esc closes; clicking outside closes.
 | `value` | string | — | selected value (reflected attribute, two-way) |
 | `placeholder` | string | `Select…` | empty-state text |
 | `size` | `sm` `md` `lg` | `md` | size |
-| `accent` | `dom` `sub` | `dom` accent | accent color |
-| `invalid` | boolean | — | error styling |
-| `disabled` | boolean | — | disable |
+| `accent` | `dom` `sub` | neutral | accent color |
+| `is-invalid` | boolean | — | error styling |
+| `is-disabled` | boolean | — | disable |
 | `inline` | boolean | — | shrink to content width |
 | `is-hidden` | boolean | — | hide |
 
@@ -42,7 +42,7 @@ Keyboard: ↑/↓ move, Enter/Space picks, Esc closes; clicking outside closes.
 
 | Event | `detail` | Description |
 | --- | --- | --- |
-| `change` | `{ value }` | on selection |
+| `change` | `{ value }` | when a committed selection changes the value |
 
 ## Related
 

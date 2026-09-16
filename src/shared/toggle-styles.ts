@@ -38,15 +38,15 @@ export const toggleStyles = css`
 		background: var(--z-toggle-button-bg, transparent);
 		border: 1px solid var(--z-toggle-button-border, transparent);
 		color: var(--z-toggle-button-color, var(--foreground));
-		height: var(--z-toggle-button-height, 2.5rem);
+		height: var(--z-toggle-button-height, var(--control-height-md));
 		padding-inline: var(--z-toggle-button-padding-inline, 1rem);
 		min-width: var(--z-toggle-button-min-width, 2.5rem);
 		font-size: var(--z-toggle-button-font-size, 0.875rem);
 		transition:
-			opacity 0.1s ease,
-			border-color 0.1s ease,
-			background-color 0.1s ease,
-			color 0.1s ease;
+			opacity var(--duration-fast) var(--easing-standard),
+			border-color var(--duration-fast) var(--easing-standard),
+			background-color var(--duration-fast) var(--easing-standard),
+			color var(--duration-fast) var(--easing-standard);
 	}
 
 	button:hover {
@@ -61,7 +61,7 @@ export const toggleStyles = css`
 	}
 
 	button:focus-visible {
-		outline: 3px solid color-mix(in oklch, var(--ring) 50%, transparent);
+		outline: 3px solid var(--focus-ring);
 		outline-offset: 2px;
 	}
 
@@ -79,36 +79,36 @@ export const toggleStyles = css`
 	}
 
 	button.is-sm {
-		--z-toggle-button-height: 2rem;
+		--z-toggle-button-height: var(--control-height-sm);
 		--z-toggle-button-padding-inline: 0.75rem;
-		--z-toggle-button-min-width: 2rem;
+		--z-toggle-button-min-width: var(--control-height-sm);
 		--z-toggle-button-font-size: 0.8125rem;
 		--z-toggle-button-icon-size: 0.875rem;
 	}
 
 	button.is-lg {
-		--z-toggle-button-height: 3rem;
+		--z-toggle-button-height: var(--control-height-lg);
 		--z-toggle-button-padding-inline: 1.25rem;
-		--z-toggle-button-min-width: 3rem;
+		--z-toggle-button-min-width: var(--control-height-lg);
 		--z-toggle-button-font-size: 1rem;
 		--z-toggle-button-icon-size: 1.125rem;
 	}
 
 	button.is-icon {
 		padding-inline: 0;
-		width: var(--z-toggle-button-height, 2.5rem);
+		width: var(--z-toggle-button-height, var(--control-height-md));
 	}
 
 	button.is-dom {
 		--z-toggle-button-color: var(--neon-purple);
 		--z-toggle-button-accent: var(--neon-purple);
-		--z-toggle-button-accent-foreground: var(--primary-foreground);
+		--z-toggle-button-accent-foreground: var(--on-accent);
 	}
 
 	button.is-sub {
 		--z-toggle-button-color: var(--neon-pink);
 		--z-toggle-button-accent: var(--neon-pink);
-		--z-toggle-button-accent-foreground: var(--primary-foreground);
+		--z-toggle-button-accent-foreground: var(--on-accent);
 	}
 
 	button.is-neutral {
@@ -120,19 +120,19 @@ export const toggleStyles = css`
 	button.is-success {
 		--z-toggle-button-color: var(--success);
 		--z-toggle-button-accent: var(--success);
-		--z-toggle-button-accent-foreground: var(--primary-foreground);
+		--z-toggle-button-accent-foreground: var(--on-accent);
 	}
 
 	button.is-warning {
 		--z-toggle-button-color: var(--warning);
 		--z-toggle-button-accent: var(--warning);
-		--z-toggle-button-accent-foreground: var(--primary-foreground);
+		--z-toggle-button-accent-foreground: var(--on-accent);
 	}
 
 	button.is-error {
 		--z-toggle-button-color: var(--destructive);
 		--z-toggle-button-accent: var(--destructive);
-		--z-toggle-button-accent-foreground: var(--primary-foreground);
+		--z-toggle-button-accent-foreground: var(--on-accent);
 	}
 
 	button.is-ghost {

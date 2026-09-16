@@ -16,7 +16,7 @@ const PANE_STYLE =
 export const zThemeSwitcherDoc: ComponentDocT = {
 	tag: 'z-theme-switcher',
 	title: 'z-theme-switcher',
-	tagline: "Switches the page between zest's dark ink and its light haze.",
+	tagline: "Switches the page between zest's dark ink and light paper.",
 	status: ComponentStatus.stable,
 
 	description:
@@ -29,7 +29,7 @@ export const zThemeSwitcherDoc: ComponentDocT = {
 	},
 
 	usageGuidance: [
-		'Changing theme fades the page out, swaps while nothing is visible, and fades back in — 0.45s end to end. Almost none of a theme swap can be transitioned in CSS, so the change is sequenced rather than blended; the page colour is the exception and interpolates on its own underneath, so the gap is never empty. Retime it with `--theme-transition-duration` on `:root`.',
+		'Changing theme fades the page out over 0.5s, swaps while nothing is visible, and fades back in over 0.2s. Almost none of a theme swap can be transitioned in CSS, so the change is sequenced rather than blended; the page colour is the exception and interpolates on its own underneath, so the gap is never empty. Retime it with `--theme-fade-out-duration` and `--theme-fade-in-duration` on `:root`. A zero fade-out applies the theme immediately; a newer request cancels any pending fade. The fade is not gated on reduced-motion — an opacity change is not motion, and the alternative is a full-screen luminance snap.',
 		'Offer `system` unless you have a reason not to. Most readers have already told their OS what they want, and following it is the answer that needs no thought — which is why the segmented kind is the default.',
 		'Reach for `icon` when the header is genuinely tight. It trades the system option and the visible current state for one button, so it is the weaker control, not the neater one.',
 		'Leave the accent unset in app chrome. A theme switcher is a setting, not a call to action, and a neutral selection keeps it from competing with the actions around it.',
@@ -187,7 +187,7 @@ export const zThemeSwitcherDoc: ComponentDocT = {
 			name: 'themes',
 			type: 'string[]',
 			defaultValue: "['light','dark','system']",
-			description: 'Which choices to offer, in order. A property, not an attribute. Unknown names are ignored.'
+			description: 'Which choices to offer, in order: light, dark, console, studio, and system. Set this array as a property. Unknown names are ignored; an empty or entirely unknown list restores the default choices.'
 		},
 		{
 			name: 'accent',
@@ -206,7 +206,7 @@ export const zThemeSwitcherDoc: ComponentDocT = {
 	events: [
 		{
 			name: 'change',
-			detail: "{ preference: 'light' | 'dark' | 'system', theme: 'light' | 'dark' }",
+			detail: "{ preference: 'light' | 'dark' | 'console' | 'studio' | 'system', theme: 'light' | 'dark' | 'console' | 'studio' }",
 			description: 'Fires on selection. `preference` is what was chosen; `theme` is what that resolves to at that moment.'
 		}
 	],
@@ -221,14 +221,19 @@ export const zThemeSwitcherDoc: ComponentDocT = {
 		{ name: '--switcher-height', defaultValue: '2.25rem', description: 'Segment height, driven by the size attributes.' },
 		{ name: '--switcher-icon-size', defaultValue: '0.9375rem', description: 'Glyph size, driven by the size attributes.' },
 		{
-			name: '--theme-transition-duration',
-			defaultValue: '0.45s',
-			description: 'Length of the whole fade-out-swap-fade-in. Set on :root, not on the switcher.'
+			name: '--theme-fade-out-duration',
+			defaultValue: '0.5s',
+			description: 'How long the page takes to fade out before the swap. Zero applies the theme instantly. Set on :root, not on the switcher.'
+		},
+		{
+			name: '--theme-fade-in-duration',
+			defaultValue: '0.2s',
+			description: 'How long the page takes to fade back in after the swap. Set on :root, not on the switcher.'
 		}
 	],
 
 	accessibilityNotes: [
-		'The segmented kind is a radiogroup of radios, so it reads as one choice out of three rather than three independent toggles.',
+		'The segmented kind is a radiogroup of radios, so it reads as one choice among the configured themes.',
 		'The icon kind carries an aria-label naming the destination — "Switch to light theme" — because the glyph alone shows the current state, not the outcome.',
 		'Every segment keeps its text label unless is-icon-only is set, and keeps its accessible name either way.',
 		'`color-scheme` is set alongside the tokens, so native chrome the browser paints for us — form control internals, the caret, overlay scrollbars — flips with the theme instead of fighting it.'

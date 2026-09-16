@@ -16,7 +16,7 @@ const styles = css`
 		--dock-size: var(--dock-item-size, 3rem);
 		transform: scale(var(--dock-scale));
 		transform-origin: bottom center;
-		transition: transform 0.14s ease-out;
+		transition: transform var(--duration-move) var(--easing-standard);
 	}
 
 	:host([is-hidden]) {
@@ -37,8 +37,8 @@ const styles = css`
 		cursor: pointer;
 		text-decoration: none;
 		transition:
-			border-color 0.12s ease,
-			background-color 0.12s ease;
+			border-color var(--duration-fast) var(--easing-standard),
+			background-color var(--duration-fast) var(--easing-standard);
 	}
 
 	.item:hover,
@@ -73,8 +73,8 @@ const styles = css`
 		opacity: 0;
 		pointer-events: none;
 		transition:
-			opacity 0.12s ease,
-			transform 0.12s ease;
+			opacity var(--duration-fast) var(--easing-standard),
+			transform var(--duration-move) var(--easing-standard);
 	}
 
 	:host(:hover) .tooltip,

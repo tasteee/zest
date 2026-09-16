@@ -298,14 +298,14 @@ export const zSelectDoc: ComponentDocT = {
 	slots: [],
 
 	events: [
-		{ name: 'change', detail: '{ value: string }', description: 'Fires once when an option is committed. Arrowing through the list does not fire it.' }
+		{ name: 'change', detail: '{ value: string }', description: 'Fires when a committed option changes the selected value. Arrowing through the list does not fire it.' }
 	],
 
 	cssVariables: [],
 
 	accessibilityNotes: [
-		'The trigger is a real button with aria-haspopup="listbox" and aria-expanded, and the panel carries role="listbox" with role="option" rows and aria-selected.',
-		'Full keyboard support: Enter or Space opens, ↑/↓ move the active row and skip disabled options, Enter commits, Escape closes.',
+		'The trigger is a button with role="combobox", aria-controls, aria-activedescendant, aria-haspopup="listbox", and aria-expanded, and the panel carries role="listbox" with role="option" rows and aria-selected.',
+		'Enter or Space opens or commits; ↑/↓ skip disabled options, Home/End reach the first/last enabled option, and typing searches labels. Escape and Tab close. Opening starts at the selected option.',
 		'Set `label` (or nest the select in a z-field) — the shadow boundary means an outside <label for> will not name the trigger.',
 		'Active and selected are separate states by design: the highlight follows the keyboard, and the tick stays on the committed choice.',
 		'An empty list renders "No options" rather than an empty panel, so an open-and-nothing-happens moment reads as a state instead of a bug.'

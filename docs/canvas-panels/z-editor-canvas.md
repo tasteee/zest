@@ -38,7 +38,7 @@ canvas.addEventListener('viewportchange', (e) => e.detail) // { x, y, zoom }
 | `grid-size` | number | `24` | canvas-space px between grid lines |
 | `pan-button` | `auto` `middle` `space` `left` | `auto` | which pointer button pans (middle always pans; Space-held always pans) |
 | `wheel` | `zoom` `pan` | `zoom` | plain-wheel behavior (Ctrl/pinch always zooms) |
-| `disabled` | boolean | — | freeze all interaction |
+| `is-disabled` | boolean | — | freeze all interaction |
 
 ## Imperative API
 

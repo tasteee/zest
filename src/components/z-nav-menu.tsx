@@ -52,8 +52,8 @@ const styles = css`
 		cursor: pointer;
 		white-space: nowrap;
 		transition:
-			color 0.12s ease,
-			background-color 0.12s ease;
+			color var(--duration-fast) var(--easing-standard),
+			background-color var(--duration-fast) var(--easing-standard);
 	}
 
 	.trigger:hover {
@@ -83,7 +83,7 @@ const styles = css`
 		stroke-linecap: round;
 		stroke-linejoin: round;
 		fill: none;
-		transition: transform 0.15s ease;
+		transition: transform var(--duration-move) var(--easing-standard);
 	}
 
 	.trigger.is-open .caret {

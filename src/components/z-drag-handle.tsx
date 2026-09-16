@@ -39,8 +39,8 @@ const dragHandleStyles = css`
 		color: var(--muted-foreground);
 		cursor: grab;
 		transition:
-			color 0.12s ease,
-			background-color 0.12s ease;
+			color var(--duration-fast) var(--easing-standard),
+			background-color var(--duration-fast) var(--easing-standard);
 	}
 
 	.grip:hover {

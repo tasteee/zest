@@ -1,5 +1,6 @@
+import { interactionStyles } from '../shared/interaction-styles'
 import { defineElement } from '../shared/define-element'
-import { c, css, useEffect, useRef } from 'atomico'
+import { c, css, useEffect, useRef, useState } from 'atomico'
 
 /*
  * z-field — the standard visible label, guidance, and error treatment for a
@@ -43,7 +44,7 @@ const styles = css`
 	   mixed rows aligned even when a theme uses different font metrics. */
 	.header { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; height: var(--field-label-height); min-width: 0; }
 
-	.label { color: var(--color-neutral-5); font-size: var(--font-size-small); font-weight: 600; line-height: 1; letter-spacing: 0.04em; text-transform: lowercase; font-variant-caps: all-small-caps; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; user-select: none; -webkit-user-select: none; }
+	.label { color: var(--foreground); font-size: var(--font-size-small); font-weight: 500; line-height: 1.25; letter-spacing: normal; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; user-select: none; -webkit-user-select: none; }
 	.required { color: var(--destructive); }
 
 	/* The band. Whatever is slotted sits vertically centred in a row of the
@@ -67,47 +68,58 @@ const styles = css`
 export const ZField = c(
 	(props) => {
 		const slotRef = useRef<HTMLSlotElement>()
-		const forwardedRequiredControl = useRef<HTMLElement>()
-		const syncControl = () => {
-			const control = slotRef.current?.assignedElements({ flatten: true })[0] as HTMLElement | undefined
-			if (!control) return
-
-			if (props.label) {
-				const alreadyNamed = control.hasAttribute('label') || control.hasAttribute('aria-label') || control.hasAttribute('aria-labelledby')
-				if (!alreadyNamed) (control as HTMLElement & { label?: string }).label = props.label
-			}
-
-			const supportsRequired = 'isRequired' in control
-			if (!supportsRequired) return
-
-			const requiredControl = control as HTMLElement & { isRequired: boolean }
-			if (props.isRequired && !requiredControl.isRequired) {
-				requiredControl.isRequired = true
-				forwardedRequiredControl.current = control
-			}
-
-			const wasForwardedByField = forwardedRequiredControl.current === control
-			if (!props.isRequired && wasForwardedByField) {
-				requiredControl.isRequired = false
-				forwardedRequiredControl.current = undefined
-			}
+		const [hasDescription, setHasDescription] = useState(false)
+		const [hasError, setHasError] = useState(false)
+		const forwarded = useRef<{ control: HTMLElement; label?: string; required?: boolean }>()
+		const release = () => {
+			const previous = forwarded.current
+			if (!previous) return
+			const control = previous.control as HTMLElement & { label?: string; isRequired?: boolean }
+			if (previous.label !== undefined && control.label === previous.label) control.label = undefined
+			if (previous.required && control.isRequired) control.isRequired = false
+			forwarded.current = undefined
 		}
-
+		const syncControl = () => {
+			const control = slotRef.current?.assignedElements({ flatten: true })[0] as (HTMLElement & { label?: string; isRequired?: boolean }) | undefined
+			if (forwarded.current?.control !== control) release()
+			if (!control) return
+			const state = forwarded.current ?? { control }
+			const ownsLabel = state.label !== undefined && control.label === state.label
+			const explicitlyNamed = control.hasAttribute('label') || control.hasAttribute('aria-label') || control.hasAttribute('aria-labelledby')
+			if ('label' in control && !explicitlyNamed && (ownsLabel || !control.label)) {
+				control.label = props.label || undefined
+				state.label = props.label || undefined
+			}
+			if ('isRequired' in control) {
+				if (props.isRequired && !control.isRequired) { control.isRequired = true; state.required = true }
+				else if (!props.isRequired && state.required) { control.isRequired = false; state.required = false }
+			}
+			forwarded.current = state
+		}
 		useEffect(() => syncControl(), [props.label, props.isRequired])
+		useEffect(() => release, [])
+		const focusControl = () => {
+			const control = slotRef.current?.assignedElements({ flatten: true })[0] as HTMLElement | undefined
+			const input = control?.shadowRoot?.querySelector<HTMLElement>('input, textarea, select')
+				?? control?.shadowRoot?.querySelector<HTMLElement>('button, [tabindex="0"]')
+			;(input ?? control)?.focus()
+		}
 
 		// An unlabelled field standing next to labelled ones has to keep the
 		// label band or it rides 24px high in the row. Reserving renders the
 		// band empty rather than rendering a blank label, so nothing is
 		// announced to a screen reader that isn't there.
 		const shouldReserveLabel = !props.label && props.isLabelReserved
+		const showError = Boolean(props.error) || hasError
 
 		return (
 			<host shadowDom>
 				<div class="field">
-					{props.label && <div class="header"><span class="label">{props.label}{props.isRequired && <span class="required" aria-hidden="true"> *</span>}</span></div>}
+					{props.label && <div class="header"><span class="label" onclick={focusControl}>{props.label}{props.isRequired && <span class="required" aria-hidden="true"> *</span>}</span></div>}
 					{shouldReserveLabel && <div class="header" aria-hidden="true" />}
 					<div class="control"><slot ref={slotRef} onslotchange={syncControl} /></div>
-					{props.error ? <div class="error"><slot name="error">{props.error}</slot></div> : props.description ? <div class="description"><slot name="description">{props.description}</slot></div> : null}
+					<div class="error" hidden={!showError}><slot name="error" onslotchange={(e: Event) => setHasError((e.target as HTMLSlotElement).assignedNodes().length > 0)}>{props.error}</slot></div>
+					<div class="description" hidden={showError || (!props.description && !hasDescription)}><slot name="description" onslotchange={(e: Event) => setHasDescription((e.target as HTMLSlotElement).assignedNodes().length > 0)}>{props.description}</slot></div>
 				</div>
 			</host>
 		)
@@ -122,7 +134,7 @@ export const ZField = c(
 			isLabelReserved: { type: Boolean, reflect: true },
 			size: { type: String, reflect: true }
 		},
-		styles
+		styles: [styles, interactionStyles]
 	}
 )
 

@@ -42,7 +42,7 @@ const styles = css`
 		outline: 3px solid var(--stack-ring, var(--background));
 		border-radius: 999px;
 		margin-left: calc(-1 * var(--overlap));
-		transition: transform 0.12s ease;
+		transition: transform var(--duration-move) var(--easing-standard);
 	}
 
 	::slotted(z-avatar:first-child) {

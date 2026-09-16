@@ -37,7 +37,7 @@ const styles = css`
 		padding: 0 var(--space-md) var(--space-md);
 		color: var(--sidebar-foreground);
 		--accent: var(--purple);
-		transition: width 0.16s ease;
+		transition: width var(--duration-move) var(--easing-standard);
 		user-select: none;
 		-webkit-user-select: none;
 	}
@@ -133,7 +133,7 @@ const styles = css`
 		cursor: pointer;
 		white-space: nowrap;
 		overflow: hidden;
-		transition: color 0.12s ease;
+		transition: color var(--duration-fast) var(--easing-standard);
 	}
 
 	.group:first-child .group-label {
@@ -165,7 +165,7 @@ const styles = css`
 		stroke-linejoin: round;
 		fill: none;
 		transform: rotate(180deg);
-		transition: transform 0.16s ease;
+		transition: transform var(--duration-move) var(--easing-standard);
 	}
 
 	.group.is-closed .group-chevron {
@@ -197,8 +197,8 @@ const styles = css`
 		cursor: pointer;
 		white-space: nowrap;
 		transition:
-			color 0.12s ease,
-			background-color 0.12s ease;
+			color var(--duration-fast) var(--easing-standard),
+			background-color var(--duration-fast) var(--easing-standard);
 	}
 
 	.link:hover {
@@ -251,8 +251,8 @@ const styles = css`
 		overflow: hidden;
 		text-overflow: ellipsis;
 		transition:
-			opacity 0.14s ease,
-			max-width 0.18s ease;
+			opacity var(--duration-fast) var(--easing-standard),
+			max-width var(--duration-move) var(--easing-standard);
 	}
 
 	/* Collapsed rail: labels fade + slide away (rather than snap) so the width

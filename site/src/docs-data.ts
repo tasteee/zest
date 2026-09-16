@@ -41,6 +41,8 @@ export type DocSiteDataT = {
 }
 
 const CATEGORY_LABELS: Record<string, string> = {
+	fundamentals: 'Fundamentals',
+	'start-here': 'Start here',
 	typography: 'Typography',
 	structure: 'Structure',
 	actionables: 'Actionables',
@@ -57,6 +59,7 @@ const CATEGORY_LABELS: Record<string, string> = {
 }
 
 const CATEGORY_ORDER = [
+	'fundamentals',
 	'typography',
 	'structure',
 	'actionables',
@@ -80,6 +83,38 @@ const PUBLIC_ELEMENT_TAGS = new Set(
 
 // Concept pages describe a family rather than a same-named custom element.
 const PUBLIC_CONCEPT_PAGES = new Set(['z-drag-drop'])
+
+// The fundamentals read in the order the token layers stack, not
+// alphabetically: colour before the surfaces built from it, spacing before
+// the control sizes that consume it. Anything not listed here sorts after the
+// listed pages, by slug, so a new page still appears without being lost.
+const FUNDAMENTALS_CATEGORY = 'fundamentals'
+const FUNDAMENTALS_ORDER = [
+	'principles',
+	'token-architecture',
+	'color',
+	'surfaces',
+	'borders',
+	'typography',
+	'spacing',
+	'radius',
+	'motion',
+	'layout',
+	'iconography'
+]
+
+const compareFundamentalsPages = (pageA: DocPageT, pageB: DocPageT): number => {
+	const indexA = FUNDAMENTALS_ORDER.indexOf(pageA.slug)
+	const indexB = FUNDAMENTALS_ORDER.indexOf(pageB.slug)
+	const rankA = indexA === -1 ? FUNDAMENTALS_ORDER.length : indexA
+	const rankB = indexB === -1 ? FUNDAMENTALS_ORDER.length : indexB
+	if (rankA !== rankB) return rankA - rankB
+	return pageA.slug.localeCompare(pageB.slug)
+}
+
+export const isFundamentalsPage = (page: DocPageT): boolean => {
+	return page.categorySlug === FUNDAMENTALS_CATEGORY
+}
 
 const getCategoryLabel = (categorySlug: string): string => {
 	const knownLabel = CATEGORY_LABELS[categorySlug]
@@ -192,8 +227,12 @@ export const buildDocSiteData = (rawDocsByPath: Record<string, string>): DocSite
 		const categoryLabel = isStandalone ? '' : getCategoryLabel(parsedPath.categorySlug)
 		const title = getDocTitle(rawMarkdown, parsedPath.slug)
 		// Standalone/meta pages (e.g. "questionable API choices") aren't live
-		// component demos, so they never get a live-preview panel.
-		const primaryExampleHtml = isStandalone ? null : getPrimaryExampleHtml(rawMarkdown)
+		// component demos, so they never get a live-preview panel. Fundamentals
+		// pages carry their live example inline, in the "In use" section where
+		// the token flow it demonstrates is explained, rather than as a
+		// playground hoisted above the prose.
+		const isFundamentals = parsedPath.categorySlug === FUNDAMENTALS_CATEGORY
+		const primaryExampleHtml = isStandalone || isFundamentals ? null : getPrimaryExampleHtml(rawMarkdown)
 		const route = isStandalone ? `/p/${parsedPath.slug}` : `/elements/${parsedPath.categorySlug}/${parsedPath.slug}`
 
 		const subcategoryLabel = parsedPath.subcategorySlug ? getCategoryLabel(parsedPath.subcategorySlug) : ''
@@ -229,10 +268,15 @@ export const buildDocSiteData = (rawDocsByPath: Record<string, string>): DocSite
 	}
 
 	for (const category of categoriesBySlug.values()) {
-		category.pages.sort((pageA, pageB) => pageA.slug.localeCompare(pageB.slug))
+		const isFundamentals = category.slug === FUNDAMENTALS_CATEGORY
+		const comparePages = isFundamentals
+			? compareFundamentalsPages
+			: (pageA: DocPageT, pageB: DocPageT) => pageA.slug.localeCompare(pageB.slug)
+
+		category.pages.sort(comparePages)
 		category.subcategories.sort((groupA, groupB) => groupA.slug.localeCompare(groupB.slug))
 		for (const subcategory of category.subcategories) {
-			subcategory.pages.sort((pageA, pageB) => pageA.slug.localeCompare(pageB.slug))
+			subcategory.pages.sort(comparePages)
 		}
 	}
 
@@ -349,7 +393,9 @@ const parseAttributeRows = (tableLines: string[]): AttributeRowT[] => {
 		const name = cells[0].replace(/`/g, '').trim()
 		if (!name) continue
 
-		rows.push({ name, valuesCell: cells[1] ?? '', defaultCell: cells[2] ?? '', descriptionCell: cells[3] ?? '' })
+		// A row can document several attributes, e.g. `min` / `max`.
+		const names = name.split(/\s*\/\s*/).filter((candidate) => /^[a-z][a-z0-9-]*$/.test(candidate))
+		for (const attributeName of names) rows.push({ name: attributeName, valuesCell: cells[1] ?? '', defaultCell: cells[2] ?? '', descriptionCell: cells[3] ?? '' })
 	}
 
 	return rows
@@ -495,7 +541,10 @@ export const resolveDocLinkToRoute = (currentPage: DocPageT | null, href: string
 
 	const hrefWithoutFragment = href.split('#')[0]
 	const hrefSegments = hrefWithoutFragment.split('/').filter((segment) => segment !== '.' && segment !== '')
+	// The page's folder as it is on disk, group included, so `../color.md`
+	// written from docs/fundamentals/start-here/ lands where the author meant.
 	const currentDirSegments = currentPage && currentPage.categorySlug ? [currentPage.categorySlug] : []
+	if (currentPage && currentPage.subcategorySlug) currentDirSegments.push(currentPage.subcategorySlug)
 
 	const leadingUpSegmentCount = hrefSegments.filter((segment) => segment === '..').length
 	const escapesDocsRoot = leadingUpSegmentCount > currentDirSegments.length

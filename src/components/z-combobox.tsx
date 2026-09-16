@@ -1,4 +1,6 @@
-import { defineElement } from '../shared/define-element'
+import { computePosition, autoUpdate, applyPosition, showFloating, hideFloating } from '../shared/overlay'
+import { interactionStyles } from '../shared/interaction-styles'
+import { defineFormElement, useFormControl } from '../shared/form-control'
 import { c, css, event, useProp, useState, useHost, useEffect, useRef } from 'atomico'
 import { themedScrollbarStyles } from '../shared/scrollbar-styles'
 
@@ -9,6 +11,8 @@ import { themedScrollbarStyles } from '../shared/scrollbar-styles'
  * an `options` array property: el.options = [{ value, label, isDisabled? }].
  */
 const styles = css`
+	.field:focus-within { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
+
 	:host {
 		display: inline-flex;
 		position: relative;
@@ -41,7 +45,7 @@ const styles = css`
 		background: transparent;
 		border: 1px solid var(--border);
 		border-radius: var(--radius-md);
-		transition: border-color 0.12s ease, background-color 0.12s ease;
+		transition: border-color var(--duration-fast) var(--easing-standard), background-color var(--duration-fast) var(--easing-standard);
 	}
 
 	/* matches z-input's scale — a combobox is a text field first, and the two
@@ -60,10 +64,10 @@ const styles = css`
 	}
 
 	.field.is-sm input {
-		font-size: var(--font-size-small);
+		font-size: var(--control-font-size-sm);
 	}
 	.field.is-lg input {
-		font-size: var(--font-size-h4);
+		font-size: var(--control-font-size-lg);
 	}
 
 	.field:hover {
@@ -80,7 +84,7 @@ const styles = css`
 	}
 
 	.field.is-disabled {
-		opacity: 0.55;
+		opacity: var(--control-disabled-opacity);
 		pointer-events: none;
 	}
 
@@ -93,7 +97,7 @@ const styles = css`
 		outline: none;
 		color: var(--foreground);
 		font-family: inherit;
-		font-size: var(--font-size-body);
+		font-size: inherit;
 	}
 
 	input::placeholder {
@@ -107,7 +111,7 @@ const styles = css`
 		height: 1rem;
 		flex-shrink: 0;
 		color: var(--muted-foreground);
-		transition: transform 0.15s ease;
+		transition: transform var(--duration-move) var(--easing-standard);
 		stroke: currentColor;
 		stroke-width: 2;
 		stroke-linecap: round;
@@ -122,10 +126,13 @@ const styles = css`
 	}
 
 	.panel {
-		position: absolute;
-		top: calc(100% + 6px);
+		position: fixed;
+		margin: 0;
+		box-sizing: border-box;
+		top: 0;
 		left: 0;
-		right: 0;
+		right: auto;
+		bottom: auto;
 		z-index: 50;
 		background: var(--popover);
 		border: 1px solid var(--border);
@@ -133,6 +140,9 @@ const styles = css`
 		padding: 0.3125rem;
 		max-height: 16rem;
 		overflow-y: auto;
+	}
+
+	.panel:popover-open {
 		display: flex;
 		flex-direction: column;
 		gap: 1px;
@@ -186,13 +196,30 @@ export const ZCombobox = c(
 	(props) => {
 		const host = useHost()
 		const inputRef = useRef<HTMLInputElement>()
+		const panelRef = useRef<HTMLDivElement>()
 		const [value, setValue] = useProp<string>('value')
+		const defaultValue = useRef(value)
 		const [isOpen, setIsOpen] = useState(false)
 		const [query, setQuery] = useState('')
-		const [activeIndex, setActiveIndex] = useState(0)
+		const [activeIndex, setActiveIndex] = useState(-1)
 
 		const options: OptionT[] = Array.isArray(props.options) ? (props.options as OptionT[]) : []
 		const selected = options.find((o) => o.value === value)
+		const hasValue = value != null && value !== ''
+		// The inner input holds the search text, not the selection, so its
+		// native validity is not what the form should see; `required` is decided
+		// here against the chosen option.
+		const { isFormDisabled } = useFormControl({
+			value: value ?? '',
+			isDisabled: props.isDisabled,
+			control: inputRef,
+			validity: props.isRequired && !hasValue
+				? { flags: { valueMissing: true }, message: 'Please select an item in the list.' }
+				: { flags: {} },
+			onReset: () => { setValue(defaultValue.current); setQuery('') },
+			onRestore: (state) => { if (typeof state === 'string') setValue(state) }
+		})
+		const isDisabled = Boolean(props.isDisabled) || isFormDisabled
 
 		const filtered = query
 			? options.filter((o) => o.label.toLowerCase().includes(query.toLowerCase()))
@@ -210,60 +237,85 @@ export const ZCombobox = c(
 			return () => document.removeEventListener('pointerdown', onDocumentPointerDown)
 		}, [isOpen])
 
+		useEffect(() => {
+			const panel = panelRef.current
+			if (!panel) return
+			if (!isOpen) { hideFloating(panel); return }
+			showFloating(panel)
+			const cleanup = autoUpdate(host.current, panel, () => {
+				panel.style.width = `${host.current.getBoundingClientRect().width}px`
+				applyPosition(panel, computePosition(host.current, panel, { placement: 'bottom-start', offset: 6, padding: 8 }))
+			})
+			return () => { cleanup(); hideFloating(panel) }
+		}, [isOpen, query])
+
 		const commit = (opt: OptionT) => {
-			if (opt.isDisabled) return
-			setValue(opt.value)
+			if (isDisabled || opt.isDisabled) return
+			if (opt.value !== value) { setValue(opt.value); props.change({ value: opt.value }) }
 			setIsOpen(false)
 			setQuery('')
-			props.change({ value: opt.value })
 		}
 
+		const enabled = filtered.flatMap((option, index) => option.isDisabled ? [] : [index])
+		useEffect(() => {
+			if (isDisabled) { setIsOpen(false); setQuery('') }
+		}, [isDisabled])
+		useEffect(() => {
+			if (!isOpen) return
+			if (!filtered[activeIndex] || filtered[activeIndex].isDisabled) setActiveIndex(enabled[0] ?? -1)
+			else host.current.shadowRoot?.querySelector<HTMLElement>(`#option-${activeIndex}`)?.scrollIntoView({ block: 'nearest' })
+		}, [isOpen, activeIndex, query, props.options])
 		const onKeyDown = (e: KeyboardEvent) => {
-			if (e.key === 'Escape') {
+			if (isDisabled) return
+			if (e.key === 'Escape' || e.key === 'Tab') {
+				if (e.key === 'Escape' && isOpen) { e.preventDefault(); e.stopPropagation() }
 				setIsOpen(false)
 				setQuery('')
 				return
 			}
-			if (e.key === 'Enter') {
+			if (e.key === 'Enter' && isOpen) {
 				e.preventDefault()
 				if (filtered[activeIndex]) commit(filtered[activeIndex])
 				return
 			}
 			if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
 				e.preventDefault()
-				if (!isOpen) setIsOpen(true)
-				const dir = e.key === 'ArrowDown' ? 1 : -1
-				const len = filtered.length || 1
-				setActiveIndex((activeIndex + dir + len) % len)
+				if (!isOpen) { setIsOpen(true); setActiveIndex((e.key === 'ArrowUp' ? enabled.at(-1) : enabled[0]) ?? -1); return }
+				const position = enabled.indexOf(activeIndex)
+				setActiveIndex(enabled[(position + (e.key === 'ArrowDown' ? 1 : -1) + enabled.length) % enabled.length] ?? -1)
 			}
 		}
 
 		const fieldClass = ['field', resolveSizeClass(props)]
 			.concat(isOpen ? ['is-open'] : [])
 			.concat(props.isInvalid ? ['is-invalid'] : [])
-			.concat(props.isDisabled ? ['is-disabled'] : [])
+			.concat(isDisabled ? ['is-disabled'] : [])
 			.join(' ')
 
 		const displayValue = isOpen ? query : selected ? selected.label : ''
 
 		return (
-			<host shadowDom>
+			<host shadowDom={{ delegatesFocus: true }}>
 				<div class={fieldClass}>
 					<input
 						ref={inputRef}
 						type="text"
 						value={displayValue}
 						placeholder={props.placeholder || 'Search…'}
-						disabled={props.isDisabled}
+						disabled={isDisabled}
 						role="combobox"
+						aria-required={props.isRequired ? 'true' : undefined}
 						aria-label={props.label || host.current?.getAttribute('aria-label') || undefined}
 						aria-expanded={isOpen ? 'true' : 'false'}
 						aria-invalid={props.isInvalid ? 'true' : undefined}
 						aria-autocomplete="list"
-						onfocus={() => setIsOpen(true)}
+						aria-controls="combobox-options"
+						aria-activedescendant={isOpen && activeIndex >= 0 ? `option-${activeIndex}` : undefined}
+						onblur={() => { setIsOpen(false); setQuery('') }}
+						onfocus={() => { if (!isDisabled) { setIsOpen(true); setActiveIndex(enabled[0] ?? -1) } }}
 						oninput={(e: any) => {
 							setQuery(e.target.value)
-							setActiveIndex(0)
+							setActiveIndex(-1)
 							setIsOpen(true)
 						}}
 						onkeydown={onKeyDown}
@@ -271,7 +323,9 @@ export const ZCombobox = c(
 					<svg
 						class="chevron"
 						viewBox="0 0 24 24"
+						onmousedown={(e: MouseEvent) => e.preventDefault()}
 						onclick={() => {
+							if (isDisabled) return
 							setIsOpen(!isOpen)
 							inputRef.current?.focus()
 						}}
@@ -280,8 +334,7 @@ export const ZCombobox = c(
 					</svg>
 				</div>
 
-				{isOpen && (
-					<div class="panel" role="listbox">
+				<div ref={panelRef} popover="manual" id="combobox-options" class="panel" role="listbox" aria-label={props.label || 'Options'}>
 						{filtered.length === 0 && <div class="empty">No matches</div>}
 						{filtered.map((opt, index) => {
 							const optClass = ['option']
@@ -294,8 +347,11 @@ export const ZCombobox = c(
 									key={opt.value}
 									class={optClass}
 									role="option"
+									id={`option-${index}`}
+									aria-disabled={opt.isDisabled ? 'true' : undefined}
 									aria-selected={opt.value === value ? 'true' : 'false'}
-									onmouseenter={() => setActiveIndex(index)}
+									onmouseenter={() => !opt.isDisabled && setActiveIndex(index)}
+									onmousedown={(e: MouseEvent) => e.preventDefault()}
 									onclick={() => commit(opt)}
 								>
 									{opt.label}
@@ -303,26 +359,28 @@ export const ZCombobox = c(
 							)
 						})}
 					</div>
-				)}
 			</host>
 		)
 	},
 	{
 		props: {
 			value: { type: String, reflect: true },
+			name: { type: String, reflect: true },
 			label: String,
 			placeholder: String,
 			options: { type: Array },
 			size: { type: String, reflect: true },
 			accent: { type: String, reflect: true },
+			isRequired: { type: Boolean, reflect: true },
 			isInvalid: { type: Boolean, reflect: true },
 			isDisabled: { type: Boolean, reflect: true },
 			inline: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			change: event<{ value: string }>({ bubbles: true, composed: true })
 		},
-		styles: [themedScrollbarStyles, styles]
+		styles: [themedScrollbarStyles, styles, interactionStyles],
+		form: true
 	}
 )
 
-defineElement('z-combobox', ZCombobox)
+defineFormElement('z-combobox', ZCombobox)

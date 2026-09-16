@@ -2,7 +2,7 @@
 
 A single item inside a [z-toggle-button-group](z-toggle-button-group.md). Carries a `value` and
 a pressed state; it inherits accent/size/kind from the parent group but can
-override any of them with its own variant flags.
+override any of them with its own variant properties.
 
 ```html
 <z-toggle-button-group>
@@ -17,11 +17,11 @@ override any of them with its own variant flags.
 | --- | --- | --- | --- |
 | `value` | string | — | identifies this item in the group's `change` event |
 | `is-pressed` | boolean | — | pressed state (reflected, two-way) |
-| `disabled` | boolean | — | disable |
+| `is-disabled` | boolean | — | disable |
 | `is-hidden` | boolean | — | hide |
-| _color_ | `accent` `accent` `accent` | inherit | override accent |
-| _size_ | `size` `is-medium` `size` | inherit | override size |
-| _kind_ | `kind` `kind` | inherit | override treatment |
+| `accent` | `neutral` `dom` `sub` `success` `warning` `error` | inherit | override accent |
+| `size` | `xs` `sm` `md` `lg` | inherit | override size |
+| `kind` | `solid` `outline` `ghost` `soft` `plain` | inherit | override treatment |
 | `is-icon` | boolean | — | square icon-only item |
 
 ## Slots

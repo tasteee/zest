@@ -50,7 +50,7 @@ const styles = css`
 		font-family: inherit;
 		font-size: inherit;
 		cursor: pointer;
-		transition: color 0.12s ease;
+		transition: color var(--duration-fast) var(--easing-standard);
 	}
 
 	.crumb:hover {

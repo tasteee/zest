@@ -141,6 +141,7 @@ export const zRadioDoc: ComponentDocT = {
 	],
 
 	attributes: [
+		{ name: 'label', type: 'string', defaultValue: '—', description: 'Accessible name. Use slotted text for a visible, clickable label.' },
 		{ name: 'is-checked', type: 'boolean', defaultValue: '—', description: 'The chosen state. Reflects, and is cleared by the parent group when a sibling wins.' },
 		{ name: 'is-disabled', type: 'boolean', defaultValue: '—', description: 'Blocks pointer and keyboard interaction.' },
 		{ name: 'accent', type: 'neutral | dom | sub', defaultValue: 'neutral', description: 'Accent family of the chosen ring and dot.' },

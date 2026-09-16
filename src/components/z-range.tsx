@@ -1,3 +1,4 @@
+import { interactionStyles } from '../shared/interaction-styles'
 import { defineElement } from '../shared/define-element'
 import { c, css, event, useHost, useState, useEffect } from 'atomico'
 
@@ -163,7 +164,7 @@ const styles = css`
 		border-radius: 999px;
 		border: 2px solid var(--background);
 		cursor: pointer;
-		transition: transform 0.1s ease;
+		transition: transform var(--duration-move) var(--easing-standard);
 	}
 	input::-moz-range-thumb {
 		pointer-events: auto;
@@ -191,11 +192,11 @@ const styles = css`
 	}
 
 	input:focus-visible::-webkit-slider-thumb {
-		outline: 3px solid color-mix(in oklch, var(--ring) 50%, transparent);
+		outline: 3px solid var(--focus-ring);
 		outline-offset: 2px;
 	}
 	input:focus-visible::-moz-range-thumb {
-		outline: 3px solid color-mix(in oklch, var(--ring) 50%, transparent);
+		outline: 3px solid var(--focus-ring);
 		outline-offset: 2px;
 	}
 `
@@ -429,7 +430,7 @@ export const ZRange = c(
 			input: event<RangeDetailT>({ bubbles: true, composed: true }),
 			change: event<RangeDetailT>({ bubbles: true, composed: true })
 		},
-		styles
+		styles: [styles, interactionStyles]
 	}
 )
 

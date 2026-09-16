@@ -112,7 +112,7 @@ const styles = css`
 		font-weight: var(--font-weight-medium);
 		border-radius: var(--small-button-radius);
 		cursor: pointer;
-		transition: background 0.12s ease, color 0.12s ease;
+		transition: background var(--duration-fast) var(--easing-standard), color var(--duration-fast) var(--easing-standard);
 	}
 	.tb-btn:hover {
 		background: color-mix(in oklch, var(--foreground) 6%, transparent);

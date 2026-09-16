@@ -34,8 +34,8 @@ for (const file of sourceFiles) {
 			continue
 		}
 
-		// The closing line of a css template is a lone backtick.
-		if (line.trim() === '`') {
+		// The closing line of a css template is a backtick with an optional semicolon.
+		if (/^`;?$/.test(line.trim())) {
 			isInsideTemplate = false
 			continue
 		}

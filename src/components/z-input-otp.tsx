@@ -47,7 +47,7 @@ const styles = css`
 		font-size: var(--font-size-h3);
 		font-weight: 600;
 		caret-color: var(--accent);
-		transition: border-color 0.12s ease, background-color 0.12s ease, color 0.12s ease;
+		transition: border-color var(--duration-fast) var(--easing-standard), background-color var(--duration-fast) var(--easing-standard), color var(--duration-fast) var(--easing-standard);
 		appearance: none;
 		outline: none;
 		box-sizing: border-box;

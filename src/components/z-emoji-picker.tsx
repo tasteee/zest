@@ -91,7 +91,7 @@ const styles = css`
 		font-size: 1rem;
 		cursor: pointer;
 		opacity: 0.65;
-		transition: background-color 0.12s ease, opacity 0.12s ease;
+		transition: background-color var(--duration-fast) var(--easing-standard), opacity var(--duration-fast) var(--easing-standard);
 	}
 	.tab:hover {
 		background: color-mix(in oklch, var(--foreground) 8%, transparent);
@@ -116,7 +116,7 @@ const styles = css`
 		line-height: 1;
 		padding: 0.3rem 0;
 		cursor: pointer;
-		transition: background-color 0.1s ease, transform 0.06s ease;
+		transition: background-color var(--duration-fast) var(--easing-standard), transform 0.06s ease;
 	}
 	.emoji:hover {
 		background: color-mix(in oklch, var(--foreground) 10%, transparent);

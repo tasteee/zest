@@ -17,7 +17,7 @@ export const zTextareaDoc: ComponentDocT = {
 	status: ComponentStatus.stable,
 
 	description:
-		'The same hairline-to-accent focus treatment as `z-input`, wrapped around a native `<textarea>`. `rows` sets the resting height. Set `is-auto-resize` and the field tracks its own content instead — no scrollbar, no fixed box the user has to write inside. `input` fires per keystroke and `change` on blur, matching `z-input` exactly, so the two are interchangeable in a form handler.',
+		'The same hairline-to-accent focus treatment as `z-input`, wrapped around a native `<textarea>`. `rows` sets the resting height. Set `is-auto-resize` and the field tracks its own content instead — no scrollbar, no fixed box the user has to write inside. `input` fires per keystroke and `change` on blur only when the value changed during editing, matching `z-input` exactly, so the two are interchangeable in a form handler.',
 
 	playground: {
 		buildElement: buildPlaygroundTextarea,
@@ -194,10 +194,10 @@ export const zTextareaDoc: ComponentDocT = {
 		{ name: 'label', type: 'string', defaultValue: '—', description: 'Accessible name applied to the inner textarea. Set for you inside a z-field.' },
 		{ name: 'placeholder', type: 'string', defaultValue: '—', description: 'Example text shown while the field is empty.' },
 		{ name: 'name', type: 'string', defaultValue: '—', description: 'Name passed to the inner textarea for form submission.' },
-		{ name: 'rows', type: 'number', defaultValue: '3', description: 'Resting height in lines. Ignored once the content grows under is-auto-resize.' },
+		{ name: 'rows', type: 'number', defaultValue: '3', description: 'Resting height in lines; the minimum height while is-auto-resize is enabled.' },
 		{ name: 'size', type: 'sm | md | lg', defaultValue: 'md', description: 'Control density.' },
 		{ name: 'accent', type: 'neutral | dom | sub', defaultValue: 'neutral', description: 'Which accent the border lifts to on focus.' },
-		{ name: 'is-auto-resize', type: 'boolean', defaultValue: '—', description: 'Grows the field to fit its content instead of scrolling.' },
+		{ name: 'is-auto-resize', type: 'boolean', defaultValue: '—', description: 'Fits initial content, typed and programmatic edits, and width changes. Turning it off restores the rows-based height.' },
 		{ name: 'is-focused', type: 'boolean', defaultValue: '—', description: 'Reflects the focus state.' },
 		{ name: 'is-invalid', type: 'boolean', defaultValue: '—', description: 'Paints the error border and sets aria-invalid.' },
 		{ name: 'is-disabled', type: 'boolean', defaultValue: '—', description: 'Blocks interaction and removes the field from the tab order.' },
@@ -212,7 +212,7 @@ export const zTextareaDoc: ComponentDocT = {
 
 	events: [
 		{ name: 'input', detail: '{ value: string }', description: 'Fires on every keystroke with the current contents.' },
-		{ name: 'change', detail: '{ value: string }', description: 'Fires once on blur with the committed contents.' }
+		{ name: 'change', detail: '{ value: string }', description: 'Fires on blur when the value differs from the value at focus. Unchanged edits do not emit change.' }
 	],
 
 	cssVariables: [],

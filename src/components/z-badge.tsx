@@ -1,3 +1,4 @@
+import { interactionStyles } from '../shared/interaction-styles'
 import { defineElement } from '../shared/define-element'
 import { c, css, event } from 'atomico'
 
@@ -73,19 +74,16 @@ const styles = css`
 	/* kinds */
 	.badge.is-soft {
 		background: color-mix(in oklch, var(--tone) 18%, transparent);
-		color: color-mix(in oklch, var(--tone) 80%, white);
+		color: color-mix(in oklch, var(--tone) 78%, var(--foreground));
 	}
 	.badge.is-solid {
 		--emissive-color: var(--tone);
 		background: var(--material-tone), var(--tone);
 		box-shadow: var(--emissive-tone);
-		color: var(--primary-foreground);
+		color: var(--on-accent);
 	}
-	/* purple/pink fills are light enough that dark text muddies; use neutral-8. */
-	.badge.is-solid.is-dom,
-	.badge.is-solid.is-sub {
-		color: var(--color-neutral-8);
-	}
+	.badge.is-solid.is-neutral { color: var(--primary-foreground); }
+
 	.badge.is-outline {
 		background: transparent;
 		/* srgb, not oklch: --border carries a faint green hue, and interpolating
@@ -117,19 +115,15 @@ const styles = css`
 		flex-shrink: 0;
 	}
 
-	.is-solid.is-dom .label,
-	.is-solid.is-sub .label {
-		text-shadow: 0 0px 18px var(--primary-foreground);
-	}
 
 	/* ── interactive states (opt-in via selectable / selected) ─────────────── */
 
 	.badge.is-clickable {
 		cursor: pointer;
 		transition:
-			border-color 0.12s ease,
-			background-color 0.12s ease,
-			color 0.12s ease;
+			border-color var(--duration-fast) var(--easing-standard),
+			background-color var(--duration-fast) var(--easing-standard),
+			color var(--duration-fast) var(--easing-standard);
 	}
 	.badge.is-clickable:hover {
 		border-color: color-mix(in srgb, var(--tone) 55%, var(--border));
@@ -152,7 +146,7 @@ const styles = css`
 	}
 
 	.badge:focus-visible {
-		outline: 3px solid color-mix(in oklch, var(--ring) 50%, transparent);
+		outline: 3px solid var(--focus-ring);
 		outline-offset: 2px;
 	}
 
@@ -173,8 +167,8 @@ const styles = css`
 		padding: 0;
 		opacity: 0.6;
 		transition:
-			opacity 0.12s ease,
-			background-color 0.12s ease;
+			opacity var(--duration-fast) var(--easing-standard),
+			background-color var(--duration-fast) var(--easing-standard);
 	}
 	.remove:hover {
 		opacity: 1;
@@ -294,7 +288,7 @@ export const ZBadge = c(
 			select: event<{ value?: string; selected: boolean }>({ bubbles: true, composed: true }),
 			remove: event<{ value?: string }>({ bubbles: true, composed: true })
 		},
-		styles
+		styles: [styles, interactionStyles]
 	}
 )
 

@@ -1,3 +1,4 @@
+import { interactionStyles } from '../shared/interaction-styles'
 import { defineElement } from '../shared/define-element'
 import { c, css } from 'atomico'
 
@@ -110,7 +111,7 @@ export const ZSkeleton = c(
 			inline: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true }
 		},
-		styles
+		styles: [styles, interactionStyles]
 	}
 )
 

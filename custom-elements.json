@@ -2278,6 +2278,13 @@
             },
             {
               "kind": "field",
+              "name": "isRequired",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
               "name": "isDisabled",
               "type": {
                 "text": "boolean"
@@ -2317,12 +2324,26 @@
               "type": {
                 "text": "string"
               }
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              }
             }
           ],
           "attributes": [
             {
               "name": "is-checked",
               "fieldName": "isChecked",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "is-required",
+              "fieldName": "isRequired",
               "type": {
                 "text": "boolean"
               }
@@ -2365,6 +2386,13 @@
             {
               "name": "value",
               "fieldName": "value",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "label",
+              "fieldName": "label",
               "type": {
                 "text": "string"
               }
@@ -3408,6 +3436,13 @@
             },
             {
               "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
               "name": "description",
               "type": {
                 "text": "string"
@@ -3453,6 +3488,13 @@
             {
               "name": "heading",
               "fieldName": "heading",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "label",
+              "fieldName": "label",
               "type": {
                 "text": "string"
               }
@@ -7348,13 +7390,6 @@
             },
             {
               "kind": "field",
-              "name": "mode",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "kind": "field",
               "name": "fold",
               "type": {
                 "text": "string"
@@ -7465,13 +7500,6 @@
               "fieldName": "maxPitch",
               "type": {
                 "text": "number"
-              }
-            },
-            {
-              "name": "mode",
-              "fieldName": "mode",
-              "type": {
-                "text": "string"
               }
             },
             {
@@ -7857,6 +7885,13 @@
               "type": {
                 "text": "string"
               }
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              }
             }
           ],
           "attributes": [
@@ -7891,6 +7926,13 @@
             {
               "name": "value",
               "fieldName": "value",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "label",
+              "fieldName": "label",
               "type": {
                 "text": "string"
               }
@@ -10309,6 +10351,13 @@
               "type": {
                 "text": "string"
               }
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              }
             }
           ],
           "attributes": [
@@ -10364,6 +10413,13 @@
             {
               "name": "value",
               "fieldName": "value",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "label",
+              "fieldName": "label",
               "type": {
                 "text": "string"
               }
@@ -10662,6 +10718,13 @@
             },
             {
               "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
               "name": "tabs",
               "type": {
                 "text": "array"
@@ -10693,6 +10756,13 @@
             {
               "name": "value",
               "fieldName": "value",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "label",
+              "fieldName": "label",
               "type": {
                 "text": "string"
               }

@@ -25,7 +25,7 @@ sortable.addEventListener('sort', (e) => e.detail) // { oldIndex, newIndex }
 | --- | --- | --- | --- |
 | `axis` | `x` `y` | `y` | drag axis |
 | `handle` | CSS selector | — | restrict picking up to pointerdown within this selector |
-| `disabled` | boolean | — | disable reordering |
+| `is-disabled` | boolean | — | disable reordering |
 
 ## Slots
 

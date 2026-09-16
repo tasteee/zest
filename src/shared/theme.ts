@@ -174,8 +174,9 @@ const notifyListeners = (): void => {
 // which can animate from their flat equivalents at all.
 //
 // So the change is sequenced rather than blended. The page fades out, the
-// attribute swaps while nothing is visible, and the page fades back in. Half
-// the budget each way, with the swap landing exactly at the midpoint.
+// attribute swaps while nothing is visible, and the page fades back in. Out is
+// slow and in is quick — the two durations are separate tokens, and the swap
+// lands the moment the fade out completes.
 //
 // This used to go through the View Transition API, which is the obvious tool
 // and the wrong one. Its default root animation cross-fades the two snapshots
@@ -186,10 +187,15 @@ const notifyListeners = (): void => {
 //
 // ink.css handles the one thing that must not fade: the page colour itself
 // transitions on its own underneath, so the gap is never empty.
+//
+// The fade is not gated on prefers-reduced-motion. That preference is about
+// movement, and WCAG's definition of motion animation explicitly excludes
+// opacity and colour changes; the alternative here is a full-screen luminance
+// snap, which is the harsher experience. A zero fade-out token opts out.
 
 const FADING_CLASS = 'isThemeFading'
-const DURATION_PROPERTY = '--theme-transition-duration'
-const FALLBACK_DURATION_MS = 600
+const FADE_OUT_PROPERTY = '--theme-fade-out-duration'
+const FALLBACK_FADE_OUT_MS = 500
 
 const parseDurationMs = (rawDuration: string): number | null => {
 	const trimmed = rawDuration.trim()
@@ -208,23 +214,17 @@ const parseDurationMs = (rawDuration: string): number | null => {
 	return seconds * 1000
 }
 
-// The token is the single source of truth for how long a theme change takes.
+// The token is the single source of truth for how long the fade out takes.
 // The fade itself is CSS; this only decides when to flip the attribute, so it
 // has to read the same value rather than keep a copy that could drift the
 // moment anyone retimes the token.
-const getThemeTransitionMs = (): number => {
-	if (!checkIsBrowser()) return FALLBACK_DURATION_MS
+const getThemeFadeOutMs = (): number => {
+	if (!checkIsBrowser()) return FALLBACK_FADE_OUT_MS
 
-	const declared = getComputedStyle(document.documentElement).getPropertyValue(DURATION_PROPERTY)
+	const declared = getComputedStyle(document.documentElement).getPropertyValue(FADE_OUT_PROPERTY)
 	const parsed = parseDurationMs(declared)
-	if (parsed === null) return FALLBACK_DURATION_MS
+	if (parsed === null) return FALLBACK_FADE_OUT_MS
 	return parsed
-}
-
-const checkPrefersReducedMotion = (): boolean => {
-	const hasMatchMedia = typeof window !== 'undefined' && typeof window.matchMedia === 'function'
-	if (!hasMatchMedia) return false
-	return window.matchMedia('(prefers-reduced-motion: reduce)').matches
 }
 
 let fadeTimeoutId = 0
@@ -232,9 +232,9 @@ let fadeTimeoutId = 0
 const runThemeFade = (commit: () => void): void => {
 	const root = document.documentElement
 
-	// Half the budget fading out, half fading back in — so the swap lands at
-	// the midpoint, when the page is at zero and nobody can see it happen.
-	const fadePhaseMs = getThemeTransitionMs() / 2
+	// The swap lands when the fade out completes — the page is at zero and
+	// nobody can see it happen. Removing the class is what starts the fade in.
+	const fadeOutMs = getThemeFadeOutMs()
 
 	// A second change mid-fade abandons the first rather than queueing behind
 	// it — the reader's latest choice is the one worth animating to.
@@ -245,10 +245,14 @@ const runThemeFade = (commit: () => void): void => {
 	fadeTimeoutId = window.setTimeout(() => {
 		commit()
 		root.classList.remove(FADING_CLASS)
-	}, fadePhaseMs)
+	}, fadeOutMs)
 }
 
 const commitThemeChange = (): void => {
+	if (checkIsBrowser()) {
+		window.clearTimeout(fadeTimeoutId)
+		document.documentElement.classList.remove(FADING_CLASS)
+	}
 	applyThemeAttribute()
 	notifyListeners()
 }
@@ -259,8 +263,8 @@ const runThemeChange = (): void => {
 		return
 	}
 
-	// Someone who has asked for less motion has asked for exactly this.
-	if (checkPrefersReducedMotion()) {
+	// A zero fade-out token is the opt-out: apply the theme immediately.
+	if (getThemeFadeOutMs() <= 0) {
 		commitThemeChange()
 		return
 	}
@@ -269,6 +273,7 @@ const runThemeChange = (): void => {
 }
 
 export const setThemePreference = (preference: ThemePreferenceT): void => {
+	if (!checkIsThemePreference(preference)) return
 	const previousTheme = resolveTheme(currentPreference)
 
 	currentPreference = preference
@@ -352,7 +357,7 @@ export const initTheme = (): ThemeStateT => {
 let hasStarted = false
 
 export const startTheme = (): void => {
-	if (hasStarted) return
+	if (hasStarted || !checkIsBrowser()) return
 	hasStarted = true
 
 	initTheme()

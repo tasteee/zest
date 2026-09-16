@@ -1,5 +1,6 @@
-import { defineElement } from '../shared/define-element'
-import { c, css, event, useEffect, useHost, useListener, useProp } from 'atomico'
+import { interactionStyles } from '../shared/interaction-styles'
+import { defineFormElement, useFormControl } from '../shared/form-control'
+import { c, css, event, useEffect, useHost, useListener, useProp, useRef } from 'atomico'
 
 /*
  * z-radio-group — coordinates single-selection across slotted z-radio items.
@@ -10,6 +11,10 @@ import { c, css, event, useEffect, useHost, useListener, useProp } from 'atomico
  * matching child is checked for you; leave it unset and the group adopts
  * whichever child was seeded with `is-checked`. Either way, reading `value`
  * afterwards tells the truth.
+ *
+ * The group, not the radios, is the form participant: it submits `value`
+ * under its `name`, is what `is-required` validates, and forwards a form or
+ * fieldset disabling to its children.
  */
 const styles = css`
 	:host {
@@ -36,7 +41,7 @@ const styles = css`
 `
 
 type SelectDetailT = { value?: string }
-type RadioElementT = HTMLElement & { isChecked?: boolean; value?: string }
+type RadioElementT = HTMLElement & { isChecked?: boolean; isDisabled?: boolean; value?: string }
 
 // A slotted child may not have upgraded yet when the group first reads it, so
 // the attribute is the reliable fallback for its value.
@@ -57,6 +62,36 @@ export const ZRadioGroup = c(
 	(props) => {
 		const host = useHost()
 		const [value, setValue] = useProp<string>('value')
+		const defaultValue = useRef(value)
+		const hasValue = value != null && value !== ''
+		const { isFormDisabled } = useFormControl({
+			value: hasValue ? value : null,
+			isDisabled: props.isDisabled,
+			validity: props.isRequired && !hasValue
+				? { flags: { valueMissing: true }, message: 'Please select one of these options.' }
+				: { flags: {} },
+			onReset: () => setValue(defaultValue.current),
+			onRestore: (state) => { if (typeof state === 'string') setValue(state) }
+		})
+		const isDisabled = Boolean(props.isDisabled) || isFormDisabled
+
+		// Disabling the group disables its radios, but only the ones it disabled
+		// get re-enabled, so an individually disabled radio stays that way.
+		const disabledByGroup = useRef(new Set<RadioElementT>())
+		const syncDisabled = () => {
+			const radios = readRadios(host.current)
+			if (isDisabled) {
+				for (const radio of radios) {
+					if (radio.isDisabled || radio.hasAttribute('is-disabled')) continue
+					radio.isDisabled = true
+					disabledByGroup.current.add(radio)
+				}
+				return
+			}
+			for (const radio of disabledByGroup.current) radio.isDisabled = false
+			disabledByGroup.current.clear()
+		}
+		useEffect(syncDisabled, [isDisabled])
 
 		useListener(
 			host,
@@ -95,24 +130,29 @@ export const ZRadioGroup = c(
 		}
 
 		useEffect(syncSelection, [value])
+		const onSlotChange = () => { syncSelection(); syncDisabled() }
 
 		return (
-			<host shadowDom role="radiogroup" aria-label={props.label}>
-				<slot onslotchange={syncSelection} />
+			<host shadowDom={{ delegatesFocus: true }} role="radiogroup" aria-label={props.label} aria-required={props.isRequired ? 'true' : undefined}>
+				<slot onslotchange={onSlotChange} />
 			</host>
 		)
 	},
 	{
 		props: {
 			value: { type: String, reflect: true },
+			name: { type: String, reflect: true },
 			label: String,
 			direction: { type: String, reflect: true },
 			accent: { type: String, reflect: true },
+			isRequired: { type: Boolean, reflect: true },
+			isDisabled: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			change: event<{ value?: string }>({ bubbles: true, composed: true })
 		},
-		styles
+		styles: [styles, interactionStyles],
+		form: true
 	}
 )
 
-defineElement('z-radio-group', ZRadioGroup)
+defineFormElement('z-radio-group', ZRadioGroup)

@@ -29,7 +29,7 @@ const styles = css`
 		color: var(--purple);
 		text-decoration: none;
 		border-bottom: 1px solid color-mix(in oklch, var(--purple) 40%, transparent);
-		transition: border-color 0.12s ease;
+		transition: border-color var(--duration-fast) var(--easing-standard);
 	}
 
 	a:hover {

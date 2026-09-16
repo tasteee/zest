@@ -185,7 +185,10 @@ export const ZSwap = c(
 
 		return (
 			<host shadowDom>
-				<label class={labelClass}>
+				{/* The label names the checkbox for assistive tech; mirroring it into
+				    title gives pointer users the same word on hover, as the other
+				    icon-only controls do. Wrap in z-tooltip for the styled version. */}
+				<label class={labelClass} title={props.label}>
 					<input
 						type="checkbox"
 						checked={isActive}

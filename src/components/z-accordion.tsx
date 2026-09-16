@@ -1,3 +1,4 @@
+import { interactionStyles } from '../shared/interaction-styles'
 import { defineElement } from '../shared/define-element'
 import { c, css, useHost, useEffect } from 'atomico'
 
@@ -37,7 +38,8 @@ export const ZAccordion = c(
 				if (props.type === 'multiple') return
 				if (!detail?.open) return
 				const opened = e.target as Element
-				const items = el.querySelectorAll('z-collapsible')
+				if (opened.parentElement !== el || opened.localName !== 'z-collapsible') return
+				const items = el.querySelectorAll(':scope > z-collapsible')
 				items.forEach((item) => {
 					if (item !== opened) (item as any).isOpen = false
 				})
@@ -57,7 +59,7 @@ export const ZAccordion = c(
 			type: { type: String, reflect: true },
 			isHidden: { type: Boolean, reflect: true }
 		},
-		styles
+		styles: [styles, interactionStyles]
 	}
 )
 

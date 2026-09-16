@@ -6,20 +6,24 @@ top-layer stacking, and the backdrop all come from the platform. An optional
 the body; a `[slot="footer"]` holds actions.
 
 ```html
-<z-dialog heading="Edit profile" description="Update your details.">
+<z-dialog id="profileDialog" heading="Edit profile" description="Update your details.">
   <z-button slot="trigger">Edit</z-button>
 
-  <z-input placeholder="Name"></z-input>
+  <z-field label="Name"><z-input placeholder="Ada Lovelace"></z-input></z-field>
 
   <div slot="footer">
-    <z-button kind="outline" accent="neutral">Cancel</z-button>
-    <z-button accent="dom">Save</z-button>
+    <z-button id="done" accent="dom">Done</z-button>
   </div>
 </z-dialog>
 ```
 
 ```js
-// open/close imperatively
+const dialog = document.querySelector('#profileDialog')
+document.querySelector('#done').addEventListener('click', () => {
+  dialog.isOpen = false
+})
+
+// Open or close imperatively
 dialog.isOpen = true
 dialog.addEventListener('open', () => {})
 dialog.addEventListener('close', () => {})
@@ -30,12 +34,13 @@ dialog.addEventListener('close', () => {})
 | Attribute | Values | Default | Description |
 | --- | --- | --- | --- |
 | `is-open` | boolean | — | open state (reflected, two-way) |
-| `heading` | string | — | title |
-| `description` | string | — | sub-text below the title |
-| `size` | `sm` `md` `lg` | `md` | width (24 / 30 / 42 rem) |
+| `label` | string | — | accessible name when there is no heading |
+| `heading` | string | — | visible title and accessible name |
+| `description` | string | — | visible description, linked with aria-describedby |
+| `size` | `small` `medium` `large` | `medium` | width (24 / 30 / 42 rem) |
 | `has-close` | boolean | — | hide the × close button |
 | `is-static` | boolean | — | disable backdrop-click dismiss |
-| `disabled` | boolean | — | prevent the trigger from opening |
+| `is-disabled` | boolean | — | prevent the trigger from opening |
 
 ## Slots
 
@@ -49,3 +54,5 @@ dialog.addEventListener('close', () => {})
 | --- | --- |
 | `open` | when the dialog opens |
 | `close` | when the dialog closes |
+
+`is-static` prevents backdrop dismissal; Escape still closes. Footer actions need their own handlers. Boolean attributes are enabled by presence: `has-close="false"` does not hide the close button. Use `dialog.hasClose = false`.

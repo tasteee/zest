@@ -1,3 +1,4 @@
+import { interactionStyles } from '../shared/interaction-styles'
 import { defineElement } from '../shared/define-element'
 import { c, css, event, useRef, useProp, useEffect, useHost } from 'atomico'
 import { floatingSurfaceStyles } from '../shared/overlay-styles'
@@ -115,7 +116,7 @@ export const ZPopover = c(
 			isDisabled: { type: Boolean, reflect: true },
 			toggle: event<{ open: boolean }>({ bubbles: true, composed: true })
 		},
-		styles: [floatingSurfaceStyles, styles]
+		styles: [floatingSurfaceStyles, styles, interactionStyles]
 	}
 )
 

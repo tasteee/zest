@@ -15,6 +15,38 @@ there's nothing else to wire up. Each component carries its own encapsulated
 styles inside a shadow root and reads the document-level tokens from `ink.css`
 via `var(--token)`.
 
+### Shared control conventions
+
+Use `is-disabled`, `is-invalid`, and `is-required` for supported boolean states.
+Boolean attributes are enabled by presence; `is-disabled="false"` still disables
+a control. Set the corresponding JavaScript property to `false` to turn it off.
+Wrap form controls in `z-field` for visible labels, descriptions, and errors.
+
+Text inputs and textareas emit `input` during editing, then `change` on blur
+only when their value changed. Selects and comboboxes emit `change` only when
+a committed selection changes the value.
+
+See [theming](theming.md) for the four themes, shared control sizes, focus
+treatment, and reduced-motion behavior. The docs server also includes a
+[core foundations specimen](../core.html) with all four themes side by side.
+
+### Fundamentals
+
+The token system, one layer at a time. Every page shows the same flow —
+primitive → semantic → component — and says where the layer is unfinished.
+
+- [Principles](fundamentals/start-here/principles.md) — flat by design, dark-first, colour ⟂ kind, intent over literal values
+- [Token architecture](fundamentals/start-here/token-architecture.md) — the three layers, naming rules, `z-` / `is-`, how the accent pointer works
+- [Color](fundamentals/color.md) — scale anatomy, palettes, semantic roles, the accent pointer worked through, contrast guarantees
+- [Surfaces & depth](fundamentals/surfaces.md) — the surface ladder and the no-shadows rule
+- [Borders & outlines](fundamentals/borders.md) — stroke widths, border roles, the focus ring
+- [Typography](fundamentals/typography.md) — the ladder, semantic roles, font stacks and weights
+- [Spacing & sizing](fundamentals/spacing.md) — the space scale, control sizes, density rules
+- [Radius](fundamentals/radius.md) — the radius scale and its roles
+- [Motion](fundamentals/motion.md) — durations, easing, reduced motion
+- [Layout](fundamentals/layout.md) — container widths, stacking, breakpoints
+- [Iconography](fundamentals/iconography.md) — icon sizing, stroke weight, colour inheritance
+
 ### A note on attributes vs. properties
 
 These are standard custom elements, so most options are plain HTML **attributes**.

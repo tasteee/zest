@@ -2,10 +2,10 @@
 
 A tab list driven by a `tabs` **array property**. Panels are provided as named
 slots whose name matches each tab's `value`. The active tab carries an accent
-underline; only the active panel renders.
+underline; all panels stay mounted, with inactive panels hidden.
 
 ```html
-<z-tabs id="t">
+<z-tabs id="t" label="Product details">
   <div slot="overview">Overview content</div>
   <div slot="specs">Specs content</div>
 </z-tabs>
@@ -20,15 +20,16 @@ tabs.tabs = [
 tabs.addEventListener('change', (e) => e.detail.value)
 ```
 
-Keyboard: ←/→ move (skipping disabled), Home/End jump to the ends.
+Keyboard: ←/→ select and focus the next enabled tab; Home/End select and focus the first/last enabled tab.
 
 ## Properties & attributes
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | `tabs` | `{ value, label, isDisabled? }[]` | `[]` | **property** — the tab list |
-| `value` | string | first tab | active tab value (reflected attribute, two-way) |
-| `accent` | `dom` `sub` | `dom` accent | underline color |
+| `value` | string | first enabled tab | active value; an unset, invalid, or disabled value displays the first enabled tab |
+| `accent` | `dom` `sub` | neutral | underline color |
+| `label` | string | — | accessible name for the tab list |
 | `is-fitted` | boolean | — | tabs stretch to fill the width equally |
 | `is-hidden` | boolean | — | hide |
 

@@ -75,11 +75,13 @@
 	"devDependencies": {
 		"@types/hast": "^3.0.4",
 		"@types/node": "^26.0.0",
+		"@vitest/browser-playwright": "^5.0.1",
 		"@vitest/coverage-v8": "^5.0.0",
 		"happy-dom": "^20.13.2",
 		"highlight.js": "^11.11.1",
 		"lowlight": "^3.3.0",
 		"marked": "^18.0.5",
+		"playwright": "^1.63.0",
 		"typescript": "^5.7.3",
 		"vite": "^6.0.0",
 		"vitest": "^5.0.0"

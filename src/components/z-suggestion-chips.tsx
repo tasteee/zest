@@ -33,8 +33,8 @@ const styles = css`
 		cursor: pointer;
 		text-align: left;
 		transition:
-			background-color 0.12s ease,
-			border-color 0.12s ease;
+			background-color var(--duration-fast) var(--easing-standard),
+			border-color var(--duration-fast) var(--easing-standard);
 	}
 	button:hover {
 		background: color-mix(in oklch, var(--primary) 12%, transparent);

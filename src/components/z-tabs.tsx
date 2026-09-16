@@ -1,5 +1,6 @@
+import { interactionStyles } from '../shared/interaction-styles'
 import { defineElement } from '../shared/define-element'
-import { c, css, event, useProp } from 'atomico'
+import { c, css, event, useProp, useHost, useRef, useEffect } from 'atomico'
 
 /*
  * z-tabs — a tab list driven by a `tabs` array property:
@@ -30,6 +31,8 @@ const styles = css`
 
 	.list {
 		display: flex;
+		overflow-x: auto;
+		overflow-y: hidden;
 		gap: 0.25rem;
 		border-bottom: 1px solid var(--border);
 		user-select: none;
@@ -58,8 +61,8 @@ const styles = css`
 		white-space: nowrap;
 		border-bottom: 2px solid transparent;
 		transition:
-			color 0.12s ease,
-			border-color 0.12s ease;
+			color var(--duration-fast) var(--easing-standard),
+			border-color var(--duration-fast) var(--easing-standard);
 	}
 
 	:host([is-fitted]) .tab {
@@ -76,7 +79,7 @@ const styles = css`
 	}
 
 	.tab:focus-visible {
-		outline: 3px solid color-mix(in oklch, var(--ring) 50%, transparent);
+		outline: 3px solid var(--focus-ring);
 		outline-offset: -2px;
 		border-radius: var(--radius-sm);
 	}
@@ -96,13 +99,21 @@ type TabT = { value: string; label: string; isDisabled?: boolean }
 
 export const ZTabs = c(
 	(props) => {
+		const host = useHost()
+		const pendingFocus = useRef<number>()
 		const [value, setValue] = useProp<string>('value')
+		useEffect(() => {
+			if (pendingFocus.current === undefined) return
+			host.current.shadowRoot?.querySelector<HTMLButtonElement>(`#tab-${pendingFocus.current}`)?.focus()
+			pendingFocus.current = undefined
+		})
 
 		const tabs: TabT[] = Array.isArray(props.tabs) ? (props.tabs as TabT[]) : []
-		const active = value || (tabs[0] && tabs[0].value)
+		const active = tabs.find((tab) => tab.value === value && !tab.isDisabled)?.value
+			?? tabs.find((tab) => !tab.isDisabled)?.value
 
 		const commit = (tab: TabT) => {
-			if (tab.isDisabled) return
+			if (tab.isDisabled || tab.value === active) return
 			setValue(tab.value)
 			props.change({ value: tab.value })
 		}
@@ -118,16 +129,21 @@ export const ZTabs = c(
 			for (let i = 0; i < tabs.length; i++) {
 				const candidate = ((next % tabs.length) + tabs.length) % tabs.length
 				if (!tabs[candidate].isDisabled) {
+					pendingFocus.current = candidate
 					commit(tabs[candidate])
+					if (tabs[candidate].value === active) {
+						host.current.shadowRoot?.querySelector<HTMLButtonElement>(`#tab-${candidate}`)?.focus()
+						pendingFocus.current = undefined
+					}
 					break
 				}
-				next += e.key === 'ArrowLeft' ? -1 : 1
+				next += e.key === 'ArrowLeft' || e.key === 'End' ? -1 : 1
 			}
 		}
 
 		return (
 			<host shadowDom>
-				<div class="list" role="tablist">
+				<div class="list" role="tablist" aria-label={props.label}>
 					{tabs.map((tab, index) => {
 						const isActive = tab.value === active
 						return (
@@ -136,10 +152,12 @@ export const ZTabs = c(
 								type="button"
 								class={isActive ? 'tab is-active' : 'tab'}
 								role="tab"
+								id={`tab-${index}`}
+								aria-controls={`panel-${index}`}
 								aria-selected={isActive ? 'true' : 'false'}
 								tabindex={isActive ? '0' : '-1'}
 								disabled={tab.isDisabled}
-								onclick={() => commit(tab)}
+								onclick={() => { if (tab.value !== active) pendingFocus.current = index; commit(tab) }}
 								onkeydown={(e: KeyboardEvent) => onKeyDown(e, index)}
 							>
 								{tab.label}
@@ -147,26 +165,25 @@ export const ZTabs = c(
 						)
 					})}
 				</div>
-				{tabs.map((tab) =>
-					tab.value === active ? (
-						<div key={tab.value} class="panel" role="tabpanel">
+				{tabs.map((tab, index) => (
+						<div key={tab.value} id={`panel-${index}`} class="panel" role="tabpanel" aria-labelledby={`tab-${index}`} tabindex="0" hidden={tab.value !== active}>
 							<slot name={tab.value} />
 						</div>
-					) : null
-				)}
+				))}
 			</host>
 		)
 	},
 	{
 		props: {
 			value: { type: String, reflect: true },
+			label: String,
 			tabs: { type: Array },
 			accent: { type: String, reflect: true },
 			isFitted: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			change: event<{ value: string }>({ bubbles: true, composed: true })
 		},
-		styles
+		styles: [styles, interactionStyles]
 	}
 )
 

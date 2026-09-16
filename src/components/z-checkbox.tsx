@@ -1,5 +1,6 @@
-import { defineElement } from '../shared/define-element'
-import { c, css, event, useProp } from 'atomico'
+import { interactionStyles } from '../shared/interaction-styles'
+import { defineFormElement, useFormControl } from '../shared/form-control'
+import { c, css, event, useHost, useProp, useRef } from 'atomico'
 
 /*
  * z-checkbox — square control. Unchecked is a hairline outline; checked fills
@@ -57,7 +58,7 @@ const styles = css`
 		border: 1px solid var(--border);
 		border-radius: var(--radius-sm);
 		background: transparent;
-		transition: border-color 0.12s ease, background-color 0.12s ease;
+		transition: border-color var(--duration-fast) var(--easing-standard), background-color var(--duration-fast) var(--easing-standard);
 	}
 
 	label.is-sm .box {
@@ -88,7 +89,7 @@ const styles = css`
 	}
 
 	input:focus-visible + .box {
-		outline: 3px solid color-mix(in oklch, var(--ring) 50%, transparent);
+		outline: 3px solid var(--focus-ring);
 		outline-offset: 2px;
 	}
 
@@ -103,7 +104,7 @@ const styles = css`
 		fill: none;
 		opacity: 0;
 		transform: scale(0.6);
-		transition: opacity 0.12s ease, transform 0.12s ease;
+		transition: opacity var(--duration-fast) var(--easing-standard), transform var(--duration-move) var(--easing-standard);
 	}
 
 	.box.is-checked .check {
@@ -121,23 +122,38 @@ const resolveSizeClass = (props: any): string => {
 
 export const ZCheckbox = c(
 	(props) => {
+		const host = useHost()
+		const inputRef = useRef<HTMLInputElement>()
 		const [isChecked, setIsChecked] = useProp<boolean>('isChecked')
+		const defaultChecked = useRef(Boolean(isChecked))
+		// A checkbox contributes `value` (or the platform's "on") only while
+		// checked; unchecked, it is absent from the FormData, as native.
+		const { isFormDisabled } = useFormControl({
+			value: isChecked ? (props.value ?? 'on') : null,
+			isDisabled: props.isDisabled,
+			control: inputRef,
+			onReset: () => setIsChecked(defaultChecked.current),
+			onRestore: (state) => setIsChecked(state != null && state !== '')
+		})
+		const isDisabled = props.isDisabled || isFormDisabled
 
 		const labelClass = ['label', resolveSizeClass(props)]
-			.concat(props.isDisabled ? ['is-disabled'] : [])
+			.concat(isDisabled ? ['is-disabled'] : [])
 			.join(' ')
 
 		const boxClass = ['box'].concat(isChecked ? ['is-checked'] : []).join(' ')
 
 		return (
-			<host shadowDom>
+			<host shadowDom={{ delegatesFocus: true }}>
 				<label class={labelClass}>
 					<input
+						ref={inputRef}
 						type="checkbox"
 						checked={isChecked}
-						name={props.name}
 						value={props.value}
-						disabled={props.isDisabled}
+						disabled={isDisabled}
+						required={props.isRequired}
+						aria-label={props.label || host.current?.getAttribute('aria-label') || undefined}
 						aria-checked={isChecked ? 'true' : 'false'}
 						onchange={(changeEvent: Event) => {
 							changeEvent.stopPropagation()
@@ -159,16 +175,19 @@ export const ZCheckbox = c(
 	{
 		props: {
 			isChecked: { type: Boolean, reflect: true },
+			isRequired: { type: Boolean, reflect: true },
 			isDisabled: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			size: { type: String, reflect: true },
 			accent: { type: String, reflect: true },
-			name: String,
+			name: { type: String, reflect: true },
 			value: String,
+			label: String,
 			change: event<{ checked: boolean; value?: string }>({ bubbles: true, composed: true })
 		},
-		styles
+		styles: [styles, interactionStyles],
+		form: true
 	}
 )
 
-defineElement('z-checkbox', ZCheckbox)
+defineFormElement('z-checkbox', ZCheckbox)

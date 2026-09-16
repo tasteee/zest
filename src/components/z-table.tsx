@@ -62,7 +62,7 @@ const styles = css`
 	}
 
 	tbody tr {
-		transition: background-color 0.1s ease;
+		transition: background-color var(--duration-fast) var(--easing-standard);
 	}
 	tbody tr:hover {
 		background: color-mix(in oklch, var(--foreground) 4%, transparent);

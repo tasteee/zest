@@ -177,6 +177,7 @@ export const zSwitchDoc: ComponentDocT = {
 	],
 
 	attributes: [
+		{ name: 'label', type: 'string', defaultValue: '—', description: 'Accessible name. Use slotted text for a visible, clickable label.' },
 		{ name: 'is-checked', type: 'boolean', defaultValue: '—', description: 'The on state. Reflects, so it is both the initial value and the live one.' },
 		{ name: 'is-disabled', type: 'boolean', defaultValue: '—', description: 'Blocks pointer and keyboard interaction.' },
 		{ name: 'is-full-width', type: 'boolean', defaultValue: '—', description: 'Makes the switch fill its row rather than sit inline.' },

@@ -6,12 +6,16 @@ import '../../src/index'
 
 import './site.css'
 import './internal-doc-elements'
-import { buildDocSiteData, getAllPages, resolveDocLinkToRoute, stripLeadingTitleHeading } from './docs-data'
+import { buildDocSiteData, getAllPages, isFundamentalsPage, resolveDocLinkToRoute, stripLeadingTitleHeading } from './docs-data'
 import type { DocPageT } from './docs-data'
+import type { ExampleEntryT } from './examples/types'
 import { createElement } from './dom-helpers'
 import { buildPlayground } from './playground'
 import { getComponentDoc } from './component-docs/registry'
 import { buildComponentPage } from './render/component-page'
+import { renderExamplesGallery } from './render/examples-gallery'
+import { renderExamplePage, renderStandaloneExample } from './render/example-page'
+import { getAllExamples, getExample } from './examples/registry'
 
 // Every markdown file under docs/, read as raw text at build/dev time.
 const rawDocsByPath = import.meta.glob('../../docs/**/*.md', {
@@ -72,6 +76,46 @@ type ZDocsShellElementT = HTMLElement & {
 // relative to the right folder.
 let activePage: DocPageT | null = null
 
+// A route that mounted live examples hands back a teardown, because a demo
+// that fakes replies on a timer would otherwise keep running into whatever
+// page replaced it.
+let disposeActiveRoute: (() => void) | null = null
+
+// The examples live under one route family: the gallery at /examples, each
+// example beneath it, and — for page-kind examples — a chrome-free render at
+// /examples/<slug>/live that opens in its own tab.
+const EXAMPLES_ROUTE = '/examples'
+const EXAMPLE_ROUTE_PREFIX = `${EXAMPLES_ROUTE}/`
+const STANDALONE_ROUTE_SUFFIX = '/live'
+
+const getStandaloneHref = (example: ExampleEntryT): string => {
+	return `#${EXAMPLE_ROUTE_PREFIX}${example.slug}${STANDALONE_ROUTE_SUFFIX}`
+}
+
+// The example a standalone route names, or null when the route is not one.
+const findStandaloneExample = (route: string): ExampleEntryT | null => {
+	const isStandalone = route.startsWith(EXAMPLE_ROUTE_PREFIX) && route.endsWith(STANDALONE_ROUTE_SUFFIX)
+	if (!isStandalone) return null
+
+	const slug = route.slice(EXAMPLE_ROUTE_PREFIX.length, -STANDALONE_ROUTE_SUFFIX.length)
+	return getExample(slug)
+}
+
+const isExamplesRoute = (route: string): boolean => {
+	return route === EXAMPLES_ROUTE || route.startsWith(EXAMPLE_ROUTE_PREFIX)
+}
+
+// Element tag -> reference page route, for linking an example's "built with"
+// list. Tags without a page (held-back families) resolve to null.
+const routesByElementTag = new Map<string, string>()
+for (const page of getAllPages(siteData)) {
+	if (page.slug.startsWith('z-')) routesByElementTag.set(page.slug, page.route)
+}
+
+const resolveElementRoute = (tag: string): string | null => {
+	return routesByElementTag.get(tag) ?? null
+}
+
 const buildBreadcrumbs = (items: ZBreadcrumbsItemT[]): ZBreadcrumbsElementT => {
 	const breadcrumbs = document.createElement('z-breadcrumbs') as ZBreadcrumbsElementT
 	breadcrumbs.items = items
@@ -85,8 +129,12 @@ const buildMarkdown = (content: string): ZMarkdownElementT => {
 	return markdown
 }
 
+// Component pages are listed by tag, because the tag is what a reader
+// searches for. A fundamentals page has no tag — its slug is a file name —
+// so it is listed by its title instead.
 const buildNavLeaf = (page: DocPageT): NavNodeT => {
-	return { label: page.slug, route: page.route }
+	const label = isFundamentalsPage(page) ? page.title : page.slug
+	return { label, route: page.route }
 }
 
 // Where the page sits, for the eyebrow above its title and the group heading
@@ -103,8 +151,20 @@ const getPageSectionLabel = (page: DocPageT): string => {
 // Grouped runs come before loose pages, the way a file tree puts folders above
 // files: a sub-section heading sitting halfway down a list of leaves is one
 // nobody finds.
+// Examples are a branch like any category: the gallery first, then each
+// example by title. It collapses like the rest, so a long list costs nothing
+// to a reader who is here for the reference.
+const buildExamplesNavBranch = (): NavNodeT => {
+	const gallery: NavNodeT = { label: 'All examples', route: EXAMPLES_ROUTE }
+	const examples = getAllExamples().map((example) => ({
+		label: example.title,
+		route: `${EXAMPLE_ROUTE_PREFIX}${example.slug}`
+	}))
+	return { label: 'Examples', children: [gallery, ...examples] }
+}
+
 const buildNavItems = (): NavNodeT[] => {
-	const items: NavNodeT[] = []
+	const items: NavNodeT[] = [buildExamplesNavBranch()]
 
 	for (const category of siteData.categories) {
 		const groupNodes = category.subcategories.map((subcategory) => ({
@@ -293,13 +353,53 @@ const scrollPageToTop = (): void => {
 	shell?.scrollContentToTop?.()
 }
 
+const renderExamplesRoute = (contentRoot: HTMLElement, route: string): boolean => {
+	const isGallery = route === EXAMPLES_ROUTE
+	if (isGallery) {
+		const rendered = renderExamplesGallery()
+		disposeActiveRoute = rendered.dispose
+		contentRoot.replaceChildren(rendered.element)
+		return true
+	}
+
+	const example = getExample(route.slice(EXAMPLE_ROUTE_PREFIX.length))
+	if (!example) return false
+
+	const rendered = renderExamplePage(example, { resolveElementRoute, getStandaloneHref })
+	disposeActiveRoute = rendered.dispose
+	contentRoot.replaceChildren(rendered.element)
+	setPageOutline(rendered.outline)
+	return true
+}
+
 const renderRoute = (): void => {
 	const contentRoot = document.querySelector('#docContent') as HTMLElement | null
 	const navTree = document.querySelector('#docNav') as ZNavTreeElementT | null
 	if (!contentRoot || !navTree) return
 
+	disposeActiveRoute?.()
+	disposeActiveRoute = null
+
 	const currentRoute = parseCurrentRoute()
+
+	// A standalone route entered from inside the docs (the address bar, a
+	// pasted hash) has no shell to render into; the document reboots into
+	// standalone mode the way a fresh tab would.
+	if (findStandaloneExample(currentRoute)) {
+		location.reload()
+		return
+	}
+
 	navTree.route = currentRoute
+
+	if (isExamplesRoute(currentRoute)) {
+		activePage = null
+		setPageOutline(null)
+		const wasRendered = renderExamplesRoute(contentRoot, currentRoute)
+		if (!wasRendered) renderNotFound(contentRoot)
+		scrollPageToTop()
+		return
+	}
 
 	const isHomeRoute = currentRoute === '/'
 	if (isHomeRoute) {
@@ -340,10 +440,21 @@ const handleDocContentClick = (event: MouseEvent): void => {
 
 const buildCommandPalette = (): ZCommandElementT => {
 	const commandPalette = document.createElement('z-command') as ZCommandElementT
-	commandPalette.items = getAllPages(siteData).map((page) => {
+	const pageItems = getAllPages(siteData).map((page) => {
 		const group = getPageSectionLabel(page) || 'Pages'
 		return { value: page.route, label: page.title, group, keywords: page.slug }
 	})
+	const exampleItems = getAllExamples().map((example) => ({
+		value: `${EXAMPLE_ROUTE_PREFIX}${example.slug}`,
+		label: example.title,
+		group: 'Examples',
+		keywords: [example.slug, ...example.tags].join(' ')
+	}))
+	commandPalette.items = [
+		{ value: EXAMPLES_ROUTE, label: 'All examples', group: 'Examples', keywords: 'examples gallery showcase' },
+		...exampleItems,
+		...pageItems
+	]
 
 	commandPalette.addEventListener('select', (event) => {
 		const selectEvent = event as CustomEvent<{ value: string }>
@@ -412,9 +523,24 @@ const buildNavFooter = (): HTMLElement => {
 	return utilities
 }
 
+// A standalone example owns the whole document: no shell, no nav, no
+// palette. It is a separate tab by design, so a hash change in it means the
+// reader typed a new address — the page reloads into whatever that is.
+const initStandaloneExample = (appRoot: Element, example: ExampleEntryT): void => {
+	const rendered = renderStandaloneExample(example)
+	appRoot.replaceChildren(rendered.element)
+	window.addEventListener('hashchange', () => location.reload())
+}
+
 const initDocsSite = (): void => {
-	const appRoot = document.querySelector('#app')
-	if (!appRoot) throw new Error('missing #app root element')
+	const appRoot = document.querySelector('#zestDocs')
+	if (!appRoot) throw new Error('missing #zestDocs root element')
+
+	const standaloneExample = findStandaloneExample(parseCurrentRoute())
+	if (standaloneExample) {
+		initStandaloneExample(appRoot, standaloneExample)
+		return
+	}
 
 	const commandPalette = buildCommandPalette()
 

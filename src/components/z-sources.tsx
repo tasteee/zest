@@ -55,7 +55,7 @@ const styles = css`
 		cursor: pointer;
 		text-decoration: none;
 		color: inherit;
-		transition: border-color 0.12s ease, background-color 0.12s ease;
+		transition: border-color var(--duration-fast) var(--easing-standard), background-color var(--duration-fast) var(--easing-standard);
 	}
 	.card:hover {
 		border-color: color-mix(in oklch, var(--foreground) 30%, transparent);

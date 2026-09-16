@@ -1,3 +1,4 @@
+import { interactionStyles } from '../shared/interaction-styles'
 import { defineElement } from '../shared/define-element'
 import { c, css, event, useRef, useProp, useEffect } from 'atomico'
 import { dialogSurfaceStyles } from '../shared/overlay-styles'
@@ -85,7 +86,7 @@ export const ZAlertDialog = c(
 			confirm: event<void>({ bubbles: true, composed: true }),
 			cancel: event<void>({ bubbles: true, composed: true })
 		},
-		styles: [dialogSurfaceStyles, styles]
+		styles: [dialogSurfaceStyles, styles, interactionStyles]
 	}
 )
 

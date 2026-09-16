@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zest · Core foundations</title>
+  <link rel="stylesheet" href="../src/ink.css">
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: var(--font-sans); color: var(--foreground); background: var(--background); }
+    main { max-width: 1440px; margin: auto; padding: 48px 32px; }
+    header { display: flex; justify-content: space-between; align-items: end; gap: 24px; margin-bottom: 40px; }
+    h1 { margin: 8px 0 0; font-size: 32px; letter-spacing: -.04em; font-weight: 600; }
+    .eyebrow { font-size: 12px; color: var(--muted-foreground); letter-spacing: .08em; text-transform: uppercase; }
+    p { margin: 0; color: var(--muted-foreground); font-size: 14px; line-height: 1.5; }
+    .themes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+    .theme { padding: 28px; min-width: 0; background: var(--background); color: var(--foreground); font-family: var(--font-sans); border: 1px solid var(--border); border-radius: var(--radius-xl); }
+    .theme h2 { margin: 0 0 4px; font-size: 20px; letter-spacing: -.03em; }
+    .heading { margin-bottom: 24px; }
+    .row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+    .fields { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 16px; margin: 24px 0; }
+    .divider { border-top: 1px solid var(--border); margin: 24px 0; }
+    .toggles { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+    .swatches { display: flex; gap: 4px; margin: 20px 0; }
+    .swatches span { flex: 1; height: 8px; border-radius: 2px; }
+    z-tabs { margin-top: 24px; }
+    z-textarea { margin-top: 16px; }
+    details { margin-top: 32px; color: var(--muted-foreground); font-size: 13px; }
+    pre { white-space: pre-wrap; font-family: var(--font-mono); font-size: 12px; }
+    @media(max-width:760px) { main { padding: 24px 16px; } header { display: block; } header p { margin-top: 16px; } .themes { grid-template-columns: 1fr; } .theme { padding: 20px; } }
+    @media(max-width:480px) { .fields { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body><main>
+  <header><div><div class="eyebrow">Zest / Design system</div><h1>Core foundations</h1></div><p>One language. Four expressions.<br>Type, controls, surfaces, and interaction.</p></header>
+  <div class="themes"></div>
+  <details><summary>Foundation checks</summary><pre id="checks">Checking…</pre></details>
+</main>
+<script type="module">
+import '../src/index';
+const descriptions = {dark: 'Quiet ink. Precise contrast.', light: 'Clean paper. Familiar geometry.', console: 'Dark material. Tactile controls.', studio: 'Light material. Soft definition.'};
+for (const theme of ['dark','light','console','studio']) {
+  const section = document.createElement('section');
+  section.className = 'theme'; section.dataset.theme = theme;
+  section.innerHTML = `<div class="heading"><h2>${theme[0].toUpperCase()+theme.slice(1)}</h2><p>${descriptions[theme]}</p></div>
+  <div class="swatches">${Array.from({length:10},(_,i)=>`<span style="background:var(--color-neutral-${i})"></span>`).join('')}</div>
+  <div class="row"><z-button>Continue</z-button><z-button kind="outline">Secondary</z-button><z-button kind="ghost">Cancel</z-button><z-button accent="dom">Create project</z-button></div>
+  <div class="fields"><z-field label="Project name"><z-input placeholder="Untitled project"></z-input></z-field><z-field label="Workspace"><z-select placeholder="Choose workspace"></z-select></z-field><z-field label="Team member"><z-combobox placeholder="Search people"></z-combobox></z-field><z-field label="Seats"><z-number-input value="3" min="1" max="20" has-stepper-buttons is-full-width></z-number-input></z-field></div>
+  <div class="toggles"><z-checkbox is-checked>Include assets</z-checkbox><z-switch is-checked>Notifications</z-switch></div>
+  <z-tabs label="Project settings"><div slot="general"><p>Manage the details your team uses every day.</p><z-textarea label="Description" placeholder="Add a description…" rows="2" is-auto-resize></z-textarea></div><div slot="activity"><p>All changes are up to date.</p></div></z-tabs>
+  <div class="divider"></div><div class="row tones">${['dom','sub','success','warning','error'].map(t=>`<z-button size="sm" accent="${t}">${t}</z-button>`).join('')}<z-button size="sm" is-disabled>Disabled</z-button></div>
+  <div class="row" style="margin-top:16px"><z-badge kind="solid" accent="dom">Design</z-badge><z-badge accent="success">Published</z-badge><z-badge accent="warning">Pending</z-badge><z-badge accent="error">Needs review</z-badge></div><div class="divider"></div><z-slider label="Storage allocation" value="40" does-show-value></z-slider>
+  <div style="margin-top:20px"><z-progress value="64" aria-label="Upload progress"></z-progress></div>
+  <div style="margin-top:24px"><z-dialog heading="Invite people" description="Choose a workspace for your invitation."><z-button slot="trigger" kind="outline" size="sm">Open dialog</z-button><z-field label="Invitation workspace"><z-select class="dialog-select" placeholder="Choose workspace"></z-select></z-field></z-dialog></div>`;
+  section.querySelector('z-select').options=[{value:'design',label:'Design'},{value:'archived',label:'Archived',isDisabled:true},{value:'engineering',label:'Engineering'},{value:'product',label:'Product'}];
+  section.querySelector('z-combobox').options=[{value:'alex',label:'Alex Morgan'},{value:'inactive',label:'Inactive member',isDisabled:true},{value:'sam',label:'Sam Rivera'}];
+  section.querySelector('.dialog-select').options=[{value:'design',label:'Design'},{value:'engineering',label:'Engineering'}];
+  section.querySelector('z-tabs').tabs=[{value:'general',label:'General'},{value:'archived',label:'Archived',isDisabled:true},{value:'activity',label:'Activity'}];
+  document.querySelector('.themes').append(section);
+}
+const channel = x => x <= .04045 ? x / 12.92 : ((x + .055) / 1.055) ** 2.4;
+const canvas=document.createElement('canvas'); canvas.width=canvas.height=1; const ctx=canvas.getContext('2d',{willReadFrequently:true});
+function luminance(color) {ctx.clearRect(0,0,1,1);ctx.fillStyle=color;ctx.fillRect(0,0,1,1);const rgb=ctx.getImageData(0,0,1,1).data;return .2126*channel(rgb[0]/255)+.7152*channel(rgb[1]/255)+.0722*channel(rgb[2]/255);}
+function contrast(a,b) {const x=luminance(a),y=luminance(b);return (Math.max(x,y)+.05)/(Math.min(x,y)+.05);}
+setTimeout(()=>{
+ const reports=[];
+ document.querySelectorAll('.theme').forEach(section=>{
+  const css=getComputedStyle(section);
+  const controls=['z-button','z-input','z-select','z-combobox','z-number-input'].map(tag=>({tag,height:section.querySelector(tag).getBoundingClientRect().height}));
+  const tones=[...section.querySelectorAll('.tones z-button:not([is-disabled])')].map(el=>{const b=getComputedStyle(el.shadowRoot.querySelector('button'));return {tone:el.getAttribute('accent'),contrast:+contrast(b.color,b.backgroundColor).toFixed(2)};});
+  reports.push({theme:section.dataset.theme,textContrast:+contrast(css.color,css.backgroundColor).toFixed(2),controls,tones});
+ });
+ document.querySelector('#checks').textContent=JSON.stringify(reports,null,2);
+},600);
+</script></body></html>

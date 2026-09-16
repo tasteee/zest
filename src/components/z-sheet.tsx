@@ -1,3 +1,4 @@
+import { interactionStyles } from '../shared/interaction-styles'
 import { defineElement } from '../shared/define-element'
 import { c, css, event, useRef, useProp, useState, useEffect } from 'atomico'
 import { dialogSurfaceStyles } from '../shared/overlay-styles'
@@ -182,7 +183,7 @@ export const ZSheet = c(
 			open: event<void>({ bubbles: true, composed: true }),
 			close: event<void>({ bubbles: true, composed: true })
 		},
-		styles: [dialogSurfaceStyles, styles]
+		styles: [dialogSurfaceStyles, styles, interactionStyles]
 	}
 )
 

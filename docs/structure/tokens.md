@@ -1,8 +1,9 @@
 # Tokens
 
-Every value in zest comes from a token. Nothing in a component hardcodes a
-colour, a spacing, a radius, or a type size — which is what lets four themes
-that disagree about physics share one component library.
+Zest uses shared tokens for theme colors, control geometry, typography, and
+spacing. Component-specific details sit on top of these foundations. This page
+is the resolved-value reference; the [fundamentals](../fundamentals/color.md)
+explain each layer and the flow from primitive to semantic to component.
 
 Every swatch below shows its **resolved** value in whatever theme you are
 currently reading in. Switch the theme and they all change, because they are
@@ -65,3 +66,10 @@ Two rules cover most of it. Depth comes from surface and border, never from a
 shadow or a gradient — see [theming](../theming.md) for how the hardware
 themes get away with looking otherwise. And red is reserved: if it is not
 destructive, it is not `--destructive`.
+
+## Core controls
+
+<z-token-table names="--control-height-sm --control-height-md --control-height-lg --control-font-size-sm --control-font-size-md --control-font-size-lg" kind="space"></z-token-table>
+
+Use `--focus-ring` for keyboard outlines and `--on-accent` for text on colored
+solid fills. `--control-disabled-opacity` is the shared disabled-control opacity.

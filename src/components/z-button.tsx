@@ -1,3 +1,4 @@
+import { interactionStyles } from '../shared/interaction-styles'
 import { defineElement } from '../shared/define-element'
 import { c, css } from 'atomico'
 
@@ -35,10 +36,10 @@ const styles = css`
 		   staying content-width. */
 		width: 100%;
 		transition:
-			opacity 0.05s,
-			border-color 0.05s,
-			background-color 0.05s,
-			color 0.05s,
+			opacity var(--duration-fast),
+			border-color var(--duration-fast),
+			background-color var(--duration-fast),
+			color var(--duration-fast),
 			box-shadow var(--material-press-duration) ease;
 	}
 
@@ -47,7 +48,7 @@ const styles = css`
 	}
 
 	button:focus-visible {
-		outline: 3px solid color-mix(in oklch, var(--ring) 55%, transparent);
+		outline: 3px solid var(--focus-ring);
 		outline-offset: 2px;
 	}
 
@@ -57,21 +58,21 @@ const styles = css`
 		border-radius: var(--z-button-radius, var(--small-button-radius));
 		height: var(--control-height-sm);
 		padding-inline: 0.875rem;
-		font-size: 0.75rem;
+		font-size: var(--control-font-size-sm);
 	}
 
 	button.is-md {
 		border-radius: var(--z-button-radius, var(--medium-button-radius));
 		height: var(--control-height-md);
 		padding-inline: 1rem;
-		font-size: 0.875rem;
+		font-size: var(--control-font-size-md);
 	}
 
 	button.is-lg {
 		border-radius: var(--z-button-radius, var(--large-button-radius));
 		height: var(--control-height-lg);
 		padding-inline: 1.5rem;
-		font-size: 1rem;
+		font-size: var(--control-font-size-lg);
 	}
 
 	button.is-neutral {
@@ -111,7 +112,7 @@ const styles = css`
 		background: var(--material-tone), var(--tone-color);
 		box-shadow: var(--elevation-raised), var(--emissive-tone);
 		border-color: var(--tone-color);
-		color: white;
+		color: var(--on-accent);
 		font-weight: 600;
 	}
 
@@ -199,7 +200,7 @@ const styles = css`
 
 	button.is-disabled,
 	button:disabled {
-		filter: contrast(75%) brightness(0.6);
+		opacity: var(--control-disabled-opacity);
 		pointer-events: none;
 	}
 
@@ -234,13 +235,12 @@ const styles = css`
 	}
 
 	button.is-outline.is-neutral {
-		--tone-color: var(--color-neutral-7);
-		color: var(--color-neutral-7);
+		border-color: var(--border);
+		color: var(--foreground);
+	}
 
-		&:hover {
-			/* background: var(--color-neutral-3); */
-			color: var(--color-neutral-9) !important;
-		}
+	button.is-outline.is-neutral:hover {
+		border-color: var(--color-neutral-4);
 	}
 
 	.label {
@@ -296,7 +296,7 @@ export const ZButton = c(
 
 		return (
 			<host shadowDom>
-				<button class={buttonClass} type={buttonType} disabled={isButtonDisabled}>
+				<button class={buttonClass} type={buttonType} disabled={isButtonDisabled} aria-busy={props.isLoading ? 'true' : undefined}>
 					{props.isLoading && <span class='spinner' aria-hidden='true'></span>}
 					<span class='label'>{props.label ? props.label : <slot />}</span>
 				</button>
@@ -315,7 +315,7 @@ export const ZButton = c(
 			label: String,
 			type: String
 		},
-		styles
+		styles: [styles, interactionStyles]
 	}
 )
 

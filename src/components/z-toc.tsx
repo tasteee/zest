@@ -64,8 +64,8 @@ const styles = css`
 		line-height: 1.45;
 		text-decoration: none;
 		transition:
-			color 0.12s ease,
-			border-color 0.12s ease;
+			color var(--duration-fast) var(--easing-standard),
+			border-color var(--duration-fast) var(--easing-standard);
 	}
 
 	/* Depth is indentation plus nothing else — a second type size for sub

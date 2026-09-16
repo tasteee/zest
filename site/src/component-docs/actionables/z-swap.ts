@@ -29,7 +29,7 @@ export const zSwapDoc: ComponentDocT = {
 	},
 
 	usageGuidance: [
-		'Always set `label`. It names the hidden checkbox, and without it the control is announced as an unlabelled checkbox.',
+		'Always set `label`. It names the hidden checkbox — without it the control is announced as an unlabelled checkbox — and doubles as the native hover tooltip. Wrap the swap in `z-tooltip` when you want the styled one.',
 		'`stack` is the right default for an icon button — the footprint stays fixed, so nothing around it shifts when the state flips.',
 		'The two faces should mean opposite things. A swap that changes between unrelated icons reads as a glitch rather than a state.',
 		'`has-ghost` only applies to `beside`, where the inactive face stays as a faint silhouette instead of disappearing.'
@@ -190,7 +190,7 @@ export const zSwapDoc: ComponentDocT = {
 			name: 'label',
 			type: 'string',
 			defaultValue: '—',
-			description: 'Accessible name for the hidden checkbox. Effectively required.'
+			description: 'Accessible name for the hidden checkbox, also shown as a native tooltip on hover. Effectively required.'
 		},
 		{ name: 'is-hidden', type: 'boolean', defaultValue: '—', description: 'Removes the swap from layout.' }
 	],

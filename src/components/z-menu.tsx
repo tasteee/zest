@@ -1,3 +1,4 @@
+import { interactionStyles } from '../shared/interaction-styles'
 import { defineElement } from '../shared/define-element'
 import { c, css, event, useState, useHost, useEffect } from 'atomico'
 
@@ -240,7 +241,7 @@ export const ZMenu = c(
 			isHidden: { type: Boolean, reflect: true },
 			select: event<{ value: string }>({ bubbles: true, composed: true })
 		},
-		styles
+		styles: [styles, interactionStyles]
 	}
 )
 

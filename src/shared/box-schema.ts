@@ -90,47 +90,37 @@ export const getBoxHostStyle = (props: BoxHostPropsT): Record<string, string> =>
 		if (value !== undefined) style[variable] = value
 	}
 
-	// inset is a padding default; the explicit padding/paddingX/paddingY/
-	// paddingTop... props below are computed after, so they win when both are set.
+	// Every edge resolves to one longhand variable, most specific prop first:
+	// per-side beats axis beats all-sides, and inset is the padding default
+	// underneath all three. The stylesheet reads only the longhands — it used
+	// to also declare `padding: var(--z-box-padding)` and then the four
+	// longhands after it, so with `padding="lg"` alone the longhands' unset
+	// var()s were invalid at computed-value time, fell to `0`, and won over
+	// the shorthand in the same rule. Resolving here means an unset edge
+	// simply stays unset.
 	const insetAll = resolveSize(props.inset)
 	const insetX = resolveSize(props.insetX)
 	const insetY = resolveSize(props.insetY)
-	set('--z-box-padding-top', insetY ?? insetAll)
-	set('--z-box-padding-bottom', insetY ?? insetAll)
-	set('--z-box-padding-left', insetX ?? insetAll)
-	set('--z-box-padding-right', insetX ?? insetAll)
+
+	const paddingAll = coerceSize(props.padding)
+	const paddingX = coerceSize(props.paddingX)
+	const paddingY = coerceSize(props.paddingY)
+	set('--z-box-padding-top', coerceSize(props.paddingTop) ?? paddingY ?? paddingAll ?? insetY ?? insetAll)
+	set('--z-box-padding-bottom', coerceSize(props.paddingBottom) ?? paddingY ?? paddingAll ?? insetY ?? insetAll)
+	set('--z-box-padding-left', coerceSize(props.paddingLeft) ?? paddingX ?? paddingAll ?? insetX ?? insetAll)
+	set('--z-box-padding-right', coerceSize(props.paddingRight) ?? paddingX ?? paddingAll ?? insetX ?? insetAll)
+
+	const marginAll = coerceSize(props.margin)
+	const marginX = coerceSize(props.marginX)
+	const marginY = coerceSize(props.marginY)
+	set('--z-box-margin-top', coerceSize(props.marginTop) ?? marginY ?? marginAll)
+	set('--z-box-margin-bottom', coerceSize(props.marginBottom) ?? marginY ?? marginAll)
+	set('--z-box-margin-left', coerceSize(props.marginLeft) ?? marginX ?? marginAll)
+	set('--z-box-margin-right', coerceSize(props.marginRight) ?? marginX ?? marginAll)
 
 	set('--z-box-gap', coerceSize(props.gap))
 	set('--z-box-row-gap', coerceSize(props.rowGap))
 	set('--z-box-column-gap', coerceSize(props.columnGap))
-
-	set('--z-box-margin', coerceSize(props.margin))
-	set('--z-box-margin-top', coerceSize(props.marginTop))
-	set('--z-box-margin-right', coerceSize(props.marginRight))
-	set('--z-box-margin-bottom', coerceSize(props.marginBottom))
-	set('--z-box-margin-left', coerceSize(props.marginLeft))
-
-	const marginX = coerceSize(props.marginX)
-	set('--z-box-margin-left', marginX)
-	set('--z-box-margin-right', marginX)
-
-	const marginY = coerceSize(props.marginY)
-	set('--z-box-margin-top', marginY)
-	set('--z-box-margin-bottom', marginY)
-
-	set('--z-box-padding', coerceSize(props.padding))
-	set('--z-box-padding-top', coerceSize(props.paddingTop))
-	set('--z-box-padding-right', coerceSize(props.paddingRight))
-	set('--z-box-padding-bottom', coerceSize(props.paddingBottom))
-	set('--z-box-padding-left', coerceSize(props.paddingLeft))
-
-	const paddingX = coerceSize(props.paddingX)
-	set('--z-box-padding-left', paddingX)
-	set('--z-box-padding-right', paddingX)
-
-	const paddingY = coerceSize(props.paddingY)
-	set('--z-box-padding-top', paddingY)
-	set('--z-box-padding-bottom', paddingY)
 
 	set('--z-box-width', resolveLengthValue(props.width))
 	set('--z-box-min-width', resolveLengthValue(props.minWidth))

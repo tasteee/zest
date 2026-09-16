@@ -17,7 +17,7 @@ export const zInputDoc: ComponentDocT = {
 	status: ComponentStatus.stable,
 
 	description:
-		'A transparent field with a hairline border that lifts to the accent colour on focus — no fill, no shadow, no inner glow. It wraps a real `<input>`, so `type`, `autocomplete`, and `inputmode` behave exactly as the platform defines them. `value` reflects and is two-way: set it to seed the field, read it to get what the user typed. `input` fires on every keystroke, `change` fires once on blur. Pair it with `z-field` whenever the field needs a visible label, help text, or an error.',
+		'A field with a subtle border and an accent focus treatment. Its surface follows the active theme. It wraps a real `<input>`, so `type`, `autocomplete`, and `inputmode` behave exactly as the platform defines them. `value` reflects and is two-way: set it to seed the field, read it to get what the user typed. `input` fires on every keystroke, `change` fires on blur only when the value changed during editing. Pair it with `z-field` whenever the field needs a visible label, help text, or an error.',
 
 	playground: {
 		buildElement: buildPlaygroundInput,
@@ -122,7 +122,7 @@ export const zInputDoc: ComponentDocT = {
 			id: 'live-value',
 			title: 'input versus change',
 			description:
-				'`input` fires on every keystroke; `change` fires once, on blur. Type into the field and then click away to watch the second line settle behind the first.',
+				'`input` fires on every keystroke; `change` fires on blur only when the value changed during editing. Type into the field and then click away to watch the second line settle behind the first.',
 			layout: ExampleLayout.stack,
 			markup: `
 				<z-input id="nameInput" placeholder="Type, then click away" label="Display name"></z-input>
@@ -245,7 +245,7 @@ export const zInputDoc: ComponentDocT = {
 
 	events: [
 		{ name: 'input', detail: '{ value: string }', description: 'Fires on every keystroke with the current contents.' },
-		{ name: 'change', detail: '{ value: string }', description: 'Fires once on blur with the committed contents.' }
+		{ name: 'change', detail: '{ value: string }', description: 'Fires on blur when the value differs from the value at focus. Unchanged edits do not emit change.' }
 	],
 
 	cssVariables: [],

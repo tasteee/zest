@@ -32,7 +32,7 @@ const styles = css`
 		border-radius: var(--radius-lg);
 		background: var(--card);
 		padding: var(--space-sm);
-		transition: border-color 0.12s ease;
+		transition: border-color var(--duration-fast) var(--easing-standard);
 		--accent: var(--primary);
 	}
 	.composer.is-focused {
@@ -86,7 +86,7 @@ const styles = css`
 		cursor: pointer;
 		user-select: none;
 		-webkit-user-select: none;
-		transition: opacity 0.12s ease, transform 0.08s ease;
+		transition: opacity var(--duration-fast) var(--easing-standard), transform 0.08s ease;
 	}
 	.send:hover:not(:disabled) { transform: scale(1.05); }
 	.send:active:not(:disabled) { transform: scale(0.95); }

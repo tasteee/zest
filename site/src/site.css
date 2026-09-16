@@ -8,15 +8,23 @@
    top when the reader keeps flicking at the end of an inner list. */
 html,
 body {
-	height: 100%;
-	margin: 0;
-	overflow: hidden;
-	overscroll-behavior: none;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  overscroll-behavior: none;
 }
 
-#app {
-	height: 100dvh;
-	overflow: hidden;
+#zestDocs {
+  height: 100dvh;
+  overflow: hidden;
+}
+
+#zestDocs z-code-block {
+  margin-top: var(--spacing-4);
+}
+
+#zestDocs z-markdown z-callout {
+  margin: var(--spacing-8) 0 var(--spacing-8) 0 !important;
 }
 
 /* The frame is <z-docs-shell> and the rail is <z-nav-tree>; both own their
@@ -24,97 +32,97 @@ body {
    what the site slots into them. */
 
 .navBrand {
-	display: flex;
-	flex-direction: column;
-	align-items: stretch;
-	gap: var(--spacing-3);
-	padding: var(--spacing-2) var(--spacing-3) var(--spacing-4);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--spacing-3);
+  padding: var(--spacing-2) var(--spacing-3) var(--spacing-4);
 }
 
 .navUtilities {
-	display: flex;
-	flex-direction: column;
-	align-items: stretch;
-	gap: var(--spacing-2);
-	padding: var(--spacing-3);
-	border-top: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--spacing-2);
+  padding: var(--spacing-3);
+  border-top: 1px solid var(--border);
 }
 
 .appLogo {
-	font-family: var(--font-mono);
-	font-weight: var(--font-weight-semibold);
-	font-size: var(--font-size-4);
-	color: var(--foreground);
-	letter-spacing: -0.02em;
+  font-family: var(--font-mono);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-4);
+  color: var(--foreground);
+  letter-spacing: -0.02em;
 }
 
 /* Sits where z-nav-tree's filter input used to, so it reads as the nav's
    find-a-component field rather than a button bolted above it. */
 .searchTrigger {
-	display: flex;
-	width: 100%;
-	align-items: center;
-	justify-content: space-between;
-	gap: var(--spacing-2);
-	min-width: 0;
-	padding: var(--spacing-1) var(--spacing-2);
-	background: var(--background-light);
-	border: 1px solid var(--border);
-	border-radius: var(--radius-sm);
-	color: var(--muted-foreground);
-	font-family: var(--font-sans);
-	font-size: var(--font-size-1);
-	cursor: pointer;
-	transition: border-color var(--duration-fast) var(--easing-standard);
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-2);
+  min-width: 0;
+  padding: var(--spacing-1) var(--spacing-2);
+  background: var(--background-light);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--muted-foreground);
+  font-family: var(--font-sans);
+  font-size: var(--font-size-1);
+  cursor: pointer;
+  transition: border-color var(--duration-fast) var(--easing-standard);
 }
 
 .searchTrigger:hover {
-	border-color: var(--color-neutral-4);
-	color: var(--foreground);
+  border-color: var(--color-neutral-4);
+  color: var(--foreground);
 }
 
 .searchTriggerKeys {
-	display: flex;
-	gap: var(--spacing-1);
+  display: flex;
+  gap: var(--spacing-1);
 }
 
 .docArticle {
-	display: flex;
-	flex-direction: column;
-	gap: var(--spacing-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-5);
 }
 
 .docPreviewLabel {
-	margin: 0 0 var(--spacing-2);
-	font-family: var(--font-mono);
-	font-size: var(--font-size-0);
-	font-weight: var(--font-weight-medium);
-	text-transform: uppercase;
-	letter-spacing: 0.06em;
-	color: var(--muted-foreground);
+  margin: 0 0 var(--spacing-2);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-0);
+  font-weight: var(--font-weight-medium);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted-foreground);
 }
 
 .playgroundSetup {
-	display: flex;
-	flex-direction: column;
-	gap: var(--spacing-2);
-	padding: var(--spacing-4) var(--spacing-6) var(--spacing-6);
-	border-top: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+  padding: var(--spacing-4) var(--spacing-6) var(--spacing-6);
+  border-top: 1px solid var(--border);
 }
 
 .playgroundSetupLabel {
-	font-family: var(--font-mono);
+  font-family: var(--font-mono);
 }
 
 .playgroundFootnote {
-	margin: var(--spacing-4) var(--spacing-6) var(--spacing-6);
+  margin: var(--spacing-4) var(--spacing-6) var(--spacing-6);
 }
 
 .notFound {
-	display: flex;
-	flex-direction: column;
-	gap: var(--spacing-4);
-	align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  align-items: flex-start;
 }
 
 /* ---------------------------------------------------------------------
@@ -125,86 +133,86 @@ body {
 /* The two-column measure, the page padding, and the outline's sticky offset
    all belong to z-docs-shell now. */
 .componentArticle {
-	display: flex;
-	flex-direction: column;
-	gap: var(--spacing-12);
-	min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-12);
+  min-width: 0;
 }
 
 .pageSection {
-	display: flex;
-	flex-direction: column;
-	gap: var(--spacing-5);
-	scroll-margin-top: var(--spacing-6);
-	min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-5);
+  scroll-margin-top: var(--spacing-6);
+  min-width: 0;
 }
 
 .sectionHeader {
-	display: flex;
-	flex-direction: column;
-	gap: var(--spacing-1);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
 }
 
 .inlineCode {
-	font-family: var(--font-mono);
-	font-size: 0.9em;
-	padding: 0.1em 0.35em;
-	border: 1px solid var(--border);
-	border-radius: var(--radius-sm);
-	background: var(--background-light);
-	color: var(--foreground);
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  padding: 0.1em 0.35em;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--background-light);
+  color: var(--foreground);
 }
 
 /* --- guidance and accessibility lists --- */
 
 .guidanceList {
-	list-style: none;
-	margin: 0;
-	padding: 0;
-	display: flex;
-	flex-direction: column;
-	gap: var(--spacing-3);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
 }
 
 .guidanceItem {
-	position: relative;
-	padding-left: var(--spacing-5);
+  position: relative;
+  padding-left: var(--spacing-5);
 }
 
 .guidanceItem::before {
-	content: '';
-	position: absolute;
-	top: 0.6em;
-	left: 0;
-	width: var(--spacing-2);
-	height: 1px;
-	background: var(--color-neutral-4);
+  content: "";
+  position: absolute;
+  top: 0.6em;
+  left: 0;
+  width: var(--spacing-2);
+  height: 1px;
+  background: var(--color-neutral-4);
 }
 
 /* --- anatomy --- */
 
 .anatomyList {
-	display: flex;
-	flex-direction: column;
-	border: 1px solid var(--border);
-	border-radius: var(--radius-lg);
-	overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
 }
 
 .anatomyRow {
-	display: grid;
-	grid-template-columns: 180px minmax(0, 1fr);
-	gap: var(--spacing-5);
-	padding: var(--spacing-4) var(--spacing-5);
-	border-bottom: 1px solid var(--border);
+  display: grid;
+  grid-template-columns: 180px minmax(0, 1fr);
+  gap: var(--spacing-5);
+  padding: var(--spacing-4) var(--spacing-5);
+  border-bottom: 1px solid var(--border);
 }
 
 .anatomyRow:last-child {
-	border-bottom: none;
+  border-bottom: none;
 }
 
 .anatomyName {
-	font-family: var(--font-mono);
+  font-family: var(--font-mono);
 }
 
 /* --- examples --- */
@@ -212,9 +220,9 @@ body {
 /* The example card itself is <z-example>; it owns its frame, preview
    layout, and source disclosure. Only the list spacing lives here. */
 .exampleList {
-	display: flex;
-	flex-direction: column;
-	gap: var(--spacing-10);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-10);
 }
 
 /* --- API reference --- */
@@ -236,57 +244,58 @@ body {
    just enough to see what they are doing. */
 
 .demoFrame {
-	border: 1px solid var(--border);
-	border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
 }
 
 .demoPadded {
-	padding: var(--spacing-3);
+  padding: var(--spacing-3);
 }
 
 .demoFullWidth {
-	width: 100%;
+  width: 100%;
 }
 
 .demoConstrained {
-	max-width: 22rem;
+  max-width: 22rem;
 }
 
 .demoTall {
-	height: 16rem;
+  height: 16rem;
 }
 
 .demoShort {
-	height: 10rem;
+  height: 10rem;
 }
 
 /* --- related --- */
 
 .relatedGrid {
-	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-	gap: var(--spacing-3);
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: var(--spacing-3);
 }
 
 .relatedCard {
-	display: flex;
-	flex-direction: column;
-	gap: var(--spacing-1);
-	padding: var(--spacing-4);
-	border: 1px solid var(--border);
-	border-radius: var(--radius-md);
-	text-decoration: none;
-	transition: border-color var(--duration-fast) var(--easing-standard),
-		background-color var(--duration-fast) var(--easing-standard);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+  padding: var(--spacing-4);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  transition:
+    border-color var(--duration-fast) var(--easing-standard),
+    background-color var(--duration-fast) var(--easing-standard);
 }
 
 .relatedCard:hover {
-	border-color: var(--color-neutral-4);
-	background: var(--background-light);
+  border-color: var(--color-neutral-4);
+  background: var(--background-light);
 }
 
 .relatedName {
-	font-family: var(--font-mono);
+  font-family: var(--font-mono);
 }
 
 /* --- on-this-page rail --- */
@@ -295,7 +304,373 @@ body {
    the track the outline sits in. */
 
 .playgroundGroup {
-	display: flex;
-	flex-direction: column;
-	gap: var(--spacing-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+}
+
+/* ---------------------------------------------------------------------
+   Example thumbnails
+   A live render at its authored size, scaled to the stage. Shared by the
+   gallery cards and the preview on a page-kind example.
+   --------------------------------------------------------------------- */
+
+/* The stage reserves its aspect ratio up front and shows a skeleton until
+   the render mounts, so the layout around it never jumps. A hairline grid
+   behind the render reads as a workbench rather than a void. */
+.exampleThumbnail {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--background);
+  background-image:
+    linear-gradient(color-mix(in oklch, var(--foreground) 5%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in oklch, var(--foreground) 5%, transparent) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.exampleThumbnailSkeleton {
+  position: absolute;
+  inset: var(--spacing-4);
+  width: auto;
+  height: auto;
+  opacity: 0.6;
+}
+
+.exampleThumbnail.is-mounted .exampleThumbnailSkeleton {
+  display: none;
+}
+
+.exampleThumbnailCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-origin: top left;
+  pointer-events: none;
+  user-select: none;
+}
+
+.exampleThumbnailCanvas > * {
+  height: 100%;
+}
+
+/* ---------------------------------------------------------------------
+   Examples gallery
+   Same rules as the reference pages: surfaces, hairlines, and space.
+   --------------------------------------------------------------------- */
+
+.galleryArticle {
+  gap: var(--spacing-8);
+}
+
+.galleryFilters {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+}
+
+.galleryToolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-3);
+}
+
+.gallerySearch {
+  flex: 1 1 16rem;
+  max-width: 22rem;
+}
+
+.gallerySearchIcon {
+  display: inline-flex;
+  color: var(--muted-foreground);
+}
+
+.galleryTagRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-3);
+}
+
+.galleryTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-2);
+}
+
+.galleryTag {
+  text-transform: capitalize;
+}
+
+.galleryResultCount {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-0);
+  color: var(--muted-foreground);
+  white-space: nowrap;
+}
+
+.galleryGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr));
+  gap: var(--spacing-5);
+}
+
+.galleryGrid[hidden],
+.galleryEmpty[hidden],
+.galleryCard[hidden] {
+  display: none;
+}
+
+.galleryCard {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--card);
+  color: inherit;
+  text-decoration: none;
+  overflow: hidden;
+  transition:
+    border-color var(--duration-fast) var(--easing-standard),
+    background-color var(--duration-fast) var(--easing-standard);
+}
+
+.galleryCard:hover,
+.galleryCard:focus-visible {
+  border-color: var(--color-neutral-4);
+  background: var(--background-light);
+}
+
+.galleryCard:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.galleryStage {
+  border-bottom: 1px solid var(--border);
+}
+
+.galleryCardBody {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+  padding: var(--spacing-4) var(--spacing-5) var(--spacing-5);
+}
+
+.galleryCardMeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-3);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-0);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+}
+
+.galleryKind {
+  color: var(--accent);
+}
+
+.galleryChips {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spacing-1);
+  margin-top: var(--spacing-2);
+}
+
+.galleryChip {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-0);
+  padding: 0.1em 0.45em;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--muted-foreground);
+}
+
+.galleryChipMore {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-0);
+  color: var(--muted-foreground);
+}
+
+/* The affordance is the card; this line just says so, and only once the
+   pointer has committed to the card. */
+.galleryOpen {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  margin-top: var(--spacing-3);
+  font-size: var(--font-size-1);
+  font-weight: var(--font-weight-medium);
+  color: var(--foreground);
+  opacity: 0;
+  transform: translateX(-4px);
+  transition:
+    opacity var(--duration-fast) var(--easing-standard),
+    transform var(--duration-fast) var(--easing-standard);
+}
+
+.galleryCard:hover .galleryOpen,
+.galleryCard:focus-visible .galleryOpen {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---------------------------------------------------------------------
+   Example page
+   Same skeleton as a component page (.componentArticle / .pageSection);
+   only the preview stage is its own.
+   --------------------------------------------------------------------- */
+
+.exampleStageBar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-3);
+}
+
+.exampleStageBarGroup {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.exampleStageBarGroup z-button svg {
+  margin-right: var(--spacing-1);
+}
+
+/* The frame is the same workbench the gallery uses, so the page reads as the
+   card opened up rather than a different place. */
+.exampleStageFrame {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background-color: var(--background);
+  background-image:
+    linear-gradient(color-mix(in oklch, var(--foreground) 5%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in oklch, var(--foreground) 5%, transparent) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* --- organism: runs in the page --- */
+
+.exampleStageViewport {
+  max-width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+  overflow: hidden;
+  transition: width var(--duration-move) var(--easing-standard);
+}
+
+/* A narrowed viewport sits on the grid with hairlines either side, like a
+   device frame without the pretence of one. */
+.exampleStageViewport:not([style*="width: 100%"]) {
+  border-left: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+}
+
+.exampleStageViewport > * {
+  height: 100%;
+}
+
+.exampleRoot {
+  height: 100%;
+}
+
+/* --- page: a scaled render that opens the real thing in a new tab --- */
+
+.exampleStandaloneLink {
+  position: relative;
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.exampleStandaloneLink:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: -2px;
+}
+
+.exampleStandaloneHint {
+  position: absolute;
+  right: var(--spacing-3);
+  bottom: var(--spacing-3);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  padding: var(--spacing-1) var(--spacing-3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--card);
+  font-size: var(--font-size-1);
+  font-weight: var(--font-weight-medium);
+  opacity: 0;
+  transform: translateY(4px);
+  transition:
+    opacity var(--duration-fast) var(--easing-standard),
+    transform var(--duration-fast) var(--easing-standard);
+}
+
+.exampleStandaloneLink:hover .exampleStandaloneHint,
+.exampleStandaloneLink:focus-visible .exampleStandaloneHint {
+  opacity: 1;
+  transform: none;
+}
+
+/* --- built with --- */
+
+.exampleElementList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-2);
+}
+
+.exampleElementChip {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: var(--font-size-1);
+  padding: 0.2em 0.6em;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--muted-foreground);
+  text-decoration: none;
+  transition:
+    border-color var(--duration-fast) var(--easing-standard),
+    color var(--duration-fast) var(--easing-standard),
+    background-color var(--duration-fast) var(--easing-standard);
+}
+
+.exampleElementChip.is-linked {
+  color: var(--foreground);
+}
+
+.exampleElementChip.is-linked:hover {
+  border-color: var(--color-neutral-4);
+  background: var(--background-light);
+}
+
+.exampleSourcePanel {
+  display: block;
+  padding-top: var(--spacing-4);
+}
+
+/* ---------------------------------------------------------------------
+   Standalone example
+   A page-kind example in its own tab: the example is the document.
+   --------------------------------------------------------------------- */
+
+.standaloneExample {
+  height: 100dvh;
+  background: var(--background);
+  color: var(--foreground);
 }

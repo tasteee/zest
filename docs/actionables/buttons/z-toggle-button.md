@@ -23,7 +23,7 @@ related toggles use [z-toggle-button-group](z-toggle-button-group.md) +
 | `size` | `sm` `md` `lg` | `md` | size |
 | `is-icon` | boolean | — | square icon-only button |
 | `is-pressed` | boolean | — | the on/off state (reflected, two-way) |
-| `disabled` | boolean | — | disable |
+| `is-disabled` | boolean | — | disable |
 | `is-hidden` | boolean | — | hide |
 
 ## Slots

@@ -182,7 +182,7 @@ const styles = css`
 	   code still gives the excerpt somewhere to sit. */
 	.line.is-dimmed {
 		opacity: 0.35;
-		transition: opacity 0.15s ease;
+		transition: opacity var(--duration-fast) var(--easing-standard);
 	}
 
 	.block:hover .line.is-dimmed {

@@ -90,6 +90,9 @@ export default defineConfig(({ command, isPreview }) => ({
 	root: SITE_DIR,
 	base: command === 'build' || isPreview ? DEPLOYED_BASE_PATH : '/',
 	publicDir: resolve(__dirname, 'dist'),
+	build: {
+		rollupOptions: { input: { index: resolve(SITE_DIR, 'index.html'), core: resolve(SITE_DIR, 'core.html') } }
+	},
 	server: {
 		port: 3124,
 		strictPort: true

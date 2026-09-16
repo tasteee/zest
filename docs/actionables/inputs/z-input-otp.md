@@ -20,10 +20,10 @@ otp.addEventListener('complete', (e) => e.detail.value)   // all cells filled
 | `value` | string | — | current code (reflected, two-way) |
 | `length` | number | `6` | number of cells |
 | `size` | `sm` `md` `lg` | `md` | cell size |
-| `accent` | `dom` `sub` | `dom` accent | accent color |
+| `accent` | `dom` `sub` | neutral | accent color |
 | `is-numeric` | boolean | — | restrict to digits + numeric keyboard |
-| `invalid` | boolean | — | error styling |
-| `disabled` | boolean | — | disable |
+| `is-invalid` | boolean | — | error styling |
+| `is-disabled` | boolean | — | disable |
 | `is-hidden` | boolean | — | hide |
 
 ## Events

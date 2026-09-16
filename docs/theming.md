@@ -5,7 +5,7 @@ zest ships four themes that disagree about physics.
 | Theme | Scheme | Character |
 | --- | --- | --- |
 | `dark` | dark | The default. Flat ink — no shadow, no gradient, depth from surface and border alone. |
-| `light` | light | Haze. Soft lavender paper lit by wide colour washes. No pure white. |
+| `light` | light | Quiet paper. Flat, opaque surfaces; the same typography and geometry as dark. |
 | `console` | dark | Black anodized aluminium, matte caps, milled square corners. |
 | `studio` | light | Bead-blasted aluminium synth panel. Carved paneling, silkscreen labels, tight radii. |
 
@@ -26,7 +26,7 @@ make that work.
 ### Tier 1 — theme-private primitives
 
 Whatever a theme needs to describe itself, named in its own vocabulary:
-`--haze`, `--blast-grain`, `--panel-occlusion`, `--shell-highlight`. These are
+`--material-page`, `--blast-grain`, `--panel-occlusion`, `--shell-highlight`. These are
 never read outside the theme block that defines them, so they can be added,
 renamed and reshaped freely.
 
@@ -142,21 +142,13 @@ Re-face the sans and mono tiers through the two **base** families, not through
 | Theme | Heading | Body | Mono |
 | --- | --- | --- | --- |
 | `dark` | DM Sans | DM Sans | DM Mono |
-| `light` | Outfit | Manrope | DM Mono |
+| `light` | DM Sans | DM Sans | DM Mono |
 | `console` | Outfit | Manrope | IBM Plex Mono |
 | `studio` | DM Sans | DM Sans | DM Mono |
 
-**light** and **console** share Outfit over Manrope. Outfit is close to pure
-geometric — near-circular bowls, even strokes — which gives headings a clean
-modern authority with no decoration to fight the surface behind them. Manrope
-takes the body because pure geometry is tiring at small sizes: it is
-semi-geometric, the same family of shapes loosened just enough to read
-comfortably over long passages.
-
-They diverge on the mono tier. Light keeps DM Mono, soft-cornered and geometric,
-sitting with the pair. Console switches to IBM Plex Mono, drawn out of the
-engineering-drawing tradition the hardware comes from — which is the right
-register for a readout and the wrong one for body copy.
+**dark** and **light** share DM Sans and DM Mono so switching between
+canonical schemes does not reflow text. **console** uses Outfit headings,
+Manrope body text, and IBM Plex Mono readouts.
 
 **studio** keeps the library's own DM Sans and DM Mono. The panel is already
 doing the talking through material and depth; a second voice in the type only
@@ -172,7 +164,7 @@ The heading sizes carry aggressive negative tracking tuned for DM Sans'
 geometric forms. Other faces need less, or none:
 
 ```css
---font-heading-tracking-scale: 0.85; /* light, console — Outfit sets a touch wider */
+--font-heading-tracking-scale: 0.85; /* console — Outfit sets a touch wider */
 --font-heading-tracking-scale: 0.15; /* studio — silkscreen sets open, not tight */
 ```
 
@@ -353,3 +345,17 @@ re-substitute on their own.
 
 This is the one part of the system that fails quietly rather than loudly, which
 is why it is worth stating twice.
+
+## Core control contract
+
+- `size="sm|md|lg"` maps to 32/40/48px control heights at a 16px root size.
+- Control text uses `--control-font-size-sm/md/lg`: 13/14/16px.
+- Buttons derive their radii from the same radius scale as fields.
+- `--focus-ring` is a contrast-bearing keyboard outline; `--ring` remains available for decoration.
+- `--on-accent` supplies text on a solid accent fill. Neutral fills use `--primary-foreground`.
+- Semantic color tokens, including `--popover` and `--background-light`, always resolve to colors. Add material layers separately with `background: var(--material-raised), var(--popover)`.
+- Core controls and overlays suppress motion when reduced motion is requested.
+
+Run the docs server and open `/core.html` for the four-theme control specimen,
+keyboard checks, and measured text/solid-button contrast. Material gradients
+are not included in those numerical contrast measurements.

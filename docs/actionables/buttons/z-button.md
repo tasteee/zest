@@ -25,8 +25,8 @@ neutral; explicit `dom` and `sub` values use purple and pink.
 | `size` | `sm` `md` `lg` | `md` | size |
 | `label` | string | — | text (alternative to slotting children) |
 | `type` | `button` `submit` `reset` | `button` | native button type |
-| `disabled` | boolean | — | disable |
-| `is-loading` | boolean | — | show a spinner and block interaction |
+| `is-disabled` | boolean | — | disable |
+| `is-loading` | boolean | — | show a spinner, expose aria-busy, and block interaction |
 | `is-full-width` | boolean | — | stretch to fill its container |
 | `is-hidden` | boolean | — | hide |
 

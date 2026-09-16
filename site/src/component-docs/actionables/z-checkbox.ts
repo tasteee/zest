@@ -110,6 +110,8 @@ export const zCheckboxDoc: ComponentDocT = {
 	],
 
 	attributes: [
+		{ name: 'is-required', type: 'boolean', defaultValue: '—', description: 'Forwards required state to the native checkbox.' },
+		{ name: 'label', type: 'string', defaultValue: '—', description: 'Accessible name. Use slotted text for a visible, clickable label.' },
 		{ name: 'is-checked', type: 'boolean', defaultValue: '—', description: 'The on state. Reflects, so it is both the initial value and the live one.' },
 		{ name: 'is-disabled', type: 'boolean', defaultValue: '—', description: 'Blocks pointer and keyboard interaction.' },
 		{ name: 'size', type: 'sm | md | lg', defaultValue: 'md', description: 'Size of the box and its label text.' },

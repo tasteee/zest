@@ -56,7 +56,7 @@ export const zDialogDoc: ComponentDocT = {
 		defineMarkupExample({
 			id: 'basic',
 			title: 'Basic',
-			description: 'A trigger, a body, and two actions. Escape closes it, and so does a click on the backdrop.',
+			description: 'A trigger, a body, and a footer layout. Escape or the backdrop closes it. Wire footer actions in your application; the form example below shows how.',
 			layout: ExampleLayout.start,
 			markup: `
 				<z-dialog heading="Invite teammates" description="They will get an email with a link to join this workspace.">
@@ -77,17 +77,17 @@ export const zDialogDoc: ComponentDocT = {
 				'Three widths. Small is for a single question, medium for a short form, large for something with structure — a diff, a table, a preview.',
 			layout: ExampleLayout.start,
 			markup: `
-				<z-dialog size="sm" heading="Rename project">
+				<z-dialog size="small" heading="Rename project">
 				  <z-button slot="trigger" kind="outline">Small</z-button>
 				  <z-field label="Name"><z-input value="Untitled"></z-input></z-field>
 				  <z-button slot="footer" kind="solid" accent="dom">Rename</z-button>
 				</z-dialog>
-				<z-dialog size="md" heading="Project settings">
+				<z-dialog size="medium" heading="Project settings">
 				  <z-button slot="trigger" kind="outline">Medium</z-button>
 				  <z-text size="sm" color="muted">The default width — enough for a short form without feeling empty.</z-text>
 				  <z-button slot="footer" kind="solid" accent="dom">Save</z-button>
 				</z-dialog>
-				<z-dialog size="lg" heading="Review changes">
+				<z-dialog size="large" heading="Review changes">
 				  <z-button slot="trigger" kind="outline">Large</z-button>
 				  <z-text size="sm" color="muted">Room for structured content — a diff, a table, a preview.</z-text>
 				  <z-button slot="footer" kind="solid" accent="dom">Apply</z-button>
@@ -123,19 +123,31 @@ export const zDialogDoc: ComponentDocT = {
 			`
 		}),
 
-		defineMarkupExample({
+		defineInteractiveExample({
 			id: 'has-close',
 			title: 'Without the close button',
-			description:
-				'`has-close` removes the ✕. Only reasonable when the footer already offers a way out — never combine it with `is-static`, or the dialog becomes a trap.',
+			description: 'Set the hasClose property to false and provide a visible way to dismiss. Boolean HTML attributes are enabled by presence.',
 			layout: ExampleLayout.start,
 			markup: `
-				<z-dialog has-close heading="Confirm your email" description="We sent a link to ada@example.com.">
+				<z-dialog id="noticeDialog" heading="Check your email" description="We sent a link to ada@example.com.">
 				  <z-button slot="trigger" kind="outline">Open</z-button>
-				  <z-button slot="footer" kind="outline" accent="neutral">Not now</z-button>
-				  <z-button slot="footer" kind="solid" accent="dom">Resend</z-button>
+				  <z-button slot="footer" id="noticeDismiss" kind="outline">Done</z-button>
 				</z-dialog>
-			`
+			`,
+			script: `
+				const dialog = document.querySelector('#noticeDialog')
+				dialog.hasClose = false
+				document.querySelector('#noticeDismiss').addEventListener('click', () => {
+				  dialog.isOpen = false
+				})
+			`,
+			wire: (root) => {
+				const dialog = queryPreview<HTMLElement & { hasClose: boolean; isOpen: boolean }>(root, '#noticeDialog')
+				dialog.hasClose = false
+				queryPreview<HTMLElement>(root, '#noticeDismiss').addEventListener('click', () => {
+					dialog.isOpen = false
+				})
+			}
 		}),
 
 		defineInteractiveExample({
@@ -158,8 +170,14 @@ export const zDialogDoc: ComponentDocT = {
 				  codeDialog.isOpen = true
 				})
 
+				document.querySelector('#dismissButton').addEventListener('click', () => {
+				  codeDialog.isOpen = false
+				})
+				codeDialog.addEventListener('open', () => {
+				  document.querySelector('#dialogStatus').textContent = 'Open.'
+				})
 				codeDialog.addEventListener('close', () => {
-				  restoreFocus()
+				  document.querySelector('#dialogStatus').textContent = 'Closed.'
 				})
 			`,
 			wire: (root) => {
@@ -195,7 +213,7 @@ export const zDialogDoc: ComponentDocT = {
 				'The common shape: collect something, act on it, close. Closing in the handler rather than on the button is what keeps a failed submit from dismissing the work.',
 			layout: ExampleLayout.stack,
 			markup: `
-				<z-dialog id="renameDialog" size="sm" heading="Rename project" is-static>
+				<z-dialog id="renameDialog" size="small" heading="Rename project" is-static>
 				  <z-button slot="trigger" kind="outline">Rename project</z-button>
 				  <z-field label="Project name">
 				    <z-input id="renameInput" value="Untitled project"></z-input>
@@ -208,11 +226,18 @@ export const zDialogDoc: ComponentDocT = {
 			script: `
 				const renameDialog = document.querySelector('#renameDialog')
 				const renameInput = document.querySelector('#renameInput')
-
-				document.querySelector('#renameConfirm').addEventListener('click', async () => {
-				  const [saved, saveError] = await wrap(renameProject(renameInput.value))
-				  if (saveError) return showError(saveError)
-
+				const renameStatus = document.querySelector('#renameStatus')
+				document.querySelector('#renameCancel').addEventListener('click', () => {
+				  renameDialog.isOpen = false
+				})
+				document.querySelector('#renameConfirm').addEventListener('click', () => {
+				  const nextName = (renameInput.value || '').trim()
+				  if (!nextName) {
+				    renameInput.setAttribute('is-invalid', '')
+				    return
+				  }
+				  renameInput.removeAttribute('is-invalid')
+				  renameStatus.textContent = 'Current name: ' + nextName
 				  renameDialog.isOpen = false
 				})
 			`,
@@ -247,10 +272,11 @@ export const zDialogDoc: ComponentDocT = {
 
 	attributes: [
 		{ name: 'is-open', type: 'boolean', defaultValue: '—', description: 'Whether the dialog is showing. Reflects and is two-way — set it to open or close from code.' },
-		{ name: 'heading', type: 'string', defaultValue: '—', description: 'Title in the header.' },
-		{ name: 'description', type: 'string', defaultValue: '—', description: 'A muted line under the heading.' },
-		{ name: 'size', type: 'sm | md | lg', defaultValue: 'md', description: 'Panel width — 24rem, 30rem, or 42rem, capped to the viewport.' },
-		{ name: 'has-close', type: 'boolean', defaultValue: '—', description: 'Removes the ✕. Only safe when the footer offers another way out.' },
+		{ name: 'label', type: 'string', defaultValue: '—', description: 'Accessible name when no heading is supplied.' },
+		{ name: 'heading', type: 'string', defaultValue: '—', description: 'Visible title and the accessible name of the native dialog.' },
+		{ name: 'description', type: 'string', defaultValue: '—', description: 'A muted line under the heading, linked with aria-describedby.' },
+		{ name: 'size', type: 'small | medium | large', defaultValue: 'medium', description: 'Panel width — 24rem, 30rem, or 42rem, capped to the viewport.' },
+		{ name: 'has-close', type: 'boolean', defaultValue: 'true', description: 'Shows the close button. Set the hasClose property to false to hide it.' },
 		{ name: 'is-static', type: 'boolean', defaultValue: '—', description: 'Ignores backdrop clicks. Escape still closes.' },
 		{ name: 'is-disabled', type: 'boolean', defaultValue: '—', description: 'Stops the trigger from opening the dialog.' }
 	],
@@ -276,8 +302,8 @@ export const zDialogDoc: ComponentDocT = {
 		'showModal() gives real modality: focus is trapped in the dialog, the rest of the page is inert to assistive technology, and Escape closes — none of it hand-rolled.',
 		'The dialog sits in the browser’s top layer, so it renders above every stacking context on the page regardless of z-index. This is the main reason to build on the platform element.',
 		'Focus returns to the trigger on close, because the native element restores it. Opening from code without a trigger means you own returning focus somewhere sensible.',
-		'Never pair has-close with is-static. That combination removes every dismissal route except a footer button that may not exist.',
-		'Set a heading. It is the dialog’s accessible name, and a modal announced with no name gives a screen-reader user nothing to orient against.'
+		'If you hide the close button, provide a visible dismissal action in the footer. Escape still closes, including with is-static.',
+		'Use heading for a visible and accessible title, or label when the body supplies the visible title.'
 	],
 
 	related: [

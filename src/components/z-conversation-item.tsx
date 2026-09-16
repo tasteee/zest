@@ -26,7 +26,7 @@ const styles = css`
 		padding: 0.5rem 0.75rem;
 		border-radius: var(--radius-md);
 		cursor: pointer;
-		transition: background-color 0.12s ease;
+		transition: background-color var(--duration-fast) var(--easing-standard);
 	}
 	.item:hover {
 		background: color-mix(in oklch, var(--foreground) 6%, transparent);

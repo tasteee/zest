@@ -13,7 +13,7 @@ produces echoed underneath.
 const playground = document.querySelector('z-playground')
 playground.controls = [
   { name: 'kind', kind: 'enum', options: ['solid', 'outline', 'ghost'], defaultValue: 'solid' },
-  { name: 'disabled', kind: 'boolean' }
+  { name: 'is-disabled', kind: 'boolean' }
 ]
 ```
 
@@ -34,7 +34,9 @@ for the output.
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | `controls` | `control[]` | `[]` | **property** — see [z-control-panel](z-control-panel.md) for the shape |
-| `tag-name` | string | — | the tag being demonstrated, for the snippet |
+| `tag-name` | string | — | tag the controls target, including a matching descendant of the stage wrapper |
+| `authoredAttributes` | `string[]` | — | **property** — root attributes to retain in copied HTML, alongside controlled attributes |
+| `authoredAttributeValues` | `Record<string, string>` | — | **property** — original root attribute values for Reset; otherwise captured on connection |
 | `layout` | `center` `stack` `fill` | — | how the stage arranges what is slotted |
 | `is-hidden` | boolean | — | hide |
 
@@ -53,8 +55,9 @@ for the output.
 ## Notes
 
 Reset means "back to the element as authored" — every controlled attribute is
-removed, so the component's own defaults are the baseline rather than whatever
-the last reader left behind.
+restored to its original value. Attributes added through the controls are removed. Wrapped examples reset the controlled child, preserving the wrapper.
 
 The `slot` attribute is stripped from the serialized markup, so readers see
 what they would paste rather than the plumbing that got it onto the stage.
+
+Live attribute and content changes update the snippet, including direct interaction with the preview. Mixed text and nested elements are preserved, and attribute values are HTML-escaped. For a boolean whose documented default is `true`, turning it off also produces a JavaScript property assignment; an absent HTML attribute alone cannot express that override.

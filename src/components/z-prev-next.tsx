@@ -52,7 +52,7 @@ const styles = css`
 		background: var(--material-surface);
 		color: var(--foreground);
 		text-decoration: none;
-		transition: border-color 0.12s ease;
+		transition: border-color var(--duration-fast) var(--easing-standard);
 	}
 
 	.card:hover {

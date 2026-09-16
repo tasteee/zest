@@ -45,7 +45,7 @@ const styles = css`
 		font: inherit;
 		text-align: left;
 		cursor: pointer;
-		transition: border-color 0.12s ease;
+		transition: border-color var(--duration-fast) var(--easing-standard);
 	}
 
 	.swatch:hover {

@@ -8,7 +8,7 @@ which coordinates single-selection across siblings.
 <z-radio-group value="card">
   <z-radio value="card">Credit card</z-radio>
   <z-radio value="paypal">PayPal</z-radio>
-  <z-radio value="bank" disabled>Bank transfer</z-radio>
+  <z-radio value="bank" is-disabled>Bank transfer</z-radio>
 </z-radio-group>
 ```
 
@@ -16,10 +16,11 @@ which coordinates single-selection across siblings.
 
 | Attribute | Values | Default | Description |
 | --- | --- | --- | --- |
+| `label` | string | — | Accessible name; use slotted text for the visible label. |
 | `value` | string | — | this option's value |
 | `is-checked` | boolean | — | selected state (reflected; usually managed by the group) |
-| `accent` | `dom` `sub` | `dom` accent | accent color |
-| `disabled` | boolean | — | disable |
+| `accent` | `dom` `sub` | neutral | accent color |
+| `is-disabled` | boolean | — | disable |
 | `is-hidden` | boolean | — | hide |
 
 ## Slots

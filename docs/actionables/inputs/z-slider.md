@@ -31,8 +31,8 @@ slider.addEventListener('change', (event) => event.detail.value)  // on release
 | `does-show-value` | boolean | — | show the live value as an accent-tinted pill in the header |
 | `value-prefix` | string | — | text before the displayed value (e.g. `$`) |
 | `value-suffix` | string | — | text after the displayed value (e.g. `%`) |
-| `accent` | `dom` `sub` | `dom` accent | accent color |
-| `disabled` | boolean | — | disable |
+| `accent` | `dom` `sub` | neutral | accent color |
+| `is-disabled` | boolean | — | disable |
 | `is-hidden` | boolean | — | hide |
 
 ## Events

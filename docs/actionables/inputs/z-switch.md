@@ -24,10 +24,11 @@ switchEl.addEventListener('change', (e) => e.detail.checked)
 | --- | --- | --- | --- |
 | `is-checked` | boolean | — | on/off state (reflected, two-way) |
 | `size` | `sm` `md` `lg` | `md` | size |
-| `accent` | `dom` `sub` | `dom` accent | accent color |
+| `accent` | `dom` `sub` | neutral | accent color |
 | `name` | string | — | form field name |
+| `label` | string | — | Accessible name; use slotted text for the visible label. |
 | `value` | string | — | form value |
-| `disabled` | boolean | — | disable |
+| `is-disabled` | boolean | — | disable |
 | `is-full-width` | boolean | — | render as a block element |
 | `is-hidden` | boolean | — | hide |
 

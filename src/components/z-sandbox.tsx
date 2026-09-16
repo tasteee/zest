@@ -93,7 +93,7 @@ const styles = css`
 		height: var(--sandbox-height, 20rem);
 		border: 0;
 		background: transparent;
-		transition: width 0.15s ease;
+		transition: width var(--duration-move) var(--easing-standard);
 	}
 `
 

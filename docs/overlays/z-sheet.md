@@ -26,7 +26,7 @@ body/header/footer chrome; only the geometry and slide transition differ.
 | `description` | string | — | sub-text |
 | `has-close` | boolean | — | hide the × button |
 | `is-static` | boolean | — | disable backdrop-click dismiss |
-| `disabled` | boolean | — | prevent the trigger from opening |
+| `is-disabled` | boolean | — | prevent the trigger from opening |
 
 Size is themeable via `--z-sheet-size` (default `22rem`).
 

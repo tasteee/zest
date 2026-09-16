@@ -55,7 +55,7 @@ const readDeclaredDefault = (defaultValue?: string): string => {
 const styles = css`
 	:host {
 		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(12.5rem, 1fr));
+		grid-template-columns: repeat(auto-fit, minmax(min(100%, 12.5rem), 1fr));
 		gap: var(--space-base);
 	}
 
@@ -81,14 +81,7 @@ const readControls = (value: unknown): ControlT[] => {
 	return controls
 }
 
-// Two `input` events reach these listeners for every keystroke: the
-// component's own CustomEvent (detail `{ value }`), and the native `input`
-// from the plain <input> inside its shadow root — native input events are
-// composed, so they cross the boundary and arrive retargeted at the host.
-// The native one carries a UIEvent detail of 0, so reading `.value` off it
-// yields undefined, which the host reads as "unset" and strips the attribute
-// the reader is mid-way through typing. Only a component event carries an
-// object detail, so that is what separates them.
+// Accept only component payloads, never native UIEvent detail values.
 const readComponentDetail = <DetailT,>(candidateEvent: Event): DetailT | null => {
 	const detail = (candidateEvent as CustomEvent).detail
 	const isComponentDetail = Boolean(detail) && typeof detail === 'object'
@@ -150,7 +143,7 @@ export const ZControlPanel = c(
 					value={current}
 					onchange={(changeEvent: CustomEvent<{ value: string }>) => {
 						changeEvent.stopPropagation()
-						emit(control.name, changeEvent.detail.value)
+						emit(control.name, changeEvent.detail.value || null)
 					}}
 				/>
 			)
@@ -158,7 +151,7 @@ export const ZControlPanel = c(
 
 		const buildNumberControl = (control: ControlT) => {
 			const declaredDefault = readDeclaredDefault(control.defaultValue)
-			const current = values[control.name] ?? declaredDefault
+			const current = values[control.name] ?? ''
 			const parsed = Number(current)
 			const isUsable = current !== '' && Number.isFinite(parsed)
 
@@ -171,25 +164,26 @@ export const ZControlPanel = c(
 					value={isUsable ? parsed : undefined}
 					oninput={(inputEvent: Event) => {
 						inputEvent.stopPropagation()
-						const detail = readComponentDetail<{ value: number | null }>(inputEvent)
+						const detail = readComponentDetail<{ value: number | null; rawValue: string }>(inputEvent)
 						if (!detail) return
 
 						const next = detail.value
-						emit(control.name, next === null ? '' : String(next))
+						if (next !== null && Number.isFinite(next)) emit(control.name, String(next))
+						else if (detail.rawValue === '') emit(control.name, null)
 					}}
-					// z-number-input also fires its own `change` on blur (real-form
-					// semantics, shaped { value } with no `name`). Left unstopped it
-					// bubbles past z-playground's generic panel change listener, which
-					// reads changeEvent.detail.name and would call
-					// setAttribute(undefined, value) on the stage element.
-					onchange={(changeEvent: Event) => changeEvent.stopPropagation()}
+					// Translate committed steps and blur corrections into the panel contract.
+					onchange={(changeEvent: Event) => {
+						changeEvent.stopPropagation()
+						const detail = readComponentDetail<{ value: number }>(changeEvent)
+						if (detail && Number.isFinite(detail.value)) emit(control.name, String(detail.value))
+					}}
 				/>
 			)
 		}
 
 		const buildTextControl = (control: ControlT) => {
 			const declaredDefault = readDeclaredDefault(control.defaultValue)
-			const current = values[control.name] ?? declaredDefault
+			const current = values[control.name] ?? ''
 
 			return (
 				<z-input
@@ -201,10 +195,10 @@ export const ZControlPanel = c(
 						const detail = readComponentDetail<{ value: string }>(inputEvent)
 						if (!detail) return
 
-						emit(control.name, detail.value)
+						emit(control.name, detail.value === '' ? null : detail.value)
 					}}
 					// z-input also fires its own `change` on blur (real-form semantics,
-					// shaped { value } with no `name`). Same leak as z-number-input above.
+					// shaped { value } with no `name`); keep it inside the panel.
 					onchange={(changeEvent: Event) => changeEvent.stopPropagation()}
 				/>
 			)

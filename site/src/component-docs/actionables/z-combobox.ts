@@ -38,7 +38,7 @@ export const zComboboxDoc: ComponentDocT = {
 	status: ComponentStatus.stable,
 
 	description:
-		'The trigger is a text field rather than a button: focus it and the list opens, type and it narrows, press Enter and the active row commits. Options come from the same `options` property as `z-select`, and filtering is a plain case-insensitive substring match on the label. When nothing matches, the panel says so rather than sitting empty.',
+		'The trigger is a text field rather than a button: focus it and the list opens, type and it narrows, press Enter and the active row commits. Options come from the same `options` property as `z-select`, and filtering is a plain case-insensitive substring match on the label. When nothing matches, the panel says so rather than sitting empty. The panel uses the browser top layer, including inside dialogs, so scroll containers do not clip it.',
 
 	playground: {
 		buildElement: buildPlaygroundCombobox,
@@ -284,14 +284,14 @@ export const zComboboxDoc: ComponentDocT = {
 	slots: [],
 
 	events: [
-		{ name: 'change', detail: '{ value: string }', description: 'Fires once when an option is committed. Typing and arrowing do not fire it.' }
+		{ name: 'change', detail: '{ value: string }', description: 'Fires when a committed option changes the selected value. Typing and arrowing do not fire it.' }
 	],
 
 	cssVariables: [],
 
 	accessibilityNotes: [
-		'The field carries role="combobox" with aria-expanded and aria-autocomplete="list"; the panel is a listbox of role="option" rows with aria-selected.',
-		'Keyboard: typing filters, ↑/↓ move the active row, Enter commits it, Escape closes and clears the query without changing the value.',
+		'The field carries role="combobox" with aria-controls, aria-activedescendant, aria-expanded, and aria-autocomplete="list"; the panel is a listbox of role="option" rows with aria-selected.',
+		'Keyboard: typing filters, ↑/↓ skip disabled results, and Enter commits. Escape, Tab, and blur close the list and restore the selected label without committing the query.',
 		'Set `label` (or nest it in a z-field). A combobox with only a placeholder is unlabelled to a screen reader.',
 		'is-invalid sets aria-invalid on the field as well as painting the border, so the failure is announced rather than only drawn.',
 		'Filtering is case-insensitive substring matching on the visible label — the same text a user reads is the text they can search, with no hidden keyword index to guess at.',

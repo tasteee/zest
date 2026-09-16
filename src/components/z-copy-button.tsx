@@ -38,9 +38,9 @@ const styles = css`
 		font-size: var(--font-size-caption);
 		cursor: pointer;
 		transition:
-			color 0.12s ease,
-			border-color 0.12s ease,
-			background-color 0.12s ease;
+			color var(--duration-fast) var(--easing-standard),
+			border-color var(--duration-fast) var(--easing-standard),
+			background-color var(--duration-fast) var(--easing-standard);
 	}
 
 	.copy:hover {
@@ -69,7 +69,7 @@ const styles = css`
 
 	:host([kind='ghost']) .copy:hover {
 		border-color: transparent;
-		background: var(--muted);
+		background: color-mix(in oklch, var(--foreground) 8%, transparent);
 	}
 
 	:host([kind='icon']) .copy {

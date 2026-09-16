@@ -21,13 +21,13 @@ with clear surrounding context.
 | `placeholder` | string | — | placeholder text |
 | `name` | string | — | form field name |
 | `rows` | number | `3` | initial visible rows |
-| `accent` | `dom` `sub` | `dom` accent | focus accent color |
+| `accent` | `dom` `sub` | neutral | focus accent color |
 | `label` | string | — | accessible name for compact contextual use (falls back to a surrounding `aria-label`) |
 | `size` | `sm` `md` `lg` | `md` | field padding and font size (same scale as [z-input](z-input.md)) |
 | `is-focused` | boolean | — | focus state (reflected, two-way; driven internally on focus/blur) |
 | `is-auto-resize` | boolean | — | grow to fit content (disables manual resize) |
-| `invalid` | boolean | — | error styling |
-| `disabled` | boolean | — | disable |
+| `is-invalid` | boolean | — | error styling |
+| `is-disabled` | boolean | — | disable |
 | `is-readonly` | boolean | — | read-only |
 | `is-required` | boolean | — | required |
 | `is-hidden` | boolean | — | hide |
@@ -37,4 +37,4 @@ with clear surrounding context.
 | Event | `detail` | Description |
 | --- | --- | --- |
 | `input` | `{ value }` | on every keystroke |
-| `change` | `{ value }` | on blur |
+| `change` | `{ value }` | on blur, when the value changed during editing |

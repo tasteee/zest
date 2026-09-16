@@ -71,8 +71,10 @@ const OPPOSITE: Record<Side, Side> = {
 }
 
 const parsePlacement = (placement: Placement): { side: Side; align: Align } => {
-	const [side, align] = placement.split('-') as [Side, Align | undefined]
-	return { side, align: align ?? 'center' }
+	const [requestedSide, requestedAlign] = String(placement).split('-')
+	const side: Side = ['top', 'bottom', 'left', 'right'].includes(requestedSide) ? requestedSide as Side : 'bottom'
+	const align: Align = requestedAlign === 'start' || requestedAlign === 'end' ? requestedAlign : 'center'
+	return { side, align }
 }
 
 /** Coordinate of the floating box for a given side, before cross-axis alignment. */

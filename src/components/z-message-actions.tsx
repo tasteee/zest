@@ -44,7 +44,7 @@ const styles = css`
 		color: var(--muted-foreground);
 		font-size: 1rem;
 		transition:
-			background-color 0.1s ease,
+			background-color var(--duration-fast) var(--easing-standard),
 			transform 0.06s ease;
 	}
 	button:hover {

@@ -31,7 +31,7 @@ grip.addEventListener('dragend', () => (indicator.isOpen = false))
 
 | Attribute | Values | Default | Description |
 | --- | --- | --- | --- |
-| `disabled` | boolean | — | disable the grip |
+| `is-disabled` | boolean | — | disable the grip |
 
 ### Properties
 

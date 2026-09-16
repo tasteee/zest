@@ -23,10 +23,12 @@ checkbox.addEventListener('change', (e) => e.detail.checked)
 | --- | --- | --- | --- |
 | `is-checked` | boolean | — | checked state (reflected, two-way) |
 | `size` | `sm` `md` `lg` | `md` | size of the box and label text |
-| `accent` | `dom` `sub` | `dom` accent | accent color |
+| `accent` | `dom` `sub` | neutral | accent color |
 | `name` | string | — | form field name |
+| `label` | string | — | Accessible name; use slotted text for the visible label. |
 | `value` | string | — | form value |
-| `disabled` | boolean | — | disable |
+| `is-required` | boolean | — | Required state of the native checkbox. |
+| `is-disabled` | boolean | — | disable |
 | `is-hidden` | boolean | — | hide |
 
 ## Slots

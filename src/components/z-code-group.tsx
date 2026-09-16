@@ -59,7 +59,7 @@ const styles = css`
 		font-family: var(--font-mono);
 		font-size: var(--font-size-caption);
 		cursor: pointer;
-		transition: color 0.12s ease, border-color 0.12s ease;
+		transition: color var(--duration-fast) var(--easing-standard), border-color var(--duration-fast) var(--easing-standard);
 	}
 
 	.tab:hover {
