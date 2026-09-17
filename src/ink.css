@@ -6,23 +6,12 @@
  */
 
 /*
- * Every family any theme can ask for, in one request.
- *
- * This looks expensive and isn't: the URL returns a stylesheet of @font-face
- * rules, and a browser downloads the actual woff2 only when something on the
- * page renders in that family. A reader who stays in the default dark theme
- * fetches DM Sans and DM Mono and nothing else, exactly as before.
- *
- * The families are grouped by the theme that uses them — see the type notes in
- * each theme block below.
- *   DM Sans / DM Mono        → dark, light, studio
- *   Outfit / Manrope         → console
- *   IBM Plex Mono            → console readouts
- *   DM Serif Display         → not used by any shipped theme; kept because
- *                              --font-serif is a public token and costs nothing
- *                              until something renders in it
+ * The fonts are not loaded here. ink.css only names the families
+ * (--base-sans-font-family and friends, with system fallbacks); fetching
+ * them is the app's decision. `@tasteee/zest/fonts.css` pulls every family
+ * any theme uses from Google Fonts in one request, and self-hosting is a set
+ * of @font-face rules for the same names — see README, "Fonts".
  */
-@import url("https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,100..1000&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=DM+Serif+Display&family=IBM+Plex+Mono:wght@300;400;500;600&family=Outfit:wght@100..900&family=Manrope:wght@200..800&display=swap");
 
 /*
  * Registered custom property for z-aura's rotating conic-gradient frame.
@@ -538,7 +527,9 @@
   --color-neutral-3: oklch(0.876 0.011 292);
   --color-neutral-4: oklch(0.818 0.014 292);
   --color-neutral-5: oklch(0.628 0.017 292);
-  --color-neutral-6: oklch(0.528 0.02 292);
+  /* neutral-6 is --muted-foreground. 0.528 measured 4.4:1 as small text on
+     the 8%-tinted alert and toast surfaces; 0.5 clears 4.5:1 on all of them. */
+  --color-neutral-6: oklch(0.5 0.02 292);
   --color-neutral-7: oklch(0.408 0.02 292);
   --color-neutral-8: oklch(0.286 0.02 292);
   --color-neutral-9: oklch(0.176 0.022 292);

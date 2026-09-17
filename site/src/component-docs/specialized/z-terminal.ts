@@ -1,5 +1,5 @@
 import { defineInteractiveExample, queryAllPreview, queryPreview } from '../authoring'
-import { ComponentStatus, ExampleLayout } from '../types'
+import { ComponentStatus, EvidenceLevel, ExampleLayout } from '../types'
 import type { ComponentDocT } from '../types'
 
 type TerminalLineT = {
@@ -61,7 +61,14 @@ export const zTerminalDoc: ComponentDocT = {
 	tag: 'z-terminal',
 	title: 'z-terminal',
 	tagline: 'A terminal window for command walkthroughs, with a live-session mode.',
-	status: ComponentStatus.stable,
+	status: ComponentStatus.beta,
+	evidence: {
+		formAssociated: null,
+		keyboard: EvidenceLevel.unverified,
+		screenReader: EvidenceLevel.unverified,
+		browserTests: false,
+		screenshots: false
+	},
 
 	description:
 		'A chrome-styled shell window for install steps and CLI usage — no line numbers, no syntax highlighting, and a seamless header, so it reads as a session rather than a source file. Lines opening with the `prompt` marker are treated as commands: they copy on hover, minus the marker. Add `does-animate` and the same content plays back as a live session, commands typing out under a blinking caret and output fading in behind them. Give the window a `width` and `height` and it holds that footprint — a long run scrolls inside it instead of pushing the page around.',

@@ -43,7 +43,7 @@ const styles = css`
 		background: transparent;
 		color: var(--foreground);
 		font: inherit;
-		text-align: left;
+		text-align: start;
 		cursor: pointer;
 		transition: border-color var(--duration-fast) var(--easing-standard);
 	}
@@ -53,26 +53,26 @@ const styles = css`
 	}
 
 	.swatch:focus-visible {
-		outline: 3px solid color-mix(in oklch, var(--ring) 50%, transparent);
+		outline: 3px solid var(--focus-ring);
 		outline-offset: 2px;
 	}
 
 	/* Every specimen occupies the same box so a column of mixed kinds still
-	   lines its names up. */
+	   lines its names up. It does not clip: a specimen's outline is part of
+	   what it shows, and the box is a minimum, not a frame. */
 	.specimen {
 		display: flex;
 		align-items: center;
 		justify-content: center;
 		flex-shrink: 0;
-		width: 2.75rem;
-		height: 2.75rem;
-		border-radius: var(--radius-sm);
-		overflow: hidden;
+		min-width: 2.75rem;
+		min-height: 2.75rem;
 	}
 
 	.chip {
-		width: 100%;
-		height: 100%;
+		width: 2.75rem;
+		height: 2.75rem;
+		box-sizing: border-box;
 		border: 1px solid var(--border);
 		border-radius: var(--radius-sm);
 		background: var(--swatch-value);
@@ -88,16 +88,28 @@ const styles = css`
 		background: var(--foreground);
 	}
 
+	/* The box is the token: its own corners carry the radius, so the border
+	   has to sit inside the box rather than grow it into a clip. */
 	.corner {
-		width: 100%;
-		height: 100%;
+		width: 2.75rem;
+		height: 2.75rem;
+		box-sizing: border-box;
 		border: 1px solid var(--foreground);
 		border-radius: var(--swatch-value);
+	}
+
+	/* Rendered at the token's own size, so the specimen grows with the scale
+	   instead of clipping the display sizes to a caption-sized box. The column
+	   is as wide as the largest glyph so the names still line up down a type
+	   scale. */
+	.specimen[data-kind='type'] {
+		min-width: 6.5rem;
 	}
 
 	.glyph {
 		font-size: var(--swatch-value);
 		line-height: 1;
+		white-space: nowrap;
 		color: var(--foreground);
 	}
 
@@ -213,7 +225,7 @@ export const ZSwatch = c(
 			<host shadowDom>
 				<button type='button' class='swatch' onclick={handleCopy} title={`Copy var(${token})`}>
 					{specimen && (
-						<span class='specimen' style={specimenStyle}>
+						<span class='specimen' data-kind={kind} style={specimenStyle}>
 							{specimen}
 						</span>
 					)}

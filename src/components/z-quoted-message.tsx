@@ -26,7 +26,7 @@ const styles = css`
 		align-items: stretch;
 		width: 100%;
 		box-sizing: border-box;
-		text-align: left;
+		text-align: start;
 		background: color-mix(in oklch, var(--foreground) 5%, transparent);
 		border: none;
 		border-radius: var(--radius-sm);

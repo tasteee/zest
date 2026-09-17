@@ -1,5 +1,5 @@
 import { defineMarkupExample } from '../authoring'
-import { ComponentStatus, ExampleLayout } from '../types'
+import { ComponentStatus, EvidenceLevel, ExampleLayout } from '../types'
 import type { ComponentDocT } from '../types'
 import { TEXT_FAMILY_RELATED } from './text-family'
 
@@ -14,7 +14,14 @@ export const zEyebrowDoc: ComponentDocT = {
 	tag: 'z-eyebrow',
 	title: 'z-eyebrow',
 	tagline: 'The mono kicker above a title, with an optional trailing hairline.',
-	status: ComponentStatus.stable,
+	status: ComponentStatus.beta,
+	evidence: {
+		formAssociated: null,
+		keyboard: EvidenceLevel.unverified,
+		screenReader: EvidenceLevel.unverified,
+		browserTests: false,
+		screenshots: false
+	},
 
 	description:
 		'A small uppercase kicker set in the mono face, letter-tracked and drawn in an accent accent, with an optional rule trailing off to the right. It differs from `z-subheading` in texture rather than role: the mono typeface and accent colour make it read as a system marker rather than as text, which is why it works above a large title without competing with it. It owns no outer margin — space it with whatever layout primitive it sits in.',

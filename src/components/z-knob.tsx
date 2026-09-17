@@ -86,7 +86,7 @@ const styles = css`
 	}
 
 	.dial:focus-visible {
-		outline: 3px solid color-mix(in oklch, var(--ring) 50%, transparent);
+		outline: 3px solid var(--focus-ring);
 		outline-offset: 3px;
 	}
 
@@ -160,7 +160,7 @@ const styles = css`
 		top: 10%;
 		width: 2px;
 		height: 30%;
-		margin-left: -1px;
+		margin-inline-start: -1px;
 		border-radius: 1px;
 		background: var(--knob-tone);
 	}

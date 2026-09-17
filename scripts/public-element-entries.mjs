@@ -6,7 +6,9 @@ const scriptsDir = dirname(fileURLToPath(import.meta.url))
 export const projectRoot = join(scriptsDir, '..')
 export const sourceRoot = join(projectRoot, 'src')
 
-const definitionPattern = /defineElement\(\s*['"]([^'"]+)['"]\s*,\s*([A-Za-z_$][\w$]*)\s*\)/g
+// defineFormElement (shared/form-control.ts) registers the form-associated
+// controls through the same guard, so it counts as a definition here too.
+const definitionPattern = /define(?:Form)?Element\(\s*['"]([^'"]+)['"]\s*,\s*([A-Za-z_$][\w$]*)\s*\)/g
 
 const definitionsIn = (file) => {
 	const source = readFileSync(file, 'utf8')

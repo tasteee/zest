@@ -12,13 +12,13 @@ export const boxLayoutStyles = css`
 		   specific prop, so a shorthand declaration here would only be
 		   overridden by whichever of these four sits below it. */
 		margin-top: var(--z-box-margin-top);
-		margin-right: var(--z-box-margin-right);
+		margin-inline-end: var(--z-box-margin-right);
 		margin-bottom: var(--z-box-margin-bottom);
-		margin-left: var(--z-box-margin-left);
+		margin-inline-start: var(--z-box-margin-left);
 		padding-top: var(--z-box-padding-top);
-		padding-right: var(--z-box-padding-right);
+		padding-inline-end: var(--z-box-padding-right);
 		padding-bottom: var(--z-box-padding-bottom);
-		padding-left: var(--z-box-padding-left);
+		padding-inline-start: var(--z-box-padding-left);
 		gap: var(--z-box-gap);
 		row-gap: var(--z-box-row-gap, var(--z-box-gap));
 		column-gap: var(--z-box-column-gap, var(--z-box-gap));

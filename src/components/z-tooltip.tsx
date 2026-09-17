@@ -60,36 +60,37 @@ const styles = css`
 		rotate: 45deg;
 	}
 
+	/* physical: the arrow follows the side the overlay engine measured */
 	.surface[data-side='top'] .arrow {
 		bottom: -4px;
-		left: var(--arrow-x, 50%);
-		margin-left: -4px;
-		border-right: 1px solid var(--tooltip-edge);
+		left: var(--arrow-x, 50%); /* physical */
+		margin-inline-start: -4px;
+		border-inline-end: 1px solid var(--tooltip-edge);
 		border-bottom: 1px solid var(--tooltip-edge);
 	}
 
 	.surface[data-side='bottom'] .arrow {
 		top: -4px;
-		left: var(--arrow-x, 50%);
-		margin-left: -4px;
-		border-left: 1px solid var(--tooltip-edge);
+		left: var(--arrow-x, 50%); /* physical */
+		margin-inline-start: -4px;
+		border-inline-start: 1px solid var(--tooltip-edge);
 		border-top: 1px solid var(--tooltip-edge);
 	}
 
 	.surface[data-side='left'] .arrow {
-		right: -4px;
+		right: -4px; /* physical */
 		top: var(--arrow-y, 50%);
 		margin-top: -4px;
 		border-top: 1px solid var(--tooltip-edge);
-		border-right: 1px solid var(--tooltip-edge);
+		border-inline-end: 1px solid var(--tooltip-edge);
 	}
 
 	.surface[data-side='right'] .arrow {
-		left: -4px;
+		left: -4px; /* physical */
 		top: var(--arrow-y, 50%);
 		margin-top: -4px;
 		border-bottom: 1px solid var(--tooltip-edge);
-		border-left: 1px solid var(--tooltip-edge);
+		border-inline-start: 1px solid var(--tooltip-edge);
 	}
 `
 
@@ -97,8 +98,28 @@ export const ZTooltip = c(
 	(props) => {
 		const host = useHost()
 		const floatRef = useRef<HTMLDivElement>()
+		const slotRef = useRef<HTMLSlotElement>()
 		const timer = useRef<ReturnType<typeof setTimeout>>()
 		const [isOpen, setIsOpen] = useState(false)
+
+		// aria-describedby cannot point from the slotted trigger (light DOM) into
+		// this shadow root, so the tooltip text is forwarded as aria-description
+		// on the trigger instead — owned here, and released if the content goes.
+		const described = useRef<{ element: Element; text: string }>()
+		const syncDescription = () => {
+			const element = slotRef.current?.assignedElements({ flatten: true })[0]
+			const previous = described.current
+			if (previous && (previous.element !== element || !props.content)) {
+				if (previous.element.getAttribute('aria-description') === previous.text) previous.element.removeAttribute('aria-description')
+				described.current = undefined
+			}
+			if (!element || !props.content) return
+			const ownsIt = described.current?.element === element
+			if (!ownsIt && element.hasAttribute('aria-description')) return
+			element.setAttribute('aria-description', props.content)
+			described.current = { element, text: props.content }
+		}
+		useEffect(syncDescription, [props.content])
 
 		useEffect(() => {
 			const floating = floatRef.current
@@ -141,7 +162,7 @@ export const ZTooltip = c(
 				onfocusout={close}
 				onkeydown={(e: KeyboardEvent) => e.key === 'Escape' && close()}
 			>
-				<slot />
+				<slot ref={slotRef} onslotchange={syncDescription} />
 				<div ref={floatRef} class="surface" popover="manual" role="tooltip">
 					{props.content}
 					{!props.doesHideArrow && <span class="arrow" aria-hidden="true" />}

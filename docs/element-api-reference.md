@@ -1,6 +1,6 @@
 # Zest element API reference
 
-**113 elements.** Every one, as you would write it. Generated from
+**116 elements.** Every one, as you would write it. Generated from
 source by `scripts/build-api-reference.mjs`, so it is current by
 construction rather than by discipline.
 
@@ -34,7 +34,7 @@ short, that is the first place to check.
 - [Effects](#effects) — 2
 - [Music](#music) — 2
 - [Specialized](#specialized) — 3
-- [Uncategorised](#uncategorised) — 34
+- [Uncategorised](#uncategorised) — 37
 
 ---
 
@@ -44,7 +44,7 @@ short, that is the first place to check.
 
 ```jsx
 <z-alert
-  accent="dom | neutral | success | warning | error"   // default: neutral
+  accent="dom | sub | neutral | success | warning | error"   // default: neutral
   heading={string}
   is-dismissable
   is-hidden
@@ -90,7 +90,7 @@ short, that is the first place to check.
   heading={string}
   label={string}
   description={string}
-  size="small | medium | large"   // default: medium
+  size="sm | md | lg"   // default: md
   is-open
   has-close
   is-static
@@ -114,9 +114,9 @@ short, that is the first place to check.
 
 ```jsx
 <z-hover-card
-  placement="top | bottom | left | right | -start | -end"   // default: bottom
+  placement="top | bottom | left | right | top-start | top-center | top-end | bottom-start | bottom-center | bottom-end | left-start | left-center | left-end | right-start | right-center | right-end | -start | -end"   // default: bottom
   offset={number}   // default: 8
-  accent="dom | sub"
+  accent="dom | sub | neutral"
   open-delay={number}   // default: 200
   close-delay={number}   // default: 150
   is-hidden
@@ -127,9 +127,10 @@ short, that is the first place to check.
 
 ```jsx
 <z-popover
-  placement="top | bottom | left | right | -start | -end"   // default: bottom
+  placement="top | bottom | left | right | top-start | top-center | top-end | bottom-start | bottom-center | bottom-end | left-start | left-center | left-end | right-start | right-center | right-end | -start | -end"   // default: bottom
   offset={number}   // default: 8
-  accent="dom | sub"
+  accent="dom | sub | neutral"
+  label={string}
   is-open
   is-disabled
   is-hidden
@@ -154,7 +155,7 @@ short, that is the first place to check.
 
 ```jsx
 <z-toast
-  position="bottom-end | bottom-start | bottom-center | top-end | top-start | top-center"   // default: bottom-end
+  position="bottom-end | top-start | top-center | top-end | bottom-start | bottom-center"   // default: bottom-end
 />
 ```
 
@@ -162,9 +163,9 @@ short, that is the first place to check.
 
 ```jsx
 <z-tooltip
-  placement="top | bottom | left | right | -start | -end"   // default: top
+  placement="top | bottom | left | right | top-start | top-center | top-end | bottom-start | bottom-center | bottom-end | left-start | left-center | left-end | right-start | right-center | right-end | -start | -end"   // default: top
   offset={number}   // default: 8
-  accent={string}
+  accent="dom | sub | neutral"
   content={string}
   open-delay={number}   // default: 150
   does-hide-arrow
@@ -710,11 +711,13 @@ short, that is the first place to check.
 
 ```jsx
 <z-button
-  size={string}
-  kind={string}
-  accent={string}
+  size="sm | md | lg"
+  kind="solid | outline | ghost | soft | plain"
+  accent="dom | sub | neutral | success | warning | error"
   label={string}
-  type={string}
+  type="button | submit | reset"
+  name={string}
+  value={string}
   is-disabled
   is-loading
   is-full-width
@@ -742,12 +745,47 @@ short, that is the first place to check.
 />
 ```
 
+### `z-chat-ai-dock`
+
+```jsx
+<z-chat-ai-dock
+  placeholder={string}
+  is-open
+  is-hidden
+/>
+```
+
+### `z-chat-message`
+
+```jsx
+<z-chat-message
+  me-label={string}
+  locale={string}
+  message-link={string}
+  from-me
+  is-hidden
+/>
+```
+
+### `z-chat-transcript`
+
+```jsx
+<z-chat-transcript
+  context-window={number}
+  me-label={string}
+  locale={string}
+  is-hidden
+/>
+```
+
 ### `z-checkbox`
 
 ```jsx
 <z-checkbox
-  size={string}
-  accent={string}
+  description={string}
+  error={string}
+  size="sm | md | lg"
+  accent="dom | sub | neutral"
   name={string}
   value={string}
   label={string}
@@ -763,6 +801,7 @@ short, that is the first place to check.
 ```jsx
 <z-color-picker
   value={string}
+  name={string}
   label={string}
   accent={string}
   is-disabled
@@ -774,11 +813,15 @@ short, that is the first place to check.
 
 ```jsx
 <z-combobox
+  description={string}
+  error={string}
   value={string}
+  name={string}
   label={string}
   placeholder={string}
-  size={string}
-  accent={string}
+  size="sm | md | lg"
+  accent="dom | sub | neutral"
+  is-required
   is-invalid
   is-disabled
   inline
@@ -855,7 +898,7 @@ short, that is the first place to check.
   label={string}
   description={string}
   error={string}
-  size={string}
+  size="sm | md | lg"
   is-required
   is-label-hidden
   is-label-reserved
@@ -866,6 +909,7 @@ short, that is the first place to check.
 
 ```jsx
 <z-filter
+  name={string}
   accent={string}
   size={string}
   label={string}
@@ -880,6 +924,8 @@ short, that is the first place to check.
 
 ```jsx
 <z-input
+  description={string}
+  error={string}
   value={string}
   label={string}
   type={string}
@@ -887,8 +933,8 @@ short, that is the first place to check.
   name={string}
   autocomplete={string}
   inputmode={string}
-  size={string}
-  accent={string}
+  size="sm | md | lg"
+  accent="dom | sub | neutral"
   is-focused
   is-invalid
   is-disabled
@@ -908,7 +954,9 @@ short, that is the first place to check.
   length={number}
   size={string}
   accent={string}
+  name={string}
   is-numeric
+  is-required
   is-invalid
   is-disabled
   is-hidden
@@ -919,6 +967,8 @@ short, that is the first place to check.
 
 ```jsx
 <z-number-input
+  description={string}
+  error={string}
   value={number}
   min={number}
   max={number}
@@ -926,8 +976,8 @@ short, that is the first place to check.
   label={string}
   name={string}
   placeholder={string}
-  size={string}
-  accent={string}
+  size="sm | md | lg"
+  accent="dom | sub | neutral"
   is-invalid
   is-disabled
   is-readonly
@@ -951,7 +1001,7 @@ short, that is the first place to check.
 
 ```jsx
 <z-radio
-  accent={string}
+  accent="dom | sub | neutral"
   value={string}
   label={string}
   is-checked
@@ -964,10 +1014,15 @@ short, that is the first place to check.
 
 ```jsx
 <z-radio-group
+  description={string}
+  error={string}
   value={string}
+  name={string}
   label={string}
-  direction={string}
-  accent={string}
+  direction="horizontal | vertical"
+  accent="dom | sub | neutral | success | warning | error"
+  is-required
+  is-disabled
   is-hidden
 />
 ```
@@ -979,6 +1034,7 @@ short, that is the first place to check.
   min={number}
   max={number}
   step={number}
+  name={string}
   label={string}
   value-prefix={string}
   value-suffix={string}
@@ -1005,11 +1061,15 @@ short, that is the first place to check.
 
 ```jsx
 <z-select
+  description={string}
+  error={string}
   value={string}
+  name={string}
   label={string}
   placeholder={string}
-  size={string}
-  accent={string}
+  size="sm | md | lg"
+  accent="dom | sub | neutral"
+  is-required
   is-invalid
   is-disabled
   inline
@@ -1054,12 +1114,15 @@ short, that is the first place to check.
 
 ```jsx
 <z-switch
-  size={string}
-  accent={string}
+  description={string}
+  error={string}
+  size="sm | md | lg"
+  accent="dom | sub | neutral"
   name={string}
   value={string}
   label={string}
   is-checked
+  is-required
   is-disabled
   is-full-width
   is-hidden
@@ -1081,13 +1144,15 @@ short, that is the first place to check.
 
 ```jsx
 <z-textarea
+  description={string}
+  error={string}
   value={string}
   label={string}
   placeholder={string}
   name={string}
   rows={number}
-  size={string}
-  accent={string}
+  size="sm | md | lg"
+  accent="dom | sub | neutral"
   is-focused
   is-invalid
   is-disabled
@@ -1131,9 +1196,11 @@ short, that is the first place to check.
   accent={string}
   size={string}
   kind={string}
+  name={string}
   direction={string}
   is-icon
   is-multiple
+  is-disabled
   is-hidden
 />
 ```

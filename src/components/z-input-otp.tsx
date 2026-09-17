@@ -1,5 +1,6 @@
-import { defineElement } from '../shared/define-element'
-import { c, css, event, useProp, useHost } from 'atomico'
+import { defineFormElement, useFormControl } from '../shared/form-control'
+import { useLocale } from '../shared/locale'
+import { c, css, event, useProp, useHost, useRef } from 'atomico'
 
 /*
  * z-input-otp — a row of single-character cells for one-time codes. Typing
@@ -77,7 +78,7 @@ const styles = css`
 	.cell:focus {
 		border-color: var(--accent);
 		background: color-mix(in oklch, var(--accent) 6%, transparent);
-		outline: 3px solid color-mix(in oklch, var(--ring) 40%, transparent);
+		outline: 3px solid var(--focus-ring);
 		outline-offset: 1px;
 	}
 
@@ -101,10 +102,27 @@ const resolveSizeClass = (props: any): string => {
 export const ZInputOtp = c(
 	(props) => {
 		const host = useHost()
+		const t = useLocale()
 		const [value, setValue] = useProp<string>('value')
+		const defaultValue = useRef(value ?? '')
+		const firstCellRef = useRef<HTMLInputElement>()
 
 		const length = props.length || 6
 		const chars = (value || '').slice(0, length).split('')
+		// The code is one value split across cells: submitted whole, required
+		// means every cell filled, and the bubble anchors to the first cell.
+		const isComplete = chars.length === length && chars.every((char) => char !== '')
+		const { isFormDisabled } = useFormControl({
+			value: value ?? '',
+			isDisabled: props.isDisabled,
+			control: firstCellRef,
+			validity: props.isRequired && !isComplete
+				? { flags: { valueMissing: true }, message: t('enterTheCode', { length }) }
+				: { flags: {} },
+			onReset: () => setValue(defaultValue.current),
+			onRestore: (state) => { if (typeof state === 'string') setValue(state) }
+		})
+		const isDisabled = props.isDisabled || isFormDisabled
 		const sizeClass = resolveSizeClass(props)
 
 		const focusCell = (index: number) => {
@@ -207,8 +225,9 @@ export const ZInputOtp = c(
 								inputmode={props.isNumeric ? 'numeric' : 'text'}
 								maxlength={1}
 								value={ch}
-								disabled={props.isDisabled}
-								aria-label={`Digit ${index + 1}`}
+								ref={index === 0 ? firstCellRef : undefined}
+								disabled={isDisabled}
+								aria-label={t('digitOf', { index: index + 1, length })}
 								oninput={onInput(index)}
 								onkeydown={onKeyDown(index)}
 								onfocus={(e: any) => e.target.select()}
@@ -227,14 +246,17 @@ export const ZInputOtp = c(
 			size: { type: String, reflect: true },
 			accent: { type: String, reflect: true },
 			isNumeric: { type: Boolean, reflect: true },
+			name: { type: String, reflect: true },
+			isRequired: { type: Boolean, reflect: true },
 			isInvalid: { type: Boolean, reflect: true },
 			isDisabled: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			change: event<{ value: string }>({ bubbles: true, composed: true }),
 			complete: event<{ value: string }>({ bubbles: true, composed: true })
 		},
-		styles
+		styles,
+		form: true
 	}
 )
 
-defineElement('z-input-otp', ZInputOtp)
+defineFormElement('z-input-otp', ZInputOtp)

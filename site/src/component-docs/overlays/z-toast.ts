@@ -1,5 +1,5 @@
 import { defineInteractiveExample, queryPreview } from '../authoring'
-import { ComponentStatus, ExampleLayout } from '../types'
+import { ComponentStatus, EvidenceLevel, ExampleLayout } from '../types'
 import type { ComponentDocT } from '../types'
 
 type ToastInputT = {
@@ -33,7 +33,14 @@ export const zToastDoc: ComponentDocT = {
 	tag: 'z-toast',
 	title: 'z-toast',
 	tagline: 'A region that stacks transient notifications and cleans up after itself.',
-	status: ComponentStatus.stable,
+	status: ComponentStatus.beta,
+	evidence: {
+		formAssociated: null,
+		keyboard: EvidenceLevel.verified,
+		screenReader: EvidenceLevel.unverified,
+		browserTests: true,
+		screenshots: true
+	},
 
 	description:
 		'This element is the toaster, not the toast. Put one on the page, park it in a corner with `position`, and push notifications into it imperatively: `toaster.push({ title, description, accent, duration })` returns an id you can pass to `toaster.dismiss(id)`. Each toast expires on its own after `duration`, or sticks around forever with `duration: 0`. A `dismiss` event fires with the id whenever one leaves.',
@@ -313,6 +320,11 @@ export const zToastDoc: ComponentDocT = {
 
 	cssVariables: [
 		{ name: '--toast-accent', defaultValue: 'per accent', description: 'The accent on a toast’s edge, set from its accent.' }
+	],
+
+	keyboard: [
+		{ keys: 'Tab', action: 'Reaches each toast\'s dismiss button in order.' },
+		{ keys: 'Enter / Space', action: 'On a dismiss button: removes that toast.' }
 	],
 
 	accessibilityNotes: [

@@ -1,6 +1,6 @@
 import { defineInteractiveExample, defineMarkupExample, queryAllPreview } from '../authoring'
 import { Icons } from '../icons'
-import { ComponentStatus, ExampleLayout } from '../types'
+import { ComponentStatus, EvidenceLevel, ExampleLayout } from '../types'
 import type { ComponentDocT } from '../types'
 
 const buildPlaygroundGroup = (): HTMLElement => {
@@ -17,7 +17,14 @@ export const zButtonGroupDoc: ComponentDocT = {
 	tag: 'z-button-group',
 	title: 'z-button-group',
 	tagline: 'Joins adjacent buttons into a single segmented control.',
-	status: ComponentStatus.stable,
+	status: ComponentStatus.beta,
+	evidence: {
+		formAssociated: null,
+		keyboard: EvidenceLevel.verified,
+		screenReader: EvidenceLevel.unverified,
+		browserTests: true,
+		screenshots: true
+	},
 
 	description:
 		'A layout wrapper, not a state container. It manages the three things that make a row of buttons look like one control instead of three: the corner radii on the first and last child, the 1px border overlap between neighbours, and the stacking order so a focused button draws its ring above its siblings. It holds no selection state of its own — if you need one item to stay pressed, that is `z-toggle-button-group`.',
@@ -179,6 +186,10 @@ export const zButtonGroupDoc: ComponentDocT = {
 
 	events: [],
 	cssVariables: [],
+
+	keyboard: [
+		{ keys: 'Tab', action: 'Moves through the buttons in order; the group adds no keys of its own.' }
+	],
 
 	accessibilityNotes: [
 		'Exposes role="group", so assistive technology announces the segments as one related set rather than loose buttons.',

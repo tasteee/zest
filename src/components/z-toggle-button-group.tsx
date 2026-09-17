@@ -1,6 +1,6 @@
 import { interactionStyles } from '../shared/interaction-styles'
-import { defineElement } from '../shared/define-element'
-import { c, css, event, useHost, useListener } from 'atomico'
+import { defineFormElement, useFormControl } from '../shared/form-control'
+import { c, css, event, useHost, useListener, useRef, useState } from 'atomico'
 import { toggleVariantProps } from '../shared/toggle-schema'
 
 const styles = css`
@@ -41,7 +41,7 @@ const styles = css`
 	}
 
 	:host(:not([direction='vertical'])) ::slotted(:not(:first-child)) {
-		margin-left: -1px;
+		margin-inline-start: -1px;
 	}
 
 	:host([direction='vertical']) ::slotted(:first-child) {
@@ -219,6 +219,35 @@ type ToggleGroupItemElementT = HTMLElement & { isPressed?: boolean }
 export const ZToggleButtonGroup = c(
 	(props) => {
 		const host = useHost()
+		// The pressed values live on the children; a copy in state is what the
+		// form reads, refreshed on every press and slot change.
+		const [pressed, setPressed] = useState<string[]>([])
+		const defaults = useRef<string[] | null>(null)
+		const syncPressed = () => {
+			const values = getPressedValues(host.current)
+			if (defaults.current === null && host.current.querySelector('z-toggle-button-group-item')) defaults.current = values
+			setPressed(values)
+		}
+		const formValue = () => {
+			if (pressed.length === 0) return null
+			if (!props.isMultiple) return pressed[0]
+			const data = new FormData()
+			const name = host.current.getAttribute('name') ?? ''
+			for (const value of pressed) data.append(name, value)
+			return data
+		}
+		const { isFormDisabled } = useFormControl({
+			value: formValue(),
+			isDisabled: props.isDisabled,
+			onReset: () => {
+				const wanted = new Set(defaults.current ?? [])
+				for (const item of host.current.querySelectorAll<ToggleGroupItemElementT & { value?: string }>('z-toggle-button-group-item')) {
+					item.isPressed = wanted.has(item.value ?? '')
+				}
+				syncPressed()
+			}
+		})
+		const isDisabled = Boolean(props.isDisabled) || isFormDisabled
 
 		useListener(
 			host,
@@ -228,6 +257,7 @@ export const ZToggleButtonGroup = c(
 
 				if (props.isMultiple) {
 					props.change({ value: getPressedValues(host.current) })
+					syncPressed()
 					return
 				}
 
@@ -238,25 +268,29 @@ export const ZToggleButtonGroup = c(
 				}
 
 				props.change({ value: zEvent.detail.pressed ? zEvent.detail.value : undefined })
+				syncPressed()
 			},
 			{ passive: true }
 		)
 
 		return (
-			<host shadowDom role="group">
-				<slot />
+			<host shadowDom role="group" aria-disabled={isDisabled ? 'true' : undefined}>
+				<slot onslotchange={syncPressed} />
 			</host>
 		)
 	},
 	{
 		props: {
 			...toggleVariantProps,
+			name: { type: String, reflect: true },
 			direction: { type: String, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			isMultiple: { type: Boolean, reflect: true },
+			isDisabled: { type: Boolean, reflect: true },
 			change: event<{ value?: string | string[] }>({ bubbles: true, composed: true })
 		},
-		styles: [styles, interactionStyles]
+		styles: [styles, interactionStyles],
+		form: true
 	}
 )
 
@@ -271,4 +305,4 @@ const getPressedValues = (root: HTMLElement): string[] => {
 	return pressedValues
 }
 
-defineElement('z-toggle-button-group', ZToggleButtonGroup)
+defineFormElement('z-toggle-button-group', ZToggleButtonGroup)

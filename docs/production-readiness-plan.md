@@ -20,6 +20,33 @@ exit criteria that can be checked, not felt.
   logical ones. No locale/string mechanism. No `forced-colors` handling.
 - No CHANGELOG, no browser-support statement, no deprecation policy.
 
+## Follow-ups parked on purpose
+
+Things the work so far surfaced and deliberately did not fix. Each is
+small enough to take in an afternoon; none should be forgotten.
+
+- **`z-menu` active-item highlight is faint** (14% accent tint) in every
+  theme — see `e2e/__screenshots__/z-menu-rest-*.png`.
+- **Screen-reader evidence is `unverified` on every page.** A manual NVDA
+  + VoiceOver pass per core element is owed, and until it is recorded the
+  core set honestly stays `beta`.
+- **`z-menu`, `z-tabs`, `z-table`, `z-table-toolbar` have no TS doc page**,
+  so no evidence record and no rendered key map; their key maps are in
+  markdown.
+- **Long button labels overflow** their box rather than wrapping or
+  truncating (`z-button-rest-*.png`, the narrow row).
+- **Bundling**: wired external + atomico inlined means an unbundled page
+  loads two Atomicos; bundle wired in, or externalise atomico consistently.
+- **Firefox and WebKit** are supported by the feature table in SUPPORT.md,
+  not by a test run.
+- **Linux screenshot baselines** are not committed yet; the CI job seeds
+  them as an artifact on its first run.
+- **Playwright's own Chromium fails to launch on the Windows dev machine**
+  (side-by-side manifest); Edge is used there.
+- **React 19 hydration drops properties and `on*` listeners** on custom
+  elements; the React example binds through refs. Worth a docs page of its
+  own once frameworks get one.
+
 ## Principles for this plan
 
 - **Freeze the catalog.** No new elements land until Phase 4 is done.
@@ -104,6 +131,43 @@ Nothing here fixes a component. It makes the following phases checkable.
 screenshot test exist and run. No page says `stable`. README has no
 contradictions with `src/`.
 
+### Status — done 2026-09-16
+
+1. `.github/workflows/ci.yml`: typecheck, unit, browser, build, examples,
+   smoke. `deploy-docs.yml` now runs on `workflow_run` after CI succeeds.
+2. Vitest browser project in `vitest.config.ts`; the red test became the
+   117-test form suite in Phase 1.
+3. `src/_tests/browser/a11y-helpers.ts` (`expectNoA11yViolations`, on
+   axe-core in-page) and `a11y.test.ts`: the nine core controls pass at rest.
+4. `e2e/` Playwright Test project, `npm run test:screens`: `z-button` at rest
+   (kinds × accents, sizes, disabled, loading, long label) plus hover,
+   focus-visible and active, in all four themes — 16 baselines. Baselines
+   are per platform; Windows ones are committed, and the CI job seeds the
+   Linux set as an artifact on its first run until they are committed too.
+5. `EvidenceT` on `ComponentDocT`, rendered as an Evidence section on every
+   page; all 58 pages flipped to `beta`; `src/_tests/doc-status.test.ts`
+   refuses `stable` without green rows. (The rule lives in a test rather
+   than `check-release-surface.mjs` because the doc pages are TypeScript
+   modules, not manifest data.)
+6. README: `is-disabled`, the light theme description, the tokens link, and
+   a generated default-true list (`build-readme-catalog.mjs` scans
+   `value: () => true`). Also found and fixed: the plain-HTML example could
+   never have worked — `dist/zest.js` has bare `@tasteee/wired` and
+   `atomico` imports — so it now carries the import map.
+7. `CHANGELOG.md` and `SUPPORT.md`, with the browser floor derived from the
+   features actually used (`ElementInternals`, `popover`, `@starting-style`,
+   `color-mix(in oklch)`): Chrome/Edge 117, Firefox 129, Safari 17.5.
+
+Surfaced for later phases:
+
+- The long-label button in the fixture overflows its box rather than
+  wrapping or truncating (visible in `rest-*.png`). Phase 3's state matrix
+  should decide the rule; it is not fixed here.
+- Bundling: keeping wired external while inlining atomico means an
+  unbundled page loads two Atomicos. Phase 4 should either bundle wired in
+  or externalise atomico consistently.
+- Firefox and WebKit are supported by feature table, not by a test run.
+
 ## Phase 1 — Form participation (≈2–3 weeks)
 
 Goal: a `<form>` containing Zest controls submits, validates, resets and
@@ -149,6 +213,40 @@ disables exactly as if they were native.
 `<form onsubmit>` with only Zest controls produces the right `FormData`, and
 `form.checkValidity()` returns false when a required Zest input is empty.
 Three framework examples build in CI.
+
+### Status — done 2026-09-16
+
+- `src/shared/form-control.ts`: `useFormControl` + `defineFormElement`.
+  Everything above, plus `formStateRestoreCallback`, readonly/disabled
+  barred from validation as the platform does, and a no-op path where
+  `ElementInternals` is missing (older Safari, happy-dom).
+- All eight controls and `z-button` wired. `z-switch`, `z-select`,
+  `z-combobox` and `z-radio-group` gained `is-required`; `z-select`,
+  `z-combobox` and `z-radio-group` gained `name`; `z-radio-group` gained
+  `is-disabled`; `z-button` gained `name`/`value`. `name` reflects everywhere.
+- 117 real-browser tests in `src/_tests/browser/` — a shared 11-case
+  contract per control (`describeFormContract`) plus control-specific cases.
+  Pulled forward from Phase 0 to make this possible: the Vitest browser
+  project (`vitest.config.ts`, `npm run test:browser`) and
+  `.github/workflows/ci.yml`. Still owed from Phase 0: axe, screenshots,
+  status flip, README pass, policy stubs, and gating `deploy-docs` on CI.
+- `examples/react`, `examples/vue`, `examples/svelte` build from the package
+  and pass `scripts/smoke-examples.mjs` in a real browser. See
+  `examples/README.md` for what they found — most importantly that React 19
+  hydration applies neither properties nor `on*` listeners to custom
+  elements, so the React example binds both through refs.
+- Docs: `docs/fundamentals/forms.md` states the contract; the nine
+  component pages (TS and markdown) describe the new attributes.
+
+Two things this surfaced for later phases:
+
+- Chrome's `delegatesFocus` does not reach slotted light-DOM children, so
+  `z-radio-group` takes focus itself (`tabindex="-1"`) and forwards it.
+  Arrow-key movement between radios is still missing (Phase 2).
+- Playwright's own Chromium build fails to launch on this Windows machine
+  (side-by-side manifest error), so the browser project and the smoke
+  script use the installed Edge on Windows and Playwright's Chromium in CI,
+  with `ZEST_BROWSER_CHANNEL` to override.
 
 ## Phase 2 — Accessible relationships and keyboard completeness (≈2 weeks)
 
@@ -196,6 +294,35 @@ key map, an axe pass in every state, and `--ring` no longer appears in
 set to `'verified'` for the core set — the screen-reader row still requires
 one manual NVDA + VoiceOver pass per element, recorded in the doc page.
 
+### Status — done 2026-09-16
+
+1. `src/shared/accessible.tsx`: one naming rule (`aria-labelledby` →
+   `aria-label` → `label` → `<label for>` via the host's `labels`), one
+   description mechanism (z-field forwards `description` / `error` /
+   `isInvalid`; the control renders hidden nodes and `aria-describedby`
+   points at them). All eight controls use it; `z-radio-group` carries
+   `aria-description` on the host; `z-tooltip` forwards its content as
+   `aria-description` on its trigger. The `ariaDescribedByElements` tier was
+   dropped: element reflection cannot reach a sibling element's shadow root.
+2. Key maps on every core page (`keyboard:` on TS pages, a Keyboard table on
+   the four markdown-only ones) and `src/_tests/browser/keyboard.test.ts`
+   with one test per row. Closed on the way: `z-menu` roving focus, Home/End,
+   type-ahead and focus return; `z-tabs` RTL arrows; `z-table` rows in the
+   tab order with Enter/Space; `z-dialog` Tab wrapping (the platform does
+   not wrap at a modal's edges); `z-popover` focus in on open and back on
+   Escape; `z-radio-group` arrow keys. Popup ARIA moved from role-less
+   wrapper divs onto the slotted triggers' inner controls.
+3. axe after every state in the keyboard, naming and form suites. It found
+   three real things, all fixed: icon-only `z-button` / `z-toggle-button`
+   had no accessible name (host `aria-label` was never forwarded); soft
+   buttons and badges measured 3.7–4.4:1 in the light themes; the light
+   theme's `--muted-foreground` measured 4.4:1 on tinted surfaces.
+4. `--ring` is gone from `src/`; `check-css-templates.mjs` refuses it.
+5. `interaction-styles.ts` carries the forced-colors block (Highlight for
+   checked/active/selected, GrayText for disabled, a solid outline for
+   focus); `transition.ts` skips the exit phase under reduced motion.
+   Both are in the screenshot matrix.
+
 ## Phase 3 — Regression protection at scale (≈1–2 weeks)
 
 1. **State × theme screenshot matrix** for the core set. States: default,
@@ -221,6 +348,39 @@ one manual NVDA + VoiceOver pass per element, recorded in the doc page.
 
 **Exit:** a change to a core element's CSS or keyboard handling cannot merge
 without either a screenshot diff or a failing behavior test in the PR.
+
+### Status — done 2026-09-16
+
+1. `e2e/core-matrix.ts` + `core-matrix.screens.ts`: all 20 core elements ×
+   4 themes, each as one composite of its static states (default, sizes,
+   disabled, error, loading, long label, 320px) plus hover / focus / active
+   on a probe, an RTL composite and a forced-colors composite — 172 tests,
+   276 baselines, 2.2 MB, stable across runs. Tolerance is 24 pixels, not a
+   ratio: a ratio let a one-button text-colour change through unnoticed.
+2. `ExampleT.assert`; `src/_tests/browser/docs.test.ts` runs `verify-docs`
+   in CI, runs every asserting example, and axes every example on a core
+   page. Three examples assert so far (`z-input` × 2, `z-select`); the
+   pattern is there for the rest.
+3. `src/_tests/api-contract.test.ts` holds `custom-elements.json` to
+   `dist/components/*.d.ts` (fields, types, events, both directions). Its
+   first honest run exposed that the nine `defineFormElement` controls had
+   dropped out of the inventory since Phase 1 — no manifest entry, no
+   README catalog row, no `dist/elements/*.js` subpath — because
+   `public-element-entries.mjs` matched only `defineElement(`. Fixed, and
+   `check-release-surface.mjs` now fails when an exported component
+   registers an element the inventory does not see.
+4. Coverage thresholds: 40/30/30/40 catalog-wide, 80/65/70/85 on the core
+   set's files (they sit at 84–100% statements). `npm run test:coverage`
+   runs in CI after the build.
+
+Surfaced, not fixed here:
+
+- The open `z-menu`'s active-item highlight (14% accent tint) is faint in
+  every theme; visible in `z-menu-rest-*.png`.
+- `z-menu`, `z-tabs`, `z-table` and `z-table-toolbar` have no TS doc page,
+  so their evidence record cannot be set; their key maps live in markdown.
+- Screen reader rows stay `unverified` for every element: a manual NVDA +
+  VoiceOver pass is still owed.
 
 ## Phase 4 — Public contracts and honest docs (≈1–2 weeks)
 
@@ -251,6 +411,29 @@ without either a screenshot diff or a failing behavior test in the PR.
 Every `stable` page shows green evidence. The docs contain no claim `src/`
 contradicts (re-run the README pass across `docs/**`).
 
+### Status — done 2026-09-16
+
+1. `src/shared/prop-types.ts`: `oneOf('sm', 'md', 'lg')` — Atomico's `type()`
+   at runtime (still `String`), a `CustomType<'sm' | 'md' | 'lg'>` in the
+   declaration. Applied to every enum attribute on the core set and to the
+   shared overlay placement/accent. `build-cem.mjs` reads the same call, so
+   the manifest carries the union; `build-api-reference.mjs` prints it; the
+   API contract test compares the two unions. `src/_tests/prop-types.test.ts`
+   is the type-level proof: `size = 'huge'` is a compile error under
+   `npm run typecheck`. The rest of the catalog still declares `String`.
+2. `z-dialog` takes `sm | md | lg`; `small | medium | large` resolve for one
+   minor and warn once in dev through `src/shared/deprecate.ts` (the warning
+   is tree-shaken out of dist). Tested.
+3. The default-true list is generated into the README (Phase 0).
+4. **No status flipped.** The rule needs a screen-reader row that only a
+   manual pass can supply, and none has been recorded — so the core set
+   stays `beta`, and the status page says so rather than the rule bending.
+5. `#/status`: every element in one table with the evidence columns and a
+   status filter, built from the doc registry (`site/src/render/status-page.ts`).
+   Elements without a TS page show "no record".
+6. README sweep across `docs/**`: `tone=`, `size="small"`, and the borders
+   page's "two focus specs" callout were the stale claims; fixed.
+
 ## Phase 5 — Internationalization and the long tail (≈2 weeks)
 
 1. **Locale registry.** `src/shared/locale.ts`: `setLocale(strings)` +
@@ -268,6 +451,35 @@ contradicts (re-run the README pass across `docs/**`).
 
 **Exit:** the settings-screen flow renders correctly in `dir="rtl"` with a
 non-English locale and no Google request in the network log.
+
+### Status — done 2026-09-16
+
+1. `src/shared/locale.ts`: `setLocale()` / `getLocale()` / `useLocale()`,
+   exported from the root. Every string the core set and the long-tail form
+   controls say is a key (27 of them); `docs/fundamentals/internationalization.md`
+   lists them and a test refuses an undocumented key.
+2. 128 physical spacing declarations rewritten to logical ones across
+   `src/components` and `src/shared`; `check-css-templates.mjs` refuses
+   `margin-left` and its relatives anywhere, and bare `left`/`right` insets
+   in the core set unless marked `/* physical */` (the overlay engine's
+   measured positioning). The RTL screenshot column changed as intended and
+   caught one real bug on the way: `z-button-group`'s corner radii did not
+   follow the row direction (fixed with `:dir(rtl)`).
+3. `z-input-otp`, `z-slider`, `z-range`, `z-color-picker`, `z-filter` and
+   `z-toggle-button-group` are form-associated, with 17 browser tests.
+   `z-range` submits both handles under one `name`; `z-toggle-button-group`
+   submits every pressed value under one `name` when `is-multiple`.
+4. Fonts moved to `@tasteee/zest/fonts.css` (opt-in); `ink.css` names the
+   families and fetches nothing. The release gate refuses a Google URL in
+   `ink.css`. README has the self-hosting recipe.
+5. The exit criterion is `src/_tests/browser/rtl-locale.test.ts`: a
+   settings screen in `dir="rtl"` with French strings, mirrored layout
+   asserted by geometry, arrow keys following reading direction, axe clean,
+   and no request to Google Fonts.
+
+Left for the long tail: physical `left`/`right` insets in non-core files
+are unreviewed (the lint rule is scoped to the core set), and non-core
+enum attributes still declare `String`.
 
 ## Phase 6 — Prove it with three flows (≈1–2 weeks, overlaps Phase 5)
 

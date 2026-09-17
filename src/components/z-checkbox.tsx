@@ -1,6 +1,8 @@
 import { interactionStyles } from '../shared/interaction-styles'
 import { defineFormElement, useFormControl } from '../shared/form-control'
+import { describableProps, describedBy, renderDescriptions, srOnlyStyles, useAccessibleName } from '../shared/accessible'
 import { c, css, event, useHost, useProp, useRef } from 'atomico'
+import { oneOf } from '../shared/prop-types'
 
 /*
  * z-checkbox — square control. Unchecked is a hairline outline; checked fills
@@ -123,6 +125,7 @@ const resolveSizeClass = (props: any): string => {
 export const ZCheckbox = c(
 	(props) => {
 		const host = useHost()
+		const accessibleName = useAccessibleName(props.label)
 		const inputRef = useRef<HTMLInputElement>()
 		const [isChecked, setIsChecked] = useProp<boolean>('isChecked')
 		const defaultChecked = useRef(Boolean(isChecked))
@@ -153,7 +156,9 @@ export const ZCheckbox = c(
 						value={props.value}
 						disabled={isDisabled}
 						required={props.isRequired}
-						aria-label={props.label || host.current?.getAttribute('aria-label') || undefined}
+						aria-label={accessibleName}
+						aria-describedby={describedBy(props.description, props.error)}
+						aria-invalid={props.error ? 'true' : undefined}
 						aria-checked={isChecked ? 'true' : 'false'}
 						onchange={(changeEvent: Event) => {
 							changeEvent.stopPropagation()
@@ -169,23 +174,25 @@ export const ZCheckbox = c(
 					</span>
 					<slot />
 				</label>
+				{renderDescriptions(props.description, props.error)}
 			</host>
 		)
 	},
 	{
 		props: {
+			...describableProps,
 			isChecked: { type: Boolean, reflect: true },
 			isRequired: { type: Boolean, reflect: true },
 			isDisabled: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
-			size: { type: String, reflect: true },
-			accent: { type: String, reflect: true },
+			size: { type: oneOf('sm', 'md', 'lg'), reflect: true },
+			accent: { type: oneOf('neutral', 'dom', 'sub'), reflect: true },
 			name: { type: String, reflect: true },
 			value: String,
 			label: String,
 			change: event<{ checked: boolean; value?: string }>({ bubbles: true, composed: true })
 		},
-		styles: [styles, interactionStyles],
+		styles: [styles, interactionStyles, srOnlyStyles],
 		form: true
 	}
 )

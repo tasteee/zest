@@ -1,5 +1,5 @@
 import { defineInteractiveExample, defineMarkupExample, queryPreview } from '../authoring'
-import { ComponentStatus, ExampleLayout } from '../types'
+import { ComponentStatus, EvidenceLevel, ExampleLayout } from '../types'
 import type { ComponentDocT } from '../types'
 
 const buildPlaygroundSheet = (): HTMLElement => {
@@ -21,7 +21,14 @@ export const zSheetDoc: ComponentDocT = {
 	tag: 'z-sheet',
 	title: 'z-sheet',
 	tagline: 'A modal panel that arrives from the edge instead of the middle.',
-	status: ComponentStatus.stable,
+	status: ComponentStatus.beta,
+	evidence: {
+		formAssociated: null,
+		keyboard: EvidenceLevel.unverified,
+		screenReader: EvidenceLevel.unverified,
+		browserTests: false,
+		screenshots: false
+	},
 
 	description:
 		'The same native `<dialog>` foundation and the same header/body/footer chrome as `z-dialog` — only the geometry and the transition differ. It sits flush against one edge, sized by `--z-sheet-size`, and slides in from there. That shape earns its keep when the content is a list or a form long enough to want the full height of the viewport, and when keeping the page visible behind it is part of the point.',

@@ -1,5 +1,5 @@
 import { defineMarkupExample } from '../authoring'
-import { ComponentStatus, ExampleLayout } from '../types'
+import { ComponentStatus, EvidenceLevel, ExampleLayout } from '../types'
 import type { ComponentDocT } from '../types'
 
 const buildPlaygroundGrid = (): HTMLElement => {
@@ -19,7 +19,14 @@ export const wiredGridDoc: ComponentDocT = {
 	tag: 'wired-grid',
 	title: 'wired-grid',
 	tagline: 'A fixed or intrinsic CSS grid from @tasteee/wired.',
-	status: ComponentStatus.stable,
+	status: ComponentStatus.beta,
+	evidence: {
+		formAssociated: null,
+		keyboard: EvidenceLevel.unverified,
+		screenReader: EvidenceLevel.unverified,
+		browserTests: false,
+		screenshots: false
+	},
 	description:
 		'Use `columns` for an explicit equal-column layout or `min` for an intrinsic responsive grid. The two modes are intentionally mutually exclusive, making the layout decision visible in the markup.',
 	playground: {

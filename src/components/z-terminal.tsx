@@ -170,7 +170,7 @@ const styles = css`
 		font-size: var(--font-size-small);
 		line-height: 1.75;
 		letter-spacing: 0.35px;
-		text-align: left;
+		text-align: start;
 		color: var(--foreground);
 		tab-size: 2;
 	}
@@ -206,7 +206,7 @@ const styles = css`
 	.text {
 		flex: 1 1 auto;
 		min-width: 0;
-		text-align: left;
+		text-align: start;
 		white-space: pre;
 		overflow: hidden;
 		/* Terminal text stays selectable even though the page default opts out. */
@@ -217,7 +217,7 @@ const styles = css`
 	.prompt {
 		color: var(--accent);
 		user-select: none;
-		margin-right: 0.5rem;
+		margin-inline-end: 0.5rem;
 	}
 
 	.command {
@@ -233,7 +233,7 @@ const styles = css`
 		display: inline-block;
 		width: 0.55em;
 		height: 1.05em;
-		margin-left: 1px;
+		margin-inline-start: 1px;
 		vertical-align: text-bottom;
 		background: var(--accent);
 		animation: term-blink 1s step-end infinite;
@@ -311,7 +311,7 @@ const styles = css`
 	}
 
 	.replay:focus-visible {
-		outline: 3px solid color-mix(in oklch, var(--ring) 50%, transparent);
+		outline: 3px solid var(--focus-ring);
 		outline-offset: 2px;
 	}
 
@@ -356,7 +356,7 @@ const styles = css`
 	}
 
 	.copy:focus-visible {
-		outline: 3px solid color-mix(in oklch, var(--ring) 50%, transparent);
+		outline: 3px solid var(--focus-ring);
 		outline-offset: -1px;
 	}
 

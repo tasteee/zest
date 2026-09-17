@@ -41,7 +41,7 @@ const styles = css`
 		font-size: var(--font-size-body);
 		font-weight: 500;
 		color: var(--foreground);
-		text-align: left;
+		text-align: start;
 		cursor: pointer;
 		transition: color var(--duration-fast) var(--easing-standard);
 	}

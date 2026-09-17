@@ -1,6 +1,6 @@
 import { defineInteractiveExample, defineMarkupExample, queryPreview } from '../authoring'
 import { Icons } from '../icons'
-import { ComponentStatus, ExampleLayout } from '../types'
+import { ComponentStatus, EvidenceLevel, ExampleLayout } from '../types'
 import type { ComponentDocT } from '../types'
 
 const buildPlaygroundInput = (): HTMLElement => {
@@ -14,7 +14,14 @@ export const zInputDoc: ComponentDocT = {
 	tag: 'z-input',
 	title: 'z-input',
 	tagline: 'The single-line text field every other form control is measured against.',
-	status: ComponentStatus.stable,
+	status: ComponentStatus.beta,
+	evidence: {
+		formAssociated: true,
+		keyboard: EvidenceLevel.verified,
+		screenReader: EvidenceLevel.unverified,
+		browserTests: true,
+		screenshots: true
+	},
 
 	description:
 		'A field with a subtle border and an accent focus treatment. Its surface follows the active theme. It wraps a real `<input>`, so `type`, `autocomplete`, and `inputmode` behave exactly as the platform defines them. `value` reflects and is two-way: set it to seed the field, read it to get what the user typed. `input` fires on every keystroke, `change` fires on blur only when the value changed during editing. Pair it with `z-field` whenever the field needs a visible label, help text, or an error.',
@@ -154,6 +161,18 @@ export const zInputDoc: ComponentDocT = {
 					const detail = (changeEvent as CustomEvent<{ value: string }>).detail
 					committedLine.textContent = `change: ${detail.value || '—'}`
 				})
+			},
+			assert: async (preview) => {
+				const input = preview.querySelector('#nameInput')!.shadowRoot!.querySelector('input')!
+				input.focus()
+				input.value = 'Ada'
+				input.dispatchEvent(new Event('input', { bubbles: true, composed: true }))
+				await new Promise((resolve) => setTimeout(resolve, 0))
+				if (preview.querySelector('#liveLine')!.textContent !== 'input: Ada') throw new Error('input did not report the keystroke')
+				if (preview.querySelector('#committedLine')!.textContent !== 'change: —') throw new Error('change fired before blur')
+				input.blur()
+				await new Promise((resolve) => setTimeout(resolve, 0))
+				if (preview.querySelector('#committedLine')!.textContent !== 'change: Ada') throw new Error('change did not fire on blur')
 			}
 		}),
 
@@ -201,6 +220,23 @@ export const zInputDoc: ComponentDocT = {
 					emailInput.removeAttribute('is-invalid')
 					emailField.error = ''
 				})
+			},
+			assert: async (preview) => {
+				const host = preview.querySelector('#emailInput')!
+				const input = host.shadowRoot!.querySelector('input')!
+				const field = preview.querySelector<HTMLElement & { error: string }>('#emailField')!
+				const settle = () => new Promise((resolve) => setTimeout(resolve, 0))
+				input.focus()
+				input.value = 'not-an-email'
+				input.dispatchEvent(new Event('input', { bubbles: true, composed: true }))
+				input.blur()
+				await settle()
+				if (!host.hasAttribute('is-invalid') || !field.error) throw new Error('a bad address was not marked on blur')
+				input.focus()
+				input.value = 'not-an-email!'
+				input.dispatchEvent(new Event('input', { bubbles: true, composed: true }))
+				await settle()
+				if (host.hasAttribute('is-invalid') || field.error) throw new Error('typing again did not clear the mark')
 			}
 		}),
 
@@ -220,9 +256,11 @@ export const zInputDoc: ComponentDocT = {
 	attributes: [
 		{ name: 'value', type: 'string', defaultValue: '—', description: 'The field contents. Reflects, so it is both the seed and the live value.' },
 		{ name: 'label', type: 'string', defaultValue: '—', description: 'Accessible name applied to the inner input. Set for you when the field is inside a z-field.' },
+		{ name: 'description', type: 'string', defaultValue: '—', description: 'Accessible description, read after the name. Set for you by a z-field with a description; the text is rendered hidden inside the control and pointed at with aria-describedby.' },
+		{ name: 'error', type: 'string', defaultValue: '—', description: 'Accessible error text, and aria-invalid. Set for you by a z-field with an error.' },
 		{ name: 'type', type: 'string', defaultValue: 'text', description: 'Native input type — text, email, password, tel, url, search.' },
 		{ name: 'placeholder', type: 'string', defaultValue: '—', description: 'Example text shown while the field is empty. Never a substitute for a label.' },
-		{ name: 'name', type: 'string', defaultValue: '—', description: 'Name passed to the inner input for form submission.' },
+		{ name: 'name', type: 'string', defaultValue: '—', description: 'The FormData entry name. The host is the form participant, so this goes on the element, not on anything inside it.' },
 		{ name: 'autocomplete', type: 'string', defaultValue: '—', description: 'Native autocomplete token, forwarded verbatim.' },
 		{ name: 'inputmode', type: 'string', defaultValue: '—', description: 'Which soft keyboard to raise on touch devices.' },
 		{ name: 'size', type: 'sm | md | lg', defaultValue: 'md', description: 'Control density.' },
@@ -231,7 +269,7 @@ export const zInputDoc: ComponentDocT = {
 		{ name: 'is-invalid', type: 'boolean', defaultValue: '—', description: 'Paints the error border and sets aria-invalid.' },
 		{ name: 'is-disabled', type: 'boolean', defaultValue: '—', description: 'Blocks interaction and removes the field from the tab order.' },
 		{ name: 'is-readonly', type: 'boolean', defaultValue: '—', description: 'Focusable and selectable, but not editable.' },
-		{ name: 'is-required', type: 'boolean', defaultValue: '—', description: 'Marks the inner input required for native form validation.' },
+		{ name: 'is-required', type: 'boolean', defaultValue: '—', description: 'Blocks the owning form from submitting while empty, and fires `invalid` on the host.' },
 		{ name: 'inline', type: 'boolean', defaultValue: '—', description: 'Shrinks the field to its natural width instead of filling its container.' },
 		{ name: 'is-hidden', type: 'boolean', defaultValue: '—', description: 'Removes the field from layout.' }
 	],
@@ -249,6 +287,10 @@ export const zInputDoc: ComponentDocT = {
 	],
 
 	cssVariables: [],
+
+	keyboard: [
+		{ keys: 'Enter', action: 'Submits the owning form, validating first. Nothing happens outside a form.' }
+	],
 
 	accessibilityNotes: [
 		'The inner element is a native input, so autofill, password managers, spellcheck, and the platform caret all work untouched.',

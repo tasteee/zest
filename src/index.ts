@@ -69,6 +69,10 @@ export * from './shared/theme'
 // from its own affordances without rendering one.
 export * from './shared/clipboard'
 
+// The strings zest says on its own, replaceable once per app: setLocale({ close: 'Fermer' }).
+export { setLocale, getLocale, englishStrings } from './shared/locale'
+export type { LocaleStringsT, LocaleKeyT } from './shared/locale'
+
 // Form controls
 export * from './components/z-field'
 export * from './components/z-input'
@@ -129,6 +133,19 @@ export * from './components/z-file-attachment'
 export * from './components/z-attachment-chip'
 export * from './components/z-attachment-tray'
 export * from './components/z-suggestion-chips'
+
+// Archived conversations
+export type {
+	ChatDateT,
+	ChatReactionT,
+	ChatAttachmentT,
+	ChatMessageT,
+	ChatTranscriptT,
+	ChatContextRequestT
+} from './components/z-chat-types'
+export * from './components/z-chat-message'
+export * from './components/z-chat-transcript'
+export * from './components/z-chat-ai-dock'
 
 // Specialized
 export * from './components/z-callout'

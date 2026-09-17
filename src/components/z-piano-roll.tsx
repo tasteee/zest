@@ -166,7 +166,7 @@ const styles = css`
 		left: 0;
 		z-index: 4;
 		background: var(--card);
-		border-right: 1px solid var(--border);
+		border-inline-end: 1px solid var(--border);
 		border-bottom: 1px solid var(--border);
 	}
 	.ruler {
@@ -186,11 +186,11 @@ const styles = css`
 		bottom: 0;
 		display: flex;
 		align-items: center;
-		padding-left: 5px;
+		padding-inline-start: 5px;
 		font-family: var(--font-mono);
 		font-size: var(--font-size-caption);
 		color: var(--muted-foreground);
-		border-left: 1px solid var(--pr-bar-line);
+		border-inline-start: 1px solid var(--pr-bar-line);
 		font-variant-numeric: tabular-nums;
 		pointer-events: none;
 	}
@@ -198,7 +198,7 @@ const styles = css`
 		position: sticky;
 		left: 0;
 		z-index: 3;
-		border-right: 1px solid var(--border);
+		border-inline-end: 1px solid var(--border);
 		overflow: hidden;
 		cursor: ew-resize;
 		touch-action: none;
@@ -210,7 +210,7 @@ const styles = css`
 		display: flex;
 		align-items: center;
 		justify-content: flex-end;
-		padding-right: 6px;
+		padding-inline-end: 6px;
 		box-sizing: border-box;
 		font-family: var(--font-mono);
 		font-size: 9px;

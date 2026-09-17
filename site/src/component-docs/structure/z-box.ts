@@ -1,5 +1,5 @@
 import { defineMarkupExample } from '../authoring'
-import { ComponentStatus, ExampleLayout } from '../types'
+import { ComponentStatus, EvidenceLevel, ExampleLayout } from '../types'
 import type { ComponentDocT } from '../types'
 
 const buildPlaygroundBox = (): HTMLElement => {
@@ -20,7 +20,14 @@ export const zBoxDoc: ComponentDocT = {
 	tag: 'z-box',
 	title: 'z-box',
 	tagline: 'The one generic layout primitive — flex, grid, or block, with the whole spacing scale as attributes.',
-	status: ComponentStatus.stable,
+	status: ComponentStatus.beta,
+	evidence: {
+		formAssociated: null,
+		keyboard: EvidenceLevel.unverified,
+		screenReader: EvidenceLevel.unverified,
+		browserTests: false,
+		screenshots: false
+	},
 
 	description:
 		'Everything else in the layout category is either a specialisation of this or built on it. `z-box` is a flex container: direction, alignment on both axes, gap, margin, padding and sizing, all as attributes resolved against the design system scale, so a layout never hardcodes a pixel value. The idea worth internalising is that `aligns-x` and `aligns-y` always mean horizontal and vertical, regardless of flow direction. In a vertical box, `aligns-x` still means horizontal even though CSS would call that the cross axis. You describe the result you want, and the component works out which CSS property that maps to. For a grid, reach for `wired-grid` — a box used to switch between seven display modes and that made it a display switch rather than a layout primitive.',

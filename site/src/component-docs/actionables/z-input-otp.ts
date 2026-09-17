@@ -1,5 +1,5 @@
 import { defineInteractiveExample, defineMarkupExample, queryPreview } from '../authoring'
-import { ComponentStatus, ExampleLayout } from '../types'
+import { ComponentStatus, EvidenceLevel, ExampleLayout } from '../types'
 import type { ComponentDocT } from '../types'
 
 const buildPlaygroundInputOtp = (): HTMLElement => {
@@ -13,7 +13,14 @@ export const zInputOtpDoc: ComponentDocT = {
 	tag: 'z-input-otp',
 	title: 'z-input-otp',
 	tagline: 'One cell per character, and a paste that fills all of them.',
-	status: ComponentStatus.stable,
+	status: ComponentStatus.beta,
+	evidence: {
+		formAssociated: true,
+		keyboard: EvidenceLevel.unverified,
+		screenReader: EvidenceLevel.unverified,
+		browserTests: false,
+		screenshots: false
+	},
 
 	description:
 		'A row of single-character cells for verification codes. Typing advances, Backspace retreats — and on an empty cell it clears the one before it, which is what people actually mean by Backspace here. Pasting a whole code fills every cell at once and lands the caret at the end, because nobody wants to paste a code six times. `value` stays positionally faithful to the cells: clearing a middle one leaves a hole rather than sliding the rest back, and `change` emits exactly the string the property holds, so the two can never disagree. `complete` fires the moment every cell is filled, which is usually where you submit.',
@@ -179,6 +186,8 @@ export const zInputOtpDoc: ComponentDocT = {
 	],
 
 	attributes: [
+		{ name: 'name', type: 'string', defaultValue: '—', description: 'The FormData entry name. The host is the form participant, so this goes on the element, not on anything inside it.' },
+		{ name: 'is-required', type: 'boolean', defaultValue: '—', description: 'Blocks the owning form from submitting until every cell is filled.' },
 		{
 			name: 'value',
 			type: 'string',

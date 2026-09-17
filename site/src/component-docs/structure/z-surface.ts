@@ -1,5 +1,5 @@
 import { defineMarkupExample } from '../authoring'
-import { ComponentStatus, ExampleLayout } from '../types'
+import { ComponentStatus, EvidenceLevel, ExampleLayout } from '../types'
 import type { ComponentDocT } from '../types'
 
 const buildPlaygroundSurface = (): HTMLElement => {
@@ -13,7 +13,14 @@ const buildPlaygroundSurface = (): HTMLElement => {
 export const zSurfaceDoc: ComponentDocT = {
 	tag: 'z-surface', title: 'z-surface',
 	tagline: 'A neutral panel with a clear surface treatment.',
-	status: ComponentStatus.stable,
+	status: ComponentStatus.beta,
+	evidence: {
+		formAssociated: null,
+		keyboard: EvidenceLevel.unverified,
+		screenReader: EvidenceLevel.unverified,
+		browserTests: false,
+		screenshots: false
+	},
 	description: '`level` chooses a neutral surface step and `kind` chooses its treatment. The component deliberately has no accent or elevation API: status belongs in purpose-built components, and this design system uses surfaces and borders rather than shadows.',
 	playground: { buildElement: buildPlaygroundSurface, controlNames: ['level', 'kind', 'radius', 'interactive', 'is-full-width'], slotLabel: 'Panel content' },
 	usageGuidance: [

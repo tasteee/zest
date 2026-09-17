@@ -18,6 +18,8 @@ bands.
 switchEl.addEventListener('change', (e) => e.detail.checked)
 ```
 
+Form-associated: see [Forms](../../fundamentals/forms.md). `name` goes on the host and names the FormData entry; `is-required` blocks the owning form from submitting; reset, fieldset disabling and `checkValidity()` / `reportValidity()` / `setCustomValidity()` all work as they would on a native control.
+
 ## Attributes
 
 | Attribute | Values | Default | Description |
@@ -25,9 +27,12 @@ switchEl.addEventListener('change', (e) => e.detail.checked)
 | `is-checked` | boolean | — | on/off state (reflected, two-way) |
 | `size` | `sm` `md` `lg` | `md` | size |
 | `accent` | `dom` `sub` | neutral | accent color |
-| `name` | string | — | form field name |
+| `name` | string | — | FormData entry name (on the host) |
 | `label` | string | — | Accessible name; use slotted text for the visible label. |
-| `value` | string | — | form value |
+| `description` | string | — | accessible description (set by a surrounding `z-field`; rendered hidden and pointed at with `aria-describedby`) |
+| `error` | string | — | accessible error text and `aria-invalid` (set by a surrounding `z-field`) |
+| `value` | string | `on` | value submitted while on; nothing is submitted while off |
+| `is-required` | boolean | — | blocks the owning form from submitting while off |
 | `is-disabled` | boolean | — | disable |
 | `is-full-width` | boolean | — | render as a block element |
 | `is-hidden` | boolean | — | hide |

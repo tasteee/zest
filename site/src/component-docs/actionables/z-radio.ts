@@ -1,5 +1,5 @@
 import { defineInteractiveExample, defineMarkupExample, queryPreview } from '../authoring'
-import { ComponentStatus, ExampleLayout } from '../types'
+import { ComponentStatus, EvidenceLevel, ExampleLayout } from '../types'
 import type { ComponentDocT } from '../types'
 
 const buildPlaygroundRadio = (): HTMLElement => {
@@ -14,7 +14,14 @@ export const zRadioDoc: ComponentDocT = {
 	tag: 'z-radio',
 	title: 'z-radio',
 	tagline: 'One option in a set — a ring that fills when chosen.',
-	status: ComponentStatus.stable,
+	status: ComponentStatus.beta,
+	evidence: {
+		formAssociated: null,
+		keyboard: EvidenceLevel.unverified,
+		screenReader: EvidenceLevel.unverified,
+		browserTests: false,
+		screenshots: false
+	},
 
 	description:
 		'A single radio option: a hairline ring when off, an accent ring with a filled dot when on. It has no notion of its siblings — clearing the others is `z-radio-group`’s job, and it does that by listening for the `select` event this element bubbles. A radio used outside a group is a radio that can never be unchosen, so put it in one.',

@@ -1,8 +1,11 @@
 import { interactionStyles } from '../shared/interaction-styles'
 import { defineFormElement, useFormControl } from '../shared/form-control'
+import { describableProps, describedBy, renderDescriptions, srOnlyStyles, useAccessibleName } from '../shared/accessible'
 import { c, css, event, useProp, useState, useHost, useEffect, useRef } from 'atomico'
 import { themedScrollbarStyles } from '../shared/scrollbar-styles'
 import { computePosition, autoUpdate, applyPosition, showFloating, hideFloating } from '../shared/overlay'
+import { oneOf } from '../shared/prop-types'
+import { useLocale } from '../shared/locale'
 
 /*
  * z-select — a custom dropdown. Trigger shows the selected label (or a
@@ -52,7 +55,7 @@ const styles = css`
 		color: var(--foreground);
 		font-family: inherit;
 		cursor: pointer;
-		text-align: left;
+		text-align: start;
 		user-select: none;
 		-webkit-user-select: none;
 		transition: border-color var(--duration-fast) var(--easing-standard), background-color var(--duration-fast) var(--easing-standard);
@@ -131,9 +134,10 @@ const styles = css`
 		position: fixed;
 		box-sizing: border-box;
 		margin: 0;
+		/* physical: shared/overlay.ts positions the panel from measured rects */
 		left: 0;
 		top: 0;
-		right: auto;
+		right: auto; /* physical */
 		bottom: auto;
 		z-index: 50;
 		background: var(--popover);
@@ -207,7 +211,9 @@ type OptionT = { value: string; label: string; isDisabled?: boolean }
 
 export const ZSelect = c(
 	(props) => {
+		const t = useLocale()
 		const host = useHost()
+		const accessibleName = useAccessibleName(props.label)
 		const panelRef = useRef<HTMLDivElement>()
 		const triggerRef = useRef<HTMLButtonElement>()
 		const [value, setValue] = useProp<string>('value')
@@ -225,7 +231,7 @@ export const ZSelect = c(
 			isDisabled: props.isDisabled,
 			control: triggerRef,
 			validity: props.isRequired && !hasValue
-				? { flags: { valueMissing: true }, message: 'Please select an item in the list.' }
+				? { flags: { valueMissing: true }, message: t('selectAnItemInTheList') }
 				: { flags: {} },
 			onReset: () => setValue(defaultValue.current),
 			onRestore: (state) => { if (typeof state === 'string') setValue(state) }
@@ -345,22 +351,23 @@ export const ZSelect = c(
 					aria-haspopup="listbox"
 					aria-controls="select-options"
 					aria-activedescendant={isOpen && activeIndex >= 0 ? `option-${activeIndex}` : undefined}
-					aria-invalid={props.isInvalid ? 'true' : undefined}
-					aria-label={props.label || host.current?.getAttribute('aria-label') || undefined}
+					aria-label={accessibleName}
+					aria-describedby={describedBy(props.description, props.error)}
+					aria-invalid={props.isInvalid || props.error ? 'true' : undefined}
 					aria-expanded={isOpen ? 'true' : 'false'}
 					onclick={() => isOpen ? setIsOpen(false) : open()}
 					onkeydown={onKeyDown}
 				>
 					<span class={selected ? 'value' : 'value is-placeholder'}>
-						{selected ? selected.label : props.placeholder || 'Select…'}
+						{selected ? selected.label : props.placeholder || t('selectPlaceholder')}
 					</span>
 					<svg class="chevron" viewBox="0 0 24 24">
 						<polyline points="6 9 12 15 18 9" />
 					</svg>
 				</button>
 
-				<div ref={panelRef} id="select-options" class="panel" role="listbox" aria-label={props.label || props.placeholder || 'Options'} popover="manual">
-					{options.length === 0 && <div class="empty">No options</div>}
+				<div ref={panelRef} id="select-options" class="panel" role="listbox" aria-label={props.label || props.placeholder || t('options')} popover="manual">
+					{options.length === 0 && <div class="empty">{t('noOptions')}</div>}
 					{options.map((opt, index) => {
 						const optClass = ['option']
 							.concat(index === activeIndex ? ['is-active'] : [])
@@ -389,18 +396,20 @@ export const ZSelect = c(
 						)
 					})}
 				</div>
+				{renderDescriptions(props.description, props.error)}
 			</host>
 		)
 	},
 	{
 		props: {
+			...describableProps,
 			value: { type: String, reflect: true },
 			name: { type: String, reflect: true },
 			label: String,
 			placeholder: String,
 			options: { type: Array },
-			size: { type: String, reflect: true },
-			accent: { type: String, reflect: true },
+			size: { type: oneOf('sm', 'md', 'lg'), reflect: true },
+			accent: { type: oneOf('neutral', 'dom', 'sub'), reflect: true },
 			isRequired: { type: Boolean, reflect: true },
 			isInvalid: { type: Boolean, reflect: true },
 			isDisabled: { type: Boolean, reflect: true },
@@ -408,7 +417,7 @@ export const ZSelect = c(
 			isHidden: { type: Boolean, reflect: true },
 			change: event<{ value: string }>({ bubbles: true, composed: true })
 		},
-		styles: [themedScrollbarStyles, styles, interactionStyles],
+		styles: [themedScrollbarStyles, styles, interactionStyles, srOnlyStyles],
 		form: true
 	}
 )

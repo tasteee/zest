@@ -1,6 +1,6 @@
 import { defineInteractiveExample, defineMarkupExample, queryPreview } from '../authoring'
 import { Icons } from '../icons'
-import { ComponentStatus, ExampleLayout } from '../types'
+import { ComponentStatus, EvidenceLevel, ExampleLayout } from '../types'
 import type { ComponentDocT } from '../types'
 
 const buildPlaygroundTooltip = (): HTMLElement => {
@@ -17,7 +17,14 @@ export const zTooltipDoc: ComponentDocT = {
 	tag: 'z-tooltip',
 	title: 'z-tooltip',
 	tagline: 'A short label that appears where you are already looking.',
-	status: ComponentStatus.stable,
+	status: ComponentStatus.beta,
+	evidence: {
+		formAssociated: null,
+		keyboard: EvidenceLevel.verified,
+		screenReader: EvidenceLevel.unverified,
+		browserTests: true,
+		screenshots: true
+	},
 
 	description:
 		'Wrap anything: `<z-tooltip content="Save"><z-button>…</z-button></z-tooltip>`. The label opens on hover or focus after `open-delay` and closes on leave, blur, or Escape. Like every anchored overlay here it uses the shared positioning core — a top-layer `[popover]` surface that escapes overflow and flips near an edge — with tighter padding and a plain-text body, because a tooltip that holds anything more than a phrase is the wrong component. An arrow points back at the trigger by default, tracking the side the label flipped to and stopping short of the corners when a near-edge shift moves the label off centre; `does-hide-arrow` removes it.',
@@ -189,6 +196,11 @@ export const zTooltipDoc: ComponentDocT = {
 	cssVariables: [
 		{ name: '--z-overlay-max-width', defaultValue: '20rem', description: 'Caps the label width. Worth lowering for tooltips — a wide one is usually too wordy.' },
 		{ name: '--z-overlay-padding', defaultValue: 'tightened', description: 'Inner padding, already reduced from the shared floating surface.' }
+	],
+
+	keyboard: [
+		{ keys: 'Tab', action: 'Focusing the slotted trigger shows the tooltip; leaving hides it.' },
+		{ keys: 'Esc', action: 'Hides the tooltip.' }
 	],
 
 	accessibilityNotes: [

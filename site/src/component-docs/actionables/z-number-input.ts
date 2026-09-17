@@ -1,5 +1,5 @@
 import { defineInteractiveExample, defineMarkupExample, queryPreview } from '../authoring'
-import { ComponentStatus, ExampleLayout } from '../types'
+import { ComponentStatus, EvidenceLevel, ExampleLayout } from '../types'
 import type { ComponentDocT } from '../types'
 
 const buildPlaygroundNumberInput = (): HTMLElement => {
@@ -16,7 +16,14 @@ export const zNumberInputDoc: ComponentDocT = {
 	tag: 'z-number-input',
 	title: 'z-number-input',
 	tagline: 'A number field that corrects itself on the way out, not while you type.',
-	status: ComponentStatus.stable,
+	status: ComponentStatus.beta,
+	evidence: {
+		formAssociated: true,
+		keyboard: EvidenceLevel.verified,
+		screenReader: EvidenceLevel.unverified,
+		browserTests: true,
+		screenshots: true
+	},
 
 	description:
 		'A typed numeric field with optional ghost steppers. The important behaviour is the timing: while you type, the raw text is left alone — half-typed values like `-` or `1.` are not fought with — and the field only normalises on blur, clamping to `min`/`max` while preserving typed decimals and fractional bounds. `input` fires per keystroke with both the parsed number and the raw text; `change` fires with the settled number. Arrow keys step, and the steppers disable themselves at the bounds.',
@@ -186,7 +193,9 @@ export const zNumberInputDoc: ComponentDocT = {
 		{ name: 'max', type: 'number', defaultValue: '—', description: 'Upper bound. Clamped to on blur; disables the increase stepper at the limit.' },
 		{ name: 'step', type: 'number', defaultValue: '1', description: 'Positive stepper increment. Does not round typed values to its decimal precision.' },
 		{ name: 'label', type: 'string', defaultValue: '—', description: 'Accessible name applied to the inner input. Set for you inside a z-field.' },
-		{ name: 'name', type: 'string', defaultValue: '—', description: 'Name passed to the inner input.' },
+		{ name: 'description', type: 'string', defaultValue: '—', description: 'Accessible description, read after the name. Set for you by a z-field with a description; the text is rendered hidden inside the control and pointed at with aria-describedby.' },
+		{ name: 'error', type: 'string', defaultValue: '—', description: 'Accessible error text, and aria-invalid. Set for you by a z-field with an error.' },
+		{ name: 'name', type: 'string', defaultValue: '—', description: 'The FormData entry name. The host is the form participant, so this goes on the element, not on anything inside it.' },
 		{ name: 'placeholder', type: 'string', defaultValue: '—', description: 'Shown while the field is empty.' },
 		{ name: 'size', type: 'sm | md | lg', defaultValue: 'md', description: 'Control density.' },
 		{ name: 'accent', type: 'neutral | dom | sub', defaultValue: 'neutral', description: 'Which accent the border lifts to on focus.' },
@@ -194,7 +203,7 @@ export const zNumberInputDoc: ComponentDocT = {
 		{ name: 'is-invalid', type: 'boolean', defaultValue: '—', description: 'Forces the error state. Out-of-range typing also triggers it on its own.' },
 		{ name: 'is-disabled', type: 'boolean', defaultValue: '—', description: 'Blocks typing and stepping.' },
 		{ name: 'is-readonly', type: 'boolean', defaultValue: '—', description: 'Selectable but not editable; the steppers are inert.' },
-		{ name: 'is-required', type: 'boolean', defaultValue: '—', description: 'Marks the inner input required for native form validation.' },
+		{ name: 'is-required', type: 'boolean', defaultValue: '—', description: 'Blocks the owning form from submitting while empty. Out-of-range, off-step and non-numeric text block it too.' },
 		{ name: 'is-full-width', type: 'boolean', defaultValue: '—', description: 'Stretches the field to fill its container.' },
 		{ name: 'inline', type: 'boolean', defaultValue: '—', description: 'Shrinks the field to its natural width.' },
 		{ name: 'is-hidden', type: 'boolean', defaultValue: '—', description: 'Removes the field from layout.' }
@@ -214,6 +223,11 @@ export const zNumberInputDoc: ComponentDocT = {
 	],
 
 	cssVariables: [],
+
+	keyboard: [
+		{ keys: '↑ / ↓', action: 'Steps the value by `step`, clamped to `min` and `max`.' },
+		{ keys: 'Enter', action: 'Submits the owning form, validating first.' }
+	],
 
 	accessibilityNotes: [
 		'The inner control is type="text" with inputmode="decimal" rather than type="number" — this keeps the raw string editable mid-typing and avoids the browser’s scroll-wheel-changes-the-value behaviour, while still raising a numeric keypad on touch.',

@@ -1,5 +1,5 @@
 import { defineInteractiveExample, defineMarkupExample, queryPreview } from '../authoring'
-import { ComponentStatus, ExampleLayout } from '../types'
+import { ComponentStatus, EvidenceLevel, ExampleLayout } from '../types'
 import type { ComponentDocT } from '../types'
 
 const buildPlaygroundAlertDialog = (): HTMLElement => {
@@ -20,7 +20,14 @@ export const zAlertDialogDoc: ComponentDocT = {
 	tag: 'z-alert-dialog',
 	title: 'z-alert-dialog',
 	tagline: 'The one modal that will not let you click away from the question.',
-	status: ComponentStatus.stable,
+	status: ComponentStatus.beta,
+	evidence: {
+		formAssociated: null,
+		keyboard: EvidenceLevel.unverified,
+		screenReader: EvidenceLevel.unverified,
+		browserTests: false,
+		screenshots: false
+	},
 
 	description:
 		'Same native `<dialog>` foundation as `z-dialog`, with two deliberate differences. It owns its actions — a cancel and a confirm, no free-form footer — and it refuses light dismissal: a backdrop click does nothing, and Escape resolves as an explicit cancel rather than an ambiguous close. That is the right shape for a consequential choice, because "the user clicked somewhere" should never be recorded as an answer. `accent="error"` paints the confirm in the destructive colour.',

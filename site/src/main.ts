@@ -3,6 +3,7 @@
 // apps preserve its package identity, but browsers cannot resolve that bare
 // specifier from a public /zest.js file. Vite resolves and bundles it here.
 import '../../src/index'
+import '../../src/fonts.css'
 
 import './site.css'
 import './internal-doc-elements'
@@ -14,6 +15,7 @@ import { buildPlayground } from './playground'
 import { getComponentDoc } from './component-docs/registry'
 import { buildComponentPage } from './render/component-page'
 import { renderExamplesGallery } from './render/examples-gallery'
+import { buildStatusPage } from './render/status-page'
 import { renderExamplePage, renderStandaloneExample } from './render/example-page'
 import { getAllExamples, getExample } from './examples/registry'
 
@@ -163,8 +165,10 @@ const buildExamplesNavBranch = (): NavNodeT => {
 	return { label: 'Examples', children: [gallery, ...examples] }
 }
 
+const STATUS_ROUTE = '/status'
+
 const buildNavItems = (): NavNodeT[] => {
-	const items: NavNodeT[] = [buildExamplesNavBranch()]
+	const items: NavNodeT[] = [buildExamplesNavBranch(), { label: 'Status', route: STATUS_ROUTE }]
 
 	for (const category of siteData.categories) {
 		const groupNodes = category.subcategories.map((subcategory) => ({
@@ -404,6 +408,14 @@ const renderRoute = (): void => {
 	const isHomeRoute = currentRoute === '/'
 	if (isHomeRoute) {
 		renderHomePage(contentRoot)
+		scrollPageToTop()
+		return
+	}
+
+	if (currentRoute === STATUS_ROUTE) {
+		activePage = null
+		setPageOutline(null)
+		contentRoot.replaceChildren(buildStatusPage(getAllPages(siteData)))
 		scrollPageToTop()
 		return
 	}

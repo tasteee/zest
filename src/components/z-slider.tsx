@@ -1,6 +1,7 @@
 import { interactionStyles } from '../shared/interaction-styles'
-import { defineElement } from '../shared/define-element'
-import { c, css, event, useProp } from 'atomico'
+import { defineFormElement, useFormControl } from '../shared/form-control'
+import { useAccessibleName } from '../shared/accessible'
+import { c, css, event, useProp, useRef } from 'atomico'
 
 /*
  * z-slider — a range control built on a native input[type=range] so keyboard
@@ -36,7 +37,7 @@ const styles = css`
 
 	.value {
 		/* margin-left keeps the value flush-right even when there's no label. */
-		margin-left: auto;
+		margin-inline-start: auto;
 		font-size: var(--font-size-caption);
 		font-weight: var(--font-weight-semibold);
 		font-variant-numeric: tabular-nums;
@@ -142,16 +143,28 @@ const styles = css`
 export const ZSlider = c(
 	(props) => {
 		const [value, setValue] = useProp<number>('value')
+		const inputRef = useRef<HTMLInputElement>()
+		const defaultValue = useRef(value)
+		const accessibleName = useAccessibleName(props.label)
 
 		const min = props.min ?? 0
 		const max = props.max ?? 100
 		const current = Math.min(max, Math.max(min, value ?? min))
+		// A range always has a value, so it always submits one, as native does.
+		const { isFormDisabled } = useFormControl({
+			value: String(current),
+			isDisabled: props.isDisabled,
+			control: inputRef,
+			onReset: () => setValue(defaultValue.current),
+			onRestore: (state) => { if (typeof state === 'string' && state !== '') setValue(Number(state)) }
+		})
+		const isDisabled = props.isDisabled || isFormDisabled
 		const fill = max > min ? ((current - min) / (max - min)) * 100 : 0
 
 		const showHeader = Boolean(props.label) || props.doesShowValue
 
 		return (
-			<host shadowDom style={{ '--fill': `${fill}%` }}>
+			<host shadowDom={{ delegatesFocus: true }} style={{ '--fill': `${fill}%` }}>
 				{showHeader && (
 					<div class="header">
 						{props.label && <span class="label">{props.label}</span>}
@@ -165,14 +178,14 @@ export const ZSlider = c(
 					</div>
 				)}
 				<input
+					ref={inputRef}
 					type="range"
 					min={min}
 					max={max}
 					step={props.step ?? 1}
 					value={current}
-					name={props.name}
-					disabled={props.isDisabled}
-					aria-label={props.label}
+					disabled={isDisabled}
+					aria-label={accessibleName}
 					oninput={(e: any) => {
 						e.stopPropagation()
 						const next = Number(e.target.value)
@@ -193,7 +206,7 @@ export const ZSlider = c(
 			min: { type: Number, reflect: true },
 			max: { type: Number, reflect: true },
 			step: { type: Number, reflect: true },
-			name: String,
+			name: { type: String, reflect: true },
 			label: String,
 			doesShowValue: { type: Boolean, reflect: true },
 			valuePrefix: String,
@@ -204,8 +217,9 @@ export const ZSlider = c(
 			input: event<{ value: number }>({ bubbles: true, composed: true }),
 			change: event<{ value: number }>({ bubbles: true, composed: true })
 		},
-		styles: [styles, interactionStyles]
+		styles: [styles, interactionStyles],
+		form: true
 	}
 )
 
-defineElement('z-slider', ZSlider)
+defineFormElement('z-slider', ZSlider)

@@ -1,6 +1,6 @@
 import { defineMarkupExample } from '../authoring'
 import { Icons } from '../icons'
-import { ComponentStatus, ExampleLayout } from '../types'
+import { ComponentStatus, EvidenceLevel, ExampleLayout } from '../types'
 import type { ComponentDocT } from '../types'
 
 const buildPlaygroundToolbar = (): HTMLElement => {
@@ -18,7 +18,14 @@ export const zToolbarDoc: ComponentDocT = {
 	tag: 'z-toolbar',
 	title: 'z-toolbar',
 	tagline: 'An action strip that is a single tab stop, with arrow keys moving between its controls.',
-	status: ComponentStatus.stable,
+	status: ComponentStatus.beta,
+	evidence: {
+		formAssociated: null,
+		keyboard: EvidenceLevel.unverified,
+		screenReader: EvidenceLevel.unverified,
+		browserTests: false,
+		screenshots: false
+	},
 
 	description:
 		'A real toolbar, not a styled row. It sets `role="toolbar"` and implements roving tabindex: the whole strip takes one Tab, and the arrow keys move focus between the controls inside it, with Home and End jumping to the ends. That matters because a formatting bar with twelve buttons otherwise costs twelve Tab presses to step past. The roving index is recalculated on `focusin` and on any child mutation, so controls added or removed at runtime stay reachable.',

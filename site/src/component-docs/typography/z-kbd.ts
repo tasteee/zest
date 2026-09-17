@@ -1,5 +1,5 @@
 import { defineMarkupExample } from '../authoring'
-import { ComponentStatus, ExampleLayout } from '../types'
+import { ComponentStatus, EvidenceLevel, ExampleLayout } from '../types'
 import type { ComponentDocT } from '../types'
 
 const buildPlaygroundKbd = (): HTMLElement => {
@@ -12,7 +12,14 @@ export const zKbdDoc: ComponentDocT = {
 	tag: 'z-kbd',
 	title: 'z-kbd',
 	tagline: 'One keyboard key cap, for documenting shortcuts.',
-	status: ComponentStatus.stable,
+	status: ComponentStatus.beta,
+	evidence: {
+		formAssociated: null,
+		keyboard: EvidenceLevel.unverified,
+		screenReader: EvidenceLevel.unverified,
+		browserTests: false,
+		screenshots: false
+	},
 
 	description:
 		'A single key. Bordered, mono, with just enough of a raised edge to read as a physical cap rather than a code span. It is deliberately one key rather than a chord parser — a chord is a few of these with plain text between them, which keeps the markup obvious and lets you space and punctuate a combination however your interface needs.',

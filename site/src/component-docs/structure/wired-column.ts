@@ -1,5 +1,5 @@
 import { defineMarkupExample } from '../authoring'
-import { ComponentStatus, ExampleLayout } from '../types'
+import { ComponentStatus, EvidenceLevel, ExampleLayout } from '../types'
 import type { ComponentDocT } from '../types'
 
 const buildPlaygroundColumn = (): HTMLElement => {
@@ -17,7 +17,14 @@ export const wiredColumnDoc: ComponentDocT = {
 	tag: 'wired-column',
 	title: 'wired-column',
 	tagline: 'A focused vertical layout primitive from @tasteee/wired.',
-	status: ComponentStatus.stable,
+	status: ComponentStatus.beta,
+	evidence: {
+		formAssociated: null,
+		keyboard: EvidenceLevel.unverified,
+		screenReader: EvidenceLevel.unverified,
+		browserTests: false,
+		screenshots: false
+	},
 	description:
 		'`wired-column` stacks children vertically and keeps spacing on the container. Zest re-exports the implementation from `@tasteee/wired`, giving applications one consistent column API.',
 	playground: {

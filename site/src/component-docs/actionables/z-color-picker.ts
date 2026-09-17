@@ -1,5 +1,5 @@
 import { defineInteractiveExample, defineMarkupExample, queryPreview } from '../authoring'
-import { ComponentStatus, ExampleLayout } from '../types'
+import { ComponentStatus, EvidenceLevel, ExampleLayout } from '../types'
 import type { ComponentDocT } from '../types'
 
 type ColorPickerElementT = HTMLElement & {
@@ -17,7 +17,14 @@ export const zColorPickerDoc: ComponentDocT = {
 	tag: 'z-color-picker',
 	title: 'z-color-picker',
 	tagline: 'A swatch that opens onto three ways of picking the same colour.',
-	status: ComponentStatus.stable,
+	status: ComponentStatus.beta,
+	evidence: {
+		formAssociated: true,
+		keyboard: EvidenceLevel.unverified,
+		screenReader: EvidenceLevel.unverified,
+		browserTests: false,
+		screenshots: false
+	},
 
 	description:
 		'The trigger is a swatch and its hex code. Opening it reveals a bordered panel with the native spectrum picker, a hex field, and a row of preset swatches — three routes to the same value, because "roughly this blue", "#0A84FF exactly", and "the brand colour" are three different tasks. `value` is always a normalised uppercase hex string, so short forms and stray hashes typed into the field come back out canonical.',
@@ -154,6 +161,7 @@ export const zColorPickerDoc: ComponentDocT = {
 	],
 
 	attributes: [
+		{ name: 'name', type: 'string', defaultValue: '—', description: 'The FormData entry name. The host is the form participant, so this goes on the element, not on anything inside it. Always submits the current hex, like a native colour input.' },
 		{ name: 'value', type: 'string', defaultValue: '#BF40BF', description: 'The chosen colour as an uppercase hex string. Reflects.' },
 		{
 			name: 'label',

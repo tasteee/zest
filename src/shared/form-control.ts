@@ -1,6 +1,7 @@
 import { useEffect, useFormDisabled, useFormReset, useHost, useState } from 'atomico'
 import type { Ref } from 'atomico'
 import { defineElement } from './define-element'
+import { useLocale } from './locale'
 
 /*
  * Form participation for Zest controls.
@@ -99,6 +100,7 @@ export const useFormControl = (config: FormControlConfigT): FormControlT => {
 	const host = useHost() as unknown as { current: FormHostT }
 	const [isFormDisabled, setIsFormDisabled] = useState(false)
 	const internals = attachInternals(host.current)
+	const t = useLocale()
 
 	useFormDisabled((disabled) => setIsFormDisabled(disabled))
 	useFormReset(() => config.onReset())
@@ -122,7 +124,7 @@ export const useFormControl = (config: FormControlConfigT): FormControlT => {
 		const custom = host.current[CUSTOM_MESSAGE]
 		const flags: ValidityFlagsT = { ...native.flags, ...config.validity?.flags }
 		if (custom) flags.customError = true
-		const message = custom || config.validity?.message || native.message || (hasFailure(flags) ? 'Invalid value.' : '')
+		const message = custom || config.validity?.message || native.message || (hasFailure(flags) ? t('invalidValue') : '')
 		const anchor = config.control?.current
 		if (hasFailure(flags)) internals.setValidity(flags, message, anchor)
 		else internals.setValidity({})

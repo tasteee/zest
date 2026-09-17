@@ -1,0 +1,85 @@
+# The gate. Nothing lands on main without the unit and browser suites, the
+# release build (which regenerates the manifest and runs
+# check-release-surface), and the framework examples building and passing
+# their real-browser smoke flow.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      # The browser project and the example smoke flow both drive Chromium
+      # through Playwright.
+      - run: npx playwright install --with-deps chromium
+
+      - run: npm run typecheck
+
+      # The build comes first: the API contract test reads what it produces
+      # (custom-elements.json against dist/components/*.d.ts).
+      - run: npm run build
+
+      # Unit + browser projects, with the coverage thresholds in
+      # vitest.config.ts enforced — the core set has its own, higher bar.
+      - run: npm run test:coverage
+
+      - run: npm run examples:build
+
+      - run: npm run examples:smoke
+
+  # Screenshot regression runs on its own so a pixel diff never hides a test
+  # failure, and vice versa. Baselines are per platform; the ones committed
+  # from Windows do not apply here. Until *-linux.png baselines are committed
+  # this job seeds them and uploads them as an artifact instead of failing —
+  # download it, commit e2e/__screenshots__, and from then on it compares.
+  screenshots:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - run: npx playwright install --with-deps chromium
+
+      - run: npm run build
+
+      - name: Compare against Linux baselines, or seed them
+        run: |
+          if ls e2e/__screenshots__/*/*-linux.png >/dev/null 2>&1; then
+            npm run test:screens
+          else
+            echo "::warning::No Linux screenshot baselines are committed. Seeding them; download the screenshot-baselines-linux artifact and commit e2e/__screenshots__."
+            npm run test:screens -- --update-snapshots
+          fi
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: screenshot-baselines-linux
+          path: e2e/__screenshots__
+
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: screenshot-diffs
+          path: |
+            e2e/results
+            e2e/report

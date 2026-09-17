@@ -98,7 +98,7 @@ const styles = css`
 
 	caption {
 		margin-bottom: var(--space-sm);
-		text-align: left;
+		text-align: start;
 		font-size: var(--font-size-caption);
 		letter-spacing: 0.06em;
 		text-transform: uppercase;
@@ -108,7 +108,7 @@ const styles = css`
 	th {
 		padding: 0 var(--space-sm) var(--space-xs);
 		border-bottom: 1px solid var(--border);
-		text-align: left;
+		text-align: start;
 		font-size: var(--font-size-caption);
 		font-weight: var(--font-weight-medium);
 		letter-spacing: 0.04em;
@@ -150,7 +150,7 @@ const styles = css`
 	}
 
 	.name:focus-visible {
-		outline: 3px solid color-mix(in oklch, var(--ring) 50%, transparent);
+		outline: 3px solid var(--focus-ring);
 		outline-offset: 2px;
 		border-radius: var(--radius-sm);
 	}
@@ -164,7 +164,7 @@ const styles = css`
 	}
 
 	.required {
-		margin-left: 0.25rem;
+		margin-inline-start: 0.25rem;
 		color: var(--destructive);
 	}
 

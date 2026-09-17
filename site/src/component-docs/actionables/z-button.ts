@@ -1,6 +1,6 @@
 import { defineInteractiveExample, defineMarkupExample, queryPreview } from '../authoring'
 import { Icons } from '../icons'
-import { ComponentStatus, ExampleLayout } from '../types'
+import { ComponentStatus, EvidenceLevel, ExampleLayout } from '../types'
 import type { ComponentDocT } from '../types'
 
 const buildPlaygroundButton = (): HTMLElement => {
@@ -14,7 +14,14 @@ export const zButtonDoc: ComponentDocT = {
 	tag: 'z-button',
 	title: 'z-button',
 	tagline: 'The action control — neutral by default, with explicit accents when emphasis requires them.',
-	status: ComponentStatus.stable,
+	status: ComponentStatus.beta,
+	evidence: {
+		formAssociated: true,
+		keyboard: EvidenceLevel.verified,
+		screenReader: EvidenceLevel.unverified,
+		browserTests: true,
+		screenshots: true
+	},
 
 	description:
 		'z-button separates meaning from emphasis. `kind` picks the visual treatment and `size` picks the density. With no accent it is neutral; explicit `dom` and `sub` accents use their purple and pink families, while status accents communicate success, warning, or error.',
@@ -344,7 +351,9 @@ export const zButtonDoc: ComponentDocT = {
 		},
 		{ name: 'size', type: 'sm | md | lg', defaultValue: 'md', description: 'Control density.' },
 		{ name: 'label', type: 'string', defaultValue: '—', description: 'Text content. Takes precedence over slotted children.' },
-		{ name: 'type', type: 'button | submit | reset', defaultValue: 'button', description: 'Native button type for form participation.' },
+		{ name: 'type', type: 'button | submit | reset', defaultValue: 'button', description: 'submit calls requestSubmit() on the owning form, so validation runs first; reset resets it.' },
+		{ name: 'name', type: 'string', defaultValue: '—', description: 'With type="submit", the FormData entry contributed for that submission only, as a native submitter does.' },
+		{ name: 'value', type: 'string', defaultValue: '—', description: 'The value submitted under `name`.' },
 		{ name: 'is-disabled', type: 'boolean', defaultValue: '—', description: 'Blocks pointer and keyboard interaction.' },
 		{
 			name: 'is-loading',
@@ -374,6 +383,10 @@ export const zButtonDoc: ComponentDocT = {
 	],
 
 	cssVariables: [],
+
+	keyboard: [
+		{ keys: 'Enter / Space', action: 'Activates the button. With type="submit" that submits the owning form, validating first; with type="reset" it resets it.' }
+	],
 
 	accessibilityNotes: [
 		'Renders a real native button, so Enter and Space activate it and it lands in the tab order without any extra work.',

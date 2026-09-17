@@ -80,3 +80,12 @@ axis.addEventListener('remove', () => deleteColumn(hoveredColumnIndex))
 - `z-bubble-menu`'s `table-cell` variant covers per-cell actions (insert/delete
   relative to the current cell, merge); `z-table-axis-handle` covers whole-row
   and whole-column actions from the header edge — use both together.
+
+## Keyboard
+
+Every row is exercised by a browser test.
+
+| Keys | Action |
+| --- | --- |
+| Tab | Reaches each action button while the toolbar is open. |
+| Enter / Space | On a button: fires `action` with its value. |

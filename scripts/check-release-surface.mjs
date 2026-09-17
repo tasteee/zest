@@ -79,9 +79,19 @@ for (const tag of heldBackTags) {
 }
 
 const componentDir = join(root, 'src', 'components')
+const inventoriedFiles = new Set(elementEntries.map((entry) => entry.sourceFile))
+const indexSource = readFileSync(join(root, 'src', 'index.ts'), 'utf8')
 for (const name of readdirSync(componentDir).filter((entry) => entry.endsWith('.tsx'))) {
-	const source = readFileSync(join(componentDir, name), 'utf8')
+	const path = join(componentDir, name)
+	const source = readFileSync(path, 'utf8')
 	if (source.includes('customElements.define(')) failures.push(`${name} bypasses defineElement`)
+	// A component the root entry exports must register at least one element
+	// the inventory can see. The inventory is a source pattern; a new way of
+	// registering (defineFormElement was one) must be taught to it, or the
+	// element silently drops out of the manifest, the catalog and dist/elements.
+	const isExported = indexSource.includes(`./components/${name.slice(0, -4)}'`)
+	const registers = /define\w*Element\(/.test(source)
+	if (isExported && registers && !inventoriedFiles.has(path)) failures.push(`${name} registers an element the inventory does not see (scripts/public-element-entries.mjs)`)
 }
 
 const declarationDir = join(root, 'dist', 'components')
@@ -96,6 +106,9 @@ const packageJson = JSON.parse(readFileSync(join(root, 'package.json'), 'utf8'))
 if (packageJson.version !== '0.8.0') failures.push(`package version is ${packageJson.version}, expected 0.8.0`)
 if (!packageJson.dependencies?.atomico) failures.push('atomico must be a dependency because public declarations reference its types')
 if (!packageJson.dependencies?.['@tasteee/wired']) failures.push('@tasteee/wired must provide the public layout primitives')
+if (packageJson.exports?.['./fonts.css'] !== './dist/fonts.css') failures.push('package fonts.css subpath is missing')
+if (!existsSync(join(root, 'dist', 'fonts.css'))) failures.push('dist/fonts.css is missing')
+if (readFileSync(join(root, 'dist', 'ink.css'), 'utf8').includes('fonts.googleapis.com')) failures.push('ink.css loads fonts from Google; that belongs to fonts.css')
 if (packageJson.exports?.['./*']?.import !== './dist/elements/*.js') failures.push('package element import wildcard is missing')
 if (packageJson.exports?.['./*']?.types !== './dist/elements/*.d.ts') failures.push('package element types wildcard is missing')
 

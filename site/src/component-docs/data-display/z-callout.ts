@@ -1,5 +1,5 @@
 import { defineInteractiveExample, defineMarkupExample, queryPreview } from '../authoring'
-import { ComponentStatus, ExampleLayout } from '../types'
+import { ComponentStatus, EvidenceLevel, ExampleLayout } from '../types'
 import type { ComponentDocT } from '../types'
 
 const buildPlaygroundCallout = (): HTMLElement => {
@@ -14,7 +14,14 @@ export const zCalloutDoc: ComponentDocT = {
 	tag: 'z-callout',
 	title: 'z-callout',
 	tagline: 'The admonition block — a note, a tip, a warning inside prose.',
-	status: ComponentStatus.stable,
+	status: ComponentStatus.beta,
+	evidence: {
+		formAssociated: null,
+		keyboard: EvidenceLevel.unverified,
+		screenReader: EvidenceLevel.unverified,
+		browserTests: false,
+		screenshots: false
+	},
 
 	description:
 		'A content-emphasis block for documentation: a left accent bar tinted by `kind`, a leading icon, an optional `heading`, and slotted body copy. Alert reacts to what the app just did; callout annotates what you\'re reading — a callout is never triggered by an event, it just sits in the prose it belongs to. Omit the heading and it renders compact, with the icon centred against the copy. Set `is-expandable` and long copy clamps to two lines with an inline "Show more" that only appears when the text actually overflows.',

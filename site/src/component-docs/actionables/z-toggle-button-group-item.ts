@@ -1,6 +1,6 @@
 import { defineInteractiveExample, defineMarkupExample, queryPreview } from '../authoring'
 import { Icons } from '../icons'
-import { ComponentStatus, ExampleLayout } from '../types'
+import { ComponentStatus, EvidenceLevel, ExampleLayout } from '../types'
 import type { ComponentDocT } from '../types'
 
 const buildPlaygroundItem = (): HTMLElement => {
@@ -21,7 +21,14 @@ export const zToggleButtonGroupItemDoc: ComponentDocT = {
 	tag: 'z-toggle-button-group-item',
 	title: 'z-toggle-button-group-item',
 	tagline: 'One segment of a toggle group — carries a value and a pressed state.',
-	status: ComponentStatus.stable,
+	status: ComponentStatus.beta,
+	evidence: {
+		formAssociated: null,
+		keyboard: EvidenceLevel.unverified,
+		screenReader: EvidenceLevel.unverified,
+		browserTests: false,
+		screenshots: false
+	},
 
 	description:
 		'The child half of `z-toggle-button-group`. It carries the `value` that identifies it in the group\'s `change` event and the `is-pressed` state that reflects whether it is currently selected. Appearance is inherited from the parent group through shared CSS variables, but every axis can be overridden per item when one segment genuinely needs to differ — a destructive option in an otherwise neutral set, say. Reaching for those overrides routinely is usually a sign the styling belongs on the group.',

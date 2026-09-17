@@ -1,4 +1,5 @@
-import { defineElement } from '../shared/define-element'
+import { defineFormElement, useFormControl } from '../shared/form-control'
+import { useLocale } from '../shared/locale'
 import { c, css, event, useState } from 'atomico'
 
 /*
@@ -107,7 +108,7 @@ const styles = css`
 
 	.pill:focus-visible,
 	.reset:focus-visible {
-		outline: 3px solid color-mix(in oklch, var(--ring) 50%, transparent);
+		outline: 3px solid var(--focus-ring);
 		outline-offset: 2px;
 	}
 
@@ -231,14 +232,24 @@ const resolveView = (options: FilterOptionT[], path: string[], collapseLeaf: boo
 
 export const ZFilter = c(
 	(props) => {
+		const t = useLocale()
 		const [path, setPath] = useState<string[]>([])
+		// The chosen leaf is the value (its path is in the change event); with
+		// nothing chosen there is no entry, like an unchecked radio group.
+		const { isFormDisabled } = useFormControl({
+			value: path.length ? path[path.length - 1] : null,
+			isDisabled: props.isDisabled,
+			onReset: () => setPath([]),
+			onRestore: (state) => { if (typeof state === 'string') setPath(state ? [state] : []) }
+		})
+		const isDisabled = props.isDisabled || isFormDisabled
 
 		const options: FilterOptionT[] = Array.isArray(props.options) ? (props.options as FilterOptionT[]) : []
 		const collapseLeaf = !props.isDrilldown
 		const view = resolveView(options, path, collapseLeaf)
 
 		const apply = (next: string[]) => {
-			if (props.isDisabled) return
+			if (isDisabled) return
 			setPath(next)
 			props.change({ value: next.length ? next[next.length - 1] : undefined, path: next })
 		}
@@ -254,7 +265,7 @@ export const ZFilter = c(
 			<host shadowDom role="group" aria-label={props.label}>
 				<div class={filterClass}>
 					{path.length > 0 && (
-						<button type="button" class="reset" aria-label={props.resetLabel || 'Clear'} onclick={() => apply([])}>
+						<button type="button" class="reset" aria-label={props.resetLabel || t('clear')} onclick={() => apply([])}>
 							<svg viewBox="0 0 12 12">
 								<path d="M3 3l6 6M9 3l-6 6" />
 							</svg>
@@ -305,6 +316,7 @@ export const ZFilter = c(
 	{
 		props: {
 			options: { type: Array },
+			name: { type: String, reflect: true },
 			accent: { type: String, reflect: true },
 			size: { type: String, reflect: true },
 			label: String,
@@ -314,8 +326,9 @@ export const ZFilter = c(
 			isHidden: { type: Boolean, reflect: true },
 			change: event<{ value?: string; path: string[] }>({ bubbles: true, composed: true })
 		},
-		styles
+		styles,
+		form: true
 	}
 )
 
-defineElement('z-filter', ZFilter)
+defineFormElement('z-filter', ZFilter)

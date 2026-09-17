@@ -1,6 +1,7 @@
 import { interactionStyles } from '../shared/interaction-styles'
-import { defineElement } from '../shared/define-element'
-import { c, css, event, useHost, useState, useEffect } from 'atomico'
+import { defineFormElement, useFormControl } from '../shared/form-control'
+import { useLocale } from '../shared/locale'
+import { c, css, event, useHost, useState, useEffect, useRef } from 'atomico'
 
 /*
  * z-range — a single slider bar with two handles. z-range owns the domain
@@ -63,7 +64,7 @@ const styles = css`
 		align-items: center;
 		gap: 0.375rem;
 		/* margin-left keeps the value flush-right even when there's no label. */
-		margin-left: auto;
+		margin-inline-start: auto;
 		font-size: var(--font-size-caption);
 		font-weight: var(--font-weight-semibold);
 		font-variant-numeric: tabular-nums;
@@ -249,9 +250,42 @@ const accentFor = (accent: unknown): string => {
 export const ZRange = c(
 	(props) => {
 		const host = useHost()
+		const t = useLocale()
 		const [config, setConfig] = useState<ConfigT | null>(null)
 		const [leftValue, setLeftValue] = useState(0)
 		const [rightValue, setRightValue] = useState(0)
+		const defaults = useRef<{ left: number; right: number } | null>(null)
+		const leftInputRef = useRef<HTMLInputElement>()
+
+		// Two values under one name, like a multiple <select>: FormData.getAll(name)
+		// gives [lower, upper]. Reset returns both handles to where they began.
+		const formValue = () => {
+			if (!config) return null
+			const data = new FormData()
+			const name = host.current.getAttribute('name') ?? ''
+			data.append(name, String(leftValue))
+			data.append(name, String(rightValue))
+			return data
+		}
+		const applyValues = (left: number, right: number) => {
+			setLeftValue(left)
+			setRightValue(right)
+			const handles = host.current.querySelectorAll<HandleElementT>('z-range-handle')
+			if (handles[0]) handles[0].value = left
+			if (handles[1]) handles[1].value = right
+		}
+		const { isFormDisabled } = useFormControl({
+			value: formValue(),
+			isDisabled: props.isDisabled,
+			control: leftInputRef,
+			onReset: () => { if (defaults.current) applyValues(defaults.current.left, defaults.current.right) },
+			onRestore: (state) => {
+				if (!(state instanceof FormData)) return
+				const [left, right] = state.getAll(host.current.getAttribute('name') ?? '').map(Number)
+				if (Number.isFinite(left) && Number.isFinite(right)) applyValues(left, right)
+			}
+		})
+		const isDisabled = props.isDisabled || isFormDisabled
 
 		// Read the domain + the two handle children once, then drive from state.
 		useEffect(() => {
@@ -286,13 +320,14 @@ export const ZRange = c(
 				leftMax: left.max,
 				leftStep: left.step,
 				leftAccent: left.accent,
-				leftLabel: left.label || 'Lower value',
+				leftLabel: left.label || t('lowerValue'),
 				rightMin: right.min,
 				rightMax: right.max,
 				rightStep: right.step,
 				rightAccent: right.accent,
-				rightLabel: right.label || 'Upper value'
+				rightLabel: right.label || t('upperValue')
 			})
+			defaults.current = { left: lv, right: rv }
 			setLeftValue(lv)
 			setRightValue(rv)
 			handles[0].value = lv
@@ -388,13 +423,14 @@ export const ZRange = c(
 					<div class="cap" style={{ right: '0', width: `${rightCapWidth}%` }} />
 					<div class="fill" style={{ left: `${leftPct}%`, right: `${100 - rightPct}%` }} />
 					<input
+						ref={leftInputRef}
 						class="left"
 						type="range"
 						min={config.domainMin}
 						max={config.domainMax}
 						step={config.leftStep}
 						value={leftValue}
-						disabled={props.isDisabled}
+						disabled={isDisabled}
 						aria-label={config.leftLabel}
 						oninput={(e: any) => commit(e.target, 'left', 'input')}
 						onchange={(e: any) => commit(e.target, 'left', 'change')}
@@ -406,7 +442,7 @@ export const ZRange = c(
 						max={config.domainMax}
 						step={config.rightStep}
 						value={rightValue}
-						disabled={props.isDisabled}
+						disabled={isDisabled}
 						aria-label={config.rightLabel}
 						oninput={(e: any) => commit(e.target, 'right', 'input')}
 						onchange={(e: any) => commit(e.target, 'right', 'change')}
@@ -421,6 +457,7 @@ export const ZRange = c(
 			min: { type: Number, reflect: true },
 			max: { type: Number, reflect: true },
 			step: { type: Number, reflect: true },
+			name: { type: String, reflect: true },
 			label: String,
 			showValue: { type: Boolean, reflect: true },
 			valuePrefix: String,
@@ -430,8 +467,9 @@ export const ZRange = c(
 			input: event<RangeDetailT>({ bubbles: true, composed: true }),
 			change: event<RangeDetailT>({ bubbles: true, composed: true })
 		},
-		styles: [styles, interactionStyles]
+		styles: [styles, interactionStyles],
+		form: true
 	}
 )
 
-defineElement('z-range', ZRange)
+defineFormElement('z-range', ZRange)

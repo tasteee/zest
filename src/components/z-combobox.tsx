@@ -1,8 +1,11 @@
 import { computePosition, autoUpdate, applyPosition, showFloating, hideFloating } from '../shared/overlay'
 import { interactionStyles } from '../shared/interaction-styles'
 import { defineFormElement, useFormControl } from '../shared/form-control'
+import { describableProps, describedBy, renderDescriptions, srOnlyStyles, useAccessibleName } from '../shared/accessible'
 import { c, css, event, useProp, useState, useHost, useEffect, useRef } from 'atomico'
 import { themedScrollbarStyles } from '../shared/scrollbar-styles'
+import { oneOf } from '../shared/prop-types'
+import { useLocale } from '../shared/locale'
 
 /*
  * z-combobox — a select you can type into. The trigger is a text input that
@@ -129,9 +132,10 @@ const styles = css`
 		position: fixed;
 		margin: 0;
 		box-sizing: border-box;
+		/* physical: shared/overlay.ts positions the panel from measured rects */
 		top: 0;
-		left: 0;
-		right: auto;
+		left: 0; /* physical */
+		right: auto; /* physical */
 		bottom: auto;
 		z-index: 50;
 		background: var(--popover);
@@ -194,7 +198,9 @@ const resolveSizeClass = (props: any): string => {
 
 export const ZCombobox = c(
 	(props) => {
+		const t = useLocale()
 		const host = useHost()
+		const accessibleName = useAccessibleName(props.label)
 		const inputRef = useRef<HTMLInputElement>()
 		const panelRef = useRef<HTMLDivElement>()
 		const [value, setValue] = useProp<string>('value')
@@ -214,7 +220,7 @@ export const ZCombobox = c(
 			isDisabled: props.isDisabled,
 			control: inputRef,
 			validity: props.isRequired && !hasValue
-				? { flags: { valueMissing: true }, message: 'Please select an item in the list.' }
+				? { flags: { valueMissing: true }, message: t('selectAnItemInTheList') }
 				: { flags: {} },
 			onReset: () => { setValue(defaultValue.current); setQuery('') },
 			onRestore: (state) => { if (typeof state === 'string') setValue(state) }
@@ -301,13 +307,14 @@ export const ZCombobox = c(
 						ref={inputRef}
 						type="text"
 						value={displayValue}
-						placeholder={props.placeholder || 'Search…'}
+						placeholder={props.placeholder || t('searchPlaceholder')}
 						disabled={isDisabled}
 						role="combobox"
 						aria-required={props.isRequired ? 'true' : undefined}
-						aria-label={props.label || host.current?.getAttribute('aria-label') || undefined}
+						aria-label={accessibleName}
+						aria-describedby={describedBy(props.description, props.error)}
+						aria-invalid={props.isInvalid || props.error ? 'true' : undefined}
 						aria-expanded={isOpen ? 'true' : 'false'}
-						aria-invalid={props.isInvalid ? 'true' : undefined}
 						aria-autocomplete="list"
 						aria-controls="combobox-options"
 						aria-activedescendant={isOpen && activeIndex >= 0 ? `option-${activeIndex}` : undefined}
@@ -334,8 +341,8 @@ export const ZCombobox = c(
 					</svg>
 				</div>
 
-				<div ref={panelRef} popover="manual" id="combobox-options" class="panel" role="listbox" aria-label={props.label || 'Options'}>
-						{filtered.length === 0 && <div class="empty">No matches</div>}
+				<div ref={panelRef} popover="manual" id="combobox-options" class="panel" role="listbox" aria-label={props.label || t('options')}>
+						{filtered.length === 0 && <div class="empty">{t('noMatches')}</div>}
 						{filtered.map((opt, index) => {
 							const optClass = ['option']
 								.concat(index === activeIndex ? ['is-active'] : [])
@@ -359,18 +366,20 @@ export const ZCombobox = c(
 							)
 						})}
 					</div>
+				{renderDescriptions(props.description, props.error)}
 			</host>
 		)
 	},
 	{
 		props: {
+			...describableProps,
 			value: { type: String, reflect: true },
 			name: { type: String, reflect: true },
 			label: String,
 			placeholder: String,
 			options: { type: Array },
-			size: { type: String, reflect: true },
-			accent: { type: String, reflect: true },
+			size: { type: oneOf('sm', 'md', 'lg'), reflect: true },
+			accent: { type: oneOf('neutral', 'dom', 'sub'), reflect: true },
 			isRequired: { type: Boolean, reflect: true },
 			isInvalid: { type: Boolean, reflect: true },
 			isDisabled: { type: Boolean, reflect: true },
@@ -378,7 +387,7 @@ export const ZCombobox = c(
 			isHidden: { type: Boolean, reflect: true },
 			change: event<{ value: string }>({ bubbles: true, composed: true })
 		},
-		styles: [themedScrollbarStyles, styles, interactionStyles],
+		styles: [themedScrollbarStyles, styles, interactionStyles, srOnlyStyles],
 		form: true
 	}
 )

@@ -49,8 +49,8 @@ One spec:
 
 `3px` because a hairline-weight ring disappears against a hairline border; `outline-offset: 2px` so the ring never touches the element's own edge and the page colour shows between them; `:focus-visible` so a mouse click does not paint it. Fields use `2px` on `:focus-within` with the same colour, because a field already has a visible edge and a 3px ring on top of it reads as a double border.
 
-<z-callout accent="warning" heading="Unfinished: two focus specs are shipping">
-The 16 core controls (button, input, select, checkbox, switch, tabs, badge, …) read <code>--focus-ring</code>. 32 other components — links, breadcrumbs, pagination, the nav tree, the theme switcher, the knob — still paint <code>3px solid color-mix(in oklch, var(--ring) 50%, transparent)</code>, which is <code>neutral-4</code> at half opacity and does not clear 3:1 on the dark page. Those should move to <code>--focus-ring</code>; the <code>--ring</code> form is the decorative one.
+<z-callout accent="success" heading="One focus spec">
+Every component reads <code>--focus-ring</code>. The older <code>color-mix(in oklch, var(--ring) 50%, transparent)</code> form — <code>neutral-4</code> at half opacity, which did not clear 3:1 on the dark page — is gone from the library, and <code>scripts/check-css-templates.mjs</code> fails the build if it comes back.
 </z-callout>
 
 ## In use

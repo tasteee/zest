@@ -1,5 +1,5 @@
 import { defineMarkupExample } from '../authoring'
-import { ComponentStatus, ExampleLayout } from '../types'
+import { ComponentStatus, EvidenceLevel, ExampleLayout } from '../types'
 import type { ComponentDocT } from '../types'
 
 const buildPlaygroundRow = (): HTMLElement => {
@@ -18,7 +18,14 @@ export const wiredRowDoc: ComponentDocT = {
 	tag: 'wired-row',
 	title: 'wired-row',
 	tagline: 'A focused horizontal layout primitive from @tasteee/wired.',
-	status: ComponentStatus.stable,
+	status: ComponentStatus.beta,
+	evidence: {
+		formAssociated: null,
+		keyboard: EvidenceLevel.unverified,
+		screenReader: EvidenceLevel.unverified,
+		browserTests: false,
+		screenshots: false
+	},
 	description:
 		'`wired-row` arranges children horizontally with a semantic spacing scale and direct axis names. Zest re-exports it from `@tasteee/wired`, so the root Zest import registers it without maintaining a competing row implementation.',
 	playground: {

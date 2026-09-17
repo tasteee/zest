@@ -1,5 +1,5 @@
 import { defineInteractiveExample, queryAllPreview, queryPreview } from '../authoring'
-import { ComponentStatus, ExampleLayout } from '../types'
+import { ComponentStatus, EvidenceLevel, ExampleLayout } from '../types'
 import type { ComponentDocT } from '../types'
 
 type ComboboxOptionT = {
@@ -35,7 +35,14 @@ export const zComboboxDoc: ComponentDocT = {
 	tag: 'z-combobox',
 	title: 'z-combobox',
 	tagline: 'A select you can type into, for when scrolling stopped being the fast way.',
-	status: ComponentStatus.stable,
+	status: ComponentStatus.beta,
+	evidence: {
+		formAssociated: true,
+		keyboard: EvidenceLevel.verified,
+		screenReader: EvidenceLevel.unverified,
+		browserTests: true,
+		screenshots: true
+	},
 
 	description:
 		'The trigger is a text field rather than a button: focus it and the list opens, type and it narrows, press Enter and the active row commits. Options come from the same `options` property as `z-select`, and filtering is a plain case-insensitive substring match on the label. When nothing matches, the panel says so rather than sitting empty. The panel uses the browser top layer, including inside dialogs, so scroll containers do not clip it.',
@@ -262,10 +269,14 @@ export const zComboboxDoc: ComponentDocT = {
 
 	attributes: [
 		{ name: 'value', type: 'string', defaultValue: '—', description: 'The committed option’s value. Reflects, so it is both the seed and the live answer.' },
+		{ name: 'name', type: 'string', defaultValue: '—', description: 'The FormData entry name. The host is the form participant, so this goes on the element, not on anything inside it.' },
 		{ name: 'label', type: 'string', defaultValue: '—', description: 'Accessible name for the field. Set for you inside a z-field.' },
+		{ name: 'description', type: 'string', defaultValue: '—', description: 'Accessible description, read after the name. Set for you by a z-field with a description; the text is rendered hidden inside the control and pointed at with aria-describedby.' },
+		{ name: 'error', type: 'string', defaultValue: '—', description: 'Accessible error text, and aria-invalid. Set for you by a z-field with an error.' },
 		{ name: 'placeholder', type: 'string', defaultValue: 'Search…', description: 'Shown while the field is empty and nothing is selected.' },
 		{ name: 'size', type: 'sm | md | lg', defaultValue: 'md', description: 'Control density, on the same scale as z-input.' },
 		{ name: 'accent', type: 'neutral | dom | sub', defaultValue: 'neutral', description: 'Accent family for the focus border and the selected row.' },
+		{ name: 'is-required', type: 'boolean', defaultValue: '—', description: 'Blocks the owning form from submitting until an option is chosen. Search text alone does not count.' },
 		{ name: 'is-invalid', type: 'boolean', defaultValue: '—', description: 'Paints the error border and sets aria-invalid on the field.' },
 		{ name: 'is-disabled', type: 'boolean', defaultValue: '—', description: 'Blocks typing and opening, and removes the field from the tab order.' },
 		{ name: 'inline', type: 'boolean', defaultValue: '—', description: 'Shrinks the field to its natural width instead of filling its container.' },
@@ -288,6 +299,13 @@ export const zComboboxDoc: ComponentDocT = {
 	],
 
 	cssVariables: [],
+
+	keyboard: [
+		{ keys: 'A–Z', action: 'Filters the options to those whose label contains the text, and opens the list.' },
+		{ keys: '↓ / ↑', action: 'Opens the list, then moves the active option, wrapping and skipping disabled ones.' },
+		{ keys: 'Enter', action: 'Commits the active option.' },
+		{ keys: 'Esc / Tab', action: 'Closes the list and clears the search text.' }
+	],
 
 	accessibilityNotes: [
 		'The field carries role="combobox" with aria-controls, aria-activedescendant, aria-expanded, and aria-autocomplete="list"; the panel is a listbox of role="option" rows with aria-selected.',

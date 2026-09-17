@@ -1,5 +1,5 @@
 import { defineInteractiveExample, defineMarkupExample, queryPreview } from '../authoring'
-import { ComponentStatus, ExampleLayout } from '../types'
+import { ComponentStatus, EvidenceLevel, ExampleLayout } from '../types'
 import type { ComponentDocT } from '../types'
 
 const buildPlaygroundRange = (): HTMLElement => {
@@ -24,7 +24,14 @@ export const zRangeDoc: ComponentDocT = {
 	tag: 'z-range',
 	title: 'z-range',
 	tagline: 'Two handles on one track, so a span reads as a single value.',
-	status: ComponentStatus.stable,
+	status: ComponentStatus.beta,
+	evidence: {
+		formAssociated: true,
+		keyboard: EvidenceLevel.unverified,
+		screenReader: EvidenceLevel.unverified,
+		browserTests: false,
+		screenshots: false
+	},
 
 	description:
 		'A lower and an upper bound that share one rail. `z-range` owns the domain — `min`, `max`, `step` — and its two `z-range-handle` children own their values, plus an optional per-handle `min`/`max` that limits how far each one can travel. The handles cannot cross: the left value always stays strictly below the right. Both are native range inputs stacked on the same track, which is what keeps the keyboard and screen-reader behaviour honest.',
@@ -232,6 +239,7 @@ export const zRangeDoc: ComponentDocT = {
 	],
 
 	attributes: [
+		{ name: 'name', type: 'string', defaultValue: '—', description: 'The FormData entry name. Both handles submit under it: FormData.getAll(name) is [lower, upper].' },
 		{ name: 'min', type: 'number', defaultValue: '0', description: 'Lower end of the domain. Per-handle bounds are clamped inside it.' },
 		{ name: 'max', type: 'number', defaultValue: '100', description: 'Upper end of the domain.' },
 		{ name: 'step', type: 'number', defaultValue: '1', description: 'Default increment for both handles. A handle may override it.' },

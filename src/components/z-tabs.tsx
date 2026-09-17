@@ -1,6 +1,7 @@
 import { interactionStyles } from '../shared/interaction-styles'
 import { defineElement } from '../shared/define-element'
 import { c, css, event, useProp, useHost, useRef, useEffect } from 'atomico'
+import { oneOf } from '../shared/prop-types'
 
 /*
  * z-tabs — a tab list driven by a `tabs` array property:
@@ -118,12 +119,18 @@ export const ZTabs = c(
 			props.change({ value: tab.value })
 		}
 
+		// In a right-to-left context the arrows swap: → moves to the tab that is
+		// visually to the right, which is the previous one in document order.
+		const isRightToLeft = () => getComputedStyle(host.current).direction === 'rtl'
 		const onKeyDown = (e: KeyboardEvent, index: number) => {
+			const forward = isRightToLeft() ? 'ArrowLeft' : 'ArrowRight'
+			const backward = isRightToLeft() ? 'ArrowRight' : 'ArrowLeft'
 			let next = index
-			if (e.key === 'ArrowRight') next = index + 1
-			else if (e.key === 'ArrowLeft') next = index - 1
+			let step = 1
+			if (e.key === forward) next = index + 1
+			else if (e.key === backward) { next = index - 1; step = -1 }
 			else if (e.key === 'Home') next = 0
-			else if (e.key === 'End') next = tabs.length - 1
+			else if (e.key === 'End') { next = tabs.length - 1; step = -1 }
 			else return
 			e.preventDefault()
 			for (let i = 0; i < tabs.length; i++) {
@@ -137,7 +144,7 @@ export const ZTabs = c(
 					}
 					break
 				}
-				next += e.key === 'ArrowLeft' || e.key === 'End' ? -1 : 1
+				next += step
 			}
 		}
 
@@ -178,7 +185,7 @@ export const ZTabs = c(
 			value: { type: String, reflect: true },
 			label: String,
 			tabs: { type: Array },
-			accent: { type: String, reflect: true },
+			accent: { type: oneOf('neutral', 'dom', 'sub'), reflect: true },
 			isFitted: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			change: event<{ value: string }>({ bubbles: true, composed: true })

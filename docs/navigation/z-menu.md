@@ -35,6 +35,21 @@ Keyboard: ↑/↓ move (skipping separators/disabled), Enter/Space pick, Esc clo
 **MenuItem:** `{ value?, label?, icon?, shortcut?, isDisabled?, isSeparator?, isDanger? }`
 (`icon` is an HTML string rendered inline).
 
+## Keyboard
+
+Every row is exercised by a browser test.
+
+| Keys | Action |
+| --- | --- |
+| ↓ / Enter / Space | On the trigger: opens the menu and focuses the first item. |
+| ↑ | On the trigger: opens the menu and focuses the last item. |
+| ↓ / ↑ | Moves focus between items, wrapping and skipping separators and disabled items. |
+| Home / End | Focuses the first or last item. |
+| A–Z | Type-ahead: jumps to the next item whose label starts with what was typed. |
+| Enter / Space | Picks the focused item, closes, and returns focus to the trigger. |
+| Esc | Closes and returns focus to the trigger. |
+| Tab | Closes and moves on. |
+
 ## Slots
 
 - `trigger` — the element that opens the menu.

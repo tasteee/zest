@@ -1,5 +1,5 @@
 import { defineMarkupExample } from '../authoring'
-import { ComponentStatus, ExampleLayout } from '../types'
+import { ComponentStatus, EvidenceLevel, ExampleLayout } from '../types'
 import type { ComponentDocT } from '../types'
 import { TEXT_FAMILY_RELATED, buildTextFamilyAttributes } from './text-family'
 
@@ -14,7 +14,14 @@ export const zDisplayDoc: ComponentDocT = {
 	tag: 'z-display',
 	title: 'z-display',
 	tagline: 'Hero type that clamps with the viewport instead of stepping through fixed sizes.',
-	status: ComponentStatus.stable,
+	status: ComponentStatus.beta,
+	evidence: {
+		formAssociated: null,
+		keyboard: EvidenceLevel.unverified,
+		screenReader: EvidenceLevel.unverified,
+		browserTests: false,
+		screenshots: false
+	},
 
 	description:
 		'The tier above `z-heading`. Where a heading tops out at a fixed size, a display title is fluid — it clamps against the viewport, so it fills a wide screen without overflowing a phone. That is the only structural difference; it shares the family\'s `color`, `weight`, and `tag` vocabulary. Because the size is fluid, there is no size-to-tag derivation here: `tag` defaults to `h1`, which is almost always what a hero title should be.',

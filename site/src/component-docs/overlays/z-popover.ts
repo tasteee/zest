@@ -1,5 +1,5 @@
 import { defineInteractiveExample, defineMarkupExample, queryPreview } from '../authoring'
-import { ComponentStatus, ExampleLayout } from '../types'
+import { ComponentStatus, EvidenceLevel, ExampleLayout } from '../types'
 import type { ComponentDocT } from '../types'
 
 const buildPlaygroundPopover = (): HTMLElement => {
@@ -21,7 +21,14 @@ export const zPopoverDoc: ComponentDocT = {
 	tag: 'z-popover',
 	title: 'z-popover',
 	tagline: 'A click-opened panel anchored to whatever opened it.',
-	status: ComponentStatus.stable,
+	status: ComponentStatus.beta,
+	evidence: {
+		formAssociated: null,
+		keyboard: EvidenceLevel.verified,
+		screenReader: EvidenceLevel.unverified,
+		browserTests: true,
+		screenshots: true
+	},
 
 	description:
 		'The trigger goes in `[slot="trigger"]`, the body in the default slot, and the panel appears anchored beside it. It rides the shared overlay core: the surface is a `[popover]` element in the browser’s top layer, so it escapes overflow clipping and every stacking context on the page, and its position is computed each frame it needs to be — flipping to the opposite side when there is no room and shifting to stay on screen. Outside clicks and Escape close it, matching every other dismissible surface here. `is-open` reflects and is two-way, so a popover can be opened from code exactly as the dialog family can.',
@@ -170,7 +177,7 @@ export const zPopoverDoc: ComponentDocT = {
 				const popoverStatus = queryPreview<HTMLElement>(root, '#popoverStatus')
 
 				statsPopover.addEventListener('toggle', (toggleEvent) => {
-					const detail = (toggleEvent as CustomEvent<{ open: boolean }>).detail
+					const detail = (toggleEvent as unknown as CustomEvent<{ open: boolean }>).detail
 					popoverStatus.textContent = detail.open ? 'Open — this is where you would fetch.' : 'Closed.'
 				})
 			}
@@ -217,7 +224,7 @@ export const zPopoverDoc: ComponentDocT = {
 				})
 
 				hintPopover.addEventListener('toggle', (toggleEvent) => {
-					const detail = (toggleEvent as CustomEvent<{ open: boolean }>).detail
+					const detail = (toggleEvent as unknown as CustomEvent<{ open: boolean }>).detail
 					hintStatus.textContent = detail.open ? 'Open — opened from code.' : 'Closed.'
 				})
 			}
@@ -249,6 +256,7 @@ export const zPopoverDoc: ComponentDocT = {
 	attributes: [
 		{ name: 'placement', type: 'top | bottom | left | right | top-start | top-end | bottom-start | bottom-end | left-start | left-end | right-start | right-end', defaultValue: 'bottom', description: 'Preferred side and cross-axis alignment. Flips when there is no room.' },
 		{ name: 'offset', type: 'number', defaultValue: '8', description: 'Gap in pixels between the trigger and the panel.' },
+		{ name: 'label', type: 'string', defaultValue: '—', description: 'Accessible name for the panel, which is a non-modal dialog. Focus moves into it on open and back to the trigger on Escape.' },
 		{ name: 'is-open', type: 'boolean', defaultValue: '—', description: 'Whether the panel is showing. Reflects and is two-way — assign it to open or close from code.' },
 		{ name: 'accent', type: 'neutral | dom | sub', defaultValue: 'neutral', description: 'Accent used inside the panel.' },
 		{ name: 'is-disabled', type: 'boolean', defaultValue: '—', description: 'Stops the trigger from opening the panel.' },
@@ -273,6 +281,11 @@ export const zPopoverDoc: ComponentDocT = {
 	cssVariables: [
 		{ name: '--z-overlay-max-width', defaultValue: '20rem', description: 'Caps the panel width.' },
 		{ name: '--z-overlay-padding', defaultValue: '1rem', description: 'Inner padding of the panel.' }
+	],
+
+	keyboard: [
+		{ keys: 'Enter / Space', action: 'On the slotted trigger: opens the panel and moves focus into it.' },
+		{ keys: 'Esc', action: 'Closes the panel and returns focus to the trigger.' }
 	],
 
 	accessibilityNotes: [

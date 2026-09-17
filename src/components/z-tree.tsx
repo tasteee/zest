@@ -74,7 +74,7 @@ const styles = css`
 		color: var(--foreground);
 	}
 	.row:focus-visible {
-		box-shadow: inset 0 0 0 2px color-mix(in oklch, var(--ring) 60%, transparent);
+		box-shadow: inset 0 0 0 2px var(--focus-ring);
 	}
 	.row.is-disabled {
 		opacity: 0.45;

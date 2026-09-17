@@ -94,7 +94,7 @@ const styles = css`
 	}
 
 	.meta a:focus-visible {
-		outline: 3px solid color-mix(in oklch, var(--ring) 50%, transparent);
+		outline: 3px solid var(--focus-ring);
 		outline-offset: 2px;
 		border-radius: var(--radius-sm);
 	}
@@ -103,7 +103,7 @@ const styles = css`
 		display: flex;
 		align-items: center;
 		gap: var(--space-sm);
-		margin-left: auto;
+		margin-inline-start: auto;
 	}
 `
 

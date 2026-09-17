@@ -1,6 +1,6 @@
 import { defineInteractiveExample, defineMarkupExample, queryPreview } from '../authoring'
 import { Icons } from '../icons'
-import { ComponentStatus, ExampleLayout } from '../types'
+import { ComponentStatus, EvidenceLevel, ExampleLayout } from '../types'
 import type { ComponentDocT } from '../types'
 
 const buildPlaygroundToggle = (): HTMLElement => {
@@ -14,7 +14,14 @@ export const zToggleButtonDoc: ComponentDocT = {
 	tag: 'z-toggle-button',
 	title: 'z-toggle-button',
 	tagline: 'A button that stays pressed — on/off state you can see without reading a label.',
-	status: ComponentStatus.stable,
+	status: ComponentStatus.beta,
+	evidence: {
+		formAssociated: null,
+		keyboard: EvidenceLevel.unverified,
+		screenReader: EvidenceLevel.unverified,
+		browserTests: false,
+		screenshots: false
+	},
 
 	description:
 		'A standalone two-state button. `is-pressed` reflects, so the attribute is both how you set the initial state and how you read the current one, and the element fires `press` with the new value on every change. Reach for this when the state belongs to the button itself — bold, mute, pin, favourite. When several toggles are alternatives to one another, use `z-toggle-button-group` so only one can win.',

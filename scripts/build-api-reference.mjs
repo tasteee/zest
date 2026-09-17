@@ -245,10 +245,14 @@ const renderAttributeValue = (attribute, scraped, docValues, declaredDefault) =>
 	if (type === 'array') return '{Array}'
 	if (type === 'object') return '{Object}'
 
+	// A declared union (oneOf in the source) is the contract itself; the
+	// scrape and the tables can only add what the type already says.
+	const declaredUnion = type.includes('|') ? type.split('|').map((member) => member.trim().replace(/^'|'$/g, '')) : []
+
 	// Union rather than either/or. The scrape catches values the tables never
 	// documented; the tables carry values that only exist as a var() fallback
 	// and so leave no trace to scrape.
-	const merged = [...scraped]
+	const merged = [...declaredUnion, ...scraped.filter((value) => !declaredUnion.includes(value))]
 	for (const value of docValues || []) {
 		if (!merged.includes(value)) merged.push(value)
 	}

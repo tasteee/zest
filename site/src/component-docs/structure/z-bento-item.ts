@@ -1,6 +1,6 @@
 import { defineMarkupExample } from '../authoring'
 import { Icons } from '../icons'
-import { ComponentStatus, ExampleLayout } from '../types'
+import { ComponentStatus, EvidenceLevel, ExampleLayout } from '../types'
 import type { ComponentDocT } from '../types'
 
 const buildPlaygroundBentoItem = (): HTMLElement => {
@@ -24,7 +24,14 @@ export const zBentoItemDoc: ComponentDocT = {
 	tag: 'z-bento-item',
 	title: 'z-bento-item',
 	tagline: 'One cell of a bento grid, with layered background, icon, and hover CTA.',
-	status: ComponentStatus.stable,
+	status: ComponentStatus.beta,
+	evidence: {
+		formAssociated: null,
+		keyboard: EvidenceLevel.unverified,
+		screenReader: EvidenceLevel.unverified,
+		browserTests: false,
+		screenshots: false
+	},
 
 	description:
 		'A cell with three layers. The `background` slot fills it behind everything — an image, a gradient, a pattern — and nudges into view on hover. The `icon` slot sits above the body, and the default slot is the body itself. Giving the cell an `href` reveals a CTA row pinned to the bottom on hover or focus; omit it and the cell is static, with no CTA and no link. That single attribute is the whole difference between a decorative panel and a navigable one.',

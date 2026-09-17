@@ -33,6 +33,15 @@ table.addEventListener('rowclick', (e) => e.detail) // { row, index }
 | `is-clickable` | boolean | — | pointer cursor + emit `rowclick` |
 | `is-hidden` | boolean | — | hide |
 
+## Keyboard
+
+Every row is exercised by a browser test.
+
+| Keys | Action |
+| --- | --- |
+| Tab | With `is-clickable`, reaches each row in order. |
+| Enter / Space | On a focused row: fires `rowclick`, the same as a click. |
+
 ## Events
 
 | Event | `detail` | Description |

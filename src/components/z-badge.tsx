@@ -74,7 +74,7 @@ const styles = css`
 	/* kinds */
 	.badge.is-soft {
 		background: color-mix(in oklch, var(--tone) 18%, transparent);
-		color: color-mix(in oklch, var(--tone) 78%, var(--foreground));
+		color: color-mix(in oklch, var(--tone) 70%, var(--foreground));
 	}
 	.badge.is-solid {
 		--emissive-color: var(--tone);
@@ -158,7 +158,7 @@ const styles = css`
 		justify-content: center;
 		width: 1rem;
 		height: 1rem;
-		margin-right: -0.25rem;
+		margin-inline-end: -0.25rem;
 		border: none;
 		border-radius: 999px;
 		background: transparent;
@@ -183,8 +183,8 @@ const styles = css`
 		fill: none;
 	}
 	.badge.is-dot .remove {
-		margin-left: -0.125rem;
-		margin-right: -0.125rem;
+		margin-inline-start: -0.125rem;
+		margin-inline-end: -0.125rem;
 	}
 
 	::slotted(svg) {
@@ -195,7 +195,7 @@ const styles = css`
 		width: 1.125rem;
 		height: 1.125rem;
 		border-radius: 999px;
-		margin-left: -0.25rem;
+		margin-inline-start: -0.25rem;
 		object-fit: cover;
 	}
 `

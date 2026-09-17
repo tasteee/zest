@@ -204,25 +204,10 @@ these docs, flagged for discussion rather than fixed silently.
 - [z-terminal](specialized/z-terminal.md) — animated terminal/code demo
 - [z-relative-time](specialized/z-relative-time.md) — auto-updating relative timestamp
 
-### Chat & messaging
-- [z-chat-shell](chat/z-chat-shell.md) — resizable inbox/thread/details app frame
-- [z-chat-header](chat/z-chat-header.md) — thread top bar
-- [z-conversation-list](chat/z-conversation-list.md) / [z-conversation-item](chat/z-conversation-item.md) — inbox rail
-- [z-message-list](chat/z-message-list.md) — pin-to-bottom message scroll surface
-- [z-message-group](chat/z-message-group.md) / [z-message-bubble](chat/z-message-bubble.md) — sender-grouped bubbles
-- [z-composer](chat/z-composer.md) — message input row
-- [z-model-picker](chat/z-model-picker.md) — AI model selector
-- [z-emoji-picker](chat/z-emoji-picker.md) — categorized emoji panel
-- [z-reactions](chat/z-reactions.md) — emoji-count reaction pills
-- [z-message-actions](chat/z-message-actions.md) — hover action bar (reply/forward/react/more)
-- [z-quoted-message](chat/z-quoted-message.md) — "replying to…" snippet
-- [z-image-message](chat/z-image-message.md) — image/album message content
-- [z-delivery-status](chat/z-delivery-status.md) — sent/delivered/read indicator
-- [z-read-receipt](chat/z-read-receipt.md) — "seen by" avatar row
-- [z-typing-indicator](chat/z-typing-indicator.md) — "…" typing bubble
-- [z-date-divider](chat/z-date-divider.md) / [z-unread-divider](chat/z-unread-divider.md) — thread dividers
-- [z-system-message](chat/z-system-message.md) — centered muted status line
-- [z-tool-call](chat/z-tool-call.md) — agent tool-invocation card
+### Archived conversations
+- `z-chat-transcript` — one read-only, data-driven conversation with automatic day boundaries, daily story summaries, range selection, and AI context-point events
+- `z-chat-message` — one timestamped message with mirrored participants, reply navigation, attachments, reactions, and edit/service metadata
+- `z-chat-ai-dock` — an always-visible question composer with an upward-opening ongoing AI discussion and explicit transcript context
 
 ### Music
 - [z-piano-roll](music/z-piano-roll.md) — full MIDI note editor

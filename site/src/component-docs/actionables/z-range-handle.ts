@@ -1,5 +1,5 @@
 import { defineInteractiveExample, defineMarkupExample, queryAllPreview, queryPreview } from '../authoring'
-import { ComponentStatus, ExampleLayout } from '../types'
+import { ComponentStatus, EvidenceLevel, ExampleLayout } from '../types'
 import type { ComponentDocT } from '../types'
 
 const buildPlaygroundRangeHandle = (): HTMLElement => {
@@ -13,7 +13,14 @@ export const zRangeHandleDoc: ComponentDocT = {
 	tag: 'z-range-handle',
 	title: 'z-range-handle',
 	tagline: 'A declaration, not a control — one end of a z-range.',
-	status: ComponentStatus.stable,
+	status: ComponentStatus.beta,
+	evidence: {
+		formAssociated: null,
+		keyboard: EvidenceLevel.unverified,
+		screenReader: EvidenceLevel.unverified,
+		browserTests: false,
+		screenshots: false
+	},
 
 	description:
 		'This element renders nothing. It exists so a range can be described in markup rather than configured through a property: put two of them inside a `z-range` and the parent reads their `value`, `min`, `max`, `step`, and `accent` to paint one unified track. The first child is the lower end, the second is the upper. The parent mirrors each live value back onto its handle, so reading `handleElement.value` afterwards always tells the truth.',

@@ -92,6 +92,7 @@ const FUNDAMENTALS_CATEGORY = 'fundamentals'
 const FUNDAMENTALS_ORDER = [
 	'principles',
 	'token-architecture',
+	'tokens',
 	'color',
 	'surfaces',
 	'borders',
@@ -100,7 +101,9 @@ const FUNDAMENTALS_ORDER = [
 	'radius',
 	'motion',
 	'layout',
-	'iconography'
+	'iconography',
+	'forms',
+	'internationalization'
 ]
 
 const compareFundamentalsPages = (pageA: DocPageT, pageB: DocPageT): number => {

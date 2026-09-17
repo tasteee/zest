@@ -58,7 +58,7 @@ const styles = css`
 	.link {
 		display: block;
 		padding: 0.25rem 0.625rem;
-		border-left: 1px solid var(--border);
+		border-inline-start: 1px solid var(--border);
 		color: var(--muted-foreground);
 		font-size: var(--font-size-small);
 		line-height: 1.45;
@@ -71,15 +71,15 @@ const styles = css`
 	/* Depth is indentation plus nothing else — a second type size for sub
 	   headings would compete with the page's own hierarchy. */
 	.link[data-depth='1'] {
-		padding-left: 1.25rem;
+		padding-inline-start: 1.25rem;
 	}
 
 	.link[data-depth='2'] {
-		padding-left: 1.875rem;
+		padding-inline-start: 1.875rem;
 	}
 
 	.link[data-depth='3'] {
-		padding-left: 2.5rem;
+		padding-inline-start: 2.5rem;
 	}
 
 	.link:hover {
@@ -87,14 +87,14 @@ const styles = css`
 	}
 
 	.link:focus-visible {
-		outline: 3px solid color-mix(in oklch, var(--ring) 50%, transparent);
+		outline: 3px solid var(--focus-ring);
 		outline-offset: -3px;
 		border-radius: var(--radius-sm);
 	}
 
 	.link.is-active {
 		color: var(--foreground);
-		border-left-color: var(--foreground);
+		border-inline-start-color: var(--foreground);
 	}
 `
 

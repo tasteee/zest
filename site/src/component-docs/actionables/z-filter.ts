@@ -1,5 +1,5 @@
 import { defineInteractiveExample, queryPreview } from '../authoring'
-import { ComponentStatus, ExampleLayout } from '../types'
+import { ComponentStatus, EvidenceLevel, ExampleLayout } from '../types'
 import type { ComponentDocT } from '../types'
 
 type FilterOptionT = {
@@ -31,7 +31,14 @@ export const zFilterDoc: ComponentDocT = {
 	tag: 'z-filter',
 	title: 'z-filter',
 	tagline: 'Pills that collapse to the one you picked — and, if you want, drill deeper.',
-	status: ComponentStatus.stable,
+	status: ComponentStatus.beta,
+	evidence: {
+		formAssociated: true,
+		keyboard: EvidenceLevel.unverified,
+		screenReader: EvidenceLevel.unverified,
+		browserTests: false,
+		screenshots: false
+	},
 
 	description:
 		'A faceting control made of pills. Flat by default: the options sit in a row, and choosing one collapses the rest away and reveals a reset. Set `is-drilldown` and options may carry `children` — choosing a branch pushes it into a breadcrumb and reveals the next level, while choosing a leaf simply activates it and leaves its siblings in place. One rule separates the two modes: a leaf selection collapses its level in flat mode and keeps it in drill-down.',
@@ -309,6 +316,7 @@ export const zFilterDoc: ComponentDocT = {
 	],
 
 	attributes: [
+		{ name: 'name', type: 'string', defaultValue: '—', description: 'The FormData entry name. The chosen leaf value is submitted; nothing while clear.' },
 		{ name: 'label', type: 'string', defaultValue: '—', description: 'Accessible name for the pill group.' },
 		{ name: 'size', type: 'sm | md', defaultValue: 'md', description: 'Pill density.' },
 		{ name: 'accent', type: 'neutral | dom | sub', defaultValue: 'neutral', description: 'Accent family of the active pill.' },

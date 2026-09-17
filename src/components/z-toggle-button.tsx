@@ -1,5 +1,6 @@
 import { interactionStyles } from '../shared/interaction-styles'
 import { defineElement } from '../shared/define-element'
+import { useAccessibleName } from '../shared/accessible'
 import { c, css, event, useProp } from 'atomico'
 
 const styles = css`
@@ -171,6 +172,9 @@ const resolveAccentClass = (props: any): string => {
 export const ZToggleButton = c(
 	(props) => {
 		const [isPressed, setIsPressed] = useProp<boolean>('isPressed')
+		// An icon-only toggle is named by aria-label / aria-labelledby on the
+		// host; the inner button is what a screen reader reads, so it goes there.
+		const accessibleName = useAccessibleName()
 
 		const kindClass = resolveKindClass(props)
 		const accentClass = resolveAccentClass(props)
@@ -185,6 +189,7 @@ export const ZToggleButton = c(
 					class={buttonClass}
 					data-state={isPressed ? 'on' : 'off'}
 					aria-pressed={isPressed ? 'true' : 'false'}
+					aria-label={accessibleName}
 					disabled={props.isDisabled}
 					onclick={() => {
 						const nextPressed = !isPressed

@@ -1,6 +1,6 @@
 import { defineInteractiveExample, defineMarkupExample, queryPreview } from '../authoring'
 import { Icons } from '../icons'
-import { ComponentStatus, ExampleLayout } from '../types'
+import { ComponentStatus, EvidenceLevel, ExampleLayout } from '../types'
 import type { ComponentDocT } from '../types'
 
 const buildPlaygroundGroup = (): HTMLElement => {
@@ -19,7 +19,14 @@ export const zToggleButtonGroupDoc: ComponentDocT = {
 	tag: 'z-toggle-button-group',
 	title: 'z-toggle-button-group',
 	tagline: 'A segmented control that owns which of its items are pressed.',
-	status: ComponentStatus.stable,
+	status: ComponentStatus.beta,
+	evidence: {
+		formAssociated: true,
+		keyboard: EvidenceLevel.unverified,
+		screenReader: EvidenceLevel.unverified,
+		browserTests: false,
+		screenshots: false
+	},
 
 	description:
 		'Coordinates a set of `z-toggle-button-group-item` children and reports the result as a single value. In `single` mode — the default — pressing one item releases the others, which is the right model for a set of alternatives like text alignment. In `multiple` mode any number can stay pressed, which suits filters and formatting marks. The group also owns the shared appearance: the accent, size, and kind flags set CSS variables the items read, so you style the group once instead of every item.',
@@ -207,6 +214,8 @@ export const zToggleButtonGroupDoc: ComponentDocT = {
 	],
 
 	attributes: [
+		{ name: 'name', type: 'string', defaultValue: '—', description: 'The FormData entry name. The pressed value is submitted; with is-multiple, every pressed value under the same name.' },
+		{ name: 'is-disabled', type: 'boolean', defaultValue: '—', description: 'Marks the group disabled for the form and assistive technology.' },
 		{ name: 'is-multiple', type: 'boolean', defaultValue: '—', description: 'Lets any number of items stay pressed at once, instead of just one.' },
 		{ name: 'direction', type: 'horizontal | vertical', defaultValue: 'horizontal', description: 'Sets the segment layout axis.' },
 		{ name: 'accent', type: 'dom | sub | neutral | success | warning | error', defaultValue: '—', description: 'Shared accent for every item.' },

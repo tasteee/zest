@@ -1,5 +1,5 @@
 import { defineMarkupExample } from '../authoring'
-import { ComponentStatus, ExampleLayout } from '../types'
+import { ComponentStatus, EvidenceLevel, ExampleLayout } from '../types'
 import type { ComponentDocT } from '../types'
 
 const buildPlaygroundCard = (): HTMLElement => {
@@ -17,7 +17,14 @@ export const zCardDoc: ComponentDocT = {
 	tag: 'z-card',
 	title: 'z-card',
 	tagline: 'A bordered content block with comfortable padding.',
-	status: ComponentStatus.stable,
+	status: ComponentStatus.beta,
+	evidence: {
+		formAssociated: null,
+		keyboard: EvidenceLevel.unverified,
+		screenReader: EvidenceLevel.unverified,
+		browserTests: false,
+		screenshots: false
+	},
 
 	description:
 		'The everyday container: a hairline border, a rounded corner, and enough padding that content never touches the edge. Depth comes from the border and the surface underneath rather than from a shadow, which is why a grid of cards reads as a flat plane rather than a pile. Use the layout primitives inside it when its content needs spacing. For accented or elevated panels — accents, variants, elevation levels — `z-surface` is the fuller instrument. `heading` and `description` render the same header the dialog family renders, from the same tokens, so a card title and a sheet title are the same object rather than two hand-sized headings that drift apart. Both are optional; a card with neither is a border around a slot, exactly as before.',

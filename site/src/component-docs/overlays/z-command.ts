@@ -1,5 +1,5 @@
 import { defineInteractiveExample, queryPreview } from '../authoring'
-import { ComponentStatus, ExampleLayout } from '../types'
+import { ComponentStatus, EvidenceLevel, ExampleLayout } from '../types'
 import type { ComponentDocT } from '../types'
 
 type CommandItemT = {
@@ -43,7 +43,14 @@ export const zCommandDoc: ComponentDocT = {
 	tag: 'z-command',
 	title: 'z-command',
 	tagline: 'Everything the app can do, one search away.',
-	status: ComponentStatus.stable,
+	status: ComponentStatus.beta,
+	evidence: {
+		formAssociated: null,
+		keyboard: EvidenceLevel.unverified,
+		screenReader: EvidenceLevel.unverified,
+		browserTests: false,
+		screenshots: false
+	},
 
 	description:
 		'A command palette on the native `<dialog>` foundation, so focus trapping, Escape, and the backdrop are free. Commands come from an `items` array; typing filters on the label plus an optional `keywords` string, so a command can be findable by words that are not on screen. Results stay grouped as they narrow, arrow keys move past disabled rows, and Enter runs the active one.',

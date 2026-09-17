@@ -24,6 +24,8 @@ steps both work. `step` must be positive and defaults to `1`. It controls the in
 - On blur, a numeric value clamps to `min`/`max`; invalid text restores the last
   numeric value (or the minimum when no value exists).
 
+Form-associated: see [Forms](../../fundamentals/forms.md). `name` goes on the host and names the FormData entry; `is-required` blocks the owning form from submitting; reset, fieldset disabling and `checkValidity()` / `reportValidity()` / `setCustomValidity()` all work as they would on a native control.
+
 ## Properties & attributes
 
 | Name | Type | Default | Description |
@@ -37,9 +39,11 @@ steps both work. `step` must be positive and defaults to `1`. It controls the in
 | `size` | `sm` `md` `lg` | `md` | Matches the same size of `z-button` and `z-select`. |
 | `accent` | `dom` `sub` | neutral | Focus accent color. |
 | `label` | string | — | Accessible name for compact contextual use. Prefer `z-field` for a visible label. |
-| `name` | string | — | Form field name. |
+| `description` | string | — | accessible description (set by a surrounding `z-field`; rendered hidden and pointed at with `aria-describedby`) |
+| `error` | string | — | accessible error text and `aria-invalid` (set by a surrounding `z-field`) |
+| `name` | string | — | FormData entry name (on the host). |
 | `placeholder` | string | — | Placeholder text. |
-| `is-invalid` / `is-disabled` / `is-readonly` / `is-required` | boolean | — | External invalid state, disabled state, read-only state, or required state. |
+| `is-invalid` / `is-disabled` / `is-readonly` / `is-required` | boolean | — | External invalid state, disabled state, read-only state, or required state. Required, out-of-range, off-step and non-numeric text all block the owning form from submitting. |
 | `is-hidden` | boolean | — | Hide. |
 
 ## Events

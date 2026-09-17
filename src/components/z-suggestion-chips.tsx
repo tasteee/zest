@@ -31,7 +31,7 @@ const styles = css`
 		font-size: 0.8125rem;
 		color: var(--foreground);
 		cursor: pointer;
-		text-align: left;
+		text-align: start;
 		transition:
 			background-color var(--duration-fast) var(--easing-standard),
 			border-color var(--duration-fast) var(--easing-standard);

@@ -13,23 +13,27 @@ with clear surrounding context.
 <z-textarea is-auto-resize></z-textarea>
 ```
 
+Form-associated: see [Forms](../../fundamentals/forms.md). `name` goes on the host and names the FormData entry; `is-required` blocks the owning form from submitting; reset, fieldset disabling and `checkValidity()` / `reportValidity()` / `setCustomValidity()` all work as they would on a native control.
+
 ## Attributes
 
 | Attribute | Values | Default | Description |
 | --- | --- | --- | --- |
 | `value` | string | — | current value (reflected, two-way) |
 | `placeholder` | string | — | placeholder text |
-| `name` | string | — | form field name |
+| `name` | string | — | FormData entry name (on the host; the inner textarea carries none) |
 | `rows` | number | `3` | initial visible rows |
 | `accent` | `dom` `sub` | neutral | focus accent color |
 | `label` | string | — | accessible name for compact contextual use (falls back to a surrounding `aria-label`) |
+| `description` | string | — | accessible description (set by a surrounding `z-field`; rendered hidden and pointed at with `aria-describedby`) |
+| `error` | string | — | accessible error text and `aria-invalid` (set by a surrounding `z-field`) |
 | `size` | `sm` `md` `lg` | `md` | field padding and font size (same scale as [z-input](z-input.md)) |
 | `is-focused` | boolean | — | focus state (reflected, two-way; driven internally on focus/blur) |
 | `is-auto-resize` | boolean | — | grow to fit content (disables manual resize) |
 | `is-invalid` | boolean | — | error styling |
 | `is-disabled` | boolean | — | disable |
 | `is-readonly` | boolean | — | read-only |
-| `is-required` | boolean | — | required |
+| `is-required` | boolean | — | blocks the owning form from submitting while empty |
 | `is-hidden` | boolean | — | hide |
 
 ## Events

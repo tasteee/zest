@@ -18,8 +18,8 @@ const styles = css`
 		align-items: var(--z-grid-align, stretch);
 		padding-top: var(--z-grid-pad-top, 0);
 		padding-bottom: var(--z-grid-pad-bottom, 0);
-		padding-left: var(--z-grid-pad-left, 0);
-		padding-right: var(--z-grid-pad-right, 0);
+		padding-inline-start: var(--z-grid-pad-left, 0);
+		padding-inline-end: var(--z-grid-pad-right, 0);
 	}
 
 	:host([is-full-width]) {

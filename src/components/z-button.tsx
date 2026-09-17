@@ -1,6 +1,8 @@
 import { interactionStyles } from '../shared/interaction-styles'
-import { defineElement } from '../shared/define-element'
+import { defineFormElement, useFormControl } from '../shared/form-control'
+import { useAccessibleName } from '../shared/accessible'
 import { c, css } from 'atomico'
+import { oneOf } from '../shared/prop-types'
 
 const styles = css`
 	:host {
@@ -168,7 +170,10 @@ const styles = css`
 	button.is-soft {
 		background: color-mix(in srgb, var(--tone-color) 15%, transparent);
 		border-color: transparent;
-		color: var(--tone-color);
+		/* The tone on its own tint measured 3.7–4.3:1 in the light themes.
+		   Pulling the text a quarter of the way to the foreground clears 4.5:1
+		   in every theme — darker on paper, lighter on ink — as z-badge does. */
+		color: color-mix(in oklch, var(--tone-color) 72%, var(--foreground));
 		font-weight: 600;
 	}
 
@@ -282,21 +287,45 @@ const resolveAccentClass = (props: any): string => {
 export const ZButton = c(
 	(props) => {
 		const buttonType = (props.type as any) || 'button'
+		// An icon-only button is named by aria-label / aria-labelledby on the
+		// host; the inner button is what a screen reader reads, so it goes there.
+		// `label` is visible text, so it is not part of this.
+		const accessibleName = useAccessibleName()
+
+		// The inner <button> has no form owner from inside the shadow root, so a
+		// submit or reset is relayed to the owning form through ElementInternals.
+		// A named submit button contributes its name/value for the duration of
+		// the submission, as the native submitter would.
+		const { internals, isFormDisabled } = useFormControl({
+			value: null,
+			isDisabled: props.isDisabled,
+			onReset: () => {}
+		})
+		const isDisabled = props.isDisabled || isFormDisabled
+		const relayToForm = () => {
+			const form = internals?.form
+			if (!form) return
+			if (buttonType === 'reset') { form.reset(); return }
+			if (buttonType !== 'submit') return
+			const isNamed = Boolean(props.name)
+			if (isNamed) internals!.setFormValue(props.value ?? '')
+			try { form.requestSubmit() } finally { if (isNamed) internals!.setFormValue(null) }
+		}
 
 		const kindClass = resolveKindClass(props)
 		const accentClass = resolveAccentClass(props)
 		const sizeClass = resolveSizeClass(props)
-		const isButtonDisabled = props.isDisabled || props.isLoading
+		const isButtonDisabled = isDisabled || props.isLoading
 
 		const buttonClass = [kindClass, accentClass, sizeClass]
 			.concat(props.isLoading ? ['is-loading'] : [])
-			.concat(props.isDisabled ? ['is-disabled'] : [])
+			.concat(isDisabled ? ['is-disabled'] : [])
 			.concat(props.isFullWidth ? ['is-full-width'] : [])
 			.join(' ')
 
 		return (
-			<host shadowDom>
-				<button class={buttonClass} type={buttonType} disabled={isButtonDisabled} aria-busy={props.isLoading ? 'true' : undefined}>
+			<host shadowDom={{ delegatesFocus: true }}>
+				<button class={buttonClass} type={buttonType} disabled={isButtonDisabled} aria-busy={props.isLoading ? 'true' : undefined} aria-label={accessibleName} onclick={relayToForm}>
 					{props.isLoading && <span class='spinner' aria-hidden='true'></span>}
 					<span class='label'>{props.label ? props.label : <slot />}</span>
 				</button>
@@ -305,18 +334,21 @@ export const ZButton = c(
 	},
 	{
 		props: {
-			size: { type: String, reflect: true },
-			kind: { type: String, reflect: true },
-			accent: { type: String, reflect: true },
+			size: { type: oneOf('sm', 'md', 'lg'), reflect: true },
+			kind: { type: oneOf('solid', 'outline', 'ghost', 'soft', 'plain'), reflect: true },
+			accent: { type: oneOf('neutral', 'dom', 'sub', 'success', 'warning', 'error'), reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			isDisabled: { type: Boolean, reflect: true },
 			isLoading: { type: Boolean, reflect: true },
 			isFullWidth: { type: Boolean, reflect: true },
 			label: String,
-			type: String
+			type: oneOf('button', 'submit', 'reset'),
+			name: { type: String, reflect: true },
+			value: String
 		},
-		styles: [styles, interactionStyles]
+		styles: [styles, interactionStyles],
+		form: true
 	}
 )
 
-defineElement('z-button', ZButton)
+defineFormElement('z-button', ZButton)

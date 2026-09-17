@@ -309,16 +309,16 @@ const handleStyles = css`
 	}
 	:host(:not([is-column]):hover) .grip,
 	:host(:not([is-column]).is-dragging) .grip {
-		background: var(--ring);
+		background: var(--focus-ring);
 		width: 2px;
 	}
 	:host([is-column]:hover) .grip,
 	:host([is-column].is-dragging) .grip {
-		background: var(--ring);
+		background: var(--focus-ring);
 		height: 2px;
 	}
 	:host(:focus-visible) {
-		outline: 3px solid color-mix(in oklch, var(--ring) 50%, transparent);
+		outline: 3px solid var(--focus-ring);
 		outline-offset: -2px;
 		border-radius: var(--radius-sm);
 	}

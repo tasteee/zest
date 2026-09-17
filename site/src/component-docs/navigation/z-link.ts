@@ -1,6 +1,6 @@
 import { defineMarkupExample } from '../authoring'
 import { Icons } from '../icons'
-import { ComponentStatus, ExampleLayout } from '../types'
+import { ComponentStatus, EvidenceLevel, ExampleLayout } from '../types'
 import type { ComponentDocT } from '../types'
 
 const buildPlaygroundLink = (): HTMLElement => {
@@ -14,7 +14,14 @@ export const zLinkDoc: ComponentDocT = {
 	tag: 'z-link',
 	title: 'z-link',
 	tagline: 'An inline text link with an underline that grows from the start on hover.',
-	status: ComponentStatus.stable,
+	status: ComponentStatus.beta,
+	evidence: {
+		formAssociated: null,
+		keyboard: EvidenceLevel.unverified,
+		screenReader: EvidenceLevel.unverified,
+		browserTests: false,
+		screenshots: false
+	},
 
 	description:
 		'A real anchor with the design system\'s treatment on top. The underline animates in from the leading edge rather than fading, which reads as deliberate at small sizes where a fade just looks like a rendering artifact. Use a link when the target is a destination; use `z-button` when the target is an action. The distinction matters beyond aesthetics: a link supports middle-click, cmd-click, and copy-link-address, and users expect all three.',

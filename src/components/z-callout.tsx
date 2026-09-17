@@ -53,7 +53,7 @@ const styles = css`
 		/* srgb: oklch would drift the chromatic accent when mixed against the
 		   hue-carrying --border (matches z-alert). */
 		border: 1px solid color-mix(in srgb, var(--callout-color) 25%, var(--border));
-		border-left: 3px solid var(--callout-color);
+		border-inline-start: 3px solid var(--callout-color);
 		border-radius: var(--radius-md);
 		background: color-mix(in oklch, var(--callout-color) 7%, transparent);
 		color: var(--foreground);
@@ -128,7 +128,7 @@ const styles = css`
 	}
 
 	.toggle:focus-visible {
-		outline: 3px solid color-mix(in oklch, var(--ring) 50%, transparent);
+		outline: 3px solid var(--focus-ring);
 		outline-offset: 2px;
 		border-radius: var(--radius-sm);
 	}
@@ -139,7 +139,7 @@ const styles = css`
 		position: absolute;
 		right: 0;
 		bottom: 0;
-		padding-left: 2.75rem;
+		padding-inline-start: 2.75rem;
 		background: linear-gradient(to right, transparent, var(--callout-fade) 45%);
 	}
 

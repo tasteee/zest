@@ -68,24 +68,24 @@ const styles = css`
 
 	/* grouped corners — tuck the corners on the sender's near side */
 	:host([side='start'][group='first']) .bubble {
-		border-bottom-left-radius: var(--tight);
+		border-end-start-radius: var(--tight);
 	}
 	:host([side='start'][group='middle']) .bubble {
-		border-top-left-radius: var(--tight);
-		border-bottom-left-radius: var(--tight);
+		border-start-start-radius: var(--tight);
+		border-end-start-radius: var(--tight);
 	}
 	:host([side='start'][group='last']) .bubble {
-		border-top-left-radius: var(--tight);
+		border-start-start-radius: var(--tight);
 	}
 	:host([side='end'][group='first']) .bubble {
-		border-bottom-right-radius: var(--tight);
+		border-end-end-radius: var(--tight);
 	}
 	:host([side='end'][group='middle']) .bubble {
-		border-top-right-radius: var(--tight);
-		border-bottom-right-radius: var(--tight);
+		border-start-end-radius: var(--tight);
+		border-end-end-radius: var(--tight);
 	}
 	:host([side='end'][group='last']) .bubble {
-		border-top-right-radius: var(--tight);
+		border-start-end-radius: var(--tight);
 	}
 
 	::slotted(img),

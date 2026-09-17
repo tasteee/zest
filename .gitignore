@@ -3,3 +3,6 @@ dist
 coverage
 *.tsbuildinfo
 .DS_Store
+.vitest
+e2e/results
+e2e/report

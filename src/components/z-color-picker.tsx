@@ -1,5 +1,5 @@
-import { defineElement } from '../shared/define-element'
-import { c, css, event, useProp, useState, useHost, useEffect } from 'atomico'
+import { defineFormElement, useFormControl } from '../shared/form-control'
+import { c, css, event, useProp, useState, useHost, useEffect, useRef } from 'atomico'
 
 /*
  * z-color-picker — a swatch trigger that opens a bordered, shadow-free panel
@@ -50,7 +50,7 @@ const styles = css`
 	}
 
 	.trigger:focus-visible {
-		outline: 3px solid color-mix(in oklch, var(--ring) 50%, transparent);
+		outline: 3px solid var(--focus-ring);
 		outline-offset: 2px;
 	}
 
@@ -169,8 +169,19 @@ export const ZColorPicker = c(
 		const host = useHost()
 		const [value, setValue] = useProp<string>('value')
 		const [isOpen, setIsOpen] = useState(false)
+		const defaultValue = useRef(value)
+		const triggerRef = useRef<HTMLButtonElement>()
 
 		const current = value || '#BF40BF'
+		// Submits the hex like <input type="color">: always a value, never empty.
+		const { isFormDisabled } = useFormControl({
+			value: current,
+			isDisabled: props.isDisabled,
+			control: triggerRef,
+			onReset: () => setValue(defaultValue.current),
+			onRestore: (state) => { if (typeof state === 'string' && state) setValue(state) }
+		})
+		const isDisabled = props.isDisabled || isFormDisabled
 		const presets: string[] = Array.isArray(props.presets) ? (props.presets as string[]) : DEFAULT_PRESETS
 
 		useEffect(() => {
@@ -193,11 +204,12 @@ export const ZColorPicker = c(
 		const triggerLabel = providedLabel ? `${providedLabel}, ${current.toUpperCase()}` : undefined
 
 		return (
-			<host shadowDom>
+			<host shadowDom={{ delegatesFocus: true }}>
 				<button
+					ref={triggerRef}
 					type="button"
 					class={isOpen ? 'trigger is-open' : 'trigger'}
-					disabled={props.isDisabled}
+					disabled={isDisabled}
 					aria-haspopup="dialog"
 					aria-label={triggerLabel}
 					aria-expanded={isOpen ? 'true' : 'false'}
@@ -245,6 +257,7 @@ export const ZColorPicker = c(
 	{
 		props: {
 			value: { type: String, reflect: true },
+			name: { type: String, reflect: true },
 			label: String,
 			presets: { type: Array },
 			accent: { type: String, reflect: true },
@@ -252,8 +265,9 @@ export const ZColorPicker = c(
 			isHidden: { type: Boolean, reflect: true },
 			change: event<{ value: string }>({ bubbles: true, composed: true })
 		},
-		styles
+		styles,
+		form: true
 	}
 )
 
-defineElement('z-color-picker', ZColorPicker)
+defineFormElement('z-color-picker', ZColorPicker)

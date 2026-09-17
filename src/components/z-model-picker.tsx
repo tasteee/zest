@@ -76,7 +76,7 @@ const styles = css`
 		background: transparent;
 		border-radius: var(--radius-sm);
 		padding: 0.4rem 0.5rem;
-		text-align: left;
+		text-align: start;
 		font-family: inherit;
 		color: var(--foreground);
 		cursor: pointer;

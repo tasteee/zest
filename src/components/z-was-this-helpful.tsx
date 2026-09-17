@@ -67,7 +67,7 @@ const styles = css`
 	}
 
 	.choice:focus-visible {
-		outline: 3px solid color-mix(in oklch, var(--ring) 50%, transparent);
+		outline: 3px solid var(--focus-ring);
 		outline-offset: 2px;
 	}
 
@@ -98,7 +98,7 @@ const styles = css`
 	}
 
 	textarea:focus-visible {
-		outline: 3px solid color-mix(in oklch, var(--ring) 50%, transparent);
+		outline: 3px solid var(--focus-ring);
 		outline-offset: 1px;
 		border-color: transparent;
 	}

@@ -1,6 +1,6 @@
 import { defineInteractiveExample, defineMarkupExample, queryPreview } from '../authoring'
 import { Icons } from '../icons'
-import { ComponentStatus, ExampleLayout } from '../types'
+import { ComponentStatus, EvidenceLevel, ExampleLayout } from '../types'
 import type { ComponentDocT } from '../types'
 
 const buildPlaygroundSwap = (): HTMLElement => {
@@ -17,7 +17,14 @@ export const zSwapDoc: ComponentDocT = {
 	tag: 'z-swap',
 	title: 'z-swap',
 	tagline: 'Toggles between two faces with a transition — play/pause, sun/moon, menu/close.',
-	status: ComponentStatus.stable,
+	status: ComponentStatus.beta,
+	evidence: {
+		formAssociated: null,
+		keyboard: EvidenceLevel.unverified,
+		screenReader: EvidenceLevel.unverified,
+		browserTests: false,
+		screenshots: false
+	},
 
 	description:
 		'Two slotted faces and a transition between them. `kind` decides how they occupy space: `stack` overlaps both in a single footprint and crossfades, so the control never changes size; `beside` gives each its own space and moves between them. It owns a hidden checkbox, which is what makes it clickable and keyboard-operable for free — but that also means `label` is doing real work as the checkbox\'s accessible name rather than being decoration.',

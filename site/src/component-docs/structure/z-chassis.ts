@@ -1,6 +1,6 @@
 import { defineMarkupExample } from '../authoring'
 import { Icons } from '../icons'
-import { ComponentStatus, ExampleLayout } from '../types'
+import { ComponentStatus, EvidenceLevel, ExampleLayout } from '../types'
 import type { ComponentDocT } from '../types'
 
 const buildPlaygroundChassis = (): HTMLElement => {
@@ -24,7 +24,14 @@ export const zChassisDoc: ComponentDocT = {
 	tag: 'z-chassis',
 	title: 'z-chassis',
 	tagline: 'A device-like application shell — lighter bezel and rail around a darker inset screen.',
-	status: ComponentStatus.stable,
+	status: ComponentStatus.beta,
+	evidence: {
+		formAssociated: null,
+		keyboard: EvidenceLevel.unverified,
+		screenReader: EvidenceLevel.unverified,
+		browserTests: false,
+		screenshots: false
+	},
 
 	description:
 		'The outermost frame of an application. The body and rail form a lighter shell, like the casing of a device, and the main content sits in a darker inset "screen" with its own border — which is where a routed view renders. That inversion is what makes the shell recede and the content read as the thing you are actually looking at. Every dimension is an attribute and every colour a custom property, so the same element can frame a dense tool or a spacious dashboard.',

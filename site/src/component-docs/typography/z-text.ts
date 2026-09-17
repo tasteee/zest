@@ -1,5 +1,5 @@
 import { defineMarkupExample } from '../authoring'
-import { ComponentStatus, ExampleLayout } from '../types'
+import { ComponentStatus, EvidenceLevel, ExampleLayout } from '../types'
 import type { ComponentDocT } from '../types'
 import { TEXT_FAMILY_RELATED, buildTextFamilyAttributes } from './text-family'
 
@@ -13,7 +13,14 @@ export const zTextDoc: ComponentDocT = {
 	tag: 'z-text',
 	title: 'z-text',
 	tagline: 'Body copy — the base of the type family everything else is measured against.',
-	status: ComponentStatus.stable,
+	status: ComponentStatus.beta,
+	evidence: {
+		formAssociated: null,
+		keyboard: EvidenceLevel.unverified,
+		screenReader: EvidenceLevel.unverified,
+		browserTests: false,
+		screenshots: false
+	},
 
 	description:
 		'`z-text`, `z-heading`, and `z-subheading` share the same flexible typography API. `z-label` is intentionally narrower: it has one fixed small-caps treatment matching `z-field`. `z-text` renders a `<p>` unless `tag` says otherwise.',

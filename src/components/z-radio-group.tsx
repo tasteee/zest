@@ -1,6 +1,9 @@
 import { interactionStyles } from '../shared/interaction-styles'
 import { defineFormElement, useFormControl } from '../shared/form-control'
+import { describableProps, useAccessibleName } from '../shared/accessible'
 import { c, css, event, useEffect, useHost, useListener, useProp, useRef } from 'atomico'
+import { oneOf } from '../shared/prop-types'
+import { useLocale } from '../shared/locale'
 
 /*
  * z-radio-group — coordinates single-selection across slotted z-radio items.
@@ -60,15 +63,23 @@ const findCheckedRadio = (radios: RadioElementT[]): RadioElementT | undefined =>
 
 export const ZRadioGroup = c(
 	(props) => {
+		const t = useLocale()
 		const host = useHost()
+		const accessibleName = useAccessibleName(props.label)
 		const [value, setValue] = useProp<string>('value')
 		const defaultValue = useRef(value)
 		const hasValue = value != null && value !== ''
+		// The group has no native control of its own, so the browser's validation
+		// bubble (and the focus that comes with it) is anchored to the checked
+		// radio, or the first one that can be chosen.
+		const radios = readRadios(host.current)
+		const anchorRef = { current: findCheckedRadio(radios) ?? radios.find((radio) => !radio.isDisabled && !radio.hasAttribute('is-disabled')) }
 		const { isFormDisabled } = useFormControl({
 			value: hasValue ? value : null,
 			isDisabled: props.isDisabled,
+			control: anchorRef,
 			validity: props.isRequired && !hasValue
-				? { flags: { valueMissing: true }, message: 'Please select one of these options.' }
+				? { flags: { valueMissing: true }, message: t('selectOneOfTheseOptions') }
 				: { flags: {} },
 			onReset: () => setValue(defaultValue.current),
 			onRestore: (state) => { if (typeof state === 'string') setValue(state) }
@@ -132,19 +143,60 @@ export const ZRadioGroup = c(
 		useEffect(syncSelection, [value])
 		const onSlotChange = () => { syncSelection(); syncDisabled() }
 
+		// Arrow keys move selection and focus through the enabled radios, wrapping
+		// at the ends, as a native radio group does. The radios are separate
+		// elements with no shared name, so the platform will not do this for us.
+		const onKeyDown = (event: KeyboardEvent) => {
+			const step = event.key === 'ArrowDown' || event.key === 'ArrowRight' ? 1
+				: event.key === 'ArrowUp' || event.key === 'ArrowLeft' ? -1
+				: 0
+			if (!step || isDisabled) return
+			const enabled = readRadios(host.current).filter((radio) => !radio.isDisabled && !radio.hasAttribute('is-disabled'))
+			if (enabled.length === 0) return
+			event.preventDefault()
+			const focused = enabled.findIndex((radio) => radio === event.target || radio.contains(event.target as Node))
+			const current = focused >= 0 ? focused : enabled.findIndex((radio) => radio.isChecked)
+			const next = enabled[((current < 0 ? (step > 0 ? -1 : 0) : current) + step + enabled.length) % enabled.length]
+			next.focus()
+			const value = readRadioValue(next)
+			if (value === undefined || value === props.value) return
+			for (const radio of readRadios(host.current)) radio.isChecked = radio === next
+			setValue(value)
+			props.change({ value })
+		}
+
+		// The radios are light-DOM children, which delegatesFocus does not reach,
+		// so the host takes focus itself (programmatic or from reportValidity)
+		// and passes it straight on to the checked or first usable radio.
+		const forwardFocus = (event: FocusEvent) => {
+			if (event.target !== host.current) return
+			anchorRef.current?.focus()
+		}
+
 		return (
-			<host shadowDom={{ delegatesFocus: true }} role="radiogroup" aria-label={props.label} aria-required={props.isRequired ? 'true' : undefined}>
+			<host
+				shadowDom
+				role="radiogroup"
+				tabindex="-1"
+				onfocus={forwardFocus}
+				onkeydown={onKeyDown}
+				aria-label={accessibleName}
+				aria-description={[props.description, props.error].filter(Boolean).join(' ') || undefined}
+				aria-invalid={props.error ? 'true' : undefined}
+				aria-required={props.isRequired ? 'true' : undefined}
+			>
 				<slot onslotchange={onSlotChange} />
 			</host>
 		)
 	},
 	{
 		props: {
+			...describableProps,
 			value: { type: String, reflect: true },
 			name: { type: String, reflect: true },
 			label: String,
-			direction: { type: String, reflect: true },
-			accent: { type: String, reflect: true },
+			direction: { type: oneOf('vertical', 'horizontal'), reflect: true },
+			accent: { type: oneOf('neutral', 'dom', 'sub', 'success', 'warning', 'error'), reflect: true },
 			isRequired: { type: Boolean, reflect: true },
 			isDisabled: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },

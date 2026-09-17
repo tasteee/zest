@@ -1,5 +1,5 @@
 import { defineInteractiveExample, defineMarkupExample, queryPreview } from '../authoring'
-import { ComponentStatus, ExampleLayout } from '../types'
+import { ComponentStatus, EvidenceLevel, ExampleLayout } from '../types'
 import type { ComponentDocT } from '../types'
 
 const buildPlaygroundField = (): HTMLElement => {
@@ -18,7 +18,14 @@ export const zFieldDoc: ComponentDocT = {
 	tag: 'z-field',
 	title: 'z-field',
 	tagline: 'The label, the help text, and the error — one wrapper, one treatment, every control.',
-	status: ComponentStatus.stable,
+	status: ComponentStatus.beta,
+	evidence: {
+		formAssociated: null,
+		keyboard: EvidenceLevel.verified,
+		screenReader: EvidenceLevel.unverified,
+		browserTests: true,
+		screenshots: true
+	},
 
 	description:
 		'A form control on its own is only half a field. The other half is the flush-left label above it, the guidance underneath, and the error that replaces that guidance when something is wrong. `z-field` owns all three without overlaying the control or adding a shadow, and — critically — forwards its `label` onto the slotted control as an accessible name, because a shadow boundary breaks the ordinary `<label for>` association that would otherwise do this for free. Set `error` and the description gives way; clear it and the description returns.',
@@ -235,6 +242,10 @@ export const zFieldDoc: ComponentDocT = {
 	events: [],
 
 	cssVariables: [],
+
+	keyboard: [
+		{ keys: 'Tab', action: 'Reaches the slotted control; the field itself is not focusable. Clicking the label focuses the control.' }
+	],
 
 	accessibilityNotes: [
 		'Label forwarding is the whole point: a custom element’s shadow root means an external <label for="…"> never reaches the real input, so the field assigns its label to the control directly.',

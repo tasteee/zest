@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+	<head>
+		<meta charset="utf-8" />
+		<title>zest stage</title>
+		<link rel="stylesheet" href="/dist/ink.css" />
+		<link rel="stylesheet" href="/dist/fonts.css" />
+		<!-- dist/zest.js keeps @tasteee/wired external, and wired imports atomico
+		     bare; without a bundler an import map resolves both. -->
+		<script type="importmap">
+			{ "imports": {
+				"@tasteee/wired": "/node_modules/@tasteee/wired/dist/index.mjs",
+				"atomico": "/node_modules/atomico/core.js",
+				"atomico/jsx-runtime": "/node_modules/atomico/jsx-runtime.js"
+			} }
+		</script>
+		<script type="module" src="/dist/zest.js"></script>
+		<style>
+			body { margin: 0; padding: 24px; background: var(--background); color: var(--foreground); font-family: var(--font-sans, sans-serif); }
+			/* The stage is what gets photographed: a column of labelled state rows. */
+			#stage { display: inline-flex; flex-direction: column; gap: 16px; align-items: flex-start; min-width: 360px; }
+			.state { display: flex; flex-direction: column; gap: 6px; }
+			.state > .name { font-size: 11px; letter-spacing: 0.04em; text-transform: uppercase; opacity: 0.55; }
+			.narrow { width: 320px; box-sizing: border-box; border: 1px dashed color-mix(in oklch, var(--foreground) 20%, transparent); padding: 8px; }
+		</style>
+	</head>
+	<body>
+		<div id="stage"></div>
+	</body>
+</html>

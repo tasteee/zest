@@ -24,12 +24,18 @@ combo.addEventListener('change', (e) => e.detail.value)
 
 Keyboard: type to filter, ↑/↓ move between enabled results, Enter commits the active row, and Escape or Tab closes. Blur restores the selected label. The panel uses the browser top layer so scroll containers do not clip it. `change` fires only when the selected value changes.
 
+Form-associated: see [Forms](../../fundamentals/forms.md). `name` goes on the host and names the FormData entry; `is-required` blocks the owning form from submitting; reset, fieldset disabling and `checkValidity()` / `reportValidity()` / `setCustomValidity()` all work as they would on a native control.
+
 ## Properties & attributes
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | `options` | `{ value, label, isDisabled? }[]` | `[]` | **property** — the option list |
 | `value` | string | — | selected value (reflected attribute, two-way) |
+| `name` | string | — | FormData entry name (on the host) |
+| `description` | string | — | accessible description (set by a surrounding `z-field`; rendered hidden and pointed at with `aria-describedby`) |
+| `error` | string | — | accessible error text and `aria-invalid` (set by a surrounding `z-field`) |
+| `is-required` | boolean | — | blocks the owning form from submitting until an option is chosen; search text alone does not count |
 | `placeholder` | string | `Search…` | input placeholder |
 | `accent` | `dom` `sub` | neutral | accent color |
 | `is-disabled` | boolean | — | disable |

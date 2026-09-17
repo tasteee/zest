@@ -1,5 +1,5 @@
 import { defineMarkupExample } from '../authoring'
-import { ComponentStatus, ExampleLayout } from '../types'
+import { ComponentStatus, EvidenceLevel, ExampleLayout } from '../types'
 import type { ComponentDocT } from '../types'
 import { TEXT_FAMILY_RELATED, buildTextFamilyAttributes } from './text-family'
 
@@ -14,7 +14,14 @@ export const zSubheadingDoc: ComponentDocT = {
 	tag: 'z-subheading',
 	title: 'z-subheading',
 	tagline: 'Uppercase, letter-spaced overline text.',
-	status: ComponentStatus.stable,
+	status: ComponentStatus.beta,
+	evidence: {
+		formAssociated: null,
+		keyboard: EvidenceLevel.unverified,
+		screenReader: EvidenceLevel.unverified,
+		browserTests: false,
+		screenshots: false
+	},
 
 	description:
 		'The `z-text` family at weight 600 with `text-transform: uppercase` and widened tracking. It is the overline that sits above a title or opens a group of settings — short, quiet, and structural rather than something anyone reads as prose. Renders a `<p>` by default. For the mono, accent-tinted kicker with an optional trailing rule, `z-eyebrow` is the more decorative sibling.',

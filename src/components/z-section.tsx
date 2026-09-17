@@ -21,10 +21,10 @@ const styles = css`
 		box-sizing: border-box;
 		width: 100%;
 		max-width: var(--z-section-container, none);
-		margin-left: auto;
-		margin-right: auto;
-		padding-left: var(--z-section-gutter, 0);
-		padding-right: var(--z-section-gutter, 0);
+		margin-inline-start: auto;
+		margin-inline-end: auto;
+		padding-inline-start: var(--z-section-gutter, 0);
+		padding-inline-end: var(--z-section-gutter, 0);
 	}
 `
 

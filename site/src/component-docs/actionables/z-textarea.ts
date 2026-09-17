@@ -1,5 +1,5 @@
 import { defineInteractiveExample, defineMarkupExample, queryPreview } from '../authoring'
-import { ComponentStatus, ExampleLayout } from '../types'
+import { ComponentStatus, EvidenceLevel, ExampleLayout } from '../types'
 import type { ComponentDocT } from '../types'
 
 const buildPlaygroundTextarea = (): HTMLElement => {
@@ -14,7 +14,14 @@ export const zTextareaDoc: ComponentDocT = {
 	tag: 'z-textarea',
 	title: 'z-textarea',
 	tagline: 'Multi-line text, with an optional field that grows to fit what was written.',
-	status: ComponentStatus.stable,
+	status: ComponentStatus.beta,
+	evidence: {
+		formAssociated: true,
+		keyboard: EvidenceLevel.verified,
+		screenReader: EvidenceLevel.unverified,
+		browserTests: true,
+		screenshots: true
+	},
 
 	description:
 		'The same hairline-to-accent focus treatment as `z-input`, wrapped around a native `<textarea>`. `rows` sets the resting height. Set `is-auto-resize` and the field tracks its own content instead — no scrollbar, no fixed box the user has to write inside. `input` fires per keystroke and `change` on blur only when the value changed during editing, matching `z-input` exactly, so the two are interchangeable in a form handler.',
@@ -192,8 +199,10 @@ export const zTextareaDoc: ComponentDocT = {
 	attributes: [
 		{ name: 'value', type: 'string', defaultValue: '—', description: 'The field contents. Reflects, so it is both the seed and the live value.' },
 		{ name: 'label', type: 'string', defaultValue: '—', description: 'Accessible name applied to the inner textarea. Set for you inside a z-field.' },
+		{ name: 'description', type: 'string', defaultValue: '—', description: 'Accessible description, read after the name. Set for you by a z-field with a description; the text is rendered hidden inside the control and pointed at with aria-describedby.' },
+		{ name: 'error', type: 'string', defaultValue: '—', description: 'Accessible error text, and aria-invalid. Set for you by a z-field with an error.' },
 		{ name: 'placeholder', type: 'string', defaultValue: '—', description: 'Example text shown while the field is empty.' },
-		{ name: 'name', type: 'string', defaultValue: '—', description: 'Name passed to the inner textarea for form submission.' },
+		{ name: 'name', type: 'string', defaultValue: '—', description: 'The FormData entry name. The host is the form participant, so this goes on the element, not on anything inside it.' },
 		{ name: 'rows', type: 'number', defaultValue: '3', description: 'Resting height in lines; the minimum height while is-auto-resize is enabled.' },
 		{ name: 'size', type: 'sm | md | lg', defaultValue: 'md', description: 'Control density.' },
 		{ name: 'accent', type: 'neutral | dom | sub', defaultValue: 'neutral', description: 'Which accent the border lifts to on focus.' },
@@ -202,7 +211,7 @@ export const zTextareaDoc: ComponentDocT = {
 		{ name: 'is-invalid', type: 'boolean', defaultValue: '—', description: 'Paints the error border and sets aria-invalid.' },
 		{ name: 'is-disabled', type: 'boolean', defaultValue: '—', description: 'Blocks interaction and removes the field from the tab order.' },
 		{ name: 'is-readonly', type: 'boolean', defaultValue: '—', description: 'Focusable and selectable, but not editable.' },
-		{ name: 'is-required', type: 'boolean', defaultValue: '—', description: 'Marks the inner textarea required for native form validation.' },
+		{ name: 'is-required', type: 'boolean', defaultValue: '—', description: 'Blocks the owning form from submitting while empty, and fires `invalid` on the host.' },
 		{ name: 'is-hidden', type: 'boolean', defaultValue: '—', description: 'Removes the field from layout.' }
 	],
 
@@ -216,6 +225,10 @@ export const zTextareaDoc: ComponentDocT = {
 	],
 
 	cssVariables: [],
+
+	keyboard: [
+		{ keys: 'Enter', action: 'Inserts a line break. Never submits the form.' }
+	],
 
 	accessibilityNotes: [
 		'Wraps a native textarea, so selection, spellcheck, dictation, and the platform caret behave exactly as users expect.',

@@ -104,7 +104,7 @@ const styles = css`
 		background: transparent;
 		border: 0;
 		font-family: inherit;
-		text-align: left;
+		text-align: start;
 		width: 100%;
 		box-sizing: border-box;
 	}

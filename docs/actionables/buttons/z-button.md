@@ -24,7 +24,9 @@ neutral; explicit `dom` and `sub` values use purple and pink.
 | `kind` | `solid` `outline` `ghost` `soft` `plain` | `solid` | visual treatment |
 | `size` | `sm` `md` `lg` | `md` | size |
 | `label` | string | — | text (alternative to slotting children) |
-| `type` | `button` `submit` `reset` | `button` | native button type |
+| `type` | `button` `submit` `reset` | `button` | `submit` calls `requestSubmit()` on the owning form (validation runs first); `reset` resets it |
+| `name` | string | — | with `type="submit"`, the FormData entry contributed for that submission only |
+| `value` | string | — | the value submitted under `name` |
 | `is-disabled` | boolean | — | disable |
 | `is-loading` | boolean | — | show a spinner, expose aria-busy, and block interaction |
 | `is-full-width` | boolean | — | stretch to fill its container |

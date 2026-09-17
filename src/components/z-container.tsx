@@ -12,10 +12,10 @@ const styles = css`
 		display: block;
 		width: 100%;
 		max-width: var(--z-container-size, 80rem);
-		margin-left: auto;
-		margin-right: auto;
-		padding-left: var(--z-container-gutter, 0);
-		padding-right: var(--z-container-gutter, 0);
+		margin-inline-start: auto;
+		margin-inline-end: auto;
+		padding-inline-start: var(--z-container-gutter, 0);
+		padding-inline-end: var(--z-container-gutter, 0);
 	}
 
 	:host([is-full-height]) {

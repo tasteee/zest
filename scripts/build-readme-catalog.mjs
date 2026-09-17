@@ -18,6 +18,8 @@ const docsDirectory = join(repoRoot, 'docs')
 
 const START_MARKER = '<!-- catalog:start -->'
 const END_MARKER = '<!-- catalog:end -->'
+const DEFAULT_TRUE_START = '<!-- default-true:start -->'
+const DEFAULT_TRUE_END = '<!-- default-true:end -->'
 
 const CATEGORY_LABELS = {
 	foundation: 'Foundation',
@@ -146,20 +148,34 @@ for (const category of CATEGORY_ORDER) {
 	lines.push(group.map((tag) => `\`${tag}\``).join(' '))
 }
 
-const readmePath = join(repoRoot, 'README.md')
-const readme = readFileSync(readmePath, 'utf8')
-
-const start = readme.indexOf(START_MARKER)
-const end = readme.indexOf(END_MARKER)
-
-const hasMarkers = start >= 0 && end > start
-if (!hasMarkers) {
-	console.error(`README.md is missing ${START_MARKER} / ${END_MARKER}`)
-	process.exit(1)
+// The README's rule is "absent is the default, and the default is false" —
+// except for the booleans declared with `value: () => true`. Listing them by
+// hand is how the rule ended up contradicted, so they are scanned from source.
+const toKebab = (name) => name.replace(/[A-Z]/g, (letter) => `-${letter.toLowerCase()}`)
+const publicTags = new Set(tags)
+const defaultTrueLines = []
+for (const file of readdirSync(join(repoRoot, 'src', 'components')).sort()) {
+	const tag = basename(file, '.tsx')
+	if (!publicTags.has(tag)) continue
+	const source = readFileSync(join(repoRoot, 'src', 'components', file), 'utf8')
+	const names = [...source.matchAll(/(\w+):\s*\{\s*type:\s*Boolean[^}]*value:\s*\(\)\s*=>\s*true/g)].map((match) => toKebab(match[1]))
+	if (names.length) defaultTrueLines.push(`- \`${tag}\`: ${names.map((name) => `\`${name}\``).join(', ')}`)
 }
 
-const before = readme.slice(0, start + START_MARKER.length)
-const after = readme.slice(end)
-writeFileSync(readmePath, `${before}\n\n${lines.join('\n')}\n\n${after}`)
+const replaceBetween = (text, startMarker, endMarker, body) => {
+	const start = text.indexOf(startMarker)
+	const end = text.indexOf(endMarker)
+	if (start < 0 || end <= start) {
+		console.error(`README.md is missing ${startMarker} / ${endMarker}`)
+		process.exit(1)
+	}
+	return `${text.slice(0, start + startMarker.length)}\n\n${body}\n\n${text.slice(end)}`
+}
 
-console.log(`README catalog: ${tags.length} elements across ${byCategory.size} categories`)
+const readmePath = join(repoRoot, 'README.md')
+let readme = readFileSync(readmePath, 'utf8')
+readme = replaceBetween(readme, START_MARKER, END_MARKER, lines.join('\n'))
+readme = replaceBetween(readme, DEFAULT_TRUE_START, DEFAULT_TRUE_END, defaultTrueLines.join('\n'))
+writeFileSync(readmePath, readme)
+
+console.log(`README catalog: ${tags.length} elements across ${byCategory.size} categories, ${defaultTrueLines.length} elements with default-true booleans`)

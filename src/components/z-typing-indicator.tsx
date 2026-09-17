@@ -25,7 +25,7 @@ const styles = css`
 		gap: 4px;
 		background: color-mix(in oklch, var(--foreground) 8%, var(--card));
 		border-radius: 1.125rem;
-		border-bottom-left-radius: 0.3rem;
+		border-end-start-radius: 0.3rem;
 		padding: 0.7rem 0.85rem;
 	}
 	.dot {

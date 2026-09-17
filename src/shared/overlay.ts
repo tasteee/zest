@@ -1,3 +1,4 @@
+import { oneOf } from './prop-types'
 /*
  * Shared overlay positioning + lifecycle helpers, used by every floating
  * z-* component (z-popover, z-tooltip, z-hover-card, and the dialog family).
@@ -210,8 +211,15 @@ export const applyArrowPosition = (
 
 /** Shared prop surface for anchored overlays (placement / offset / accent). */
 export const overlayPositionProps = {
-	placement: { type: String, reflect: true },
+	placement: {
+		type: oneOf(
+			'top', 'bottom', 'left', 'right',
+			'top-start', 'top-center', 'top-end', 'bottom-start', 'bottom-center', 'bottom-end',
+			'left-start', 'left-center', 'left-end', 'right-start', 'right-center', 'right-end'
+		),
+		reflect: true
+	},
 	offset: { type: Number },
-	accent: { type: String, reflect: true },
+	accent: { type: oneOf('neutral', 'dom', 'sub'), reflect: true },
 	isHidden: { type: Boolean, reflect: true }
 }

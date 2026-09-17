@@ -16,8 +16,8 @@ const styles = css`
 		min-height: var(--z-center-min-height, auto);
 		padding-top: var(--z-center-pad-top, 0);
 		padding-bottom: var(--z-center-pad-bottom, 0);
-		padding-left: var(--z-center-pad-left, 0);
-		padding-right: var(--z-center-pad-right, 0);
+		padding-inline-start: var(--z-center-pad-left, 0);
+		padding-inline-end: var(--z-center-pad-right, 0);
 	}
 
 	:host([centers-text]) {

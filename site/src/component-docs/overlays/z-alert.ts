@@ -1,5 +1,5 @@
 import { defineInteractiveExample, defineMarkupExample, queryPreview } from '../authoring'
-import { ComponentStatus, ExampleLayout } from '../types'
+import { ComponentStatus, EvidenceLevel, ExampleLayout } from '../types'
 import type { ComponentDocT } from '../types'
 
 const buildPlaygroundAlert = (): HTMLElement => {
@@ -14,7 +14,14 @@ export const zAlertDoc: ComponentDocT = {
 	tag: 'z-alert',
 	title: 'z-alert',
 	tagline: 'A status banner that sits in the page rather than over it.',
-	status: ComponentStatus.stable,
+	status: ComponentStatus.beta,
+	evidence: {
+		formAssociated: null,
+		keyboard: EvidenceLevel.verified,
+		screenReader: EvidenceLevel.unverified,
+		browserTests: true,
+		screenshots: true
+	},
 
 	description:
 		'Despite the category, this is not a floating overlay — it is an in-flow bordered box tinted by `accent`, with a leading status icon, an optional `heading`, slotted body copy, and an optional close button. It takes up space, which is the point: an alert that has to be dismissed before the layout settles is one the user cannot miss. Red, amber, and green are reserved for the semantic accents; everything else reads through the neutral border.',
@@ -189,6 +196,11 @@ export const zAlertDoc: ComponentDocT = {
 	],
 
 	cssVariables: [],
+
+	keyboard: [
+		{ keys: 'Tab', action: 'Reaches the dismiss button when `is-dismissable` is set.' },
+		{ keys: 'Enter / Space', action: 'On the dismiss button: hides the alert.' }
+	],
 
 	accessibilityNotes: [
 		'Warning and danger alerts carry role="alert", so they are announced immediately; the quieter accents use role="status", which waits for a pause. That difference is deliberate — not every alert deserves to interrupt.',

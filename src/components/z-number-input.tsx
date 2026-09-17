@@ -1,7 +1,10 @@
 import { interactionStyles } from '../shared/interaction-styles'
 import { defineFormElement, useFormControl } from '../shared/form-control'
+import { describableProps, describedBy, renderDescriptions, srOnlyStyles, useAccessibleName } from '../shared/accessible'
 import type { ValidityFlagsT } from '../shared/form-control'
 import { c, css, event, useEffect, useHost, useProp, useRef, useState } from 'atomico'
+import { oneOf } from '../shared/prop-types'
+import { useLocale } from '../shared/locale'
 
 /*
  * z-number-input — a typed numeric field with optional ghost stepper buttons.
@@ -51,7 +54,9 @@ const decimalPlaces = (value: number) => {
 
 export const ZNumberInput = c(
 	(props) => {
+		const t = useLocale()
 		const host = useHost()
+		const accessibleName = useAccessibleName(props.label)
 		const inputRef = useRef<HTMLInputElement>()
 		const [value, setValue] = useProp<number>('value')
 		const defaultValue = useRef(value)
@@ -70,13 +75,13 @@ export const ZNumberInput = c(
 
 		const formValidity = (): { flags: ValidityFlagsT; message?: string } => {
 			if (rawValue === '') return { flags: {} }
-			if (parsed == null) return { flags: { badInput: true }, message: 'Please enter a number.' }
-			if (min != null && parsed < min) return { flags: { rangeUnderflow: true }, message: `Value must be greater than or equal to ${min}.` }
-			if (max != null && parsed > max) return { flags: { rangeOverflow: true }, message: `Value must be less than or equal to ${max}.` }
+			if (parsed == null) return { flags: { badInput: true }, message: t('enterANumber') }
+			if (min != null && parsed < min) return { flags: { rangeUnderflow: true }, message: t('valueAtLeast', { min }) }
+			if (max != null && parsed > max) return { flags: { rangeOverflow: true }, message: t('valueAtMost', { max }) }
 			const offset = (parsed - (min ?? 0)) / step
 			const precision = Math.max(decimalPlaces(step), decimalPlaces(parsed), decimalPlaces(min ?? 0))
 			const isOnStep = Math.abs(offset - Math.round(offset)) < 10 ** -Math.min(12, precision + 2)
-			if (!isOnStep) return { flags: { stepMismatch: true }, message: `Please enter a valid value. The nearest valid values are ${Number((Math.floor(offset) * step + (min ?? 0)).toFixed(precision))} and ${Number((Math.ceil(offset) * step + (min ?? 0)).toFixed(precision))}.` }
+			if (!isOnStep) return { flags: { stepMismatch: true }, message: t('valueOnStep', { low: Number((Math.floor(offset) * step + (min ?? 0)).toFixed(precision)), high: Number((Math.ceil(offset) * step + (min ?? 0)).toFixed(precision)) }) }
 			return { flags: {} }
 		}
 		const { isFormDisabled } = useFormControl({
@@ -131,7 +136,7 @@ export const ZNumberInput = c(
 			.join(' ')
 
 		return <host shadowDom={{ delegatesFocus: true }}><div class={fieldClass}>
-			{props.hasStepperButtons && <button class="stepper" type="button" tabindex="-1" disabled={isDisabled || props.isReadonly || (min != null && (parsed ?? value ?? min) <= min)} aria-label="Decrease value" onclick={() => stepValue(-1)}>−</button>}
+			{props.hasStepperButtons && <button class="stepper" type="button" tabindex="-1" disabled={isDisabled || props.isReadonly || (min != null && (parsed ?? value ?? min) <= min)} aria-label={t('decreaseValue')} onclick={() => stepValue(-1)}>−</button>}
 			<input
 				ref={inputRef}
 				type="text"
@@ -145,18 +150,20 @@ export const ZNumberInput = c(
 				disabled={isDisabled}
 				readonly={props.isReadonly}
 				required={props.isRequired}
-				aria-label={props.label || host.current?.getAttribute('aria-label') || undefined}
-				aria-invalid={isInvalid ? 'true' : undefined}
+				aria-label={accessibleName}
+				aria-describedby={describedBy(props.description, props.error)}
+				aria-invalid={isInvalid || props.error ? 'true' : undefined}
 				onfocus={(e: any) => { setIsFocused(true); e.target.select() }}
 				onblur={correctOnBlur}
 				onkeydown={(e: KeyboardEvent) => { if (e.key === 'ArrowUp') { e.preventDefault(); stepValue(1) } if (e.key === 'ArrowDown') { e.preventDefault(); stepValue(-1) } }}
 				oninput={(e: any) => { e.stopPropagation(); const next = e.target.value; setRawValue(next); const numeric = isNumberText(next) ? Number(next) : null; if (numeric != null) setValue(numeric); const valid = numeric != null && (min == null || numeric >= min) && (max == null || numeric <= max); props.input({ value: numeric, rawValue: next, isValid: valid }) }}
 			/>
-			{props.hasStepperButtons && <button class="stepper" type="button" tabindex="-1" disabled={isDisabled || props.isReadonly || (max != null && (parsed ?? value ?? max) >= max)} aria-label="Increase value" onclick={() => stepValue(1)}>+</button>}
-		</div></host>
+			{props.hasStepperButtons && <button class="stepper" type="button" tabindex="-1" disabled={isDisabled || props.isReadonly || (max != null && (parsed ?? value ?? max) >= max)} aria-label={t('increaseValue')} onclick={() => stepValue(1)}>+</button>}
+		</div>{renderDescriptions(props.description, props.error)}</host>
 	},
 	{
 		props: {
+			...describableProps,
 			value: { type: Number, reflect: true },
 			min: { type: Number, reflect: true },
 			max: { type: Number, reflect: true },
@@ -164,8 +171,8 @@ export const ZNumberInput = c(
 			label: String,
 			name: { type: String, reflect: true },
 			placeholder: String,
-			size: { type: String, reflect: true },
-			accent: { type: String, reflect: true },
+			size: { type: oneOf('sm', 'md', 'lg'), reflect: true },
+			accent: { type: oneOf('neutral', 'dom', 'sub'), reflect: true },
 			isInvalid: { type: Boolean, reflect: true },
 			isDisabled: { type: Boolean, reflect: true },
 			isReadonly: { type: Boolean, reflect: true },
@@ -177,7 +184,7 @@ export const ZNumberInput = c(
 			input: event<{ value: number | null; rawValue: string; isValid: boolean }>({ bubbles: true, composed: true }),
 			change: event<{ value: number }>({ bubbles: true, composed: true })
 		},
-		styles: [styles, interactionStyles],
+		styles: [styles, interactionStyles, srOnlyStyles],
 		form: true
 	}
 )

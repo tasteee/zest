@@ -1,5 +1,8 @@
 import { defineElement } from '../shared/define-element'
+import { interactionStyles } from '../shared/interaction-styles'
 import { c, css, event, useProp } from 'atomico'
+import { oneOf } from '../shared/prop-types'
+import { useLocale } from '../shared/locale'
 
 /*
  * z-alert — an inline, in-flow status banner (not a floating overlay). A
@@ -109,7 +112,7 @@ const styles = css`
 	}
 
 	.close:focus-visible {
-		outline: 3px solid color-mix(in oklch, var(--ring) 50%, transparent);
+		outline: 3px solid var(--focus-ring);
 		outline-offset: 2px;
 	}
 
@@ -137,6 +140,7 @@ const URGENT_ACCENTS = ['error', 'warning']
 
 export const ZAlert = c(
 	(props) => {
+		const t = useLocale()
 		const [isHidden, setIsHidden] = useProp<boolean>('isHidden')
 		const accent = (props.accent as string) || 'neutral'
 		const isUrgent = URGENT_ACCENTS.includes(accent)
@@ -160,7 +164,7 @@ export const ZAlert = c(
 						</div>
 					</div>
 					{props.isDismissable && (
-						<button type="button" class="close" aria-label="Dismiss" onclick={dismiss}>
+						<button type="button" class="close" aria-label={t('dismiss')} onclick={dismiss}>
 							<svg viewBox="0 0 24 24">
 								<line x1="6" y1="6" x2="18" y2="18" />
 								<line x1="18" y1="6" x2="6" y2="18" />
@@ -173,13 +177,13 @@ export const ZAlert = c(
 	},
 	{
 		props: {
-			accent: { type: String, reflect: true },
+			accent: { type: oneOf('neutral', 'dom', 'sub', 'success', 'warning', 'error'), reflect: true },
 			heading: String,
 			isDismissable: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			dismiss: event<void>({ bubbles: true, composed: true })
 		},
-		styles
+		styles: [styles, interactionStyles]
 	}
 )
 

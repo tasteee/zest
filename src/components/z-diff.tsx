@@ -88,7 +88,7 @@ const styles = css`
 
 	.sign {
 		width: 1.5rem;
-		padding-left: 0.875rem;
+		padding-inline-start: 0.875rem;
 		text-align: center;
 		color: var(--muted-foreground);
 		user-select: none;
@@ -96,7 +96,7 @@ const styles = css`
 	}
 
 	.text {
-		padding-right: 1rem;
+		padding-inline-end: 1rem;
 		color: var(--foreground);
 	}
 
@@ -135,7 +135,7 @@ const styles = css`
 	}
 
 	.split .pane + .pane {
-		border-left: 1px solid var(--border);
+		border-inline-start: 1px solid var(--border);
 	}
 
 	.pane {
@@ -157,7 +157,7 @@ const styles = css`
 		}
 
 		.split .pane + .pane {
-			border-left: 0;
+			border-inline-start: 0;
 			border-top: 1px solid var(--border);
 		}
 	}

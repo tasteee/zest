@@ -1,5 +1,5 @@
 import { defineInteractiveExample, defineMarkupExample, queryPreview } from '../authoring'
-import { ComponentStatus, ExampleLayout } from '../types'
+import { ComponentStatus, EvidenceLevel, ExampleLayout } from '../types'
 import type { ComponentDocT } from '../types'
 
 const buildPlaygroundDialog = (): HTMLElement => {
@@ -23,7 +23,14 @@ export const zDialogDoc: ComponentDocT = {
 	tag: 'z-dialog',
 	title: 'z-dialog',
 	tagline: 'A modal on the platform’s own foundation — focus trap, Esc, and top layer included.',
-	status: ComponentStatus.stable,
+	status: ComponentStatus.beta,
+	evidence: {
+		formAssociated: null,
+		keyboard: EvidenceLevel.verified,
+		screenReader: EvidenceLevel.unverified,
+		browserTests: true,
+		screenshots: true
+	},
 
 	description:
 		'Built on the native `<dialog>` element with `showModal()`, which is a deliberate choice rather than an implementation detail: focus trapping, Escape-to-close, top-layer stacking above every z-index you have ever written, and the backdrop all come from the browser instead of from JavaScript that has to be right. A `[slot="trigger"]` opens it, `heading` and `description` fill the top of the body, and `[slot="footer"]` holds the actions. `is-open` reflects and is two-way, so opening it from code is one assignment.',
@@ -77,17 +84,17 @@ export const zDialogDoc: ComponentDocT = {
 				'Three widths. Small is for a single question, medium for a short form, large for something with structure — a diff, a table, a preview.',
 			layout: ExampleLayout.start,
 			markup: `
-				<z-dialog size="small" heading="Rename project">
+				<z-dialog size="sm" heading="Rename project">
 				  <z-button slot="trigger" kind="outline">Small</z-button>
 				  <z-field label="Name"><z-input value="Untitled"></z-input></z-field>
 				  <z-button slot="footer" kind="solid" accent="dom">Rename</z-button>
 				</z-dialog>
-				<z-dialog size="medium" heading="Project settings">
+				<z-dialog size="md" heading="Project settings">
 				  <z-button slot="trigger" kind="outline">Medium</z-button>
 				  <z-text size="sm" color="muted">The default width — enough for a short form without feeling empty.</z-text>
 				  <z-button slot="footer" kind="solid" accent="dom">Save</z-button>
 				</z-dialog>
-				<z-dialog size="large" heading="Review changes">
+				<z-dialog size="lg" heading="Review changes">
 				  <z-button slot="trigger" kind="outline">Large</z-button>
 				  <z-text size="sm" color="muted">Room for structured content — a diff, a table, a preview.</z-text>
 				  <z-button slot="footer" kind="solid" accent="dom">Apply</z-button>
@@ -213,7 +220,7 @@ export const zDialogDoc: ComponentDocT = {
 				'The common shape: collect something, act on it, close. Closing in the handler rather than on the button is what keeps a failed submit from dismissing the work.',
 			layout: ExampleLayout.stack,
 			markup: `
-				<z-dialog id="renameDialog" size="small" heading="Rename project" is-static>
+				<z-dialog id="renameDialog" size="sm" heading="Rename project" is-static>
 				  <z-button slot="trigger" kind="outline">Rename project</z-button>
 				  <z-field label="Project name">
 				    <z-input id="renameInput" value="Untitled project"></z-input>
@@ -275,7 +282,7 @@ export const zDialogDoc: ComponentDocT = {
 		{ name: 'label', type: 'string', defaultValue: '—', description: 'Accessible name when no heading is supplied.' },
 		{ name: 'heading', type: 'string', defaultValue: '—', description: 'Visible title and the accessible name of the native dialog.' },
 		{ name: 'description', type: 'string', defaultValue: '—', description: 'A muted line under the heading, linked with aria-describedby.' },
-		{ name: 'size', type: 'small | medium | large', defaultValue: 'medium', description: 'Panel width — 24rem, 30rem, or 42rem, capped to the viewport.' },
+		{ name: 'size', type: 'sm | md | lg', defaultValue: 'md', description: 'Panel width — 24rem, 30rem, or 42rem, capped to the viewport. `small`/`medium`/`large` still work for one minor, with a dev warning.' },
 		{ name: 'has-close', type: 'boolean', defaultValue: 'true', description: 'Shows the close button. Set the hasClose property to false to hide it.' },
 		{ name: 'is-static', type: 'boolean', defaultValue: '—', description: 'Ignores backdrop clicks. Escape still closes.' },
 		{ name: 'is-disabled', type: 'boolean', defaultValue: '—', description: 'Stops the trigger from opening the dialog.' }
@@ -296,6 +303,12 @@ export const zDialogDoc: ComponentDocT = {
 
 	cssVariables: [
 		{ name: '--z-dialog-width', defaultValue: '30rem', description: 'Panel width. Set by the size attribute, and overridable for a one-off.' }
+	],
+
+	keyboard: [
+		{ keys: 'Enter / Space', action: 'On the slotted trigger: opens the dialog. Focus moves inside it.' },
+		{ keys: 'Tab / Shift+Tab', action: 'Cycles through the dialog\'s focusable content; the page behind is inert.' },
+		{ keys: 'Esc', action: 'Closes the dialog and returns focus to what opened it.' }
 	],
 
 	accessibilityNotes: [

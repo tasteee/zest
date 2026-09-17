@@ -1,5 +1,5 @@
 import { defineInteractiveExample, defineMarkupExample, queryPreview } from '../authoring'
-import { ComponentStatus, ExampleLayout } from '../types'
+import { ComponentStatus, EvidenceLevel, ExampleLayout } from '../types'
 import type { ComponentDocT } from '../types'
 
 const buildPlaygroundRadioGroup = (): HTMLElement => {
@@ -20,7 +20,14 @@ export const zRadioGroupDoc: ComponentDocT = {
 	tag: 'z-radio-group',
 	title: 'z-radio-group',
 	tagline: 'Turns a pile of radios into one control with one answer.',
-	status: ComponentStatus.stable,
+	status: ComponentStatus.beta,
+	evidence: {
+		formAssociated: true,
+		keyboard: EvidenceLevel.verified,
+		screenReader: EvidenceLevel.unverified,
+		browserTests: true,
+		screenshots: true
+	},
 
 	description:
 		'The coordinator for `z-radio`. It listens for the `select` event bubbling up from its children, clears every other radio, records the winner on its own `value`, and re-emits a single `change`. That means you bind one listener to the group rather than one per option, and read one property rather than hunting for whichever child is checked. `value` works in both directions: assign it and the matching child is checked for you; leave it unset and the group adopts whichever child was seeded with `is-checked`. The same model as `z-toggle-button-group`.',
@@ -237,7 +244,12 @@ export const zRadioGroupDoc: ComponentDocT = {
 			defaultValue: '—',
 			description: 'The chosen value. Reflects, two-way — assigning it checks the matching child, and it updates as the selection changes.'
 		},
+		{ name: 'name', type: 'string', defaultValue: '—', description: 'The FormData entry name. The group is the form participant; the radios only carry values.' },
 		{ name: 'label', type: 'string', defaultValue: '—', description: 'Accessible name for the group. Set this even when a z-field already shows a visible label.' },
+		{ name: 'description', type: 'string', defaultValue: '—', description: 'Accessible description, read after the name. Set for you by a z-field with a description; the text is rendered hidden inside the control and pointed at with aria-describedby.' },
+		{ name: 'error', type: 'string', defaultValue: '—', description: 'Accessible error text, and aria-invalid. Set for you by a z-field with an error.' },
+		{ name: 'is-required', type: 'boolean', defaultValue: '—', description: 'Blocks the owning form from submitting until a radio is chosen.' },
+		{ name: 'is-disabled', type: 'boolean', defaultValue: '—', description: 'Disables every radio in the group. Re-enabling restores only the ones the group disabled.' },
 		{ name: 'accent', type: 'neutral | dom | sub | success | warning | error', defaultValue: 'neutral', description: 'Shared selection accent for the radios in the group.' },
 		{ name: 'direction', type: 'vertical | horizontal', defaultValue: 'vertical', description: 'Sets the option layout axis.' },
 		{ name: 'is-hidden', type: 'boolean', defaultValue: '—', description: 'Removes the group from layout.' }
@@ -252,6 +264,12 @@ export const zRadioGroupDoc: ComponentDocT = {
 	],
 
 	cssVariables: [],
+
+	keyboard: [
+		{ keys: '↓ / →', action: 'Moves selection and focus to the next enabled radio, wrapping at the end.' },
+		{ keys: '↑ / ←', action: 'Moves selection and focus to the previous enabled radio, wrapping at the start.' },
+		{ keys: 'Space', action: 'Selects the focused radio.' }
+	],
 
 	accessibilityNotes: [
 		'The host carries role="radiogroup" with `label` as its accessible name, so the set is announced as one control — "Billing period, radio group" — rather than as unrelated radios.',

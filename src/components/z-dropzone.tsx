@@ -66,7 +66,7 @@ const styles = css`
 		overflow: hidden;
 		font-size: var(--font-size-caption);
 		font-weight: 600;
-		text-align: left;
+		text-align: start;
 		text-overflow: ellipsis;
 		white-space: nowrap;
 	}

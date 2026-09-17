@@ -37,7 +37,7 @@ const styles = css`
 	}
 
 	a:focus-visible {
-		outline: 3px solid color-mix(in oklch, var(--ring) 50%, transparent);
+		outline: 3px solid var(--focus-ring);
 		outline-offset: 2px;
 		border-radius: var(--radius-sm);
 	}
@@ -48,7 +48,7 @@ const styles = css`
 		display: inline-block;
 		width: 0.7em;
 		height: 0.7em;
-		margin-left: 0.15em;
+		margin-inline-start: 0.15em;
 		vertical-align: baseline;
 		stroke: currentColor;
 		stroke-width: 2.5;

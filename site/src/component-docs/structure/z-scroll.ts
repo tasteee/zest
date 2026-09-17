@@ -1,5 +1,5 @@
 import { defineMarkupExample } from '../authoring'
-import { ComponentStatus, ExampleLayout } from '../types'
+import { ComponentStatus, EvidenceLevel, ExampleLayout } from '../types'
 import type { ComponentDocT } from '../types'
 
 const buildPlaygroundScroll = (): HTMLElement => {
@@ -20,7 +20,14 @@ export const zScrollDoc: ComponentDocT = {
 	tag: 'z-scroll',
 	title: 'z-scroll',
 	tagline: 'An overflow container with the system\'s slim, themed scrollbars.',
-	status: ComponentStatus.stable,
+	status: ComponentStatus.beta,
+	evidence: {
+		formAssociated: null,
+		keyboard: EvidenceLevel.unverified,
+		screenReader: EvidenceLevel.unverified,
+		browserTests: false,
+		screenshots: false
+	},
 
 	description:
 		'A viewport that scrolls, with the design system\'s scrollbar treatment instead of the platform default. Pick the axis with `direction`, bound it with `max-height` or `max-width`, and set `overscroll` to stop a scroll gesture from chaining out to the page behind it — which is what you want inside a dialog or a dropdown. The inner viewport carries `tabindex="0"`, so a scrollable region is reachable and scrollable by keyboard rather than being a mouse-only area.',

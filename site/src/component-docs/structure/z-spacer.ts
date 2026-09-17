@@ -1,5 +1,5 @@
 import { defineMarkupExample } from '../authoring'
-import { ComponentStatus, ExampleLayout } from '../types'
+import { ComponentStatus, EvidenceLevel, ExampleLayout } from '../types'
 import type { ComponentDocT } from '../types'
 
 const buildPlaygroundSpacer = (): HTMLElement => {
@@ -19,7 +19,14 @@ export const zSpacerDoc: ComponentDocT = {
 	tag: 'z-spacer',
 	title: 'z-spacer',
 	tagline: 'Empty, non-semantic space — fixed, or growing to fill what is left.',
-	status: ComponentStatus.stable,
+	status: ComponentStatus.beta,
+	evidence: {
+		formAssociated: null,
+		keyboard: EvidenceLevel.unverified,
+		screenReader: EvidenceLevel.unverified,
+		browserTests: false,
+		screenshots: false
+	},
 
 	description:
 		'An empty element whose only job is to take up room. A fixed `size` creates a deliberate gap on both axes. In a parent layout that distributes free space, `can-grow` can absorb what remains and put the break exactly where the spacer sits.',

@@ -60,7 +60,7 @@ band, so the compact switch track centres inside the same 40px a select fills:
   </z-field>
 
   <z-field is-label-reserved>
-    <z-button kind="solid" tone="primary">Save</z-button>
+    <z-button kind="solid" accent="dom">Save</z-button>
   </z-field>
 </wired-row>
 ```
@@ -87,7 +87,7 @@ inside it:
 
 ```html
 <z-field label="Port" is-small>
-  <z-input size="small" placeholder="8080"></z-input>
+  <z-input size="sm" placeholder="8080"></z-input>
 </z-field>
 ```
 

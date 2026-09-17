@@ -27,7 +27,7 @@ const styles = css`
 		display: inline-block;
 		width: 0.55em;
 		height: 1.05em;
-		margin-left: 1px;
+		margin-inline-start: 1px;
 		transform: translateY(0.15em);
 		background: currentColor;
 		border-radius: 1px;

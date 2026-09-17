@@ -1,6 +1,6 @@
 import { defineMarkupExample } from '../authoring'
 import { Icons } from '../icons'
-import { ComponentStatus, ExampleLayout } from '../types'
+import { ComponentStatus, EvidenceLevel, ExampleLayout } from '../types'
 import type { ComponentDocT } from '../types'
 
 const buildPlaygroundGroup = (): HTMLElement => {
@@ -18,7 +18,14 @@ export const zToolbarGroupDoc: ComponentDocT = {
 	tag: 'z-toolbar-group',
 	title: 'z-toolbar-group',
 	tagline: 'A labelled cluster of related controls inside a toolbar.',
-	status: ComponentStatus.stable,
+	status: ComponentStatus.beta,
+	evidence: {
+		formAssociated: null,
+		keyboard: EvidenceLevel.unverified,
+		screenReader: EvidenceLevel.unverified,
+		browserTests: false,
+		screenshots: false
+	},
 
 	description:
 		'Tightens the spacing between a set of related controls and gives them an accessible name. A `z-separator` draws a boundary that sighted users can see; a toolbar group creates a boundary that is also announced. In a bar with several clusters — text style, alignment, insert — that name is the difference between "button, button, button" and "Text style group, Bold button".',

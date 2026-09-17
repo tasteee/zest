@@ -33,6 +33,16 @@ Keyboard: ←/→ select and focus the next enabled tab; Home/End select and foc
 | `is-fitted` | boolean | — | tabs stretch to fill the width equally |
 | `is-hidden` | boolean | — | hide |
 
+## Keyboard
+
+Every row is exercised by a browser test.
+
+| Keys | Action |
+| --- | --- |
+| → / ← | Moves to the next or previous enabled tab and activates it, wrapping. In a right-to-left context the arrows swap. |
+| Home / End | Moves to the first or last enabled tab and activates it. |
+| Tab | From the active tab, moves into its panel. |
+
 ## Slots
 
 - _(named)_ — one slot per tab, named after the tab's `value`.

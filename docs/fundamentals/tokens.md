@@ -2,7 +2,7 @@
 
 Zest uses shared tokens for theme colors, control geometry, typography, and
 spacing. Component-specific details sit on top of these foundations. This page
-is the resolved-value reference; the [fundamentals](../fundamentals/color.md)
+is the resolved-value reference; the [fundamentals](./color.md)
 explain each layer and the flow from primitive to semantic to component.
 
 Every swatch below shows its **resolved** value in whatever theme you are

@@ -30,13 +30,13 @@ const styles = css`
 		align-items: center;
 	}
 	.stack z-avatar {
-		margin-left: -0.375rem;
+		margin-inline-start: -0.375rem;
 	}
 	.stack z-avatar:first-child {
-		margin-left: 0;
+		margin-inline-start: 0;
 	}
 	.more {
-		margin-left: 0.25rem;
+		margin-inline-start: 0.25rem;
 		font-size: 0.6875rem;
 		font-weight: 600;
 		color: var(--muted-foreground);

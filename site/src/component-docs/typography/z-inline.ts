@@ -1,5 +1,5 @@
 import { defineMarkupExample } from '../authoring'
-import { ComponentStatus, ExampleLayout } from '../types'
+import { ComponentStatus, EvidenceLevel, ExampleLayout } from '../types'
 import type { ComponentDocT } from '../types'
 import { TEXT_FAMILY_RELATED, WEIGHT_CONTROL_OPTIONS } from './text-family'
 
@@ -19,7 +19,14 @@ export const zInlineDoc: ComponentDocT = {
 	tag: 'z-inline',
 	title: 'z-inline',
 	tagline: 'A style patch for a fragment of text — carries no size of its own.',
-	status: ComponentStatus.stable,
+	status: ComponentStatus.beta,
+	evidence: {
+		formAssociated: null,
+		keyboard: EvidenceLevel.unverified,
+		screenReader: EvidenceLevel.unverified,
+		browserTests: false,
+		screenshots: false
+	},
 
 	description:
 		'The one member of the text family with no `size` prop, and that absence is the entire design. Font size, line height, letter spacing, and family all inherit, so an inline fragment can sit inside a `z-text` or `z-heading` at any size without silently snapping back to a default. `color` and `weight` also inherit unless you set them, which makes a bare `<z-inline>` a visual no-op — it only ever changes what you explicitly ask it to change.',

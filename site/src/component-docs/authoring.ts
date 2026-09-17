@@ -61,6 +61,7 @@ type MarkupExampleInputT = {
 	id: string
 	title: string
 	description: string
+	assert?: ExampleT['assert']
 	markup: string
 	layout?: ExampleLayoutT
 }
@@ -77,7 +78,8 @@ export const defineMarkupExample = (input: MarkupExampleInputT): ExampleT => {
 		description: input.description,
 		layout: resolveLayout(input.layout),
 		snippets,
-		buildPreview: () => buildPreviewRoot(markup)
+		buildPreview: () => buildPreviewRoot(markup),
+		assert: input.assert
 	}
 }
 
@@ -85,6 +87,7 @@ type InteractiveExampleInputT = {
 	id: string
 	title: string
 	description: string
+	assert?: ExampleT['assert']
 	markup: string
 	script: string
 	// The React-authored equivalent of `markup` + `script`, shown as a third
@@ -121,7 +124,8 @@ export const defineInteractiveExample = (input: InteractiveExampleInputT): Examp
 		description: input.description,
 		layout: resolveLayout(input.layout),
 		snippets,
-		buildPreview
+		buildPreview,
+		assert: input.assert
 	}
 }
 
@@ -129,6 +133,7 @@ type ComposedExampleInputT = {
 	id: string
 	title: string
 	description: string
+	assert?: ExampleT['assert']
 	snippets: CodeSnippetT[]
 	build: () => HTMLElement
 	layout?: ExampleLayoutT
@@ -154,7 +159,8 @@ export const defineComposedExample = (input: ComposedExampleInputT): ExampleT =>
 		description: input.description,
 		layout: resolveLayout(input.layout),
 		snippets: dedentedSnippets,
-		buildPreview
+		buildPreview,
+		assert: input.assert
 	}
 }
 

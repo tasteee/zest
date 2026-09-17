@@ -138,13 +138,13 @@ const styles = css`
 		flex: none;
 		width: 0.75rem;
 		cursor: col-resize;
-		border-left: 1px solid var(--border);
+		border-inline-start: 1px solid var(--border);
 		background: var(--muted, transparent);
 		touch-action: none;
 	}
 
 	.resizeHandle:focus-visible {
-		outline: 3px solid color-mix(in oklch, var(--ring) 50%, transparent);
+		outline: 3px solid var(--focus-ring);
 		outline-offset: -3px;
 	}
 

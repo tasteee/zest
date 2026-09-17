@@ -14,6 +14,37 @@ export const ComponentStatus = {
 
 export type ComponentStatusT = (typeof ComponentStatus)[keyof typeof ComponentStatus]
 
+// Status is earned, not declared. A page may say `stable` only when every
+// row of its evidence record is green; src/_tests/doc-status.test.ts holds
+// the line. `unverified` means nobody has checked, not that it is broken.
+export const EvidenceLevel = {
+	verified: 'verified',
+	partial: 'partial',
+	unverified: 'unverified'
+} as const
+
+export type EvidenceLevelT = (typeof EvidenceLevel)[keyof typeof EvidenceLevel]
+
+export type EvidenceT = {
+	/** Takes part in a <form> through ElementInternals, proven in the browser suite. `null` for elements that are not controls. */
+	formAssociated: boolean | null
+	/** Every row of the documented key map has a browser test. */
+	keyboard: EvidenceLevelT
+	/** A manual NVDA and VoiceOver pass, recorded on the page. */
+	screenReader: EvidenceLevelT
+	/** Behaviour tests run in a real browser, not only registration and mount checks. */
+	browserTests: boolean
+	/** State × theme screenshots with committed baselines. */
+	screenshots: boolean
+}
+
+export const isStableEvidence = (evidence: EvidenceT): boolean =>
+	evidence.formAssociated !== false &&
+	evidence.keyboard === EvidenceLevel.verified &&
+	evidence.screenReader === EvidenceLevel.verified &&
+	evidence.browserTests &&
+	evidence.screenshots
+
 // How an example's preview area arranges whatever the example builds.
 // Previews vary a lot — a row of buttons wants centering, a full-width bar
 // wants to stretch, a dock wants breathing room underneath it.
@@ -39,6 +70,11 @@ export type ExampleT = {
 	layout: ExampleLayoutT
 	snippets: CodeSnippetT[]
 	buildPreview: () => HTMLElement
+	// What the example claims, proven: runs in the browser test project against
+	// the mounted preview. An example that says "clicking submit shows an
+	// error" asserts it here, so the docs cannot describe behaviour the
+	// element no longer has.
+	assert?: (preview: HTMLElement) => void | Promise<void>
 }
 
 // One row of an attribute or property reference table.
@@ -106,12 +142,21 @@ export type PlaygroundSpecT = {
 	slotLabel: string
 }
 
+// A documented key map is a contract: every row here has a browser test in
+// src/_tests/browser/keyboard.test.ts, and `evidence.keyboard` says
+// `verified` only when that is true.
+export type KeyboardRowT = {
+	keys: string
+	action: string
+}
+
 export type ComponentDocT = {
 	tag: string
 	title: string
 	tagline: string
 	description: string
 	status: ComponentStatusT
+	evidence: EvidenceT
 	playground: PlaygroundSpecT | null
 	anatomy: AnatomyPartT[]
 	examples: ExampleT[]
@@ -121,6 +166,7 @@ export type ComponentDocT = {
 	events: EventRowT[]
 	cssVariables: CssVariableRowT[]
 	accessibilityNotes: string[]
+	keyboard?: KeyboardRowT[]
 	usageGuidance: string[]
 	related: RelatedComponentT[]
 }

@@ -101,7 +101,7 @@ const styles = css`
 		background: transparent;
 		color: inherit;
 		font: inherit;
-		text-align: left;
+		text-align: start;
 		text-decoration: none;
 		cursor: pointer;
 	}

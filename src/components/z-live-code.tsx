@@ -48,11 +48,11 @@ const styles = css`
 	}
 
 	.pane + .pane {
-		border-left: 1px solid var(--border);
+		border-inline-start: 1px solid var(--border);
 	}
 
 	:host([layout='stacked']) .pane + .pane {
-		border-left: 0;
+		border-inline-start: 0;
 		border-top: 1px solid var(--border);
 	}
 
@@ -88,7 +88,7 @@ const styles = css`
 	}
 
 	textarea:focus-visible {
-		outline: 3px solid color-mix(in oklch, var(--ring) 50%, transparent);
+		outline: 3px solid var(--focus-ring);
 		outline-offset: -3px;
 	}
 
@@ -111,7 +111,7 @@ const styles = css`
 		}
 
 		.pane + .pane {
-			border-left: 0;
+			border-inline-start: 0;
 			border-top: 1px solid var(--border);
 		}
 	}

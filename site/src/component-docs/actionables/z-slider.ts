@@ -1,5 +1,5 @@
 import { defineInteractiveExample, defineMarkupExample, queryPreview } from '../authoring'
-import { ComponentStatus, ExampleLayout } from '../types'
+import { ComponentStatus, EvidenceLevel, ExampleLayout } from '../types'
 import type { ComponentDocT } from '../types'
 
 const buildPlaygroundSlider = (): HTMLElement => {
@@ -16,7 +16,14 @@ export const zSliderDoc: ComponentDocT = {
 	tag: 'z-slider',
 	title: 'z-slider',
 	tagline: 'A bounded number you set by feel rather than by typing.',
-	status: ComponentStatus.stable,
+	status: ComponentStatus.beta,
+	evidence: {
+		formAssociated: true,
+		keyboard: EvidenceLevel.unverified,
+		screenReader: EvidenceLevel.unverified,
+		browserTests: false,
+		screenshots: false
+	},
 
 	description:
 		'Built on a native `input[type=range]`, then restyled completely: hairline track, accent-filled progress, solid accent thumb. Building on the native control is what buys full keyboard support, correct touch behaviour, and screen-reader announcement for free. An optional header carries the `label` on the left and — with `does-show-value` — the live number on the right as an accent pill, with `value-prefix` and `value-suffix` for units.',

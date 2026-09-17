@@ -56,7 +56,7 @@ const styles = css`
     font-weight: 700;
   }
   .heading-anchor {
-    margin-left: 0.4em;
+    margin-inline-start: 0.4em;
     font-weight: 400;
     color: var(--muted-foreground);
     text-decoration: none;
@@ -91,7 +91,7 @@ const styles = css`
   ul,
   ol {
     margin: 0 0 0.75em;
-    padding-left: 1.5em;
+    padding-inline-start: 1.5em;
   }
   li {
     margin: 0.15em 0;
@@ -104,7 +104,7 @@ const styles = css`
   blockquote {
     margin: 0 0 0.75em;
     padding: 0.1em 0 0.1em 1em;
-    border-left: 3px solid var(--border);
+    border-inline-start: 3px solid var(--border);
     color: var(--muted-foreground);
   }
 
@@ -146,7 +146,7 @@ const styles = css`
   td {
     border: 1px solid var(--border);
     padding: 0.4em 0.6em;
-    text-align: left;
+    text-align: start;
   }
   th {
     background: color-mix(in oklch, var(--foreground) 6%, transparent);

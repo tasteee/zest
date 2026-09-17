@@ -1,5 +1,5 @@
 import { defineInteractiveExample, queryAllPreview, queryPreview } from '../authoring'
-import { ComponentStatus, ExampleLayout } from '../types'
+import { ComponentStatus, EvidenceLevel, ExampleLayout } from '../types'
 import type { ComponentDocT } from '../types'
 
 type SelectOptionT = {
@@ -32,7 +32,14 @@ export const zSelectDoc: ComponentDocT = {
 	tag: 'z-select',
 	title: 'z-select',
 	tagline: 'A dropdown you can actually style, without giving up the keyboard.',
-	status: ComponentStatus.stable,
+	status: ComponentStatus.beta,
+	evidence: {
+		formAssociated: true,
+		keyboard: EvidenceLevel.verified,
+		screenReader: EvidenceLevel.unverified,
+		browserTests: true,
+		screenshots: true
+	},
 
 	description:
 		'A custom listbox: the trigger shows the selected label or a placeholder, and the panel drops below as a bordered, shadow-free surface. Options are a property, not markup — `element.options = [{ value, label, isDisabled }]` — which keeps the option list a data structure you can map from your own model rather than a block of DOM you have to keep in sync. Arrow keys move, Enter picks, Escape closes, and clicking outside closes.',
@@ -218,6 +225,22 @@ export const zSelectDoc: ComponentDocT = {
 					const chosen = regionOptions.find((option) => option.value === detail.value)
 					regionStatus.textContent = chosen ? `Selected: ${chosen.label}` : 'No region selected.'
 				})
+			},
+			assert: async (preview) => {
+				const select = preview.querySelector('#regionSelect')!
+				const status = preview.querySelector('#regionStatus')!
+				const text = () => status.textContent as string
+				const settle = () => new Promise((resolve) => setTimeout(resolve, 0))
+				const trigger = select.shadowRoot!.querySelector<HTMLButtonElement>('button.trigger')!
+				trigger.focus()
+				trigger.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true, composed: true }))
+				await settle()
+				trigger.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true, composed: true }))
+				await settle()
+				if (text() !== 'No region selected.') throw new Error('arrowing through the list fired change')
+				trigger.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true, composed: true }))
+				await settle()
+				if (text() !== 'Selected: US West (Oregon)') throw new Error(`committing did not fire change once: ${text()}`)
 			}
 		}),
 
@@ -276,10 +299,14 @@ export const zSelectDoc: ComponentDocT = {
 
 	attributes: [
 		{ name: 'value', type: 'string', defaultValue: '—', description: 'The selected option’s value. Reflects, so it is both the seed and the live answer.' },
+		{ name: 'name', type: 'string', defaultValue: '—', description: 'The FormData entry name. The host is the form participant, so this goes on the element, not on anything inside it.' },
 		{ name: 'label', type: 'string', defaultValue: '—', description: 'Accessible name for the trigger. Set for you inside a z-field.' },
+		{ name: 'description', type: 'string', defaultValue: '—', description: 'Accessible description, read after the name. Set for you by a z-field with a description; the text is rendered hidden inside the control and pointed at with aria-describedby.' },
+		{ name: 'error', type: 'string', defaultValue: '—', description: 'Accessible error text, and aria-invalid. Set for you by a z-field with an error.' },
 		{ name: 'placeholder', type: 'string', defaultValue: 'Select…', description: 'Shown in muted type while nothing is selected.' },
 		{ name: 'size', type: 'sm | md | lg', defaultValue: 'md', description: 'Control density.' },
 		{ name: 'accent', type: 'neutral | dom | sub', defaultValue: 'neutral', description: 'Accent family for the focus border and the selected row.' },
+		{ name: 'is-required', type: 'boolean', defaultValue: '—', description: 'Blocks the owning form from submitting until an option is chosen.' },
 		{ name: 'is-invalid', type: 'boolean', defaultValue: '—', description: 'Paints the error border on the trigger.' },
 		{ name: 'is-disabled', type: 'boolean', defaultValue: '—', description: 'Blocks opening and removes the trigger from the tab order.' },
 		{ name: 'inline', type: 'boolean', defaultValue: '—', description: 'Shrinks the trigger to its natural width instead of filling its container.' },
@@ -302,6 +329,15 @@ export const zSelectDoc: ComponentDocT = {
 	],
 
 	cssVariables: [],
+
+	keyboard: [
+		{ keys: '↓ / ↑', action: 'Closed: opens at the selected option. Open: moves the active option, wrapping and skipping disabled ones.' },
+		{ keys: 'Home / End', action: 'Moves to the first or last enabled option.' },
+		{ keys: 'Enter / Space', action: 'Closed: opens. Open: commits the active option and returns focus to the trigger.' },
+		{ keys: 'Esc', action: 'Closes without changing the value.' },
+		{ keys: 'Tab', action: 'Closes and moves on.' },
+		{ keys: 'A–Z', action: 'Type-ahead: jumps to the next option whose label starts with what was typed.' }
+	],
 
 	accessibilityNotes: [
 		'The trigger is a button with role="combobox", aria-controls, aria-activedescendant, aria-haspopup="listbox", and aria-expanded, and the panel carries role="listbox" with role="option" rows and aria-selected.',

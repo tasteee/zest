@@ -46,7 +46,11 @@ const styles = css`
 		gap: 0.125rem;
 	}
 
-	:host([columns='1']) .grid {
+	/* A type scale is read top to bottom, and its specimens are as tall as
+	   the sizes they show — a grid would either clip them or leave every
+	   cell as tall as the display size. */
+	:host([columns='1']) .grid,
+	:host([kind='type']) .grid {
 		grid-template-columns: 1fr;
 	}
 

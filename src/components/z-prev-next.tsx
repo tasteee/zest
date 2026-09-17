@@ -60,13 +60,13 @@ const styles = css`
 	}
 
 	.card:focus-visible {
-		outline: 3px solid color-mix(in oklch, var(--ring) 50%, transparent);
+		outline: 3px solid var(--focus-ring);
 		outline-offset: 2px;
 	}
 
 	.card.is-next {
 		align-items: flex-end;
-		text-align: right;
+		text-align: end;
 	}
 
 	.direction {
@@ -89,7 +89,7 @@ const styles = css`
 
 		.card.is-next {
 			align-items: flex-start;
-			text-align: left;
+			text-align: start;
 		}
 	}
 `

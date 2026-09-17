@@ -142,8 +142,8 @@ const styles = css`
 	}
 
 	.gutter {
-		padding-right: 1rem;
-		text-align: right;
+		padding-inline-end: 1rem;
+		text-align: end;
 		color: var(--muted-foreground);
 		user-select: none;
 		opacity: 0.6;

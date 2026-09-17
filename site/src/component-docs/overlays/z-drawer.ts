@@ -1,5 +1,5 @@
 import { defineInteractiveExample, defineMarkupExample, queryPreview } from '../authoring'
-import { ComponentStatus, ExampleLayout } from '../types'
+import { ComponentStatus, EvidenceLevel, ExampleLayout } from '../types'
 import type { ComponentDocT } from '../types'
 
 const buildPlaygroundDrawer = (): HTMLElement => {
@@ -20,7 +20,14 @@ export const zDrawerDoc: ComponentDocT = {
 	tag: 'z-drawer',
 	title: 'z-drawer',
 	tagline: 'A bottom sheet you can throw away with your thumb.',
-	status: ComponentStatus.stable,
+	status: ComponentStatus.beta,
+	evidence: {
+		formAssociated: null,
+		keyboard: EvidenceLevel.unverified,
+		screenReader: EvidenceLevel.unverified,
+		browserTests: false,
+		screenshots: false
+	},
 
 	description:
 		'The same native `<dialog>` modality and chrome as `z-sheet`, pinned to the bottom edge with a rounded top and a grab handle — plus the one thing that sets it apart: pointer drag. Pull it down past a threshold and it closes; release short of that and it snaps back. The handle is what makes the gesture discoverable, which is why it is drawn even on desktop, where the drag also works with a mouse.',

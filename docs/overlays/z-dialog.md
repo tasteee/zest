@@ -37,7 +37,7 @@ dialog.addEventListener('close', () => {})
 | `label` | string | — | accessible name when there is no heading |
 | `heading` | string | — | visible title and accessible name |
 | `description` | string | — | visible description, linked with aria-describedby |
-| `size` | `small` `medium` `large` | `medium` | width (24 / 30 / 42 rem) |
+| `size` | `sm` `md` `lg` | `md` | width (24 / 30 / 42 rem); `small`/`medium`/`large` are deprecated aliases |
 | `has-close` | boolean | — | hide the × close button |
 | `is-static` | boolean | — | disable backdrop-click dismiss |
 | `is-disabled` | boolean | — | prevent the trigger from opening |

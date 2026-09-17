@@ -41,12 +41,12 @@ const styles = css`
 	::slotted(z-avatar) {
 		outline: 3px solid var(--stack-ring, var(--background));
 		border-radius: 999px;
-		margin-left: calc(-1 * var(--overlap));
+		margin-inline-start: calc(-1 * var(--overlap));
 		transition: transform var(--duration-move) var(--easing-standard);
 	}
 
 	::slotted(z-avatar:first-child) {
-		margin-left: 0;
+		margin-inline-start: 0;
 	}
 
 	::slotted(z-avatar:hover) {
@@ -58,7 +58,7 @@ const styles = css`
 		width: var(--size);
 		height: var(--size);
 		border-radius: 999px;
-		margin-left: calc(-1 * var(--overlap));
+		margin-inline-start: calc(-1 * var(--overlap));
 		outline: 3px solid var(--stack-ring, var(--background));
 		background: var(--color-neutral-3);
 		color: var(--muted-foreground);

@@ -55,7 +55,7 @@
               "kind": "field",
               "name": "accent",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'dom' | 'sub' | 'success' | 'warning' | 'error'"
               }
             },
             {
@@ -85,7 +85,7 @@
               "name": "accent",
               "fieldName": "accent",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'dom' | 'sub' | 'success' | 'warning' | 'error'"
               }
             },
             {
@@ -1713,21 +1713,21 @@
               "kind": "field",
               "name": "size",
               "type": {
-                "text": "string"
+                "text": "'sm' | 'md' | 'lg'"
               }
             },
             {
               "kind": "field",
               "name": "kind",
               "type": {
-                "text": "string"
+                "text": "'solid' | 'outline' | 'ghost' | 'soft' | 'plain'"
               }
             },
             {
               "kind": "field",
               "name": "accent",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'dom' | 'sub' | 'success' | 'warning' | 'error'"
               }
             },
             {
@@ -1769,6 +1769,20 @@
               "kind": "field",
               "name": "type",
               "type": {
+                "text": "'button' | 'submit' | 'reset'"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
                 "text": "string"
               }
             }
@@ -1778,21 +1792,21 @@
               "name": "size",
               "fieldName": "size",
               "type": {
-                "text": "string"
+                "text": "'sm' | 'md' | 'lg'"
               }
             },
             {
               "name": "kind",
               "fieldName": "kind",
               "type": {
-                "text": "string"
+                "text": "'solid' | 'outline' | 'ghost' | 'soft' | 'plain'"
               }
             },
             {
               "name": "accent",
               "fieldName": "accent",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'dom' | 'sub' | 'success' | 'warning' | 'error'"
               }
             },
             {
@@ -1833,6 +1847,20 @@
             {
               "name": "type",
               "fieldName": "type",
+              "type": {
+                "text": "'button' | 'submit' | 'reset'"
+              }
+            },
+            {
+              "name": "name",
+              "fieldName": "name",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "value",
+              "fieldName": "value",
               "type": {
                 "text": "string"
               }
@@ -2266,9 +2294,285 @@
         {
           "kind": "class",
           "customElement": true,
+          "tagName": "z-chat-ai-dock",
+          "name": "ZChatAiDock",
+          "members": [
+            {
+              "kind": "field",
+              "name": "messages",
+              "type": {
+                "text": "array"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "placeholder",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isOpen",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "placeholder",
+              "fieldName": "placeholder",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "is-open",
+              "fieldName": "isOpen",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ],
+          "events": [
+            {
+              "name": "ask",
+              "type": {
+                "text": "CustomEvent<{ value: string }>"
+              }
+            },
+            {
+              "name": "openchange",
+              "type": {
+                "text": "CustomEvent<{ isOpen: boolean }>"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
+          "tagName": "z-chat-message",
+          "name": "ZChatMessage",
+          "members": [
+            {
+              "kind": "field",
+              "name": "message",
+              "type": {
+                "text": "object"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "replyMessage",
+              "type": {
+                "text": "object"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "meLabel",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "locale",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "messageLink",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "fromMe",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "me-label",
+              "fieldName": "meLabel",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "locale",
+              "fieldName": "locale",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "message-link",
+              "fieldName": "messageLink",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "from-me",
+              "fieldName": "fromMe",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ],
+          "events": [
+            {
+              "name": "messagecopy",
+              "type": {
+                "text": "CustomEvent<{\n        messageId: string;\n        kind: \"text\" | \"link\";\n        value: string;\n      }>"
+              }
+            },
+            {
+              "name": "replyjump",
+              "type": {
+                "text": "CustomEvent<{ messageId: string }>"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
+          "tagName": "z-chat-transcript",
+          "name": "ZChatTranscript",
+          "members": [
+            {
+              "kind": "field",
+              "name": "chat",
+              "type": {
+                "text": "object"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "contextWindow",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "meLabel",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "locale",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "context-window",
+              "fieldName": "contextWindow",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "name": "me-label",
+              "fieldName": "meLabel",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "locale",
+              "fieldName": "locale",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              }
+            }
+          ],
+          "events": [
+            {
+              "name": "contextrequest",
+              "type": {
+                "text": "CustomEvent<ChatContextRequestT>"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
           "tagName": "z-checkbox",
           "name": "ZCheckbox",
           "members": [
+            {
+              "kind": "field",
+              "name": "description",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "error",
+              "type": {
+                "text": "string"
+              }
+            },
             {
               "kind": "field",
               "name": "isChecked",
@@ -2301,14 +2605,14 @@
               "kind": "field",
               "name": "size",
               "type": {
-                "text": "string"
+                "text": "'sm' | 'md' | 'lg'"
               }
             },
             {
               "kind": "field",
               "name": "accent",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'dom' | 'sub'"
               }
             },
             {
@@ -2334,6 +2638,20 @@
             }
           ],
           "attributes": [
+            {
+              "name": "description",
+              "fieldName": "description",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "error",
+              "fieldName": "error",
+              "type": {
+                "text": "string"
+              }
+            },
             {
               "name": "is-checked",
               "fieldName": "isChecked",
@@ -2366,14 +2684,14 @@
               "name": "size",
               "fieldName": "size",
               "type": {
-                "text": "string"
+                "text": "'sm' | 'md' | 'lg'"
               }
             },
             {
               "name": "accent",
               "fieldName": "accent",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'dom' | 'sub'"
               }
             },
             {
@@ -2710,6 +3028,13 @@
             },
             {
               "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
               "name": "label",
               "type": {
                 "text": "string"
@@ -2748,6 +3073,13 @@
             {
               "name": "value",
               "fieldName": "value",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "name",
+              "fieldName": "name",
               "type": {
                 "text": "string"
               }
@@ -2798,7 +3130,28 @@
           "members": [
             {
               "kind": "field",
+              "name": "description",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "error",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
               "name": "value",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "name",
               "type": {
                 "text": "string"
               }
@@ -2828,14 +3181,21 @@
               "kind": "field",
               "name": "size",
               "type": {
-                "text": "string"
+                "text": "'sm' | 'md' | 'lg'"
               }
             },
             {
               "kind": "field",
               "name": "accent",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'dom' | 'sub'"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isRequired",
+              "type": {
+                "text": "boolean"
               }
             },
             {
@@ -2869,8 +3229,29 @@
           ],
           "attributes": [
             {
+              "name": "description",
+              "fieldName": "description",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "error",
+              "fieldName": "error",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
               "name": "value",
               "fieldName": "value",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "name",
+              "fieldName": "name",
               "type": {
                 "text": "string"
               }
@@ -2893,14 +3274,21 @@
               "name": "size",
               "fieldName": "size",
               "type": {
-                "text": "string"
+                "text": "'sm' | 'md' | 'lg'"
               }
             },
             {
               "name": "accent",
               "fieldName": "accent",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'dom' | 'sub'"
+              }
+            },
+            {
+              "name": "is-required",
+              "fieldName": "isRequired",
+              "type": {
+                "text": "boolean"
               }
             },
             {
@@ -3452,7 +3840,7 @@
               "kind": "field",
               "name": "size",
               "type": {
-                "text": "string"
+                "text": "'sm' | 'md' | 'lg'"
               }
             },
             {
@@ -3510,7 +3898,7 @@
               "name": "size",
               "fieldName": "size",
               "type": {
-                "text": "string"
+                "text": "'sm' | 'md' | 'lg'"
               }
             },
             {
@@ -4493,7 +4881,7 @@
               "kind": "field",
               "name": "size",
               "type": {
-                "text": "string"
+                "text": "'sm' | 'md' | 'lg'"
               }
             }
           ],
@@ -4544,7 +4932,7 @@
               "name": "size",
               "fieldName": "size",
               "type": {
-                "text": "string"
+                "text": "'sm' | 'md' | 'lg'"
               }
             }
           ],
@@ -4646,6 +5034,13 @@
             },
             {
               "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
               "name": "accent",
               "type": {
                 "text": "string"
@@ -4695,6 +5090,13 @@
             }
           ],
           "attributes": [
+            {
+              "name": "name",
+              "fieldName": "name",
+              "type": {
+                "text": "string"
+              }
+            },
             {
               "name": "accent",
               "fieldName": "accent",
@@ -5027,7 +5429,7 @@
               "kind": "field",
               "name": "placement",
               "type": {
-                "text": "string"
+                "text": "'top' | 'bottom' | 'left' | 'right' | 'top-start' | 'top-center' | 'top-end' | 'bottom-start' | 'bottom-center' | 'bottom-end' | 'left-start' | 'left-center' | 'left-end' | 'right-start' | 'right-center' | 'right-end'"
               }
             },
             {
@@ -5041,7 +5443,7 @@
               "kind": "field",
               "name": "accent",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'dom' | 'sub'"
               }
             },
             {
@@ -5071,7 +5473,7 @@
               "name": "placement",
               "fieldName": "placement",
               "type": {
-                "text": "string"
+                "text": "'top' | 'bottom' | 'left' | 'right' | 'top-start' | 'top-center' | 'top-end' | 'bottom-start' | 'bottom-center' | 'bottom-end' | 'left-start' | 'left-center' | 'left-end' | 'right-start' | 'right-center' | 'right-end'"
               }
             },
             {
@@ -5085,7 +5487,7 @@
               "name": "accent",
               "fieldName": "accent",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'dom' | 'sub'"
               }
             },
             {
@@ -5229,6 +5631,20 @@
           "members": [
             {
               "kind": "field",
+              "name": "description",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "error",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
               "name": "value",
               "type": {
                 "text": "string"
@@ -5280,14 +5696,14 @@
               "kind": "field",
               "name": "size",
               "type": {
-                "text": "string"
+                "text": "'sm' | 'md' | 'lg'"
               }
             },
             {
               "kind": "field",
               "name": "accent",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'dom' | 'sub'"
               }
             },
             {
@@ -5342,6 +5758,20 @@
           ],
           "attributes": [
             {
+              "name": "description",
+              "fieldName": "description",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "error",
+              "fieldName": "error",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
               "name": "value",
               "fieldName": "value",
               "type": {
@@ -5394,14 +5824,14 @@
               "name": "size",
               "fieldName": "size",
               "type": {
-                "text": "string"
+                "text": "'sm' | 'md' | 'lg'"
               }
             },
             {
               "name": "accent",
               "fieldName": "accent",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'dom' | 'sub'"
               }
             },
             {
@@ -5519,6 +5949,20 @@
             },
             {
               "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isRequired",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
               "name": "isInvalid",
               "type": {
                 "text": "boolean"
@@ -5578,6 +6022,20 @@
             {
               "name": "is-numeric",
               "fieldName": "isNumeric",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "name",
+              "fieldName": "name",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "is-required",
+              "fieldName": "isRequired",
               "type": {
                 "text": "boolean"
               }
@@ -6463,14 +6921,14 @@
               "kind": "field",
               "name": "align",
               "type": {
-                "text": "string"
+                "text": "'start' | 'end'"
               }
             },
             {
               "kind": "field",
               "name": "accent",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'dom' | 'sub'"
               }
             },
             {
@@ -6486,14 +6944,14 @@
               "name": "align",
               "fieldName": "align",
               "type": {
-                "text": "string"
+                "text": "'start' | 'end'"
               }
             },
             {
               "name": "accent",
               "fieldName": "accent",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'dom' | 'sub'"
               }
             },
             {
@@ -6588,6 +7046,20 @@
           "members": [
             {
               "kind": "field",
+              "name": "description",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "error",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
               "name": "value",
               "type": {
                 "text": "number"
@@ -6639,14 +7111,14 @@
               "kind": "field",
               "name": "size",
               "type": {
-                "text": "string"
+                "text": "'sm' | 'md' | 'lg'"
               }
             },
             {
               "kind": "field",
               "name": "accent",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'dom' | 'sub'"
               }
             },
             {
@@ -6708,6 +7180,20 @@
           ],
           "attributes": [
             {
+              "name": "description",
+              "fieldName": "description",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "error",
+              "fieldName": "error",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
               "name": "value",
               "fieldName": "value",
               "type": {
@@ -6760,14 +7246,14 @@
               "name": "size",
               "fieldName": "size",
               "type": {
-                "text": "string"
+                "text": "'sm' | 'md' | 'lg'"
               }
             },
             {
               "name": "accent",
               "fieldName": "accent",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'dom' | 'sub'"
               }
             },
             {
@@ -7658,7 +8144,7 @@
               "kind": "field",
               "name": "placement",
               "type": {
-                "text": "string"
+                "text": "'top' | 'bottom' | 'left' | 'right' | 'top-start' | 'top-center' | 'top-end' | 'bottom-start' | 'bottom-center' | 'bottom-end' | 'left-start' | 'left-center' | 'left-end' | 'right-start' | 'right-center' | 'right-end'"
               }
             },
             {
@@ -7672,7 +8158,7 @@
               "kind": "field",
               "name": "accent",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'dom' | 'sub'"
               }
             },
             {
@@ -7680,6 +8166,13 @@
               "name": "isHidden",
               "type": {
                 "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
               }
             },
             {
@@ -7702,7 +8195,7 @@
               "name": "placement",
               "fieldName": "placement",
               "type": {
-                "text": "string"
+                "text": "'top' | 'bottom' | 'left' | 'right' | 'top-start' | 'top-center' | 'top-end' | 'bottom-start' | 'bottom-center' | 'bottom-end' | 'left-start' | 'left-center' | 'left-end' | 'right-start' | 'right-center' | 'right-end'"
               }
             },
             {
@@ -7716,7 +8209,7 @@
               "name": "accent",
               "fieldName": "accent",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'dom' | 'sub'"
               }
             },
             {
@@ -7724,6 +8217,13 @@
               "fieldName": "isHidden",
               "type": {
                 "text": "boolean"
+              }
+            },
+            {
+              "name": "label",
+              "fieldName": "label",
+              "type": {
+                "text": "string"
               }
             },
             {
@@ -7876,7 +8376,7 @@
               "kind": "field",
               "name": "accent",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'dom' | 'sub'"
               }
             },
             {
@@ -7920,7 +8420,7 @@
               "name": "accent",
               "fieldName": "accent",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'dom' | 'sub'"
               }
             },
             {
@@ -7955,7 +8455,28 @@
           "members": [
             {
               "kind": "field",
+              "name": "description",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "error",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
               "name": "value",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "name",
               "type": {
                 "text": "string"
               }
@@ -7971,14 +8492,28 @@
               "kind": "field",
               "name": "direction",
               "type": {
-                "text": "string"
+                "text": "'vertical' | 'horizontal'"
               }
             },
             {
               "kind": "field",
               "name": "accent",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'dom' | 'sub' | 'success' | 'warning' | 'error'"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isRequired",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isDisabled",
+              "type": {
+                "text": "boolean"
               }
             },
             {
@@ -7991,8 +8526,29 @@
           ],
           "attributes": [
             {
+              "name": "description",
+              "fieldName": "description",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "error",
+              "fieldName": "error",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
               "name": "value",
               "fieldName": "value",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "name",
+              "fieldName": "name",
               "type": {
                 "text": "string"
               }
@@ -8008,14 +8564,28 @@
               "name": "direction",
               "fieldName": "direction",
               "type": {
-                "text": "string"
+                "text": "'vertical' | 'horizontal'"
               }
             },
             {
               "name": "accent",
               "fieldName": "accent",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'dom' | 'sub' | 'success' | 'warning' | 'error'"
+              }
+            },
+            {
+              "name": "is-required",
+              "fieldName": "isRequired",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "is-disabled",
+              "fieldName": "isDisabled",
+              "type": {
+                "text": "boolean"
               }
             },
             {
@@ -8060,6 +8630,13 @@
               "name": "step",
               "type": {
                 "text": "number"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
               }
             },
             {
@@ -8125,6 +8702,13 @@
               "fieldName": "step",
               "type": {
                 "text": "number"
+              }
+            },
+            {
+              "name": "name",
+              "fieldName": "name",
+              "type": {
+                "text": "string"
               }
             },
             {
@@ -8619,7 +9203,28 @@
           "members": [
             {
               "kind": "field",
+              "name": "description",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "error",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
               "name": "value",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "name",
               "type": {
                 "text": "string"
               }
@@ -8649,14 +9254,21 @@
               "kind": "field",
               "name": "size",
               "type": {
-                "text": "string"
+                "text": "'sm' | 'md' | 'lg'"
               }
             },
             {
               "kind": "field",
               "name": "accent",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'dom' | 'sub'"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isRequired",
+              "type": {
+                "text": "boolean"
               }
             },
             {
@@ -8690,8 +9302,29 @@
           ],
           "attributes": [
             {
+              "name": "description",
+              "fieldName": "description",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "error",
+              "fieldName": "error",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
               "name": "value",
               "fieldName": "value",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "name",
+              "fieldName": "name",
               "type": {
                 "text": "string"
               }
@@ -8714,14 +9347,21 @@
               "name": "size",
               "fieldName": "size",
               "type": {
-                "text": "string"
+                "text": "'sm' | 'md' | 'lg'"
               }
             },
             {
               "name": "accent",
               "fieldName": "accent",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'dom' | 'sub'"
+              }
+            },
+            {
+              "name": "is-required",
+              "fieldName": "isRequired",
+              "type": {
+                "text": "boolean"
               }
             },
             {
@@ -10298,7 +10938,28 @@
           "members": [
             {
               "kind": "field",
+              "name": "description",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "error",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
               "name": "isChecked",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isRequired",
               "type": {
                 "text": "boolean"
               }
@@ -10328,14 +10989,14 @@
               "kind": "field",
               "name": "size",
               "type": {
-                "text": "string"
+                "text": "'sm' | 'md' | 'lg'"
               }
             },
             {
               "kind": "field",
               "name": "accent",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'dom' | 'sub'"
               }
             },
             {
@@ -10362,8 +11023,29 @@
           ],
           "attributes": [
             {
+              "name": "description",
+              "fieldName": "description",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "error",
+              "fieldName": "error",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
               "name": "is-checked",
               "fieldName": "isChecked",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "is-required",
+              "fieldName": "isRequired",
               "type": {
                 "text": "boolean"
               }
@@ -10393,14 +11075,14 @@
               "name": "size",
               "fieldName": "size",
               "type": {
-                "text": "string"
+                "text": "'sm' | 'md' | 'lg'"
               }
             },
             {
               "name": "accent",
               "fieldName": "accent",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'dom' | 'sub'"
               }
             },
             {
@@ -10734,7 +11416,7 @@
               "kind": "field",
               "name": "accent",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'dom' | 'sub'"
               }
             },
             {
@@ -10771,7 +11453,7 @@
               "name": "accent",
               "fieldName": "accent",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'dom' | 'sub'"
               }
             },
             {
@@ -11226,6 +11908,20 @@
           "members": [
             {
               "kind": "field",
+              "name": "description",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "error",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
               "name": "value",
               "type": {
                 "text": "string"
@@ -11263,14 +11959,14 @@
               "kind": "field",
               "name": "size",
               "type": {
-                "text": "string"
+                "text": "'sm' | 'md' | 'lg'"
               }
             },
             {
               "kind": "field",
               "name": "accent",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'dom' | 'sub'"
               }
             },
             {
@@ -11325,6 +12021,20 @@
           ],
           "attributes": [
             {
+              "name": "description",
+              "fieldName": "description",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "error",
+              "fieldName": "error",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
               "name": "value",
               "fieldName": "value",
               "type": {
@@ -11363,14 +12073,14 @@
               "name": "size",
               "fieldName": "size",
               "type": {
-                "text": "string"
+                "text": "'sm' | 'md' | 'lg'"
               }
             },
             {
               "name": "accent",
               "fieldName": "accent",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'dom' | 'sub'"
               }
             },
             {
@@ -11543,7 +12253,7 @@
               "kind": "field",
               "name": "position",
               "type": {
-                "text": "string"
+                "text": "'top-start' | 'top-center' | 'top-end' | 'bottom-start' | 'bottom-center' | 'bottom-end'"
               }
             }
           ],
@@ -11552,7 +12262,7 @@
               "name": "position",
               "fieldName": "position",
               "type": {
-                "text": "string"
+                "text": "'top-start' | 'top-center' | 'top-end' | 'bottom-start' | 'bottom-center' | 'bottom-end'"
               }
             }
           ],
@@ -11717,6 +12427,13 @@
             },
             {
               "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "kind": "field",
               "name": "direction",
               "type": {
                 "text": "string"
@@ -11732,6 +12449,13 @@
             {
               "kind": "field",
               "name": "isMultiple",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -11767,6 +12491,13 @@
               }
             },
             {
+              "name": "name",
+              "fieldName": "name",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
               "name": "direction",
               "fieldName": "direction",
               "type": {
@@ -11783,6 +12514,13 @@
             {
               "name": "is-multiple",
               "fieldName": "isMultiple",
+              "type": {
+                "text": "boolean"
+              }
+            },
+            {
+              "name": "is-disabled",
+              "fieldName": "isDisabled",
               "type": {
                 "text": "boolean"
               }
@@ -12029,7 +12767,7 @@
               "kind": "field",
               "name": "placement",
               "type": {
-                "text": "string"
+                "text": "'top' | 'bottom' | 'left' | 'right' | 'top-start' | 'top-center' | 'top-end' | 'bottom-start' | 'bottom-center' | 'bottom-end' | 'left-start' | 'left-center' | 'left-end' | 'right-start' | 'right-center' | 'right-end'"
               }
             },
             {
@@ -12043,7 +12781,7 @@
               "kind": "field",
               "name": "accent",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'dom' | 'sub'"
               }
             },
             {
@@ -12087,7 +12825,7 @@
               "name": "placement",
               "fieldName": "placement",
               "type": {
-                "text": "string"
+                "text": "'top' | 'bottom' | 'left' | 'right' | 'top-start' | 'top-center' | 'top-end' | 'bottom-start' | 'bottom-center' | 'bottom-end' | 'left-start' | 'left-center' | 'left-end' | 'right-start' | 'right-center' | 'right-end'"
               }
             },
             {
@@ -12101,7 +12839,7 @@
               "name": "accent",
               "fieldName": "accent",
               "type": {
-                "text": "string"
+                "text": "'neutral' | 'dom' | 'sub'"
               }
             },
             {
@@ -12400,6 +13138,30 @@
           "name": "z-chassis",
           "declaration": {
             "name": "ZChassis",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "z-chat-ai-dock",
+          "declaration": {
+            "name": "ZChatAiDock",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "z-chat-message",
+          "declaration": {
+            "name": "ZChatMessage",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "z-chat-transcript",
+          "declaration": {
+            "name": "ZChatTranscript",
             "module": "dist/zest.js"
           }
         },

@@ -1,5 +1,5 @@
 import { defineMarkupExample } from '../authoring'
-import { ComponentStatus, ExampleLayout } from '../types'
+import { ComponentStatus, EvidenceLevel, ExampleLayout } from '../types'
 import type { ComponentDocT } from '../types'
 
 const buildPlaygroundBentoGrid = (): HTMLElement => {
@@ -20,7 +20,14 @@ export const zBentoGridDoc: ComponentDocT = {
 	tag: 'z-bento-grid',
 	title: 'z-bento-grid',
 	tagline: 'A fixed-row-height grid whose cells choose their own footprint.',
-	status: ComponentStatus.stable,
+	status: ComponentStatus.beta,
+	evidence: {
+		formAssociated: null,
+		keyboard: EvidenceLevel.unverified,
+		screenReader: EvidenceLevel.unverified,
+		browserTests: false,
+		screenshots: false
+	},
 
 	description:
 		'The grid behind a feature showcase — the layout where cells are deliberately different sizes and the composition is part of the message. It does very little on its own: it sets the column count and the height of one row unit, and each `z-bento-item` declares how many of those units it wants through `col-span` and `row-span`. Fixing the row height is what keeps a ragged set of spans reading as a deliberate composition instead of a collapsed mess.',

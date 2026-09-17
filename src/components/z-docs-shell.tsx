@@ -94,7 +94,7 @@ const styles = css`
 	}
 
 	.navToggle:focus-visible {
-		outline: 3px solid color-mix(in oklch, var(--ring) 50%, transparent);
+		outline: 3px solid var(--focus-ring);
 		outline-offset: 2px;
 	}
 
@@ -201,7 +201,7 @@ const styles = css`
 			left: 0;
 			z-index: 20;
 			background: var(--paper, var(--background));
-			border-right: 1px solid var(--border);
+			border-inline-end: 1px solid var(--border);
 			transform: translateX(-102%);
 			transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1);
 		}

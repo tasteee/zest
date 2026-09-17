@@ -1,6 +1,8 @@
 import { interactionStyles } from '../shared/interaction-styles'
 import { defineElement } from '../shared/define-element'
 import { c, css, event, useRef, useState, useEffect, useHost } from 'atomico'
+import { oneOf } from '../shared/prop-types'
+import { useLocale } from '../shared/locale'
 
 /*
  * z-toast — a toaster region that stacks transient notifications. Place one on
@@ -25,28 +27,28 @@ const styles = css`
 	:host(:not([position])),
 	:host([position='bottom-end']) {
 		bottom: 1.25rem;
-		right: 1.25rem;
+		inset-inline-end: 1.25rem;
 	}
 	:host([position='bottom-start']) {
 		bottom: 1.25rem;
-		left: 1.25rem;
+		inset-inline-start: 1.25rem;
 	}
 	:host([position='bottom-center']) {
 		bottom: 1.25rem;
-		left: 50%;
+		left: 50%; /* physical: centred, direction has no bearing */
 		transform: translateX(-50%);
 	}
 	:host([position='top-end']) {
 		top: 1.25rem;
-		right: 1.25rem;
+		inset-inline-end: 1.25rem;
 	}
 	:host([position='top-start']) {
 		top: 1.25rem;
-		left: 1.25rem;
+		inset-inline-start: 1.25rem;
 	}
 	:host([position='top-center']) {
 		top: 1.25rem;
-		left: 50%;
+		left: 50%; /* physical: centred, direction has no bearing */
 		transform: translateX(-50%);
 	}
 
@@ -59,7 +61,7 @@ const styles = css`
 		padding: 0.75rem 0.875rem;
 		background: var(--popover);
 		border: 1px solid var(--border);
-		border-left: 3px solid var(--toast-accent, var(--border));
+		border-inline-start: 3px solid var(--toast-accent, var(--border));
 		border-radius: var(--radius-md);
 		animation: toast-in var(--duration-move) var(--easing-standard);
 	}
@@ -144,6 +146,7 @@ type ToastInput = { accent?: string; title?: string; description?: string; durat
 
 export const ZToast = c(
 	(props) => {
+		const t = useLocale()
 		const host = useHost()
 		const [toasts, setToasts] = useState<ToastT[]>([])
 		const timers = useRef<Map<number, ReturnType<typeof setTimeout>>>(new Map())
@@ -179,14 +182,14 @@ export const ZToast = c(
 		}, [])
 
 		return (
-			<host shadowDom role="region" aria-label="Notifications">
+			<host shadowDom role="region" aria-label={t('notifications')}>
 				{toasts.map((toast) => (
 					<div key={toast.id} class={`toast is-${toast.accent || 'neutral'}`} role="status">
 						<div class="content">
 							{toast.title && <span class="title">{toast.title}</span>}
 							{toast.description && <span class="description">{toast.description}</span>}
 						</div>
-						<button type="button" class="close" aria-label="Dismiss" onclick={() => dismiss(toast.id)}>
+						<button type="button" class="close" aria-label={t('dismiss')} onclick={() => dismiss(toast.id)}>
 							<svg viewBox="0 0 24 24">
 								<line x1="6" y1="6" x2="18" y2="18" />
 								<line x1="18" y1="6" x2="6" y2="18" />
@@ -199,7 +202,7 @@ export const ZToast = c(
 	},
 	{
 		props: {
-			position: { type: String, reflect: true },
+			position: { type: oneOf('top-start', 'top-center', 'top-end', 'bottom-start', 'bottom-center', 'bottom-end'), reflect: true },
 			dismiss: event<{ id: number }>({ bubbles: true, composed: true })
 		},
 		styles: [styles, interactionStyles]

@@ -1,6 +1,8 @@
 import { interactionStyles } from '../shared/interaction-styles'
 import { defineFormElement, useFormControl } from '../shared/form-control'
+import { describableProps, describedBy, renderDescriptions, srOnlyStyles, useAccessibleName } from '../shared/accessible'
 import { c, css, event, useHost, useProp, useRef } from 'atomico'
+import { oneOf } from '../shared/prop-types'
 
 /*
  * z-input — single-line text field. Transparent fill, hairline border that
@@ -152,6 +154,7 @@ const resolveSizeClass = (props: any): string => {
 export const ZInput = c(
 	(props) => {
 		const host = useHost()
+		const accessibleName = useAccessibleName(props.label)
 		const inputRef = useRef<HTMLInputElement>()
 		const [value, setValue] = useProp<string>('value')
 		const defaultValue = useRef(value ?? '')
@@ -190,12 +193,15 @@ export const ZInput = c(
 						required={props.isRequired}
 						autocomplete={props.autocomplete as any}
 						inputmode={props.inputmode}
-						aria-invalid={props.isInvalid ? 'true' : undefined}
-						aria-label={props.label || host.current?.getAttribute('aria-label') || undefined}
+						aria-label={accessibleName}
+						aria-describedby={describedBy(props.description, props.error)}
+						aria-invalid={props.isInvalid || props.error ? 'true' : undefined}
 						onfocus={() => { committedValue.current = value ?? ''; setIsFocused(true) }}
-						onblur={() => {
+						onblur={(e: Event) => {
 							setIsFocused(false)
-							const next = value ?? ''
+							// Read the control, not the render closure: a keystroke and a blur
+							// in the same task would otherwise compare against a stale value.
+							const next = (e.target as HTMLInputElement).value
 							if (next !== committedValue.current) { committedValue.current = next; props.change({ value: next }) }
 						}}
 						onchange={(e: Event) => e.stopPropagation()}
@@ -210,11 +216,13 @@ export const ZInput = c(
 						<slot name='suffix' />
 					</span>
 				</label>
+				{renderDescriptions(props.description, props.error)}
 			</host>
 		)
 	},
 	{
 		props: {
+			...describableProps,
 			value: { type: String, reflect: true },
 			label: String,
 			type: String,
@@ -222,8 +230,8 @@ export const ZInput = c(
 			name: { type: String, reflect: true },
 			autocomplete: String,
 			inputmode: String,
-			size: { type: String, reflect: true },
-			accent: { type: String, reflect: true },
+			size: { type: oneOf('sm', 'md', 'lg'), reflect: true },
+			accent: { type: oneOf('neutral', 'dom', 'sub'), reflect: true },
 			isFocused: { type: Boolean, reflect: true },
 			isInvalid: { type: Boolean, reflect: true },
 			isDisabled: { type: Boolean, reflect: true },
@@ -234,7 +242,7 @@ export const ZInput = c(
 			input: event<{ value: string }>({ bubbles: true, composed: true }),
 			change: event<{ value: string }>({ bubbles: true, composed: true })
 		},
-		styles: [styles, interactionStyles],
+		styles: [styles, interactionStyles, srOnlyStyles],
 		form: true
 	}
 )

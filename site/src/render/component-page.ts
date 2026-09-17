@@ -8,6 +8,7 @@ import { buildApiReference } from './api-reference'
 import { buildExampleCard } from './example-card'
 import { buildPlayground } from './playground'
 import {
+	buildBadge,
 	buildCodeBlock,
 	buildLabel,
 	buildRichText,
@@ -16,7 +17,8 @@ import {
 	createElement
 } from './zest-elements'
 import type { ZBreadcrumbItemT, ZBreadcrumbsElementT } from './zest-elements'
-import type { AnatomyPartT, ComponentDocT, RelatedComponentT } from '../component-docs/types'
+import { EvidenceLevel, isStableEvidence } from '../component-docs/types'
+import type { AnatomyPartT, ComponentDocT, EvidenceLevelT, RelatedComponentT } from '../component-docs/types'
 
 type PageSectionT = {
 	id: string
@@ -154,6 +156,71 @@ const buildAccessibilitySection = (componentDoc: ComponentDocT): HTMLElement | n
 	return section
 }
 
+// What the status badge in the header is resting on. A `beta` page shows
+// exactly which rows are still open, so "stable" reads as a claim with
+// receipts rather than a mood.
+const levelBadge = (level: EvidenceLevelT): HTMLElement => {
+	if (level === EvidenceLevel.verified) return buildBadge('verified', 'success', 'soft')
+	if (level === EvidenceLevel.partial) return buildBadge('partial', 'warning', 'soft')
+	return buildBadge('unverified', 'neutral', 'soft')
+}
+
+const booleanBadge = (value: boolean | null, yes: string, no: string): HTMLElement => {
+	if (value === null) return buildBadge('not a control', 'neutral', 'soft')
+	return value ? buildBadge(yes, 'success', 'soft') : buildBadge(no, 'neutral', 'soft')
+}
+
+const buildEvidenceRow = (label: string, description: string, badge: HTMLElement): HTMLElement => {
+	const row = createElement('div', 'evidenceRow')
+	const name = buildLabel(label)
+	name.classList.add('evidenceName')
+	row.append(name, badge, buildText(description, 'xs', 'muted'))
+	return row
+}
+
+const buildEvidenceSection = (componentDoc: ComponentDocT): HTMLElement => {
+	const { evidence } = componentDoc
+	const section = createElement('section', 'pageSection')
+	const verdict = isStableEvidence(evidence)
+		? 'Every row is green, which is what stable means here.'
+		: 'Stable needs every row green. Until then the page says beta, whatever the element feels like.'
+	section.append(buildSectionHeader('Evidence', verdict))
+
+	const list = createElement('div', 'evidenceList')
+	list.append(
+		buildEvidenceRow('Form participation', 'Submits, validates and resets inside a <form>, proven in a real browser.', booleanBadge(evidence.formAssociated, 'verified', 'missing')),
+		buildEvidenceRow('Keyboard', 'Every documented key has a browser test.', levelBadge(evidence.keyboard)),
+		buildEvidenceRow('Screen reader', 'A manual NVDA and VoiceOver pass, recorded on this page.', levelBadge(evidence.screenReader)),
+		buildEvidenceRow('Browser tests', 'Behaviour tests in Chromium, beyond registration and mount.', booleanBadge(evidence.browserTests, 'yes', 'not yet')),
+		buildEvidenceRow('Screenshots', 'State × theme baselines committed and compared in CI.', booleanBadge(evidence.screenshots, 'yes', 'not yet'))
+	)
+	section.append(list)
+	return section
+}
+
+const buildKeyboardSection = (componentDoc: ComponentDocT): HTMLElement | null => {
+	const rows = componentDoc.keyboard
+	if (!rows || rows.length === 0) return null
+
+	const section = createElement('section', 'pageSection')
+	section.append(buildSectionHeader('Keyboard', 'Every row here is exercised by a browser test.'))
+
+	const list = createElement('div', 'keyboardList')
+	for (const row of rows) {
+		const item = createElement('div', 'keyboardRow')
+		const keys = createElement('div', 'keyboardKeys')
+		for (const key of row.keys.split(' / ')) {
+			const kbd = createElement('z-kbd')
+			kbd.textContent = key
+			keys.append(kbd)
+		}
+		item.append(keys, buildText(row.action, 'sm', 'neutral'))
+		list.append(item)
+	}
+	section.append(list)
+	return section
+}
+
 const buildRelatedCard = (related: RelatedComponentT): HTMLElement => {
 	const card = createElement('a', 'relatedCard') as HTMLAnchorElement
 	card.href = `#${related.route}`
@@ -206,7 +273,9 @@ const collectSections = (componentDoc: ComponentDocT): PageSectionT[] => {
 		wrapSection('anatomy', 'Anatomy', buildAnatomySection(componentDoc)),
 		wrapSection('examples', 'Examples', buildExamplesSection(componentDoc)),
 		wrapSection('api', 'API reference', buildApiSection(componentDoc)),
+		wrapSection('keyboard', 'Keyboard', buildKeyboardSection(componentDoc)),
 		wrapSection('accessibility', 'Accessibility', buildAccessibilitySection(componentDoc)),
+		{ id: 'evidence', label: 'Evidence', element: buildEvidenceSection(componentDoc) },
 		wrapSection('related', 'Related', buildRelatedSection(componentDoc))
 	]
 

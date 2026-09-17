@@ -40,9 +40,9 @@ const styles = css`
 		height: 100%;
 		gap: var(--chassis-bezel, 0.75rem);
 		padding-top: var(--chassis-frame, 0.375rem);
-		padding-right: var(--chassis-frame, 0.375rem);
+		padding-inline-end: var(--chassis-frame, 0.375rem);
 		padding-bottom: var(--chassis-frame, 0.375rem);
-		padding-left: var(--chassis-bezel, 0.75rem);
+		padding-inline-start: var(--chassis-bezel, 0.75rem);
 		background: var(--chassis-body, var(--paper));
 		border: 1px solid var(--chassis-border, var(--color-neutral-3));
 		border-radius: var(--chassis-radius, var(--radius-xl));
@@ -50,8 +50,8 @@ const styles = css`
 	}
 	:host([rail-side='right']) {
 		flex-direction: row-reverse;
-		padding-left: var(--chassis-frame, 0.375rem);
-		padding-right: var(--chassis-bezel, 0.75rem);
+		padding-inline-start: var(--chassis-frame, 0.375rem);
+		padding-inline-end: var(--chassis-bezel, 0.75rem);
 	}
 	:host([is-hidden]) {
 		display: none;

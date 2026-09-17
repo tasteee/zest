@@ -1,7 +1,9 @@
 import { interactionStyles } from '../shared/interaction-styles'
 import { defineFormElement, useFormControl } from '../shared/form-control'
+import { describableProps, describedBy, renderDescriptions, srOnlyStyles, useAccessibleName } from '../shared/accessible'
 import { c, css, event, useHost, useProp, useRef, useEffect } from 'atomico'
 import { themedScrollbarStyles } from '../shared/scrollbar-styles'
+import { oneOf } from '../shared/prop-types'
 
 /*
  * z-textarea — multi-line text field. Same hairline-to-accent focus treatment
@@ -120,6 +122,7 @@ const resolveSizeClass = (props: any): string => {
 export const ZTextarea = c(
 	(props) => {
 		const host = useHost()
+		const accessibleName = useAccessibleName(props.label)
 		const textareaRef = useRef<HTMLTextAreaElement>()
 		const [value, setValue] = useProp<string>('value')
 		const defaultValue = useRef(value ?? '')
@@ -173,12 +176,15 @@ export const ZTextarea = c(
 						disabled={isDisabled}
 						readonly={props.isReadonly}
 						required={props.isRequired}
-						aria-invalid={props.isInvalid ? 'true' : undefined}
-						aria-label={props.label || host.current?.getAttribute('aria-label') || undefined}
+						aria-label={accessibleName}
+						aria-describedby={describedBy(props.description, props.error)}
+						aria-invalid={props.isInvalid || props.error ? 'true' : undefined}
 						onfocus={() => { committedValue.current = value ?? ''; setIsFocused(true) }}
-						onblur={() => {
+						onblur={(e: Event) => {
 							setIsFocused(false)
-							const next = value ?? ''
+							// Read the control, not the render closure: a keystroke and a blur
+							// in the same task would otherwise compare against a stale value.
+							const next = (e.target as HTMLInputElement).value
 							if (next !== committedValue.current) { committedValue.current = next; props.change({ value: next }) }
 						}}
 						onchange={(e: Event) => e.stopPropagation()}
@@ -191,18 +197,20 @@ export const ZTextarea = c(
 						}}
 					/>
 				</div>
+				{renderDescriptions(props.description, props.error)}
 			</host>
 		)
 	},
 	{
 		props: {
+			...describableProps,
 			value: { type: String, reflect: true },
 			label: String,
 			placeholder: String,
 			name: { type: String, reflect: true },
 			rows: Number,
-			size: { type: String, reflect: true },
-			accent: { type: String, reflect: true },
+			size: { type: oneOf('sm', 'md', 'lg'), reflect: true },
+			accent: { type: oneOf('neutral', 'dom', 'sub'), reflect: true },
 			isFocused: { type: Boolean, reflect: true },
 			isInvalid: { type: Boolean, reflect: true },
 			isDisabled: { type: Boolean, reflect: true },
@@ -213,7 +221,7 @@ export const ZTextarea = c(
 			input: event<{ value: string }>({ bubbles: true, composed: true }),
 			change: event<{ value: string }>({ bubbles: true, composed: true })
 		},
-		styles: [themedScrollbarStyles, styles, interactionStyles],
+		styles: [themedScrollbarStyles, styles, interactionStyles, srOnlyStyles],
 		form: true
 	}
 )

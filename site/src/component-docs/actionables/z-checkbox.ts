@@ -1,5 +1,5 @@
 import { defineInteractiveExample, defineMarkupExample, queryPreview } from '../authoring'
-import { ComponentStatus, ExampleLayout } from '../types'
+import { ComponentStatus, EvidenceLevel, ExampleLayout } from '../types'
 import type { ComponentDocT } from '../types'
 
 const buildPlaygroundCheckbox = (): HTMLElement => {
@@ -13,7 +13,14 @@ export const zCheckboxDoc: ComponentDocT = {
 	tag: 'z-checkbox',
 	title: 'z-checkbox',
 	tagline: 'A square that fills when it means yes.',
-	status: ComponentStatus.stable,
+	status: ComponentStatus.beta,
+	evidence: {
+		formAssociated: true,
+		keyboard: EvidenceLevel.verified,
+		screenReader: EvidenceLevel.unverified,
+		browserTests: true,
+		screenshots: true
+	},
 
 	description:
 		'Unchecked is a hairline outline; checked fills with the accent and strikes a checkmark through it. The slotted label sits to the right and is part of the hit area, so the whole row is clickable. `is-checked` reflects, which makes the attribute both the way you set the initial state and the way you read the current one.',
@@ -110,14 +117,16 @@ export const zCheckboxDoc: ComponentDocT = {
 	],
 
 	attributes: [
-		{ name: 'is-required', type: 'boolean', defaultValue: '—', description: 'Forwards required state to the native checkbox.' },
+		{ name: 'is-required', type: 'boolean', defaultValue: '—', description: 'Blocks the owning form from submitting while unchecked.' },
 		{ name: 'label', type: 'string', defaultValue: '—', description: 'Accessible name. Use slotted text for a visible, clickable label.' },
+		{ name: 'description', type: 'string', defaultValue: '—', description: 'Accessible description, read after the name. Set for you by a z-field with a description; the text is rendered hidden inside the control and pointed at with aria-describedby.' },
+		{ name: 'error', type: 'string', defaultValue: '—', description: 'Accessible error text, and aria-invalid. Set for you by a z-field with an error.' },
 		{ name: 'is-checked', type: 'boolean', defaultValue: '—', description: 'The on state. Reflects, so it is both the initial value and the live one.' },
 		{ name: 'is-disabled', type: 'boolean', defaultValue: '—', description: 'Blocks pointer and keyboard interaction.' },
 		{ name: 'size', type: 'sm | md | lg', defaultValue: 'md', description: 'Size of the box and its label text.' },
 		{ name: 'accent', type: 'neutral | dom | sub', defaultValue: 'neutral', description: 'Accent family of the checked fill.' },
-		{ name: 'name', type: 'string', defaultValue: '—', description: 'Name passed to the inner input for form submission.' },
-		{ name: 'value', type: 'string', defaultValue: '—', description: 'The value submitted when checked, and echoed back in the change event.' },
+		{ name: 'name', type: 'string', defaultValue: '—', description: 'The FormData entry name. The host is the form participant, so this goes on the element, not on anything inside it.' },
+		{ name: 'value', type: 'string', defaultValue: 'on', description: 'The value submitted while checked (nothing is submitted while unchecked), and echoed back in the change event.' },
 		{ name: 'is-hidden', type: 'boolean', defaultValue: '—', description: 'Removes the checkbox from layout.' }
 	],
 
@@ -130,6 +139,10 @@ export const zCheckboxDoc: ComponentDocT = {
 	],
 
 	cssVariables: [],
+
+	keyboard: [
+		{ keys: 'Space', action: 'Toggles the checked state.' }
+	],
 
 	accessibilityNotes: [
 		'A real input[type=checkbox] drives the control, so it is focusable, Space toggles it, and it sits in the tab order naturally.',

@@ -36,7 +36,7 @@ const styles = css`
 
 	.stat.is-end {
 		align-items: flex-end;
-		text-align: right;
+		text-align: end;
 	}
 `
 

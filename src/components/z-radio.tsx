@@ -1,6 +1,7 @@
 import { interactionStyles } from '../shared/interaction-styles'
 import { defineElement } from '../shared/define-element'
 import { c, css, event, useProp, useHost } from 'atomico'
+import { oneOf } from '../shared/prop-types'
 
 /*
  * z-radio — a single radio option. Circular control: hairline ring when off,
@@ -127,7 +128,7 @@ export const ZRadio = c(
 			isChecked: { type: Boolean, reflect: true },
 			isDisabled: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
-			accent: { type: String, reflect: true },
+			accent: { type: oneOf('neutral', 'dom', 'sub'), reflect: true },
 			value: String,
 			label: String,
 			select: event<{ value?: string }>({ bubbles: true, composed: true })

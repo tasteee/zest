@@ -1,5 +1,5 @@
 import { defineInteractiveExample, defineMarkupExample, queryPreview } from '../authoring'
-import { ComponentStatus, ExampleLayout } from '../types'
+import { ComponentStatus, EvidenceLevel, ExampleLayout } from '../types'
 import type { ComponentDocT } from '../types'
 
 const buildPlaygroundSwitcher = (): HTMLElement => {
@@ -17,7 +17,14 @@ export const zThemeSwitcherDoc: ComponentDocT = {
 	tag: 'z-theme-switcher',
 	title: 'z-theme-switcher',
 	tagline: "Switches the page between zest's dark ink and light paper.",
-	status: ComponentStatus.stable,
+	status: ComponentStatus.beta,
+	evidence: {
+		formAssociated: null,
+		keyboard: EvidenceLevel.unverified,
+		screenReader: EvidenceLevel.unverified,
+		browserTests: false,
+		screenshots: false
+	},
 
 	description:
 		"Two kinds over one piece of state. `segmented` is the honest one — Light, Dark and System as three explicit choices in a single joined control. `icon` is the compact one for a crowded header: one button that flips between light and dark, with no `system` state to land on. Choosing a theme writes `data-theme` onto `<html>`, which is the attribute every token block in `ink.css` keys off; because custom properties cross shadow boundaries, that one attribute re-themes every `z-*` element on the page. The choice persists to `localStorage`, and `system` keeps tracking the OS after the fact rather than resolving once and forgetting.",

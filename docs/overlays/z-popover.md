@@ -25,6 +25,8 @@ popover.addEventListener('toggle', (e) => e.detail.open)
 | `placement` | `top` `bottom` `left` `right` (+ `-start`/`-end`) | `bottom` | preferred side |
 | `offset` | number (px) | `8` | gap from the trigger |
 | `accent` | `dom` `sub` | — | accent for the surface |
+| `label` | string | — | accessible name for the panel (a non-modal dialog); focus moves into it on open and back to the trigger on Escape |
+| `is-open` | boolean | — | open state (reflected, two-way) |
 | `is-disabled` | boolean | — | prevent opening |
 | `is-hidden` | boolean | — | hide |
 

@@ -63,7 +63,7 @@ const styles = css`
   }
 
   .filter:focus-visible {
-    outline: 3px solid color-mix(in oklch, var(--ring) 50%, transparent);
+    outline: 3px solid var(--focus-ring);
     outline-offset: 1px;
     border-color: transparent;
   }
@@ -80,7 +80,7 @@ const styles = css`
   /* Nested rows carry their own hairline rail. Consecutive rows at the same
 	   depth line their borders up into one continuous guide. */
   .row.is-nested {
-    border-left: 1px solid var(--border);
+    border-inline-start: 1px solid var(--border);
   }
 
   .groupLabel {
@@ -99,7 +99,7 @@ const styles = css`
     font-weight: 600;
     letter-spacing: 0.04em;
     text-transform: uppercase;
-    text-align: left;
+    text-align: start;
     cursor: pointer;
   }
 
@@ -108,7 +108,7 @@ const styles = css`
   }
 
   .groupLabel:focus-visible {
-    outline: 3px solid color-mix(in oklch, var(--ring) 50%, transparent);
+    outline: 3px solid var(--focus-ring);
     outline-offset: -1px;
   }
 
@@ -156,7 +156,7 @@ const styles = css`
   }
 
   .link:focus-visible {
-    outline: 3px solid color-mix(in oklch, var(--ring) 50%, transparent);
+    outline: 3px solid var(--focus-ring);
     outline-offset: -1px;
   }
 

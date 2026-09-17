@@ -1,5 +1,5 @@
 import { defineMarkupExample } from '../authoring'
-import { ComponentStatus, ExampleLayout } from '../types'
+import { ComponentStatus, EvidenceLevel, ExampleLayout } from '../types'
 import type { ComponentDocT } from '../types'
 
 const buildPlaygroundHoverCard = (): HTMLElement => {
@@ -21,7 +21,14 @@ export const zHoverCardDoc: ComponentDocT = {
 	tag: 'z-hover-card',
 	title: 'z-hover-card',
 	tagline: 'A preview that appears on hover — and stays put long enough to reach.',
-	status: ComponentStatus.stable,
+	status: ComponentStatus.beta,
+	evidence: {
+		formAssociated: null,
+		keyboard: EvidenceLevel.unverified,
+		screenReader: EvidenceLevel.unverified,
+		browserTests: false,
+		screenshots: false
+	},
 
 	description:
 		'The hover-triggered sibling of `z-popover`: a trigger in `[slot="trigger"]`, rich content in the default slot. What separates it from a tooltip is the grace period — the card keeps itself open while the pointer travels from the trigger into it, and hovering the card itself cancels the pending close. That is what makes a link or a button inside it actually reachable, which a tooltip can never manage.',

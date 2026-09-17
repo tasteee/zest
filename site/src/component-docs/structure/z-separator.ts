@@ -1,5 +1,5 @@
 import { defineMarkupExample } from '../authoring'
-import { ComponentStatus, ExampleLayout } from '../types'
+import { ComponentStatus, EvidenceLevel, ExampleLayout } from '../types'
 import type { ComponentDocT } from '../types'
 
 const buildPlaygroundSeparator = (): HTMLElement => {
@@ -17,7 +17,14 @@ export const zSeparatorDoc: ComponentDocT = {
 	tag: 'z-separator',
 	title: 'z-separator',
 	tagline: 'The divider — a hairline rule, optionally labelled, optionally vertical.',
-	status: ComponentStatus.stable,
+	status: ComponentStatus.beta,
+	evidence: {
+		formAssociated: null,
+		keyboard: EvidenceLevel.unverified,
+		screenReader: EvidenceLevel.unverified,
+		browserTests: false,
+		screenshots: false
+	},
 
 	description:
 		'One element for every rule in the system. Given a `label` — or slotted content — it splits the hairline and centres the label in the gap; given neither, it collapses to a single continuous rule. `vertical` turns it into the 1px rule that divides clusters in a row. It detects slotted content at runtime, so a separator whose label is populated later still lays itself out correctly rather than leaving an empty notch in the rule. This absorbed `z-line`, which was this element with the label taken away. The unlabelled horizontal case rendered identically from either, so choosing between them was a coin toss with no consequence — the label is what is optional here, not the element.',

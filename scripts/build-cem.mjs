@@ -116,6 +116,12 @@ const resolvePropDescriptor = (node) => {
 			return buildPropDescriptor('function', { isAttribute: false, isEvent: true, eventDetail })
 		}
 		if (value.expression.text === 'callback') return buildPropDescriptor('function', { isAttribute: false })
+		// oneOf('sm', 'md', 'lg') — shared/prop-types.ts. A string attribute whose
+		// declared type is the literal union; the manifest says the same.
+		if (value.expression.text === 'oneOf') {
+			const members = value.arguments.filter((argument) => ts.isStringLiteral(argument)).map((argument) => `'${argument.text}'`)
+			return buildPropDescriptor(members.join(' | '), { isAttribute: true })
+		}
 	}
 
 	if (ts.isObjectLiteralExpression(value)) {

@@ -1,5 +1,5 @@
 import { defineMarkupExample } from '../authoring'
-import { ComponentStatus, ExampleLayout } from '../types'
+import { ComponentStatus, EvidenceLevel, ExampleLayout } from '../types'
 import type { ComponentDocT } from '../types'
 import { TEXT_FAMILY_RELATED } from './text-family'
 
@@ -13,7 +13,14 @@ export const zLabelDoc: ComponentDocT = {
 	tag: 'z-label',
 	title: 'z-label',
 	tagline: 'A consistent small-caps label for fields and compact UI.',
-	status: ComponentStatus.stable,
+	status: ComponentStatus.beta,
+	evidence: {
+		formAssociated: null,
+		keyboard: EvidenceLevel.unverified,
+		screenReader: EvidenceLevel.unverified,
+		browserTests: false,
+		screenshots: false
+	},
 
 	description:
 		'An opinionated visual label that matches `z-field`: small text, 600 weight, all-small-caps, and `neutral-5`. It deliberately has no size, color, weight, italic, underline, or strikethrough variants, so labels stay consistent throughout an interface. It renders a `<span>` by default. For a form control label that is programmatically associated with its input, use `z-field`, which forwards the name across the shadow boundary.',

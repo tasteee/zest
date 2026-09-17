@@ -173,7 +173,7 @@ const panelStyles = css`
 		box-sizing: border-box;
 		height: 100%;
 		background: var(--popover);
-		border-left: 1px solid var(--border);
+		border-inline-start: 1px solid var(--border);
 	}
 
 	:host([is-hidden]) {

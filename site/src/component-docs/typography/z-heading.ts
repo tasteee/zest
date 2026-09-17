@@ -1,5 +1,5 @@
 import { defineMarkupExample } from '../authoring'
-import { ComponentStatus, ExampleLayout } from '../types'
+import { ComponentStatus, EvidenceLevel, ExampleLayout } from '../types'
 import type { ComponentDocT } from '../types'
 import { TEXT_FAMILY_RELATED, buildTextFamilyAttributes } from './text-family'
 
@@ -14,7 +14,14 @@ export const zHeadingDoc: ComponentDocT = {
 	tag: 'z-heading',
 	title: 'z-heading',
 	tagline: 'Headings whose semantic level is derived from their visual size.',
-	status: ComponentStatus.stable,
+	status: ComponentStatus.beta,
+	evidence: {
+		formAssociated: null,
+		keyboard: EvidenceLevel.unverified,
+		screenReader: EvidenceLevel.unverified,
+		browserTests: false,
+		screenshots: false
+	},
 
 	description:
 		'The `z-text` family at weight 700, with one addition that matters: the rendered tag is derived from `size`, mapping `xxl` to `h1` down through `xs` to `h6`. Visual hierarchy and document outline stay in sync by default instead of by discipline, which is the usual way outlines rot. When the two genuinely need to diverge — an `h2` that should look small, a heading inside a card that must not claim a level — `tag` overrides the derivation without touching the styling.',
