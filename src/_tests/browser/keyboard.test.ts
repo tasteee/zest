@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 import { userEvent } from 'vitest/browser'
 import { deepActiveElement, flatContains, innerOf, mount, mountForm, settle } from './form-helpers'
 import { expectNoA11yViolations } from './a11y-helpers'
@@ -632,12 +632,13 @@ describe('<z-toaster>', () => {
 		focus(wrapper.querySelector<HTMLElement>('#before')!)
 		await userEvent.keyboard('{Tab}')
 		await userEvent.keyboard('{Enter}')
-		await settle(wrapper)
-		expect([...host.shadowRoot!.querySelectorAll('.title')].map((el) => el.textContent)).toEqual(['Second'])
+		// A dismissed toast animates out before it leaves the DOM. Wait for that
+		// instead of guessing how long a slow machine takes.
+		const getTitles = () => [...host.shadowRoot!.querySelectorAll('.title')].map((el) => el.textContent)
+		await vi.waitFor(() => expect(getTitles()).toEqual(['Second']))
 		await userEvent.keyboard('{Tab}')
 		await userEvent.keyboard(' ')
-		await settle(wrapper)
-		expect(host.shadowRoot!.querySelectorAll('.toast')).toHaveLength(0)
+		await vi.waitFor(() => expect(host.shadowRoot!.querySelectorAll('.toast')).toHaveLength(0))
 		toaster.clear()
 	})
 })
