@@ -17,6 +17,9 @@ const elementEntries = Object.fromEntries(
 //                    fonts) extracted from src/ink.css. Consumers import this
 //                    separately: `import '@tasteee/zest/ink.css'`.
 export default defineConfig({
+	// Set explicitly so the build never depends on finding tsconfig.json. Installed from git, pnpm
+	// can build without it, and esbuild then falls back to React.createElement, which crashes.
+	esbuild: { jsx: 'automatic', jsxImportSource: 'atomico' },
 	build: {
 		lib: {
 			entry: {
