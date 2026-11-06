@@ -1,0 +1,11 @@
+<z-card gap="3" style="width: min(46rem, 100%); padding: 1.25rem">
+  <z-row gap="2" aligns-y="center" does-wrap>
+    <z-input id="search" type="search" placeholder="Filter projects…" size="sm" style="flex: 1; min-width: 10rem"></z-input>
+    <z-select id="status" size="sm" placeholder="Status"></z-select>
+  </z-row>
+  <z-table id="table"></z-table>
+  <z-row aligns-x="between" aligns-y="center">
+    <z-text id="count" size="sm" color="muted"></z-text>
+    <z-pagination label="Projects" page="1" total="3"></z-pagination>
+  </z-row>
+</z-card>

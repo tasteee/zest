@@ -1,0 +1,16 @@
+<z-sheet side="right" heading="Filters" description="Narrow the results.">
+  <z-button slot="trigger" kind="outline">Filters</z-button>
+  <z-column gap="5">
+    <z-radio-group label="Status" value="any">
+      <z-radio value="any" label="Any"></z-radio>
+      <z-radio value="active" label="Active"></z-radio>
+      <z-radio value="archived" label="Archived"></z-radio>
+    </z-radio-group>
+    <z-slider label="Max price" min="0" max="500" value="250" does-show-value value-prefix="$"></z-slider>
+    <z-switch label="Only show favorites"></z-switch>
+  </z-column>
+  <z-row slot="footer" gap="2" aligns-x="end">
+    <z-button kind="plain">Reset</z-button>
+    <z-button tone="primary">Show results</z-button>
+  </z-row>
+</z-sheet>

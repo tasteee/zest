@@ -1,0 +1,16 @@
+<z-card gap="5" style="width: min(30rem, 100%); padding: 1.75rem">
+  <z-heading size="xs" tag="h2">Payment</z-heading>
+  <z-radio-group label="Plan" value="monthly" direction="horizontal">
+    <z-radio value="monthly" label="Monthly · $12"></z-radio>
+    <z-radio value="yearly" label="Yearly · $120"></z-radio>
+  </z-radio-group>
+  <z-column gap="4">
+    <z-input label="Name on card" autocomplete="cc-name"></z-input>
+    <z-input label="Card number" inputmode="numeric" placeholder="1234 1234 1234 1234" autocomplete="cc-number"></z-input>
+    <z-row gap="3">
+      <z-input label="Expiry" placeholder="MM / YY" autocomplete="cc-exp" style="flex: 1"></z-input>
+      <z-input label="CVC" inputmode="numeric" placeholder="123" autocomplete="cc-csc" style="flex: 1"></z-input>
+    </z-row>
+  </z-column>
+  <z-button tone="primary" is-full-width>Pay $12.00</z-button>
+</z-card>

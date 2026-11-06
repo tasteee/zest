@@ -1,0 +1,21 @@
+<z-card gap="5" style="width: min(26rem, 100%); padding: 1.75rem">
+  <z-column gap="1">
+    <z-heading size="xs" tag="h2">Create your account</z-heading>
+    <z-text size="sm" color="muted">Free for 14 days. No card needed.</z-text>
+  </z-column>
+  <form id="sign-up">
+    <z-column gap="4">
+      <z-row gap="3">
+        <z-input label="First name" name="first" autocomplete="given-name" style="flex: 1"></z-input>
+        <z-input label="Last name" name="last" autocomplete="family-name" style="flex: 1"></z-input>
+      </z-row>
+      <z-input label="Email" type="email" name="email" placeholder="you@example.com" autocomplete="email"></z-input>
+      <z-input label="Password" type="password" name="password" description="At least 8 characters." autocomplete="new-password"></z-input>
+      <z-checkbox name="terms" is-required>I agree to the terms and privacy policy</z-checkbox>
+      <z-button type="submit" tone="primary" is-full-width>Create account</z-button>
+    </z-column>
+  </form>
+  <z-text size="sm" color="muted" style="text-align: center">
+    Already have an account? <z-link href="#">Sign in</z-link>
+  </z-text>
+</z-card>
