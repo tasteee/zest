@@ -394,5 +394,92 @@ export const BLOCKS: BlockGroupT[] = [
 				'profile user account stats'
 			)
 		]
+	},
+	{
+		label: 'Navigation',
+		items: [
+			block(
+				'sidebar-groups',
+				'Sidebar: groups',
+				'A sidebar with a pinned brand and account and nav items in labelled groups.',
+				[{ demo: 'blocks/sidebar-groups', title: 'Grouped navigation', description: 'Groups come from nesting items; badges ride on the item.' }],
+				'sidebar navigation groups'
+			),
+			block(
+				'sidebar-inset',
+				'Sidebar: inset',
+				'A sidebar beside a content area that sits on its own surface.',
+				[{ demo: 'blocks/sidebar-inset', title: 'Inset content', description: 'The frame owns the border and radius; the sidebar owns selection.' }],
+				'sidebar inset layout'
+			),
+			block(
+				'navbar-simple',
+				'Navbar: simple',
+				'Brand, three links, and two actions in a bordered bar.',
+				[{ demo: 'blocks/navbar-simple', title: 'Brand, links, actions', description: 'Plain z-link elements are enough when nothing opens.' }],
+				'navbar header top nav'
+			),
+			block(
+				'navbar-dropdowns',
+				'Navbar: dropdowns',
+				'A navbar whose items open panels with a description under each destination.',
+				[{ demo: 'blocks/navbar-dropdowns', title: 'Menus with descriptions', description: 'z-nav-menu takes the whole tree as one array.' }],
+				'navbar mega menu dropdown nav-menu'
+			),
+			block(
+				'navbar-floating',
+				'Navbar: floating pill',
+				'A compact pill that floats centered above the page.',
+				[{ demo: 'blocks/navbar-floating', title: 'Floating pill', description: 'A rounded surface with a border replaces a full-width bar.' }],
+				'navbar floating pill'
+			)
+		]
+	},
+	{
+		label: 'Productivity',
+		items: [
+			block(
+				'kanban',
+				'Kanban',
+				'Three columns of cards you can reorder by dragging.',
+				[{ demo: 'blocks/kanban', title: 'Reorder within a column', description: 'Each column is its own z-sortable on the y axis.' }],
+				'board columns drag sortable tasks'
+			),
+			block(
+				'inbox',
+				'Inbox',
+				'A message list beside a reading pane that follows the selection.',
+				[{ demo: 'blocks/inbox', title: 'List and detail', description: 'Rows are created from data; clicking one fills the pane.' }],
+				'mail messages list detail'
+			),
+			block(
+				'todo-list',
+				'Todo list',
+				'Checkboxes with a live count of what’s left.',
+				[{ demo: 'blocks/todo-list', title: 'Live remaining count', description: 'One change listener on the container covers every checkbox.' }],
+				'tasks checklist checkbox'
+			),
+			block(
+				'issue-list',
+				'Issue list',
+				'Rows with a status dot, a title, a line of context, and a label.',
+				[{ demo: 'blocks/issue-list', title: 'Issues with status', description: 'The dot carries state; the badge carries the kind.' }],
+				'issues bugs tracker list'
+			),
+			block(
+				'leaderboard',
+				'Leaderboard',
+				'A ranked list with a rank, an avatar, a name, and a score.',
+				[{ demo: 'blocks/leaderboard', title: 'Top contributors', description: 'Mono numerals keep ranks and scores aligned.' }],
+				'ranking top list scores'
+			),
+			block(
+				'changelog',
+				'Changelog',
+				'Versions in reverse order, each with a date and a short summary.',
+				[{ demo: 'blocks/changelog', title: 'Release notes', description: 'A line between entries is enough; no timeline needed.' }],
+				'releases versions notes updates'
+			)
+		]
 	}
 ]
