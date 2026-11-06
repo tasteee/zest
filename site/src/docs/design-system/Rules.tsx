@@ -6,14 +6,7 @@ export const Rules = () => (
 		<DocsHero
 			eyebrow="DESIGN SYSTEM"
 			title="Design rules."
-			lede={
-				<>
-					The constraints that keep zest coherent.{' '}
-					<z-inline color="muted" weight={400}>
-						Break these constraints on purpose, not by accident.
-					</z-inline>
-				</>
-			}
+			lede="The constraints that keep zest coherent. Break them on purpose, not by accident."
 		/>
 
 		<section className="section" id="article">
