@@ -1,0 +1,307 @@
+/* Site chrome, the shared nav + the marketing Home page + Docs landing.
+   Surfaces, borders, type, and accents come from zest components/tokens
+   (loaded via zest.ts). This file is page chrome only: layout, nav, the mono
+   eyebrow label, hero/section rhythm, footer. */
+
+:root {
+	/* The editor (editor.css) sizes itself from 100dvh minus this. Keep in sync. */
+	--site-nav-h: 3.5rem;
+}
+
+html {
+	scroll-behavior: smooth;
+	scroll-padding-top: calc(var(--site-nav-h) + 1.5rem);
+}
+
+/* ── Shared nav ───────────────────────────────────────────── */
+
+.SiteNav {
+	position: sticky;
+	top: 0;
+	z-index: 100;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	height: var(--site-nav-h);
+	padding: 0 clamp(1.5rem, 5vw, 4rem);
+	background: color-mix(in oklch, var(--background) 82%, transparent);
+	backdrop-filter: blur(14px);
+	border-bottom: 1px solid var(--border, var(--line));
+}
+
+.SiteBrand {
+	display: flex;
+	align-items: center;
+	gap: 0.625rem;
+	font-weight: 600;
+	font-size: 1.0625rem;
+	color: var(--primary);
+	letter-spacing: -0.01em;
+}
+.SiteBrand .dot {
+	width: 0.5rem;
+	height: 0.5rem;
+	border-radius: 999px;
+	background: var(--purple);
+}
+
+.SiteNavLinks {
+	display: flex;
+	align-items: center;
+	gap: clamp(1rem, 2.5vw, 2.25rem);
+}
+.SiteNavLinks a {
+	color: var(--muted-foreground);
+	font-size: 0.9375rem;
+	font-weight: 500;
+	transition: color 0.14s ease;
+}
+.SiteNavLinks a:hover {
+	color: var(--foreground);
+}
+.SiteNavLinks a.active {
+	color: var(--primary);
+}
+
+.SiteNavActions {
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+}
+.SiteNavActions .SiteNavLink {
+	color: var(--muted-foreground);
+	font-size: 0.9375rem;
+	font-weight: 500;
+	text-decoration: none;
+	transition: color 0.14s ease;
+}
+.SiteNavActions .SiteNavLink:hover {
+	color: var(--foreground);
+}
+
+@media (max-width: 820px) {
+	.SiteNavLinks {
+		display: none;
+	}
+}
+
+/* ── Page width ───────────────────────────────────────────────
+   One dial for every top-level page container (marketing, docs, blog, tools).
+   Defined here because site.css loads app-wide; .DocsPage, .BlogContainer, and
+   the frame-extractor reference it too, so widths stay in lockstep. */
+
+:root {
+	--page-width: 1180px;
+}
+
+.SitePage {
+	max-width: var(--page-width);
+	margin: 0 auto;
+	padding: 0 clamp(1.5rem, 5vw, 4rem) 8rem;
+}
+
+/* the mono eyebrow, shared across sections */
+.eyebrow {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.875rem;
+	font-family: var(--font-mono);
+	font-size: 0.75rem;
+	font-weight: 500;
+	letter-spacing: 0.2em;
+	text-transform: uppercase;
+	color: var(--pink);
+}
+.eyebrow .line {
+	width: 2.5rem;
+	height: 1px;
+	background: var(--border, var(--line));
+}
+.mono {
+	font-family: var(--font-mono);
+	font-size: 0.75rem;
+	letter-spacing: 0.08em;
+	color: var(--muted-foreground);
+}
+
+.hero {
+	padding: clamp(4rem, 10vw, 8rem) 0 clamp(3rem, 6vw, 5rem);
+}
+.section {
+	padding-top: clamp(4rem, 8vw, 6.5rem);
+}
+.section-head {
+	display: flex;
+	align-items: flex-end;
+	justify-content: space-between;
+	gap: 1.5rem;
+	flex-wrap: wrap;
+	margin-bottom: 2.25rem;
+}
+
+/* card-as-link: let z-card own all the visuals */
+.card-link {
+	display: block;
+	color: inherit;
+	text-decoration: none;
+}
+
+/* footer link list */
+.FooterLink {
+	color: var(--muted-foreground);
+	font-size: var(--font-size-small, 0.875rem);
+	text-decoration: none;
+	transition: color 0.14s ease;
+}
+.FooterLink:hover {
+	color: var(--foreground);
+}
+
+/* ════════════════════════════════════════════════════════════
+   Home page, a personal HQ. Flat: borders and surfaces only,
+   no shadows and no gradient fills.
+   ════════════════════════════════════════════════════════════ */
+
+/* ── hero ─────────────────────────────────────────────────── */
+
+.home-title {
+	max-width: 48rem;
+	line-height: 1.04;
+	letter-spacing: -0.025em;
+}
+.home-intro {
+	max-width: 36rem;
+}
+
+/* ── work cards ───────────────────────────────────────────── */
+
+.work-card {
+	height: 100%;
+}
+.work-card-cta {
+	margin-top: auto;
+	padding-top: 1rem;
+}
+
+/* ── feature showcase (alternating text + visual) ─────────── */
+
+.showcase {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: clamp(2rem, 5vw, 4rem);
+	align-items: center;
+}
+@media (min-width: 900px) {
+	.showcase {
+		grid-template-columns: 1fr 1fr;
+	}
+}
+/* the component stage, a slow vertical stream of live but inert components.
+   Tiles render twice (in Home.tsx) and use margin-bottom (not flex gap) so the
+   two copies are exactly equal height and translateY(-50%) loops seamlessly.
+   The edge fade is a transparency mask, not a painted gradient. */
+.showcase-stage {
+	position: relative;
+	height: clamp(24rem, 42vw, 32rem);
+	overflow: hidden;
+	padding: 0 1.25rem;
+	border: 1px solid var(--border, var(--line));
+	border-radius: var(--radius, 0.625rem);
+	background: color-mix(in oklch, var(--card, var(--background)) 45%, transparent);
+	-webkit-mask-image: linear-gradient(to bottom, transparent, #000 11%, #000 89%, transparent);
+	mask-image: linear-gradient(to bottom, transparent, #000 11%, #000 89%, transparent);
+}
+.showcase-stream {
+	display: flex;
+	flex-direction: column;
+	animation: showcase-rise 42s linear infinite;
+}
+.showcase-stage:hover .showcase-stream {
+	animation-play-state: paused;
+}
+@keyframes showcase-rise {
+	from {
+		transform: translateY(0);
+	}
+	to {
+		transform: translateY(-50%);
+	}
+}
+@media (prefers-reduced-motion: reduce) {
+	.showcase-stream {
+		animation: none;
+	}
+}
+
+.showcase-tile {
+	display: flex;
+	flex-direction: column;
+	gap: 0.625rem;
+	margin-bottom: 1rem;
+	padding: 1rem 1.125rem;
+	border: 1px solid var(--border, var(--line));
+	border-radius: var(--radius, 0.625rem);
+	background: var(--background);
+}
+.showcase-tile-label {
+	font-family: var(--font-mono);
+	font-size: 0.6875rem;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	color: var(--muted-foreground);
+}
+.showcase-tile z-input,
+.showcase-tile z-slider {
+	width: 100%;
+}
+.showcase-progress {
+	flex: 1;
+	min-width: 7rem;
+}
+.showcase-title {
+	max-width: 24ch;
+}
+.showcase-body {
+	max-width: 46ch;
+}
+.home-inline-link {
+	margin-top: 0.5rem;
+}
+
+/* feature checklist */
+.check-list {
+	list-style: none;
+	margin: 0.5rem 0 0;
+	padding: 0;
+	display: grid;
+	gap: 0.75rem;
+}
+.check-list li {
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+	color: var(--foreground);
+	font-size: 0.9375rem;
+}
+.check-list svg {
+	flex: none;
+	width: 1.125rem;
+	height: 1.125rem;
+	padding: 0.1875rem;
+	border-radius: 999px;
+	color: var(--purple);
+	background: color-mix(in oklch, var(--purple) 16%, transparent);
+}
+
+/* ── footer ───────────────────────────────────────────────── */
+
+.home-footer-separator {
+	margin-top: 6rem;
+}
+.home-footer-about {
+	max-width: 24rem;
+}
+
+.SiteNav[hidden] {
+	display: none;
+}

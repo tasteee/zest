@@ -1,0 +1,71 @@
+name: Release
+
+# Publishing is a deliberate act: push a tag named v<version>, where
+# <version> is the version in package.json, e.g. v1.0.0.
+# The workflow runs every check the CI runs, then publishes with provenance.
+# It needs the NPM_TOKEN repository secret (an npm automation token).
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: read
+  id-token: write
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+          registry-url: https://registry.npmjs.org
+
+      # A tag that disagrees with package.json would publish the wrong version.
+      - name: Tag matches package version
+        run: |
+          package_version=$(node -p "require('./package.json').version")
+          tag_version="${GITHUB_REF_NAME#v}"
+          if [ "$package_version" != "$tag_version" ]; then
+            echo "Tag says $tag_version, package.json says $package_version."
+            exit 1
+          fi
+
+      - name: Changelog has an entry for this version
+        run: |
+          package_version=$(node -p "require('./package.json').version")
+          grep -q "^## \[$package_version\]" CHANGELOG.md
+
+      - run: pnpm install --frozen-lockfile
+
+      - run: pnpm exec playwright install --with-deps chromium
+
+      # Builds zest and runs the release gate (held-back elements stay out).
+      - run: pnpm build
+
+      - run: pnpm typecheck
+
+      - run: pnpm build:site
+
+      - run: pnpm check:docs
+
+      - run: pnpm test:coverage
+
+      - run: pnpm test:consumers
+
+      - name: Publish
+        run: npm publish --provenance --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

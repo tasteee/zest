@@ -1,0 +1,74 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - run: pnpm exec playwright install --with-deps chromium
+
+      # Builds the library and runs the release gate (held-back elements stay
+      # out), then typechecks and builds the docs site.
+      - run: pnpm build
+
+      - run: pnpm build:site
+
+      - run: pnpm typecheck
+
+      # Crawls the built docs site in Chromium: console errors, broken links,
+      # unregistered or held-back elements, phone overflow, axe on every
+      # example, the sections each element page needs, and ⌘K search.
+      - run: pnpm check:docs
+
+      # Unit and browser suites together, with the coverage floor from
+      # vitest.config.ts. A drop below it fails the build.
+      - run: pnpm test:coverage
+
+  # The published tarball, installed into clean projects: plain HTML, React +
+  # TypeScript, Vue and Svelte. Slower and network-bound, so it runs beside the
+  # main job instead of inside it.
+  consumers:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - run: pnpm build
+
+      - run: pnpm exec playwright install --with-deps chromium
+
+      - run: pnpm test:consumers
