@@ -40,6 +40,7 @@ export const englishStrings = {
 	digitOf: 'Digit {index} of {length}',
 	lowerValue: 'Lower value',
 	upperValue: 'Upper value',
+	rangeSeparator: 'to',
 	row: 'row',
 	column: 'column',
 	selectAxis: 'Select {axis}',

@@ -1,4 +1,6 @@
-<z-field label="Guests" description="Leave a side empty for an open-ended range." style="width: min(22rem, 100%)">
-  <z-number-range-input id="guests" min="1" max="20" lower-placeholder="Min" upper-placeholder="Max"></z-number-range-input>
-</z-field>
-<z-text id="guests-result">No range yet</z-text>
+<z-column gap="4">
+  <z-field label="Guests" style="width: min(22rem, 100%)">
+    <z-number-range-input id="guests" min="1" max="20" lower-placeholder="Min" upper-placeholder="Max"></z-number-range-input>
+  </z-field>
+  <z-text id="guests-result">No range yet</z-text>
+</z-column>

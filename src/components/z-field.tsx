@@ -65,6 +65,14 @@ const styles = css`
 	.description ::slotted(*) { color: var(--muted-foreground); }
 	.error { color: var(--destructive); }
 
+	/* Horizontal puts the label in its own column left of the control. The
+	   label band takes the control's height so the text centres on it, and
+	   the error and description line up under the control. */
+	:host([is-horizontal]) .field { grid-template-columns: max-content minmax(0, 1fr); column-gap: var(--space-base); align-items: start; }
+	:host([is-horizontal]) .header { grid-column: 1; grid-row: 1; height: var(--z-field-control-height); }
+	:host([is-horizontal]) .control { grid-column: 2; grid-row: 1; }
+	:host([is-horizontal]) .error, :host([is-horizontal]) .description { grid-column: 2; }
+
 	:host([is-label-hidden]) .header { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 `
 
@@ -163,6 +171,7 @@ export const ZField = c(
 			isRequired: { type: Boolean, reflect: true },
 			isLabelHidden: { type: Boolean, reflect: true },
 			isLabelReserved: { type: Boolean, reflect: true },
+			isHorizontal: { type: Boolean, reflect: true },
 			size: { type: oneOf('sm', 'md', 'lg'), reflect: true }
 		},
 		styles: [styles, interactionStyles]

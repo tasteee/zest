@@ -20,12 +20,21 @@ import './z-number-input'
  * `input` / `change` carry { value: [lower, upper] }.
  */
 const styles = css`
-	:host { display: inline-block; width: fit-content; max-width: 100%; }
+	:host { display: inline-block; width: fit-content; max-width: 100%; --accent: var(--primary); }
 	:host([is-full-width]) { display: block; width: 100%; }
 	:host([is-hidden]) { display: none; }
-	.row { display: flex; align-items: center; gap: var(--space-sm); }
+	:host([tone='primary']) { --accent: var(--purple); }
+	:host([tone='secondary']) { --accent: var(--pink); }
+	.row { display: flex; align-items: stretch; box-sizing: border-box; width: 100%; background: transparent; border: 1px solid var(--border); border-radius: var(--radius-md); color: var(--foreground); overflow: hidden; transition: border-color var(--motion-fast) var(--ease-enter), background-color var(--motion-fast) var(--ease-enter); }
+	.row.is-sm { height: var(--control-height-sm); font-size: var(--control-font-size-sm); }
+	.row.is-md { height: var(--control-height-md); font-size: var(--control-font-size-md); }
+	.row.is-lg { height: var(--control-height-lg); font-size: var(--control-font-size-lg); }
+	.row:hover { border-color: color-mix(in oklch, var(--foreground) 30%, transparent); }
+	.row:focus-within { border-color: var(--accent); background: color-mix(in oklch, var(--accent) 5%, transparent); outline: 2px solid var(--focus-ring); outline-offset: 2px; }
+	.row.is-invalid { border-color: var(--destructive); --accent: var(--destructive); }
+	.row.is-disabled { opacity: var(--control-disabled-opacity); pointer-events: none; }
 	z-number-input { flex: 1 1 0; min-width: 0; }
-	.dash { color: var(--muted-foreground); user-select: none; -webkit-user-select: none; }
+	.separator { display: flex; align-items: center; padding-inline: var(--space-xs); color: var(--muted-foreground); user-select: none; -webkit-user-select: none; }
 `
 
 type BoundT = number | null
@@ -112,11 +121,16 @@ export const ZNumberRangeInput = c(
 		}
 
 		const isInvalid = Boolean(props.isInvalid) || Boolean(props.error)
+		const sizeName = props.size ?? 'md'
+		const sizeClass = `is-${sizeName}`
+		const invalidClass = isInvalid ? 'is-invalid' : ''
+		const disabledClass = isDisabled ? 'is-disabled' : ''
+		const rowClass = ['row', sizeClass, invalidClass, disabledClass].filter(Boolean).join(' ')
 		const describedById = describedBy(props.description, props.error)
 
 		return (
 			<host shadowDom={{ delegatesFocus: true }}>
-				<div class="row" role="group" aria-label={accessibleName} aria-describedby={describedById}>
+				<div class={rowClass} role="group" aria-label={accessibleName} aria-describedby={describedById}>
 					<z-number-input
 						ref={lowerRef}
 						label={t('lowerValue')}
@@ -127,6 +141,9 @@ export const ZNumberRangeInput = c(
 						size={props.size}
 						tone={props.tone}
 						placeholder={props.lowerPlaceholder}
+						valuePrefix={props.valuePrefix}
+						valueSuffix={props.valueSuffix}
+						isBorderless={true}
 						isInvalid={isInvalid}
 						isDisabled={isDisabled}
 						isReadonly={props.isReadonly}
@@ -135,7 +152,7 @@ export const ZNumberRangeInput = c(
 						oninput={(boundEvent: any) => handleBoundEvent('lower', 'input', boundEvent)}
 						onchange={(boundEvent: any) => handleBoundEvent('lower', 'change', boundEvent)}
 					/>
-					<span class="dash" aria-hidden="true">–</span>
+					<span class="separator" aria-hidden="true">{t('rangeSeparator')}</span>
 					<z-number-input
 						label={t('upperValue')}
 						value={upperValue}
@@ -145,6 +162,9 @@ export const ZNumberRangeInput = c(
 						size={props.size}
 						tone={props.tone}
 						placeholder={props.upperPlaceholder}
+						valuePrefix={props.valuePrefix}
+						valueSuffix={props.valueSuffix}
+						isBorderless={true}
 						isInvalid={isInvalid}
 						isDisabled={isDisabled}
 						isReadonly={props.isReadonly}
@@ -169,6 +189,8 @@ export const ZNumberRangeInput = c(
 			name: { type: String, reflect: true },
 			lowerPlaceholder: String,
 			upperPlaceholder: String,
+			valuePrefix: String,
+			valueSuffix: String,
 			size: { type: oneOf('sm', 'md', 'lg'), reflect: true },
 			tone: { type: oneOf('primary', 'secondary'), reflect: true },
 			isInvalid: { type: Boolean, reflect: true },

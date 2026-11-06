@@ -28,6 +28,11 @@ export const ZFieldDoc = () => (
 			description="Compact or repeated controls can omit visible text, but must still have an accessible name. is-label-hidden keeps the wrapper label available to assistive technology."
 		/>
 		<DocExample
+			demo="z-field/put-the-label-beside-the-control"
+			title="Put the label beside the control"
+			description="is-horizontal moves the label to the left of the control. Guidance and errors stay under the control."
+		/>
+		<DocExample
 			demo="z-field/use-label-directly-for-compact"
 			title="Use label directly for compact contextual controls"
 			description="When surrounding UI already makes the purpose obvious, skip z-field and give the control its accessible label directly. A placeholder is never its label."

@@ -13,6 +13,11 @@ export const ZNumberRangeInputDoc = () => (
 			description="value is a [lower, upper] array, so set it from JavaScript or React. min, max, and step are shared by both fields, and the fields never cross."
 		/>
 		<DocExample
+			demo="z-number-range-input/add-a-unit"
+			title="Add a prefix or suffix"
+			description="value-prefix and value-suffix decorate each value while the field is not being edited. Focus shows the bare number."
+		/>
+		<DocExample
 			demo="z-number-range-input/read-the-committed-interval"
 			title="Read the committed interval"
 			description="change reports { value: [lower, upper] }. An empty field is null, so open-ended ranges work."
