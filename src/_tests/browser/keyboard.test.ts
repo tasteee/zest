@@ -636,6 +636,9 @@ describe('<z-toaster>', () => {
 		// instead of guessing how long a slow machine takes.
 		const getTitles = () => [...host.shadowRoot!.querySelectorAll('.title')].map((el) => el.textContent)
 		await vi.waitFor(() => expect(getTitles()).toEqual(['Second']))
+		// Removing the focused button drops focus, and where Tab goes next
+		// depends on timing. Start again from a known place.
+		focus(wrapper.querySelector<HTMLElement>('#before')!)
 		await userEvent.keyboard('{Tab}')
 		await userEvent.keyboard(' ')
 		await vi.waitFor(() => expect(host.shadowRoot!.querySelectorAll('.toast')).toHaveLength(0))
