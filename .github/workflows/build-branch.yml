@@ -1,0 +1,61 @@
+name: Build branch
+
+# Publishes the built package (dist and the files npm would ship) to the
+# `build` branch, so apps can install it straight from GitHub with no build
+# step on install: github:tasteee/zest#build
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build-branch
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - run: pnpm build
+
+      # package.json loses its scripts and devDependencies, so installing the
+      # package never runs a build.
+      - name: Assemble the package
+        run: |
+          mkdir /tmp/pkg
+          cp -r dist custom-elements.json README.md CHANGELOG.md SUPPORT.md LICENSE /tmp/pkg/
+          node -e "
+            const p = JSON.parse(require('fs').readFileSync('package.json', 'utf8'))
+            delete p.scripts
+            delete p.devDependencies
+            require('fs').writeFileSync('/tmp/pkg/package.json', JSON.stringify(p, null, 2) + '\n')
+          "
+
+      - name: Push the build branch
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          cd /tmp/pkg
+          git init -q -b build
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -q -m "build of ${GITHUB_SHA}"
+          git remote add origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          git push -f origin build

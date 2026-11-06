@@ -14,11 +14,11 @@ npm install @tasteee/zest
 # or: pnpm add @tasteee/zest
 ```
 
-From GitHub (it builds on install, so the first install takes a moment):
+From GitHub. The `build` branch holds the built package, updated on every
+push to `main`:
 
 ```sh
-pnpm add github:tasteee/zest
-# or pin a tag: pnpm add github:tasteee/zest#v1.0.0
+pnpm add github:tasteee/zest#build
 ```
 
 ## Usage
