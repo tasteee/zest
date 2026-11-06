@@ -2079,6 +2079,9 @@
 			"is-label-hidden": {
 				"description": "Visually hides the label while retaining it as the control's accessible name."
 			},
+			"is-horizontal": {
+				"description": "Puts the label to the left of the control instead of above it."
+			},
 			"size": {
 				"description": "Size passed to the control inside the field.",
 				"values": [
@@ -3081,8 +3084,17 @@
 				"description": "Blocks interaction, dims the element, and removes it from the keyboard focus order.",
 				"default": "false"
 			},
+			"value-prefix": {
+				"description": "Text shown before each value while the field is not focused, such as `$`."
+			},
+			"value-suffix": {
+				"description": "Text shown after each value while the field is not focused, such as `bpm`."
+			},
 			"has-stepper-buttons": {
 				"description": "Shows ghost decrement/increment buttons inside the field."
+			},
+			"is-borderless": {
+				"description": "Removes the field's own border and focus ring so a parent can draw one. Used inside `z-number-range-input`."
 			},
 			"is-full-width": {
 				"description": "Stretches the normally compact numeric field to its container width."
@@ -3189,6 +3201,12 @@
 			},
 			"upper-placeholder": {
 				"description": "Hint text for the empty upper field."
+			},
+			"value-prefix": {
+				"description": "Text shown before each value while the field is not focused, such as `$`."
+			},
+			"value-suffix": {
+				"description": "Text shown after each value while the field is not focused, such as `bpm`."
 			},
 			"has-stepper-buttons": {
 				"description": "Shows ghost −/+ buttons on both fields."

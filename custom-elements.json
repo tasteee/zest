@@ -5332,6 +5332,14 @@
             },
             {
               "kind": "field",
+              "name": "isHorizontal",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Puts the label to the left of the control instead of above it."
+            },
+            {
+              "kind": "field",
               "name": "size",
               "type": {
                 "text": "'sm' | 'md' | 'lg'"
@@ -5387,6 +5395,14 @@
                 "text": "boolean"
               },
               "description": "Keeps the height of the label row when there is no label, so fields in a row stay aligned."
+            },
+            {
+              "name": "is-horizontal",
+              "fieldName": "isHorizontal",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Puts the label to the left of the control instead of above it."
             },
             {
               "name": "size",
@@ -7727,6 +7743,22 @@
             },
             {
               "kind": "field",
+              "name": "valuePrefix",
+              "type": {
+                "text": "string"
+              },
+              "description": "Text shown before each value while the field is not focused, such as `$`."
+            },
+            {
+              "kind": "field",
+              "name": "valueSuffix",
+              "type": {
+                "text": "string"
+              },
+              "description": "Text shown after each value while the field is not focused, such as `bpm`."
+            },
+            {
+              "kind": "field",
               "name": "size",
               "type": {
                 "text": "'sm' | 'md' | 'lg'"
@@ -7796,6 +7828,14 @@
                 "text": "boolean"
               },
               "description": "Shrinks the field to fit its content instead of filling the row."
+            },
+            {
+              "kind": "field",
+              "name": "isBorderless",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Removes the field's own border and focus ring so a parent can draw one. Used inside `z-number-range-input`."
             },
             {
               "kind": "field",
@@ -7880,6 +7920,22 @@
               "description": "Hint text shown while the control is empty."
             },
             {
+              "name": "value-prefix",
+              "fieldName": "valuePrefix",
+              "type": {
+                "text": "string"
+              },
+              "description": "Text shown before each value while the field is not focused, such as `$`."
+            },
+            {
+              "name": "value-suffix",
+              "fieldName": "valueSuffix",
+              "type": {
+                "text": "string"
+              },
+              "description": "Text shown after each value while the field is not focused, such as `bpm`."
+            },
+            {
               "name": "size",
               "fieldName": "size",
               "type": {
@@ -7950,6 +8006,14 @@
                 "text": "boolean"
               },
               "description": "Shrinks the field to fit its content instead of filling the row."
+            },
+            {
+              "name": "is-borderless",
+              "fieldName": "isBorderless",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Removes the field's own border and focus ring so a parent can draw one. Used inside `z-number-range-input`."
             },
             {
               "name": "is-hidden",
@@ -8065,6 +8129,22 @@
                 "text": "string"
               },
               "description": "Hint text for the empty upper field."
+            },
+            {
+              "kind": "field",
+              "name": "valuePrefix",
+              "type": {
+                "text": "string"
+              },
+              "description": "Text shown before each value while the field is not focused, such as `$`."
+            },
+            {
+              "kind": "field",
+              "name": "valueSuffix",
+              "type": {
+                "text": "string"
+              },
+              "description": "Text shown after each value while the field is not focused, such as `bpm`."
             },
             {
               "kind": "field",
@@ -8219,6 +8299,22 @@
                 "text": "string"
               },
               "description": "Hint text for the empty upper field."
+            },
+            {
+              "name": "value-prefix",
+              "fieldName": "valuePrefix",
+              "type": {
+                "text": "string"
+              },
+              "description": "Text shown before each value while the field is not focused, such as `$`."
+            },
+            {
+              "name": "value-suffix",
+              "fieldName": "valueSuffix",
+              "type": {
+                "text": "string"
+              },
+              "description": "Text shown after each value while the field is not focused, such as `bpm`."
             },
             {
               "name": "size",

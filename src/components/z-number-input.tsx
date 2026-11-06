@@ -33,9 +33,11 @@ const styles = css`
 	.field.is-focused { border-color: var(--accent); background: color-mix(in oklch, var(--accent) 5%, transparent); }
 	.field.is-invalid { border-color: var(--destructive); --accent: var(--destructive); }
 	.field.is-disabled { opacity: var(--control-disabled-opacity); pointer-events: none; }
-	input { flex: 1 1 auto; min-width: 0; width: 5ch; appearance: textfield; background: transparent; border: 0; outline: none; color: inherit; font: inherit; text-align: center; }
+	input { flex: 1 1 auto; min-width: 0; width: calc(5ch + var(--affix-length, 0) * 1ch); appearance: textfield; background: transparent; border: 0; outline: none; color: inherit; font: inherit; text-align: center; }
 	input::placeholder { color: var(--muted-foreground); user-select: none; -webkit-user-select: none; }
 	input::-webkit-outer-spin-button, input::-webkit-inner-spin-button { appearance: none; margin: 0; }
+	:host([is-borderless]) .field { height: auto; border: 0; border-radius: 0; background: transparent; outline: none; }
+	:host([is-borderless]) .field:hover, :host([is-borderless]) .field.is-focused { background: transparent; }
 	.stepper { display: grid; place-items: center; flex: 0 0 auto; width: 2rem; border: 0; background: transparent; color: var(--muted-foreground); font: inherit; font-size: 1.125em; line-height: 1; cursor: pointer; user-select: none; -webkit-user-select: none; transition: color var(--motion-fast) var(--ease-enter), background-color var(--motion-fast) var(--ease-enter); }
 	.stepper:hover:not(:disabled) { color: var(--foreground); background: color-mix(in oklch, var(--foreground) 6%, transparent); }
 	.stepper:active:not(:disabled) { background: color-mix(in oklch, var(--accent) 12%, transparent); color: var(--accent); }
@@ -101,6 +103,10 @@ export const ZNumberInput = c(
 		const isDisabled = props.isDisabled || isFormDisabled
 
 		useEffect(() => {
+			if (isFocused) inputRef.current?.select()
+		}, [isFocused])
+
+		useEffect(() => {
 			if (!isFocused) setRawValue(value == null ? '' : String(value))
 		}, [value, isFocused])
 
@@ -129,6 +135,18 @@ export const ZNumberInput = c(
 			}
 			commit(parsed)
 		}
+		// Blurred, a valid number shows with its prefix and suffix
+		// ("$60", "60bpm"). Focused, the input holds the bare number.
+		const valuePrefix = props.valuePrefix ?? ''
+		const valueSuffix = props.valueSuffix ?? ''
+		const affixLength = valuePrefix.length + valueSuffix.length
+		const hasAffix = affixLength > 0
+		const isShowingNumber = rawValue !== '' && parsed != null
+		const decoratedValue = `${valuePrefix}${rawValue}${valueSuffix}`
+		const shouldDecorate = hasAffix && isShowingNumber && !isFocused
+		const displayedValue = shouldDecorate ? decoratedValue : rawValue
+		const valueText = hasAffix && isShowingNumber ? decoratedValue : undefined
+		const affixStyle = `--affix-length: ${affixLength}`
 		const fieldClass = ['field', resolveSizeClass(props)]
 			.concat(isFocused ? ['is-focused'] : [])
 			.concat(isInvalid ? ['is-invalid'] : [])
@@ -145,7 +163,9 @@ export const ZNumberInput = c(
 				aria-valuemax={max}
 				aria-valuenow={parsed != null && Number.isFinite(parsed) ? parsed : undefined}
 				inputmode="decimal"
-				value={rawValue}
+				value={displayedValue}
+				style={affixStyle}
+				aria-valuetext={valueText}
 				placeholder={props.placeholder}
 				disabled={isDisabled}
 				readonly={props.isReadonly}
@@ -171,6 +191,8 @@ export const ZNumberInput = c(
 			label: String,
 			name: { type: String, reflect: true },
 			placeholder: String,
+			valuePrefix: String,
+			valueSuffix: String,
 			size: { type: oneOf('sm', 'md', 'lg'), reflect: true },
 			tone: { type: oneOf('primary', 'secondary'), reflect: true },
 			isInvalid: { type: Boolean, reflect: true },
@@ -180,6 +202,7 @@ export const ZNumberInput = c(
 			hasStepperButtons: { type: Boolean, reflect: true },
 			isFullWidth: { type: Boolean, reflect: true },
 			isInline: { type: Boolean, reflect: true },
+			isBorderless: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			input: event<{ value: number | null; rawValue: string; isValid: boolean }>({ bubbles: true, composed: true }),
 			change: event<{ value: number }>({ bubbles: true, composed: true })
