@@ -1,6 +1,6 @@
 import { interactionStyles } from '../shared/interaction-styles'
 import { defineFormElement, useFormControl } from '../shared/form-control'
-import { describableProps, describedBy, renderDescriptions, useAccessibleName } from '../shared/accessible'
+import { describableProps, describedBy, renderDescriptions, srOnlyStyles, useAccessibleName } from '../shared/accessible'
 import { c, css, event, useHost, useProp, useRef } from 'atomico'
 import { oneOf } from '../shared/prop-types'
 import { useLocale } from '../shared/locale'
@@ -203,7 +203,7 @@ export const ZNumberRangeInput = c(
 			input: event<{ value: RangeValueT }>({ bubbles: true, composed: true }),
 			change: event<{ value: RangeValueT }>({ bubbles: true, composed: true })
 		},
-		styles: [styles, interactionStyles],
+		styles: [styles, interactionStyles, srOnlyStyles],
 		form: true
 	}
 )
