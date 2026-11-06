@@ -246,7 +246,7 @@ const checkElementPages = () => {
 			continue
 		}
 		const needed = ['Keyboard', 'Accessibility']
-		if ((declaration.attributes ?? []).length) needed.push('Properties')
+		if ((declaration.attributes ?? []).length) needed.push('Attributes')
 		if ((declaration.events ?? []).length) needed.push('Events')
 		if ((declaration.slots ?? []).length) needed.push('Slots')
 		if ((declaration.cssProperties ?? []).length) needed.push('CSS custom properties')
