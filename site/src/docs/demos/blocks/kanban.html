@@ -1,0 +1,23 @@
+<z-grid min-column-width="14rem" gap="3" style="width: min(52rem, 100%)">
+  <z-column gap="2">
+    <z-row gap="2" aligns-y="center"><z-text weight="600">To do</z-text><z-badge kind="outline">3</z-badge></z-row>
+    <z-sortable axis="y" style="display: flex; flex-direction: column; gap: 0.5rem">
+      <z-card style="padding: 0.875rem; cursor: grab"><z-text size="sm">Write the launch post</z-text></z-card>
+      <z-card style="padding: 0.875rem; cursor: grab"><z-text size="sm">Audit empty states</z-text></z-card>
+      <z-card style="padding: 0.875rem; cursor: grab"><z-text size="sm">Update pricing copy</z-text></z-card>
+    </z-sortable>
+  </z-column>
+  <z-column gap="2">
+    <z-row gap="2" aligns-y="center"><z-text weight="600">In progress</z-text><z-badge kind="outline">2</z-badge></z-row>
+    <z-sortable axis="y" style="display: flex; flex-direction: column; gap: 0.5rem">
+      <z-card style="padding: 0.875rem; cursor: grab"><z-text size="sm">Redesign settings</z-text></z-card>
+      <z-card style="padding: 0.875rem; cursor: grab"><z-text size="sm">Fix focus ring on menus</z-text></z-card>
+    </z-sortable>
+  </z-column>
+  <z-column gap="2">
+    <z-row gap="2" aligns-y="center"><z-text weight="600">Done</z-text><z-badge kind="outline">1</z-badge></z-row>
+    <z-sortable axis="y" style="display: flex; flex-direction: column; gap: 0.5rem">
+      <z-card style="padding: 0.875rem; cursor: grab"><z-text size="sm">Ship dark theme</z-text></z-card>
+    </z-sortable>
+  </z-column>
+</z-grid>

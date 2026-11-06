@@ -1,0 +1,32 @@
+<z-card gap="0" style="width: min(42rem, 100%); padding: 0">
+  <z-row aligns-x="between" aligns-y="center" gap="3" style="padding: 1rem 1.25rem; border-bottom: 1px solid var(--border)">
+    <z-heading size="xs" tag="h2">Issues</z-heading>
+    <z-button tone="primary" size="sm">New issue</z-button>
+  </z-row>
+  <z-list label="Issues">
+    <z-list-row>
+      <z-status-dot status="busy"></z-status-dot>
+      <div style="flex: 1; min-width: 0">
+        <z-text weight="600">Menu loses focus after closing</z-text>
+        <z-text size="sm" color="muted" style="display: block">#214 · opened 2 days ago by Grace</z-text>
+      </div>
+      <z-badge tone="danger">Bug</z-badge>
+    </z-list-row>
+    <z-list-row>
+      <z-status-dot status="online"></z-status-dot>
+      <div style="flex: 1; min-width: 0">
+        <z-text weight="600">Add a compact table density</z-text>
+        <z-text size="sm" color="muted" style="display: block">#209 · opened 5 days ago by Alan</z-text>
+      </div>
+      <z-badge tone="primary">Feature</z-badge>
+    </z-list-row>
+    <z-list-row>
+      <z-status-dot status="offline"></z-status-dot>
+      <div style="flex: 1; min-width: 0">
+        <z-text weight="600">Docs typo on the dialog page</z-text>
+        <z-text size="sm" color="muted" style="display: block">#198 · closed last week</z-text>
+      </div>
+      <z-badge kind="outline">Docs</z-badge>
+    </z-list-row>
+  </z-list>
+</z-card>
