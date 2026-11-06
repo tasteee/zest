@@ -160,6 +160,29 @@ export const insetProps = {
 /* id/class/style/role/aria-* are native global attributes and need no props;
  * `hidden` is native too but :host display rules override it, so each component
  * re-asserts it via baseStyles below. */
+/*
+ * Custom properties inherit. A layout primitive that reads `--z-row-gap` etc.
+ * would otherwise pick up the value an ancestor z-row set, so a nested layout
+ * with no gap prop gets its parent's gap and padding. Declaring each variable
+ * as `initial` on :host cuts the inheritance: the var() fallbacks apply, and a
+ * value set inline from the element's own props still wins.
+ */
+export const resetInheritedVars = (names: string[]) => {
+	const declarations = names.map((name) => name + ': initial;').join(' ')
+	return css`
+		:host {
+			${declarations}
+		}
+	`
+}
+
+export const padVarNames = (prefix: string): string[] => [
+	prefix + '-pad-top',
+	prefix + '-pad-bottom',
+	prefix + '-pad-left',
+	prefix + '-pad-right'
+]
+
 export const baseStyles = css`
 	:host {
 		box-sizing: border-box;

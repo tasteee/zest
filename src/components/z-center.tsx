@@ -1,6 +1,6 @@
 import { defineElement } from '../shared/define-element'
 import { c, css } from 'atomico'
-import { baseStyles, insetProps, insetVars, resolveEdge, resolveWidth } from '../shared/layout-schema'
+import { baseStyles, padVarNames, resetInheritedVars, insetProps, insetVars, resolveEdge, resolveWidth } from '../shared/layout-schema'
 import { oneOf } from '../shared/prop-types'
 
 /*
@@ -82,7 +82,17 @@ export const ZCenter = c(
 			isFullHeight: { type: Boolean, reflect: true },
 			...insetProps
 		},
-		styles: [baseStyles, styles]
+		styles: [
+			baseStyles,
+			resetInheritedVars([
+				...padVarNames('--z-center'),
+				'--z-center-justify',
+				'--z-center-align',
+				'--z-center-min-height',
+				'--z-center-max-width'
+			]),
+			styles
+		]
 	}
 )
 

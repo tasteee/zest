@@ -42,3 +42,12 @@ describe('<z-checkbox> in a form', () => {
 		expect(entriesOf(form)).toEqual([['topping', 'olives'], ['topping', 'chili']])
 	})
 })
+
+describe('<z-checkbox> label', () => {
+	it('shows the label prop as visible text when nothing is slotted', async () => {
+		const form = await mountForm('<z-checkbox label="Public project"></z-checkbox>')
+		const host = form.querySelector<HTMLElement>('z-checkbox')!
+		await settle()
+		expect(host.shadowRoot!.querySelector('label')!.textContent).toContain('Public project')
+	})
+})

@@ -1,6 +1,6 @@
 import { defineElement } from '../shared/define-element'
 import { c, css } from 'atomico'
-import { baseStyles, insetProps, insetVars } from '../shared/layout-schema'
+import { baseStyles, padVarNames, resetInheritedVars, insetProps, insetVars } from '../shared/layout-schema'
 import { themedScrollbarStyles } from '../shared/scrollbar-styles'
 import { oneOf } from '../shared/prop-types'
 
@@ -121,7 +121,12 @@ export const ZScroll = c(
 			scrollbar: { type: oneOf('auto', 'thin', 'hidden'), reflect: true },
 			...insetProps
 		},
-		styles: [baseStyles, themedScrollbarStyles, styles]
+		styles: [
+			baseStyles,
+			resetInheritedVars([...padVarNames('--z-scroll'), '--z-scroll-max-height', '--z-scroll-max-width']),
+			themedScrollbarStyles,
+			styles
+		]
 	}
 )
 
