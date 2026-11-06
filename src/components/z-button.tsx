@@ -114,8 +114,16 @@ const styles = css`
 		background: var(--material-tone), var(--tone-color);
 		box-shadow: var(--elevation-raised), var(--emissive-tone);
 		border-color: var(--tone-color);
-		color: var(--on-accent);
+		color: var(--tone-on-color);
 		font-weight: 600;
+	}
+
+	/* A mid-tone fill has no good plain black or white label. The label is
+	   the tone's own hue pulled very dark, so it stays legible and still
+	   reads as part of the same colour family. The theme sets how dark
+	   (light themes keep a plain white label). Neutral overrides this below. */
+	button.is-solid {
+		--tone-on-color: oklch(from var(--tone-color) var(--on-tone-lightness) calc(c * var(--on-tone-chroma)) h);
 	}
 
 	/* Pressing swaps the raised stack for the pressed one, which in the
