@@ -197,7 +197,7 @@ export const BLOCKS: BlockGroupT[] = [
 				'not-found',
 				'Not found',
 				'A 404 screen that says what happened and offers two ways out.',
-				[{ demo: 'blocks/not-found', title: 'Page not found', description: 'An empty state doubles as an error page.' }],
+				[{ demo: 'blocks/not-found', title: 'Missing page', description: 'An empty state doubles as an error page.' }],
 				'404 error missing'
 			),
 			block(

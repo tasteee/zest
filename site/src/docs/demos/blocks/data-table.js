@@ -24,7 +24,7 @@ status.options = [
 ]
 
 const render = () => {
-  const query = search.value.toLowerCase()
+  const query = (search.value ?? '').toLowerCase()
   const wanted = status.value
   const visible = ROWS.filter((row) => {
     const matchesQuery = row.project.toLowerCase().includes(query)

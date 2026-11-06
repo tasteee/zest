@@ -140,6 +140,18 @@ export const UsageSvelte = () => (
 <z-sidebar {items} {value} on:select={(event) => (value = event.detail.value)} />
 `}
 		/>
+
+		<h2>Props and events</h2>
+		<p>
+			Svelte sets a property on a custom element when one with that name exists, so arrays and objects such as{' '}
+			<code>items</code> or <code>options</code> arrive intact. Listen to custom events with <code>on:</code>, and read
+			the payload from <code>event.detail</code>.
+		</p>
+
+		<h2>Types</h2>
+		<p>
+			See <Link href="/setup/typescript">TypeScript</Link> for typing the z elements in a Svelte project.
+		</p>
 	</Article>
 )
 
