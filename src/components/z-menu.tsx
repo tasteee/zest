@@ -51,9 +51,10 @@ const styles = css`
 		position: fixed;
 		box-sizing: border-box;
 		margin: 0;
+		/* physical: shared/overlay.ts positions the panel from measured rects */
 		left: 0;
 		top: 0;
-		right: auto;
+		right: auto; /* physical */
 		bottom: auto;
 		z-index: 50;
 		min-width: 12rem;
