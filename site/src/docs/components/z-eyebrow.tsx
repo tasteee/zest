@@ -5,7 +5,7 @@ export const ZEyebrowDoc = () => (
 	<ComponentDoc
 		tag="z-eyebrow"
 		category="Foundations"
-		description="An uppercase, letter-spaced kicker for introducing a page or section. It can take its label from content or from a label property, with an optional trailing rule."
+		description="An uppercase, letter-spaced kicker for introducing a page or section. It can take its label from content or from a label attribute, with an optional trailing rule."
 	>
 		<DocExample
 			demo="z-eyebrow/introduce-a-section"

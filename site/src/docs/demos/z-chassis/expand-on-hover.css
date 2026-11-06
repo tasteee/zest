@@ -70,7 +70,7 @@
   color: var(--muted-foreground);
 }
 
-.chassis-row span {
+.chassis-row .chassis-label {
   font-size: var(--font-size-small);
   opacity: var(--chassis-label-opacity, 1);
   transition: opacity var(--motion-fast) var(--ease-enter);

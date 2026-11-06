@@ -15,7 +15,7 @@ export const ZButtonDoc = () => (
 		<DocExample
 			demo="z-button/choose-kind-before-color"
 			title="Choose kind before color"
-			description="Kind communicates priority; tone communicates meaning or brand emphasis."
+			description="Kind communicates priority; tone communicates meaning or brand emphasis. Each row is one tone across every kind."
 		/>
 		<DocExample
 			demo="z-button/represent-pending-work-honestly"

@@ -595,7 +595,7 @@
 		"props": {
 			"items": {
 				"default": "[]",
-				"description": "The trail, in order from root to current page. Set it as a property.",
+				"description": "The trail, in order from root to current page. Set it from JavaScript.",
 				"type": "{ label: string; href?: string }[]",
 				"example": "breadcrumbs.items = [\n  { label: 'Docs', href: '/docs' },\n  { label: 'Components', href: '/docs/components' },\n  { label: 'z-button' }\n]"
 			},
@@ -1047,7 +1047,7 @@
 		"summary": "A syntax-highlighted code surface with an optional header and a copy button.",
 		"props": {
 			"code": {
-				"description": "The source (set as a property to preserve whitespace)."
+				"description": "The source (set from JavaScript to preserve whitespace)."
 			},
 			"language": {
 				"default": "auto",
@@ -1075,7 +1075,7 @@
 				"default": "false"
 			},
 			"files": {
-				"description": "Files to show as tabs: [{ name, code, language? }]. Set it as a property."
+				"description": "Files to show as tabs: [{ name, code, language? }]. Set it from JavaScript."
 			},
 			"is-flush": {
 				"description": "Removes the border, radius and background so the block sits flush in its container.",
@@ -1189,7 +1189,7 @@
 			},
 			"presets": {
 				"default": "zest palette",
-				"description": "Swatches in the quick-pick row. Set it as a property.",
+				"description": "Swatches in the quick-pick row. Set it from JavaScript.",
 				"type": "string[]",
 				"example": "picker.presets = ['#FAFAFA', '#BF40BF', '#FF1493']"
 			},
@@ -1311,7 +1311,7 @@
 			},
 			"options": {
 				"default": "[]",
-				"description": "The list to filter and choose from. Set it as a property.",
+				"description": "The list to filter and choose from. Set it from JavaScript.",
 				"type": "{ value: string; label: string }[]",
 				"example": "combobox.options = [\n  { value: 'ts', label: 'TypeScript' },\n  { value: 'rs', label: 'Rust' }\n]"
 			},
@@ -1400,7 +1400,7 @@
 			},
 			"items": {
 				"default": "[]",
-				"description": "Commands to search and run. Set it as a property.",
+				"description": "Commands to search and run. Set it from JavaScript.",
 				"type": "{ value?: string; label: string; group?: string; shortcut?: string; keywords?: string[]; isDisabled?: boolean }[]",
 				"example": "command.items = [\n  { value: 'new', label: 'New file', group: 'File', shortcut: '⌘N' },\n  { value: 'open', label: 'Open…', group: 'File', keywords: ['load'] }\n]"
 			},
@@ -1538,7 +1538,7 @@
 		"props": {
 			"items": {
 				"default": "[]",
-				"description": "Rows of the menu. Set it as a property.",
+				"description": "Rows of the menu. Set it from JavaScript.",
 				"type": "{ value?: string; label?: string; shortcut?: string; isDisabled?: boolean; isSeparator?: boolean; isDanger?: boolean }[]",
 				"example": "menu.items = [\n  { value: 'copy', label: 'Copy', shortcut: '⌘C' },\n  { isSeparator: true },\n  { value: 'delete', label: 'Delete', isDanger: true }\n]"
 			},
@@ -1715,10 +1715,10 @@
 				"description": "Control the maximum scale and pointer reach. Magnification is capped at 1.12, then constrained by the space between items."
 			},
 			"item-size": {
-				"description": "CSS-size properties for adapting the dock to the surrounding interface. With no gap, items remain at their base size."
+				"description": "CSS-size attributes for adapting the dock to the surrounding interface. With no gap, items remain at their base size."
 			},
 			"gap": {
-				"description": "CSS-size properties for adapting the dock to the surrounding interface. With no gap, items remain at their base size."
+				"description": "CSS-size attributes for adapting the dock to the surrounding interface. With no gap, items remain at their base size."
 			},
 			"is-floating": {
 				"description": "Fixes the dock at the viewport bottom center. Check small screens and safe areas before using it."
@@ -1792,7 +1792,7 @@
 				"default": "empty"
 			},
 			"data": {
-				"description": "Payload delivered to the drop target. Set it as a property.",
+				"description": "Payload delivered to the drop target. Set it from JavaScript.",
 				"type": "unknown",
 				"default": "none",
 				"example": "draggable.data = { id: 'card-42' }"
@@ -1954,7 +1954,7 @@
 				"min": "1"
 			},
 			"files": {
-				"description": "Files currently held by the zone. Set it as a property.",
+				"description": "Files currently held by the zone. Set it from JavaScript.",
 				"type": "File[]",
 				"default": "[]"
 			}
@@ -2115,7 +2115,7 @@
 		"summary": "A pill-based control for picking from a set of options.",
 		"props": {
 			"options": {
-				"description": "Pills to choose from. Nest `children` for drill-down. Set it as a property.",
+				"description": "Pills to choose from. Nest `children` for drill-down. Set it from JavaScript.",
 				"type": "{ value: string; label: string; isDisabled?: boolean; children?: unknown[] }[]",
 				"default": "[]",
 				"example": "filter.options = [\n  { value: 'all', label: 'All' },\n  {\n    value: 'type',\n    label: 'Type',\n    children: [{ value: 'image', label: 'Image' }]\n  }\n]"
@@ -2879,7 +2879,7 @@
 		"props": {
 			"items": {
 				"default": "[]",
-				"description": "Rows of the menu. Set it as a property.",
+				"description": "Rows of the menu. Set it from JavaScript.",
 				"type": "{ value?: string; label?: string; shortcut?: string; isDisabled?: boolean; isSeparator?: boolean; isDanger?: boolean }[]",
 				"example": "menu.items = [\n  { value: 'rename', label: 'Rename', shortcut: 'F2' },\n  { isSeparator: true },\n  { value: 'delete', label: 'Delete', isDanger: true }\n]"
 			},
@@ -2996,7 +2996,7 @@
 		"props": {
 			"items": {
 				"default": "[]",
-				"description": "Entries of the menu. Set it as a property.",
+				"description": "Entries of the menu. Set it from JavaScript.",
 				"type": "{ value?: string; label: string; href?: string; items?: unknown[] }[]"
 			},
 			"value": {
@@ -3050,10 +3050,10 @@
 				"default": "none"
 			},
 			"min": {
-				"description": "Numeric properties and reflected attributes. Use a positive step; decimals such as 0.25 are supported."
+				"description": "Numeric attributes. Use a positive step; decimals such as 0.25 are supported."
 			},
 			"max": {
-				"description": "Numeric properties and reflected attributes. Use a positive step; decimals such as 0.25 are supported."
+				"description": "Numeric attributes. Use a positive step; decimals such as 0.25 are supported."
 			},
 			"step": {
 				"default": "1",
@@ -3811,7 +3811,7 @@
 			},
 			"options": {
 				"default": "[]",
-				"description": "The options to choose from. Set it as a property.",
+				"description": "The options to choose from. Set it from JavaScript.",
 				"type": "{ value: string; label: string; isDisabled?: boolean }[]",
 				"example": "select.options = [\n  { value: 'free', label: 'Free' },\n  { value: 'pro', label: 'Pro' }\n]"
 			},
@@ -4005,7 +4005,7 @@
 		"props": {
 			"items": {
 				"default": "[]",
-				"description": "Groups of navigation entries. Set it as a property.",
+				"description": "Groups of navigation entries. Set it from JavaScript.",
 				"type": "{ label: string; items: { value: string; label: string }[] }[]",
 				"example": "sidebar.items = [\n  {\n    label: 'Guides',\n    items: [{ value: 'intro', label: 'Introduction' }]\n  }\n]"
 			},
@@ -4632,17 +4632,17 @@
 		"accessibility": "One tab in a tab list. The tab list gives it role=\"tab\" and manages selection."
 	},
 	"z-table": {
-		"summary": "A data table driven by columns and rows properties.",
+		"summary": "A data table driven by columns and rows attributes.",
 		"props": {
 			"columns": {
 				"default": "[]",
-				"description": "Column definitions. `align` is `start`, `center`, or `end`. Set it as a property.",
+				"description": "Column definitions. `align` is `start`, `center`, or `end`. Set it from JavaScript.",
 				"type": "{ key: string; label: string; align?: string; isMono?: boolean }[]",
 				"example": "table.columns = [\n  { key: 'name', label: 'Name' },\n  { key: 'size', label: 'Size', align: 'end', isMono: true }\n]"
 			},
 			"rows": {
 				"default": "[]",
-				"description": "Row objects keyed by column `key`. Add an optional `id` for stable keys. Set it as a property.",
+				"description": "Row objects keyed by column `key`. Add an optional `id` for stable keys. Set it from JavaScript.",
 				"type": "Record<string, unknown>[]",
 				"example": "table.rows = [\n  { id: 1, name: 'index.html', size: '2 KB' }\n]"
 			},
@@ -4688,7 +4688,7 @@
 			},
 			"tabs": {
 				"default": "[]",
-				"description": "The tabs. Set it as a property.",
+				"description": "The tabs. Set it from JavaScript.",
 				"type": "{ value: string; label: string; isDisabled?: boolean }[]",
 				"example": "tabs.tabs = [\n  { value: 'overview', label: 'Overview' },\n  { value: 'activity', label: 'Activity' }\n]"
 			},
@@ -4926,7 +4926,7 @@
 				]
 			},
 			"themes": {
-				"description": "Which choices to offer and in what order, from light, dark and system. Set it as a property."
+				"description": "Which choices to offer and in what order, from light, dark and system. Set it from JavaScript."
 			},
 			"is-icon-only": {
 				"description": "Hides the text labels and shows only icons.",
@@ -5387,7 +5387,7 @@
 				"default": "false"
 			},
 			"items": {
-				"description": "Nodes of the tree. Children nest under `children`. Set it as a property.",
+				"description": "Nodes of the tree. Children nest under `children`. Set it from JavaScript.",
 				"type": "TreeNode[]",
 				"default": "[]",
 				"example": "tree.items = [\n  {\n    id: 'src',\n    label: 'src',\n    children: [{ id: 'main', label: 'main.ts' }]\n  }\n]"
@@ -5402,12 +5402,12 @@
 				"default": "single"
 			},
 			"selected": {
-				"description": "Ids of the selected nodes. Set it as a property.",
+				"description": "Ids of the selected nodes. Set it from JavaScript.",
 				"type": "string[]",
 				"default": "[]"
 			},
 			"expanded": {
-				"description": "Ids of the expanded nodes. Set it as a property.",
+				"description": "Ids of the expanded nodes. Set it from JavaScript.",
 				"type": "string[]",
 				"default": "[]"
 			},

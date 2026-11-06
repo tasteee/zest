@@ -152,7 +152,7 @@ const PropItems = (props: { attributes: ManifestAttributeT[]; notes: Record<stri
 				const note = props.notes[attributeName] ?? {}
 				const propertyName = attribute.fieldName ?? attributeName
 				const hasAlias = propertyName !== attributeName
-				const alias = hasAlias ? `property: ${propertyName}` : undefined
+				const alias = hasAlias ? `js: ${propertyName}` : undefined
 				const meta = buildPropMeta(attribute, note)
 
 				return (
@@ -321,7 +321,7 @@ export const ApiReference = (props: { tag: string; heading?: string }) => {
 				{headingText}
 			</z-heading>
 			{hasAttributes && (
-				<ApiGroup title="Properties" count={attributes.length}>
+				<ApiGroup title="Attributes" count={attributes.length}>
 					<PropItems attributes={attributes} notes={tagNotes.props ?? {}} />
 				</ApiGroup>
 			)}

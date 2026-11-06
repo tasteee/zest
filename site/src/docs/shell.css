@@ -369,7 +369,7 @@
 	letter-spacing: -0.04em !important;
 }
 
-.DocsLede {
+.DocsArticle .DocsLede {
 	margin: 1rem 0 0;
 	max-width: 60ch;
 	font-size: 1.125rem;
@@ -651,4 +651,10 @@
 	.DocsPagerLink.is-next {
 		grid-column: 1;
 	}
+}
+
+/* header of a System page, matches the article header above */
+.DocsHero {
+	padding-bottom: 2rem;
+	border-bottom: 1px solid var(--border);
 }

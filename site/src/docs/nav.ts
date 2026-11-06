@@ -2,7 +2,7 @@ import type { ComponentType } from 'react'
 import { ELEMENT_DOCS } from '@app/docs/components/manifest'
 import { Introduction } from '@app/docs/setup/Introduction'
 import { Installation } from '@app/docs/setup/Installation'
-import { UsageHtml, UsageReact, UsageSvelte } from '@app/docs/setup/Usage'
+import { UsageHtml, UsageReact, UsageSolid, UsageSvelte, UsageVue } from '@app/docs/setup/Usage'
 import { Theming } from '@app/docs/setup/Theming'
 import { TypeScriptSetup } from '@app/docs/setup/TypeScriptSetup'
 import { Rules } from '@app/docs/design-system/Rules'
@@ -21,7 +21,7 @@ import { BLOCKS } from '@app/docs/blocks/blocks'
  *
  *   Setup     get Zest running in a project
  *   System    the design language underneath: tokens, rules, motion
- *   Elements  every z element, one page each
+ *   Elements  every z element: demos, code, API
  *   Blocks    recipes composing elements into real interfaces
  */
 
@@ -77,7 +77,9 @@ const SETUP: SectionT = {
 			items: [
 				{ slug: 'html', label: 'Plain HTML', Component: UsageHtml, keywords: 'attributes properties events' },
 				{ slug: 'react', label: 'React', Component: UsageReact, keywords: 'jsx props' },
-				{ slug: 'svelte', label: 'Svelte', Component: UsageSvelte }
+				{ slug: 'svelte', label: 'Svelte', Component: UsageSvelte },
+				{ slug: 'vue', label: 'Vue', Component: UsageVue, keywords: 'vue3 custom elements iscustomelement' },
+				{ slug: 'solid', label: 'Solid', Component: UsageSolid, keywords: 'solidjs attr prop' }
 			]
 		},
 		{
@@ -119,7 +121,7 @@ const SYSTEM: SectionT = {
 const ELEMENTS: SectionT = {
 	id: 'elements',
 	label: 'Elements',
-	blurb: 'Every z element, one page each: live demos, code, and the full API.',
+	blurb: 'Every z element, with live demos, code, and attributes.',
 	overviewLabel: 'All elements',
 	nav: [
 		{

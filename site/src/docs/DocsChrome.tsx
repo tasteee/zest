@@ -10,22 +10,16 @@ import type { ReactNode } from 'react'
 
 type Tone = 'primary' | 'secondary'
 
-// Hero: mono eyebrow + fluid display title + optional lede, closed by a rule.
-// `children` slots extra content into the hero (e.g. a section subnav).
+// Hero: the same header every docs page uses (eyebrow with rule, h1, lede),
+// so System pages match Setup, Elements, and Blocks.
+// `children` slots extra content under the lede (e.g. a section subnav).
 export const DocsHero = (props: { eyebrow: string; title: string; lede?: ReactNode; children?: ReactNode }) => (
-	<>
-		<z-column gap="lg" insetY="3xl">
-			<z-eyebrow hasRule>{props.eyebrow}</z-eyebrow>
-			<z-display>{props.title}</z-display>
-			{props.lede && (
-				<z-text size="xl" weight={500} style={{ maxWidth: '46ch' }}>
-					{props.lede}
-				</z-text>
-			)}
-			{props.children}
-		</z-column>
-		<z-line />
-	</>
+	<header className="DocsArticle DocsHero">
+		<z-eyebrow hasRule>{props.eyebrow}</z-eyebrow>
+		<h1>{props.title}</h1>
+		{props.lede && <p className="DocsLede">{props.lede}</p>}
+		{props.children}
+	</header>
 )
 
 // Section header: accent status dot (z-badge dot mode) + heading, with an

@@ -5,7 +5,7 @@ export const ZRangeDoc = () => (
 	<ComponentDoc
 		tag="z-range"
 		category="Forms"
-		description="One track with two handles, set through the value and handles array properties. Handles never cross, making it suited to filters and bounded intervals."
+		description="One track with two handles, set through the value and handles array attributes. Handles never cross, making it suited to filters and bounded intervals."
 	>
 		<DocExample
 			demo="z-range/set-a-price-interval"

@@ -10,7 +10,7 @@ export const ZNumberInputDoc = () => (
 		<DocExample
 			demo="z-number-input/use-bounds-and-a-decimal"
 			title="Use bounds and a decimal step"
-			description="step, min, and max are numeric properties. Decimal steps work naturally; typed values stay editable and clamp only when the field loses focus."
+			description="step, min, and max are numeric attributes. Decimal steps work naturally; typed values stay editable and clamp only when the field loses focus."
 		/>
 		<DocExample
 			demo="z-number-input/use-the-compact-size-beside"

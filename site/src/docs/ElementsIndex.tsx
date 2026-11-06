@@ -15,10 +15,9 @@ export const ElementsIndex = () => {
 	return (
 		<div className="DocsArticle">
 			<z-eyebrow hasRule>Elements</z-eyebrow>
-			<h1>Every element, one page each.</h1>
+			<h1>Elements</h1>
 			<p className="DocsLede">
-				{total} web components that work in plain HTML, React, Svelte, or anywhere else. Each page pairs live demos with the
-				exact code running them, followed by the full API.
+				{total} elements, grouped by what they do. Pick one to see it running, copy the code, and check its attributes.
 			</p>
 
 			<div className="DocsIndexGrid">

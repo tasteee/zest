@@ -37,7 +37,7 @@ export const Introduction = () => (
 
 		<h2>Principles in one breath</h2>
 		<p>
-			Beautiful defaults, simple common cases, composition over special-purpose props. Data goes in properties, content goes
+			Beautiful defaults, simple common cases, composition over special-purpose props. Data goes in attributes, content goes
 			in slots (or declarative child elements), and styling goes through tokens. Motion follows one shared scale, and every
 			exit is as considered as its entrance.
 		</p>
