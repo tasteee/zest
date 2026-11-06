@@ -54,7 +54,7 @@
 		"./package.json": "./package.json"
 	},
 	"files": [
-		"dist",
+		"dist/**",
 		"custom-elements.json",
 		"README.md",
 		"CHANGELOG.md",
