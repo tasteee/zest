@@ -316,6 +316,8 @@
   --control-disabled-opacity: 0.5;
   --focus-ring: var(--color-neutral-7);
   --on-accent: var(--color-neutral-0);
+  --on-tone-lightness: 0.2;
+  --on-tone-chroma: 0.5;
   --control-height-sm: 2rem;
   --control-height-md: 2.5rem;
   --control-height-lg: 3rem;
@@ -552,6 +554,8 @@
   --material-raised: none;
   --material-tone: none;
   --on-accent: #fff;
+  --on-tone-lightness: 1;
+  --on-tone-chroma: 0;
 
   --elevation-flush: 0 0 transparent;
   --elevation-raised: 0 0 transparent;
@@ -794,6 +798,8 @@ html.isThemeFading body {
 
 [data-theme="light"] {
   --on-accent: #fff;
+  --on-tone-lightness: 1;
+  --on-tone-chroma: 0;
   color-scheme: light;
 }
 
