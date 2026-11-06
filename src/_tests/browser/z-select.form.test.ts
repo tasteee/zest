@@ -44,3 +44,31 @@ describe('<z-select> in a form', () => {
 		expect(innerOf<HTMLButtonElement>(host, 'button.trigger').getAttribute('aria-required')).toBe('true')
 	})
 })
+
+describe('<z-select> nested options', () => {
+	const nested = [
+		{ value: 'fruit', label: 'Fruit', children: [{ value: 'apple', label: 'Apple' }, { value: 'lemon', label: 'Lemon' }] },
+		{ value: 'water', label: 'Water' }
+	]
+
+	it('opens a submenu beside its branch and submits the chosen leaf', async () => {
+		const form = await mountForm('<z-select name="food"></z-select>')
+		const host = form.querySelector<SelectHostT>('z-select')!
+		host.options = nested
+		await settle(form)
+
+		innerOf<HTMLButtonElement>(host, 'button.trigger').click()
+		await settle(form)
+		const branch = host.shadowRoot!.querySelector<HTMLElement>('#option-0')!
+		branch.dispatchEvent(new MouseEvent('mouseenter'))
+		await settle(form)
+
+		const submenu = host.shadowRoot!.querySelector<HTMLElement>('.submenu')!
+		expect(submenu.matches(':popover-open')).toBe(true)
+		expect(submenu.getBoundingClientRect().left).toBeGreaterThanOrEqual(branch.getBoundingClientRect().right - 1)
+
+		host.shadowRoot!.querySelector<HTMLElement>('#option-0-1')!.click()
+		await settle(form)
+		expect(entriesOf(form)).toEqual([['food', 'lemon']])
+	})
+})

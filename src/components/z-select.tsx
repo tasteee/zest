@@ -6,14 +6,21 @@ import { themedScrollbarStyles } from '../shared/scrollbar-styles'
 import { computePosition, autoUpdate, applyPosition, showFloating, hideFloating } from '../shared/overlay'
 import { oneOf } from '../shared/prop-types'
 import { useLocale } from '../shared/locale'
+import { enabledIndicesOf, findPath, hasChildren, nodeAt, siblingsOf, valuesAlong } from '../shared/nested-options'
+import type { NestedOptionT } from '../shared/nested-options'
 
 /*
  * z-select, a custom dropdown. Trigger shows the selected label (or a
  * placeholder); the panel is a bordered, shadow-free popover that drops below.
  * Options are supplied as an `options` array property:
- *   el.options = [{ value, label, isDisabled? }]
- * Selection highlights with an accent tint. Keyboard: ↑/↓ move, Enter picks,
- * Esc closes. Clicking outside closes.
+ *   el.options = [{ value, label, isDisabled?, children? }]
+ * An option with `children` is a branch: it opens a cascading submenu and is
+ * never itself selectable. Only leaves are picked, `value` stays a single
+ * (tree-unique) string, and `change` also reports `path`, the values from the
+ * root down to the leaf.
+ * Selection highlights with an accent tint. Keyboard: ↑/↓ move within a level,
+ * →/Enter open a branch (← in RTL), ←/Esc close a submenu (→ in RTL), Enter
+ * picks a leaf, Esc at the top level closes. Clicking outside closes.
  */
 const styles = css`
 	:host {
@@ -173,9 +180,33 @@ const styles = css`
 		color: var(--accent);
 	}
 
-	.option.is-selected {
+	.option.is-selected,
+	.option.is-ancestor {
 		color: var(--accent);
 		font-weight: 600;
+	}
+
+	.levels {
+		display: contents;
+	}
+
+	.panel.submenu {
+		min-width: 10rem;
+	}
+
+	.branch-chevron {
+		width: 0.875rem;
+		height: 0.875rem;
+		flex-shrink: 0;
+		stroke: currentColor;
+		stroke-width: 2.5;
+		stroke-linecap: round;
+		stroke-linejoin: round;
+		fill: none;
+	}
+
+	:host(:dir(rtl)) .branch-chevron {
+		transform: scaleX(-1);
 	}
 
 	.option.is-disabled {
@@ -207,7 +238,7 @@ const resolveSizeClass = (props: any): string => {
 	return 'is-md'
 }
 
-type OptionT = { value: string; label: string; isDisabled?: boolean }
+type OptionT = NestedOptionT
 
 export const ZSelect = c(
 	(props) => {
@@ -219,10 +250,15 @@ export const ZSelect = c(
 		const [value, setValue] = useProp<string>('value')
 		const defaultValue = useRef(value)
 		const [isOpen, setIsOpen] = useState(false)
-		const [activeIndex, setActiveIndex] = useState(-1)
+		// Index path to the highlighted option, one entry per open level. A
+		// branch's submenu is open when the path continues past it, or when
+		// `isSubOpen` says the branch itself was just opened (hover/click/→).
+		const [activePath, setActivePath] = useState<number[]>([])
+		const [isSubOpen, setIsSubOpen] = useState(false)
 
 		const options: OptionT[] = Array.isArray(props.options) ? (props.options as OptionT[]) : []
-		const selected = options.find((o) => o.value === value)
+		const selectedPath = findPath(options, value)
+		const selected = selectedPath ? nodeAt(options, selectedPath) : undefined
 		const hasValue = value != null && value !== ''
 		// The trigger is a <button>, which has no validity of its own, so
 		// `required` is decided here and anchored to it for the browser's bubble.
@@ -266,22 +302,55 @@ export const ZSelect = c(
 			}
 		}, [isOpen])
 
-		const enabledIndices = options.flatMap((option, index) => option.isDisabled ? [] : [index])
+		const rootEnabled = enabledIndicesOf(options)
+		const activeNode = nodeAt(options, activePath)
+		const activeId = activePath.length ? `option-${activePath.join('-')}` : undefined
+		const isRtl = () => getComputedStyle(host.current).direction === 'rtl'
+
+		// The panels on screen, outermost first: the roots, then the children of
+		// each branch along the active path whose submenu is open.
+		const levels: Array<{ nodes: OptionT[]; parentPath: number[] }> = [{ nodes: options, parentPath: [] }]
+		if (isOpen) {
+			let nodes = options
+			for (let depth = 0; depth < activePath.length; depth++) {
+				const node = nodes[activePath[depth]]
+				if (!hasChildren(node)) break
+				if (depth === activePath.length - 1 && !isSubOpen) break
+				nodes = node.children as OptionT[]
+				levels.push({ nodes, parentPath: activePath.slice(0, depth + 1) })
+			}
+		}
+		const levelKey = levels.map((level) => level.parentPath.join('-')).join('|')
+
 		const open = (fromEnd = false) => {
 			if (isDisabled) return
-			const selectedIndex = options.findIndex((option) => option.value === value && !option.isDisabled)
-			setActiveIndex(selectedIndex >= 0 ? selectedIndex : (fromEnd ? enabledIndices.at(-1) : enabledIndices[0]) ?? -1)
+			const path = selectedPath && !nodeAt(options, selectedPath)?.isDisabled ? selectedPath : undefined
+			setActivePath(path ?? [(fromEnd ? rootEnabled.at(-1) : rootEnabled[0]) ?? -1])
+			setIsSubOpen(false)
 			setIsOpen(true)
 		}
-		const commit = (opt: OptionT) => {
-			if (isDisabled || opt.isDisabled) return
+		const commit = (opt: OptionT, path: number[]) => {
+			if (isDisabled || opt.isDisabled || hasChildren(opt)) return
 			setIsOpen(false)
 			if (opt.value !== value) {
 				setValue(opt.value)
-				props.change({ value: opt.value })
+				props.change({ value: opt.value, path: valuesAlong(options, path) })
 			}
 			host.current.shadowRoot?.querySelector<HTMLButtonElement>('.trigger')?.focus()
 		}
+		// Open the highlighted branch, landing on its first enabled child.
+		const enterBranch = (path: number[]) => {
+			const node = nodeAt(options, path)
+			if (!node || node.isDisabled || !hasChildren(node)) return
+			const first = enabledIndicesOf(node.children as OptionT[])[0]
+			setActivePath(first === undefined ? path : [...path, first])
+			setIsSubOpen(true)
+		}
+		const leaveBranch = () => {
+			setActivePath(activePath.slice(0, -1))
+			setIsSubOpen(false)
+		}
+		const activate = (opt: OptionT, path: number[]) => hasChildren(opt) ? enterBranch(path) : commit(opt, path)
 
 		useEffect(() => {
 			if (isDisabled) setIsOpen(false)
@@ -289,35 +358,71 @@ export const ZSelect = c(
 
 		useEffect(() => {
 			if (!isOpen) return
-			if (!options[activeIndex] || options[activeIndex].isDisabled) {
-				setActiveIndex(enabledIndices[0] ?? -1)
+			if (!activeNode || activeNode.isDisabled) {
+				setActivePath([rootEnabled[0] ?? -1])
 				return
 			}
-			panelRef.current?.querySelector<HTMLElement>(`#option-${activeIndex}`)?.scrollIntoView({ block: 'nearest' })
-		}, [isOpen, activeIndex, props.options])
+			host.current.shadowRoot?.querySelector<HTMLElement>(`#option-${activePath.join('-')}`)?.scrollIntoView({ block: 'nearest' })
+		}, [isOpen, activePath.join('-'), props.options])
+
+		// Submenus are their own top-layer panels, each anchored to its parent row.
+		// They leave the top layer when they leave the DOM, so only the autoUpdate
+		// subscriptions need tearing down here.
+		useEffect(() => {
+			if (!isOpen) return
+			const root = host.current.shadowRoot
+			const cleanups: Array<() => void> = []
+			root?.querySelectorAll<HTMLElement>('.submenu').forEach((panel) => {
+				const anchor = root.querySelector<HTMLElement>(`#${panel.dataset.parent}`)
+				if (!anchor) return
+				if (!panel.matches(':popover-open')) showFloating(panel)
+				const placement = isRtl() ? 'left-start' : 'right-start'
+				cleanups.push(autoUpdate(anchor, panel, () => applyPosition(panel, computePosition(anchor, panel, { placement, offset: 2, padding: 8 }))))
+			})
+			return () => cleanups.forEach((cleanup) => cleanup())
+		}, [isOpen, levelKey])
 
 		const search = useRef({ text: '', time: 0 })
 		const onKeyDown = (e: KeyboardEvent) => {
 			if (isDisabled) return
-			if (e.key === 'Tab' || e.key === 'Escape') {
-				if (e.key === 'Escape' && isOpen) { e.preventDefault(); e.stopPropagation() }
+			if (e.key === 'Tab') {
 				setIsOpen(false)
+				return
+			}
+			if (e.key === 'Escape') {
+				if (!isOpen) return
+				e.preventDefault()
+				e.stopPropagation()
+				// Esc backs out one submenu at a time before it closes the select.
+				if (activePath.length > 1) leaveBranch()
+				else setIsOpen(false)
 				return
 			}
 			if (e.key === 'Enter' || e.key === ' ') {
 				e.preventDefault()
 				if (!isOpen) open()
-				else if (activeIndex >= 0 && options[activeIndex]) commit(options[activeIndex])
+				else if (activeNode) activate(activeNode, activePath)
+				return
+			}
+			if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+				if (!isOpen) return
+				e.preventDefault()
+				const opensBranch = (e.key === 'ArrowRight') !== isRtl()
+				if (opensBranch) enterBranch(activePath)
+				else if (activePath.length > 1) leaveBranch()
 				return
 			}
 			if (['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(e.key)) {
 				e.preventDefault()
 				if (!isOpen) { open(e.key === 'ArrowUp' || e.key === 'End'); return }
-				const position = enabledIndices.indexOf(activeIndex)
-				const next = e.key === 'Home' ? enabledIndices[0]
-					: e.key === 'End' ? enabledIndices.at(-1)
-					: enabledIndices[(position + (e.key === 'ArrowDown' ? 1 : -1) + enabledIndices.length) % enabledIndices.length]
-				setActiveIndex(next ?? -1)
+				const enabled = enabledIndicesOf(siblingsOf(options, activePath))
+				const current = activePath.at(-1) as number
+				const position = enabled.indexOf(current)
+				const next = e.key === 'Home' ? enabled[0]
+					: e.key === 'End' ? enabled.at(-1)
+					: enabled[(position + (e.key === 'ArrowDown' ? 1 : -1) + enabled.length) % enabled.length]
+				setActivePath([...activePath.slice(0, -1), next ?? -1])
+				setIsSubOpen(false)
 				return
 			}
 			if (e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey) {
@@ -326,10 +431,17 @@ export const ZSelect = c(
 				const text = (now - search.current.time < 600 ? search.current.text : '') + e.key.toLowerCase()
 				search.current = { text, time: now }
 				const query = [...text].every((char) => char === text[0]) ? text[0] : text
-				const start = enabledIndices.indexOf(activeIndex)
-				const ordered = [...enabledIndices.slice(start + 1), ...enabledIndices.slice(0, start + 1)]
-				const match = ordered.find((index) => options[index].label.toLowerCase().startsWith(query))
-				if (match !== undefined) { setIsOpen(true); setActiveIndex(match) }
+				// typeahead searches the level the highlight is on
+				const level = isOpen ? siblingsOf(options, activePath) : options
+				const enabled = enabledIndicesOf(level)
+				const start = isOpen ? enabled.indexOf(activePath.at(-1) as number) : -1
+				const ordered = [...enabled.slice(start + 1), ...enabled.slice(0, start + 1)]
+				const match = ordered.find((index) => level[index].label.toLowerCase().startsWith(query))
+				if (match !== undefined) {
+					if (!isOpen) setIsOpen(true)
+					setActivePath([...(isOpen ? activePath.slice(0, -1) : []), match])
+					setIsSubOpen(false)
+				}
 			}
 		}
 
@@ -350,7 +462,7 @@ export const ZSelect = c(
 					aria-required={props.isRequired ? 'true' : undefined}
 					aria-haspopup="listbox"
 					aria-controls="select-options"
-					aria-activedescendant={isOpen && activeIndex >= 0 ? `option-${activeIndex}` : undefined}
+					aria-activedescendant={isOpen && activeNode ? activeId : undefined}
 					aria-label={accessibleName}
 					aria-describedby={describedBy(props.description, props.error)}
 					aria-invalid={props.isInvalid || props.error ? 'true' : undefined}
@@ -366,35 +478,72 @@ export const ZSelect = c(
 					</svg>
 				</button>
 
-				<div ref={panelRef} id="select-options" class="panel" role="listbox" aria-label={props.label || props.placeholder || t('options')} popover="manual">
-					{options.length === 0 && <div class="empty">{t('noOptions')}</div>}
-					{options.map((opt, index) => {
-						const optClass = ['option']
-							.concat(index === activeIndex ? ['is-active'] : [])
-							.concat(opt.value === value ? ['is-selected'] : [])
-							.concat(opt.isDisabled ? ['is-disabled'] : [])
-							.join(' ')
-						return (
-							<div
-								key={opt.value}
-								class={optClass}
-								role="option"
-								id={`option-${index}`}
-								aria-disabled={opt.isDisabled ? 'true' : undefined}
-								aria-selected={opt.value === value ? 'true' : 'false'}
-								onmouseenter={() => !opt.isDisabled && setActiveIndex(index)}
-								onmousedown={(e: MouseEvent) => e.preventDefault()}
-								onclick={() => commit(opt)}
-							>
-								<span>{opt.label}</span>
-								{opt.value === value && (
-									<svg class="tick" viewBox="0 0 24 24">
-										<polyline points="4 12 10 18 20 6" />
-									</svg>
-								)}
-							</div>
-						)
-					})}
+				<div class="levels">
+				{levels.map((level, depth) => {
+					const isRoot = depth === 0
+					const parentNode = isRoot ? undefined : nodeAt(options, level.parentPath)
+					const levelActive = activePath.length > depth ? activePath[depth] : -1
+					return (
+						<div
+							key={`level-${level.parentPath.join('-')}`}
+							ref={isRoot ? panelRef : undefined}
+							id={isRoot ? 'select-options' : `select-options-${level.parentPath.join('-')}`}
+							class={isRoot ? 'panel' : 'panel submenu'}
+							role="listbox"
+							aria-label={isRoot ? props.label || props.placeholder || t('options') : parentNode?.label}
+							data-parent={isRoot ? undefined : `option-${level.parentPath.join('-')}`}
+							popover="manual"
+						>
+							{isRoot && options.length === 0 && <div class="empty">{t('noOptions')}</div>}
+							{level.nodes.map((opt, index) => {
+								const path = [...level.parentPath, index]
+								const isBranch = hasChildren(opt)
+								const isAncestor = isBranch && selectedPath !== undefined && path.every((entry, i) => selectedPath[i] === entry)
+								const optClass = ['option']
+									.concat(index === levelActive ? ['is-active'] : [])
+									.concat(!isBranch && opt.value === value ? ['is-selected'] : [])
+									.concat(isAncestor ? ['is-ancestor'] : [])
+									.concat(opt.isDisabled ? ['is-disabled'] : [])
+									.join(' ')
+								return (
+									<div
+										key={opt.value}
+										class={optClass}
+										role="option"
+										id={`option-${path.join('-')}`}
+										aria-disabled={opt.isDisabled ? 'true' : undefined}
+										aria-selected={!isBranch && opt.value === value ? 'true' : 'false'}
+										aria-haspopup={isBranch ? 'listbox' : undefined}
+										aria-expanded={isBranch ? (levels[depth + 1]?.parentPath.join('-') === path.join('-') ? 'true' : 'false') : undefined}
+										onmouseenter={() => {
+											if (opt.isDisabled) return
+											setActivePath(path)
+											setIsSubOpen(isBranch)
+										}}
+										onmousedown={(e: MouseEvent) => e.preventDefault()}
+										onclick={() => {
+											if (!isBranch) return commit(opt, path)
+											if (opt.isDisabled) return
+											setActivePath(path)
+											setIsSubOpen(true)
+										}}
+									>
+										<span>{opt.label}</span>
+										{isBranch ? (
+											<svg class="branch-chevron" viewBox="0 0 24 24">
+												<polyline points="9 6 15 12 9 18" />
+											</svg>
+										) : opt.value === value && (
+											<svg class="tick" viewBox="0 0 24 24">
+												<polyline points="4 12 10 18 20 6" />
+											</svg>
+										)}
+									</div>
+								)
+							})}
+						</div>
+					)
+				})}
 				</div>
 				{renderDescriptions(props.description, props.error)}
 			</host>
@@ -415,7 +564,7 @@ export const ZSelect = c(
 			isDisabled: { type: Boolean, reflect: true },
 			isInline: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
-			change: event<{ value: string }>({ bubbles: true, composed: true })
+			change: event<{ value: string; path: string[] }>({ bubbles: true, composed: true })
 		},
 		styles: [themedScrollbarStyles, styles, interactionStyles, srOnlyStyles],
 		form: true

@@ -17,5 +17,10 @@ export const ZSelectDoc = () => (
 			title="Handle a committed choice"
 			description="The change event reports the selected value."
 		/>
+		<DocExample
+			demo="z-select/nest-options-as-submenus"
+			title="Nest options as submenus"
+			description="Give an option children to make it a branch that opens a cascading submenu. Only leaves can be selected, value stays a single string, and change also reports the path of values from the root down to the leaf."
+		/>
 	</ComponentDoc>
 )

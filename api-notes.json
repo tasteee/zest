@@ -3811,8 +3811,8 @@
 			},
 			"options": {
 				"default": "[]",
-				"description": "The options to choose from. Set it from JavaScript.",
-				"type": "{ value: string; label: string; isDisabled?: boolean }[]",
+				"description": "The options to choose from. Set it from JavaScript. An option with `children` is a branch that opens a cascading submenu and cannot itself be selected; values must be unique across the whole tree.",
+				"type": "{ value: string; label: string; isDisabled?: boolean; children?: Option[] }[]",
 				"example": "select.options = [\n  { value: 'free', label: 'Free' },\n  { value: 'pro', label: 'Pro' }\n]"
 			},
 			"size": {
@@ -3863,8 +3863,8 @@
 		},
 		"events": {
 			"change": {
-				"description": "Fired when an option is chosen.",
-				"detail": "{ value: string }"
+				"description": "Fired when an option is chosen. `path` lists the option values from the root down to the chosen leaf.",
+				"detail": "{ value: string; path: string[] }"
 			}
 		},
 		"keyboard": [
@@ -3881,8 +3881,12 @@
 				"action": "Open, then commit and return focus to the trigger."
 			},
 			{
+				"keys": "→ / ←",
+				"action": "Open the highlighted branch, or close the current submenu (swapped in right-to-left)."
+			},
+			{
 				"keys": "Esc",
-				"action": "Closes without changing the value."
+				"action": "Closes the current submenu, or the list at the top level, without changing the value."
 			},
 			{
 				"keys": "Tab",
