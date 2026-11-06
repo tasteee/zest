@@ -1,0 +1,23 @@
+<z-grid min-column-width="18rem" gap="4" style="width: min(52rem, 100%)">
+  <z-card gap="4" style="padding: 1.5rem">
+    <z-heading size="xs" tag="h2">Shipping</z-heading>
+    <z-input label="Full name" autocomplete="name"></z-input>
+    <z-input label="Address" autocomplete="street-address"></z-input>
+    <z-row gap="3">
+      <z-input label="City" autocomplete="address-level2" style="flex: 1"></z-input>
+      <z-input label="Postcode" autocomplete="postal-code" style="flex: 1"></z-input>
+    </z-row>
+    <z-radio-group label="Delivery" value="standard">
+      <z-radio value="standard">Standard · $5.00 · 3–5 days</z-radio>
+      <z-radio value="express">Express · $12.00 · next day</z-radio>
+    </z-radio-group>
+  </z-card>
+  <z-card gap="4" style="padding: 1.5rem; align-self: start">
+    <z-heading size="xs" tag="h2">Order summary</z-heading>
+    <z-row aligns-x="between"><z-text size="sm">Canvas tote × 1</z-text><z-text size="sm">$32.00</z-text></z-row>
+    <z-row aligns-x="between"><z-text size="sm">Ceramic mug × 1</z-text><z-text size="sm">$18.00</z-text></z-row>
+    <z-line></z-line>
+    <z-row aligns-x="between"><z-text weight="600">Total</z-text><z-text weight="600">$55.00</z-text></z-row>
+    <z-button tone="primary" is-full-width>Place order</z-button>
+  </z-card>
+</z-grid>

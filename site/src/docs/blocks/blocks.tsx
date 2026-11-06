@@ -298,6 +298,48 @@ export const BLOCKS: BlockGroupT[] = [
 				'Questions in a single-open accordion.',
 				[{ demo: 'blocks/faq', title: 'Accordion FAQ', description: 'type="single" keeps one answer in focus.' }],
 				'faq accordion questions'
+			),
+			block(
+				'footer-basic',
+				'Footer',
+				'A brand blurb, two link columns, and a legal row under a divider.',
+				[{ demo: 'blocks/footer-basic', title: 'Basic footer', description: 'Columns wrap on narrow screens; the divider sets off the legal row.' }],
+				'footer links legal'
+			),
+			block(
+				'footer-mega',
+				'Mega footer',
+				'Four link columns beside a newsletter signup.',
+				[{ demo: 'blocks/footer-mega', title: 'Four columns and signup', description: 'z-grid gives the columns equal width without media queries.' }],
+				'footer mega newsletter links'
+			),
+			block(
+				'logo-strip',
+				'Logo strip',
+				'A slow marquee of customer names under a short lead-in.',
+				[{ demo: 'blocks/logo-strip', title: 'Trusted by', description: 'Swap the headings for logos; has-fade softens the edges.' }],
+				'logos customers social proof marquee'
+			),
+			block(
+				'testimonial-grid',
+				'Testimonials',
+				'Quote cards with an avatar, a name, and a role.',
+				[{ demo: 'blocks/testimonial-grid', title: 'Three quotes', description: 'Each card is a quote above its author.' }],
+				'reviews quotes social proof'
+			),
+			block(
+				'cta',
+				'Call to action',
+				'A closing banner with one line, one sentence, and two actions.',
+				[{ demo: 'blocks/cta', title: 'Closing banner', description: 'Keep one primary action and one quieter alternative.' }],
+				'cta banner conversion'
+			),
+			block(
+				'compare-plans',
+				'Compare plans',
+				'Plans side by side in a table, one row per feature.',
+				[{ demo: 'blocks/compare-plans', title: 'Feature table', description: 'Center-aligned columns make the checkmarks easy to scan.' }],
+				'compare table plans features'
 			)
 		]
 	},
@@ -346,42 +388,42 @@ export const BLOCKS: BlockGroupT[] = [
 		items: [
 			block(
 				'settings-members',
-				'Settings: members',
+				'Members',
 				'A member table under a header with the invite action.',
 				[{ demo: 'blocks/settings-members', title: 'Members table', description: 'The header action sits right and the table fills the card.' }],
 				'settings members team table'
 			),
 			block(
 				'settings-integrations',
-				'Settings: integrations',
+				'Integrations',
 				'Connected apps with an on/off switch per row.',
 				[{ demo: 'blocks/settings-integrations', title: 'Connect and disconnect', description: 'Every row is an avatar, a name with a line of context, and a switch.' }],
 				'settings integrations apps connect'
 			),
 			block(
 				'api-keys',
-				'Settings: API keys',
+				'API keys',
 				'Masked keys with copy and revoke actions.',
 				[{ demo: 'blocks/api-keys', title: 'Key list', description: 'Copy writes the full key to the clipboard and says so.' }],
 				'settings api keys token copy'
 			),
 			block(
 				'billing',
-				'Settings: billing',
+				'Billing',
 				'The current plan, seat usage, and an invoice table.',
 				[{ demo: 'blocks/billing', title: 'Plan and invoices', description: 'The progress bar shows usage without a chart.' }],
 				'settings billing plan invoices'
 			),
 			block(
 				'payment-methods',
-				'Settings: payment methods',
+				'Payment methods',
 				'Saved cards with a default badge and per-row actions.',
 				[{ demo: 'blocks/payment-methods', title: 'Saved cards', description: 'Only the non-default card offers Make default.' }],
 				'settings payment card billing'
 			),
 			block(
 				'invite-user',
-				'Settings: invite user',
+				'Invite user',
 				'An inline invite form: email, role, send.',
 				[{ demo: 'blocks/invite-user', title: 'Inline invite', description: 'The input grows; the select and button keep their size.' }],
 				'settings invite email role'
@@ -400,35 +442,35 @@ export const BLOCKS: BlockGroupT[] = [
 		items: [
 			block(
 				'sidebar-groups',
-				'Sidebar: groups',
+				'Sidebar with groups',
 				'A sidebar with a pinned brand and account and nav items in labelled groups.',
 				[{ demo: 'blocks/sidebar-groups', title: 'Grouped navigation', description: 'Groups come from nesting items; badges ride on the item.' }],
 				'sidebar navigation groups'
 			),
 			block(
 				'sidebar-inset',
-				'Sidebar: inset',
+				'Inset sidebar',
 				'A sidebar beside a content area that sits on its own surface.',
 				[{ demo: 'blocks/sidebar-inset', title: 'Inset content', description: 'The frame owns the border and radius; the sidebar owns selection.' }],
 				'sidebar inset layout'
 			),
 			block(
 				'navbar-simple',
-				'Navbar: simple',
+				'Simple navbar',
 				'Brand, three links, and two actions in a bordered bar.',
 				[{ demo: 'blocks/navbar-simple', title: 'Brand, links, actions', description: 'Plain z-link elements are enough when nothing opens.' }],
 				'navbar header top nav'
 			),
 			block(
 				'navbar-dropdowns',
-				'Navbar: dropdowns',
+				'Navbar with dropdowns',
 				'A navbar whose items open panels with a description under each destination.',
 				[{ demo: 'blocks/navbar-dropdowns', title: 'Menus with descriptions', description: 'z-nav-menu takes the whole tree as one array.' }],
 				'navbar mega menu dropdown nav-menu'
 			),
 			block(
 				'navbar-floating',
-				'Navbar: floating pill',
+				'Floating navbar',
 				'A compact pill that floats centered above the page.',
 				[{ demo: 'blocks/navbar-floating', title: 'Floating pill', description: 'A rounded surface with a border replaces a full-width bar.' }],
 				'navbar floating pill'
@@ -479,6 +521,25 @@ export const BLOCKS: BlockGroupT[] = [
 				'Versions in reverse order, each with a date and a short summary.',
 				[{ demo: 'blocks/changelog', title: 'Release notes', description: 'A line between entries is enough; no timeline needed.' }],
 				'releases versions notes updates'
+			)
+		]
+	},
+	{
+		label: 'Ecommerce',
+		items: [
+			block(
+				'shopping-cart',
+				'Shopping cart',
+				'Line items with a name, a detail, and a price, then totals and a checkout button.',
+				[{ demo: 'blocks/shopping-cart', title: 'Cart summary', description: 'Mono numerals keep prices aligned.' }],
+				'cart ecommerce basket'
+			),
+			block(
+				'checkout',
+				'Checkout',
+				'Shipping fields and delivery choice beside an order summary.',
+				[{ demo: 'blocks/checkout', title: 'Shipping and summary', description: 'The summary stays at the top of its column while the form grows.' }],
+				'checkout ecommerce order'
 			)
 		]
 	}
