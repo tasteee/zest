@@ -224,14 +224,6 @@ export const ZMenu = c(
 		const selectable = (i: number) => items[i] && !items[i].isSeparator && !items[i].isDisabled
 		const selectableIndices = items.flatMap((_, index) => selectable(index) ? [index] : [])
 
-		// Focus follows the active item, so a screen reader announces each
-		// menuitem as the user moves; the trigger gets focus back on close.
-		useEffect(() => {
-			const hasActiveItem = activeIndex >= 0
-			const canFocusItem = isOpen && hasActiveItem
-			if (!canFocusItem) return
-			host.current.shadowRoot?.querySelector<HTMLButtonElement>(`#menu-item-${activeIndex}`)?.focus()
-		}, [isOpen, activeIndex])
 		const triggerElement = () => triggerSlotRef.current?.assignedElements({ flatten: true })[0] as HTMLElement | undefined
 		const focusTrigger = () => triggerElement()?.focus()
 		// aria-haspopup / aria-expanded describe the trigger, which is slotted
@@ -339,6 +331,7 @@ export const ZMenu = c(
 		useEffect(() => {
 			const panel = panelRef.current
 			if (!panel) return
+			if (!panel.isConnected) return
 			if (!panel.matches(':popover-open')) panel.showPopover()
 			const placement = props.align === 'end' ? 'bottom-end' : 'bottom-start'
 			const update = () => {
@@ -348,6 +341,17 @@ export const ZMenu = c(
 			}
 			return autoUpdate(host.current, panel, update)
 		}, [isPanelRendered, props.align])
+
+		// Declared after the popover effect: an item in a panel that is not
+		// yet in the top layer cannot take focus.
+		// Focus follows the active item, so a screen reader announces each
+		// menuitem as the user moves; the trigger gets focus back on close.
+		useEffect(() => {
+			const hasActiveItem = activeIndex >= 0
+			const canFocusItem = isOpen && hasActiveItem
+			if (!canFocusItem) return
+			host.current.shadowRoot?.querySelector<HTMLButtonElement>(`#menu-item-${activeIndex}`)?.focus()
+		}, [isOpen, activeIndex])
 
 		const panelClass = ['panel', isPanelLeaving ? 'is-closing' : '', isCommitting ? 'is-committing' : ''].join(' ')
 
