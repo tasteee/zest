@@ -3175,19 +3175,60 @@
 			"name": {
 				"description": "Form field name. Both values submit under it; `FormData.getAll(name)` gives `[lower, upper]`."
 			},
-			"lowerPlaceholder": {
-				"description": "Hint text for the empty lower field."
-			},
-			"upperPlaceholder": {
-				"description": "Hint text for the empty upper field."
-			},
 			"size": {
 				"default": "md",
 				"description": "Matches the size of `z-number-input`.",
-				"values": ["sm", "md", "lg"]
+				"values": [
+					"sm",
+					"md",
+					"lg"
+				]
 			},
-			"hasStepperButtons": {
+			"lower-placeholder": {
+				"description": "Hint text for the empty lower field."
+			},
+			"upper-placeholder": {
+				"description": "Hint text for the empty upper field."
+			},
+			"has-stepper-buttons": {
 				"description": "Shows ghost −/+ buttons on both fields."
+			},
+			"tone": {
+				"description": "Accent color of the focus ring.",
+				"values": [
+					"primary",
+					"secondary"
+				],
+				"default": "primary"
+			},
+			"is-invalid": {
+				"description": "Shows the error state.",
+				"default": "false"
+			},
+			"is-disabled": {
+				"description": "Blocks interaction, dims the element, and removes it from the keyboard focus order.",
+				"default": "false"
+			},
+			"is-readonly": {
+				"description": "Shows the value but blocks editing.",
+				"default": "false"
+			},
+			"is-required": {
+				"description": "Marks the field as required for form validation.",
+				"default": "false"
+			},
+			"is-full-width": {
+				"description": "Stretches the normally compact numeric field to its container width."
+			},
+			"is-hidden": {
+				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
+				"default": "false"
+			},
+			"description": {
+				"description": "Helper text shown under the control and linked to it for screen readers."
+			},
+			"error": {
+				"description": "Error message shown under the control. Setting it marks the control invalid."
 			}
 		},
 		"events": {

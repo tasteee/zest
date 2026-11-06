@@ -7982,6 +7982,339 @@
         {
           "kind": "class",
           "customElement": true,
+          "tagName": "z-number-range-input",
+          "name": "ZNumberRangeInput",
+          "description": "Two number fields for a lower and upper bound.",
+          "members": [
+            {
+              "kind": "field",
+              "name": "description",
+              "type": {
+                "text": "string"
+              },
+              "description": "Helper text shown under the control and linked to it for screen readers."
+            },
+            {
+              "kind": "field",
+              "name": "error",
+              "type": {
+                "text": "string"
+              },
+              "description": "Error message shown under the control. Setting it marks the control invalid."
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "array"
+              },
+              "description": "`[lower, upper]` pair. An empty side is `null`. Set from JavaScript."
+            },
+            {
+              "kind": "field",
+              "name": "min",
+              "type": {
+                "text": "number"
+              },
+              "description": "Smallest value either field accepts."
+            },
+            {
+              "kind": "field",
+              "name": "max",
+              "type": {
+                "text": "number"
+              },
+              "description": "Largest value either field accepts."
+            },
+            {
+              "kind": "field",
+              "name": "step",
+              "type": {
+                "text": "number"
+              },
+              "description": "Positive increment shared by both fields."
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "description": "Accessible name for the group. Prefer `z-field` for a visible label."
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "description": "Form field name. Both values submit under it; `FormData.getAll(name)` gives `[lower, upper]`."
+            },
+            {
+              "kind": "field",
+              "name": "lowerPlaceholder",
+              "type": {
+                "text": "string"
+              },
+              "description": "Hint text for the empty lower field."
+            },
+            {
+              "kind": "field",
+              "name": "upperPlaceholder",
+              "type": {
+                "text": "string"
+              },
+              "description": "Hint text for the empty upper field."
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "'sm' | 'md' | 'lg'"
+              },
+              "description": "Matches the size of `z-number-input`."
+            },
+            {
+              "kind": "field",
+              "name": "tone",
+              "type": {
+                "text": "'primary' | 'secondary'"
+              },
+              "description": "Accent color of the focus ring."
+            },
+            {
+              "kind": "field",
+              "name": "isInvalid",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Shows the error state."
+            },
+            {
+              "kind": "field",
+              "name": "isDisabled",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Blocks interaction, dims the element, and removes it from the keyboard focus order."
+            },
+            {
+              "kind": "field",
+              "name": "isReadonly",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Shows the value but blocks editing."
+            },
+            {
+              "kind": "field",
+              "name": "isRequired",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Marks the field as required for form validation."
+            },
+            {
+              "kind": "field",
+              "name": "hasStepperButtons",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Shows ghost −/+ buttons on both fields."
+            },
+            {
+              "kind": "field",
+              "name": "isFullWidth",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Stretches the normally compact numeric field to its container width."
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Hides the element with display: none. It stays in the DOM and keeps its state."
+            }
+          ],
+          "attributes": [
+            {
+              "name": "description",
+              "fieldName": "description",
+              "type": {
+                "text": "string"
+              },
+              "description": "Helper text shown under the control and linked to it for screen readers."
+            },
+            {
+              "name": "error",
+              "fieldName": "error",
+              "type": {
+                "text": "string"
+              },
+              "description": "Error message shown under the control. Setting it marks the control invalid."
+            },
+            {
+              "name": "value",
+              "fieldName": "value",
+              "type": {
+                "text": "array"
+              },
+              "description": "`[lower, upper]` pair. An empty side is `null`. Set from JavaScript."
+            },
+            {
+              "name": "min",
+              "fieldName": "min",
+              "type": {
+                "text": "number"
+              },
+              "description": "Smallest value either field accepts."
+            },
+            {
+              "name": "max",
+              "fieldName": "max",
+              "type": {
+                "text": "number"
+              },
+              "description": "Largest value either field accepts."
+            },
+            {
+              "name": "step",
+              "fieldName": "step",
+              "type": {
+                "text": "number"
+              },
+              "description": "Positive increment shared by both fields."
+            },
+            {
+              "name": "label",
+              "fieldName": "label",
+              "type": {
+                "text": "string"
+              },
+              "description": "Accessible name for the group. Prefer `z-field` for a visible label."
+            },
+            {
+              "name": "name",
+              "fieldName": "name",
+              "type": {
+                "text": "string"
+              },
+              "description": "Form field name. Both values submit under it; `FormData.getAll(name)` gives `[lower, upper]`."
+            },
+            {
+              "name": "lower-placeholder",
+              "fieldName": "lowerPlaceholder",
+              "type": {
+                "text": "string"
+              },
+              "description": "Hint text for the empty lower field."
+            },
+            {
+              "name": "upper-placeholder",
+              "fieldName": "upperPlaceholder",
+              "type": {
+                "text": "string"
+              },
+              "description": "Hint text for the empty upper field."
+            },
+            {
+              "name": "size",
+              "fieldName": "size",
+              "type": {
+                "text": "'sm' | 'md' | 'lg'"
+              },
+              "description": "Matches the size of `z-number-input`."
+            },
+            {
+              "name": "tone",
+              "fieldName": "tone",
+              "type": {
+                "text": "'primary' | 'secondary'"
+              },
+              "description": "Accent color of the focus ring."
+            },
+            {
+              "name": "is-invalid",
+              "fieldName": "isInvalid",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Shows the error state."
+            },
+            {
+              "name": "is-disabled",
+              "fieldName": "isDisabled",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Blocks interaction, dims the element, and removes it from the keyboard focus order."
+            },
+            {
+              "name": "is-readonly",
+              "fieldName": "isReadonly",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Shows the value but blocks editing."
+            },
+            {
+              "name": "is-required",
+              "fieldName": "isRequired",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Marks the field as required for form validation."
+            },
+            {
+              "name": "has-stepper-buttons",
+              "fieldName": "hasStepperButtons",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Shows ghost −/+ buttons on both fields."
+            },
+            {
+              "name": "is-full-width",
+              "fieldName": "isFullWidth",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Stretches the normally compact numeric field to its container width."
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Hides the element with display: none. It stays in the DOM and keeps its state."
+            }
+          ],
+          "events": [
+            {
+              "name": "input",
+              "type": {
+                "text": "CustomEvent<{ value: RangeValueT }>"
+              },
+              "detail": "{ value: RangeValueT }",
+              "description": "Fires on each keystroke with `{ value: [lower, upper] }`."
+            },
+            {
+              "name": "change",
+              "type": {
+                "text": "CustomEvent<{ value: RangeValueT }>"
+              },
+              "detail": "{ value: RangeValueT }",
+              "description": "Fires after a blur correction or step action with `{ value: [lower, upper] }`."
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
           "tagName": "z-pagination",
           "name": "ZPagination",
           "description": "Numbered page navigation with previous and next arrows.",
@@ -13805,6 +14138,14 @@
           "name": "z-number-input",
           "declaration": {
             "name": "ZNumberInput",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "z-number-range-input",
+          "declaration": {
+            "name": "ZNumberRangeInput",
             "module": "dist/zest.js"
           }
         },
