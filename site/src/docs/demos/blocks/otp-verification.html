@@ -1,0 +1,11 @@
+<z-card gap="5" style="width: min(24rem, 100%); padding: 1.75rem; text-align: center">
+  <z-column gap="1">
+    <z-heading size="xs" tag="h2">Check your email</z-heading>
+    <z-text size="sm" color="muted">We sent a 6-digit code to ada@example.com.</z-text>
+  </z-column>
+  <z-row aligns-x="center">
+    <z-input-otp id="code" length="6" is-numeric label="Verification code"></z-input-otp>
+  </z-row>
+  <z-button id="verify" tone="primary" is-full-width is-disabled>Verify</z-button>
+  <z-text size="sm" color="muted">Didn’t get it? <z-link href="#">Resend code</z-link></z-text>
+</z-card>

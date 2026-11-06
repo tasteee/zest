@@ -1,0 +1,21 @@
+<z-card gap="0" style="width: min(36rem, 100%); padding: 0">
+  <z-column gap="4" style="padding: 1.5rem">
+    <z-row gap="4" aligns-y="center">
+      <z-avatar name="Ada Lovelace" size="xl"></z-avatar>
+      <z-column gap="1">
+        <z-text weight="600">Profile photo</z-text>
+        <z-row gap="2">
+          <z-button size="sm" kind="outline">Upload</z-button>
+          <z-button size="sm" kind="plain">Remove</z-button>
+        </z-row>
+      </z-column>
+    </z-row>
+    <z-input label="Display name" value="Ada Lovelace"></z-input>
+    <z-input label="Username" value="ada" description="Appears in your profile URL."></z-input>
+    <z-textarea label="Bio" rows="3" placeholder="A sentence or two about you."></z-textarea>
+  </z-column>
+  <z-row gap="2" aligns-x="end" style="padding: 0.875rem 1.5rem; border-top: 1px solid var(--border)">
+    <z-button kind="plain">Cancel</z-button>
+    <z-button tone="primary">Save profile</z-button>
+  </z-row>
+</z-card>

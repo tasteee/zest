@@ -1,0 +1,17 @@
+<z-card gap="0" style="width: min(36rem, 100%); padding: 0; border-color: var(--red, var(--border))">
+  <z-row gap="4" aligns-y="center" aligns-x="between" does-wrap style="padding: 1.25rem">
+    <z-column gap="1" style="flex: 1; min-width: 12rem">
+      <z-text weight="600">Delete workspace</z-text>
+      <z-text size="sm" color="muted">Permanently removes the workspace and all its data.</z-text>
+    </z-column>
+    <z-button id="open" tone="danger" kind="outline">Delete workspace</z-button>
+  </z-row>
+</z-card>
+
+<z-alert-dialog
+  id="confirm"
+  tone="danger"
+  heading="Delete this workspace?"
+  description="This can’t be undone."
+  confirm-label="Delete workspace"
+></z-alert-dialog>

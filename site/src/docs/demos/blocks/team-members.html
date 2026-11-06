@@ -1,0 +1,24 @@
+<z-card gap="0" style="width: min(36rem, 100%); padding: 0">
+  <z-column gap="1" style="padding: 1.25rem; border-bottom: 1px solid var(--border)">
+    <z-heading size="xs" tag="h2">Team</z-heading>
+    <z-text size="sm" color="muted">Invite people and choose what they can do.</z-text>
+  </z-column>
+  <z-list label="Team members">
+    <z-list-row>
+      <z-avatar name="Ada Lovelace" size="sm" status="online"></z-avatar>
+      <div style="flex: 1; min-width: 0">
+        <z-text weight="600">Ada Lovelace</z-text>
+        <z-text size="sm" color="muted" style="display: block">ada@example.com</z-text>
+      </div>
+      <z-select id="role-ada" size="sm" value="owner" style="width: 8rem"></z-select>
+    </z-list-row>
+    <z-list-row>
+      <z-avatar name="Grace Hopper" size="sm" tone="secondary"></z-avatar>
+      <div style="flex: 1; min-width: 0">
+        <z-text weight="600">Grace Hopper</z-text>
+        <z-text size="sm" color="muted" style="display: block">grace@example.com</z-text>
+      </div>
+      <z-select id="role-grace" size="sm" value="editor" style="width: 8rem"></z-select>
+    </z-list-row>
+  </z-list>
+</z-card>
