@@ -300,5 +300,99 @@ export const BLOCKS: BlockGroupT[] = [
 				'faq accordion questions'
 			)
 		]
+	},
+	{
+		label: 'Auth',
+		items: [
+			block(
+				'forgot-password',
+				'Forgot password',
+				'Ask for an email, send a reset link, and confirm with a toast.',
+				[{ demo: 'blocks/forgot-password', title: 'Request a reset', description: 'Submit shows the loading state, then the toast confirms.' }],
+				'auth reset recover email'
+			),
+			block(
+				'reset-password',
+				'Reset password',
+				'New password and confirmation, with the mismatch shown once the second field is done.',
+				[{ demo: 'blocks/reset-password', title: 'Choose a new password', description: 'Validation waits for change, not every keystroke.' }],
+				'auth password reset validation'
+			),
+			block(
+				'magic-link',
+				'Magic link',
+				'Passwordless sign-in by email, with a fallback to a password.',
+				[{ demo: 'blocks/magic-link', title: 'Email link', description: 'The outline button keeps the fallback quieter than the main action.' }],
+				'auth passwordless email link'
+			),
+			block(
+				'two-factor',
+				'Two-factor',
+				'A code entry with a tab for backup codes.',
+				[{ demo: 'blocks/two-factor', title: 'Authenticator or backup', description: 'z-tabs holds both methods so the card never changes size.' }],
+				'auth 2fa mfa otp'
+			),
+			block(
+				'verify-email',
+				'Verify email',
+				'A confirmation screen with the two things people need next.',
+				[{ demo: 'blocks/verify-email', title: 'Check your inbox', description: 'An empty state works as a status page.' }],
+				'auth verify email confirm'
+			)
+		]
+	},
+	{
+		label: 'Settings',
+		items: [
+			block(
+				'settings-members',
+				'Settings: members',
+				'A member table under a header with the invite action.',
+				[{ demo: 'blocks/settings-members', title: 'Members table', description: 'The header action sits right and the table fills the card.' }],
+				'settings members team table'
+			),
+			block(
+				'settings-integrations',
+				'Settings: integrations',
+				'Connected apps with an on/off switch per row.',
+				[{ demo: 'blocks/settings-integrations', title: 'Connect and disconnect', description: 'Every row is an avatar, a name with a line of context, and a switch.' }],
+				'settings integrations apps connect'
+			),
+			block(
+				'api-keys',
+				'Settings: API keys',
+				'Masked keys with copy and revoke actions.',
+				[{ demo: 'blocks/api-keys', title: 'Key list', description: 'Copy writes the full key to the clipboard and says so.' }],
+				'settings api keys token copy'
+			),
+			block(
+				'billing',
+				'Settings: billing',
+				'The current plan, seat usage, and an invoice table.',
+				[{ demo: 'blocks/billing', title: 'Plan and invoices', description: 'The progress bar shows usage without a chart.' }],
+				'settings billing plan invoices'
+			),
+			block(
+				'payment-methods',
+				'Settings: payment methods',
+				'Saved cards with a default badge and per-row actions.',
+				[{ demo: 'blocks/payment-methods', title: 'Saved cards', description: 'Only the non-default card offers Make default.' }],
+				'settings payment card billing'
+			),
+			block(
+				'invite-user',
+				'Settings: invite user',
+				'An inline invite form: email, role, send.',
+				[{ demo: 'blocks/invite-user', title: 'Inline invite', description: 'The input grows; the select and button keep their size.' }],
+				'settings invite email role'
+			),
+			block(
+				'user-profile',
+				'User profile',
+				'A profile header with status, badges, and a stat row.',
+				[{ demo: 'blocks/user-profile', title: 'Profile header', description: 'Status shows on the avatar; the stat row sits under a border.' }],
+				'profile user account stats'
+			)
+		]
 	}
 ]

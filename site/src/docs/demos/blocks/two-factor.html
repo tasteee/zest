@@ -1,0 +1,18 @@
+<z-card gap="5" style="width: min(24rem, 100%); padding: 1.75rem">
+  <z-column gap="1">
+    <z-heading size="xs" tag="h2">Two-factor authentication</z-heading>
+    <z-text size="sm" color="muted">Enter a code from your authenticator app.</z-text>
+  </z-column>
+  <z-tabs value="app">
+    <z-tab value="app">Authenticator</z-tab>
+    <z-tab value="backup">Backup code</z-tab>
+    <z-column slot="app" gap="4" style="padding-top: 1rem">
+      <z-row aligns-x="center"><z-input-otp length="6" is-numeric label="Authenticator code"></z-input-otp></z-row>
+      <z-button tone="primary" is-full-width>Verify</z-button>
+    </z-column>
+    <z-column slot="backup" gap="4" style="padding-top: 1rem">
+      <z-input label="Backup code" placeholder="xxxx-xxxx"></z-input>
+      <z-button tone="primary" is-full-width>Verify</z-button>
+    </z-column>
+  </z-tabs>
+</z-card>

@@ -1,0 +1,27 @@
+<z-card gap="0" style="width: min(38rem, 100%); padding: 0">
+  <z-row aligns-x="between" aligns-y="center" gap="3" style="padding: 1.25rem; border-bottom: 1px solid var(--border)">
+    <z-column gap="1">
+      <z-heading size="xs" tag="h2">API keys</z-heading>
+      <z-text size="sm" color="muted">Keep these secret. Revoke any that leak.</z-text>
+    </z-column>
+    <z-button tone="primary" size="sm">Create key</z-button>
+  </z-row>
+  <z-list label="API keys">
+    <z-list-row>
+      <div style="flex: 1; min-width: 0">
+        <z-text weight="600">Production</z-text>
+        <z-text size="sm" color="muted" style="display: block; font-family: var(--font-mono)">zk_live_••••••••3f9a</z-text>
+      </div>
+      <z-button class="copy" kind="outline" size="sm" data-key="zk_live_example3f9a">Copy</z-button>
+      <z-button kind="ghost" size="sm" tone="danger">Revoke</z-button>
+    </z-list-row>
+    <z-list-row>
+      <div style="flex: 1; min-width: 0">
+        <z-text weight="600">Staging</z-text>
+        <z-text size="sm" color="muted" style="display: block; font-family: var(--font-mono)">zk_test_••••••••71bc</z-text>
+      </div>
+      <z-button class="copy" kind="outline" size="sm" data-key="zk_test_example71bc">Copy</z-button>
+      <z-button kind="ghost" size="sm" tone="danger">Revoke</z-button>
+    </z-list-row>
+  </z-list>
+</z-card>
