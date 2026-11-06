@@ -66,7 +66,6 @@ export const BLOCKS: BlockGroupT[] = [
 				],
 				'tabs form preferences'
 			),
-,
 			block(
 				'stats-overview',
 				'Stats overview',
