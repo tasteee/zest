@@ -369,7 +369,7 @@
 	letter-spacing: -0.04em !important;
 }
 
-.DocsLede {
+.DocsArticle .DocsLede {
 	margin: 1rem 0 0;
 	max-width: 60ch;
 	font-size: 1.125rem;

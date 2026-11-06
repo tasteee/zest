@@ -10,7 +10,7 @@ export const ZComboboxDoc = () => (
 		<DocExample
 			demo="z-combobox/search-a-known-option-set"
 			title="Search a known option set"
-			description="Options are an array property, and the field filters by label as people type. z-field supplies the visible and accessible name."
+			description="Options are an array attribute, and the field filters by label as people type. z-field supplies the visible and accessible name."
 		/>
 		<DocExample
 			demo="z-combobox/store-the-committed-choice"

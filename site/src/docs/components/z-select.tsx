@@ -5,11 +5,11 @@ export const ZSelectDoc = () => (
 	<ComponentDoc
 		tag="z-select"
 		category="Forms"
-		description="A compact single-choice dropdown driven by an options property. Use it when the choice set is known and no search is necessary."
+		description="A compact single-choice dropdown driven by an options attribute. Use it when the choice set is known and no search is necessary."
 	>
 		<DocExample
 			demo="z-select/supply-options-as-a-property"
-			title="Supply options as a property"
+			title="Supply options from JavaScript"
 			description="Array-valued props are passed from JavaScript or React, not written as an HTML attribute. Wrap standalone selects in z-field for their visible and accessible name."
 		/>
 		<DocExample
