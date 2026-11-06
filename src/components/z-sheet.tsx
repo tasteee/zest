@@ -23,6 +23,7 @@ const styles = css`
 	   from. Hidden state = offset by its own size; shared/modal.ts flips
 	   data-state. Timings come from the motion scale (slow in, slow-exit out). */
 	.dialog {
+		background: var(--color-neutral-1);
 		--sheet-from: calc(100% * var(--motion-travel)) 0;
 		position: fixed;
 		margin: 0;

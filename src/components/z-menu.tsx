@@ -4,6 +4,7 @@ import { oneOf } from '../shared/prop-types'
 import { useChildItems, hasFlag } from '../shared/child-items'
 import { flashThen } from '../shared/menu-nav'
 import { useVisibilityPhase } from '../shared/transition'
+import { computePosition, autoUpdate, applyPosition } from '../shared/overlay'
 
 /*
  * z-menu, a dropdown menu. The trigger is whatever you slot into
@@ -43,18 +44,29 @@ const styles = css`
 		display: none;
 	}
 
+	/* Fixed + top-layer (via [popover]) so no ancestor's overflow can clip the
+	   panel. display is left unset until :popover-open so the UA stylesheet
+	   still hides it while closed. shared/overlay.ts sets left/top. */
 	.panel {
-		position: absolute;
-		top: calc(100% + 6px);
+		position: fixed;
+		box-sizing: border-box;
+		margin: 0;
+		left: 0;
+		top: 0;
+		right: auto;
+		bottom: auto;
 		z-index: 50;
-		min-width: max(12rem, 100%);
+		min-width: 12rem;
 		background: var(--popover);
 		border: 1px solid var(--border);
 		border-radius: var(--radius-md);
 		padding: 0.3125rem;
+		gap: 1px;
+	}
+
+	.panel:popover-open {
 		display: flex;
 		flex-direction: column;
-		gap: 1px;
 	}
 
 	/* enters on mount, exits via .is-closing while useVisibilityPhase keeps it rendered */
@@ -101,14 +113,6 @@ const styles = css`
 		75% {
 			background: transparent;
 		}
-	}
-
-	:host([align='end']) .panel {
-		inset-inline-end: 0;
-	}
-
-	:host(:not([align='end'])) .panel {
-		inset-inline-start: 0;
 	}
 
 	.item {
@@ -195,6 +199,7 @@ export const ZMenu = c(
 	(props) => {
 		const host = useHost()
 		const triggerSlotRef = useRef<HTMLSlotElement>()
+		const panelRef = useRef<HTMLDivElement>()
 		const search = useRef({ text: '', time: 0 })
 		const [isOpen, setIsOpen] = useState(false)
 		const [activeIndex, setActiveIndex] = useState(-1)
@@ -328,6 +333,21 @@ export const ZMenu = c(
 		// in at once; while it fades out it is inert and drops the menu role.
 		const isPanelLeaving = !isOpen && phase === 'closing'
 		const isPanelRendered = isOpen || isPanelLeaving
+
+		// Move the panel into the top layer and pin it under the trigger.
+		useEffect(() => {
+			const panel = panelRef.current
+			if (!panel) return
+			if (!panel.matches(':popover-open')) panel.showPopover()
+			const placement = props.align === 'end' ? 'bottom-end' : 'bottom-start'
+			const update = () => {
+				const triggerWidth = host.current.getBoundingClientRect().width
+				panel.style.minWidth = `max(12rem, ${triggerWidth}px)`
+				applyPosition(panel, computePosition(host.current, panel, { placement, offset: 6, padding: 8 }))
+			}
+			return autoUpdate(host.current, panel, update)
+		}, [isPanelRendered, props.align])
+
 		const panelClass = ['panel', isPanelLeaving ? 'is-closing' : '', isCommitting ? 'is-committing' : ''].join(' ')
 
 		return (
@@ -338,6 +358,8 @@ export const ZMenu = c(
 
 				{isPanelRendered && (
 					<div
+						ref={panelRef}
+						popover="manual"
 						class={panelClass}
 						role={isOpen ? 'menu' : undefined}
 						inert={isPanelLeaving}
