@@ -1,9 +1,16 @@
-<z-column gap="4">
-  <div style="display: flex; gap: 1rem; align-items: center">
+<z-column gap="5" style="width: min(30rem, 100%)">
+  <z-row gap="3" aligns-y="center">
     <z-skeleton shape="circle" width="3rem" is-inline></z-skeleton>
-    <div style="flex: 1">
-      <z-skeleton lines="3"></z-skeleton>
-    </div>
-  </div>
-  <z-skeleton shape="rect" height="5rem" style="margin-top: 1.25rem"></z-skeleton>
+    <z-column gap="2" style="flex: 1; min-width: 0">
+      <z-skeleton shape="text" width="40%"></z-skeleton>
+      <z-skeleton shape="text" width="65%"></z-skeleton>
+    </z-column>
+  </z-row>
+
+  <z-skeleton shape="rect" height="8rem"></z-skeleton>
+
+  <z-column gap="2">
+    <z-skeleton shape="text" width="55%"></z-skeleton>
+    <z-skeleton lines="3"></z-skeleton>
+  </z-column>
 </z-column>
