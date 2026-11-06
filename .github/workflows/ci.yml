@@ -12,63 +12,114 @@ concurrency:
 permissions:
   contents: read
 
+# Shape:
+#
+#   typecheck ─────────────────────────┐
+#   build ──┬─ test (unit + browser)   │  run side by side
+#           ├─ docs (site + crawl)     │
+#           └─ consumers (gated)       ┘
+#
+# The library is built once. Jobs that need it download the same artifact.
+
 jobs:
-  check:
+  typecheck:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 10
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: pnpm
-
-      - run: pnpm install --frozen-lockfile
-
-      - run: pnpm exec playwright install --with-deps chromium
-
-      # Builds the library and runs the release gate (held-back elements stay
-      # out), then typechecks and builds the docs site.
-      - run: pnpm build
-
-      - run: pnpm build:site
-
+      - uses: ./.github/actions/setup
       - run: pnpm typecheck
 
-      # Crawls the built docs site in Chromium: console errors, broken links,
-      # unregistered or held-back elements, phone overflow, axe on every
-      # example, the sections each element page needs, and ⌘K search.
-      - run: pnpm check:docs
-
-      # Unit and browser suites together, with the coverage floor from
-      # vitest.config.ts. A drop below it fails the build.
-      - run: pnpm test:coverage
-
-  # The published tarball, installed into clean projects: plain HTML, React +
-  # TypeScript, Vue and Svelte. Slower and network-bound, so it runs beside the
-  # main job instead of inside it.
-  consumers:
+  # Builds the library and runs the release gate (held-back elements stay out).
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 10
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: pnpm
-
-      - run: pnpm install --frozen-lockfile
-
+      - uses: ./.github/actions/setup
       - run: pnpm build
+      # custom-elements.json is tracked, but the build rewrites it and the
+      # tests and docs crawl read the fresh copy.
+      - uses: actions/upload-artifact@v4
+        with:
+          name: library
+          path: |
+            dist
+            custom-elements.json
+          retention-days: 1
+          if-no-files-found: error
 
-      - run: pnpm exec playwright install --with-deps chromium
+  # Unit and browser suites together, with the coverage floor from
+  # vitest.config.ts. A drop below it fails the build. They stay in one job
+  # because the thresholds are measured over both.
+  test:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup
+        with:
+          playwright: 'true'
+      - uses: actions/download-artifact@v4
+        with:
+          name: library
+      - run: pnpm test:coverage
 
+  # Builds the docs site, then crawls it in Chromium: console errors, broken
+  # links, unregistered or held-back elements, phone overflow, axe on every
+  # example, the sections each element page needs, and ⌘K search.
+  docs:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup
+        with:
+          playwright: 'true'
+      - uses: actions/download-artifact@v4
+        with:
+          name: library
+      - run: pnpm build:site
+      - run: pnpm check:docs
+
+  # Decides whether the package itself changed. Docs-only and workflow-only
+  # pull requests skip the slow consumer install below.
+  changes:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: read
+    outputs:
+      package: ${{ github.event_name == 'push' || steps.filter.outputs.package == 'true' }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: filter
+        uses: dorny/paths-filter@v3
+        with:
+          filters: |
+            package:
+              - 'src/**'
+              - 'scripts/**'
+              - 'package.json'
+              - 'pnpm-lock.yaml'
+              - 'pnpm-workspace.yaml'
+              - 'vite.config.ts'
+              - 'tsconfig*.json'
+              - 'custom-elements.json'
+              - '.github/workflows/ci.yml'
+              - '.github/actions/**'
+
+  # The published tarball, installed into clean projects: plain HTML, React +
+  # TypeScript, Vue and Svelte. Slow and network-bound, so it runs beside the
+  # other jobs. A skipped job counts as passing for required checks.
+  consumers:
+    needs: [build, changes]
+    if: needs.changes.outputs.package == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup
+        with:
+          playwright: 'true'
+      - uses: actions/download-artifact@v4
+        with:
+          name: library
       - run: pnpm test:consumers
