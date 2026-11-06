@@ -5,6 +5,23 @@ All notable changes to `@tasteee/zest`. The format follows
 [Semantic Versioning](https://semver.org/). From 1.0, a breaking change
 needs a major version and a prior deprecation. See `SUPPORT.md`.
 
+## [Unreleased]
+
+### Added
+
+- `z-field` `is-horizontal` puts the label to the left of the control.
+- `z-number-input` and `z-number-range-input` `value-prefix` and
+  `value-suffix` decorate each value while the field is not focused
+  (`$60`, `60bpm`).
+- `z-number-input` `is-borderless` removes the field's own border and focus
+  ring so a parent can draw one.
+
+### Changed
+
+- `z-number-range-input` draws one outline around both fields, with "to" as
+  the separator in place of the dash. The text is the `rangeSeparator` locale
+  key.
+
 ## [1.0.0] - 2026-11-06
 
 The first stable release. 97 elements; Chrome and Edge 117+. From here the
