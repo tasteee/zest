@@ -1,7 +1,7 @@
 import { defineElement } from '../shared/define-element'
 import { c } from 'atomico'
 import { baseStyles, insetProps, sizeProp } from '../shared/layout-schema'
-import { flexLineStyles, flexLineVars, stackBelowStyles } from '../shared/flex-line'
+import { flexLineResetStyles, flexLineStyles, flexLineVars, stackBelowStyles } from '../shared/flex-line'
 import { oneOf } from '../shared/prop-types'
 
 /*
@@ -30,7 +30,7 @@ export const ZRow = c(
 			isFullHeight: { type: Boolean, reflect: true },
 			...insetProps
 		},
-		styles: [baseStyles, flexLineStyles('--z-row', 'row'), stackBelowStyles('--z-row')]
+		styles: [baseStyles, flexLineResetStyles('--z-row'), flexLineStyles('--z-row', 'row'), stackBelowStyles('--z-row')]
 	}
 )
 

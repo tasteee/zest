@@ -1,7 +1,7 @@
 import { defineElement } from '../shared/define-element'
 import { c } from 'atomico'
 import { baseStyles, insetProps, sizeProp } from '../shared/layout-schema'
-import { flexLineStyles, flexLineVars } from '../shared/flex-line'
+import { flexLineResetStyles, flexLineStyles, flexLineVars } from '../shared/flex-line'
 import { oneOf } from '../shared/prop-types'
 
 /*
@@ -27,7 +27,7 @@ export const ZColumn = c(
 			isFullHeight: { type: Boolean, reflect: true },
 			...insetProps
 		},
-		styles: [baseStyles, flexLineStyles('--z-column', 'column')]
+		styles: [baseStyles, flexLineResetStyles('--z-column'), flexLineStyles('--z-column', 'column')]
 	}
 )
 

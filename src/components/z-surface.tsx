@@ -1,7 +1,7 @@
 import { defineElement } from '../shared/define-element'
 import { c, css } from 'atomico'
 import { oneOf } from '../shared/prop-types'
-import { baseStyles, insetProps, insetVars, resolveRadius } from '../shared/layout-schema'
+import { baseStyles, padVarNames, resetInheritedVars, insetProps, insetVars, resolveRadius } from '../shared/layout-schema'
 
 /*
  * z-surface, a themed container panel. `level` is the everyday path: a neutral
@@ -145,7 +145,7 @@ export const ZSurface = c(
 			isFullWidth: { type: Boolean, reflect: true },
 			...insetProps
 		},
-		styles: [baseStyles, styles]
+		styles: [baseStyles, resetInheritedVars([...padVarNames('--z-surface'), '--z-surface-radius']), styles]
 	}
 )
 

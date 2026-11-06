@@ -197,7 +197,7 @@ export const ZCheckbox = c(
 					<span class={boxClass} aria-hidden="true">
 						{boxMark}
 					</span>
-					<slot />
+					<slot>{props.label}</slot>
 				</label>
 				{renderDescriptions(props.description, props.error)}
 			</host>

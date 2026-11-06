@@ -1,6 +1,6 @@
 import { defineElement } from '../shared/define-element'
 import { c, css } from 'atomico'
-import { baseStyles, insetProps, insetVars, resolveGridAlign, coerceSize, sizeProp } from '../shared/layout-schema'
+import { baseStyles, padVarNames, resetInheritedVars, insetProps, insetVars, resolveGridAlign, coerceSize, sizeProp } from '../shared/layout-schema'
 import { oneOf } from '../shared/prop-types'
 
 /*
@@ -81,7 +81,19 @@ export const ZGrid = c(
 			isFullWidth: { type: Boolean, reflect: true },
 			...insetProps
 		},
-		styles: [baseStyles, styles]
+		styles: [
+			baseStyles,
+			resetInheritedVars([
+				...padVarNames('--z-grid'),
+				'--z-grid-gap',
+				'--z-grid-row-gap',
+				'--z-grid-column-gap',
+				'--z-grid-columns',
+				'--z-grid-justify',
+				'--z-grid-align'
+			]),
+			styles
+		]
 	}
 )
 

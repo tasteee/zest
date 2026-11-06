@@ -37,3 +37,27 @@ describe.each(['z-scroll', 'z-scroll-area'])('<%s>', (tag) => {
 		expect(box.scrollWidth).toBeLessThanOrEqual(box.clientWidth)
 	})
 })
+
+describe('nested layouts', () => {
+	it('a nested z-column does not inherit the gap or padding of its parent', async () => {
+		const wrapper = await mount('<z-column gap="xl" inset="xl"><z-column id="inner"><span>One</span><span>Two</span></z-column></z-column>')
+		const inner = wrapper.querySelector<HTMLElement>('#inner')!
+		const style = getComputedStyle(inner)
+		expect(style.rowGap === 'normal' || style.rowGap === '0px').toBe(true)
+		expect(style.paddingTop).toBe('0px')
+		expect(style.paddingLeft).toBe('0px')
+	})
+
+	it('a nested z-row does not inherit the alignment of its parent', async () => {
+		const wrapper = await mount('<z-row aligns-x="end"><z-row id="inner"><span>One</span></z-row></z-row>')
+		const inner = wrapper.querySelector<HTMLElement>('#inner')!
+		expect(getComputedStyle(inner).justifyContent).toBe('flex-start')
+	})
+
+	it('a nested z-column still applies its own props', async () => {
+		const wrapper = await mount('<z-column gap="xl"><z-column id="inner" gap="sm"><span>One</span><span>Two</span></z-column></z-column>')
+		const inner = wrapper.querySelector<HTMLElement>('#inner')!
+		expect(getComputedStyle(inner).rowGap).toBe('12px')
+		expect(getComputedStyle(inner).rowGap).not.toBe('32px')
+	})
+})

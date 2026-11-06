@@ -1,5 +1,5 @@
 import { css } from 'atomico'
-import { coerceSize, insetVars, resolveAlign, resolveJustify } from './layout-schema'
+import { coerceSize, insetVars, padVarNames, resetInheritedVars, resolveAlign, resolveJustify } from './layout-schema'
 
 /*
  * The shared engine behind z-row and z-column: a one-axis flex line with the
@@ -32,6 +32,20 @@ const BREAKPOINTS: Record<string, string> = {
 }
 
 const sides = ['top', 'bottom', 'left', 'right'] as const
+
+export const flexLineResetStyles = (prefix: string) =>
+	resetInheritedVars([
+		...padVarNames(prefix),
+		prefix + '-gap',
+		prefix + '-margin-top',
+		prefix + '-margin-bottom',
+		prefix + '-margin-left',
+		prefix + '-margin-right',
+		prefix + '-justify',
+		prefix + '-align',
+		prefix + '-stacked-justify',
+		prefix + '-stacked-align'
+	])
 
 export const flexLineStyles = (prefix: string, direction: 'row' | 'column') => css`
 	:host {
