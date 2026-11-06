@@ -64,13 +64,35 @@ export const UsageReact = () => (
 		<h2>Props</h2>
 		<p>
 			Write options in camelCase. React sets them as element properties, which is how array-valued options like{' '}
-			<code>items</code> arrive intact.
+			<code>items</code> arrive intact. Here the component gets <code>route</code> and <code>saving</code> from its
+			props and passes them straight on.
 		</p>
 		<Code
 			language="tsx"
+			filename="Inbox.tsx"
 			code={`
-<z-sidebar value={route} items={[{ value: 'inbox', label: 'Inbox' }]} />
-<z-button kind="outline" isLoading={saving}>Save</z-button>
+import '@tasteee/zest'
+
+type InboxPropsT = {
+  route: string
+  saving: boolean
+}
+
+const items = [
+  { value: 'inbox', label: 'Inbox' },
+  { value: 'sent', label: 'Sent' }
+]
+
+export const Inbox = (props: InboxPropsT) => {
+  return (
+    <>
+      <z-sidebar value={props.route} items={items} />
+      <z-button kind="outline" isLoading={props.saving}>
+        Save
+      </z-button>
+    </>
+  )
+}
 `}
 		/>
 
