@@ -3152,6 +3152,66 @@
 			}
 		]
 	},
+	"z-number-range-input": {
+		"summary": "Two number fields for a lower and upper bound.",
+		"props": {
+			"value": {
+				"description": "`[lower, upper]` pair. An empty side is `null`. Set from JavaScript.",
+				"default": "[null, null]"
+			},
+			"min": {
+				"description": "Smallest value either field accepts."
+			},
+			"max": {
+				"description": "Largest value either field accepts."
+			},
+			"step": {
+				"default": "1",
+				"description": "Positive increment shared by both fields."
+			},
+			"label": {
+				"description": "Accessible name for the group. Prefer `z-field` for a visible label."
+			},
+			"name": {
+				"description": "Form field name. Both values submit under it; `FormData.getAll(name)` gives `[lower, upper]`."
+			},
+			"lowerPlaceholder": {
+				"description": "Hint text for the empty lower field."
+			},
+			"upperPlaceholder": {
+				"description": "Hint text for the empty upper field."
+			},
+			"size": {
+				"default": "md",
+				"description": "Matches the size of `z-number-input`.",
+				"values": ["sm", "md", "lg"]
+			},
+			"hasStepperButtons": {
+				"description": "Shows ghost −/+ buttons on both fields."
+			}
+		},
+		"events": {
+			"input": {
+				"description": "Fires on each keystroke with `{ value: [lower, upper] }`."
+			},
+			"change": {
+				"description": "Fires after a blur correction or step action with `{ value: [lower, upper] }`."
+			}
+		},
+		"keyboard": [
+			{
+				"keys": "↑ / ↓",
+				"action": "Step the focused field."
+			}
+		],
+		"accessibility": "A role=\"group\" holding two spinbuttons, named \"Lower value\" and \"Upper value\" (localised).",
+		"guidance": [
+			{
+				"title": "Use for range",
+				"text": "Use z-range when dragging a handle beats typing an exact number."
+			}
+		]
+	},
 	"z-pagination": {
 		"summary": "Numbered page navigation with previous and next arrows.",
 		"props": {

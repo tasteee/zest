@@ -35,6 +35,7 @@ import { ZLinkDoc } from '@app/docs/components/z-link'
 import { ZFieldDoc } from '@app/docs/components/z-field'
 import { ZInputDoc } from '@app/docs/components/z-input'
 import { ZNumberInputDoc } from '@app/docs/components/z-number-input'
+import { ZNumberRangeInputDoc } from '@app/docs/components/z-number-range-input'
 import { ZTextareaDoc } from '@app/docs/components/z-textarea'
 import { ZCheckboxDoc } from '@app/docs/components/z-checkbox'
 import { ZSwitchDoc } from '@app/docs/components/z-switch'
@@ -132,6 +133,7 @@ export const ELEMENT_DOCS: Record<string, ComponentType> = {
 	'z-field': ZFieldDoc,
 	'z-input': ZInputDoc,
 	'z-number-input': ZNumberInputDoc,
+	'z-number-range-input': ZNumberRangeInputDoc,
 	'z-textarea': ZTextareaDoc,
 	'z-checkbox': ZCheckboxDoc,
 	'z-switch': ZSwitchDoc,

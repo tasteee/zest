@@ -168,7 +168,7 @@ const ELEMENTS: SectionT = {
 		{
 			label: 'Forms',
 			items: [
-				{ label: 'Text', items: elements('z-field', 'z-input', 'z-textarea', 'z-number-input', 'z-input-otp') },
+				{ label: 'Text', items: elements('z-field', 'z-input', 'z-textarea', 'z-number-input', 'z-number-range-input', 'z-input-otp') },
 				{
 					label: 'Choice',
 					items: elements('z-checkbox', 'z-switch', 'z-radio', 'z-radio-group', 'z-select', 'z-combobox', 'z-filter')
