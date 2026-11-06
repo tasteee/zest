@@ -1,0 +1,32 @@
+<z-card gap="0" style="width: min(36rem, 100%); padding: 0">
+  <z-column gap="1" style="padding: 1.25rem; border-bottom: 1px solid var(--border)">
+    <z-heading size="xs" tag="h2">Integrations</z-heading>
+    <z-text size="sm" color="muted">Connect the tools your team already uses.</z-text>
+  </z-column>
+  <z-list label="Integrations">
+    <z-list-row>
+      <z-avatar name="GitHub" size="sm" is-square></z-avatar>
+      <div style="flex: 1; min-width: 0">
+        <z-text weight="600">GitHub</z-text>
+        <z-text size="sm" color="muted" style="display: block">Link pull requests to projects.</z-text>
+      </div>
+      <z-switch is-checked aria-label="GitHub"></z-switch>
+    </z-list-row>
+    <z-list-row>
+      <z-avatar name="Slack" size="sm" is-square tone="secondary"></z-avatar>
+      <div style="flex: 1; min-width: 0">
+        <z-text weight="600">Slack</z-text>
+        <z-text size="sm" color="muted" style="display: block">Post updates to a channel.</z-text>
+      </div>
+      <z-switch aria-label="Slack"></z-switch>
+    </z-list-row>
+    <z-list-row>
+      <z-avatar name="Linear" size="sm" is-square></z-avatar>
+      <div style="flex: 1; min-width: 0">
+        <z-text weight="600">Linear</z-text>
+        <z-text size="sm" color="muted" style="display: block">Sync issues both ways.</z-text>
+      </div>
+      <z-switch aria-label="Linear"></z-switch>
+    </z-list-row>
+  </z-list>
+</z-card>
