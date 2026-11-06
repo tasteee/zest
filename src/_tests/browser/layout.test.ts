@@ -62,3 +62,21 @@ describe('nested layouts', () => {
 		expect(getComputedStyle(inner).rowGap).not.toBe('32px')
 	})
 })
+
+describe('<z-scroll> in a height-constrained flex parent', () => {
+	it('scrolls its content instead of growing past the parent', async () => {
+		const rows = Array.from({ length: 30 }, (_, index) => `<div style="height: 40px">Row ${index}</div>`).join('')
+		const wrapper = await mount(`<div id="box" style="display: flex; flex-direction: column; height: 200px"><z-scroll style="flex: 1 1 0; min-height: 0">${rows}</z-scroll></div>`)
+		const scroller = wrapper.querySelector<HTMLElement>('z-scroll')!
+		const viewport = scroller.shadowRoot!.querySelector<HTMLElement>('.viewport')!
+		expect(scroller.getBoundingClientRect().height).toBeLessThanOrEqual(200)
+		expect(viewport.clientHeight).toBeLessThanOrEqual(200)
+		expect(viewport.scrollHeight).toBeGreaterThan(viewport.clientHeight)
+	})
+
+	it('still grows with its content in an auto-height parent', async () => {
+		const wrapper = await mount('<div><z-scroll><div style="height: 500px">Tall</div></z-scroll></div>')
+		const viewport = wrapper.querySelector<HTMLElement>('z-scroll')!.shadowRoot!.querySelector<HTMLElement>('.viewport')!
+		expect(viewport.clientHeight).toBeGreaterThanOrEqual(500)
+	})
+})

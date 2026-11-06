@@ -21,7 +21,11 @@ const styles = css`
 
 	.viewport {
 		box-sizing: border-box;
-		max-height: var(--z-scroll-max-height, none);
+		/* Without a max-height the viewport grows with its content and never
+		   scrolls inside a height-constrained parent (a flex or grid item).
+		   100% resolves against the host: it caps a constrained host, and is
+		   ignored (treated as none) when the host's height is auto. */
+		max-height: var(--z-scroll-max-height, 100%);
 		max-width: var(--z-scroll-max-width, none);
 		padding-top: var(--z-scroll-pad-top, 0);
 		padding-bottom: var(--z-scroll-pad-bottom, 0);
