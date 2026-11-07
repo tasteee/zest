@@ -292,7 +292,7 @@ export const ZCommand = c(
 		}
 
 		return (
-			<host shadowDom style={{ '--accent': 'var(--purple)' }}>
+			<host shadowDom>
 				<div class="trigger" onclick={() => setIsOpen(true)}>
 					<slot name="trigger" />
 				</div>

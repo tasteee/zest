@@ -28,8 +28,8 @@ const styles = css`
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
-		background: color-mix(in srgb, var(--purple) 22%, var(--card));
-		color: color-mix(in oklch, var(--purple) 85%, white);
+		background: color-mix(in srgb, var(--accent) 22%, var(--card));
+		color: color-mix(in oklch, var(--accent) 85%, white);
 		font-size: 0.6875rem;
 		font-weight: 600;
 		font-family: inherit;
@@ -87,7 +87,7 @@ const styles = css`
 	}
 
 	.tag:hover {
-		border-color: color-mix(in oklch, var(--purple) 50%, transparent);
+		border-color: color-mix(in oklch, var(--accent) 50%, transparent);
 		color: var(--foreground);
 	}
 

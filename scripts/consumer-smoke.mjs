@@ -204,7 +204,7 @@ const App = () => {
 	return (
 		<>
 			<z-switch label="Dark mode" onchange={handleChange}></z-switch>
-			<z-button kind="solid" tone="primary" size="md">Save</z-button>
+			<z-button kind="solid" tone="secondary" size="md">Save</z-button>
 			<p id="count">{count}</p>
 		</>
 	)
@@ -266,7 +266,7 @@ const count = ref(0)
 </script>
 <template>
 	<z-switch label="Dark mode" @change="count += 1"></z-switch>
-	<z-button kind="solid" tone="primary">Save</z-button>
+	<z-button kind="solid" tone="secondary">Save</z-button>
 	<p id="count">{{ count }}</p>
 </template>
 `)
@@ -291,7 +291,7 @@ mount(App, { target: document.querySelector('#app') })
 </script>
 
 <z-switch label="Dark mode" onchange={() => (count += 1)}></z-switch>
-<z-button kind="solid" tone="primary">Save</z-button>
+<z-button kind="solid" tone="secondary">Save</z-button>
 <p id="count">{count}</p>
 `)
 	run('npx', ['vite', 'build'], { cwd: dir })

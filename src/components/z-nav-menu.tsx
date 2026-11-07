@@ -16,10 +16,14 @@ import { oneOf } from '../shared/prop-types'
 const styles = css`
 	:host {
 		display: block;
-		--accent: var(--purple);
+		--accent: var(--primary);
 	}
 
 	:host([tone='secondary']) {
+		--accent: var(--purple);
+	}
+
+	:host([tone='tertiary']) {
 		--accent: var(--pink);
 	}
 
@@ -244,7 +248,7 @@ export const ZNavMenu = c(
 		props: {
 			items: { type: Array },
 			value: { type: String, reflect: true },
-			tone: { type: oneOf('primary', 'secondary'), reflect: true },
+			tone: { type: oneOf('primary', 'secondary', 'tertiary'), reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			select: event<{ value: string }>({ bubbles: true, composed: true })
 		},

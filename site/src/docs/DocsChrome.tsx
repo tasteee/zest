@@ -8,7 +8,7 @@ import type { ReactNode } from 'react'
  * bespoke CSS.
  */
 
-type Tone = 'primary' | 'secondary'
+type Tone = 'primary' | 'secondary' | 'tertiary'
 
 // Hero: the same header every docs page uses (eyebrow with rule, h1, lede),
 // so System pages match Setup, Elements, and Blocks.

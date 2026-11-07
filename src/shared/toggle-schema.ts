@@ -3,7 +3,7 @@ import { oneOf } from './prop-types'
 /*
  * Shared variant surface for z-toggle-button-group and z-toggle-button-group-item.
  *
- * These used to be nine booleans — is-purple/is-pink/is-neutral,
+ * These used to be nine booleans — is-purple/is-pink/is-primary,
  * is-small/is-medium/is-large, is-ghost/is-outlined — one flag per value,
  * across three sets where only one member could ever be true. They are now
  * three enums on the library's own vocabulary. That is also what makes a
@@ -14,7 +14,7 @@ import { oneOf } from './prop-types'
  * kind, unlike the three above.
  */
 export const toggleVariantProps = {
-	tone: { type: oneOf('neutral', 'primary', 'secondary', 'success', 'warning', 'danger'), reflect: true },
+	tone: { type: oneOf('primary', 'secondary', 'tertiary', 'success', 'warning', 'danger'), reflect: true },
 	size: { type: oneOf('xs', 'sm', 'md', 'lg'), reflect: true },
 	kind: { type: oneOf('solid', 'outline', 'ghost', 'soft', 'plain'), reflect: true },
 	isIcon: { type: Boolean, reflect: true }
@@ -28,9 +28,9 @@ type ToggleVariantPropsT = {
 }
 
 const TONE_CLASSES: Record<string, string> = {
-	primary: 'is-primary',
-	secondary: 'is-secondary',
-	neutral: 'is-neutral',
+	primary: 'is-secondary',
+	secondary: 'is-tertiary',
+	neutral: 'is-primary',
 	success: 'is-success',
 	warning: 'is-warning',
 	danger: 'is-danger'

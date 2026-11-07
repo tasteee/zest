@@ -19,12 +19,16 @@ import { useLocale } from '../shared/locale'
 const styles = css`
 	:host {
 		display: block;
-		--accent: var(--purple);
+		--accent: var(--primary);
 		width: 100%;
 		min-width: 0;
 	}
 
 	:host([tone='secondary']) {
+		--accent: var(--purple);
+	}
+
+	:host([tone='tertiary']) {
 		--accent: var(--pink);
 	}
 
@@ -561,7 +565,7 @@ export const ZCodeBlock = c(
 			addedLines: { type: String, reflect: true },
 			removedLines: { type: String, reflect: true },
 			focusLines: { type: String, reflect: true },
-			tone: { type: oneOf('primary', 'secondary'), reflect: true },
+			tone: { type: oneOf('primary', 'secondary', 'tertiary'), reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			copy: event<void>({ bubbles: true, composed: true })
 		},

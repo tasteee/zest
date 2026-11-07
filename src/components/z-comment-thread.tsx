@@ -32,8 +32,8 @@ const markStyles = css`
 	}
 
 	:host([is-active]) {
-		background: color-mix(in oklch, var(--purple) 26%, transparent);
-		border-bottom-color: var(--purple);
+		background: color-mix(in oklch, var(--accent) 26%, transparent);
+		border-bottom-color: var(--accent);
 	}
 
 	:host([is-resolved]) {
@@ -211,7 +211,7 @@ const panelStyles = css`
 	}
 
 	.thread.is-active {
-		border-color: var(--purple);
+		border-color: var(--accent);
 	}
 
 	.thread.is-resolved {

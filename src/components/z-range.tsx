@@ -241,8 +241,8 @@ const num = (value: unknown, fallback: number): number => {
 const clamp = (value: number, lo: number, hi: number): number => Math.min(Math.max(value, lo), hi)
 
 const toneFor = (tone: unknown): string => {
-	if (tone === 'primary') return 'var(--purple)'
-	if (tone === 'secondary') return 'var(--pink)'
+	if (tone === 'secondary') return 'var(--purple)'
+	if (tone === 'tertiary') return 'var(--pink)'
 	if (tone === 'success') return 'var(--success)'
 	if (tone === 'warning') return 'var(--warning)'
 	if (tone === 'danger') return 'var(--destructive)'

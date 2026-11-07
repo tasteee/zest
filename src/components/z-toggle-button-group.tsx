@@ -100,19 +100,19 @@ const styles = css`
 	   into the slotted items and their shadow buttons, and an item that sets
 	   its own accent/size/kind overrides them locally. That only holds because
 	   an unset variant resolves to no class at all — see toggle-schema.ts. */
-	:host([tone='primary']) {
+	:host([tone='secondary']) {
 		--z-toggle-button-color: var(--neon-purple);
 		--z-toggle-button-accent: var(--neon-purple);
 		--z-toggle-button-accent-foreground: var(--on-accent);
 	}
 
-	:host([tone='secondary']) {
+	:host([tone='tertiary']) {
 		--z-toggle-button-color: var(--neon-pink);
 		--z-toggle-button-accent: var(--neon-pink);
 		--z-toggle-button-accent-foreground: var(--on-accent);
 	}
 
-	:host([tone='neutral']) {
+	:host([tone='primary']) {
 		--z-toggle-button-color: var(--foreground);
 		--z-toggle-button-accent: var(--primary);
 		--z-toggle-button-accent-foreground: var(--primary-foreground);

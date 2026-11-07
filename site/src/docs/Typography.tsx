@@ -24,7 +24,7 @@ export const Typography = () => (
 
 		{/* ── THE SCALE ── */}
 		<section className="section" id="scale">
-			<DocsSectionHead tone="primary">The Scale</DocsSectionHead>
+			<DocsSectionHead tone="secondary">The Scale</DocsSectionHead>
 			<p className="section-sub">
 				Six heading steps map one-to-one onto <code className="inline">h1</code>–<code className="inline">h6</code>; the tag
 				is derived from <code className="inline">size</code>, so visual rank and document outline never drift apart. Each
@@ -49,7 +49,7 @@ export const Typography = () => (
 
 		{/* ── BODY, LABELS, EYEBROWS ── */}
 		<section className="section" id="text">
-			<DocsSectionHead tone="secondary">Body, Labels &amp; the Rest</DocsSectionHead>
+			<DocsSectionHead tone="tertiary">Body, Labels &amp; the Rest</DocsSectionHead>
 			<p className="section-sub">
 				Running text sits in <code className="inline">&lt;z-text&gt;</code>; UI labels in{' '}
 				<code className="inline">&lt;z-label&gt;</code>; tracked eyebrows in{' '}
@@ -100,7 +100,7 @@ export const Typography = () => (
 					uppercase · tracked
 				</div>
 				<div className="scale-sample">
-					<z-subheading size="sm" color="primary">
+					<z-subheading size="sm" color="secondary">
 						Platform · Developer Advocacy
 					</z-subheading>
 					<p className="usage">
@@ -196,13 +196,13 @@ export const Typography = () => (
 
 		{/* ── IN CONTEXT: THE ARTICLE ── */}
 		<section className="section" id="article">
-			<DocsSectionHead tone="primary">In Context</DocsSectionHead>
+			<DocsSectionHead tone="secondary">In Context</DocsSectionHead>
 			<p className="section-sub">
 				The real test of a type system is a wall of words. Here it is, set the way you'd actually publish it.
 			</p>
 
 			<article className="article">
-				<z-subheading size="sm" color="primary" style={{ display: 'block', marginBottom: '1rem' }}>
+				<z-subheading size="sm" color="secondary" style={{ display: 'block', marginBottom: '1rem' }}>
 					Platform · Developer Advocacy
 				</z-subheading>
 				<z-heading size="lg">The Internal Platform Deserves a Brand</z-heading>
@@ -257,7 +257,7 @@ export const Typography = () => (
 					</z-text>
 
 					<div className="pullquote">
-						<z-heading size="xs" tag="p" color="primary">
+						<z-heading size="xs" tag="p" color="secondary">
 							“A brand is a compression algorithm for trust. The name does the first 80% of the documentation's job before
 							anyone reads a word.”
 						</z-heading>
@@ -315,11 +315,11 @@ export const Typography = () => (
 						onboarding funnels and watch where people drop off. They hold office hours. They write changelogs that someone
 						would actually want to read. They publish a status page so trust survives the inevitable outage. For more on the
 						mechanics, the{' '}
-						<z-link href="#" tone="primary">
+						<z-link href="#" tone="secondary">
 							platform playbook
 						</z-link>{' '}
 						collects the patterns we keep reaching for, and the{' '}
-						<z-link href="#" tone="secondary">
+						<z-link href="#" tone="tertiary">
 							adoption metrics dashboard
 						</z-link>{' '}
 						is where we keep ourselves honest.
@@ -464,17 +464,17 @@ const COLORS = [
 		usage: 'Captions, metadata, and long passages of body text where full-bright white would fatigue the eye.'
 	},
 	{
-		token: 'color="primary"',
+		token: 'color="secondary"',
 		meta: '--purple',
-		color: 'primary',
+		color: 'secondary',
 		sample: 'Purple marks the primary accent',
 		usageTitle: 'Primary accent.',
 		usage: 'Links, active states, and a single point of emphasis. Not for running text.'
 	},
 	{
-		token: 'color="secondary"',
+		token: 'color="tertiary"',
 		meta: '--pink',
-		color: 'secondary',
+		color: 'tertiary',
 		sample: 'Pink marks the secondary accent',
 		usageTitle: 'Secondary accent.',
 		usage: 'A contrasting highlight, used sparingly so it stays special.'

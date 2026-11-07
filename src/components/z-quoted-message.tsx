@@ -14,7 +14,7 @@ const styles = css`
 		display: block;
 		--bar: var(--primary);
 	}
-	:host([tone='secondary']) {
+	:host([tone='tertiary']) {
 		--bar: var(--pink);
 	}
 	:host([is-hidden]) {

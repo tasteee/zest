@@ -110,19 +110,19 @@ const styles = css`
 	   with, plus the resting text color (--tone-text) and the foreground used
 	   when pressed (--tone-on-foreground). Mirrors z-button's tone model. */
 
-	button.is-neutral {
+	button.is-primary {
 		--tone-color: var(--primary);
 		--tone-text: var(--foreground);
 		--tone-on-foreground: var(--primary-foreground);
 	}
 
-	button.is-primary {
+	button.is-secondary {
 		--tone-color: var(--neon-purple);
 		--tone-text: var(--neon-purple);
 		--tone-on-foreground: var(--on-accent);
 	}
 
-	button.is-secondary {
+	button.is-tertiary {
 		--tone-color: var(--neon-pink);
 		--tone-text: var(--neon-pink);
 		--tone-on-foreground: var(--on-accent);
@@ -165,9 +165,9 @@ const resolveKindClass = (props: any): string => {
 }
 
 const resolveAccentClass = (props: any): string => {
-	if (props.tone === 'primary') return 'is-primary'
 	if (props.tone === 'secondary') return 'is-secondary'
-	return 'is-neutral'
+	if (props.tone === 'tertiary') return 'is-tertiary'
+	return 'is-primary'
 }
 
 export const ZToggleButton = c(
@@ -207,7 +207,7 @@ export const ZToggleButton = c(
 		props: {
 			size: { type: oneOf('xs', 'sm', 'md', 'lg'), reflect: true },
 			kind: { type: oneOf('solid', 'outline', 'ghost', 'soft', 'plain'), reflect: true },
-			tone: { type: oneOf('neutral', 'primary', 'secondary', 'success', 'warning', 'danger'), reflect: true },
+			tone: { type: oneOf('primary', 'secondary', 'tertiary', 'success', 'warning', 'danger'), reflect: true },
 			isIcon: { type: Boolean, reflect: true },
 			isPressed: { type: Boolean, reflect: true },
 			isDisabled: { type: Boolean, reflect: true },

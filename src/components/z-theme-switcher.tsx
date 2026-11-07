@@ -73,12 +73,12 @@ const styles = css`
 		--switcher-accent-foreground: var(--primary-foreground);
 	}
 
-	:host([tone='primary']) {
+	:host([tone='secondary']) {
 		--switcher-accent: var(--purple);
 		--switcher-accent-foreground: white;
 	}
 
-	:host([tone='secondary']) {
+	:host([tone='tertiary']) {
 		--switcher-accent: var(--pink);
 		--switcher-accent-foreground: white;
 	}
@@ -361,7 +361,7 @@ export const ZThemeSwitcher = c(
 	{
 		props: {
 			kind: { type: oneOf('segmented', 'icon'), reflect: true },
-			tone: { type: oneOf('primary', 'secondary'), reflect: true },
+			tone: { type: oneOf('primary', 'secondary', 'tertiary'), reflect: true },
 			themes: { type: Array },
 			isIconOnly: { type: Boolean, reflect: true },
 			size: { type: oneOf('sm', 'md', 'lg'), reflect: true },

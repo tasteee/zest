@@ -30,11 +30,11 @@ const styles = css`
 		--accent: var(--primary);
 	}
 
-	:host([tone='primary']) {
+	:host([tone='secondary']) {
 		--accent: var(--purple);
 	}
 
-	:host([tone='secondary']) {
+	:host([tone='tertiary']) {
 		--accent: var(--pink);
 	}
 
@@ -558,7 +558,7 @@ export const ZSelect = c(
 			placeholder: String,
 			options: { type: Array },
 			size: { type: oneOf('sm', 'md', 'lg'), reflect: true },
-			tone: { type: oneOf('primary', 'secondary'), reflect: true },
+			tone: { type: oneOf('primary', 'secondary', 'tertiary'), reflect: true },
 			isRequired: { type: Boolean, reflect: true },
 			isInvalid: { type: Boolean, reflect: true },
 			isDisabled: { type: Boolean, reflect: true },

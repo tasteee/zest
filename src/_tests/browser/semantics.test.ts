@@ -68,7 +68,7 @@ describe('<z-pagination>', () => {
 describe.each(['dark', 'light'] as const)('<z-avatar> initials contrast, %s theme', (theme) => {
 	it('every tone is readable', async () => {
 		await useTheme(theme)
-		const tones = ['neutral', 'primary', 'secondary', 'success', 'warning', 'danger']
+		const tones = ['primary', 'secondary', 'tertiary', 'success', 'warning', 'danger']
 		const markup = tones.map((tone) => `<z-avatar name="Ada Lovelace" tone="${tone}"></z-avatar>`).join('')
 		const wrapper = await mount(markup)
 		await expectNoA11yViolations(wrapper)

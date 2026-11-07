@@ -23,8 +23,8 @@ const styles = css`
 	:host { display: inline-block; width: fit-content; max-width: 100%; --accent: var(--primary); }
 	:host([is-full-width]) { display: block; width: 100%; }
 	:host([is-hidden]) { display: none; }
-	:host([tone='primary']) { --accent: var(--purple); }
-	:host([tone='secondary']) { --accent: var(--pink); }
+	:host([tone='secondary']) { --accent: var(--purple); }
+	:host([tone='tertiary']) { --accent: var(--pink); }
 	.row { display: flex; align-items: stretch; box-sizing: border-box; width: 100%; background: transparent; border: 1px solid var(--border); border-radius: var(--radius-md); color: var(--foreground); overflow: hidden; transition: border-color var(--motion-fast) var(--ease-enter), background-color var(--motion-fast) var(--ease-enter); }
 	.row.is-sm { height: var(--control-height-sm); font-size: var(--control-font-size-sm); }
 	.row.is-md { height: var(--control-height-md); font-size: var(--control-font-size-md); }
@@ -192,7 +192,7 @@ export const ZNumberRangeInput = c(
 			valuePrefix: String,
 			valueSuffix: String,
 			size: { type: oneOf('sm', 'md', 'lg'), reflect: true },
-			tone: { type: oneOf('primary', 'secondary'), reflect: true },
+			tone: { type: oneOf('primary', 'secondary', 'tertiary'), reflect: true },
 			isInvalid: { type: Boolean, reflect: true },
 			isDisabled: { type: Boolean, reflect: true },
 			isReadonly: { type: Boolean, reflect: true },

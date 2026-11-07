@@ -362,7 +362,7 @@
 .DocsPage .pullquote {
 	margin: 3.5rem 0;
 	padding: 0.25rem 0 0.25rem 1.75rem;
-	border-left: 3px solid var(--purple);
+	border-left: 3px solid var(--accent);
 }
 .DocsPage .pullquote + * {
 	margin-top: 3.5rem;
@@ -380,7 +380,7 @@
 	padding-left: 0.35rem;
 }
 .DocsPage .article-list li::marker {
-	color: var(--purple);
+	color: var(--accent);
 }
 .DocsPage .article-list li strong {
 	font-weight: 600;
@@ -452,7 +452,7 @@
 }
 .DocsPage .space-row .space-bar {
 	height: 0.875rem;
-	background: var(--purple);
+	background: var(--accent);
 	border-radius: 2px;
 }
 .DocsPage .space-row .space-value {

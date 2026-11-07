@@ -95,12 +95,12 @@ const styles = css`
 	}
 
 	/* a tone tints the inverse surface rather than replacing it */
-	:host([tone='primary']) .surface {
+	:host([tone='secondary']) .surface {
 		background: color-mix(in oklab, var(--inverse) 82%, var(--purple));
 		border-color: transparent;
 	}
 
-	:host([tone='secondary']) .surface {
+	:host([tone='tertiary']) .surface {
 		background: color-mix(in oklab, var(--inverse) 82%, var(--pink));
 		border-color: transparent;
 	}

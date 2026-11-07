@@ -137,7 +137,7 @@ const dropIndicatorStyles = css`
 		display: block;
 		height: 2px;
 		border-radius: 999px;
-		background: var(--accent, var(--purple));
+		background: var(--accent);
 		opacity: 0;
 		pointer-events: none;
 	}

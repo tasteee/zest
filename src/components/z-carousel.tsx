@@ -19,7 +19,7 @@ const styles = css`
 		--accent: var(--color-neutral-8);
 	}
 
-	:host([tone='secondary']) {
+	:host([tone='tertiary']) {
 		--accent: var(--pink);
 	}
 
@@ -232,7 +232,7 @@ export const ZCarousel = c(
 		props: {
 			autoplay: { type: Number },
 			doesLoop: { type: Boolean, reflect: true },
-			tone: { type: oneOf('neutral', 'primary', 'secondary'), reflect: true },
+			tone: { type: oneOf('primary', 'secondary', 'tertiary'), reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			change: event<{ index: number }>({ bubbles: true, composed: true })
 		},

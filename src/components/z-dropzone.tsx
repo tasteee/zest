@@ -41,8 +41,8 @@ const styles = css`
 		outline-offset: 2px;
 	}
 	:host([data-state='over']) .zone {
-		border-color: var(--purple);
-		background: color-mix(in oklch, var(--purple) 10%, transparent);
+		border-color: var(--accent);
+		background: color-mix(in oklch, var(--accent) 10%, transparent);
 		color: var(--foreground);
 	}
 	:host([data-state='reject']) .zone {
@@ -62,9 +62,9 @@ const styles = css`
 		justify-content: space-between;
 		gap: 0.75rem;
 		padding: 0.875rem 1rem;
-		border: 1px solid color-mix(in oklab, var(--purple) 32%, var(--border));
+		border: 1px solid color-mix(in oklab, var(--accent) 32%, var(--border));
 		border-radius: var(--radius-lg);
-		background: color-mix(in oklab, var(--purple) 7%, var(--paper));
+		background: color-mix(in oklab, var(--accent) 7%, var(--paper));
 		color: var(--foreground);
 	}
 	.selected-name {

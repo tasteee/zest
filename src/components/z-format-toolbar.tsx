@@ -104,8 +104,8 @@ const styles = css`
 	}
 
 	.heading-option.is-active {
-		background: color-mix(in oklch, var(--purple) 14%, transparent);
-		color: var(--purple);
+		background: color-mix(in oklch, var(--accent) 14%, transparent);
+		color: var(--accent);
 	}
 
 	.heading-option.is-selected {

@@ -192,15 +192,15 @@ const styles = css`
 	   colors
 	--------------------------------------------- */
 
-	.text.is-neutral {
+	.text.is-primary {
 		color: var(--foreground);
 	}
 
-	.text.is-primary {
+	.text.is-secondary {
 		color: var(--purple);
 	}
 
-	.text.is-secondary {
+	.text.is-tertiary {
 		color: var(--pink);
 	}
 
@@ -270,11 +270,11 @@ const styles = css`
 		box-sizing: border-box;
 	}
 
-	.inline.is-primary {
+	.inline.is-secondary {
 		color: var(--purple);
 	}
 
-	.inline.is-secondary {
+	.inline.is-tertiary {
 		color: var(--pink);
 	}
 
@@ -286,7 +286,7 @@ const styles = css`
 		color: var(--color-neutral-9);
 	}
 
-	.inline.is-neutral {
+	.inline.is-primary {
 		color: var(--foreground);
 	}
 
@@ -335,14 +335,14 @@ const resolveSizeClass = (props: any, fallback: string): string => {
 }
 
 const resolveColorClass = (props: any): string => {
-	if (props.color === 'primary') return 'is-primary'
 	if (props.color === 'secondary') return 'is-secondary'
+	if (props.color === 'tertiary') return 'is-tertiary'
 	if (props.color === 'muted') return 'is-muted'
 	if (props.color === 'strong') return 'is-strong'
 	if (props.color === 'success') return 'is-success'
 	if (props.color === 'warning') return 'is-warning'
 	if (props.color === 'danger') return 'is-danger'
-	return 'is-neutral'
+	return 'is-primary'
 }
 
 // Weight is passed straight through to CSS rather than mapped onto a fixed
@@ -393,11 +393,11 @@ const resolveTextClass = (props: any, variantClass: string, fallbackSizeClass: s
 }
 
 const resolveInlineColorClass = (props: any): string => {
-	if (props.color === 'primary') return 'is-primary'
 	if (props.color === 'secondary') return 'is-secondary'
+	if (props.color === 'tertiary') return 'is-tertiary'
 	if (props.color === 'muted') return 'is-muted'
 	if (props.color === 'strong') return 'is-strong'
-	if (props.color === 'neutral') return 'is-neutral'
+	if (props.color === 'primary') return 'is-primary'
 	// No explicit color: emit no override class so color inherits from
 	// whatever context this is dropped into, instead of forcing --foreground.
 	return ''
@@ -415,7 +415,7 @@ const resolveInlineClass = (props: any): string => {
 }
 
 const baseTextProps = {
-	color: { type: oneOf('neutral', 'primary', 'secondary', 'success', 'warning', 'danger', 'muted', 'strong'), reflect: true },
+	color: { type: oneOf('primary', 'secondary', 'tertiary', 'success', 'warning', 'danger', 'muted', 'strong'), reflect: true },
 	weight: { type: Number, reflect: true },
 	tag: String,
 	isHidden: { type: Boolean, reflect: true },
@@ -516,7 +516,7 @@ export const ZLabel = c(
 )
 
 const inlineProps = {
-	color: { type: oneOf('neutral', 'primary', 'secondary', 'muted', 'strong'), reflect: true },
+	color: { type: oneOf('primary', 'secondary', 'tertiary', 'muted', 'strong'), reflect: true },
 	weight: { type: Number, reflect: true },
 	tag: String,
 	isHidden: { type: Boolean, reflect: true },

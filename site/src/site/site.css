@@ -42,7 +42,7 @@ html {
 	width: 0.5rem;
 	height: 0.5rem;
 	border-radius: 999px;
-	background: var(--purple);
+	background: var(--accent);
 }
 
 .SiteNavLinks {
@@ -289,8 +289,8 @@ html {
 	height: 1.125rem;
 	padding: 0.1875rem;
 	border-radius: 999px;
-	color: var(--purple);
-	background: color-mix(in oklch, var(--purple) 16%, transparent);
+	color: var(--accent);
+	background: color-mix(in oklch, var(--accent) 16%, transparent);
 }
 
 /* ── footer ───────────────────────────────────────────────── */

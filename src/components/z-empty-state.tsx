@@ -20,13 +20,13 @@ const styles = css`
 		--accent: var(--color-neutral-6);
 	}
 
-	:host([tone='primary']) {
+	:host([tone='secondary']) {
 		--accent: var(--purple);
 	}
-	:host([tone='secondary']) {
+	:host([tone='tertiary']) {
 		--accent: var(--pink);
 	}
-	:host([tone='neutral']) {
+	:host([tone='primary']) {
 		--accent: var(--color-neutral-6);
 	}
 	:host([tone='success']) {
@@ -120,7 +120,7 @@ export const ZEmptyState = c(
 		props: {
 			heading: String,
 			description: String,
-			tone: { type: oneOf('neutral', 'primary', 'secondary', 'success', 'warning', 'danger'), reflect: true },
+			tone: { type: oneOf('primary', 'secondary', 'tertiary', 'success', 'warning', 'danger'), reflect: true },
 			isBordered: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true }
 		},

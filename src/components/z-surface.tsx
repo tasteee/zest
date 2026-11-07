@@ -31,13 +31,13 @@ const styles = css`
 	}
 
 	/* tones set --tone */
-	:host([tone='neutral']) {
+	:host([tone='primary']) {
 		--tone: var(--color-neutral-6);
 	}
-	:host([tone='primary']) {
+	:host([tone='secondary']) {
 		--tone: var(--purple);
 	}
-	:host([tone='secondary']) {
+	:host([tone='tertiary']) {
 		--tone: var(--pink);
 	}
 	:host([tone='success']) {
@@ -59,8 +59,8 @@ const styles = css`
 		color: var(--primary-foreground);
 	}
 	/* purple/pink fills are light; dark text reads better on them */
-	:host([kind='solid'][tone='primary']),
-	:host([kind='solid'][tone='secondary']) {
+	:host([kind='solid'][tone='secondary']),
+	:host([kind='solid'][tone='tertiary']) {
 		color: var(--color-neutral-8);
 	}
 	/* Tone tints are mixed with transparent, NOT the background: the neutral
@@ -136,7 +136,7 @@ export const ZSurface = c(
 	{
 		props: {
 			level: { type: oneOf('0', '1', '2', '3'), reflect: true },
-			tone: { type: oneOf('neutral', 'primary', 'secondary', 'success', 'warning', 'danger'), reflect: true },
+			tone: { type: oneOf('primary', 'secondary', 'tertiary', 'success', 'warning', 'danger'), reflect: true },
 			kind: { type: oneOf('solid', 'soft', 'outline', 'ghost', 'plain'), reflect: true },
 			radius: String,
 			isBordered: { type: Boolean, reflect: true },

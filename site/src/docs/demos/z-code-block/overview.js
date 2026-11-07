@@ -1,7 +1,7 @@
 const DEMO_CODE = `const resolveToneClass = (props: any): string => {
-  if (props.tone === 'primary') return 'is-primary'
   if (props.tone === 'secondary') return 'is-secondary'
-  return 'is-neutral'
+  if (props.tone === 'tertiary') return 'is-tertiary'
+  return 'is-primary'
 }`
 
 const codeBlock = document.querySelector('#code-block')

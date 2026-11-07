@@ -23,11 +23,11 @@ export const floatingSurfaceStyles = css`
 		--accent: var(--primary);
 	}
 
-	:host([tone='primary']) {
+	:host([tone='secondary']) {
 		--accent: var(--purple);
 	}
 
-	:host([tone='secondary']) {
+	:host([tone='tertiary']) {
 		--accent: var(--pink);
 	}
 
@@ -109,11 +109,11 @@ export const dialogSurfaceStyles = css`
 		--accent: var(--primary);
 	}
 
-	:host([tone='primary']) {
+	:host([tone='secondary']) {
 		--accent: var(--purple);
 	}
 
-	:host([tone='secondary']) {
+	:host([tone='tertiary']) {
 		--accent: var(--pink);
 	}
 

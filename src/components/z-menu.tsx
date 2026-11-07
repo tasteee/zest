@@ -32,11 +32,11 @@ const styles = css`
 		-webkit-user-select: none;
 	}
 
-	:host([tone='primary']) {
+	:host([tone='secondary']) {
 		--accent: var(--purple);
 	}
 
-	:host([tone='secondary']) {
+	:host([tone='tertiary']) {
 		--accent: var(--pink);
 	}
 
@@ -405,7 +405,7 @@ export const ZMenu = c(
 		props: {
 			items: { type: Array },
 			align: { type: oneOf('start', 'end'), reflect: true },
-			tone: { type: oneOf('primary', 'secondary'), reflect: true },
+			tone: { type: oneOf('primary', 'secondary', 'tertiary'), reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			select: event<{ value: string }>({ bubbles: true, composed: true })
 		},

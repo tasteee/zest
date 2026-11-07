@@ -43,13 +43,13 @@ const styles = css`
 	}
 
 	/* tones set --tone */
-	.badge.is-primary {
+	.badge.is-secondary {
 		--tone: var(--purple);
 	}
-	.badge.is-secondary {
+	.badge.is-tertiary {
 		--tone: var(--pink);
 	}
-	.badge.is-neutral {
+	.badge.is-primary {
 		--tone: var(--color-neutral-7);
 	}
 	.badge.is-success {
@@ -84,7 +84,7 @@ const styles = css`
 		box-shadow: var(--emissive-tone);
 		color: var(--on-accent);
 	}
-	.badge.is-solid.is-neutral { color: var(--primary-foreground); }
+	.badge.is-solid.is-primary { color: var(--primary-foreground); }
 
 	.badge.is-outline {
 		background: transparent;
@@ -93,7 +93,7 @@ const styles = css`
 		border-color: color-mix(in srgb, var(--tone) 45%, var(--border));
 		color: var(--tone);
 	}
-	.badge.is-neutral.is-outline {
+	.badge.is-primary.is-outline {
 		color: var(--muted-foreground);
 		border-color: var(--border);
 	}
@@ -138,7 +138,7 @@ const styles = css`
 		border-color: color-mix(in oklch, var(--tone) 50%, transparent);
 		color: color-mix(in oklch, var(--tone) 85%, white);
 	}
-	.badge.is-neutral.is-selected {
+	.badge.is-primary.is-selected {
 		color: var(--foreground);
 	}
 
@@ -203,12 +203,12 @@ const styles = css`
 `
 
 const resolveAccentClass = (props: any): string => {
-	if (props.tone === 'primary') return 'is-primary'
 	if (props.tone === 'secondary') return 'is-secondary'
+	if (props.tone === 'tertiary') return 'is-tertiary'
 	if (props.tone === 'success') return 'is-success'
 	if (props.tone === 'warning') return 'is-warning'
 	if (props.tone === 'danger') return 'is-error'
-	return 'is-neutral'
+	return 'is-primary'
 }
 
 const resolveKindClass = (props: any): string => {
@@ -277,7 +277,7 @@ export const ZBadge = c(
 	},
 	{
 		props: {
-			tone: { type: oneOf('neutral', 'primary', 'secondary', 'success', 'warning', 'danger'), reflect: true },
+			tone: { type: oneOf('primary', 'secondary', 'tertiary', 'success', 'warning', 'danger'), reflect: true },
 			kind: { type: oneOf('soft', 'solid', 'outline'), reflect: true },
 			size: { type: oneOf('sm', 'md'), reflect: true },
 			label: String,

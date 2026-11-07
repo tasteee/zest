@@ -36,11 +36,11 @@ const styles = css`
 	label.is-md { font-size: var(--font-size-small); }
 	label.is-lg { min-height: var(--control-height-lg); font-size: var(--font-size-body); }
 
-	:host([tone='primary']) label {
+	:host([tone='secondary']) label {
 		--accent: var(--purple);
 	}
 
-	:host([tone='secondary']) label {
+	:host([tone='tertiary']) label {
 		--accent: var(--pink);
 	}
 
@@ -212,7 +212,7 @@ export const ZCheckbox = c(
 			isDisabled: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			size: { type: oneOf('sm', 'md', 'lg'), reflect: true },
-			tone: { type: oneOf('primary', 'secondary'), reflect: true },
+			tone: { type: oneOf('primary', 'secondary', 'tertiary'), reflect: true },
 			name: { type: String, reflect: true },
 			value: String,
 			label: String,

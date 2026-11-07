@@ -23,7 +23,7 @@ export const Patterns = () => (
 
 		<DocsSection
 			id="trigger"
-			tone="primary"
+			tone="secondary"
 			title="The trigger slot"
 			sub={
 				<>
@@ -42,7 +42,7 @@ export const Patterns = () => (
 
 		<DocsSection
 			id="form-field"
-			tone="secondary"
+			tone="tertiary"
 			title="Labeled field"
 			sub={
 				<>
@@ -64,7 +64,7 @@ export const Patterns = () => (
 
 		<DocsSection
 			id="card-grid"
-			tone="primary"
+			tone="secondary"
 			title="Card grid"
 			sub={
 				<>
@@ -97,7 +97,7 @@ export const Patterns = () => (
 
 		<DocsSection
 			id="toolbar"
-			tone="secondary"
+			tone="tertiary"
 			title="Toolbar, trailing actions"
 			sub={
 				<>
@@ -115,7 +115,7 @@ export const Patterns = () => (
 					<z-button kind="outline" size="sm">
 						Cancel
 					</z-button>
-					<z-button tone="primary" kind="solid" size="sm">
+					<z-button tone="secondary" kind="solid" size="sm">
 						Save
 					</z-button>
 				</z-row>
@@ -124,7 +124,7 @@ export const Patterns = () => (
 
 		<DocsSection
 			id="destructive-confirm"
-			tone="primary"
+			tone="secondary"
 			title="Destructive confirmation"
 			sub={
 				<>

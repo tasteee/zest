@@ -52,7 +52,7 @@ import '@tasteee/zest/ink.css'
 
 export const App = () => (
   <>
-    <z-button kind="solid" tone="primary">Save</z-button>
+    <z-button kind="solid" tone="secondary">Save</z-button>
     <z-switch label="Dark mode" onchange={(event) => console.log(event.detail.checked)} />
     <z-button kind="huge">Error: "huge" is not a kind</z-button>
   </>

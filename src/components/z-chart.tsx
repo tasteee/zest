@@ -14,7 +14,7 @@ const styles = css`
 		--accent: var(--chart-1);
 	}
 
-	:host([tone='secondary']) {
+	:host([tone='tertiary']) {
 		--accent: var(--chart-2);
 	}
 	:host([tone='success']) {
