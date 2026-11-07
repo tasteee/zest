@@ -61,10 +61,10 @@ const styles = css`
 	}
 
 	/* colors, same vocabulary as z-text (neutral default = --foreground) */
-	.display.is-primary {
+	.display.is-secondary {
 		color: var(--purple);
 	}
-	.display.is-secondary {
+	.display.is-tertiary {
 		color: var(--pink);
 	}
 	.display.is-muted {
@@ -95,10 +95,10 @@ const resolveWeightStyle = (props: any): string => {
 const resolveDisplayClass = (props: any): string => {
 	const sizeClass = SIZE_CLASS[props.size] || 'is-lg'
 	const colorClass =
-		props.color === 'primary'
-			? 'is-primary'
-			: props.color === 'secondary'
-				? 'is-secondary'
+		props.color === 'secondary'
+			? 'is-secondary'
+			: props.color === 'tertiary'
+				? 'is-tertiary'
 				: props.color === 'muted'
 					? 'is-muted'
 					: props.color === 'strong'
@@ -123,7 +123,7 @@ export const ZDisplay = c(
 	{
 		props: {
 			size: { type: oneOf('sm', 'md', 'lg', 'xl'), reflect: true },
-			color: { type: oneOf('neutral', 'primary', 'secondary', 'muted', 'strong'), reflect: true },
+			color: { type: oneOf('primary', 'secondary', 'tertiary', 'muted', 'strong'), reflect: true },
 			weight: { type: Number, reflect: true },
 			tag: String,
 			isHidden: { type: Boolean, reflect: true }

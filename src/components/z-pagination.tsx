@@ -17,11 +17,11 @@ const styles = css`
 		-webkit-user-select: none;
 	}
 
-	:host([tone='primary']) {
+	:host([tone='secondary']) {
 		--accent: var(--purple);
 	}
 
-	:host([tone='secondary']) {
+	:host([tone='tertiary']) {
 		--accent: var(--pink);
 	}
 
@@ -188,7 +188,7 @@ export const ZPagination = c(
 			page: { type: Number, reflect: true },
 			total: { type: Number, reflect: true },
 			siblingCount: { type: Number, reflect: true },
-			tone: { type: oneOf('primary', 'secondary'), reflect: true },
+			tone: { type: oneOf('primary', 'secondary', 'tertiary'), reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			change: event<{ page: number }>({ bubbles: true, composed: true })
 		},

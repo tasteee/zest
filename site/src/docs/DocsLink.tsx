@@ -8,6 +8,6 @@ import type { ReactNode } from 'react'
 // clicks bubble as composed events), so navigation stays client-side.
 export const DocsLink = ({ href, children }: { href: string; children: ReactNode }) => (
 	<Link asChild href={href}>
-		<z-link tone="primary">{children}</z-link>
+		<z-link tone="secondary">{children}</z-link>
 	</Link>
 )

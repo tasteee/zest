@@ -20,11 +20,11 @@ const styles = css`
 		--accent: var(--primary);
 	}
 
-	:host([tone='primary']) {
+	:host([tone='secondary']) {
 		--accent: var(--purple);
 	}
 
-	:host([tone='secondary']) {
+	:host([tone='tertiary']) {
 		--accent: var(--pink);
 	}
 
@@ -248,7 +248,7 @@ export const ZInputOtp = c(
 			label: String,
 			length: { type: Number, reflect: true },
 			size: { type: oneOf('sm', 'md', 'lg'), reflect: true },
-			tone: { type: oneOf('primary', 'secondary'), reflect: true },
+			tone: { type: oneOf('primary', 'secondary', 'tertiary'), reflect: true },
 			isNumeric: { type: Boolean, reflect: true },
 			name: { type: String, reflect: true },
 			isRequired: { type: Boolean, reflect: true },

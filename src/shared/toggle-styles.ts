@@ -99,19 +99,19 @@ export const toggleStyles = css`
 		width: var(--z-toggle-button-height, var(--control-height-md));
 	}
 
-	button.is-primary {
+	button.is-secondary {
 		--z-toggle-button-color: var(--neon-purple);
 		--z-toggle-button-accent: var(--neon-purple);
 		--z-toggle-button-accent-foreground: var(--on-accent);
 	}
 
-	button.is-secondary {
+	button.is-tertiary {
 		--z-toggle-button-color: var(--neon-pink);
 		--z-toggle-button-accent: var(--neon-pink);
 		--z-toggle-button-accent-foreground: var(--on-accent);
 	}
 
-	button.is-neutral {
+	button.is-primary {
 		--z-toggle-button-color: var(--foreground);
 		--z-toggle-button-accent: var(--primary);
 		--z-toggle-button-accent-foreground: var(--primary-foreground);

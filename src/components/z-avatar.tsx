@@ -21,13 +21,13 @@ const styles = css`
 		display: none;
 	}
 
-	:host([tone='primary']) {
+	:host([tone='secondary']) {
 		--tone: var(--purple);
 	}
-	:host([tone='secondary']) {
+	:host([tone='tertiary']) {
 		--tone: var(--pink);
 	}
-	:host([tone='neutral']) {
+	:host([tone='primary']) {
 		--tone: var(--color-neutral-5);
 	}
 	:host([tone='success']) {
@@ -143,7 +143,7 @@ export const ZAvatar = c(
 			initials: String,
 			status: { type: oneOf('online', 'busy', 'away', 'offline'), reflect: true },
 			size: { type: oneOf('xs', 'sm', 'md', 'lg', 'xl'), reflect: true },
-			tone: { type: oneOf('neutral', 'primary', 'secondary', 'success', 'warning', 'danger'), reflect: true },
+			tone: { type: oneOf('primary', 'secondary', 'tertiary', 'success', 'warning', 'danger'), reflect: true },
 			isSquare: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true }
 		},

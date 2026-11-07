@@ -12,7 +12,7 @@ export const UsageHtml = () => (
 			Every option is an attribute in kebab-case. Boolean options are present or absent: <code>is-disabled</code>,{' '}
 			<code>is-open</code>.
 		</p>
-		<Code code={`<z-button kind="outline" tone="primary" is-loading>Saving</z-button>`} />
+		<Code code={`<z-button kind="outline" tone="secondary" is-loading>Saving</z-button>`} />
 
 		<h2>Content: slots and child elements</h2>
 		<p>

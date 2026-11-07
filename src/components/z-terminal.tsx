@@ -53,7 +53,7 @@ const styles = css`
 		--accent: var(--success);
 	}
 
-	:host([tone='secondary']) {
+	:host([tone='tertiary']) {
 		--accent: var(--purple);
 	}
 

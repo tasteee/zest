@@ -50,13 +50,13 @@ const styles = css`
 	}
 
 	/* tones */
-	a.is-primary {
+	a.is-secondary {
 		--tone-color: var(--purple);
 	}
-	a.is-secondary {
+	a.is-tertiary {
 		--tone-color: var(--pink);
 	}
-	a.is-neutral {
+	a.is-primary {
 		--tone-color: var(--foreground);
 	}
 
@@ -126,9 +126,9 @@ const resolveSizeClass = (props: any): string => {
 }
 
 const resolveAccentClass = (props: any): string => {
-	if (props.tone === 'secondary') return 'is-secondary'
-	if (props.tone === 'neutral') return 'is-neutral'
-	return 'is-primary'
+	if (props.tone === 'tertiary') return 'is-tertiary'
+	if (props.tone === 'primary') return 'is-primary'
+	return 'is-secondary'
 }
 
 const resolveUnderlineClass = (props: any): string => {
@@ -169,7 +169,7 @@ export const ZLink = c(
 			target: String,
 			label: String,
 			size: { type: oneOf('sm', 'md', 'lg'), reflect: true },
-			tone: { type: oneOf('neutral', 'primary', 'secondary'), reflect: true },
+			tone: { type: oneOf('primary', 'secondary', 'tertiary'), reflect: true },
 			underline: { type: oneOf('hover', 'always', 'none'), reflect: true },
 			isExternal: { type: Boolean, reflect: true },
 			isFullWidth: { type: Boolean, reflect: true },

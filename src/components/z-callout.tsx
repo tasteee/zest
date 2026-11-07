@@ -27,14 +27,14 @@ const styles = css`
 		--callout-fade: color-mix(in oklab, var(--callout-color) 7%, var(--background));
 	}
 
-	:host([tone='primary']) {
+	:host([tone='secondary']) {
 		--callout-color: var(--purple);
 	}
 	:host([tone='success']) {
 		--callout-color: var(--success);
 	}
-	:host([tone='secondary']) {
-		--callout-color: var(--accent-alt);
+	:host([tone='tertiary']) {
+		--callout-color: var(--accent-tertiary);
 	}
 	:host([tone='warning']) {
 		--callout-color: var(--warning);
@@ -277,7 +277,7 @@ export const ZCallout = c(
 	},
 	{
 		props: {
-			tone: { type: oneOf('primary', 'secondary', 'success', 'warning', 'danger'), reflect: true },
+			tone: { type: oneOf('primary', 'secondary', 'tertiary', 'success', 'warning', 'danger'), reflect: true },
 			heading: { type: String, reflect: true },
 			isExpandable: { type: Boolean, reflect: true },
 			isExpanded: { type: Boolean, reflect: true },

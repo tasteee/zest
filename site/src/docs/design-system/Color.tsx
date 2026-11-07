@@ -52,13 +52,18 @@ const SEMANTIC_TOKENS = [
 	},
 	{
 		token: '--accent',
-		label: 'Accent (purple)',
-		hint: 'The main accent. Active and selected states, links, and the one primary action or highlight on a screen.'
+		label: 'Accent (neutral)',
+		hint: 'The primary tone, and it is neutral. Active and selected states and the one primary action on a screen. The shell stays neutral so the artwork supplies the colour.'
 	},
 	{
-		token: '--accent-alt',
-		label: 'Accent alt (pink)',
-		hint: 'The secondary accent. Pairs with the main accent for gradients, charts, and a second level of emphasis. Use sparingly.'
+		token: '--accent-secondary',
+		label: 'Accent secondary (purple)',
+		hint: 'The secondary tone (tone="secondary"). Opt-in emphasis; use sparingly.'
+	},
+	{
+		token: '--accent-tertiary',
+		label: 'Accent tertiary (pink)',
+		hint: 'The tertiary tone (tone="tertiary"). Opt-in emphasis; pairs with purple in charts. Use sparingly.'
 	},
 	{
 		token: '--destructive',
@@ -93,48 +98,48 @@ export const Color = () => (
 		/>
 
 		<DocsSection
-			id="primary"
-			tone="secondary"
+			id="pink"
+			tone="tertiary"
 			title="Pink"
-			tag="--color-primary-0…9"
+			tag="--color-pink-0…9"
 			sub={
 				<>
-					Derived from <code className="inline">--base-accent-color-0</code>.{' '}
-					<code className="inline">--color-primary-4</code> is the base, steps below darken toward the background, steps
-					above lighten toward white. The token name is historical: components paint{' '}
-					<code className="inline">tone="secondary"</code> with this pink, not <code className="inline">tone="primary"</code>.
+					Derived from <code className="inline">--base-pink-color</code>.{' '}
+					<code className="inline">--color-pink-4</code> is the base, steps below darken toward the background, steps
+					above lighten toward white. This is the hue behind{' '}
+					<code className="inline">tone="tertiary"</code>.
 				</>
 			}
 		>
 			<div className="swatch-row">
 				{RAMP_STEPS.map((step) => (
-					<Swatch key={step} token={`--color-primary-${step}`} label={step} />
+					<Swatch key={step} token={`--color-pink-${step}`} label={step} />
 				))}
 			</div>
 		</DocsSection>
 
 		<DocsSection
-			id="secondary"
-			tone="primary"
+			id="purple"
+			tone="secondary"
 			title="Purple"
-			tag="--color-secondary-0…9"
+			tag="--color-purple-0…9"
 			sub={
 				<>
-					Derived from <code className="inline">--base-accent-color-1</code>, the same way as the pink ramp. This is the
-					hue behind <code className="inline">tone="primary"</code>.
+					Derived from <code className="inline">--base-purple-color</code>, the same way as the pink ramp. This is the
+					hue behind <code className="inline">tone="secondary"</code>.
 				</>
 			}
 		>
 			<div className="swatch-row">
 				{RAMP_STEPS.map((step) => (
-					<Swatch key={step} token={`--color-secondary-${step}`} label={step} />
+					<Swatch key={step} token={`--color-purple-${step}`} label={step} />
 				))}
 			</div>
 		</DocsSection>
 
 		<DocsSection
 			id="neutral"
-			tone="primary"
+			tone="secondary"
 			title="Neutral"
 			tag="--color-neutral-0…9"
 			sub={
@@ -154,7 +159,7 @@ export const Color = () => (
 
 		<DocsSection
 			id="semantic"
-			tone="secondary"
+			tone="tertiary"
 			title="Semantic aliases"
 			sub="What components actually read. Hover a swatch to see what it is for. Each aliases back to a step on one of the ramps above, so retheme by moving the alias, not by touching the ramp."
 		>

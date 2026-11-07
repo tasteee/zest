@@ -34,6 +34,6 @@ import '@tasteee/zest/fonts.css'
 		/>
 
 		<h2>Check it works</h2>
-		<Code language="html" code={`<z-button tone="primary">It works</z-button>`} />
+		<Code language="html" code={`<z-button tone="secondary">It works</z-button>`} />
 	</Article>
 )

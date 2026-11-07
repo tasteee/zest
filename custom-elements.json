@@ -67,7 +67,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "'neutral' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger'"
+                "text": "'primary' | 'secondary' | 'tertiary' | 'success' | 'warning' | 'danger'"
               },
               "description": "Sets the color and icon of the alert. Use `danger` for failures, `warning` for risks, `success` for confirmations, and `primary` for news."
             },
@@ -101,7 +101,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "'neutral' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger'"
+                "text": "'primary' | 'secondary' | 'tertiary' | 'success' | 'warning' | 'danger'"
               },
               "description": "Sets the color and icon of the alert. Use `danger` for failures, `warning` for risks, `success` for confirmations, and `primary` for news."
             },
@@ -210,7 +210,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "'primary' | 'secondary' | 'danger'"
+                "text": "'primary' | 'secondary' | 'tertiary' | 'danger'"
               },
               "description": "Color of the confirm button. Use `danger` for destructive actions."
             }
@@ -260,7 +260,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "'primary' | 'secondary' | 'danger'"
+                "text": "'primary' | 'secondary' | 'tertiary' | 'danger'"
               },
               "description": "Color of the confirm button. Use `danger` for destructive actions."
             }
@@ -345,7 +345,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "'neutral' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger'"
+                "text": "'primary' | 'secondary' | 'tertiary' | 'success' | 'warning' | 'danger'"
               },
               "description": "Tint behind the initials fallback."
             },
@@ -411,7 +411,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "'neutral' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger'"
+                "text": "'primary' | 'secondary' | 'tertiary' | 'success' | 'warning' | 'danger'"
               },
               "description": "Tint behind the initials fallback."
             },
@@ -527,7 +527,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "'neutral' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger'"
+                "text": "'primary' | 'secondary' | 'tertiary' | 'success' | 'warning' | 'danger'"
               },
               "description": "Color family of the badge. Use `danger`, `warning`, and `success` for status, `primary` and `secondary` for emphasis."
             },
@@ -617,7 +617,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "'neutral' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger'"
+                "text": "'primary' | 'secondary' | 'tertiary' | 'success' | 'warning' | 'danger'"
               },
               "description": "Color family of the badge. Use `danger`, `warning`, and `success` for status, `primary` and `secondary` for emphasis."
             },
@@ -1620,7 +1620,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "'primary' | 'secondary'"
+                "text": "'primary' | 'secondary' | 'tertiary'"
               },
               "description": "Accent color of links on hover and of the current page."
             },
@@ -1654,7 +1654,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "'primary' | 'secondary'"
+                "text": "'primary' | 'secondary' | 'tertiary'"
               },
               "description": "Accent color of links on hover and of the current page."
             },
@@ -1705,7 +1705,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "'neutral' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger'"
+                "text": "'primary' | 'secondary' | 'tertiary' | 'success' | 'warning' | 'danger'"
               },
               "description": "Color family of the button."
             },
@@ -1795,7 +1795,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "'neutral' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger'"
+                "text": "'primary' | 'secondary' | 'tertiary' | 'success' | 'warning' | 'danger'"
               },
               "description": "Color family of the button."
             },
@@ -1917,7 +1917,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "'primary' | 'secondary' | 'success' | 'warning' | 'danger'"
+                "text": "'primary' | 'secondary' | 'tertiary' | 'success' | 'warning' | 'danger'"
               },
               "description": "Type of note. Each kind has its own hue and icon."
             },
@@ -1959,7 +1959,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "'primary' | 'secondary' | 'success' | 'warning' | 'danger'"
+                "text": "'primary' | 'secondary' | 'tertiary' | 'success' | 'warning' | 'danger'"
               },
               "description": "Type of note. Each kind has its own hue and icon."
             },
@@ -2145,7 +2145,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "'neutral' | 'primary' | 'secondary'"
+                "text": "'primary' | 'secondary' | 'tertiary'"
               },
               "description": "Accent color of the controls and dots."
             },
@@ -2179,7 +2179,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "'neutral' | 'primary' | 'secondary'"
+                "text": "'primary' | 'secondary' | 'tertiary'"
               },
               "description": "Accent color of the controls and dots."
             },
@@ -2630,7 +2630,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "'primary' | 'secondary'"
+                "text": "'primary' | 'secondary' | 'tertiary'"
               },
               "description": "Accent color of the checked state."
             },
@@ -2728,7 +2728,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "'primary' | 'secondary'"
+                "text": "'primary' | 'secondary' | 'tertiary'"
               },
               "description": "Accent color of the checked state."
             },
@@ -2881,7 +2881,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "'primary' | 'secondary'"
+                "text": "'primary' | 'secondary' | 'tertiary'"
               },
               "description": "Accent color of the language tag in the header."
             },
@@ -2995,7 +2995,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "'primary' | 'secondary'"
+                "text": "'primary' | 'secondary' | 'tertiary'"
               },
               "description": "Accent color of the language tag in the header."
             },
@@ -3046,7 +3046,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "'primary' | 'secondary'"
+                "text": "'primary' | 'secondary' | 'tertiary'"
               },
               "description": "Accent color of the trigger when open."
             },
@@ -3096,7 +3096,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "'primary' | 'secondary'"
+                "text": "'primary' | 'secondary' | 'tertiary'"
               },
               "description": "Accent color of the trigger when open."
             },
@@ -3189,7 +3189,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "'primary' | 'secondary'"
+                "text": "'primary' | 'secondary' | 'tertiary'"
               },
               "description": "Accent color of the open state."
             },
@@ -3247,7 +3247,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "'primary' | 'secondary'"
+                "text": "'primary' | 'secondary' | 'tertiary'"
               },
               "description": "Accent color of the open state."
             },
@@ -3548,7 +3548,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "'primary' | 'secondary'"
+                "text": "'primary' | 'secondary' | 'tertiary'"
               },
               "description": "Accent color of the focused field and active option."
             },
@@ -3662,7 +3662,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "'primary' | 'secondary'"
+                "text": "'primary' | 'secondary' | 'tertiary'"
               },
               "description": "Accent color of the focused field and active option."
             },
@@ -4052,7 +4052,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "'primary' | 'secondary'"
+                "text": "'primary' | 'secondary' | 'tertiary'"
               },
               "description": "Accent color of the highlighted item."
             },
@@ -4078,7 +4078,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "'primary' | 'secondary'"
+                "text": "'primary' | 'secondary' | 'tertiary'"
               },
               "description": "Accent color of the highlighted item."
             },
@@ -4293,7 +4293,7 @@
               "kind": "field",
               "name": "color",
               "type": {
-                "text": "'neutral' | 'primary' | 'secondary' | 'muted' | 'strong'"
+                "text": "'primary' | 'secondary' | 'tertiary' | 'muted' | 'strong'"
               },
               "description": "Text color."
             },
@@ -4335,7 +4335,7 @@
               "name": "color",
               "fieldName": "color",
               "type": {
-                "text": "'neutral' | 'primary' | 'secondary' | 'muted' | 'strong'"
+                "text": "'primary' | 'secondary' | 'tertiary' | 'muted' | 'strong'"
               },
               "description": "Text color."
             },
@@ -5102,7 +5102,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "'neutral' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger'"
+                "text": "'primary' | 'secondary' | 'tertiary' | 'success' | 'warning' | 'danger'"
               },
               "description": "Tint of the icon."
             },
@@ -5144,7 +5144,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "'neutral' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger'"
+                "text": "'primary' | 'secondary' | 'tertiary' | 'success' | 'warning' | 'danger'"
               },
               "description": "Tint of the icon."
             },
@@ -5188,7 +5188,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "'neutral' | 'primary' | 'secondary'"
+                "text": "'primary' | 'secondary' | 'tertiary'"
               },
               "description": "Accent color of the label."
             },
@@ -5230,7 +5230,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "'neutral' | 'primary' | 'secondary'"
+                "text": "'primary' | 'secondary' | 'tertiary'"
               },
               "description": "Accent color of the label."
             },
@@ -5456,7 +5456,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "'neutral' | 'primary' | 'secondary'"
+                "text": "'primary' | 'secondary' | 'tertiary'"
               },
               "description": "Accent color of the active pill."
             },
@@ -5530,7 +5530,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "'neutral' | 'primary' | 'secondary'"
+                "text": "'primary' | 'secondary' | 'tertiary'"
               },
               "description": "Accent color of the active pill."
             },
@@ -5799,7 +5799,7 @@
               "kind": "field",
               "name": "color",
               "type": {
-                "text": "'neutral' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger' | 'muted' | 'strong'"
+                "text": "'primary' | 'secondary' | 'tertiary' | 'success' | 'warning' | 'danger' | 'muted' | 'strong'"
               },
               "description": "Text color. `neutral` is the default foreground, `muted` recedes, `primary` and `secondary` are accents, and `white` is the brightest."
             },
@@ -5865,7 +5865,7 @@
               "name": "color",
               "fieldName": "color",
               "type": {
-                "text": "'neutral' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger' | 'muted' | 'strong'"
+                "text": "'primary' | 'secondary' | 'tertiary' | 'success' | 'warning' | 'danger' | 'muted' | 'strong'"
               },
               "description": "Text color. `neutral` is the default foreground, `muted` recedes, `primary` and `secondary` are accents, and `white` is the brightest."
             },
@@ -5961,7 +5961,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "'primary' | 'secondary'"
+                "text": "'primary' | 'secondary' | 'tertiary'"
               },
               "description": "Accent for the surface."
             },
@@ -6011,7 +6011,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "'primary' | 'secondary'"
+                "text": "'primary' | 'secondary' | 'tertiary'"
               },
               "description": "Accent for the surface."
             },
@@ -6075,7 +6075,7 @@
               "kind": "field",
               "name": "color",
               "type": {
-                "text": "'neutral' | 'primary' | 'secondary' | 'muted' | 'strong'"
+                "text": "'primary' | 'secondary' | 'tertiary' | 'muted' | 'strong'"
               },
               "description": "Text color. By default the text inherits the color of its parent."
             },
@@ -6133,7 +6133,7 @@
               "name": "color",
               "fieldName": "color",
               "type": {
-                "text": "'neutral' | 'primary' | 'secondary' | 'muted' | 'strong'"
+                "text": "'primary' | 'secondary' | 'tertiary' | 'muted' | 'strong'"
               },
               "description": "Text color. By default the text inherits the color of its parent."
             },
@@ -6285,7 +6285,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "'primary' | 'secondary'"
+                "text": "'primary' | 'secondary' | 'tertiary'"
               },
               "description": "Accent color of the focus ring and border."
             },
@@ -6431,7 +6431,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "'primary' | 'secondary'"
+                "text": "'primary' | 'secondary' | 'tertiary'"
               },
               "description": "Accent color of the focus ring and border."
             },
@@ -6564,7 +6564,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "'primary' | 'secondary'"
+                "text": "'primary' | 'secondary' | 'tertiary'"
               },
               "description": "Accent color of the active cell."
             },
@@ -6654,7 +6654,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "'primary' | 'secondary'"
+                "text": "'primary' | 'secondary' | 'tertiary'"
               },
               "description": "Accent color of the active cell."
             },
@@ -6803,7 +6803,7 @@
               "kind": "field",
               "name": "color",
               "type": {
-                "text": "'neutral' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger' | 'muted' | 'strong'"
+                "text": "'primary' | 'secondary' | 'tertiary' | 'success' | 'warning' | 'danger' | 'muted' | 'strong'"
               },
               "description": "Text color. `neutral` is the default foreground, `muted` recedes, `primary` and `secondary` are accents, and `white` is the brightest."
             },
@@ -6861,7 +6861,7 @@
               "name": "color",
               "fieldName": "color",
               "type": {
-                "text": "'neutral' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger' | 'muted' | 'strong'"
+                "text": "'primary' | 'secondary' | 'tertiary' | 'success' | 'warning' | 'danger' | 'muted' | 'strong'"
               },
               "description": "Text color. `neutral` is the default foreground, `muted` recedes, `primary` and `secondary` are accents, and `white` is the brightest."
             },
@@ -6993,7 +6993,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "'neutral' | 'primary' | 'secondary'"
+                "text": "'primary' | 'secondary' | 'tertiary'"
               },
               "description": "Color of the link."
             },
@@ -7075,7 +7075,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "'neutral' | 'primary' | 'secondary'"
+                "text": "'primary' | 'secondary' | 'tertiary'"
               },
               "description": "Color of the link."
             },
@@ -7401,7 +7401,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "'primary' | 'secondary'"
+                "text": "'primary' | 'secondary' | 'tertiary'"
               },
               "description": "Accent color of the highlighted item."
             },
@@ -7435,7 +7435,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "'primary' | 'secondary'"
+                "text": "'primary' | 'secondary' | 'tertiary'"
               },
               "description": "Accent color of the highlighted item."
             },
@@ -7604,7 +7604,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "'primary' | 'secondary'"
+                "text": "'primary' | 'secondary' | 'tertiary'"
               },
               "description": "Accent color of the active entry."
             },
@@ -7638,7 +7638,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "'primary' | 'secondary'"
+                "text": "'primary' | 'secondary' | 'tertiary'"
               },
               "description": "Accent color of the active entry."
             },
@@ -7769,7 +7769,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "'primary' | 'secondary'"
+                "text": "'primary' | 'secondary' | 'tertiary'"
               },
               "description": "Accent color of the focus ring."
             },
@@ -7947,7 +7947,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "'primary' | 'secondary'"
+                "text": "'primary' | 'secondary' | 'tertiary'"
               },
               "description": "Accent color of the focus ring."
             },
@@ -8158,7 +8158,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "'primary' | 'secondary'"
+                "text": "'primary' | 'secondary' | 'tertiary'"
               },
               "description": "Accent color of the focus ring."
             },
@@ -8328,7 +8328,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "'primary' | 'secondary'"
+                "text": "'primary' | 'secondary' | 'tertiary'"
               },
               "description": "Accent color of the focus ring."
             },
@@ -8451,7 +8451,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "'primary' | 'secondary'"
+                "text": "'primary' | 'secondary' | 'tertiary'"
               },
               "description": "Accent color of the current page."
             },
@@ -8501,7 +8501,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "'primary' | 'secondary'"
+                "text": "'primary' | 'secondary' | 'tertiary'"
               },
               "description": "Accent color of the current page."
             },
@@ -8544,7 +8544,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "'neutral' | 'primary' | 'secondary'"
+                "text": "'primary' | 'secondary' | 'tertiary'"
               },
               "description": "Color of the dot and tag."
             },
@@ -8578,7 +8578,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "'neutral' | 'primary' | 'secondary'"
+                "text": "'primary' | 'secondary' | 'tertiary'"
               },
               "description": "Color of the dot and tag."
             },
@@ -8634,7 +8634,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "'primary' | 'secondary'"
+                "text": "'primary' | 'secondary' | 'tertiary'"
               },
               "description": "Accent for the surface."
             },
@@ -8692,7 +8692,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "'primary' | 'secondary'"
+                "text": "'primary' | 'secondary' | 'tertiary'"
               },
               "description": "Accent for the surface."
             },
@@ -8789,7 +8789,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "'neutral' | 'secondary' | 'success' | 'danger'"
+                "text": "'primary' | 'tertiary' | 'success' | 'danger'"
               },
               "description": "Color of the bar."
             },
@@ -8839,7 +8839,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "'neutral' | 'secondary' | 'success' | 'danger'"
+                "text": "'primary' | 'tertiary' | 'success' | 'danger'"
               },
               "description": "Color of the bar."
             },
@@ -8905,7 +8905,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "'primary' | 'secondary'"
+                "text": "'primary' | 'secondary' | 'tertiary'"
               },
               "description": "Accent color of the selected state."
             },
@@ -8955,7 +8955,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "'primary' | 'secondary'"
+                "text": "'primary' | 'secondary' | 'tertiary'"
               },
               "description": "Accent color of the selected state."
             },
@@ -9052,7 +9052,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "'neutral' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger'"
+                "text": "'primary' | 'secondary' | 'tertiary' | 'success' | 'warning' | 'danger'"
               },
               "description": "Accent color of the selected option."
             },
@@ -9134,7 +9134,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "'neutral' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger'"
+                "text": "'primary' | 'secondary' | 'tertiary' | 'success' | 'warning' | 'danger'"
               },
               "description": "Accent color of the selected option."
             },
@@ -10088,7 +10088,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "'primary' | 'secondary'"
+                "text": "'primary' | 'secondary' | 'tertiary'"
               },
               "description": "Accent color of the focus ring and highlighted option."
             },
@@ -10202,7 +10202,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "'primary' | 'secondary'"
+                "text": "'primary' | 'secondary' | 'tertiary'"
               },
               "description": "Accent color of the focus ring and highlighted option."
             },
@@ -10513,7 +10513,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "'primary' | 'secondary'"
+                "text": "'primary' | 'secondary' | 'tertiary'"
               },
               "description": "Accent color of the active entry."
             },
@@ -10563,7 +10563,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "'primary' | 'secondary'"
+                "text": "'primary' | 'secondary' | 'tertiary'"
               },
               "description": "Accent color of the active entry."
             },
@@ -10816,7 +10816,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "'primary' | 'secondary'"
+                "text": "'primary' | 'secondary' | 'tertiary'"
               },
               "description": "Accent color of the filled track and thumb."
             },
@@ -10914,7 +10914,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "'primary' | 'secondary'"
+                "text": "'primary' | 'secondary' | 'tertiary'"
               },
               "description": "Accent color of the filled track and thumb."
             },
@@ -11132,7 +11132,7 @@
               "kind": "field",
               "name": "color",
               "type": {
-                "text": "'neutral' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger' | 'muted' | 'strong'"
+                "text": "'primary' | 'secondary' | 'tertiary' | 'success' | 'warning' | 'danger' | 'muted' | 'strong'"
               },
               "description": "Color of the value."
             },
@@ -11190,7 +11190,7 @@
               "name": "color",
               "fieldName": "color",
               "type": {
-                "text": "'neutral' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger' | 'muted' | 'strong'"
+                "text": "'primary' | 'secondary' | 'tertiary' | 'success' | 'warning' | 'danger' | 'muted' | 'strong'"
               },
               "description": "Color of the value."
             },
@@ -11326,7 +11326,7 @@
               "kind": "field",
               "name": "color",
               "type": {
-                "text": "'neutral' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger' | 'muted' | 'strong'"
+                "text": "'primary' | 'secondary' | 'tertiary' | 'success' | 'warning' | 'danger' | 'muted' | 'strong'"
               },
               "description": "Text color. `neutral` is the default foreground, `muted` recedes, `primary` and `secondary` are accents, and `white` is the brightest."
             },
@@ -11392,7 +11392,7 @@
               "name": "color",
               "fieldName": "color",
               "type": {
-                "text": "'neutral' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger' | 'muted' | 'strong'"
+                "text": "'primary' | 'secondary' | 'tertiary' | 'success' | 'warning' | 'danger' | 'muted' | 'strong'"
               },
               "description": "Text color. `neutral` is the default foreground, `muted` recedes, `primary` and `secondary` are accents, and `white` is the brightest."
             },
@@ -11480,7 +11480,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "'neutral' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger'"
+                "text": "'primary' | 'secondary' | 'tertiary' | 'success' | 'warning' | 'danger'"
               },
               "description": "Color family of the surface. `plain` has no tint."
             },
@@ -11570,7 +11570,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "'neutral' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger'"
+                "text": "'primary' | 'secondary' | 'tertiary' | 'success' | 'warning' | 'danger'"
               },
               "description": "Color family of the surface. `plain` has no tint."
             },
@@ -11873,7 +11873,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "'primary' | 'secondary'"
+                "text": "'primary' | 'secondary' | 'tertiary'"
               },
               "description": "Accent color of the on state."
             },
@@ -11971,7 +11971,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "'primary' | 'secondary'"
+                "text": "'primary' | 'secondary' | 'tertiary'"
               },
               "description": "Accent color of the on state."
             },
@@ -12219,7 +12219,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "'primary' | 'secondary'"
+                "text": "'primary' | 'secondary' | 'tertiary'"
               },
               "description": "Color of the active underline."
             },
@@ -12269,7 +12269,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "'primary' | 'secondary'"
+                "text": "'primary' | 'secondary' | 'tertiary'"
               },
               "description": "Color of the active underline."
             },
@@ -12312,7 +12312,7 @@
               "kind": "field",
               "name": "color",
               "type": {
-                "text": "'neutral' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger' | 'muted' | 'strong'"
+                "text": "'primary' | 'secondary' | 'tertiary' | 'success' | 'warning' | 'danger' | 'muted' | 'strong'"
               },
               "description": "Text color. `neutral` is the default foreground, `muted` recedes, `primary` and `secondary` are accents, and `white` is the brightest."
             },
@@ -12378,7 +12378,7 @@
               "name": "color",
               "fieldName": "color",
               "type": {
-                "text": "'neutral' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger' | 'muted' | 'strong'"
+                "text": "'primary' | 'secondary' | 'tertiary' | 'success' | 'warning' | 'danger' | 'muted' | 'strong'"
               },
               "description": "Text color. `neutral` is the default foreground, `muted` recedes, `primary` and `secondary` are accents, and `white` is the brightest."
             },
@@ -12522,7 +12522,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "'primary' | 'secondary'"
+                "text": "'primary' | 'secondary' | 'tertiary'"
               },
               "description": "Accent color of the focus ring and border."
             },
@@ -12652,7 +12652,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "'primary' | 'secondary'"
+                "text": "'primary' | 'secondary' | 'tertiary'"
               },
               "description": "Accent color of the focus ring and border."
             },
@@ -12751,7 +12751,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "'primary' | 'secondary'"
+                "text": "'primary' | 'secondary' | 'tertiary'"
               },
               "description": "Accent color of the active choice."
             },
@@ -12801,7 +12801,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "'primary' | 'secondary'"
+                "text": "'primary' | 'secondary' | 'tertiary'"
               },
               "description": "Accent color of the active choice."
             },
@@ -12904,7 +12904,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "'neutral' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger'"
+                "text": "'primary' | 'secondary' | 'tertiary' | 'success' | 'warning' | 'danger'"
               },
               "description": "Colour family. On the group it applies to every item; an item can override it."
             },
@@ -12962,7 +12962,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "'neutral' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger'"
+                "text": "'primary' | 'secondary' | 'tertiary' | 'success' | 'warning' | 'danger'"
               },
               "description": "Colour family. On the group it applies to every item; an item can override it."
             },
@@ -13034,7 +13034,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "'neutral' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger'"
+                "text": "'primary' | 'secondary' | 'tertiary' | 'success' | 'warning' | 'danger'"
               },
               "description": "Colour family. On the group it applies to every item; an item can override it."
             },
@@ -13108,7 +13108,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "'neutral' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger'"
+                "text": "'primary' | 'secondary' | 'tertiary' | 'success' | 'warning' | 'danger'"
               },
               "description": "Colour family. On the group it applies to every item; an item can override it."
             },
@@ -13205,7 +13205,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "'neutral' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger'"
+                "text": "'primary' | 'secondary' | 'tertiary' | 'success' | 'warning' | 'danger'"
               },
               "description": "Colour family. On the group it applies to every item; an item can override it."
             },
@@ -13271,7 +13271,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "'neutral' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger'"
+                "text": "'primary' | 'secondary' | 'tertiary' | 'success' | 'warning' | 'danger'"
               },
               "description": "Colour family. On the group it applies to every item; an item can override it."
             },
@@ -13519,7 +13519,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "'primary' | 'secondary'"
+                "text": "'primary' | 'secondary' | 'tertiary'"
               },
               "description": "Color of the tooltip."
             },
@@ -13585,7 +13585,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "'primary' | 'secondary'"
+                "text": "'primary' | 'secondary' | 'tertiary'"
               },
               "description": "Color of the tooltip."
             },

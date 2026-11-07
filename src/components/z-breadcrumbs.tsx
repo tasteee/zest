@@ -14,10 +14,14 @@ import { oneOf } from '../shared/prop-types'
 const styles = css`
 	:host {
 		display: block;
-		--accent: var(--purple);
+		--accent: var(--primary);
 	}
 
 	:host([tone='secondary']) {
+		--accent: var(--purple);
+	}
+
+	:host([tone='tertiary']) {
 		--accent: var(--pink);
 	}
 
@@ -147,7 +151,7 @@ export const ZBreadcrumbs = c(
 		props: {
 			items: { type: Array },
 			max: { type: Number },
-			tone: { type: oneOf('primary', 'secondary'), reflect: true },
+			tone: { type: oneOf('primary', 'secondary', 'tertiary'), reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			navigate: event<{ value: string; index: number }>({ bubbles: true, composed: true })
 		},

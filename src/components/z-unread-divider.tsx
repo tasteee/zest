@@ -16,7 +16,7 @@ const styles = css`
 		margin: var(--space-sm) 0;
 		--tone: var(--primary);
 	}
-	:host([tone='secondary']) {
+	:host([tone='tertiary']) {
 		--tone: var(--pink);
 	}
 	:host([is-hidden]) {

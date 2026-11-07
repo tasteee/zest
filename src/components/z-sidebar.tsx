@@ -43,13 +43,17 @@ const styles = css`
 		border-radius: var(--radius-lg);
 		padding: var(--space-sm) var(--space-md) var(--space-md);
 		color: var(--sidebar-foreground);
-		--accent: var(--purple);
+		--accent: var(--primary);
 		transition: width var(--motion-fast) var(--ease-enter);
 		user-select: none;
 		-webkit-user-select: none;
 	}
 
 	:host([tone='secondary']) {
+		--accent: var(--purple);
+	}
+
+	:host([tone='tertiary']) {
 		--accent: var(--pink);
 	}
 
@@ -427,7 +431,7 @@ export const ZSidebar = c(
 		props: {
 			items: { type: Array },
 			value: { type: String, reflect: true },
-			tone: { type: oneOf('primary', 'secondary'), reflect: true },
+			tone: { type: oneOf('primary', 'secondary', 'tertiary'), reflect: true },
 			isCollapsed: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			isDocked: { type: Boolean, reflect: true },

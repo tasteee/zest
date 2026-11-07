@@ -59,7 +59,7 @@ export const Spacing = () => (
 
 		<DocsSection
 			id="gap-scale"
-			tone="primary"
+			tone="secondary"
 			title="Gap / inset keywords"
 			tag="resolveSize() · layout-schema.ts"
 			sub={
@@ -85,7 +85,7 @@ export const Spacing = () => (
 
 		<DocsSection
 			id="raw-scale"
-			tone="secondary"
+			tone="tertiary"
 			title="Semantic aliases"
 			tag="--space-xs…3xl"
 			sub={
@@ -104,7 +104,7 @@ export const Spacing = () => (
 
 		<DocsSection
 			id="radius"
-			tone="primary"
+			tone="secondary"
 			title="Radius"
 			tag="--radius-sm…xl"
 			sub={

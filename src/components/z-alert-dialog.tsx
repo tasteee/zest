@@ -70,7 +70,7 @@ export const ZAlertDialog = c(
 						<slot />
 					</div>
 					<div class="footer">
-						<z-button kind="outline" tone="neutral" onclick={() => resolve(false)}>
+						<z-button kind="outline" tone="primary" onclick={() => resolve(false)}>
 							{props.cancelLabel || t('cancel')}
 						</z-button>
 						<z-button kind="solid" tone={confirmAccent} onclick={() => resolve(true)}>
@@ -88,7 +88,7 @@ export const ZAlertDialog = c(
 			description: String,
 			confirmLabel: String,
 			cancelLabel: String,
-			tone: { type: oneOf('primary', 'secondary', 'danger'), reflect: true },
+			tone: { type: oneOf('primary', 'secondary', 'tertiary', 'danger'), reflect: true },
 			confirm: event<void>({ bubbles: true, composed: true }),
 			cancel: event<void>({ bubbles: true, composed: true })
 		},

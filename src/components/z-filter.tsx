@@ -27,10 +27,10 @@ const styles = css`
 		--filter-accent: var(--primary);
 	}
 
-	:host([tone='primary']) {
+	:host([tone='secondary']) {
 		--filter-accent: var(--purple);
 	}
-	:host([tone='secondary']) {
+	:host([tone='tertiary']) {
 		--filter-accent: var(--pink);
 	}
 
@@ -97,8 +97,8 @@ const styles = css`
 	/* neutral tone === foreground, which reads fine as text on the faint tint */
 	:host(:not([tone])) .pill.is-active,
 	:host(:not([tone])) .pill.is-crumb,
-	:host([tone='neutral']) .pill.is-active,
-	:host([tone='neutral']) .pill.is-crumb {
+	:host([tone='primary']) .pill.is-active,
+	:host([tone='primary']) .pill.is-crumb {
 		color: var(--foreground);
 	}
 
@@ -318,7 +318,7 @@ export const ZFilter = c(
 		props: {
 			options: { type: Array },
 			name: { type: String, reflect: true },
-			tone: { type: oneOf('neutral', 'primary', 'secondary'), reflect: true },
+			tone: { type: oneOf('primary', 'secondary', 'tertiary'), reflect: true },
 			size: { type: oneOf('sm', 'md', 'lg'), reflect: true },
 			label: String,
 			resetLabel: String,

@@ -45,11 +45,11 @@ const styles = css`
 
 	/* tone overrides the side-based background, for status/system bubbles
 	   (a payment failure, a success confirmation, …) regardless of who "sent" it. */
-	:host([tone='primary']) .bubble {
+	:host([tone='secondary']) .bubble {
 		background: color-mix(in oklch, var(--purple) 16%, var(--card));
 		color: var(--foreground);
 	}
-	:host([tone='secondary']) .bubble {
+	:host([tone='tertiary']) .bubble {
 		background: color-mix(in oklch, var(--pink) 16%, var(--card));
 		color: var(--foreground);
 	}

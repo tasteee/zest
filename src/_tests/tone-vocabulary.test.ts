@@ -12,11 +12,11 @@ import { describe, expect, it } from 'vitest'
  * CSS length or width token for `size`.
  */
 
-const sharedTones = ['neutral', 'primary', 'secondary', 'success', 'warning', 'danger']
+const sharedTones = ['primary', 'secondary', 'tertiary', 'success', 'warning', 'danger']
 const sharedSizes = ['xs', 'sm', 'md', 'lg', 'xl', 'xxl']
 const sharedVisualKinds = ['solid', 'soft', 'outline', 'ghost', 'plain']
 const openSizeTags = ['z-container', 'z-spacer']
-const sharedTextColors = ['neutral', 'primary', 'secondary', 'success', 'warning', 'danger', 'muted', 'strong']
+const sharedTextColors = ['primary', 'secondary', 'tertiary', 'success', 'warning', 'danger', 'muted', 'strong']
 const layoutPropNames = ['direction', 'side', 'align', 'position']
 // `kind` picks a layout, not a look, on these two.
 const layoutKindTags = ['z-swap', 'z-theme-switcher']

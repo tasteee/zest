@@ -77,15 +77,15 @@ const styles = css`
 		font-size: var(--control-font-size-lg);
 	}
 
-	button.is-neutral {
+	button.is-primary {
 		--tone-color: var(--color-neutral-8);
 	}
 
-	button.is-primary {
+	button.is-secondary {
 		--tone-color: var(--purple);
 	}
 
-	button.is-secondary {
+	button.is-tertiary {
 		--tone-color: var(--pink);
 	}
 
@@ -135,7 +135,7 @@ const styles = css`
 	/* The neutral tone is the one fill that flips with the theme — near-white
 	   on dark, near-black on light — so its label has to flip with it rather
 	   than being pinned to black. */
-	button.is-solid.is-neutral {
+	button.is-solid.is-primary {
 		color: var(--primary-foreground);
 	}
 
@@ -247,12 +247,12 @@ const styles = css`
 		height: 1.125rem;
 	}
 
-	button.is-outline.is-neutral {
+	button.is-outline.is-primary {
 		border-color: var(--border);
 		color: var(--foreground);
 	}
 
-	button.is-outline.is-neutral:hover {
+	button.is-outline.is-primary:hover {
 		border-color: var(--color-neutral-4);
 	}
 
@@ -284,12 +284,12 @@ const resolveKindClass = (props: any): string => {
 }
 
 const resolveAccentClass = (props: any): string => {
-	if (props.tone === 'primary') return 'is-primary'
 	if (props.tone === 'secondary') return 'is-secondary'
+	if (props.tone === 'tertiary') return 'is-tertiary'
 	if (props.tone === 'success') return 'is-success'
 	if (props.tone === 'warning') return 'is-warning'
 	if (props.tone === 'danger') return 'is-error'
-	return 'is-neutral'
+	return 'is-primary'
 }
 
 export const ZButton = c(
@@ -344,7 +344,7 @@ export const ZButton = c(
 		props: {
 			size: { type: oneOf('sm', 'md', 'lg'), reflect: true },
 			kind: { type: oneOf('solid', 'outline', 'ghost', 'soft', 'plain'), reflect: true },
-			tone: { type: oneOf('neutral', 'primary', 'secondary', 'success', 'warning', 'danger'), reflect: true },
+			tone: { type: oneOf('primary', 'secondary', 'tertiary', 'success', 'warning', 'danger'), reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			isDisabled: { type: Boolean, reflect: true },
 			isLoading: { type: Boolean, reflect: true },

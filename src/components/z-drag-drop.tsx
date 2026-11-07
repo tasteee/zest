@@ -220,8 +220,8 @@ const dropTargetStyles = css`
 			box-shadow var(--motion-fast) var(--ease-enter);
 	}
 	:host([data-state='over']) {
-		background: color-mix(in oklch, var(--accent, var(--purple)) 12%, transparent);
-		box-shadow: inset 0 0 0 2px var(--accent, var(--purple));
+		background: color-mix(in oklch, var(--accent) 12%, transparent);
+		box-shadow: inset 0 0 0 2px var(--accent);
 	}
 	:host([data-state='reject']) {
 		background: color-mix(in oklch, var(--destructive) 10%, transparent);

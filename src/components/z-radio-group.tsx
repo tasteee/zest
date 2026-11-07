@@ -27,8 +27,8 @@ const styles = css`
 		--z-radio-group-accent: var(--primary);
 	}
 
-	:host([tone='primary']) { --z-radio-group-accent: var(--purple); }
-	:host([tone='secondary']) { --z-radio-group-accent: var(--pink); }
+	:host([tone='secondary']) { --z-radio-group-accent: var(--purple); }
+	:host([tone='tertiary']) { --z-radio-group-accent: var(--pink); }
 	:host([tone='success']) { --z-radio-group-accent: var(--success); }
 	:host([tone='warning']) { --z-radio-group-accent: var(--warning); }
 	:host([tone='danger']) { --z-radio-group-accent: var(--destructive); }
@@ -196,7 +196,7 @@ export const ZRadioGroup = c(
 			name: { type: String, reflect: true },
 			label: String,
 			direction: { type: oneOf('vertical', 'horizontal'), reflect: true },
-			tone: { type: oneOf('neutral', 'primary', 'secondary', 'success', 'warning', 'danger'), reflect: true },
+			tone: { type: oneOf('primary', 'secondary', 'tertiary', 'success', 'warning', 'danger'), reflect: true },
 			isRequired: { type: Boolean, reflect: true },
 			isDisabled: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },

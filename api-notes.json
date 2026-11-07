@@ -45,14 +45,14 @@
 		"props": {
 			"tone": {
 				"values": [
-					"neutral",
 					"primary",
 					"secondary",
+					"tertiary",
 					"success",
 					"warning",
 					"danger"
 				],
-				"default": "neutral",
+				"default": "primary",
 				"description": "Sets the color and icon of the alert. Use `danger` for failures, `warning` for risks, `success` for confirmations, and `primary` for news."
 			},
 			"heading": {
@@ -124,6 +124,7 @@
 				"values": [
 					"primary",
 					"secondary",
+					"tertiary",
 					"danger"
 				],
 				"default": "primary",
@@ -193,14 +194,14 @@
 			},
 			"tone": {
 				"values": [
-					"neutral",
 					"primary",
 					"secondary",
+					"tertiary",
 					"success",
 					"warning",
 					"danger"
 				],
-				"default": "primary",
+				"default": "secondary",
 				"description": "Tint behind the initials fallback."
 			},
 			"is-square": {
@@ -254,14 +255,14 @@
 		"props": {
 			"tone": {
 				"values": [
-					"neutral",
 					"primary",
 					"secondary",
+					"tertiary",
 					"success",
 					"warning",
 					"danger"
 				],
-				"default": "neutral",
+				"default": "primary",
 				"description": "Color family of the badge. Use `danger`, `warning`, and `success` for status, `primary` and `secondary` for emphasis."
 			},
 			"kind": {
@@ -607,7 +608,8 @@
 				"description": "Accent color of links on hover and of the current page.",
 				"values": [
 					"primary",
-					"secondary"
+					"secondary",
+					"tertiary"
 				]
 			},
 			"is-hidden": {
@@ -657,14 +659,14 @@
 			},
 			"tone": {
 				"values": [
-					"neutral",
 					"primary",
 					"secondary",
+					"tertiary",
 					"success",
 					"warning",
 					"danger"
 				],
-				"default": "neutral",
+				"default": "primary",
 				"description": "Color family of the button."
 			},
 			"is-hidden": {
@@ -751,6 +753,7 @@
 				"values": [
 					"primary",
 					"secondary",
+					"tertiary",
 					"success",
 					"warning",
 					"danger"
@@ -831,11 +834,11 @@
 			},
 			"tone": {
 				"values": [
-					"neutral",
 					"primary",
-					"secondary"
+					"secondary",
+					"tertiary"
 				],
-				"default": "neutral",
+				"default": "primary",
 				"description": "Accent color of the controls and dots."
 			},
 			"is-hidden": {
@@ -1001,7 +1004,8 @@
 			"tone": {
 				"values": [
 					"primary",
-					"secondary"
+					"secondary",
+					"tertiary"
 				],
 				"default": "primary",
 				"description": "Accent color of the checked state."
@@ -1067,7 +1071,8 @@
 				"description": "Accent color of the language tag in the header.",
 				"values": [
 					"primary",
-					"secondary"
+					"secondary",
+					"tertiary"
 				]
 			},
 			"is-hidden": {
@@ -1138,7 +1143,8 @@
 			"tone": {
 				"values": [
 					"primary",
-					"secondary"
+					"secondary",
+					"tertiary"
 				],
 				"default": "primary",
 				"description": "Accent color of the trigger when open."
@@ -1198,7 +1204,8 @@
 				"description": "Accent color of the open state.",
 				"values": [
 					"primary",
-					"secondary"
+					"secondary",
+					"tertiary"
 				]
 			},
 			"is-disabled": {
@@ -1320,7 +1327,8 @@
 				"description": "Accent color of the focused field and active option.",
 				"values": [
 					"primary",
-					"secondary"
+					"secondary",
+					"tertiary"
 				]
 			},
 			"is-disabled": {
@@ -1547,7 +1555,8 @@
 				"description": "Accent color of the highlighted item.",
 				"values": [
 					"primary",
-					"secondary"
+					"secondary",
+					"tertiary"
 				]
 			},
 			"is-disabled": {
@@ -1686,13 +1695,13 @@
 			"color": {
 				"description": "Text color.",
 				"values": [
-					"neutral",
 					"primary",
 					"secondary",
+					"tertiary",
 					"muted",
 					"strong"
 				],
-				"default": "neutral"
+				"default": "primary"
 			},
 			"weight": {
 				"description": "Any font weight as a number. The browser clamps it to what the face supports.",
@@ -2002,14 +2011,14 @@
 			},
 			"tone": {
 				"values": [
-					"neutral",
 					"primary",
 					"secondary",
+					"tertiary",
 					"success",
 					"warning",
 					"danger"
 				],
-				"default": "primary",
+				"default": "secondary",
 				"description": "Tint of the icon."
 			},
 			"is-bordered": {
@@ -2037,11 +2046,11 @@
 			"tone": {
 				"description": "Accent color of the label.",
 				"values": [
-					"neutral",
 					"primary",
-					"secondary"
+					"secondary",
+					"tertiary"
 				],
-				"default": "secondary"
+				"default": "tertiary"
 			},
 			"label": {
 				"description": "Text of the eyebrow. The default slot works too."
@@ -2142,7 +2151,7 @@
 				"values": [
 					"primary",
 					"secondary",
-					"neutral"
+					"tertiary"
 				]
 			},
 			"size": {
@@ -2261,16 +2270,16 @@
 			},
 			"color": {
 				"values": [
-					"neutral",
 					"primary",
 					"secondary",
+					"tertiary",
 					"success",
 					"warning",
 					"danger",
 					"muted",
 					"strong"
 				],
-				"default": "neutral",
+				"default": "primary",
 				"description": "Text color. `neutral` is the default foreground, `muted` recedes, `primary` and `secondary` are accents, and `white` is the brightest."
 			},
 			"weight": {
@@ -2339,7 +2348,8 @@
 			"tone": {
 				"values": [
 					"primary",
-					"secondary"
+					"secondary",
+					"tertiary"
 				],
 				"description": "Accent for the surface."
 			},
@@ -2399,9 +2409,9 @@
 		"props": {
 			"color": {
 				"values": [
-					"neutral",
 					"primary",
 					"secondary",
+					"tertiary",
 					"muted",
 					"strong"
 				],
@@ -2490,7 +2500,8 @@
 			"tone": {
 				"values": [
 					"primary",
-					"secondary"
+					"secondary",
+					"tertiary"
 				],
 				"default": "primary",
 				"description": "Accent color of the focus ring and border."
@@ -2575,7 +2586,8 @@
 			"tone": {
 				"values": [
 					"primary",
-					"secondary"
+					"secondary",
+					"tertiary"
 				],
 				"default": "primary",
 				"description": "Accent color of the active cell."
@@ -2661,16 +2673,16 @@
 		"props": {
 			"color": {
 				"values": [
-					"neutral",
 					"primary",
 					"secondary",
+					"tertiary",
 					"success",
 					"warning",
 					"danger",
 					"muted",
 					"strong"
 				],
-				"default": "neutral",
+				"default": "primary",
 				"description": "Text color. `neutral` is the default foreground, `muted` recedes, `primary` and `secondary` are accents, and `white` is the brightest."
 			},
 			"weight": {
@@ -2754,9 +2766,9 @@
 				"values": [
 					"primary",
 					"secondary",
-					"neutral"
+					"tertiary"
 				],
-				"default": "primary",
+				"default": "secondary",
 				"description": "Color of the link."
 			},
 			"underline": {
@@ -2899,7 +2911,8 @@
 				"description": "Accent color of the highlighted item.",
 				"values": [
 					"primary",
-					"secondary"
+					"secondary",
+					"tertiary"
 				]
 			},
 			"is-hidden": {
@@ -3010,7 +3023,8 @@
 				"description": "Accent color of the active entry.",
 				"values": [
 					"primary",
-					"secondary"
+					"secondary",
+					"tertiary"
 				]
 			},
 			"is-hidden": {
@@ -3107,7 +3121,8 @@
 				"description": "Accent color of the focus ring.",
 				"values": [
 					"primary",
-					"secondary"
+					"secondary",
+					"tertiary"
 				],
 				"default": "primary"
 			},
@@ -3215,7 +3230,8 @@
 				"description": "Accent color of the focus ring.",
 				"values": [
 					"primary",
-					"secondary"
+					"secondary",
+					"tertiary"
 				],
 				"default": "primary"
 			},
@@ -3291,7 +3307,8 @@
 			"tone": {
 				"values": [
 					"primary",
-					"secondary"
+					"secondary",
+					"tertiary"
 				],
 				"default": "primary",
 				"description": "Accent color of the current page."
@@ -3336,11 +3353,11 @@
 			"tone": {
 				"description": "Color of the dot and tag.",
 				"values": [
-					"neutral",
 					"primary",
-					"secondary"
+					"secondary",
+					"tertiary"
 				],
-				"default": "primary"
+				"default": "secondary"
 			},
 			"is-fixed": {
 				"description": "Runs as a page-level cursor with no children. It tracks the pointer across the whole window and hides the native cursor.",
@@ -3385,7 +3402,8 @@
 			"tone": {
 				"values": [
 					"primary",
-					"secondary"
+					"secondary",
+					"tertiary"
 				],
 				"description": "Accent for the surface."
 			},
@@ -3461,12 +3479,12 @@
 			},
 			"tone": {
 				"values": [
-					"neutral",
-					"secondary",
+					"primary",
+					"tertiary",
 					"success",
 					"danger"
 				],
-				"default": "neutral",
+				"default": "primary",
 				"description": "Color of the bar."
 			},
 			"size": {
@@ -3506,7 +3524,8 @@
 			"tone": {
 				"values": [
 					"primary",
-					"secondary"
+					"secondary",
+					"tertiary"
 				],
 				"default": "primary",
 				"description": "Accent color of the selected state."
@@ -3578,9 +3597,9 @@
 			"tone": {
 				"description": "Accent color of the selected option.",
 				"values": [
-					"neutral",
 					"primary",
 					"secondary",
+					"tertiary",
 					"success",
 					"warning",
 					"danger"
@@ -3948,7 +3967,8 @@
 				"description": "Accent color of the focus ring and highlighted option.",
 				"values": [
 					"primary",
-					"secondary"
+					"secondary",
+					"tertiary"
 				]
 			},
 			"is-invalid": {
@@ -4140,7 +4160,8 @@
 				"description": "Accent color of the active entry.",
 				"values": [
 					"primary",
-					"secondary"
+					"secondary",
+					"tertiary"
 				]
 			},
 			"is-collapsed": {
@@ -4272,7 +4293,8 @@
 			"tone": {
 				"values": [
 					"primary",
-					"secondary"
+					"secondary",
+					"tertiary"
 				],
 				"default": "primary",
 				"description": "Accent color of the filled track and thumb."
@@ -4409,16 +4431,16 @@
 			"color": {
 				"description": "Color of the value.",
 				"values": [
-					"neutral",
 					"primary",
 					"secondary",
+					"tertiary",
 					"success",
 					"warning",
 					"danger",
 					"muted",
 					"strong"
 				],
-				"default": "neutral"
+				"default": "primary"
 			},
 			"align": {
 				"values": [
@@ -4496,16 +4518,16 @@
 			},
 			"color": {
 				"values": [
-					"neutral",
 					"primary",
 					"secondary",
+					"tertiary",
 					"success",
 					"warning",
 					"danger",
 					"muted",
 					"strong"
 				],
-				"default": "neutral",
+				"default": "primary",
 				"description": "Text color. `neutral` is the default foreground, `muted` recedes, `primary` and `secondary` are accents, and `white` is the brightest."
 			},
 			"weight": {
@@ -4550,14 +4572,14 @@
 			},
 			"tone": {
 				"values": [
-					"neutral",
 					"primary",
 					"secondary",
+					"tertiary",
 					"success",
 					"warning",
 					"danger"
 				],
-				"default": "neutral",
+				"default": "primary",
 				"description": "Color family of the surface. `plain` has no tint."
 			},
 			"kind": {
@@ -4685,7 +4707,8 @@
 			"tone": {
 				"values": [
 					"primary",
-					"secondary"
+					"secondary",
+					"tertiary"
 				],
 				"default": "primary",
 				"description": "Accent color of the on state."
@@ -4820,7 +4843,8 @@
 				"description": "Color of the active underline.",
 				"values": [
 					"primary",
-					"secondary"
+					"secondary",
+					"tertiary"
 				]
 			},
 			"is-fitted": {
@@ -4887,16 +4911,16 @@
 			},
 			"color": {
 				"values": [
-					"neutral",
 					"primary",
 					"secondary",
+					"tertiary",
 					"success",
 					"warning",
 					"danger",
 					"muted",
 					"strong"
 				],
-				"default": "neutral",
+				"default": "primary",
 				"description": "Text color. `neutral` is the default foreground, `muted` recedes, `primary` and `secondary` are accents, and `white` is the brightest."
 			},
 			"weight": {
@@ -4951,7 +4975,8 @@
 			"tone": {
 				"values": [
 					"primary",
-					"secondary"
+					"secondary",
+					"tertiary"
 				],
 				"default": "primary",
 				"description": "Accent color of the focus ring and border."
@@ -5038,7 +5063,8 @@
 				"description": "Accent color of the active choice.",
 				"values": [
 					"primary",
-					"secondary"
+					"secondary",
+					"tertiary"
 				]
 			},
 			"kind": {
@@ -5135,7 +5161,7 @@
 				"values": [
 					"primary",
 					"secondary",
-					"neutral",
+					"tertiary",
 					"success",
 					"warning",
 					"danger"
@@ -5201,7 +5227,7 @@
 				"values": [
 					"primary",
 					"secondary",
-					"neutral",
+					"tertiary",
 					"success",
 					"warning",
 					"danger"
@@ -5297,7 +5323,7 @@
 				"values": [
 					"primary",
 					"secondary",
-					"neutral",
+					"tertiary",
 					"success",
 					"warning",
 					"danger"
@@ -5473,7 +5499,8 @@
 				"description": "Color of the tooltip.",
 				"values": [
 					"primary",
-					"secondary"
+					"secondary",
+					"tertiary"
 				]
 			},
 			"does-hide-arrow": {

@@ -14,18 +14,18 @@ const styles = css`
 		display: inline-flex;
 		align-items: center;
 		gap: 1rem;
-		--eyebrow-tone: var(--pink);
+		--eyebrow-tone: var(--muted-foreground);
 	}
 
 	:host([is-hidden]) {
 		display: none;
 	}
 
-	:host([tone='primary']) {
+	:host([tone='secondary']) {
 		--eyebrow-tone: var(--purple);
 	}
-	:host([tone='neutral']) {
-		--eyebrow-tone: var(--muted-foreground);
+	:host([tone='tertiary']) {
+		--eyebrow-tone: var(--pink);
 	}
 
 	/* Full-width lets the trailing rule stretch to the edge instead of a fixed 5rem. */
@@ -69,7 +69,7 @@ export const ZEyebrow = c(
 	),
 	{
 		props: {
-			tone: { type: oneOf('neutral', 'primary', 'secondary'), reflect: true },
+			tone: { type: oneOf('primary', 'secondary', 'tertiary'), reflect: true },
 			label: String,
 			hasRule: { type: Boolean, reflect: true },
 			isFullWidth: { type: Boolean, reflect: true },

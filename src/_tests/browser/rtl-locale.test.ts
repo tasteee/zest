@@ -21,7 +21,7 @@ describe('a settings screen in RTL with a French locale', () => {
 				<z-switch name="dark">Thème sombre</z-switch>
 				<z-radio-group name="plan" label="Offre" value="pro"><z-radio value="free">Gratuit</z-radio><z-radio value="pro">Pro</z-radio></z-radio-group>
 				<z-table id="table"></z-table>
-				<z-button type="submit" tone="primary">Enregistrer</z-button>
+				<z-button type="submit" tone="secondary">Enregistrer</z-button>
 			</form>
 			<z-toaster id="toast" position="bottom-end"></z-toaster>
 		</div>`

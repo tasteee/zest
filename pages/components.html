@@ -378,8 +378,8 @@
 							</z-text>
 							<z-text size="md" color="muted">Muted supporting copy for secondary detail and captions.</z-text>
 							<z-box direction="horizontal" gap="3" doesWrap>
-								<z-text color="primary" weight="lg">Purple accent</z-text>
-								<z-text color="secondary" weight="lg">Pink accent</z-text>
+								<z-text color="secondary" weight="lg">Purple accent</z-text>
+								<z-text color="tertiary" weight="lg">Pink accent</z-text>
 								<z-text is-italic>Italic</z-text>
 								<z-text is-underlined>Underlined</z-text>
 								<z-text is-strikethrough color="muted">Strikethrough</z-text>
@@ -397,7 +397,7 @@
 					<div class="panel-grid">
 						<z-card is-reactive gap="3">
 							<z-box direction="horizontal" aligns-y="center" margin-bottom="1rem" aligns-x="between">
-								<z-text color="primary" weight="700" size="sm">Active</z-text>
+								<z-text color="secondary" weight="700" size="sm">Active</z-text>
 								<z-text color="muted" size="xs">2 min ago</z-text>
 							</z-box>
 							<z-heading size="xs" tag="h3">Project Alpha</z-heading>
@@ -409,7 +409,7 @@
 						</z-card>
 						<z-card is-reactive gap="3">
 							<z-box direction="horizontal" aligns-y="center" aligns-x="between">
-								<z-text color="secondary" weight="lg" size="sm">Draft</z-text>
+								<z-text color="tertiary" weight="lg" size="sm">Draft</z-text>
 								<z-text color="muted" size="xs">Yesterday</z-text>
 							</z-box>
 							<z-heading size="xs" tag="h3">Campaign Beta</z-heading>
@@ -458,17 +458,17 @@
 						<div class="panel">
 							<div class="micro">Primary actions</div>
 							<div class="row">
-								<z-button tone="neutral" kind="solid">Get Started</z-button>
-								<z-button tone="primary" kind="solid">Let's Go</z-button>
-								<z-button tone="secondary" kind="solid">Go Off</z-button>
+								<z-button tone="primary" kind="solid">Get Started</z-button>
+								<z-button tone="secondary" kind="solid">Let's Go</z-button>
+								<z-button tone="tertiary" kind="solid">Go Off</z-button>
 							</div>
 						</div>
 						<div class="panel">
 							<div class="micro">Secondary actions</div>
 							<div class="row">
-								<z-button kind="outline" tone="neutral">Learn More</z-button>
-								<z-button kind="outline" tone="primary">Explore</z-button>
-								<z-link tone="secondary" style="margin-left: 0.5rem">Skip →</z-link>
+								<z-button kind="outline" tone="primary">Learn More</z-button>
+								<z-button kind="outline" tone="secondary">Explore</z-button>
+								<z-link tone="tertiary" style="margin-left: 0.5rem">Skip →</z-link>
 							</div>
 						</div>
 					</div>
@@ -490,19 +490,19 @@
 						</div>
 						<div class="micro" style="margin-top: 2rem">Kinds, purple tone</div>
 						<div class="row">
-							<z-button tone="primary" kind="solid">Solid</z-button>
-							<z-button tone="primary" kind="soft">Soft</z-button>
-							<z-button tone="primary" kind="outline">Outline</z-button>
-							<z-button tone="primary" kind="ghost">Ghost</z-button>
-							<z-button tone="primary" kind="plain">Plain</z-button>
-						</div>
-						<div class="micro" style="margin-top: 2rem">Kinds, pink tone</div>
-						<div class="row">
 							<z-button tone="secondary" kind="solid">Solid</z-button>
 							<z-button tone="secondary" kind="soft">Soft</z-button>
 							<z-button tone="secondary" kind="outline">Outline</z-button>
 							<z-button tone="secondary" kind="ghost">Ghost</z-button>
 							<z-button tone="secondary" kind="plain">Plain</z-button>
+						</div>
+						<div class="micro" style="margin-top: 2rem">Kinds, pink tone</div>
+						<div class="row">
+							<z-button tone="tertiary" kind="solid">Solid</z-button>
+							<z-button tone="tertiary" kind="soft">Soft</z-button>
+							<z-button tone="tertiary" kind="outline">Outline</z-button>
+							<z-button tone="tertiary" kind="ghost">Ghost</z-button>
+							<z-button tone="tertiary" kind="plain">Plain</z-button>
 						</div>
 
 						<div class="micro" style="margin-top: 2rem">Sizes &amp; states</div>
@@ -548,14 +548,14 @@
 						<div class="micro">Standalone toggles</div>
 						<div class="row">
 							<z-toggle-button>Default</z-toggle-button>
-							<z-toggle-button tone="primary">Primary</z-toggle-button>
-							<z-toggle-button tone="secondary">Secondary</z-toggle-button>
+							<z-toggle-button tone="secondary">Primary</z-toggle-button>
+							<z-toggle-button tone="tertiary">Secondary</z-toggle-button>
 							<z-toggle-button kind="ghost">Ghost</z-toggle-button>
 							<z-toggle-button is-disabled>Disabled</z-toggle-button>
 						</div>
 						<div class="micro" style="margin-top: 2rem">Group, single select</div>
 						<div class="row">
-							<z-toggle-button-group kind="outline" tone="primary">
+							<z-toggle-button-group kind="outline" tone="secondary">
 								<z-toggle-button-group-item value="left">Left</z-toggle-button-group-item>
 								<z-toggle-button-group-item value="center" is-pressed>Center</z-toggle-button-group-item>
 								<z-toggle-button-group-item value="right">Right</z-toggle-button-group-item>
@@ -579,12 +579,12 @@
 					</div>
 					<div class="panel">
 						<div class="row" style="gap: 2rem">
-							<z-link href="#" tone="primary">Purple link</z-link>
-							<z-link href="#" tone="secondary">Pink link</z-link>
-							<z-link href="#" tone="neutral">Neutral link</z-link>
-							<z-link href="#" tone="primary" underline="always">Always underlined</z-link>
-							<z-link href="#" tone="primary" is-external>External ↗</z-link>
-							<z-link tone="primary" is-disabled>Disabled</z-link>
+							<z-link href="#" tone="secondary">Purple link</z-link>
+							<z-link href="#" tone="tertiary">Pink link</z-link>
+							<z-link href="#" tone="primary">Neutral link</z-link>
+							<z-link href="#" tone="secondary" underline="always">Always underlined</z-link>
+							<z-link href="#" tone="secondary" is-external>External ↗</z-link>
+							<z-link tone="secondary" is-disabled>Disabled</z-link>
 						</div>
 					</div>
 				</z-box>
@@ -630,10 +630,10 @@
 								<li><span class="sd" style="background: var(--destructive)"></span> Error</li>
 							</ul>
 							<div class="field" style="margin-top: 1.5rem">
-								<z-input tone="primary" placeholder="Purple focus tone"></z-input>
+								<z-input tone="secondary" placeholder="Purple focus tone"></z-input>
 							</div>
 							<div class="field" style="margin-top: 1rem">
-								<z-input tone="secondary" placeholder="Pink focus tone"></z-input>
+								<z-input tone="tertiary" placeholder="Pink focus tone"></z-input>
 							</div>
 							<div class="field" style="margin-top: 1rem">
 								<z-input is-disabled value="Disabled field"></z-input>
@@ -654,7 +654,7 @@
 								<z-checkbox is-checked>Accept terms</z-checkbox>
 								<z-checkbox>Subscribe to updates</z-checkbox>
 								<z-checkbox is-indeterminate>Partial selection</z-checkbox>
-								<z-checkbox tone="secondary" is-checked>Pink tone</z-checkbox>
+								<z-checkbox tone="tertiary" is-checked>Pink tone</z-checkbox>
 								<z-checkbox is-disabled>Disabled</z-checkbox>
 							</div>
 							<div class="col">
@@ -666,7 +666,7 @@
 								</z-radio-group>
 								<div class="micro" style="margin: 1rem 0 0">Switch</div>
 								<z-switch is-checked>Notifications</z-switch>
-								<z-switch tone="secondary">Pink switch</z-switch>
+								<z-switch tone="tertiary">Pink switch</z-switch>
 								<z-switch is-disabled>Disabled</z-switch>
 							</div>
 						</div>
@@ -680,7 +680,7 @@
 					</div>
 					<div class="panel" style="display: flex; flex-direction: column; gap: 2rem; max-width: 480px">
 						<z-slider value="60"></z-slider>
-						<z-slider value="35" tone="secondary"></z-slider>
+						<z-slider value="35" tone="tertiary"></z-slider>
 						<z-slider value="50" is-disabled></z-slider>
 					</div>
 				</div>
@@ -738,21 +738,21 @@
 					<div class="panel">
 						<div class="micro">Soft tints</div>
 						<div class="row">
-							<z-badge tone="primary">Active</z-badge>
-							<z-badge tone="secondary">Featured</z-badge>
-							<z-badge tone="primary">New</z-badge>
+							<z-badge tone="secondary">Active</z-badge>
+							<z-badge tone="tertiary">Featured</z-badge>
+							<z-badge tone="secondary">New</z-badge>
 							<z-badge kind="outline">Default</z-badge>
 						</div>
 						<div class="micro" style="margin-top: 2rem">Solid &amp; outline</div>
 						<div class="row">
-							<z-badge kind="solid" tone="primary">Solid</z-badge>
 							<z-badge kind="solid" tone="secondary">Solid</z-badge>
+							<z-badge kind="solid" tone="tertiary">Solid</z-badge>
 						</div>
 						<div class="micro" style="margin-top: 2rem">Inline status</div>
 						<div class="row" style="gap: 1.5rem">
-							<z-badge is-dot tone="primary">Online</z-badge>
-							<z-badge is-dot tone="secondary">Limited</z-badge>
-							<z-badge is-dot tone="neutral">Premium</z-badge>
+							<z-badge is-dot tone="secondary">Online</z-badge>
+							<z-badge is-dot tone="tertiary">Limited</z-badge>
+							<z-badge is-dot tone="primary">Premium</z-badge>
 						</div>
 					</div>
 				</div>
@@ -768,7 +768,7 @@
 							<z-badge is-selectable is-selected>Selected</z-badge>
 							<z-badge is-selectable>Selectable</z-badge>
 							<z-badge kind="outline" is-removable>Removable</z-badge>
-							<z-badge tone="secondary" is-selectable is-selected>Pink</z-badge>
+							<z-badge tone="tertiary" is-selectable is-selected>Pink</z-badge>
 							<z-badge is-selectable is-disabled>Disabled</z-badge>
 						</div>
 					</div>
@@ -784,7 +784,7 @@
 							<z-avatar name="Ada Lovelace" size="xs"></z-avatar>
 							<z-avatar name="Grace Hopper" size="sm"></z-avatar>
 							<z-avatar name="Alan Turing" status="online"></z-avatar>
-							<z-avatar name="Katherine Johnson" tone="secondary" size="lg" status="busy"></z-avatar>
+							<z-avatar name="Katherine Johnson" tone="tertiary" size="lg" status="busy"></z-avatar>
 							<z-avatar name="Linus" size="xl" is-square status="away"></z-avatar>
 						</div>
 					</div>
@@ -799,8 +799,8 @@
 						<div class="panel" style="display: flex; flex-direction: column; gap: 1.5rem">
 							<div class="micro" style="margin: 0">Progress</div>
 							<z-progress value="72"></z-progress>
-							<z-progress value="45" tone="secondary"></z-progress>
-							<z-progress value="90" tone="neutral" size="sm"></z-progress>
+							<z-progress value="45" tone="tertiary"></z-progress>
+							<z-progress value="90" tone="primary" size="sm"></z-progress>
 							<z-progress is-indeterminate></z-progress>
 						</div>
 						<div class="panel">
@@ -832,7 +832,7 @@
 					<div class="panel">
 						<div class="col" style="gap: 1.5rem; align-items: flex-start">
 							<z-pagination page="1" total="5"></z-pagination>
-							<z-pagination page="6" total="12" tone="secondary"></z-pagination>
+							<z-pagination page="6" total="12" tone="tertiary"></z-pagination>
 						</div>
 					</div>
 				</div>
@@ -857,7 +857,7 @@
 					<div class="panel">
 						<div class="col" style="gap: 1.5rem; align-items: flex-start">
 							<z-breadcrumbs id="demo-breadcrumbs"></z-breadcrumbs>
-							<z-breadcrumbs id="demo-breadcrumbs-collapsed" max="3" tone="secondary"></z-breadcrumbs>
+							<z-breadcrumbs id="demo-breadcrumbs-collapsed" max="3" tone="tertiary"></z-breadcrumbs>
 						</div>
 					</div>
 				</div>
@@ -944,7 +944,7 @@
 									<z-text size="xs" color="muted">v0.1.0 · WIP</z-text>
 								</div>
 							</z-sidebar>
-							<z-sidebar id="demo-sidebar-collapsed" value="dashboard" tone="secondary" is-collapsed></z-sidebar>
+							<z-sidebar id="demo-sidebar-collapsed" value="dashboard" tone="tertiary" is-collapsed></z-sidebar>
 						</div>
 					</div>
 				</div>
@@ -974,11 +974,11 @@
 							<z-tooltip content="Shown to the right" placement="right">
 								<z-button kind="outline">Right</z-button>
 							</z-tooltip>
-							<z-tooltip content="Drops below the trigger" placement="bottom" tone="primary">
-								<z-button kind="outline" tone="primary">Bottom</z-button>
+							<z-tooltip content="Drops below the trigger" placement="bottom" tone="secondary">
+								<z-button kind="outline" tone="secondary">Bottom</z-button>
 							</z-tooltip>
-							<z-tooltip content="Anchored to the left" placement="left" tone="secondary">
-								<z-button kind="outline" tone="secondary">Left</z-button>
+							<z-tooltip content="Anchored to the left" placement="left" tone="tertiary">
+								<z-button kind="outline" tone="tertiary">Left</z-button>
 							</z-tooltip>
 						</div>
 					</div>
@@ -991,8 +991,8 @@
 					</div>
 					<div class="panel">
 						<div class="row" style="gap: 1.5rem">
-							<z-popover placement="bottom-start" tone="primary">
-								<z-button slot="trigger" kind="outline" tone="primary">Open popover</z-button>
+							<z-popover placement="bottom-start" tone="secondary">
+								<z-button slot="trigger" kind="outline" tone="secondary">Open popover</z-button>
 								<z-box direction="vertical" gap="2">
 									<z-heading size="xs" tag="h3">Dimensions</z-heading>
 									<z-text size="sm" color="muted">
@@ -1062,7 +1062,7 @@
 								description="Your changes will go live immediately for everyone."
 								confirm-label="Publish"
 							>
-								<z-button slot="trigger" kind="outline" tone="primary">Publish…</z-button>
+								<z-button slot="trigger" kind="outline" tone="secondary">Publish…</z-button>
 							</z-alert-dialog>
 						</div>
 					</div>
@@ -1075,7 +1075,7 @@
 					</div>
 					<div class="panel">
 						<div class="col" style="gap: 1rem; align-items: stretch">
-							<z-alert tone="primary" heading="Heads up">A new version is available, refresh when convenient.</z-alert>
+							<z-alert tone="secondary" heading="Heads up">A new version is available, refresh when convenient.</z-alert>
 							<z-alert tone="success" heading="Saved">Your changes have been published.</z-alert>
 							<z-alert tone="warning" heading="Approaching limit">You've used 90% of your monthly quota.</z-alert>
 							<z-alert tone="danger" heading="Payment failed" is-dismissable>
@@ -1099,7 +1099,7 @@
 									<z-checkbox>On sale</z-checkbox>
 									<z-checkbox>Free shipping</z-checkbox>
 								</z-box>
-								<z-button slot="footer" kind="solid" tone="primary">Apply</z-button>
+								<z-button slot="footer" kind="solid" tone="secondary">Apply</z-button>
 							</z-sheet>
 
 							<z-sheet side="left" heading="Navigation">
@@ -1270,7 +1270,7 @@
 								>
 									<path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z" />
 								</svg>
-								<z-button kind="solid" tone="primary" size="sm">New project</z-button>
+								<z-button kind="solid" tone="secondary" size="sm">New project</z-button>
 							</z-empty-state>
 						</div>
 					</div>
@@ -1462,12 +1462,12 @@
 			if (codeEl)
 				codeEl.code = [
 					`const resolveToneClass = (props: any): string => {
-	if (props.tone === 'primary') return 'is-primary'
 	if (props.tone === 'secondary') return 'is-secondary'
+	if (props.tone === 'tertiary') return 'is-tertiary'
 	if (props.tone === 'success') return 'is-success'
 	if (props.tone === 'warning') return 'is-warning'
 	if (props.tone === 'danger') return 'is-danger'
-	return 'is-neutral'
+	return 'is-primary'
 }
 
 const resolveKindClass = (props: any): string => {

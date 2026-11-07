@@ -20,7 +20,7 @@ const styles = css`
 		--alert-color: var(--muted-foreground);
 	}
 
-	:host([tone='primary']) {
+	:host([tone='secondary']) {
 		--alert-color: var(--purple);
 	}
 	:host([tone='success']) {
@@ -208,7 +208,7 @@ export const ZAlert = c(
 	},
 	{
 		props: {
-			tone: { type: oneOf('neutral', 'primary', 'secondary', 'success', 'warning', 'danger'), reflect: true },
+			tone: { type: oneOf('primary', 'secondary', 'tertiary', 'success', 'warning', 'danger'), reflect: true },
 			heading: String,
 			isDismissable: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },

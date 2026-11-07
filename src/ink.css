@@ -85,9 +85,11 @@
 	--color-warning: lch(72 78 76 / 1);
 	--color-success: lch(62 58 145 / 1); */
 
-  /* secondary tone */
-  --base-accent-color-0: lch(62.44 70.29 0.86 / 1);
-  --base-accent-color-1: lab(60 40.17 -57.68);
+  /* Hue anchors. The chrome is neutral on purpose: the user's artwork supplies
+	   the colour, so pink and purple are opt-in tones (tertiary / secondary), never
+	   the default look. */
+  --base-pink-color: lch(62.44 70.29 0.86 / 1);
+  --base-purple-color: lab(60 40.17 -57.68);
   --base-success-color: lab(52.2 -46.61 31.61 / 1);
   --base-warning-color: lch(62.44 70.29 54.86 / 1);
   --base-danger-color: lch(59.5 75.52 35.8 / 1);
@@ -97,13 +99,17 @@
   --base-danger-color: lch(58 72 37 / 1);
 
   --base-neutral-color-light: #fff;
-  --base-neutral-color-dark: #0a0f0a;
+  --base-neutral-color-dark: oklch(0.1609 0.0137 146.4);
+  /* Tint of the dark neutral ramp. Plain numbers (not relative-colour syntax)
+	   so every browser resolves the ramp identically. */
+  --base-neutral-hue: 146.4;
+  --base-neutral-chroma: 0.0137;
   --base-sans-font-family: "DM Sans";
   --base-mono-font-family: "DM Mono";
   --base-serif-font-family: "DM Serif Display";
   --base-spacing: 0.25rem;
   --base-radius: 0.625rem;
-  /* The single dial for the z-text/z-heading/z-subheading/z-label scale , 
+  /* The single dial for the z-text/z-heading/z-subheading/z-label scale ,
 	   every step in that scale is a calc() multiple of this, so scoping this
 	   var on any container (or :root) rescales the whole type system there
 	   without touching the components themselves. */
@@ -117,40 +123,40 @@
   --font-size-6: calc(1.953rem * (var(--base-font-size) / 16px));
   --font-size-7: calc(2.441rem * (var(--base-font-size) / 16px));
   --font-size-8: calc(3.052rem * (var(--base-font-size) / 16px));
-  --color-primary-0: oklch(from var(--base-accent-color-0) 0.18 0.1 h);
-  --color-primary-1: oklch(from var(--base-accent-color-0) 0.28 0.14 h);
-  --color-primary-2: oklch(from var(--base-accent-color-0) 0.38 0.18 h);
-  --color-primary-3: oklch(from var(--base-accent-color-0) 0.52 0.22 h);
-  --color-primary-4: var(--base-accent-color-0);
-  --color-primary-5: oklch(from var(--base-accent-color-0) 0.82 0.21 h);
-  --color-primary-6: oklch(from var(--base-accent-color-0) 0.87 0.16 h);
-  --color-primary-7: oklch(from var(--base-accent-color-0) 0.91 0.11 h);
-  --color-primary-8: oklch(from var(--base-accent-color-0) 0.94 0.06 h);
-  --color-primary-9: oklch(from var(--base-accent-color-0) 0.97 0.02 h);
-  --color-secondary-0: oklch(from var(--base-accent-color-1) 0.15 0.1 h);
-  --color-secondary-1: oklch(from var(--base-accent-color-1) 0.25 0.14 h);
-  --color-secondary-2: oklch(from var(--base-accent-color-1) 0.35 0.18 h);
-  --color-secondary-3: oklch(from var(--base-accent-color-1) 0.5 0.22 h);
-  --color-secondary-4: var(--base-accent-color-1);
-  --color-secondary-5: oklch(from var(--base-accent-color-1) 0.78 0.21 h);
-  --color-secondary-6: oklch(from var(--base-accent-color-1) 0.84 0.16 h);
-  --color-secondary-7: oklch(from var(--base-accent-color-1) 0.89 0.1 h);
-  --color-secondary-8: oklch(from var(--base-accent-color-1) 0.93 0.05 h);
-  --color-secondary-9: oklch(from var(--base-accent-color-1) 0.97 0.02 h);
+  --color-pink-0: oklch(from var(--base-pink-color) 0.18 0.1 h);
+  --color-pink-1: oklch(from var(--base-pink-color) 0.28 0.14 h);
+  --color-pink-2: oklch(from var(--base-pink-color) 0.38 0.18 h);
+  --color-pink-3: oklch(from var(--base-pink-color) 0.52 0.22 h);
+  --color-pink-4: var(--base-pink-color);
+  --color-pink-5: oklch(from var(--base-pink-color) 0.82 0.21 h);
+  --color-pink-6: oklch(from var(--base-pink-color) 0.87 0.16 h);
+  --color-pink-7: oklch(from var(--base-pink-color) 0.91 0.11 h);
+  --color-pink-8: oklch(from var(--base-pink-color) 0.94 0.06 h);
+  --color-pink-9: oklch(from var(--base-pink-color) 0.97 0.02 h);
+  --color-purple-0: oklch(from var(--base-purple-color) 0.15 0.1 h);
+  --color-purple-1: oklch(from var(--base-purple-color) 0.25 0.14 h);
+  --color-purple-2: oklch(from var(--base-purple-color) 0.35 0.18 h);
+  --color-purple-3: oklch(from var(--base-purple-color) 0.5 0.22 h);
+  --color-purple-4: var(--base-purple-color);
+  --color-purple-5: oklch(from var(--base-purple-color) 0.78 0.21 h);
+  --color-purple-6: oklch(from var(--base-purple-color) 0.84 0.16 h);
+  --color-purple-7: oklch(from var(--base-purple-color) 0.89 0.1 h);
+  --color-purple-8: oklch(from var(--base-purple-color) 0.93 0.05 h);
+  --color-purple-9: oklch(from var(--base-purple-color) 0.97 0.02 h);
   /* Neutral ramp: lightness must climb monotonically 0 -> 9. neutral-0 keeps
 	   the base dark's own L (~0.17) as the page floor; every step above it lifts
 	   lighter. The old 1/2 values (0.12/0.18) dipped below 0, so surfaces above
 	   the background rendered darker-than-black, fixed by stepping 1/2 up. */
-  --color-neutral-0: oklch(from var(--base-neutral-color-dark) l c h);
-  --color-neutral-1: oklch(from var(--base-neutral-color-dark) 0.21 c h);
-  --color-neutral-2: oklch(from var(--base-neutral-color-dark) 0.25 c h);
-  --color-neutral-3: oklch(from var(--base-neutral-color-dark) 0.31 c h);
-  --color-neutral-4: oklch(from var(--base-neutral-color-dark) 0.4 c h);
-  --color-neutral-5: oklch(from var(--base-neutral-color-dark) 0.55 c h);
-  --color-neutral-6: oklch(from var(--base-neutral-color-dark) 0.68 c h);
-  --color-neutral-7: oklch(from var(--base-neutral-color-dark) 0.8 c h);
-  --color-neutral-8: oklch(from var(--base-neutral-color-dark) 0.9 c h);
-  --color-neutral-9: oklch(from var(--base-neutral-color-light) l c h);
+  --color-neutral-0: var(--base-neutral-color-dark);
+  --color-neutral-1: oklch(0.21 var(--base-neutral-chroma) var(--base-neutral-hue));
+  --color-neutral-2: oklch(0.25 var(--base-neutral-chroma) var(--base-neutral-hue));
+  --color-neutral-3: oklch(0.31 var(--base-neutral-chroma) var(--base-neutral-hue));
+  --color-neutral-4: oklch(0.4 var(--base-neutral-chroma) var(--base-neutral-hue));
+  --color-neutral-5: oklch(0.55 var(--base-neutral-chroma) var(--base-neutral-hue));
+  --color-neutral-6: oklch(0.68 var(--base-neutral-chroma) var(--base-neutral-hue));
+  --color-neutral-7: oklch(0.8 var(--base-neutral-chroma) var(--base-neutral-hue));
+  --color-neutral-8: oklch(0.9 var(--base-neutral-chroma) var(--base-neutral-hue));
+  --color-neutral-9: var(--base-neutral-color-light);
   --spacing-0: 0;
   --spacing-1: calc(var(--base-spacing) * 1);
   --spacing-2: calc(var(--base-spacing) * 2);
@@ -175,17 +181,11 @@
 
 }
 
-@supports (color: lab(0% 0 0)) {
-  :root,
-  [data-theme] {
-    --base-neutral-color-dark: lab(3.87% -2.29438 1.63959);
-  }
-}
 
 :root,
 [data-theme] {
-  --color-pink: var(--color-primary-4);
-  --color-purple: var(--color-secondary-4);
+  --color-pink: var(--color-pink-4);
+  --color-purple: var(--color-purple-4);
   --bg: var(--color-neutral-0);
   --paper: var(--color-neutral-1);
   --paper-soft: var(--color-neutral-2);
@@ -196,13 +196,16 @@
   --foreground: var(--color-neutral-8);
   --muted: var(--color-neutral-6);
   --secondary: var(--color-neutral-5);
-  --accent: var(--color-purple);
-  --accent-alt: var(--color-pink);
+  /* --accent is the PRIMARY tone and is neutral. Purple and pink are the
+	   secondary and tertiary tones. */
+  --accent: var(--primary);
+  --accent-secondary: var(--color-purple);
+  --accent-tertiary: var(--color-pink);
   /* button-tone colors: exact per-tone colors with hand-tuned lightness/chroma.
 	   Deliberately decoupled from --color-purple/--color-pink above (which stay
 	   tied to the raw base accent colors z-toggle's dom/sub accents rely on). */
-  --purple: var(--base-accent-color-1);
-  --pink: var(--base-accent-color-0);
+  --purple: var(--base-purple-color);
+  --pink: var(--base-pink-color);
   --success: var(--base-success-color);
   --warning: var(--base-warning-color);
   --background: var(--bg);
@@ -475,16 +478,16 @@
 :root,
 [data-theme] {
   --syntax-comment: var(--color-neutral-5);
-  --syntax-keyword: var(--color-secondary-6);
+  --syntax-keyword: var(--color-purple-6);
   --syntax-string: oklch(0.79 0.13 152);
   --syntax-number: oklch(0.82 0.12 78);
   --syntax-constant: oklch(0.76 0.16 48);
-  --syntax-function: var(--color-primary-6);
+  --syntax-function: var(--color-pink-6);
   --syntax-class: oklch(0.83 0.11 200);
   --syntax-property: oklch(0.86 0.07 222);
   --syntax-operator: var(--color-neutral-6);
   --syntax-punctuation: var(--color-neutral-6);
-  --syntax-tag: var(--color-primary-6);
+  --syntax-tag: var(--color-pink-6);
   --syntax-attr: oklch(0.82 0.12 78);
   --syntax-variable: var(--color-neutral-8);
   --syntax-regex: oklch(0.79 0.13 168);
@@ -520,8 +523,8 @@
  * block.
  */
 [data-theme="light"] {
-  --base-neutral-color-light: oklch(0.988 0.004 292);
-  --base-neutral-color-dark: oklch(0.176 0.022 292);
+  --base-neutral-color-light: oklch(0.988 0.004 146);
+  --base-neutral-color-dark: oklch(0.176 0.022 146);
 
   /* The accents are held a few steps darker than their dark-theme
 	   counterparts. On paper the same colour has to do two jobs at once — be
@@ -529,24 +532,24 @@
 	   solid fill — and only the darker end of each hue clears both. Every
 	   value below was picked against measured contrast on --color-neutral-0,
 	   not by eye. */
-  --base-accent-color-0: oklch(0.565 0.2 12);
-  --base-accent-color-1: oklch(0.525 0.195 288);
+  --base-pink-color: oklch(0.565 0.2 12);
+  --base-purple-color: oklch(0.525 0.195 288);
   --base-success-color: oklch(0.522 0.128 155);
   --base-warning-color: oklch(0.55 0.125 70);
   --base-danger-color: oklch(0.555 0.195 27);
 
-  --color-neutral-0: oklch(0.966 0.006 292);
-  --color-neutral-1: oklch(0.988 0.004 292);
-  --color-neutral-2: oklch(0.951 0.008 292);
-  --color-neutral-3: oklch(0.876 0.011 292);
-  --color-neutral-4: oklch(0.818 0.014 292);
-  --color-neutral-5: oklch(0.628 0.017 292);
+  --color-neutral-0: oklch(0.966 0.006 146);
+  --color-neutral-1: oklch(0.988 0.004 146);
+  --color-neutral-2: oklch(0.951 0.008 146);
+  --color-neutral-3: oklch(0.876 0.011 146);
+  --color-neutral-4: oklch(0.818 0.014 146);
+  --color-neutral-5: oklch(0.628 0.017 146);
   /* neutral-6 is --muted-foreground. 0.528 measured 4.4:1 as small text on
      the 8%-tinted alert and toast surfaces; 0.5 clears 4.5:1 on all of them. */
-  --color-neutral-6: oklch(0.5 0.02 292);
-  --color-neutral-7: oklch(0.408 0.02 292);
-  --color-neutral-8: oklch(0.286 0.02 292);
-  --color-neutral-9: oklch(0.176 0.022 292);
+  --color-neutral-6: oklch(0.5 0.02 146);
+  --color-neutral-7: oklch(0.408 0.02 146);
+  --color-neutral-8: oklch(0.286 0.02 146);
+  --color-neutral-9: oklch(0.176 0.022 146);
 
   /* Flat paper, opaque floating surfaces, and no decorative lighting. */
   --material-page: none;
@@ -586,13 +589,13 @@
 
   /* A pale highlighter band tinted toward the purple accent, with ink dark
 	   enough to stay comfortable inside it. */
-  --selection-background: oklch(0.87 0.072 292);
-  --selection-foreground: oklch(0.22 0.03 292);
+  --selection-background: oklch(0.87 0.072 146);
+  --selection-foreground: oklch(0.22 0.03 146);
 
   /* Code needs its own light palette rather than the dark one dimmed: these
 	   are held near L 0.5 so every token clears text contrast on the pale code
 	   surface while the hues stay recognisably the same language. */
-  --syntax-comment: oklch(0.578 0.019 292);
+  --syntax-comment: oklch(0.578 0.019 146);
   --syntax-keyword: oklch(0.5 0.18 288);
   --syntax-string: oklch(0.475 0.125 152);
   --syntax-number: oklch(0.52 0.125 62);
@@ -600,13 +603,13 @@
   --syntax-function: oklch(0.53 0.185 8);
   --syntax-class: oklch(0.5 0.115 215);
   --syntax-property: oklch(0.475 0.09 235);
-  --syntax-operator: oklch(0.55 0.018 292);
-  --syntax-punctuation: oklch(0.578 0.019 292);
+  --syntax-operator: oklch(0.55 0.018 146);
+  --syntax-punctuation: oklch(0.578 0.019 146);
   --syntax-tag: oklch(0.53 0.185 8);
   --syntax-attr: oklch(0.52 0.125 62);
-  --syntax-variable: oklch(0.3 0.02 292);
+  --syntax-variable: oklch(0.3 0.02 146);
   --syntax-regex: oklch(0.475 0.125 168);
-  --syntax-plain: oklch(0.3 0.02 292);
+  --syntax-plain: oklch(0.3 0.02 146);
 }
 
 /*

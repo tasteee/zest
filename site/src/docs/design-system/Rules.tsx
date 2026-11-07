@@ -46,7 +46,7 @@ export const Rules = () => (
 						Purple and pink are accents, not defaults
 					</z-heading>
 					<z-text>
-						<code className="inline">tone="primary"</code> (purple) and <code className="inline">tone="secondary"</code>{' '}
+						<code className="inline">tone="secondary"</code> (purple) and <code className="inline">tone="tertiary"</code>{' '}
 						(pink) exist to draw the eye to the one thing that matters on a screen, a primary action, an active state, a
 						highlighted stat. Everything else defaults to neutral. If most of a page is purple, the accent has stopped
 						meaning anything.

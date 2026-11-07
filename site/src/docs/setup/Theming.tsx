@@ -13,9 +13,11 @@ export const Theming = () => (
 			language="css"
 			code={`
 :root {
-  --base-accent-color-0: oklch(0.72 0.19 350); /* pink accent */
-  --base-accent-color-1: oklch(0.62 0.2 290);  /* purple accent */
-  --base-neutral-color-dark: #0a0f0a;          /* page floor */
+  --base-pink-color: oklch(0.72 0.19 350); /* pink accent */
+  --base-purple-color: oklch(0.62 0.2 290);  /* purple accent */
+  --base-neutral-color-dark: oklch(0.161 0.014 146);   /* page floor */
+  --base-neutral-hue: 146;                     /* tint of the dark neutral ramp */
+  --base-neutral-chroma: 0.014;
   --base-radius: 0.625rem;
   --base-spacing: 0.25rem;
   --base-font-size: 16px;                      /* scales the whole type ramp */

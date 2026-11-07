@@ -20,13 +20,17 @@ const styles = css`
 	:host {
 		display: inline-block;
 		position: relative;
-		--tone: var(--purple);
+		--tone: var(--color-neutral-6);
 	}
 
 	:host([tone='secondary']) {
+		--tone: var(--purple);
+	}
+
+	:host([tone='tertiary']) {
 		--tone: var(--pink);
 	}
-	:host([tone='neutral']) {
+	:host([tone='primary']) {
 		--tone: var(--color-neutral-6);
 	}
 
@@ -135,7 +139,7 @@ export const ZPointerFollow = c(
 	{
 		props: {
 			label: String,
-			tone: { type: oneOf('neutral', 'primary', 'secondary'), reflect: true },
+			tone: { type: oneOf('primary', 'secondary', 'tertiary'), reflect: true },
 			isFixed: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true }
 		},

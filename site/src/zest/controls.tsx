@@ -60,7 +60,7 @@ export const ZSelect = ({ value, options, onValue, placeholder, size }: ZSelectP
 type ZBadgeProps = {
 	label: string
 	value: string
-	tone?: 'primary' | 'secondary' | 'neutral' | 'success' | 'warning' | 'danger'
+	tone?: 'primary' | 'secondary' | 'tertiary' | 'success' | 'warning' | 'danger'
 	kind?: 'soft' | 'solid' | 'outline'
 	isSelected?: boolean
 	onSelect?: (selected: boolean, value?: string) => void

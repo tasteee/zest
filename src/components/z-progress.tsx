@@ -15,7 +15,7 @@ const styles = css`
     --accent: var(--color-neutral-8);
   }
 
-  :host([tone="secondary"]) {
+  :host([tone="tertiary"]) {
     --accent: var(--pink);
   }
 
@@ -99,7 +99,7 @@ export const ZProgress = c(
     props: {
       value: { type: Number, reflect: true },
       max: { type: Number, reflect: true },
-      tone: { type: oneOf('neutral', 'secondary', 'success', 'danger'), reflect: true },
+      tone: { type: oneOf('primary', 'tertiary', 'success', 'danger'), reflect: true },
       size: { type: oneOf('sm', 'md', 'lg'), reflect: true },
       isIndeterminate: { type: Boolean, reflect: true },
       isHidden: { type: Boolean, reflect: true },
