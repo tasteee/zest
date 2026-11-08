@@ -64,10 +64,10 @@ const styles = css`
 		width: var(--chassis-rail-width, 4.25rem);
 		display: flex;
 		flex-direction: column;
-		gap: 0.5rem;
+		gap: var(--space-2);
 		min-height: 0;
 		box-sizing: border-box;
-		padding: 0.125rem;
+		padding: var(--space-0-5);
 		overflow: hidden;
 		/* the fluid part: expand/collapse the rail and, via flex, the screen,
 		   on a long premium easing (easeOutQuint). */
@@ -94,7 +94,7 @@ const styles = css`
 		display: flex;
 		flex-direction: column;
 		align-items: stretch;
-		gap: 0.5rem;
+		gap: var(--space-2);
 		padding-top: 8px;
 		overflow: hidden;
 	}
@@ -104,7 +104,7 @@ const styles = css`
 		display: flex;
 		flex-direction: column;
 		align-items: stretch;
-		gap: 0.5rem;
+		gap: var(--space-2);
 		min-height: 0;
 		padding-top: 8px;
 		overflow-y: auto;
@@ -118,7 +118,7 @@ const styles = css`
 		display: flex;
 		flex-direction: column;
 		align-items: stretch;
-		gap: 0.5rem;
+		gap: var(--space-2);
 		padding-bottom: 8px;
 		overflow: hidden;
 	}
@@ -147,7 +147,7 @@ const styles = css`
 	.screen::-webkit-scrollbar-thumb {
 		background: var(--border-default);
 		border: 2px solid transparent;
-		border-radius: 999px;
+		border-radius: var(--radius-full);
 		background-clip: padding-box;
 	}
 	.screen::-webkit-scrollbar-thumb:hover {

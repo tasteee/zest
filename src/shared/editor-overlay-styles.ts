@@ -67,7 +67,7 @@ export const floatingToolbarStyles = css`
 		display: flex;
 		align-items: center;
 		gap: 1px;
-		padding: 0.25rem;
+		padding: var(--space-1);
 	}
 `
 
@@ -82,7 +82,7 @@ export const floatingMenuStyles = css`
 		max-width: 20rem;
 		max-height: 18rem;
 		overflow-y: auto;
-		padding: 0.3125rem;
+		padding: var(--space-1-5);
 	}
 `
 
@@ -92,8 +92,8 @@ export const floatingMenuItemStyles = css`
 	.item {
 		display: flex;
 		align-items: center;
-		gap: 0.625rem;
-		padding: 0.5rem 0.625rem;
+		gap: var(--space-2-5);
+		padding: var(--space-2) var(--space-2-5);
 		border-radius: var(--radius-sm);
 		font-size: var(--font-size-sm);
 		color: var(--text-primary);
@@ -136,7 +136,7 @@ export const floatingMenuItemStyles = css`
 	}
 
 	.empty {
-		padding: 0.75rem;
+		padding: var(--space-3);
 		text-align: center;
 		color: var(--text-secondary);
 		font-size: var(--font-size-sm);
@@ -190,7 +190,7 @@ export const floatingIconButtonStyles = css`
 	.sep {
 		width: 1px;
 		align-self: stretch;
-		margin: 0.25rem 0.125rem;
+		margin: var(--space-1) var(--space-0-5);
 		background: var(--border-default);
 	}
 `

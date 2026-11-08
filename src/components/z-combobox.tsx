@@ -42,7 +42,7 @@ const styles = css`
 	.field {
 		display: inline-flex;
 		align-items: center;
-		gap: 0.5rem;
+		gap: var(--space-2);
 		width: 100%;
 		box-sizing: border-box;
 		background: transparent;
@@ -55,15 +55,15 @@ const styles = css`
 	   sit side by side in forms often enough that they must share a baseline. */
 	.field.is-sm {
 		height: var(--control-height-sm);
-		padding-inline: 0.75rem;
+		padding-inline: var(--space-3);
 	}
 	.field.is-md {
 		height: var(--control-height-md);
-		padding-inline: 0.875rem;
+		padding-inline: var(--space-3-5);
 	}
 	.field.is-lg {
 		height: var(--control-height-lg);
-		padding-inline: 1rem;
+		padding-inline: var(--space-4);
 	}
 
 	.field.is-sm input {
@@ -142,7 +142,7 @@ const styles = css`
 		border: 1px solid var(--border-default);
 		border-radius: var(--radius-md);
 		box-shadow: var(--shadow-overlay);
-		padding: 0.3125rem;
+		padding: var(--space-1-5);
 		max-height: 16rem;
 		overflow-y: auto;
 	}
@@ -156,8 +156,8 @@ const styles = css`
 	.option {
 		display: flex;
 		align-items: center;
-		gap: 0.5rem;
-		padding: 0.5rem 0.625rem;
+		gap: var(--space-2);
+		padding: var(--space-2) var(--space-2-5);
 		border-radius: var(--radius-sm);
 		font-size: var(--font-size-sm);
 		color: var(--text-primary);
@@ -173,7 +173,7 @@ const styles = css`
 
 	.option.is-selected {
 		color: var(--tone);
-		font-weight: 600;
+		font-weight: var(--font-weight-semibold);
 	}
 
 	.option.is-disabled {
@@ -182,7 +182,7 @@ const styles = css`
 	}
 
 	.empty {
-		padding: 0.625rem;
+		padding: var(--space-2-5);
 		font-size: var(--font-size-sm);
 		color: var(--text-secondary);
 		text-align: center;

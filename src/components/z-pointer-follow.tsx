@@ -56,7 +56,7 @@ const styles = css`
 		left: 0;
 		display: flex;
 		align-items: center;
-		gap: 0.4rem;
+		gap: var(--space-1-5);
 		pointer-events: none;
 		opacity: 0;
 		will-change: transform;
@@ -70,7 +70,7 @@ const styles = css`
 	.dot {
 		width: 0.85rem;
 		height: 0.85rem;
-		border-radius: 999px;
+		border-radius: var(--radius-full);
 		background: var(--tone);
 		box-shadow: 0 0 0 3px color-mix(in oklch, var(--tone) 25%, transparent);
 	}
@@ -78,10 +78,10 @@ const styles = css`
 	.tag {
 		font-family: var(--font-sans);
 		font-size: var(--font-size-xs);
-		font-weight: 600;
+		font-weight: var(--font-weight-semibold);
 		color: var(--on-accent);
 		background: var(--tone);
-		padding: 0.15rem 0.5rem;
+		padding: var(--space-0-5) var(--space-2);
 		border-radius: var(--radius-sm);
 		white-space: nowrap;
 		transform: translateY(-0.1rem);

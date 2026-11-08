@@ -34,10 +34,10 @@ const styles = css`
 
 	.skeleton.is-text {
 		height: 0.75rem;
-		border-radius: 999px;
+		border-radius: var(--radius-full);
 	}
 	.skeleton.is-circle {
-		border-radius: 999px;
+		border-radius: var(--radius-full);
 		width: 2.5rem;
 		height: 2.5rem;
 	}
@@ -64,7 +64,7 @@ const styles = css`
 	.stack {
 		display: flex;
 		flex-direction: column;
-		gap: 0.625rem;
+		gap: var(--space-2-5);
 	}
 	.stack .skeleton:last-child {
 		width: 70%;

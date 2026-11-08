@@ -67,7 +67,7 @@ const styles = css`
 		background: color-mix(in oklch, black 55%, transparent);
 		color: white;
 		font-size: var(--font-size-xl);
-		font-weight: 700;
+		font-weight: var(--font-weight-bold);
 	}
 `
 

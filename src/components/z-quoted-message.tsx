@@ -22,7 +22,7 @@ const styles = css`
 	}
 	.quote {
 		display: flex;
-		gap: 0.5rem;
+		gap: var(--space-2);
 		align-items: stretch;
 		width: 100%;
 		box-sizing: border-box;
@@ -30,7 +30,7 @@ const styles = css`
 		background: color-mix(in oklch, var(--text-primary) 5%, transparent);
 		border: none;
 		border-radius: var(--radius-sm);
-		padding: 0.375rem 0.5rem;
+		padding: var(--space-1-5) var(--space-2);
 		font-family: inherit;
 		color: inherit;
 		cursor: pointer;
@@ -40,7 +40,7 @@ const styles = css`
 	}
 	.bar {
 		flex: 0 0 3px;
-		border-radius: 999px;
+		border-radius: var(--radius-full);
 		background: var(--bar);
 	}
 	.body {
@@ -48,7 +48,7 @@ const styles = css`
 	}
 	.name {
 		font-size: var(--font-size-xs);
-		font-weight: 600;
+		font-weight: var(--font-weight-semibold);
 		color: var(--bar);
 		white-space: nowrap;
 		overflow: hidden;

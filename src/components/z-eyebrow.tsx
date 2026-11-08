@@ -13,7 +13,7 @@ const styles = css`
 	:host {
 		display: inline-flex;
 		align-items: center;
-		gap: 1rem;
+		gap: var(--space-4);
 		--eyebrow-tone: var(--text-secondary);
 	}
 
@@ -38,8 +38,8 @@ const styles = css`
 	.label {
 		font-family: var(--font-mono);
 		font-size: var(--font-size-sm);
-		font-weight: 500;
-		line-height: 1;
+		font-weight: var(--font-weight-medium);
+		line-height: var(--line-height-none);
 		letter-spacing: 0.2em;
 		text-transform: uppercase;
 		white-space: nowrap;

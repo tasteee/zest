@@ -91,13 +91,13 @@ const styles = css`
 	.file {
 		display: flex;
 		align-items: center;
-		gap: 0.625rem;
+		gap: var(--space-2-5);
 		min-width: 12rem;
 		max-width: 20rem;
 		box-sizing: border-box;
 		border-radius: var(--radius-md);
 		background: color-mix(in oklch, var(--text-primary) 6%, transparent);
-		padding: 0.5rem 0.625rem;
+		padding: var(--space-2) var(--space-2-5);
 	}
 	.icon {
 		flex: 0 0 auto;
@@ -125,7 +125,7 @@ const styles = css`
 	}
 	.name {
 		font-size: var(--font-size-sm);
-		font-weight: 500;
+		font-weight: var(--font-weight-medium);
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
@@ -141,7 +141,7 @@ const styles = css`
 		justify-content: center;
 		width: 2rem;
 		height: 2rem;
-		border-radius: 999px;
+		border-radius: var(--radius-full);
 		border: none;
 		background: transparent;
 		color: var(--text-secondary);

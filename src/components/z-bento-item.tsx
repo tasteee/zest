@@ -87,9 +87,9 @@ const styles = css`
 		z-index: 1;
 		display: inline-flex;
 		align-items: center;
-		gap: 0.25rem;
+		gap: var(--space-1);
 		font-size: var(--font-size-sm);
-		font-weight: 600;
+		font-weight: var(--font-weight-semibold);
 		color: var(--text-primary);
 		text-decoration: none;
 		transform: translateY(0.5rem);

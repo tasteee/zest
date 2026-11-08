@@ -59,7 +59,7 @@ const styles = css`
 		justify-content: center;
 		width: 2.5rem;
 		height: 2.5rem;
-		border-radius: 999px;
+		border-radius: var(--radius-full);
 		background: color-mix(in oklch, var(--surface-page) 70%, transparent);
 		backdrop-filter: blur(8px);
 		border: 1px solid var(--border-default);
@@ -106,8 +106,8 @@ const styles = css`
 	.dots {
 		display: flex;
 		justify-content: center;
-		gap: 0.5rem;
-		margin-top: 1rem;
+		gap: var(--space-2);
+		margin-top: var(--space-4);
 	}
 
 	.dot {
@@ -115,7 +115,7 @@ const styles = css`
 		height: 0.5rem;
 		padding: 0;
 		border: 0;
-		border-radius: 999px;
+		border-radius: var(--radius-full);
 		background: var(--border-default);
 		cursor: pointer;
 		transition:

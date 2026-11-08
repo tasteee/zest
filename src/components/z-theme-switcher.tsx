@@ -109,7 +109,7 @@ const styles = css`
 		font-family: inherit;
 		font-size: var(--switcher-font-size);
 		font-weight: var(--font-weight-medium);
-		line-height: 1;
+		line-height: var(--line-height-none);
 		white-space: nowrap;
 		cursor: pointer;
 		transition: color var(--motion-fast) var(--ease-enter), background-color var(--motion-fast) var(--ease-enter), border-color var(--motion-fast) var(--ease-enter);

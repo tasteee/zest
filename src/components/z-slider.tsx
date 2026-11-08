@@ -26,14 +26,14 @@ const styles = css`
 		display: flex;
 		align-items: center;
 		gap: var(--space-2);
-		margin-bottom: 0.5rem;
+		margin-bottom: var(--space-2);
 	}
 
 	.label {
 		font-size: var(--font-size-sm);
 		font-weight: var(--font-weight-medium);
 		color: var(--text-primary);
-		line-height: 1.2;
+		line-height: var(--line-height-tight);
 	}
 
 	.value {
@@ -44,9 +44,9 @@ const styles = css`
 		font-variant-numeric: tabular-nums;
 		color: var(--tone);
 		background: color-mix(in oklch, var(--tone) 12%, transparent);
-		padding: 0.125rem 0.5rem;
-		border-radius: 999px;
-		line-height: 1.4;
+		padding: var(--space-0-5) var(--space-2);
+		border-radius: var(--radius-full);
+		line-height: var(--line-height-snug);
 		white-space: nowrap;
 	}
 
@@ -79,7 +79,7 @@ const styles = css`
 	/* WebKit track */
 	input::-webkit-slider-runnable-track {
 		height: 4px;
-		border-radius: 999px;
+		border-radius: var(--radius-full);
 		background: linear-gradient(
 			to right,
 			var(--tone) 0%,
@@ -92,12 +92,12 @@ const styles = css`
 	/* Firefox track + progress */
 	input::-moz-range-track {
 		height: 4px;
-		border-radius: 999px;
+		border-radius: var(--radius-full);
 		background: var(--border-default);
 	}
 	input::-moz-range-progress {
 		height: 4px;
-		border-radius: 999px;
+		border-radius: var(--radius-full);
 		background: var(--tone);
 	}
 
@@ -106,7 +106,7 @@ const styles = css`
 		width: 1rem;
 		height: 1rem;
 		margin-top: -6px;
-		border-radius: 999px;
+		border-radius: var(--radius-full);
 		background: var(--tone);
 		border: 2px solid var(--surface-page);
 		transition: transform var(--motion-instant) var(--ease-enter);
@@ -119,7 +119,7 @@ const styles = css`
 	input::-moz-range-thumb {
 		width: 1rem;
 		height: 1rem;
-		border-radius: 999px;
+		border-radius: var(--radius-full);
 		background: var(--tone);
 		border: 2px solid var(--surface-page);
 	}

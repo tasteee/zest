@@ -13,8 +13,8 @@ const styles = css`
 	:host {
 		display: flex;
 		align-items: center;
-		gap: 0.75rem;
-		padding: 0.625rem 1rem;
+		gap: var(--space-3);
+		padding: var(--space-2-5) var(--space-4);
 		border-bottom: 1px solid var(--border-default);
 		background: var(--surface-default);
 	}
@@ -29,7 +29,7 @@ const styles = css`
 		gap: 1px;
 	}
 	.name {
-		font-weight: 600;
+		font-weight: var(--font-weight-semibold);
 		font-size: var(--font-size-md);
 		white-space: nowrap;
 		overflow: hidden;
@@ -46,7 +46,7 @@ const styles = css`
 		flex: 0 0 auto;
 		display: inline-flex;
 		align-items: center;
-		gap: 0.25rem;
+		gap: var(--space-1);
 	}
 `
 

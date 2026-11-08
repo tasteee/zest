@@ -47,19 +47,19 @@ const styles = css`
 		display: flex;
 		flex-wrap: wrap;
 		align-items: center;
-		gap: 0.375rem;
+		gap: var(--space-1-5);
 	}
 
 	.pill {
 		display: inline-flex;
 		align-items: center;
-		gap: 0.375rem;
+		gap: var(--space-1-5);
 		font-family: inherit;
-		font-weight: 500;
-		line-height: 1;
+		font-weight: var(--font-weight-medium);
+		line-height: var(--line-height-none);
 		white-space: nowrap;
 		border: 1px solid var(--border-default);
-		border-radius: 999px;
+		border-radius: var(--radius-full);
 		background: transparent;
 		/* resting / candidate: the less-prominent neutral state */
 		color: var(--text-secondary);
@@ -73,11 +73,11 @@ const styles = css`
 
 	.filter.is-sm .pill {
 		font-size: var(--font-size-xs);
-		padding: 0.3125rem 0.6875rem;
+		padding: var(--space-1-5) var(--space-3);
 	}
 	.filter.is-md .pill {
 		font-size: var(--font-size-sm);
-		padding: 0.4375rem 0.875rem;
+		padding: var(--space-2) var(--space-3-5);
 	}
 
 	.pill:hover {
@@ -92,7 +92,7 @@ const styles = css`
 		background: color-mix(in oklch, var(--filter-accent) 14%, transparent);
 		border-color: color-mix(in oklch, var(--filter-accent) 50%, transparent);
 		color: var(--filter-accent);
-		font-weight: 600;
+		font-weight: var(--font-weight-semibold);
 	}
 	/* neutral tone === foreground, which reads fine as text on the faint tint */
 	:host(:not([tone])) .pill.is-active,
@@ -120,7 +120,7 @@ const styles = css`
 		justify-content: center;
 		flex-shrink: 0;
 		border: 1px solid var(--border-default);
-		border-radius: 999px;
+		border-radius: var(--radius-full);
 		background: transparent;
 		color: var(--text-secondary);
 		cursor: pointer;

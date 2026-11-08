@@ -21,7 +21,7 @@ const styles = css`
 	label {
 		display: inline-flex;
 		align-items: center;
-		gap: 0.625rem;
+		gap: var(--space-2-5);
 		min-height: var(--control-height-md);
 		cursor: pointer;
 		font-family: inherit;
@@ -87,7 +87,7 @@ const styles = css`
 	.dash {
 		width: 60%;
 		height: 2px;
-		border-radius: 1px;
+		border-radius: var(--radius-xs);
 		background: var(--on-accent);
 	}
 

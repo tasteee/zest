@@ -56,7 +56,7 @@ const styles = css`
 	.avatar {
 		width: var(--size);
 		height: var(--size);
-		border-radius: 999px;
+		border-radius: var(--radius-full);
 		overflow: hidden;
 		display: inline-flex;
 		align-items: center;
@@ -69,9 +69,9 @@ const styles = css`
 		/* Toward the theme's own text color, so the initials read in light and dark. */
 		color: color-mix(in oklch, var(--tone) 55%, var(--text-primary));
 		font-family: inherit;
-		font-weight: 600;
+		font-weight: var(--font-weight-semibold);
 		font-size: calc(var(--size) * 0.4);
-		line-height: 1;
+		line-height: var(--line-height-none);
 		user-select: none;
 	}
 
@@ -92,7 +92,7 @@ const styles = css`
 		bottom: 0;
 		width: calc(var(--size) * 0.28);
 		height: calc(var(--size) * 0.28);
-		border-radius: 999px;
+		border-radius: var(--radius-full);
 		border: 2px solid var(--surface-page);
 		box-sizing: border-box;
 	}

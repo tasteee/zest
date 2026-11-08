@@ -64,7 +64,7 @@ const styles = css`
 	.title {
 		margin: 0;
 		font-size: var(--font-size-xl);
-		font-weight: 600;
+		font-weight: var(--font-weight-semibold);
 		line-height: var(--line-height-snug);
 		color: var(--text-primary);
 	}

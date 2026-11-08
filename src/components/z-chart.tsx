@@ -76,7 +76,7 @@ const styles = css`
 		fill: var(--text-primary);
 		font-family: var(--font-sans);
 		font-size: var(--font-size-xs);
-		font-weight: 600;
+		font-weight: var(--font-weight-semibold);
 		text-anchor: middle;
 	}
 

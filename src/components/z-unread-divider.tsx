@@ -29,7 +29,7 @@ const styles = css`
 	}
 	.label {
 		font-size: var(--font-size-2xs);
-		font-weight: 700;
+		font-weight: var(--font-weight-bold);
 		letter-spacing: 0.04em;
 		text-transform: uppercase;
 		color: var(--tone);

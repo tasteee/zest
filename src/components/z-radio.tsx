@@ -20,7 +20,7 @@ const styles = css`
 	label {
 		display: inline-flex;
 		align-items: center;
-		gap: 0.625rem;
+		gap: var(--space-2-5);
 		cursor: pointer;
 		font-family: inherit;
 		font-size: var(--font-size-sm);
@@ -51,7 +51,7 @@ const styles = css`
 		width: 1.125rem;
 		height: 1.125rem;
 		border: 1px solid var(--border-default);
-		border-radius: 999px;
+		border-radius: var(--radius-full);
 		background: transparent;
 		transition: border-color var(--motion-instant) var(--ease-enter);
 	}
@@ -67,7 +67,7 @@ const styles = css`
 	.dot {
 		width: 0.55rem;
 		height: 0.55rem;
-		border-radius: 999px;
+		border-radius: var(--radius-full);
 		background: var(--tone);
 		transform: scale(0);
 		transition: transform var(--motion-instant) var(--ease-enter);

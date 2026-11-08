@@ -34,7 +34,7 @@ const styles = css`
 
 	.cells {
 		display: inline-flex;
-		gap: 0.5rem;
+		gap: var(--space-2);
 	}
 
 	.cell {
@@ -47,7 +47,7 @@ const styles = css`
 		color: var(--text-primary);
 		font-family: var(--font-mono);
 		font-size: var(--font-size-2xl);
-		font-weight: 600;
+		font-weight: var(--font-weight-semibold);
 		caret-color: var(--tone);
 		transition:
 			border-color var(--motion-fast) var(--ease-enter),

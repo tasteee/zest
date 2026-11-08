@@ -82,22 +82,22 @@ const styles = css`
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		gap: 0.75rem;
+		gap: var(--space-3);
 		flex: 0 0 auto;
-		padding: 0.625rem 0.875rem 0.25rem 0.875rem;
+		padding: var(--space-2-5) var(--space-3-5) var(--space-1) var(--space-3-5);
 		user-select: none;
 	}
 
 	.meta {
 		display: flex;
 		align-items: baseline;
-		gap: 0.5rem;
+		gap: var(--space-2);
 		min-width: 0;
 		font-size: var(--font-size-xs);
 	}
 
 	.shell {
-		font-weight: 600;
+		font-weight: var(--font-weight-semibold);
 		letter-spacing: 0.02em;
 		color: var(--tone);
 		white-space: nowrap;
@@ -114,14 +114,14 @@ const styles = css`
 	.dots {
 		display: inline-flex;
 		align-items: center;
-		gap: 0.4375rem;
+		gap: var(--space-2);
 		flex-shrink: 0;
 	}
 
 	.dot {
 		width: 0.6875rem;
 		height: 0.6875rem;
-		border-radius: 999px;
+		border-radius: var(--radius-full);
 		background: var(--border-default);
 	}
 
@@ -154,7 +154,7 @@ const styles = css`
 	}
 	.scroll::-webkit-scrollbar-thumb {
 		background: var(--border-default);
-		border-radius: 999px;
+		border-radius: var(--radius-full);
 	}
 	.scroll::-webkit-scrollbar-button {
 		display: none;
@@ -166,9 +166,9 @@ const styles = css`
 	   sideways rather than squeezing text. */
 	.body {
 		min-width: max-content;
-		padding: 0.375rem 0 0.75rem 0;
+		padding: var(--space-1-5) 0 var(--space-3) 0;
 		font-size: var(--font-size-sm);
-		line-height: 1.75;
+		line-height: var(--line-height-relaxed);
 		letter-spacing: 0.35px;
 		text-align: start;
 		color: var(--text-primary);
@@ -190,8 +190,8 @@ const styles = css`
 		display: flex;
 		align-items: center;
 		justify-content: flex-start;
-		gap: 0.75rem;
-		padding: 0 0.875rem;
+		gap: var(--space-3);
+		padding: 0 var(--space-3-5);
 		min-height: 1.75em;
 	}
 
@@ -217,7 +217,7 @@ const styles = css`
 	.prompt {
 		color: var(--tone);
 		user-select: none;
-		margin-inline-end: 0.5rem;
+		margin-inline-end: var(--space-2);
 	}
 
 	.command {
@@ -287,7 +287,7 @@ const styles = css`
 		padding: 0;
 		background: color-mix(in oklch, var(--surface-page) 82%, transparent);
 		border: 1px solid var(--border-default);
-		border-radius: 999px;
+		border-radius: var(--radius-full);
 		color: var(--text-secondary);
 		cursor: pointer;
 		opacity: 0;

@@ -39,10 +39,10 @@ const styles = css`
 		flex: 1;
 		min-height: 0;
 		overflow-y: auto;
-		padding: 0.375rem;
+		padding: var(--space-1-5);
 		display: flex;
 		flex-direction: column;
-		gap: 0.125rem;
+		gap: var(--space-0-5);
 	}
 `
 

@@ -34,7 +34,7 @@ const styles = css`
 	nav {
 		display: flex;
 		align-items: center;
-		gap: 0.25rem;
+		gap: var(--space-1);
 	}
 
 	.top {
@@ -44,14 +44,14 @@ const styles = css`
 	.trigger {
 		display: inline-flex;
 		align-items: center;
-		gap: 0.375rem;
+		gap: var(--space-1-5);
 		background: transparent;
 		border: 0;
-		padding: 0.5rem 0.75rem;
+		padding: var(--space-2) var(--space-3);
 		border-radius: var(--radius-md);
 		font-family: inherit;
 		font-size: var(--font-size-sm);
-		font-weight: 500;
+		font-weight: var(--font-weight-medium);
 		color: var(--text-secondary);
 		text-decoration: none;
 		cursor: pointer;
@@ -105,7 +105,7 @@ const styles = css`
 		border: 1px solid var(--border-default);
 		border-radius: var(--radius-md);
 		box-shadow: var(--shadow-overlay);
-		padding: 0.375rem;
+		padding: var(--space-1-5);
 		display: flex;
 		flex-direction: column;
 		gap: 1px;
@@ -114,8 +114,8 @@ const styles = css`
 	.child {
 		display: flex;
 		flex-direction: column;
-		gap: 0.125rem;
-		padding: 0.5rem 0.625rem;
+		gap: var(--space-0-5);
+		padding: var(--space-2) var(--space-2-5);
 		border-radius: var(--radius-sm);
 		color: var(--text-primary);
 		text-decoration: none;
@@ -132,7 +132,7 @@ const styles = css`
 
 	.child .child-label {
 		font-size: var(--font-size-sm);
-		font-weight: 500;
+		font-weight: var(--font-weight-medium);
 	}
 
 	.child .child-desc {

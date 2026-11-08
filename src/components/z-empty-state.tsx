@@ -15,7 +15,7 @@ const styles = css`
 		flex-direction: column;
 		align-items: center;
 		text-align: center;
-		gap: 0.75rem;
+		gap: var(--space-3);
 		padding: var(--space-12) var(--space-6);
 		--tone: var(--text-secondary);
 	}
@@ -54,7 +54,7 @@ const styles = css`
 		justify-content: center;
 		width: 3rem;
 		height: 3rem;
-		margin-bottom: 0.25rem;
+		margin-bottom: var(--space-1);
 		border-radius: var(--radius-lg);
 		color: var(--tone);
 		background: color-mix(in oklch, var(--tone) 12%, transparent);
@@ -72,7 +72,7 @@ const styles = css`
 	.heading {
 		margin: 0;
 		font-size: var(--font-size-xl);
-		font-weight: 600;
+		font-weight: var(--font-weight-semibold);
 		color: var(--text-primary);
 		line-height: var(--line-height-snug);
 	}
@@ -87,8 +87,8 @@ const styles = css`
 
 	.actions {
 		display: flex;
-		gap: 0.625rem;
-		margin-top: 1rem;
+		gap: var(--space-2-5);
+		margin-top: var(--space-4);
 	}
 
 	.actions.is-empty {

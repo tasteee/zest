@@ -50,29 +50,29 @@ const styles = css`
 		display: flex;
 		align-items: center;
 		gap: var(--space-2);
-		margin-bottom: 0.5rem;
+		margin-bottom: var(--space-2);
 	}
 
 	.label {
 		font-size: var(--font-size-sm);
 		font-weight: var(--font-weight-medium);
 		color: var(--text-primary);
-		line-height: 1.2;
+		line-height: var(--line-height-tight);
 	}
 
 	.value {
 		display: inline-flex;
 		align-items: center;
-		gap: 0.375rem;
+		gap: var(--space-1-5);
 		/* margin-left keeps the value flush-right even when there's no label. */
 		margin-inline-start: auto;
 		font-size: var(--font-size-xs);
 		font-weight: var(--font-weight-semibold);
 		font-variant-numeric: tabular-nums;
 		background: color-mix(in oklch, var(--text-secondary) 12%, transparent);
-		padding: 0.125rem 0.5rem;
-		border-radius: 999px;
-		line-height: 1.4;
+		padding: var(--space-0-5) var(--space-2);
+		border-radius: var(--radius-full);
+		line-height: var(--line-height-snug);
 		white-space: nowrap;
 	}
 	.value .left {
@@ -100,7 +100,7 @@ const styles = css`
 	.fill {
 		position: absolute;
 		height: 4px;
-		border-radius: 999px;
+		border-radius: var(--radius-full);
 		pointer-events: none;
 	}
 	/* reachable but unselected */
@@ -163,7 +163,7 @@ const styles = css`
 		width: 1rem;
 		height: 1rem;
 		margin-top: -6px;
-		border-radius: 999px;
+		border-radius: var(--radius-full);
 		border: 2px solid var(--surface-page);
 		cursor: pointer;
 		transition: transform var(--motion-instant) var(--ease-enter);
@@ -172,7 +172,7 @@ const styles = css`
 		pointer-events: auto;
 		width: 1rem;
 		height: 1rem;
-		border-radius: 999px;
+		border-radius: var(--radius-full);
 		border: 2px solid var(--surface-page);
 		cursor: pointer;
 	}

@@ -15,14 +15,14 @@ const styles = css`
 	.meta {
 		display: flex;
 		align-items: center;
-		gap: 0.75rem;
+		gap: var(--space-3);
 		flex-wrap: wrap;
 	}
 
 	.avatar {
 		width: 1.75rem;
 		height: 1.75rem;
-		border-radius: 999px;
+		border-radius: var(--radius-full);
 		overflow: hidden;
 		flex-shrink: 0;
 		display: inline-flex;
@@ -31,7 +31,7 @@ const styles = css`
 		background: color-mix(in srgb, var(--tone) 22%, var(--surface-default));
 		color: color-mix(in oklch, var(--tone) 85%, var(--text-strong));
 		font-size: var(--font-size-2xs);
-		font-weight: 600;
+		font-weight: var(--font-weight-semibold);
 		font-family: inherit;
 	}
 
@@ -44,14 +44,14 @@ const styles = css`
 
 	.name {
 		font-size: var(--font-size-sm);
-		font-weight: 500;
+		font-weight: var(--font-weight-medium);
 		color: var(--text-primary);
 	}
 
 	.sep {
 		width: 3px;
 		height: 3px;
-		border-radius: 999px;
+		border-radius: var(--radius-full);
 		background: var(--text-secondary);
 		flex-shrink: 0;
 	}
@@ -64,8 +64,8 @@ const styles = css`
 	.tags {
 		display: flex;
 		flex-wrap: wrap;
-		gap: 0.5rem;
-		margin-top: 0.875rem;
+		gap: var(--space-2);
+		margin-top: var(--space-3-5);
 	}
 
 	.tag {
@@ -73,13 +73,13 @@ const styles = css`
 		align-items: center;
 		font-family: inherit;
 		font-size: var(--font-size-sm);
-		font-weight: 500;
-		line-height: 1;
+		font-weight: var(--font-weight-medium);
+		line-height: var(--line-height-none);
 		border: 1px solid var(--border-default);
-		border-radius: 999px;
+		border-radius: var(--radius-full);
 		background: transparent;
 		color: var(--text-secondary);
-		padding: 0.375rem 0.75rem;
+		padding: var(--space-1-5) var(--space-3);
 		cursor: pointer;
 		transition:
 			border-color var(--motion-fast) var(--ease-enter),

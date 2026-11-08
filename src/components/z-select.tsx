@@ -51,7 +51,7 @@ const styles = css`
 		display: inline-flex;
 		align-items: center;
 		justify-content: space-between;
-		gap: 0.625rem;
+		gap: var(--space-2-5);
 		width: 100%;
 		box-sizing: border-box;
 		background: transparent;
@@ -68,17 +68,17 @@ const styles = css`
 
 	.trigger.is-sm {
 		height: var(--control-height-sm);
-		padding-inline: 0.75rem;
+		padding-inline: var(--space-3);
 		font-size: var(--font-size-sm);
 	}
 	.trigger.is-md {
 		height: var(--control-height-md);
-		padding-inline: 0.875rem;
+		padding-inline: var(--space-3-5);
 		font-size: var(--font-size-sm);
 	}
 	.trigger.is-lg {
 		height: var(--control-height-lg);
-		padding-inline: 1rem;
+		padding-inline: var(--space-4);
 		font-size: var(--font-size-md);
 	}
 
@@ -149,7 +149,7 @@ const styles = css`
 		border: 1px solid var(--border-default);
 		border-radius: var(--radius-md);
 		box-shadow: var(--shadow-overlay);
-		padding: 0.3125rem;
+		padding: var(--space-1-5);
 		max-height: 16rem;
 		overflow-y: auto;
 		gap: 1px;
@@ -164,8 +164,8 @@ const styles = css`
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		gap: 0.5rem;
-		padding: 0.5rem 0.625rem;
+		gap: var(--space-2);
+		padding: var(--space-2) var(--space-2-5);
 		border-radius: var(--radius-sm);
 		font-size: var(--font-size-sm);
 		color: var(--text-primary);
@@ -182,7 +182,7 @@ const styles = css`
 	.option.is-selected,
 	.option.is-ancestor {
 		color: var(--tone);
-		font-weight: 600;
+		font-weight: var(--font-weight-semibold);
 	}
 
 	.levels {
@@ -224,7 +224,7 @@ const styles = css`
 	}
 
 	.empty {
-		padding: 0.625rem;
+		padding: var(--space-2-5);
 		font-size: var(--font-size-sm);
 		color: var(--text-secondary);
 		text-align: center;

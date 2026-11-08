@@ -74,12 +74,12 @@ const styles = css`
 	}
 
 	.head.has-content {
-		padding: 0.25rem 0.5rem 0.75rem;
+		padding: var(--space-1) var(--space-2) var(--space-3);
 	}
 
 	.foot.has-content {
 		margin-top: auto;
-		padding-top: 0.75rem;
+		padding-top: var(--space-3);
 		border-top: 1px solid var(--border-default);
 	}
 
@@ -88,7 +88,7 @@ const styles = css`
 		flex-direction: column;
 		flex: 1 1 auto;
 		min-height: 0;
-		gap: 0.125rem;
+		gap: var(--space-0-5);
 		overflow-y: auto;
 	}
 
@@ -112,7 +112,7 @@ const styles = css`
 	}
 	nav::-webkit-scrollbar-thumb {
 		background: var(--border-default);
-		border-radius: 999px;
+		border-radius: var(--radius-full);
 	}
 	nav::-webkit-scrollbar-thumb:hover {
 		background: var(--border-strong);
@@ -128,13 +128,13 @@ const styles = css`
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		gap: 0.5rem;
+		gap: var(--space-2);
 		width: 100%;
 		box-sizing: border-box;
-		padding: 0.375rem 0.625rem 0.875rem;
+		padding: var(--space-1-5) var(--space-2-5) var(--space-3-5);
 		font-family: inherit;
 		font-size: var(--font-size-xs);
-		font-weight: 700;
+		font-weight: var(--font-weight-bold);
 		letter-spacing: 0.1em;
 		text-transform: uppercase;
 		color: var(--text-secondary);
@@ -148,13 +148,13 @@ const styles = css`
 	}
 
 	.group:first-child > .group-label {
-		padding-top: 0.5rem;
+		padding-top: var(--space-2);
 	}
 
 	/* a group nested inside a group: a quieter, sentence-case sub-heading */
 	.group .group .group-label {
-		padding: 0.5rem 0.625rem 0.375rem 1.125rem;
-		font-weight: 600;
+		padding: var(--space-2) var(--space-2-5) var(--space-1-5) var(--space-5);
+		font-weight: var(--font-weight-semibold);
 		letter-spacing: 0;
 		text-transform: none;
 	}
@@ -204,12 +204,12 @@ const styles = css`
 	.link {
 		display: flex;
 		align-items: center;
-		gap: 0.625rem;
-		padding: 0.5rem 0.625rem;
+		gap: var(--space-2-5);
+		padding: var(--space-2) var(--space-2-5);
 		border-radius: var(--radius-md);
 		font-family: inherit;
 		font-size: var(--font-size-sm);
-		font-weight: 500;
+		font-weight: var(--font-weight-medium);
 		color: var(--text-primary);
 		text-decoration: none;
 		background: transparent;
@@ -235,21 +235,21 @@ const styles = css`
 	}
 
 	:host(:not([is-collapsed])) .group .link {
-		margin-inline-start: 0.5rem;
+		margin-inline-start: var(--space-2);
 		width: calc(100% - 0.5rem);
 	}
 
 	.group > .link:last-child,
 	.group > .group:last-child {
-		margin-bottom: 1rem;
+		margin-bottom: var(--space-4);
 	}
 
 	.group .group > .link:last-child {
-		margin-bottom: 0.5rem;
+		margin-bottom: var(--space-2);
 	}
 
 	:host(:not([is-collapsed])) .group .group .link {
-		margin-inline-start: 1rem;
+		margin-inline-start: var(--space-4);
 		width: calc(100% - 1rem);
 	}
 
@@ -272,7 +272,7 @@ const styles = css`
 	   rail never renders an empty row when labels are hidden. */
 	.initial {
 		font-size: var(--font-size-sm);
-		font-weight: 600;
+		font-weight: var(--font-weight-semibold);
 	}
 
 	:host(:not([is-collapsed])) .initial {
@@ -306,9 +306,9 @@ const styles = css`
 
 	.badge {
 		font-size: var(--font-size-xs);
-		font-weight: 600;
-		padding: 0.0625rem 0.4rem;
-		border-radius: 999px;
+		font-weight: var(--font-weight-semibold);
+		padding: 0.0625rem var(--space-1-5);
+		border-radius: var(--radius-full);
 		background: color-mix(in oklch, var(--tone) 18%, transparent);
 		color: var(--tone);
 	}

@@ -24,13 +24,13 @@ const styles = css`
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
-		gap: 0.5rem;
+		gap: var(--space-2);
 		font-family: inherit;
-		font-weight: 500;
+		font-weight: var(--font-weight-medium);
 		white-space: nowrap;
 		border: 1px solid transparent;
 		cursor: pointer;
-		line-height: 1;
+		line-height: var(--line-height-none);
 		box-sizing: border-box;
 		/* Fill the host. The host is inline-flex, so it still shrink-wraps to the
 		   button's content when standalone, but when a parent stretches the host
@@ -58,21 +58,21 @@ const styles = css`
 	button.is-sm {
 		border-radius: var(--z-button-radius, var(--radius-md));
 		height: var(--control-height-sm);
-		padding-inline: 0.875rem;
+		padding-inline: var(--space-3-5);
 		font-size: var(--font-size-sm);
 	}
 
 	button.is-md {
 		border-radius: var(--z-button-radius, var(--radius-md));
 		height: var(--control-height-md);
-		padding-inline: 1rem;
+		padding-inline: var(--space-4);
 		font-size: var(--font-size-sm);
 	}
 
 	button.is-lg {
 		border-radius: var(--z-button-radius, var(--radius-md));
 		height: var(--control-height-lg);
-		padding-inline: 1.5rem;
+		padding-inline: var(--space-6);
 		font-size: var(--font-size-md);
 	}
 
@@ -106,7 +106,7 @@ const styles = css`
 		background: var(--tone);
 		border-color: var(--tone);
 		color: var(--tone-on-color);
-		font-weight: 600;
+		font-weight: var(--font-weight-semibold);
 	}
 
 	/* A mid-tone fill has no good plain black or white label. The label is
@@ -168,7 +168,7 @@ const styles = css`
 		   Pulling the text a quarter of the way to the foreground clears 4.5:1
 		   in every theme — darker on paper, lighter on ink — as z-badge does. */
 		color: color-mix(in oklab, var(--tone) 72%, var(--text-primary));
-		font-weight: 600;
+		font-weight: var(--font-weight-semibold);
 	}
 
 	button.is-soft:hover {
@@ -212,7 +212,7 @@ const styles = css`
 		height: 0.875em;
 		border: 2px solid currentColor;
 		border-top-color: transparent;
-		border-radius: 999px;
+		border-radius: var(--radius-full);
 		animation: z-button-spin 0.7s linear infinite;
 	}
 
@@ -245,7 +245,7 @@ const styles = css`
 	.label {
 		display: inline-flex;
 		align-items: center;
-		gap: 0.5rem;
+		gap: var(--space-2);
 	}
 
 	@keyframes z-button-spin {

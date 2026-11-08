@@ -69,7 +69,7 @@ const styles = css`
 		color: var(--text-primary);
 		font-family: inherit;
 		font-size: var(--font-size-sm);
-		padding: 0.6rem 0.75rem;
+		padding: var(--space-2-5) var(--space-3);
 		outline: none;
 	}
 	.search::placeholder {
@@ -77,8 +77,8 @@ const styles = css`
 	}
 	.tabs {
 		display: flex;
-		gap: 0.125rem;
-		padding: 0.25rem 0.375rem;
+		gap: var(--space-0-5);
+		padding: var(--space-1) var(--space-1-5);
 		border-bottom: 1px solid var(--border-default);
 	}
 	.tab {
@@ -86,7 +86,7 @@ const styles = css`
 		border: none;
 		background: transparent;
 		border-radius: var(--radius-sm);
-		padding: 0.25rem 0;
+		padding: var(--space-1) 0;
 		font-size: var(--font-size-md);
 		cursor: pointer;
 		opacity: 0.65;
@@ -104,8 +104,8 @@ const styles = css`
 	.grid {
 		display: grid;
 		grid-template-columns: repeat(8, 1fr);
-		gap: 0.125rem;
-		padding: 0.375rem;
+		gap: var(--space-0-5);
+		padding: var(--space-1-5);
 		max-height: 14rem;
 		overflow-y: auto;
 	}
@@ -114,8 +114,8 @@ const styles = css`
 		background: transparent;
 		border-radius: var(--radius-sm);
 		font-size: var(--font-size-xl);
-		line-height: 1;
-		padding: 0.3rem 0;
+		line-height: var(--line-height-none);
+		padding: var(--space-1) 0;
 		cursor: pointer;
 		transition:
 			background-color var(--motion-instant) var(--ease-enter),
@@ -130,7 +130,7 @@ const styles = css`
 		text-align: center;
 		color: var(--text-secondary);
 		font-size: var(--font-size-sm);
-		padding: 1.5rem 0;
+		padding: var(--space-6) 0;
 	}
 `
 

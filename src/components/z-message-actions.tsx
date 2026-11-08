@@ -20,11 +20,11 @@ const styles = css`
 	:host {
 		display: inline-flex;
 		align-items: center;
-		gap: 0.125rem;
+		gap: var(--space-0-5);
 		background: var(--surface-overlay);
 		border: 1px solid var(--border-default);
-		border-radius: 999px;
-		padding: 0px 0.25rem 0.125rem;
+		border-radius: var(--radius-full);
+		padding: 0px var(--space-1) var(--space-0-5);
 		box-shadow: var(--shadow-overlay);
 	}
 	:host([is-hidden]) {
@@ -38,7 +38,7 @@ const styles = css`
 		height: 1.75rem;
 		border: none;
 		background: transparent;
-		border-radius: 999px;
+		border-radius: var(--radius-full);
 		cursor: pointer;
 		padding: 0;
 		color: var(--text-secondary);
@@ -58,7 +58,7 @@ const styles = css`
 		width: 1px;
 		height: 1.1rem;
 		background: var(--border-default);
-		margin: 0 0.125rem;
+		margin: 0 var(--space-0-5);
 	}
 	svg {
 		width: 1rem;

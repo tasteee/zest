@@ -14,7 +14,7 @@ const styles = css`
 		display: flex;
 		align-items: flex-end;
 		gap: var(--space-2);
-		padding: 0.125rem 0;
+		padding: var(--space-0-5) 0;
 	}
 	:host([is-hidden]) {
 		display: none;
@@ -24,14 +24,14 @@ const styles = css`
 		align-items: center;
 		gap: 4px;
 		background: color-mix(in oklch, var(--text-primary) 8%, var(--surface-default));
-		border-radius: 1.125rem;
+		border-radius: var(--radius-full);
 		border-end-start-radius: 0.3rem;
-		padding: 0.7rem 0.85rem;
+		padding: var(--space-3) var(--space-3-5);
 	}
 	.dot {
 		width: 7px;
 		height: 7px;
-		border-radius: 999px;
+		border-radius: var(--radius-full);
 		background: var(--text-secondary);
 		animation: typing 1.4s infinite both;
 	}

@@ -27,7 +27,7 @@ const styles = css`
 		display: flex;
 		align-items: flex-end;
 		gap: var(--space-2);
-		padding: 0.125rem 0;
+		padding: var(--space-0-5) 0;
 	}
 	:host([side='end']) .row {
 		flex-direction: row-reverse;
@@ -54,14 +54,14 @@ const styles = css`
 
 	.name {
 		font-size: var(--font-size-xs);
-		font-weight: 600;
+		font-weight: var(--font-weight-semibold);
 		color: var(--text-secondary);
-		margin: 0 0.5rem 2px;
+		margin: 0 var(--space-2) 2px;
 	}
 	.meta {
 		font-size: var(--font-size-2xs);
 		color: var(--text-secondary);
-		margin: 2px 0.5rem 0;
+		margin: 2px var(--space-2) 0;
 	}
 `
 

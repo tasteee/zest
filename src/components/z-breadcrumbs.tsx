@@ -33,7 +33,7 @@ const styles = css`
 		display: flex;
 		flex-wrap: wrap;
 		align-items: center;
-		gap: 0.5rem;
+		gap: var(--space-2);
 		margin: 0;
 		padding: 0;
 		list-style: none;
@@ -43,7 +43,7 @@ const styles = css`
 	li {
 		display: inline-flex;
 		align-items: center;
-		gap: 0.5rem;
+		gap: var(--space-2);
 	}
 
 	.crumb {
@@ -70,7 +70,7 @@ const styles = css`
 
 	.crumb.is-current {
 		color: var(--text-primary);
-		font-weight: 500;
+		font-weight: var(--font-weight-medium);
 		cursor: default;
 		pointer-events: none;
 	}

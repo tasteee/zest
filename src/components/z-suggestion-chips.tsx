@@ -14,7 +14,7 @@ const styles = css`
 	:host {
 		display: flex;
 		flex-wrap: wrap;
-		gap: 0.5rem;
+		gap: var(--space-2);
 	}
 	:host([is-hidden]) {
 		display: none;
@@ -22,11 +22,11 @@ const styles = css`
 	button {
 		display: inline-flex;
 		align-items: center;
-		gap: 0.375rem;
+		gap: var(--space-1-5);
 		border: 1px solid var(--border-default);
 		background: color-mix(in oklch, var(--text-primary) 4%, transparent);
-		border-radius: 999px;
-		padding: 0.35rem 0.75rem;
+		border-radius: var(--radius-full);
+		padding: var(--space-1-5) var(--space-3);
 		font-family: inherit;
 		font-size: var(--font-size-sm);
 		color: var(--text-primary);

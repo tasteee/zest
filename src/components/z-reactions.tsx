@@ -19,7 +19,7 @@ const styles = css`
 	:host {
 		display: inline-flex;
 		flex-wrap: wrap;
-		gap: 0.25rem;
+		gap: var(--space-1);
 		vertical-align: middle;
 	}
 	:host([is-hidden]) {
@@ -28,14 +28,14 @@ const styles = css`
 	button {
 		display: inline-flex;
 		align-items: center;
-		gap: 0.25rem;
+		gap: var(--space-1);
 		border: 1px solid var(--border-default);
 		background: color-mix(in oklch, var(--text-primary) 5%, transparent);
-		border-radius: 999px;
-		padding: 0.1rem 0.5rem;
+		border-radius: var(--radius-full);
+		padding: var(--space-0-5) var(--space-2);
 		font-family: inherit;
 		font-size: var(--font-size-sm);
-		line-height: 1.4;
+		line-height: var(--line-height-snug);
 		color: var(--text-primary);
 		cursor: pointer;
 		transition:
@@ -60,7 +60,7 @@ const styles = css`
 		color: var(--text-primary);
 	}
 	.add {
-		padding: 0.1rem 0.45rem;
+		padding: var(--space-0-5) var(--space-2);
 		color: var(--text-secondary);
 	}
 	.add svg {

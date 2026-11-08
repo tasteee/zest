@@ -29,10 +29,10 @@ const styles = css`
 
 	.label {
 		display: block;
-		padding: 0.875rem 1rem 0.5rem;
+		padding: var(--space-3-5) var(--space-4) var(--space-2);
 		font-family: var(--font-mono);
 		font-size: var(--font-size-2xs);
-		font-weight: 500;
+		font-weight: var(--font-weight-medium);
 		letter-spacing: 0.12em;
 		text-transform: uppercase;
 		color: var(--text-secondary);

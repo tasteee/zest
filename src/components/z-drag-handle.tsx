@@ -71,7 +71,7 @@ const dragHandleStyles = css`
 		top: -1000px;
 		left: -1000px;
 		max-width: 16rem;
-		padding: 0.5rem 0.75rem;
+		padding: var(--space-2) var(--space-3);
 		background: var(--surface-overlay);
 		border: 1px solid var(--border-default);
 		border-radius: var(--radius-md);
@@ -136,7 +136,7 @@ const dropIndicatorStyles = css`
 		z-index: var(--z-overlay, 60);
 		display: block;
 		height: 2px;
-		border-radius: 999px;
+		border-radius: var(--radius-full);
 		background: var(--tone);
 		opacity: 0;
 		pointer-events: none;

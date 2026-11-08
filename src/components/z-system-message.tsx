@@ -21,8 +21,8 @@ const styles = css`
 		font-size: var(--font-size-xs);
 		color: var(--text-secondary);
 		background: color-mix(in oklch, var(--text-primary) 6%, transparent);
-		padding: 0.25rem 0.625rem;
-		border-radius: 999px;
+		padding: var(--space-1) var(--space-2-5);
+		border-radius: var(--radius-full);
 		text-align: center;
 		max-width: 80%;
 	}

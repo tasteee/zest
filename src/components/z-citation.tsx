@@ -32,8 +32,8 @@ const styles = css`
 		color: var(--text-primary);
 		font-family: inherit;
 		font-size: 0.7em;
-		font-weight: 700;
-		line-height: 1;
+		font-weight: var(--font-weight-bold);
+		line-height: var(--line-height-none);
 		vertical-align: super;
 		cursor: pointer;
 		text-decoration: none;

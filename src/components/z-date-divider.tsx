@@ -24,7 +24,7 @@ const styles = css`
 	}
 	.label {
 		font-size: var(--font-size-xs);
-		font-weight: 600;
+		font-weight: var(--font-weight-semibold);
 		color: var(--text-secondary);
 		white-space: nowrap;
 	}

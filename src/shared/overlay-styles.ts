@@ -188,7 +188,7 @@ export const dialogSurfaceStyles = css`
 		   scroll surface, rather than handing it off to the document at either end. */
 		display: flex;
 		flex-direction: column;
-		gap: 0.5rem;
+		gap: var(--space-2);
 		padding: var(--space-6);
 		min-height: 0;
 		overflow-y: auto;
@@ -199,13 +199,13 @@ export const dialogSurfaceStyles = css`
 		display: flex;
 		align-items: flex-start;
 		justify-content: space-between;
-		gap: 1rem;
+		gap: var(--space-4);
 	}
 
 	.title {
 		margin: 0;
 		font-size: var(--font-size-xl);
-		font-weight: 600;
+		font-weight: var(--font-weight-semibold);
 		line-height: var(--line-height-snug);
 		color: var(--text-primary);
 	}
@@ -257,12 +257,12 @@ export const dialogSurfaceStyles = css`
 	.footer {
 		display: flex;
 		justify-content: flex-end;
-		gap: 0.625rem;
+		gap: var(--space-2-5);
 		padding: var(--space-3) var(--space-6) var(--space-6);
 	}
 
 	::slotted([slot='footer']) {
 		display: flex;
-		gap: 0.625rem;
+		gap: var(--space-2-5);
 	}
 `

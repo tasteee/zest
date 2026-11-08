@@ -32,7 +32,7 @@ const styles = css`
 	nav {
 		display: inline-flex;
 		align-items: center;
-		gap: 0.375rem;
+		gap: var(--space-1-5);
 	}
 
 	button {
@@ -41,14 +41,14 @@ const styles = css`
 		justify-content: center;
 		min-width: 2.25rem;
 		height: 2.25rem;
-		padding: 0 0.5rem;
+		padding: 0 var(--space-2);
 		border: 1px solid transparent;
 		border-radius: var(--radius-md);
 		background: transparent;
 		color: var(--text-primary);
 		font-family: inherit;
 		font-size: var(--font-size-sm);
-		font-weight: 500;
+		font-weight: var(--font-weight-medium);
 		cursor: pointer;
 		transition:
 			border-color var(--motion-fast) var(--ease-enter),
@@ -65,7 +65,7 @@ const styles = css`
 		border-color: var(--tone);
 		color: var(--tone);
 		background: color-mix(in oklch, var(--tone) 12%, transparent);
-		font-weight: 600;
+		font-weight: var(--font-weight-semibold);
 		cursor: default;
 	}
 

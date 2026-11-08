@@ -26,7 +26,7 @@ const styles = css`
 		position: relative;
 		display: inline-flex;
 		align-items: center;
-		gap: 0.625rem;
+		gap: var(--space-2-5);
 		min-height: var(--control-height-md);
 		cursor: pointer;
 		font-family: inherit;
@@ -61,7 +61,7 @@ const styles = css`
 		height: 1.375rem;
 		padding: 2px;
 		border: 1px solid var(--border-default);
-		border-radius: 999px;
+		border-radius: var(--radius-full);
 		background: transparent;
 		box-sizing: border-box;
 		transition:
@@ -92,7 +92,7 @@ const styles = css`
 	.knob {
 		width: calc(1.375rem - 6px);
 		height: calc(1.375rem - 6px);
-		border-radius: 999px;
+		border-radius: var(--radius-full);
 		background: var(--text-secondary);
 		transition:
 			transform var(--motion-fast) var(--ease-enter),

@@ -32,12 +32,12 @@ const styles = css`
 	.trigger {
 		display: inline-flex;
 		align-items: center;
-		gap: 0.625rem;
+		gap: var(--space-2-5);
 		background: transparent;
 		border: 1px solid var(--border-default);
 		border-radius: var(--radius-md);
 		height: var(--control-height-md);
-		padding-inline: 0.625rem 0.875rem;
+		padding-inline: var(--space-2-5) var(--space-3-5);
 		color: var(--text-primary);
 		font-family: var(--font-mono);
 		font-size: var(--font-size-sm);
@@ -104,7 +104,7 @@ const styles = css`
 		position: relative;
 		width: 100%;
 		height: 0.75rem;
-		border-radius: 999px;
+		border-radius: var(--radius-full);
 		border: 1px solid var(--border-default);
 		cursor: pointer;
 		touch-action: none;
@@ -116,7 +116,7 @@ const styles = css`
 		position: absolute;
 		width: 0.875rem;
 		height: 0.875rem;
-		border-radius: 999px;
+		border-radius: var(--radius-full);
 		border: 2px solid #fff;
 		background: transparent;
 		outline: 1px solid rgb(0 0 0 / 0.5);
@@ -133,10 +133,10 @@ const styles = css`
 	.hex-row {
 		display: flex;
 		align-items: center;
-		gap: 0.5rem;
+		gap: var(--space-2);
 		border: 1px solid var(--border-default);
 		border-radius: var(--radius-sm);
-		padding-inline: 0.5rem;
+		padding-inline: var(--space-2);
 		height: 2.25rem;
 	}
 	.hex-row:focus-within {
@@ -162,11 +162,11 @@ const styles = css`
 	.presets {
 		display: grid;
 		grid-template-columns: repeat(8, 1fr);
-		gap: 0.375rem;
+		gap: var(--space-1-5);
 	}
 	.preset {
 		aspect-ratio: 1;
-		border-radius: 999px;
+		border-radius: var(--radius-full);
 		border: 1px solid color-mix(in oklch, var(--text-primary) 20%, transparent);
 		cursor: pointer;
 		padding: 0;

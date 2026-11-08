@@ -67,7 +67,7 @@ const styles = css`
 		color: var(--text-primary);
 		font-size: var(--font-size-xs);
 		font-family: var(--font-sans);
-		padding: 0.25rem 0.5rem;
+		padding: var(--space-1) var(--space-2);
 		border-radius: var(--radius-sm);
 		white-space: nowrap;
 		opacity: 0;
@@ -90,7 +90,7 @@ const styles = css`
 		transform: translateX(-50%);
 		width: 0.25rem;
 		height: 0.25rem;
-		border-radius: 999px;
+		border-radius: var(--radius-full);
 		background: var(--text-primary);
 	}
 

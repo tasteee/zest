@@ -26,12 +26,12 @@ const styles = css`
 		display: none;
 	}
 	z-collapsible {
-		padding: 0 0.75rem;
+		padding: 0 var(--space-3);
 	}
 	.head {
 		display: inline-flex;
 		align-items: center;
-		gap: 0.5rem;
+		gap: var(--space-2);
 		min-width: 0;
 		font-size: var(--font-size-sm);
 	}
@@ -43,13 +43,13 @@ const styles = css`
 	}
 	.name {
 		font-family: var(--font-mono);
-		font-weight: 600;
+		font-weight: var(--font-weight-semibold);
 		color: var(--text-primary);
 	}
 	.status {
 		display: inline-flex;
 		align-items: center;
-		gap: 0.3rem;
+		gap: var(--space-1);
 		font-size: var(--font-size-xs);
 		text-transform: capitalize;
 		color: var(--text-secondary);
@@ -57,7 +57,7 @@ const styles = css`
 	.dot {
 		width: 0.5rem;
 		height: 0.5rem;
-		border-radius: 999px;
+		border-radius: var(--radius-full);
 		background: var(--text-secondary);
 	}
 	.status.is-running .dot {
@@ -79,18 +79,18 @@ const styles = css`
 		}
 	}
 	.body {
-		padding-bottom: 0.75rem;
+		padding-bottom: var(--space-3);
 		display: flex;
 		flex-direction: column;
-		gap: 0.625rem;
+		gap: var(--space-2-5);
 	}
 	.section-label {
 		font-size: var(--font-size-2xs);
-		font-weight: 600;
+		font-weight: var(--font-weight-semibold);
 		letter-spacing: 0.04em;
 		text-transform: uppercase;
 		color: var(--text-secondary);
-		margin-bottom: 0.3rem;
+		margin-bottom: var(--space-1);
 	}
 `
 

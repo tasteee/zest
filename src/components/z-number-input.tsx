@@ -38,7 +38,7 @@ const styles = css`
 	input::-webkit-outer-spin-button, input::-webkit-inner-spin-button { appearance: none; margin: 0; }
 	:host([is-borderless]) .field { height: auto; border: 0; border-radius: 0; background: transparent; outline: none; }
 	:host([is-borderless]) .field:hover, :host([is-borderless]) .field.is-focused { background: transparent; }
-	.stepper { display: grid; place-items: center; flex: 0 0 auto; width: 2rem; border: 0; background: transparent; color: var(--text-secondary); font: inherit; font-size: 1.125em; line-height: 1; cursor: pointer; user-select: none; -webkit-user-select: none; transition: color var(--motion-fast) var(--ease-enter), background-color var(--motion-fast) var(--ease-enter); }
+	.stepper { display: grid; place-items: center; flex: 0 0 auto; width: 2rem; border: 0; background: transparent; color: var(--text-secondary); font: inherit; font-size: 1.125em; line-height: var(--line-height-none); cursor: pointer; user-select: none; -webkit-user-select: none; transition: color var(--motion-fast) var(--ease-enter), background-color var(--motion-fast) var(--ease-enter); }
 	.stepper:hover:not(:disabled) { color: var(--text-primary); background: color-mix(in oklch, var(--text-primary) 6%, transparent); }
 	.stepper:active:not(:disabled) { background: color-mix(in oklch, var(--tone) 12%, transparent); color: var(--tone); }
 	.stepper:focus-visible { position: relative; z-index: 1; outline: 2px solid var(--border-focus); outline-offset: -2px; }

@@ -30,7 +30,7 @@ export const themedScrollbarStyles = css`
 	*::-webkit-scrollbar-thumb {
 		background: var(--border-default);
 		border: 2px solid transparent;
-		border-radius: 999px;
+		border-radius: var(--radius-full);
 		background-clip: padding-box;
 	}
 	:host::-webkit-scrollbar-thumb:hover,

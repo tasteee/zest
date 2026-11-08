@@ -49,7 +49,7 @@ const styles = css`
 
 	.callout {
 		display: flex;
-		gap: 0.75rem;
+		gap: var(--space-3);
 		box-sizing: border-box;
 		padding: var(--space-3) var(--space-4);
 		/* srgb: oklch would drift the chromatic accent when mixed against the
@@ -85,14 +85,14 @@ const styles = css`
 		min-width: 0;
 		display: flex;
 		flex-direction: column;
-		gap: 0.25rem;
+		gap: var(--space-1);
 	}
 
 	.label {
 		margin: 0;
 		font-size: var(--font-size-sm);
-		font-weight: 600;
-		line-height: 1.4;
+		font-weight: var(--font-weight-semibold);
+		line-height: var(--line-height-snug);
 		letter-spacing: 0.01em;
 		color: var(--callout-color);
 	}
@@ -120,7 +120,7 @@ const styles = css`
 		border: 0;
 		background: transparent;
 		font: inherit;
-		font-weight: 600;
+		font-weight: var(--font-weight-semibold);
 		color: var(--callout-color);
 		cursor: pointer;
 	}
@@ -148,7 +148,7 @@ const styles = css`
 	/* Expanded toggle drops to its own line beneath the full copy. */
 	.body:not(.is-clamped) .toggle {
 		display: inline-block;
-		margin-top: 0.35rem;
+		margin-top: var(--space-1-5);
 	}
 
 	/* No heading + copy that fits: centre the icon so a bare callout isn't

@@ -32,13 +32,13 @@ const styles = css`
 	.badge {
 		display: inline-flex;
 		align-items: center;
-		gap: 0.375rem;
+		gap: var(--space-1-5);
 		font-family: inherit;
-		font-weight: 600;
-		line-height: 1;
+		font-weight: var(--font-weight-semibold);
+		line-height: var(--line-height-none);
 		white-space: nowrap;
 		border: 1px solid transparent;
-		border-radius: 999px;
+		border-radius: var(--radius-full);
 		--tone: var(--accent-primary);
 	}
 
@@ -65,12 +65,12 @@ const styles = css`
 	/* sizes */
 	.badge.is-sm {
 		font-size: var(--font-size-2xs);
-		padding: 0.25rem 0.5rem;
+		padding: var(--space-1) var(--space-2);
 		letter-spacing: 0.01em;
 	}
 	.badge.is-md {
 		font-size: var(--font-size-xs);
-		padding: 0.3125rem 0.625rem;
+		padding: var(--space-1-5) var(--space-2-5);
 	}
 
 	/* kinds */
@@ -100,17 +100,17 @@ const styles = css`
 	.badge.is-dot {
 		background: transparent;
 		border-color: transparent;
-		padding: 0.25rem 0.375rem;
+		padding: var(--space-1) var(--space-1-5);
 		text-transform: uppercase;
 		letter-spacing: 0.1em;
 		font-size: var(--font-size-2xs);
 		color: var(--tone);
-		gap: 0.375rem;
+		gap: var(--space-1-5);
 	}
 	.dot {
 		width: 0.4375rem;
 		height: 0.4375rem;
-		border-radius: 999px;
+		border-radius: var(--radius-full);
 		background: var(--tone);
 		flex-shrink: 0;
 	}
@@ -160,7 +160,7 @@ const styles = css`
 		height: 1rem;
 		margin-inline-end: -0.25rem;
 		border: none;
-		border-radius: 999px;
+		border-radius: var(--radius-full);
 		background: transparent;
 		color: currentColor;
 		cursor: pointer;
@@ -194,7 +194,7 @@ const styles = css`
 	::slotted(img) {
 		width: 1.125rem;
 		height: 1.125rem;
-		border-radius: 999px;
+		border-radius: var(--radius-full);
 		margin-inline-start: -0.25rem;
 		object-fit: cover;
 	}

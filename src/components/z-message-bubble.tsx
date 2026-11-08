@@ -27,9 +27,9 @@ const styles = css`
 		display: inline-block;
 		max-width: 100%;
 		box-sizing: border-box;
-		padding: 0.5rem 0.75rem;
+		padding: var(--space-2) var(--space-3);
 		font-size: var(--font-size-md);
-		line-height: 1.4;
+		line-height: var(--line-height-snug);
 		border-radius: var(--r);
 		overflow-wrap: anywhere;
 		white-space: pre-wrap;

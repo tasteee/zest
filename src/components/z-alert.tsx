@@ -39,7 +39,7 @@ const styles = css`
 
 	.alert {
 		display: flex;
-		gap: 0.75rem;
+		gap: var(--space-3);
 		box-sizing: border-box;
 		padding: var(--space-3) var(--space-4);
 		/* srgb: oklch would drift the hue when mixing the chromatic alert colour
@@ -74,14 +74,14 @@ const styles = css`
 		min-width: 0;
 		display: flex;
 		flex-direction: column;
-		gap: 0.125rem;
+		gap: var(--space-0-5);
 	}
 
 	.title {
 		margin: 0;
 		font-size: var(--font-size-sm);
-		font-weight: 600;
-		line-height: 1.4;
+		font-weight: var(--font-weight-semibold);
+		line-height: var(--line-height-snug);
 		color: var(--text-primary);
 	}
 
@@ -93,8 +93,8 @@ const styles = css`
 	.actions {
 		display: flex;
 		flex-wrap: wrap;
-		gap: 0.5rem;
-		margin-top: 0.625rem;
+		gap: var(--space-2);
+		margin-top: var(--space-2-5);
 	}
 
 	.actions.is-empty {

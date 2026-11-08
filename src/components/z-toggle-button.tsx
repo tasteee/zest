@@ -19,12 +19,12 @@ const styles = css`
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
-		gap: 0.5rem;
+		gap: var(--space-2);
 		font-family: inherit;
-		font-weight: 500;
+		font-weight: var(--font-weight-medium);
 		white-space: nowrap;
 		cursor: pointer;
-		line-height: 1;
+		line-height: var(--line-height-none);
 		box-sizing: border-box;
 		background: transparent;
 		border: 1px solid var(--toggle-border, transparent);

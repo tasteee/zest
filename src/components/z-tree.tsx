@@ -58,8 +58,8 @@ const styles = css`
 	.row {
 		display: flex;
 		align-items: center;
-		gap: 0.375rem;
-		padding: 0.3rem 0.5rem;
+		gap: var(--space-1-5);
+		padding: var(--space-1) var(--space-2);
 		border-radius: var(--radius-sm);
 		color: var(--text-primary);
 		cursor: default;

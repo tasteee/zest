@@ -41,7 +41,7 @@ const styles = css`
 		font-family: var(--font-heading, inherit);
 		font-weight: var(--z-text-weight, var(--font-heading-weight, 700));
 		font-variation-settings: var(--font-heading-settings, normal);
-		line-height: 0.95;
+		line-height: var(--line-height-none);
 		letter-spacing: calc(-0.03em * var(--font-heading-tracking-scale, 1));
 		color: inherit;
 		text-wrap: balance;

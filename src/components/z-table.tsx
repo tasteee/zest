@@ -38,9 +38,9 @@ const styles = css`
 
 	thead th {
 		text-align: start;
-		padding: 0.875rem 1.125rem;
+		padding: var(--space-3-5) var(--space-5);
 		font-size: var(--font-size-2xs);
-		font-weight: 600;
+		font-weight: var(--font-weight-semibold);
 		letter-spacing: 0.1em;
 		text-transform: uppercase;
 		color: var(--text-secondary);
@@ -49,7 +49,7 @@ const styles = css`
 	}
 
 	tbody td {
-		padding: 0.9375rem 1.125rem;
+		padding: var(--space-4) var(--space-5);
 		font-size: var(--font-size-sm);
 		color: var(--text-primary);
 		border-bottom: 1px solid var(--border-default);
@@ -92,7 +92,7 @@ const styles = css`
 	}
 
 	.empty {
-		padding: 2.5rem;
+		padding: var(--space-10);
 		text-align: center;
 		color: var(--text-secondary);
 		font-size: var(--font-size-sm);

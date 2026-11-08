@@ -27,10 +27,10 @@ const styles = css`
 		align-items: center;
 		gap: 0.375em;
 		font-family: inherit;
-		font-weight: 500;
+		font-weight: var(--font-weight-medium);
 		text-decoration: none;
 		cursor: pointer;
-		line-height: 1.4;
+		line-height: var(--line-height-snug);
 		color: var(--tone);
 		transition:
 			color var(--motion-fast) var(--ease-enter),
@@ -92,7 +92,7 @@ const styles = css`
 	a:focus-visible {
 		outline: 3px solid var(--border-focus);
 		outline-offset: 3px;
-		border-radius: 2px;
+		border-radius: var(--radius-xs);
 	}
 
 	:host([is-disabled]) a {

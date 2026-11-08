@@ -166,7 +166,29 @@ describe('token contract', () => {
 	})
 
 	it('components set text from the type scale, not raw rem or px', () => {
-		const offenders = filesMatching(libraryFiles, /(^|[s;{])(font-size|--[a-z-]*font-size):s*[0-9.]+(rem|px)/m)
+		const offenders = filesMatching(libraryFiles, /(^|[\s;{])(font-size|--[a-z-]*font-size):\s*[0-9.]+(rem|px)/m)
+		expect(offenders).toEqual([])
+	})
+
+	it('components use the line-height, weight, radius and tracking scales', () => {
+		expect(filesMatching(libraryFiles, /line-height:\s*[0-9.]+(rem)?\s*[;}!]/)).toEqual([])
+		expect(filesMatching(libraryFiles, /font-weight:\s*[0-9]{3}/)).toEqual([])
+		expect(filesMatching(libraryFiles, /border-radius:\s*[0-9]+px\s*[;}]/)).toEqual([])
+		expect(filesMatching(libraryFiles, /letter-spacing:[^;]*--base-font-size/)).toEqual([])
+	})
+
+	it('padding, margin and gap come from the spacing scale', () => {
+		const allowed = new Set(['0.0625rem', '2.75rem'])
+		const offenders: string[] = []
+		const declaration = /(?:^|[\s;{])(?:padding|margin|gap|row-gap|column-gap)(?:-[a-z]+)*:\s*([^;{}\n]+)/g
+		for (const file of libraryFiles) {
+			for (const match of (text.get(file) ?? '').matchAll(declaration)) {
+				if (/calc\(|var\(/.test(match[1])) continue
+				for (const rem of match[1].match(/(?<![-0-9.])[0-9.]+rem/g) ?? []) {
+					if (!allowed.has(rem)) offenders.push(file.replace(srcRoot, 'src') + ': ' + match[1].trim())
+				}
+			}
+		}
 		expect(offenders).toEqual([])
 	})
 
@@ -201,7 +223,13 @@ describe('token contract', () => {
 			'tone',
 			'space-4',
 			'font-size-md',
-			'line-height-normal'
+			'line-height-normal',
+			'line-height-none',
+			'line-height-tight',
+			'line-height-snug',
+			'line-height-relaxed',
+			'radius-xs',
+			'radius-full'
 		]
 		const missing = roles.filter((role) => !new RegExp(`--${role}\\s*:`).test(tokensCss))
 		expect(missing).toEqual([])

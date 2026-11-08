@@ -24,7 +24,7 @@ const styles = css`
 	.head {
 		display: inline-flex;
 		align-items: center;
-		gap: 0.5rem;
+		gap: var(--space-2);
 		font-size: var(--font-size-sm);
 		color: var(--text-secondary);
 	}
@@ -38,7 +38,7 @@ const styles = css`
 		color: var(--text-primary);
 	}
 	.label {
-		font-weight: 500;
+		font-weight: var(--font-weight-medium);
 	}
 	:host([is-active]) .label {
 		background: linear-gradient(
@@ -65,7 +65,7 @@ const styles = css`
 	.body {
 		color: var(--text-secondary);
 		font-size: var(--font-size-sm);
-		line-height: 1.55;
+		line-height: var(--line-height-normal);
 		white-space: pre-wrap;
 	}
 `

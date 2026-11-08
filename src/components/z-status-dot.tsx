@@ -51,7 +51,7 @@ const styles = css`
 	.dot {
 		width: var(--dot);
 		height: var(--dot);
-		border-radius: 999px;
+		border-radius: var(--radius-full);
 		background: var(--color);
 		position: relative;
 		flex-shrink: 0;
@@ -61,7 +61,7 @@ const styles = css`
 		content: '';
 		position: absolute;
 		inset: 0;
-		border-radius: 999px;
+		border-radius: var(--radius-full);
 		background: var(--color);
 		animation: ping 1.6s var(--ease-enter) infinite;
 	}
@@ -80,7 +80,7 @@ const styles = css`
 	.label {
 		font-size: var(--font-size-sm);
 		color: var(--text-secondary);
-		line-height: 1;
+		line-height: var(--line-height-none);
 	}
 `
 

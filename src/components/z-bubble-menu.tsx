@@ -35,8 +35,8 @@ const styles = css`
 	.link-field {
 		display: flex;
 		align-items: center;
-		gap: 0.375rem;
-		padding: 0 0.375rem;
+		gap: var(--space-1-5);
+		padding: 0 var(--space-1-5);
 	}
 
 	.link-field input {

@@ -55,38 +55,38 @@ const styles = css`
 
 	.text.is-heading.is-xxl {
 		font-size: var(--font-size-7xl);
-		line-height: 1.125;
-		letter-spacing: calc(var(--base-font-size, 16px) * -0.06 * var(--font-heading-tracking-scale, 1));
+		line-height: var(--line-height-tight);
+		letter-spacing: calc(-0.015em * var(--font-heading-tracking-scale, 1));
 	}
 
 	.text.is-heading.is-xl {
 		font-size: var(--font-size-6xl);
-		line-height: 1.142857;
-		letter-spacing: calc(var(--base-font-size, 16px) * -0.05 * var(--font-heading-tracking-scale, 1));
+		line-height: var(--line-height-tight);
+		letter-spacing: calc(-0.01429em * var(--font-heading-tracking-scale, 1));
 	}
 
 	.text.is-heading.is-lg {
 		font-size: var(--font-size-5xl);
-		line-height: 1.166667;
-		letter-spacing: calc(var(--base-font-size, 16px) * -0.04 * var(--font-heading-tracking-scale, 1));
+		line-height: var(--line-height-tight);
+		letter-spacing: calc(-0.01333em * var(--font-heading-tracking-scale, 1));
 	}
 
 	.text.is-heading.is-md {
 		font-size: var(--font-size-4xl);
-		line-height: 1.3;
-		letter-spacing: calc(var(--base-font-size, 16px) * -0.03375 * var(--font-heading-tracking-scale, 1));
+		line-height: var(--line-height-snug);
+		letter-spacing: calc(-0.0135em * var(--font-heading-tracking-scale, 1));
 	}
 
 	.text.is-heading.is-sm {
 		font-size: var(--font-size-3xl);
-		line-height: 1.25;
-		letter-spacing: calc(var(--base-font-size, 16px) * -0.03 * var(--font-heading-tracking-scale, 1));
+		line-height: var(--line-height-tight);
+		letter-spacing: calc(-0.015em * var(--font-heading-tracking-scale, 1));
 	}
 
 	.text.is-heading.is-xs {
 		font-size: var(--font-size-2xl);
-		line-height: 1.333333;
-		letter-spacing: calc(var(--base-font-size, 16px) * -0.00625 * var(--font-heading-tracking-scale, 1));
+		line-height: var(--line-height-snug);
+		letter-spacing: calc(-0.00417em * var(--font-heading-tracking-scale, 1));
 	}
 
 	/* ---------------------------------------------
@@ -100,32 +100,32 @@ const styles = css`
 
 	.text.is-subheading.is-xl {
 		font-size: var(--font-size-xl);
-		line-height: 1.2;
-		letter-spacing: calc(var(--base-font-size, 16px) * 0.075);
+		line-height: var(--line-height-tight);
+		letter-spacing: 0.06em;
 	}
 
 	.text.is-subheading.is-lg {
 		font-size: var(--font-size-lg);
-		line-height: 1.333333;
-		letter-spacing: calc(var(--base-font-size, 16px) * 0.075);
+		line-height: var(--line-height-snug);
+		letter-spacing: 0.06667em;
 	}
 
 	.text.is-subheading.is-md {
 		font-size: var(--font-size-md);
-		line-height: 1.25;
-		letter-spacing: calc(var(--base-font-size, 16px) * 0.075);
+		line-height: var(--line-height-tight);
+		letter-spacing: 0.075em;
 	}
 
 	.text.is-subheading.is-sm {
 		font-size: var(--font-size-sm);
-		line-height: 1.428571;
-		letter-spacing: calc(var(--base-font-size, 16px) * 0.05);
+		line-height: var(--line-height-snug);
+		letter-spacing: 0.05714em;
 	}
 
 	.text.is-subheading.is-xs {
 		font-size: var(--font-size-xs);
-		line-height: 1.333333;
-		letter-spacing: calc(var(--base-font-size, 16px) * 0.05);
+		line-height: var(--line-height-snug);
+		letter-spacing: 0.06667em;
 	}
 
 	/* ---------------------------------------------
@@ -138,37 +138,37 @@ const styles = css`
 
 	.text.is-text.is-xxl {
 		font-size: var(--font-size-2xl);
-		line-height: 1.666667;
-		letter-spacing: calc(var(--base-font-size, 16px) * -0.0275);
+		line-height: var(--line-height-normal);
+		letter-spacing: -0.01833em;
 	}
 
 	.text.is-text.is-xl {
 		font-size: var(--font-size-xl);
-		line-height: 1.6;
-		letter-spacing: calc(var(--base-font-size, 16px) * -0.02);
+		line-height: var(--line-height-normal);
+		letter-spacing: -0.016em;
 	}
 
 	.text.is-text.is-lg {
 		font-size: var(--font-size-lg);
-		line-height: 1.777778;
-		letter-spacing: calc(var(--base-font-size, 16px) * -0.01625);
+		line-height: var(--line-height-relaxed);
+		letter-spacing: -0.01444em;
 	}
 
 	.text.is-text.is-md {
 		font-size: var(--font-size-md);
-		line-height: 1.75;
-		letter-spacing: calc(var(--base-font-size, 16px) * -0.01125);
+		line-height: var(--line-height-relaxed);
+		letter-spacing: -0.01125em;
 	}
 
 	.text.is-text.is-sm {
 		font-size: var(--font-size-sm);
-		line-height: 1.714286;
-		letter-spacing: calc(var(--base-font-size, 16px) * -0.005);
+		line-height: var(--line-height-relaxed);
+		letter-spacing: -0.00571em;
 	}
 
 	.text.is-text.is-xs {
 		font-size: var(--font-size-xs);
-		line-height: 1.333333;
+		line-height: var(--line-height-snug);
 		letter-spacing: 0;
 	}
 
@@ -179,8 +179,8 @@ const styles = css`
 	.text.is-label {
 		color: var(--text-tertiary);
 		font-size: var(--font-size-sm);
-		font-weight: 600;
-		line-height: 1;
+		font-weight: var(--font-weight-semibold);
+		line-height: var(--line-height-none);
 		letter-spacing: 0.04em;
 		text-transform: lowercase;
 		font-variant-caps: all-small-caps;

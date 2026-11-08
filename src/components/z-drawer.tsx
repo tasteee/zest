@@ -58,7 +58,7 @@ const styles = css`
 	.handle-area {
 		display: flex;
 		justify-content: center;
-		padding: 0.75rem 0 0.25rem;
+		padding: var(--space-3) 0 var(--space-1);
 		cursor: grab;
 		touch-action: none;
 	}
@@ -70,13 +70,13 @@ const styles = css`
 	.handle {
 		width: 2.5rem;
 		height: 0.3125rem;
-		border-radius: 999px;
+		border-radius: var(--radius-full);
 		background: var(--border-default);
 	}
 
 	.body {
 		flex: 1;
-		padding-top: 0.5rem;
+		padding-top: var(--space-2);
 	}
 `
 

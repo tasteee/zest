@@ -59,7 +59,7 @@ const styles = css`
 	}
 	.viewport::-webkit-scrollbar-thumb {
 		background: var(--border-default);
-		border-radius: 999px;
+		border-radius: var(--radius-full);
 	}
 	.viewport::-webkit-scrollbar-thumb:hover {
 		background: var(--border-strong);

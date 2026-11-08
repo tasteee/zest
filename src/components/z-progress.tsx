@@ -35,7 +35,7 @@ const styles = css`
     width: 100%;
     height: var(--bar-height, 0.5rem);
     background: color-mix(in oklch, var(--border-default) 70%, transparent);
-    border-radius: 999px;
+    border-radius: var(--radius-full);
     overflow: hidden;
   }
 
@@ -51,7 +51,7 @@ const styles = css`
 		left: 0;
 		top: 0;
 		bottom: 0;
-		border-radius: 999px;
+		border-radius: var(--radius-full);
 		background: var(--tone);
 		transition: width var(--motion-slow) var(--ease-enter);
 	}

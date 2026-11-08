@@ -30,15 +30,15 @@ const styles = css`
 	}
 	.label {
 		font-size: var(--font-size-2xs);
-		font-weight: 700;
+		font-weight: var(--font-weight-bold);
 		letter-spacing: 0.04em;
 		text-transform: uppercase;
 		color: var(--text-secondary);
-		margin-bottom: 0.5rem;
+		margin-bottom: var(--space-2);
 	}
 	.list {
 		display: grid;
-		gap: 0.5rem;
+		gap: var(--space-2);
 	}
 	:host([columns]) .list {
 		grid-template-columns: repeat(var(--cols, 2), minmax(0, 1fr));
@@ -51,7 +51,7 @@ const styles = css`
 		border: 1px solid var(--border-default);
 		border-radius: var(--radius-md);
 		background: var(--surface-default);
-		padding: 0.5rem 0.625rem;
+		padding: var(--space-2) var(--space-2-5);
 		cursor: pointer;
 		text-decoration: none;
 		color: inherit;
@@ -66,7 +66,7 @@ const styles = css`
 	.top {
 		display: flex;
 		align-items: center;
-		gap: 0.4rem;
+		gap: var(--space-1-5);
 	}
 	.idx {
 		flex: 0 0 auto;
@@ -75,19 +75,19 @@ const styles = css`
 		justify-content: center;
 		min-width: 1.1rem;
 		height: 1.1rem;
-		padding: 0 0.3rem;
+		padding: 0 var(--space-1);
 		box-sizing: border-box;
 		border-radius: 0.35rem;
 		background: color-mix(in oklch, var(--accent-primary) 16%, transparent);
 		color: var(--text-primary);
 		font-size: var(--font-size-2xs);
-		font-weight: 700;
+		font-weight: var(--font-weight-bold);
 	}
 	.title {
 		flex: 1;
 		min-width: 0;
 		font-size: var(--font-size-sm);
-		font-weight: 600;
+		font-weight: var(--font-weight-semibold);
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
@@ -98,7 +98,7 @@ const styles = css`
 		color: var(--text-secondary);
 	}
 	.snippet {
-		margin-top: 0.25rem;
+		margin-top: var(--space-1);
 		font-size: var(--font-size-xs);
 		color: var(--text-secondary);
 		display: -webkit-box;

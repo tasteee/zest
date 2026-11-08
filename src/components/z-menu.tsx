@@ -62,7 +62,7 @@ const styles = css`
 		border: 1px solid var(--border-default);
 		border-radius: var(--radius-md);
 		box-shadow: var(--shadow-overlay);
-		padding: 0.3125rem;
+		padding: var(--space-1-5);
 		gap: 1px;
 	}
 
@@ -120,8 +120,8 @@ const styles = css`
 	.item {
 		display: flex;
 		align-items: center;
-		gap: 0.625rem;
-		padding: 0.5rem 0.625rem;
+		gap: var(--space-2-5);
+		padding: var(--space-2) var(--space-2-5);
 		border-radius: var(--radius-sm);
 		font-size: var(--font-size-sm);
 		color: var(--text-primary);
@@ -167,7 +167,7 @@ const styles = css`
 
 	.sep {
 		height: 1px;
-		margin: 0.3125rem 0;
+		margin: var(--space-1-5) 0;
 		background: var(--border-default);
 	}
 
@@ -438,7 +438,7 @@ export const ZMenuItem = c(
 			:host {
 				display: inline-flex;
 				align-items: center;
-				gap: 0.625rem;
+				gap: var(--space-2-5);
 				min-width: 0;
 			}
 		`

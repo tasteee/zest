@@ -27,7 +27,7 @@ const styles = css`
 		   to --text-primary when used standalone on the page background. */
     color: inherit;
     font-size: var(--font-size-md);
-    line-height: 1.6;
+    line-height: var(--line-height-normal);
     overflow-wrap: anywhere;
   }
   :host([is-hidden]) {
@@ -52,12 +52,12 @@ const styles = css`
   h6 {
     position: relative;
     margin: 1.2em 0 0.5em;
-    line-height: 1.25;
-    font-weight: 700;
+    line-height: var(--line-height-tight);
+    font-weight: var(--font-weight-bold);
   }
   .heading-anchor {
     margin-inline-start: 0.4em;
-    font-weight: 400;
+    font-weight: var(--font-weight-regular);
     color: var(--text-secondary);
     text-decoration: none;
     opacity: 0;
@@ -150,11 +150,11 @@ const styles = css`
   }
   th {
     background: color-mix(in oklch, var(--text-primary) 6%, transparent);
-    font-weight: 600;
+    font-weight: var(--font-weight-semibold);
   }
 
   strong {
-    font-weight: 700;
+    font-weight: var(--font-weight-bold);
   }
   del {
     opacity: 0.7;

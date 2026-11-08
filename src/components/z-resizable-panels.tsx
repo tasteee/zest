@@ -289,7 +289,7 @@ const handleStyles = css`
 	}
 	.grip {
 		background: var(--border-default);
-		border-radius: 999px;
+		border-radius: var(--radius-full);
 		transition:
 			background var(--motion-fast) var(--ease-enter),
 			width var(--motion-fast) var(--ease-enter),

@@ -108,7 +108,7 @@ const axisHandleStyles = css`
 		display: flex;
 		align-items: center;
 		gap: 1px;
-		padding: 0.125rem;
+		padding: var(--space-0-5);
 		background: var(--surface-overlay);
 		border: 1px solid var(--border-default);
 		border-radius: var(--radius-sm);

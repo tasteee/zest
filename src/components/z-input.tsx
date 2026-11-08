@@ -33,7 +33,7 @@ const styles = css`
 	.field {
 		display: inline-flex;
 		align-items: center;
-		gap: 0.625rem;
+		gap: var(--space-2-5);
 		width: 100%;
 		box-sizing: border-box;
 		background: transparent;
@@ -61,17 +61,17 @@ const styles = css`
 	/* sizes */
 	.field.is-sm {
 		height: var(--control-height-sm);
-		padding-inline: 0.625rem;
+		padding-inline: var(--space-2-5);
 		font-size: var(--font-size-sm);
 	}
 	.field.is-md {
 		height: var(--control-height-md);
-		padding-inline: 0.75rem;
+		padding-inline: var(--space-3);
 		font-size: var(--font-size-sm);
 	}
 	.field.is-lg {
 		height: var(--control-height-lg);
-		padding-inline: 0.875rem;
+		padding-inline: var(--space-3-5);
 		font-size: var(--font-size-md);
 	}
 
@@ -105,7 +105,7 @@ const styles = css`
 		color: inherit;
 		font-family: inherit;
 		font-size: inherit;
-		line-height: 1;
+		line-height: var(--line-height-none);
 		padding: 0;
 	}
 

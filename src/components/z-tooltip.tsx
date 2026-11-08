@@ -32,11 +32,11 @@ const styles = css`
 	.surface {
 		--tooltip-surface: var(--text-primary);
 		--tooltip-edge: color-mix(in srgb, var(--text-primary) 78%, var(--surface-page));
-		padding: 0.4375rem 0.625rem;
+		padding: var(--space-2) var(--space-2-5);
 		max-width: 16rem;
 		font-size: var(--font-size-xs);
-		font-weight: 500;
-		line-height: 1.35;
+		font-weight: var(--font-weight-medium);
+		line-height: var(--line-height-snug);
 		pointer-events: none;
 		width: max-content;
 		user-select: none;

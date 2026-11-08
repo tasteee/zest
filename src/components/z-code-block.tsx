@@ -53,7 +53,7 @@ const styles = css`
 	.tabs {
 		display: flex;
 		align-items: center;
-		gap: 0.25rem;
+		gap: var(--space-1);
 		min-width: 0;
 		overflow-x: auto;
 		scrollbar-width: none;
@@ -61,7 +61,7 @@ const styles = css`
 
 	.file-tab {
 		position: relative;
-		padding: 0.3125rem 0.625rem;
+		padding: var(--space-1-5) var(--space-2-5);
 		background: transparent;
 		border: 0;
 		border-radius: var(--radius-sm);
@@ -93,8 +93,8 @@ const styles = css`
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		gap: 0.75rem;
-		padding: 0.5rem 0.75rem 0.5rem 0.875rem;
+		gap: var(--space-3);
+		padding: var(--space-2) var(--space-3) var(--space-2) var(--space-3-5);
 		border-bottom: 1px solid var(--border-default);
 		background: var(--surface-default);
 	}
@@ -102,7 +102,7 @@ const styles = css`
 	.meta {
 		display: flex;
 		align-items: center;
-		gap: 0.625rem;
+		gap: var(--space-2-5);
 		min-width: 0;
 	}
 
@@ -116,7 +116,7 @@ const styles = css`
 
 	.lang {
 		font-size: var(--font-size-xs);
-		font-weight: 600;
+		font-weight: var(--font-weight-semibold);
 		letter-spacing: 0.04em;
 		text-transform: uppercase;
 		color: var(--tone);
@@ -125,9 +125,9 @@ const styles = css`
 	.copy {
 		display: inline-flex;
 		align-items: center;
-		gap: 0.375rem;
+		gap: var(--space-1-5);
 		flex-shrink: 0;
-		padding: 0.25rem 0.5rem;
+		padding: var(--space-1) var(--space-2);
 		background: transparent;
 		border: 1px solid var(--border-default);
 		border-radius: var(--radius-sm);
@@ -183,7 +183,7 @@ const styles = css`
 	}
 	.scroll::-webkit-scrollbar-thumb {
 		background: var(--border-default);
-		border-radius: 999px;
+		border-radius: var(--radius-full);
 	}
 	.scroll::-webkit-scrollbar-button {
 		display: none;
@@ -193,9 +193,9 @@ const styles = css`
 
 	pre {
 		margin: 0;
-		padding: 0.875rem 1rem;
+		padding: var(--space-3-5) var(--space-4);
 		font-size: var(--font-size-sm);
-		line-height: 1.6;
+		line-height: var(--line-height-normal);
 		color: var(--text-primary);
 		tab-size: 2;
 		/* Code stays selectable even though the page default is user-select:none,
@@ -233,7 +233,7 @@ const styles = css`
 	}
 
 	.gutter {
-		padding-inline-end: 1rem;
+		padding-inline-end: var(--space-4);
 		text-align: end;
 		color: var(--text-secondary);
 		user-select: none;
@@ -355,11 +355,11 @@ const styles = css`
 		font-style: italic;
 	}
 	.hljs-strong {
-		font-weight: 700;
+		font-weight: var(--font-weight-bold);
 	}
 
 	.rows {
-		line-height: 1.75 !important;
+		line-height: var(--line-height-relaxed) !important;
 		letter-spacing: 0.35px !important;
 		font-family: var(--font-mono);
 	}

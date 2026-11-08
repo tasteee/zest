@@ -24,8 +24,8 @@ const styles = css`
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
-		gap: 0.5rem;
-		padding: 2rem 1.5rem;
+		gap: var(--space-2);
+		padding: var(--space-8) var(--space-6);
 		text-align: center;
 		border: 1.5px dashed var(--border-default);
 		border-radius: var(--radius-lg);
@@ -60,8 +60,8 @@ const styles = css`
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		gap: 0.75rem;
-		padding: 0.875rem 1rem;
+		gap: var(--space-3);
+		padding: var(--space-3-5) var(--space-4);
 		border: 1px solid color-mix(in oklab, var(--tone) 32%, var(--border-default));
 		border-radius: var(--radius-lg);
 		background: color-mix(in oklab, var(--tone) 7%, var(--surface-default));
@@ -70,7 +70,7 @@ const styles = css`
 	.selected-name {
 		overflow: hidden;
 		font-size: var(--font-size-xs);
-		font-weight: 600;
+		font-weight: var(--font-weight-semibold);
 		text-align: start;
 		text-overflow: ellipsis;
 		white-space: nowrap;
@@ -85,7 +85,7 @@ const styles = css`
 		color: var(--text-secondary);
 		cursor: pointer;
 		font-size: var(--font-size-xl);
-		line-height: 1;
+		line-height: var(--line-height-none);
 	}
 	.clear:hover {
 		background: color-mix(in oklch, var(--text-primary) 8%, transparent);

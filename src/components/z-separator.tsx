@@ -61,7 +61,7 @@ const styles = css`
 		text-transform: uppercase;
 		white-space: nowrap;
 		color: var(--text-secondary);
-		line-height: 1;
+		line-height: var(--line-height-none);
 		user-select: none;
 	}
 

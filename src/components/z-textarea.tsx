@@ -31,22 +31,22 @@ const styles = css`
 		border-radius: var(--radius-md);
 		color: var(--text-primary);
 		font-family: inherit;
-		line-height: 1.6;
+		line-height: var(--line-height-normal);
 		transition: border-color var(--motion-fast) var(--ease-enter), background-color var(--motion-fast) var(--ease-enter);
 		--tone: var(--accent-primary);
 	}
 
 	/* sizes — same scale as z-input */
 	.field.is-sm {
-		padding: 0.5rem 0.75rem;
+		padding: var(--space-2) var(--space-3);
 		font-size: var(--font-size-sm);
 	}
 	.field.is-md {
-		padding: 0.75rem 0.875rem;
+		padding: var(--space-3) var(--space-3-5);
 		font-size: var(--font-size-sm);
 	}
 	.field.is-lg {
-		padding: 0.875rem 1rem;
+		padding: var(--space-3-5) var(--space-4);
 		font-size: var(--font-size-md);
 	}
 

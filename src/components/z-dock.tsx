@@ -34,7 +34,7 @@ const styles = css`
 		align-items: flex-end;
 		gap: var(--dock-gap, 0.75rem);
 		box-sizing: border-box;
-		padding: 0.6rem;
+		padding: var(--space-2-5);
 		border-radius: var(--radius-xl);
 		/* Mixes the flat ramp colour rather than --surface-overlay: in the light theme
 		   --surface-overlay carries a haze layer in front of its colour, which is a

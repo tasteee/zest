@@ -47,7 +47,7 @@ const styles = css`
 	.trailing {
 		display: inline-flex;
 		align-items: center;
-		gap: 0.25rem;
+		gap: var(--space-1);
 		flex: 0 0 auto;
 	}
 
@@ -64,8 +64,8 @@ const styles = css`
 		color: var(--text-primary);
 		font-family: inherit;
 		font-size: var(--font-size-md);
-		line-height: 1.5;
-		padding: 0.4rem 0.25rem;
+		line-height: var(--line-height-normal);
+		padding: var(--space-1-5) var(--space-1);
 		max-height: 40vh;
 		overflow-y: auto;
 	}
@@ -80,7 +80,7 @@ const styles = css`
 		height: 2.25rem;
 		padding: 0;
 		border: 0;
-		border-radius: 999px;
+		border-radius: var(--radius-full);
 		background: var(--accent-primary);
 		color: var(--on-accent);
 		cursor: pointer;

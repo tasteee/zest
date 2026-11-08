@@ -22,14 +22,14 @@ const styles = css`
 	.trigger {
 		display: inline-flex;
 		align-items: center;
-		gap: 0.375rem;
+		gap: var(--space-1-5);
 		border: 1px solid var(--border-default);
 		background: var(--surface-default);
 		border-radius: var(--radius-md);
-		padding: 0.35rem 0.6rem;
+		padding: var(--space-1-5) var(--space-2-5);
 		font-family: inherit;
 		font-size: var(--font-size-sm);
-		font-weight: 500;
+		font-weight: var(--font-weight-medium);
 		color: var(--text-primary);
 		cursor: pointer;
 	}
@@ -59,7 +59,7 @@ const styles = css`
 		border: 1px solid var(--border-default);
 		border-radius: var(--radius-md);
 		box-shadow: var(--shadow-overlay);
-		padding: 0.25rem;
+		padding: var(--space-1);
 		display: flex;
 		flex-direction: column;
 		gap: 1px;
@@ -71,11 +71,11 @@ const styles = css`
 	.item {
 		display: flex;
 		align-items: flex-start;
-		gap: 0.5rem;
+		gap: var(--space-2);
 		border: none;
 		background: transparent;
 		border-radius: var(--radius-sm);
-		padding: 0.4rem 0.5rem;
+		padding: var(--space-1-5) var(--space-2);
 		text-align: start;
 		font-family: inherit;
 		color: var(--text-primary);
@@ -88,7 +88,7 @@ const styles = css`
 		flex: 0 0 auto;
 		width: 1rem;
 		height: 1rem;
-		margin-top: 0.1rem;
+		margin-top: var(--space-0-5);
 		stroke: var(--text-primary);
 		fill: none;
 		stroke-width: 2.5;
@@ -107,7 +107,7 @@ const styles = css`
 	}
 	.name {
 		font-size: var(--font-size-sm);
-		font-weight: 600;
+		font-weight: var(--font-weight-semibold);
 	}
 	.desc {
 		font-size: var(--font-size-2xs);

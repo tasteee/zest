@@ -22,8 +22,8 @@ const styles = css`
 	.item {
 		display: flex;
 		align-items: center;
-		gap: 0.625rem;
-		padding: 0.5rem 0.75rem;
+		gap: var(--space-2-5);
+		padding: var(--space-2) var(--space-3);
 		border-radius: var(--radius-md);
 		cursor: pointer;
 		transition: background-color var(--motion-fast) var(--ease-enter);
@@ -45,12 +45,12 @@ const styles = css`
 	.bottom {
 		display: flex;
 		align-items: center;
-		gap: 0.5rem;
+		gap: var(--space-2);
 	}
 	.name {
 		flex: 1;
 		min-width: 0;
-		font-weight: 600;
+		font-weight: var(--font-weight-semibold);
 		font-size: var(--font-size-md);
 		white-space: nowrap;
 		overflow: hidden;
@@ -89,16 +89,16 @@ const styles = css`
 		flex: 0 0 auto;
 		min-width: 1.125rem;
 		height: 1.125rem;
-		padding: 0 0.35rem;
+		padding: 0 var(--space-1-5);
 		box-sizing: border-box;
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
-		border-radius: 999px;
+		border-radius: var(--radius-full);
 		background: var(--accent-primary);
 		color: var(--on-accent);
 		font-size: var(--font-size-2xs);
-		font-weight: 700;
+		font-weight: var(--font-weight-bold);
 		font-variant-numeric: tabular-nums;
 	}
 `

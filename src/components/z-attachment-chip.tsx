@@ -29,13 +29,13 @@ const styles = css`
 		position: relative;
 		display: inline-flex;
 		align-items: center;
-		gap: 0.5rem;
+		gap: var(--space-2);
 		max-width: 15rem;
 		box-sizing: border-box;
 		border: 1px solid var(--border-default);
 		border-radius: var(--radius-md);
 		background: var(--surface-default);
-		padding: 0.375rem 0.5rem;
+		padding: var(--space-1-5) var(--space-2);
 		overflow: hidden;
 	}
 	.thumb {
@@ -64,7 +64,7 @@ const styles = css`
 	}
 	.name {
 		font-size: var(--font-size-sm);
-		font-weight: 500;
+		font-weight: var(--font-weight-medium);
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
@@ -81,7 +81,7 @@ const styles = css`
 		width: 1.25rem;
 		height: 1.25rem;
 		border: none;
-		border-radius: 999px;
+		border-radius: var(--radius-full);
 		background: color-mix(in oklch, var(--text-primary) 10%, transparent);
 		color: var(--text-primary);
 		cursor: pointer;

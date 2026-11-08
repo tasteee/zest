@@ -15,7 +15,7 @@ const styles = css`
 	:host {
 		display: inline-flex;
 		align-items: center;
-		gap: 0.375rem;
+		gap: var(--space-1-5);
 		vertical-align: middle;
 	}
 	:host([is-hidden]) {
@@ -36,9 +36,9 @@ const styles = css`
 		margin-inline-start: 0;
 	}
 	.more {
-		margin-inline-start: 0.25rem;
+		margin-inline-start: var(--space-1);
 		font-size: var(--font-size-2xs);
-		font-weight: 600;
+		font-weight: var(--font-weight-semibold);
 		color: var(--text-secondary);
 	}
 `

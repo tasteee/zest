@@ -30,7 +30,7 @@ const styles = css`
 		margin-inline-start: 1px;
 		transform: translateY(0.15em);
 		background: currentColor;
-		border-radius: 1px;
+		border-radius: var(--radius-xs);
 		animation: blink 1s steps(2, start) infinite;
 	}
 	@keyframes blink {

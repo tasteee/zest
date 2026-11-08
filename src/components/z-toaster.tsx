@@ -215,7 +215,7 @@ const styles = css`
 	.item {
 		display: grid;
 		grid-template-rows: 1fr;
-		padding-top: 0.625rem;
+		padding-top: var(--space-2-5);
 		transition:
 			grid-template-rows var(--motion-exit-base) var(--ease-move),
 			padding var(--motion-exit-base) var(--ease-move);
@@ -223,7 +223,7 @@ const styles = css`
 
 	:host([position^='top']) .item {
 		padding-top: 0;
-		padding-bottom: 0.625rem;
+		padding-bottom: var(--space-2-5);
 	}
 
 	.item.is-closing {
@@ -240,9 +240,9 @@ const styles = css`
 		pointer-events: auto;
 		display: flex;
 		align-items: flex-start;
-		gap: 0.625rem;
+		gap: var(--space-2-5);
 		box-sizing: border-box;
-		padding: 0.75rem 0.75rem 0.75rem 0.875rem;
+		padding: var(--space-3) var(--space-3) var(--space-3) var(--space-3-5);
 		color: var(--text-primary);
 		background: var(--surface-overlay);
 		border: 1px solid var(--border-default);
@@ -303,15 +303,15 @@ const styles = css`
 		min-width: 0;
 		display: flex;
 		flex-direction: column;
-		gap: 0.125rem;
-		padding-top: 0.25rem;
+		gap: var(--space-0-5);
+		padding-top: var(--space-1);
 	}
 
 	.title {
 		font-size: var(--font-size-sm);
-		font-weight: 600;
+		font-weight: var(--font-weight-semibold);
 		color: var(--text-primary);
-		line-height: 1.4;
+		line-height: var(--line-height-snug);
 	}
 
 	.description {
@@ -332,7 +332,7 @@ const styles = css`
 		padding: 0;
 		background: transparent;
 		border: 0;
-		border-radius: 999px;
+		border-radius: var(--radius-full);
 		color: var(--text-secondary);
 		cursor: pointer;
 		transition:

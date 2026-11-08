@@ -32,15 +32,15 @@ const styles = css`
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		gap: 0.75rem;
+		gap: var(--space-3);
 		width: 100%;
 		box-sizing: border-box;
 		background: transparent;
 		border: 0;
-		padding: 0.875rem 0;
+		padding: var(--space-3-5) 0;
 		font-family: inherit;
 		font-size: var(--font-size-md);
-		font-weight: 500;
+		font-weight: var(--font-weight-medium);
 		color: var(--text-primary);
 		text-align: start;
 		cursor: pointer;
@@ -88,7 +88,7 @@ const styles = css`
 
 	.content {
 		display: none;
-		padding: 0 0 1rem;
+		padding: 0 0 var(--space-4);
 		color: var(--text-secondary);
 		font-size: var(--font-size-sm);
 		line-height: var(--line-height-normal);
