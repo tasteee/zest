@@ -50,7 +50,7 @@ const styles = css`
 		padding: 0.5rem 0.75rem;
 		border-radius: var(--radius-md);
 		font-family: inherit;
-		font-size: var(--font-size-small);
+		font-size: var(--font-size-sm);
 		font-weight: 500;
 		color: var(--text-secondary);
 		text-decoration: none;
@@ -131,12 +131,12 @@ const styles = css`
 	}
 
 	.child .child-label {
-		font-size: var(--font-size-small);
+		font-size: var(--font-size-sm);
 		font-weight: 500;
 	}
 
 	.child .child-desc {
-		font-size: var(--font-size-caption);
+		font-size: var(--font-size-xs);
 		color: var(--text-secondary);
 	}
 `

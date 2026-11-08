@@ -67,7 +67,7 @@ const styles = css`
 		border-radius: var(--radius-sm);
 		color: var(--text-secondary);
 		font-family: var(--font-mono);
-		font-size: var(--font-size-caption);
+		font-size: var(--font-size-xs);
 		white-space: nowrap;
 		cursor: pointer;
 		transition:
@@ -107,7 +107,7 @@ const styles = css`
 	}
 
 	.filename {
-		font-size: var(--font-size-caption);
+		font-size: var(--font-size-xs);
 		color: var(--text-primary);
 		white-space: nowrap;
 		overflow: hidden;
@@ -115,7 +115,7 @@ const styles = css`
 	}
 
 	.lang {
-		font-size: var(--font-size-caption);
+		font-size: var(--font-size-xs);
 		font-weight: 600;
 		letter-spacing: 0.04em;
 		text-transform: uppercase;
@@ -133,7 +133,7 @@ const styles = css`
 		border-radius: var(--radius-sm);
 		color: var(--text-secondary);
 		font-family: inherit;
-		font-size: var(--font-size-caption);
+		font-size: var(--font-size-xs);
 		cursor: pointer;
 		transition:
 			color var(--motion-fast) var(--ease-enter),
@@ -194,7 +194,7 @@ const styles = css`
 	pre {
 		margin: 0;
 		padding: 0.875rem 1rem;
-		font-size: var(--font-size-small);
+		font-size: var(--font-size-sm);
 		line-height: 1.6;
 		color: var(--text-primary);
 		tab-size: 2;

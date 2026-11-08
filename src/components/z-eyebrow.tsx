@@ -37,7 +37,7 @@ const styles = css`
 
 	.label {
 		font-family: var(--font-mono);
-		font-size: 0.8125rem;
+		font-size: var(--font-size-sm);
 		font-weight: 500;
 		line-height: 1;
 		letter-spacing: 0.2em;

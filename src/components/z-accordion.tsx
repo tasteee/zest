@@ -16,7 +16,7 @@ const styles = css`
 		display: block;
 		border: 1px solid var(--border-default);
 		border-radius: var(--radius-lg);
-		padding: 0 var(--space-lg);
+		padding: 0 var(--space-6);
 	}
 
 	:host([is-hidden]) {

@@ -12,7 +12,7 @@ const styles = css`
 		display: grid;
 		grid-template-columns: repeat(var(--bento-columns, 3), minmax(0, 1fr));
 		grid-auto-rows: var(--bento-row-height, 14rem);
-		gap: var(--bento-gap, var(--spacing-4));
+		gap: var(--bento-gap, var(--space-4));
 	}
 
 	:host([is-hidden]) {

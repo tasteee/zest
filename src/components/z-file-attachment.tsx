@@ -124,14 +124,14 @@ const styles = css`
 		min-width: 0;
 	}
 	.name {
-		font-size: 0.875rem;
+		font-size: var(--font-size-sm);
 		font-weight: 500;
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
 	}
 	.size {
-		font-size: 0.6875rem;
+		font-size: var(--font-size-2xs);
 		color: var(--text-secondary);
 	}
 	.download {

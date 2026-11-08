@@ -21,7 +21,7 @@ const styles = css`
 		align-items: center;
 		width: 100%;
 		color: var(--text-secondary);
-		gap: var(--space-base);
+		gap: var(--space-4);
 	}
 
 	:host([is-hidden]) {
@@ -55,7 +55,7 @@ const styles = css`
 	.label {
 		flex: 0 0 auto;
 		font-family: inherit;
-		font-size: var(--font-size-caption);
+		font-size: var(--font-size-xs);
 		font-weight: var(--font-weight-semibold);
 		letter-spacing: 0.08em;
 		text-transform: uppercase;

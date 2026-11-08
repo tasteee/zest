@@ -31,7 +31,7 @@ const styles = css`
 		display: block;
 		padding: 0.875rem 1rem 0.5rem;
 		font-family: var(--font-mono);
-		font-size: 0.6875rem;
+		font-size: var(--font-size-2xs);
 		font-weight: 500;
 		letter-spacing: 0.12em;
 		text-transform: uppercase;

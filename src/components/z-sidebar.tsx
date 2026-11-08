@@ -41,7 +41,7 @@ const styles = css`
 		background: var(--surface-page);
 		border: 1px solid var(--border-default);
 		border-radius: var(--radius-lg);
-		padding: var(--space-sm) var(--space-md) var(--space-md);
+		padding: var(--space-2) var(--space-3) var(--space-3);
 		color: var(--text-primary);
 		--tone: var(--accent-primary);
 		transition: width var(--motion-fast) var(--ease-enter);
@@ -70,7 +70,7 @@ const styles = css`
 		border: none;
 		border-inline-end: 1px solid var(--border-default);
 		border-radius: 0;
-		padding: var(--space-sm) 0 var(--space-md);
+		padding: var(--space-2) 0 var(--space-3);
 	}
 
 	.head.has-content {
@@ -133,7 +133,7 @@ const styles = css`
 		box-sizing: border-box;
 		padding: 0.375rem 0.625rem 0.875rem;
 		font-family: inherit;
-		font-size: var(--font-size-caption);
+		font-size: var(--font-size-xs);
 		font-weight: 700;
 		letter-spacing: 0.1em;
 		text-transform: uppercase;
@@ -208,7 +208,7 @@ const styles = css`
 		padding: 0.5rem 0.625rem;
 		border-radius: var(--radius-md);
 		font-family: inherit;
-		font-size: var(--font-size-small);
+		font-size: var(--font-size-sm);
 		font-weight: 500;
 		color: var(--text-primary);
 		text-decoration: none;
@@ -271,7 +271,7 @@ const styles = css`
 	/* the initial is a collapsed-only fallback for links without an icon, so the
 	   rail never renders an empty row when labels are hidden. */
 	.initial {
-		font-size: var(--font-size-small);
+		font-size: var(--font-size-sm);
 		font-weight: 600;
 	}
 
@@ -305,7 +305,7 @@ const styles = css`
 	}
 
 	.badge {
-		font-size: var(--font-size-caption);
+		font-size: var(--font-size-xs);
 		font-weight: 600;
 		padding: 0.0625rem 0.4rem;
 		border-radius: 999px;

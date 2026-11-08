@@ -22,7 +22,7 @@ const styles = css`
 		display: none;
 	}
 	.label {
-		font-size: 0.6875rem;
+		font-size: var(--font-size-2xs);
 		color: var(--text-secondary);
 	}
 	.stack {
@@ -37,7 +37,7 @@ const styles = css`
 	}
 	.more {
 		margin-inline-start: 0.25rem;
-		font-size: 0.6875rem;
+		font-size: var(--font-size-2xs);
 		font-weight: 600;
 		color: var(--text-secondary);
 	}

@@ -93,7 +93,7 @@ const styles = css`
 		align-items: baseline;
 		gap: 0.5rem;
 		min-width: 0;
-		font-size: var(--font-size-caption);
+		font-size: var(--font-size-xs);
 	}
 
 	.shell {
@@ -167,7 +167,7 @@ const styles = css`
 	.body {
 		min-width: max-content;
 		padding: 0.375rem 0 0.75rem 0;
-		font-size: var(--font-size-small);
+		font-size: var(--font-size-sm);
 		line-height: 1.75;
 		letter-spacing: 0.35px;
 		text-align: start;

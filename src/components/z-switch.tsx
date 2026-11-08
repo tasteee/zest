@@ -30,7 +30,7 @@ const styles = css`
 		min-height: var(--control-height-md);
 		cursor: pointer;
 		font-family: inherit;
-		font-size: var(--font-size-small);
+		font-size: var(--font-size-sm);
 		color: var(--text-primary);
 		user-select: none;
 		--tone: var(--accent-primary);

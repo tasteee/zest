@@ -72,11 +72,11 @@ const styles = css`
 	}
 
 	.filter.is-sm .pill {
-		font-size: 0.75rem;
+		font-size: var(--font-size-xs);
 		padding: 0.3125rem 0.6875rem;
 	}
 	.filter.is-md .pill {
-		font-size: 0.8125rem;
+		font-size: var(--font-size-sm);
 		padding: 0.4375rem 0.875rem;
 	}
 

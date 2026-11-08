@@ -51,7 +51,7 @@ const styles = css`
 		display: flex;
 		gap: 0.75rem;
 		box-sizing: border-box;
-		padding: var(--space-md) var(--space-base);
+		padding: var(--space-3) var(--space-4);
 		/* srgb: oklch would drift the chromatic accent when mixed against the
 		   hue-carrying --border-default (matches z-alert). */
 		border: 1px solid color-mix(in srgb, var(--callout-color) 25%, var(--border-default));
@@ -90,7 +90,7 @@ const styles = css`
 
 	.label {
 		margin: 0;
-		font-size: var(--font-size-small);
+		font-size: var(--font-size-sm);
 		font-weight: 600;
 		line-height: 1.4;
 		letter-spacing: 0.01em;
@@ -99,8 +99,8 @@ const styles = css`
 
 	.body {
 		position: relative;
-		font-size: var(--font-size-small);
-		line-height: var(--line-height-body);
+		font-size: var(--font-size-sm);
+		line-height: var(--line-height-normal);
 		color: var(--text-secondary);
 	}
 

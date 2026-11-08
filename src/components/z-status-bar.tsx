@@ -23,7 +23,7 @@ const styles = css`
 		background: var(--surface-overlay);
 		border-top: 1px solid var(--border-default);
 		color: var(--text-secondary);
-		font-size: var(--font-size-caption);
+		font-size: var(--font-size-xs);
 		position: sticky;
 		bottom: 0;
 	}

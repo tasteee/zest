@@ -39,7 +39,7 @@ const styles = css`
 		border: 0;
 		padding: 0.875rem 0;
 		font-family: inherit;
-		font-size: var(--font-size-body);
+		font-size: var(--font-size-md);
 		font-weight: 500;
 		color: var(--text-primary);
 		text-align: start;
@@ -90,8 +90,8 @@ const styles = css`
 		display: none;
 		padding: 0 0 1rem;
 		color: var(--text-secondary);
-		font-size: var(--font-size-small);
-		line-height: var(--line-height-body);
+		font-size: var(--font-size-sm);
+		line-height: var(--line-height-normal);
 	}
 
 	:host([is-open]) .content {

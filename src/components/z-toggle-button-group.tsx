@@ -141,7 +141,7 @@ const styles = css`
 		--z-toggle-button-height: 1.75rem;
 		--z-toggle-button-padding-inline: 0.625rem;
 		--z-toggle-button-min-width: 1.75rem;
-		--z-toggle-button-font-size: 0.75rem;
+		--z-toggle-button-font-size: var(--font-size-xs);
 		--z-toggle-button-icon-size: 0.75rem;
 	}
 
@@ -149,7 +149,7 @@ const styles = css`
 		--z-toggle-button-height: var(--control-height-sm);
 		--z-toggle-button-padding-inline: 0.75rem;
 		--z-toggle-button-min-width: var(--control-height-sm);
-		--z-toggle-button-font-size: 0.8125rem;
+		--z-toggle-button-font-size: var(--font-size-sm);
 		--z-toggle-button-icon-size: 0.875rem;
 	}
 
@@ -157,7 +157,7 @@ const styles = css`
 		--z-toggle-button-height: var(--control-height-lg);
 		--z-toggle-button-padding-inline: 1.25rem;
 		--z-toggle-button-min-width: var(--control-height-lg);
-		--z-toggle-button-font-size: 1rem;
+		--z-toggle-button-font-size: var(--font-size-md);
 		--z-toggle-button-icon-size: 1.125rem;
 	}
 

@@ -67,10 +67,10 @@ const styles = css`
 	}
 
 	.field.is-sm input {
-		font-size: var(--control-font-size-sm);
+		font-size: var(--font-size-sm);
 	}
 	.field.is-lg input {
-		font-size: var(--control-font-size-lg);
+		font-size: var(--font-size-md);
 	}
 
 	.field:hover {
@@ -159,7 +159,7 @@ const styles = css`
 		gap: 0.5rem;
 		padding: 0.5rem 0.625rem;
 		border-radius: var(--radius-sm);
-		font-size: var(--font-size-small);
+		font-size: var(--font-size-sm);
 		color: var(--text-primary);
 		cursor: pointer;
 		user-select: none;
@@ -183,7 +183,7 @@ const styles = css`
 
 	.empty {
 		padding: 0.625rem;
-		font-size: var(--font-size-small);
+		font-size: var(--font-size-sm);
 		color: var(--text-secondary);
 		text-align: center;
 	}

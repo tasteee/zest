@@ -34,8 +34,8 @@ Contents:
 
 Many layout primitives accept size-like props (`gap`, `gutter`, `space`, `size`). These props accept:
 
-- Numeric values (e.g. `6` or `"6"`) which map to the spacing token variables: `6` -> `var(--spacing-6)`.
-- Token names (e.g. `sm`, `md`) which resolve to the design tokens (e.g. `var(--spacing-3)`).
+- Numeric values (e.g. `6` or `"6"`) which map to the spacing token variables: `6` -> `var(--space-6)`.
+- Token names (e.g. `sm`, `md`) which resolve to the design tokens (e.g. `var(--space-3)`).
 - Any CSS length (e.g. `24px`, `1rem`) which is passed through as-is.
 
 This unified behaviour is provided by the `coerceSize` helper in `src/shared/layout-schema.ts` and components expose a `sizeProp` descriptor for reuse.

@@ -308,16 +308,16 @@ const styles = css`
 	}
 
 	.title {
-		font-size: var(--font-size-small);
+		font-size: var(--font-size-sm);
 		font-weight: 600;
 		color: var(--text-primary);
 		line-height: 1.4;
 	}
 
 	.description {
-		font-size: var(--font-size-caption);
+		font-size: var(--font-size-xs);
 		color: var(--text-secondary);
-		line-height: var(--line-height-body);
+		line-height: var(--line-height-normal);
 	}
 
 	/* close button, ringed by the remaining-time indicator on timed toasts */

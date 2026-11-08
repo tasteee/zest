@@ -41,31 +41,31 @@ const styles = css`
 		min-width: 1.25rem;
 		height: 1.25rem;
 		padding-inline: 0.3125rem;
-		font-size: 0.6875rem;
+		font-size: var(--font-size-2xs);
 	}
 	.kbd.is-sm {
 		min-width: 1.5rem;
 		height: 1.5rem;
 		padding-inline: 0.375rem;
-		font-size: 0.75rem;
+		font-size: var(--font-size-xs);
 	}
 	.kbd.is-md {
 		min-width: 1.875rem;
 		height: 1.875rem;
 		padding-inline: 0.5rem;
-		font-size: 0.8125rem;
+		font-size: var(--font-size-sm);
 	}
 	.kbd.is-lg {
 		min-width: 2.25rem;
 		height: 2.25rem;
 		padding-inline: 0.625rem;
-		font-size: 0.9375rem;
+		font-size: var(--font-size-md);
 	}
 	.kbd.is-xl {
 		min-width: 2.75rem;
 		height: 2.75rem;
 		padding-inline: 0.75rem;
-		font-size: 1.0625rem;
+		font-size: var(--font-size-md);
 	}
 `
 

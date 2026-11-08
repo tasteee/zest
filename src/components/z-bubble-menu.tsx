@@ -47,7 +47,7 @@ const styles = css`
 		outline: none;
 		color: var(--text-primary);
 		font-family: inherit;
-		font-size: var(--font-size-small);
+		font-size: var(--font-size-sm);
 	}
 `
 

@@ -69,7 +69,7 @@ const styles = css`
 	}
 	.selected-name {
 		overflow: hidden;
-		font-size: var(--font-size-caption);
+		font-size: var(--font-size-xs);
 		font-weight: 600;
 		text-align: start;
 		text-overflow: ellipsis;
@@ -84,7 +84,7 @@ const styles = css`
 		background: transparent;
 		color: var(--text-secondary);
 		cursor: pointer;
-		font-size: 1.25rem;
+		font-size: var(--font-size-xl);
 		line-height: 1;
 	}
 	.clear:hover {
@@ -92,7 +92,7 @@ const styles = css`
 		color: var(--text-primary);
 	}
 	.hint {
-		font-size: var(--font-size-caption);
+		font-size: var(--font-size-xs);
 	}
 `
 

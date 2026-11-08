@@ -16,7 +16,7 @@ const styles = css`
 		align-items: center;
 		text-align: center;
 		gap: 0.75rem;
-		padding: var(--space-2xl) var(--space-lg);
+		padding: var(--space-12) var(--space-6);
 		--tone: var(--text-secondary);
 	}
 
@@ -71,18 +71,18 @@ const styles = css`
 
 	.heading {
 		margin: 0;
-		font-size: var(--font-size-h4);
+		font-size: var(--font-size-xl);
 		font-weight: 600;
 		color: var(--text-primary);
-		line-height: var(--line-height-h4);
+		line-height: var(--line-height-snug);
 	}
 
 	.description {
 		margin: 0;
 		max-width: 42ch;
 		color: var(--text-secondary);
-		font-size: var(--font-size-small);
-		line-height: var(--line-height-body);
+		font-size: var(--font-size-sm);
+		line-height: var(--line-height-normal);
 	}
 
 	.actions {

@@ -77,7 +77,7 @@ const styles = css`
 
 	.tag {
 		font-family: var(--font-sans);
-		font-size: var(--font-size-caption);
+		font-size: var(--font-size-xs);
 		font-weight: 600;
 		color: var(--on-accent);
 		background: var(--tone);

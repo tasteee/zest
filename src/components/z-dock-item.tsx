@@ -65,7 +65,7 @@ const styles = css`
 		background: var(--surface-overlay);
 		border: 1px solid var(--border-default);
 		color: var(--text-primary);
-		font-size: var(--font-size-caption);
+		font-size: var(--font-size-xs);
 		font-family: var(--font-sans);
 		padding: 0.25rem 0.5rem;
 		border-radius: var(--radius-sm);

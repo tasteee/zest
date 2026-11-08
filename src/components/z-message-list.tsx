@@ -23,9 +23,9 @@ const styles = css`
 	:host {
 		display: flex;
 		flex-direction: column;
-		gap: var(--space-sm);
+		gap: var(--space-2);
 		overflow-y: auto;
-		padding: var(--space-md);
+		padding: var(--space-3);
 		position: relative;
 	}
 	:host([is-hidden]) {

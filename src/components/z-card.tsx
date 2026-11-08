@@ -25,8 +25,8 @@ const styles = css`
 		gap: var(--z-card-gap, 0);
 		box-sizing: border-box;
 		border-radius: var(--radius-lg);
-		padding: var(--space-lg);
-		transition: border-color 0.05s linear;
+		padding: var(--space-6);
+		transition: border-color var(--motion-instant) linear;
 		border: 1px solid var(--border-default);
 		color: var(--text-primary);
 		background: transparent;
@@ -53,27 +53,27 @@ const styles = css`
 	.header {
 		display: flex;
 		flex-direction: column;
-		gap: var(--space-xs);
+		gap: var(--space-1);
 		/* Unconditional, because knowing whether anything was slotted below
 		   would mean observing the slot — too much machinery for a card whose
 		   header is nearly always followed by content. A heading-only card just
 		   reads as slightly deeper bottom padding. */
-		margin-bottom: var(--space-md);
+		margin-bottom: var(--space-3);
 	}
 
 	.title {
 		margin: 0;
-		font-size: var(--font-size-h4);
+		font-size: var(--font-size-xl);
 		font-weight: 600;
-		line-height: var(--line-height-h4);
+		line-height: var(--line-height-snug);
 		color: var(--text-primary);
 	}
 
 	.description {
 		margin: 0;
 		color: var(--text-secondary);
-		font-size: var(--font-size-small);
-		line-height: var(--line-height-body);
+		font-size: var(--font-size-sm);
+		line-height: var(--line-height-normal);
 	}
 `
 

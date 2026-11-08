@@ -77,7 +77,7 @@ const dragHandleStyles = css`
 		border-radius: var(--radius-md);
 		color: var(--text-primary);
 		font-family: inherit;
-		font-size: var(--font-size-small);
+		font-size: var(--font-size-sm);
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;

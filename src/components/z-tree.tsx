@@ -48,7 +48,7 @@ const flatten = (nodes: TreeNode[], open: Set<string>, level = 0, out: Row[] = [
 const styles = css`
 	:host {
 		display: block;
-		font-size: var(--font-size-small);
+		font-size: var(--font-size-sm);
 		--indent: 1.1rem;
 		--tone: var(--accent-secondary);
 	}

@@ -33,7 +33,7 @@ const styles = css`
 		align-items: center;
 		gap: 0.5rem;
 		min-width: 0;
-		font-size: 0.875rem;
+		font-size: var(--font-size-sm);
 	}
 	.tool {
 		width: 1rem;
@@ -50,7 +50,7 @@ const styles = css`
 		display: inline-flex;
 		align-items: center;
 		gap: 0.3rem;
-		font-size: 0.75rem;
+		font-size: var(--font-size-xs);
 		text-transform: capitalize;
 		color: var(--text-secondary);
 	}
@@ -85,7 +85,7 @@ const styles = css`
 		gap: 0.625rem;
 	}
 	.section-label {
-		font-size: 0.6875rem;
+		font-size: var(--font-size-2xs);
 		font-weight: 600;
 		letter-spacing: 0.04em;
 		text-transform: uppercase;

@@ -4,19 +4,19 @@ import { coerceSize, insetProps, resolveAlign, resolveGridAlign, resolveJustify,
 const isPureNumber = (value: string): boolean => /^-?\d+$/.test(value)
 
 // z-box reads a bare number as a step on the semantic space scale
-// (gap="5" is --space-lg), which is what every existing layout was
+// (gap="5" is --space-6), which is what every existing layout was
 // written against. Tokens ("sm") and lengths ("1rem") still go
 // through the shared resolver.
 const SPACE_SCALE_STEPS: Record<number, string> = {
 	0: '0',
-	1: 'var(--space-xs)',
-	2: 'var(--space-sm)',
-	3: 'var(--space-md)',
-	4: 'var(--space-base)',
-	5: 'var(--space-lg)',
-	6: 'var(--space-xl)',
-	7: 'var(--space-2xl)',
-	8: 'var(--space-3xl)'
+	1: 'var(--space-1)',
+	2: 'var(--space-2)',
+	3: 'var(--space-3)',
+	4: 'var(--space-4)',
+	5: 'var(--space-6)',
+	6: 'var(--space-8)',
+	7: 'var(--space-12)',
+	8: 'var(--space-16)'
 }
 
 export const resolveBoxSpacing = (value?: string | number): string | undefined => {
@@ -26,7 +26,7 @@ export const resolveBoxSpacing = (value?: string | number): string | undefined =
 	const isStep = isPureNumber(text)
 	if (!isStep) return coerceSize(text)
 	const step = Number(text)
-	return SPACE_SCALE_STEPS[step] ?? `calc(var(--space-base) * ${step})`
+	return SPACE_SCALE_STEPS[step] ?? `calc(var(--space-4) * ${step})`
 }
 
 const resolveLengthValue = (value?: string): string | undefined => {

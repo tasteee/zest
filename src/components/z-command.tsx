@@ -83,7 +83,7 @@ const styles = css`
 		padding: 0.5rem 0.875rem;
 		border-top: 1px solid var(--border-default);
 		color: var(--text-secondary);
-		font-size: var(--font-size-caption);
+		font-size: var(--font-size-xs);
 	}
 
 	.footer.is-empty {
@@ -118,7 +118,7 @@ const styles = css`
 		outline: none;
 		color: var(--text-primary);
 		font-family: inherit;
-		font-size: var(--font-size-body);
+		font-size: var(--font-size-md);
 	}
 
 	.search input::placeholder {
@@ -134,7 +134,7 @@ const styles = css`
 
 	.group-label {
 		padding: 0.5rem 0.625rem 0.25rem;
-		font-size: var(--font-size-caption);
+		font-size: var(--font-size-xs);
 		font-weight: 600;
 		letter-spacing: 0.06em;
 		text-transform: uppercase;
@@ -147,7 +147,7 @@ const styles = css`
 		gap: 0.625rem;
 		padding: 0.5rem 0.625rem;
 		border-radius: var(--radius-sm);
-		font-size: var(--font-size-small);
+		font-size: var(--font-size-sm);
 		color: var(--text-primary);
 		cursor: pointer;
 		user-select: none;
@@ -176,14 +176,14 @@ const styles = css`
 	.shortcut {
 		color: var(--text-secondary);
 		font-family: var(--font-mono);
-		font-size: var(--font-size-caption);
+		font-size: var(--font-size-xs);
 	}
 
 	.empty {
 		padding: 1.5rem;
 		text-align: center;
 		color: var(--text-secondary);
-		font-size: var(--font-size-small);
+		font-size: var(--font-size-sm);
 	}
 `
 

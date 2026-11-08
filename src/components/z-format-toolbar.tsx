@@ -53,7 +53,7 @@ const styles = css`
 		border-radius: var(--radius-sm);
 		color: var(--text-primary);
 		font-family: inherit;
-		font-size: var(--font-size-small);
+		font-size: var(--font-size-sm);
 		cursor: pointer;
 		transition: background-color var(--motion-fast) var(--ease-enter);
 	}
@@ -92,7 +92,7 @@ const styles = css`
 		align-items: center;
 		padding: 0.4375rem 0.625rem;
 		border-radius: var(--radius-sm);
-		font-size: var(--font-size-small);
+		font-size: var(--font-size-sm);
 		color: var(--text-primary);
 		cursor: pointer;
 		background: transparent;

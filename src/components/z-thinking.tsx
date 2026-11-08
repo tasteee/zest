@@ -25,7 +25,7 @@ const styles = css`
 		display: inline-flex;
 		align-items: center;
 		gap: 0.5rem;
-		font-size: 0.875rem;
+		font-size: var(--font-size-sm);
 		color: var(--text-secondary);
 	}
 	.spark {
@@ -59,12 +59,12 @@ const styles = css`
 		}
 	}
 	.dur {
-		font-size: 0.8125rem;
+		font-size: var(--font-size-sm);
 		opacity: 0.75;
 	}
 	.body {
 		color: var(--text-secondary);
-		font-size: 0.875rem;
+		font-size: var(--font-size-sm);
 		line-height: 1.55;
 		white-space: pre-wrap;
 	}

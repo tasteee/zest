@@ -26,12 +26,12 @@ const styles = css`
 	.composer {
 		display: flex;
 		align-items: flex-end;
-		gap: var(--space-sm);
+		gap: var(--space-2);
 		box-sizing: border-box;
 		border: 1px solid var(--border-default);
 		border-radius: var(--radius-lg);
 		background: var(--surface-default);
-		padding: var(--space-sm);
+		padding: var(--space-2);
 		transition: border-color var(--motion-fast) var(--ease-enter);
 		--tone: var(--accent-primary);
 	}
@@ -63,7 +63,7 @@ const styles = css`
 		outline: none;
 		color: var(--text-primary);
 		font-family: inherit;
-		font-size: 0.9375rem;
+		font-size: var(--font-size-md);
 		line-height: 1.5;
 		padding: 0.4rem 0.25rem;
 		max-height: 40vh;

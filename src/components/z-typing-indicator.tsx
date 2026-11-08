@@ -13,7 +13,7 @@ const styles = css`
 	:host {
 		display: flex;
 		align-items: flex-end;
-		gap: var(--space-sm);
+		gap: var(--space-2);
 		padding: 0.125rem 0;
 	}
 	:host([is-hidden]) {

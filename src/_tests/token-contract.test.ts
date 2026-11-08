@@ -90,7 +90,35 @@ describe('token contract', () => {
 			'emissive-color',
 			'emissive-focus',
 			'base-pink-color',
-			'base-purple-color'
+			'base-purple-color',
+			'space-xs',
+			'space-sm',
+			'space-md',
+			'space-base',
+			'space-lg',
+			'space-xl',
+			'space-2xl',
+			'space-3xl',
+			'font-size-caption',
+			'font-size-small',
+			'font-size-body',
+			'font-size-display',
+			'font-size-h1',
+			'font-size-h2',
+			'font-size-h3',
+			'font-size-h4',
+			'font-size-0',
+			'font-size-1',
+			'font-size-2',
+			'font-size-3',
+			'control-font-size-sm',
+			'control-font-size-md',
+			'control-font-size-lg',
+			'line-height-body',
+			'line-height-h4',
+			'small-button-radius',
+			'medium-button-radius',
+			'large-button-radius'
 		]
 		const pattern = new RegExp(`--(${retired.join('|')})(?![A-Za-z0-9_-])`)
 		expect(filesMatching(allFiles, pattern)).toEqual([])
@@ -108,7 +136,7 @@ describe('token contract', () => {
 		for (const file of libraryFiles) {
 			for (const match of (text.get(file) ?? '').matchAll(/var\((--[A-Za-z0-9_-]+)\s*\)/g)) {
 				const name = match[1]
-				// Names built from a prefix at runtime (--spacing-${n}) end in a dash.
+				// Names built from a prefix at runtime (--space-${n}) end in a dash.
 				if (name.endsWith('-')) continue
 				// --z-* are per-component hooks set by the host page or by props.
 				if (name.startsWith('--z-')) continue
@@ -130,6 +158,15 @@ describe('token contract', () => {
 				if (!isToken && !isRing && !isReset) offenders.push(`${file.replace(srcRoot, 'src')}: ${value}`)
 			}
 		}
+		expect(offenders).toEqual([])
+	})
+
+	it('has one spacing scale and no spacing- prefix', () => {
+		expect(filesMatching(allFiles, /--spacing-/)).toEqual([])
+	})
+
+	it('components set text from the type scale, not raw rem or px', () => {
+		const offenders = filesMatching(libraryFiles, /(^|[s;{])(font-size|--[a-z-]*font-size):s*[0-9.]+(rem|px)/m)
 		expect(offenders).toEqual([])
 	})
 
@@ -161,7 +198,10 @@ describe('token contract', () => {
 			'status-danger',
 			'shadow-overlay',
 			'shadow-modal',
-			'tone'
+			'tone',
+			'space-4',
+			'font-size-md',
+			'line-height-normal'
 		]
 		const missing = roles.filter((role) => !new RegExp(`--${role}\\s*:`).test(tokensCss))
 		expect(missing).toEqual([])

@@ -42,7 +42,7 @@ const styles = css`
 		cursor: pointer;
 		padding: 0;
 		color: var(--text-secondary);
-		font-size: 1rem;
+		font-size: var(--font-size-md);
 		transition:
 			background-color var(--motion-instant) var(--ease-enter),
 			transform var(--motion-instant) var(--ease-enter);

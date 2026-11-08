@@ -40,7 +40,7 @@ const styles = css`
 		padding-inline: 0.625rem 0.875rem;
 		color: var(--text-primary);
 		font-family: var(--font-mono);
-		font-size: var(--font-size-small);
+		font-size: var(--font-size-sm);
 		cursor: pointer;
 		transition: border-color var(--motion-fast) var(--ease-enter);
 	}
@@ -77,10 +77,10 @@ const styles = css`
 		border: 1px solid var(--border-default);
 		border-radius: var(--radius-md);
 		box-shadow: var(--shadow-overlay);
-		padding: var(--space-md);
+		padding: var(--space-3);
 		display: flex;
 		flex-direction: column;
-		gap: var(--space-md);
+		gap: var(--space-3);
 	}
 
 	.area {
@@ -145,7 +145,7 @@ const styles = css`
 	.hash {
 		color: var(--text-secondary);
 		font-family: var(--font-mono);
-		font-size: var(--font-size-small);
+		font-size: var(--font-size-sm);
 	}
 	.hex-input {
 		flex: 1;
@@ -155,7 +155,7 @@ const styles = css`
 		outline: none;
 		color: var(--text-primary);
 		font-family: var(--font-mono);
-		font-size: var(--font-size-small);
+		font-size: var(--font-size-sm);
 		text-transform: uppercase;
 	}
 

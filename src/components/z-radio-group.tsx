@@ -23,7 +23,7 @@ const styles = css`
 	:host {
 		display: flex;
 		flex-direction: column;
-		gap: var(--space-md);
+		gap: var(--space-3);
 		--z-radio-group-accent: var(--accent-primary);
 	}
 
@@ -35,7 +35,7 @@ const styles = css`
 
 	:host([direction='horizontal']) {
 		flex-direction: row;
-		gap: var(--space-lg);
+		gap: var(--space-6);
 	}
 
 	:host([is-hidden]) {

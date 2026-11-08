@@ -51,8 +51,8 @@ export const floatingSurfaceStyles = css`
 		border-radius: var(--radius-md);
 		padding: var(--z-overlay-padding, 1rem);
 		max-width: var(--z-overlay-max-width, 20rem);
-		font-size: var(--font-size-small);
-		line-height: var(--line-height-body);
+		font-size: var(--font-size-sm);
+		line-height: var(--line-height-normal);
 		overflow: visible;
 	}
 
@@ -189,7 +189,7 @@ export const dialogSurfaceStyles = css`
 		display: flex;
 		flex-direction: column;
 		gap: 0.5rem;
-		padding: var(--space-lg);
+		padding: var(--space-6);
 		min-height: 0;
 		overflow-y: auto;
 		overscroll-behavior: contain;
@@ -204,17 +204,17 @@ export const dialogSurfaceStyles = css`
 
 	.title {
 		margin: 0;
-		font-size: var(--font-size-h4);
+		font-size: var(--font-size-xl);
 		font-weight: 600;
-		line-height: var(--line-height-h4);
+		line-height: var(--line-height-snug);
 		color: var(--text-primary);
 	}
 
 	.description {
 		margin: 0;
 		color: var(--text-secondary);
-		font-size: var(--font-size-small);
-		line-height: var(--line-height-body);
+		font-size: var(--font-size-sm);
+		line-height: var(--line-height-normal);
 	}
 
 	.close {
@@ -258,7 +258,7 @@ export const dialogSurfaceStyles = css`
 		display: flex;
 		justify-content: flex-end;
 		gap: 0.625rem;
-		padding: var(--space-md) var(--space-lg) var(--space-lg);
+		padding: var(--space-3) var(--space-6) var(--space-6);
 	}
 
 	::slotted([slot='footer']) {

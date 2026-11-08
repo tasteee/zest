@@ -51,14 +51,14 @@ const styles = css`
 		flex: 1;
 		min-width: 0;
 		font-weight: 600;
-		font-size: 0.9375rem;
+		font-size: var(--font-size-md);
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
 	}
 	.time {
 		flex: 0 0 auto;
-		font-size: 0.6875rem;
+		font-size: var(--font-size-2xs);
 		color: var(--text-secondary);
 	}
 	:host([unread]:not([unread='0'])) .time {
@@ -67,7 +67,7 @@ const styles = css`
 	.preview {
 		flex: 1;
 		min-width: 0;
-		font-size: 0.8125rem;
+		font-size: var(--font-size-sm);
 		color: var(--text-secondary);
 		white-space: nowrap;
 		overflow: hidden;
@@ -97,7 +97,7 @@ const styles = css`
 		border-radius: 999px;
 		background: var(--accent-primary);
 		color: var(--on-accent);
-		font-size: 0.6875rem;
+		font-size: var(--font-size-2xs);
 		font-weight: 700;
 		font-variant-numeric: tabular-nums;
 	}

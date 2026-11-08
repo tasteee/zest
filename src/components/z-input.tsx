@@ -62,17 +62,17 @@ const styles = css`
 	.field.is-sm {
 		height: var(--control-height-sm);
 		padding-inline: 0.625rem;
-		font-size: var(--control-font-size-sm);
+		font-size: var(--font-size-sm);
 	}
 	.field.is-md {
 		height: var(--control-height-md);
 		padding-inline: 0.75rem;
-		font-size: var(--control-font-size-md);
+		font-size: var(--font-size-sm);
 	}
 	.field.is-lg {
 		height: var(--control-height-lg);
 		padding-inline: 0.875rem;
-		font-size: var(--control-font-size-lg);
+		font-size: var(--font-size-md);
 	}
 
 	.field:hover {

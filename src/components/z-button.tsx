@@ -56,24 +56,24 @@ const styles = css`
 	/* sizes */
 
 	button.is-sm {
-		border-radius: var(--z-button-radius, var(--small-button-radius));
+		border-radius: var(--z-button-radius, var(--radius-md));
 		height: var(--control-height-sm);
 		padding-inline: 0.875rem;
-		font-size: var(--control-font-size-sm);
+		font-size: var(--font-size-sm);
 	}
 
 	button.is-md {
-		border-radius: var(--z-button-radius, var(--medium-button-radius));
+		border-radius: var(--z-button-radius, var(--radius-md));
 		height: var(--control-height-md);
 		padding-inline: 1rem;
-		font-size: var(--control-font-size-md);
+		font-size: var(--font-size-sm);
 	}
 
 	button.is-lg {
-		border-radius: var(--z-button-radius, var(--large-button-radius));
+		border-radius: var(--z-button-radius, var(--radius-md));
 		height: var(--control-height-lg);
 		padding-inline: 1.5rem;
-		font-size: var(--control-font-size-lg);
+		font-size: var(--font-size-md);
 	}
 
 	button.is-primary {

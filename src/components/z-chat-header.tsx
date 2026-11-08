@@ -30,13 +30,13 @@ const styles = css`
 	}
 	.name {
 		font-weight: 600;
-		font-size: 0.9375rem;
+		font-size: var(--font-size-md);
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
 	}
 	.subtitle {
-		font-size: 0.75rem;
+		font-size: var(--font-size-xs);
 		color: var(--text-secondary);
 		white-space: nowrap;
 		overflow: hidden;

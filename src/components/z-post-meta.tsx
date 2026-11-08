@@ -29,8 +29,8 @@ const styles = css`
 		align-items: center;
 		justify-content: center;
 		background: color-mix(in srgb, var(--tone) 22%, var(--surface-default));
-		color: color-mix(in oklch, var(--tone) 85%, white);
-		font-size: 0.6875rem;
+		color: color-mix(in oklch, var(--tone) 85%, var(--text-strong));
+		font-size: var(--font-size-2xs);
 		font-weight: 600;
 		font-family: inherit;
 	}
@@ -43,7 +43,7 @@ const styles = css`
 	}
 
 	.name {
-		font-size: 0.875rem;
+		font-size: var(--font-size-sm);
 		font-weight: 500;
 		color: var(--text-primary);
 	}
@@ -57,7 +57,7 @@ const styles = css`
 	}
 
 	.date {
-		font-size: 0.875rem;
+		font-size: var(--font-size-sm);
 		color: var(--text-secondary);
 	}
 
@@ -72,7 +72,7 @@ const styles = css`
 		display: inline-flex;
 		align-items: center;
 		font-family: inherit;
-		font-size: 0.8125rem;
+		font-size: var(--font-size-sm);
 		font-weight: 500;
 		line-height: 1;
 		border: 1px solid var(--border-default);

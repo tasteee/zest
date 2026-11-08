@@ -26,15 +26,15 @@ const styles = css`
 	:host([tone='secondary']) { --tone: var(--accent-secondary); }
 	:host([tone='tertiary']) { --tone: var(--accent-tertiary); }
 	.row { display: flex; align-items: stretch; box-sizing: border-box; width: 100%; background: transparent; border: 1px solid var(--border-default); border-radius: var(--radius-md); color: var(--text-primary); overflow: hidden; transition: border-color var(--motion-fast) var(--ease-enter), background-color var(--motion-fast) var(--ease-enter); }
-	.row.is-sm { height: var(--control-height-sm); font-size: var(--control-font-size-sm); }
-	.row.is-md { height: var(--control-height-md); font-size: var(--control-font-size-md); }
-	.row.is-lg { height: var(--control-height-lg); font-size: var(--control-font-size-lg); }
+	.row.is-sm { height: var(--control-height-sm); font-size: var(--font-size-sm); }
+	.row.is-md { height: var(--control-height-md); font-size: var(--font-size-sm); }
+	.row.is-lg { height: var(--control-height-lg); font-size: var(--font-size-md); }
 	.row:hover { border-color: color-mix(in oklch, var(--text-primary) 30%, transparent); }
 	.row:focus-within { border-color: var(--tone); background: color-mix(in oklch, var(--tone) 5%, transparent); outline: 2px solid var(--border-focus); outline-offset: 2px; }
 	.row.is-invalid { border-color: var(--status-danger); --tone: var(--status-danger); }
 	.row.is-disabled { opacity: var(--control-disabled-opacity); pointer-events: none; }
 	z-number-input { flex: 1 1 0; min-width: 0; }
-	.separator { display: flex; align-items: center; padding-inline: var(--space-xs); color: var(--text-secondary); user-select: none; -webkit-user-select: none; }
+	.separator { display: flex; align-items: center; padding-inline: var(--space-1); color: var(--text-secondary); user-select: none; -webkit-user-select: none; }
 `
 
 type BoundT = number | null

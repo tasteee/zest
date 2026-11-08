@@ -25,16 +25,16 @@ const styles = css`
 		min-height: var(--control-height-md);
 		cursor: pointer;
 		font-family: inherit;
-		font-size: var(--font-size-small);
+		font-size: var(--font-size-sm);
 		color: var(--text-primary);
 		user-select: none;
 		-webkit-user-select: none;
 		--tone: var(--accent-primary);
 	}
 
-	label.is-sm { min-height: var(--control-height-sm); font-size: var(--font-size-caption); }
-	label.is-md { font-size: var(--font-size-small); }
-	label.is-lg { min-height: var(--control-height-lg); font-size: var(--font-size-body); }
+	label.is-sm { min-height: var(--control-height-sm); font-size: var(--font-size-xs); }
+	label.is-md { font-size: var(--font-size-sm); }
+	label.is-lg { min-height: var(--control-height-lg); font-size: var(--font-size-md); }
 
 	:host([tone='secondary']) label {
 		--tone: var(--accent-secondary);

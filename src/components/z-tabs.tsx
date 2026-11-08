@@ -63,7 +63,7 @@ const styles = css`
 		padding: 0.75rem 1rem;
 		margin-bottom: -1px;
 		font-family: inherit;
-		font-size: var(--font-size-small);
+		font-size: var(--font-size-sm);
 		font-weight: 500;
 		color: var(--text-secondary);
 		cursor: pointer;

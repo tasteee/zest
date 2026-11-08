@@ -20,10 +20,10 @@ const styles = css`
 		color: var(--text-primary);
 		border: 1px solid transparent;
 		border-radius: var(--z-surface-radius, var(--radius-lg));
-		padding-top: var(--z-surface-pad-top, var(--space-md));
-		padding-bottom: var(--z-surface-pad-bottom, var(--space-md));
-		padding-inline-start: var(--z-surface-pad-left, var(--space-md));
-		padding-inline-end: var(--z-surface-pad-right, var(--space-md));
+		padding-top: var(--z-surface-pad-top, var(--space-3));
+		padding-bottom: var(--z-surface-pad-bottom, var(--space-3));
+		padding-inline-start: var(--z-surface-pad-left, var(--space-3));
+		padding-inline-end: var(--z-surface-pad-right, var(--space-3));
 	}
 
 	:host([is-full-width]) {

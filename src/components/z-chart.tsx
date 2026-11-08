@@ -68,14 +68,14 @@ const styles = css`
 	.x-label {
 		fill: var(--text-secondary);
 		font-family: var(--font-sans);
-		font-size: 11px;
+		font-size: var(--font-size-2xs);
 		text-anchor: middle;
 	}
 
 	.value {
 		fill: var(--text-primary);
 		font-family: var(--font-sans);
-		font-size: 12px;
+		font-size: var(--font-size-xs);
 		font-weight: 600;
 		text-anchor: middle;
 	}

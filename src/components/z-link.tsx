@@ -40,13 +40,13 @@ const styles = css`
 
 	/* sizes */
 	a.is-sm {
-		font-size: var(--font-size-small);
+		font-size: var(--font-size-sm);
 	}
 	a.is-md {
-		font-size: var(--font-size-body);
+		font-size: var(--font-size-md);
 	}
 	a.is-lg {
-		font-size: var(--font-size-h4);
+		font-size: var(--font-size-xl);
 	}
 
 	/* tones */

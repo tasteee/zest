@@ -54,37 +54,37 @@ const styles = css`
 	}
 
 	.text.is-heading.is-xxl {
-		font-size: calc(var(--base-font-size, 16px) * 4);
+		font-size: var(--font-size-7xl);
 		line-height: 1.125;
 		letter-spacing: calc(var(--base-font-size, 16px) * -0.06 * var(--font-heading-tracking-scale, 1));
 	}
 
 	.text.is-heading.is-xl {
-		font-size: calc(var(--base-font-size, 16px) * 3.5);
+		font-size: var(--font-size-6xl);
 		line-height: 1.142857;
 		letter-spacing: calc(var(--base-font-size, 16px) * -0.05 * var(--font-heading-tracking-scale, 1));
 	}
 
 	.text.is-heading.is-lg {
-		font-size: calc(var(--base-font-size, 16px) * 3);
+		font-size: var(--font-size-5xl);
 		line-height: 1.166667;
 		letter-spacing: calc(var(--base-font-size, 16px) * -0.04 * var(--font-heading-tracking-scale, 1));
 	}
 
 	.text.is-heading.is-md {
-		font-size: calc(var(--base-font-size, 16px) * 2.5);
+		font-size: var(--font-size-4xl);
 		line-height: 1.3;
 		letter-spacing: calc(var(--base-font-size, 16px) * -0.03375 * var(--font-heading-tracking-scale, 1));
 	}
 
 	.text.is-heading.is-sm {
-		font-size: calc(var(--base-font-size, 16px) * 2);
+		font-size: var(--font-size-3xl);
 		line-height: 1.25;
 		letter-spacing: calc(var(--base-font-size, 16px) * -0.03 * var(--font-heading-tracking-scale, 1));
 	}
 
 	.text.is-heading.is-xs {
-		font-size: calc(var(--base-font-size, 16px) * 1.5);
+		font-size: var(--font-size-2xl);
 		line-height: 1.333333;
 		letter-spacing: calc(var(--base-font-size, 16px) * -0.00625 * var(--font-heading-tracking-scale, 1));
 	}
@@ -99,31 +99,31 @@ const styles = css`
 	}
 
 	.text.is-subheading.is-xl {
-		font-size: calc(var(--base-font-size, 16px) * 1.25);
+		font-size: var(--font-size-xl);
 		line-height: 1.2;
 		letter-spacing: calc(var(--base-font-size, 16px) * 0.075);
 	}
 
 	.text.is-subheading.is-lg {
-		font-size: calc(var(--base-font-size, 16px) * 1.125);
+		font-size: var(--font-size-lg);
 		line-height: 1.333333;
 		letter-spacing: calc(var(--base-font-size, 16px) * 0.075);
 	}
 
 	.text.is-subheading.is-md {
-		font-size: var(--base-font-size, 16px);
+		font-size: var(--font-size-md);
 		line-height: 1.25;
 		letter-spacing: calc(var(--base-font-size, 16px) * 0.075);
 	}
 
 	.text.is-subheading.is-sm {
-		font-size: calc(var(--base-font-size, 16px) * 0.875);
+		font-size: var(--font-size-sm);
 		line-height: 1.428571;
 		letter-spacing: calc(var(--base-font-size, 16px) * 0.05);
 	}
 
 	.text.is-subheading.is-xs {
-		font-size: calc(var(--base-font-size, 16px) * 0.75);
+		font-size: var(--font-size-xs);
 		line-height: 1.333333;
 		letter-spacing: calc(var(--base-font-size, 16px) * 0.05);
 	}
@@ -137,37 +137,37 @@ const styles = css`
 	}
 
 	.text.is-text.is-xxl {
-		font-size: calc(var(--base-font-size, 16px) * 1.5);
+		font-size: var(--font-size-2xl);
 		line-height: 1.666667;
 		letter-spacing: calc(var(--base-font-size, 16px) * -0.0275);
 	}
 
 	.text.is-text.is-xl {
-		font-size: calc(var(--base-font-size, 16px) * 1.25);
+		font-size: var(--font-size-xl);
 		line-height: 1.6;
 		letter-spacing: calc(var(--base-font-size, 16px) * -0.02);
 	}
 
 	.text.is-text.is-lg {
-		font-size: calc(var(--base-font-size, 16px) * 1.125);
+		font-size: var(--font-size-lg);
 		line-height: 1.777778;
 		letter-spacing: calc(var(--base-font-size, 16px) * -0.01625);
 	}
 
 	.text.is-text.is-md {
-		font-size: var(--base-font-size, 16px);
+		font-size: var(--font-size-md);
 		line-height: 1.75;
 		letter-spacing: calc(var(--base-font-size, 16px) * -0.01125);
 	}
 
 	.text.is-text.is-sm {
-		font-size: calc(var(--base-font-size, 16px) * 0.875);
+		font-size: var(--font-size-sm);
 		line-height: 1.714286;
 		letter-spacing: calc(var(--base-font-size, 16px) * -0.005);
 	}
 
 	.text.is-text.is-xs {
-		font-size: calc(var(--base-font-size, 16px) * 0.75);
+		font-size: var(--font-size-xs);
 		line-height: 1.333333;
 		letter-spacing: 0;
 	}
@@ -178,7 +178,7 @@ const styles = css`
 
 	.text.is-label {
 		color: var(--text-tertiary);
-		font-size: var(--font-size-small);
+		font-size: var(--font-size-sm);
 		font-weight: 600;
 		line-height: 1;
 		letter-spacing: 0.04em;

@@ -47,7 +47,7 @@ const styles = css`
 	   mixed rows aligned even when a theme uses different font metrics. */
 	.header { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; height: var(--field-label-height); min-width: 0; }
 
-	.label { color: var(--text-primary); font-size: var(--font-size-small); font-weight: 500; line-height: 1.25; letter-spacing: normal; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; user-select: none; -webkit-user-select: none; }
+	.label { color: var(--text-primary); font-size: var(--font-size-sm); font-weight: 500; line-height: 1.25; letter-spacing: normal; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; user-select: none; -webkit-user-select: none; }
 	.required { color: var(--status-danger); }
 
 	/* The band. Whatever is slotted sits vertically centred in a row of the
@@ -60,7 +60,7 @@ const styles = css`
 	   input already; this carries that the rest of the way out. */
 	.control ::slotted(*) { min-width: 0; max-width: 100%; }
 
-	.description, .error { font-size: var(--font-size-small); line-height: 1.45; }
+	.description, .error { font-size: var(--font-size-sm); line-height: 1.45; }
 	.description { color: var(--text-secondary); }
 	.description ::slotted(*) { color: var(--text-secondary); }
 	.error { color: var(--status-danger); }
@@ -68,7 +68,7 @@ const styles = css`
 	/* Horizontal puts the label in its own column left of the control. The
 	   label band takes the control's height so the text centres on it, and
 	   the error and description line up under the control. */
-	:host([is-horizontal]) .field { grid-template-columns: max-content minmax(0, 1fr); column-gap: var(--space-base); align-items: start; }
+	:host([is-horizontal]) .field { grid-template-columns: max-content minmax(0, 1fr); column-gap: var(--space-4); align-items: start; }
 	:host([is-horizontal]) .header { grid-column: 1; grid-row: 1; height: var(--z-field-control-height); }
 	:host([is-horizontal]) .control { grid-column: 2; grid-row: 1; }
 	:host([is-horizontal]) .error, :host([is-horizontal]) .description { grid-column: 2; }

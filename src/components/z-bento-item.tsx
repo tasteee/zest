@@ -26,10 +26,10 @@ const styles = css`
 		border-radius: var(--radius-lg);
 		border: 1px solid var(--border-default);
 		background: var(--surface-default);
-		padding: var(--spacing-6);
+		padding: var(--space-6);
 		display: flex;
 		flex-direction: column;
-		gap: var(--spacing-2);
+		gap: var(--space-2);
 		transition: border-color var(--motion-fast) var(--ease-enter);
 	}
 
@@ -78,7 +78,7 @@ const styles = css`
 		flex: 1;
 		display: flex;
 		flex-direction: column;
-		gap: var(--spacing-1);
+		gap: var(--space-1);
 		justify-content: flex-end;
 	}
 
@@ -88,7 +88,7 @@ const styles = css`
 		display: inline-flex;
 		align-items: center;
 		gap: 0.25rem;
-		font-size: var(--font-size-small);
+		font-size: var(--font-size-sm);
 		font-weight: 600;
 		color: var(--text-primary);
 		text-decoration: none;

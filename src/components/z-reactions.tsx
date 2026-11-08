@@ -34,7 +34,7 @@ const styles = css`
 		border-radius: 999px;
 		padding: 0.1rem 0.5rem;
 		font-family: inherit;
-		font-size: 0.8125rem;
+		font-size: var(--font-size-sm);
 		line-height: 1.4;
 		color: var(--text-primary);
 		cursor: pointer;
@@ -50,7 +50,7 @@ const styles = css`
 		border-color: color-mix(in oklch, var(--accent-primary) 45%, transparent);
 	}
 	.emoji {
-		font-size: 0.9375rem;
+		font-size: var(--font-size-md);
 	}
 	.count {
 		font-variant-numeric: tabular-nums;

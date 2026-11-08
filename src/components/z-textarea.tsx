@@ -39,15 +39,15 @@ const styles = css`
 	/* sizes — same scale as z-input */
 	.field.is-sm {
 		padding: 0.5rem 0.75rem;
-		font-size: var(--control-font-size-sm);
+		font-size: var(--font-size-sm);
 	}
 	.field.is-md {
 		padding: 0.75rem 0.875rem;
-		font-size: var(--control-font-size-md);
+		font-size: var(--font-size-sm);
 	}
 	.field.is-lg {
 		padding: 0.875rem 1rem;
-		font-size: var(--control-font-size-lg);
+		font-size: var(--font-size-md);
 	}
 
 	:host([tone='secondary']) .field {

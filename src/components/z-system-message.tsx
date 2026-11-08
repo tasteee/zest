@@ -12,13 +12,13 @@ const styles = css`
 	:host {
 		display: flex;
 		justify-content: center;
-		margin: var(--space-xs) 0;
+		margin: var(--space-1) 0;
 	}
 	:host([is-hidden]) {
 		display: none;
 	}
 	.pill {
-		font-size: 0.75rem;
+		font-size: var(--font-size-xs);
 		color: var(--text-secondary);
 		background: color-mix(in oklch, var(--text-primary) 6%, transparent);
 		padding: 0.25rem 0.625rem;

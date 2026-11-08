@@ -47,7 +47,7 @@ const styles = css`
 		min-width: 0;
 	}
 	.name {
-		font-size: 0.75rem;
+		font-size: var(--font-size-xs);
 		font-weight: 600;
 		color: var(--bar);
 		white-space: nowrap;
@@ -55,7 +55,7 @@ const styles = css`
 		text-overflow: ellipsis;
 	}
 	.text {
-		font-size: 0.8125rem;
+		font-size: var(--font-size-sm);
 		color: var(--text-secondary);
 		display: -webkit-box;
 		-webkit-line-clamp: 2;

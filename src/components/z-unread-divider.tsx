@@ -12,8 +12,8 @@ const styles = css`
 	:host {
 		display: flex;
 		align-items: center;
-		gap: var(--space-sm);
-		margin: var(--space-sm) 0;
+		gap: var(--space-2);
+		margin: var(--space-2) 0;
 		--tone: var(--accent-primary);
 	}
 	:host([tone='tertiary']) {
@@ -28,7 +28,7 @@ const styles = css`
 		background: color-mix(in oklch, var(--tone) 45%, transparent);
 	}
 	.label {
-		font-size: 0.6875rem;
+		font-size: var(--font-size-2xs);
 		font-weight: 700;
 		letter-spacing: 0.04em;
 		text-transform: uppercase;

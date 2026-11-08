@@ -99,7 +99,7 @@ const gutterIconStyles = css`
 		border-radius: 999px;
 		background: var(--status-warning);
 		color: var(--surface-page);
-		font-size: 0.6rem;
+		font-size: var(--font-size-2xs);
 		font-weight: 700;
 		line-height: 0.9rem;
 		text-align: center;
@@ -186,7 +186,7 @@ const panelStyles = css`
 		justify-content: space-between;
 		padding: 0.75rem 1rem;
 		border-bottom: 1px solid var(--border-default);
-		font-size: var(--font-size-small);
+		font-size: var(--font-size-sm);
 		font-weight: 600;
 		color: var(--text-primary);
 	}
@@ -227,12 +227,12 @@ const panelStyles = css`
 	.message .meta {
 		display: flex;
 		gap: 0.375rem;
-		font-size: var(--font-size-caption);
+		font-size: var(--font-size-xs);
 		color: var(--text-secondary);
 	}
 
 	.message .text {
-		font-size: var(--font-size-small);
+		font-size: var(--font-size-sm);
 		color: var(--text-primary);
 	}
 
@@ -252,7 +252,7 @@ const panelStyles = css`
 		padding: 0.375rem 0.5rem;
 		color: var(--text-primary);
 		font-family: inherit;
-		font-size: var(--font-size-small);
+		font-size: var(--font-size-sm);
 	}
 
 	.resolve {
@@ -264,7 +264,7 @@ const panelStyles = css`
 		border-radius: var(--radius-sm);
 		color: var(--text-primary);
 		font-family: inherit;
-		font-size: var(--font-size-caption);
+		font-size: var(--font-size-xs);
 		cursor: pointer;
 	}
 

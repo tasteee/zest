@@ -34,7 +34,7 @@ const styles = css`
 		--tooltip-edge: color-mix(in srgb, var(--text-primary) 78%, var(--surface-page));
 		padding: 0.4375rem 0.625rem;
 		max-width: 16rem;
-		font-size: var(--font-size-caption);
+		font-size: var(--font-size-xs);
 		font-weight: 500;
 		line-height: 1.35;
 		pointer-events: none;

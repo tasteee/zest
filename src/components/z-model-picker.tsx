@@ -28,7 +28,7 @@ const styles = css`
 		border-radius: var(--radius-md);
 		padding: 0.35rem 0.6rem;
 		font-family: inherit;
-		font-size: 0.8125rem;
+		font-size: var(--font-size-sm);
 		font-weight: 500;
 		color: var(--text-primary);
 		cursor: pointer;
@@ -106,11 +106,11 @@ const styles = css`
 		gap: 1px;
 	}
 	.name {
-		font-size: 0.8125rem;
+		font-size: var(--font-size-sm);
 		font-weight: 600;
 	}
 	.desc {
-		font-size: 0.6875rem;
+		font-size: var(--font-size-2xs);
 		color: var(--text-secondary);
 	}
 `

@@ -49,12 +49,12 @@ const styles = css`
 	.header {
 		display: flex;
 		align-items: center;
-		gap: var(--space-sm);
+		gap: var(--space-2);
 		margin-bottom: 0.5rem;
 	}
 
 	.label {
-		font-size: var(--font-size-small);
+		font-size: var(--font-size-sm);
 		font-weight: var(--font-weight-medium);
 		color: var(--text-primary);
 		line-height: 1.2;
@@ -66,7 +66,7 @@ const styles = css`
 		gap: 0.375rem;
 		/* margin-left keeps the value flush-right even when there's no label. */
 		margin-inline-start: auto;
-		font-size: var(--font-size-caption);
+		font-size: var(--font-size-xs);
 		font-weight: var(--font-weight-semibold);
 		font-variant-numeric: tabular-nums;
 		background: color-mix(in oklch, var(--text-secondary) 12%, transparent);

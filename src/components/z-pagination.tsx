@@ -47,7 +47,7 @@ const styles = css`
 		background: transparent;
 		color: var(--text-primary);
 		font-family: inherit;
-		font-size: 0.875rem;
+		font-size: var(--font-size-sm);
 		font-weight: 500;
 		cursor: pointer;
 		transition:

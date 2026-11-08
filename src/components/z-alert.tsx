@@ -41,7 +41,7 @@ const styles = css`
 		display: flex;
 		gap: 0.75rem;
 		box-sizing: border-box;
-		padding: var(--space-md) var(--space-base);
+		padding: var(--space-3) var(--space-4);
 		/* srgb: oklch would drift the hue when mixing the chromatic alert colour
 		   against the hue-carrying --border-default. */
 		border: 1px solid color-mix(in srgb, var(--alert-color) 40%, var(--border-default));
@@ -79,7 +79,7 @@ const styles = css`
 
 	.title {
 		margin: 0;
-		font-size: var(--font-size-small);
+		font-size: var(--font-size-sm);
 		font-weight: 600;
 		line-height: 1.4;
 		color: var(--text-primary);
@@ -102,8 +102,8 @@ const styles = css`
 	}
 
 	.body {
-		font-size: var(--font-size-small);
-		line-height: var(--line-height-body);
+		font-size: var(--font-size-sm);
+		line-height: var(--line-height-normal);
 		color: var(--text-secondary);
 	}
 

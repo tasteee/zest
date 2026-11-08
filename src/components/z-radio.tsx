@@ -23,7 +23,7 @@ const styles = css`
 		gap: 0.625rem;
 		cursor: pointer;
 		font-family: inherit;
-		font-size: var(--font-size-small);
+		font-size: var(--font-size-sm);
 		color: var(--text-primary);
 		user-select: none;
 		--tone: var(--z-radio-group-accent, var(--accent-primary));

@@ -26,9 +26,9 @@ const styles = css`
 	:host([tone='secondary']) { --tone: var(--accent-secondary); }
 	:host([tone='tertiary']) { --tone: var(--accent-tertiary); }
 	.field { display: inline-flex; align-items: stretch; width: 100%; box-sizing: border-box; min-width: 0; background: transparent; border: 1px solid var(--border-default); border-radius: var(--radius-md); color: var(--text-primary); font-family: inherit; overflow: hidden; transition: border-color var(--motion-fast) var(--ease-enter), background-color var(--motion-fast) var(--ease-enter); }
-	.field.is-sm { height: var(--control-height-sm); font-size: var(--control-font-size-sm); }
-	.field.is-md { height: var(--control-height-md); font-size: var(--control-font-size-md); }
-	.field.is-lg { height: var(--control-height-lg); font-size: var(--control-font-size-lg); }
+	.field.is-sm { height: var(--control-height-sm); font-size: var(--font-size-sm); }
+	.field.is-md { height: var(--control-height-md); font-size: var(--font-size-sm); }
+	.field.is-lg { height: var(--control-height-lg); font-size: var(--font-size-md); }
 	.field:hover { border-color: color-mix(in oklch, var(--text-primary) 30%, transparent); }
 	.field.is-focused { border-color: var(--tone); background: color-mix(in oklch, var(--tone) 5%, transparent); }
 	.field.is-invalid { border-color: var(--status-danger); --tone: var(--status-danger); }

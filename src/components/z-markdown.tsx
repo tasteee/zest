@@ -26,7 +26,7 @@ const styles = css`
     /* inherit so a bubble (or any container) drives the text color; falls back
 		   to --text-primary when used standalone on the page background. */
     color: inherit;
-    font-size: 0.9375rem;
+    font-size: var(--font-size-md);
     line-height: 1.6;
     overflow-wrap: anywhere;
   }
@@ -118,11 +118,11 @@ const styles = css`
 
   z-code-block {
     display: block;
-    margin: var(--spacing-4) 0 var(--spacing-4) 0;
+    margin: var(--space-4) 0 var(--space-4) 0;
   }
 
   z-callout {
-    margin: var(--spacing-8) 0 var(--spacing-8) 0;
+    margin: var(--space-8) 0 var(--space-8) 0;
   }
 
   hr {

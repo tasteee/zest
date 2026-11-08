@@ -26,7 +26,7 @@ const styles = css`
 	.row {
 		display: flex;
 		align-items: flex-end;
-		gap: var(--space-sm);
+		gap: var(--space-2);
 		padding: 0.125rem 0;
 	}
 	:host([side='end']) .row {
@@ -53,13 +53,13 @@ const styles = css`
 	}
 
 	.name {
-		font-size: 0.75rem;
+		font-size: var(--font-size-xs);
 		font-weight: 600;
 		color: var(--text-secondary);
 		margin: 0 0.5rem 2px;
 	}
 	.meta {
-		font-size: 0.6875rem;
+		font-size: var(--font-size-2xs);
 		color: var(--text-secondary);
 		margin: 2px 0.5rem 0;
 	}

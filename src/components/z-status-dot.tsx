@@ -18,7 +18,7 @@ const styles = css`
 	:host {
 		display: inline-flex;
 		align-items: center;
-		gap: var(--space-xs);
+		gap: var(--space-1);
 		vertical-align: middle;
 		--dot: 0.5rem;
 		--color: var(--text-secondary);
@@ -78,7 +78,7 @@ const styles = css`
 	}
 
 	.label {
-		font-size: 0.8125rem;
+		font-size: var(--font-size-sm);
 		color: var(--text-secondary);
 		line-height: 1;
 	}

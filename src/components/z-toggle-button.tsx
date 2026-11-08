@@ -68,7 +68,7 @@ const styles = css`
 		--toggle-height: 1.75rem;
 		--toggle-padding-inline: 0.625rem;
 		--toggle-min-width: 1.75rem;
-		--toggle-font-size: 0.75rem;
+		--toggle-font-size: var(--font-size-xs);
 		--toggle-icon-size: 0.75rem;
 	}
 
@@ -76,7 +76,7 @@ const styles = css`
 		--toggle-height: var(--control-height-sm);
 		--toggle-padding-inline: 0.75rem;
 		--toggle-min-width: 2rem;
-		--toggle-font-size: 0.8125rem;
+		--toggle-font-size: var(--font-size-sm);
 		--toggle-icon-size: 0.875rem;
 	}
 
@@ -84,7 +84,7 @@ const styles = css`
 		--toggle-height: var(--control-height-md);
 		--toggle-padding-inline: 1rem;
 		--toggle-min-width: 2.5rem;
-		--toggle-font-size: 0.875rem;
+		--toggle-font-size: var(--font-size-sm);
 		--toggle-icon-size: 1rem;
 	}
 
@@ -92,7 +92,7 @@ const styles = css`
 		--toggle-height: var(--control-height-lg);
 		--toggle-padding-inline: 1.25rem;
 		--toggle-min-width: 3rem;
-		--toggle-font-size: 1rem;
+		--toggle-font-size: var(--font-size-md);
 		--toggle-icon-size: 1.125rem;
 	}
 

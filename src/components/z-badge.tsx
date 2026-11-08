@@ -64,12 +64,12 @@ const styles = css`
 
 	/* sizes */
 	.badge.is-sm {
-		font-size: 0.6875rem;
+		font-size: var(--font-size-2xs);
 		padding: 0.25rem 0.5rem;
 		letter-spacing: 0.01em;
 	}
 	.badge.is-md {
-		font-size: 0.75rem;
+		font-size: var(--font-size-xs);
 		padding: 0.3125rem 0.625rem;
 	}
 
@@ -103,7 +103,7 @@ const styles = css`
 		padding: 0.25rem 0.375rem;
 		text-transform: uppercase;
 		letter-spacing: 0.1em;
-		font-size: 0.6875rem;
+		font-size: var(--font-size-2xs);
 		color: var(--tone);
 		gap: 0.375rem;
 	}
@@ -134,7 +134,7 @@ const styles = css`
 	.badge.is-selected {
 		background: color-mix(in oklch, var(--tone) 16%, transparent);
 		border-color: color-mix(in oklch, var(--tone) 50%, transparent);
-		color: color-mix(in oklch, var(--tone) 85%, white);
+		color: color-mix(in oklch, var(--tone) 85%, var(--text-strong));
 	}
 	.badge.is-primary.is-selected {
 		color: var(--text-primary);

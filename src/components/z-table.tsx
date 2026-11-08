@@ -39,7 +39,7 @@ const styles = css`
 	thead th {
 		text-align: start;
 		padding: 0.875rem 1.125rem;
-		font-size: 0.6875rem;
+		font-size: var(--font-size-2xs);
 		font-weight: 600;
 		letter-spacing: 0.1em;
 		text-transform: uppercase;
@@ -50,7 +50,7 @@ const styles = css`
 
 	tbody td {
 		padding: 0.9375rem 1.125rem;
-		font-size: 0.875rem;
+		font-size: var(--font-size-sm);
 		color: var(--text-primary);
 		border-bottom: 1px solid var(--border-default);
 		vertical-align: middle;
@@ -83,7 +83,7 @@ const styles = css`
 	}
 	.is-mono {
 		font-family: var(--font-mono);
-		font-size: 0.8125rem;
+		font-size: var(--font-size-sm);
 	}
 
 	tbody tr:focus-visible {
@@ -95,7 +95,7 @@ const styles = css`
 		padding: 2.5rem;
 		text-align: center;
 		color: var(--text-secondary);
-		font-size: 0.875rem;
+		font-size: var(--font-size-sm);
 	}
 `
 

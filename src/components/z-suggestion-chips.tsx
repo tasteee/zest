@@ -28,7 +28,7 @@ const styles = css`
 		border-radius: 999px;
 		padding: 0.35rem 0.75rem;
 		font-family: inherit;
-		font-size: 0.8125rem;
+		font-size: var(--font-size-sm);
 		color: var(--text-primary);
 		cursor: pointer;
 		text-align: start;

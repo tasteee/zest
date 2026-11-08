@@ -68,7 +68,7 @@ const styles = css`
 		background: transparent;
 		color: var(--text-primary);
 		font-family: inherit;
-		font-size: 0.875rem;
+		font-size: var(--font-size-sm);
 		padding: 0.6rem 0.75rem;
 		outline: none;
 	}
@@ -87,7 +87,7 @@ const styles = css`
 		background: transparent;
 		border-radius: var(--radius-sm);
 		padding: 0.25rem 0;
-		font-size: 1rem;
+		font-size: var(--font-size-md);
 		cursor: pointer;
 		opacity: 0.65;
 		transition:
@@ -113,7 +113,7 @@ const styles = css`
 		border: none;
 		background: transparent;
 		border-radius: var(--radius-sm);
-		font-size: 1.25rem;
+		font-size: var(--font-size-xl);
 		line-height: 1;
 		padding: 0.3rem 0;
 		cursor: pointer;
@@ -129,7 +129,7 @@ const styles = css`
 		grid-column: 1 / -1;
 		text-align: center;
 		color: var(--text-secondary);
-		font-size: 0.8125rem;
+		font-size: var(--font-size-sm);
 		padding: 1.5rem 0;
 	}
 `

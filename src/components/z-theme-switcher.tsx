@@ -40,7 +40,7 @@ const styles = css`
 		-webkit-user-select: none;
 		--switcher-height: var(--control-height-md);
 		--switcher-padding-inline: 0.75rem;
-		--switcher-font-size: var(--font-size-2);
+		--switcher-font-size: var(--font-size-sm);
 		--switcher-icon-size: 0.9375rem;
 		--switcher-gap: 0.4375rem;
 	}
@@ -52,7 +52,7 @@ const styles = css`
 	:host([size='sm']) {
 		--switcher-height: var(--control-height-sm);
 		--switcher-padding-inline: 0.5625rem;
-		--switcher-font-size: var(--font-size-1);
+		--switcher-font-size: var(--font-size-xs);
 		--switcher-icon-size: 0.8125rem;
 		--switcher-gap: 0.375rem;
 	}
@@ -60,7 +60,7 @@ const styles = css`
 	:host([size='lg']) {
 		--switcher-height: var(--control-height-lg);
 		--switcher-padding-inline: 1rem;
-		--switcher-font-size: var(--font-size-3);
+		--switcher-font-size: var(--font-size-md);
 		--switcher-icon-size: 1.125rem;
 		--switcher-gap: 0.5rem;
 	}

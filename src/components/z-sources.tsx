@@ -29,7 +29,7 @@ const styles = css`
 		display: none;
 	}
 	.label {
-		font-size: 0.6875rem;
+		font-size: var(--font-size-2xs);
 		font-weight: 700;
 		letter-spacing: 0.04em;
 		text-transform: uppercase;
@@ -80,13 +80,13 @@ const styles = css`
 		border-radius: 0.35rem;
 		background: color-mix(in oklch, var(--accent-primary) 16%, transparent);
 		color: var(--text-primary);
-		font-size: 0.6875rem;
+		font-size: var(--font-size-2xs);
 		font-weight: 700;
 	}
 	.title {
 		flex: 1;
 		min-width: 0;
-		font-size: 0.8125rem;
+		font-size: var(--font-size-sm);
 		font-weight: 600;
 		white-space: nowrap;
 		overflow: hidden;
@@ -94,12 +94,12 @@ const styles = css`
 	}
 	.domain {
 		flex: 0 0 auto;
-		font-size: 0.6875rem;
+		font-size: var(--font-size-2xs);
 		color: var(--text-secondary);
 	}
 	.snippet {
 		margin-top: 0.25rem;
-		font-size: 0.75rem;
+		font-size: var(--font-size-xs);
 		color: var(--text-secondary);
 		display: -webkit-box;
 		-webkit-line-clamp: 2;

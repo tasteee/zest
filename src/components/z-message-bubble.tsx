@@ -28,7 +28,7 @@ const styles = css`
 		max-width: 100%;
 		box-sizing: border-box;
 		padding: 0.5rem 0.75rem;
-		font-size: 0.9375rem;
+		font-size: var(--font-size-md);
 		line-height: 1.4;
 		border-radius: var(--r);
 		overflow-wrap: anywhere;

@@ -46,7 +46,7 @@ const styles = css`
 		border-radius: var(--radius-md);
 		color: var(--text-primary);
 		font-family: var(--font-mono);
-		font-size: var(--font-size-h3);
+		font-size: var(--font-size-2xl);
 		font-weight: 600;
 		caret-color: var(--tone);
 		transition:
@@ -61,12 +61,12 @@ const styles = css`
 	.cell.is-sm {
 		width: 2.25rem;
 		height: 2.75rem;
-		font-size: var(--font-size-h4);
+		font-size: var(--font-size-xl);
 	}
 	.cell.is-lg {
 		width: 3.25rem;
 		height: 3.75rem;
-		font-size: var(--font-size-h2);
+		font-size: var(--font-size-3xl);
 	}
 
 	.cell:hover {

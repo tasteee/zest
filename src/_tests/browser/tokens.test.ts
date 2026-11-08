@@ -58,16 +58,15 @@ describe('scale inputs', () => {
 
 	it('a [data-zest-scope] container re-derives the type scale from --base-font-size', () => {
 		const scoped = add('<div data-zest-scope style="--base-font-size: 8px"></div>')
-		expect(probe(scoped, 'font-size: var(--font-size-3)').fontSize).toBe('8px')
-		expect(probe(scoped, 'font-size: var(--font-size-body)').fontSize).toBe('8px')
-		expect(probe(scoped, 'font-size: var(--control-font-size-lg)').fontSize).toBe('8px')
+		expect(probe(scoped, 'font-size: var(--font-size-md)').fontSize).toBe('8px')
+		expect(probe(scoped, 'font-size: var(--font-size-xl)').fontSize).toBe('10px')
 	})
 
-	it('named and numbered type sizes agree at the default size', () => {
+	it('the type scale is rem-based at the default size', () => {
 		const sized = (token: string) => probe(root, `font-size: var(${token})`).fontSize
-		expect(sized('--font-size-body')).toBe(sized('--font-size-3'))
-		expect(sized('--font-size-body')).toBe('16px')
-		expect(sized('--font-size-small')).toBe('14px')
+		expect(sized('--font-size-sm')).toBe('14px')
+		expect(sized('--font-size-md')).toBe('16px')
+		expect(sized('--font-size-xl')).toBe('20px')
 	})
 })
 
@@ -75,7 +74,7 @@ describe('theme boundaries', () => {
 	it('keep scale values set on :root', () => {
 		root.style.setProperty('--base-spacing', '0.5rem')
 		const themed = add('<section data-theme="light"></section>')
-		expect(probe(themed, 'padding-top: var(--spacing-1)').paddingTop).toBe('8px')
+		expect(probe(themed, 'padding-top: var(--space-1)').paddingTop).toBe('8px')
 	})
 
 	it('a light region swaps the palette and its role tokens', () => {
