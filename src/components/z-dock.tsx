@@ -26,7 +26,7 @@ const styles = css`
 		bottom: 1.25rem;
 		left: 50%;
 		transform: translateX(-50%);
-		z-index: 999;
+		z-index: var(--z-overlay);
 	}
 
 	.dock {
@@ -36,11 +36,11 @@ const styles = css`
 		box-sizing: border-box;
 		padding: 0.6rem;
 		border-radius: var(--radius-xl);
-		/* Mixes the flat ramp colour rather than --popover: in the light theme
-		   --popover carries a haze layer in front of its colour, which is a
+		/* Mixes the flat ramp colour rather than --surface-overlay: in the light theme
+		   --surface-overlay carries a haze layer in front of its colour, which is a
 		   background shorthand value, not something color-mix can take. */
-		background: color-mix(in oklch, var(--color-neutral-1) 85%, transparent);
-		border: 1px solid var(--border);
+		background: color-mix(in oklch, var(--surface-default) 85%, transparent);
+		border: 1px solid var(--border-default);
 		backdrop-filter: blur(12px);
 		-webkit-backdrop-filter: blur(12px);
 	}

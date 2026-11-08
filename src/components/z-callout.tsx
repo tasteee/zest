@@ -20,27 +20,27 @@ import { useLocale } from '../shared/locale'
 const styles = css`
 	:host {
 		display: block;
-		--callout-color: var(--muted-foreground);
+		--callout-color: var(--text-secondary);
 		/* Opaque twin of the callout fill (below), used behind the "Show more"
 		   fade. The fill itself keeps a transparent base so the block blends over
-		   any surface; the fade approximates the default --background surface. */
-		--callout-fade: color-mix(in oklab, var(--callout-color) 7%, var(--background));
+		   any surface; the fade approximates the default --surface-page surface. */
+		--callout-fade: color-mix(in oklab, var(--callout-color) 7%, var(--surface-page));
 	}
 
 	:host([tone='secondary']) {
-		--callout-color: var(--purple);
+		--callout-color: var(--accent-secondary);
 	}
 	:host([tone='success']) {
-		--callout-color: var(--success);
+		--callout-color: var(--status-success);
 	}
 	:host([tone='tertiary']) {
 		--callout-color: var(--accent-tertiary);
 	}
 	:host([tone='warning']) {
-		--callout-color: var(--warning);
+		--callout-color: var(--status-warning);
 	}
 	:host([tone='danger']) {
-		--callout-color: var(--destructive);
+		--callout-color: var(--status-danger);
 	}
 
 	:host([is-hidden]) {
@@ -53,12 +53,12 @@ const styles = css`
 		box-sizing: border-box;
 		padding: var(--space-md) var(--space-base);
 		/* srgb: oklch would drift the chromatic accent when mixed against the
-		   hue-carrying --border (matches z-alert). */
-		border: 1px solid color-mix(in srgb, var(--callout-color) 25%, var(--border));
+		   hue-carrying --border-default (matches z-alert). */
+		border: 1px solid color-mix(in srgb, var(--callout-color) 25%, var(--border-default));
 		border-inline-start: 3px solid var(--callout-color);
 		border-radius: var(--radius-md);
 		background: color-mix(in oklch, var(--callout-color) 7%, transparent);
-		color: var(--foreground);
+		color: var(--text-primary);
 	}
 
 	.icon {
@@ -101,7 +101,7 @@ const styles = css`
 		position: relative;
 		font-size: var(--font-size-small);
 		line-height: var(--line-height-body);
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 	}
 
 	/* Collapsed: clamp the slotted copy to two lines. The <slot> defaults to
@@ -130,7 +130,7 @@ const styles = css`
 	}
 
 	.toggle:focus-visible {
-		outline: 3px solid var(--focus-ring);
+		outline: 3px solid var(--border-focus);
 		outline-offset: 2px;
 		border-radius: var(--radius-sm);
 	}

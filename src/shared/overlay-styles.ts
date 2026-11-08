@@ -3,7 +3,7 @@ import { css } from 'atomico'
 /*
  * Shared chrome for floating overlays. Two reusable sheets:
  *
- *  - floatingSurfaceStyles: the bordered, shadow-free panel used by
+ *  - floatingSurfaceStyles: the bordered overlay panel used by
  *    z-popover and z-hover-card. Lives in the top layer via [popover], is
  *    fixed-positioned (coords come from shared/overlay.ts), and fades/rises in
  *    with a short, side-aware transition.
@@ -11,8 +11,9 @@ import { css } from 'atomico'
  *  - dialogSurfaceStyles: the modal <dialog> chrome shared by z-dialog and
  *    z-alert-dialog, centered panel, dimmed backdrop, same border language.
  *
- * Both deliberately keep the "borders over shadows" rule: depth reads through a
- * hairline border and a backdrop, never a drop shadow.
+ * Both are the only elevated surfaces zest has: a hairline border on
+ * surface-overlay, plus --shadow-overlay for popovers and --shadow-modal for
+ * dialogs. Resting UI never takes a shadow.
  */
 
 export const floatingSurfaceStyles = css`
@@ -20,15 +21,15 @@ export const floatingSurfaceStyles = css`
 		/* the host hugs its trigger and acts as the positioning anchor, it must
 		   have a box (not display:contents) so getBoundingClientRect is real. */
 		display: inline-flex;
-		--accent: var(--primary);
+		--tone: var(--accent-primary);
 	}
 
 	:host([tone='secondary']) {
-		--accent: var(--purple);
+		--tone: var(--accent-secondary);
 	}
 
 	:host([tone='tertiary']) {
-		--accent: var(--pink);
+		--tone: var(--accent-tertiary);
 	}
 
 	:host([is-hidden]) {
@@ -41,15 +42,12 @@ export const floatingSurfaceStyles = css`
 		top: 0;
 		/* override the UA [popover] { margin: auto } that would re-center it */
 		margin: 0;
-		z-index: 50;
+		z-index: var(--z-menu);
 		box-sizing: border-box;
-		background: var(--popover);
-		color: var(--popover-foreground);
-		/* Overlays float clear of the page, so they take the overlay stack —
-		   the one elevation that reads as "not attached to anything". Inert in
-		   the flat themes, where these panels stay borders on a fill. */
-		box-shadow: var(--elevation-overlay);
-		border: 1px solid var(--border);
+		background: var(--surface-overlay);
+		color: var(--text-primary);
+		box-shadow: var(--shadow-overlay);
+		border: 1px solid var(--border-default);
 		border-radius: var(--radius-md);
 		padding: var(--z-overlay-padding, 1rem);
 		max-width: var(--z-overlay-max-width, 20rem);
@@ -106,19 +104,19 @@ export const floatingSurfaceStyles = css`
 export const dialogSurfaceStyles = css`
 	:host {
 		display: contents;
-		--accent: var(--primary);
+		--tone: var(--accent-primary);
 	}
 
 	:host([tone='secondary']) {
-		--accent: var(--purple);
+		--tone: var(--accent-secondary);
 	}
 
 	:host([tone='tertiary']) {
-		--accent: var(--pink);
+		--tone: var(--accent-tertiary);
 	}
 
 	:host([tone='danger']) {
-		--accent: var(--destructive);
+		--tone: var(--status-danger);
 	}
 
 	/* Everything except display lives on the base rule rather than on [open],
@@ -133,17 +131,13 @@ export const dialogSurfaceStyles = css`
 		width: min(var(--z-dialog-width, 30rem), calc(100vw - 2rem));
 		max-height: calc(100vh - 4rem);
 		padding: 0;
-		background: var(--color-neutral-2);
-		color: var(--popover-foreground);
-		border: 1px solid var(--border);
+		background: var(--surface-overlay);
+		color: var(--text-primary);
+		border: 1px solid var(--border-default);
 		border-radius: var(--radius-lg);
 		overflow: hidden;
 		flex-direction: column;
-		box-shadow:
-			0 1px 1px color-mix(in oklch, black 28%, transparent),
-			0 6px 14px -8px color-mix(in oklch, black 42%, transparent),
-			0 28px 64px -36px color-mix(in oklch, black 48%, transparent),
-			0 72px 180px -112px color-mix(in oklch, var(--accent) 20%, transparent);
+		box-shadow: var(--shadow-modal);
 	}
 
 	/* Motion (shared/modal.ts drives data-state). The resting, un-flagged state
@@ -171,7 +165,7 @@ export const dialogSurfaceStyles = css`
 	}
 
 	.dialog::backdrop {
-		background: color-mix(in oklch, var(--background) 55%, transparent);
+		background: var(--surface-scrim);
 		backdrop-filter: blur(3px);
 		opacity: 0;
 		transition: opacity var(--motion-exit-base) var(--ease-exit);
@@ -213,12 +207,12 @@ export const dialogSurfaceStyles = css`
 		font-size: var(--font-size-h4);
 		font-weight: 600;
 		line-height: var(--line-height-h4);
-		color: var(--foreground);
+		color: var(--text-primary);
 	}
 
 	.description {
 		margin: 0;
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 		font-size: var(--font-size-small);
 		line-height: var(--line-height-body);
 	}
@@ -234,7 +228,7 @@ export const dialogSurfaceStyles = css`
 		background: transparent;
 		border: 0;
 		border-radius: var(--radius-sm);
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 		cursor: pointer;
 		transition:
 			color var(--motion-fast) var(--ease-enter),
@@ -242,12 +236,12 @@ export const dialogSurfaceStyles = css`
 	}
 
 	.close:hover {
-		color: var(--foreground);
-		background: color-mix(in oklch, var(--foreground) 8%, transparent);
+		color: var(--text-primary);
+		background: color-mix(in oklch, var(--text-primary) 8%, transparent);
 	}
 
 	.close:focus-visible {
-		outline: 3px solid var(--focus-ring);
+		outline: 3px solid var(--border-focus);
 		outline-offset: 2px;
 	}
 

@@ -18,8 +18,8 @@
 
 			body {
 				margin: 0;
-				background: var(--background);
-				color: var(--foreground);
+				background: var(--surface-page);
+				color: var(--text-primary);
 				font-family: var(--font-sans);
 				-webkit-font-smoothing: antialiased;
 				text-rendering: optimizeLegibility;
@@ -34,11 +34,11 @@
 				background: transparent;
 			}
 			::-webkit-scrollbar-thumb {
-				background: var(--color-neutral-3);
+				background: var(--border-default);
 				border-radius: 4px;
 			}
 			::-webkit-scrollbar-thumb:hover {
-				background: var(--color-neutral-4);
+				background: var(--border-strong);
 			}
 
 			/* ---------------------------------------------------------------
@@ -53,9 +53,9 @@
 				justify-content: space-between;
 				height: 4.5rem;
 				padding: 0 clamp(1.5rem, 5vw, 4rem);
-				background: color-mix(in oklch, var(--background) 82%, transparent);
+				background: color-mix(in oklch, var(--surface-page) 82%, transparent);
 				backdrop-filter: blur(14px);
-				border-bottom: 1px solid var(--border);
+				border-bottom: 1px solid var(--border-default);
 			}
 
 			.brand {
@@ -64,14 +64,14 @@
 				gap: 0.625rem;
 				font-weight: 600;
 				font-size: 1.0625rem;
-				color: var(--primary);
+				color: var(--text-primary);
 				letter-spacing: -0.01em;
 			}
 			.brand .dot {
 				width: 0.5rem;
 				height: 0.5rem;
 				border-radius: 999px;
-				background: var(--purple);
+				background: var(--accent-secondary);
 			}
 
 			.nav-links {
@@ -79,24 +79,24 @@
 				gap: clamp(1rem, 2.5vw, 2.25rem);
 			}
 			.nav-links a {
-				color: var(--muted-foreground);
+				color: var(--text-secondary);
 				text-decoration: none;
 				font-size: 0.9375rem;
 				font-weight: 500;
 				transition: color 0.14s ease;
 			}
 			.nav-links a:hover {
-				color: var(--foreground);
+				color: var(--text-primary);
 			}
 			.nav-links a.active {
-				color: var(--primary);
+				color: var(--text-primary);
 			}
 
 			.nav-tag {
 				font-size: 0.75rem;
 				font-weight: 700;
 				letter-spacing: 0.12em;
-				color: var(--pink);
+				color: var(--accent-tertiary);
 			}
 
 			@media (max-width: 760px) {
@@ -116,7 +116,7 @@
 
 			.hero {
 				padding: clamp(4rem, 9vw, 7.5rem) 0 clamp(3rem, 6vw, 5rem);
-				border-bottom: 1px solid var(--border);
+				border-bottom: 1px solid var(--border-default);
 			}
 			.eyebrow {
 				display: flex;
@@ -129,12 +129,12 @@
 				font-size: 0.8125rem;
 				font-weight: 500;
 				letter-spacing: 0.2em;
-				color: var(--pink);
+				color: var(--accent-tertiary);
 			}
 			.eyebrow .line {
 				width: 5rem;
 				height: 1px;
-				background: var(--border);
+				background: var(--border-default);
 			}
 			.hero h1 {
 				margin: 0;
@@ -142,17 +142,17 @@
 				line-height: 0.95;
 				font-weight: 700;
 				letter-spacing: -0.03em;
-				color: var(--primary);
+				color: var(--text-primary);
 			}
 			.hero .lede {
 				margin: 1.75rem 0 0;
 				font-size: clamp(1.125rem, 2.5vw, 1.5rem);
 				font-weight: 500;
-				color: var(--primary);
+				color: var(--text-primary);
 				letter-spacing: -0.01em;
 			}
 			.hero .lede .muted {
-				color: var(--muted-foreground);
+				color: var(--text-secondary);
 				font-weight: 400;
 			}
 
@@ -173,21 +173,21 @@
 				flex-shrink: 0;
 			}
 			.section-head .dot.purple {
-				background: var(--purple);
+				background: var(--accent-secondary);
 			}
 			.section-head .dot.pink {
-				background: var(--pink);
+				background: var(--accent-tertiary);
 			}
 			.section-head h2 {
 				margin: 0;
 				font-size: 1.5rem;
 				font-weight: 700;
 				letter-spacing: -0.02em;
-				color: var(--primary);
+				color: var(--text-primary);
 			}
 			.section-sub {
 				margin: 0 0 2rem 1.25rem;
-				color: var(--muted-foreground);
+				color: var(--text-secondary);
 				font-size: 0.9375rem;
 				max-width: 52ch;
 			}
@@ -207,16 +207,16 @@
 				font-family: var(--font-mono);
 				font-size: 0.9375rem;
 				font-weight: 500;
-				color: var(--foreground);
+				color: var(--text-primary);
 			}
 			.block-title .desc {
 				font-size: 0.8125rem;
-				color: var(--muted-foreground);
+				color: var(--text-secondary);
 			}
 
 			/* bordered specimen panel */
 			.panel {
-				border: 1px solid var(--border);
+				border: 1px solid var(--border-default);
 				border-radius: var(--radius-lg);
 				padding: clamp(1.5rem, 3vw, 2.25rem);
 			}
@@ -239,7 +239,7 @@
 				font-weight: 600;
 				letter-spacing: 0.14em;
 				text-transform: uppercase;
-				color: var(--muted-foreground);
+				color: var(--text-secondary);
 				margin-bottom: 1.25rem;
 			}
 
@@ -262,7 +262,7 @@
 				width: 5rem;
 				flex-shrink: 0;
 				font-size: 0.75rem;
-				color: var(--muted-foreground);
+				color: var(--text-secondary);
 				font-family: var(--font-mono);
 			}
 
@@ -274,7 +274,7 @@
 			.field > label {
 				font-size: 0.8125rem;
 				font-weight: 500;
-				color: var(--primary);
+				color: var(--text-primary);
 			}
 
 			/* status dot list (input states) */
@@ -288,7 +288,7 @@
 				align-items: center;
 				gap: 0.75rem;
 				font-size: 0.9375rem;
-				color: var(--foreground);
+				color: var(--text-primary);
 			}
 			.state-list .sd {
 				width: 0.75rem;
@@ -305,12 +305,12 @@
 			.fyi {
 				margin-top: 1rem;
 				font-size: 0.8125rem;
-				color: var(--muted-foreground);
+				color: var(--text-secondary);
 			}
 			.fyi code {
 				font-family: var(--font-mono);
-				color: var(--foreground);
-				background: var(--color-neutral-2);
+				color: var(--text-primary);
+				background: var(--surface-subtle);
 				padding: 0.1em 0.4em;
 				border-radius: 4px;
 				font-size: 0.95em;
@@ -319,11 +319,11 @@
 			footer {
 				margin-top: 7rem;
 				padding-top: 2rem;
-				border-top: 1px solid var(--border);
+				border-top: 1px solid var(--border-default);
 				display: flex;
 				justify-content: space-between;
 				align-items: center;
-				color: var(--muted-foreground);
+				color: var(--text-secondary);
 				font-size: 0.8125rem;
 			}
 		</style>
@@ -403,7 +403,7 @@
 							<z-heading size="xs" tag="h3">Project Alpha</z-heading>
 							<z-text size="sm" color="muted">Breaking conventions since day one. No rules, just results.</z-text>
 							<z-box direction="horizontal" aligns-y="center" gap="2" margin-top="1.5rem">
-								<span style="width: 1.5rem; height: 1.5rem; border-radius: 999px; background: var(--pink)"></span>
+								<span style="width: 1.5rem; height: 1.5rem; border-radius: 999px; background: var(--accent-tertiary)"></span>
 								<z-text size="sm" color="muted">@creator</z-text>
 							</z-box>
 						</z-card>
@@ -415,7 +415,7 @@
 							<z-heading size="xs" tag="h3">Campaign Beta</z-heading>
 							<z-text size="sm" color="muted">Still cooking. The best things take time to burn bright.</z-text>
 							<z-box direction="horizontal" aligns-y="center" gap="2" style="margin-top: 0.5rem">
-								<span style="width: 1.5rem; height: 1.5rem; border-radius: 999px; background: var(--purple)"></span>
+								<span style="width: 1.5rem; height: 1.5rem; border-radius: 999px; background: var(--accent-secondary)"></span>
 								<z-text size="sm" color="muted">@team</z-text>
 							</z-box>
 						</z-card>
@@ -623,11 +623,11 @@
 						<div class="panel">
 							<div class="micro">Input states</div>
 							<ul class="state-list">
-								<li><span class="sd" style="background: var(--muted-foreground)"></span> Default</li>
-								<li><span class="sd" style="background: var(--primary)"></span> Focused / Active (neutral)</li>
-								<li><span class="sd" style="background: var(--purple)"></span> Purple tone</li>
-								<li><span class="sd" style="background: var(--pink)"></span> Pink tone</li>
-								<li><span class="sd" style="background: var(--destructive)"></span> Error</li>
+								<li><span class="sd" style="background: var(--text-secondary)"></span> Default</li>
+								<li><span class="sd" style="background: var(--text-primary)"></span> Focused / Active (neutral)</li>
+								<li><span class="sd" style="background: var(--accent-secondary)"></span> Purple tone</li>
+								<li><span class="sd" style="background: var(--accent-tertiary)"></span> Pink tone</li>
+								<li><span class="sd" style="background: var(--status-danger)"></span> Error</li>
 							</ul>
 							<div class="field" style="margin-top: 1.5rem">
 								<z-input tone="secondary" placeholder="Purple focus tone"></z-input>
@@ -1130,9 +1130,9 @@
 									display: grid;
 									place-items: center;
 									height: 8rem;
-									border: 1px dashed var(--border);
+									border: 1px dashed var(--border-default);
 									border-radius: var(--radius-md);
-									color: var(--muted-foreground);
+									color: var(--text-secondary);
 									font-size: 0.875rem;
 								"
 							>
@@ -1201,7 +1201,7 @@
 								justify-content: center;
 								align-items: center;
 								border: 0;
-								background: color-mix(in oklch, var(--purple) 14%, transparent);
+								background: color-mix(in oklch, var(--accent-secondary) 14%, transparent);
 							"
 						>
 							<z-heading size="xs" tag="h3">Ship inward</z-heading>
@@ -1214,7 +1214,7 @@
 								justify-content: center;
 								align-items: center;
 								border: 0;
-								background: color-mix(in oklch, var(--pink) 14%, transparent);
+								background: color-mix(in oklch, var(--accent-tertiary) 14%, transparent);
 							"
 						>
 							<z-heading size="xs" tag="h3">Name it well</z-heading>
@@ -1227,7 +1227,7 @@
 								justify-content: center;
 								align-items: center;
 								border: 0;
-								background: color-mix(in oklch, var(--foreground) 8%, transparent);
+								background: color-mix(in oklch, var(--text-primary) 8%, transparent);
 							"
 						>
 							<z-heading size="xs" tag="h3">Document it</z-heading>

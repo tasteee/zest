@@ -47,8 +47,8 @@ const styles = css`
 	   mixed rows aligned even when a theme uses different font metrics. */
 	.header { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; height: var(--field-label-height); min-width: 0; }
 
-	.label { color: var(--foreground); font-size: var(--font-size-small); font-weight: 500; line-height: 1.25; letter-spacing: normal; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; user-select: none; -webkit-user-select: none; }
-	.required { color: var(--destructive); }
+	.label { color: var(--text-primary); font-size: var(--font-size-small); font-weight: 500; line-height: 1.25; letter-spacing: normal; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; user-select: none; -webkit-user-select: none; }
+	.required { color: var(--status-danger); }
 
 	/* The band. Whatever is slotted sits vertically centred in a row of the
 	   control height, which is what lets a switch and a select agree. */
@@ -61,9 +61,9 @@ const styles = css`
 	.control ::slotted(*) { min-width: 0; max-width: 100%; }
 
 	.description, .error { font-size: var(--font-size-small); line-height: 1.45; }
-	.description { color: var(--muted-foreground); }
-	.description ::slotted(*) { color: var(--muted-foreground); }
-	.error { color: var(--destructive); }
+	.description { color: var(--text-secondary); }
+	.description ::slotted(*) { color: var(--text-secondary); }
+	.error { color: var(--status-danger); }
 
 	/* Horizontal puts the label in its own column left of the control. The
 	   label band takes the control's height so the text centres on it, and

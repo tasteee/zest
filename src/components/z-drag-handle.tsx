@@ -36,7 +36,7 @@ const dragHandleStyles = css`
 		background: transparent;
 		border: 0;
 		border-radius: var(--radius-sm);
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 		cursor: grab;
 		transition:
 			color var(--motion-fast) var(--ease-enter),
@@ -44,8 +44,8 @@ const dragHandleStyles = css`
 	}
 
 	.grip:hover {
-		color: var(--foreground);
-		background: color-mix(in oklch, var(--foreground) 8%, transparent);
+		color: var(--text-primary);
+		background: color-mix(in oklch, var(--text-primary) 8%, transparent);
 	}
 
 	.grip:active {
@@ -72,10 +72,10 @@ const dragHandleStyles = css`
 		left: -1000px;
 		max-width: 16rem;
 		padding: 0.5rem 0.75rem;
-		background: var(--popover);
-		border: 1px solid var(--border);
+		background: var(--surface-overlay);
+		border: 1px solid var(--border-default);
 		border-radius: var(--radius-md);
-		color: var(--foreground);
+		color: var(--text-primary);
 		font-family: inherit;
 		font-size: var(--font-size-small);
 		white-space: nowrap;
@@ -137,7 +137,7 @@ const dropIndicatorStyles = css`
 		display: block;
 		height: 2px;
 		border-radius: 999px;
-		background: var(--accent);
+		background: var(--tone);
 		opacity: 0;
 		pointer-events: none;
 	}

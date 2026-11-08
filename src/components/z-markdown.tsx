@@ -24,7 +24,7 @@ const styles = css`
   :host {
     display: block;
     /* inherit so a bubble (or any container) drives the text color; falls back
-		   to --foreground when used standalone on the page background. */
+		   to --text-primary when used standalone on the page background. */
     color: inherit;
     font-size: 0.9375rem;
     line-height: 1.6;
@@ -58,7 +58,7 @@ const styles = css`
   .heading-anchor {
     margin-inline-start: 0.4em;
     font-weight: 400;
-    color: var(--muted-foreground);
+    color: var(--text-secondary);
     text-decoration: none;
     opacity: 0;
   }
@@ -80,7 +80,7 @@ const styles = css`
   }
 
   a {
-    color: var(--primary);
+    color: var(--text-primary);
     text-decoration: underline;
     text-underline-offset: 2px;
   }
@@ -104,14 +104,14 @@ const styles = css`
   blockquote {
     margin: 0 0 0.75em;
     padding: 0.1em 0 0.1em 1em;
-    border-inline-start: 3px solid var(--border);
-    color: var(--muted-foreground);
+    border-inline-start: 3px solid var(--border-default);
+    color: var(--text-secondary);
   }
 
   :not(pre) > code {
     font-family: var(--font-mono);
     font-size: 0.875em;
-    background: color-mix(in oklch, var(--foreground) 10%, transparent);
+    background: color-mix(in oklch, var(--text-primary) 10%, transparent);
     padding: 0.15em 0.35em;
     border-radius: var(--radius-sm);
   }
@@ -127,7 +127,7 @@ const styles = css`
 
   hr {
     border: none;
-    border-top: 1px solid var(--border);
+    border-top: 1px solid var(--border-default);
     margin: 1.2em 0;
   }
 
@@ -144,12 +144,12 @@ const styles = css`
   }
   th,
   td {
-    border: 1px solid var(--border);
+    border: 1px solid var(--border-default);
     padding: 0.4em 0.6em;
     text-align: start;
   }
   th {
-    background: color-mix(in oklch, var(--foreground) 6%, transparent);
+    background: color-mix(in oklch, var(--text-primary) 6%, transparent);
     font-weight: 600;
   }
 

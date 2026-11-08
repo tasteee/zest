@@ -19,7 +19,7 @@ const styles = css`
 		flex-direction: column;
 		height: 100%;
 		min-height: 0;
-		background: var(--card);
+		background: var(--surface-default);
 	}
 	:host([is-hidden]) {
 		display: none;
@@ -29,8 +29,8 @@ const styles = css`
 		position: sticky;
 		top: 0;
 		z-index: 1;
-		background: var(--card);
-		border-bottom: 1px solid var(--border);
+		background: var(--surface-default);
+		border-bottom: 1px solid var(--border-default);
 	}
 	.header:empty {
 		display: none;

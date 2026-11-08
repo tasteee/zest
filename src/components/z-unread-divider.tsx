@@ -14,10 +14,10 @@ const styles = css`
 		align-items: center;
 		gap: var(--space-sm);
 		margin: var(--space-sm) 0;
-		--tone: var(--primary);
+		--tone: var(--accent-primary);
 	}
 	:host([tone='tertiary']) {
-		--tone: var(--pink);
+		--tone: var(--accent-tertiary);
 	}
 	:host([is-hidden]) {
 		display: none;

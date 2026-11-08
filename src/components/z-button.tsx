@@ -41,8 +41,7 @@ const styles = css`
 			opacity var(--motion-fast),
 			border-color var(--motion-fast),
 			background-color var(--motion-fast),
-			color var(--motion-fast),
-			box-shadow var(--material-press-duration) ease;
+			color var(--motion-fast);
 	}
 
 	button.is-full-width {
@@ -50,7 +49,7 @@ const styles = css`
 	}
 
 	button:focus-visible {
-		outline: 3px solid var(--focus-ring);
+		outline: 3px solid var(--border-focus);
 		outline-offset: 2px;
 	}
 
@@ -78,42 +77,34 @@ const styles = css`
 	}
 
 	button.is-primary {
-		--tone-color: var(--color-neutral-8);
+		--tone: var(--accent-primary);
 	}
 
 	button.is-secondary {
-		--tone-color: var(--purple);
+		--tone: var(--accent-secondary);
 	}
 
 	button.is-tertiary {
-		--tone-color: var(--pink);
+		--tone: var(--accent-tertiary);
 	}
 
 	button.is-success {
-		--tone-color: var(--success);
+		--tone: var(--status-success);
 	}
 
 	button.is-warning {
-		--tone-color: var(--warning);
+		--tone: var(--status-warning);
 	}
 
 	button.is-error {
-		--tone-color: var(--destructive);
+		--tone: var(--status-danger);
 	}
 
-	/* kinds: paint using --tone-color */
+	/* kinds: paint using --tone */
 
-	/* A solid button is the library's most physical object, so it consumes the
-	   full material vocabulary: a lit fill, a raised stack, and an LED rim in
-	   its own tone. Every one of those tokens is inert in the flat themes,
-	   where this paints exactly the flat tone colour it always did.
-	   --emissive-color is the handshake: the theme writes the glow, this
-	   writes which colour it glows. */
 	button.is-solid {
-		--emissive-color: var(--tone-color);
-		background: var(--material-tone), var(--tone-color);
-		box-shadow: var(--elevation-raised), var(--emissive-tone);
-		border-color: var(--tone-color);
+		background: var(--tone);
+		border-color: var(--tone);
 		color: var(--tone-on-color);
 		font-weight: 600;
 	}
@@ -123,20 +114,15 @@ const styles = css`
 	   reads as part of the same colour family. The theme sets how dark
 	   (light themes keep a plain white label). Neutral overrides this below. */
 	button.is-solid {
-		--tone-on-color: oklch(from var(--tone-color) var(--on-tone-lightness) calc(c * var(--on-tone-chroma)) h);
+		--tone-on-color: oklch(from var(--tone) var(--on-tone-lightness) calc(c * var(--on-tone-chroma)) h);
 	}
 
-	/* Pressing swaps the raised stack for the pressed one, which in the
-	   hardware themes reads as the cap travelling into the panel. */
-	button.is-solid:active {
-		box-shadow: var(--elevation-pressed);
-	}
 
 	/* The neutral tone is the one fill that flips with the theme — near-white
 	   on dark, near-black on light — so its label has to flip with it rather
 	   than being pinned to black. */
 	button.is-solid.is-primary {
-		color: var(--primary-foreground);
+		color: var(--on-accent);
 	}
 
 	button.is-solid:hover {
@@ -148,55 +134,55 @@ const styles = css`
 	}
 
 	button.is-outline {
-		background: var(--material-surface);
-		border-color: var(--tone-color);
-		color: var(--tone-color);
+		background: transparent;
+		border-color: var(--tone);
+		color: var(--tone);
 	}
 
 	button.is-outline:hover {
-		background: color-mix(in srgb, var(--tone-color) 10%, transparent);
+		background: color-mix(in srgb, var(--tone) 10%, transparent);
 	}
 
 	button.is-outline:active {
-		background: color-mix(in srgb, var(--tone-color) 20%, transparent);
+		background: color-mix(in srgb, var(--tone) 20%, transparent);
 	}
 
 	button.is-ghost {
 		background: transparent;
 		border-color: transparent;
-		color: var(--tone-color);
+		color: var(--tone);
 	}
 
 	button.is-ghost:hover {
-		background: color-mix(in srgb, var(--tone-color) 10%, transparent);
+		background: color-mix(in srgb, var(--tone) 10%, transparent);
 	}
 
 	button.is-ghost:active {
-		background: color-mix(in srgb, var(--tone-color) 18%, transparent);
+		background: color-mix(in srgb, var(--tone) 18%, transparent);
 	}
 
 	button.is-soft {
-		background: color-mix(in srgb, var(--tone-color) 15%, transparent);
+		background: color-mix(in srgb, var(--tone) 15%, transparent);
 		border-color: transparent;
 		/* The tone on its own tint measured 3.7–4.3:1 in the light themes.
 		   Pulling the text a quarter of the way to the foreground clears 4.5:1
 		   in every theme — darker on paper, lighter on ink — as z-badge does. */
-		color: color-mix(in oklab, var(--tone-color) 72%, var(--foreground));
+		color: color-mix(in oklab, var(--tone) 72%, var(--text-primary));
 		font-weight: 600;
 	}
 
 	button.is-soft:hover {
-		background: color-mix(in srgb, var(--tone-color) 24%, transparent);
+		background: color-mix(in srgb, var(--tone) 24%, transparent);
 	}
 
 	button.is-soft:active {
-		background: color-mix(in srgb, var(--tone-color) 32%, transparent);
+		background: color-mix(in srgb, var(--tone) 32%, transparent);
 	}
 
 	button.is-plain {
 		background: transparent;
 		border-color: transparent;
-		color: var(--tone-color);
+		color: var(--tone);
 	}
 
 	button.is-plain:hover {
@@ -248,12 +234,12 @@ const styles = css`
 	}
 
 	button.is-outline.is-primary {
-		border-color: var(--border);
-		color: var(--foreground);
+		border-color: var(--border-default);
+		color: var(--text-primary);
 	}
 
 	button.is-outline.is-primary:hover {
-		border-color: var(--color-neutral-4);
+		border-color: var(--border-strong);
 	}
 
 	.label {

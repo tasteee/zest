@@ -109,8 +109,8 @@ const axisHandleStyles = css`
 		align-items: center;
 		gap: 1px;
 		padding: 0.125rem;
-		background: var(--popover);
-		border: 1px solid var(--border);
+		background: var(--surface-overlay);
+		border: 1px solid var(--border-default);
 		border-radius: var(--radius-sm);
 		opacity: 0;
 		transform: translateY(4px);
@@ -138,12 +138,12 @@ const axisHandleStyles = css`
 	}
 
 	.grip {
-		background: color-mix(in oklch, var(--foreground) 6%, transparent);
+		background: color-mix(in oklch, var(--text-primary) 6%, transparent);
 	}
 
 	.grip.is-active {
-		background: color-mix(in oklch, var(--accent, var(--primary)) 16%, transparent);
-		color: var(--accent, var(--primary));
+		background: color-mix(in oklch, var(--tone, var(--accent-primary)) 16%, transparent);
+		color: var(--tone, var(--accent-primary));
 	}
 `
 

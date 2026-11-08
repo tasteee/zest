@@ -17,15 +17,15 @@ import { oneOf } from '../shared/prop-types'
 const styles = css`
 	:host {
 		display: inline-flex;
-		--accent: var(--primary);
+		--tone: var(--accent-primary);
 	}
 
 	:host([tone='secondary']) {
-		--accent: var(--purple);
+		--tone: var(--accent-secondary);
 	}
 
 	:host([tone='tertiary']) {
-		--accent: var(--pink);
+		--tone: var(--accent-tertiary);
 	}
 
 	:host([is-hidden]) {
@@ -42,13 +42,13 @@ const styles = css`
 		height: 3.25rem;
 		text-align: center;
 		background: transparent;
-		border: 1px solid var(--border);
+		border: 1px solid var(--border-default);
 		border-radius: var(--radius-md);
-		color: var(--foreground);
+		color: var(--text-primary);
 		font-family: var(--font-mono);
 		font-size: var(--font-size-h3);
 		font-weight: 600;
-		caret-color: var(--accent);
+		caret-color: var(--tone);
 		transition:
 			border-color var(--motion-fast) var(--ease-enter),
 			background-color var(--motion-fast) var(--ease-enter),
@@ -70,25 +70,25 @@ const styles = css`
 	}
 
 	.cell:hover {
-		border-color: color-mix(in oklch, var(--foreground) 30%, transparent);
+		border-color: color-mix(in oklch, var(--text-primary) 30%, transparent);
 	}
 
 	.cell.is-filled {
-		color: var(--accent);
-		/* srgb: oklch drifts the hue when mixing --accent against the hue-carrying --border. */
-		border-color: color-mix(in srgb, var(--accent) 45%, var(--border));
+		color: var(--tone);
+		/* srgb: oklch drifts the hue when mixing --tone against the hue-carrying --border-default. */
+		border-color: color-mix(in srgb, var(--tone) 45%, var(--border-default));
 	}
 
 	.cell:focus {
-		border-color: var(--accent);
-		background: color-mix(in oklch, var(--accent) 6%, transparent);
-		outline: 3px solid var(--focus-ring);
+		border-color: var(--tone);
+		background: color-mix(in oklch, var(--tone) 6%, transparent);
+		outline: 3px solid var(--border-focus);
 		outline-offset: 1px;
 	}
 
 	.cell.is-invalid {
-		border-color: var(--destructive);
-		color: var(--destructive);
+		border-color: var(--status-danger);
+		color: var(--status-danger);
 	}
 
 	.cell:disabled {

@@ -15,8 +15,8 @@ const styles = css`
 		align-items: center;
 		gap: 0.75rem;
 		padding: 0.625rem 1rem;
-		border-bottom: 1px solid var(--border);
-		background: var(--card);
+		border-bottom: 1px solid var(--border-default);
+		background: var(--surface-default);
 	}
 	:host([is-hidden]) {
 		display: none;
@@ -37,7 +37,7 @@ const styles = css`
 	}
 	.subtitle {
 		font-size: 0.75rem;
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;

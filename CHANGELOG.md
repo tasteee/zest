@@ -16,6 +16,69 @@ needs a major version and a prior deprecation. See `SUPPORT.md`.
 - `z-number-input` `is-borderless` removes the field's own border and focus
   ring so a parent can draw one.
 
+- `@tasteee/zest/tokens.css` is the design tokens alone; it styles nothing on
+  the host page. `@tasteee/zest/document.css` is the page-level part
+  (`html`/`body`, scrollbars, selection, theme fade). `ink.css` is both, so
+  existing imports are unchanged.
+- `data-zest-scope` re-derives the scale and role tokens for a subtree, so a
+  container can set `--base-radius`, `--base-spacing` or `--base-font-size`.
+- `--border-strong` role token.
+
+### Fixed
+
+- Setting `--base-radius`, `--base-spacing` or `--base-font-size` on a plain
+  container had no effect, because derived tokens were inherited already
+  computed. Use `data-zest-scope` (or `data-theme`) on that container.
+- A `data-theme` region reset `--base-spacing`, `--base-radius` and
+  `--base-font-size` to their defaults. Values set on `:root` now carry into it.
+- `--font-size-h1`..`h4`, `-display`, `-body`, `-small`, `-caption` and the
+  `--control-font-size-*` tokens now follow `--base-font-size` like the
+  numbered scale. Output at the default 16px is unchanged.
+- Reduced motion also removes the full-page theme fade; the theme applies
+  immediately. Set `--theme-fade-out-duration` / `--theme-fade-in-duration` to
+  restore it.
+
+- Dialogs, sheets and drawers use `--surface-overlay`, like every other overlay.
+- Floating UI uses the `--z-menu`, `--z-overlay` and `--z-toast` stacking tokens.
+- z-theme-switcher referenced undefined motion tokens, so its transitions never
+  ran. z-card used an undefined spacing token for its header gap.
+
+### Changed (breaking token rename)
+
+Colour is now a role vocabulary, named `--{group}-{role}`, and components read
+roles instead of the numbered palette. No aliases are kept.
+
+- Surfaces: `--surface-page`, `-default`, `-subtle`, `-strong`, `-overlay`,
+  `-inverse`, `-selection`, `-scrim` replace `--bg`, `--background`, `--paper`,
+  `--card`, `--popover`, `--sidebar`, `--paper-soft`, `--background-light`,
+  `--inverse` and `--selection-background`.
+- Text: `--text-primary`, `-secondary`, `-tertiary`, `-strong`, `-inverse`,
+  `-selection` replace `--foreground`, `--muted-foreground`, `--muted`,
+  `--primary` (as text) and the `*-foreground` family. `--on-accent` replaces
+  `--primary-foreground` and `--accent-foreground`.
+- Borders: `--border-default`, `--border-strong`, `--border-focus` replace
+  `--border`, `--line`, `--input`, `--ring` and `--focus-ring`.
+- Tones: `--accent-primary`, `-secondary`, `-tertiary` replace `--primary` (as a
+  fill), `--purple`, `--pink`, `--neon-*` and `--color-purple` / `--color-pink`.
+  `--status-success`, `-warning`, `-danger` replace `--success`, `--warning`
+  and `--destructive`.
+- `--tone` is the one contextual variable: the colour the current component is
+  painting with. It replaces `--accent` and `--tone-color`.
+- `--color-neutral-0..9` is the theme's private palette; components no longer
+  read it.
+- `--shadow-overlay` and `--shadow-modal` are the only shadows. Resting UI is
+  flat. Tooltip, model picker, message actions and dialogs use them in place
+  of hardcoded shadows; the z-kbd keycap shadow is gone.
+
+### Removed
+
+- The material system (`--material-*`, `--elevation-*`, `--emissive-*`), which
+  painted nothing.
+- `--page-gradient*`, `--field-row-height`, the Tailwind-style `--color-*`
+  aliases, the `--sidebar-*` roles, `--base-pink-color` and friends (accents are
+  set directly on the theme), the pink and purple ramps, and unused syntax
+  tokens.
+
 ### Changed
 
 - `z-number-range-input` draws one outline around both fields, with "to" as

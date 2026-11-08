@@ -28,15 +28,15 @@ const styles = css`
 		align-items: flex-end;
 		gap: var(--space-sm);
 		box-sizing: border-box;
-		border: 1px solid var(--border);
+		border: 1px solid var(--border-default);
 		border-radius: var(--radius-lg);
-		background: var(--card);
+		background: var(--surface-default);
 		padding: var(--space-sm);
 		transition: border-color var(--motion-fast) var(--ease-enter);
-		--accent: var(--primary);
+		--tone: var(--accent-primary);
 	}
 	.composer.is-focused {
-		border-color: var(--accent);
+		border-color: var(--tone);
 	}
 	.composer.is-disabled {
 		opacity: 0.6;
@@ -61,7 +61,7 @@ const styles = css`
 		background: transparent;
 		border: none;
 		outline: none;
-		color: var(--foreground);
+		color: var(--text-primary);
 		font-family: inherit;
 		font-size: 0.9375rem;
 		line-height: 1.5;
@@ -70,7 +70,7 @@ const styles = css`
 		overflow-y: auto;
 	}
 	textarea::placeholder {
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 	}
 
 	.send {
@@ -81,8 +81,8 @@ const styles = css`
 		padding: 0;
 		border: 0;
 		border-radius: 999px;
-		background: var(--primary);
-		color: var(--primary-foreground);
+		background: var(--accent-primary);
+		color: var(--on-accent);
 		cursor: pointer;
 		user-select: none;
 		-webkit-user-select: none;

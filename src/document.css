@@ -1,0 +1,132 @@
+/*
+ * Zest document styles: the opt-in part of the stylesheet. Unlike tokens.css,
+ * these rules act on the host page itself: <html> and <body> colours and
+ * margin, scrollbars, text selection, and the theme fade. Import it once at the
+ * document level, after tokens.css. `ink.css` is both files together.
+ *
+ * Components bring their own equivalents inside their shadow roots (see
+ * shared/scrollbar-styles.ts and the ::selection rules in z-code-block,
+ * z-terminal and z-text), because document selectors do not cross shadow
+ * boundaries. They read the same tokens, so the two always agree.
+ */
+
+/* Native form internals, carets and overlay scrollbars follow the theme.
+   Zero specificity so a [data-theme] rule always wins. */
+:where(:root) {
+  color-scheme: dark;
+}
+
+html,
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  background-color: var(--surface-page);
+  color: var(--text-primary);
+}
+
+/* ---------------------------------------------------------------------------
+ * Scrollbars
+ * ------------------------------------------------------------------------- */
+@supports not selector(::-webkit-scrollbar) {
+  html,
+  body,
+  * {
+    scrollbar-color: var(--border-default) transparent;
+    scrollbar-width: thin;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-default);
+  border: 2px solid transparent;
+  border-radius: 999px;
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--border-strong);
+}
+
+::-webkit-scrollbar-button {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+/* ---------------------------------------------------------------------------
+ * Text selection
+ * Action copy and form labels are interface chrome, not content. `user-select`
+ * is inherited and crosses shadow boundaries, so a host that opts back in
+ * (<z-text is-selectable>) re-enables selection for its slotted text too.
+ * ------------------------------------------------------------------------- */
+button,
+label {
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Editing hosts stay selectable. Browsers force this for the inner fields of
+   z-input and z-textarea; this covers native fields in the light DOM. */
+input,
+textarea,
+[contenteditable]:not([contenteditable="false"]) {
+  -webkit-user-select: text;
+  user-select: text;
+}
+
+::selection {
+  background-color: var(--surface-selection);
+  color: var(--text-selection);
+}
+
+/* ---------------------------------------------------------------------------
+ * Theme fade
+ * A theme swap changes hundreds of values at once and almost none can
+ * transition: custom properties do not interpolate unless registered. So the
+ * change is a sequence, not a cross-fade: content fades out, the theme swaps
+ * while nothing is visible, content fades back in. shared/theme.ts adds
+ * `isThemeFading` to <html> and reads --theme-fade-out-duration to time the
+ * swap, so CSS and script cannot drift.
+ *
+ * The View Transition API is deliberately not used. Its root animation blends
+ * the old and new snapshots with plus-lighter, which adds them; when the whole
+ * page changes luminance, dark fading out plus light fading in sums past white
+ * and the screen flashes. A fade to nothing and back has no overlap to get
+ * wrong.
+ *
+ * The page colour itself must not fade, or the bare canvas shows through. The
+ * background transitions on its own, timed to the fade in.
+ *
+ * Timing is asymmetric through the cascade: a transition runs at the duration
+ * of the style it moves TO. Adding the class resolves to the fade-out rule, and
+ * removing it resolves back to the fade-in rule.
+ *
+ * Both durations are zero under prefers-reduced-motion (see tokens.css), which
+ * applies the theme immediately.
+ * ------------------------------------------------------------------------- */
+html {
+  transition: background-color var(--theme-fade-in-duration) ease;
+}
+
+body {
+  transition:
+    opacity var(--theme-fade-in-duration) ease,
+    background-color var(--theme-fade-in-duration) ease;
+}
+
+html.isThemeFading body {
+  opacity: 0;
+  transition:
+    opacity var(--theme-fade-out-duration) ease,
+    background-color var(--theme-fade-in-duration) ease;
+}

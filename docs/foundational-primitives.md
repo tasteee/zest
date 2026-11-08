@@ -115,9 +115,9 @@ const styles = css`
 		position: relative;
 		overflow: hidden;
 		touch-action: none; /* we own pan/zoom gestures */
-		background: var(--background);
+		background: var(--surface-page);
 		cursor: grab;
-		--grid-color: color-mix(in oklch, var(--border) 60%, transparent);
+		--grid-color: color-mix(in oklch, var(--border-default) 60%, transparent);
 	}
 	:host([is-disabled]) {
 		cursor: default;
@@ -524,12 +524,12 @@ const handleStyles = css`
 	}
 	/* thin hit strip whose axis matches the group direction (set by group CSS) */
 	.grip {
-		background: var(--border);
+		background: var(--border-default);
 		transition: background var(--duration-fast) var(--easing-standard);
 	}
 	:host(:hover) .grip,
 	:host(.is-dragging) .grip {
-		background: var(--ring);
+		background: var(--border-focus);
 	}
 `
 
@@ -1020,7 +1020,7 @@ const md = new MarkdownIt({ html: false, linkify: true, breaks: true })
 const styles = css`
 	:host {
 		display: block;
-		color: var(--foreground);
+		color: var(--text-primary);
 		line-height: 1.6;
 	}
 	::slotted(*),
@@ -1028,7 +1028,7 @@ const styles = css`
 		max-width: 100%;
 	}
 	a {
-		color: var(--primary);
+		color: var(--text-primary);
 		text-decoration: underline;
 	}
 `
@@ -1358,7 +1358,7 @@ const styles = css`
 		align-items: center;
 		gap: var(--space-1, 4px);
 		--dot: 8px;
-		--color: var(--muted-foreground);
+		--color: var(--text-secondary);
 	}
 	:host([size='md']) {
 		--dot: 10px;
@@ -1367,17 +1367,17 @@ const styles = css`
 		--dot: 12px;
 	}
 	:host([status='online']) {
-		--color: var(--success, oklch(0.72 0.19 149));
+		--color: var(--status-success, oklch(0.72 0.19 149));
 	}
 	:host([status='away']) {
-		--color: var(--warning, oklch(0.79 0.16 86));
+		--color: var(--status-warning, oklch(0.79 0.16 86));
 	}
 	:host([status='dnd']),
 	:host([status='busy']) {
-		--color: var(--destructive, oklch(0.63 0.24 25));
+		--color: var(--status-danger, oklch(0.63 0.24 25));
 	}
 	:host([status='offline']) {
-		--color: var(--muted-foreground);
+		--color: var(--text-secondary);
 	}
 	.dot {
 		width: var(--dot);
@@ -1407,7 +1407,7 @@ const styles = css`
 	}
 	.label {
 		font-size: 0.8125rem;
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 	}
 `
 
@@ -1432,8 +1432,8 @@ export const ZStatusDot = c(
 customElements.define('z-status-dot', ZStatusDot)
 ```
 
-**Gap:** none load-bearing, the token fallbacks assume `--success`/`--warning`/
-`--destructive` may not exist yet in `ink.css`; wire real presence tokens there.
+**Gap:** none load-bearing, the token fallbacks assume `--status-success`/`--status-warning`/
+`--status-danger` may not exist yet in `ink.css`; wire real presence tokens there.
 
 ---
 
@@ -1448,4 +1448,4 @@ customElements.define('z-status-dot', ZStatusDot)
 - **Styling hooks:** stateful primitives expose CSS `part`s (`part="over"`,
   `part="grip"`) so consumers can restyle drag/hover/handle states without piercing
   internals; interactive states also use `--token`s from `ink.css`
-  (`--border`, `--ring`, `--duration-fast`, `--easing-standard`).
+  (`--border-default`, `--border-focus`, `--duration-fast`, `--easing-standard`).

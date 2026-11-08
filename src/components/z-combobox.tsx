@@ -10,25 +10,25 @@ import { useLocale } from '../shared/locale'
 /*
  * z-combobox, a select you can type into. The trigger is a text input that
  * filters the option list as you type; matches highlight, Enter commits the
- * active row. Same shadow-free bordered popover as z-select. Options come from
+ * active row. Same bordered, floating popover as z-select. Options come from
  * an `options` array property: el.options = [{ value, label, isDisabled? }].
  */
 const styles = css`
-	.field:focus-within { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
+	.field:focus-within { outline: 2px solid var(--border-focus); outline-offset: 2px; }
 
 	:host {
 		display: inline-flex;
 		position: relative;
 		width: 100%;
-		--accent: var(--primary);
+		--tone: var(--accent-primary);
 	}
 
 	:host([tone='secondary']) {
-		--accent: var(--purple);
+		--tone: var(--accent-secondary);
 	}
 
 	:host([tone='tertiary']) {
-		--accent: var(--pink);
+		--tone: var(--accent-tertiary);
 	}
 
 	:host([is-inline]) {
@@ -46,7 +46,7 @@ const styles = css`
 		width: 100%;
 		box-sizing: border-box;
 		background: transparent;
-		border: 1px solid var(--border);
+		border: 1px solid var(--border-default);
 		border-radius: var(--radius-md);
 		transition: border-color var(--motion-fast) var(--ease-enter), background-color var(--motion-fast) var(--ease-enter);
 	}
@@ -74,16 +74,16 @@ const styles = css`
 	}
 
 	.field:hover {
-		border-color: color-mix(in oklch, var(--foreground) 30%, transparent);
+		border-color: color-mix(in oklch, var(--text-primary) 30%, transparent);
 	}
 
 	.field.is-open {
-		border-color: var(--accent);
-		background: color-mix(in oklch, var(--accent) 5%, transparent);
+		border-color: var(--tone);
+		background: color-mix(in oklch, var(--tone) 5%, transparent);
 	}
 
 	.field.is-invalid {
-		border-color: var(--destructive);
+		border-color: var(--status-danger);
 	}
 
 	.field.is-disabled {
@@ -98,13 +98,13 @@ const styles = css`
 		background: transparent;
 		border: none;
 		outline: none;
-		color: var(--foreground);
+		color: var(--text-primary);
 		font-family: inherit;
 		font-size: inherit;
 	}
 
 	input::placeholder {
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 		user-select: none;
 		-webkit-user-select: none;
 	}
@@ -113,7 +113,7 @@ const styles = css`
 		width: 1rem;
 		height: 1rem;
 		flex-shrink: 0;
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 		transition: transform var(--motion-fast) var(--ease-enter);
 		stroke: currentColor;
 		stroke-width: 2;
@@ -125,7 +125,7 @@ const styles = css`
 
 	.field.is-open .chevron {
 		transform: rotate(180deg);
-		color: var(--accent);
+		color: var(--tone);
 	}
 
 	.panel {
@@ -137,10 +137,11 @@ const styles = css`
 		left: 0; /* physical */
 		right: auto; /* physical */
 		bottom: auto;
-		z-index: 50;
-		background: var(--popover);
-		border: 1px solid var(--border);
+		z-index: var(--z-menu);
+		background: var(--surface-overlay);
+		border: 1px solid var(--border-default);
 		border-radius: var(--radius-md);
+		box-shadow: var(--shadow-overlay);
 		padding: 0.3125rem;
 		max-height: 16rem;
 		overflow-y: auto;
@@ -159,19 +160,19 @@ const styles = css`
 		padding: 0.5rem 0.625rem;
 		border-radius: var(--radius-sm);
 		font-size: var(--font-size-small);
-		color: var(--foreground);
+		color: var(--text-primary);
 		cursor: pointer;
 		user-select: none;
 		white-space: nowrap;
 	}
 
 	.option.is-active {
-		background: color-mix(in oklch, var(--accent) 14%, transparent);
-		color: var(--accent);
+		background: color-mix(in oklch, var(--tone) 14%, transparent);
+		color: var(--tone);
 	}
 
 	.option.is-selected {
-		color: var(--accent);
+		color: var(--tone);
 		font-weight: 600;
 	}
 
@@ -183,7 +184,7 @@ const styles = css`
 	.empty {
 		padding: 0.625rem;
 		font-size: var(--font-size-small);
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 		text-align: center;
 	}
 `

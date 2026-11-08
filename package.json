@@ -29,6 +29,8 @@
 		"./dist/elements/*.js",
 		"./dist/ink.css",
 		"./dist/fonts.css",
+		"./dist/tokens.css",
+		"./dist/document.css",
 		"./src/**"
 	],
 	"main": "./dist/zest.js",
@@ -47,6 +49,8 @@
 		"./zest.js": "./dist/zest.js",
 		"./ink.css": "./dist/ink.css",
 		"./fonts.css": "./dist/fonts.css",
+		"./tokens.css": "./dist/tokens.css",
+		"./document.css": "./dist/document.css",
 		"./react": {
 			"types": "./dist/react.d.ts"
 		},
@@ -62,7 +66,7 @@
 		"LICENSE"
 	],
 	"scripts": {
-		"build": "node scripts/check-css-templates.mjs && vite build && node scripts/copy-fonts.mjs && tsc -p tsconfig.build.json && node scripts/build-element-types.mjs && node scripts/build-cem.mjs && node scripts/build-jsx-types.mjs && node scripts/check-release-surface.mjs",
+		"build": "node scripts/check-css-templates.mjs && vite build && node scripts/copy-fonts.mjs && tsc -p tsconfig.build.json && node scripts/build-element-types.mjs && node scripts/build-cem.mjs && node scripts/build-jsx-types.mjs && node scripts/build-jsr.mjs && node scripts/check-release-surface.mjs",
 		"dev": "vite build && concurrently -k -n lib,site -c blue,green \"vite build --watch\" \"pnpm --filter @tasteee/zest-site dev\"",
 		"typecheck": "tsc --noEmit -p tsconfig.json",
 		"test": "vitest run",
@@ -71,6 +75,8 @@
 		"test:watch": "vitest",
 		"test:coverage": "vitest run --coverage",
 		"test:consumers": "node scripts/consumer-smoke.mjs",
+		"publish:jsr": "deno publish --allow-slow-types",
+		"publish:jsr:dry-run": "deno publish --dry-run --allow-dirty --allow-slow-types",
 		"prepublishOnly": "npm run build",
 		"prepare": "npm run build",
 		"dev:lib": "vite build --watch",

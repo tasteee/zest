@@ -29,10 +29,10 @@ const styles = css`
 		transition: background-color var(--motion-fast) var(--ease-enter);
 	}
 	.item:hover {
-		background: color-mix(in oklch, var(--foreground) 6%, transparent);
+		background: color-mix(in oklch, var(--text-primary) 6%, transparent);
 	}
 	:host([is-active]) .item {
-		background: color-mix(in oklch, var(--primary) 14%, transparent);
+		background: color-mix(in oklch, var(--accent-primary) 14%, transparent);
 	}
 	.avatar {
 		flex: 0 0 auto;
@@ -59,16 +59,16 @@ const styles = css`
 	.time {
 		flex: 0 0 auto;
 		font-size: 0.6875rem;
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 	}
 	:host([unread]:not([unread='0'])) .time {
-		color: var(--primary);
+		color: var(--text-primary);
 	}
 	.preview {
 		flex: 1;
 		min-width: 0;
 		font-size: 0.8125rem;
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
@@ -78,7 +78,7 @@ const styles = css`
 		flex: 0 0 auto;
 		width: 0.875rem;
 		height: 0.875rem;
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 		stroke: currentColor;
 		fill: none;
 		stroke-width: 2;
@@ -95,8 +95,8 @@ const styles = css`
 		align-items: center;
 		justify-content: center;
 		border-radius: 999px;
-		background: var(--primary);
-		color: var(--primary-foreground);
+		background: var(--accent-primary);
+		color: var(--on-accent);
 		font-size: 0.6875rem;
 		font-weight: 700;
 		font-variant-numeric: tabular-nums;

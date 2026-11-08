@@ -12,10 +12,10 @@ import { c, css, event } from 'atomico'
 const styles = css`
 	:host {
 		display: block;
-		--bar: var(--primary);
+		--bar: var(--accent-primary);
 	}
 	:host([tone='tertiary']) {
-		--bar: var(--pink);
+		--bar: var(--accent-tertiary);
 	}
 	:host([is-hidden]) {
 		display: none;
@@ -27,7 +27,7 @@ const styles = css`
 		width: 100%;
 		box-sizing: border-box;
 		text-align: start;
-		background: color-mix(in oklch, var(--foreground) 5%, transparent);
+		background: color-mix(in oklch, var(--text-primary) 5%, transparent);
 		border: none;
 		border-radius: var(--radius-sm);
 		padding: 0.375rem 0.5rem;
@@ -56,7 +56,7 @@ const styles = css`
 	}
 	.text {
 		font-size: 0.8125rem;
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 		display: -webkit-box;
 		-webkit-line-clamp: 2;
 		-webkit-box-orient: vertical;

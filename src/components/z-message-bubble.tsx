@@ -34,36 +34,36 @@ const styles = css`
 		overflow-wrap: anywhere;
 		white-space: pre-wrap;
 		/* theirs (default / start) */
-		background: color-mix(in oklch, var(--foreground) 8%, var(--card));
-		color: var(--foreground);
+		background: color-mix(in oklch, var(--text-primary) 8%, var(--surface-default));
+		color: var(--text-primary);
 	}
 
 	:host([side='end']) .bubble {
-		background: var(--primary);
-		color: var(--primary-foreground);
+		background: var(--accent-primary);
+		color: var(--on-accent);
 	}
 
 	/* tone overrides the side-based background, for status/system bubbles
 	   (a payment failure, a success confirmation, …) regardless of who "sent" it. */
 	:host([tone='secondary']) .bubble {
-		background: color-mix(in oklch, var(--purple) 16%, var(--card));
-		color: var(--foreground);
+		background: color-mix(in oklch, var(--accent-secondary) 16%, var(--surface-default));
+		color: var(--text-primary);
 	}
 	:host([tone='tertiary']) .bubble {
-		background: color-mix(in oklch, var(--pink) 16%, var(--card));
-		color: var(--foreground);
+		background: color-mix(in oklch, var(--accent-tertiary) 16%, var(--surface-default));
+		color: var(--text-primary);
 	}
 	:host([tone='success']) .bubble {
-		background: color-mix(in oklch, var(--success) 16%, var(--card));
-		color: var(--foreground);
+		background: color-mix(in oklch, var(--status-success) 16%, var(--surface-default));
+		color: var(--text-primary);
 	}
 	:host([tone='warning']) .bubble {
-		background: color-mix(in oklch, var(--warning) 16%, var(--card));
-		color: var(--foreground);
+		background: color-mix(in oklch, var(--status-warning) 16%, var(--surface-default));
+		color: var(--text-primary);
 	}
 	:host([tone='danger']) .bubble {
-		background: color-mix(in oklch, var(--destructive) 16%, var(--card));
-		color: var(--foreground);
+		background: color-mix(in oklch, var(--status-danger) 16%, var(--surface-default));
+		color: var(--text-primary);
 	}
 
 	/* grouped corners, tuck the corners on the sender's near side */

@@ -20,25 +20,25 @@ import { useVisibilityPhase } from '../shared/transition'
 const markStyles = css`
 	:host {
 		display: inline;
-		background: color-mix(in oklch, var(--warning) 22%, transparent);
-		border-bottom: 2px solid color-mix(in oklch, var(--warning) 55%, transparent);
+		background: color-mix(in oklch, var(--status-warning) 22%, transparent);
+		border-bottom: 2px solid color-mix(in oklch, var(--status-warning) 55%, transparent);
 		border-radius: 2px;
 		cursor: pointer;
 		transition: background-color var(--motion-fast) var(--ease-enter);
 	}
 
 	:host(:hover) {
-		background: color-mix(in oklch, var(--warning) 32%, transparent);
+		background: color-mix(in oklch, var(--status-warning) 32%, transparent);
 	}
 
 	:host([is-active]) {
-		background: color-mix(in oklch, var(--accent) 26%, transparent);
-		border-bottom-color: var(--accent);
+		background: color-mix(in oklch, var(--tone) 26%, transparent);
+		border-bottom-color: var(--tone);
 	}
 
 	:host([is-resolved]) {
 		background: transparent;
-		border-bottom-color: var(--border);
+		border-bottom-color: var(--border-default);
 		opacity: 0.6;
 	}
 `
@@ -97,8 +97,8 @@ const gutterIconStyles = css`
 		height: 0.9rem;
 		padding: 0 0.2rem;
 		border-radius: 999px;
-		background: var(--warning);
-		color: var(--bg);
+		background: var(--status-warning);
+		color: var(--surface-page);
 		font-size: 0.6rem;
 		font-weight: 700;
 		line-height: 0.9rem;
@@ -172,8 +172,8 @@ const panelStyles = css`
 		max-width: 100%;
 		box-sizing: border-box;
 		height: 100%;
-		background: var(--popover);
-		border-inline-start: 1px solid var(--border);
+		background: var(--surface-overlay);
+		border-inline-start: 1px solid var(--border-default);
 	}
 
 	:host([is-hidden]) {
@@ -185,10 +185,10 @@ const panelStyles = css`
 		align-items: center;
 		justify-content: space-between;
 		padding: 0.75rem 1rem;
-		border-bottom: 1px solid var(--border);
+		border-bottom: 1px solid var(--border-default);
 		font-size: var(--font-size-small);
 		font-weight: 600;
-		color: var(--foreground);
+		color: var(--text-primary);
 	}
 
 	.list {
@@ -201,7 +201,7 @@ const panelStyles = css`
 	}
 
 	.thread {
-		border: 1px solid var(--border);
+		border: 1px solid var(--border-default);
 		border-radius: var(--radius-md);
 		padding: 0.625rem;
 		display: flex;
@@ -211,7 +211,7 @@ const panelStyles = css`
 	}
 
 	.thread.is-active {
-		border-color: var(--accent);
+		border-color: var(--tone);
 	}
 
 	.thread.is-resolved {
@@ -228,12 +228,12 @@ const panelStyles = css`
 		display: flex;
 		gap: 0.375rem;
 		font-size: var(--font-size-caption);
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 	}
 
 	.message .text {
 		font-size: var(--font-size-small);
-		color: var(--foreground);
+		color: var(--text-primary);
 	}
 
 	.actions {
@@ -247,10 +247,10 @@ const panelStyles = css`
 		resize: none;
 		min-height: 2rem;
 		background: transparent;
-		border: 1px solid var(--border);
+		border: 1px solid var(--border-default);
 		border-radius: var(--radius-sm);
 		padding: 0.375rem 0.5rem;
-		color: var(--foreground);
+		color: var(--text-primary);
 		font-family: inherit;
 		font-size: var(--font-size-small);
 	}
@@ -260,9 +260,9 @@ const panelStyles = css`
 		height: 1.75rem;
 		padding: 0 0.625rem;
 		background: transparent;
-		border: 1px solid var(--border);
+		border: 1px solid var(--border-default);
 		border-radius: var(--radius-sm);
-		color: var(--foreground);
+		color: var(--text-primary);
 		font-family: inherit;
 		font-size: var(--font-size-caption);
 		cursor: pointer;
@@ -271,7 +271,7 @@ const panelStyles = css`
 	.close {
 		background: transparent;
 		border: 0;
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 		cursor: pointer;
 	}
 `

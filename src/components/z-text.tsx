@@ -3,7 +3,7 @@ import { oneOf } from '../shared/prop-types'
 
 const styles = css`
 	:host {
-		color: var(--foreground);
+		color: var(--text-primary);
 	}
 
 	:host([is-hidden]) {
@@ -16,13 +16,13 @@ const styles = css`
 	   it here against the shared --selection-* tokens so prose highlights the
 	   same as everything else. */
 	::selection {
-		background: var(--selection-background);
-		color: var(--selection-foreground);
+		background: var(--surface-selection);
+		color: var(--text-selection);
 	}
 
 	::-moz-selection {
-		background: var(--selection-background);
-		color: var(--selection-foreground);
+		background: var(--surface-selection);
+		color: var(--text-selection);
 	}
 
 	.text {
@@ -177,7 +177,7 @@ const styles = css`
 	--------------------------------------------- */
 
 	.text.is-label {
-		color: var(--color-neutral-5);
+		color: var(--text-tertiary);
 		font-size: var(--font-size-small);
 		font-weight: 600;
 		line-height: 1;
@@ -193,35 +193,35 @@ const styles = css`
 	--------------------------------------------- */
 
 	.text.is-primary {
-		color: var(--foreground);
+		color: var(--text-primary);
 	}
 
 	.text.is-secondary {
-		color: var(--purple);
+		color: var(--accent-secondary);
 	}
 
 	.text.is-tertiary {
-		color: var(--pink);
+		color: var(--accent-tertiary);
 	}
 
 	.text.is-muted {
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 	}
 
 	.text.is-strong {
-		color: var(--color-neutral-9);
+		color: var(--text-strong);
 	}
 
 	.text.is-success {
-		color: var(--success);
+		color: var(--status-success);
 	}
 
 	.text.is-warning {
-		color: var(--warning);
+		color: var(--status-warning);
 	}
 
 	.text.is-danger {
-		color: var(--destructive);
+		color: var(--status-danger);
 	}
 
 
@@ -271,35 +271,35 @@ const styles = css`
 	}
 
 	.inline.is-secondary {
-		color: var(--purple);
+		color: var(--accent-secondary);
 	}
 
 	.inline.is-tertiary {
-		color: var(--pink);
+		color: var(--accent-tertiary);
 	}
 
 	.inline.is-muted {
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 	}
 
 	.inline.is-strong {
-		color: var(--color-neutral-9);
+		color: var(--text-strong);
 	}
 
 	.inline.is-primary {
-		color: var(--foreground);
+		color: var(--text-primary);
 	}
 
 	.inline.is-success {
-		color: var(--success);
+		color: var(--status-success);
 	}
 
 	.inline.is-warning {
-		color: var(--warning);
+		color: var(--status-warning);
 	}
 
 	.inline.is-danger {
-		color: var(--destructive);
+		color: var(--status-danger);
 	}
 
 
@@ -399,7 +399,7 @@ const resolveInlineColorClass = (props: any): string => {
 	if (props.color === 'strong') return 'is-strong'
 	if (props.color === 'primary') return 'is-primary'
 	// No explicit color: emit no override class so color inherits from
-	// whatever context this is dropped into, instead of forcing --foreground.
+	// whatever context this is dropped into, instead of forcing --text-primary.
 	return ''
 }
 

@@ -13,7 +13,7 @@ import { oneOf } from '../shared/prop-types'
 const styles = css`
 	:host {
 		display: block;
-		color: var(--foreground);
+		color: var(--text-primary);
 	}
 
 	:host([is-hidden]) {
@@ -23,12 +23,12 @@ const styles = css`
 	/* ::selection doesn't cross shadow boundaries, restate it against the shared
 	   tokens so a highlighted title matches the rest of the page (see z-text). */
 	::selection {
-		background: var(--selection-background);
-		color: var(--selection-foreground);
+		background: var(--surface-selection);
+		color: var(--text-selection);
 	}
 	::-moz-selection {
-		background: var(--selection-background);
-		color: var(--selection-foreground);
+		background: var(--surface-selection);
+		color: var(--text-selection);
 	}
 
 	/* Same heading tier as z-text's is-heading, and re-faced by the same
@@ -60,18 +60,18 @@ const styles = css`
 		font-size: clamp(2rem, 5vw, 3.25rem);
 	}
 
-	/* colors, same vocabulary as z-text (neutral default = --foreground) */
+	/* colors, same vocabulary as z-text (neutral default = --text-primary) */
 	.display.is-secondary {
-		color: var(--purple);
+		color: var(--accent-secondary);
 	}
 	.display.is-tertiary {
-		color: var(--pink);
+		color: var(--accent-tertiary);
 	}
 	.display.is-muted {
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 	}
 	.display.is-strong {
-		color: var(--color-neutral-9);
+		color: var(--text-strong);
 	}
 
 `

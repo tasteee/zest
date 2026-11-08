@@ -20,18 +20,18 @@ const styles = css`
 	:host {
 		display: inline-block;
 		position: relative;
-		--tone: var(--color-neutral-6);
+		--tone: var(--text-secondary);
 	}
 
 	:host([tone='secondary']) {
-		--tone: var(--purple);
+		--tone: var(--accent-secondary);
 	}
 
 	:host([tone='tertiary']) {
-		--tone: var(--pink);
+		--tone: var(--accent-tertiary);
 	}
 	:host([tone='primary']) {
-		--tone: var(--color-neutral-6);
+		--tone: var(--text-secondary);
 	}
 
 	:host([is-hidden]) {
@@ -47,7 +47,7 @@ const styles = css`
 		position: fixed;
 		inset: 0;
 		pointer-events: none;
-		z-index: 9999;
+		z-index: var(--z-toast);
 	}
 
 	.pointer {
@@ -79,7 +79,7 @@ const styles = css`
 		font-family: var(--font-sans);
 		font-size: var(--font-size-caption);
 		font-weight: 600;
-		color: var(--primary-foreground);
+		color: var(--on-accent);
 		background: var(--tone);
 		padding: 0.15rem 0.5rem;
 		border-radius: var(--radius-sm);

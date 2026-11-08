@@ -21,7 +21,7 @@ const styles = css`
 		gap: var(--space-xs);
 		vertical-align: middle;
 		--dot: 0.5rem;
-		--color: var(--muted-foreground);
+		--color: var(--text-secondary);
 	}
 	:host([is-hidden]) {
 		display: none;
@@ -35,17 +35,17 @@ const styles = css`
 	}
 
 	:host([status='online']) {
-		--color: var(--success);
+		--color: var(--status-success);
 	}
 	:host([status='away']) {
-		--color: var(--warning);
+		--color: var(--status-warning);
 	}
 	:host([status='dnd']),
 	:host([status='busy']) {
-		--color: var(--destructive);
+		--color: var(--status-danger);
 	}
 	:host([status='offline']) {
-		--color: var(--muted-foreground);
+		--color: var(--text-secondary);
 	}
 
 	.dot {
@@ -79,7 +79,7 @@ const styles = css`
 
 	.label {
 		font-size: 0.8125rem;
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 		line-height: 1;
 	}
 `

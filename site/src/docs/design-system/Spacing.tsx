@@ -119,7 +119,7 @@ export const Spacing = () => (
 					<div className="swatch" key={r.key}>
 						<div
 							className="swatch-fill"
-							style={{ borderRadius: `var(${r.token})`, background: 'var(--color-neutral-2)' }}
+							style={{ borderRadius: `var(${r.token})`, background: 'var(--surface-subtle)' }}
 						/>
 						<span className="swatch-label">{r.key}</span>
 						<span className="swatch-token">

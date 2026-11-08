@@ -24,14 +24,14 @@ const styles = css`
 		display: flex;
 		flex-direction: column;
 		gap: var(--space-md);
-		--z-radio-group-accent: var(--primary);
+		--z-radio-group-accent: var(--accent-primary);
 	}
 
-	:host([tone='secondary']) { --z-radio-group-accent: var(--purple); }
-	:host([tone='tertiary']) { --z-radio-group-accent: var(--pink); }
-	:host([tone='success']) { --z-radio-group-accent: var(--success); }
-	:host([tone='warning']) { --z-radio-group-accent: var(--warning); }
-	:host([tone='danger']) { --z-radio-group-accent: var(--destructive); }
+	:host([tone='secondary']) { --z-radio-group-accent: var(--accent-secondary); }
+	:host([tone='tertiary']) { --z-radio-group-accent: var(--accent-tertiary); }
+	:host([tone='success']) { --z-radio-group-accent: var(--status-success); }
+	:host([tone='warning']) { --z-radio-group-accent: var(--status-warning); }
+	:host([tone='danger']) { --z-radio-group-accent: var(--status-danger); }
 
 	:host([direction='horizontal']) {
 		flex-direction: row;

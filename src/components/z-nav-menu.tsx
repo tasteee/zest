@@ -16,15 +16,15 @@ import { oneOf } from '../shared/prop-types'
 const styles = css`
 	:host {
 		display: block;
-		--accent: var(--primary);
+		--tone: var(--accent-primary);
 	}
 
 	:host([tone='secondary']) {
-		--accent: var(--purple);
+		--tone: var(--accent-secondary);
 	}
 
 	:host([tone='tertiary']) {
-		--accent: var(--pink);
+		--tone: var(--accent-tertiary);
 	}
 
 	:host([is-hidden]) {
@@ -52,7 +52,7 @@ const styles = css`
 		font-family: inherit;
 		font-size: var(--font-size-small);
 		font-weight: 500;
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 		text-decoration: none;
 		cursor: pointer;
 		white-space: nowrap;
@@ -62,21 +62,21 @@ const styles = css`
 	}
 
 	.trigger:hover {
-		color: var(--foreground);
-		background: color-mix(in oklch, var(--foreground) 6%, transparent);
+		color: var(--text-primary);
+		background: color-mix(in oklch, var(--text-primary) 6%, transparent);
 	}
 
 	.trigger.is-active {
-		color: var(--color-neutral-9);
+		color: var(--text-strong);
 	}
 
 	.trigger.is-open {
-		color: var(--accent);
-		background: color-mix(in oklch, var(--accent) 8%, transparent);
+		color: var(--tone);
+		background: color-mix(in oklch, var(--tone) 8%, transparent);
 	}
 
 	.trigger:focus-visible {
-		outline: 3px solid var(--focus-ring);
+		outline: 3px solid var(--border-focus);
 		outline-offset: 2px;
 	}
 
@@ -99,11 +99,12 @@ const styles = css`
 		position: absolute;
 		top: calc(100% + 6px);
 		left: 0;
-		z-index: 50;
+		z-index: var(--z-menu);
 		min-width: 16rem;
-		background: var(--popover);
-		border: 1px solid var(--border);
+		background: var(--surface-overlay);
+		border: 1px solid var(--border-default);
 		border-radius: var(--radius-md);
+		box-shadow: var(--shadow-overlay);
 		padding: 0.375rem;
 		display: flex;
 		flex-direction: column;
@@ -116,7 +117,7 @@ const styles = css`
 		gap: 0.125rem;
 		padding: 0.5rem 0.625rem;
 		border-radius: var(--radius-sm);
-		color: var(--foreground);
+		color: var(--text-primary);
 		text-decoration: none;
 		background: transparent;
 		border: 0;
@@ -126,7 +127,7 @@ const styles = css`
 	}
 
 	.child:hover {
-		background: color-mix(in oklch, var(--accent) 12%, transparent);
+		background: color-mix(in oklch, var(--tone) 12%, transparent);
 	}
 
 	.child .child-label {
@@ -136,7 +137,7 @@ const styles = css`
 
 	.child .child-desc {
 		font-size: var(--font-size-caption);
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 	}
 `
 

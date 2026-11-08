@@ -19,17 +19,17 @@ import { useLocale } from '../shared/locale'
 const styles = css`
 	:host {
 		display: block;
-		--accent: var(--primary);
+		--tone: var(--accent-primary);
 		width: 100%;
 		min-width: 0;
 	}
 
 	:host([tone='secondary']) {
-		--accent: var(--purple);
+		--tone: var(--accent-secondary);
 	}
 
 	:host([tone='tertiary']) {
-		--accent: var(--pink);
+		--tone: var(--accent-tertiary);
 	}
 
 	:host([is-hidden]) {
@@ -37,9 +37,9 @@ const styles = css`
 	}
 
 	.block {
-		border: 1px solid var(--border);
+		border: 1px solid var(--border-default);
 		border-radius: var(--radius-md);
-		background: var(--color-neutral-0);
+		background: var(--surface-page);
 		overflow: hidden;
 		font-family: var(--font-mono);
 	}
@@ -65,7 +65,7 @@ const styles = css`
 		background: transparent;
 		border: 0;
 		border-radius: var(--radius-sm);
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 		font-family: var(--font-mono);
 		font-size: var(--font-size-caption);
 		white-space: nowrap;
@@ -76,16 +76,16 @@ const styles = css`
 	}
 
 	.file-tab:hover {
-		color: var(--foreground);
+		color: var(--text-primary);
 	}
 
 	.file-tab.is-active {
-		color: var(--foreground);
-		background: color-mix(in oklch, var(--foreground) 8%, transparent);
+		color: var(--text-primary);
+		background: color-mix(in oklch, var(--text-primary) 8%, transparent);
 	}
 
 	.file-tab:focus-visible {
-		outline: 3px solid var(--focus-ring);
+		outline: 3px solid var(--border-focus);
 		outline-offset: 1px;
 	}
 
@@ -95,8 +95,8 @@ const styles = css`
 		justify-content: space-between;
 		gap: 0.75rem;
 		padding: 0.5rem 0.75rem 0.5rem 0.875rem;
-		border-bottom: 1px solid var(--border);
-		background: var(--color-neutral-1);
+		border-bottom: 1px solid var(--border-default);
+		background: var(--surface-default);
 	}
 
 	.meta {
@@ -108,7 +108,7 @@ const styles = css`
 
 	.filename {
 		font-size: var(--font-size-caption);
-		color: var(--foreground);
+		color: var(--text-primary);
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
@@ -119,7 +119,7 @@ const styles = css`
 		font-weight: 600;
 		letter-spacing: 0.04em;
 		text-transform: uppercase;
-		color: var(--accent);
+		color: var(--tone);
 	}
 
 	.copy {
@@ -129,9 +129,9 @@ const styles = css`
 		flex-shrink: 0;
 		padding: 0.25rem 0.5rem;
 		background: transparent;
-		border: 1px solid var(--border);
+		border: 1px solid var(--border-default);
 		border-radius: var(--radius-sm);
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 		font-family: inherit;
 		font-size: var(--font-size-caption);
 		cursor: pointer;
@@ -142,18 +142,18 @@ const styles = css`
 	}
 
 	.copy:hover {
-		color: var(--foreground);
-		border-color: color-mix(in oklch, var(--foreground) 30%, transparent);
+		color: var(--text-primary);
+		border-color: color-mix(in oklch, var(--text-primary) 30%, transparent);
 	}
 
 	.copy:focus-visible {
-		outline: 3px solid var(--focus-ring);
+		outline: 3px solid var(--border-focus);
 		outline-offset: 2px;
 	}
 
 	.copy.is-copied {
-		color: var(--success);
-		border-color: color-mix(in oklch, var(--success) 50%, transparent);
+		color: var(--status-success);
+		border-color: color-mix(in oklch, var(--status-success) 50%, transparent);
 	}
 
 	.copy svg {
@@ -174,7 +174,7 @@ const styles = css`
 	@supports not selector(::-webkit-scrollbar) {
 		.scroll {
 			scrollbar-width: thin;
-			scrollbar-color: var(--color-neutral-3) transparent;
+			scrollbar-color: var(--border-default) transparent;
 		}
 	}
 	.scroll::-webkit-scrollbar {
@@ -182,7 +182,7 @@ const styles = css`
 		width: 8px;
 	}
 	.scroll::-webkit-scrollbar-thumb {
-		background: var(--color-neutral-3);
+		background: var(--border-default);
 		border-radius: 999px;
 	}
 	.scroll::-webkit-scrollbar-button {
@@ -196,7 +196,7 @@ const styles = css`
 		padding: 0.875rem 1rem;
 		font-size: var(--font-size-small);
 		line-height: 1.6;
-		color: var(--foreground);
+		color: var(--text-primary);
 		tab-size: 2;
 		/* Code stays selectable even though the page default is user-select:none,
 		   people need to copy snippets. The line-number gutter re-opts out
@@ -209,12 +209,12 @@ const styles = css`
 	   selection style (ink.css) here for code rendered inside this shadow root.
 	   Shares the --selection-* tokens, so code and prose highlight identically. */
 	pre ::selection {
-		background: var(--selection-background);
-		color: var(--selection-foreground);
+		background: var(--surface-selection);
+		color: var(--text-selection);
 	}
 	pre ::-moz-selection {
-		background: var(--selection-background);
-		color: var(--selection-foreground);
+		background: var(--surface-selection);
+		color: var(--text-selection);
 	}
 
 	.rows {
@@ -235,7 +235,7 @@ const styles = css`
 	.gutter {
 		padding-inline-end: 1rem;
 		text-align: end;
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 		user-select: none;
 		opacity: 0.6;
 	}
@@ -251,21 +251,21 @@ const styles = css`
 	 */
 	.line.is-added .gutter,
 	.line.is-added .text {
-		background: color-mix(in oklch, var(--success) 12%, transparent);
+		background: color-mix(in oklch, var(--status-success) 12%, transparent);
 	}
 
 	.line.is-added .gutter {
-		color: var(--success);
+		color: var(--status-success);
 		opacity: 1;
 	}
 
 	.line.is-removed .gutter,
 	.line.is-removed .text {
-		background: color-mix(in oklch, var(--destructive) 12%, transparent);
+		background: color-mix(in oklch, var(--status-danger) 12%, transparent);
 	}
 
 	.line.is-removed .gutter {
-		color: var(--destructive);
+		color: var(--status-danger);
 		opacity: 1;
 	}
 

@@ -1,0 +1,438 @@
+/*
+ * Zest design tokens: custom properties only. No element selectors, so this
+ * file never changes the page it is loaded into. Custom properties cross
+ * shadow boundaries, so every z element reads these through var(--token).
+ * Import it once at the document level, not inside a shadow root.
+ *
+ * Page-level behaviour (body colours, scrollbars, selection, the theme fade)
+ * lives in document.css. `ink.css` is both files together.
+ * Fonts are not loaded here; see fonts.css.
+ *
+ * ---------------------------------------------------------------------------
+ * Vocabulary
+ * ---------------------------------------------------------------------------
+ * Colour has three tiers. Components read only the second.
+ *
+ *   Palette   --color-neutral-0..9. Private to the theme: step N plays a
+ *             different part in light and dark. Never read by a component.
+ *   Roles     --{group}-{role}[-{variant}], noun first. One name per meaning,
+ *             named for the job, never for the hue or the lightness.
+ *   Local     --tone and the --z-* component properties.
+ *
+ *   surface-*   page, default, subtle, strong, overlay, inverse, selection, scrim
+ *   text-*      primary, secondary, tertiary, strong, inverse, selection
+ *   border-*    default, strong, focus
+ *   accent-*    primary, secondary, tertiary  (the three tones), on-accent
+ *   status-*    success, warning, danger
+ *   chart-1..5  series order is genuinely ordinal
+ *   syntax-*    code highlighting
+ *
+ * A surface always pairs with a text-* and a border-* token. Text on a solid
+ * fill uses on-accent; text on surface-inverse uses text-inverse.
+ *
+ * --tone is the one contextual variable: the colour the current component or
+ * region is painting with. It defaults to accent-primary, and a component
+ * overrides it for its own tone variants (primary, secondary, tertiary,
+ * success, warning, danger). Everything inside inherits it.
+ *
+ * ---------------------------------------------------------------------------
+ * Depth
+ * ---------------------------------------------------------------------------
+ * Zest is flat. Resting UI (cards, fields, buttons, switches) is a surface plus
+ * a 1px border, with no shadow. A shadow exists only for things that float
+ * above arbitrary content and must separate from it:
+ *
+ *   --shadow-overlay   menus, popovers, tooltips, toasts   (surface-overlay)
+ *   --shadow-modal     dialogs, sheets, drawers
+ *
+ * They are theme-specific: black shadows barely read on dark surfaces, so dark
+ * uses a higher alpha and leans on the border. Pressed and selected states
+ * change surface, never elevation. Focus is a ring (border-focus), not a shadow.
+ *
+ * ---------------------------------------------------------------------------
+ * Layers, in source order
+ * ---------------------------------------------------------------------------
+ *   1. Inputs     Scale and static values, declared once on :root. Nothing
+ *                 derives from them at a theme boundary, so a value set on
+ *                 :root survives inside every themed region.
+ *   2. Dark       The dark palette: the neutral ramp and every value that
+ *                 differs per theme (accents, status, selection, syntax,
+ *                 shadows).
+ *   3. Derived    Everything computed from layers 1 and 2: scales and roles.
+ *   4. Light      The light palette, authored by hand. It declares only what
+ *                 the dark palette declares, so it never ties with layer 3.
+ *
+ * Why derivation targets `:root, [data-theme], [data-zest-scope]`
+ * ---------------------------------------------------------------
+ * A custom property is substituted where it is declared, not where it is
+ * used. After `--text-primary: var(--color-neutral-8)` resolves on <html>,
+ * descendants inherit the resulting colour, not the expression. Changing
+ * `--color-neutral-8` further down the tree does nothing to them.
+ *
+ * So any element that changes an input (a theme's palette, --base-radius,
+ * --base-spacing, --base-font-size) must also re-run the derivations. Two
+ * kinds of element do that:
+ *
+ *   [data-theme]       a themed region. Sets a palette and re-derives.
+ *   [data-zest-scope]  a region that only changes the scale inputs. It keeps
+ *                      the inherited palette and re-derives against its own
+ *                      --base-* values.
+ *
+ * Without one of those attributes, a container that sets --base-radius
+ * changes the input but inherits the radius already computed on <html>.
+ *
+ * Contract for contributors:
+ *  - Components read roles, never the numbered neutrals.
+ *  - Values that differ per theme belong in a palette layer, never in the
+ *    derived layer. A scope element re-declares everything in the derived
+ *    layer, which would reset a theme's value back to the dark one.
+ *  - Palette overrides go on the theme: `[data-theme="light"] { ... }`.
+ */
+
+/* ---------------------------------------------------------------------------
+ * 1. Inputs
+ * :where() keeps specificity at zero, so any rule a consumer writes wins
+ * regardless of stylesheet order.
+ * ------------------------------------------------------------------------- */
+:where(:root) {
+  /* Type families. Themes re-face by overriding these names; the fallback
+     stacks in --font-sans / --font-mono / --font-serif stay intact. */
+  --base-sans-font-family: "DM Sans";
+  --base-mono-font-family: "DM Mono";
+  --base-serif-font-family: "DM Serif Display";
+
+  /* Scale dials. Each one drives a whole scale below; set it on :root, or on a
+     [data-zest-scope] element to rescale that region only. */
+  --base-spacing: 0.25rem;
+  --base-radius: 0.625rem;
+  --base-font-size: 16px;
+
+  /* Tint of the neutral ramp, as plain numbers so every browser resolves the
+     ramp identically. */
+  --base-neutral-hue: 146.4;
+  --base-neutral-chroma: 0.0137;
+
+  /* Heading face: the one type tier a theme may re-face. Only z-display and
+     z-heading read these. */
+  --font-heading-weight: 700;
+  --font-heading-settings: normal;
+  /* Multiplies the heading scale's negative tracking. High-contrast serifs
+     need much less than a geometric sans. */
+  --font-heading-tracking-scale: 1;
+
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  --line-height-display: 0.9;
+  --line-height-h1: 1;
+  --line-height-h2: 1.1;
+  --line-height-h3: 1.2;
+  --line-height-h4: 1.3;
+  --line-height-body: 1.6;
+  --line-height-small: 1.5;
+  --line-height-caption: 1.4;
+
+  /* Control metrics: one height scale for every interactive control, so an
+     input, select, button and toggle side by side agree. Padding stays
+     per-component. */
+  --control-height-sm: 2rem;
+  --control-height-md: 2.5rem;
+  --control-height-lg: 3rem;
+  --control-disabled-opacity: 0.5;
+  --small-button-radius: 4px;
+  --medium-button-radius: 5px;
+  --large-button-radius: 6px;
+
+  /* Field composition: label, gap, control. Fixing the first two makes every
+     labelled control in a row the same total height. */
+  --field-label-height: 1.25rem;
+  --field-gap: 0.25rem;
+
+  /* Motion. Durations step by surface size: micro feedback, floating panels,
+     edge-anchored sheets. Exits run at about 70% of their entrance. */
+  --motion-instant: 80ms;
+  --motion-fast: 140ms;
+  --motion-base: 200ms;
+  --motion-slow: 280ms;
+  --motion-exit-fast: 100ms;
+  --motion-exit-base: 140ms;
+  --motion-exit-slow: 200ms;
+  --ease-enter: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-exit: cubic-bezier(0.3, 0, 0.7, 0.4);
+  --ease-move: cubic-bezier(0.65, 0, 0.35, 1);
+  --motion-distance-sm: 4px;
+  --motion-distance-md: 8px;
+  --motion-scale-from: 0.97;
+  --motion-stagger: 30ms;
+  /* Components multiply their travel offsets by this. */
+  --motion-travel: 1;
+
+  /* Theme change: content fades out, the theme swaps, content fades back in.
+     Out is slow enough to confirm the click; in is brisk. shared/theme.ts reads
+     the fade-out value to time the swap. A zero fade-out applies the theme
+     immediately. */
+  --theme-fade-out-duration: 0.2s;
+  --theme-fade-in-duration: 0.35s;
+
+  /* Stacking for floating UI that escapes its parent. Local stacking inside a
+     component (button-group overlap, range thumbs) stays a plain integer.
+     Modals use the top layer and need no z-index. */
+  --z-toolbar: 40;
+  --z-menu: 50;
+  --z-overlay: 60;
+  --z-toast: 1000;
+}
+
+/* Reduced motion drops travel and scale. The theme fade is also retimed to
+   zero, which applies the theme immediately. Opacity is not movement, but a
+   full-page fade is the most visible animation zest runs, and a consumer who
+   wants it back sets the two durations. */
+@media (prefers-reduced-motion: reduce) {
+  :where(:root) {
+    --motion-travel: 0;
+    --motion-scale-from: 1;
+    --theme-fade-out-duration: 0s;
+    --theme-fade-in-duration: 0s;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+ * 2. Dark palette (the default)
+ * ------------------------------------------------------------------------- */
+:where(:root),
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  /* Neutral ramp. Lightness climbs 0 to 9: 0 is the page floor, 1 and 2 are
+     surfaces above it, 3 and 4 are lines, 5 to 9 step up into ink. */
+  --color-neutral-0: oklch(0.1609 var(--base-neutral-chroma) var(--base-neutral-hue));
+  --color-neutral-1: oklch(0.21 var(--base-neutral-chroma) var(--base-neutral-hue));
+  --color-neutral-2: oklch(0.25 var(--base-neutral-chroma) var(--base-neutral-hue));
+  --color-neutral-3: oklch(0.31 var(--base-neutral-chroma) var(--base-neutral-hue));
+  --color-neutral-4: oklch(0.4 var(--base-neutral-chroma) var(--base-neutral-hue));
+  --color-neutral-5: oklch(0.55 var(--base-neutral-chroma) var(--base-neutral-hue));
+  --color-neutral-6: oklch(0.68 var(--base-neutral-chroma) var(--base-neutral-hue));
+  --color-neutral-7: oklch(0.8 var(--base-neutral-chroma) var(--base-neutral-hue));
+  --color-neutral-8: oklch(0.9 var(--base-neutral-chroma) var(--base-neutral-hue));
+  --color-neutral-9: #fff;
+
+  /* The chrome is neutral on purpose: the user's content supplies the colour,
+     so secondary and tertiary are opt-in tones, never the default look. */
+  --accent-secondary: lab(60 40.17 -57.68);
+  --accent-tertiary: lch(62.44 70.29 0.86 / 1);
+  --status-success: lch(62 58 145 / 1);
+  --status-warning: lch(72 78 76 / 1);
+  --status-danger: lch(58 72 37 / 1);
+
+  /* Text on a solid accent or status fill, and the lightness/chroma used to
+     derive a readable label from a tone colour (z-button). */
+  --on-accent: var(--color-neutral-0);
+  --on-tone-lightness: 0.2;
+  --on-tone-chroma: 0.5;
+
+  /* Selection: a pale band with near-black ink instead of the browser blue. */
+  --surface-selection: var(--color-neutral-7);
+  --text-selection: var(--color-neutral-1);
+
+  /* Floating shadows, tinted with the neutral hue rather than pure black. */
+  --shadow-overlay: 0 8px 24px -8px oklch(0.06 var(--base-neutral-chroma) var(--base-neutral-hue) / 0.7);
+  --shadow-modal: 0 24px 64px -16px oklch(0.06 var(--base-neutral-chroma) var(--base-neutral-hue) / 0.85);
+
+  /* Syntax highlighting for z-code-block, tuned for the near-black code
+     surface (--color-neutral-1). Override any token to retheme code. */
+  --syntax-comment: var(--color-neutral-5);
+  --syntax-keyword: oklch(from var(--accent-secondary) 0.84 0.16 h);
+  --syntax-string: oklch(0.79 0.13 152);
+  --syntax-number: oklch(0.82 0.12 78);
+  --syntax-constant: oklch(0.76 0.16 48);
+  --syntax-function: oklch(from var(--accent-tertiary) 0.87 0.16 h);
+  --syntax-class: oklch(0.83 0.11 200);
+  --syntax-property: oklch(0.86 0.07 222);
+  --syntax-operator: var(--color-neutral-6);
+  --syntax-tag: oklch(from var(--accent-tertiary) 0.87 0.16 h);
+  --syntax-variable: var(--color-neutral-8);
+  --syntax-regex: oklch(0.79 0.13 168);
+}
+
+/* ---------------------------------------------------------------------------
+ * 3. Derived tokens
+ * Re-run at every theme and scope boundary. Declares nothing that a palette
+ * layer sets per theme.
+ * ------------------------------------------------------------------------- */
+:root,
+[data-theme],
+[data-zest-scope] {
+  /* Type scale. Every step, including the named ones, follows
+     --base-font-size, so one dial rescales all text. rem keeps the user's
+     browser font-size setting in play. */
+  --font-size-0: calc(0.579rem * (var(--base-font-size) / 16px));
+  --font-size-1: calc(0.694rem * (var(--base-font-size) / 16px));
+  --font-size-2: calc(0.833rem * (var(--base-font-size) / 16px));
+  --font-size-3: calc(1rem * (var(--base-font-size) / 16px));
+  --font-size-4: calc(1.25rem * (var(--base-font-size) / 16px));
+  --font-size-5: calc(1.563rem * (var(--base-font-size) / 16px));
+  --font-size-6: calc(1.953rem * (var(--base-font-size) / 16px));
+  --font-size-7: calc(2.441rem * (var(--base-font-size) / 16px));
+  --font-size-8: calc(3.052rem * (var(--base-font-size) / 16px));
+
+  --font-size-display: calc(4.5rem * (var(--base-font-size) / 16px));
+  --font-size-h1: calc(3rem * (var(--base-font-size) / 16px));
+  --font-size-h2: calc(2.25rem * (var(--base-font-size) / 16px));
+  --font-size-h3: calc(1.5rem * (var(--base-font-size) / 16px));
+  --font-size-h4: calc(1.25rem * (var(--base-font-size) / 16px));
+  --font-size-body: calc(1rem * (var(--base-font-size) / 16px));
+  --font-size-small: calc(0.875rem * (var(--base-font-size) / 16px));
+  --font-size-caption: calc(0.75rem * (var(--base-font-size) / 16px));
+
+  --control-font-size-sm: calc(0.8125rem * (var(--base-font-size) / 16px));
+  --control-font-size-md: calc(0.875rem * (var(--base-font-size) / 16px));
+  --control-font-size-lg: calc(1rem * (var(--base-font-size) / 16px));
+
+  --font-sans: var(--base-sans-font-family), "DM Sans Fallback", system-ui, sans-serif;
+  --font-mono: var(--base-mono-font-family), "Geist Mono", "Fira Code", monospace;
+  --font-serif:
+    var(--base-serif-font-family), "Iowan Old Style", Georgia, "Times New Roman", serif;
+  --font-heading: var(--font-sans);
+
+  /* Spacing scale */
+  --spacing-0: 0;
+  --spacing-1: calc(var(--base-spacing) * 1);
+  --spacing-2: calc(var(--base-spacing) * 2);
+  --spacing-3: calc(var(--base-spacing) * 3);
+  --spacing-4: calc(var(--base-spacing) * 4);
+  --spacing-5: calc(var(--base-spacing) * 5);
+  --spacing-6: calc(var(--base-spacing) * 6);
+  --spacing-7: calc(var(--base-spacing) * 7);
+  --spacing-8: calc(var(--base-spacing) * 8);
+  --spacing-9: calc(var(--base-spacing) * 9);
+  --spacing-10: calc(var(--base-spacing) * 10);
+  --spacing-11: calc(var(--base-spacing) * 11);
+  --spacing-12: calc(var(--base-spacing) * 12);
+  --spacing-14: calc(var(--base-spacing) * 14);
+  --spacing-16: calc(var(--base-spacing) * 16);
+  --spacing-20: calc(var(--base-spacing) * 20);
+  --spacing-24: calc(var(--base-spacing) * 24);
+  --spacing-28: calc(var(--base-spacing) * 28);
+  --spacing-32: calc(var(--base-spacing) * 32);
+  --spacing-36: calc(var(--base-spacing) * 36);
+  --spacing-40: calc(var(--base-spacing) * 40);
+
+  --space-xs: var(--spacing-1);
+  --space-sm: var(--spacing-2);
+  --space-md: var(--spacing-3);
+  --space-base: var(--spacing-4);
+  --space-lg: var(--spacing-6);
+  --space-xl: var(--spacing-8);
+  --space-2xl: var(--spacing-12);
+  --space-3xl: var(--spacing-16);
+
+  /* Radius scale */
+  --radius: var(--base-radius);
+  --radius-sm: max(0px, calc(var(--radius) - 4px));
+  --radius-md: max(0px, calc(var(--radius) - 2px));
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  /* Surfaces */
+  --surface-page: var(--color-neutral-0);
+  --surface-default: var(--color-neutral-1);
+  --surface-subtle: var(--color-neutral-2);
+  --surface-strong: var(--color-neutral-3);
+  --surface-overlay: var(--color-neutral-1);
+  --surface-inverse: var(--color-neutral-8);
+  --surface-scrim: color-mix(in oklch, var(--surface-page) 55%, transparent);
+
+  /* Text. --text-strong (full white in dark) is reserved for the few elements
+     that opt into it, such as display type. */
+  --text-primary: var(--color-neutral-8);
+  --text-secondary: var(--color-neutral-6);
+  --text-tertiary: var(--color-neutral-5);
+  --text-strong: var(--color-neutral-9);
+  --text-inverse: var(--color-neutral-0);
+
+  /* Borders */
+  --border-default: var(--color-neutral-3);
+  --border-strong: var(--color-neutral-4);
+  --border-focus: var(--color-neutral-7);
+
+  /* Tones. accent-primary is neutral; secondary and tertiary are opt-in. */
+  --accent-primary: var(--color-neutral-8);
+  --tone: var(--accent-primary);
+
+  /* z-chart series */
+  --chart-1: var(--accent-secondary);
+  --chart-2: var(--accent-tertiary);
+  --chart-3: var(--color-neutral-7);
+  --chart-4: var(--color-neutral-5);
+  --chart-5: var(--color-neutral-4);
+}
+
+/* ---------------------------------------------------------------------------
+ * 4. Light palette: "haze"
+ * A quiet paper canvas with opaque raised surfaces. Type and control geometry
+ * match dark, so switching schemes never reflows the interface.
+ *
+ * The ramp is authored by hand because its direction differs from dark. Its
+ * steps follow surface roles, not lightness: 0 is the page, 1 lifts above it
+ * (raised surfaces read lighter on paper), 2 recedes below it, 3 and 4 are
+ * lines, 5 to 9 descend into ink. That is why components read roles.
+ * Anything a palette leaves out is inherited from the surrounding theme, not
+ * from dark.
+ * ------------------------------------------------------------------------- */
+[data-theme="light"] {
+  color-scheme: light;
+
+  --color-neutral-0: oklch(0.966 0.006 146);
+  --color-neutral-1: oklch(0.988 0.004 146);
+  --color-neutral-2: oklch(0.951 0.008 146);
+  --color-neutral-3: oklch(0.876 0.011 146);
+  --color-neutral-4: oklch(0.818 0.014 146);
+  --color-neutral-5: oklch(0.628 0.017 146);
+  /* neutral-6 is --text-secondary. 0.528 measured 4.4:1 as small text on the
+     8%-tinted alert and toast surfaces; 0.5 clears 4.5:1 on all of them. */
+  --color-neutral-6: oklch(0.5 0.02 146);
+  --color-neutral-7: oklch(0.408 0.02 146);
+  --color-neutral-8: oklch(0.286 0.02 146);
+  --color-neutral-9: oklch(0.176 0.022 146);
+
+  /* Accents sit a few steps darker than in dark. On paper one colour has to be
+     legible as text and also carry white text as a solid fill, and only the
+     darker end of each hue clears both. Picked against measured contrast on
+     --color-neutral-0, not by eye. */
+  --accent-secondary: oklch(0.525 0.195 288);
+  --accent-tertiary: oklch(0.565 0.2 12);
+  --status-success: oklch(0.522 0.128 155);
+  --status-warning: oklch(0.55 0.125 70);
+  --status-danger: oklch(0.555 0.195 27);
+
+  --on-accent: #fff;
+  --on-tone-lightness: 1;
+  --on-tone-chroma: 0;
+
+  /* A pale highlighter band tinted with the neutral hue, with ink dark enough
+     to stay comfortable inside it. */
+  --surface-selection: oklch(0.87 0.072 146);
+  --text-selection: oklch(0.22 0.03 146);
+
+  --shadow-overlay:
+    0 8px 24px -8px oklch(0.25 0.02 146 / 0.22), 0 1px 2px oklch(0.25 0.02 146 / 0.06);
+  --shadow-modal: 0 24px 64px -16px oklch(0.25 0.02 146 / 0.32);
+
+  /* Code gets its own light palette rather than the dark one dimmed: held near
+     L 0.5 so every token clears text contrast on the pale code surface while
+     the hues stay recognisably the same language. */
+  --syntax-comment: oklch(0.578 0.019 146);
+  --syntax-keyword: oklch(0.5 0.18 288);
+  --syntax-string: oklch(0.475 0.125 152);
+  --syntax-number: oklch(0.52 0.125 62);
+  --syntax-constant: oklch(0.52 0.16 40);
+  --syntax-function: oklch(0.53 0.185 8);
+  --syntax-class: oklch(0.5 0.115 215);
+  --syntax-property: oklch(0.475 0.09 235);
+  --syntax-operator: oklch(0.55 0.018 146);
+  --syntax-tag: oklch(0.53 0.185 8);
+  --syntax-variable: oklch(0.3 0.02 146);
+  --syntax-regex: oklch(0.475 0.125 168);
+}

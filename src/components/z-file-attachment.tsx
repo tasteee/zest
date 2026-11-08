@@ -96,7 +96,7 @@ const styles = css`
 		max-width: 20rem;
 		box-sizing: border-box;
 		border-radius: var(--radius-md);
-		background: color-mix(in oklch, var(--foreground) 6%, transparent);
+		background: color-mix(in oklch, var(--text-primary) 6%, transparent);
 		padding: 0.5rem 0.625rem;
 	}
 	.icon {
@@ -104,8 +104,8 @@ const styles = css`
 		width: 2.25rem;
 		height: 2.25rem;
 		border-radius: var(--radius-sm);
-		background: color-mix(in oklch, var(--primary) 16%, transparent);
-		color: var(--primary);
+		background: color-mix(in oklch, var(--accent-primary) 16%, transparent);
+		color: var(--text-primary);
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
@@ -132,7 +132,7 @@ const styles = css`
 	}
 	.size {
 		font-size: 0.6875rem;
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 	}
 	.download {
 		flex: 0 0 auto;
@@ -144,13 +144,13 @@ const styles = css`
 		border-radius: 999px;
 		border: none;
 		background: transparent;
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 		cursor: pointer;
 		text-decoration: none;
 	}
 	.download:hover {
-		background: color-mix(in oklch, var(--foreground) 10%, transparent);
-		color: var(--foreground);
+		background: color-mix(in oklch, var(--text-primary) 10%, transparent);
+		color: var(--text-primary);
 	}
 	.download svg {
 		width: 1.1rem;

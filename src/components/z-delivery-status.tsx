@@ -15,7 +15,7 @@ const styles = css`
 		display: inline-flex;
 		vertical-align: middle;
 		--read-color: oklch(0.7 0.14 230);
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 	}
 	:host([is-hidden]) {
 		display: none;
@@ -24,7 +24,7 @@ const styles = css`
 		color: var(--read-color);
 	}
 	:host([status='error']) {
-		color: var(--destructive);
+		color: var(--status-danger);
 	}
 	svg {
 		width: 1.05rem;

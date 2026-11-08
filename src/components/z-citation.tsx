@@ -28,8 +28,8 @@ const styles = css`
 		box-sizing: border-box;
 		border: none;
 		border-radius: 0.35em;
-		background: color-mix(in oklch, var(--primary) 16%, transparent);
-		color: var(--primary);
+		background: color-mix(in oklch, var(--accent-primary) 16%, transparent);
+		color: var(--text-primary);
 		font-family: inherit;
 		font-size: 0.7em;
 		font-weight: 700;
@@ -40,7 +40,7 @@ const styles = css`
 		transition: background-color var(--motion-fast) var(--ease-enter);
 	}
 	.cite:hover {
-		background: color-mix(in oklch, var(--primary) 30%, transparent);
+		background: color-mix(in oklch, var(--accent-primary) 30%, transparent);
 	}
 `
 

@@ -19,8 +19,8 @@ const styles = css`
 	}
 	.pill {
 		font-size: 0.75rem;
-		color: var(--muted-foreground);
-		background: color-mix(in oklch, var(--foreground) 6%, transparent);
+		color: var(--text-secondary);
+		background: color-mix(in oklch, var(--text-primary) 6%, transparent);
 		padding: 0.25rem 0.625rem;
 		border-radius: 999px;
 		text-align: center;

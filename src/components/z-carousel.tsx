@@ -16,11 +16,11 @@ const styles = css`
 		position: relative;
 		width: 100%;
 		min-width: 0;
-		--accent: var(--color-neutral-8);
+		--tone: var(--accent-primary);
 	}
 
 	:host([tone='tertiary']) {
-		--accent: var(--pink);
+		--tone: var(--accent-tertiary);
 	}
 
 	:host([is-hidden]) {
@@ -60,10 +60,10 @@ const styles = css`
 		width: 2.5rem;
 		height: 2.5rem;
 		border-radius: 999px;
-		background: color-mix(in oklch, var(--background) 70%, transparent);
+		background: color-mix(in oklch, var(--surface-page) 70%, transparent);
 		backdrop-filter: blur(8px);
-		border: 1px solid var(--border);
-		color: var(--foreground);
+		border: 1px solid var(--border-default);
+		color: var(--text-primary);
 		cursor: pointer;
 		transition:
 			border-color var(--motion-fast) var(--ease-enter),
@@ -72,11 +72,11 @@ const styles = css`
 	}
 
 	.btn:hover {
-		border-color: var(--accent);
+		border-color: var(--tone);
 	}
 
 	.btn:focus-visible {
-		outline: 3px solid var(--focus-ring);
+		outline: 3px solid var(--border-focus);
 		outline-offset: 2px;
 	}
 
@@ -116,7 +116,7 @@ const styles = css`
 		padding: 0;
 		border: 0;
 		border-radius: 999px;
-		background: var(--color-neutral-3);
+		background: var(--border-default);
 		cursor: pointer;
 		transition:
 			background-color var(--motion-fast) var(--ease-enter),
@@ -124,16 +124,16 @@ const styles = css`
 	}
 
 	.dot:hover {
-		background: var(--color-neutral-4);
+		background: var(--border-strong);
 	}
 
 	.dot.is-active {
-		background: var(--accent);
+		background: var(--tone);
 		width: 1.25rem;
 	}
 
 	.dot:focus-visible {
-		outline: 3px solid var(--focus-ring);
+		outline: 3px solid var(--border-focus);
 		outline-offset: 2px;
 	}
 `

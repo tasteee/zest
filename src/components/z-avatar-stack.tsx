@@ -40,7 +40,7 @@ const styles = css`
 	}
 
 	::slotted(z-avatar) {
-		outline: 3px solid var(--stack-ring, var(--background));
+		outline: 3px solid var(--stack-ring, var(--surface-page));
 		border-radius: 999px;
 		margin-inline-start: calc(-1 * var(--overlap));
 		transition: transform var(--motion-base) var(--ease-enter);
@@ -60,9 +60,9 @@ const styles = css`
 		height: var(--size);
 		border-radius: 999px;
 		margin-inline-start: calc(-1 * var(--overlap));
-		outline: 3px solid var(--stack-ring, var(--background));
-		background: var(--color-neutral-3);
-		color: var(--muted-foreground);
+		outline: 3px solid var(--stack-ring, var(--surface-page));
+		background: var(--border-default);
+		color: var(--text-secondary);
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;

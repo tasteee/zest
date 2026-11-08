@@ -39,27 +39,27 @@ const styles = css`
 		white-space: nowrap;
 		border: 1px solid transparent;
 		border-radius: 999px;
-		--tone: var(--color-neutral-7);
+		--tone: var(--accent-primary);
 	}
 
 	/* tones set --tone */
 	.badge.is-secondary {
-		--tone: var(--purple);
+		--tone: var(--accent-secondary);
 	}
 	.badge.is-tertiary {
-		--tone: var(--pink);
+		--tone: var(--accent-tertiary);
 	}
 	.badge.is-primary {
-		--tone: var(--color-neutral-7);
+		--tone: var(--accent-primary);
 	}
 	.badge.is-success {
-		--tone: var(--success);
+		--tone: var(--status-success);
 	}
 	.badge.is-warning {
-		--tone: var(--warning);
+		--tone: var(--status-warning);
 	}
 	.badge.is-error {
-		--tone: var(--destructive);
+		--tone: var(--status-danger);
 	}
 
 	/* sizes */
@@ -76,26 +76,24 @@ const styles = css`
 	/* kinds */
 	.badge.is-soft {
 		background: color-mix(in oklch, var(--tone) 18%, transparent);
-		color: color-mix(in oklab, var(--tone) 70%, var(--foreground));
+		color: color-mix(in oklab, var(--tone) 70%, var(--text-primary));
 	}
 	.badge.is-solid {
-		--emissive-color: var(--tone);
-		background: var(--material-tone), var(--tone);
-		box-shadow: var(--emissive-tone);
+		background: var(--tone);
 		color: var(--on-accent);
 	}
-	.badge.is-solid.is-primary { color: var(--primary-foreground); }
+	.badge.is-solid.is-primary { color: var(--on-accent); }
 
 	.badge.is-outline {
 		background: transparent;
-		/* srgb, not oklch: --border carries a faint green hue, and interpolating
+		/* srgb, not oklch: --border-default carries a faint green hue, and interpolating
 		   hue against it in oklch drags the tone around the wheel (purple → blue). */
-		border-color: color-mix(in srgb, var(--tone) 45%, var(--border));
+		border-color: color-mix(in srgb, var(--tone) 45%, var(--border-default));
 		color: var(--tone);
 	}
 	.badge.is-primary.is-outline {
-		color: var(--muted-foreground);
-		border-color: var(--border);
+		color: var(--text-secondary);
+		border-color: var(--border-default);
 	}
 
 	/* inline status: dot + uppercase tracked text */
@@ -128,7 +126,7 @@ const styles = css`
 			color var(--motion-fast) var(--ease-enter);
 	}
 	.badge.is-clickable:hover {
-		border-color: color-mix(in srgb, var(--tone) 55%, var(--border));
+		border-color: color-mix(in srgb, var(--tone) 55%, var(--border-default));
 	}
 
 	/* Selected wins over the resting kind: a toned tint + border regardless of
@@ -139,7 +137,7 @@ const styles = css`
 		color: color-mix(in oklch, var(--tone) 85%, white);
 	}
 	.badge.is-primary.is-selected {
-		color: var(--foreground);
+		color: var(--text-primary);
 	}
 
 	.badge.is-disabled {
@@ -148,7 +146,7 @@ const styles = css`
 	}
 
 	.badge:focus-visible {
-		outline: 3px solid var(--focus-ring);
+		outline: 3px solid var(--border-focus);
 		outline-offset: 2px;
 	}
 
@@ -174,7 +172,7 @@ const styles = css`
 	}
 	.remove:hover {
 		opacity: 1;
-		background: color-mix(in oklch, var(--foreground) 18%, transparent);
+		background: color-mix(in oklch, var(--text-primary) 18%, transparent);
 	}
 	.remove svg {
 		width: 0.625rem;

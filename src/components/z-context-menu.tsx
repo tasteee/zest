@@ -20,14 +20,14 @@ import { oneOf } from '../shared/prop-types'
 const styles = css`
 	:host {
 		display: contents;
-		--accent: var(--primary);
+		--tone: var(--accent-primary);
 	}
 
 	:host([tone='secondary']) {
-		--accent: var(--purple);
+		--tone: var(--accent-secondary);
 	}
 	:host([tone='tertiary']) {
-		--accent: var(--pink);
+		--tone: var(--accent-tertiary);
 	}
 
 	.target {
@@ -39,11 +39,12 @@ const styles = css`
 		left: 0;
 		top: 0;
 		margin: 0;
-		z-index: 50;
+		z-index: var(--z-menu);
 		min-width: 12rem;
-		background: var(--popover);
-		border: 1px solid var(--border);
+		background: var(--surface-overlay);
+		border: 1px solid var(--border-default);
 		border-radius: var(--radius-md);
+		box-shadow: var(--shadow-overlay);
 		padding: 0.3125rem;
 		transform-origin: top left;
 		opacity: 0;
@@ -72,7 +73,7 @@ const styles = css`
 	@keyframes z-menu-flash {
 		0%,
 		50% {
-			background: color-mix(in oklch, var(--accent) 14%, transparent);
+			background: color-mix(in oklch, var(--tone) 14%, transparent);
 		}
 		25%,
 		75% {
@@ -100,7 +101,7 @@ const styles = css`
 		padding: 0.5rem 0.625rem;
 		border-radius: var(--radius-sm);
 		font-size: var(--font-size-small);
-		color: var(--foreground);
+		color: var(--text-primary);
 		cursor: pointer;
 		user-select: none;
 		white-space: nowrap;
@@ -113,15 +114,15 @@ const styles = css`
 	}
 
 	.item.is-active {
-		background: color-mix(in oklch, var(--accent) 14%, transparent);
-		color: var(--accent);
+		background: color-mix(in oklch, var(--tone) 14%, transparent);
+		color: var(--tone);
 	}
 
 	.item.is-error {
-		color: var(--destructive);
+		color: var(--status-danger);
 	}
 	.item.is-error.is-active {
-		background: color-mix(in oklch, var(--destructive) 14%, transparent);
+		background: color-mix(in oklch, var(--status-danger) 14%, transparent);
 	}
 
 	.item.is-disabled {
@@ -134,7 +135,7 @@ const styles = css`
 	}
 
 	.shortcut {
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 		font-family: var(--font-mono);
 		font-size: var(--font-size-caption);
 	}
@@ -142,7 +143,7 @@ const styles = css`
 	.sep {
 		height: 1px;
 		margin: 0.3125rem 0;
-		background: var(--border);
+		background: var(--border-default);
 	}
 
 	.controls {

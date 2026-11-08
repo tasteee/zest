@@ -17,20 +17,20 @@ import { useLocale } from '../shared/locale'
 const styles = css`
 	:host {
 		display: block;
-		--alert-color: var(--muted-foreground);
+		--alert-color: var(--text-secondary);
 	}
 
 	:host([tone='secondary']) {
-		--alert-color: var(--purple);
+		--alert-color: var(--accent-secondary);
 	}
 	:host([tone='success']) {
-		--alert-color: var(--success);
+		--alert-color: var(--status-success);
 	}
 	:host([tone='warning']) {
-		--alert-color: var(--warning);
+		--alert-color: var(--status-warning);
 	}
 	:host([tone='danger']) {
-		--alert-color: var(--destructive);
+		--alert-color: var(--status-danger);
 	}
 
 	:host([is-hidden]) {
@@ -43,11 +43,11 @@ const styles = css`
 		box-sizing: border-box;
 		padding: var(--space-md) var(--space-base);
 		/* srgb: oklch would drift the hue when mixing the chromatic alert colour
-		   against the hue-carrying --border. */
-		border: 1px solid color-mix(in srgb, var(--alert-color) 40%, var(--border));
+		   against the hue-carrying --border-default. */
+		border: 1px solid color-mix(in srgb, var(--alert-color) 40%, var(--border-default));
 		border-radius: var(--radius-md);
 		background: color-mix(in oklch, var(--alert-color) 8%, transparent);
-		color: var(--foreground);
+		color: var(--text-primary);
 	}
 
 	.icon {
@@ -82,7 +82,7 @@ const styles = css`
 		font-size: var(--font-size-small);
 		font-weight: 600;
 		line-height: 1.4;
-		color: var(--foreground);
+		color: var(--text-primary);
 	}
 
 	.title a,
@@ -104,7 +104,7 @@ const styles = css`
 	.body {
 		font-size: var(--font-size-small);
 		line-height: var(--line-height-body);
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 	}
 
 	.close {
@@ -118,7 +118,7 @@ const styles = css`
 		background: transparent;
 		border: 0;
 		border-radius: var(--radius-sm);
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 		cursor: pointer;
 		transition:
 			color var(--motion-fast) var(--ease-enter),
@@ -126,12 +126,12 @@ const styles = css`
 	}
 
 	.close:hover {
-		color: var(--foreground);
-		background: color-mix(in oklch, var(--foreground) 8%, transparent);
+		color: var(--text-primary);
+		background: color-mix(in oklch, var(--text-primary) 8%, transparent);
 	}
 
 	.close:focus-visible {
-		outline: 3px solid var(--focus-ring);
+		outline: 3px solid var(--border-focus);
 		outline-offset: 2px;
 	}
 

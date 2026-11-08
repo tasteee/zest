@@ -71,7 +71,7 @@ const styles = css`
 		width: 2.5rem;
 		height: 0.3125rem;
 		border-radius: 999px;
-		background: var(--border);
+		background: var(--border-default);
 	}
 
 	.body {

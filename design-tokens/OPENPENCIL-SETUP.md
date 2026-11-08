@@ -5,8 +5,10 @@ single-toggle Dark/Light mode, using Claude Code + OpenPencil's MCP server.
 
 ## Files in this folder
 
-- `zest-tokens.json`: source of truth (primitives, semantic-dark, semantic-light, type). Machine-readable.
-- `zest-tokens.css`: same system as CSS custom properties (dark default, `[data-theme="light"]` override). Doubles as the realigned `ink.css`.
+- `zest-tokens.json`: the design-tool vocabulary (primitives, semantic-dark, semantic-light, type). Machine-readable.
+- `zest-tokens.css`: the same vocabulary as CSS custom properties.
+
+These files are a design-tool snapshot with their own names (`--dom-*`, `--sub-*`). The shipped tokens, and the source of truth for the library, are `src/tokens.css` (custom properties) and `src/document.css` (page styles), which `src/ink.css` combines. Update this folder from those, not the other way round.
 
 ## 1. Install
 

@@ -23,23 +23,23 @@ const styles = css`
 		display: inline-flex;
 		align-items: center;
 		gap: 0.375rem;
-		border: 1px solid var(--border);
-		background: var(--card);
+		border: 1px solid var(--border-default);
+		background: var(--surface-default);
 		border-radius: var(--radius-md);
 		padding: 0.35rem 0.6rem;
 		font-family: inherit;
 		font-size: 0.8125rem;
 		font-weight: 500;
-		color: var(--foreground);
+		color: var(--text-primary);
 		cursor: pointer;
 	}
 	.trigger:hover {
-		border-color: color-mix(in oklch, var(--foreground) 30%, transparent);
+		border-color: color-mix(in oklch, var(--text-primary) 30%, transparent);
 	}
 	.chevron {
 		width: 0.85rem;
 		height: 0.85rem;
-		stroke: var(--muted-foreground);
+		stroke: var(--text-secondary);
 		fill: none;
 		stroke-width: 2;
 		stroke-linecap: round;
@@ -51,14 +51,14 @@ const styles = css`
 	}
 	.menu {
 		position: absolute;
-		z-index: 50;
+		z-index: var(--z-menu);
 		bottom: calc(100% + 0.375rem);
 		left: 0;
 		min-width: 15rem;
-		background: var(--card);
-		border: 1px solid var(--border);
+		background: var(--surface-overlay);
+		border: 1px solid var(--border-default);
 		border-radius: var(--radius-md);
-		box-shadow: 0 8px 24px color-mix(in oklch, var(--foreground) 15%, transparent);
+		box-shadow: var(--shadow-overlay);
 		padding: 0.25rem;
 		display: flex;
 		flex-direction: column;
@@ -78,18 +78,18 @@ const styles = css`
 		padding: 0.4rem 0.5rem;
 		text-align: start;
 		font-family: inherit;
-		color: var(--foreground);
+		color: var(--text-primary);
 		cursor: pointer;
 	}
 	.item:hover {
-		background: color-mix(in oklch, var(--foreground) 8%, transparent);
+		background: color-mix(in oklch, var(--text-primary) 8%, transparent);
 	}
 	.check {
 		flex: 0 0 auto;
 		width: 1rem;
 		height: 1rem;
 		margin-top: 0.1rem;
-		stroke: var(--primary);
+		stroke: var(--text-primary);
 		fill: none;
 		stroke-width: 2.5;
 		stroke-linecap: round;
@@ -111,7 +111,7 @@ const styles = css`
 	}
 	.desc {
 		font-size: 0.6875rem;
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 	}
 `
 

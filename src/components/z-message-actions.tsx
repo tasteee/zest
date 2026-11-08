@@ -21,11 +21,11 @@ const styles = css`
 		display: inline-flex;
 		align-items: center;
 		gap: 0.125rem;
-		background: var(--card);
-		border: 1px solid var(--border);
+		background: var(--surface-overlay);
+		border: 1px solid var(--border-default);
 		border-radius: 999px;
 		padding: 0px 0.25rem 0.125rem;
-		box-shadow: 0 2px 8px color-mix(in oklch, var(--foreground) 12%, transparent);
+		box-shadow: var(--shadow-overlay);
 	}
 	:host([is-hidden]) {
 		display: none;
@@ -41,15 +41,15 @@ const styles = css`
 		border-radius: 999px;
 		cursor: pointer;
 		padding: 0;
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 		font-size: 1rem;
 		transition:
 			background-color var(--motion-instant) var(--ease-enter),
 			transform var(--motion-instant) var(--ease-enter);
 	}
 	button:hover {
-		background: color-mix(in oklch, var(--foreground) 10%, transparent);
-		color: var(--foreground);
+		background: color-mix(in oklch, var(--text-primary) 10%, transparent);
+		color: var(--text-primary);
 	}
 	button.quick:hover {
 		transform: scale(1.2);
@@ -57,7 +57,7 @@ const styles = css`
 	.divider {
 		width: 1px;
 		height: 1.1rem;
-		background: var(--border);
+		background: var(--border-default);
 		margin: 0 0.125rem;
 	}
 	svg {

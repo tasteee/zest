@@ -11,7 +11,7 @@ import { oneOf } from '../shared/prop-types'
  * height without a scrollbar.
  */
 const styles = css`
-	.field:focus-within { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
+	.field:focus-within { outline: 1px solid var(--border-focus); }
 
 	:host {
 		display: block;
@@ -26,16 +26,14 @@ const styles = css`
 		display: block;
 		width: 100%;
 		box-sizing: border-box;
-		/* Carved into the surface, like z-input. Inert in the flat themes. */
-		background: var(--material-surface);
-		box-shadow: var(--elevation-carved);
-		border: 1px solid var(--border);
+		background: transparent;
+		border: 1px solid var(--border-default);
 		border-radius: var(--radius-md);
-		color: var(--foreground);
+		color: var(--text-primary);
 		font-family: inherit;
 		line-height: 1.6;
 		transition: border-color var(--motion-fast) var(--ease-enter), background-color var(--motion-fast) var(--ease-enter);
-		--accent: var(--primary);
+		--tone: var(--accent-primary);
 	}
 
 	/* sizes — same scale as z-input */
@@ -53,11 +51,11 @@ const styles = css`
 	}
 
 	:host([tone='secondary']) .field {
-		--accent: var(--purple);
+		--tone: var(--accent-secondary);
 	}
 
 	:host([tone='tertiary']) .field {
-		--accent: var(--pink);
+		--tone: var(--accent-tertiary);
 	}
 
 	textarea {
@@ -83,23 +81,23 @@ const styles = css`
 	}
 
 	textarea::placeholder {
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 		user-select: none;
 		-webkit-user-select: none;
 	}
 
 	.field:hover {
-		border-color: color-mix(in oklch, var(--foreground) 30%, transparent);
+		border-color: color-mix(in oklch, var(--text-primary) 30%, transparent);
 	}
 
 	.field.is-focused {
-		border-color: var(--accent);
-		background: color-mix(in oklch, var(--accent) 5%, transparent);
+		border-color: var(--tone);
+		background: color-mix(in oklch, var(--tone) 5%, transparent);
 	}
 
 	.field.is-invalid {
-		border-color: var(--destructive);
-		--accent: var(--destructive);
+		border-color: var(--status-danger);
+		--tone: var(--status-danger);
 	}
 
 	.field.is-disabled {

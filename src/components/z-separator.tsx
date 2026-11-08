@@ -20,7 +20,7 @@ const styles = css`
 		display: flex;
 		align-items: center;
 		width: 100%;
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 		gap: var(--space-base);
 	}
 
@@ -38,12 +38,12 @@ const styles = css`
 		align-self: stretch;
 		width: 1px;
 		height: auto;
-		background: var(--border);
+		background: var(--border-default);
 	}
 
 	.rule {
 		flex: 1 1 auto;
-		background: var(--border);
+		background: var(--border-default);
 		height: 1px;
 	}
 
@@ -60,7 +60,7 @@ const styles = css`
 		letter-spacing: 0.08em;
 		text-transform: uppercase;
 		white-space: nowrap;
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 		line-height: 1;
 		user-select: none;
 	}

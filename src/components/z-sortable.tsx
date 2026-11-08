@@ -33,9 +33,9 @@ const styles = css`
 	}
 	.placeholder {
 		box-sizing: border-box;
-		border: 1px dashed var(--border);
+		border: 1px dashed var(--border-default);
 		border-radius: var(--radius-md);
-		background: color-mix(in oklch, var(--muted) 8%, transparent);
+		background: color-mix(in oklch, var(--text-secondary) 8%, transparent);
 	}
 `
 
@@ -90,8 +90,8 @@ export const ZSortable = c(
 				margin: '0',
 				zIndex: '9999',
 				pointerEvents: 'none',
-				outline: '1px solid var(--border)',
-				background: 'var(--background)'
+				outline: '1px solid var(--border-default)',
+				background: 'var(--surface-page)'
 			})
 			;(e.currentTarget as HTMLElement).setPointerCapture(e.pointerId)
 			props.start({ index: s.oldIndex })

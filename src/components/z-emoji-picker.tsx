@@ -54,8 +54,8 @@ const styles = css`
 	:host {
 		display: block;
 		width: 20rem;
-		background: var(--card);
-		border: 1px solid var(--border);
+		background: var(--surface-default);
+		border: 1px solid var(--border-default);
 		border-radius: var(--radius-md);
 		overflow: hidden;
 	}
@@ -64,22 +64,22 @@ const styles = css`
 		width: 100%;
 		box-sizing: border-box;
 		border: none;
-		border-bottom: 1px solid var(--border);
+		border-bottom: 1px solid var(--border-default);
 		background: transparent;
-		color: var(--foreground);
+		color: var(--text-primary);
 		font-family: inherit;
 		font-size: 0.875rem;
 		padding: 0.6rem 0.75rem;
 		outline: none;
 	}
 	.search::placeholder {
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 	}
 	.tabs {
 		display: flex;
 		gap: 0.125rem;
 		padding: 0.25rem 0.375rem;
-		border-bottom: 1px solid var(--border);
+		border-bottom: 1px solid var(--border-default);
 	}
 	.tab {
 		flex: 1;
@@ -95,11 +95,11 @@ const styles = css`
 			opacity var(--motion-fast) var(--ease-enter);
 	}
 	.tab:hover {
-		background: color-mix(in oklch, var(--foreground) 8%, transparent);
+		background: color-mix(in oklch, var(--text-primary) 8%, transparent);
 	}
 	.tab.is-active {
 		opacity: 1;
-		background: color-mix(in oklch, var(--foreground) 12%, transparent);
+		background: color-mix(in oklch, var(--text-primary) 12%, transparent);
 	}
 	.grid {
 		display: grid;
@@ -122,13 +122,13 @@ const styles = css`
 			transform var(--motion-instant) var(--ease-enter);
 	}
 	.emoji:hover {
-		background: color-mix(in oklch, var(--foreground) 10%, transparent);
+		background: color-mix(in oklch, var(--text-primary) 10%, transparent);
 		transform: scale(1.15);
 	}
 	.empty {
 		grid-column: 1 / -1;
 		text-align: center;
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 		font-size: 0.8125rem;
 		padding: 1.5rem 0;
 	}

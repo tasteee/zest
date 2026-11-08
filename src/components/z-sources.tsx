@@ -33,7 +33,7 @@ const styles = css`
 		font-weight: 700;
 		letter-spacing: 0.04em;
 		text-transform: uppercase;
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 		margin-bottom: 0.5rem;
 	}
 	.list {
@@ -48,9 +48,9 @@ const styles = css`
 		text-align: start;
 		width: 100%;
 		box-sizing: border-box;
-		border: 1px solid var(--border);
+		border: 1px solid var(--border-default);
 		border-radius: var(--radius-md);
-		background: var(--card);
+		background: var(--surface-default);
 		padding: 0.5rem 0.625rem;
 		cursor: pointer;
 		text-decoration: none;
@@ -60,8 +60,8 @@ const styles = css`
 			background-color var(--motion-fast) var(--ease-enter);
 	}
 	.card:hover {
-		border-color: color-mix(in oklch, var(--foreground) 30%, transparent);
-		background: color-mix(in oklch, var(--foreground) 3%, var(--card));
+		border-color: color-mix(in oklch, var(--text-primary) 30%, transparent);
+		background: color-mix(in oklch, var(--text-primary) 3%, var(--surface-default));
 	}
 	.top {
 		display: flex;
@@ -78,8 +78,8 @@ const styles = css`
 		padding: 0 0.3rem;
 		box-sizing: border-box;
 		border-radius: 0.35rem;
-		background: color-mix(in oklch, var(--primary) 16%, transparent);
-		color: var(--primary);
+		background: color-mix(in oklch, var(--accent-primary) 16%, transparent);
+		color: var(--text-primary);
 		font-size: 0.6875rem;
 		font-weight: 700;
 	}
@@ -95,12 +95,12 @@ const styles = css`
 	.domain {
 		flex: 0 0 auto;
 		font-size: 0.6875rem;
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 	}
 	.snippet {
 		margin-top: 0.25rem;
 		font-size: 0.75rem;
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 		display: -webkit-box;
 		-webkit-line-clamp: 2;
 		-webkit-box-orient: vertical;

@@ -3947,6 +3947,9 @@
 				"default": "Select…",
 				"description": "Text shown when nothing is selected."
 			},
+			"value-prefix": {
+				"description": "Text shown before the selected label in the trigger, for example `Weight: `. The options in the panel are not affected."
+			},
 			"options": {
 				"default": "[]",
 				"description": "The options to choose from. Set it from JavaScript. An option with `children` is a branch that opens a cascading submenu and cannot itself be selected; values must be unique across the whole tree.",

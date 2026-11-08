@@ -95,11 +95,11 @@ const driveBrowser = async (browser, rootDir, label) => {
 		const upgrade = await page.evaluate(() => ({
 			isDefined: Boolean(customElements.get('z-switch')),
 			hasShadow: Boolean(document.querySelector('z-switch')?.shadowRoot),
-			hasTokens: getComputedStyle(document.documentElement).getPropertyValue('--primary').trim().length > 0
+			hasTokens: getComputedStyle(document.documentElement).getPropertyValue('--text-primary').trim().length > 0
 		}))
 		if (!upgrade.isDefined) problems.push('z-switch is not defined')
 		if (!upgrade.hasShadow) problems.push('z-switch rendered no shadow root')
-		if (!upgrade.hasTokens) problems.push('ink.css tokens are missing (--primary is empty)')
+		if (!upgrade.hasTokens) problems.push('ink.css tokens are missing (--text-primary is empty)')
 
 		await page.locator('z-switch').click()
 		await page.waitForTimeout(150)

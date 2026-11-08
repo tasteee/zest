@@ -351,7 +351,7 @@ export const Typography = () => (
 				</>
 			}
 		>
-			zest · dark only · borders over shadows
+			zest · flat surfaces, floating shadows
 		</DocsFooter>
 	</div>
 )
@@ -449,7 +449,7 @@ const BODY = [
 const COLORS = [
 	{
 		token: 'color (default)',
-		meta: '--foreground',
+		meta: '--text-primary',
 		color: undefined,
 		sample: 'Default foreground for primary reading',
 		usageTitle: 'Primary ink.',
@@ -457,7 +457,7 @@ const COLORS = [
 	},
 	{
 		token: 'color="muted"',
-		meta: '--muted-foreground',
+		meta: '--text-secondary',
 		color: 'muted',
 		sample: 'Muted for support and de-emphasis',
 		usageTitle: 'Supporting copy.',
@@ -465,7 +465,7 @@ const COLORS = [
 	},
 	{
 		token: 'color="secondary"',
-		meta: '--purple',
+		meta: '--accent-secondary',
 		color: 'secondary',
 		sample: 'Purple marks the primary accent',
 		usageTitle: 'Primary accent.',
@@ -473,7 +473,7 @@ const COLORS = [
 	},
 	{
 		token: 'color="tertiary"',
-		meta: '--pink',
+		meta: '--accent-tertiary',
 		color: 'tertiary',
 		sample: 'Pink marks the secondary accent',
 		usageTitle: 'Secondary accent.',

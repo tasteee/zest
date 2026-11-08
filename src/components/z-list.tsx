@@ -11,8 +11,8 @@ import { c, css } from 'atomico'
 const styles = css`
 	:host {
 		display: block;
-		background: var(--card);
-		border: 1px solid var(--border);
+		background: var(--surface-default);
+		border: 1px solid var(--border-default);
 		border-radius: var(--radius-lg);
 		overflow: hidden;
 	}
@@ -35,7 +35,7 @@ const styles = css`
 		font-weight: 500;
 		letter-spacing: 0.12em;
 		text-transform: uppercase;
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 	}
 
 	/* Hairline dividers between rows. ::slotted() only accepts a compound
@@ -43,7 +43,7 @@ const styles = css`
 	   the first. The label lives in the shadow DOM, so :first-child here is the
 	   first slotted light-DOM row. */
 	::slotted(z-list-row:not(:first-child)) {
-		border-top: 1px solid var(--border);
+		border-top: 1px solid var(--border-default);
 	}
 `
 

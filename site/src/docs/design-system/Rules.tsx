@@ -13,13 +13,13 @@ export const Rules = () => (
 			<article className="article">
 				<div className="article-body">
 					<z-heading size="sm" tag="h2">
-						Borders over shadows
+						Flat, with shadows only where something floats
 					</z-heading>
 					<z-text>
-						No box-shadows, anywhere. Elevation and separation come from a 1px border (
-						<code className="inline">--border</code>) or a shift on the neutral ramp (
-						<code className="inline">--color-neutral-0…9</code>), never a drop shadow. It reads flatter and more precise,
-						and it means one fewer axis of inconsistency across every component.
+						Resting UI is a surface plus a 1px border (<code className="inline">--border-default</code>), with no shadow: cards, fields,
+						buttons and switches stay flat. Only things that float above other content take a shadow: <code className="inline">--shadow-overlay</code>
+						for menus, popovers, tooltips and toasts, and <code className="inline">--shadow-modal</code> for dialogs and sheets.
+						Pressed and selected states change surface, never elevation.
 					</z-text>
 
 					<z-heading size="sm" tag="h2">

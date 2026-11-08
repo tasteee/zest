@@ -23,7 +23,7 @@ const styles = css`
 	}
 	.label {
 		font-size: 0.6875rem;
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 	}
 	.stack {
 		display: inline-flex;
@@ -39,7 +39,7 @@ const styles = css`
 		margin-inline-start: 0.25rem;
 		font-size: 0.6875rem;
 		font-weight: 600;
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 	}
 `
 

@@ -23,7 +23,7 @@ const styles = css`
 		display: inline-flex;
 		align-items: center;
 		gap: 4px;
-		background: color-mix(in oklch, var(--foreground) 8%, var(--card));
+		background: color-mix(in oklch, var(--text-primary) 8%, var(--surface-default));
 		border-radius: 1.125rem;
 		border-end-start-radius: 0.3rem;
 		padding: 0.7rem 0.85rem;
@@ -32,7 +32,7 @@ const styles = css`
 		width: 7px;
 		height: 7px;
 		border-radius: 999px;
-		background: var(--muted-foreground);
+		background: var(--text-secondary);
 		animation: typing 1.4s infinite both;
 	}
 	.dot:nth-child(2) {

@@ -28,12 +28,12 @@ const styles = css`
 		width: var(--dock-size);
 		height: var(--dock-size);
 		border-radius: var(--radius-lg);
-		background: var(--card);
-		border: 1px solid var(--border);
+		background: var(--surface-default);
+		border: 1px solid var(--border-default);
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
-		color: var(--foreground);
+		color: var(--text-primary);
 		cursor: pointer;
 		text-decoration: none;
 		transition:
@@ -43,11 +43,11 @@ const styles = css`
 
 	.item:hover,
 	.item:focus-visible {
-		border-color: color-mix(in oklch, var(--foreground) 45%, transparent);
+		border-color: color-mix(in oklch, var(--text-primary) 45%, transparent);
 	}
 
 	.item:focus-visible {
-		outline: 3px solid var(--focus-ring);
+		outline: 3px solid var(--border-focus);
 		outline-offset: 2px;
 	}
 
@@ -62,9 +62,9 @@ const styles = css`
 		left: 50%;
 		transform: translateX(-50%) translateY(4px);
 		box-sizing: border-box;
-		background: var(--popover);
-		border: 1px solid var(--border);
-		color: var(--foreground);
+		background: var(--surface-overlay);
+		border: 1px solid var(--border-default);
+		color: var(--text-primary);
 		font-size: var(--font-size-caption);
 		font-family: var(--font-sans);
 		padding: 0.25rem 0.5rem;
@@ -91,7 +91,7 @@ const styles = css`
 		width: 0.25rem;
 		height: 0.25rem;
 		border-radius: 999px;
-		background: var(--foreground);
+		background: var(--text-primary);
 	}
 
 	@media (prefers-reduced-motion: reduce) {

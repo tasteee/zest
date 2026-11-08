@@ -26,8 +26,8 @@ const styles = css`
 		align-items: center;
 		justify-content: center;
 		cursor: pointer;
-		background: var(--primary);
-		color: var(--primary-foreground);
+		background: var(--accent-primary);
+		color: var(--on-accent);
 		padding: 0;
 		transition:
 			opacity var(--motion-fast) var(--ease-enter),
@@ -45,7 +45,7 @@ const styles = css`
 		cursor: default;
 	}
 	:host([is-streaming]) button {
-		background: var(--destructive);
+		background: var(--status-danger);
 	}
 	svg {
 		width: 1.1rem;

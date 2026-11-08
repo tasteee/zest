@@ -8,15 +8,12 @@ export const Theming = () => (
 		lede="Every element reads its look from CSS custom properties defined in ink.css. Override them on :root to retheme the whole system, or on any container to retheme just that subtree."
 	>
 		<h2>The base dials</h2>
-		<p>A handful of base tokens drive the derived ramps. Change one and every shade, accent, and surface follows.</p>
+		<p>A handful of base tokens drive the scales and the neutral ramp. Change one and every surface, border and size follows.</p>
 		<Code
 			language="css"
 			code={`
 :root {
-  --base-pink-color: oklch(0.72 0.19 350); /* pink accent */
-  --base-purple-color: oklch(0.62 0.2 290);  /* purple accent */
-  --base-neutral-color-dark: oklch(0.161 0.014 146);   /* page floor */
-  --base-neutral-hue: 146;                     /* tint of the dark neutral ramp */
+  --base-neutral-hue: 146;                     /* tint of the neutral ramp */
   --base-neutral-chroma: 0.014;
   --base-radius: 0.625rem;
   --base-spacing: 0.25rem;
@@ -34,19 +31,32 @@ export const Theming = () => (
 		<Code language="html" code={`<html data-theme="light">`} />
 
 		<h2>Scoped themes</h2>
-		<p>Tokens inherit, so a container can carry its own values.</p>
+		<p>
+			Derived tokens (the radius, spacing and type scales, and every role token) are computed where they are declared, so
+			a container that only changes <code>--base-radius</code> would still inherit the radius computed on the root. Add{' '}
+			<code>data-zest-scope</code> to re-derive them for that subtree. A <code>data-theme</code> element does the same,
+			and also swaps the palette. Both keep the scale values you set on <code>:root</code>.
+		</p>
 		<Code
 			code={`
-<section style="--base-radius: 0; --base-font-size: 14px">
+<section data-zest-scope style="--base-radius: 0; --base-font-size: 14px">
   <z-card>Square, compact cards in here only.</z-card>
 </section>
 `}
 		/>
 
+		<h2>Tokens only</h2>
+		<p>
+			<code>ink.css</code> is two files. <code>tokens.css</code> holds custom properties and never touches your page;{' '}
+			<code>document.css</code> styles <code>html</code> and <code>body</code>, scrollbars, text selection and the theme
+			fade. Import <code>@tasteee/zest/tokens.css</code> on its own when your application owns those.
+		</p>
+
 		<h2>Motion</h2>
 		<p>
 			Durations and curves are tokens too. See <Link href="/system/motion">Motion</Link> for the full scale. Reduced-motion
-			users get every fade with no travel automatically.
+			users get no travel or scale, and the theme changes without a fade. Set{' '}
+			<code>--theme-fade-out-duration</code> and <code>--theme-fade-in-duration</code> to bring the fade back.
 		</p>
 	</Article>
 )

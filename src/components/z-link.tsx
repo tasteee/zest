@@ -31,7 +31,7 @@ const styles = css`
 		text-decoration: none;
 		cursor: pointer;
 		line-height: 1.4;
-		color: var(--tone-color);
+		color: var(--tone);
 		transition:
 			color var(--motion-fast) var(--ease-enter),
 			opacity var(--motion-fast) var(--ease-enter);
@@ -51,13 +51,13 @@ const styles = css`
 
 	/* tones */
 	a.is-secondary {
-		--tone-color: var(--purple);
+		--tone: var(--accent-secondary);
 	}
 	a.is-tertiary {
-		--tone-color: var(--pink);
+		--tone: var(--accent-tertiary);
 	}
 	a.is-primary {
-		--tone-color: var(--foreground);
+		--tone: var(--text-primary);
 	}
 
 	/* animated underline, grows from the leading edge on hover */
@@ -90,13 +90,13 @@ const styles = css`
 	}
 
 	a:focus-visible {
-		outline: 3px solid var(--focus-ring);
+		outline: 3px solid var(--border-focus);
 		outline-offset: 3px;
 		border-radius: 2px;
 	}
 
 	:host([is-disabled]) a {
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 		pointer-events: none;
 		opacity: 0.6;
 	}

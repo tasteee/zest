@@ -30,8 +30,8 @@ const ARROW_SIZE = 8
 
 const styles = css`
 	.surface {
-		--tooltip-surface: var(--foreground);
-		--tooltip-edge: color-mix(in srgb, var(--foreground) 78%, var(--background));
+		--tooltip-surface: var(--text-primary);
+		--tooltip-edge: color-mix(in srgb, var(--text-primary) 78%, var(--surface-page));
 		padding: 0.4375rem 0.625rem;
 		max-width: 16rem;
 		font-size: var(--font-size-caption);
@@ -43,10 +43,10 @@ const styles = css`
 		-webkit-user-select: none;
 		font-weight: var(--font-weight-medium);
 		/* inverse surface: reads at a glance as "not part of the page" */
-		background: var(--inverse);
-		color: var(--inverse-foreground);
-		border: 1px solid var(--inverse);
-		box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.6);
+		background: var(--surface-inverse);
+		color: var(--text-inverse);
+		border: 1px solid var(--surface-inverse);
+		box-shadow: var(--shadow-overlay);
 	}
 
 	/* A square rotated onto its corner, centred exactly on the surface edge:
@@ -57,7 +57,7 @@ const styles = css`
 		position: absolute;
 		width: 8px;
 		height: 8px;
-		background: var(--inverse);
+		background: var(--surface-inverse);
 		rotate: 45deg;
 	}
 
@@ -66,42 +66,42 @@ const styles = css`
 		bottom: -4px;
 		left: var(--arrow-x, 50%); /* physical */
 		margin-inline-start: -4px;
-		border-inline-end: 1px solid var(--inverse);
-		border-bottom: 1px solid var(--inverse);
+		border-inline-end: 1px solid var(--surface-inverse);
+		border-bottom: 1px solid var(--surface-inverse);
 	}
 
 	.surface[data-side='bottom'] .arrow {
 		top: -4px;
 		left: var(--arrow-x, 50%); /* physical */
 		margin-inline-start: -4px;
-		border-inline-start: 1px solid var(--inverse);
-		border-top: 1px solid var(--inverse);
+		border-inline-start: 1px solid var(--surface-inverse);
+		border-top: 1px solid var(--surface-inverse);
 	}
 
 	.surface[data-side='left'] .arrow {
 		right: -4px; /* physical */
 		top: var(--arrow-y, 50%);
 		margin-top: -4px;
-		border-top: 1px solid var(--inverse);
-		border-inline-end: 1px solid var(--inverse);
+		border-top: 1px solid var(--surface-inverse);
+		border-inline-end: 1px solid var(--surface-inverse);
 	}
 
 	.surface[data-side='right'] .arrow {
 		left: -4px; /* physical */
 		top: var(--arrow-y, 50%);
 		margin-top: -4px;
-		border-bottom: 1px solid var(--inverse);
-		border-inline-start: 1px solid var(--inverse);
+		border-bottom: 1px solid var(--surface-inverse);
+		border-inline-start: 1px solid var(--surface-inverse);
 	}
 
 	/* a tone tints the inverse surface rather than replacing it */
 	:host([tone='secondary']) .surface {
-		background: color-mix(in oklab, var(--inverse) 82%, var(--purple));
+		background: color-mix(in oklab, var(--surface-inverse) 82%, var(--accent-secondary));
 		border-color: transparent;
 	}
 
 	:host([tone='tertiary']) .surface {
-		background: color-mix(in oklab, var(--inverse) 82%, var(--pink));
+		background: color-mix(in oklab, var(--surface-inverse) 82%, var(--accent-tertiary));
 		border-color: transparent;
 	}
 `

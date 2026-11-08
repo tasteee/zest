@@ -28,8 +28,8 @@ const styles = css`
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
-		background: color-mix(in srgb, var(--accent) 22%, var(--card));
-		color: color-mix(in oklch, var(--accent) 85%, white);
+		background: color-mix(in srgb, var(--tone) 22%, var(--surface-default));
+		color: color-mix(in oklch, var(--tone) 85%, white);
 		font-size: 0.6875rem;
 		font-weight: 600;
 		font-family: inherit;
@@ -45,20 +45,20 @@ const styles = css`
 	.name {
 		font-size: 0.875rem;
 		font-weight: 500;
-		color: var(--foreground);
+		color: var(--text-primary);
 	}
 
 	.sep {
 		width: 3px;
 		height: 3px;
 		border-radius: 999px;
-		background: var(--muted-foreground);
+		background: var(--text-secondary);
 		flex-shrink: 0;
 	}
 
 	.date {
 		font-size: 0.875rem;
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 	}
 
 	.tags {
@@ -75,10 +75,10 @@ const styles = css`
 		font-size: 0.8125rem;
 		font-weight: 500;
 		line-height: 1;
-		border: 1px solid var(--border);
+		border: 1px solid var(--border-default);
 		border-radius: 999px;
 		background: transparent;
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 		padding: 0.375rem 0.75rem;
 		cursor: pointer;
 		transition:
@@ -87,12 +87,12 @@ const styles = css`
 	}
 
 	.tag:hover {
-		border-color: color-mix(in oklch, var(--accent) 50%, transparent);
-		color: var(--foreground);
+		border-color: color-mix(in oklch, var(--tone) 50%, transparent);
+		color: var(--text-primary);
 	}
 
 	.tag:focus-visible {
-		outline: 3px solid var(--focus-ring);
+		outline: 3px solid var(--border-focus);
 		outline-offset: 2px;
 	}
 `

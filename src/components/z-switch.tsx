@@ -31,20 +31,20 @@ const styles = css`
 		cursor: pointer;
 		font-family: inherit;
 		font-size: var(--font-size-small);
-		color: var(--foreground);
+		color: var(--text-primary);
 		user-select: none;
-		--accent: var(--primary);
+		--tone: var(--accent-primary);
 	}
 
 	label.is-sm { min-height: var(--control-height-sm); }
 	label.is-lg { min-height: var(--control-height-lg); }
 
 	:host([tone='secondary']) label {
-		--accent: var(--purple);
+		--tone: var(--accent-secondary);
 	}
 
 	:host([tone='tertiary']) label {
-		--accent: var(--pink);
+		--tone: var(--accent-tertiary);
 	}
 
 	label.is-disabled {
@@ -60,12 +60,9 @@ const styles = css`
 		width: 2.5rem;
 		height: 1.375rem;
 		padding: 2px;
-		border: 1px solid var(--border);
+		border: 1px solid var(--border-default);
 		border-radius: 999px;
-		/* The track is a channel the knob slides along — carved, not raised.
-		   Inert in the flat themes. */
-		background: var(--material-surface);
-		box-shadow: var(--elevation-carved);
+		background: transparent;
 		box-sizing: border-box;
 		transition:
 			background-color var(--motion-fast) var(--ease-enter),
@@ -82,14 +79,12 @@ const styles = css`
 	}
 
 	label:hover .track {
-		border-color: color-mix(in oklch, var(--foreground) 40%, transparent);
+		border-color: color-mix(in oklch, var(--text-primary) 40%, transparent);
 	}
 
 	.track.is-on {
-		--emissive-color: var(--accent);
-		background: var(--material-tone), var(--accent);
-		box-shadow: var(--elevation-carved), var(--emissive-tone);
-		border-color: var(--accent);
+		background: var(--tone);
+		border-color: var(--tone);
 	}
 
 	/* The knob is the one part of a switch that is unambiguously an object
@@ -98,7 +93,7 @@ const styles = css`
 		width: calc(1.375rem - 6px);
 		height: calc(1.375rem - 6px);
 		border-radius: 999px;
-		background: var(--muted-foreground);
+		background: var(--text-secondary);
 		transition:
 			transform var(--motion-fast) var(--ease-enter),
 			background-color var(--motion-fast) var(--ease-enter);
@@ -114,7 +109,7 @@ const styles = css`
 	}
 
 	.track.is-on .knob {
-		background: var(--primary-foreground);
+		background: var(--on-accent);
 		transform: translateX(calc(2.5rem - 1.375rem));
 	}
 	label.is-sm .track.is-on .knob {
@@ -136,7 +131,7 @@ const styles = css`
 	}
 
 	input:focus-visible + .track {
-		outline: 3px solid var(--focus-ring);
+		outline: 3px solid var(--border-focus);
 		outline-offset: 2px;
 	}
 `

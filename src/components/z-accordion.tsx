@@ -14,7 +14,7 @@ import { oneOf } from '../shared/prop-types'
 const styles = css`
 	:host {
 		display: block;
-		border: 1px solid var(--border);
+		border: 1px solid var(--border-default);
 		border-radius: var(--radius-lg);
 		padding: 0 var(--space-lg);
 	}
@@ -24,7 +24,7 @@ const styles = css`
 	}
 
 	::slotted(z-collapsible:not(:first-child)) {
-		border-top: 1px solid var(--border);
+		border-top: 1px solid var(--border-default);
 	}
 `
 

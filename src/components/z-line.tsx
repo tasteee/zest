@@ -10,7 +10,7 @@ const styles = css`
 	:host {
 		display: block;
 		flex-shrink: 0;
-		background: var(--border);
+		background: var(--border-default);
 		height: 1px;
 		width: 100%;
 	}

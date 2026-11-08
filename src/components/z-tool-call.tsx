@@ -17,9 +17,9 @@ import { c, css } from 'atomico'
 const styles = css`
 	:host {
 		display: block;
-		border: 1px solid var(--border);
+		border: 1px solid var(--border-default);
 		border-radius: var(--radius-md);
-		background: color-mix(in oklch, var(--foreground) 3%, var(--card));
+		background: color-mix(in oklch, var(--text-primary) 3%, var(--surface-default));
 		overflow: hidden;
 	}
 	:host([is-hidden]) {
@@ -39,12 +39,12 @@ const styles = css`
 		width: 1rem;
 		height: 1rem;
 		flex-shrink: 0;
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 	}
 	.name {
 		font-family: var(--font-mono);
 		font-weight: 600;
-		color: var(--foreground);
+		color: var(--text-primary);
 	}
 	.status {
 		display: inline-flex;
@@ -52,26 +52,26 @@ const styles = css`
 		gap: 0.3rem;
 		font-size: 0.75rem;
 		text-transform: capitalize;
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 	}
 	.dot {
 		width: 0.5rem;
 		height: 0.5rem;
 		border-radius: 999px;
-		background: var(--muted-foreground);
+		background: var(--text-secondary);
 	}
 	.status.is-running .dot {
-		background: var(--warning);
+		background: var(--status-warning);
 		animation: pulse 1.2s ease-in-out infinite;
 	}
 	.status.is-success .dot {
-		background: var(--success);
+		background: var(--status-success);
 	}
 	.status.is-error .dot {
-		background: var(--destructive);
+		background: var(--status-danger);
 	}
 	.status.is-error {
-		color: var(--destructive);
+		color: var(--status-danger);
 	}
 	@keyframes pulse {
 		50% {
@@ -89,7 +89,7 @@ const styles = css`
 		font-weight: 600;
 		letter-spacing: 0.04em;
 		text-transform: uppercase;
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 		margin-bottom: 0.3rem;
 	}
 `

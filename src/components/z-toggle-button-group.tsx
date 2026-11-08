@@ -101,38 +101,38 @@ const styles = css`
 	   its own accent/size/kind overrides them locally. That only holds because
 	   an unset variant resolves to no class at all — see toggle-schema.ts. */
 	:host([tone='secondary']) {
-		--z-toggle-button-color: var(--neon-purple);
-		--z-toggle-button-accent: var(--neon-purple);
+		--z-toggle-button-color: var(--accent-secondary);
+		--z-toggle-button-accent: var(--accent-secondary);
 		--z-toggle-button-accent-foreground: var(--on-accent);
 	}
 
 	:host([tone='tertiary']) {
-		--z-toggle-button-color: var(--neon-pink);
-		--z-toggle-button-accent: var(--neon-pink);
+		--z-toggle-button-color: var(--accent-tertiary);
+		--z-toggle-button-accent: var(--accent-tertiary);
 		--z-toggle-button-accent-foreground: var(--on-accent);
 	}
 
 	:host([tone='primary']) {
-		--z-toggle-button-color: var(--foreground);
-		--z-toggle-button-accent: var(--primary);
-		--z-toggle-button-accent-foreground: var(--primary-foreground);
+		--z-toggle-button-color: var(--text-primary);
+		--z-toggle-button-accent: var(--accent-primary);
+		--z-toggle-button-accent-foreground: var(--on-accent);
 	}
 
 	:host([tone='success']) {
-		--z-toggle-button-color: var(--success);
-		--z-toggle-button-accent: var(--success);
+		--z-toggle-button-color: var(--status-success);
+		--z-toggle-button-accent: var(--status-success);
 		--z-toggle-button-accent-foreground: var(--on-accent);
 	}
 
 	:host([tone='warning']) {
-		--z-toggle-button-color: var(--warning);
-		--z-toggle-button-accent: var(--warning);
+		--z-toggle-button-color: var(--status-warning);
+		--z-toggle-button-accent: var(--status-warning);
 		--z-toggle-button-accent-foreground: var(--on-accent);
 	}
 
 	:host([tone='danger']) {
-		--z-toggle-button-color: var(--destructive);
-		--z-toggle-button-accent: var(--destructive);
+		--z-toggle-button-color: var(--status-danger);
+		--z-toggle-button-accent: var(--status-danger);
 		--z-toggle-button-accent-foreground: var(--on-accent);
 	}
 
@@ -163,40 +163,40 @@ const styles = css`
 
 	:host([kind='ghost']) {
 		--z-toggle-button-border: transparent;
-		--z-toggle-button-hover-bg: color-mix(in oklch, var(--z-toggle-button-accent, var(--foreground)) 10%, transparent);
-		--z-toggle-button-on-bg: var(--z-toggle-button-accent, var(--primary));
-		--z-toggle-button-on-color: var(--z-toggle-button-accent-foreground, var(--primary-foreground));
+		--z-toggle-button-hover-bg: color-mix(in oklch, var(--z-toggle-button-accent, var(--text-primary)) 10%, transparent);
+		--z-toggle-button-on-bg: var(--z-toggle-button-accent, var(--text-primary));
+		--z-toggle-button-on-color: var(--z-toggle-button-accent-foreground, var(--on-accent));
 		--z-toggle-button-on-border: transparent;
 	}
 
 	/* off: tone-colored text + a dimmed tone border (mixed toward transparent so
 	   the hue never rotates). on: solid tone fill with dark on-foreground text. */
 	:host([kind='outline']) {
-		--z-toggle-button-border: color-mix(in oklch, var(--z-toggle-button-accent, var(--foreground)) 50%, transparent);
-		--z-toggle-button-hover-bg: color-mix(in oklch, var(--z-toggle-button-accent, var(--foreground)) 10%, transparent);
-		--z-toggle-button-on-bg: var(--z-toggle-button-accent, var(--primary));
-		--z-toggle-button-on-color: var(--z-toggle-button-accent-foreground, var(--primary-foreground));
-		--z-toggle-button-on-border: var(--z-toggle-button-accent, var(--primary));
+		--z-toggle-button-border: color-mix(in oklch, var(--z-toggle-button-accent, var(--text-primary)) 50%, transparent);
+		--z-toggle-button-hover-bg: color-mix(in oklch, var(--z-toggle-button-accent, var(--text-primary)) 10%, transparent);
+		--z-toggle-button-on-bg: var(--z-toggle-button-accent, var(--text-primary));
+		--z-toggle-button-on-color: var(--z-toggle-button-accent-foreground, var(--on-accent));
+		--z-toggle-button-on-border: var(--z-toggle-button-accent, var(--text-primary));
 	}
 
 	/* solid: filled at rest, not just on press, so the segment reads as an
 	   object even before it is selected. */
 	:host([kind='solid']) {
 		--z-toggle-button-border: transparent;
-		--z-toggle-button-bg: color-mix(in oklch, var(--z-toggle-button-accent, var(--foreground)) 12%, var(--surface, transparent));
-		--z-toggle-button-hover-bg: color-mix(in oklch, var(--z-toggle-button-accent, var(--foreground)) 20%, var(--surface, transparent));
-		--z-toggle-button-on-bg: var(--z-toggle-button-accent, var(--primary));
-		--z-toggle-button-on-color: var(--z-toggle-button-accent-foreground, var(--primary-foreground));
+		--z-toggle-button-bg: color-mix(in oklch, var(--z-toggle-button-accent, var(--text-primary)) 12%, var(--z-toggle-button-surface, transparent));
+		--z-toggle-button-hover-bg: color-mix(in oklch, var(--z-toggle-button-accent, var(--text-primary)) 20%, var(--z-toggle-button-surface, transparent));
+		--z-toggle-button-on-bg: var(--z-toggle-button-accent, var(--text-primary));
+		--z-toggle-button-on-color: var(--z-toggle-button-accent-foreground, var(--on-accent));
 		--z-toggle-button-on-border: transparent;
 	}
 
 	:host([kind='soft']) {
 		--z-toggle-button-border: transparent;
-		--z-toggle-button-bg: color-mix(in oklch, var(--z-toggle-button-accent, var(--foreground)) 15%, transparent);
-		--z-toggle-button-color: var(--z-toggle-button-accent, var(--foreground));
-		--z-toggle-button-hover-bg: color-mix(in oklch, var(--z-toggle-button-accent, var(--foreground)) 24%, transparent);
-		--z-toggle-button-on-bg: var(--z-toggle-button-accent, var(--primary));
-		--z-toggle-button-on-color: var(--z-toggle-button-accent-foreground, var(--primary-foreground));
+		--z-toggle-button-bg: color-mix(in oklch, var(--z-toggle-button-accent, var(--text-primary)) 15%, transparent);
+		--z-toggle-button-color: var(--z-toggle-button-accent, var(--text-primary));
+		--z-toggle-button-hover-bg: color-mix(in oklch, var(--z-toggle-button-accent, var(--text-primary)) 24%, transparent);
+		--z-toggle-button-on-bg: var(--z-toggle-button-accent, var(--text-primary));
+		--z-toggle-button-on-color: var(--z-toggle-button-accent-foreground, var(--on-accent));
 		--z-toggle-button-on-border: transparent;
 	}
 
@@ -204,8 +204,8 @@ const styles = css`
 	:host([kind='plain']) {
 		--z-toggle-button-border: transparent;
 		--z-toggle-button-hover-bg: transparent;
-		--z-toggle-button-on-bg: var(--z-toggle-button-accent, var(--primary));
-		--z-toggle-button-on-color: var(--z-toggle-button-accent-foreground, var(--primary-foreground));
+		--z-toggle-button-on-bg: var(--z-toggle-button-accent, var(--text-primary));
+		--z-toggle-button-on-color: var(--z-toggle-button-accent-foreground, var(--on-accent));
 		--z-toggle-button-on-border: transparent;
 	}
 

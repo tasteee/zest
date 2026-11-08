@@ -34,7 +34,7 @@ const styles = css`
 		transition: background-color var(--motion-fast) var(--ease-enter);
 	}
 	:host([is-clickable]:hover) {
-		background: color-mix(in oklch, var(--foreground) 6%, transparent);
+		background: color-mix(in oklch, var(--text-primary) 6%, transparent);
 	}
 
 	/* The second child grows to fill the row by default. */

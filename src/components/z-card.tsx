@@ -27,12 +27,9 @@ const styles = css`
 		border-radius: var(--radius-lg);
 		padding: var(--space-lg);
 		transition: border-color 0.05s linear;
-		border: 1px solid var(--border);
-		color: var(--foreground);
-		/* Inert in the flat themes, material in the rest. A card rests on the
-		   page rather than floating above it, so it takes the flush stack. */
-		background: var(--material-surface);
-		box-shadow: var(--elevation-flush);
+		border: 1px solid var(--border-default);
+		color: var(--text-primary);
+		background: transparent;
 	}
 
 	:host([direction='horizontal']) {
@@ -46,7 +43,7 @@ const styles = css`
 
 	:host([is-reactive]:hover),
 	:host([is-reactive]:focus-within) {
-		border-color: color-mix(in oklch, var(--foreground) 50%, transparent);
+		border-color: color-mix(in oklch, var(--text-primary) 50%, transparent);
 	}
 
 	/* Same title treatment as z-dialog, z-sheet, and z-drawer, from the same
@@ -56,7 +53,7 @@ const styles = css`
 	.header {
 		display: flex;
 		flex-direction: column;
-		gap: var(--space-2xs);
+		gap: var(--space-xs);
 		/* Unconditional, because knowing whether anything was slotted below
 		   would mean observing the slot — too much machinery for a card whose
 		   header is nearly always followed by content. A heading-only card just
@@ -69,12 +66,12 @@ const styles = css`
 		font-size: var(--font-size-h4);
 		font-weight: 600;
 		line-height: var(--line-height-h4);
-		color: var(--foreground);
+		color: var(--text-primary);
 	}
 
 	.description {
 		margin: 0;
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 		font-size: var(--font-size-small);
 		line-height: var(--line-height-body);
 	}

@@ -11,14 +11,14 @@ import { c, css, useState, useEffect, useHost } from 'atomico'
 const styles = css`
 	:host {
 		display: block;
-		--accent: var(--chart-1);
+		--tone: var(--chart-1);
 	}
 
 	:host([tone='tertiary']) {
-		--accent: var(--chart-2);
+		--tone: var(--chart-2);
 	}
 	:host([tone='success']) {
-		--accent: var(--success);
+		--tone: var(--status-success);
 	}
 
 	:host([is-hidden]) {
@@ -33,12 +33,12 @@ const styles = css`
 	}
 
 	.grid {
-		stroke: var(--border);
+		stroke: var(--border-default);
 		stroke-width: 1;
 	}
 
 	.bar {
-		fill: var(--accent);
+		fill: var(--tone);
 		transition: opacity var(--motion-fast) var(--ease-enter);
 	}
 
@@ -47,33 +47,33 @@ const styles = css`
 	}
 
 	.area {
-		fill: var(--accent);
+		fill: var(--tone);
 		opacity: 0.14;
 	}
 
 	.line {
 		fill: none;
-		stroke: var(--accent);
+		stroke: var(--tone);
 		stroke-width: 2.5;
 		stroke-linejoin: round;
 		stroke-linecap: round;
 	}
 
 	.point {
-		fill: var(--background);
-		stroke: var(--accent);
+		fill: var(--surface-page);
+		stroke: var(--tone);
 		stroke-width: 2.5;
 	}
 
 	.x-label {
-		fill: var(--muted-foreground);
+		fill: var(--text-secondary);
 		font-family: var(--font-sans);
 		font-size: 11px;
 		text-anchor: middle;
 	}
 
 	.value {
-		fill: var(--foreground);
+		fill: var(--text-primary);
 		font-family: var(--font-sans);
 		font-size: 12px;
 		font-weight: 600;

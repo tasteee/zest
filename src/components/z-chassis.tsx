@@ -44,10 +44,10 @@ const styles = css`
 		padding-inline-end: var(--chassis-frame, 0.375rem);
 		padding-bottom: var(--chassis-frame, 0.375rem);
 		padding-inline-start: var(--chassis-bezel, 0.75rem);
-		background: var(--chassis-body, var(--paper));
-		border: 1px solid var(--chassis-border, var(--color-neutral-3));
+		background: var(--chassis-body, var(--surface-default));
+		border: 1px solid var(--chassis-border, var(--border-default));
 		border-radius: var(--chassis-radius, var(--radius-xl));
-		color: var(--foreground);
+		color: var(--text-primary);
 	}
 	:host([rail-side='right']) {
 		flex-direction: row-reverse;
@@ -133,8 +133,8 @@ const styles = css`
 		   scroll shouldn't drag whatever's outside the chassis up with it. */
 		overscroll-behavior: contain;
 		position: relative;
-		background: var(--chassis-screen, var(--bg));
-		border: 1px solid var(--chassis-screen-border, var(--border));
+		background: var(--chassis-screen, var(--surface-page));
+		border: 1px solid var(--chassis-screen-border, var(--border-default));
 		border-radius: var(--chassis-screen-radius, var(--radius-lg));
 	}
 	.screen::-webkit-scrollbar {
@@ -145,13 +145,13 @@ const styles = css`
 		background: transparent;
 	}
 	.screen::-webkit-scrollbar-thumb {
-		background: var(--color-neutral-3);
+		background: var(--border-default);
 		border: 2px solid transparent;
 		border-radius: 999px;
 		background-clip: padding-box;
 	}
 	.screen::-webkit-scrollbar-thumb:hover {
-		background: var(--color-neutral-4);
+		background: var(--border-strong);
 		background-clip: padding-box;
 	}
 

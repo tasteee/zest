@@ -40,7 +40,7 @@ const styles = css`
 		border: none;
 		padding: 0;
 		cursor: pointer;
-		background: color-mix(in oklch, var(--foreground) 8%, transparent);
+		background: color-mix(in oklch, var(--text-primary) 8%, transparent);
 		aspect-ratio: 1;
 		overflow: hidden;
 	}

@@ -10070,6 +10070,14 @@
             },
             {
               "kind": "field",
+              "name": "valuePrefix",
+              "type": {
+                "text": "string"
+              },
+              "description": "Text shown before the selected label in the trigger, for example `Weight: `. The options in the panel are not affected."
+            },
+            {
+              "kind": "field",
               "name": "options",
               "type": {
                 "text": "array"
@@ -10181,6 +10189,14 @@
                 "text": "string"
               },
               "description": "Text shown when nothing is selected."
+            },
+            {
+              "name": "value-prefix",
+              "fieldName": "valuePrefix",
+              "type": {
+                "text": "string"
+              },
+              "description": "Text shown before the selected label in the trigger, for example `Weight: `. The options in the panel are not affected."
             },
             {
               "name": "options",

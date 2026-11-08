@@ -28,15 +28,12 @@ const styles = css`
 		font-weight: 500;
 		line-height: 1;
 		white-space: nowrap;
-		color: var(--foreground);
-		background: color-mix(in oklch, var(--paper-soft) 70%, transparent);
-		border: 1px solid var(--border);
-		/* the raised edge: a hairline highlight on top, a deeper shadow below */
+		color: var(--text-primary);
+		background: color-mix(in oklch, var(--surface-subtle) 70%, transparent);
+		border: 1px solid var(--border-default);
+		/* the keycap edge: a thicker bottom border, no shadow */
 		border-bottom-width: 2px;
 		border-radius: var(--radius-sm);
-		box-shadow:
-			inset 0 1px 0 color-mix(in oklch, white 8%, transparent),
-			0 1px 1px color-mix(in oklch, black 25%, transparent);
 	}
 
 	/* sizes, height, padding and font-size scale together */

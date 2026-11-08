@@ -152,7 +152,7 @@ const styles = css`
 	}
 
 	input:focus-visible + .swap {
-		outline: 3px solid var(--focus-ring);
+		outline: 3px solid var(--border-focus);
 		outline-offset: 3px;
 		border-radius: var(--radius-sm);
 	}

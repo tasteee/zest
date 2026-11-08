@@ -38,23 +38,23 @@ const styles = css`
 		height: 100%;
 		min-height: 0;
 		max-height: 100%;
-		background: var(--color-neutral-0);
-		border: 1px solid var(--sidebar-border);
+		background: var(--surface-page);
+		border: 1px solid var(--border-default);
 		border-radius: var(--radius-lg);
 		padding: var(--space-sm) var(--space-md) var(--space-md);
-		color: var(--sidebar-foreground);
-		--accent: var(--primary);
+		color: var(--text-primary);
+		--tone: var(--accent-primary);
 		transition: width var(--motion-fast) var(--ease-enter);
 		user-select: none;
 		-webkit-user-select: none;
 	}
 
 	:host([tone='secondary']) {
-		--accent: var(--purple);
+		--tone: var(--accent-secondary);
 	}
 
 	:host([tone='tertiary']) {
-		--accent: var(--pink);
+		--tone: var(--accent-tertiary);
 	}
 
 	:host([is-collapsed]) {
@@ -68,7 +68,7 @@ const styles = css`
 	:host([is-docked]) {
 		background: transparent;
 		border: none;
-		border-inline-end: 1px solid var(--sidebar-border);
+		border-inline-end: 1px solid var(--border-default);
 		border-radius: 0;
 		padding: var(--space-sm) 0 var(--space-md);
 	}
@@ -80,7 +80,7 @@ const styles = css`
 	.foot.has-content {
 		margin-top: auto;
 		padding-top: 0.75rem;
-		border-top: 1px solid var(--sidebar-border);
+		border-top: 1px solid var(--border-default);
 	}
 
 	nav {
@@ -99,7 +99,7 @@ const styles = css`
 	@supports not selector(::-webkit-scrollbar) {
 		nav {
 			scrollbar-width: thin;
-			scrollbar-color: var(--color-neutral-3) transparent;
+			scrollbar-color: var(--border-default) transparent;
 		}
 	}
 
@@ -111,11 +111,11 @@ const styles = css`
 		background: transparent;
 	}
 	nav::-webkit-scrollbar-thumb {
-		background: var(--color-neutral-3);
+		background: var(--border-default);
 		border-radius: 999px;
 	}
 	nav::-webkit-scrollbar-thumb:hover {
-		background: var(--color-neutral-4);
+		background: var(--border-strong);
 	}
 	/* No stepper arrows: Windows Chromium renders them otherwise. */
 	nav::-webkit-scrollbar-button {
@@ -137,7 +137,7 @@ const styles = css`
 		font-weight: 700;
 		letter-spacing: 0.1em;
 		text-transform: uppercase;
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 		background: transparent;
 		border: 0;
 		text-align: start;
@@ -164,11 +164,11 @@ const styles = css`
 	}
 
 	.group-label:hover {
-		color: var(--foreground);
+		color: var(--text-primary);
 	}
 
 	.group-label:focus-visible {
-		outline: 3px solid var(--focus-ring);
+		outline: 3px solid var(--border-focus);
 		outline-offset: 2px;
 		border-radius: var(--radius-sm);
 	}
@@ -210,7 +210,7 @@ const styles = css`
 		font-family: inherit;
 		font-size: var(--font-size-small);
 		font-weight: 500;
-		color: var(--color-neutral-8);
+		color: var(--text-primary);
 		text-decoration: none;
 		background: transparent;
 		border: 0;
@@ -225,13 +225,13 @@ const styles = css`
 	}
 
 	.link:hover {
-		color: var(--foreground);
-		background: color-mix(in oklch, var(--foreground) 6%, transparent);
+		color: var(--text-primary);
+		background: color-mix(in oklch, var(--text-primary) 6%, transparent);
 	}
 
 	.link.is-active {
-		color: var(--accent);
-		background: color-mix(in oklch, var(--accent) 12%, transparent);
+		color: var(--tone);
+		background: color-mix(in oklch, var(--tone) 12%, transparent);
 	}
 
 	:host(:not([is-collapsed])) .group .link {
@@ -254,7 +254,7 @@ const styles = css`
 	}
 
 	.link:focus-visible {
-		outline: 3px solid var(--focus-ring);
+		outline: 3px solid var(--border-focus);
 		outline-offset: 2px;
 	}
 
@@ -309,8 +309,8 @@ const styles = css`
 		font-weight: 600;
 		padding: 0.0625rem 0.4rem;
 		border-radius: 999px;
-		background: color-mix(in oklch, var(--accent) 18%, transparent);
-		color: var(--accent);
+		background: color-mix(in oklch, var(--tone) 18%, transparent);
+		color: var(--tone);
 	}
 `
 

@@ -20,12 +20,12 @@ const styles = css`
 	.line {
 		flex: 1;
 		height: 1px;
-		background: var(--border);
+		background: var(--border-default);
 	}
 	.label {
 		font-size: 0.75rem;
 		font-weight: 600;
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 		white-space: nowrap;
 	}
 `

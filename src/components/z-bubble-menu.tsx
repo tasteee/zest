@@ -45,7 +45,7 @@ const styles = css`
 		background: transparent;
 		border: 0;
 		outline: none;
-		color: var(--foreground);
+		color: var(--text-primary);
 		font-family: inherit;
 		font-size: var(--font-size-small);
 	}

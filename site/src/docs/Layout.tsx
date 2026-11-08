@@ -325,7 +325,7 @@ export const Layout = () => (
 						space="xl"
 						container="md"
 						gutter="md"
-						style={{ background: 'color-mix(in oklch, var(--purple) 7%, transparent)' }}
+						style={{ background: 'color-mix(in oklch, var(--accent-secondary) 7%, transparent)' }}
 					>
 						<z-surface className="tile lead" tone="tertiary" kind="soft" radius="md">
 							vertical space above &amp; below · content centered to md
@@ -481,7 +481,7 @@ export const Layout = () => (
 						direction="vertical"
 						maxHeight="14rem"
 						inset="sm"
-						style={{ border: '1px solid var(--border)', borderRadius: 'var(--radius-md)' }}
+						style={{ border: '1px solid var(--border-default)', borderRadius: 'var(--radius-md)' }}
 					>
 						<z-column gap="sm">
 							<z-surface className="tile" tone="secondary" kind="soft" radius="md">
@@ -521,7 +521,7 @@ export const Layout = () => (
 					<z-scroll
 						direction="horizontal"
 						inset="sm"
-						style={{ border: '1px solid var(--border)', borderRadius: 'var(--radius-md)' }}
+						style={{ border: '1px solid var(--border-default)', borderRadius: 'var(--radius-md)' }}
 					>
 						<z-row gap="sm">
 							<z-surface className="tile tall" tone="secondary" kind="soft" radius="md">
@@ -626,7 +626,7 @@ export const Layout = () => (
 				</>
 			}
 		>
-			zesty-wc · layout primitives · borders over shadows
+			zesty-wc · layout primitives · flat surfaces, floating shadows
 		</DocsFooter>
 	</div>
 )

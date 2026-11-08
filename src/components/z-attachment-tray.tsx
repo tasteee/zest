@@ -33,7 +33,7 @@ const styles = css`
 		align-items: center;
 		gap: 0.375rem;
 		font-size: 0.8125rem;
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 	}
 	.add svg {
 		width: 1rem;

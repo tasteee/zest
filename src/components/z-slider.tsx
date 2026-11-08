@@ -18,7 +18,7 @@ const styles = css`
 	:host {
 		display: block;
 		width: 100%;
-		--accent: var(--primary);
+		--tone: var(--accent-primary);
 	}
 
 	/* Header row: label left, value pill right. */
@@ -32,7 +32,7 @@ const styles = css`
 	.label {
 		font-size: var(--font-size-small);
 		font-weight: var(--font-weight-medium);
-		color: var(--foreground);
+		color: var(--text-primary);
 		line-height: 1.2;
 	}
 
@@ -42,8 +42,8 @@ const styles = css`
 		font-size: var(--font-size-caption);
 		font-weight: var(--font-weight-semibold);
 		font-variant-numeric: tabular-nums;
-		color: var(--accent);
-		background: color-mix(in oklch, var(--accent) 12%, transparent);
+		color: var(--tone);
+		background: color-mix(in oklch, var(--tone) 12%, transparent);
 		padding: 0.125rem 0.5rem;
 		border-radius: 999px;
 		line-height: 1.4;
@@ -51,11 +51,11 @@ const styles = css`
 	}
 
 	:host([tone='secondary']) {
-		--accent: var(--purple);
+		--tone: var(--accent-secondary);
 	}
 
 	:host([tone='tertiary']) {
-		--accent: var(--pink);
+		--tone: var(--accent-tertiary);
 	}
 
 	:host([is-hidden]) {
@@ -82,10 +82,10 @@ const styles = css`
 		border-radius: 999px;
 		background: linear-gradient(
 			to right,
-			var(--accent) 0%,
-			var(--accent) var(--fill, 0%),
-			var(--border) var(--fill, 0%),
-			var(--border) 100%
+			var(--tone) 0%,
+			var(--tone) var(--fill, 0%),
+			var(--border-default) var(--fill, 0%),
+			var(--border-default) 100%
 		);
 	}
 
@@ -93,27 +93,22 @@ const styles = css`
 	input::-moz-range-track {
 		height: 4px;
 		border-radius: 999px;
-		background: var(--border);
+		background: var(--border-default);
 	}
 	input::-moz-range-progress {
 		height: 4px;
 		border-radius: 999px;
-		background: var(--accent);
+		background: var(--tone);
 	}
 
-	/* WebKit thumb. A fader cap: raised off the track, and lit in the accent
-	   so it reads as the live part of the control. Both tokens are inert in
-	   the flat themes. */
 	input::-webkit-slider-thumb {
 		appearance: none;
 		width: 1rem;
 		height: 1rem;
 		margin-top: -6px;
 		border-radius: 999px;
-		--emissive-color: var(--accent);
-		background: var(--material-raised), var(--accent);
-		box-shadow: var(--elevation-raised), var(--emissive-tone);
-		border: 2px solid var(--background);
+		background: var(--tone);
+		border: 2px solid var(--surface-page);
 		transition: transform var(--motion-instant) var(--ease-enter);
 	}
 	input::-webkit-slider-thumb:active {
@@ -125,18 +120,16 @@ const styles = css`
 		width: 1rem;
 		height: 1rem;
 		border-radius: 999px;
-		--emissive-color: var(--accent);
-		background: var(--material-raised), var(--accent);
-		box-shadow: var(--elevation-raised), var(--emissive-tone);
-		border: 2px solid var(--background);
+		background: var(--tone);
+		border: 2px solid var(--surface-page);
 	}
 
 	input:focus-visible::-webkit-slider-thumb {
-		outline: 3px solid var(--focus-ring);
+		outline: 3px solid var(--border-focus);
 		outline-offset: 2px;
 	}
 	input:focus-visible::-moz-range-thumb {
-		outline: 3px solid var(--focus-ring);
+		outline: 3px solid var(--border-focus);
 		outline-offset: 2px;
 	}
 `

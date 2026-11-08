@@ -24,8 +24,8 @@ const styles = css`
 		box-sizing: border-box;
 		overflow: hidden;
 		border-radius: var(--radius-lg);
-		border: 1px solid var(--border);
-		background: var(--card);
+		border: 1px solid var(--border-default);
+		background: var(--surface-default);
 		padding: var(--spacing-6);
 		display: flex;
 		flex-direction: column;
@@ -35,7 +35,7 @@ const styles = css`
 
 	:host(:hover) .surface,
 	:host(:focus-within) .surface {
-		border-color: color-mix(in oklch, var(--foreground) 45%, transparent);
+		border-color: color-mix(in oklch, var(--text-primary) 45%, transparent);
 	}
 
 	.background {
@@ -64,7 +64,7 @@ const styles = css`
 		position: relative;
 		z-index: 1;
 		display: inline-flex;
-		color: var(--foreground);
+		color: var(--text-primary);
 	}
 
 	::slotted([slot='icon']) {
@@ -90,7 +90,7 @@ const styles = css`
 		gap: 0.25rem;
 		font-size: var(--font-size-small);
 		font-weight: 600;
-		color: var(--foreground);
+		color: var(--text-primary);
 		text-decoration: none;
 		transform: translateY(0.5rem);
 		opacity: 0;

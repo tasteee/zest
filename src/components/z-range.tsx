@@ -31,7 +31,7 @@ const styles = css`
 	:host {
 		display: block;
 		width: 100%;
-		--accent: var(--primary);
+		--tone: var(--accent-primary);
 	}
 
 	:host([is-hidden]) {
@@ -56,7 +56,7 @@ const styles = css`
 	.label {
 		font-size: var(--font-size-small);
 		font-weight: var(--font-weight-medium);
-		color: var(--foreground);
+		color: var(--text-primary);
 		line-height: 1.2;
 	}
 
@@ -69,20 +69,20 @@ const styles = css`
 		font-size: var(--font-size-caption);
 		font-weight: var(--font-weight-semibold);
 		font-variant-numeric: tabular-nums;
-		background: color-mix(in oklch, var(--muted-foreground) 12%, transparent);
+		background: color-mix(in oklch, var(--text-secondary) 12%, transparent);
 		padding: 0.125rem 0.5rem;
 		border-radius: 999px;
 		line-height: 1.4;
 		white-space: nowrap;
 	}
 	.value .left {
-		color: var(--left-accent, var(--accent));
+		color: var(--left-accent, var(--tone));
 	}
 	.value .right {
-		color: var(--right-accent, var(--accent));
+		color: var(--right-accent, var(--tone));
 	}
 	.value .dash {
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 		font-weight: var(--font-weight-regular);
 	}
 
@@ -107,17 +107,17 @@ const styles = css`
 	.track {
 		left: 0;
 		right: 0;
-		background: var(--border);
+		background: var(--border-default);
 		z-index: 1;
 	}
 	/* off-limits ends, clearly distinct from both rail and active range */
 	.cap {
-		background: color-mix(in oklch, var(--muted-foreground) 32%, transparent);
+		background: color-mix(in oklch, var(--text-secondary) 32%, transparent);
 		z-index: 2;
 	}
 	/* active range between the handles */
 	.fill {
-		background: var(--accent);
+		background: var(--tone);
 		z-index: 3;
 	}
 
@@ -164,7 +164,7 @@ const styles = css`
 		height: 1rem;
 		margin-top: -6px;
 		border-radius: 999px;
-		border: 2px solid var(--background);
+		border: 2px solid var(--surface-page);
 		cursor: pointer;
 		transition: transform var(--motion-instant) var(--ease-enter);
 	}
@@ -173,7 +173,7 @@ const styles = css`
 		width: 1rem;
 		height: 1rem;
 		border-radius: 999px;
-		border: 2px solid var(--background);
+		border: 2px solid var(--surface-page);
 		cursor: pointer;
 	}
 	input:active::-webkit-slider-thumb {
@@ -181,24 +181,24 @@ const styles = css`
 	}
 
 	input.left::-webkit-slider-thumb {
-		background: var(--left-accent, var(--accent));
+		background: var(--left-accent, var(--tone));
 	}
 	input.left::-moz-range-thumb {
-		background: var(--left-accent, var(--accent));
+		background: var(--left-accent, var(--tone));
 	}
 	input.right::-webkit-slider-thumb {
-		background: var(--right-accent, var(--accent));
+		background: var(--right-accent, var(--tone));
 	}
 	input.right::-moz-range-thumb {
-		background: var(--right-accent, var(--accent));
+		background: var(--right-accent, var(--tone));
 	}
 
 	input:focus-visible::-webkit-slider-thumb {
-		outline: 3px solid var(--focus-ring);
+		outline: 3px solid var(--border-focus);
 		outline-offset: 2px;
 	}
 	input:focus-visible::-moz-range-thumb {
-		outline: 3px solid var(--focus-ring);
+		outline: 3px solid var(--border-focus);
 		outline-offset: 2px;
 	}
 `
@@ -241,12 +241,12 @@ const num = (value: unknown, fallback: number): number => {
 const clamp = (value: number, lo: number, hi: number): number => Math.min(Math.max(value, lo), hi)
 
 const toneFor = (tone: unknown): string => {
-	if (tone === 'secondary') return 'var(--purple)'
-	if (tone === 'tertiary') return 'var(--pink)'
-	if (tone === 'success') return 'var(--success)'
-	if (tone === 'warning') return 'var(--warning)'
-	if (tone === 'danger') return 'var(--destructive)'
-	return 'var(--primary)'
+	if (tone === 'secondary') return 'var(--accent-secondary)'
+	if (tone === 'tertiary') return 'var(--accent-tertiary)'
+	if (tone === 'success') return 'var(--status-success)'
+	if (tone === 'warning') return 'var(--status-warning)'
+	if (tone === 'danger') return 'var(--status-danger)'
+	return 'var(--text-primary)'
 }
 
 const buildHandleConfig = (

@@ -2,7 +2,7 @@ import { css } from 'atomico'
 
 /**
  * The single scrollbar treatment for every scroll surface inside a Zest shadow
- * root. Document-level rules in ink.css cover application chrome; this sheet
+ * root. Document-level rules in document.css cover application chrome; this sheet
  * covers internal component surfaces, where document CSS cannot cross the
  * shadow boundary.
  */
@@ -11,7 +11,7 @@ export const themedScrollbarStyles = css`
 		:host,
 		* {
 			scrollbar-width: thin;
-			scrollbar-color: var(--color-neutral-3) transparent;
+			scrollbar-color: var(--border-default) transparent;
 		}
 	}
 
@@ -28,14 +28,14 @@ export const themedScrollbarStyles = css`
 	}
 	:host::-webkit-scrollbar-thumb,
 	*::-webkit-scrollbar-thumb {
-		background: var(--color-neutral-3);
+		background: var(--border-default);
 		border: 2px solid transparent;
 		border-radius: 999px;
 		background-clip: padding-box;
 	}
 	:host::-webkit-scrollbar-thumb:hover,
 	*::-webkit-scrollbar-thumb:hover {
-		background: var(--color-neutral-4);
+		background: var(--border-strong);
 		background-clip: padding-box;
 	}
 	:host::-webkit-scrollbar-button,

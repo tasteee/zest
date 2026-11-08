@@ -11,13 +11,14 @@ import type { NestedOptionT } from '../shared/nested-options'
 
 /*
  * z-select, a custom dropdown. Trigger shows the selected label (or a
- * placeholder); the panel is a bordered, shadow-free popover that drops below.
+ * placeholder); the panel is a bordered, floating popover that drops below.
  * Options are supplied as an `options` array property:
  *   el.options = [{ value, label, isDisabled?, children? }]
  * An option with `children` is a branch: it opens a cascading submenu and is
  * never itself selectable. Only leaves are picked, `value` stays a single
  * (tree-unique) string, and `change` also reports `path`, the values from the
  * root down to the leaf.
+ * `value-prefix` puts a string before the selected label in the trigger only.
  * Selection highlights with an accent tint. Keyboard: ↑/↓ move within a level,
  * →/Enter open a branch (← in RTL), ←/Esc close a submenu (→ in RTL), Enter
  * picks a leaf, Esc at the top level closes. Clicking outside closes.
@@ -27,15 +28,15 @@ const styles = css`
 		display: inline-flex;
 		position: relative;
 		width: 100%;
-		--accent: var(--primary);
+		--tone: var(--accent-primary);
 	}
 
 	:host([tone='secondary']) {
-		--accent: var(--purple);
+		--tone: var(--accent-secondary);
 	}
 
 	:host([tone='tertiary']) {
-		--accent: var(--pink);
+		--tone: var(--accent-tertiary);
 	}
 
 	:host([is-inline]) {
@@ -53,13 +54,10 @@ const styles = css`
 		gap: 0.625rem;
 		width: 100%;
 		box-sizing: border-box;
-		/* The trigger is a pressable cap, not a hole — raised, unlike z-input.
-		   Inert in the flat themes. */
-		background: var(--material-raised), transparent;
-		box-shadow: var(--elevation-raised);
-		border: 1px solid var(--border);
+		background: transparent;
+		border: 1px solid var(--border-default);
 		border-radius: var(--radius-md);
-		color: var(--foreground);
+		color: var(--text-primary);
 		font-family: inherit;
 		cursor: pointer;
 		text-align: start;
@@ -85,16 +83,16 @@ const styles = css`
 	}
 
 	.trigger:hover {
-		border-color: color-mix(in oklch, var(--foreground) 30%, transparent);
+		border-color: color-mix(in oklch, var(--text-primary) 30%, transparent);
 	}
 
 	.trigger.is-open {
-		border-color: var(--accent);
-		background: color-mix(in oklch, var(--accent) 5%, transparent);
+		border-color: var(--tone);
+		background: color-mix(in oklch, var(--tone) 5%, transparent);
 	}
 
 	.trigger.is-invalid {
-		border-color: var(--destructive);
+		border-color: var(--status-danger);
 	}
 
 	.trigger.is-disabled {
@@ -103,21 +101,21 @@ const styles = css`
 	}
 
 	.trigger:focus-visible {
-		outline: 3px solid var(--focus-ring);
+		outline: 3px solid var(--border-focus);
 		outline-offset: 2px;
 	}
 
 	.value { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
 	.value.is-placeholder {
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 	}
 
 	.chevron {
 		width: 1rem;
 		height: 1rem;
 		flex-shrink: 0;
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 		transition: transform var(--motion-fast) var(--ease-enter);
 		stroke: currentColor;
 		stroke-width: 2;
@@ -128,7 +126,7 @@ const styles = css`
 
 	.trigger.is-open .chevron {
 		transform: rotate(180deg);
-		color: var(--accent);
+		color: var(--tone);
 	}
 
 	/* Fixed + top-layer (via [popover]) rather than absolute-in-:host, so the
@@ -146,10 +144,11 @@ const styles = css`
 		top: 0;
 		right: auto; /* physical */
 		bottom: auto;
-		z-index: 50;
-		background: var(--popover);
-		border: 1px solid var(--border);
+		z-index: var(--z-menu);
+		background: var(--surface-overlay);
+		border: 1px solid var(--border-default);
 		border-radius: var(--radius-md);
+		box-shadow: var(--shadow-overlay);
 		padding: 0.3125rem;
 		max-height: 16rem;
 		overflow-y: auto;
@@ -169,20 +168,20 @@ const styles = css`
 		padding: 0.5rem 0.625rem;
 		border-radius: var(--radius-sm);
 		font-size: var(--font-size-small);
-		color: var(--foreground);
+		color: var(--text-primary);
 		cursor: pointer;
 		user-select: none;
 		white-space: nowrap;
 	}
 
 	.option.is-active {
-		background: color-mix(in oklch, var(--accent) 14%, transparent);
-		color: var(--accent);
+		background: color-mix(in oklch, var(--tone) 14%, transparent);
+		color: var(--tone);
 	}
 
 	.option.is-selected,
 	.option.is-ancestor {
-		color: var(--accent);
+		color: var(--tone);
 		font-weight: 600;
 	}
 
@@ -227,7 +226,7 @@ const styles = css`
 	.empty {
 		padding: 0.625rem;
 		font-size: var(--font-size-small);
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 		text-align: center;
 	}
 `
@@ -471,7 +470,7 @@ export const ZSelect = c(
 					onkeydown={onKeyDown}
 				>
 					<span class={selected ? 'value' : 'value is-placeholder'}>
-						{selected ? selected.label : props.placeholder || t('selectPlaceholder')}
+						{selected ? `${props.valuePrefix ?? ''}${selected.label}` : props.placeholder || t('selectPlaceholder')}
 					</span>
 					<svg class="chevron" viewBox="0 0 24 24">
 						<polyline points="6 9 12 15 18 9" />
@@ -556,6 +555,9 @@ export const ZSelect = c(
 			name: { type: String, reflect: true },
 			label: String,
 			placeholder: String,
+			// Text shown before the selected label in the trigger, e.g. "Weight: ".
+			// The options in the panel are not affected.
+			valuePrefix: String,
 			options: { type: Array },
 			size: { type: oneOf('sm', 'md', 'lg'), reflect: true },
 			tone: { type: oneOf('primary', 'secondary', 'tertiary'), reflect: true },

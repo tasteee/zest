@@ -14,7 +14,7 @@ const styles = css`
 		display: inline-flex;
 		align-items: center;
 		gap: 1rem;
-		--eyebrow-tone: var(--muted-foreground);
+		--eyebrow-tone: var(--text-secondary);
 	}
 
 	:host([is-hidden]) {
@@ -22,10 +22,10 @@ const styles = css`
 	}
 
 	:host([tone='secondary']) {
-		--eyebrow-tone: var(--purple);
+		--eyebrow-tone: var(--accent-secondary);
 	}
 	:host([tone='tertiary']) {
-		--eyebrow-tone: var(--pink);
+		--eyebrow-tone: var(--accent-tertiary);
 	}
 
 	/* Full-width lets the trailing rule stretch to the edge instead of a fixed 5rem. */
@@ -51,7 +51,7 @@ const styles = css`
 		flex-shrink: 0;
 		width: var(--eyebrow-rule-width, 5rem);
 		height: 1px;
-		background: var(--border);
+		background: var(--border-default);
 	}
 
 	:host([is-full-width]) .rule {

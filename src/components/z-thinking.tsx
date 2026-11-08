@@ -19,23 +19,23 @@ const styles = css`
 		display: none;
 	}
 	z-collapsible {
-		--accent: var(--muted-foreground);
+		--tone: var(--text-secondary);
 	}
 	.head {
 		display: inline-flex;
 		align-items: center;
 		gap: 0.5rem;
 		font-size: 0.875rem;
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 	}
 	.spark {
 		width: 1rem;
 		height: 1rem;
 		flex-shrink: 0;
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 	}
 	:host([is-active]) .spark {
-		color: var(--primary);
+		color: var(--text-primary);
 	}
 	.label {
 		font-weight: 500;
@@ -43,9 +43,9 @@ const styles = css`
 	:host([is-active]) .label {
 		background: linear-gradient(
 			90deg,
-			var(--muted-foreground) 20%,
-			var(--foreground) 50%,
-			var(--muted-foreground) 80%
+			var(--text-secondary) 20%,
+			var(--text-primary) 50%,
+			var(--text-secondary) 80%
 		);
 		background-size: 200% 100%;
 		-webkit-background-clip: text;
@@ -63,7 +63,7 @@ const styles = css`
 		opacity: 0.75;
 	}
 	.body {
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 		font-size: 0.875rem;
 		line-height: 1.55;
 		white-space: pre-wrap;

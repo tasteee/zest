@@ -13,15 +13,15 @@ import { oneOf } from '../shared/prop-types'
 const styles = css`
 	:host {
 		display: block;
-		--accent: var(--primary);
+		--tone: var(--accent-primary);
 	}
 
 	:host([tone='secondary']) {
-		--accent: var(--purple);
+		--tone: var(--accent-secondary);
 	}
 
 	:host([tone='tertiary']) {
-		--accent: var(--pink);
+		--tone: var(--accent-tertiary);
 	}
 
 	:host([is-hidden]) {
@@ -41,18 +41,18 @@ const styles = css`
 		font-family: inherit;
 		font-size: var(--font-size-body);
 		font-weight: 500;
-		color: var(--foreground);
+		color: var(--text-primary);
 		text-align: start;
 		cursor: pointer;
 		transition: color var(--motion-fast) var(--ease-enter);
 	}
 
 	.trigger:hover {
-		color: var(--accent);
+		color: var(--tone);
 	}
 
 	.trigger:focus-visible {
-		outline: 3px solid var(--focus-ring);
+		outline: 3px solid var(--border-focus);
 		outline-offset: 2px;
 		border-radius: var(--radius-sm);
 	}
@@ -66,7 +66,7 @@ const styles = css`
 		width: 1rem;
 		height: 1rem;
 		flex-shrink: 0;
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 		transition:
 			transform var(--motion-fast) var(--ease-enter),
 			color var(--motion-fast) var(--ease-enter);
@@ -79,7 +79,7 @@ const styles = css`
 
 	.trigger:hover .chevron,
 	:host([is-open]) .chevron {
-		color: var(--accent);
+		color: var(--tone);
 	}
 
 	:host([is-open]) .chevron {
@@ -89,7 +89,7 @@ const styles = css`
 	.content {
 		display: none;
 		padding: 0 0 1rem;
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 		font-size: var(--font-size-small);
 		line-height: var(--line-height-body);
 	}

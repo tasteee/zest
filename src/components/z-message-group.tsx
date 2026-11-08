@@ -55,12 +55,12 @@ const styles = css`
 	.name {
 		font-size: 0.75rem;
 		font-weight: 600;
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 		margin: 0 0.5rem 2px;
 	}
 	.meta {
 		font-size: 0.6875rem;
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 		margin: 2px 0.5rem 0;
 	}
 `

@@ -15,7 +15,7 @@ import { oneOf } from '../shared/prop-types'
  * owning form. See ../shared/form-control.ts.
  */
 const styles = css`
-	.field:focus-within { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
+	.field:focus-within { outline: 2px solid var(--border-focus); outline-offset: 2px; }
 
 	:host {
 		display: inline-flex;
@@ -36,13 +36,10 @@ const styles = css`
 		gap: 0.625rem;
 		width: 100%;
 		box-sizing: border-box;
-		/* A field is a hole cut into the surface, so it takes the carved stack
-		   rather than a raised one. Both are inert in the flat themes. */
-		background: var(--material-surface);
-		box-shadow: var(--elevation-carved);
-		border: 1px solid var(--border);
+		background: transparent;
+		border: 1px solid var(--border-default);
 		border-radius: var(--radius-md);
-		color: var(--foreground);
+		color: var(--text-primary);
 		font-family: inherit;
 		/* a <label> wrapper: clicking the padding or empty adornments focuses the
 		   input natively, so there are no dead zones on the sides. */
@@ -50,15 +47,15 @@ const styles = css`
 		transition:
 			border-color var(--motion-fast) var(--ease-enter),
 			background-color var(--motion-fast) var(--ease-enter);
-		--accent: var(--primary);
+		--tone: var(--accent-primary);
 	}
 
 	:host([tone='secondary']) .field {
-		--accent: var(--purple);
+		--tone: var(--accent-secondary);
 	}
 
 	:host([tone='tertiary']) .field {
-		--accent: var(--pink);
+		--tone: var(--accent-tertiary);
 	}
 
 	/* sizes */
@@ -79,17 +76,17 @@ const styles = css`
 	}
 
 	.field:hover {
-		border-color: color-mix(in oklch, var(--foreground) 30%, transparent);
+		border-color: color-mix(in oklch, var(--text-primary) 30%, transparent);
 	}
 
 	.field.is-focused {
-		border-color: var(--accent);
-		background: color-mix(in oklch, var(--accent) 5%, transparent);
+		border-color: var(--tone);
+		background: color-mix(in oklch, var(--tone) 5%, transparent);
 	}
 
 	.field.is-invalid {
-		border-color: var(--destructive);
-		--accent: var(--destructive);
+		border-color: var(--status-danger);
+		--tone: var(--status-danger);
 	}
 
 	.field.is-disabled {
@@ -113,7 +110,7 @@ const styles = css`
 	}
 
 	input::placeholder {
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 		user-select: none;
 		-webkit-user-select: none;
 	}
@@ -131,12 +128,12 @@ const styles = css`
 	.adornment {
 		display: inline-flex;
 		align-items: center;
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 		flex-shrink: 0;
 	}
 
 	.field.is-focused .adornment {
-		color: var(--accent);
+		color: var(--tone);
 	}
 
 	::slotted(svg) {
