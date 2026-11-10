@@ -1,7 +1,7 @@
 import { interactionStyles } from '../shared/interaction-styles'
 import { defineFormElement, useFormControl } from '../shared/form-control'
 import { useAccessibleName } from '../shared/accessible'
-import { c, css, event, useProp, useRef } from 'atomico'
+import { c, css, event, useProp, useRef, useState } from 'atomico'
 import { oneOf } from '../shared/prop-types'
 
 /*
@@ -10,9 +10,13 @@ import { oneOf } from '../shared/prop-types'
  * progress, and a solid accent thumb. The filled portion is driven by a
  * --fill custom property computed from the current value.
  *
- * An optional header sits above the track: a `label` on the left, and, when
- * `show-value` is set, the live value on the right as an accent-tinted pill
- * (with optional `value-prefix`/`value-suffix` for units like $ or %).
+ * An optional header sits above the track: a `label` on the left, custom DOM in
+ * the `center` slot between the two, and, when `does-show-value` is set, the
+ * live value anchored right as an accent-tinted pill (with optional
+ * `value-prefix`/`value-suffix` for units like $ or %).
+ *
+ * `can-reset` lets a double click on the thumb or the label restore the value
+ * the slider started with.
  */
 const styles = css`
 	:host {
@@ -21,12 +25,29 @@ const styles = css`
 		--tone: var(--accent-primary);
 	}
 
-	/* Header row: label left, value pill right. */
+	/* Header row: label left, center slot in the middle, value pill right. */
 	.header {
 		display: flex;
 		align-items: center;
 		gap: var(--space-2);
 		margin-bottom: var(--space-2);
+	}
+
+	.header[hidden] {
+		display: none;
+	}
+
+	.center {
+		display: flex;
+		align-items: center;
+		gap: var(--space-2);
+		flex: 1;
+		min-width: 0;
+	}
+
+	:host([can-reset]) .label {
+		-webkit-user-select: none;
+		user-select: none;
 	}
 
 	.label {
@@ -139,6 +160,11 @@ export const ZSlider = c(
 		const [value, setValue] = useProp<number>('value')
 		const inputRef = useRef<HTMLInputElement>()
 		const defaultValue = useRef(value)
+		const [hasCenter, setHasCenter] = useState(false)
+		// Where the thumb sat before the current click sequence began. A first click
+		// on the track moves the thumb under the pointer, so the second click of a
+		// double click would otherwise always look like it landed on the thumb.
+		const press = useRef({ at: 0, fill: 0 })
 		const accessibleName = useAccessibleName(props.label)
 
 		const min = props.min ?? 0
@@ -155,22 +181,52 @@ export const ZSlider = c(
 		const isDisabled = props.isDisabled || isFormDisabled
 		const fill = max > min ? ((current - min) / (max - min)) * 100 : 0
 
-		const showHeader = Boolean(props.label) || props.doesShowValue
+		const showHeader = Boolean(props.label) || props.doesShowValue || hasCenter
+
+		// Restore the value the slider started with, announcing it like a drag would.
+		const reset = () => {
+			if (!props.canReset || isDisabled) return
+			const original = Math.min(max, Math.max(min, defaultValue.current ?? min))
+			if (original === current) return
+			setValue(original)
+			props.input({ value: original })
+			props.change({ value: original })
+		}
+
+		// The native range has no thumb element to listen on, so a double click
+		// counts when it lands within reach of where the thumb is drawn.
+		const rememberThumb = (e: PointerEvent) => {
+			const isNewSequence = e.timeStamp - press.current.at > 600
+			press.current = { at: e.timeStamp, fill: isNewSequence ? fill : press.current.fill }
+		}
+		const resetFromThumb = (e: MouseEvent) => {
+			const input = e.currentTarget as HTMLInputElement
+			const thumb = 16
+			const center = thumb / 2 + ((input.clientWidth - thumb) * press.current.fill) / 100
+			if (Math.abs(e.offsetX - center) <= thumb) reset()
+		}
 
 		return (
 			<host shadowDom={{ delegatesFocus: true }} style={{ '--fill': `${fill}%` }}>
-				{showHeader && (
-					<div class="header">
-						{props.label && <span class="label">{props.label}</span>}
-						{props.doesShowValue && (
-							<span class="value">
-								{props.valuePrefix}
-								{current}
-								{props.valueSuffix}
-							</span>
-						)}
-					</div>
-				)}
+				<div class="header" hidden={!showHeader}>
+					{props.label && (
+						<span class="label" ondblclick={reset}>
+							{props.label}
+						</span>
+					)}
+					<slot
+						name="center"
+						class="center"
+						onslotchange={(e: any) => setHasCenter(e.target.assignedNodes().length > 0)}
+					></slot>
+					{props.doesShowValue && (
+						<span class="value">
+							{props.valuePrefix}
+							{current}
+							{props.valueSuffix}
+						</span>
+					)}
+				</div>
 				<input
 					ref={inputRef}
 					type="range"
@@ -180,6 +236,8 @@ export const ZSlider = c(
 					value={current}
 					disabled={isDisabled}
 					aria-label={accessibleName}
+					onpointerdown={props.canReset ? rememberThumb : undefined}
+					ondblclick={props.canReset ? resetFromThumb : undefined}
 					oninput={(e: any) => {
 						e.stopPropagation()
 						const next = Number(e.target.value)
@@ -203,6 +261,7 @@ export const ZSlider = c(
 			name: { type: String, reflect: true },
 			label: String,
 			doesShowValue: { type: Boolean, reflect: true },
+			canReset: { type: Boolean, reflect: true },
 			valuePrefix: String,
 			valueSuffix: String,
 			tone: { type: oneOf('primary', 'secondary', 'tertiary'), reflect: true },

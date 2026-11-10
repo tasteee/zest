@@ -17,5 +17,10 @@ export const ZSliderDoc = () => (
 			title="Show the current value nearby"
 			description="Do not make people infer a precise value from thumb position."
 		/>
+		<DocExample
+			demo="z-slider/reset-to-the-starting-value"
+			title="Reset to the starting value"
+			description="can-reset lets a double click on the thumb or the label restore the original value. The center slot takes custom content between the label and the value."
+		/>
 	</ComponentDoc>
 )

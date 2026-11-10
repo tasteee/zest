@@ -5340,6 +5340,14 @@
             },
             {
               "kind": "field",
+              "name": "isSpaceBetween",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Aligns the slotted control to the end, creating space between the label and control."
+            },
+            {
+              "kind": "field",
               "name": "size",
               "type": {
                 "text": "'sm' | 'md' | 'lg'"
@@ -5403,6 +5411,14 @@
                 "text": "boolean"
               },
               "description": "Puts the label to the left of the control instead of above it."
+            },
+            {
+              "name": "is-space-between",
+              "fieldName": "isSpaceBetween",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Aligns the slotted control to the end, creating space between the label and control."
             },
             {
               "name": "size",
@@ -10810,7 +10826,15 @@
               "type": {
                 "text": "boolean"
               },
-              "description": "Show the live value as an accent-tinted pill in the header."
+              "description": "Show the live value as an accent-tinted pill, anchored to the right of the header row (in the same row as the label, if there is one)."
+            },
+            {
+              "kind": "field",
+              "name": "canReset",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Double clicking the thumb or the label restores the value the slider started with, and fires `input` and `change`."
             },
             {
               "kind": "field",
@@ -10908,7 +10932,15 @@
               "type": {
                 "text": "boolean"
               },
-              "description": "Show the live value as an accent-tinted pill in the header."
+              "description": "Show the live value as an accent-tinted pill, anchored to the right of the header row (in the same row as the label, if there is one)."
+            },
+            {
+              "name": "can-reset",
+              "fieldName": "canReset",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Double clicking the thumb or the label restores the value the slider started with, and fires `input` and `change`."
             },
             {
               "name": "value-prefix",
@@ -10967,6 +10999,12 @@
               },
               "detail": "{ value: number }",
               "description": "Fired when the thumb is released."
+            }
+          ],
+          "slots": [
+            {
+              "name": "center",
+              "description": "Custom content in the header row, between the label and the value."
             }
           ]
         },

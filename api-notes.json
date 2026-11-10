@@ -2091,6 +2091,9 @@
 			"is-horizontal": {
 				"description": "Puts the label to the left of the control instead of above it."
 			},
+			"is-space-between": {
+				"description": "Aligns the slotted control to the end, creating space between the label and control."
+			},
 			"size": {
 				"description": "Size passed to the control inside the field.",
 				"values": [
@@ -4285,7 +4288,11 @@
 				"description": "Accessible label (`aria-label`); shown in the header when set."
 			},
 			"does-show-value": {
-				"description": "Show the live value as an accent-tinted pill in the header."
+				"description": "Show the live value as an accent-tinted pill, anchored to the right of the header row (in the same row as the label, if there is one)."
+			},
+			"can-reset": {
+				"description": "Double clicking the thumb or the label restores the value the slider started with, and fires `input` and `change`.",
+				"default": "false"
 			},
 			"value-prefix": {
 				"description": "Text before the displayed value (e.g. `$`)."
@@ -4310,6 +4317,9 @@
 				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
 				"default": "false"
 			}
+		},
+		"slots": {
+			"center": "Custom content in the header row, between the label and the value."
 		},
 		"events": {
 			"input": {

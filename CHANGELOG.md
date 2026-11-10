@@ -9,6 +9,9 @@ needs a major version and a prior deprecation. See `SUPPORT.md`.
 
 ### Added
 
+- `z-slider` `can-reset`: a double click on the thumb or the label restores the
+  starting value. A `center` slot renders custom DOM between the label and the
+  value, which `does-show-value` anchors to the right of the header row.
 - `z-field` `is-horizontal` puts the label to the left of the control.
 - `z-number-input` and `z-number-range-input` `value-prefix` and
   `value-suffix` decorate each value while the field is not focused
