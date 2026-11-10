@@ -22,7 +22,7 @@ const styles = css`
 	:host {
 		display: flex;
 		align-items: center;
-		gap: var(--space-sm);
+		gap: var(--space-2);
 		min-width: 0;
 	}
 	:host([direction='vertical']) {
@@ -30,10 +30,10 @@ const styles = css`
 		align-items: stretch;
 	}
 	:host([size='sm']) {
-		gap: var(--space-xs);
+		gap: var(--space-1);
 	}
 	:host([size='lg']) {
-		gap: var(--space-md);
+		gap: var(--space-3);
 	}
 	:host([overflow='scroll']) {
 		overflow: auto;

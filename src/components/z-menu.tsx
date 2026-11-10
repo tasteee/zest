@@ -15,7 +15,7 @@ import { computePosition, autoUpdate, applyPosition } from '../shared/overlay'
  *   <z-menu-item value="delete" is-danger>Delete</z-menu-item>
  * or an `items` array property for data-driven menus:
  *   el.items = [{ value, label, icon?, shortcut?, isDisabled?, isSeparator?, isDanger? }]
- * The panel is a bordered, shadow-free popover. Keyboard, per the WAI-ARIA
+ * The panel is a bordered, floating popover. Keyboard, per the WAI-ARIA
  * menu button pattern: ↓ / Enter / Space open and focus the first item, ↑
  * opens and focuses the last; inside, ↑/↓ move (wrapping, skipping
  * separators and disabled rows), Home/End jump, typing a letter jumps to the
@@ -27,17 +27,17 @@ const styles = css`
 	:host {
 		display: inline-flex;
 		position: relative;
-		--accent: var(--primary);
+		--tone: var(--accent-primary);
 		user-select: none;
 		-webkit-user-select: none;
 	}
 
 	:host([tone='secondary']) {
-		--accent: var(--purple);
+		--tone: var(--accent-secondary);
 	}
 
 	:host([tone='tertiary']) {
-		--accent: var(--pink);
+		--tone: var(--accent-tertiary);
 	}
 
 	:host([is-hidden]) {
@@ -56,12 +56,13 @@ const styles = css`
 		top: 0;
 		right: auto; /* physical */
 		bottom: auto;
-		z-index: 50;
+		z-index: var(--z-menu);
 		min-width: 12rem;
-		background: var(--popover);
-		border: 1px solid var(--border);
+		background: var(--surface-overlay);
+		border: 1px solid var(--border-default);
 		border-radius: var(--radius-md);
-		padding: 0.3125rem;
+		box-shadow: var(--shadow-overlay);
+		padding: var(--space-1-5);
 		gap: 1px;
 	}
 
@@ -108,7 +109,7 @@ const styles = css`
 	@keyframes z-menu-flash {
 		0%,
 		50% {
-			background: color-mix(in oklch, var(--accent) 14%, transparent);
+			background: color-mix(in oklch, var(--tone) 14%, transparent);
 		}
 		25%,
 		75% {
@@ -119,11 +120,11 @@ const styles = css`
 	.item {
 		display: flex;
 		align-items: center;
-		gap: 0.625rem;
-		padding: 0.5rem 0.625rem;
+		gap: var(--space-2-5);
+		padding: var(--space-2) var(--space-2-5);
 		border-radius: var(--radius-sm);
-		font-size: var(--font-size-small);
-		color: var(--foreground);
+		font-size: var(--font-size-sm);
+		color: var(--text-primary);
 		cursor: pointer;
 		user-select: none;
 		white-space: nowrap;
@@ -136,17 +137,17 @@ const styles = css`
 	}
 
 	.item.is-active {
-		background: color-mix(in oklch, var(--accent) 14%, transparent);
-		color: var(--accent);
+		background: color-mix(in oklch, var(--tone) 14%, transparent);
+		color: var(--tone);
 	}
 
 	.item.is-error {
-		color: var(--destructive);
+		color: var(--status-danger);
 	}
 
 	.item.is-error.is-active {
-		background: color-mix(in oklch, var(--destructive) 14%, transparent);
-		color: var(--destructive);
+		background: color-mix(in oklch, var(--status-danger) 14%, transparent);
+		color: var(--status-danger);
 	}
 
 	.item.is-disabled {
@@ -159,15 +160,15 @@ const styles = css`
 	}
 
 	.shortcut {
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 		font-family: var(--font-mono);
-		font-size: var(--font-size-caption);
+		font-size: var(--font-size-xs);
 	}
 
 	.sep {
 		height: 1px;
-		margin: 0.3125rem 0;
-		background: var(--border);
+		margin: var(--space-1-5) 0;
+		background: var(--border-default);
 	}
 
 	::slotted([slot='trigger']) {
@@ -437,7 +438,7 @@ export const ZMenuItem = c(
 			:host {
 				display: inline-flex;
 				align-items: center;
-				gap: 0.625rem;
+				gap: var(--space-2-5);
 				min-width: 0;
 			}
 		`

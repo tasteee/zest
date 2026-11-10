@@ -30,10 +30,11 @@ const styles = css`
 		inset: 0;
 		margin: 12vh auto auto;
 		padding: 0;
-		background: var(--popover);
-		color: var(--popover-foreground);
-		border: 1px solid var(--border);
+		background: var(--surface-overlay);
+		color: var(--text-primary);
+		border: 1px solid var(--border-default);
 		border-radius: var(--radius-lg);
+		box-shadow: var(--shadow-modal);
 		overflow: hidden;
 	}
 
@@ -64,7 +65,7 @@ const styles = css`
 	}
 
 	.command::backdrop {
-		background: color-mix(in oklch, var(--background) 55%, transparent);
+		background: var(--surface-scrim);
 		backdrop-filter: blur(3px);
 		opacity: 0;
 		transition: opacity var(--motion-exit-base) var(--ease-exit);
@@ -78,11 +79,11 @@ const styles = css`
 	.footer {
 		display: flex;
 		align-items: center;
-		gap: 0.75rem;
-		padding: 0.5rem 0.875rem;
-		border-top: 1px solid var(--border);
-		color: var(--muted-foreground);
-		font-size: var(--font-size-caption);
+		gap: var(--space-3);
+		padding: var(--space-2) var(--space-3-5);
+		border-top: 1px solid var(--border-default);
+		color: var(--text-secondary);
+		font-size: var(--font-size-xs);
 	}
 
 	.footer.is-empty {
@@ -92,16 +93,16 @@ const styles = css`
 	.search {
 		display: flex;
 		align-items: center;
-		gap: 0.625rem;
-		padding: 0.875rem 1rem;
-		border-bottom: 1px solid var(--border);
+		gap: var(--space-2-5);
+		padding: var(--space-3-5) var(--space-4);
+		border-bottom: 1px solid var(--border-default);
 	}
 
 	.search svg {
 		width: 1.125rem;
 		height: 1.125rem;
 		flex-shrink: 0;
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 		stroke: currentColor;
 		stroke-width: 2;
 		stroke-linecap: round;
@@ -115,39 +116,39 @@ const styles = css`
 		background: transparent;
 		border: 0;
 		outline: none;
-		color: var(--foreground);
+		color: var(--text-primary);
 		font-family: inherit;
-		font-size: var(--font-size-body);
+		font-size: var(--font-size-md);
 	}
 
 	.search input::placeholder {
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 		user-select: none;
 		-webkit-user-select: none;
 	}
 
 	.list {
 		overflow-y: auto;
-		padding: 0.375rem;
+		padding: var(--space-1-5);
 	}
 
 	.group-label {
-		padding: 0.5rem 0.625rem 0.25rem;
-		font-size: var(--font-size-caption);
-		font-weight: 600;
+		padding: var(--space-2) var(--space-2-5) var(--space-1);
+		font-size: var(--font-size-xs);
+		font-weight: var(--font-weight-semibold);
 		letter-spacing: 0.06em;
 		text-transform: uppercase;
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 	}
 
 	.item {
 		display: flex;
 		align-items: center;
-		gap: 0.625rem;
-		padding: 0.5rem 0.625rem;
+		gap: var(--space-2-5);
+		padding: var(--space-2) var(--space-2-5);
 		border-radius: var(--radius-sm);
-		font-size: var(--font-size-small);
-		color: var(--foreground);
+		font-size: var(--font-size-sm);
+		color: var(--text-primary);
 		cursor: pointer;
 		user-select: none;
 		background: transparent;
@@ -159,8 +160,8 @@ const styles = css`
 	}
 
 	.item.is-active {
-		background: color-mix(in oklch, var(--accent, var(--primary)) 14%, transparent);
-		color: var(--accent, var(--primary));
+		background: color-mix(in oklch, var(--tone, var(--accent-primary)) 14%, transparent);
+		color: var(--tone, var(--accent-primary));
 	}
 
 	.item.is-disabled {
@@ -173,16 +174,16 @@ const styles = css`
 	}
 
 	.shortcut {
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 		font-family: var(--font-mono);
-		font-size: var(--font-size-caption);
+		font-size: var(--font-size-xs);
 	}
 
 	.empty {
-		padding: 1.5rem;
+		padding: var(--space-6);
 		text-align: center;
-		color: var(--muted-foreground);
-		font-size: var(--font-size-small);
+		color: var(--text-secondary);
+		font-size: var(--font-size-sm);
 	}
 `
 
@@ -410,7 +411,7 @@ export const ZCommandItem = c(
 			:host {
 				display: inline-flex;
 				align-items: center;
-				gap: 0.625rem;
+				gap: var(--space-2-5);
 				min-width: 0;
 			}
 		`

@@ -14,7 +14,7 @@ const styles = css`
 		vertical-align: middle;
 		position: relative;
 		--size: 2.5rem;
-		--tone: var(--color-neutral-5);
+		--tone: var(--text-tertiary);
 	}
 
 	:host([is-hidden]) {
@@ -22,22 +22,22 @@ const styles = css`
 	}
 
 	:host([tone='secondary']) {
-		--tone: var(--purple);
+		--tone: var(--accent-secondary);
 	}
 	:host([tone='tertiary']) {
-		--tone: var(--pink);
+		--tone: var(--accent-tertiary);
 	}
 	:host([tone='primary']) {
-		--tone: var(--color-neutral-5);
+		--tone: var(--text-tertiary);
 	}
 	:host([tone='success']) {
-		--tone: var(--success);
+		--tone: var(--status-success);
 	}
 	:host([tone='warning']) {
-		--tone: var(--warning);
+		--tone: var(--status-warning);
 	}
 	:host([tone='danger']) {
-		--tone: var(--destructive);
+		--tone: var(--status-danger);
 	}
 
 	:host([size='xs']) {
@@ -56,22 +56,22 @@ const styles = css`
 	.avatar {
 		width: var(--size);
 		height: var(--size);
-		border-radius: 999px;
+		border-radius: var(--radius-full);
 		overflow: hidden;
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
 		box-sizing: border-box;
-		border: 1px solid color-mix(in oklch, var(--foreground) 14%, transparent);
-		/* srgb: mixing a chromatic tone with the hue-carrying --card in oklch
+		border: 1px solid color-mix(in oklch, var(--text-primary) 14%, transparent);
+		/* srgb: mixing a chromatic tone with the hue-carrying --surface-default in oklch
 		   drifts the hue around the wheel. */
-		background: color-mix(in srgb, var(--tone) 22%, var(--card));
+		background: color-mix(in srgb, var(--tone) 22%, var(--surface-default));
 		/* Toward the theme's own text color, so the initials read in light and dark. */
-		color: color-mix(in oklch, var(--tone) 55%, var(--foreground));
+		color: color-mix(in oklch, var(--tone) 55%, var(--text-primary));
 		font-family: inherit;
-		font-weight: 600;
+		font-weight: var(--font-weight-semibold);
 		font-size: calc(var(--size) * 0.4);
-		line-height: 1;
+		line-height: var(--line-height-none);
 		user-select: none;
 	}
 
@@ -92,21 +92,21 @@ const styles = css`
 		bottom: 0;
 		width: calc(var(--size) * 0.28);
 		height: calc(var(--size) * 0.28);
-		border-radius: 999px;
-		border: 2px solid var(--background);
+		border-radius: var(--radius-full);
+		border: 2px solid var(--surface-page);
 		box-sizing: border-box;
 	}
 	.status.is-online {
-		background: var(--success);
+		background: var(--status-success);
 	}
 	.status.is-busy {
-		background: var(--destructive);
+		background: var(--status-danger);
 	}
 	.status.is-away {
-		background: var(--warning);
+		background: var(--status-warning);
 	}
 	.status.is-offline {
-		background: var(--color-neutral-5);
+		background: var(--text-tertiary);
 	}
 `
 

@@ -16,7 +16,7 @@ const styles = css`
 	:host {
 		display: inline-flex;
 		align-items: center;
-		gap: 0.125rem;
+		gap: var(--space-0-5);
 	}
 	:host([is-hidden]) {
 		display: none;

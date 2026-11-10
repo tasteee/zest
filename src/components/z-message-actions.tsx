@@ -20,12 +20,12 @@ const styles = css`
 	:host {
 		display: inline-flex;
 		align-items: center;
-		gap: 0.125rem;
-		background: var(--card);
-		border: 1px solid var(--border);
-		border-radius: 999px;
-		padding: 0px 0.25rem 0.125rem;
-		box-shadow: 0 2px 8px color-mix(in oklch, var(--foreground) 12%, transparent);
+		gap: var(--space-0-5);
+		background: var(--surface-overlay);
+		border: 1px solid var(--border-default);
+		border-radius: var(--radius-full);
+		padding: 0px var(--space-1) var(--space-0-5);
+		box-shadow: var(--shadow-overlay);
 	}
 	:host([is-hidden]) {
 		display: none;
@@ -38,18 +38,18 @@ const styles = css`
 		height: 1.75rem;
 		border: none;
 		background: transparent;
-		border-radius: 999px;
+		border-radius: var(--radius-full);
 		cursor: pointer;
 		padding: 0;
-		color: var(--muted-foreground);
-		font-size: 1rem;
+		color: var(--text-secondary);
+		font-size: var(--font-size-md);
 		transition:
 			background-color var(--motion-instant) var(--ease-enter),
 			transform var(--motion-instant) var(--ease-enter);
 	}
 	button:hover {
-		background: color-mix(in oklch, var(--foreground) 10%, transparent);
-		color: var(--foreground);
+		background: color-mix(in oklch, var(--text-primary) 10%, transparent);
+		color: var(--text-primary);
 	}
 	button.quick:hover {
 		transform: scale(1.2);
@@ -57,8 +57,8 @@ const styles = css`
 	.divider {
 		width: 1px;
 		height: 1.1rem;
-		background: var(--border);
-		margin: 0 0.125rem;
+		background: var(--border-default);
+		margin: 0 var(--space-0-5);
 	}
 	svg {
 		width: 1rem;

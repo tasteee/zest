@@ -40,7 +40,7 @@ const styles = css`
 		border: none;
 		padding: 0;
 		cursor: pointer;
-		background: color-mix(in oklch, var(--foreground) 8%, transparent);
+		background: color-mix(in oklch, var(--text-primary) 8%, transparent);
 		aspect-ratio: 1;
 		overflow: hidden;
 	}
@@ -66,8 +66,8 @@ const styles = css`
 		justify-content: center;
 		background: color-mix(in oklch, black 55%, transparent);
 		color: white;
-		font-size: 1.25rem;
-		font-weight: 700;
+		font-size: var(--font-size-xl);
+		font-weight: var(--font-weight-bold);
 	}
 `
 

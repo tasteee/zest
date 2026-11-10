@@ -182,13 +182,12 @@ const notifyListeners = (): void => {
 // white and the whole screen flashes. Sequencing has no overlap, so there is
 // no blend to get wrong.
 //
-// ink.css handles the one thing that must not fade: the page colour itself
+// document.css handles the one thing that must not fade: the page colour itself
 // transitions on its own underneath, so the gap is never empty.
 //
-// The fade is not gated on prefers-reduced-motion. That preference is about
-// movement, and WCAG's definition of motion animation explicitly excludes
-// opacity and colour changes; the alternative here is a full-screen luminance
-// snap, which is the harsher experience. A zero fade-out token opts out.
+// Under prefers-reduced-motion tokens.css sets both fade durations to zero, and
+// a zero fade-out applies the theme immediately. A consumer who wants the fade
+// back for those readers overrides the two tokens.
 
 const FADING_CLASS = 'isThemeFading'
 const FADE_OUT_PROPERTY = '--theme-fade-out-duration'

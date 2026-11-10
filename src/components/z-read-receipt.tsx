@@ -15,15 +15,15 @@ const styles = css`
 	:host {
 		display: inline-flex;
 		align-items: center;
-		gap: 0.375rem;
+		gap: var(--space-1-5);
 		vertical-align: middle;
 	}
 	:host([is-hidden]) {
 		display: none;
 	}
 	.label {
-		font-size: 0.6875rem;
-		color: var(--muted-foreground);
+		font-size: var(--font-size-2xs);
+		color: var(--text-secondary);
 	}
 	.stack {
 		display: inline-flex;
@@ -36,10 +36,10 @@ const styles = css`
 		margin-inline-start: 0;
 	}
 	.more {
-		margin-inline-start: 0.25rem;
-		font-size: 0.6875rem;
-		font-weight: 600;
-		color: var(--muted-foreground);
+		margin-inline-start: var(--space-1);
+		font-size: var(--font-size-2xs);
+		font-weight: var(--font-weight-semibold);
+		color: var(--text-secondary);
 	}
 `
 

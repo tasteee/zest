@@ -48,9 +48,9 @@ const flatten = (nodes: TreeNode[], open: Set<string>, level = 0, out: Row[] = [
 const styles = css`
 	:host {
 		display: block;
-		font-size: var(--font-size-small);
+		font-size: var(--font-size-sm);
 		--indent: 1.1rem;
-		--accent: var(--purple);
+		--tone: var(--accent-secondary);
 	}
 	:host([is-hidden]) {
 		display: none;
@@ -58,24 +58,24 @@ const styles = css`
 	.row {
 		display: flex;
 		align-items: center;
-		gap: 0.375rem;
-		padding: 0.3rem 0.5rem;
+		gap: var(--space-1-5);
+		padding: var(--space-1) var(--space-2);
 		border-radius: var(--radius-sm);
-		color: var(--foreground);
+		color: var(--text-primary);
 		cursor: default;
 		user-select: none;
 		white-space: nowrap;
 		outline: none;
 	}
 	.row:hover {
-		background: color-mix(in oklch, var(--muted) 8%, transparent);
+		background: color-mix(in oklch, var(--text-secondary) 8%, transparent);
 	}
 	.row.is-selected {
-		background: color-mix(in oklch, var(--accent) 15%, transparent);
-		color: var(--foreground);
+		background: color-mix(in oklch, var(--tone) 15%, transparent);
+		color: var(--text-primary);
 	}
 	.row:focus-visible {
-		box-shadow: inset 0 0 0 2px var(--focus-ring);
+		box-shadow: inset 0 0 0 2px var(--border-focus);
 	}
 	.row.is-disabled {
 		opacity: 0.45;
@@ -90,7 +90,7 @@ const styles = css`
 		justify-content: center;
 		border: 0;
 		background: transparent;
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 		cursor: pointer;
 		border-radius: var(--radius-sm);
 		transition: transform var(--motion-fast) var(--ease-enter);

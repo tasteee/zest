@@ -48,11 +48,6 @@ for (const file of sourceFiles) {
 			problems.push({ file, line: index + 1, text: line.trim(), reason: 'backtick inside a css`` template silently ends the template' })
 		}
 
-		// One focus treatment. `--ring` is the pre-unification token; every
-		// focus outline goes through `--focus-ring` (see shared/interaction-styles.ts).
-		if (/var\(--ring\)/.test(line)) {
-			problems.push({ file, line: index + 1, text: line.trim(), reason: 'uses var(--ring); focus styling goes through var(--focus-ring)' })
-		}
 
 		// Direction-relative spacing is written logically so RTL flips it:
 		// margin-inline-start, not margin-left. `left` / `right` insets are

@@ -24,10 +24,10 @@ const styles = css`
   :host {
     display: block;
     /* inherit so a bubble (or any container) drives the text color; falls back
-		   to --foreground when used standalone on the page background. */
+		   to --text-primary when used standalone on the page background. */
     color: inherit;
-    font-size: 0.9375rem;
-    line-height: 1.6;
+    font-size: var(--font-size-md);
+    line-height: var(--line-height-normal);
     overflow-wrap: anywhere;
   }
   :host([is-hidden]) {
@@ -52,13 +52,13 @@ const styles = css`
   h6 {
     position: relative;
     margin: 1.2em 0 0.5em;
-    line-height: 1.25;
-    font-weight: 700;
+    line-height: var(--line-height-tight);
+    font-weight: var(--font-weight-bold);
   }
   .heading-anchor {
     margin-inline-start: 0.4em;
-    font-weight: 400;
-    color: var(--muted-foreground);
+    font-weight: var(--font-weight-regular);
+    color: var(--text-secondary);
     text-decoration: none;
     opacity: 0;
   }
@@ -80,7 +80,7 @@ const styles = css`
   }
 
   a {
-    color: var(--primary);
+    color: var(--text-primary);
     text-decoration: underline;
     text-underline-offset: 2px;
   }
@@ -104,30 +104,30 @@ const styles = css`
   blockquote {
     margin: 0 0 0.75em;
     padding: 0.1em 0 0.1em 1em;
-    border-inline-start: 3px solid var(--border);
-    color: var(--muted-foreground);
+    border-inline-start: 3px solid var(--border-default);
+    color: var(--text-secondary);
   }
 
   :not(pre) > code {
     font-family: var(--font-mono);
     font-size: 0.875em;
-    background: color-mix(in oklch, var(--foreground) 10%, transparent);
+    background: color-mix(in oklch, var(--text-primary) 10%, transparent);
     padding: 0.15em 0.35em;
     border-radius: var(--radius-sm);
   }
 
   z-code-block {
     display: block;
-    margin: var(--spacing-4) 0 var(--spacing-4) 0;
+    margin: var(--space-4) 0 var(--space-4) 0;
   }
 
   z-callout {
-    margin: var(--spacing-8) 0 var(--spacing-8) 0;
+    margin: var(--space-8) 0 var(--space-8) 0;
   }
 
   hr {
     border: none;
-    border-top: 1px solid var(--border);
+    border-top: 1px solid var(--border-default);
     margin: 1.2em 0;
   }
 
@@ -144,17 +144,17 @@ const styles = css`
   }
   th,
   td {
-    border: 1px solid var(--border);
+    border: 1px solid var(--border-default);
     padding: 0.4em 0.6em;
     text-align: start;
   }
   th {
-    background: color-mix(in oklch, var(--foreground) 6%, transparent);
-    font-weight: 600;
+    background: color-mix(in oklch, var(--text-primary) 6%, transparent);
+    font-weight: var(--font-weight-semibold);
   }
 
   strong {
-    font-weight: 700;
+    font-weight: var(--font-weight-bold);
   }
   del {
     opacity: 0.7;

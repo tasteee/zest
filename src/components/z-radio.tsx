@@ -20,21 +20,21 @@ const styles = css`
 	label {
 		display: inline-flex;
 		align-items: center;
-		gap: 0.625rem;
+		gap: var(--space-2-5);
 		cursor: pointer;
 		font-family: inherit;
-		font-size: var(--font-size-small);
-		color: var(--foreground);
+		font-size: var(--font-size-sm);
+		color: var(--text-primary);
 		user-select: none;
-		--accent: var(--z-radio-group-accent, var(--primary));
+		--tone: var(--z-radio-group-accent, var(--accent-primary));
 	}
 
 	:host([tone='secondary']) label {
-		--accent: var(--purple);
+		--tone: var(--accent-secondary);
 	}
 
 	:host([tone='tertiary']) label {
-		--accent: var(--pink);
+		--tone: var(--accent-tertiary);
 	}
 
 	label.is-disabled {
@@ -50,25 +50,25 @@ const styles = css`
 		flex-shrink: 0;
 		width: 1.125rem;
 		height: 1.125rem;
-		border: 1px solid var(--border);
-		border-radius: 999px;
+		border: 1px solid var(--border-default);
+		border-radius: var(--radius-full);
 		background: transparent;
 		transition: border-color var(--motion-instant) var(--ease-enter);
 	}
 
 	label:hover .ring {
-		border-color: color-mix(in oklch, var(--foreground) 40%, transparent);
+		border-color: color-mix(in oklch, var(--text-primary) 40%, transparent);
 	}
 
 	.ring.is-checked {
-		border-color: var(--accent);
+		border-color: var(--tone);
 	}
 
 	.dot {
 		width: 0.55rem;
 		height: 0.55rem;
-		border-radius: 999px;
-		background: var(--accent);
+		border-radius: var(--radius-full);
+		background: var(--tone);
 		transform: scale(0);
 		transition: transform var(--motion-instant) var(--ease-enter);
 	}
@@ -86,7 +86,7 @@ const styles = css`
 	}
 
 	input:focus-visible + .ring {
-		outline: 3px solid var(--focus-ring);
+		outline: 3px solid var(--border-focus);
 		outline-offset: 2px;
 	}
 `

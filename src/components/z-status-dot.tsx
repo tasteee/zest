@@ -18,10 +18,10 @@ const styles = css`
 	:host {
 		display: inline-flex;
 		align-items: center;
-		gap: var(--space-xs);
+		gap: var(--space-1);
 		vertical-align: middle;
 		--dot: 0.5rem;
-		--color: var(--muted-foreground);
+		--color: var(--text-secondary);
 	}
 	:host([is-hidden]) {
 		display: none;
@@ -35,23 +35,23 @@ const styles = css`
 	}
 
 	:host([status='online']) {
-		--color: var(--success);
+		--color: var(--status-success);
 	}
 	:host([status='away']) {
-		--color: var(--warning);
+		--color: var(--status-warning);
 	}
 	:host([status='dnd']),
 	:host([status='busy']) {
-		--color: var(--destructive);
+		--color: var(--status-danger);
 	}
 	:host([status='offline']) {
-		--color: var(--muted-foreground);
+		--color: var(--text-secondary);
 	}
 
 	.dot {
 		width: var(--dot);
 		height: var(--dot);
-		border-radius: 999px;
+		border-radius: var(--radius-full);
 		background: var(--color);
 		position: relative;
 		flex-shrink: 0;
@@ -61,7 +61,7 @@ const styles = css`
 		content: '';
 		position: absolute;
 		inset: 0;
-		border-radius: 999px;
+		border-radius: var(--radius-full);
 		background: var(--color);
 		animation: ping 1.6s var(--ease-enter) infinite;
 	}
@@ -78,9 +78,9 @@ const styles = css`
 	}
 
 	.label {
-		font-size: 0.8125rem;
-		color: var(--muted-foreground);
-		line-height: 1;
+		font-size: var(--font-size-sm);
+		color: var(--text-secondary);
+		line-height: var(--line-height-none);
 	}
 `
 

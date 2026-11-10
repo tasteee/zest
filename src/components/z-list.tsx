@@ -11,8 +11,8 @@ import { c, css } from 'atomico'
 const styles = css`
 	:host {
 		display: block;
-		background: var(--card);
-		border: 1px solid var(--border);
+		background: var(--surface-default);
+		border: 1px solid var(--border-default);
 		border-radius: var(--radius-lg);
 		overflow: hidden;
 	}
@@ -29,13 +29,13 @@ const styles = css`
 
 	.label {
 		display: block;
-		padding: 0.875rem 1rem 0.5rem;
+		padding: var(--space-3-5) var(--space-4) var(--space-2);
 		font-family: var(--font-mono);
-		font-size: 0.6875rem;
-		font-weight: 500;
+		font-size: var(--font-size-2xs);
+		font-weight: var(--font-weight-medium);
 		letter-spacing: 0.12em;
 		text-transform: uppercase;
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 	}
 
 	/* Hairline dividers between rows. ::slotted() only accepts a compound
@@ -43,7 +43,7 @@ const styles = css`
 	   the first. The label lives in the shadow DOM, so :first-child here is the
 	   first slotted light-DOM row. */
 	::slotted(z-list-row:not(:first-child)) {
-		border-top: 1px solid var(--border);
+		border-top: 1px solid var(--border-default);
 	}
 `
 

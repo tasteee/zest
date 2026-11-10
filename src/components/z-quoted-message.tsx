@@ -12,25 +12,25 @@ import { c, css, event } from 'atomico'
 const styles = css`
 	:host {
 		display: block;
-		--bar: var(--primary);
+		--bar: var(--accent-primary);
 	}
 	:host([tone='tertiary']) {
-		--bar: var(--pink);
+		--bar: var(--accent-tertiary);
 	}
 	:host([is-hidden]) {
 		display: none;
 	}
 	.quote {
 		display: flex;
-		gap: 0.5rem;
+		gap: var(--space-2);
 		align-items: stretch;
 		width: 100%;
 		box-sizing: border-box;
 		text-align: start;
-		background: color-mix(in oklch, var(--foreground) 5%, transparent);
+		background: color-mix(in oklch, var(--text-primary) 5%, transparent);
 		border: none;
 		border-radius: var(--radius-sm);
-		padding: 0.375rem 0.5rem;
+		padding: var(--space-1-5) var(--space-2);
 		font-family: inherit;
 		color: inherit;
 		cursor: pointer;
@@ -40,23 +40,23 @@ const styles = css`
 	}
 	.bar {
 		flex: 0 0 3px;
-		border-radius: 999px;
+		border-radius: var(--radius-full);
 		background: var(--bar);
 	}
 	.body {
 		min-width: 0;
 	}
 	.name {
-		font-size: 0.75rem;
-		font-weight: 600;
+		font-size: var(--font-size-xs);
+		font-weight: var(--font-weight-semibold);
 		color: var(--bar);
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
 	}
 	.text {
-		font-size: 0.8125rem;
-		color: var(--muted-foreground);
+		font-size: var(--font-size-sm);
+		color: var(--text-secondary);
 		display: -webkit-box;
 		-webkit-line-clamp: 2;
 		-webkit-box-orient: vertical;

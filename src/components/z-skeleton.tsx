@@ -10,7 +10,7 @@ import { oneOf } from '../shared/prop-types'
  * shadows, the shimmer is a gradient, not elevation. The sweep defaults to the
  * surface lifted 0.09 in oklch lightness, so it reads as a highlight in every
  * theme rather than a foreground smear that inverts between light and dark;
- * override it wholesale with `--skeleton-shimmer`.
+ * override it wholesale with `--z-skeleton-shimmer`.
  */
 const styles = css`
 	:host {
@@ -28,16 +28,16 @@ const styles = css`
 	.skeleton {
 		position: relative;
 		overflow: hidden;
-		background: var(--skeleton, var(--color-neutral-3));
+		background: var(--z-skeleton-color, var(--border-default));
 		border-radius: var(--radius-sm);
 	}
 
 	.skeleton.is-text {
 		height: 0.75rem;
-		border-radius: 999px;
+		border-radius: var(--radius-full);
 	}
 	.skeleton.is-circle {
-		border-radius: 999px;
+		border-radius: var(--radius-full);
 		width: 2.5rem;
 		height: 2.5rem;
 	}
@@ -55,7 +55,7 @@ const styles = css`
 		background: linear-gradient(
 			90deg,
 			transparent 15%,
-			var(--skeleton-shimmer, oklch(from var(--skeleton, var(--color-neutral-3)) calc(l + 0.09) c h)) 50%,
+			var(--z-skeleton-shimmer, oklch(from var(--z-skeleton-color, var(--border-default)) calc(l + 0.09) c h)) 50%,
 			transparent 85%
 		);
 		animation: z-skeleton-shimmer 1.5s linear infinite;
@@ -64,7 +64,7 @@ const styles = css`
 	.stack {
 		display: flex;
 		flex-direction: column;
-		gap: 0.625rem;
+		gap: var(--space-2-5);
 	}
 	.stack .skeleton:last-child {
 		width: 70%;

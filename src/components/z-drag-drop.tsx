@@ -220,12 +220,12 @@ const dropTargetStyles = css`
 			box-shadow var(--motion-fast) var(--ease-enter);
 	}
 	:host([data-state='over']) {
-		background: color-mix(in oklch, var(--accent) 12%, transparent);
-		box-shadow: inset 0 0 0 2px var(--accent);
+		background: color-mix(in oklch, var(--tone) 12%, transparent);
+		box-shadow: inset 0 0 0 2px var(--tone);
 	}
 	:host([data-state='reject']) {
-		background: color-mix(in oklch, var(--destructive) 10%, transparent);
-		box-shadow: inset 0 0 0 2px var(--destructive);
+		background: color-mix(in oklch, var(--status-danger) 10%, transparent);
+		box-shadow: inset 0 0 0 2px var(--status-danger);
 	}
 `
 

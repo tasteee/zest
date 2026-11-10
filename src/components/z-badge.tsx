@@ -32,87 +32,85 @@ const styles = css`
 	.badge {
 		display: inline-flex;
 		align-items: center;
-		gap: 0.375rem;
+		gap: var(--space-1-5);
 		font-family: inherit;
-		font-weight: 600;
-		line-height: 1;
+		font-weight: var(--font-weight-semibold);
+		line-height: var(--line-height-none);
 		white-space: nowrap;
 		border: 1px solid transparent;
-		border-radius: 999px;
-		--tone: var(--color-neutral-7);
+		border-radius: var(--radius-full);
+		--tone: var(--accent-primary);
 	}
 
 	/* tones set --tone */
 	.badge.is-secondary {
-		--tone: var(--purple);
+		--tone: var(--accent-secondary);
 	}
 	.badge.is-tertiary {
-		--tone: var(--pink);
+		--tone: var(--accent-tertiary);
 	}
 	.badge.is-primary {
-		--tone: var(--color-neutral-7);
+		--tone: var(--accent-primary);
 	}
 	.badge.is-success {
-		--tone: var(--success);
+		--tone: var(--status-success);
 	}
 	.badge.is-warning {
-		--tone: var(--warning);
+		--tone: var(--status-warning);
 	}
 	.badge.is-error {
-		--tone: var(--destructive);
+		--tone: var(--status-danger);
 	}
 
 	/* sizes */
 	.badge.is-sm {
-		font-size: 0.6875rem;
-		padding: 0.25rem 0.5rem;
+		font-size: var(--font-size-2xs);
+		padding: var(--space-1) var(--space-2);
 		letter-spacing: 0.01em;
 	}
 	.badge.is-md {
-		font-size: 0.75rem;
-		padding: 0.3125rem 0.625rem;
+		font-size: var(--font-size-xs);
+		padding: var(--space-1-5) var(--space-2-5);
 	}
 
 	/* kinds */
 	.badge.is-soft {
 		background: color-mix(in oklch, var(--tone) 18%, transparent);
-		color: color-mix(in oklab, var(--tone) 70%, var(--foreground));
+		color: color-mix(in oklab, var(--tone) 70%, var(--text-primary));
 	}
 	.badge.is-solid {
-		--emissive-color: var(--tone);
-		background: var(--material-tone), var(--tone);
-		box-shadow: var(--emissive-tone);
+		background: var(--tone);
 		color: var(--on-accent);
 	}
-	.badge.is-solid.is-primary { color: var(--primary-foreground); }
+	.badge.is-solid.is-primary { color: var(--on-accent); }
 
 	.badge.is-outline {
 		background: transparent;
-		/* srgb, not oklch: --border carries a faint green hue, and interpolating
+		/* srgb, not oklch: --border-default carries a faint green hue, and interpolating
 		   hue against it in oklch drags the tone around the wheel (purple → blue). */
-		border-color: color-mix(in srgb, var(--tone) 45%, var(--border));
+		border-color: color-mix(in srgb, var(--tone) 45%, var(--border-default));
 		color: var(--tone);
 	}
 	.badge.is-primary.is-outline {
-		color: var(--muted-foreground);
-		border-color: var(--border);
+		color: var(--text-secondary);
+		border-color: var(--border-default);
 	}
 
 	/* inline status: dot + uppercase tracked text */
 	.badge.is-dot {
 		background: transparent;
 		border-color: transparent;
-		padding: 0.25rem 0.375rem;
+		padding: var(--space-1) var(--space-1-5);
 		text-transform: uppercase;
 		letter-spacing: 0.1em;
-		font-size: 0.6875rem;
+		font-size: var(--font-size-2xs);
 		color: var(--tone);
-		gap: 0.375rem;
+		gap: var(--space-1-5);
 	}
 	.dot {
 		width: 0.4375rem;
 		height: 0.4375rem;
-		border-radius: 999px;
+		border-radius: var(--radius-full);
 		background: var(--tone);
 		flex-shrink: 0;
 	}
@@ -128,7 +126,7 @@ const styles = css`
 			color var(--motion-fast) var(--ease-enter);
 	}
 	.badge.is-clickable:hover {
-		border-color: color-mix(in srgb, var(--tone) 55%, var(--border));
+		border-color: color-mix(in srgb, var(--tone) 55%, var(--border-default));
 	}
 
 	/* Selected wins over the resting kind: a toned tint + border regardless of
@@ -136,10 +134,10 @@ const styles = css`
 	.badge.is-selected {
 		background: color-mix(in oklch, var(--tone) 16%, transparent);
 		border-color: color-mix(in oklch, var(--tone) 50%, transparent);
-		color: color-mix(in oklch, var(--tone) 85%, white);
+		color: color-mix(in oklch, var(--tone) 85%, var(--text-strong));
 	}
 	.badge.is-primary.is-selected {
-		color: var(--foreground);
+		color: var(--text-primary);
 	}
 
 	.badge.is-disabled {
@@ -148,7 +146,7 @@ const styles = css`
 	}
 
 	.badge:focus-visible {
-		outline: 3px solid var(--focus-ring);
+		outline: 3px solid var(--border-focus);
 		outline-offset: 2px;
 	}
 
@@ -162,7 +160,7 @@ const styles = css`
 		height: 1rem;
 		margin-inline-end: -0.25rem;
 		border: none;
-		border-radius: 999px;
+		border-radius: var(--radius-full);
 		background: transparent;
 		color: currentColor;
 		cursor: pointer;
@@ -174,7 +172,7 @@ const styles = css`
 	}
 	.remove:hover {
 		opacity: 1;
-		background: color-mix(in oklch, var(--foreground) 18%, transparent);
+		background: color-mix(in oklch, var(--text-primary) 18%, transparent);
 	}
 	.remove svg {
 		width: 0.625rem;
@@ -196,7 +194,7 @@ const styles = css`
 	::slotted(img) {
 		width: 1.125rem;
 		height: 1.125rem;
-		border-radius: 999px;
+		border-radius: var(--radius-full);
 		margin-inline-start: -0.25rem;
 		object-fit: cover;
 	}

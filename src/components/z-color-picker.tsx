@@ -4,7 +4,7 @@ import { oneOf } from '../shared/prop-types'
 import { useLocale } from '../shared/locale'
 
 /*
- * z-color-picker: a swatch trigger that opens a bordered, shadow-free panel
+ * z-color-picker: a swatch trigger that opens a bordered, floating panel
  * holding a custom saturation/brightness area, a hue slider, a hex field, and
  * a row of preset swatches (the zest palette by default). value is a hex
  * string like #BF40BF. The spectrum is drawn here, not with the native color
@@ -14,15 +14,15 @@ const styles = css`
 	:host {
 		display: inline-flex;
 		position: relative;
-		--accent: var(--primary);
+		--tone: var(--accent-primary);
 	}
 
 	:host([tone='secondary']) {
-		--accent: var(--purple);
+		--tone: var(--accent-secondary);
 	}
 
 	:host([tone='tertiary']) {
-		--accent: var(--pink);
+		--tone: var(--accent-tertiary);
 	}
 
 	:host([is-hidden]) {
@@ -32,29 +32,29 @@ const styles = css`
 	.trigger {
 		display: inline-flex;
 		align-items: center;
-		gap: 0.625rem;
+		gap: var(--space-2-5);
 		background: transparent;
-		border: 1px solid var(--border);
+		border: 1px solid var(--border-default);
 		border-radius: var(--radius-md);
 		height: var(--control-height-md);
-		padding-inline: 0.625rem 0.875rem;
-		color: var(--foreground);
+		padding-inline: var(--space-2-5) var(--space-3-5);
+		color: var(--text-primary);
 		font-family: var(--font-mono);
-		font-size: var(--font-size-small);
+		font-size: var(--font-size-sm);
 		cursor: pointer;
 		transition: border-color var(--motion-fast) var(--ease-enter);
 	}
 
 	.trigger:hover {
-		border-color: color-mix(in oklch, var(--foreground) 30%, transparent);
+		border-color: color-mix(in oklch, var(--text-primary) 30%, transparent);
 	}
 
 	.trigger.is-open {
-		border-color: var(--accent);
+		border-color: var(--tone);
 	}
 
 	.trigger:focus-visible {
-		outline: 3px solid var(--focus-ring);
+		outline: 3px solid var(--border-focus);
 		outline-offset: 2px;
 	}
 
@@ -62,7 +62,7 @@ const styles = css`
 		width: 1.25rem;
 		height: 1.25rem;
 		border-radius: var(--radius-sm);
-		border: 1px solid color-mix(in oklch, var(--foreground) 25%, transparent);
+		border: 1px solid color-mix(in oklch, var(--text-primary) 25%, transparent);
 		flex-shrink: 0;
 	}
 
@@ -71,15 +71,16 @@ const styles = css`
 		top: 0;
 		left: 0;
 		visibility: hidden;
-		z-index: 50;
+		z-index: var(--z-menu);
 		width: 15rem;
-		background: var(--popover);
-		border: 1px solid var(--border);
+		background: var(--surface-overlay);
+		border: 1px solid var(--border-default);
 		border-radius: var(--radius-md);
-		padding: var(--space-md);
+		box-shadow: var(--shadow-overlay);
+		padding: var(--space-3);
 		display: flex;
 		flex-direction: column;
-		gap: var(--space-md);
+		gap: var(--space-3);
 	}
 
 	.area {
@@ -87,7 +88,7 @@ const styles = css`
 		width: 100%;
 		height: 8.5rem;
 		border-radius: var(--radius-sm);
-		border: 1px solid var(--border);
+		border: 1px solid var(--border-default);
 		cursor: crosshair;
 		touch-action: none;
 		outline: none;
@@ -95,7 +96,7 @@ const styles = css`
 	}
 	.area:focus-visible,
 	.hue:focus-visible {
-		outline: 3px solid var(--focus-ring);
+		outline: 3px solid var(--border-focus);
 		outline-offset: 2px;
 	}
 
@@ -103,8 +104,8 @@ const styles = css`
 		position: relative;
 		width: 100%;
 		height: 0.75rem;
-		border-radius: 999px;
-		border: 1px solid var(--border);
+		border-radius: var(--radius-full);
+		border: 1px solid var(--border-default);
 		cursor: pointer;
 		touch-action: none;
 		outline: none;
@@ -115,7 +116,7 @@ const styles = css`
 		position: absolute;
 		width: 0.875rem;
 		height: 0.875rem;
-		border-radius: 999px;
+		border-radius: var(--radius-full);
 		border: 2px solid #fff;
 		background: transparent;
 		outline: 1px solid rgb(0 0 0 / 0.5);
@@ -132,19 +133,19 @@ const styles = css`
 	.hex-row {
 		display: flex;
 		align-items: center;
-		gap: 0.5rem;
-		border: 1px solid var(--border);
+		gap: var(--space-2);
+		border: 1px solid var(--border-default);
 		border-radius: var(--radius-sm);
-		padding-inline: 0.5rem;
+		padding-inline: var(--space-2);
 		height: 2.25rem;
 	}
 	.hex-row:focus-within {
-		border-color: var(--accent);
+		border-color: var(--tone);
 	}
 	.hash {
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 		font-family: var(--font-mono);
-		font-size: var(--font-size-small);
+		font-size: var(--font-size-sm);
 	}
 	.hex-input {
 		flex: 1;
@@ -152,21 +153,21 @@ const styles = css`
 		background: transparent;
 		border: none;
 		outline: none;
-		color: var(--foreground);
+		color: var(--text-primary);
 		font-family: var(--font-mono);
-		font-size: var(--font-size-small);
+		font-size: var(--font-size-sm);
 		text-transform: uppercase;
 	}
 
 	.presets {
 		display: grid;
 		grid-template-columns: repeat(8, 1fr);
-		gap: 0.375rem;
+		gap: var(--space-1-5);
 	}
 	.preset {
 		aspect-ratio: 1;
-		border-radius: 999px;
-		border: 1px solid color-mix(in oklch, var(--foreground) 20%, transparent);
+		border-radius: var(--radius-full);
+		border: 1px solid color-mix(in oklch, var(--text-primary) 20%, transparent);
 		cursor: pointer;
 		padding: 0;
 		transition: transform var(--motion-instant) var(--ease-enter);
@@ -175,7 +176,7 @@ const styles = css`
 		transform: scale(1.15);
 	}
 	.preset.is-selected {
-		outline: 2px solid var(--primary);
+		outline: 2px solid var(--text-primary);
 		outline-offset: 1px;
 	}
 `

@@ -29,13 +29,13 @@ const styles = css`
 		position: relative;
 		display: inline-flex;
 		align-items: center;
-		gap: 0.5rem;
+		gap: var(--space-2);
 		max-width: 15rem;
 		box-sizing: border-box;
-		border: 1px solid var(--border);
+		border: 1px solid var(--border-default);
 		border-radius: var(--radius-md);
-		background: var(--card);
-		padding: 0.375rem 0.5rem;
+		background: var(--surface-default);
+		padding: var(--space-1-5) var(--space-2);
 		overflow: hidden;
 	}
 	.thumb {
@@ -44,11 +44,11 @@ const styles = css`
 		height: 2rem;
 		border-radius: var(--radius-sm);
 		object-fit: cover;
-		background: color-mix(in oklch, var(--foreground) 8%, transparent);
+		background: color-mix(in oklch, var(--text-primary) 8%, transparent);
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 	}
 	.thumb svg {
 		width: 1.1rem;
@@ -63,15 +63,15 @@ const styles = css`
 		min-width: 0;
 	}
 	.name {
-		font-size: 0.8125rem;
-		font-weight: 500;
+		font-size: var(--font-size-sm);
+		font-weight: var(--font-weight-medium);
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
 	}
 	.size {
-		font-size: 0.6875rem;
-		color: var(--muted-foreground);
+		font-size: var(--font-size-2xs);
+		color: var(--text-secondary);
 	}
 	.remove {
 		flex: 0 0 auto;
@@ -81,9 +81,9 @@ const styles = css`
 		width: 1.25rem;
 		height: 1.25rem;
 		border: none;
-		border-radius: 999px;
-		background: color-mix(in oklch, var(--foreground) 10%, transparent);
-		color: var(--foreground);
+		border-radius: var(--radius-full);
+		background: color-mix(in oklch, var(--text-primary) 10%, transparent);
+		color: var(--text-primary);
 		cursor: pointer;
 		padding: 0;
 	}
@@ -100,7 +100,7 @@ const styles = css`
 		left: 0;
 		bottom: 0;
 		height: 2px;
-		background: var(--primary);
+		background: var(--accent-primary);
 		transition: width var(--motion-base) var(--ease-enter);
 	}
 `

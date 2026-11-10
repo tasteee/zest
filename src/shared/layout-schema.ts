@@ -10,18 +10,18 @@ import { css } from 'atomico'
  * (`aligns-x`/`aligns-y`) doesn't have to live alongside z-box's `x-*`/`y-*`.
  */
 
-/* ZSizeT -> spacing scale. Anchored on the --spacing-N primitives in tokens.css. */
+/* ZSizeT -> spacing scale. Anchored on the --space-N primitives in tokens.css. */
 const sizeScale: Record<string, string> = {
 	'0': '0',
-	'2xs': 'var(--spacing-1)',
-	xs: 'var(--spacing-2)',
-	sm: 'var(--spacing-3)',
-	md: 'var(--spacing-4)',
-	lg: 'var(--spacing-6)',
-	xl: 'var(--spacing-8)',
-	'2xl': 'var(--spacing-12)',
-	'3xl': 'var(--spacing-16)',
-	'4xl': 'var(--spacing-24)'
+	'2xs': 'var(--space-1)',
+	xs: 'var(--space-2)',
+	sm: 'var(--space-3)',
+	md: 'var(--space-4)',
+	lg: 'var(--space-6)',
+	xl: 'var(--space-8)',
+	'2xl': 'var(--space-12)',
+	'3xl': 'var(--space-16)',
+	'4xl': 'var(--space-24)'
 }
 
 /* ZWidthT -> max content widths. Unknown values pass through (e.g. "32rem", "60ch"). */
@@ -98,7 +98,7 @@ export const resolveGridAlign = lookup(gridAlignMap, false)
 
 /*
  * Coerce a size prop (string or number) into a CSS value. Numeric values map
- * to the spacing token variables (e.g. `6` -> `var(--spacing-6)`). Non-numeric
+ * to the spacing token variables (e.g. `6` -> `var(--space-6)`). Non-numeric
  * strings are passed through `resolveSize` so tokens ("sm") and lengths
  * ("24px", "1rem") continue to work.
  */
@@ -106,7 +106,7 @@ export const coerceSize = (value?: string | number): string | undefined => {
 	if (value == null || value === '') return undefined
 	if (typeof value === 'number' || /^\d+$/.test(String(value))) {
 		const n = typeof value === 'number' ? value : Number(value)
-		return `var(--spacing-${n})`
+		return `var(--space-${n})`
 	}
 	return resolveSize(String(value))
 }

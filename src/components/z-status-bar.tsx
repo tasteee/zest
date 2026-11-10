@@ -16,14 +16,14 @@ const styles = css`
 	:host {
 		display: flex;
 		align-items: center;
-		gap: 1rem;
+		gap: var(--space-4);
 		box-sizing: border-box;
 		width: 100%;
-		padding: 0.375rem 0.875rem;
-		background: var(--popover);
-		border-top: 1px solid var(--border);
-		color: var(--muted-foreground);
-		font-size: var(--font-size-caption);
+		padding: var(--space-1-5) var(--space-3-5);
+		background: var(--surface-overlay);
+		border-top: 1px solid var(--border-default);
+		color: var(--text-secondary);
+		font-size: var(--font-size-xs);
 		position: sticky;
 		bottom: 0;
 	}
@@ -31,7 +31,7 @@ const styles = css`
 	.stat {
 		display: inline-flex;
 		align-items: center;
-		gap: 0.3125rem;
+		gap: var(--space-1-5);
 		white-space: nowrap;
 	}
 
@@ -42,22 +42,22 @@ const styles = css`
 	.save-state {
 		display: inline-flex;
 		align-items: center;
-		gap: 0.375rem;
+		gap: var(--space-1-5);
 	}
 
 	.dot {
 		width: 0.4rem;
 		height: 0.4rem;
-		border-radius: 999px;
-		background: var(--muted-foreground);
+		border-radius: var(--radius-full);
+		background: var(--text-secondary);
 	}
 
 	.save-state.is-saving .dot {
-		background: var(--warning);
+		background: var(--status-warning);
 	}
 
 	.save-state.is-saved .dot {
-		background: var(--success);
+		background: var(--status-success);
 	}
 `
 

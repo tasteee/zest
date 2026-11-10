@@ -20,8 +20,8 @@ const styles = css`
 		display: flex;
 		align-items: center;
 		width: 100%;
-		color: var(--muted-foreground);
-		gap: var(--space-base);
+		color: var(--text-secondary);
+		gap: var(--space-4);
 	}
 
 	:host([is-hidden]) {
@@ -38,12 +38,12 @@ const styles = css`
 		align-self: stretch;
 		width: 1px;
 		height: auto;
-		background: var(--border);
+		background: var(--border-default);
 	}
 
 	.rule {
 		flex: 1 1 auto;
-		background: var(--border);
+		background: var(--border-default);
 		height: 1px;
 	}
 
@@ -55,13 +55,13 @@ const styles = css`
 	.label {
 		flex: 0 0 auto;
 		font-family: inherit;
-		font-size: var(--font-size-caption);
+		font-size: var(--font-size-xs);
 		font-weight: var(--font-weight-semibold);
 		letter-spacing: 0.08em;
 		text-transform: uppercase;
 		white-space: nowrap;
-		color: var(--muted-foreground);
-		line-height: 1;
+		color: var(--text-secondary);
+		line-height: var(--line-height-none);
 		user-select: none;
 	}
 

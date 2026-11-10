@@ -35,7 +35,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup
+      - uses: denoland/setup-deno@v2
       - run: pnpm build
+      - run: deno publish --dry-run --allow-dirty --allow-slow-types
       # custom-elements.json is tracked, but the build rewrites it and the
       # tests and docs crawl read the fresh copy.
       - uses: actions/upload-artifact@v4
@@ -44,6 +46,7 @@ jobs:
           path: |
             dist
             custom-elements.json
+            jsr.json
           retention-days: 1
           if-no-files-found: error
 
@@ -99,6 +102,7 @@ jobs:
               - 'src/**'
               - 'scripts/**'
               - 'package.json'
+              - 'jsr.json'
               - 'pnpm-lock.yaml'
               - 'pnpm-workspace.yaml'
               - 'vite.config.ts'

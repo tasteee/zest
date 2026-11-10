@@ -35,8 +35,8 @@ const styles = css`
 	.link-field {
 		display: flex;
 		align-items: center;
-		gap: 0.375rem;
-		padding: 0 0.375rem;
+		gap: var(--space-1-5);
+		padding: 0 var(--space-1-5);
 	}
 
 	.link-field input {
@@ -45,9 +45,9 @@ const styles = css`
 		background: transparent;
 		border: 0;
 		outline: none;
-		color: var(--foreground);
+		color: var(--text-primary);
 		font-family: inherit;
-		font-size: var(--font-size-small);
+		font-size: var(--font-size-sm);
 	}
 `
 

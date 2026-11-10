@@ -5,8 +5,8 @@ import { DocsFooter, DocsHero, DocsSection } from '@app/docs/DocsChrome'
 // Swatches render the literal CSS var so this page can never drift from the
 // token values shipped in src/ink.css.
 // The token is resolved on the outer element, before the tooltip. z-tooltip
-// sets its own --accent for its children, which would otherwise repaint the
-// --accent swatch with the tooltip's color instead of the page's.
+// sets its own --tone for its children, which would otherwise repaint the
+// --tone swatch with the tooltip's color instead of the page's.
 const Swatch = ({ token, label, hint }: { token: string; label: string; hint?: string }) => {
 	const swatch = (
 		<div className="swatch" tabIndex={hint ? 0 : undefined}>
@@ -29,58 +29,49 @@ const Swatch = ({ token, label, hint }: { token: string; label: string; hint?: s
 
 const RAMP_STEPS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
 
-const SEMANTIC_TOKENS = [
-	{
-		token: '--foreground',
-		label: 'Foreground',
-		hint: 'Default text and icon color (neutral 8). Body copy, headings, and any content that needs full contrast against the page background.'
-	},
-	{
-		token: '--muted-foreground',
-		label: 'Muted foreground',
-		hint: 'Secondary text (neutral 6). Captions, helper text, placeholders, timestamps, and anything that should recede behind the main content.'
-	},
-	{
-		token: '--border',
-		label: 'Border',
-		hint: 'Hairline color (neutral 3). Card and input outlines, dividers, and separators. Zest uses borders instead of shadows for separation.'
-	},
-	{
-		token: '--ring',
-		label: 'Focus ring',
-		hint: 'Keyboard focus outline (neutral 4). Drawn around any interactive element reached with the keyboard; never removed.'
-	},
-	{
-		token: '--accent',
-		label: 'Accent (neutral)',
-		hint: 'The primary tone, and it is neutral. Active and selected states and the one primary action on a screen. The shell stays neutral so the artwork supplies the colour.'
-	},
-	{
-		token: '--accent-secondary',
-		label: 'Accent secondary (purple)',
-		hint: 'The secondary tone (tone="secondary"). Opt-in emphasis; use sparingly.'
-	},
-	{
-		token: '--accent-tertiary',
-		label: 'Accent tertiary (pink)',
-		hint: 'The tertiary tone (tone="tertiary"). Opt-in emphasis; pairs with purple in charts. Use sparingly.'
-	},
-	{
-		token: '--destructive',
-		label: 'Destructive',
-		hint: 'Errors and irreversible actions: delete buttons, invalid fields, failure alerts. Reserved for these cases only.'
-	},
-	{
-		token: '--success',
-		label: 'Success',
-		hint: 'Positive outcomes: completed steps, saved confirmations, passing checks, and healthy status indicators.'
-	},
-	{
-		token: '--warning',
-		label: 'Warning',
-		hint: 'Caution without failure: things that need attention soon, risky-but-allowed actions, and degraded status.'
-	}
+type RoleT = { token: string; label: string; hint: string }
+
+const SURFACES: RoleT[] = [
+	{ token: '--surface-page', label: 'Page', hint: 'The canvas behind everything. Body background.' },
+	{ token: '--surface-default', label: 'Default', hint: 'Cards, panels and fields resting on the page. Flat: a fill and a hairline border, no shadow.' },
+	{ token: '--surface-subtle', label: 'Subtle', hint: 'A quieter region inside a panel: wells, table headers, hover rows.' },
+	{ token: '--surface-strong', label: 'Strong', hint: 'The deepest resting step: chips, tracks and tiles that must read against a subtle surface.' },
+	{ token: '--surface-overlay', label: 'Overlay', hint: 'Anything that floats above the page: menus, popovers, tooltips, toasts, dialogs. Always paired with a border and a shadow.' },
+	{ token: '--surface-inverse', label: 'Inverse', hint: 'A soft off-white panel with dark ink, for surfaces that must read as not part of the page. Pair with --text-inverse.' }
 ]
+
+const TEXT: RoleT[] = [
+	{ token: '--text-primary', label: 'Primary', hint: 'Default text and icons. Body copy, headings, anything that needs full contrast.' },
+	{ token: '--text-secondary', label: 'Secondary', hint: 'Captions, helper text, placeholders, timestamps: whatever should recede.' },
+	{ token: '--text-tertiary', label: 'Tertiary', hint: 'The quietest readable text: disabled-adjacent hints and decorative labels.' },
+	{ token: '--text-strong', label: 'Strong', hint: 'Full contrast, reserved for display type and the few elements that opt in.' }
+]
+
+const BORDERS: RoleT[] = [
+	{ token: '--border-default', label: 'Default', hint: 'Hairlines: card and input outlines, dividers, separators.' },
+	{ token: '--border-strong', label: 'Strong', hint: 'Hover and emphasis outlines; scrollbar thumb on hover.' },
+	{ token: '--border-focus', label: 'Focus', hint: 'The keyboard focus outline. Drawn around every interactive element reached with the keyboard; never removed.' }
+]
+
+const ACCENTS: RoleT[] = [
+	{ token: '--accent-primary', label: 'Primary', hint: 'The primary tone, and it is neutral. The shell stays neutral so the content supplies the colour.' },
+	{ token: '--accent-secondary', label: 'Secondary', hint: 'tone="secondary". Opt-in emphasis; use sparingly.' },
+	{ token: '--accent-tertiary', label: 'Tertiary', hint: 'tone="tertiary". Opt-in emphasis; pairs with secondary in charts.' }
+]
+
+const STATUS: RoleT[] = [
+	{ token: '--status-success', label: 'Success', hint: 'Completed steps, saved confirmations, passing checks, healthy status.' },
+	{ token: '--status-warning', label: 'Warning', hint: 'Needs attention soon, risky-but-allowed actions, degraded status.' },
+	{ token: '--status-danger', label: 'Danger', hint: 'Errors and irreversible actions: delete buttons, invalid fields, failure alerts.' }
+]
+
+const RoleRow = ({ roles }: { roles: RoleT[] }) => (
+	<div className="swatch-row">
+		{roles.map((role) => (
+			<Swatch key={role.token} token={role.token} label={role.label} hint={role.hint} />
+		))}
+	</div>
+)
 
 export const Color = () => (
 	<div className="DocsPage">
@@ -89,83 +80,71 @@ export const Color = () => (
 			title="Color."
 			lede={
 				<>
-					OKLCH-derived ramps, dark and light.{' '}
+					Roles, not hues.{' '}
 					<z-inline color="muted" weight={400}>
-						Purple and pink accents, ten-step neutrals.
+						Components read a role; the theme decides which colour fills it.
 					</z-inline>
 				</>
 			}
 		/>
 
 		<DocsSection
-			id="pink"
-			tone="tertiary"
-			title="Pink"
-			tag="--color-pink-0…9"
-			sub={
-				<>
-					Derived from <code className="inline">--base-pink-color</code>.{' '}
-					<code className="inline">--color-pink-4</code> is the base, steps below darken toward the background, steps
-					above lighten toward white. This is the hue behind{' '}
-					<code className="inline">tone="tertiary"</code>.
-				</>
-			}
+			id="surfaces"
+			tone="primary"
+			title="Surfaces"
+			tag="--surface-*"
+			sub="Where something sits. Resting surfaces are flat: a fill plus a hairline border. Only surface-overlay floats, and it takes a shadow."
 		>
-			<div className="swatch-row">
-				{RAMP_STEPS.map((step) => (
-					<Swatch key={step} token={`--color-pink-${step}`} label={step} />
-				))}
-			</div>
+			<RoleRow roles={SURFACES} />
+		</DocsSection>
+
+		<DocsSection id="text" tone="primary" title="Text" tag="--text-*" sub="Ink on a surface. On a solid accent or status fill, use --on-accent.">
+			<RoleRow roles={TEXT} />
+		</DocsSection>
+
+		<DocsSection id="borders" tone="primary" title="Borders" tag="--border-*">
+			<RoleRow roles={BORDERS} />
 		</DocsSection>
 
 		<DocsSection
-			id="purple"
+			id="accents"
 			tone="secondary"
-			title="Purple"
-			tag="--color-purple-0…9"
+			title="Accents"
+			tag="--accent-*"
 			sub={
 				<>
-					Derived from <code className="inline">--base-purple-color</code>, the same way as the pink ramp. This is the
-					hue behind <code className="inline">tone="secondary"</code>.
+					The three tones behind <code className="inline">tone="primary | secondary | tertiary"</code>. Inside a component,{' '}
+					<code className="inline">--tone</code> holds whichever one is active.
 				</>
 			}
 		>
-			<div className="swatch-row">
-				{RAMP_STEPS.map((step) => (
-					<Swatch key={step} token={`--color-purple-${step}`} label={step} />
-				))}
-			</div>
+			<RoleRow roles={ACCENTS} />
+		</DocsSection>
+
+		<DocsSection
+			id="status"
+			tone="tertiary"
+			title="Status"
+			tag="--status-*"
+			sub={
+				<>
+					<code className="inline">tone="success | warning | danger"</code>.
+				</>
+			}
+		>
+			<RoleRow roles={STATUS} />
 		</DocsSection>
 
 		<DocsSection
 			id="neutral"
 			tone="secondary"
-			title="Neutral"
+			title="Neutral palette"
 			tag="--color-neutral-0…9"
-			sub={
-				<>
-					<code className="inline">--color-neutral-0</code> is the page background (<code className="inline">--bg</code>);{' '}
-					<code className="inline">--color-neutral-8</code> is <code className="inline">--foreground</code>. Lightness
-					climbs monotonically from 0 to 9.
-				</>
-			}
+			sub="The theme's private palette, shown for reference. Step N plays a different part in light and dark, so components never read it directly; they read the roles above."
 		>
 			<div className="swatch-row">
 				{RAMP_STEPS.map((step) => (
 					<Swatch key={step} token={`--color-neutral-${step}`} label={step} />
-				))}
-			</div>
-		</DocsSection>
-
-		<DocsSection
-			id="semantic"
-			tone="tertiary"
-			title="Semantic aliases"
-			sub="What components actually read. Hover a swatch to see what it is for. Each aliases back to a step on one of the ramps above, so retheme by moving the alias, not by touching the ramp."
-		>
-			<div className="swatch-row">
-				{SEMANTIC_TOKENS.map((t) => (
-					<Swatch key={t.token} token={t.token} label={t.label} hint={t.hint} />
 				))}
 			</div>
 		</DocsSection>

@@ -14,15 +14,15 @@ import { oneOf } from '../shared/prop-types'
 const styles = css`
 	:host {
 		display: block;
-		--accent: var(--primary);
+		--tone: var(--accent-primary);
 	}
 
 	:host([tone='secondary']) {
-		--accent: var(--purple);
+		--tone: var(--accent-secondary);
 	}
 
 	:host([tone='tertiary']) {
-		--accent: var(--pink);
+		--tone: var(--accent-tertiary);
 	}
 
 	:host([is-hidden]) {
@@ -33,21 +33,21 @@ const styles = css`
 		display: flex;
 		flex-wrap: wrap;
 		align-items: center;
-		gap: 0.5rem;
+		gap: var(--space-2);
 		margin: 0;
 		padding: 0;
 		list-style: none;
-		font-size: var(--font-size-small);
+		font-size: var(--font-size-sm);
 	}
 
 	li {
 		display: inline-flex;
 		align-items: center;
-		gap: 0.5rem;
+		gap: var(--space-2);
 	}
 
 	.crumb {
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 		text-decoration: none;
 		background: transparent;
 		border: 0;
@@ -59,24 +59,24 @@ const styles = css`
 	}
 
 	.crumb:hover {
-		color: var(--accent);
+		color: var(--tone);
 	}
 
 	.crumb:focus-visible {
-		outline: 3px solid var(--focus-ring);
+		outline: 3px solid var(--border-focus);
 		outline-offset: 2px;
 		border-radius: var(--radius-sm);
 	}
 
 	.crumb.is-current {
-		color: var(--foreground);
-		font-weight: 500;
+		color: var(--text-primary);
+		font-weight: var(--font-weight-medium);
 		cursor: default;
 		pointer-events: none;
 	}
 
 	.ellipsis {
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 		user-select: none;
 	}
 
@@ -84,7 +84,7 @@ const styles = css`
 		width: 0.875rem;
 		height: 0.875rem;
 		flex-shrink: 0;
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 		stroke: currentColor;
 		stroke-width: 2;
 		stroke-linecap: round;

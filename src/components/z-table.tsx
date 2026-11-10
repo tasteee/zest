@@ -26,7 +26,7 @@ const styles = css`
 	.wrap {
 		width: 100%;
 		overflow-x: auto;
-		border: 1px solid var(--border);
+		border: 1px solid var(--border-default);
 		border-radius: var(--radius-lg);
 	}
 
@@ -38,21 +38,21 @@ const styles = css`
 
 	thead th {
 		text-align: start;
-		padding: 0.875rem 1.125rem;
-		font-size: 0.6875rem;
-		font-weight: 600;
+		padding: var(--space-3-5) var(--space-5);
+		font-size: var(--font-size-2xs);
+		font-weight: var(--font-weight-semibold);
 		letter-spacing: 0.1em;
 		text-transform: uppercase;
-		color: var(--muted-foreground);
-		border-bottom: 1px solid var(--border);
+		color: var(--text-secondary);
+		border-bottom: 1px solid var(--border-default);
 		white-space: nowrap;
 	}
 
 	tbody td {
-		padding: 0.9375rem 1.125rem;
-		font-size: 0.875rem;
-		color: var(--foreground);
-		border-bottom: 1px solid var(--border);
+		padding: var(--space-4) var(--space-5);
+		font-size: var(--font-size-sm);
+		color: var(--text-primary);
+		border-bottom: 1px solid var(--border-default);
 		vertical-align: middle;
 	}
 
@@ -68,11 +68,11 @@ const styles = css`
 		transition: background-color var(--motion-instant) var(--ease-enter);
 	}
 	tbody tr:hover {
-		background: color-mix(in oklch, var(--foreground) 4%, transparent);
+		background: color-mix(in oklch, var(--text-primary) 4%, transparent);
 	}
 
 	:host([is-striped]) tbody tr:nth-child(even) {
-		background: color-mix(in oklch, var(--foreground) 3%, transparent);
+		background: color-mix(in oklch, var(--text-primary) 3%, transparent);
 	}
 
 	.align-end {
@@ -83,19 +83,19 @@ const styles = css`
 	}
 	.is-mono {
 		font-family: var(--font-mono);
-		font-size: 0.8125rem;
+		font-size: var(--font-size-sm);
 	}
 
 	tbody tr:focus-visible {
-		outline: 3px solid var(--focus-ring);
+		outline: 3px solid var(--border-focus);
 		outline-offset: -3px;
 	}
 
 	.empty {
-		padding: 2.5rem;
+		padding: var(--space-10);
 		text-align: center;
-		color: var(--muted-foreground);
-		font-size: 0.875rem;
+		color: var(--text-secondary);
+		font-size: var(--font-size-sm);
 	}
 `
 

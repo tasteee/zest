@@ -174,7 +174,7 @@ export const toaster = {
 const styles = css`
 	:host {
 		position: fixed;
-		z-index: 9999;
+		z-index: var(--z-toast);
 		display: flex;
 		flex-direction: column;
 		width: min(22rem, calc(100vw - 2rem));
@@ -215,7 +215,7 @@ const styles = css`
 	.item {
 		display: grid;
 		grid-template-rows: 1fr;
-		padding-top: 0.625rem;
+		padding-top: var(--space-2-5);
 		transition:
 			grid-template-rows var(--motion-exit-base) var(--ease-move),
 			padding var(--motion-exit-base) var(--ease-move);
@@ -223,7 +223,7 @@ const styles = css`
 
 	:host([position^='top']) .item {
 		padding-top: 0;
-		padding-bottom: 0.625rem;
+		padding-bottom: var(--space-2-5);
 	}
 
 	.item.is-closing {
@@ -240,14 +240,15 @@ const styles = css`
 		pointer-events: auto;
 		display: flex;
 		align-items: flex-start;
-		gap: 0.625rem;
+		gap: var(--space-2-5);
 		box-sizing: border-box;
-		padding: 0.75rem 0.75rem 0.75rem 0.875rem;
-		color: var(--foreground);
-		background: var(--popover);
-		border: 1px solid var(--border);
-		border-inline-start: 2px solid var(--toast-accent, var(--border));
+		padding: var(--space-3) var(--space-3) var(--space-3) var(--space-3-5);
+		color: var(--text-primary);
+		background: var(--surface-overlay);
+		border: 1px solid var(--border-default);
+		border-inline-start: 2px solid var(--toast-accent, var(--border-default));
 		border-radius: var(--radius-md);
+		box-shadow: var(--shadow-overlay);
 		overflow: hidden;
 		animation: toast-in var(--motion-base) var(--ease-enter);
 		transition:
@@ -270,23 +271,23 @@ const styles = css`
 	.toast:not(.is-primary) {
 		background: linear-gradient(
 			100deg,
-			color-mix(in oklab, var(--toast-accent) 16%, var(--popover)) 0%,
-			color-mix(in oklab, var(--toast-accent) 6%, var(--popover)) 45%,
-			var(--popover) 85%
+			color-mix(in oklab, var(--toast-accent) 16%, var(--surface-overlay)) 0%,
+			color-mix(in oklab, var(--toast-accent) 6%, var(--surface-overlay)) 45%,
+			var(--surface-overlay) 85%
 		);
 	}
 
 	.toast.is-info {
-		--toast-accent: var(--purple);
+		--toast-accent: var(--accent-secondary);
 	}
 	.toast.is-success {
-		--toast-accent: var(--success);
+		--toast-accent: var(--status-success);
 	}
 	.toast.is-warning {
-		--toast-accent: var(--warning);
+		--toast-accent: var(--status-warning);
 	}
 	.toast.is-danger {
-		--toast-accent: var(--destructive);
+		--toast-accent: var(--status-danger);
 	}
 
 	@keyframes toast-in {
@@ -302,21 +303,21 @@ const styles = css`
 		min-width: 0;
 		display: flex;
 		flex-direction: column;
-		gap: 0.125rem;
-		padding-top: 0.25rem;
+		gap: var(--space-0-5);
+		padding-top: var(--space-1);
 	}
 
 	.title {
-		font-size: var(--font-size-small);
-		font-weight: 600;
-		color: var(--foreground);
-		line-height: 1.4;
+		font-size: var(--font-size-sm);
+		font-weight: var(--font-weight-semibold);
+		color: var(--text-primary);
+		line-height: var(--line-height-snug);
 	}
 
 	.description {
-		font-size: var(--font-size-caption);
-		color: var(--muted-foreground);
-		line-height: var(--line-height-body);
+		font-size: var(--font-size-xs);
+		color: var(--text-secondary);
+		line-height: var(--line-height-normal);
 	}
 
 	/* close button, ringed by the remaining-time indicator on timed toasts */
@@ -331,8 +332,8 @@ const styles = css`
 		padding: 0;
 		background: transparent;
 		border: 0;
-		border-radius: 999px;
-		color: var(--muted-foreground);
+		border-radius: var(--radius-full);
+		color: var(--text-secondary);
 		cursor: pointer;
 		transition:
 			color var(--motion-fast) var(--ease-enter),
@@ -340,12 +341,12 @@ const styles = css`
 	}
 
 	.close:hover {
-		color: var(--foreground);
-		background: color-mix(in oklch, var(--foreground) 8%, transparent);
+		color: var(--text-primary);
+		background: color-mix(in oklch, var(--text-primary) 8%, transparent);
 	}
 
 	.close:focus-visible {
-		outline: 3px solid var(--focus-ring);
+		outline: 3px solid var(--border-focus);
 		outline-offset: 1px;
 	}
 
@@ -373,12 +374,12 @@ const styles = css`
 	}
 
 	.ring .track {
-		stroke: color-mix(in oklch, var(--foreground) 8%, transparent);
+		stroke: color-mix(in oklch, var(--text-primary) 8%, transparent);
 	}
 
 	/* pathLength=100: the arc drains from full to nothing over the duration */
 	.ring .remaining {
-		stroke: color-mix(in oklch, var(--toast-accent, var(--muted-foreground)) 85%, transparent);
+		stroke: color-mix(in oklch, var(--toast-accent, var(--text-secondary)) 85%, transparent);
 		stroke-dasharray: 100;
 		stroke-linecap: round;
 		animation: toast-countdown linear forwards;

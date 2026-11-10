@@ -38,23 +38,23 @@ const styles = css`
 		height: 100%;
 		min-height: 0;
 		max-height: 100%;
-		background: var(--color-neutral-0);
-		border: 1px solid var(--sidebar-border);
+		background: var(--surface-page);
+		border: 1px solid var(--border-default);
 		border-radius: var(--radius-lg);
-		padding: var(--space-sm) var(--space-md) var(--space-md);
-		color: var(--sidebar-foreground);
-		--accent: var(--primary);
+		padding: var(--space-2) var(--space-3) var(--space-3);
+		color: var(--text-primary);
+		--tone: var(--accent-primary);
 		transition: width var(--motion-fast) var(--ease-enter);
 		user-select: none;
 		-webkit-user-select: none;
 	}
 
 	:host([tone='secondary']) {
-		--accent: var(--purple);
+		--tone: var(--accent-secondary);
 	}
 
 	:host([tone='tertiary']) {
-		--accent: var(--pink);
+		--tone: var(--accent-tertiary);
 	}
 
 	:host([is-collapsed]) {
@@ -68,19 +68,19 @@ const styles = css`
 	:host([is-docked]) {
 		background: transparent;
 		border: none;
-		border-inline-end: 1px solid var(--sidebar-border);
+		border-inline-end: 1px solid var(--border-default);
 		border-radius: 0;
-		padding: var(--space-sm) 0 var(--space-md);
+		padding: var(--space-2) 0 var(--space-3);
 	}
 
 	.head.has-content {
-		padding: 0.25rem 0.5rem 0.75rem;
+		padding: var(--space-1) var(--space-2) var(--space-3);
 	}
 
 	.foot.has-content {
 		margin-top: auto;
-		padding-top: 0.75rem;
-		border-top: 1px solid var(--sidebar-border);
+		padding-top: var(--space-3);
+		border-top: 1px solid var(--border-default);
 	}
 
 	nav {
@@ -88,7 +88,7 @@ const styles = css`
 		flex-direction: column;
 		flex: 1 1 auto;
 		min-height: 0;
-		gap: 0.125rem;
+		gap: var(--space-0-5);
 		overflow-y: auto;
 	}
 
@@ -99,7 +99,7 @@ const styles = css`
 	@supports not selector(::-webkit-scrollbar) {
 		nav {
 			scrollbar-width: thin;
-			scrollbar-color: var(--color-neutral-3) transparent;
+			scrollbar-color: var(--border-default) transparent;
 		}
 	}
 
@@ -111,11 +111,11 @@ const styles = css`
 		background: transparent;
 	}
 	nav::-webkit-scrollbar-thumb {
-		background: var(--color-neutral-3);
-		border-radius: 999px;
+		background: var(--border-default);
+		border-radius: var(--radius-full);
 	}
 	nav::-webkit-scrollbar-thumb:hover {
-		background: var(--color-neutral-4);
+		background: var(--border-strong);
 	}
 	/* No stepper arrows: Windows Chromium renders them otherwise. */
 	nav::-webkit-scrollbar-button {
@@ -128,16 +128,16 @@ const styles = css`
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		gap: 0.5rem;
+		gap: var(--space-2);
 		width: 100%;
 		box-sizing: border-box;
-		padding: 0.375rem 0.625rem 0.875rem;
+		padding: var(--space-1-5) var(--space-2-5) var(--space-3-5);
 		font-family: inherit;
-		font-size: var(--font-size-caption);
-		font-weight: 700;
+		font-size: var(--font-size-xs);
+		font-weight: var(--font-weight-bold);
 		letter-spacing: 0.1em;
 		text-transform: uppercase;
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 		background: transparent;
 		border: 0;
 		text-align: start;
@@ -148,13 +148,13 @@ const styles = css`
 	}
 
 	.group:first-child > .group-label {
-		padding-top: 0.5rem;
+		padding-top: var(--space-2);
 	}
 
 	/* a group nested inside a group: a quieter, sentence-case sub-heading */
 	.group .group .group-label {
-		padding: 0.5rem 0.625rem 0.375rem 1.125rem;
-		font-weight: 600;
+		padding: var(--space-2) var(--space-2-5) var(--space-1-5) var(--space-5);
+		font-weight: var(--font-weight-semibold);
 		letter-spacing: 0;
 		text-transform: none;
 	}
@@ -164,11 +164,11 @@ const styles = css`
 	}
 
 	.group-label:hover {
-		color: var(--foreground);
+		color: var(--text-primary);
 	}
 
 	.group-label:focus-visible {
-		outline: 3px solid var(--focus-ring);
+		outline: 3px solid var(--border-focus);
 		outline-offset: 2px;
 		border-radius: var(--radius-sm);
 	}
@@ -204,13 +204,13 @@ const styles = css`
 	.link {
 		display: flex;
 		align-items: center;
-		gap: 0.625rem;
-		padding: 0.5rem 0.625rem;
+		gap: var(--space-2-5);
+		padding: var(--space-2) var(--space-2-5);
 		border-radius: var(--radius-md);
 		font-family: inherit;
-		font-size: var(--font-size-small);
-		font-weight: 500;
-		color: var(--color-neutral-8);
+		font-size: var(--font-size-sm);
+		font-weight: var(--font-weight-medium);
+		color: var(--text-primary);
 		text-decoration: none;
 		background: transparent;
 		border: 0;
@@ -225,36 +225,36 @@ const styles = css`
 	}
 
 	.link:hover {
-		color: var(--foreground);
-		background: color-mix(in oklch, var(--foreground) 6%, transparent);
+		color: var(--text-primary);
+		background: color-mix(in oklch, var(--text-primary) 6%, transparent);
 	}
 
 	.link.is-active {
-		color: var(--accent);
-		background: color-mix(in oklch, var(--accent) 12%, transparent);
+		color: var(--tone);
+		background: color-mix(in oklch, var(--tone) 12%, transparent);
 	}
 
 	:host(:not([is-collapsed])) .group .link {
-		margin-inline-start: 0.5rem;
+		margin-inline-start: var(--space-2);
 		width: calc(100% - 0.5rem);
 	}
 
 	.group > .link:last-child,
 	.group > .group:last-child {
-		margin-bottom: 1rem;
+		margin-bottom: var(--space-4);
 	}
 
 	.group .group > .link:last-child {
-		margin-bottom: 0.5rem;
+		margin-bottom: var(--space-2);
 	}
 
 	:host(:not([is-collapsed])) .group .group .link {
-		margin-inline-start: 1rem;
+		margin-inline-start: var(--space-4);
 		width: calc(100% - 1rem);
 	}
 
 	.link:focus-visible {
-		outline: 3px solid var(--focus-ring);
+		outline: 3px solid var(--border-focus);
 		outline-offset: 2px;
 	}
 
@@ -271,8 +271,8 @@ const styles = css`
 	/* the initial is a collapsed-only fallback for links without an icon, so the
 	   rail never renders an empty row when labels are hidden. */
 	.initial {
-		font-size: var(--font-size-small);
-		font-weight: 600;
+		font-size: var(--font-size-sm);
+		font-weight: var(--font-weight-semibold);
 	}
 
 	:host(:not([is-collapsed])) .initial {
@@ -305,12 +305,12 @@ const styles = css`
 	}
 
 	.badge {
-		font-size: var(--font-size-caption);
-		font-weight: 600;
-		padding: 0.0625rem 0.4rem;
-		border-radius: 999px;
-		background: color-mix(in oklch, var(--accent) 18%, transparent);
-		color: var(--accent);
+		font-size: var(--font-size-xs);
+		font-weight: var(--font-weight-semibold);
+		padding: 0.0625rem var(--space-1-5);
+		border-radius: var(--radius-full);
+		background: color-mix(in oklch, var(--tone) 18%, transparent);
+		color: var(--tone);
 	}
 `
 

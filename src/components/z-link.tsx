@@ -27,11 +27,11 @@ const styles = css`
 		align-items: center;
 		gap: 0.375em;
 		font-family: inherit;
-		font-weight: 500;
+		font-weight: var(--font-weight-medium);
 		text-decoration: none;
 		cursor: pointer;
-		line-height: 1.4;
-		color: var(--tone-color);
+		line-height: var(--line-height-snug);
+		color: var(--tone);
 		transition:
 			color var(--motion-fast) var(--ease-enter),
 			opacity var(--motion-fast) var(--ease-enter);
@@ -40,24 +40,24 @@ const styles = css`
 
 	/* sizes */
 	a.is-sm {
-		font-size: var(--font-size-small);
+		font-size: var(--font-size-sm);
 	}
 	a.is-md {
-		font-size: var(--font-size-body);
+		font-size: var(--font-size-md);
 	}
 	a.is-lg {
-		font-size: var(--font-size-h4);
+		font-size: var(--font-size-xl);
 	}
 
 	/* tones */
 	a.is-secondary {
-		--tone-color: var(--purple);
+		--tone: var(--accent-secondary);
 	}
 	a.is-tertiary {
-		--tone-color: var(--pink);
+		--tone: var(--accent-tertiary);
 	}
 	a.is-primary {
-		--tone-color: var(--foreground);
+		--tone: var(--text-primary);
 	}
 
 	/* animated underline, grows from the leading edge on hover */
@@ -90,13 +90,13 @@ const styles = css`
 	}
 
 	a:focus-visible {
-		outline: 3px solid var(--focus-ring);
+		outline: 3px solid var(--border-focus);
 		outline-offset: 3px;
-		border-radius: 2px;
+		border-radius: var(--radius-xs);
 	}
 
 	:host([is-disabled]) a {
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 		pointer-events: none;
 		opacity: 0.6;
 	}

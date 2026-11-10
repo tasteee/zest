@@ -24,14 +24,14 @@ import { oneOf } from '../shared/prop-types'
 const styles = css`
 	:host {
 		display: block;
-		--filter-accent: var(--primary);
+		--filter-accent: var(--accent-primary);
 	}
 
 	:host([tone='secondary']) {
-		--filter-accent: var(--purple);
+		--filter-accent: var(--accent-secondary);
 	}
 	:host([tone='tertiary']) {
-		--filter-accent: var(--pink);
+		--filter-accent: var(--accent-tertiary);
 	}
 
 	:host([is-hidden]) {
@@ -47,22 +47,22 @@ const styles = css`
 		display: flex;
 		flex-wrap: wrap;
 		align-items: center;
-		gap: 0.375rem;
+		gap: var(--space-1-5);
 	}
 
 	.pill {
 		display: inline-flex;
 		align-items: center;
-		gap: 0.375rem;
+		gap: var(--space-1-5);
 		font-family: inherit;
-		font-weight: 500;
-		line-height: 1;
+		font-weight: var(--font-weight-medium);
+		line-height: var(--line-height-none);
 		white-space: nowrap;
-		border: 1px solid var(--border);
-		border-radius: 999px;
+		border: 1px solid var(--border-default);
+		border-radius: var(--radius-full);
 		background: transparent;
 		/* resting / candidate: the less-prominent neutral state */
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 		cursor: pointer;
 		transition:
 			background-color var(--motion-fast) var(--ease-enter),
@@ -72,17 +72,17 @@ const styles = css`
 	}
 
 	.filter.is-sm .pill {
-		font-size: 0.75rem;
-		padding: 0.3125rem 0.6875rem;
+		font-size: var(--font-size-xs);
+		padding: var(--space-1-5) var(--space-3);
 	}
 	.filter.is-md .pill {
-		font-size: 0.8125rem;
-		padding: 0.4375rem 0.875rem;
+		font-size: var(--font-size-sm);
+		padding: var(--space-2) var(--space-3-5);
 	}
 
 	.pill:hover {
-		border-color: color-mix(in srgb, var(--filter-accent) 45%, var(--border));
-		color: var(--foreground);
+		border-color: color-mix(in srgb, var(--filter-accent) 45%, var(--border-default));
+		color: var(--text-primary);
 	}
 
 	/* chosen, a crumb (drilled ancestor) or the active frontier leaf. Wins over
@@ -92,14 +92,14 @@ const styles = css`
 		background: color-mix(in oklch, var(--filter-accent) 14%, transparent);
 		border-color: color-mix(in oklch, var(--filter-accent) 50%, transparent);
 		color: var(--filter-accent);
-		font-weight: 600;
+		font-weight: var(--font-weight-semibold);
 	}
 	/* neutral tone === foreground, which reads fine as text on the faint tint */
 	:host(:not([tone])) .pill.is-active,
 	:host(:not([tone])) .pill.is-crumb,
 	:host([tone='primary']) .pill.is-active,
 	:host([tone='primary']) .pill.is-crumb {
-		color: var(--foreground);
+		color: var(--text-primary);
 	}
 
 	.pill.is-disabled {
@@ -109,7 +109,7 @@ const styles = css`
 
 	.pill:focus-visible,
 	.reset:focus-visible {
-		outline: 3px solid var(--focus-ring);
+		outline: 3px solid var(--border-focus);
 		outline-offset: 2px;
 	}
 
@@ -119,10 +119,10 @@ const styles = css`
 		align-items: center;
 		justify-content: center;
 		flex-shrink: 0;
-		border: 1px solid var(--border);
-		border-radius: 999px;
+		border: 1px solid var(--border-default);
+		border-radius: var(--radius-full);
 		background: transparent;
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 		cursor: pointer;
 		padding: 0;
 		transition:
@@ -138,8 +138,8 @@ const styles = css`
 		height: 1.875rem;
 	}
 	.reset:hover {
-		border-color: color-mix(in srgb, var(--destructive) 50%, var(--border));
-		color: var(--destructive);
+		border-color: color-mix(in srgb, var(--status-danger) 50%, var(--border-default));
+		color: var(--status-danger);
 	}
 	.reset svg {
 		width: 0.7rem;
@@ -154,7 +154,7 @@ const styles = css`
 	.sep {
 		display: inline-flex;
 		align-items: center;
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 		opacity: 0.5;
 	}
 	.sep svg {

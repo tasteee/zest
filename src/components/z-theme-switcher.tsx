@@ -40,7 +40,7 @@ const styles = css`
 		-webkit-user-select: none;
 		--switcher-height: var(--control-height-md);
 		--switcher-padding-inline: 0.75rem;
-		--switcher-font-size: var(--font-size-2);
+		--switcher-font-size: var(--font-size-sm);
 		--switcher-icon-size: 0.9375rem;
 		--switcher-gap: 0.4375rem;
 	}
@@ -52,7 +52,7 @@ const styles = css`
 	:host([size='sm']) {
 		--switcher-height: var(--control-height-sm);
 		--switcher-padding-inline: 0.5625rem;
-		--switcher-font-size: var(--font-size-1);
+		--switcher-font-size: var(--font-size-xs);
 		--switcher-icon-size: 0.8125rem;
 		--switcher-gap: 0.375rem;
 	}
@@ -60,7 +60,7 @@ const styles = css`
 	:host([size='lg']) {
 		--switcher-height: var(--control-height-lg);
 		--switcher-padding-inline: 1rem;
-		--switcher-font-size: var(--font-size-3);
+		--switcher-font-size: var(--font-size-md);
 		--switcher-icon-size: 1.125rem;
 		--switcher-gap: 0.5rem;
 	}
@@ -69,17 +69,17 @@ const styles = css`
 	   by default so the control reads as chrome rather than as a call to
 	   action; the tone attributes below opt into the accents. */
 	:host {
-		--switcher-accent: var(--foreground);
-		--switcher-accent-foreground: var(--primary-foreground);
+		--switcher-accent: var(--text-primary);
+		--switcher-accent-foreground: var(--on-accent);
 	}
 
 	:host([tone='secondary']) {
-		--switcher-accent: var(--purple);
+		--switcher-accent: var(--accent-secondary);
 		--switcher-accent-foreground: white;
 	}
 
 	:host([tone='tertiary']) {
-		--switcher-accent: var(--pink);
+		--switcher-accent: var(--accent-tertiary);
 		--switcher-accent-foreground: white;
 	}
 
@@ -89,12 +89,9 @@ const styles = css`
 		box-sizing: border-box;
 		padding: 3px;
 		gap: 2px;
-		border: 1px solid var(--border);
+		border: 1px solid var(--border-default);
 		border-radius: var(--radius-lg);
-		/* The track is a channel milled into the panel; the selected segment
-		   rises out of it. Inert in the flat themes. */
-		background: var(--material-surface);
-		box-shadow: var(--elevation-carved);
+		background: transparent;
 	}
 
 	.segment {
@@ -108,30 +105,28 @@ const styles = css`
 		border: 1px solid transparent;
 		border-radius: calc(var(--radius-lg) - 3px);
 		background: transparent;
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 		font-family: inherit;
 		font-size: var(--switcher-font-size);
 		font-weight: var(--font-weight-medium);
-		line-height: 1;
+		line-height: var(--line-height-none);
 		white-space: nowrap;
 		cursor: pointer;
-		transition: color var(--duration-fast) var(--easing-standard), background-color var(--duration-fast) var(--easing-standard), border-color var(--duration-fast) var(--easing-standard);
+		transition: color var(--motion-fast) var(--ease-enter), background-color var(--motion-fast) var(--ease-enter), border-color var(--motion-fast) var(--ease-enter);
 	}
 
 	.segment:hover {
-		color: var(--foreground);
+		color: var(--text-primary);
 	}
 
 	.segment[aria-checked='true'] {
-		--emissive-color: var(--switcher-accent);
-		background: var(--material-tone), var(--switcher-accent);
-		box-shadow: var(--elevation-raised), var(--emissive-tone);
+		background: var(--switcher-accent);
 		border-color: var(--switcher-accent);
 		color: var(--switcher-accent-foreground);
 	}
 
 	.segment:focus-visible {
-		outline: 3px solid var(--focus-ring);
+		outline: 3px solid var(--border-focus);
 		outline-offset: 2px;
 	}
 
@@ -142,30 +137,24 @@ const styles = css`
 		box-sizing: border-box;
 		width: calc(var(--switcher-height) + 6px);
 		height: calc(var(--switcher-height) + 6px);
-		border: 1px solid var(--border);
+		border: 1px solid var(--border-default);
 		border-radius: var(--radius-lg);
-		/* A single pressable cap, so it is raised rather than carved. */
-		background: var(--material-raised), transparent;
-		box-shadow: var(--elevation-raised);
-		color: var(--muted-foreground);
+		background: transparent;
+		color: var(--text-secondary);
 		cursor: pointer;
 		transition:
-			color var(--duration-fast) var(--easing-standard),
-			border-color var(--duration-fast) var(--easing-standard),
-			box-shadow var(--material-press-duration) ease;
+			color var(--motion-fast) var(--ease-enter),
+			border-color var(--motion-fast) var(--ease-enter);
 	}
 
-	.iconButton:active {
-		box-shadow: var(--elevation-pressed);
-	}
 
 	.iconButton:hover {
-		color: var(--foreground);
-		border-color: var(--color-neutral-4);
+		color: var(--text-primary);
+		border-color: var(--border-strong);
 	}
 
 	.iconButton:focus-visible {
-		outline: 3px solid var(--focus-ring);
+		outline: 3px solid var(--border-focus);
 		outline-offset: 2px;
 	}
 
@@ -182,7 +171,7 @@ const styles = css`
 	.glyph {
 		grid-area: 1 / 1;
 		display: inline-flex;
-		transition: opacity var(--duration-move) var(--easing-standard), transform var(--duration-move) var(--easing-standard);
+		transition: opacity var(--motion-base) var(--ease-enter), transform var(--motion-base) var(--ease-enter);
 	}
 
 	.glyph.is-hidden {

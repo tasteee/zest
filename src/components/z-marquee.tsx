@@ -21,7 +21,7 @@ const styles = css`
 		display: block;
 		overflow: hidden;
 		--duration: 40s;
-		--gap: var(--spacing-6);
+		--gap: var(--space-6);
 	}
 
 	:host([is-hidden]) {

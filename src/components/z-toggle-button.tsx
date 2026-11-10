@@ -19,16 +19,16 @@ const styles = css`
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
-		gap: 0.5rem;
+		gap: var(--space-2);
 		font-family: inherit;
-		font-weight: 500;
+		font-weight: var(--font-weight-medium);
 		white-space: nowrap;
 		cursor: pointer;
-		line-height: 1;
+		line-height: var(--line-height-none);
 		box-sizing: border-box;
 		background: transparent;
 		border: 1px solid var(--toggle-border, transparent);
-		color: var(--tone-text, var(--foreground));
+		color: var(--tone-text, var(--text-primary));
 		border-radius: var(--z-toggle-button-radius, var(--radius-md));
 		height: var(--toggle-height, 2.5rem);
 		padding-inline: var(--toggle-padding-inline, 1rem);
@@ -42,22 +42,17 @@ const styles = css`
 	}
 
 	button:hover {
-		background: color-mix(in oklch, var(--tone-color) 10%, transparent);
+		background: color-mix(in oklch, var(--tone) 10%, transparent);
 	}
 
-	/* On is the lit state, so it takes the tone fill and the LED rim in that
-	   same tone. Both are inert in the flat themes, where this stays a flat
-	   fill exactly as before. */
 	button[data-state='on'] {
-		--emissive-color: var(--tone-color);
-		background: var(--material-tone), var(--tone-color);
-		box-shadow: var(--emissive-tone);
+		background: var(--tone);
 		border-color: transparent;
-		color: var(--tone-on-foreground, var(--primary-foreground));
+		color: var(--tone-on-foreground, var(--on-accent));
 	}
 
 	button:focus-visible {
-		outline: 3px solid var(--focus-ring);
+		outline: 3px solid var(--border-focus);
 		outline-offset: 2px;
 	}
 
@@ -73,7 +68,7 @@ const styles = css`
 		--toggle-height: 1.75rem;
 		--toggle-padding-inline: 0.625rem;
 		--toggle-min-width: 1.75rem;
-		--toggle-font-size: 0.75rem;
+		--toggle-font-size: var(--font-size-xs);
 		--toggle-icon-size: 0.75rem;
 	}
 
@@ -81,7 +76,7 @@ const styles = css`
 		--toggle-height: var(--control-height-sm);
 		--toggle-padding-inline: 0.75rem;
 		--toggle-min-width: 2rem;
-		--toggle-font-size: 0.8125rem;
+		--toggle-font-size: var(--font-size-sm);
 		--toggle-icon-size: 0.875rem;
 	}
 
@@ -89,7 +84,7 @@ const styles = css`
 		--toggle-height: var(--control-height-md);
 		--toggle-padding-inline: 1rem;
 		--toggle-min-width: 2.5rem;
-		--toggle-font-size: 0.875rem;
+		--toggle-font-size: var(--font-size-sm);
 		--toggle-icon-size: 1rem;
 	}
 
@@ -97,7 +92,7 @@ const styles = css`
 		--toggle-height: var(--control-height-lg);
 		--toggle-padding-inline: 1.25rem;
 		--toggle-min-width: 3rem;
-		--toggle-font-size: 1rem;
+		--toggle-font-size: var(--font-size-md);
 		--toggle-icon-size: 1.125rem;
 	}
 
@@ -106,29 +101,29 @@ const styles = css`
 		width: var(--toggle-height, 2.5rem);
 	}
 
-	/* tones: each one sets --tone-color, the single accent every kind paints
+	/* tones: each one sets --tone, the single accent every kind paints
 	   with, plus the resting text color (--tone-text) and the foreground used
 	   when pressed (--tone-on-foreground). Mirrors z-button's tone model. */
 
 	button.is-primary {
-		--tone-color: var(--primary);
-		--tone-text: var(--foreground);
-		--tone-on-foreground: var(--primary-foreground);
+		--tone: var(--accent-primary);
+		--tone-text: var(--text-primary);
+		--tone-on-foreground: var(--on-accent);
 	}
 
 	button.is-secondary {
-		--tone-color: var(--neon-purple);
-		--tone-text: var(--neon-purple);
+		--tone: var(--accent-secondary);
+		--tone-text: var(--accent-secondary);
 		--tone-on-foreground: var(--on-accent);
 	}
 
 	button.is-tertiary {
-		--tone-color: var(--neon-pink);
-		--tone-text: var(--neon-pink);
+		--tone: var(--accent-tertiary);
+		--tone-text: var(--accent-tertiary);
 		--tone-on-foreground: var(--on-accent);
 	}
 
-	/* kinds: paint using --tone-color */
+	/* kinds: paint using --tone */
 
 	button.is-ghost {
 		--toggle-border: transparent;
@@ -137,11 +132,11 @@ const styles = css`
 	/* off: tone-colored text + a dimmed tone border (border and text agree).
 	   on: solid tone fill (inherits the base on-state) with a solid tone border. */
 	button.is-outline {
-		--toggle-border: color-mix(in oklch, var(--tone-color) 50%, transparent);
+		--toggle-border: color-mix(in oklch, var(--tone) 50%, transparent);
 	}
 
 	button.is-outline[data-state='on'] {
-		border-color: var(--tone-color);
+		border-color: var(--tone);
 	}
 
 	::slotted(svg) {

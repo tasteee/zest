@@ -27,9 +27,9 @@ const styles = css`
 		position: relative;
 		overflow: hidden;
 		touch-action: none;
-		background: var(--background);
+		background: var(--surface-page);
 		cursor: grab;
-		--grid-color: color-mix(in oklch, var(--border) 60%, transparent);
+		--grid-color: color-mix(in oklch, var(--border-default) 60%, transparent);
 	}
 	:host([is-disabled]) {
 		cursor: default;

@@ -41,7 +41,7 @@ const styles = css`
 	@supports not selector(::-webkit-scrollbar) {
 		.viewport {
 			scrollbar-width: thin;
-			scrollbar-color: var(--color-neutral-3) transparent;
+			scrollbar-color: var(--border-default) transparent;
 		}
 	}
 
@@ -82,11 +82,11 @@ const styles = css`
 		background: transparent;
 	}
 	.viewport::-webkit-scrollbar-thumb {
-		background: var(--color-neutral-3);
-		border-radius: 999px;
+		background: var(--border-default);
+		border-radius: var(--radius-full);
 	}
 	.viewport::-webkit-scrollbar-thumb:hover {
-		background: var(--color-neutral-4);
+		background: var(--border-strong);
 	}
 	.viewport::-webkit-scrollbar-button {
 		display: none;

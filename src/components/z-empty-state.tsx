@@ -15,32 +15,32 @@ const styles = css`
 		flex-direction: column;
 		align-items: center;
 		text-align: center;
-		gap: 0.75rem;
-		padding: var(--space-2xl) var(--space-lg);
-		--accent: var(--color-neutral-6);
+		gap: var(--space-3);
+		padding: var(--space-12) var(--space-6);
+		--tone: var(--text-secondary);
 	}
 
 	:host([tone='secondary']) {
-		--accent: var(--purple);
+		--tone: var(--accent-secondary);
 	}
 	:host([tone='tertiary']) {
-		--accent: var(--pink);
+		--tone: var(--accent-tertiary);
 	}
 	:host([tone='primary']) {
-		--accent: var(--color-neutral-6);
+		--tone: var(--text-secondary);
 	}
 	:host([tone='success']) {
-		--accent: var(--success);
+		--tone: var(--status-success);
 	}
 	:host([tone='warning']) {
-		--accent: var(--warning);
+		--tone: var(--status-warning);
 	}
 	:host([tone='danger']) {
-		--accent: var(--destructive);
+		--tone: var(--status-danger);
 	}
 
 	:host([is-bordered]) {
-		border: 1px dashed var(--border);
+		border: 1px dashed var(--border-default);
 		border-radius: var(--radius-lg);
 	}
 
@@ -54,10 +54,10 @@ const styles = css`
 		justify-content: center;
 		width: 3rem;
 		height: 3rem;
-		margin-bottom: 0.25rem;
+		margin-bottom: var(--space-1);
 		border-radius: var(--radius-lg);
-		color: var(--accent);
-		background: color-mix(in oklch, var(--accent) 12%, transparent);
+		color: var(--tone);
+		background: color-mix(in oklch, var(--tone) 12%, transparent);
 	}
 
 	.icon.is-empty {
@@ -71,24 +71,24 @@ const styles = css`
 
 	.heading {
 		margin: 0;
-		font-size: var(--font-size-h4);
-		font-weight: 600;
-		color: var(--foreground);
-		line-height: var(--line-height-h4);
+		font-size: var(--font-size-xl);
+		font-weight: var(--font-weight-semibold);
+		color: var(--text-primary);
+		line-height: var(--line-height-snug);
 	}
 
 	.description {
 		margin: 0;
 		max-width: 42ch;
-		color: var(--muted-foreground);
-		font-size: var(--font-size-small);
-		line-height: var(--line-height-body);
+		color: var(--text-secondary);
+		font-size: var(--font-size-sm);
+		line-height: var(--line-height-normal);
 	}
 
 	.actions {
 		display: flex;
-		gap: 0.625rem;
-		margin-top: 1rem;
+		gap: var(--space-2-5);
+		margin-top: var(--space-4);
 	}
 
 	.actions.is-empty {

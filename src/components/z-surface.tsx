@@ -15,15 +15,15 @@ import { baseStyles, padVarNames, resetInheritedVars, insetProps, insetVars, res
 const styles = css`
 	:host {
 		display: block;
-		--tone: var(--color-neutral-6);
+		--tone: var(--text-secondary);
 		background: transparent;
-		color: var(--foreground);
+		color: var(--text-primary);
 		border: 1px solid transparent;
 		border-radius: var(--z-surface-radius, var(--radius-lg));
-		padding-top: var(--z-surface-pad-top, var(--space-md));
-		padding-bottom: var(--z-surface-pad-bottom, var(--space-md));
-		padding-inline-start: var(--z-surface-pad-left, var(--space-md));
-		padding-inline-end: var(--z-surface-pad-right, var(--space-md));
+		padding-top: var(--z-surface-pad-top, var(--space-3));
+		padding-bottom: var(--z-surface-pad-bottom, var(--space-3));
+		padding-inline-start: var(--z-surface-pad-left, var(--space-3));
+		padding-inline-end: var(--z-surface-pad-right, var(--space-3));
 	}
 
 	:host([is-full-width]) {
@@ -32,36 +32,36 @@ const styles = css`
 
 	/* tones set --tone */
 	:host([tone='primary']) {
-		--tone: var(--color-neutral-6);
+		--tone: var(--text-secondary);
 	}
 	:host([tone='secondary']) {
-		--tone: var(--purple);
+		--tone: var(--accent-secondary);
 	}
 	:host([tone='tertiary']) {
-		--tone: var(--pink);
+		--tone: var(--accent-tertiary);
 	}
 	:host([tone='success']) {
-		--tone: var(--success);
+		--tone: var(--status-success);
 	}
 	:host([tone='warning']) {
-		--tone: var(--warning);
+		--tone: var(--status-warning);
 	}
 	:host([tone='danger']) {
-		--tone: var(--destructive);
+		--tone: var(--status-danger);
 	}
 
 	/* kinds compose the tone */
 	:host([kind='plain']) {
-		background: var(--background-light);
+		background: var(--surface-subtle);
 	}
 	:host([kind='solid']) {
 		background: var(--tone);
-		color: var(--primary-foreground);
+		color: var(--on-accent);
 	}
 	/* purple/pink fills are light; dark text reads better on them */
 	:host([kind='solid'][tone='secondary']),
 	:host([kind='solid'][tone='tertiary']) {
-		color: var(--color-neutral-8);
+		color: var(--text-primary);
 	}
 	/* Tone tints are mixed with transparent, NOT the background: the neutral
 	   background carries a faint green hue, and interpolating hue against it in
@@ -73,7 +73,7 @@ const styles = css`
 	}
 	:host([kind='outline']) {
 		background: transparent;
-		border-color: color-mix(in srgb, var(--tone) 45%, var(--border));
+		border-color: color-mix(in srgb, var(--tone) 45%, var(--border-default));
 	}
 	:host([kind='ghost']) {
 		background: transparent;
@@ -85,30 +85,30 @@ const styles = css`
 	   surface, layering UI without touching tone/kind. Each gets a hairline
 	   so it reads on its own. */
 	:host([level]) {
-		border-color: var(--border);
+		border-color: var(--border-default);
 	}
 	:host([level='0']) {
-		background: var(--color-neutral-0);
+		background: var(--surface-page);
 	}
 	:host([level='1']) {
-		background: var(--color-neutral-1);
+		background: var(--surface-default);
 	}
 	:host([level='2']) {
-		background: var(--color-neutral-2);
+		background: var(--surface-subtle);
 	}
 	:host([level='3']) {
-		background: var(--color-neutral-3);
+		background: var(--surface-strong);
 	}
 
 	/* explicit toggles */
 	:host([is-bordered]) {
-		border-color: color-mix(in srgb, var(--tone) 45%, var(--border));
+		border-color: color-mix(in srgb, var(--tone) 45%, var(--border-default));
 	}
-	/* Shadowless elevation: this system uses borders over shadows, so "raised"
-	   reads as a lighter surface lifted off the page plus a hairline ring. */
+	/* Resting elevation is a surface step plus a hairline ring, never a shadow;
+	   only floating overlays take one. */
 	:host([is-elevated]) {
-		background: var(--color-neutral-2);
-		border-color: color-mix(in srgb, var(--tone) 30%, var(--border));
+		background: var(--surface-subtle);
+		border-color: color-mix(in srgb, var(--tone) 30%, var(--border-default));
 	}
 	:host([is-interactive]) {
 		cursor: pointer;
@@ -116,7 +116,7 @@ const styles = css`
 	}
 	:host([is-interactive]:hover),
 	:host([is-interactive]:focus-within) {
-		border-color: color-mix(in oklch, var(--foreground) 40%, transparent);
+		border-color: color-mix(in oklch, var(--text-primary) 40%, transparent);
 	}
 `
 

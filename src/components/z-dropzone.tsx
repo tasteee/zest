@@ -24,30 +24,30 @@ const styles = css`
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
-		gap: 0.5rem;
-		padding: 2rem 1.5rem;
+		gap: var(--space-2);
+		padding: var(--space-8) var(--space-6);
 		text-align: center;
-		border: 1.5px dashed var(--border);
+		border: 1.5px dashed var(--border-default);
 		border-radius: var(--radius-lg);
-		background: var(--paper);
-		color: var(--muted-foreground);
+		background: var(--surface-default);
+		color: var(--text-secondary);
 		cursor: pointer;
 		transition:
 			border-color var(--motion-fast) var(--ease-enter),
 			background var(--motion-fast) var(--ease-enter);
 	}
 	.zone:focus-visible {
-		outline: 3px solid var(--focus-ring);
+		outline: 3px solid var(--border-focus);
 		outline-offset: 2px;
 	}
 	:host([data-state='over']) .zone {
-		border-color: var(--accent);
-		background: color-mix(in oklch, var(--accent) 10%, transparent);
-		color: var(--foreground);
+		border-color: var(--tone);
+		background: color-mix(in oklch, var(--tone) 10%, transparent);
+		color: var(--text-primary);
 	}
 	:host([data-state='reject']) .zone {
-		border-color: var(--destructive);
-		background: color-mix(in oklch, var(--destructive) 10%, transparent);
+		border-color: var(--status-danger);
+		background: color-mix(in oklch, var(--status-danger) 10%, transparent);
 	}
 	:host([is-disabled]) .zone {
 		opacity: 0.5;
@@ -60,17 +60,17 @@ const styles = css`
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		gap: 0.75rem;
-		padding: 0.875rem 1rem;
-		border: 1px solid color-mix(in oklab, var(--accent) 32%, var(--border));
+		gap: var(--space-3);
+		padding: var(--space-3-5) var(--space-4);
+		border: 1px solid color-mix(in oklab, var(--tone) 32%, var(--border-default));
 		border-radius: var(--radius-lg);
-		background: color-mix(in oklab, var(--accent) 7%, var(--paper));
-		color: var(--foreground);
+		background: color-mix(in oklab, var(--tone) 7%, var(--surface-default));
+		color: var(--text-primary);
 	}
 	.selected-name {
 		overflow: hidden;
-		font-size: var(--font-size-caption);
-		font-weight: 600;
+		font-size: var(--font-size-xs);
+		font-weight: var(--font-weight-semibold);
 		text-align: start;
 		text-overflow: ellipsis;
 		white-space: nowrap;
@@ -82,17 +82,17 @@ const styles = css`
 		border: 0;
 		border-radius: var(--radius-sm);
 		background: transparent;
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 		cursor: pointer;
-		font-size: 1.25rem;
-		line-height: 1;
+		font-size: var(--font-size-xl);
+		line-height: var(--line-height-none);
 	}
 	.clear:hover {
-		background: color-mix(in oklch, var(--foreground) 8%, transparent);
-		color: var(--foreground);
+		background: color-mix(in oklch, var(--text-primary) 8%, transparent);
+		color: var(--text-primary);
 	}
 	.hint {
-		font-size: var(--font-size-caption);
+		font-size: var(--font-size-xs);
 	}
 `
 

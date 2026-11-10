@@ -29,16 +29,16 @@ const styles = css`
 		display: none;
 	}
 	.label {
-		font-size: 0.6875rem;
-		font-weight: 700;
+		font-size: var(--font-size-2xs);
+		font-weight: var(--font-weight-bold);
 		letter-spacing: 0.04em;
 		text-transform: uppercase;
-		color: var(--muted-foreground);
-		margin-bottom: 0.5rem;
+		color: var(--text-secondary);
+		margin-bottom: var(--space-2);
 	}
 	.list {
 		display: grid;
-		gap: 0.5rem;
+		gap: var(--space-2);
 	}
 	:host([columns]) .list {
 		grid-template-columns: repeat(var(--cols, 2), minmax(0, 1fr));
@@ -48,10 +48,10 @@ const styles = css`
 		text-align: start;
 		width: 100%;
 		box-sizing: border-box;
-		border: 1px solid var(--border);
+		border: 1px solid var(--border-default);
 		border-radius: var(--radius-md);
-		background: var(--card);
-		padding: 0.5rem 0.625rem;
+		background: var(--surface-default);
+		padding: var(--space-2) var(--space-2-5);
 		cursor: pointer;
 		text-decoration: none;
 		color: inherit;
@@ -60,13 +60,13 @@ const styles = css`
 			background-color var(--motion-fast) var(--ease-enter);
 	}
 	.card:hover {
-		border-color: color-mix(in oklch, var(--foreground) 30%, transparent);
-		background: color-mix(in oklch, var(--foreground) 3%, var(--card));
+		border-color: color-mix(in oklch, var(--text-primary) 30%, transparent);
+		background: color-mix(in oklch, var(--text-primary) 3%, var(--surface-default));
 	}
 	.top {
 		display: flex;
 		align-items: center;
-		gap: 0.4rem;
+		gap: var(--space-1-5);
 	}
 	.idx {
 		flex: 0 0 auto;
@@ -75,32 +75,32 @@ const styles = css`
 		justify-content: center;
 		min-width: 1.1rem;
 		height: 1.1rem;
-		padding: 0 0.3rem;
+		padding: 0 var(--space-1);
 		box-sizing: border-box;
 		border-radius: 0.35rem;
-		background: color-mix(in oklch, var(--primary) 16%, transparent);
-		color: var(--primary);
-		font-size: 0.6875rem;
-		font-weight: 700;
+		background: color-mix(in oklch, var(--accent-primary) 16%, transparent);
+		color: var(--text-primary);
+		font-size: var(--font-size-2xs);
+		font-weight: var(--font-weight-bold);
 	}
 	.title {
 		flex: 1;
 		min-width: 0;
-		font-size: 0.8125rem;
-		font-weight: 600;
+		font-size: var(--font-size-sm);
+		font-weight: var(--font-weight-semibold);
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
 	}
 	.domain {
 		flex: 0 0 auto;
-		font-size: 0.6875rem;
-		color: var(--muted-foreground);
+		font-size: var(--font-size-2xs);
+		color: var(--text-secondary);
 	}
 	.snippet {
-		margin-top: 0.25rem;
-		font-size: 0.75rem;
-		color: var(--muted-foreground);
+		margin-top: var(--space-1);
+		font-size: var(--font-size-xs);
+		color: var(--text-secondary);
 		display: -webkit-box;
 		-webkit-line-clamp: 2;
 		-webkit-box-orient: vertical;

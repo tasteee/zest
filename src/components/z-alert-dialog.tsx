@@ -20,7 +20,7 @@ const styles = css`
 	}
 
 	.footer {
-		padding-top: var(--space-md);
+		padding-top: var(--space-3);
 	}
 `
 

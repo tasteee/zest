@@ -27,7 +27,7 @@ const styles = css`
 	.stat {
 		display: flex;
 		flex-direction: column;
-		gap: var(--space-xs);
+		gap: var(--space-1);
 	}
 
 	.stat.is-center {

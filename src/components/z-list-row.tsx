@@ -16,8 +16,8 @@ const styles = css`
 		width: 100%;
 		flex-wrap: wrap;
 		align-items: center;
-		gap: 0.25rem 0.875rem;
-		padding: 0.75rem 1rem;
+		gap: var(--space-1) var(--space-3-5);
+		padding: var(--space-3) var(--space-4);
 		box-sizing: border-box;
 	}
 
@@ -34,7 +34,7 @@ const styles = css`
 		transition: background-color var(--motion-fast) var(--ease-enter);
 	}
 	:host([is-clickable]:hover) {
-		background: color-mix(in oklch, var(--foreground) 6%, transparent);
+		background: color-mix(in oklch, var(--text-primary) 6%, transparent);
 	}
 
 	/* The second child grows to fill the row by default. */

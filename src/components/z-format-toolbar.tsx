@@ -20,12 +20,12 @@ const styles = css`
 	:host {
 		display: flex;
 		align-items: center;
-		gap: 0.25rem;
+		gap: var(--space-1);
 		box-sizing: border-box;
 		width: 100%;
-		padding: 0.375rem 0.5rem;
-		background: var(--popover);
-		border-bottom: 1px solid var(--border);
+		padding: var(--space-1-5) var(--space-2);
+		background: var(--surface-overlay);
+		border-bottom: 1px solid var(--border-default);
 		position: sticky;
 		top: 0;
 		z-index: var(--z-toolbar, 40);
@@ -34,8 +34,8 @@ const styles = css`
 	.sep {
 		width: 1px;
 		align-self: stretch;
-		margin: 0.25rem 0.125rem;
-		background: var(--border);
+		margin: var(--space-1) var(--space-0-5);
+		background: var(--border-default);
 	}
 
 	.heading {
@@ -45,27 +45,27 @@ const styles = css`
 	.heading-trigger {
 		display: inline-flex;
 		align-items: center;
-		gap: 0.375rem;
+		gap: var(--space-1-5);
 		height: 1.75rem;
-		padding: 0 0.5rem;
+		padding: 0 var(--space-2);
 		background: transparent;
 		border: 0;
 		border-radius: var(--radius-sm);
-		color: var(--foreground);
+		color: var(--text-primary);
 		font-family: inherit;
-		font-size: var(--font-size-small);
+		font-size: var(--font-size-sm);
 		cursor: pointer;
 		transition: background-color var(--motion-fast) var(--ease-enter);
 	}
 
 	.heading-trigger:hover {
-		background: color-mix(in oklch, var(--foreground) 8%, transparent);
+		background: color-mix(in oklch, var(--text-primary) 8%, transparent);
 	}
 
 	.heading-trigger svg {
 		width: 0.875rem;
 		height: 0.875rem;
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 		stroke: currentColor;
 		stroke-width: 2;
 		stroke-linecap: round;
@@ -78,10 +78,10 @@ const styles = css`
 		left: 0;
 		z-index: var(--z-menu, 50);
 		min-width: 9rem;
-		background: var(--popover);
-		border: 1px solid var(--border);
+		background: var(--surface-overlay);
+		border: 1px solid var(--border-default);
 		border-radius: var(--radius-md);
-		padding: 0.3125rem;
+		padding: var(--space-1-5);
 		display: flex;
 		flex-direction: column;
 		gap: 1px;
@@ -90,10 +90,10 @@ const styles = css`
 	.heading-option {
 		display: flex;
 		align-items: center;
-		padding: 0.4375rem 0.625rem;
+		padding: var(--space-2) var(--space-2-5);
 		border-radius: var(--radius-sm);
-		font-size: var(--font-size-small);
-		color: var(--foreground);
+		font-size: var(--font-size-sm);
+		color: var(--text-primary);
 		cursor: pointer;
 		background: transparent;
 		border: 0;
@@ -104,12 +104,12 @@ const styles = css`
 	}
 
 	.heading-option.is-active {
-		background: color-mix(in oklch, var(--accent) 14%, transparent);
-		color: var(--accent);
+		background: color-mix(in oklch, var(--tone) 14%, transparent);
+		color: var(--tone);
 	}
 
 	.heading-option.is-selected {
-		font-weight: 600;
+		font-weight: var(--font-weight-semibold);
 	}
 `
 

@@ -12,17 +12,17 @@ import { useLocale } from '../shared/locale'
 const styles = css`
 	:host {
 		display: inline-flex;
-		--accent: var(--primary);
+		--tone: var(--accent-primary);
 		user-select: none;
 		-webkit-user-select: none;
 	}
 
 	:host([tone='secondary']) {
-		--accent: var(--purple);
+		--tone: var(--accent-secondary);
 	}
 
 	:host([tone='tertiary']) {
-		--accent: var(--pink);
+		--tone: var(--accent-tertiary);
 	}
 
 	:host([is-hidden]) {
@@ -32,7 +32,7 @@ const styles = css`
 	nav {
 		display: inline-flex;
 		align-items: center;
-		gap: 0.375rem;
+		gap: var(--space-1-5);
 	}
 
 	button {
@@ -41,14 +41,14 @@ const styles = css`
 		justify-content: center;
 		min-width: 2.25rem;
 		height: 2.25rem;
-		padding: 0 0.5rem;
+		padding: 0 var(--space-2);
 		border: 1px solid transparent;
 		border-radius: var(--radius-md);
 		background: transparent;
-		color: var(--foreground);
+		color: var(--text-primary);
 		font-family: inherit;
-		font-size: 0.875rem;
-		font-weight: 500;
+		font-size: var(--font-size-sm);
+		font-weight: var(--font-weight-medium);
 		cursor: pointer;
 		transition:
 			border-color var(--motion-fast) var(--ease-enter),
@@ -57,15 +57,15 @@ const styles = css`
 	}
 
 	button:hover:not(:disabled):not(.is-current) {
-		border-color: color-mix(in oklch, var(--foreground) 30%, transparent);
-		color: var(--primary);
+		border-color: color-mix(in oklch, var(--text-primary) 30%, transparent);
+		color: var(--text-primary);
 	}
 
 	button.is-current {
-		border-color: var(--accent);
-		color: var(--accent);
-		background: color-mix(in oklch, var(--accent) 12%, transparent);
-		font-weight: 600;
+		border-color: var(--tone);
+		color: var(--tone);
+		background: color-mix(in oklch, var(--tone) 12%, transparent);
+		font-weight: var(--font-weight-semibold);
 		cursor: default;
 	}
 
@@ -75,7 +75,7 @@ const styles = css`
 	}
 
 	button:focus-visible {
-		outline: 3px solid var(--focus-ring);
+		outline: 3px solid var(--border-focus);
 		outline-offset: 2px;
 	}
 
@@ -95,7 +95,7 @@ const styles = css`
 		justify-content: center;
 		min-width: 2.25rem;
 		height: 2.25rem;
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 		user-select: none;
 	}
 `

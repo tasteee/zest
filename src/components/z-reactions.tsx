@@ -19,7 +19,7 @@ const styles = css`
 	:host {
 		display: inline-flex;
 		flex-wrap: wrap;
-		gap: 0.25rem;
+		gap: var(--space-1);
 		vertical-align: middle;
 	}
 	:host([is-hidden]) {
@@ -28,40 +28,40 @@ const styles = css`
 	button {
 		display: inline-flex;
 		align-items: center;
-		gap: 0.25rem;
-		border: 1px solid var(--border);
-		background: color-mix(in oklch, var(--foreground) 5%, transparent);
-		border-radius: 999px;
-		padding: 0.1rem 0.5rem;
+		gap: var(--space-1);
+		border: 1px solid var(--border-default);
+		background: color-mix(in oklch, var(--text-primary) 5%, transparent);
+		border-radius: var(--radius-full);
+		padding: var(--space-0-5) var(--space-2);
 		font-family: inherit;
-		font-size: 0.8125rem;
-		line-height: 1.4;
-		color: var(--foreground);
+		font-size: var(--font-size-sm);
+		line-height: var(--line-height-snug);
+		color: var(--text-primary);
 		cursor: pointer;
 		transition:
 			background-color var(--motion-fast) var(--ease-enter),
 			border-color var(--motion-fast) var(--ease-enter);
 	}
 	button:hover {
-		border-color: color-mix(in oklch, var(--foreground) 30%, transparent);
+		border-color: color-mix(in oklch, var(--text-primary) 30%, transparent);
 	}
 	button.is-mine {
-		background: color-mix(in oklch, var(--primary) 18%, transparent);
-		border-color: color-mix(in oklch, var(--primary) 45%, transparent);
+		background: color-mix(in oklch, var(--accent-primary) 18%, transparent);
+		border-color: color-mix(in oklch, var(--accent-primary) 45%, transparent);
 	}
 	.emoji {
-		font-size: 0.9375rem;
+		font-size: var(--font-size-md);
 	}
 	.count {
 		font-variant-numeric: tabular-nums;
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 	}
 	button.is-mine .count {
-		color: var(--foreground);
+		color: var(--text-primary);
 	}
 	.add {
-		padding: 0.1rem 0.45rem;
-		color: var(--muted-foreground);
+		padding: var(--space-0-5) var(--space-2);
+		color: var(--text-secondary);
 	}
 	.add svg {
 		width: 0.9rem;

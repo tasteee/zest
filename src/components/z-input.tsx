@@ -15,7 +15,7 @@ import { oneOf } from '../shared/prop-types'
  * owning form. See ../shared/form-control.ts.
  */
 const styles = css`
-	.field:focus-within { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
+	.field:focus-within { outline: 2px solid var(--border-focus); outline-offset: 2px; }
 
 	:host {
 		display: inline-flex;
@@ -33,16 +33,13 @@ const styles = css`
 	.field {
 		display: inline-flex;
 		align-items: center;
-		gap: 0.625rem;
+		gap: var(--space-2-5);
 		width: 100%;
 		box-sizing: border-box;
-		/* A field is a hole cut into the surface, so it takes the carved stack
-		   rather than a raised one. Both are inert in the flat themes. */
-		background: var(--material-surface);
-		box-shadow: var(--elevation-carved);
-		border: 1px solid var(--border);
+		background: transparent;
+		border: 1px solid var(--border-default);
 		border-radius: var(--radius-md);
-		color: var(--foreground);
+		color: var(--text-primary);
 		font-family: inherit;
 		/* a <label> wrapper: clicking the padding or empty adornments focuses the
 		   input natively, so there are no dead zones on the sides. */
@@ -50,46 +47,46 @@ const styles = css`
 		transition:
 			border-color var(--motion-fast) var(--ease-enter),
 			background-color var(--motion-fast) var(--ease-enter);
-		--accent: var(--primary);
+		--tone: var(--accent-primary);
 	}
 
 	:host([tone='secondary']) .field {
-		--accent: var(--purple);
+		--tone: var(--accent-secondary);
 	}
 
 	:host([tone='tertiary']) .field {
-		--accent: var(--pink);
+		--tone: var(--accent-tertiary);
 	}
 
 	/* sizes */
 	.field.is-sm {
 		height: var(--control-height-sm);
-		padding-inline: 0.625rem;
-		font-size: var(--control-font-size-sm);
+		padding-inline: var(--space-2-5);
+		font-size: var(--font-size-sm);
 	}
 	.field.is-md {
 		height: var(--control-height-md);
-		padding-inline: 0.75rem;
-		font-size: var(--control-font-size-md);
+		padding-inline: var(--space-3);
+		font-size: var(--font-size-sm);
 	}
 	.field.is-lg {
 		height: var(--control-height-lg);
-		padding-inline: 0.875rem;
-		font-size: var(--control-font-size-lg);
+		padding-inline: var(--space-3-5);
+		font-size: var(--font-size-md);
 	}
 
 	.field:hover {
-		border-color: color-mix(in oklch, var(--foreground) 30%, transparent);
+		border-color: color-mix(in oklch, var(--text-primary) 30%, transparent);
 	}
 
 	.field.is-focused {
-		border-color: var(--accent);
-		background: color-mix(in oklch, var(--accent) 5%, transparent);
+		border-color: var(--tone);
+		background: color-mix(in oklch, var(--tone) 5%, transparent);
 	}
 
 	.field.is-invalid {
-		border-color: var(--destructive);
-		--accent: var(--destructive);
+		border-color: var(--status-danger);
+		--tone: var(--status-danger);
 	}
 
 	.field.is-disabled {
@@ -108,12 +105,12 @@ const styles = css`
 		color: inherit;
 		font-family: inherit;
 		font-size: inherit;
-		line-height: 1;
+		line-height: var(--line-height-none);
 		padding: 0;
 	}
 
 	input::placeholder {
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 		user-select: none;
 		-webkit-user-select: none;
 	}
@@ -131,12 +128,12 @@ const styles = css`
 	.adornment {
 		display: inline-flex;
 		align-items: center;
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 		flex-shrink: 0;
 	}
 
 	.field.is-focused .adornment {
-		color: var(--accent);
+		color: var(--tone);
 	}
 
 	::slotted(svg) {

@@ -91,21 +91,21 @@ const styles = css`
 	.file {
 		display: flex;
 		align-items: center;
-		gap: 0.625rem;
+		gap: var(--space-2-5);
 		min-width: 12rem;
 		max-width: 20rem;
 		box-sizing: border-box;
 		border-radius: var(--radius-md);
-		background: color-mix(in oklch, var(--foreground) 6%, transparent);
-		padding: 0.5rem 0.625rem;
+		background: color-mix(in oklch, var(--text-primary) 6%, transparent);
+		padding: var(--space-2) var(--space-2-5);
 	}
 	.icon {
 		flex: 0 0 auto;
 		width: 2.25rem;
 		height: 2.25rem;
 		border-radius: var(--radius-sm);
-		background: color-mix(in oklch, var(--primary) 16%, transparent);
-		color: var(--primary);
+		background: color-mix(in oklch, var(--accent-primary) 16%, transparent);
+		color: var(--text-primary);
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
@@ -124,15 +124,15 @@ const styles = css`
 		min-width: 0;
 	}
 	.name {
-		font-size: 0.875rem;
-		font-weight: 500;
+		font-size: var(--font-size-sm);
+		font-weight: var(--font-weight-medium);
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
 	}
 	.size {
-		font-size: 0.6875rem;
-		color: var(--muted-foreground);
+		font-size: var(--font-size-2xs);
+		color: var(--text-secondary);
 	}
 	.download {
 		flex: 0 0 auto;
@@ -141,16 +141,16 @@ const styles = css`
 		justify-content: center;
 		width: 2rem;
 		height: 2rem;
-		border-radius: 999px;
+		border-radius: var(--radius-full);
 		border: none;
 		background: transparent;
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 		cursor: pointer;
 		text-decoration: none;
 	}
 	.download:hover {
-		background: color-mix(in oklch, var(--foreground) 10%, transparent);
-		color: var(--foreground);
+		background: color-mix(in oklch, var(--text-primary) 10%, transparent);
+		color: var(--text-primary);
 	}
 	.download svg {
 		width: 1.1rem;

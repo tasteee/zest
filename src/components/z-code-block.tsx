@@ -19,17 +19,17 @@ import { useLocale } from '../shared/locale'
 const styles = css`
 	:host {
 		display: block;
-		--accent: var(--primary);
+		--tone: var(--accent-primary);
 		width: 100%;
 		min-width: 0;
 	}
 
 	:host([tone='secondary']) {
-		--accent: var(--purple);
+		--tone: var(--accent-secondary);
 	}
 
 	:host([tone='tertiary']) {
-		--accent: var(--pink);
+		--tone: var(--accent-tertiary);
 	}
 
 	:host([is-hidden]) {
@@ -37,9 +37,9 @@ const styles = css`
 	}
 
 	.block {
-		border: 1px solid var(--border);
+		border: 1px solid var(--border-default);
 		border-radius: var(--radius-md);
-		background: var(--color-neutral-0);
+		background: var(--surface-page);
 		overflow: hidden;
 		font-family: var(--font-mono);
 	}
@@ -53,7 +53,7 @@ const styles = css`
 	.tabs {
 		display: flex;
 		align-items: center;
-		gap: 0.25rem;
+		gap: var(--space-1);
 		min-width: 0;
 		overflow-x: auto;
 		scrollbar-width: none;
@@ -61,13 +61,13 @@ const styles = css`
 
 	.file-tab {
 		position: relative;
-		padding: 0.3125rem 0.625rem;
+		padding: var(--space-1-5) var(--space-2-5);
 		background: transparent;
 		border: 0;
 		border-radius: var(--radius-sm);
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 		font-family: var(--font-mono);
-		font-size: var(--font-size-caption);
+		font-size: var(--font-size-xs);
 		white-space: nowrap;
 		cursor: pointer;
 		transition:
@@ -76,16 +76,16 @@ const styles = css`
 	}
 
 	.file-tab:hover {
-		color: var(--foreground);
+		color: var(--text-primary);
 	}
 
 	.file-tab.is-active {
-		color: var(--foreground);
-		background: color-mix(in oklch, var(--foreground) 8%, transparent);
+		color: var(--text-primary);
+		background: color-mix(in oklch, var(--text-primary) 8%, transparent);
 	}
 
 	.file-tab:focus-visible {
-		outline: 3px solid var(--focus-ring);
+		outline: 3px solid var(--border-focus);
 		outline-offset: 1px;
 	}
 
@@ -93,47 +93,47 @@ const styles = css`
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		gap: 0.75rem;
-		padding: 0.5rem 0.75rem 0.5rem 0.875rem;
-		border-bottom: 1px solid var(--border);
-		background: var(--color-neutral-1);
+		gap: var(--space-3);
+		padding: var(--space-2) var(--space-3) var(--space-2) var(--space-3-5);
+		border-bottom: 1px solid var(--border-default);
+		background: var(--surface-default);
 	}
 
 	.meta {
 		display: flex;
 		align-items: center;
-		gap: 0.625rem;
+		gap: var(--space-2-5);
 		min-width: 0;
 	}
 
 	.filename {
-		font-size: var(--font-size-caption);
-		color: var(--foreground);
+		font-size: var(--font-size-xs);
+		color: var(--text-primary);
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
 	}
 
 	.lang {
-		font-size: var(--font-size-caption);
-		font-weight: 600;
+		font-size: var(--font-size-xs);
+		font-weight: var(--font-weight-semibold);
 		letter-spacing: 0.04em;
 		text-transform: uppercase;
-		color: var(--accent);
+		color: var(--tone);
 	}
 
 	.copy {
 		display: inline-flex;
 		align-items: center;
-		gap: 0.375rem;
+		gap: var(--space-1-5);
 		flex-shrink: 0;
-		padding: 0.25rem 0.5rem;
+		padding: var(--space-1) var(--space-2);
 		background: transparent;
-		border: 1px solid var(--border);
+		border: 1px solid var(--border-default);
 		border-radius: var(--radius-sm);
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 		font-family: inherit;
-		font-size: var(--font-size-caption);
+		font-size: var(--font-size-xs);
 		cursor: pointer;
 		transition:
 			color var(--motion-fast) var(--ease-enter),
@@ -142,18 +142,18 @@ const styles = css`
 	}
 
 	.copy:hover {
-		color: var(--foreground);
-		border-color: color-mix(in oklch, var(--foreground) 30%, transparent);
+		color: var(--text-primary);
+		border-color: color-mix(in oklch, var(--text-primary) 30%, transparent);
 	}
 
 	.copy:focus-visible {
-		outline: 3px solid var(--focus-ring);
+		outline: 3px solid var(--border-focus);
 		outline-offset: 2px;
 	}
 
 	.copy.is-copied {
-		color: var(--success);
-		border-color: color-mix(in oklch, var(--success) 50%, transparent);
+		color: var(--status-success);
+		border-color: color-mix(in oklch, var(--status-success) 50%, transparent);
 	}
 
 	.copy svg {
@@ -174,7 +174,7 @@ const styles = css`
 	@supports not selector(::-webkit-scrollbar) {
 		.scroll {
 			scrollbar-width: thin;
-			scrollbar-color: var(--color-neutral-3) transparent;
+			scrollbar-color: var(--border-default) transparent;
 		}
 	}
 	.scroll::-webkit-scrollbar {
@@ -182,8 +182,8 @@ const styles = css`
 		width: 8px;
 	}
 	.scroll::-webkit-scrollbar-thumb {
-		background: var(--color-neutral-3);
-		border-radius: 999px;
+		background: var(--border-default);
+		border-radius: var(--radius-full);
 	}
 	.scroll::-webkit-scrollbar-button {
 		display: none;
@@ -193,10 +193,10 @@ const styles = css`
 
 	pre {
 		margin: 0;
-		padding: 0.875rem 1rem;
-		font-size: var(--font-size-small);
-		line-height: 1.6;
-		color: var(--foreground);
+		padding: var(--space-3-5) var(--space-4);
+		font-size: var(--font-size-sm);
+		line-height: var(--line-height-normal);
+		color: var(--text-primary);
 		tab-size: 2;
 		/* Code stays selectable even though the page default is user-select:none,
 		   people need to copy snippets. The line-number gutter re-opts out
@@ -209,12 +209,12 @@ const styles = css`
 	   selection style (ink.css) here for code rendered inside this shadow root.
 	   Shares the --selection-* tokens, so code and prose highlight identically. */
 	pre ::selection {
-		background: var(--selection-background);
-		color: var(--selection-foreground);
+		background: var(--surface-selection);
+		color: var(--text-selection);
 	}
 	pre ::-moz-selection {
-		background: var(--selection-background);
-		color: var(--selection-foreground);
+		background: var(--surface-selection);
+		color: var(--text-selection);
 	}
 
 	.rows {
@@ -233,9 +233,9 @@ const styles = css`
 	}
 
 	.gutter {
-		padding-inline-end: 1rem;
+		padding-inline-end: var(--space-4);
 		text-align: end;
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 		user-select: none;
 		opacity: 0.6;
 	}
@@ -251,21 +251,21 @@ const styles = css`
 	 */
 	.line.is-added .gutter,
 	.line.is-added .text {
-		background: color-mix(in oklch, var(--success) 12%, transparent);
+		background: color-mix(in oklch, var(--status-success) 12%, transparent);
 	}
 
 	.line.is-added .gutter {
-		color: var(--success);
+		color: var(--status-success);
 		opacity: 1;
 	}
 
 	.line.is-removed .gutter,
 	.line.is-removed .text {
-		background: color-mix(in oklch, var(--destructive) 12%, transparent);
+		background: color-mix(in oklch, var(--status-danger) 12%, transparent);
 	}
 
 	.line.is-removed .gutter {
-		color: var(--destructive);
+		color: var(--status-danger);
 		opacity: 1;
 	}
 
@@ -355,11 +355,11 @@ const styles = css`
 		font-style: italic;
 	}
 	.hljs-strong {
-		font-weight: 700;
+		font-weight: var(--font-weight-bold);
 	}
 
 	.rows {
-		line-height: 1.75 !important;
+		line-height: var(--line-height-relaxed) !important;
 		letter-spacing: 0.35px !important;
 		font-family: var(--font-mono);
 	}

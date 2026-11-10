@@ -288,8 +288,8 @@ const handleStyles = css`
 		pointer-events: none;
 	}
 	.grip {
-		background: var(--border);
-		border-radius: 999px;
+		background: var(--border-default);
+		border-radius: var(--radius-full);
 		transition:
 			background var(--motion-fast) var(--ease-enter),
 			width var(--motion-fast) var(--ease-enter),
@@ -305,16 +305,16 @@ const handleStyles = css`
 	}
 	:host(:not([is-column]):hover) .grip,
 	:host(:not([is-column]).is-dragging) .grip {
-		background: var(--focus-ring);
+		background: var(--border-focus);
 		width: 2px;
 	}
 	:host([is-column]:hover) .grip,
 	:host([is-column].is-dragging) .grip {
-		background: var(--focus-ring);
+		background: var(--border-focus);
 		height: 2px;
 	}
 	:host(:focus-visible) {
-		outline: 3px solid var(--focus-ring);
+		outline: 3px solid var(--border-focus);
 		outline-offset: -2px;
 		border-radius: var(--radius-sm);
 	}

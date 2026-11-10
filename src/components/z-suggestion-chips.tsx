@@ -14,7 +14,7 @@ const styles = css`
 	:host {
 		display: flex;
 		flex-wrap: wrap;
-		gap: 0.5rem;
+		gap: var(--space-2);
 	}
 	:host([is-hidden]) {
 		display: none;
@@ -22,14 +22,14 @@ const styles = css`
 	button {
 		display: inline-flex;
 		align-items: center;
-		gap: 0.375rem;
-		border: 1px solid var(--border);
-		background: color-mix(in oklch, var(--foreground) 4%, transparent);
-		border-radius: 999px;
-		padding: 0.35rem 0.75rem;
+		gap: var(--space-1-5);
+		border: 1px solid var(--border-default);
+		background: color-mix(in oklch, var(--text-primary) 4%, transparent);
+		border-radius: var(--radius-full);
+		padding: var(--space-1-5) var(--space-3);
 		font-family: inherit;
-		font-size: 0.8125rem;
-		color: var(--foreground);
+		font-size: var(--font-size-sm);
+		color: var(--text-primary);
 		cursor: pointer;
 		text-align: start;
 		transition:
@@ -37,13 +37,13 @@ const styles = css`
 			border-color var(--motion-fast) var(--ease-enter);
 	}
 	button:hover {
-		background: color-mix(in oklch, var(--primary) 12%, transparent);
-		border-color: color-mix(in oklch, var(--primary) 40%, transparent);
+		background: color-mix(in oklch, var(--accent-primary) 12%, transparent);
+		border-color: color-mix(in oklch, var(--accent-primary) 40%, transparent);
 	}
 	.arrow {
 		width: 0.8rem;
 		height: 0.8rem;
-		stroke: var(--muted-foreground);
+		stroke: var(--text-secondary);
 		fill: none;
 		stroke-width: 2;
 		stroke-linecap: round;

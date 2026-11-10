@@ -25,14 +25,11 @@ const styles = css`
 		gap: var(--z-card-gap, 0);
 		box-sizing: border-box;
 		border-radius: var(--radius-lg);
-		padding: var(--space-lg);
-		transition: border-color 0.05s linear;
-		border: 1px solid var(--border);
-		color: var(--foreground);
-		/* Inert in the flat themes, material in the rest. A card rests on the
-		   page rather than floating above it, so it takes the flush stack. */
-		background: var(--material-surface);
-		box-shadow: var(--elevation-flush);
+		padding: var(--space-6);
+		transition: border-color var(--motion-instant) linear;
+		border: 1px solid var(--border-default);
+		color: var(--text-primary);
+		background: transparent;
 	}
 
 	:host([direction='horizontal']) {
@@ -46,7 +43,7 @@ const styles = css`
 
 	:host([is-reactive]:hover),
 	:host([is-reactive]:focus-within) {
-		border-color: color-mix(in oklch, var(--foreground) 50%, transparent);
+		border-color: color-mix(in oklch, var(--text-primary) 50%, transparent);
 	}
 
 	/* Same title treatment as z-dialog, z-sheet, and z-drawer, from the same
@@ -56,27 +53,27 @@ const styles = css`
 	.header {
 		display: flex;
 		flex-direction: column;
-		gap: var(--space-2xs);
+		gap: var(--space-1);
 		/* Unconditional, because knowing whether anything was slotted below
 		   would mean observing the slot — too much machinery for a card whose
 		   header is nearly always followed by content. A heading-only card just
 		   reads as slightly deeper bottom padding. */
-		margin-bottom: var(--space-md);
+		margin-bottom: var(--space-3);
 	}
 
 	.title {
 		margin: 0;
-		font-size: var(--font-size-h4);
-		font-weight: 600;
-		line-height: var(--line-height-h4);
-		color: var(--foreground);
+		font-size: var(--font-size-xl);
+		font-weight: var(--font-weight-semibold);
+		line-height: var(--line-height-snug);
+		color: var(--text-primary);
 	}
 
 	.description {
 		margin: 0;
-		color: var(--muted-foreground);
-		font-size: var(--font-size-small);
-		line-height: var(--line-height-body);
+		color: var(--text-secondary);
+		font-size: var(--font-size-sm);
+		line-height: var(--line-height-normal);
 	}
 `
 

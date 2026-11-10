@@ -17,31 +17,31 @@ import { useLocale } from '../shared/locale'
  * number input would report them.
  */
 const styles = css`
-	.field:focus-within { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
+	.field:focus-within { outline: 2px solid var(--border-focus); outline-offset: 2px; }
 
-	:host { display: inline-flex; width: fit-content; max-width: 100%; --accent: var(--primary); }
+	:host { display: inline-flex; width: fit-content; max-width: 100%; --tone: var(--accent-primary); }
 	:host([is-full-width]) { width: 100%; }
 	:host([is-inline]) { width: auto; }
 	:host([is-hidden]) { display: none; }
-	:host([tone='secondary']) { --accent: var(--purple); }
-	:host([tone='tertiary']) { --accent: var(--pink); }
-	.field { display: inline-flex; align-items: stretch; width: 100%; box-sizing: border-box; min-width: 0; background: transparent; border: 1px solid var(--border); border-radius: var(--radius-md); color: var(--foreground); font-family: inherit; overflow: hidden; transition: border-color var(--motion-fast) var(--ease-enter), background-color var(--motion-fast) var(--ease-enter); }
-	.field.is-sm { height: var(--control-height-sm); font-size: var(--control-font-size-sm); }
-	.field.is-md { height: var(--control-height-md); font-size: var(--control-font-size-md); }
-	.field.is-lg { height: var(--control-height-lg); font-size: var(--control-font-size-lg); }
-	.field:hover { border-color: color-mix(in oklch, var(--foreground) 30%, transparent); }
-	.field.is-focused { border-color: var(--accent); background: color-mix(in oklch, var(--accent) 5%, transparent); }
-	.field.is-invalid { border-color: var(--destructive); --accent: var(--destructive); }
+	:host([tone='secondary']) { --tone: var(--accent-secondary); }
+	:host([tone='tertiary']) { --tone: var(--accent-tertiary); }
+	.field { display: inline-flex; align-items: stretch; width: 100%; box-sizing: border-box; min-width: 0; background: transparent; border: 1px solid var(--border-default); border-radius: var(--radius-md); color: var(--text-primary); font-family: inherit; overflow: hidden; transition: border-color var(--motion-fast) var(--ease-enter), background-color var(--motion-fast) var(--ease-enter); }
+	.field.is-sm { height: var(--control-height-sm); font-size: var(--font-size-sm); }
+	.field.is-md { height: var(--control-height-md); font-size: var(--font-size-sm); }
+	.field.is-lg { height: var(--control-height-lg); font-size: var(--font-size-md); }
+	.field:hover { border-color: color-mix(in oklch, var(--text-primary) 30%, transparent); }
+	.field.is-focused { border-color: var(--tone); background: color-mix(in oklch, var(--tone) 5%, transparent); }
+	.field.is-invalid { border-color: var(--status-danger); --tone: var(--status-danger); }
 	.field.is-disabled { opacity: var(--control-disabled-opacity); pointer-events: none; }
 	input { flex: 1 1 auto; min-width: 0; width: calc(5ch + var(--affix-length, 0) * 1ch); appearance: textfield; background: transparent; border: 0; outline: none; color: inherit; font: inherit; text-align: center; }
-	input::placeholder { color: var(--muted-foreground); user-select: none; -webkit-user-select: none; }
+	input::placeholder { color: var(--text-secondary); user-select: none; -webkit-user-select: none; }
 	input::-webkit-outer-spin-button, input::-webkit-inner-spin-button { appearance: none; margin: 0; }
 	:host([is-borderless]) .field { height: auto; border: 0; border-radius: 0; background: transparent; outline: none; }
 	:host([is-borderless]) .field:hover, :host([is-borderless]) .field.is-focused { background: transparent; }
-	.stepper { display: grid; place-items: center; flex: 0 0 auto; width: 2rem; border: 0; background: transparent; color: var(--muted-foreground); font: inherit; font-size: 1.125em; line-height: 1; cursor: pointer; user-select: none; -webkit-user-select: none; transition: color var(--motion-fast) var(--ease-enter), background-color var(--motion-fast) var(--ease-enter); }
-	.stepper:hover:not(:disabled) { color: var(--foreground); background: color-mix(in oklch, var(--foreground) 6%, transparent); }
-	.stepper:active:not(:disabled) { background: color-mix(in oklch, var(--accent) 12%, transparent); color: var(--accent); }
-	.stepper:focus-visible { position: relative; z-index: 1; outline: 2px solid var(--focus-ring); outline-offset: -2px; }
+	.stepper { display: grid; place-items: center; flex: 0 0 auto; width: 2rem; border: 0; background: transparent; color: var(--text-secondary); font: inherit; font-size: 1.125em; line-height: var(--line-height-none); cursor: pointer; user-select: none; -webkit-user-select: none; transition: color var(--motion-fast) var(--ease-enter), background-color var(--motion-fast) var(--ease-enter); }
+	.stepper:hover:not(:disabled) { color: var(--text-primary); background: color-mix(in oklch, var(--text-primary) 6%, transparent); }
+	.stepper:active:not(:disabled) { background: color-mix(in oklch, var(--tone) 12%, transparent); color: var(--tone); }
+	.stepper:focus-visible { position: relative; z-index: 1; outline: 2px solid var(--border-focus); outline-offset: -2px; }
 	.stepper:disabled { cursor: not-allowed; opacity: 0.35; }
 `
 

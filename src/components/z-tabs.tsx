@@ -23,15 +23,15 @@ import { useChildItems, hasFlag } from '../shared/child-items'
 const styles = css`
 	:host {
 		display: block;
-		--accent: var(--primary);
+		--tone: var(--accent-primary);
 	}
 
 	:host([tone='secondary']) {
-		--accent: var(--purple);
+		--tone: var(--accent-secondary);
 	}
 
 	:host([tone='tertiary']) {
-		--accent: var(--pink);
+		--tone: var(--accent-tertiary);
 	}
 
 	:host([is-hidden]) {
@@ -42,8 +42,8 @@ const styles = css`
 		display: flex;
 		overflow-x: auto;
 		overflow-y: hidden;
-		gap: 0.25rem;
-		border-bottom: 1px solid var(--border);
+		gap: var(--space-1);
+		border-bottom: 1px solid var(--border-default);
 		user-select: none;
 		-webkit-user-select: none;
 	}
@@ -57,15 +57,15 @@ const styles = css`
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
-		gap: 0.5rem;
+		gap: var(--space-2);
 		background: transparent;
 		border: 0;
-		padding: 0.75rem 1rem;
+		padding: var(--space-3) var(--space-4);
 		margin-bottom: -1px;
 		font-family: inherit;
-		font-size: var(--font-size-small);
-		font-weight: 500;
-		color: var(--muted-foreground);
+		font-size: var(--font-size-sm);
+		font-weight: var(--font-weight-medium);
+		color: var(--text-secondary);
 		cursor: pointer;
 		white-space: nowrap;
 		border-bottom: 2px solid transparent;
@@ -79,16 +79,16 @@ const styles = css`
 	}
 
 	.tab:hover {
-		color: var(--foreground);
+		color: var(--text-primary);
 	}
 
 	.tab.is-active {
-		color: var(--accent);
-		border-bottom-color: var(--accent);
+		color: var(--tone);
+		border-bottom-color: var(--tone);
 	}
 
 	.tab:focus-visible {
-		outline: 3px solid var(--focus-ring);
+		outline: 3px solid var(--border-focus);
 		outline-offset: -2px;
 		border-radius: var(--radius-sm);
 	}
@@ -99,8 +99,8 @@ const styles = css`
 	}
 
 	.panel {
-		padding-top: 1.25rem;
-		color: var(--foreground);
+		padding-top: var(--space-5);
+		color: var(--text-primary);
 	}
 `
 
@@ -261,7 +261,7 @@ export const ZTab = c(
 			:host {
 				display: inline-flex;
 				align-items: center;
-				gap: 0.5rem;
+				gap: var(--space-2);
 			}
 		`
 	}

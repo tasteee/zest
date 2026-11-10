@@ -54,8 +54,8 @@ const styles = css`
 	:host {
 		display: block;
 		width: 20rem;
-		background: var(--card);
-		border: 1px solid var(--border);
+		background: var(--surface-default);
+		border: 1px solid var(--border-default);
 		border-radius: var(--radius-md);
 		overflow: hidden;
 	}
@@ -64,30 +64,30 @@ const styles = css`
 		width: 100%;
 		box-sizing: border-box;
 		border: none;
-		border-bottom: 1px solid var(--border);
+		border-bottom: 1px solid var(--border-default);
 		background: transparent;
-		color: var(--foreground);
+		color: var(--text-primary);
 		font-family: inherit;
-		font-size: 0.875rem;
-		padding: 0.6rem 0.75rem;
+		font-size: var(--font-size-sm);
+		padding: var(--space-2-5) var(--space-3);
 		outline: none;
 	}
 	.search::placeholder {
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 	}
 	.tabs {
 		display: flex;
-		gap: 0.125rem;
-		padding: 0.25rem 0.375rem;
-		border-bottom: 1px solid var(--border);
+		gap: var(--space-0-5);
+		padding: var(--space-1) var(--space-1-5);
+		border-bottom: 1px solid var(--border-default);
 	}
 	.tab {
 		flex: 1;
 		border: none;
 		background: transparent;
 		border-radius: var(--radius-sm);
-		padding: 0.25rem 0;
-		font-size: 1rem;
+		padding: var(--space-1) 0;
+		font-size: var(--font-size-md);
 		cursor: pointer;
 		opacity: 0.65;
 		transition:
@@ -95,17 +95,17 @@ const styles = css`
 			opacity var(--motion-fast) var(--ease-enter);
 	}
 	.tab:hover {
-		background: color-mix(in oklch, var(--foreground) 8%, transparent);
+		background: color-mix(in oklch, var(--text-primary) 8%, transparent);
 	}
 	.tab.is-active {
 		opacity: 1;
-		background: color-mix(in oklch, var(--foreground) 12%, transparent);
+		background: color-mix(in oklch, var(--text-primary) 12%, transparent);
 	}
 	.grid {
 		display: grid;
 		grid-template-columns: repeat(8, 1fr);
-		gap: 0.125rem;
-		padding: 0.375rem;
+		gap: var(--space-0-5);
+		padding: var(--space-1-5);
 		max-height: 14rem;
 		overflow-y: auto;
 	}
@@ -113,24 +113,24 @@ const styles = css`
 		border: none;
 		background: transparent;
 		border-radius: var(--radius-sm);
-		font-size: 1.25rem;
-		line-height: 1;
-		padding: 0.3rem 0;
+		font-size: var(--font-size-xl);
+		line-height: var(--line-height-none);
+		padding: var(--space-1) 0;
 		cursor: pointer;
 		transition:
 			background-color var(--motion-instant) var(--ease-enter),
 			transform var(--motion-instant) var(--ease-enter);
 	}
 	.emoji:hover {
-		background: color-mix(in oklch, var(--foreground) 10%, transparent);
+		background: color-mix(in oklch, var(--text-primary) 10%, transparent);
 		transform: scale(1.15);
 	}
 	.empty {
 		grid-column: 1 / -1;
 		text-align: center;
-		color: var(--muted-foreground);
-		font-size: 0.8125rem;
-		padding: 1.5rem 0;
+		color: var(--text-secondary);
+		font-size: var(--font-size-sm);
+		padding: var(--space-6) 0;
 	}
 `
 

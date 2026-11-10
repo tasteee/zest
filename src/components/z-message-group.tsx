@@ -26,8 +26,8 @@ const styles = css`
 	.row {
 		display: flex;
 		align-items: flex-end;
-		gap: var(--space-sm);
-		padding: 0.125rem 0;
+		gap: var(--space-2);
+		padding: var(--space-0-5) 0;
 	}
 	:host([side='end']) .row {
 		flex-direction: row-reverse;
@@ -53,15 +53,15 @@ const styles = css`
 	}
 
 	.name {
-		font-size: 0.75rem;
-		font-weight: 600;
-		color: var(--muted-foreground);
-		margin: 0 0.5rem 2px;
+		font-size: var(--font-size-xs);
+		font-weight: var(--font-weight-semibold);
+		color: var(--text-secondary);
+		margin: 0 var(--space-2) 2px;
 	}
 	.meta {
-		font-size: 0.6875rem;
-		color: var(--muted-foreground);
-		margin: 2px 0.5rem 0;
+		font-size: var(--font-size-2xs);
+		color: var(--text-secondary);
+		margin: 2px var(--space-2) 0;
 	}
 `
 

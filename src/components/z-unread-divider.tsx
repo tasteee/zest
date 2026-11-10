@@ -12,12 +12,12 @@ const styles = css`
 	:host {
 		display: flex;
 		align-items: center;
-		gap: var(--space-sm);
-		margin: var(--space-sm) 0;
-		--tone: var(--primary);
+		gap: var(--space-2);
+		margin: var(--space-2) 0;
+		--tone: var(--accent-primary);
 	}
 	:host([tone='tertiary']) {
-		--tone: var(--pink);
+		--tone: var(--accent-tertiary);
 	}
 	:host([is-hidden]) {
 		display: none;
@@ -28,8 +28,8 @@ const styles = css`
 		background: color-mix(in oklch, var(--tone) 45%, transparent);
 	}
 	.label {
-		font-size: 0.6875rem;
-		font-weight: 700;
+		font-size: var(--font-size-2xs);
+		font-weight: var(--font-weight-bold);
 		letter-spacing: 0.04em;
 		text-transform: uppercase;
 		color: var(--tone);

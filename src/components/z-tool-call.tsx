@@ -17,61 +17,61 @@ import { c, css } from 'atomico'
 const styles = css`
 	:host {
 		display: block;
-		border: 1px solid var(--border);
+		border: 1px solid var(--border-default);
 		border-radius: var(--radius-md);
-		background: color-mix(in oklch, var(--foreground) 3%, var(--card));
+		background: color-mix(in oklch, var(--text-primary) 3%, var(--surface-default));
 		overflow: hidden;
 	}
 	:host([is-hidden]) {
 		display: none;
 	}
 	z-collapsible {
-		padding: 0 0.75rem;
+		padding: 0 var(--space-3);
 	}
 	.head {
 		display: inline-flex;
 		align-items: center;
-		gap: 0.5rem;
+		gap: var(--space-2);
 		min-width: 0;
-		font-size: 0.875rem;
+		font-size: var(--font-size-sm);
 	}
 	.tool {
 		width: 1rem;
 		height: 1rem;
 		flex-shrink: 0;
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 	}
 	.name {
 		font-family: var(--font-mono);
-		font-weight: 600;
-		color: var(--foreground);
+		font-weight: var(--font-weight-semibold);
+		color: var(--text-primary);
 	}
 	.status {
 		display: inline-flex;
 		align-items: center;
-		gap: 0.3rem;
-		font-size: 0.75rem;
+		gap: var(--space-1);
+		font-size: var(--font-size-xs);
 		text-transform: capitalize;
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 	}
 	.dot {
 		width: 0.5rem;
 		height: 0.5rem;
-		border-radius: 999px;
-		background: var(--muted-foreground);
+		border-radius: var(--radius-full);
+		background: var(--text-secondary);
 	}
 	.status.is-running .dot {
-		background: var(--warning);
+		background: var(--status-warning);
 		animation: pulse 1.2s ease-in-out infinite;
 	}
 	.status.is-success .dot {
-		background: var(--success);
+		background: var(--status-success);
 	}
 	.status.is-error .dot {
-		background: var(--destructive);
+		background: var(--status-danger);
 	}
 	.status.is-error {
-		color: var(--destructive);
+		color: var(--status-danger);
 	}
 	@keyframes pulse {
 		50% {
@@ -79,18 +79,18 @@ const styles = css`
 		}
 	}
 	.body {
-		padding-bottom: 0.75rem;
+		padding-bottom: var(--space-3);
 		display: flex;
 		flex-direction: column;
-		gap: 0.625rem;
+		gap: var(--space-2-5);
 	}
 	.section-label {
-		font-size: 0.6875rem;
-		font-weight: 600;
+		font-size: var(--font-size-2xs);
+		font-weight: var(--font-weight-semibold);
 		letter-spacing: 0.04em;
 		text-transform: uppercase;
-		color: var(--muted-foreground);
-		margin-bottom: 0.3rem;
+		color: var(--text-secondary);
+		margin-bottom: var(--space-1);
 	}
 `
 

@@ -13,10 +13,10 @@ const styles = css`
 	:host {
 		display: flex;
 		align-items: center;
-		gap: 0.75rem;
-		padding: 0.625rem 1rem;
-		border-bottom: 1px solid var(--border);
-		background: var(--card);
+		gap: var(--space-3);
+		padding: var(--space-2-5) var(--space-4);
+		border-bottom: 1px solid var(--border-default);
+		background: var(--surface-default);
 	}
 	:host([is-hidden]) {
 		display: none;
@@ -29,15 +29,15 @@ const styles = css`
 		gap: 1px;
 	}
 	.name {
-		font-weight: 600;
-		font-size: 0.9375rem;
+		font-weight: var(--font-weight-semibold);
+		font-size: var(--font-size-md);
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
 	}
 	.subtitle {
-		font-size: 0.75rem;
-		color: var(--muted-foreground);
+		font-size: var(--font-size-xs);
+		color: var(--text-secondary);
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
@@ -46,7 +46,7 @@ const styles = css`
 		flex: 0 0 auto;
 		display: inline-flex;
 		align-items: center;
-		gap: 0.25rem;
+		gap: var(--space-1);
 	}
 `
 

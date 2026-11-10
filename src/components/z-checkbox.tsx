@@ -21,27 +21,27 @@ const styles = css`
 	label {
 		display: inline-flex;
 		align-items: center;
-		gap: 0.625rem;
+		gap: var(--space-2-5);
 		min-height: var(--control-height-md);
 		cursor: pointer;
 		font-family: inherit;
-		font-size: var(--font-size-small);
-		color: var(--foreground);
+		font-size: var(--font-size-sm);
+		color: var(--text-primary);
 		user-select: none;
 		-webkit-user-select: none;
-		--accent: var(--primary);
+		--tone: var(--accent-primary);
 	}
 
-	label.is-sm { min-height: var(--control-height-sm); font-size: var(--font-size-caption); }
-	label.is-md { font-size: var(--font-size-small); }
-	label.is-lg { min-height: var(--control-height-lg); font-size: var(--font-size-body); }
+	label.is-sm { min-height: var(--control-height-sm); font-size: var(--font-size-xs); }
+	label.is-md { font-size: var(--font-size-sm); }
+	label.is-lg { min-height: var(--control-height-lg); font-size: var(--font-size-md); }
 
 	:host([tone='secondary']) label {
-		--accent: var(--purple);
+		--tone: var(--accent-secondary);
 	}
 
 	:host([tone='tertiary']) label {
-		--accent: var(--pink);
+		--tone: var(--accent-tertiary);
 	}
 
 	label.is-disabled {
@@ -57,7 +57,7 @@ const styles = css`
 		flex-shrink: 0;
 		width: 1.125rem;
 		height: 1.125rem;
-		border: 1px solid var(--border);
+		border: 1px solid var(--border-default);
 		border-radius: var(--radius-sm);
 		background: transparent;
 		transition:
@@ -75,20 +75,20 @@ const styles = css`
 	}
 
 	label:hover .box {
-		border-color: color-mix(in oklch, var(--foreground) 40%, transparent);
+		border-color: color-mix(in oklch, var(--text-primary) 40%, transparent);
 	}
 
 	.box.is-checked,
 	.box.is-indeterminate {
-		background: var(--accent);
-		border-color: var(--accent);
+		background: var(--tone);
+		border-color: var(--tone);
 	}
 
 	.dash {
 		width: 60%;
 		height: 2px;
-		border-radius: 1px;
-		background: var(--primary-foreground);
+		border-radius: var(--radius-xs);
+		background: var(--on-accent);
 	}
 
 	/* hidden native input drives focus + a11y */
@@ -101,14 +101,14 @@ const styles = css`
 	}
 
 	input:focus-visible + .box {
-		outline: 3px solid var(--focus-ring);
+		outline: 3px solid var(--border-focus);
 		outline-offset: 2px;
 	}
 
 	.check {
 		width: 70%;
 		height: 70%;
-		color: var(--primary-foreground);
+		color: var(--on-accent);
 		stroke: currentColor;
 		stroke-width: 3;
 		stroke-linecap: round;

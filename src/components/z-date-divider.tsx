@@ -11,8 +11,8 @@ const styles = css`
 	:host {
 		display: flex;
 		align-items: center;
-		gap: var(--space-sm);
-		margin: var(--space-sm) 0;
+		gap: var(--space-2);
+		margin: var(--space-2) 0;
 	}
 	:host([is-hidden]) {
 		display: none;
@@ -20,12 +20,12 @@ const styles = css`
 	.line {
 		flex: 1;
 		height: 1px;
-		background: var(--border);
+		background: var(--border-default);
 	}
 	.label {
-		font-size: 0.75rem;
-		font-weight: 600;
-		color: var(--muted-foreground);
+		font-size: var(--font-size-xs);
+		font-weight: var(--font-weight-semibold);
+		color: var(--text-secondary);
 		white-space: nowrap;
 	}
 `

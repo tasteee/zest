@@ -3,7 +3,7 @@ import { oneOf } from '../shared/prop-types'
 
 const styles = css`
 	:host {
-		color: var(--foreground);
+		color: var(--text-primary);
 	}
 
 	:host([is-hidden]) {
@@ -16,13 +16,13 @@ const styles = css`
 	   it here against the shared --selection-* tokens so prose highlights the
 	   same as everything else. */
 	::selection {
-		background: var(--selection-background);
-		color: var(--selection-foreground);
+		background: var(--surface-selection);
+		color: var(--text-selection);
 	}
 
 	::-moz-selection {
-		background: var(--selection-background);
-		color: var(--selection-foreground);
+		background: var(--surface-selection);
+		color: var(--text-selection);
 	}
 
 	.text {
@@ -54,39 +54,39 @@ const styles = css`
 	}
 
 	.text.is-heading.is-xxl {
-		font-size: calc(var(--base-font-size, 16px) * 4);
-		line-height: 1.125;
-		letter-spacing: calc(var(--base-font-size, 16px) * -0.06 * var(--font-heading-tracking-scale, 1));
+		font-size: var(--font-size-7xl);
+		line-height: var(--line-height-tight);
+		letter-spacing: calc(-0.015em * var(--font-heading-tracking-scale, 1));
 	}
 
 	.text.is-heading.is-xl {
-		font-size: calc(var(--base-font-size, 16px) * 3.5);
-		line-height: 1.142857;
-		letter-spacing: calc(var(--base-font-size, 16px) * -0.05 * var(--font-heading-tracking-scale, 1));
+		font-size: var(--font-size-6xl);
+		line-height: var(--line-height-tight);
+		letter-spacing: calc(-0.01429em * var(--font-heading-tracking-scale, 1));
 	}
 
 	.text.is-heading.is-lg {
-		font-size: calc(var(--base-font-size, 16px) * 3);
-		line-height: 1.166667;
-		letter-spacing: calc(var(--base-font-size, 16px) * -0.04 * var(--font-heading-tracking-scale, 1));
+		font-size: var(--font-size-5xl);
+		line-height: var(--line-height-tight);
+		letter-spacing: calc(-0.01333em * var(--font-heading-tracking-scale, 1));
 	}
 
 	.text.is-heading.is-md {
-		font-size: calc(var(--base-font-size, 16px) * 2.5);
-		line-height: 1.3;
-		letter-spacing: calc(var(--base-font-size, 16px) * -0.03375 * var(--font-heading-tracking-scale, 1));
+		font-size: var(--font-size-4xl);
+		line-height: var(--line-height-snug);
+		letter-spacing: calc(-0.0135em * var(--font-heading-tracking-scale, 1));
 	}
 
 	.text.is-heading.is-sm {
-		font-size: calc(var(--base-font-size, 16px) * 2);
-		line-height: 1.25;
-		letter-spacing: calc(var(--base-font-size, 16px) * -0.03 * var(--font-heading-tracking-scale, 1));
+		font-size: var(--font-size-3xl);
+		line-height: var(--line-height-tight);
+		letter-spacing: calc(-0.015em * var(--font-heading-tracking-scale, 1));
 	}
 
 	.text.is-heading.is-xs {
-		font-size: calc(var(--base-font-size, 16px) * 1.5);
-		line-height: 1.333333;
-		letter-spacing: calc(var(--base-font-size, 16px) * -0.00625 * var(--font-heading-tracking-scale, 1));
+		font-size: var(--font-size-2xl);
+		line-height: var(--line-height-snug);
+		letter-spacing: calc(-0.00417em * var(--font-heading-tracking-scale, 1));
 	}
 
 	/* ---------------------------------------------
@@ -99,33 +99,33 @@ const styles = css`
 	}
 
 	.text.is-subheading.is-xl {
-		font-size: calc(var(--base-font-size, 16px) * 1.25);
-		line-height: 1.2;
-		letter-spacing: calc(var(--base-font-size, 16px) * 0.075);
+		font-size: var(--font-size-xl);
+		line-height: var(--line-height-tight);
+		letter-spacing: 0.06em;
 	}
 
 	.text.is-subheading.is-lg {
-		font-size: calc(var(--base-font-size, 16px) * 1.125);
-		line-height: 1.333333;
-		letter-spacing: calc(var(--base-font-size, 16px) * 0.075);
+		font-size: var(--font-size-lg);
+		line-height: var(--line-height-snug);
+		letter-spacing: 0.06667em;
 	}
 
 	.text.is-subheading.is-md {
-		font-size: var(--base-font-size, 16px);
-		line-height: 1.25;
-		letter-spacing: calc(var(--base-font-size, 16px) * 0.075);
+		font-size: var(--font-size-md);
+		line-height: var(--line-height-tight);
+		letter-spacing: 0.075em;
 	}
 
 	.text.is-subheading.is-sm {
-		font-size: calc(var(--base-font-size, 16px) * 0.875);
-		line-height: 1.428571;
-		letter-spacing: calc(var(--base-font-size, 16px) * 0.05);
+		font-size: var(--font-size-sm);
+		line-height: var(--line-height-snug);
+		letter-spacing: 0.05714em;
 	}
 
 	.text.is-subheading.is-xs {
-		font-size: calc(var(--base-font-size, 16px) * 0.75);
-		line-height: 1.333333;
-		letter-spacing: calc(var(--base-font-size, 16px) * 0.05);
+		font-size: var(--font-size-xs);
+		line-height: var(--line-height-snug);
+		letter-spacing: 0.06667em;
 	}
 
 	/* ---------------------------------------------
@@ -137,38 +137,38 @@ const styles = css`
 	}
 
 	.text.is-text.is-xxl {
-		font-size: calc(var(--base-font-size, 16px) * 1.5);
-		line-height: 1.666667;
-		letter-spacing: calc(var(--base-font-size, 16px) * -0.0275);
+		font-size: var(--font-size-2xl);
+		line-height: var(--line-height-normal);
+		letter-spacing: -0.01833em;
 	}
 
 	.text.is-text.is-xl {
-		font-size: calc(var(--base-font-size, 16px) * 1.25);
-		line-height: 1.6;
-		letter-spacing: calc(var(--base-font-size, 16px) * -0.02);
+		font-size: var(--font-size-xl);
+		line-height: var(--line-height-normal);
+		letter-spacing: -0.016em;
 	}
 
 	.text.is-text.is-lg {
-		font-size: calc(var(--base-font-size, 16px) * 1.125);
-		line-height: 1.777778;
-		letter-spacing: calc(var(--base-font-size, 16px) * -0.01625);
+		font-size: var(--font-size-lg);
+		line-height: var(--line-height-relaxed);
+		letter-spacing: -0.01444em;
 	}
 
 	.text.is-text.is-md {
-		font-size: var(--base-font-size, 16px);
-		line-height: 1.75;
-		letter-spacing: calc(var(--base-font-size, 16px) * -0.01125);
+		font-size: var(--font-size-md);
+		line-height: var(--line-height-relaxed);
+		letter-spacing: -0.01125em;
 	}
 
 	.text.is-text.is-sm {
-		font-size: calc(var(--base-font-size, 16px) * 0.875);
-		line-height: 1.714286;
-		letter-spacing: calc(var(--base-font-size, 16px) * -0.005);
+		font-size: var(--font-size-sm);
+		line-height: var(--line-height-relaxed);
+		letter-spacing: -0.00571em;
 	}
 
 	.text.is-text.is-xs {
-		font-size: calc(var(--base-font-size, 16px) * 0.75);
-		line-height: 1.333333;
+		font-size: var(--font-size-xs);
+		line-height: var(--line-height-snug);
 		letter-spacing: 0;
 	}
 
@@ -177,10 +177,10 @@ const styles = css`
 	--------------------------------------------- */
 
 	.text.is-label {
-		color: var(--color-neutral-5);
-		font-size: var(--font-size-small);
-		font-weight: 600;
-		line-height: 1;
+		color: var(--text-tertiary);
+		font-size: var(--font-size-sm);
+		font-weight: var(--font-weight-semibold);
+		line-height: var(--line-height-none);
 		letter-spacing: 0.04em;
 		text-transform: lowercase;
 		font-variant-caps: all-small-caps;
@@ -193,35 +193,35 @@ const styles = css`
 	--------------------------------------------- */
 
 	.text.is-primary {
-		color: var(--foreground);
+		color: var(--text-primary);
 	}
 
 	.text.is-secondary {
-		color: var(--purple);
+		color: var(--accent-secondary);
 	}
 
 	.text.is-tertiary {
-		color: var(--pink);
+		color: var(--accent-tertiary);
 	}
 
 	.text.is-muted {
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 	}
 
 	.text.is-strong {
-		color: var(--color-neutral-9);
+		color: var(--text-strong);
 	}
 
 	.text.is-success {
-		color: var(--success);
+		color: var(--status-success);
 	}
 
 	.text.is-warning {
-		color: var(--warning);
+		color: var(--status-warning);
 	}
 
 	.text.is-danger {
-		color: var(--destructive);
+		color: var(--status-danger);
 	}
 
 
@@ -271,35 +271,35 @@ const styles = css`
 	}
 
 	.inline.is-secondary {
-		color: var(--purple);
+		color: var(--accent-secondary);
 	}
 
 	.inline.is-tertiary {
-		color: var(--pink);
+		color: var(--accent-tertiary);
 	}
 
 	.inline.is-muted {
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 	}
 
 	.inline.is-strong {
-		color: var(--color-neutral-9);
+		color: var(--text-strong);
 	}
 
 	.inline.is-primary {
-		color: var(--foreground);
+		color: var(--text-primary);
 	}
 
 	.inline.is-success {
-		color: var(--success);
+		color: var(--status-success);
 	}
 
 	.inline.is-warning {
-		color: var(--warning);
+		color: var(--status-warning);
 	}
 
 	.inline.is-danger {
-		color: var(--destructive);
+		color: var(--status-danger);
 	}
 
 
@@ -399,7 +399,7 @@ const resolveInlineColorClass = (props: any): string => {
 	if (props.color === 'strong') return 'is-strong'
 	if (props.color === 'primary') return 'is-primary'
 	// No explicit color: emit no override class so color inherits from
-	// whatever context this is dropped into, instead of forcing --foreground.
+	// whatever context this is dropped into, instead of forcing --text-primary.
 	return ''
 }
 

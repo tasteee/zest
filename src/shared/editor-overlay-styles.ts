@@ -15,8 +15,8 @@ import { css } from 'atomico'
  *  - .surface.is-open     entrance: fades + rises in over 120ms ease-out
  *  - .surface.is-closing  exit: fades in place over 80ms, no transform change
  *
- * "Borders over shadows" still applies, depth comes from --border + --popover,
- * never a box-shadow.
+ * Floating, so it takes the same elevation as every overlay: a hairline border on
+ * --surface-overlay plus --shadow-overlay.
  */
 export const floatingSurfaceStyles = css`
 	.surface {
@@ -25,10 +25,11 @@ export const floatingSurfaceStyles = css`
 		top: 0;
 		margin: 0;
 		box-sizing: border-box;
-		background: var(--popover);
-		color: var(--popover-foreground);
-		border: 1px solid var(--border);
+		background: var(--surface-overlay);
+		color: var(--text-primary);
+		border: 1px solid var(--border-default);
 		border-radius: var(--radius-md);
+		box-shadow: var(--shadow-overlay);
 		opacity: 0;
 		transform: translateY(4px);
 		pointer-events: none;
@@ -66,7 +67,7 @@ export const floatingToolbarStyles = css`
 		display: flex;
 		align-items: center;
 		gap: 1px;
-		padding: 0.25rem;
+		padding: var(--space-1);
 	}
 `
 
@@ -81,7 +82,7 @@ export const floatingMenuStyles = css`
 		max-width: 20rem;
 		max-height: 18rem;
 		overflow-y: auto;
-		padding: 0.3125rem;
+		padding: var(--space-1-5);
 	}
 `
 
@@ -91,11 +92,11 @@ export const floatingMenuItemStyles = css`
 	.item {
 		display: flex;
 		align-items: center;
-		gap: 0.625rem;
-		padding: 0.5rem 0.625rem;
+		gap: var(--space-2-5);
+		padding: var(--space-2) var(--space-2-5);
 		border-radius: var(--radius-sm);
-		font-size: var(--font-size-small);
-		color: var(--foreground);
+		font-size: var(--font-size-sm);
+		color: var(--text-primary);
 		cursor: pointer;
 		user-select: none;
 		background: transparent;
@@ -107,8 +108,8 @@ export const floatingMenuItemStyles = css`
 	}
 
 	.item.is-active {
-		background: color-mix(in oklch, var(--accent, var(--primary)) 14%, transparent);
-		color: var(--accent, var(--primary));
+		background: color-mix(in oklch, var(--tone, var(--accent-primary)) 14%, transparent);
+		color: var(--tone, var(--accent-primary));
 	}
 
 	.item.is-disabled {
@@ -121,7 +122,7 @@ export const floatingMenuItemStyles = css`
 		width: 1.125rem;
 		height: 1.125rem;
 		flex-shrink: 0;
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 	}
 
 	.item .label {
@@ -130,15 +131,15 @@ export const floatingMenuItemStyles = css`
 	}
 
 	.item .description {
-		color: var(--muted-foreground);
-		font-size: var(--font-size-caption);
+		color: var(--text-secondary);
+		font-size: var(--font-size-xs);
 	}
 
 	.empty {
-		padding: 0.75rem;
+		padding: var(--space-3);
 		text-align: center;
-		color: var(--muted-foreground);
-		font-size: var(--font-size-small);
+		color: var(--text-secondary);
+		font-size: var(--font-size-sm);
 	}
 `
 
@@ -154,7 +155,7 @@ export const floatingIconButtonStyles = css`
 		background: transparent;
 		border: 0;
 		border-radius: var(--radius-sm);
-		color: var(--muted-foreground);
+		color: var(--text-secondary);
 		cursor: pointer;
 		transition:
 			color var(--motion-fast) var(--ease-enter),
@@ -162,13 +163,13 @@ export const floatingIconButtonStyles = css`
 	}
 
 	.icon-button:hover {
-		color: var(--foreground);
-		background: color-mix(in oklch, var(--foreground) 8%, transparent);
+		color: var(--text-primary);
+		background: color-mix(in oklch, var(--text-primary) 8%, transparent);
 	}
 
 	.icon-button.is-active {
-		color: var(--accent, var(--primary));
-		background: color-mix(in oklch, var(--accent, var(--primary)) 14%, transparent);
+		color: var(--tone, var(--accent-primary));
+		background: color-mix(in oklch, var(--tone, var(--accent-primary)) 14%, transparent);
 	}
 
 	.icon-button:disabled {
@@ -189,7 +190,7 @@ export const floatingIconButtonStyles = css`
 	.sep {
 		width: 1px;
 		align-self: stretch;
-		margin: 0.25rem 0.125rem;
-		background: var(--border);
+		margin: var(--space-1) var(--space-0-5);
+		background: var(--border-default);
 	}
 `

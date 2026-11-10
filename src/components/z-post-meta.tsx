@@ -15,23 +15,23 @@ const styles = css`
 	.meta {
 		display: flex;
 		align-items: center;
-		gap: 0.75rem;
+		gap: var(--space-3);
 		flex-wrap: wrap;
 	}
 
 	.avatar {
 		width: 1.75rem;
 		height: 1.75rem;
-		border-radius: 999px;
+		border-radius: var(--radius-full);
 		overflow: hidden;
 		flex-shrink: 0;
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
-		background: color-mix(in srgb, var(--accent) 22%, var(--card));
-		color: color-mix(in oklch, var(--accent) 85%, white);
-		font-size: 0.6875rem;
-		font-weight: 600;
+		background: color-mix(in srgb, var(--tone) 22%, var(--surface-default));
+		color: color-mix(in oklch, var(--tone) 85%, var(--text-strong));
+		font-size: var(--font-size-2xs);
+		font-weight: var(--font-weight-semibold);
 		font-family: inherit;
 	}
 
@@ -43,43 +43,43 @@ const styles = css`
 	}
 
 	.name {
-		font-size: 0.875rem;
-		font-weight: 500;
-		color: var(--foreground);
+		font-size: var(--font-size-sm);
+		font-weight: var(--font-weight-medium);
+		color: var(--text-primary);
 	}
 
 	.sep {
 		width: 3px;
 		height: 3px;
-		border-radius: 999px;
-		background: var(--muted-foreground);
+		border-radius: var(--radius-full);
+		background: var(--text-secondary);
 		flex-shrink: 0;
 	}
 
 	.date {
-		font-size: 0.875rem;
-		color: var(--muted-foreground);
+		font-size: var(--font-size-sm);
+		color: var(--text-secondary);
 	}
 
 	.tags {
 		display: flex;
 		flex-wrap: wrap;
-		gap: 0.5rem;
-		margin-top: 0.875rem;
+		gap: var(--space-2);
+		margin-top: var(--space-3-5);
 	}
 
 	.tag {
 		display: inline-flex;
 		align-items: center;
 		font-family: inherit;
-		font-size: 0.8125rem;
-		font-weight: 500;
-		line-height: 1;
-		border: 1px solid var(--border);
-		border-radius: 999px;
+		font-size: var(--font-size-sm);
+		font-weight: var(--font-weight-medium);
+		line-height: var(--line-height-none);
+		border: 1px solid var(--border-default);
+		border-radius: var(--radius-full);
 		background: transparent;
-		color: var(--muted-foreground);
-		padding: 0.375rem 0.75rem;
+		color: var(--text-secondary);
+		padding: var(--space-1-5) var(--space-3);
 		cursor: pointer;
 		transition:
 			border-color var(--motion-fast) var(--ease-enter),
@@ -87,12 +87,12 @@ const styles = css`
 	}
 
 	.tag:hover {
-		border-color: color-mix(in oklch, var(--accent) 50%, transparent);
-		color: var(--foreground);
+		border-color: color-mix(in oklch, var(--tone) 50%, transparent);
+		color: var(--text-primary);
 	}
 
 	.tag:focus-visible {
-		outline: 3px solid var(--focus-ring);
+		outline: 3px solid var(--border-focus);
 		outline-offset: 2px;
 	}
 `

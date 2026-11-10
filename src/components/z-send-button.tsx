@@ -20,14 +20,14 @@ const styles = css`
 	button {
 		width: 2.25rem;
 		height: 2.25rem;
-		border-radius: 999px;
+		border-radius: var(--radius-full);
 		border: none;
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
 		cursor: pointer;
-		background: var(--primary);
-		color: var(--primary-foreground);
+		background: var(--accent-primary);
+		color: var(--on-accent);
 		padding: 0;
 		transition:
 			opacity var(--motion-fast) var(--ease-enter),
@@ -45,7 +45,7 @@ const styles = css`
 		cursor: default;
 	}
 	:host([is-streaming]) button {
-		background: var(--destructive);
+		background: var(--status-danger);
 	}
 	svg {
 		width: 1.1rem;
@@ -59,7 +59,7 @@ const styles = css`
 	.stop {
 		width: 0.75rem;
 		height: 0.75rem;
-		border-radius: 3px;
+		border-radius: var(--radius-xs);
 		background: currentColor;
 	}
 `

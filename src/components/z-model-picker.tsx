@@ -22,24 +22,24 @@ const styles = css`
 	.trigger {
 		display: inline-flex;
 		align-items: center;
-		gap: 0.375rem;
-		border: 1px solid var(--border);
-		background: var(--card);
+		gap: var(--space-1-5);
+		border: 1px solid var(--border-default);
+		background: var(--surface-default);
 		border-radius: var(--radius-md);
-		padding: 0.35rem 0.6rem;
+		padding: var(--space-1-5) var(--space-2-5);
 		font-family: inherit;
-		font-size: 0.8125rem;
-		font-weight: 500;
-		color: var(--foreground);
+		font-size: var(--font-size-sm);
+		font-weight: var(--font-weight-medium);
+		color: var(--text-primary);
 		cursor: pointer;
 	}
 	.trigger:hover {
-		border-color: color-mix(in oklch, var(--foreground) 30%, transparent);
+		border-color: color-mix(in oklch, var(--text-primary) 30%, transparent);
 	}
 	.chevron {
 		width: 0.85rem;
 		height: 0.85rem;
-		stroke: var(--muted-foreground);
+		stroke: var(--text-secondary);
 		fill: none;
 		stroke-width: 2;
 		stroke-linecap: round;
@@ -51,15 +51,15 @@ const styles = css`
 	}
 	.menu {
 		position: absolute;
-		z-index: 50;
+		z-index: var(--z-menu);
 		bottom: calc(100% + 0.375rem);
 		left: 0;
 		min-width: 15rem;
-		background: var(--card);
-		border: 1px solid var(--border);
+		background: var(--surface-overlay);
+		border: 1px solid var(--border-default);
 		border-radius: var(--radius-md);
-		box-shadow: 0 8px 24px color-mix(in oklch, var(--foreground) 15%, transparent);
-		padding: 0.25rem;
+		box-shadow: var(--shadow-overlay);
+		padding: var(--space-1);
 		display: flex;
 		flex-direction: column;
 		gap: 1px;
@@ -71,25 +71,25 @@ const styles = css`
 	.item {
 		display: flex;
 		align-items: flex-start;
-		gap: 0.5rem;
+		gap: var(--space-2);
 		border: none;
 		background: transparent;
 		border-radius: var(--radius-sm);
-		padding: 0.4rem 0.5rem;
+		padding: var(--space-1-5) var(--space-2);
 		text-align: start;
 		font-family: inherit;
-		color: var(--foreground);
+		color: var(--text-primary);
 		cursor: pointer;
 	}
 	.item:hover {
-		background: color-mix(in oklch, var(--foreground) 8%, transparent);
+		background: color-mix(in oklch, var(--text-primary) 8%, transparent);
 	}
 	.check {
 		flex: 0 0 auto;
 		width: 1rem;
 		height: 1rem;
-		margin-top: 0.1rem;
-		stroke: var(--primary);
+		margin-top: var(--space-0-5);
+		stroke: var(--text-primary);
 		fill: none;
 		stroke-width: 2.5;
 		stroke-linecap: round;
@@ -106,12 +106,12 @@ const styles = css`
 		gap: 1px;
 	}
 	.name {
-		font-size: 0.8125rem;
-		font-weight: 600;
+		font-size: var(--font-size-sm);
+		font-weight: var(--font-weight-semibold);
 	}
 	.desc {
-		font-size: 0.6875rem;
-		color: var(--muted-foreground);
+		font-size: var(--font-size-2xs);
+		color: var(--text-secondary);
 	}
 `
 

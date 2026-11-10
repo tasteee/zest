@@ -45,10 +45,10 @@ const styles = css`
 	   works on every surface and for every control shape without painting a
 	   theme-dependent patch or shadow over a border. The fixed height keeps
 	   mixed rows aligned even when a theme uses different font metrics. */
-	.header { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; height: var(--field-label-height); min-width: 0; }
+	.header { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); height: var(--field-label-height); min-width: 0; }
 
-	.label { color: var(--foreground); font-size: var(--font-size-small); font-weight: 500; line-height: 1.25; letter-spacing: normal; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; user-select: none; -webkit-user-select: none; }
-	.required { color: var(--destructive); }
+	.label { color: var(--text-primary); font-size: var(--font-size-sm); font-weight: var(--font-weight-medium); line-height: var(--line-height-tight); letter-spacing: normal; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; user-select: none; -webkit-user-select: none; }
+	.required { color: var(--status-danger); }
 
 	/* The band. Whatever is slotted sits vertically centred in a row of the
 	   control height, which is what lets a switch and a select agree. */
@@ -60,15 +60,15 @@ const styles = css`
 	   input already; this carries that the rest of the way out. */
 	.control ::slotted(*) { min-width: 0; max-width: 100%; }
 
-	.description, .error { font-size: var(--font-size-small); line-height: 1.45; }
-	.description { color: var(--muted-foreground); }
-	.description ::slotted(*) { color: var(--muted-foreground); }
-	.error { color: var(--destructive); }
+	.description, .error { font-size: var(--font-size-sm); line-height: var(--line-height-snug); }
+	.description { color: var(--text-secondary); }
+	.description ::slotted(*) { color: var(--text-secondary); }
+	.error { color: var(--status-danger); }
 
 	/* Horizontal puts the label in its own column left of the control. The
 	   label band takes the control's height so the text centres on it, and
 	   the error and description line up under the control. */
-	:host([is-horizontal]) .field { grid-template-columns: max-content minmax(0, 1fr); column-gap: var(--space-base); align-items: start; }
+	:host([is-horizontal]) .field { grid-template-columns: max-content minmax(0, 1fr); column-gap: var(--space-4); align-items: start; }
 	:host([is-horizontal]) .header { grid-column: 1; grid-row: 1; height: var(--z-field-control-height); }
 	:host([is-horizontal]) .control { grid-column: 2; grid-row: 1; }
 	:host([is-horizontal]) .error, :host([is-horizontal]) .description { grid-column: 2; }

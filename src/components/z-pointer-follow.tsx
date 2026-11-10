@@ -20,18 +20,18 @@ const styles = css`
 	:host {
 		display: inline-block;
 		position: relative;
-		--tone: var(--color-neutral-6);
+		--tone: var(--text-secondary);
 	}
 
 	:host([tone='secondary']) {
-		--tone: var(--purple);
+		--tone: var(--accent-secondary);
 	}
 
 	:host([tone='tertiary']) {
-		--tone: var(--pink);
+		--tone: var(--accent-tertiary);
 	}
 	:host([tone='primary']) {
-		--tone: var(--color-neutral-6);
+		--tone: var(--text-secondary);
 	}
 
 	:host([is-hidden]) {
@@ -47,7 +47,7 @@ const styles = css`
 		position: fixed;
 		inset: 0;
 		pointer-events: none;
-		z-index: 9999;
+		z-index: var(--z-toast);
 	}
 
 	.pointer {
@@ -56,7 +56,7 @@ const styles = css`
 		left: 0;
 		display: flex;
 		align-items: center;
-		gap: 0.4rem;
+		gap: var(--space-1-5);
 		pointer-events: none;
 		opacity: 0;
 		will-change: transform;
@@ -70,18 +70,18 @@ const styles = css`
 	.dot {
 		width: 0.85rem;
 		height: 0.85rem;
-		border-radius: 999px;
+		border-radius: var(--radius-full);
 		background: var(--tone);
 		box-shadow: 0 0 0 3px color-mix(in oklch, var(--tone) 25%, transparent);
 	}
 
 	.tag {
 		font-family: var(--font-sans);
-		font-size: var(--font-size-caption);
-		font-weight: 600;
-		color: var(--primary-foreground);
+		font-size: var(--font-size-xs);
+		font-weight: var(--font-weight-semibold);
+		color: var(--on-accent);
 		background: var(--tone);
-		padding: 0.15rem 0.5rem;
+		padding: var(--space-0-5) var(--space-2);
 		border-radius: var(--radius-sm);
 		white-space: nowrap;
 		transform: translateY(-0.1rem);

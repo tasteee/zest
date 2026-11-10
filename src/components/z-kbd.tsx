@@ -25,50 +25,47 @@ const styles = css`
 		justify-content: center;
 		box-sizing: border-box;
 		font-family: var(--font-mono);
-		font-weight: 500;
-		line-height: 1;
+		font-weight: var(--font-weight-medium);
+		line-height: var(--line-height-none);
 		white-space: nowrap;
-		color: var(--foreground);
-		background: color-mix(in oklch, var(--paper-soft) 70%, transparent);
-		border: 1px solid var(--border);
-		/* the raised edge: a hairline highlight on top, a deeper shadow below */
+		color: var(--text-primary);
+		background: color-mix(in oklch, var(--surface-subtle) 70%, transparent);
+		border: 1px solid var(--border-default);
+		/* the keycap edge: a thicker bottom border, no shadow */
 		border-bottom-width: 2px;
 		border-radius: var(--radius-sm);
-		box-shadow:
-			inset 0 1px 0 color-mix(in oklch, white 8%, transparent),
-			0 1px 1px color-mix(in oklch, black 25%, transparent);
 	}
 
 	/* sizes, height, padding and font-size scale together */
 	.kbd.is-xs {
 		min-width: 1.25rem;
 		height: 1.25rem;
-		padding-inline: 0.3125rem;
-		font-size: 0.6875rem;
+		padding-inline: var(--space-1-5);
+		font-size: var(--font-size-2xs);
 	}
 	.kbd.is-sm {
 		min-width: 1.5rem;
 		height: 1.5rem;
-		padding-inline: 0.375rem;
-		font-size: 0.75rem;
+		padding-inline: var(--space-1-5);
+		font-size: var(--font-size-xs);
 	}
 	.kbd.is-md {
 		min-width: 1.875rem;
 		height: 1.875rem;
-		padding-inline: 0.5rem;
-		font-size: 0.8125rem;
+		padding-inline: var(--space-2);
+		font-size: var(--font-size-sm);
 	}
 	.kbd.is-lg {
 		min-width: 2.25rem;
 		height: 2.25rem;
-		padding-inline: 0.625rem;
-		font-size: 0.9375rem;
+		padding-inline: var(--space-2-5);
+		font-size: var(--font-size-md);
 	}
 	.kbd.is-xl {
 		min-width: 2.75rem;
 		height: 2.75rem;
-		padding-inline: 0.75rem;
-		font-size: 1.0625rem;
+		padding-inline: var(--space-3);
+		font-size: var(--font-size-md);
 	}
 `
 

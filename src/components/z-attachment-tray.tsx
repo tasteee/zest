@@ -25,15 +25,15 @@ const styles = css`
 		display: flex;
 		flex-wrap: wrap;
 		align-items: center;
-		gap: 0.5rem;
+		gap: var(--space-2);
 		width: 100%;
 	}
 	.add {
 		display: inline-flex;
 		align-items: center;
-		gap: 0.375rem;
-		font-size: 0.8125rem;
-		color: var(--muted-foreground);
+		gap: var(--space-1-5);
+		font-size: var(--font-size-sm);
+		color: var(--text-secondary);
 	}
 	.add svg {
 		width: 1rem;

@@ -44,10 +44,10 @@ const styles = css`
 		padding-inline-end: var(--chassis-frame, 0.375rem);
 		padding-bottom: var(--chassis-frame, 0.375rem);
 		padding-inline-start: var(--chassis-bezel, 0.75rem);
-		background: var(--chassis-body, var(--paper));
-		border: 1px solid var(--chassis-border, var(--color-neutral-3));
+		background: var(--chassis-body, var(--surface-default));
+		border: 1px solid var(--chassis-border, var(--border-default));
 		border-radius: var(--chassis-radius, var(--radius-xl));
-		color: var(--foreground);
+		color: var(--text-primary);
 	}
 	:host([rail-side='right']) {
 		flex-direction: row-reverse;
@@ -64,10 +64,10 @@ const styles = css`
 		width: var(--chassis-rail-width, 4.25rem);
 		display: flex;
 		flex-direction: column;
-		gap: 0.5rem;
+		gap: var(--space-2);
 		min-height: 0;
 		box-sizing: border-box;
-		padding: 0.125rem;
+		padding: var(--space-0-5);
 		overflow: hidden;
 		/* the fluid part: expand/collapse the rail and, via flex, the screen,
 		   on a long premium easing (easeOutQuint). */
@@ -94,7 +94,7 @@ const styles = css`
 		display: flex;
 		flex-direction: column;
 		align-items: stretch;
-		gap: 0.5rem;
+		gap: var(--space-2);
 		padding-top: 8px;
 		overflow: hidden;
 	}
@@ -104,7 +104,7 @@ const styles = css`
 		display: flex;
 		flex-direction: column;
 		align-items: stretch;
-		gap: 0.5rem;
+		gap: var(--space-2);
 		min-height: 0;
 		padding-top: 8px;
 		overflow-y: auto;
@@ -118,7 +118,7 @@ const styles = css`
 		display: flex;
 		flex-direction: column;
 		align-items: stretch;
-		gap: 0.5rem;
+		gap: var(--space-2);
 		padding-bottom: 8px;
 		overflow: hidden;
 	}
@@ -133,8 +133,8 @@ const styles = css`
 		   scroll shouldn't drag whatever's outside the chassis up with it. */
 		overscroll-behavior: contain;
 		position: relative;
-		background: var(--chassis-screen, var(--bg));
-		border: 1px solid var(--chassis-screen-border, var(--border));
+		background: var(--chassis-screen, var(--surface-page));
+		border: 1px solid var(--chassis-screen-border, var(--border-default));
 		border-radius: var(--chassis-screen-radius, var(--radius-lg));
 	}
 	.screen::-webkit-scrollbar {
@@ -145,13 +145,13 @@ const styles = css`
 		background: transparent;
 	}
 	.screen::-webkit-scrollbar-thumb {
-		background: var(--color-neutral-3);
+		background: var(--border-default);
 		border: 2px solid transparent;
-		border-radius: 999px;
+		border-radius: var(--radius-full);
 		background-clip: padding-box;
 	}
 	.screen::-webkit-scrollbar-thumb:hover {
-		background: var(--color-neutral-4);
+		background: var(--border-strong);
 		background-clip: padding-box;
 	}
 
