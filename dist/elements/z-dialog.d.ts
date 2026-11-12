@@ -1,0 +1,26 @@
+export declare const ZDialog: import("atomico/types/dom").Atomico<{
+    props: {
+        isOpen: {
+            type: BooleanConstructor;
+            reflect: boolean;
+        };
+        heading: StringConstructor;
+        label: StringConstructor;
+        description: StringConstructor;
+        isCloseHidden: {
+            type: BooleanConstructor;
+            reflect: boolean;
+        };
+        isStatic: {
+            type: BooleanConstructor;
+            reflect: boolean;
+        };
+        isDisabled: {
+            type: BooleanConstructor;
+            reflect: boolean;
+        };
+        open: import("atomico").EventProp<void>;
+        close: import("atomico").EventProp<void>;
+    };
+    styles: import("atomico").Sheet[];
+}>;
