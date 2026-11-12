@@ -14,7 +14,7 @@ import type { Root, Element, RootContent } from 'hast'
 import typescript from 'highlight.js/lib/languages/typescript'
 import javascript from 'highlight.js/lib/languages/javascript'
 import cssLanguage from 'highlight.js/lib/languages/css'
-import type { HLJSApi, Language } from 'highlight.js'
+import type { HLJSApi, Language, LanguageFn } from 'highlight.js'
 import scss from 'highlight.js/lib/languages/scss'
 import json from 'highlight.js/lib/languages/json'
 import bash from 'highlight.js/lib/languages/bash'
@@ -53,6 +53,20 @@ const lowlight = createLowlight({
 	markdown
 })
 
+/**
+ * Adds a highlight.js grammar to z-code-block, plus any extra names it should
+ * answer to. The core build ships nine grammars; everything else is opt-in:
+ *
+ *   import python from 'highlight.js/lib/languages/python'
+ *   registerLanguage('python', python, ['py'])
+ *
+ * Or import '@tasteee/zest/languages' to register a ready-made set.
+ */
+export const registerLanguage = (name: string, grammar: LanguageFn, aliases: string[] = []): void => {
+	lowlight.register({ [name]: grammar })
+	if (aliases.length) lowlight.registerAlias({ [name]: aliases })
+}
+
 export type Token = { className: string; value: string }
 
 // Map the language tags the docs use onto highlight.js language names/aliases.
@@ -73,7 +87,13 @@ const LANG_ALIASES: Record<string, string> = {
 	svg: 'xml',
 	vue: 'xml',
 	jsonc: 'json',
-	yml: 'yaml'
+	yml: 'yaml',
+	// Frameworks whose templates are HTML-shaped, and sass's close cousin.
+	svelte: 'xml',
+	astro: 'xml',
+	htm: 'xml',
+	solid: 'typescript',
+	sass: 'scss'
 }
 
 const resolveLang = (language?: string): string | null => {

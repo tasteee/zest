@@ -39,6 +39,10 @@ export const getDemo = (id: string): DemoT | undefined => {
 	return demo
 }
 
+// A side-effect import of an opt-in zest module. The docs site loads these once
+// itself (see zest.ts); the demo shows the line a reader would write.
+const SIDE_EFFECT_IMPORT = /^\s*import\s+['"]@tasteee\/zest\/[\w-]+['"];?\s*$/gm
+
 const ZEST_IMPORT = /^\s*import\s*\{([^}]*)\}\s*from\s*['"]@tasteee\/zest['"];?\s*$/gm
 
 // `document`, narrowed to one preview: lookups only see that preview's
@@ -57,7 +61,7 @@ const scopeDocument = (stage: HTMLElement): Document =>
 /** Run a demo script against its preview element. */
 export const runDemoScript = (code: string, stage: HTMLElement): void => {
 	const names: string[] = []
-	const body = code.replace(ZEST_IMPORT, (_, list: string) => {
+	const body = code.replace(SIDE_EFFECT_IMPORT, '').replace(ZEST_IMPORT, (_, list: string) => {
 		names.push(...list.split(',').map((name) => name.trim()).filter(Boolean))
 		return ''
 	})

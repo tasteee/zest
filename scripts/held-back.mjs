@@ -7,8 +7,6 @@ export const heldBackTags = [
 	'z-panel',
 	'z-panel-handle',
 	'z-virtual-list',
-	'z-markdown',
-	'z-terminal',
 	'z-post-meta',
 	'z-chart',
 	'z-editor-canvas',

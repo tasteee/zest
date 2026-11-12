@@ -4,6 +4,7 @@
 	"license": "MIT",
 	"exports": {
 		".": "./dist/zest.js",
+		"./languages": "./dist/languages.js",
 		"./z-accordion": "./dist/elements/z-accordion.js",
 		"./z-alert": "./dist/elements/z-alert.js",
 		"./z-alert-dialog": "./dist/elements/z-alert-dialog.js",
@@ -56,6 +57,7 @@
 		"./z-link": "./dist/elements/z-link.js",
 		"./z-list": "./dist/elements/z-list.js",
 		"./z-list-row": "./dist/elements/z-list-row.js",
+		"./z-markdown": "./dist/elements/z-markdown.js",
 		"./z-marquee": "./dist/elements/z-marquee.js",
 		"./z-menu": "./dist/elements/z-menu.js",
 		"./z-menu-item": "./dist/elements/z-menu-item.js",
@@ -92,6 +94,7 @@
 		"./z-tab": "./dist/elements/z-tab.js",
 		"./z-table": "./dist/elements/z-table.js",
 		"./z-tabs": "./dist/elements/z-tabs.js",
+		"./z-terminal": "./dist/elements/z-terminal.js",
 		"./z-text": "./dist/elements/z-text.js",
 		"./z-textarea": "./dist/elements/z-textarea.js",
 		"./z-theme-switcher": "./dist/elements/z-theme-switcher.js",
@@ -108,6 +111,8 @@
 	"publish": {
 		"include": [
 			"dist/zest.js",
+			"dist/languages.js",
+			"dist/languages.d.ts",
 			"dist/index.d.ts",
 			"dist/react.d.ts",
 			"dist/ink.css",

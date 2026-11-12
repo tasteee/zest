@@ -64,6 +64,9 @@ export * from './shared/theme'
 // from its own affordances.
 export * from './shared/clipboard'
 
+// Add a syntax-highlighting grammar to z-code-block (see also @tasteee/zest/languages).
+export { registerLanguage } from './shared/highlight'
+
 // The strings zest says on its own, replaceable once per app: setLocale({ close: 'Fermer' }).
 export { setLocale, getLocale, englishStrings } from './shared/locale'
 export type { LocaleStringsT, LocaleKeyT } from './shared/locale'
@@ -133,6 +136,8 @@ export * from './components/z-callout'
 export * from './components/z-empty-state'
 export * from './components/z-scroll-area'
 export * from './components/z-code-block'
+export * from './components/z-terminal'
+export * from './components/z-markdown'
 export * from './components/z-carousel'
 export * from './components/z-marquee'
 export * from './components/z-pointer-follow'

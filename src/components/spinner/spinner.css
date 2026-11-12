@@ -1,7 +1,0 @@
-.spinner.isSmall {
-	--spinner-size: var(--spinner-size-small);
-}
-
-.spinner.isLarge {
-	--spinner-size: var(--spinner-size-large);
-}

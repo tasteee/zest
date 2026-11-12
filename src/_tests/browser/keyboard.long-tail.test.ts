@@ -435,6 +435,7 @@ describe('<z-context-menu>', () => {
 		const panel = innerOf(host, '.panel')
 		await waitUntil(() => isVisible(panel))
 		expect(isVisible(panel)).toBe(true)
+		await waitUntil(() => flatContains(panel, deepActiveElement()))
 		expect(flatContains(panel, deepActiveElement())).toBe(true)
 		await userEvent.keyboard('{ArrowDown}{Enter}')
 		await settle(wrapper)

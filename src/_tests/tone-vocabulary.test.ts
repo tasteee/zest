@@ -12,7 +12,7 @@ import { describe, expect, it } from 'vitest'
  * CSS length or width token for `size`.
  */
 
-const sharedTones = ['primary', 'secondary', 'tertiary', 'success', 'warning', 'danger']
+const sharedTones = ['neutral', 'primary', 'secondary', 'tertiary', 'success', 'warning', 'danger']
 const sharedSizes = ['xs', 'sm', 'md', 'lg', 'xl', 'xxl']
 const sharedVisualKinds = ['solid', 'soft', 'outline', 'ghost', 'plain']
 const openSizeTags = ['z-container', 'z-spacer']

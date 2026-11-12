@@ -209,7 +209,7 @@ const ELEMENTS: SectionT = {
 					label: 'Collections',
 					items: elements('z-list', 'z-table', 'z-tree', 'z-carousel')
 				},
-				{ label: 'Content', items: elements('z-code-block') }
+				{ label: 'Content', items: elements('z-code-block', 'z-terminal', 'z-markdown') }
 			]
 		},
 		{ label: 'Drag & drop', items: elements('z-draggable', 'z-drop-target', 'z-sortable') },

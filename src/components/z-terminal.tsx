@@ -1,6 +1,9 @@
 import { defineElement } from '../shared/define-element'
 import { c, css, event, useState, useMemo, useEffect, useRef, useHost } from 'atomico'
 import { themedScrollbarStyles } from '../shared/scrollbar-styles'
+import { copyText as copyToClipboard } from '../shared/clipboard'
+import { useLocale } from '../shared/locale'
+import { oneOf } from '../shared/prop-types'
 
 /*
  * z-terminal, a clean, chrome-styled terminal surface for command walkthroughs
@@ -53,8 +56,20 @@ const styles = css`
 		--tone: var(--status-success);
 	}
 
-	:host([tone='tertiary']) {
+	:host([tone='primary']) {
+		--tone: var(--accent-primary);
+	}
+
+	:host([tone='secondary']) {
 		--tone: var(--accent-secondary);
+	}
+
+	:host([tone='warning']) {
+		--tone: var(--status-warning);
+	}
+
+	:host([tone='danger']) {
+		--tone: var(--status-danger);
 	}
 
 	:host([is-hidden]) {
@@ -133,6 +148,26 @@ const styles = css`
 	}
 	.dot.green {
 		background: #28c840;
+	}
+
+	.copy-selection {
+		margin-inline-start: auto;
+		margin-inline-end: var(--space-3);
+		padding: var(--space-0-5) var(--space-2);
+		background: transparent;
+		border: 1px solid var(--border-default);
+		border-radius: var(--radius-sm);
+		color: var(--text-secondary);
+		font-family: inherit;
+		font-size: var(--font-size-xs);
+		cursor: pointer;
+	}
+	.copy-selection:hover {
+		color: var(--text-primary);
+	}
+	.copy-selection:focus-visible {
+		outline: 2px solid var(--border-focus);
+		outline-offset: 0;
 	}
 
 	.scroll {
@@ -474,6 +509,8 @@ const num = (v: unknown, fallback: number): number =>
 export const ZTerminal = c(
 	(props) => {
 		const host = useHost()
+		const t = useLocale()
+		const [selection, setSelection] = useState('')
 		const scrollRef = useRef<HTMLDivElement>()
 		const [copied, setCopied] = useState(-1)
 		// active: index of the line currently revealing (-1 = idle/gap).
@@ -661,12 +698,31 @@ export const ZTerminal = c(
 			viewport.scrollTop = viewport.scrollHeight
 		}, [shouldFollowPlayhead, state.shown, state.active, state.typed])
 
+		// A selection inside the body can be copied on its own: any snippet of a
+		// command or its output, not only whole lines.
+		useEffect(() => {
+			const root = (host.current as HTMLElement | undefined)?.shadowRoot as any
+			if (!root) return
+			const read = () => {
+				const picked = (root.getSelection?.() ?? document.getSelection())?.toString() ?? ''
+				setSelection(picked.trim() ? picked : '')
+			}
+			document.addEventListener('selectionchange', read)
+			return () => document.removeEventListener('selectionchange', read)
+		}, [])
+
+		const onCopySelection = async () => {
+			const text = selection
+			if (!text) return
+			if ((await copyToClipboard(text)).isCopied) props.copy(text)
+		}
+
 		const copyText = (line: Line) => (line.isCommand ? line.command : line.raw)
 
 		const onCopy = async (line: Line, index: number) => {
 			try {
 				const text = copyText(line)
-				await navigator.clipboard.writeText(text)
+				if (!(await copyToClipboard(text)).isCopied) return
 				setCopied(index)
 				props.copy(text)
 				setTimeout(() => setCopied((c) => (c === index ? -1 : c)), 1600)
@@ -691,6 +747,11 @@ export const ZTerminal = c(
 							{props.shell && <span class='shell'>{props.shell}</span>}
 							{props.cwd && <span class='cwd'>{props.cwd}</span>}
 						</div>
+						{selection && (
+							<button type="button" class="copy-selection" onmousedown={(e: Event) => e.preventDefault()} onclick={onCopySelection}>
+								{t('copySelection')}
+							</button>
+						)}
 						<div class="dots" aria-hidden="true">
 							<span class="dot red"></span>
 							<span class="dot yellow"></span>
@@ -731,7 +792,7 @@ export const ZTerminal = c(
 											<button
 												type="button"
 												class={copied === i ? 'copy is-copied' : 'copy'}
-												aria-label="Copy line"
+												aria-label={t('copyLine')}
 												onclick={() => onCopy(line, i)}
 											>
 												{copied === i ? (
@@ -754,7 +815,7 @@ export const ZTerminal = c(
 					<button
 						type="button"
 						class={showReplay ? 'replay show' : 'replay'}
-						aria-label="Replay"
+						aria-label={t('replay')}
 						aria-hidden={showReplay ? 'false' : 'true'}
 						tabindex={showReplay ? '0' : '-1'}
 						onclick={() => (host.current as any)?.restart?.()}
@@ -775,7 +836,7 @@ export const ZTerminal = c(
 			cwd: String,
 			prompt: String,
 			copyLines: String,
-			tone: { type: String, reflect: true },
+			tone: { type: oneOf('success', 'primary', 'secondary', 'warning', 'danger'), reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			// Sizing — any CSS length; height pins the window and scrolls the body.
 			width: String,

@@ -2803,7 +2803,7 @@
               "type": {
                 "text": "string"
               },
-              "description": "Highlight.js language id (also shown in the header)."
+              "description": "Highlight.js language id (also shown in the header). Aliases such as ts, tsx, svelte, vue, solid and sass work."
             },
             {
               "kind": "field",
@@ -2917,7 +2917,7 @@
               "type": {
                 "text": "string"
               },
-              "description": "Highlight.js language id (also shown in the header)."
+              "description": "Highlight.js language id (also shown in the header). Aliases such as ts, tsx, svelte, vue, solid and sass work."
             },
             {
               "name": "filename",
@@ -7326,6 +7326,123 @@
             {
               "name": "",
               "description": "The row content."
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
+          "tagName": "z-markdown",
+          "name": "ZMarkdown",
+          "description": "Renders a markdown string with the Zest design system: GitHub-flavoured markdown, fenced code through z-code-block, sanitized by default.",
+          "members": [
+            {
+              "kind": "field",
+              "name": "content",
+              "type": {
+                "text": "string"
+              },
+              "description": "The markdown source."
+            },
+            {
+              "kind": "field",
+              "name": "isStreaming",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Set while text is still arriving, such as from a chat model."
+            },
+            {
+              "kind": "field",
+              "name": "doesAllowHtml",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Skips the sanitizer and renders raw HTML found in the markdown. Only for content you trust."
+            },
+            {
+              "kind": "field",
+              "name": "isPlain",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Renders code fences as plain preformatted blocks instead of z-code-block."
+            },
+            {
+              "kind": "field",
+              "name": "hasHeadingAnchors",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Gives every heading an id and a hover \"#\" permalink."
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Hides the element with display: none. It stays in the DOM and keeps its state."
+            }
+          ],
+          "attributes": [
+            {
+              "name": "content",
+              "fieldName": "content",
+              "type": {
+                "text": "string"
+              },
+              "description": "The markdown source."
+            },
+            {
+              "name": "is-streaming",
+              "fieldName": "isStreaming",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Set while text is still arriving, such as from a chat model."
+            },
+            {
+              "name": "does-allow-html",
+              "fieldName": "doesAllowHtml",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Skips the sanitizer and renders raw HTML found in the markdown. Only for content you trust."
+            },
+            {
+              "name": "is-plain",
+              "fieldName": "isPlain",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Renders code fences as plain preformatted blocks instead of z-code-block."
+            },
+            {
+              "name": "has-heading-anchors",
+              "fieldName": "hasHeadingAnchors",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Gives every heading an id and a hover \"#\" permalink."
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Hides the element with display: none. It stays in the DOM and keeps its state."
+            }
+          ],
+          "events": [
+            {
+              "name": "linkclick",
+              "type": {
+                "text": "CustomEvent<{ href: string }>"
+              },
+              "detail": "{ href: string }",
+              "description": "When a rendered link is clicked. The detail is { href }."
             }
           ]
         },
@@ -12437,6 +12554,355 @@
         {
           "kind": "class",
           "customElement": true,
+          "tagName": "z-terminal",
+          "name": "ZTerminal",
+          "description": "A terminal window for command walkthroughs. Copy a command or any selected snippet, and play a session back with typing, fading and looping.",
+          "members": [
+            {
+              "kind": "field",
+              "name": "code",
+              "type": {
+                "text": "string"
+              },
+              "description": "The terminal text, one line per row (set from JavaScript to preserve whitespace). Lines that start with the prompt are commands."
+            },
+            {
+              "kind": "field",
+              "name": "shell",
+              "type": {
+                "text": "string"
+              },
+              "description": "Shell label in the header, such as zsh."
+            },
+            {
+              "kind": "field",
+              "name": "cwd",
+              "type": {
+                "text": "string"
+              },
+              "description": "Working directory shown after the shell label."
+            },
+            {
+              "kind": "field",
+              "name": "prompt",
+              "type": {
+                "text": "string"
+              },
+              "description": "Marker that makes a line a command. Copying a command leaves it out."
+            },
+            {
+              "kind": "field",
+              "name": "copyLines",
+              "type": {
+                "text": "string"
+              },
+              "description": "Which lines get a copy button: all, none, commands, or 1-based ranges like \"1-3,5\"."
+            },
+            {
+              "kind": "field",
+              "name": "tone",
+              "type": {
+                "text": "'success' | 'primary' | 'secondary' | 'warning' | 'danger'"
+              },
+              "description": "Color of the shell label, the prompt and the caret."
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Hides the element with display: none. It stays in the DOM and keeps its state."
+            },
+            {
+              "kind": "field",
+              "name": "width",
+              "type": {
+                "text": "string"
+              },
+              "description": "Pins the window width. Any CSS length."
+            },
+            {
+              "kind": "field",
+              "name": "height",
+              "type": {
+                "text": "string"
+              },
+              "description": "Pins the window height. The body scrolls inside it. Any CSS length."
+            },
+            {
+              "kind": "field",
+              "name": "maxHeight",
+              "type": {
+                "text": "string"
+              },
+              "description": "Caps the window height. The body scrolls past it. Any CSS length."
+            },
+            {
+              "kind": "field",
+              "name": "doesAnimate",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Plays the content back: commands type out, output fades in. Skipped when the viewer prefers reduced motion."
+            },
+            {
+              "kind": "field",
+              "name": "doesStartOnView",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Waits until the terminal scrolls into view before playing."
+            },
+            {
+              "kind": "field",
+              "name": "lines",
+              "type": {
+                "text": "array"
+              },
+              "description": "Lines with their own timing instead of code: strings, or { text, type: \"command\" | \"output\", delay, typeSpeed, fade }. Set it from JavaScript."
+            },
+            {
+              "kind": "field",
+              "name": "typeSpeed",
+              "type": {
+                "text": "number"
+              },
+              "description": "Milliseconds per typed character."
+            },
+            {
+              "kind": "field",
+              "name": "lineDelay",
+              "type": {
+                "text": "number"
+              },
+              "description": "Milliseconds before each line starts."
+            },
+            {
+              "kind": "field",
+              "name": "fadeDuration",
+              "type": {
+                "text": "number"
+              },
+              "description": "Milliseconds an output line takes to fade in."
+            },
+            {
+              "kind": "field",
+              "name": "doesLoop",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Restarts the playback after it finishes."
+            },
+            {
+              "kind": "field",
+              "name": "loopDelay",
+              "type": {
+                "text": "number"
+              },
+              "description": "Milliseconds to wait before a loop restarts."
+            },
+            {
+              "kind": "field",
+              "name": "isReplayHidden",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Hides the replay button that appears when a playback ends."
+            },
+            {
+              "kind": "field",
+              "name": "isAutoScrollDisabled",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Stops a height-limited terminal from following the newest line while it plays."
+            }
+          ],
+          "attributes": [
+            {
+              "name": "code",
+              "fieldName": "code",
+              "type": {
+                "text": "string"
+              },
+              "description": "The terminal text, one line per row (set from JavaScript to preserve whitespace). Lines that start with the prompt are commands."
+            },
+            {
+              "name": "shell",
+              "fieldName": "shell",
+              "type": {
+                "text": "string"
+              },
+              "description": "Shell label in the header, such as zsh."
+            },
+            {
+              "name": "cwd",
+              "fieldName": "cwd",
+              "type": {
+                "text": "string"
+              },
+              "description": "Working directory shown after the shell label."
+            },
+            {
+              "name": "prompt",
+              "fieldName": "prompt",
+              "type": {
+                "text": "string"
+              },
+              "description": "Marker that makes a line a command. Copying a command leaves it out."
+            },
+            {
+              "name": "copy-lines",
+              "fieldName": "copyLines",
+              "type": {
+                "text": "string"
+              },
+              "description": "Which lines get a copy button: all, none, commands, or 1-based ranges like \"1-3,5\"."
+            },
+            {
+              "name": "tone",
+              "fieldName": "tone",
+              "type": {
+                "text": "'success' | 'primary' | 'secondary' | 'warning' | 'danger'"
+              },
+              "description": "Color of the shell label, the prompt and the caret."
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Hides the element with display: none. It stays in the DOM and keeps its state."
+            },
+            {
+              "name": "width",
+              "fieldName": "width",
+              "type": {
+                "text": "string"
+              },
+              "description": "Pins the window width. Any CSS length."
+            },
+            {
+              "name": "height",
+              "fieldName": "height",
+              "type": {
+                "text": "string"
+              },
+              "description": "Pins the window height. The body scrolls inside it. Any CSS length."
+            },
+            {
+              "name": "max-height",
+              "fieldName": "maxHeight",
+              "type": {
+                "text": "string"
+              },
+              "description": "Caps the window height. The body scrolls past it. Any CSS length."
+            },
+            {
+              "name": "does-animate",
+              "fieldName": "doesAnimate",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Plays the content back: commands type out, output fades in. Skipped when the viewer prefers reduced motion."
+            },
+            {
+              "name": "does-start-on-view",
+              "fieldName": "doesStartOnView",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Waits until the terminal scrolls into view before playing."
+            },
+            {
+              "name": "lines",
+              "fieldName": "lines",
+              "type": {
+                "text": "array"
+              },
+              "description": "Lines with their own timing instead of code: strings, or { text, type: \"command\" | \"output\", delay, typeSpeed, fade }. Set it from JavaScript."
+            },
+            {
+              "name": "type-speed",
+              "fieldName": "typeSpeed",
+              "type": {
+                "text": "number"
+              },
+              "description": "Milliseconds per typed character."
+            },
+            {
+              "name": "line-delay",
+              "fieldName": "lineDelay",
+              "type": {
+                "text": "number"
+              },
+              "description": "Milliseconds before each line starts."
+            },
+            {
+              "name": "fade-duration",
+              "fieldName": "fadeDuration",
+              "type": {
+                "text": "number"
+              },
+              "description": "Milliseconds an output line takes to fade in."
+            },
+            {
+              "name": "does-loop",
+              "fieldName": "doesLoop",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Restarts the playback after it finishes."
+            },
+            {
+              "name": "loop-delay",
+              "fieldName": "loopDelay",
+              "type": {
+                "text": "number"
+              },
+              "description": "Milliseconds to wait before a loop restarts."
+            },
+            {
+              "name": "is-replay-hidden",
+              "fieldName": "isReplayHidden",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Hides the replay button that appears when a playback ends."
+            },
+            {
+              "name": "is-auto-scroll-disabled",
+              "fieldName": "isAutoScrollDisabled",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Stops a height-limited terminal from following the newest line while it plays."
+            }
+          ],
+          "events": [
+            {
+              "name": "copy",
+              "type": {
+                "text": "CustomEvent<string>"
+              },
+              "detail": "string",
+              "description": "After a line or a selected snippet is copied. The detail is the copied text."
+            },
+            {
+              "name": "done",
+              "type": {
+                "text": "CustomEvent"
+              },
+              "detail": "void",
+              "description": "When a playback reaches its last line."
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
           "tagName": "z-text",
           "name": "ZText",
           "description": "Body text in six sizes, with color and weight props.",
@@ -14332,6 +14798,14 @@
         },
         {
           "kind": "custom-element-definition",
+          "name": "z-markdown",
+          "declaration": {
+            "name": "ZMarkdown",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
           "name": "z-marquee",
           "declaration": {
             "name": "ZMarquee",
@@ -14615,6 +15089,14 @@
           "name": "z-tabs",
           "declaration": {
             "name": "ZTabs",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "z-terminal",
+          "declaration": {
+            "name": "ZTerminal",
             "module": "dist/zest.js"
           }
         },

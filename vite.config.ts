@@ -44,6 +44,7 @@ export default defineConfig({
 		lib: {
 			entry: {
 				zest: resolve(__dirname, 'src/index.ts'),
+				languages: resolve(__dirname, 'src/languages.ts'),
 				...elementEntries
 			},
 			name: 'Zest',

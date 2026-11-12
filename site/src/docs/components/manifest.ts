@@ -89,6 +89,8 @@ import { ZCalloutDoc } from '@app/docs/components/z-callout'
 import { ZEmptyStateDoc } from '@app/docs/components/z-empty-state'
 import { ZScrollAreaDoc } from '@app/docs/components/z-scroll-area'
 import { ZCodeBlockDoc } from '@app/docs/components/z-code-block'
+import { ZMarkdownDoc } from '@app/docs/components/z-markdown'
+import { ZTerminalDoc } from '@app/docs/components/z-terminal'
 import { ZCarouselDoc } from '@app/docs/components/z-carousel'
 import { ZMarqueeDoc } from '@app/docs/components/z-marquee'
 import { ZPointerFollowDoc } from '@app/docs/components/z-pointer-follow'
@@ -184,6 +186,8 @@ export const ELEMENT_DOCS: Record<string, ComponentType> = {
 	'z-empty-state': ZEmptyStateDoc,
 	'z-scroll-area': ZScrollAreaDoc,
 	'z-code-block': ZCodeBlockDoc,
+	'z-markdown': ZMarkdownDoc,
+	'z-terminal': ZTerminalDoc,
 	'z-carousel': ZCarouselDoc,
 	'z-marquee': ZMarqueeDoc,
 	'z-pointer-follow': ZPointerFollowDoc,
