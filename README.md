@@ -14,13 +14,6 @@ npm install @tasteee/zest
 # or: pnpm add @tasteee/zest
 ```
 
-From [JSR](https://jsr.io/@tasteink/zest):
-
-```sh
-deno add jsr:@tasteink/zest
-# or: npx jsr add @tasteink/zest
-```
-
 From GitHub. The `build` branch holds the built package, updated on every
 push to `main`:
 
@@ -160,8 +153,7 @@ pnpm build    # dist/zest.js + dist/ink.css + dist/*.d.ts + custom-elements.json
 ```sh
 pnpm build
 npm publish
-pnpm publish:jsr
-# prepublishOnly runs the build (including jsr.json generation)
+# prepublishOnly runs the build
 # publishConfig.access is "public"
 ```
 

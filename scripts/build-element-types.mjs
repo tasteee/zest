@@ -29,7 +29,7 @@ for (const { tag, className, sourceFile } of entries) {
 
 // Build dist/index.d.ts so every element is re-exported through its
 // ./elements/<tag>.js entry (which exists on disk alongside its .d.ts,
-// satisfying both TypeScript and Deno/JSR) and shared utilities are inlined.
+// alongside its .d.ts) and shared utilities are inlined.
 const themeDts = readFileSync(join(distDir, 'shared', 'theme.d.ts'), 'utf8').trim()
 const clipboardDts = readFileSync(join(distDir, 'shared', 'clipboard.d.ts'), 'utf8').trim()
 const localeDts = readFileSync(join(distDir, 'shared', 'locale.d.ts'), 'utf8')

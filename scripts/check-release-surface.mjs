@@ -207,25 +207,6 @@ if (!existsSync(join(root, 'dist', 'react.d.ts'))) {
 if (packageJson.exports?.['./*']?.import !== './dist/elements/*.js') failures.push('package element import wildcard is missing')
 if (packageJson.exports?.['./*']?.types !== './dist/elements/*.d.ts') failures.push('package element types wildcard is missing')
 
-if (!existsSync(join(root, 'jsr.json'))) {
-	failures.push('jsr.json is missing')
-} else {
-	const jsrJson = JSON.parse(readFileSync(join(root, 'jsr.json'), 'utf8'))
-	if (jsrJson.name !== '@tasteink/zest') failures.push(`jsr.json name must be @tasteink/zest (found ${jsrJson.name})`)
-	if (jsrJson.version !== packageJson.version) failures.push(`jsr.json version (${jsrJson.version}) does not match package.json (${packageJson.version})`)
-	if (jsrJson.exports?.['.'] !== './dist/zest.js') failures.push('jsr.json root export is missing')
-	if (jsrJson.exports?.['./react'] !== './dist/react.d.ts') failures.push('jsr.json ./react export is missing')
-	for (const tag of entryTags) {
-		if (jsrJson.exports?.[`./${tag}`] !== `./dist/elements/${tag}.js`) failures.push(`jsr.json missing export for ./${tag}`)
-		const elementJs = readFileSync(join(root, 'dist', 'elements', `${tag}.js`), 'utf8')
-		if (!elementJs.startsWith(`// @ts-self-types="./${tag}.d.ts"`)) failures.push(`dist/elements/${tag}.js is missing @ts-self-types pragma`)
-	}
-	for (const tag of heldBackTags) {
-		if (jsrJson.exports?.[`./${tag}`]) failures.push(`held-back tag ${tag} leaked into jsr.json exports`)
-	}
-	if (!bundle.startsWith('// @ts-self-types="./index.d.ts"')) failures.push('dist/zest.js is missing @ts-self-types pragma')
-}
-
 if (failures.length) {
 	console.error(failures.map((failure) => `- ${failure}`).join('\n'))
 	process.exit(1)
