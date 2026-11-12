@@ -37,8 +37,8 @@ const styles = css`
 			background var(--motion-fast) var(--ease-enter);
 	}
 	.zone:focus-visible {
-		outline: 3px solid var(--border-focus);
-		outline-offset: 2px;
+		outline: 2px solid var(--border-focus);
+		outline-offset: 0;
 	}
 	:host([data-state='over']) .zone {
 		border-color: var(--tone);

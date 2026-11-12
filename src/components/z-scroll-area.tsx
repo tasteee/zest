@@ -1,14 +1,15 @@
 import { defineElement } from '../shared/define-element'
 import { c, css } from 'atomico'
+import { baseStyles, padVarNames, resetInheritedVars, insetProps, insetVars } from '../shared/layout-schema'
 import { themedScrollbarStyles } from '../shared/scrollbar-styles'
 import { oneOf } from '../shared/prop-types'
 
 /*
- * z-scroll-area, a scroll container with the design system's slim, themed
- * scrollbars instead of the chunky native ones. Constrain it with `max-height`
- * (or `height`) and let the default slot overflow. `orientation` picks which
- * axis scrolls (vertical default, horizontal, or both). Pure CSS, the styled
- * scrollbar lives inside the shadow root so it never leaks to the page.
+ * z-scroll-area, an overflow container with the design system's slim themed
+ * scrollbars. `direction` picks the scrolling axis (vertical default,
+ * horizontal, or both), `max-height` / `max-width` constrain it, `scrollbar`
+ * tunes the bar (auto / thin / hidden) and `overscroll` sets the
+ * overscroll-behavior. `inset` pads the inner viewport.
  */
 const styles = css`
 	:host {
@@ -24,9 +25,19 @@ const styles = css`
 
 	.viewport {
 		box-sizing: border-box;
-		max-height: var(--z-scroll-max-height, none);
-		height: var(--z-scroll-height, auto);
-		overflow: auto;
+		/* Without a max-height the viewport grows with its content and never
+		   scrolls inside a height-constrained parent (a flex or grid item).
+		   100% resolves against the host: it caps a constrained host, and is
+		   ignored (treated as none) when the host's height is auto. */
+		height: var(--z-scroll-area-height, auto);
+		max-height: var(--z-scroll-area-max-height, 100%);
+		max-width: var(--z-scroll-area-max-width, none);
+		padding-top: var(--z-scroll-area-pad-top, 0);
+		padding-bottom: var(--z-scroll-area-pad-bottom, 0);
+		padding-inline-start: var(--z-scroll-area-pad-left, 0);
+		padding-inline-end: var(--z-scroll-area-pad-right, 0);
+		overflow-x: hidden;
+		overflow-y: auto;
 	}
 
 	/* Firefox only (no ::-webkit-scrollbar). Chromium must not get scrollbar-width
@@ -39,14 +50,32 @@ const styles = css`
 		}
 	}
 
-	:host([direction='vertical']) .viewport {
-		overflow-x: hidden;
-		overflow-y: auto;
-	}
-
 	:host([direction='horizontal']) .viewport {
 		overflow-x: auto;
 		overflow-y: hidden;
+	}
+	:host([direction='both']) .viewport {
+		overflow: auto;
+	}
+
+	:host([scrollbar='auto']) .viewport {
+		scrollbar-width: auto;
+	}
+	:host([scrollbar='hidden']) .viewport {
+		scrollbar-width: none;
+	}
+	:host([scrollbar='hidden']) .viewport::-webkit-scrollbar {
+		display: none;
+	}
+
+	:host([overscroll='auto']) .viewport {
+		overscroll-behavior: auto;
+	}
+	:host([overscroll='contain']) .viewport {
+		overscroll-behavior: contain;
+	}
+	:host([overscroll='none']) .viewport {
+		overscroll-behavior: none;
 	}
 
 	/* WebKit / Chromium */
@@ -74,28 +103,43 @@ const styles = css`
 	}
 `
 
+const getHostStyle = (props: {
+	maxHeight?: string
+	maxWidth?: string
+	height?: string
+} & Parameters<typeof insetVars>[0]): Record<string, string> => {
+	const style: Record<string, string> = { ...insetVars(props, '--z-scroll-area') }
+	if (props.height) style['--z-scroll-area-height'] = props.height
+	if (props.maxHeight) style['--z-scroll-area-max-height'] = props.maxHeight
+	if (props.maxWidth) style['--z-scroll-area-max-width'] = props.maxWidth
+	return style
+}
+
 export const ZScrollArea = c(
 	(props) => (
-		<host
-			shadowDom
-			style={{
-				'--z-scroll-max-height': props.maxHeight || '',
-				'--z-scroll-height': props.height || ''
-			}}
-		>
-			<div class="viewport" tabindex="0">
+		<host shadowDom style={getHostStyle(props)}>
+			<div class='viewport' tabindex='0'>
 				<slot />
 			</div>
 		</host>
 	),
 	{
 		props: {
+			direction: { type: oneOf('vertical', 'horizontal', 'both'), reflect: true },
 			maxHeight: String,
 			height: String,
-			direction: { type: oneOf('vertical', 'horizontal', 'both'), reflect: true },
-			isHidden: { type: Boolean, reflect: true }
+			isHidden: { type: Boolean, reflect: true },
+			maxWidth: String,
+			overscroll: { type: oneOf('auto', 'contain', 'none'), reflect: true },
+			scrollbar: { type: oneOf('auto', 'thin', 'hidden'), reflect: true },
+			...insetProps
 		},
-		styles: [themedScrollbarStyles, styles]
+		styles: [
+			baseStyles,
+			resetInheritedVars([...padVarNames('--z-scroll-area'), '--z-scroll-area-max-height', '--z-scroll-area-max-width', '--z-scroll-area-height']),
+			themedScrollbarStyles,
+			styles
+		]
 	}
 )
 

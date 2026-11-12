@@ -1,0 +1,266 @@
+/* Shared by every component's shadow root. */
+
+:host {
+	display: inline-flex;
+	font-family: var(--font-family);
+	font-size: var(--font-size-medium);
+	font-weight: var(--font-weight-read);
+	line-height: var(--line-height);
+	color: var(--text-strong);
+	-webkit-tap-highlight-color: transparent;
+
+	/* Interface text is not content. A double click on a */
+	/* chip, tab, or menu should never highlight it. This */
+	/* reaches slotted text too. Components that hold */
+	/* content to read set user-select: text on :host. */
+	user-select: none;
+	-webkit-user-select: none;
+}
+
+:host([hidden]) {
+	display: none;
+}
+
+:host([disabled]) {
+	pointer-events: none;
+}
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+
+	/* Any element that sets --fill gets a readable */
+	/* text color for it in --on-fill. */
+	--on-fill: oklch(
+		from var(--fill) clamp(var(--contrast-dark), (var(--contrast-threshold) - l) * 1000, 1) 0 0
+	);
+}
+
+button,
+input,
+textarea {
+	font: inherit;
+	color: inherit;
+	border: 0;
+	padding: 0;
+	background: transparent;
+}
+
+button {
+	cursor: pointer;
+	touch-action: manipulation;
+
+	/* Stays off inside a host that opts in to text. */
+	user-select: none;
+	-webkit-user-select: none;
+}
+
+/* Typing and caret placement need text selection, */
+/* and Safari breaks typing in a field without it. */
+input,
+textarea {
+	user-select: text;
+	-webkit-user-select: text;
+}
+
+:focus {
+	outline: none;
+}
+
+:focus-visible {
+	outline: var(--focus-ring-width) solid var(--text-strong);
+	outline-offset: var(--focus-ring-offset);
+}
+
+/* ---------- press ---------- */
+.isPressable {
+	position: relative;
+	transition: transform var(--duration-press-out) var(--easing-standard);
+}
+
+/* The darken sits over the fill as its own layer, */
+/* so it works on every kind and color. */
+.isPressable::after {
+	content: '';
+	position: absolute;
+	inset: 0;
+	border-radius: inherit;
+	background: var(--press-overlay);
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity var(--duration-press-out) var(--easing-standard);
+}
+
+.isPressable.isPressed {
+	transform: scale(var(--press-scale));
+	transition-duration: var(--duration-press-in);
+}
+
+.isPressable.isPressed::after {
+	opacity: 1;
+	transition-duration: var(--duration-press-in);
+}
+
+.isDisabled {
+	opacity: var(--disabled-opacity);
+}
+
+/* ---------- slide ---------- */
+/* The indicator behind or under the selected item in */
+/* a group. Its track must be positioned. */
+.slide-indicator {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: var(--slide-width, 0px);
+	height: var(--slide-height, 0px);
+	transform: translate(var(--slide-x, 0px), var(--slide-y, 0px));
+	pointer-events: none;
+	transition:
+		transform var(--duration-slide) var(--easing-standard),
+		width var(--duration-slide) var(--easing-standard),
+		height var(--duration-slide) var(--easing-standard);
+}
+
+.slide-indicator.isInstant {
+	transition: none;
+}
+
+.slide-indicator.isHidden {
+	display: none;
+}
+
+/* ---------- spinner ---------- */
+/* Shared by fem-spinner and loading buttons. It takes */
+/* the text color around it. */
+.spinner {
+	display: block;
+	width: var(--spinner-size);
+	height: var(--spinner-size);
+	border-radius: var(--radius-pill);
+	border: var(--space-hairline) solid currentColor;
+	border-top-color: transparent;
+	flex-shrink: 0;
+	animation: spin 700ms linear infinite;
+}
+
+@keyframes spin {
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+/* ---------- group label ---------- */
+/* The visible label of a checkbox or radio group. */
+/* Same look as a fem-field label. */
+.group-label {
+	display: block;
+	padding-bottom: var(--field-gap);
+	font-size: var(--field-label-size);
+	font-weight: var(--field-label-weight);
+	line-height: var(--line-height-tight);
+	color: var(--text-strong);
+}
+
+/* ---------- choice ---------- */
+/* The shared row for switch, checkbox, and radio: */
+/* the control first, then its label. */
+.choice {
+	/* Same height as an input or select, so a switch */
+	/* row lines up with the controls beside it. */
+	min-height: var(--control-height-medium);
+	text-align: left;
+	display: inline-flex;
+	align-items: center;
+	gap: var(--space-3);
+}
+
+/* With no text, the control stands alone, so it adds */
+/* no gap. A fem-field label takes its place. */
+.choice-label.isEmpty {
+	display: none;
+}
+
+/* ---------- icon ---------- */
+/* Icons are filled shapes that take the text color */
+/* around them. */
+.icon {
+	width: var(--icon-size);
+	height: var(--icon-size);
+	fill: currentColor;
+	flex-shrink: 0;
+}
+
+/* ---------- floating panel ---------- */
+/* Menus and select lists. They open in the browser's */
+/* top layer, so no container can clip them, and they */
+/* use the inverse surface to stand off the page */
+/* without a shadow. */
+.floating-panel {
+	position: fixed;
+	inset: auto;
+	top: var(--floating-top, 0);
+	left: var(--floating-left, 0);
+	min-width: var(--menu-min-width);
+	margin: 0;
+	padding: var(--space-1);
+	border: 0;
+	border-radius: var(--radius-inset);
+	background: var(--surface-inverse);
+	color: var(--text-inverse);
+	flex-direction: column;
+	opacity: 0;
+	transform: scale(0.96);
+	transform-origin: top left;
+	transition:
+		opacity var(--duration-medium) var(--easing-standard),
+		transform var(--duration-medium) var(--easing-standard),
+		display var(--duration-medium) allow-discrete,
+		overlay var(--duration-medium) allow-discrete;
+}
+
+.floating-panel.isAnchorWidth {
+	min-width: max(var(--menu-min-width), var(--floating-anchor-width, 0px));
+}
+
+.floating-panel:popover-open {
+	display: flex;
+	opacity: 1;
+	transform: scale(1);
+}
+
+@starting-style {
+	.floating-panel:popover-open {
+		opacity: 0;
+		transform: scale(0.96);
+	}
+}
+
+/* ---------- floating row ---------- */
+/* One row inside a floating panel. Its highlight is */
+/* a wash of its own text color, so it works on the */
+/* inverse surface in both themes. */
+.floating-row {
+	--row-highlight: color-mix(in oklab, currentColor 12%, transparent);
+	width: 100%;
+	height: var(--control-height-medium);
+	padding: 0 var(--space-3);
+	border-radius: var(--radius-small);
+	font-weight: var(--font-weight-act);
+	text-align: left;
+	white-space: nowrap;
+	display: flex;
+	align-items: center;
+	gap: var(--space-3);
+}
+
+.floating-row.isSelected,
+.floating-row.isActive {
+	background: var(--row-highlight);
+}
+
+@media (hover: hover) {
+	.floating-row:hover {
+		background: var(--row-highlight);
+	}
+}

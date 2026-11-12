@@ -8,7 +8,7 @@ export const Installation = () => (
 
 		<h2>Import once</h2>
 		<p>
-			Import the library (registers every element) and its token stylesheet at your app’s entry point. The stylesheet must
+			Import the library (which registers every element) and its token stylesheet at your app’s entry point. The stylesheet must
 			load at the document level: tokens are CSS custom properties, which pierce every element’s shadow root from there.
 		</p>
 		<Code
@@ -17,7 +17,6 @@ export const Installation = () => (
 			code={`
 import '@tasteee/zest'
 import '@tasteee/zest/ink.css'
-// Optional: the Google Fonts request. Skip it to self-host the fonts.
 import '@tasteee/zest/fonts.css'
 `}
 		/>

@@ -659,6 +659,7 @@
 			},
 			"tone": {
 				"values": [
+					"neutral",
 					"primary",
 					"secondary",
 					"tertiary",
@@ -666,7 +667,7 @@
 					"warning",
 					"danger"
 				],
-				"default": "primary",
+				"default": "neutral",
 				"description": "Color family of the button."
 			},
 			"is-hidden": {
@@ -2725,13 +2726,9 @@
 	"z-line": {
 		"summary": "A hairline rule, horizontal or vertical.",
 		"props": {
-			"direction": {
-				"description": "A horizontal rule (default) or a vertical one that stretches to its row.",
-				"values": [
-					"horizontal",
-					"vertical"
-				],
-				"default": "horizontal"
+			"is-vertical": {
+				"description": "Draw a vertical line that stretches to its row.",
+				"default": "false"
 			}
 		},
 		"keyboard": [],
@@ -3812,7 +3809,7 @@
 		"keyboard": [],
 		"accessibility": "Layout only. It adds no role or label and passes its content through unchanged."
 	},
-	"z-scroll": {
+	"z-scroll-area": {
 		"summary": "An overflow container with slim themed scrollbars.",
 		"props": {
 			"direction": {
@@ -3858,6 +3855,14 @@
 			},
 			"inset-y": {
 				"description": "Padding on the top and bottom. Accepts a size keyword (2xs to 4xl), a scale step, or any CSS length."
+			},
+			"height": {
+				"description": "Fixed height. Any CSS length.",
+				"default": "none"
+			},
+			"is-hidden": {
+				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
+				"default": "false"
 			}
 		},
 		"slots": {
@@ -3871,37 +3876,6 @@
 				"text": "Use a visible title or surrounding region so people know what can scroll."
 			}
 		]
-	},
-	"z-scroll-area": {
-		"summary": "A scroll container with slim themed scrollbars.",
-		"props": {
-			"max-height": {
-				"description": "Largest height before the content scrolls. Any CSS length.",
-				"default": "none"
-			},
-			"height": {
-				"description": "Fixed height. Any CSS length.",
-				"default": "none"
-			},
-			"direction": {
-				"values": [
-					"vertical",
-					"horizontal",
-					"both"
-				],
-				"default": "both",
-				"description": "Axis that scrolls."
-			},
-			"is-hidden": {
-				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
-				"default": "false"
-			}
-		},
-		"slots": {
-			"default": "The scrolling content."
-		},
-		"keyboard": [],
-		"accessibility": "A scroll container with themed scrollbars. Content that scrolls must still be reachable by keyboard, so keep focusable elements inside it."
 	},
 	"z-section": {
 		"summary": "A vertical page band with top and bottom spacing.",
@@ -5170,8 +5144,10 @@
 				"default": "ghost"
 			},
 			"tone": {
-				"description": "Colour family. On the group it applies to every item; an item can override it.",
+				"description": "Color family of the toggle button.",
+				"default": "neutral",
 				"values": [
+					"neutral",
 					"primary",
 					"secondary",
 					"tertiary",
@@ -5620,5 +5596,60 @@
 			}
 		],
 		"accessibility": "role=\"tree\" with role=\"treeitem\" rows carrying aria-level, aria-selected and aria-expanded. Arrow keys, Home and End move, Right expands and Left collapses."
+	},
+	"z-spinner": {
+		"summary": "An animated indicator for ongoing work.",
+		"props": {
+			"size": {
+				"values": [
+					"sm",
+					"md",
+					"lg"
+				],
+				"default": "md",
+				"description": "Size of the indicator."
+			},
+			"label": {
+				"description": "Accessible status label.",
+				"default": "Loading"
+			},
+			"is-hidden": {
+				"description": "Hides the indicator.",
+				"default": "false"
+			}
+		},
+		"keyboard": [],
+		"accessibility": "Announces loading as a status. Supply a label that describes the work when helpful."
+	},
+	"z-copy-field": {
+		"summary": "A read-only value with a copy button.",
+		"props": {
+			"value": {
+				"description": "The value to copy."
+			},
+			"label": {
+				"description": "Accessible name for the value."
+			},
+			"is-hidden": {
+				"description": "Hides the field.",
+				"default": "false"
+			}
+		},
+		"events": {
+			"copy": {
+				"description": "Fires when the value is copied."
+			}
+		},
+		"keyboard": [
+			{
+				"keys": "Tab",
+				"action": "Move between the value and copy button."
+			},
+			{
+				"keys": "Enter or Space",
+				"action": "Copy the value."
+			}
+		],
+		"accessibility": "The value and copy button have accessible names. If clipboard access fails, the value is selected for manual copying."
 	}
 }

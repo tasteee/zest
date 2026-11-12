@@ -152,6 +152,18 @@ export const autoUpdate = (anchor: AnchorT, floating: HTMLElement, update: () =>
 	window.addEventListener('scroll', onChange, true)
 	window.addEventListener('resize', onChange)
 
+	let previousBounds = anchor.getBoundingClientRect()
+	let animationFrame = 0
+	const checkAnchorPosition = () => {
+		const currentBounds = anchor.getBoundingClientRect()
+		const hasMoved = currentBounds.left !== previousBounds.left || currentBounds.top !== previousBounds.top
+		const hasResized = currentBounds.width !== previousBounds.width || currentBounds.height !== previousBounds.height
+		previousBounds = currentBounds
+		if (hasMoved || hasResized) update()
+		animationFrame = requestAnimationFrame(checkAnchorPosition)
+	}
+	animationFrame = requestAnimationFrame(checkAnchorPosition)
+
 	let ro: ResizeObserver | undefined
 	if (typeof ResizeObserver !== 'undefined') {
 		ro = new ResizeObserver(onChange)
@@ -164,6 +176,7 @@ export const autoUpdate = (anchor: AnchorT, floating: HTMLElement, update: () =>
 	return () => {
 		window.removeEventListener('scroll', onChange, true)
 		window.removeEventListener('resize', onChange)
+		cancelAnimationFrame(animationFrame)
 		ro?.disconnect()
 	}
 }

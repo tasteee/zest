@@ -15,7 +15,7 @@ import { oneOf } from '../shared/prop-types'
  * owning form. See ../shared/form-control.ts.
  */
 const styles = css`
-	.field:focus-within { outline: 2px solid var(--border-focus); outline-offset: 2px; }
+	.field:focus-within { outline: 1px solid var(--border-focus); outline-offset: -1px; }
 
 	:host {
 		display: inline-flex;

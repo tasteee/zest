@@ -195,13 +195,13 @@ export const ZContextMenu = c(
 			child.tag === 'z-menu-separator'
 				? { isSeparator: true }
 				: {
-						value: child.value,
-						label: child.label,
-						shortcut: child.attributes.shortcut || undefined,
-						isDisabled: hasFlag(child, 'is-disabled'),
-						isDanger: hasFlag(child, 'is-danger'),
-						slot: child.slot
-					}
+					value: child.value,
+					label: child.label,
+					shortcut: child.attributes.shortcut || undefined,
+					isDisabled: hasFlag(child, 'is-disabled'),
+					isDanger: hasFlag(child, 'is-danger'),
+					slot: child.slot
+				}
 		)
 		const items: MenuItemT[] = [...childItems, ...(Array.isArray(props.items) ? (props.items as MenuItemT[]) : [])]
 		const selectable = (i: number) => items[i] && !items[i].isSeparator && !items[i].isDisabled

@@ -7,7 +7,7 @@ import { DocsFooter, DocsHero } from '@app/docs/DocsChrome'
 // Atomico reflects them to the attributes the components' CSS reads.
 export const Layout = () => (
 	<div className="DocsPage">
-		<DocsHero eyebrow="LAYOUT PRIMITIVES" title="Layout." lede="Eight composable primitives for arranging everything else.">
+		<DocsHero eyebrow="LAYOUT PRIMITIVES" title="Layout" lede="Eight composable primitives for arranging everything else.">
 			<nav className="DocsSubnav">
 				<a href="#row-column">Row &amp; column</a>
 				<a href="#grid">Grid</a>
@@ -462,11 +462,11 @@ export const Layout = () => (
 			</div>
 		</section>
 
-		{/* ── z-scroll ── */}
+		{/* ── z-scroll-area ── */}
 		<section className="section" id="scroll">
 			<div className="section-head">
 				<span className="dot pink" />
-				<h2>z-scroll</h2>
+				<h2>z-scroll-area</h2>
 				<span className="tag">overflow container</span>
 			</div>
 			<p className="section-sub">
@@ -477,7 +477,7 @@ export const Layout = () => (
 			<z-grid minColumnWidth="22rem" gap="md">
 				<div className="panel">
 					<div className="micro">direction · vertical · max-height="14rem"</div>
-					<z-scroll
+					<z-scroll-area
 						direction="vertical"
 						maxHeight="14rem"
 						inset="sm"
@@ -509,16 +509,16 @@ export const Layout = () => (
 								row 08
 							</z-surface>
 						</z-column>
-					</z-scroll>
+					</z-scroll-area>
 					<p className="cap">
-						<span className="el">&lt;z-scroll</span> <b>direction</b>="vertical" <b>max-height</b>="14rem"
+						<span className="el">&lt;z-scroll-area</span> <b>direction</b>="vertical" <b>max-height</b>="14rem"
 						<span className="el">&gt;</span>
 					</p>
 				</div>
 
 				<div className="panel">
 					<div className="micro">direction · horizontal</div>
-					<z-scroll
+					<z-scroll-area
 						direction="horizontal"
 						inset="sm"
 						style={{ border: '1px solid var(--border-default)', borderRadius: 'var(--radius-md)' }}
@@ -549,9 +549,9 @@ export const Layout = () => (
 								H
 							</z-surface>
 						</z-row>
-					</z-scroll>
+					</z-scroll-area>
 					<p className="cap">
-						<span className="el">&lt;z-scroll</span> <b>direction</b>="horizontal"<span className="el">&gt;</span>
+						<span className="el">&lt;z-scroll-area</span> <b>direction</b>="horizontal"<span className="el">&gt;</span>
 					</p>
 				</div>
 			</z-grid>

@@ -126,8 +126,8 @@ const styles = css`
 	}
 
 	.segment:focus-visible {
-		outline: 3px solid var(--border-focus);
-		outline-offset: 2px;
+		outline: 2px solid var(--border-focus);
+		outline-offset: 0;
 	}
 
 	.iconButton {
@@ -135,8 +135,8 @@ const styles = css`
 		align-items: center;
 		justify-content: center;
 		box-sizing: border-box;
-		width: calc(var(--switcher-height) + 6px);
-		height: calc(var(--switcher-height) + 6px);
+		width: calc(var(--switcher-height) + var(--space-1));
+		height: calc(var(--switcher-height) + var(--space-1));
 		border: 1px solid var(--border-default);
 		border-radius: var(--radius-lg);
 		background: transparent;
@@ -154,8 +154,8 @@ const styles = css`
 	}
 
 	.iconButton:focus-visible {
-		outline: 3px solid var(--border-focus);
-		outline-offset: 2px;
+		outline: 2px solid var(--border-focus);
+		outline-offset: 0;
 	}
 
 	/* The two glyphs are stacked in the same cell and cross-faded, so the

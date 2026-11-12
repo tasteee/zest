@@ -76,8 +76,8 @@ const styles = css`
 	}
 
 	.trigger:focus-visible {
-		outline: 3px solid var(--border-focus);
-		outline-offset: 2px;
+		outline: 2px solid var(--border-focus);
+		outline-offset: 0;
 	}
 
 	.caret {
@@ -144,12 +144,50 @@ const styles = css`
 type ChildT = { value?: string; label: string; href?: string; description?: string }
 type NavItemT = { value?: string; label: string; href?: string; children?: ChildT[] }
 
+const getDeclarativeItems = (host: HTMLElement): NavItemT[] => {
+	const elements = Array.from(host.children)
+	const entries = elements.filter((element) => {
+		return element.matches('[data-nav-item]')
+	})
+	return entries.map((element) => {
+		const childElements = Array.from(element.querySelectorAll(':scope > [data-nav-item]'))
+		const children = childElements.map((child) => {
+			return {
+				label: child.getAttribute('label') || '',
+				value: child.getAttribute('value') || undefined,
+				href: child.getAttribute('href') || undefined,
+				description: child.getAttribute('description') || undefined
+			}
+		})
+		return {
+			label: element.getAttribute('label') || '',
+			value: element.getAttribute('value') || undefined,
+			href: element.getAttribute('href') || undefined,
+			children
+		}
+	})
+}
+
 export const ZNavMenu = c(
 	(props) => {
 		const host = useHost()
 		const [openValue, setOpenValue] = useState<string | null>(null)
 
-		const items: NavItemT[] = Array.isArray(props.items) ? (props.items as NavItemT[]) : []
+		const [declarativeItems, setDeclarativeItems] = useState<NavItemT[]>([])
+		const items: NavItemT[] = Array.isArray(props.items) ? (props.items as NavItemT[]) : declarativeItems
+
+		useEffect(() => {
+			const element = host.current as HTMLElement
+			const updateItems = () => {
+				setDeclarativeItems(getDeclarativeItems(element))
+			}
+			updateItems()
+			const observer = new MutationObserver(updateItems)
+			observer.observe(element, { childList: true, subtree: true, attributes: true })
+			return () => {
+				observer.disconnect()
+			}
+		}, [])
 
 		useEffect(() => {
 			if (openValue == null) return

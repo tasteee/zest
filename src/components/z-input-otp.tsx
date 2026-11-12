@@ -82,8 +82,8 @@ const styles = css`
 	.cell:focus {
 		border-color: var(--tone);
 		background: color-mix(in oklch, var(--tone) 6%, transparent);
-		outline: 3px solid var(--border-focus);
-		outline-offset: 1px;
+		outline: 2px solid var(--border-focus);
+		outline-offset: 0;
 	}
 
 	.cell.is-invalid {

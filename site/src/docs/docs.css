@@ -343,6 +343,9 @@
 .DocsPage .article-body {
 	margin-top: 2.75rem;
 }
+.DocsPage .article-body:first-child {
+	margin-top: 0;
+}
 .DocsPage .article-body > z-text {
 	display: block;
 }

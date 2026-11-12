@@ -168,8 +168,8 @@ const styles = css`
 	}
 
 	.group-label:focus-visible {
-		outline: 3px solid var(--border-focus);
-		outline-offset: 2px;
+		outline: 2px solid var(--border-focus);
+		outline-offset: 0;
 		border-radius: var(--radius-sm);
 	}
 
@@ -254,8 +254,8 @@ const styles = css`
 	}
 
 	.link:focus-visible {
-		outline: 3px solid var(--border-focus);
-		outline-offset: 2px;
+		outline: 2px solid var(--border-focus);
+		outline-offset: 0;
 	}
 
 	.icon,
@@ -301,6 +301,7 @@ const styles = css`
 
 	:host([is-collapsed]) .link {
 		justify-content: center;
+		gap: 0;
 		padding-inline: 0;
 	}
 

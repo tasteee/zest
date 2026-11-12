@@ -144,7 +144,6 @@ const ELEMENTS: SectionT = {
 						'z-card',
 						'z-line',
 						'z-separator',
-						'z-scroll',
 						'z-scroll-area'
 					)
 				},
@@ -168,7 +167,7 @@ const ELEMENTS: SectionT = {
 		{
 			label: 'Forms',
 			items: [
-				{ label: 'Text', items: elements('z-field', 'z-input', 'z-textarea', 'z-number-input', 'z-number-range-input', 'z-input-otp') },
+				{ label: 'Text', items: elements('z-field', 'z-input', 'z-copy-field', 'z-textarea', 'z-number-input', 'z-number-range-input', 'z-input-otp') },
 				{
 					label: 'Choice',
 					items: elements('z-checkbox', 'z-switch', 'z-radio', 'z-radio-group', 'z-select', 'z-combobox', 'z-filter')
@@ -179,7 +178,7 @@ const ELEMENTS: SectionT = {
 		},
 		{
 			label: 'Feedback',
-			items: elements('z-alert', 'z-callout', 'z-toaster', 'z-progress', 'z-skeleton', 'z-status-dot', 'z-empty-state')
+			items: elements('z-alert', 'z-callout', 'z-toaster', 'z-progress', 'z-spinner', 'z-skeleton', 'z-status-dot', 'z-empty-state')
 		},
 		{
 			label: 'Overlays',

@@ -194,12 +194,12 @@ const styles = css`
 	}
 
 	input:focus-visible::-webkit-slider-thumb {
-		outline: 3px solid var(--border-focus);
-		outline-offset: 2px;
+		outline: 2px solid var(--border-focus);
+		outline-offset: 0;
 	}
 	input:focus-visible::-moz-range-thumb {
-		outline: 3px solid var(--border-focus);
-		outline-offset: 2px;
+		outline: 2px solid var(--border-focus);
+		outline-offset: 0;
 	}
 `
 

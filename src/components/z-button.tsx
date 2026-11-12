@@ -49,8 +49,8 @@ const styles = css`
 	}
 
 	button:focus-visible {
-		outline: 3px solid var(--border-focus);
-		outline-offset: 2px;
+		outline: 2px solid var(--border-focus);
+		outline-offset: 0;
 	}
 
 	/* sizes */
@@ -74,6 +74,10 @@ const styles = css`
 		height: var(--control-height-lg);
 		padding-inline: var(--space-6);
 		font-size: var(--font-size-md);
+	}
+
+	button.is-neutral {
+		--tone: var(--text-primary);
 	}
 
 	button.is-primary {
@@ -121,6 +125,7 @@ const styles = css`
 	/* The neutral tone is the one fill that flips with the theme — near-white
 	   on dark, near-black on light — so its label has to flip with it rather
 	   than being pinned to black. */
+	button.is-solid.is-neutral,
 	button.is-solid.is-primary {
 		color: var(--on-accent);
 	}
@@ -219,7 +224,6 @@ const styles = css`
 	::slotted(svg) {
 		width: 1rem;
 		height: 1rem;
-		margin-top: 1px;
 		flex-shrink: 0;
 	}
 
@@ -233,16 +237,17 @@ const styles = css`
 		height: 1.125rem;
 	}
 
-	button.is-outline.is-primary {
+	button.is-outline.is-neutral {
 		border-color: var(--border-default);
 		color: var(--text-primary);
 	}
 
-	button.is-outline.is-primary:hover {
+	button.is-outline.is-neutral:hover {
 		border-color: var(--border-strong);
 	}
 
 	.label {
+		transform: translateY(calc(var(--space-1) / 4));
 		display: inline-flex;
 		align-items: center;
 		gap: var(--space-2);
@@ -270,12 +275,13 @@ const resolveKindClass = (props: any): string => {
 }
 
 const resolveAccentClass = (props: any): string => {
+	if (props.tone === 'primary') return 'is-primary'
 	if (props.tone === 'secondary') return 'is-secondary'
 	if (props.tone === 'tertiary') return 'is-tertiary'
 	if (props.tone === 'success') return 'is-success'
 	if (props.tone === 'warning') return 'is-warning'
 	if (props.tone === 'danger') return 'is-error'
-	return 'is-primary'
+	return 'is-neutral'
 }
 
 export const ZButton = c(
@@ -330,7 +336,7 @@ export const ZButton = c(
 		props: {
 			size: { type: oneOf('sm', 'md', 'lg'), reflect: true },
 			kind: { type: oneOf('solid', 'outline', 'ghost', 'soft', 'plain'), reflect: true },
-			tone: { type: oneOf('primary', 'secondary', 'tertiary', 'success', 'warning', 'danger'), reflect: true },
+			tone: { type: oneOf('neutral', 'primary', 'secondary', 'tertiary', 'success', 'warning', 'danger'), reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			isDisabled: { type: Boolean, reflect: true },
 			isLoading: { type: Boolean, reflect: true },

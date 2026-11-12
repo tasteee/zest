@@ -14,7 +14,7 @@ import { useLocale } from '../shared/locale'
  * an `options` array property: el.options = [{ value, label, isDisabled? }].
  */
 const styles = css`
-	.field:focus-within { outline: 2px solid var(--border-focus); outline-offset: 2px; }
+	.field:focus-within { outline: 1px solid var(--border-focus); outline-offset: -1px; }
 
 	:host {
 		display: inline-flex;

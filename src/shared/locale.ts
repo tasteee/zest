@@ -75,6 +75,8 @@ export const englishStrings = {
 	goToSlide: 'Go to slide {index}',
 	showMore: 'Show more',
 	showLess: 'Show less',
+	loading: 'Loading',
+	copyValue: 'Value to copy',
 	copy: 'Copy',
 	copied: 'Copied'
 } as const

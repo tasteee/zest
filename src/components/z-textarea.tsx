@@ -11,7 +11,7 @@ import { oneOf } from '../shared/prop-types'
  * height without a scrollbar.
  */
 const styles = css`
-	.field:focus-within { outline: 1px solid var(--border-focus); }
+	.field:focus-within { outline: 1px solid var(--border-focus); outline-offset: -1px; }
 
 	:host {
 		display: block;
