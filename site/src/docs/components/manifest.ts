@@ -19,7 +19,6 @@ import { ZCenterDoc } from '@app/docs/components/z-center'
 import { ZContainerDoc } from '@app/docs/components/z-container'
 import { ZSectionDoc } from '@app/docs/components/z-section'
 import { ZSurfaceDoc } from '@app/docs/components/z-surface'
-import { ZScrollDoc } from '@app/docs/components/z-scroll'
 import { ZSpacerDoc } from '@app/docs/components/z-spacer'
 import { ZChassisDoc } from '@app/docs/components/z-chassis'
 
@@ -33,6 +32,7 @@ import { ZSwapDoc } from '@app/docs/components/z-swap'
 import { ZLinkDoc } from '@app/docs/components/z-link'
 
 import { ZFieldDoc } from '@app/docs/components/z-field'
+import { ZCopyFieldDoc } from '@app/docs/components/z-copy-field'
 import { ZInputDoc } from '@app/docs/components/z-input'
 import { ZNumberInputDoc } from '@app/docs/components/z-number-input'
 import { ZNumberRangeInputDoc } from '@app/docs/components/z-number-range-input'
@@ -52,6 +52,7 @@ import { ZInputOtpDoc } from '@app/docs/components/z-input-otp'
 import { ZBadgeDoc } from '@app/docs/components/z-badge'
 import { ZAvatarDoc } from '@app/docs/components/z-avatar'
 import { ZAvatarStackDoc } from '@app/docs/components/z-avatar-stack'
+import { ZSpinnerDoc } from '@app/docs/components/z-spinner'
 import { ZProgressDoc } from '@app/docs/components/z-progress'
 import { ZSkeletonDoc } from '@app/docs/components/z-skeleton'
 import { ZTableDoc } from '@app/docs/components/z-table'
@@ -88,6 +89,8 @@ import { ZCalloutDoc } from '@app/docs/components/z-callout'
 import { ZEmptyStateDoc } from '@app/docs/components/z-empty-state'
 import { ZScrollAreaDoc } from '@app/docs/components/z-scroll-area'
 import { ZCodeBlockDoc } from '@app/docs/components/z-code-block'
+import { ZMarkdownDoc } from '@app/docs/components/z-markdown'
+import { ZTerminalDoc } from '@app/docs/components/z-terminal'
 import { ZCarouselDoc } from '@app/docs/components/z-carousel'
 import { ZMarqueeDoc } from '@app/docs/components/z-marquee'
 import { ZPointerFollowDoc } from '@app/docs/components/z-pointer-follow'
@@ -119,7 +122,6 @@ export const ELEMENT_DOCS: Record<string, ComponentType> = {
 	'z-container': ZContainerDoc,
 	'z-section': ZSectionDoc,
 	'z-surface': ZSurfaceDoc,
-	'z-scroll': ZScrollDoc,
 	'z-spacer': ZSpacerDoc,
 	'z-chassis': ZChassisDoc,
 	'z-button': ZButtonDoc,
@@ -132,6 +134,7 @@ export const ELEMENT_DOCS: Record<string, ComponentType> = {
 	'z-link': ZLinkDoc,
 	'z-field': ZFieldDoc,
 	'z-input': ZInputDoc,
+	'z-copy-field': ZCopyFieldDoc,
 	'z-number-input': ZNumberInputDoc,
 	'z-number-range-input': ZNumberRangeInputDoc,
 	'z-textarea': ZTextareaDoc,
@@ -150,6 +153,7 @@ export const ELEMENT_DOCS: Record<string, ComponentType> = {
 	'z-avatar': ZAvatarDoc,
 	'z-avatar-stack': ZAvatarStackDoc,
 	'z-progress': ZProgressDoc,
+	'z-spinner': ZSpinnerDoc,
 	'z-skeleton': ZSkeletonDoc,
 	'z-table': ZTableDoc,
 	'z-pagination': ZPaginationDoc,
@@ -182,6 +186,8 @@ export const ELEMENT_DOCS: Record<string, ComponentType> = {
 	'z-empty-state': ZEmptyStateDoc,
 	'z-scroll-area': ZScrollAreaDoc,
 	'z-code-block': ZCodeBlockDoc,
+	'z-markdown': ZMarkdownDoc,
+	'z-terminal': ZTerminalDoc,
 	'z-carousel': ZCarouselDoc,
 	'z-marquee': ZMarqueeDoc,
 	'z-pointer-follow': ZPointerFollowDoc,

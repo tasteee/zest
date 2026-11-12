@@ -15,7 +15,7 @@ export const ZLineDoc = () => (
 		<DocExample
 			demo="z-line/separate-inline-metadata"
 			title="Separate inline metadata"
-			description="Constrain the vertical line with its container height."
+			description="A vertical line stretches to match its row."
 		/>
 		<DocExample
 			demo="z-line/choose-the-right-divider"

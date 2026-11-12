@@ -5,7 +5,7 @@ import { BLOCKS } from '@app/docs/blocks/blocks'
 export const BlocksIndex = () => (
 	<div className="DocsArticle">
 		<z-eyebrow hasRule>Blocks</z-eyebrow>
-		<h1>Recipes, built from elements.</h1>
+		<h1>Recipes, built from elements</h1>
 		<p className="DocsLede">
 			Elements are the building blocks. Blocks show how they compose into real interfaces. Every block is plain HTML and a
 			little JS: copy it, paste it, make it yours.

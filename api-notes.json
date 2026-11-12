@@ -659,6 +659,7 @@
 			},
 			"tone": {
 				"values": [
+					"neutral",
 					"primary",
 					"secondary",
 					"tertiary",
@@ -666,7 +667,7 @@
 					"warning",
 					"danger"
 				],
-				"default": "primary",
+				"default": "neutral",
 				"description": "Color family of the button."
 			},
 			"is-hidden": {
@@ -1055,7 +1056,7 @@
 			},
 			"language": {
 				"default": "auto",
-				"description": "Highlight.js language id (also shown in the header)."
+				"description": "Highlight.js language id (also shown in the header). Aliases such as ts, tsx, svelte, vue, solid and sass work."
 			},
 			"filename": {
 				"description": "Filename shown in the header."
@@ -1123,11 +1124,15 @@
 		"guidance": [
 			{
 				"title": "Bundle cost",
-				"text": "Highlighting ships nine grammars (TypeScript, JavaScript, CSS, SCSS, JSON, Bash, HTML/XML, YAML, Markdown). The element is about 139 kB (40 kB gzipped), far larger than any other. Import @tasteee/zest/z-code-block only where you show code. The root import includes it."
+				"text": "Highlighting ships nine grammars (TypeScript, JavaScript, CSS, SCSS, JSON, Bash, HTML/XML, YAML, Markdown). The element is about 139 kB (40 kB gzipped), far larger than any other. Import @tasteee/zest/z-code-block only where you show code. The root import includes it. @tasteee/zest/languages adds about 45 kB gzipped more."
+			},
+			{
+				"title": "More languages",
+				"text": "import '@tasteee/zest/languages' to register Python, Ruby, PHP, Rust, C, C++, C#, Go, Java, Kotlin, Scala, Swift, SQL, Dart, Lua, Perl, R, Haskell, Elixir, GraphQL, Dockerfile, INI/TOML, Less, Makefile, Nginx, Objective-C, PowerShell, Protobuf and diff. For any other grammar, call registerLanguage(name, grammar, aliases) with a highlight.js grammar."
 			},
 			{
 				"title": "Unknown languages",
-				"text": "A language outside that set renders as plain text, or is guessed from the code when the guess is confident."
+				"text": "A language that is not registered renders as plain text, or is guessed from the code when the guess is confident."
 			}
 		]
 	},
@@ -2091,6 +2096,9 @@
 			"is-horizontal": {
 				"description": "Puts the label to the left of the control instead of above it."
 			},
+			"is-space-between": {
+				"description": "Aligns the slotted control to the end, creating space between the label and control."
+			},
 			"size": {
 				"description": "Size passed to the control inside the field.",
 				"values": [
@@ -2722,13 +2730,9 @@
 	"z-line": {
 		"summary": "A hairline rule, horizontal or vertical.",
 		"props": {
-			"direction": {
-				"description": "A horizontal rule (default) or a vertical one that stretches to its row.",
-				"values": [
-					"horizontal",
-					"vertical"
-				],
-				"default": "horizontal"
+			"is-vertical": {
+				"description": "Draw a vertical line that stretches to its row.",
+				"default": "false"
 			}
 		},
 		"keyboard": [],
@@ -3809,7 +3813,7 @@
 		"keyboard": [],
 		"accessibility": "Layout only. It adds no role or label and passes its content through unchanged."
 	},
-	"z-scroll": {
+	"z-scroll-area": {
 		"summary": "An overflow container with slim themed scrollbars.",
 		"props": {
 			"direction": {
@@ -3855,6 +3859,14 @@
 			},
 			"inset-y": {
 				"description": "Padding on the top and bottom. Accepts a size keyword (2xs to 4xl), a scale step, or any CSS length."
+			},
+			"height": {
+				"description": "Fixed height. Any CSS length.",
+				"default": "none"
+			},
+			"is-hidden": {
+				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
+				"default": "false"
 			}
 		},
 		"slots": {
@@ -3868,37 +3880,6 @@
 				"text": "Use a visible title or surrounding region so people know what can scroll."
 			}
 		]
-	},
-	"z-scroll-area": {
-		"summary": "A scroll container with slim themed scrollbars.",
-		"props": {
-			"max-height": {
-				"description": "Largest height before the content scrolls. Any CSS length.",
-				"default": "none"
-			},
-			"height": {
-				"description": "Fixed height. Any CSS length.",
-				"default": "none"
-			},
-			"direction": {
-				"values": [
-					"vertical",
-					"horizontal",
-					"both"
-				],
-				"default": "both",
-				"description": "Axis that scrolls."
-			},
-			"is-hidden": {
-				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
-				"default": "false"
-			}
-		},
-		"slots": {
-			"default": "The scrolling content."
-		},
-		"keyboard": [],
-		"accessibility": "A scroll container with themed scrollbars. Content that scrolls must still be reachable by keyboard, so keep focusable elements inside it."
 	},
 	"z-section": {
 		"summary": "A vertical page band with top and bottom spacing.",
@@ -4285,7 +4266,11 @@
 				"description": "Accessible label (`aria-label`); shown in the header when set."
 			},
 			"does-show-value": {
-				"description": "Show the live value as an accent-tinted pill in the header."
+				"description": "Show the live value as an accent-tinted pill, anchored to the right of the header row (in the same row as the label, if there is one)."
+			},
+			"can-reset": {
+				"description": "Double clicking the thumb or the label restores the value the slider started with, and fires `input` and `change`.",
+				"default": "false"
 			},
 			"value-prefix": {
 				"description": "Text before the displayed value (e.g. `$`)."
@@ -4310,6 +4295,9 @@
 				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
 				"default": "false"
 			}
+		},
+		"slots": {
+			"center": "Custom content in the header row, between the label and the value."
 		},
 		"events": {
 			"input": {
@@ -5160,8 +5148,10 @@
 				"default": "ghost"
 			},
 			"tone": {
-				"description": "Colour family. On the group it applies to every item; an item can override it.",
+				"description": "Color family of the toggle button.",
+				"default": "neutral",
 				"values": [
+					"neutral",
 					"primary",
 					"secondary",
 					"tertiary",
@@ -5610,5 +5600,220 @@
 			}
 		],
 		"accessibility": "role=\"tree\" with role=\"treeitem\" rows carrying aria-level, aria-selected and aria-expanded. Arrow keys, Home and End move, Right expands and Left collapses."
+	},
+	"z-spinner": {
+		"summary": "An animated indicator for ongoing work.",
+		"props": {
+			"size": {
+				"values": [
+					"sm",
+					"md",
+					"lg"
+				],
+				"default": "md",
+				"description": "Size of the indicator."
+			},
+			"label": {
+				"description": "Accessible status label.",
+				"default": "Loading"
+			},
+			"is-hidden": {
+				"description": "Hides the indicator.",
+				"default": "false"
+			}
+		},
+		"keyboard": [],
+		"accessibility": "Announces loading as a status. Supply a label that describes the work when helpful."
+	},
+	"z-copy-field": {
+		"summary": "A read-only value with a copy button.",
+		"props": {
+			"value": {
+				"description": "The value to copy."
+			},
+			"label": {
+				"description": "Accessible name for the value."
+			},
+			"is-hidden": {
+				"description": "Hides the field.",
+				"default": "false"
+			}
+		},
+		"events": {
+			"copy": {
+				"description": "Fires when the value is copied."
+			}
+		},
+		"keyboard": [
+			{
+				"keys": "Tab",
+				"action": "Move between the value and copy button."
+			},
+			{
+				"keys": "Enter or Space",
+				"action": "Copy the value."
+			}
+		],
+		"accessibility": "The value and copy button have accessible names. If clipboard access fails, the value is selected for manual copying."
+	},
+	"z-terminal": {
+		"summary": "A terminal window for command walkthroughs. Copy a command or any selected snippet, and play a session back with typing, fading and looping.",
+		"props": {
+			"code": {
+				"description": "The terminal text, one line per row (set from JavaScript to preserve whitespace). Lines that start with the prompt are commands."
+			},
+			"lines": {
+				"description": "Lines with their own timing instead of code: strings, or { text, type: \"command\" | \"output\", delay, typeSpeed, fade }. Set it from JavaScript."
+			},
+			"shell": {
+				"description": "Shell label in the header, such as zsh."
+			},
+			"cwd": {
+				"description": "Working directory shown after the shell label."
+			},
+			"prompt": {
+				"description": "Marker that makes a line a command. Copying a command leaves it out.",
+				"default": "$"
+			},
+			"copy-lines": {
+				"description": "Which lines get a copy button: all, none, commands, or 1-based ranges like \"1-3,5\".",
+				"default": "commands"
+			},
+			"tone": {
+				"description": "Color of the shell label, the prompt and the caret.",
+				"default": "success",
+				"values": [
+					"success",
+					"primary",
+					"secondary",
+					"warning",
+					"danger"
+				]
+			},
+			"width": {
+				"description": "Pins the window width. Any CSS length."
+			},
+			"height": {
+				"description": "Pins the window height. The body scrolls inside it. Any CSS length."
+			},
+			"max-height": {
+				"description": "Caps the window height. The body scrolls past it. Any CSS length."
+			},
+			"does-animate": {
+				"description": "Plays the content back: commands type out, output fades in. Skipped when the viewer prefers reduced motion.",
+				"default": "false"
+			},
+			"does-start-on-view": {
+				"description": "Waits until the terminal scrolls into view before playing.",
+				"default": "false"
+			},
+			"type-speed": {
+				"description": "Milliseconds per typed character.",
+				"default": "55"
+			},
+			"line-delay": {
+				"description": "Milliseconds before each line starts.",
+				"default": "380"
+			},
+			"fade-duration": {
+				"description": "Milliseconds an output line takes to fade in.",
+				"default": "240"
+			},
+			"does-loop": {
+				"description": "Restarts the playback after it finishes.",
+				"default": "false"
+			},
+			"loop-delay": {
+				"description": "Milliseconds to wait before a loop restarts.",
+				"default": "2200"
+			},
+			"is-replay-hidden": {
+				"description": "Hides the replay button that appears when a playback ends.",
+				"default": "false"
+			},
+			"is-auto-scroll-disabled": {
+				"description": "Stops a height-limited terminal from following the newest line while it plays.",
+				"default": "false"
+			},
+			"is-hidden": {
+				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
+				"default": "false"
+			}
+		},
+		"events": {
+			"copy": {
+				"description": "After a line or a selected snippet is copied. The detail is the copied text."
+			},
+			"done": {
+				"description": "When a playback reaches its last line."
+			}
+		},
+		"keyboard": [
+			{
+				"keys": "Tab",
+				"action": "Reaches the line copy buttons, the Copy selection button and Replay."
+			},
+			{
+				"keys": "Enter / Space",
+				"action": "On a copy button: copies that line. On Replay: plays again."
+			}
+		],
+		"accessibility": "The text is real, selectable text. Copy and Replay are native buttons with names; the window dots are hidden from assistive technology. Playback is skipped for viewers who prefer reduced motion.",
+		"guidance": [
+			{
+				"title": "Methods",
+				"text": "play(), pause() and restart() are available on the element while it animates."
+			}
+		]
+	},
+	"z-markdown": {
+		"summary": "Renders a markdown string with the Zest design system: GitHub-flavoured markdown, fenced code through z-code-block, sanitized by default.",
+		"props": {
+			"content": {
+				"description": "The markdown source."
+			},
+			"is-streaming": {
+				"description": "Set while text is still arriving, such as from a chat model.",
+				"default": "false"
+			},
+			"does-allow-html": {
+				"description": "Skips the sanitizer and renders raw HTML found in the markdown. Only for content you trust.",
+				"default": "false"
+			},
+			"is-plain": {
+				"description": "Renders code fences as plain preformatted blocks instead of z-code-block.",
+				"default": "false"
+			},
+			"has-heading-anchors": {
+				"description": "Gives every heading an id and a hover \"#\" permalink.",
+				"default": "false"
+			},
+			"is-hidden": {
+				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
+				"default": "false"
+			}
+		},
+		"events": {
+			"linkclick": {
+				"description": "When a rendered link is clicked. The detail is { href }."
+			}
+		},
+		"keyboard": [
+			{
+				"keys": "Tab",
+				"action": "Reaches rendered links and code block buttons."
+			},
+			{
+				"keys": "Enter",
+				"action": "On a link: follows it."
+			}
+		],
+		"accessibility": "Renders real headings, lists, tables and links. External links open in a new tab with rel=\"noopener noreferrer\". Heading permalinks are named.",
+		"guidance": [
+			{
+				"title": "Sanitizing",
+				"text": "By default script-like tags, event-handler attributes and javascript: URLs are removed. This is not a full HTML sanitizer: run untrusted HTML through DOMPurify before you set does-allow-html."
+			}
+		]
 	}
 }

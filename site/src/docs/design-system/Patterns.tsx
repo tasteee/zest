@@ -10,7 +10,7 @@ export const Patterns = () => (
 	<div className="DocsPage">
 		<DocsHero
 			eyebrow="DESIGN SYSTEM"
-			title="Patterns."
+			title="Patterns"
 			lede={
 				<>
 					Common compositions, not new components.{' '}

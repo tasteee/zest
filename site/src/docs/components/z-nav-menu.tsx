@@ -7,6 +7,7 @@ export const ZNavMenuDoc = () => (
 		category="Navigation"
 		description="A horizontal site navigation with links and concise product menus. Keep it shallow and reserve nested menus for closely related destinations."
 	>
+		<DocExample demo="z-nav-menu/declarative" title="HTML navigation" description="Declare items with data-nav-item. Nest items for a dropdown; use label, value, href, and description attributes." />
 		<DocExample
 			demo="z-nav-menu/mix-links-and-destination-groups"
 			title="Mix links and destination groups"

@@ -10,7 +10,7 @@ export const Typography = () => (
 			title="Typography"
 			lede={
 				<z-inline color="muted" weight={400}>
-					One family (DM Sans) across one tightly tuned scale. Hierarchy comes from size and weight, color from intent.
+					One family (Google Sans) across one tightly tuned scale. Hierarchy comes from size and weight, color from intent.
 					Below: the scale itself, then the same type doing real work in a long-form article.
 				</z-inline>
 			}

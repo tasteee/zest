@@ -6,7 +6,7 @@
 		<title>zest · layout primitives</title>
 		<meta
 			name="description"
-			content="The zest layout primitives, z-row, z-column, z-grid, z-center, z-container, z-section, z-surface, z-scroll, z-spacer."
+			content="The zest layout primitives, z-row, z-column, z-grid, z-center, z-container, z-section, z-surface, z-scroll-area, z-spacer."
 		/>
 		<style>
 			/* Page chrome only, nav, headings, and the dashed specimen frame.
@@ -653,11 +653,11 @@
 				</div>
 			</section>
 
-			<!-- ═══════════════════════ z-scroll ═══════════════════════ -->
+			<!-- ═══════════════════════ z-scroll-area ═══════════════════════ -->
 			<section class="section" id="scroll">
 				<div class="section-head">
 					<span class="dot pink"></span>
-					<h2>z-scroll</h2>
+					<h2>z-scroll-area</h2>
 					<span class="tag">overflow container</span>
 				</div>
 				<p class="section-sub">
@@ -668,7 +668,7 @@
 				<z-grid min-column-width="22rem" gap="md">
 					<div class="panel">
 						<div class="micro">direction · vertical · max-height="14rem"</div>
-						<z-scroll direction="vertical" max-height="14rem" inset="sm" style="border: 1px solid var(--border-default); border-radius: var(--radius-md)">
+						<z-scroll-area direction="vertical" max-height="14rem" inset="sm" style="border: 1px solid var(--border-default); border-radius: var(--radius-md)">
 							<z-column gap="sm">
 								<z-surface class="tile" tone="secondary" kind="soft" radius="md">row 01</z-surface>
 								<z-surface class="tile" kind="soft" radius="md">row 02</z-surface>
@@ -679,13 +679,13 @@
 								<z-surface class="tile" tone="tertiary" kind="soft" radius="md">row 07</z-surface>
 								<z-surface class="tile" kind="soft" radius="md">row 08</z-surface>
 							</z-column>
-						</z-scroll>
-						<p class="cap"><span class="el">&lt;z-scroll</span> <b>direction</b>="vertical" <b>max-height</b>="14rem"<span class="el">&gt;</span></p>
+						</z-scroll-area>
+						<p class="cap"><span class="el">&lt;z-scroll-area</span> <b>direction</b>="vertical" <b>max-height</b>="14rem"<span class="el">&gt;</span></p>
 					</div>
 
 					<div class="panel">
 						<div class="micro">direction · horizontal</div>
-						<z-scroll direction="horizontal" inset="sm" style="border: 1px solid var(--border-default); border-radius: var(--radius-md)">
+						<z-scroll-area direction="horizontal" inset="sm" style="border: 1px solid var(--border-default); border-radius: var(--radius-md)">
 							<z-row gap="sm">
 								<z-surface class="tile tall" tone="secondary" kind="soft" radius="md">A</z-surface>
 								<z-surface class="tile tall" kind="soft" radius="md">B</z-surface>
@@ -696,8 +696,8 @@
 								<z-surface class="tile tall" kind="soft" radius="md">G</z-surface>
 								<z-surface class="tile tall" kind="soft" radius="md">H</z-surface>
 							</z-row>
-						</z-scroll>
-						<p class="cap"><span class="el">&lt;z-scroll</span> <b>direction</b>="horizontal"<span class="el">&gt;</span></p>
+						</z-scroll-area>
+						<p class="cap"><span class="el">&lt;z-scroll-area</span> <b>direction</b>="horizontal"<span class="el">&gt;</span></p>
 					</div>
 				</z-grid>
 			</section>

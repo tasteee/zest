@@ -86,8 +86,8 @@ const styles = css`
 	}
 
 	input:focus-visible + .ring {
-		outline: 3px solid var(--border-focus);
-		outline-offset: 2px;
+		outline: 2px solid var(--border-focus);
+		outline-offset: 0;
 	}
 `
 

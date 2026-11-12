@@ -314,7 +314,7 @@ const handleStyles = css`
 		height: 2px;
 	}
 	:host(:focus-visible) {
-		outline: 3px solid var(--border-focus);
+		outline: 2px solid var(--border-focus);
 		outline-offset: -2px;
 		border-radius: var(--radius-sm);
 	}

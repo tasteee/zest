@@ -22,6 +22,13 @@ export const Theming = () => (
 `}
 		/>
 
+		<h2>Accent colors</h2>
+		<p>Override <code>--accent-primary</code>, <code>--accent-secondary</code>, and <code>--accent-tertiary</code> to choose your own colors. Primary is neutral by default, but can be any color. Check contrast in both themes.</p>
+		<Code language="css" code={`:root { --accent-primary: #2563eb; }`} />
+
+		<h2>Styling components</h2>
+		<p>CSS custom properties inherit into shadow roots. Use the documented component tokens to change styles, and use <code>::part()</code> where an element exposes a part. Other internal elements cannot be selected from outside the shadow root.</p>
+
 		<h2>Light and dark</h2>
 		<p>
 			Dark is the default. Set <code>data-theme="light"</code> on the root element to switch, or drop in a{' '}

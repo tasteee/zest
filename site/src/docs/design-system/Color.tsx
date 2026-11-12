@@ -29,6 +29,40 @@ const Swatch = ({ token, label, hint }: { token: string; label: string; hint?: s
 
 const RAMP_STEPS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
 
+type ScaleT = { name: string; token: string }
+
+const COLOR_SCALES: ScaleT[] = [
+	{ name: 'Primary', token: '--accent-primary' },
+	{ name: 'Secondary', token: '--accent-secondary' },
+	{ name: 'Tertiary', token: '--accent-tertiary' },
+	{ name: 'Success', token: '--status-success' },
+	{ name: 'Warning', token: '--status-warning' },
+	{ name: 'Danger', token: '--status-danger' }
+]
+
+const ColorScale = (props: ScaleT) => {
+	return (
+		<div>
+			<h3>{props.name}</h3>
+			<div className="swatch-row">
+				{RAMP_STEPS.map((step) => {
+					const stepNumber = Number(step)
+					const isDarkStep = stepNumber < 5
+					const percentage = isDarkStep ? stepNumber * 20 : (9 - stepNumber) * 25
+					const endpoint = isDarkStep ? 'black' : 'white'
+					const color = `color-mix(in oklab, var(${props.token}) ${percentage}%, ${endpoint})`
+					const style = { '--swatch-color': color } as CSSProperties
+					return (
+						<div key={step} style={style}>
+							<div className="swatch"><div className="swatch-fill" /><span className="swatch-label">{step}</span><span className="swatch-token">{props.token}</span></div>
+						</div>
+					)
+				})}
+			</div>
+		</div>
+	)
+}
+
 type RoleT = { token: string; label: string; hint: string }
 
 const SURFACES: RoleT[] = [
@@ -54,7 +88,7 @@ const BORDERS: RoleT[] = [
 ]
 
 const ACCENTS: RoleT[] = [
-	{ token: '--accent-primary', label: 'Primary', hint: 'The primary tone, and it is neutral. The shell stays neutral so the content supplies the colour.' },
+	{ token: '--accent-primary', label: 'Primary', hint: 'The primary tone is neutral by default and can be customized.' },
 	{ token: '--accent-secondary', label: 'Secondary', hint: 'tone="secondary". Opt-in emphasis; use sparingly.' },
 	{ token: '--accent-tertiary', label: 'Tertiary', hint: 'tone="tertiary". Opt-in emphasis; pairs with secondary in charts.' }
 ]
@@ -77,7 +111,7 @@ export const Color = () => (
 	<div className="DocsPage">
 		<DocsHero
 			eyebrow="DESIGN SYSTEM"
-			title="Color."
+			title="Color"
 			lede={
 				<>
 					Roles, not hues.{' '}
@@ -133,6 +167,12 @@ export const Color = () => (
 			}
 		>
 			<RoleRow roles={STATUS} />
+		</DocsSection>
+
+		<DocsSection id="color-scales" tone="primary" title="Color scales" tag="Derived colors" sub="These reference scales blend each active color toward black and white. They update with the theme and palette; components use the role tokens above.">
+			{COLOR_SCALES.map((scale) => {
+				return <ColorScale key={scale.name} name={scale.name} token={scale.token} />
+			})}
 		</DocsSection>
 
 		<DocsSection

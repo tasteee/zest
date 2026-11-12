@@ -27,7 +27,7 @@ describe('<z-grid>', () => {
 	})
 })
 
-describe.each(['z-scroll', 'z-scroll-area'])('<%s>', (tag) => {
+describe.each(['z-scroll-area'])('<%s>', (tag) => {
 	it('never widens the grid that holds it, however wide its content is', async () => {
 		const markup = `<div id="box" style="display: grid; grid-template-columns: 1fr; width: 200px"><${tag} direction="horizontal"><div style="width: 900px">Wide content</div></${tag}></div>`
 		const wrapper = await mount(markup)
@@ -63,11 +63,11 @@ describe('nested layouts', () => {
 	})
 })
 
-describe('<z-scroll> in a height-constrained flex parent', () => {
+describe('<z-scroll-area> in a height-constrained flex parent', () => {
 	it('scrolls its content instead of growing past the parent', async () => {
 		const rows = Array.from({ length: 30 }, (_, index) => `<div style="height: 40px">Row ${index}</div>`).join('')
-		const wrapper = await mount(`<div id="box" style="display: flex; flex-direction: column; height: 200px"><z-scroll style="flex: 1 1 0; min-height: 0">${rows}</z-scroll></div>`)
-		const scroller = wrapper.querySelector<HTMLElement>('z-scroll')!
+		const wrapper = await mount(`<div id="box" style="display: flex; flex-direction: column; height: 200px"><z-scroll-area style="flex: 1 1 0; min-height: 0">${rows}</z-scroll-area></div>`)
+		const scroller = wrapper.querySelector<HTMLElement>('z-scroll-area')!
 		const viewport = scroller.shadowRoot!.querySelector<HTMLElement>('.viewport')!
 		expect(scroller.getBoundingClientRect().height).toBeLessThanOrEqual(200)
 		expect(viewport.clientHeight).toBeLessThanOrEqual(200)
@@ -75,8 +75,8 @@ describe('<z-scroll> in a height-constrained flex parent', () => {
 	})
 
 	it('still grows with its content in an auto-height parent', async () => {
-		const wrapper = await mount('<div><z-scroll><div style="height: 500px">Tall</div></z-scroll></div>')
-		const viewport = wrapper.querySelector<HTMLElement>('z-scroll')!.shadowRoot!.querySelector<HTMLElement>('.viewport')!
+		const wrapper = await mount('<div><z-scroll-area><div style="height: 500px">Tall</div></z-scroll-area></div>')
+		const viewport = wrapper.querySelector<HTMLElement>('z-scroll-area')!.shadowRoot!.querySelector<HTMLElement>('.viewport')!
 		expect(viewport.clientHeight).toBeGreaterThanOrEqual(500)
 	})
 })

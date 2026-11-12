@@ -70,7 +70,9 @@ const styles = css`
 	   the error and description line up under the control. */
 	:host([is-horizontal]) .field { grid-template-columns: max-content minmax(0, 1fr); column-gap: var(--space-4); align-items: start; }
 	:host([is-horizontal]) .header { grid-column: 1; grid-row: 1; height: var(--z-field-control-height); }
-	:host([is-horizontal]) .control { grid-column: 2; grid-row: 1; }
+	:host([is-horizontal]) .control { grid-column: 2; grid-row: 1; justify-content: flex-end; }
+	:host([is-horizontal][is-start]) .control { justify-content: flex-start; }
+	:host([is-space-between]) .control { justify-content: flex-end; }
 	:host([is-horizontal]) .error, :host([is-horizontal]) .description { grid-column: 2; }
 
 	:host([is-label-hidden]) .header { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
@@ -172,6 +174,7 @@ export const ZField = c(
 			isLabelHidden: { type: Boolean, reflect: true },
 			isLabelReserved: { type: Boolean, reflect: true },
 			isHorizontal: { type: Boolean, reflect: true },
+			isSpaceBetween: { type: Boolean, reflect: true },
 			size: { type: oneOf('sm', 'md', 'lg'), reflect: true }
 		},
 		styles: [styles, interactionStyles]

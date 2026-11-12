@@ -16,6 +16,7 @@ const attachSelfTypes = (jsPath, dtsRelativePath) => {
 }
 
 attachSelfTypes(join(projectRoot, 'dist', 'zest.js'), './index.d.ts')
+attachSelfTypes(join(projectRoot, 'dist', 'languages.js'), './languages.d.ts')
 for (const { tag } of entries) {
 	attachSelfTypes(join(projectRoot, 'dist', 'elements', `${tag}.js`), `./${tag}.d.ts`)
 }
@@ -34,6 +35,7 @@ for (const name of readdirSync(chunksDir).filter((entry) => entry.endsWith('.js'
 // 3. Write jsr.json from package.json metadata and the public element inventory.
 const exportsMap = {
 	'.': './dist/zest.js',
+	'./languages': './dist/languages.js',
 	...Object.fromEntries(entries.map(({ tag }) => [`./${tag}`, `./dist/elements/${tag}.js`])),
 	'./react': './dist/react.d.ts'
 }
@@ -46,6 +48,8 @@ const jsrConfig = {
 	publish: {
 		include: [
 			'dist/zest.js',
+			'dist/languages.js',
+			'dist/languages.d.ts',
 			'dist/index.d.ts',
 			'dist/react.d.ts',
 			'dist/ink.css',

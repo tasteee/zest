@@ -1,0 +1,47 @@
+.colorPalette { position: static; }
+.colorPalette summary { list-style: none; cursor: pointer; }
+.colorPalette summary::-webkit-details-marker { display: none; }
+.colorPalettePanel { position: absolute; right: var(--space-2); top: calc(100% + var(--space-2) + var(--space-0-5) / 2); z-index: 20; width: 18rem; max-height: calc(100vh - var(--space-16)); overflow-y: auto; padding: var(--space-4); background: var(--surface-overlay); border: 1px solid var(--border-default); border-radius: var(--radius-md); }
+.colorPaletteRole { margin-top: var(--space-4); }
+.colorPaletteLabel { display: flex; justify-content: space-between; align-items: center; text-transform: capitalize; color: var(--text-primary); }
+.colorPaletteLabel input { width: 2rem; height: 2rem; padding: 0; border: 1px solid var(--border-default); background: transparent; cursor: pointer; }
+.colorPaletteScale { display: flex; height: 1.5rem; margin-top: var(--space-2); overflow: hidden; border-radius: var(--radius-sm); }
+.colorPaletteScale span { flex: 1; }
+
+:root[data-palette-primary] { --accent-primary: oklch(from var(--palette-primary) 0.78 c h); }
+:root[data-palette-secondary] { --accent-secondary: oklch(from var(--palette-secondary) 0.78 c h); }
+:root[data-palette-tertiary] { --accent-tertiary: oklch(from var(--palette-tertiary) 0.78 c h); }
+:root[data-theme="light"][data-palette-primary] { --accent-primary: oklch(from var(--palette-primary) 0.5 c h); }
+:root[data-theme="light"][data-palette-secondary] { --accent-secondary: oklch(from var(--palette-secondary) 0.5 c h); }
+:root[data-theme="light"][data-palette-tertiary] { --accent-tertiary: oklch(from var(--palette-tertiary) 0.5 c h); }
+
+:root[data-palette-success] { --status-success: oklch(from var(--palette-success) 0.78 c h); }
+:root[data-theme="light"][data-palette-success] { --status-success: oklch(from var(--palette-success) 0.5 c h); }
+:root[data-palette-warning] { --status-warning: oklch(from var(--palette-warning) 0.78 c h); }
+:root[data-theme="light"][data-palette-warning] { --status-warning: oklch(from var(--palette-warning) 0.5 c h); }
+:root[data-palette-danger] { --status-danger: oklch(from var(--palette-danger) 0.78 c h); }
+:root[data-theme="light"][data-palette-danger] { --status-danger: oklch(from var(--palette-danger) 0.5 c h); }
+:root[data-palette-neutral] {
+	--color-neutral-0: oklch(from var(--palette-neutral) 0.1609 min(c, 0.02) h);
+	--color-neutral-1: oklch(from var(--palette-neutral) 0.21 min(c, 0.02) h);
+	--color-neutral-2: oklch(from var(--palette-neutral) 0.25 min(c, 0.02) h);
+	--color-neutral-3: oklch(from var(--palette-neutral) 0.31 min(c, 0.02) h);
+	--color-neutral-4: oklch(from var(--palette-neutral) 0.4 min(c, 0.02) h);
+	--color-neutral-5: oklch(from var(--palette-neutral) 0.55 min(c, 0.02) h);
+	--color-neutral-6: oklch(from var(--palette-neutral) 0.68 min(c, 0.02) h);
+	--color-neutral-7: oklch(from var(--palette-neutral) 0.8 min(c, 0.02) h);
+	--color-neutral-8: oklch(from var(--palette-neutral) 0.9 min(c, 0.02) h);
+	--color-neutral-9: oklch(from var(--palette-neutral) 1 min(c, 0.02) h);
+}
+:root[data-theme="light"][data-palette-neutral] {
+	--color-neutral-0: oklch(from var(--palette-neutral) 0.966 min(c, 0.02) h);
+	--color-neutral-1: oklch(from var(--palette-neutral) 0.988 min(c, 0.02) h);
+	--color-neutral-2: oklch(from var(--palette-neutral) 0.951 min(c, 0.02) h);
+	--color-neutral-3: oklch(from var(--palette-neutral) 0.876 min(c, 0.02) h);
+	--color-neutral-4: oklch(from var(--palette-neutral) 0.818 min(c, 0.02) h);
+	--color-neutral-5: oklch(from var(--palette-neutral) 0.628 min(c, 0.02) h);
+	--color-neutral-6: oklch(from var(--palette-neutral) 0.5 min(c, 0.02) h);
+	--color-neutral-7: oklch(from var(--palette-neutral) 0.408 min(c, 0.02) h);
+	--color-neutral-8: oklch(from var(--palette-neutral) 0.286 min(c, 0.02) h);
+	--color-neutral-9: oklch(from var(--palette-neutral) 0.176 min(c, 0.02) h);
+}

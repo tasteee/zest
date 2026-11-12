@@ -38,6 +38,7 @@
 }
 
 .DocsTopbar {
+	position: relative;
 	display: flex;
 	align-items: center;
 	gap: 1.25rem;
@@ -184,7 +185,7 @@
 .DocsBrand:focus-visible,
 .DocsSocialLinks a:focus-visible {
 	outline: 2px solid color-mix(in oklch, var(--border-focus) 60%, transparent);
-	outline-offset: 2px;
+	outline-offset: 0;
 }
 
 .DocsMenuButton {

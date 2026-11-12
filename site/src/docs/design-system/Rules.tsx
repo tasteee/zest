@@ -5,7 +5,7 @@ export const Rules = () => (
 	<div className="DocsPage">
 		<DocsHero
 			eyebrow="DESIGN SYSTEM"
-			title="Design rules."
+			title="Design rules"
 			lede="The constraints that keep zest coherent. Break them on purpose, not by accident."
 		/>
 
@@ -27,9 +27,7 @@ export const Rules = () => (
 					</z-heading>
 					<z-text>
 						Dark is the default; light switches on with <code className="inline">data-theme="light"</code> on the root
-						element, or with <DocsLink href="/elements/z-theme-switcher">z-theme-switcher</DocsLink>. Every color ramp
-						(pink, purple, neutral) is generated in OKLCH/OKLab from a single base color, so lightness steps stay
-						perceptually even instead of eyeballed. See <DocsLink href="/system/color">Color</DocsLink> for the ramps
+						element, or with <DocsLink href="/elements/z-theme-switcher">z-theme-switcher</DocsLink>. Color roles can be customized to suit your application. See <DocsLink href="/system/color">Color</DocsLink> for the ramps
 						themselves.
 					</z-text>
 
@@ -37,19 +35,16 @@ export const Rules = () => (
 						One typeface, one scale
 					</z-heading>
 					<z-text>
-						DM Sans for everything (body copy and headings both), with DM Mono reserved for code, tokens, and the small mono
+						Google Sans for everything (body copy and headings both), with DM Mono reserved for code, tokens, and the small mono
 						labels that mark a demo's props. Hierarchy comes from size and weight, never a second font family. Full scale on{' '}
 						<DocsLink href="/system/typography">Typography</DocsLink>.
 					</z-text>
 
 					<z-heading size="sm" tag="h2">
-						Purple and pink are accents, not defaults
+						Use accent tones deliberately
 					</z-heading>
 					<z-text>
-						<code className="inline">tone="secondary"</code> (purple) and <code className="inline">tone="tertiary"</code>{' '}
-						(pink) exist to draw the eye to the one thing that matters on a screen, a primary action, an active state, a
-						highlighted stat. Everything else defaults to neutral. If most of a page is purple, the accent has stopped
-						meaning anything.
+						<code className="inline">tone="secondary"</code> and <code className="inline">tone="tertiary"</code> draw attention to actions, active states, and highlights. Their colors can be customized.
 					</z-text>
 
 					<div className="pullquote">

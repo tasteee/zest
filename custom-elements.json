@@ -1705,7 +1705,7 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "'primary' | 'secondary' | 'tertiary' | 'success' | 'warning' | 'danger'"
+                "text": "'neutral' | 'primary' | 'secondary' | 'tertiary' | 'success' | 'warning' | 'danger'"
               },
               "description": "Color family of the button."
             },
@@ -1795,7 +1795,7 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "'primary' | 'secondary' | 'tertiary' | 'success' | 'warning' | 'danger'"
+                "text": "'neutral' | 'primary' | 'secondary' | 'tertiary' | 'success' | 'warning' | 'danger'"
               },
               "description": "Color family of the button."
             },
@@ -2803,7 +2803,7 @@
               "type": {
                 "text": "string"
               },
-              "description": "Highlight.js language id (also shown in the header)."
+              "description": "Highlight.js language id (also shown in the header). Aliases such as ts, tsx, svelte, vue, solid and sass work."
             },
             {
               "kind": "field",
@@ -2917,7 +2917,7 @@
               "type": {
                 "text": "string"
               },
-              "description": "Highlight.js language id (also shown in the header)."
+              "description": "Highlight.js language id (also shown in the header). Aliases such as ts, tsx, svelte, vue, solid and sass work."
             },
             {
               "name": "filename",
@@ -4109,6 +4109,75 @@
             {
               "name": "controls",
               "description": "Extra controls shown at the top of the menu."
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
+          "tagName": "z-copy-field",
+          "name": "ZCopyField",
+          "description": "A read-only value with a copy button.",
+          "members": [
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "description": "The value to copy."
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "description": "Accessible name for the value."
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Hides the field."
+            }
+          ],
+          "attributes": [
+            {
+              "name": "value",
+              "fieldName": "value",
+              "type": {
+                "text": "string"
+              },
+              "description": "The value to copy."
+            },
+            {
+              "name": "label",
+              "fieldName": "label",
+              "type": {
+                "text": "string"
+              },
+              "description": "Accessible name for the value."
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Hides the field."
+            }
+          ],
+          "events": [
+            {
+              "name": "copy",
+              "type": {
+                "text": "CustomEvent<{ value: string }>"
+              },
+              "detail": "{ value: string }",
+              "description": "Fires when the value is copied."
             }
           ]
         },
@@ -5340,6 +5409,14 @@
             },
             {
               "kind": "field",
+              "name": "isSpaceBetween",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Aligns the slotted control to the end, creating space between the label and control."
+            },
+            {
+              "kind": "field",
               "name": "size",
               "type": {
                 "text": "'sm' | 'md' | 'lg'"
@@ -5403,6 +5480,14 @@
                 "text": "boolean"
               },
               "description": "Puts the label to the left of the control instead of above it."
+            },
+            {
+              "name": "is-space-between",
+              "fieldName": "isSpaceBetween",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Aligns the slotted control to the end, creating space between the label and control."
             },
             {
               "name": "size",
@@ -6931,21 +7016,21 @@
           "members": [
             {
               "kind": "field",
-              "name": "direction",
+              "name": "isVertical",
               "type": {
-                "text": "'horizontal' | 'vertical'"
+                "text": "boolean"
               },
-              "description": "A horizontal rule (default) or a vertical one that stretches to its row."
+              "description": "Draw a vertical line that stretches to its row."
             }
           ],
           "attributes": [
             {
-              "name": "direction",
-              "fieldName": "direction",
+              "name": "is-vertical",
+              "fieldName": "isVertical",
               "type": {
-                "text": "'horizontal' | 'vertical'"
+                "text": "boolean"
               },
-              "description": "A horizontal rule (default) or a vertical one that stretches to its row."
+              "description": "Draw a vertical line that stretches to its row."
             }
           ],
           "events": []
@@ -7241,6 +7326,123 @@
             {
               "name": "",
               "description": "The row content."
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
+          "tagName": "z-markdown",
+          "name": "ZMarkdown",
+          "description": "Renders a markdown string with the Zest design system: GitHub-flavoured markdown, fenced code through z-code-block, sanitized by default.",
+          "members": [
+            {
+              "kind": "field",
+              "name": "content",
+              "type": {
+                "text": "string"
+              },
+              "description": "The markdown source."
+            },
+            {
+              "kind": "field",
+              "name": "isStreaming",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Set while text is still arriving, such as from a chat model."
+            },
+            {
+              "kind": "field",
+              "name": "doesAllowHtml",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Skips the sanitizer and renders raw HTML found in the markdown. Only for content you trust."
+            },
+            {
+              "kind": "field",
+              "name": "isPlain",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Renders code fences as plain preformatted blocks instead of z-code-block."
+            },
+            {
+              "kind": "field",
+              "name": "hasHeadingAnchors",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Gives every heading an id and a hover \"#\" permalink."
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Hides the element with display: none. It stays in the DOM and keeps its state."
+            }
+          ],
+          "attributes": [
+            {
+              "name": "content",
+              "fieldName": "content",
+              "type": {
+                "text": "string"
+              },
+              "description": "The markdown source."
+            },
+            {
+              "name": "is-streaming",
+              "fieldName": "isStreaming",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Set while text is still arriving, such as from a chat model."
+            },
+            {
+              "name": "does-allow-html",
+              "fieldName": "doesAllowHtml",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Skips the sanitizer and renders raw HTML found in the markdown. Only for content you trust."
+            },
+            {
+              "name": "is-plain",
+              "fieldName": "isPlain",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Renders code fences as plain preformatted blocks instead of z-code-block."
+            },
+            {
+              "name": "has-heading-anchors",
+              "fieldName": "hasHeadingAnchors",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Gives every heading an id and a hover \"#\" permalink."
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Hides the element with display: none. It stays in the DOM and keeps its state."
+            }
+          ],
+          "events": [
+            {
+              "name": "linkclick",
+              "type": {
+                "text": "CustomEvent<{ href: string }>"
+              },
+              "detail": "{ href: string }",
+              "description": "When a rendered link is clicked. The detail is { href }."
             }
           ]
         },
@@ -9690,8 +9892,8 @@
         {
           "kind": "class",
           "customElement": true,
-          "tagName": "z-scroll",
-          "name": "ZScroll",
+          "tagName": "z-scroll-area",
+          "name": "ZScrollArea",
           "description": "An overflow container with slim themed scrollbars.",
           "members": [
             {
@@ -9709,6 +9911,22 @@
                 "text": "string"
               },
               "description": "Largest height before the content scrolls. Any CSS length."
+            },
+            {
+              "kind": "field",
+              "name": "height",
+              "type": {
+                "text": "string"
+              },
+              "description": "Fixed height. Any CSS length."
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Hides the element with display: none. It stays in the DOM and keeps its state."
             },
             {
               "kind": "field",
@@ -9777,6 +9995,22 @@
               "description": "Largest height before the content scrolls. Any CSS length."
             },
             {
+              "name": "height",
+              "fieldName": "height",
+              "type": {
+                "text": "string"
+              },
+              "description": "Fixed height. Any CSS length."
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Hides the element with display: none. It stays in the DOM and keeps its state."
+            },
+            {
               "name": "max-width",
               "fieldName": "maxWidth",
               "type": {
@@ -9823,88 +10057,6 @@
                 "text": "string"
               },
               "description": "Padding on the top and bottom. Accepts a size keyword (2xs to 4xl), a scale step, or any CSS length."
-            }
-          ],
-          "events": [],
-          "slots": [
-            {
-              "name": "",
-              "description": "The scrolling content."
-            }
-          ]
-        },
-        {
-          "kind": "class",
-          "customElement": true,
-          "tagName": "z-scroll-area",
-          "name": "ZScrollArea",
-          "description": "A scroll container with slim themed scrollbars.",
-          "members": [
-            {
-              "kind": "field",
-              "name": "maxHeight",
-              "type": {
-                "text": "string"
-              },
-              "description": "Largest height before the content scrolls. Any CSS length."
-            },
-            {
-              "kind": "field",
-              "name": "height",
-              "type": {
-                "text": "string"
-              },
-              "description": "Fixed height. Any CSS length."
-            },
-            {
-              "kind": "field",
-              "name": "direction",
-              "type": {
-                "text": "'vertical' | 'horizontal' | 'both'"
-              },
-              "description": "Axis that scrolls."
-            },
-            {
-              "kind": "field",
-              "name": "isHidden",
-              "type": {
-                "text": "boolean"
-              },
-              "description": "Hides the element with display: none. It stays in the DOM and keeps its state."
-            }
-          ],
-          "attributes": [
-            {
-              "name": "max-height",
-              "fieldName": "maxHeight",
-              "type": {
-                "text": "string"
-              },
-              "description": "Largest height before the content scrolls. Any CSS length."
-            },
-            {
-              "name": "height",
-              "fieldName": "height",
-              "type": {
-                "text": "string"
-              },
-              "description": "Fixed height. Any CSS length."
-            },
-            {
-              "name": "direction",
-              "fieldName": "direction",
-              "type": {
-                "text": "'vertical' | 'horizontal' | 'both'"
-              },
-              "description": "Axis that scrolls."
-            },
-            {
-              "name": "is-hidden",
-              "fieldName": "isHidden",
-              "type": {
-                "text": "boolean"
-              },
-              "description": "Hides the element with display: none. It stays in the DOM and keeps its state."
             }
           ],
           "events": [],
@@ -10810,7 +10962,15 @@
               "type": {
                 "text": "boolean"
               },
-              "description": "Show the live value as an accent-tinted pill in the header."
+              "description": "Show the live value as an accent-tinted pill, anchored to the right of the header row (in the same row as the label, if there is one)."
+            },
+            {
+              "kind": "field",
+              "name": "canReset",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Double clicking the thumb or the label restores the value the slider started with, and fires `input` and `change`."
             },
             {
               "kind": "field",
@@ -10908,7 +11068,15 @@
               "type": {
                 "text": "boolean"
               },
-              "description": "Show the live value as an accent-tinted pill in the header."
+              "description": "Show the live value as an accent-tinted pill, anchored to the right of the header row (in the same row as the label, if there is one)."
+            },
+            {
+              "name": "can-reset",
+              "fieldName": "canReset",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Double clicking the thumb or the label restores the value the slider started with, and fires `input` and `change`."
             },
             {
               "name": "value-prefix",
@@ -10967,6 +11135,12 @@
               },
               "detail": "{ value: number }",
               "description": "Fired when the thumb is released."
+            }
+          ],
+          "slots": [
+            {
+              "name": "center",
+              "description": "Custom content in the header row, between the label and the value."
             }
           ]
         },
@@ -11101,6 +11275,66 @@
                 "text": "boolean"
               },
               "description": "Flex-grow to fill remaining space."
+            }
+          ],
+          "events": []
+        },
+        {
+          "kind": "class",
+          "customElement": true,
+          "tagName": "z-spinner",
+          "name": "ZSpinner",
+          "description": "An animated indicator for ongoing work.",
+          "members": [
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "'sm' | 'md' | 'lg'"
+              },
+              "description": "Size of the indicator."
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "description": "Accessible status label."
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Hides the indicator."
+            }
+          ],
+          "attributes": [
+            {
+              "name": "size",
+              "fieldName": "size",
+              "type": {
+                "text": "'sm' | 'md' | 'lg'"
+              },
+              "description": "Size of the indicator."
+            },
+            {
+              "name": "label",
+              "fieldName": "label",
+              "type": {
+                "text": "string"
+              },
+              "description": "Accessible status label."
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Hides the indicator."
             }
           ],
           "events": []
@@ -12320,6 +12554,355 @@
         {
           "kind": "class",
           "customElement": true,
+          "tagName": "z-terminal",
+          "name": "ZTerminal",
+          "description": "A terminal window for command walkthroughs. Copy a command or any selected snippet, and play a session back with typing, fading and looping.",
+          "members": [
+            {
+              "kind": "field",
+              "name": "code",
+              "type": {
+                "text": "string"
+              },
+              "description": "The terminal text, one line per row (set from JavaScript to preserve whitespace). Lines that start with the prompt are commands."
+            },
+            {
+              "kind": "field",
+              "name": "shell",
+              "type": {
+                "text": "string"
+              },
+              "description": "Shell label in the header, such as zsh."
+            },
+            {
+              "kind": "field",
+              "name": "cwd",
+              "type": {
+                "text": "string"
+              },
+              "description": "Working directory shown after the shell label."
+            },
+            {
+              "kind": "field",
+              "name": "prompt",
+              "type": {
+                "text": "string"
+              },
+              "description": "Marker that makes a line a command. Copying a command leaves it out."
+            },
+            {
+              "kind": "field",
+              "name": "copyLines",
+              "type": {
+                "text": "string"
+              },
+              "description": "Which lines get a copy button: all, none, commands, or 1-based ranges like \"1-3,5\"."
+            },
+            {
+              "kind": "field",
+              "name": "tone",
+              "type": {
+                "text": "'success' | 'primary' | 'secondary' | 'warning' | 'danger'"
+              },
+              "description": "Color of the shell label, the prompt and the caret."
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Hides the element with display: none. It stays in the DOM and keeps its state."
+            },
+            {
+              "kind": "field",
+              "name": "width",
+              "type": {
+                "text": "string"
+              },
+              "description": "Pins the window width. Any CSS length."
+            },
+            {
+              "kind": "field",
+              "name": "height",
+              "type": {
+                "text": "string"
+              },
+              "description": "Pins the window height. The body scrolls inside it. Any CSS length."
+            },
+            {
+              "kind": "field",
+              "name": "maxHeight",
+              "type": {
+                "text": "string"
+              },
+              "description": "Caps the window height. The body scrolls past it. Any CSS length."
+            },
+            {
+              "kind": "field",
+              "name": "doesAnimate",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Plays the content back: commands type out, output fades in. Skipped when the viewer prefers reduced motion."
+            },
+            {
+              "kind": "field",
+              "name": "doesStartOnView",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Waits until the terminal scrolls into view before playing."
+            },
+            {
+              "kind": "field",
+              "name": "lines",
+              "type": {
+                "text": "array"
+              },
+              "description": "Lines with their own timing instead of code: strings, or { text, type: \"command\" | \"output\", delay, typeSpeed, fade }. Set it from JavaScript."
+            },
+            {
+              "kind": "field",
+              "name": "typeSpeed",
+              "type": {
+                "text": "number"
+              },
+              "description": "Milliseconds per typed character."
+            },
+            {
+              "kind": "field",
+              "name": "lineDelay",
+              "type": {
+                "text": "number"
+              },
+              "description": "Milliseconds before each line starts."
+            },
+            {
+              "kind": "field",
+              "name": "fadeDuration",
+              "type": {
+                "text": "number"
+              },
+              "description": "Milliseconds an output line takes to fade in."
+            },
+            {
+              "kind": "field",
+              "name": "doesLoop",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Restarts the playback after it finishes."
+            },
+            {
+              "kind": "field",
+              "name": "loopDelay",
+              "type": {
+                "text": "number"
+              },
+              "description": "Milliseconds to wait before a loop restarts."
+            },
+            {
+              "kind": "field",
+              "name": "isReplayHidden",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Hides the replay button that appears when a playback ends."
+            },
+            {
+              "kind": "field",
+              "name": "isAutoScrollDisabled",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Stops a height-limited terminal from following the newest line while it plays."
+            }
+          ],
+          "attributes": [
+            {
+              "name": "code",
+              "fieldName": "code",
+              "type": {
+                "text": "string"
+              },
+              "description": "The terminal text, one line per row (set from JavaScript to preserve whitespace). Lines that start with the prompt are commands."
+            },
+            {
+              "name": "shell",
+              "fieldName": "shell",
+              "type": {
+                "text": "string"
+              },
+              "description": "Shell label in the header, such as zsh."
+            },
+            {
+              "name": "cwd",
+              "fieldName": "cwd",
+              "type": {
+                "text": "string"
+              },
+              "description": "Working directory shown after the shell label."
+            },
+            {
+              "name": "prompt",
+              "fieldName": "prompt",
+              "type": {
+                "text": "string"
+              },
+              "description": "Marker that makes a line a command. Copying a command leaves it out."
+            },
+            {
+              "name": "copy-lines",
+              "fieldName": "copyLines",
+              "type": {
+                "text": "string"
+              },
+              "description": "Which lines get a copy button: all, none, commands, or 1-based ranges like \"1-3,5\"."
+            },
+            {
+              "name": "tone",
+              "fieldName": "tone",
+              "type": {
+                "text": "'success' | 'primary' | 'secondary' | 'warning' | 'danger'"
+              },
+              "description": "Color of the shell label, the prompt and the caret."
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Hides the element with display: none. It stays in the DOM and keeps its state."
+            },
+            {
+              "name": "width",
+              "fieldName": "width",
+              "type": {
+                "text": "string"
+              },
+              "description": "Pins the window width. Any CSS length."
+            },
+            {
+              "name": "height",
+              "fieldName": "height",
+              "type": {
+                "text": "string"
+              },
+              "description": "Pins the window height. The body scrolls inside it. Any CSS length."
+            },
+            {
+              "name": "max-height",
+              "fieldName": "maxHeight",
+              "type": {
+                "text": "string"
+              },
+              "description": "Caps the window height. The body scrolls past it. Any CSS length."
+            },
+            {
+              "name": "does-animate",
+              "fieldName": "doesAnimate",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Plays the content back: commands type out, output fades in. Skipped when the viewer prefers reduced motion."
+            },
+            {
+              "name": "does-start-on-view",
+              "fieldName": "doesStartOnView",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Waits until the terminal scrolls into view before playing."
+            },
+            {
+              "name": "lines",
+              "fieldName": "lines",
+              "type": {
+                "text": "array"
+              },
+              "description": "Lines with their own timing instead of code: strings, or { text, type: \"command\" | \"output\", delay, typeSpeed, fade }. Set it from JavaScript."
+            },
+            {
+              "name": "type-speed",
+              "fieldName": "typeSpeed",
+              "type": {
+                "text": "number"
+              },
+              "description": "Milliseconds per typed character."
+            },
+            {
+              "name": "line-delay",
+              "fieldName": "lineDelay",
+              "type": {
+                "text": "number"
+              },
+              "description": "Milliseconds before each line starts."
+            },
+            {
+              "name": "fade-duration",
+              "fieldName": "fadeDuration",
+              "type": {
+                "text": "number"
+              },
+              "description": "Milliseconds an output line takes to fade in."
+            },
+            {
+              "name": "does-loop",
+              "fieldName": "doesLoop",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Restarts the playback after it finishes."
+            },
+            {
+              "name": "loop-delay",
+              "fieldName": "loopDelay",
+              "type": {
+                "text": "number"
+              },
+              "description": "Milliseconds to wait before a loop restarts."
+            },
+            {
+              "name": "is-replay-hidden",
+              "fieldName": "isReplayHidden",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Hides the replay button that appears when a playback ends."
+            },
+            {
+              "name": "is-auto-scroll-disabled",
+              "fieldName": "isAutoScrollDisabled",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Stops a height-limited terminal from following the newest line while it plays."
+            }
+          ],
+          "events": [
+            {
+              "name": "copy",
+              "type": {
+                "text": "CustomEvent<string>"
+              },
+              "detail": "string",
+              "description": "After a line or a selected snippet is copied. The detail is the copied text."
+            },
+            {
+              "name": "done",
+              "type": {
+                "text": "CustomEvent"
+              },
+              "detail": "void",
+              "description": "When a playback reaches its last line."
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
           "tagName": "z-text",
           "name": "ZText",
           "description": "Body text in six sizes, with color and weight props.",
@@ -12920,9 +13503,9 @@
               "kind": "field",
               "name": "tone",
               "type": {
-                "text": "'primary' | 'secondary' | 'tertiary' | 'success' | 'warning' | 'danger'"
+                "text": "'neutral' | 'primary' | 'secondary' | 'tertiary' | 'success' | 'warning' | 'danger'"
               },
-              "description": "Colour family. On the group it applies to every item; an item can override it."
+              "description": "Color family of the toggle button."
             },
             {
               "kind": "field",
@@ -12978,9 +13561,9 @@
               "name": "tone",
               "fieldName": "tone",
               "type": {
-                "text": "'primary' | 'secondary' | 'tertiary' | 'success' | 'warning' | 'danger'"
+                "text": "'neutral' | 'primary' | 'secondary' | 'tertiary' | 'success' | 'warning' | 'danger'"
               },
-              "description": "Colour family. On the group it applies to every item; an item can override it."
+              "description": "Color family of the toggle button."
             },
             {
               "name": "is-icon",
@@ -14015,6 +14598,14 @@
         },
         {
           "kind": "custom-element-definition",
+          "name": "z-copy-field",
+          "declaration": {
+            "name": "ZCopyField",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
           "name": "z-dialog",
           "declaration": {
             "name": "ZDialog",
@@ -14207,6 +14798,14 @@
         },
         {
           "kind": "custom-element-definition",
+          "name": "z-markdown",
+          "declaration": {
+            "name": "ZMarkdown",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
           "name": "z-marquee",
           "declaration": {
             "name": "ZMarquee",
@@ -14335,14 +14934,6 @@
         },
         {
           "kind": "custom-element-definition",
-          "name": "z-scroll",
-          "declaration": {
-            "name": "ZScroll",
-            "module": "dist/zest.js"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
           "name": "z-scroll-area",
           "declaration": {
             "name": "ZScrollArea",
@@ -14423,6 +15014,14 @@
         },
         {
           "kind": "custom-element-definition",
+          "name": "z-spinner",
+          "declaration": {
+            "name": "ZSpinner",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
           "name": "z-stat",
           "declaration": {
             "name": "ZStat",
@@ -14490,6 +15089,14 @@
           "name": "z-tabs",
           "declaration": {
             "name": "ZTabs",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "z-terminal",
+          "declaration": {
+            "name": "ZTerminal",
             "module": "dist/zest.js"
           }
         },

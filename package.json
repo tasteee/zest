@@ -26,6 +26,7 @@
 	],
 	"sideEffects": [
 		"./dist/zest.js",
+		"./dist/languages.js",
 		"./dist/elements/*.js",
 		"./dist/ink.css",
 		"./dist/fonts.css",
@@ -47,6 +48,10 @@
 			"import": "./dist/elements/*.js"
 		},
 		"./zest.js": "./dist/zest.js",
+		"./languages": {
+			"types": "./dist/languages.d.ts",
+			"import": "./dist/languages.js"
+		},
 		"./ink.css": "./dist/ink.css",
 		"./fonts.css": "./dist/fonts.css",
 		"./tokens.css": "./dist/tokens.css",

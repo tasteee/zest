@@ -90,8 +90,8 @@ const styles = css`
 	}
 
 	a:focus-visible {
-		outline: 3px solid var(--border-focus);
-		outline-offset: 3px;
+		outline: 2px solid var(--border-focus);
+		outline-offset: 0;
 		border-radius: var(--radius-xs);
 	}
 

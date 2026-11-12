@@ -4,8 +4,7 @@ What zest runs in, what it promises, and what happens when it changes its mind.
 
 ## Browsers
 
-**Supported: Chrome 117+ and Edge 117+.** That is Chromium, current and the
-version before it. Tests run in Chromium: Playwright's Chromium in CI, Edge on
+**Supported: Chrome 119+ and Edge 119+.** These are minimum versions; automated tests run on the Chromium version bundled with Playwright. Tests run in Chromium: Playwright's Chromium in CI, Edge on
 Windows developer machines.
 
 **Not supported: Firefox and Safari.** They are not tested and zest makes no
@@ -22,6 +21,7 @@ Chromium that has all of them is the oldest one zest supports.
 | `adoptedStyleSheets` | every shadow root's styles | 73 |
 | `color-mix(in oklch …)` | most theme colours | 111 |
 | `popover` attribute / `showPopover()` | `z-select`, `z-combobox`, menus, tooltips | 114 |
+| Relative color syntax | accent colors and syntax highlighting | 119 |
 | `@starting-style` | overlay enter transitions | 117 |
 | `scrollbar-color` | themed scrollbars (decorative; degrades) | 121 |
 | Import maps | unbundled plain-HTML use only | 89 |

@@ -83,7 +83,7 @@
 .RollBack:focus-visible,
 .RollUnmute:focus-visible {
 	outline: 2px solid rgb(255 255 255 / 0.6);
-	outline-offset: 3px;
+	outline-offset: 0;
 }
 .RollBack svg {
 	width: 1.125rem;

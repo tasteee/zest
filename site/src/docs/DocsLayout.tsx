@@ -1,3 +1,5 @@
+import { ColorPalette } from '@app/docs/ColorPalette'
+import { ScaleControl } from '@app/docs/ScaleControl'
 import { useEffect, useLayoutEffect, useRef, useState, type ReactNode } from 'react'
 import { Link, useLocation } from 'wouter'
 import zestPackage from '@tasteee/zest/package.json'
@@ -260,7 +262,9 @@ export const DocsLayout = ({ children }: { children: ReactNode }) => {
 							<span className="DocsSearchText">Search</span>
 							<kbd>⌘K</kbd>
 						</button>
+						<ScaleControl />
 						<z-theme-switcher kind="icon" size="sm" />
+						<ColorPalette />
 						<a className="DocsIconButton" href={GITHUB_URL} target="_blank" rel="noreferrer" aria-label="GitHub">
 							<GithubIcon />
 						</a>

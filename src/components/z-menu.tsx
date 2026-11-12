@@ -103,7 +103,7 @@ const styles = css`
 	}
 
 	.item.is-flashing {
-		animation: z-menu-flash 200ms step-end;
+		animation: z-menu-flash 220ms step-end;
 	}
 
 	@keyframes z-menu-flash {
@@ -213,13 +213,13 @@ export const ZMenu = c(
 			child.tag === 'z-menu-separator'
 				? { isSeparator: true }
 				: {
-						value: child.value,
-						label: child.label,
-						shortcut: child.attributes.shortcut || undefined,
-						isDisabled: hasFlag(child, 'is-disabled'),
-						isDanger: hasFlag(child, 'is-danger'),
-						slot: child.slot
-					}
+					value: child.value,
+					label: child.label,
+					shortcut: child.attributes.shortcut || undefined,
+					isDisabled: hasFlag(child, 'is-disabled'),
+					isDanger: hasFlag(child, 'is-danger'),
+					slot: child.slot
+				}
 		)
 		const items: MenuItemT[] = [...childItems, ...(Array.isArray(props.items) ? (props.items as MenuItemT[]) : [])]
 		const selectable = (i: number) => items[i] && !items[i].isSeparator && !items[i].isDisabled

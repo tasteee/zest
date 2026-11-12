@@ -1,6 +1,8 @@
 import { defineElement } from "../shared/define-element";
-import { c, css, event, useMemo } from "atomico";
+import { c, css, event, useLayoutEffect, useMemo, useRef } from "atomico";
 import { Marked } from "marked";
+import "./z-code-block";
+import { getLocaleString } from "../shared/locale";
 
 /*
  * z-markdown, the shared markdown renderer behind chat, blog, and docs. Parses
@@ -13,8 +15,8 @@ import { Marked } from "marked";
  *
  * Set `is-streaming` while tokens are still arriving (chat / AI). Sanitization is
  * on by default (strips dangerous tags/attributes, neutralizes javascript: URLs);
- * `allow-html` opts out. Code fences route through z-code-block, which
- * highlights them, unless `is-plain` is set. `heading-anchors` gives
+ * `does-allow-html` opts out. Code fences route through z-code-block, which
+ * highlights them, unless `is-plain` is set. `has-heading-anchors` gives
  * every heading a stable id and a hover-revealed "#" permalink. Emits
  * `linkclick` {href} when a rendered link is clicked; a fenced code block's own
  * copy button dispatches z-code-block's `copy` event, which bubbles through
@@ -164,7 +166,13 @@ const styles = css`
 const marked = new Marked({ gfm: true, breaks: true });
 
 const DANGEROUS_TAGS = "script,style,iframe,object,embed,link,meta,base,form";
-const BAD_URL = /^\s*(javascript:|vbscript:|data:text\/html)/i;
+const BAD_URL = /^(javascript:|vbscript:|data:text\/html)/i;
+// Browsers ignore tabs, newlines and other control characters inside a URL
+// scheme (a tab inside "javascript:" still runs), so test the URL with them removed.
+// eslint-disable-next-line no-control-regex
+const URL_NOISE = /[\u0000- \u007f-\u009f]/g;
+const URL_ATTRIBUTES = new Set(["href", "src", "xlink:href", "action", "formaction", "poster", "background"]);
+const DANGEROUS_ATTRIBUTES = new Set(["srcdoc"]);
 
 const slugify = (text: string): string =>
   text
@@ -186,7 +194,7 @@ const addHeadingAnchors = (root: ParentNode) => {
     const anchor = document.createElement("a");
     anchor.className = "heading-anchor";
     anchor.href = `#${slug}`;
-    anchor.setAttribute("aria-label", `Link to "${heading.textContent ?? ""}"`);
+    anchor.setAttribute("aria-label", getLocaleString("linkTo", { title: heading.textContent ?? "" }));
     anchor.textContent = "#";
     heading.appendChild(anchor);
   });
@@ -200,11 +208,8 @@ const sanitize = (root: ParentNode) => {
   root.querySelectorAll<HTMLElement>("*").forEach((el) => {
     for (const attr of [...el.attributes]) {
       const name = attr.name.toLowerCase();
-      if (name.startsWith("on")) el.removeAttribute(attr.name);
-      else if (
-        (name === "href" || name === "src" || name === "xlink:href") &&
-        BAD_URL.test(attr.value)
-      )
+      if (name.startsWith("on") || DANGEROUS_ATTRIBUTES.has(name)) el.removeAttribute(attr.name);
+      else if (URL_ATTRIBUTES.has(name) && BAD_URL.test(attr.value.replace(URL_NOISE, "")))
         el.removeAttribute(attr.name);
     }
   });
@@ -221,8 +226,11 @@ const buildHtml = (
   noHighlight: boolean,
   headingAnchors: boolean,
 ): string => {
-  const container = document.createElement("div");
-  container.innerHTML = marked.parse(src, { async: false }) as string;
+  // A template's content is inert: images do not load and nothing runs until
+  // the sanitized result is serialized back out.
+  const template = document.createElement("template");
+  template.innerHTML = marked.parse(src, { async: false }) as string;
+  const container = template.content as unknown as HTMLElement;
 
   if (!allowHtml) sanitize(container);
 
@@ -248,7 +256,9 @@ const buildHtml = (
     }
   });
 
-  return container.innerHTML;
+  const holder = document.createElement("div");
+  holder.appendChild(container.cloneNode(true));
+  return holder.innerHTML;
 };
 
 export const ZMarkdown = c(
@@ -269,14 +279,22 @@ export const ZMarkdown = c(
       ],
     );
 
+    // Atomico keeps marker nodes inside a div it renders, and innerHTML wipes
+    // them, so the div is static and its content is written here instead.
+    const mdRef = useRef<HTMLDivElement>();
+    useLayoutEffect(() => {
+      if (mdRef.current) mdRef.current.innerHTML = html;
+    }, [html]);
+
     const onClick = (e: MouseEvent) => {
-      const a = (e.target as HTMLElement).closest("a");
+      const origin = (e.composedPath()[0] ?? e.target) as HTMLElement;
+      const a = origin.closest?.("a");
       if (a) props.linkclick({ href: a.getAttribute("href") ?? "" });
     };
 
     return (
       <host shadowDom onclick={onClick}>
-        <div class="md" innerHTML={html} />
+        <div class="md" ref={mdRef} staticNode />
       </host>
     );
   },

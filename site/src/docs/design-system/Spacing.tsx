@@ -38,7 +38,7 @@ export const Spacing = () => (
 	<div className="DocsPage">
 		<DocsHero
 			eyebrow="DESIGN SYSTEM"
-			title="Spacing."
+			title="Spacing"
 			lede={
 				<>
 					One base unit, one scale.{' '}

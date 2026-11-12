@@ -30,7 +30,7 @@ const styles = css`
 	.row.is-md { height: var(--control-height-md); font-size: var(--font-size-sm); }
 	.row.is-lg { height: var(--control-height-lg); font-size: var(--font-size-md); }
 	.row:hover { border-color: color-mix(in oklch, var(--text-primary) 30%, transparent); }
-	.row:focus-within { border-color: var(--tone); background: color-mix(in oklch, var(--tone) 5%, transparent); outline: 2px solid var(--border-focus); outline-offset: 2px; }
+	.row:focus-within { border-color: var(--tone); background: color-mix(in oklch, var(--tone) 5%, transparent); outline: 1px solid var(--border-focus); outline-offset: -1px; }
 	.row.is-invalid { border-color: var(--status-danger); --tone: var(--status-danger); }
 	.row.is-disabled { opacity: var(--control-disabled-opacity); pointer-events: none; }
 	z-number-input { flex: 1 1 0; min-width: 0; }

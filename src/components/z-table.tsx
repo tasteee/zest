@@ -87,7 +87,7 @@ const styles = css`
 	}
 
 	tbody tr:focus-visible {
-		outline: 3px solid var(--border-focus);
+		outline: 2px solid var(--border-focus);
 		outline-offset: -3px;
 	}
 

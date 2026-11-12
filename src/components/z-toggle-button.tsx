@@ -52,8 +52,8 @@ const styles = css`
 	}
 
 	button:focus-visible {
-		outline: 3px solid var(--border-focus);
-		outline-offset: 2px;
+		outline: 2px solid var(--border-focus);
+		outline-offset: 0;
 	}
 
 	button:disabled {
@@ -105,9 +105,15 @@ const styles = css`
 	   with, plus the resting text color (--tone-text) and the foreground used
 	   when pressed (--tone-on-foreground). Mirrors z-button's tone model. */
 
+	button.is-neutral {
+		--tone: var(--text-primary);
+		--tone-text: var(--text-primary);
+		--tone-on-foreground: var(--on-accent);
+	}
+
 	button.is-primary {
 		--tone: var(--accent-primary);
-		--tone-text: var(--text-primary);
+		--tone-text: var(--accent-primary);
 		--tone-on-foreground: var(--on-accent);
 	}
 
@@ -121,6 +127,17 @@ const styles = css`
 		--tone: var(--accent-tertiary);
 		--tone-text: var(--accent-tertiary);
 		--tone-on-foreground: var(--on-accent);
+	}
+
+	button.is-success { --tone: var(--status-success); --tone-text: var(--status-success); }
+	button.is-warning { --tone: var(--status-warning); --tone-text: var(--status-warning); }
+	button.is-danger { --tone: var(--status-danger); --tone-text: var(--status-danger); }
+
+	.label {
+		display: inline-flex;
+		align-items: center;
+		gap: var(--space-2);
+		transform: translateY(calc(var(--space-1) / 4));
 	}
 
 	/* kinds: paint using --tone */
@@ -160,9 +177,13 @@ const resolveKindClass = (props: any): string => {
 }
 
 const resolveAccentClass = (props: any): string => {
+	if (props.tone === 'primary') return 'is-primary'
 	if (props.tone === 'secondary') return 'is-secondary'
 	if (props.tone === 'tertiary') return 'is-tertiary'
-	return 'is-primary'
+	if (props.tone === 'success') return 'is-success'
+	if (props.tone === 'warning') return 'is-warning'
+	if (props.tone === 'danger') return 'is-danger'
+	return 'is-neutral'
 }
 
 export const ZToggleButton = c(
@@ -193,7 +214,7 @@ export const ZToggleButton = c(
 						props.press({ pressed: nextPressed })
 					}}
 				>
-					<slot />
+					<span class="label"><slot /></span>
 				</button>
 			</host>
 		)
@@ -202,7 +223,7 @@ export const ZToggleButton = c(
 		props: {
 			size: { type: oneOf('xs', 'sm', 'md', 'lg'), reflect: true },
 			kind: { type: oneOf('solid', 'outline', 'ghost', 'soft', 'plain'), reflect: true },
-			tone: { type: oneOf('primary', 'secondary', 'tertiary', 'success', 'warning', 'danger'), reflect: true },
+			tone: { type: oneOf('neutral', 'primary', 'secondary', 'tertiary', 'success', 'warning', 'danger'), reflect: true },
 			isIcon: { type: Boolean, reflect: true },
 			isPressed: { type: Boolean, reflect: true },
 			isDisabled: { type: Boolean, reflect: true },

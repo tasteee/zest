@@ -1,6 +1,6 @@
 # @tasteee/zest
 
-A gorgeous, fully featured, framework-agnostic web component library with a dark and a light theme. Use it in plain HTML, React, Vue, Svelte, or anywhere else.
+A framework-agnostic web component library with dark and light themes. Use it in plain HTML, React, Vue, or Svelte.
 
 The components are built with [Atomico](https://atomicojs.dev) and ship as a
 self-contained bundle. Atomico and the syntax highlighter are bundled in at
@@ -41,7 +41,7 @@ import '@tasteee/zest/ink.css'  // design tokens: CSS custom properties
 
 - **`@tasteee/zest/ink.css`** defines the document-level design tokens (colors,
   spacing, typography custom properties) that the components read via
-  `var(--token)`. Fonts are opt-in: add `import '@tasteee/zest/fonts.css'` for DM Sans / DM Mono.
+  `var(--token)`. Fonts are opt-in: add `import '@tasteee/zest/fonts.css'` for Google Sans / DM Mono.
 
 ### React
 
@@ -51,7 +51,7 @@ import '@tasteee/zest/ink.css'
 
 export function App() {
   return (
-    <z-button kind="primary" onClick={() => console.log('clicked')}>
+    <z-button tone="primary" onClick={() => console.log('clicked')}>
       Click me
     </z-button>
   )
@@ -65,7 +65,7 @@ export function App() {
 ```html
 <link rel="stylesheet" href="/node_modules/@tasteee/zest/dist/ink.css" />
 <script type="module" src="/node_modules/@tasteee/zest/dist/zest.js"></script>
-<z-button kind="primary">Click me</z-button>
+<z-button tone="primary">Click me</z-button>
 ```
 
 ### From a CDN (no build step)
@@ -76,7 +76,7 @@ A CDN resolves the package name for you, so here you can use it directly:
 <link rel="stylesheet" href="https://esm.sh/@tasteee/zest/ink.css" />
 <script type="module" src="https://esm.sh/@tasteee/zest"></script>
 
-<z-button kind="primary">Click me</z-button>
+<z-button tone="primary">Click me</z-button>
 ```
 
 ## TypeScript & editor support
@@ -109,7 +109,7 @@ Every element has a page with live examples, its full API, and its keyboard map.
 
 The generated [`custom-elements.json`](./custom-elements.json) is the
 machine-readable source for editor tooling; the docs component manifest mirrors
-the same 97 elements.
+the public elements.
 
 #### Foundations
 
@@ -117,7 +117,7 @@ the same 97 elements.
 
 #### Layout
 
-`z-row` `z-column` `z-grid` `z-bento-grid` `z-bento-item` `z-center` `z-container` `z-section` `z-surface` `z-scroll` `z-spacer` `z-chassis` 
+`z-row` `z-column` `z-grid` `z-bento-grid` `z-bento-item` `z-center` `z-container` `z-section` `z-surface` `z-scroll-area` `z-spacer` `z-chassis` 
 
 #### Actions
 
@@ -141,7 +141,11 @@ the same 97 elements.
 
 #### Specialized
 
-`z-callout` `z-empty-state` `z-scroll-area` `z-code-block` `z-carousel` `z-marquee` `z-pointer-follow` `z-draggable` `z-drop-target` `z-sortable` `z-dropzone`
+`z-callout` `z-empty-state` `z-code-block` `z-carousel` `z-marquee` `z-pointer-follow` `z-draggable` `z-drop-target` `z-sortable` `z-dropzone`
+
+## Browser support
+
+Zest supports Chrome and Edge 119 and later. Firefox and Safari are not currently tested or supported. See [SUPPORT.md](./SUPPORT.md) for framework, server rendering, and accessibility details.
 
 ## Local development
 

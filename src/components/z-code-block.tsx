@@ -85,8 +85,8 @@ const styles = css`
 	}
 
 	.file-tab:focus-visible {
-		outline: 3px solid var(--border-focus);
-		outline-offset: 1px;
+		outline: 2px solid var(--border-focus);
+		outline-offset: 0;
 	}
 
 	.head {
@@ -147,8 +147,8 @@ const styles = css`
 	}
 
 	.copy:focus-visible {
-		outline: 3px solid var(--border-focus);
-		outline-offset: 2px;
+		outline: 2px solid var(--border-focus);
+		outline-offset: 0;
 	}
 
 	.copy.is-copied {

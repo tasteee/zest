@@ -76,8 +76,8 @@ const styles = css`
 	}
 
 	.btn:focus-visible {
-		outline: 3px solid var(--border-focus);
-		outline-offset: 2px;
+		outline: 2px solid var(--border-focus);
+		outline-offset: 0;
 	}
 
 	.btn:disabled {
@@ -133,8 +133,8 @@ const styles = css`
 	}
 
 	.dot:focus-visible {
-		outline: 3px solid var(--border-focus);
-		outline-offset: 2px;
+		outline: 2px solid var(--border-focus);
+		outline-offset: 0;
 	}
 `
 

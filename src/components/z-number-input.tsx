@@ -17,7 +17,7 @@ import { useLocale } from '../shared/locale'
  * number input would report them.
  */
 const styles = css`
-	.field:focus-within { outline: 2px solid var(--border-focus); outline-offset: 2px; }
+	.field:focus-within { outline: 1px solid var(--border-focus); outline-offset: -1px; }
 
 	:host { display: inline-flex; width: fit-content; max-width: 100%; --tone: var(--accent-primary); }
 	:host([is-full-width]) { width: 100%; }

@@ -101,8 +101,8 @@ const styles = css`
 	}
 
 	.trigger:focus-visible {
-		outline: 3px solid var(--border-focus);
-		outline-offset: 2px;
+		outline: 1px solid var(--border-focus);
+		outline-offset: -1px;
 	}
 
 	.value { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
