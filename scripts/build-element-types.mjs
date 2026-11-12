@@ -9,7 +9,7 @@ mkdirSync(outputDir, { recursive: true })
 const inlineComponentDts = (componentModule, targetClassName) => {
 	const raw = readFileSync(join(distDir, 'components', `${componentModule}.d.ts`), 'utf8')
 	return raw
-		.replace(/^import\s+['"]\.\/z-number-input(?:\.d\.ts|\.js)?['"];?\r?\n/gm, '')
+		.replace(/^import\s+['"]\.\/z-(?:number-input|code-block)(?:\.d\.ts|\.js)?['"];?\r?\n/gm, '')
 		.replace(
 			/^import\s+type\s+\{\s*ThemePreferenceT\s*,\s*ThemeT\s*\}\s+from\s+['"]\.\.\/shared\/theme(?:\.d\.ts|\.js)?['"];?\r?\n/gm,
 			'type ThemeT = "dark" | "light";\ntype ThemePreferenceT = "system" | "dark" | "light";\n'
