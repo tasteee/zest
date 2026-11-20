@@ -68,9 +68,13 @@ export const ZColorSwatch = c(
 		const color = props.value || 'transparent'
 		const visibleText = props.label || props.value || ''
 		const isTextShown = !props.isValueHidden && visibleText !== ''
-		const chipRole = isTextShown ? undefined : 'img'
-		const chipLabel = isTextShown ? undefined : visibleText
-		const isChipHiddenFromReaders = isTextShown
+		const hasText = visibleText !== ''
+		// The chip speaks only when it is the sole carrier of a value. With
+		// the text shown, or with nothing to say, it is decoration.
+		const isChipNamed = hasText && !isTextShown
+		const chipRole = isChipNamed ? 'img' : undefined
+		const chipLabel = isChipNamed ? visibleText : undefined
+		const isChipHiddenFromReaders = !isChipNamed
 
 		return (
 			<host shadowDom>

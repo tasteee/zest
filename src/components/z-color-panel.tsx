@@ -1042,6 +1042,9 @@ export const ZColorPanel = c(
 		const formatMenuExpanded = isFormatMenuOpen ? 'true' : 'false'
 		const formatButtonExpanded = isFormatLocked ? undefined : formatMenuExpanded
 		const formatButtonPopup = isFormatLocked ? undefined : 'listbox'
+		// The name starts with the visible text ("HEX"), so a voice-control
+		// user who says what they see reaches the button (WCAG 2.5.3).
+		const formatButtonName = [activeDefinition.label, translate('colorFormat')].join(', ')
 		const copyButtonClass = wasCopied ? 'color-icon-button isConfirmed' : 'color-icon-button'
 		const visibleGroups = COLOR_GROUPS.filter((group) => allowedFormats.some((allowed) => FORMAT_DEFINITIONS[allowed].group === group))
 
@@ -1209,7 +1212,7 @@ export const ZColorPanel = c(
 							ref={formatButtonRef}
 							type="button"
 							class={formatButtonClass}
-							aria-label={translate('colorFormat')}
+							aria-label={formatButtonName}
 							aria-haspopup={formatButtonPopup}
 							aria-expanded={formatButtonExpanded}
 							disabled={isDisabled || isFormatLocked}
