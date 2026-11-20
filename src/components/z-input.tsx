@@ -20,6 +20,7 @@ const styles = css`
 	:host {
 		display: inline-flex;
 		width: 100%;
+		min-width: 0;
 	}
 
 	:host([is-hidden]) {
@@ -35,6 +36,7 @@ const styles = css`
 		align-items: center;
 		gap: var(--space-2-5);
 		width: 100%;
+		min-width: 0;
 		box-sizing: border-box;
 		background: transparent;
 		border: 1px solid var(--border-default);
