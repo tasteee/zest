@@ -115,7 +115,12 @@ const walk = (directory: string): string[] =>
 	})
 
 describe('the docs', () => {
-	const sourceFiles = walk(join(__dirname, '..', '..', 'site', 'src')).filter((path) => /\.(tsx|ts)$/.test(path))
+	// demos/ holds example source shown to readers (React/Solid versions
+	// included); an example may load @tasteee/zest/languages for its own
+	// grammar, as z-code-block/languages does for python
+	const demosDirectory = join(__dirname, '..', '..', 'site', 'src', 'docs', 'demos')
+	const checkIsDocsSource = (path: string) => /\.(tsx|ts)$/.test(path) && !path.startsWith(demosDirectory)
+	const sourceFiles = walk(join(__dirname, '..', '..', 'site', 'src')).filter(checkIsDocsSource)
 	const languagePattern = /language(?:=|:\s*)['"]([a-z]+)['"]/g
 	const usedLanguages = new Set<string>()
 	for (const path of sourceFiles) {

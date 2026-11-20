@@ -1,0 +1,38 @@
+import '@tasteee/zest'
+
+const INVOICE_COLUMNS = [
+  { key: 'date', label: 'Date' },
+  { key: 'amount', label: 'Amount', isMono: true },
+  { key: 'status', label: 'Status', align: 'end' }
+]
+
+const INVOICES = [
+  { id: 1, date: 'Nov 6, 2026', amount: '$12.00', status: 'Paid' },
+  { id: 2, date: 'Oct 6, 2026', amount: '$12.00', status: 'Paid' },
+  { id: 3, date: 'Sep 6, 2026', amount: '$12.00', status: 'Paid' }
+]
+
+export const Example = () => (
+  <z-column gap="4" style="width: min(40rem, 100%)">
+    <z-card gap="3" style="padding: 1.25rem">
+      <z-row aligns-x="between" aligns-y="center" gap="3" does-wrap="">
+        <z-column gap="1">
+          <z-row gap="2" aligns-y="center">
+            <z-text weight="600">Pro plan</z-text>
+            <z-badge tone="secondary">Current</z-badge>
+          </z-row>
+          <z-text size="sm" color="muted">$12 per month. Renews on Dec 6.</z-text>
+        </z-column>
+        <z-button kind="outline" size="sm">Change plan</z-button>
+      </z-row>
+      <z-progress aria-label="Seats used" value="60" />
+      <z-text size="xs" color="muted">6 of 10 seats used</z-text>
+    </z-card>
+    <z-card gap="0" style="padding: 0">
+      <z-heading size="xs" tag="h2" style="padding: 1.25rem 1.25rem 0.75rem">Invoices</z-heading>
+      <div style="padding: 0 1.25rem 1.25rem">
+        <z-table prop:columns={INVOICE_COLUMNS} prop:rows={INVOICES} />
+      </div>
+    </z-card>
+  </z-column>
+)

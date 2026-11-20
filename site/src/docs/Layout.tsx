@@ -1,5 +1,6 @@
 import { DocsLink } from '@app/docs/DocsLink'
 import { DocsFooter, DocsHero } from '@app/docs/DocsChrome'
+import { CaptionAttribute } from '@app/docs/frameworks/CaptionAttribute'
 
 // Ported from pages/layout-components.html. The kebab attributes from the HTML
 // (aligns-x, min-column-width, full-height…) become camelCase props. React 19
@@ -7,7 +8,7 @@ import { DocsFooter, DocsHero } from '@app/docs/DocsChrome'
 // Atomico reflects them to the attributes the components' CSS reads.
 export const Layout = () => (
 	<div className="DocsPage">
-		<DocsHero eyebrow="LAYOUT PRIMITIVES" title="Layout" lede="Eight composable primitives for arranging everything else.">
+		<DocsHero eyebrow="Foundations" title="Layout" lede="Eight composable primitives for arranging everything else.">
 			<nav className="DocsSubnav">
 				<a href="#row-column">Row &amp; column</a>
 				<a href="#grid">Grid</a>
@@ -29,7 +30,7 @@ export const Layout = () => (
 			</div>
 			<p className="section-sub">
 				Lay children out along a single axis: z-column stacks vertically, z-row runs horizontally. Alignment is expressed
-				against the page axes, not the flex main/cross axis. A row can <code>wrap</code> onto new lines, or{' '}
+				against the page axes, not the flex main/cross axis. A row can <code>does-wrap</code> onto new lines, or{' '}
 				<code>stack-below</code> a breakpoint to become a column on small screens.
 			</p>
 
@@ -50,7 +51,7 @@ export const Layout = () => (
 						</z-column>
 					</div>
 					<p className="cap">
-						<span className="el">&lt;z-column</span> <b>gap</b>="sm"<span className="el">&gt;</span>
+						<span className="el">&lt;z-column</span> <CaptionAttribute name="gap" />="sm"<span className="el">&gt;</span>
 					</p>
 				</div>
 
@@ -70,7 +71,7 @@ export const Layout = () => (
 						</z-row>
 					</div>
 					<p className="cap">
-						<span className="el">&lt;z-row</span> <b>gap</b>="sm"<span className="el">&gt;</span>
+						<span className="el">&lt;z-row</span> <CaptionAttribute name="gap" />="sm"<span className="el">&gt;</span>
 					</p>
 				</div>
 			</z-grid>
@@ -95,8 +96,8 @@ export const Layout = () => (
 						</z-row>
 					</div>
 					<p className="cap">
-						<span className="el">&lt;z-row</span> <b>aligns-x</b>="between" <b>aligns-y</b>
-						="center" <b>full-height</b>
+						<span className="el">&lt;z-row</span> <CaptionAttribute name="aligns-x" />="between" <CaptionAttribute name="aligns-y" />
+						="center" <CaptionAttribute name="is-full-height" />
 						<span className="el">&gt;</span>
 					</p>
 				</div>
@@ -150,7 +151,7 @@ export const Layout = () => (
 						</z-grid>
 					</div>
 					<p className="cap">
-						<span className="el">&lt;z-grid</span> <b>columns</b>="4" <b>gap</b>="sm"<span className="el">&gt;</span>
+						<span className="el">&lt;z-grid</span> <CaptionAttribute name="columns" />="4" <CaptionAttribute name="gap" />="sm"<span className="el">&gt;</span>
 					</p>
 				</div>
 			</div>
@@ -181,7 +182,7 @@ export const Layout = () => (
 						</z-grid>
 					</div>
 					<p className="cap">
-						<span className="el">&lt;z-grid</span> <b>min-column-width</b>="14rem" <b>gap</b>="sm"
+						<span className="el">&lt;z-grid</span> <CaptionAttribute name="min-column-width" />="14rem" <CaptionAttribute name="gap" />="sm"
 						<span className="el">&gt;</span>
 					</p>
 				</div>
@@ -196,7 +197,7 @@ export const Layout = () => (
 				<span className="tag">wrapping row</span>
 			</div>
 			<p className="section-sub">
-				Add <code>wrap</code> and a row flows onto new lines when it runs out of room: the right tool for tags, filters,
+				Add <code>does-wrap</code> and a row flows onto new lines when it runs out of room: the right tool for tags, filters,
 				toolbars, and badge groups.
 			</p>
 
@@ -216,7 +217,7 @@ export const Layout = () => (
 					</z-row>
 				</div>
 				<p className="cap">
-					<span className="el">&lt;z-row</span> <b>wrap</b> <b>gap</b>="sm" <b>aligns-y</b>="center"
+					<span className="el">&lt;z-row</span> <CaptionAttribute name="does-wrap" /> <CaptionAttribute name="gap" />="sm" <CaptionAttribute name="aligns-y" />="center"
 					<span className="el">&gt;</span>
 				</p>
 			</div>
@@ -238,7 +239,7 @@ export const Layout = () => (
 						</z-row>
 					</div>
 					<p className="cap">
-						<span className="el">&lt;z-row</span> <b>wrap</b> <b>aligns-x</b>="end" <b>gap</b>="sm" <b>full-width</b>
+						<span className="el">&lt;z-row</span> <CaptionAttribute name="does-wrap" /> <CaptionAttribute name="aligns-x" />="end" <CaptionAttribute name="gap" />="sm" <CaptionAttribute name="is-full-width" />
 						<span className="el">&gt;</span>
 					</p>
 				</div>
@@ -272,7 +273,7 @@ export const Layout = () => (
 					</z-center>
 				</div>
 				<p className="cap">
-					<span className="el">&lt;z-center</span> <b>min-height</b>="16rem" <b>max-width</b>="sm" <b>text</b> <b>inset</b>
+					<span className="el">&lt;z-center</span> <CaptionAttribute name="min-height" />="16rem" <CaptionAttribute name="max-width" />="sm" <CaptionAttribute name="does-center-text" /> <CaptionAttribute name="inset" />
 					="lg"
 					<span className="el">&gt;</span>
 				</p>
@@ -301,7 +302,7 @@ export const Layout = () => (
 					</z-container>
 				</div>
 				<p className="cap">
-					<span className="el">&lt;z-container</span> <b>size</b>="md" <b>gutter</b>="md"<span className="el">&gt;</span>
+					<span className="el">&lt;z-container</span> <CaptionAttribute name="size" />="md" <CaptionAttribute name="gutter" />="md"<span className="el">&gt;</span>
 				</p>
 			</div>
 		</section>
@@ -333,7 +334,7 @@ export const Layout = () => (
 					</z-section>
 				</div>
 				<p className="cap">
-					<span className="el">&lt;z-section</span> <b>space</b>="xl" <b>container</b>="md" <b>gutter</b>="md"
+					<span className="el">&lt;z-section</span> <CaptionAttribute name="space" />="xl" <CaptionAttribute name="container" />="md" <CaptionAttribute name="gutter" />="md"
 					<span className="el">&gt;</span>
 				</p>
 			</div>
@@ -369,7 +370,7 @@ export const Layout = () => (
 					</z-surface>
 				</z-grid>
 				<p className="cap">
-					<span className="el">&lt;z-surface</span> <b>level</b>="0 | 1 | 2 | 3"<span className="el">&gt;</span>, neutral-0
+					<span className="el">&lt;z-surface</span> <CaptionAttribute name="level" />="0 | 1 | 2 | 3"<span className="el">&gt;</span>, neutral-0
 					… neutral-3 + hairline
 				</p>
 			</div>
@@ -430,9 +431,9 @@ export const Layout = () => (
 						</z-surface>
 					</z-grid>
 					<p className="cap">
-						<span className="el">&lt;z-surface</span> <b>tone</b>="primary" <b>kind</b>="solid|soft|outline|ghost|plain"{' '}
-						<b>radius</b>
-						="md" <b>inset</b>="md"<span className="el">&gt;</span>
+						<span className="el">&lt;z-surface</span> <CaptionAttribute name="tone" />="primary" <CaptionAttribute name="kind" />="solid|soft|outline|ghost|plain"{' '}
+						<CaptionAttribute name="radius" />
+						="md" <CaptionAttribute name="inset" />="md"<span className="el">&gt;</span>
 					</p>
 				</div>
 			</div>
@@ -455,7 +456,7 @@ export const Layout = () => (
 						</z-surface>
 					</z-grid>
 					<p className="cap">
-						<span className="el">&lt;z-surface</span> … <b>border</b> · <b>elevated</b> · <b>interactive</b>
+						<span className="el">&lt;z-surface</span> … <CaptionAttribute name="is-bordered" /> · <CaptionAttribute name="is-elevated" /> · <CaptionAttribute name="is-interactive" />
 						<span className="el">&gt;</span>
 					</p>
 				</div>
@@ -511,7 +512,7 @@ export const Layout = () => (
 						</z-column>
 					</z-scroll-area>
 					<p className="cap">
-						<span className="el">&lt;z-scroll-area</span> <b>direction</b>="vertical" <b>max-height</b>="14rem"
+						<span className="el">&lt;z-scroll-area</span> <CaptionAttribute name="direction" />="vertical" <CaptionAttribute name="max-height" />="14rem"
 						<span className="el">&gt;</span>
 					</p>
 				</div>
@@ -551,7 +552,7 @@ export const Layout = () => (
 						</z-row>
 					</z-scroll-area>
 					<p className="cap">
-						<span className="el">&lt;z-scroll-area</span> <b>direction</b>="horizontal"<span className="el">&gt;</span>
+						<span className="el">&lt;z-scroll-area</span> <CaptionAttribute name="direction" />="horizontal"<span className="el">&gt;</span>
 					</p>
 				</div>
 			</z-grid>
@@ -565,7 +566,7 @@ export const Layout = () => (
 				<span className="tag">flexible gap</span>
 			</div>
 			<p className="section-sub">
-				Empty space inside a flex layout, a fixed <code>size</code>, or <code>grow</code> to soak up everything left over
+				Empty space inside a flex layout, a fixed <code>size</code>, or <code>can-grow</code> to soak up everything left over
 				and push trailing items to the far edge of a toolbar.
 			</p>
 
@@ -589,7 +590,7 @@ export const Layout = () => (
 					</z-row>
 				</div>
 				<p className="cap">
-					… <span className="el">&lt;z-spacer</span> <b>grow</b>
+					… <span className="el">&lt;z-spacer</span> <CaptionAttribute name="can-grow" />
 					<span className="el">&gt;&lt;/z-spacer&gt;</span> …
 				</p>
 			</div>
@@ -612,7 +613,7 @@ export const Layout = () => (
 						</z-row>
 					</div>
 					<p className="cap">
-						<span className="el">&lt;z-spacer</span> <b>size</b>="2xl"<span className="el">&gt;&lt;/z-spacer&gt;</span>
+						<span className="el">&lt;z-spacer</span> <CaptionAttribute name="size" />="2xl"<span className="el">&gt;&lt;/z-spacer&gt;</span>
 					</p>
 				</div>
 			</div>

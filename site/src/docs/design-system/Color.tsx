@@ -29,36 +29,27 @@ const Swatch = ({ token, label, hint }: { token: string; label: string; hint?: s
 
 const RAMP_STEPS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
 
-type ScaleT = { name: string; token: string }
+type ScaleT = { name: string; prefix: string }
 
 const COLOR_SCALES: ScaleT[] = [
-	{ name: 'Primary', token: '--accent-primary' },
-	{ name: 'Secondary', token: '--accent-secondary' },
-	{ name: 'Tertiary', token: '--accent-tertiary' },
-	{ name: 'Success', token: '--status-success' },
-	{ name: 'Warning', token: '--status-warning' },
-	{ name: 'Danger', token: '--status-danger' }
+	{ name: 'Primary', prefix: 'primary' },
+	{ name: 'Secondary', prefix: 'secondary' },
+	{ name: 'Tertiary', prefix: 'tertiary' },
+	{ name: 'Success', prefix: 'success' },
+	{ name: 'Warning', prefix: 'warning' },
+	{ name: 'Danger', prefix: 'danger' }
 ]
 
+// Each scale is a real token ramp in tokens.css: --primary-0…9 etc.
 const ColorScale = (props: ScaleT) => {
+	const swatches = RAMP_STEPS.map((step) => (
+		<Swatch key={step} token={`--${props.prefix}-${step}`} label={step} />
+	))
+
 	return (
 		<div>
 			<h3>{props.name}</h3>
-			<div className="swatch-row">
-				{RAMP_STEPS.map((step) => {
-					const stepNumber = Number(step)
-					const isDarkStep = stepNumber < 5
-					const percentage = isDarkStep ? stepNumber * 20 : (9 - stepNumber) * 25
-					const endpoint = isDarkStep ? 'black' : 'white'
-					const color = `color-mix(in oklab, var(${props.token}) ${percentage}%, ${endpoint})`
-					const style = { '--swatch-color': color } as CSSProperties
-					return (
-						<div key={step} style={style}>
-							<div className="swatch"><div className="swatch-fill" /><span className="swatch-label">{step}</span><span className="swatch-token">{props.token}</span></div>
-						</div>
-					)
-				})}
-			</div>
+			<div className="swatch-row">{swatches}</div>
 		</div>
 	)
 }
@@ -110,7 +101,7 @@ const RoleRow = ({ roles }: { roles: RoleT[] }) => (
 export const Color = () => (
 	<div className="DocsPage">
 		<DocsHero
-			eyebrow="DESIGN SYSTEM"
+			eyebrow="Foundations"
 			title="Color"
 			lede={
 				<>
@@ -169,22 +160,28 @@ export const Color = () => (
 			<RoleRow roles={STATUS} />
 		</DocsSection>
 
-		<DocsSection id="color-scales" tone="primary" title="Color scales" tag="Derived colors" sub="These reference scales blend each active color toward black and white. They update with the theme and palette; components use the role tokens above.">
-			{COLOR_SCALES.map((scale) => {
-				return <ColorScale key={scale.name} name={scale.name} token={scale.token} />
-			})}
+		<DocsSection
+			id="color-scales"
+			tone="primary"
+			title="Color scales"
+			tag="--{tone}-0…9"
+			sub="Reference ramps that blend each tone toward black (0–4) and white (6–9); step 5 is the tone itself. They follow the theme and palette. Components read the role tokens above."
+		>
+			{COLOR_SCALES.map((scale) => (
+				<ColorScale key={scale.prefix} name={scale.name} prefix={scale.prefix} />
+			))}
 		</DocsSection>
 
 		<DocsSection
 			id="neutral"
 			tone="secondary"
 			title="Neutral palette"
-			tag="--color-neutral-0…9"
-			sub="The theme's private palette, shown for reference. Step N plays a different part in light and dark, so components never read it directly; they read the roles above."
+			tag="--neutral-0…9"
+			sub="The theme's palette, shown for reference. Step N plays a different part in light and dark, so components never read it directly; they read the roles above. Themes set it through --color-neutral-0…9, the original name."
 		>
 			<div className="swatch-row">
 				{RAMP_STEPS.map((step) => (
-					<Swatch key={step} token={`--color-neutral-${step}`} label={step} />
+					<Swatch key={step} token={`--neutral-${step}`} label={step} />
 				))}
 			</div>
 		</DocsSection>
@@ -192,7 +189,7 @@ export const Color = () => (
 		<DocsFooter
 			links={
 				<>
-					<DocsLink href="/system/spacing">Spacing</DocsLink> · <DocsLink href="/system/typography">Typography</DocsLink> ·{' '}
+					<DocsLink href="/foundations/spacing">Spacing</DocsLink> · <DocsLink href="/foundations/typography">Typography</DocsLink> ·{' '}
 					<DocsLink href="~/">Home</DocsLink>
 				</>
 			}

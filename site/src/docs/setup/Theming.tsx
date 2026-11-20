@@ -1,5 +1,6 @@
 import { Link } from 'wouter'
 import { Article, Code } from '@app/docs/Prose'
+import { MarkupCode } from '@app/docs/frameworks/MarkupCode'
 
 export const Theming = () => (
 	<Article
@@ -44,8 +45,8 @@ export const Theming = () => (
 			<code>data-zest-scope</code> to re-derive them for that subtree. A <code>data-theme</code> element does the same,
 			and also swaps the palette. Both keep the scale values you set on <code>:root</code>.
 		</p>
-		<Code
-			code={`
+		<MarkupCode
+			html={`
 <section data-zest-scope style="--base-radius: 0; --base-font-size: 14px">
   <z-card>Square, compact cards in here only.</z-card>
 </section>
@@ -61,7 +62,7 @@ export const Theming = () => (
 
 		<h2>Motion</h2>
 		<p>
-			Durations and curves are tokens too. See <Link href="/system/motion">Motion</Link> for the full scale. Reduced-motion
+			Durations and curves are tokens too. See <Link href="/foundations/motion">Motion</Link> for the full scale. Reduced-motion
 			users get no travel or scale, and the theme changes without a fade. Set{' '}
 			<code>--theme-fade-out-duration</code> and <code>--theme-fade-in-duration</code> to bring the fade back.
 		</p>

@@ -1,12 +1,29 @@
 .colorPalette { position: static; }
 .colorPalette summary { list-style: none; cursor: pointer; }
 .colorPalette summary::-webkit-details-marker { display: none; }
-.colorPalettePanel { position: absolute; right: var(--space-2); top: calc(100% + var(--space-2) + var(--space-0-5) / 2); z-index: 20; width: 18rem; max-height: calc(100vh - var(--space-16)); overflow-y: auto; padding: var(--space-4); background: var(--surface-overlay); border: 1px solid var(--border-default); border-radius: var(--radius-md); }
+.colorPalettePanel { position: absolute; right: var(--space-2); top: calc(100% + var(--space-2) + var(--space-0-5) / 2); z-index: 20; width: 18rem; max-height: calc(100dvh - var(--docs-top-offset) - var(--space-4)); overflow-y: auto; overscroll-behavior: contain; padding: var(--space-4); background: var(--surface-overlay); border: 1px solid var(--border-default); border-radius: var(--radius-md); }
 .colorPaletteRole { margin-top: var(--space-4); }
 .colorPaletteLabel { display: flex; justify-content: space-between; align-items: center; text-transform: capitalize; color: var(--text-primary); }
 .colorPaletteLabel input { width: 2rem; height: 2rem; padding: 0; border: 1px solid var(--border-default); background: transparent; cursor: pointer; }
 .colorPaletteScale { display: flex; height: 1.5rem; margin-top: var(--space-2); overflow: hidden; border-radius: var(--radius-sm); }
 .colorPaletteScale span { flex: 1; }
+.colorPaletteHeader { display: flex; align-items: center; justify-content: space-between; gap: var(--space-2); }
+.colorPaletteResetAll { appearance: none; display: inline-flex; align-items: center; gap: var(--space-1-5); padding: var(--space-1) var(--space-2); border: 1px solid var(--border-default); border-radius: var(--radius-sm); background: transparent; color: var(--text-secondary); font: inherit; font-size: 0.75rem; cursor: pointer; }
+.colorPaletteResetAll svg { width: 0.75rem; height: 0.75rem; }
+.colorPaletteResetAll:hover:not(:disabled) { color: var(--text-primary); border-color: var(--border-strong); }
+.colorPaletteResetAll:disabled { opacity: 0.4; cursor: default; }
+.colorPaletteRoleName { display: inline-flex; align-items: center; gap: var(--space-2); }
+.colorPaletteResetRole { appearance: none; display: inline-flex; align-items: center; justify-content: center; width: 1.25rem; height: 1.25rem; padding: 0; border: 0; border-radius: var(--radius-sm); background: transparent; color: var(--text-tertiary); cursor: pointer; }
+.colorPaletteResetRole svg { width: 0.8125rem; height: 0.8125rem; }
+.colorPaletteResetRole:hover { color: var(--text-primary); background: color-mix(in oklch, var(--text-primary) 8%, transparent); }
+
+/* sticks under the top bar so it stays in view; the padding is the gap
+   below it, on the page color so scrolled content never shows through */
+.PaletteNoticeBar { position: sticky; top: var(--docs-top-offset); z-index: 30; padding-bottom: var(--space-6); background: var(--surface-page); }
+.PaletteNoticeBar z-callout { display: block; }
+.PaletteNoticeBar .PaletteNoticeReset { appearance: none; display: inline; height: auto; min-height: 0; padding: 0; border: 0; box-shadow: none; background: transparent; color: inherit; font: inherit; font-weight: 600; text-decoration: underline; cursor: pointer; }
+.colorPaletteSectionTitle { display: block; margin-bottom: var(--space-2); }
+.colorPaletteDivider { height: 0; margin: var(--space-4) 0; border: 0; border-top: 1px solid var(--border-default); }
 
 :root[data-palette-primary] { --accent-primary: oklch(from var(--palette-primary) 0.78 c h); }
 :root[data-palette-secondary] { --accent-secondary: oklch(from var(--palette-secondary) 0.78 c h); }

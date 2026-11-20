@@ -3,7 +3,7 @@ import './example.css'
 import './shell.css'
 import { Redirect, Route, Switch, useParams } from 'wouter'
 import { DocsLayout } from '@app/docs/DocsLayout'
-import { ELEMENT_PART_PARENTS, pagesOf, sectionById } from '@app/docs/nav'
+import { ELEMENT_PART_PARENTS, LEGACY_SECTION_IDS, pagesOf, sectionById } from '@app/docs/nav'
 import { ElementsIndex } from '@app/docs/ElementsIndex'
 import { BlocksIndex } from '@app/docs/blocks/BlocksIndex'
 
@@ -14,11 +14,13 @@ import { BlocksIndex } from '@app/docs/blocks/BlocksIndex'
 const firstPage = (sectionId: string) => {
 	const section = sectionById(sectionId)
 	const first = section && pagesOf(section)[0]
-	return first ? `/${sectionId}/${first.slug}` : '/setup/introduction'
+	return first ? `/${sectionId}/${first.slug}` : '/guide/introduction'
 }
 
 const SectionIndex = () => {
 	const { section } = useParams<{ section: string }>()
+	const renamedSectionId = LEGACY_SECTION_IDS[section]
+	if (renamedSectionId) return <Redirect to={`/${renamedSectionId}`} replace />
 	if (section === 'elements') return <ElementsIndex />
 	if (section === 'blocks') return <BlocksIndex />
 	if (sectionById(section)) return <Redirect to={firstPage(section)} replace />
@@ -27,6 +29,9 @@ const SectionIndex = () => {
 
 const DocPage = () => {
 	const { section: sectionId, slug } = useParams<{ section: string; slug: string }>()
+	const renamedSectionId = LEGACY_SECTION_IDS[sectionId]
+	if (renamedSectionId) return <Redirect to={`/${renamedSectionId}/${slug}`} replace />
+
 	const parentSlug = ELEMENT_PART_PARENTS[slug]
 	const isElementPart = sectionId === 'elements' && Boolean(parentSlug)
 	if (isElementPart) return <Redirect to={`/elements/${parentSlug}`} replace />
@@ -42,8 +47,8 @@ const DocPage = () => {
 const LEGACY_SYSTEM = new Set(['color', 'typography', 'spacing', 'layout', 'patterns'])
 const LegacyRedirect = () => {
 	const { section } = useParams<{ section: string }>()
-	if (section === 'rules') return <Redirect to="/system/principles" replace />
-	if (LEGACY_SYSTEM.has(section)) return <Redirect to={`/system/${section}`} replace />
+	if (section === 'rules') return <Redirect to="/foundations/principles" replace />
+	if (LEGACY_SYSTEM.has(section)) return <Redirect to={`/foundations/${section}`} replace />
 	return <NotFound />
 }
 
@@ -59,7 +64,7 @@ export const Docs = () => (
 	<DocsLayout>
 		<Switch>
 			<Route path="/">
-				<Redirect to="/setup/introduction" replace />
+				<Redirect to="/guide/introduction" replace />
 			</Route>
 			<Route path="/components/:slug">{(params) => <Redirect to={`/elements/${params.slug}`} replace />}</Route>
 			<Route path="/:section" component={SectionIndex} />

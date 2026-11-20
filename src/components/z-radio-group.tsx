@@ -4,6 +4,7 @@ import { describableProps, useAccessibleName } from '../shared/accessible'
 import { c, css, event, useEffect, useHost, useListener, useProp, useRef } from 'atomico'
 import { oneOf } from '../shared/prop-types'
 import { useLocale } from '../shared/locale'
+import { warnLegacyOrientation } from '../shared/deprecate'
 
 /*
  * z-radio-group, coordinates single-selection across slotted z-radio items.
@@ -33,6 +34,7 @@ const styles = css`
 	:host([tone='warning']) { --z-radio-group-accent: var(--status-warning); }
 	:host([tone='danger']) { --z-radio-group-accent: var(--status-danger); }
 
+	:host([is-horizontal]),
 	:host([direction='horizontal']) {
 		flex-direction: row;
 		gap: var(--space-6);
@@ -63,6 +65,7 @@ const findCheckedRadio = (radios: RadioElementT[]): RadioElementT | undefined =>
 
 export const ZRadioGroup = c(
 	(props) => {
+		warnLegacyOrientation({ tag: 'z-radio-group', attribute: 'direction', value: props.direction, flag: 'is-horizontal', flagValue: 'horizontal' })
 		const t = useLocale()
 		const host = useHost()
 		const accessibleName = useAccessibleName(props.label)
@@ -195,6 +198,8 @@ export const ZRadioGroup = c(
 			value: { type: String, reflect: true },
 			name: { type: String, reflect: true },
 			label: String,
+			isHorizontal: { type: Boolean, reflect: true },
+			/** @deprecated use is-horizontal */
 			direction: { type: oneOf('vertical', 'horizontal'), reflect: true },
 			tone: { type: oneOf('primary', 'secondary', 'tertiary', 'success', 'warning', 'danger'), reflect: true },
 			isRequired: { type: Boolean, reflect: true },

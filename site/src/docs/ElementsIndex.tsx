@@ -14,8 +14,8 @@ export const ElementsIndex = () => {
 
 	return (
 		<div className="DocsArticle">
-			<z-eyebrow hasRule>Elements</z-eyebrow>
-			<h1>Elements</h1>
+			<z-eyebrow hasRule>Reference</z-eyebrow>
+			<h1>All elements</h1>
 			<p className="DocsLede">
 				{total} elements, grouped by what they do. Pick one to see it running, copy the code, and check its attributes.
 			</p>

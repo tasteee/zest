@@ -1,6 +1,7 @@
 import { c, css, useHost, useRef, useEffect } from 'atomico'
 import { AnyProp } from '../shared/overlay'
 import { useVisibilityPhase } from '../shared/transition'
+import { warnLegacyOrientation } from '../shared/deprecate'
 
 /*
  * z-drag-handle, a standalone grip button that initiates a block reorder
@@ -152,6 +153,7 @@ const dropIndicatorStyles = css`
 		transition: opacity var(--motion-instant) var(--ease-enter);
 	}
 
+	:host([is-vertical]),
 	:host([orientation='vertical']) {
 		width: 2px;
 		height: auto;
@@ -160,6 +162,7 @@ const dropIndicatorStyles = css`
 
 export const ZDropIndicator = c(
 	(props) => {
+		warnLegacyOrientation({ tag: 'z-drop-indicator', attribute: 'orientation', value: props.orientation, flag: 'is-vertical', flagValue: 'vertical' })
 		const host = useHost()
 		const isOpen = Boolean(props.isOpen)
 		const phase = useVisibilityPhase(isOpen)
@@ -185,6 +188,8 @@ export const ZDropIndicator = c(
 	{
 		props: {
 			anchorRect: AnyProp,
+			isVertical: { type: Boolean, reflect: true },
+			/** @deprecated use is-vertical */
 			orientation: { type: String, reflect: true },
 			isOpen: { type: Boolean, reflect: true }
 		},

@@ -14,3 +14,25 @@ export const warnDeprecated = (subject: string, replacement: string): void => {
 	warned.add(key)
 	console.warn(`[zest] ${subject} is deprecated and will be removed in the next minor; use ${replacement}.`)
 }
+
+type LegacyOrientationT = {
+	tag: string
+	attribute: string
+	value: unknown
+	flag: string
+	flagValue: string
+}
+
+// Orientation enums became boolean flags (direction="vertical" → is-vertical).
+// Setting the flag's value names the flag; setting the default value
+// names dropping the attribute, since it never did anything.
+export const warnLegacyOrientation = (legacy: LegacyOrientationT): void => {
+	const isUnset = legacy.value == null || legacy.value === ''
+	if (isUnset) return
+	const subject = `${legacy.tag} ${legacy.attribute}="${legacy.value}"`
+	const isFlagValue = legacy.value === legacy.flagValue
+	const flagReplacement = `${legacy.tag} ${legacy.flag}`
+	const defaultReplacement = `no ${legacy.attribute} attribute (it is the default)`
+	const replacement = isFlagValue ? flagReplacement : defaultReplacement
+	warnDeprecated(subject, replacement)
+}

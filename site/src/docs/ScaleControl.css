@@ -1,5 +1,4 @@
 .ScaleControl {
-	position: relative;
 	display: inline-flex;
 	align-items: center;
 	height: 2.25rem;
@@ -206,6 +205,22 @@
 	height: 0.875rem;
 	color: var(--tone);
 	flex-shrink: 0;
+}
+
+.ScaleControlRoot {
+	position: relative;
+	display: inline-block;
+}
+
+.ScaleControlRoot.isInline {
+	display: block;
+}
+
+.ScaleControlRoot.isInline .ScaleControlMenu {
+	position: static;
+	margin-top: var(--space-2);
+	box-shadow: none;
+	animation: none;
 }
 
 :root[data-scale='75%'] { font-size: 75%; }

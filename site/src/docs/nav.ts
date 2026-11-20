@@ -19,21 +19,23 @@ import { BLOCKS } from '@app/docs/blocks/blocks'
  * The docs information architecture, one source for the top bar, every
  * section's sidebar, the routes, and ⌘K search.
  *
- *   Setup     get Zest running in a project
- *   System    the design language underneath: tokens, rules, motion
- *   Elements  every z element: demos, code, API
- *   Blocks    recipes composing elements into real interfaces
+ *   Guide        get Zest running and wire it into your stack
+ *   Foundations  the design language underneath: tokens, rules, motion
+ *   Elements     every z element: demos, code, API
+ *   Blocks       recipes composing elements into real interfaces
  */
 
 export type DocPageT = { slug: string; label: string; Component: ComponentType; keywords?: string }
 export type DocGroupT = { label: string; items: Array<DocPageT | DocGroupT> }
-export type SectionIdT = 'setup' | 'system' | 'elements' | 'blocks'
+export type SectionIdT = 'guide' | 'foundations' | 'elements' | 'blocks'
 export type SectionT = {
 	id: SectionIdT
 	label: string
 	blurb: string
 	// Sections with a landing page list it first in the sidebar.
 	overviewLabel?: string
+	// Sections with many pages can offer an A–Z list beside the groups.
+	isSortable?: boolean
 	nav: Array<DocPageT | DocGroupT>
 }
 
@@ -60,9 +62,9 @@ const element = (slug: string): DocPageT => {
 
 const elements = (...slugs: string[]) => slugs.map(element)
 
-const SETUP: SectionT = {
-	id: 'setup',
-	label: 'Setup',
+const GUIDE: SectionT = {
+	id: 'guide',
+	label: 'Guide',
 	blurb: 'Install Zest, wire it into your stack, and make it yours.',
 	nav: [
 		{
@@ -79,7 +81,7 @@ const SETUP: SectionT = {
 				{ slug: 'react', label: 'React', Component: UsageReact, keywords: 'jsx props' },
 				{ slug: 'svelte', label: 'Svelte', Component: UsageSvelte },
 				{ slug: 'vue', label: 'Vue', Component: UsageVue, keywords: 'vue3 custom elements iscustomelement' },
-				{ slug: 'solid', label: 'Solid', Component: UsageSolid, keywords: 'solidjs attr prop' }
+				{ slug: 'solid', label: 'Solid', Component: UsageSolid, keywords: 'solidjs prop solid2' }
 			]
 		},
 		{
@@ -92,13 +94,13 @@ const SETUP: SectionT = {
 	]
 }
 
-const SYSTEM: SectionT = {
-	id: 'system',
-	label: 'System',
+const FOUNDATIONS: SectionT = {
+	id: 'foundations',
+	label: 'Foundations',
 	blurb: 'Tokens, rules, and motion: the design language every element shares.',
 	nav: [
 		{
-			label: 'Foundations',
+			label: 'Design language',
 			items: [
 				{ slug: 'principles', label: 'Principles', Component: Rules, keywords: 'rules design' },
 				{ slug: 'color', label: 'Color', Component: Color, keywords: 'palette tokens accent' },
@@ -123,6 +125,7 @@ const ELEMENTS: SectionT = {
 	label: 'Elements',
 	blurb: 'Every z element, with live demos, code, and attributes.',
 	overviewLabel: 'All elements',
+	isSortable: true,
 	nav: [
 		{
 			label: 'Typography',
@@ -233,7 +236,13 @@ const BLOCKS_SECTION: SectionT = {
 	}))
 }
 
-export const SECTIONS: SectionT[] = [SETUP, SYSTEM, ELEMENTS, BLOCKS_SECTION]
+export const SECTIONS: SectionT[] = [GUIDE, FOUNDATIONS, ELEMENTS, BLOCKS_SECTION]
+
+// Sections renamed in the docs IA pass; old links redirect.
+export const LEGACY_SECTION_IDS: Record<string, SectionIdT> = {
+	setup: 'guide',
+	system: 'foundations'
+}
 
 export const sectionById = (id: string): SectionT | undefined => SECTIONS.find((s) => s.id === id)
 
@@ -249,15 +258,22 @@ export const pagesOf = (section: SectionT): Array<DocPageT & { group: string }> 
 /** Top-level group label for an element slug ("Overlays", "Forms", …). */
 export const elementGroupOf = (slug: string): string | undefined => pagesOf(ELEMENTS).find((p) => p.slug === slug)?.group
 
+export type SidebarSortT = 'grouped' | 'alphabetical'
+
 /** z-sidebar `items` for a section: values are "<section>/<slug>" paths. */
-export const sidebarItemsOf = (section: SectionT): unknown[] => {
+export const sidebarItemsOf = (section: SectionT, sortMode: SidebarSortT = 'grouped'): unknown[] => {
 	const map = (entries: Array<DocPageT | DocGroupT>): unknown[] =>
 		entries.map((entry) =>
 			isGroup(entry)
 				? { label: entry.label, items: map(entry.items) }
 				: { value: `${section.id}/${entry.slug}`, label: entry.label }
 		)
-	const pageItems = map(section.nav)
+	const getAlphabeticalItems = (): unknown[] => {
+		const sortedPages = [...pagesOf(section)].sort((a, b) => a.label.localeCompare(b.label))
+		return sortedPages.map((page) => ({ value: `${section.id}/${page.slug}`, label: page.label }))
+	}
+	const isAlphabetical = Boolean(section.isSortable) && sortMode === 'alphabetical'
+	const pageItems = isAlphabetical ? getAlphabeticalItems() : map(section.nav)
 	const hasOverview = Boolean(section.overviewLabel)
 	if (!hasOverview) return pageItems
 

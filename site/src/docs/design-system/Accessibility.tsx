@@ -2,7 +2,7 @@ import { Article } from '@app/docs/Prose'
 
 export const Accessibility = () => (
 	<Article
-		eyebrow="System"
+		eyebrow="Foundations"
 		title="Accessibility"
 		lede="Zest leans on the platform first: native buttons, <dialog>, and the Popover API bring focus management, Esc, and top-layer stacking for free. The rest is a short list of commitments."
 	>

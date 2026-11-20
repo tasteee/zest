@@ -2,6 +2,7 @@ import { defineElement } from '../shared/define-element'
 import { c, css, useEffect, useRef } from 'atomico'
 import { coerceSize, sizeProp } from '../shared/layout-schema'
 import { oneOf } from '../shared/prop-types'
+import { warnLegacyOrientation } from '../shared/deprecate'
 
 /*
  * z-marquee, an infinite auto-scrolling row (or column) over slotted content.
@@ -37,6 +38,7 @@ const styles = css`
 		-webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
 	}
 
+	:host([has-fade][is-vertical]) .viewport,
 	:host([has-fade][direction='vertical']) .viewport {
 		mask-image: linear-gradient(to bottom, transparent, black 8%, black 92%, transparent);
 		-webkit-mask-image: linear-gradient(to bottom, transparent, black 8%, black 92%, transparent);
@@ -48,6 +50,7 @@ const styles = css`
 		gap: var(--gap);
 	}
 
+	:host([is-vertical]) .track,
 	:host([direction='vertical']) .track {
 		flex-direction: column;
 		width: auto;
@@ -61,6 +64,7 @@ const styles = css`
 		animation: marquee-x var(--duration) linear infinite;
 	}
 
+	:host([is-vertical]) .group,
 	:host([direction='vertical']) .group {
 		flex-direction: column;
 		animation-name: marquee-y;
@@ -96,6 +100,7 @@ const styles = css`
 
 export const ZMarquee = c(
 	(props) => {
+		warnLegacyOrientation({ tag: 'z-marquee', attribute: 'direction', value: props.direction, flag: 'is-vertical', flagValue: 'vertical' })
 		const slotRef = useRef<HTMLSlotElement>()
 		const cloneRef = useRef<HTMLDivElement>()
 
@@ -135,6 +140,8 @@ export const ZMarquee = c(
 			duration: Number,
 			gap: sizeProp,
 			isReversed: { type: Boolean, reflect: true },
+			isVertical: { type: Boolean, reflect: true },
+			/** @deprecated use is-vertical */
 			direction: { type: oneOf('horizontal', 'vertical'), reflect: true },
 			doesPauseOnHover: { type: Boolean, reflect: true },
 			hasFade: { type: Boolean, reflect: true },

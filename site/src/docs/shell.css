@@ -387,8 +387,7 @@
 	min-height: 0;
 }
 
-.DocsAside z-sidebar,
-.DocsMobileNav z-sidebar {
+.DocsAside z-sidebar {
 	flex: 1 1 0;
 	height: auto;
 	min-height: 0;
@@ -464,7 +463,10 @@
 	gap: 1rem;
 }
 
-/* mobile sheet */
+/* mobile sheet
+   One flat list on the sheet's own surface: sections stack as rows,
+   a hairline, then the active section's pages, then a hairline footer.
+   No nested panels, so nothing reads as a box inside a box. */
 .DocsMobileSheet {
 	--z-sheet-size: min(20rem, 88vw);
 }
@@ -472,13 +474,89 @@
 .DocsMobileNav {
 	display: flex;
 	flex-direction: column;
-	gap: 0.75rem;
 	height: calc(100dvh - 7rem);
 }
 
-.DocsMobileNav .DocsSections {
-	flex-wrap: wrap;
-	margin: 0;
+.DocsMobileSections {
+	display: flex;
+	flex-direction: column;
+	/* matches z-sidebar's row gap */
+	gap: var(--space-1);
+	flex-shrink: 0;
+	padding-bottom: var(--space-3);
+	border-bottom: 1px solid var(--docs-line);
+}
+
+/* mirrors z-sidebar's .link row so both lists share one rhythm */
+.DocsMobileSection {
+	display: flex;
+	align-items: center;
+	padding: var(--space-2) var(--space-2-5);
+	border-radius: var(--radius-md);
+	font-size: var(--font-size-sm);
+	font-weight: var(--font-weight-medium);
+	color: var(--text-secondary);
+	text-decoration: none;
+	transition:
+		color var(--motion-fast) var(--ease-enter),
+		background-color var(--motion-fast) var(--ease-enter);
+}
+
+.DocsMobileSection:hover {
+	color: var(--text-primary);
+	background: color-mix(in oklch, var(--text-primary) 6%, transparent);
+}
+
+/* neutral fill: the accent tint stays reserved for the active page */
+.DocsMobileSection.is-active {
+	color: var(--text-primary);
+	background: var(--surface-subtle);
+}
+
+.DocsMobileSection:focus-visible {
+	outline: 2px solid color-mix(in oklch, var(--border-focus) 60%, transparent);
+	outline-offset: 0;
+}
+
+/* docked sidebar, minus its trailing hairline: it sits flush
+   in the sheet rather than against a page edge */
+.DocsMobileNav z-sidebar {
+	flex: 1 1 0;
+	height: auto;
+	min-height: 0;
+	--z-sidebar-width: 100%;
+	padding-top: var(--space-3);
+	border: 0;
+	background: transparent;
+}
+
+.DocsMobileNav .DocsSocial {
+	padding: var(--space-3) 0 0 var(--space-2-5);
+	border: 0;
+	border-top: 1px solid var(--docs-line);
+	border-radius: 0;
+	background: transparent;
+}
+
+/* current section beside the brand; only shown once the top
+   bar's section links collapse into the drawer */
+.DocsTopbarCrumb {
+	display: none;
+	align-items: center;
+	gap: 0.625rem;
+	min-width: 0;
+	margin-left: -0.5rem;
+	font-size: 0.9375rem;
+	font-weight: 500;
+	color: var(--text-secondary);
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.DocsTopbarCrumb::before {
+	content: '/';
+	color: var(--docs-line);
 }
 
 /* pager */
@@ -781,7 +859,17 @@
 }
 
 /* ── responsive ── */
-@media (max-width: 960px) {
+/* below 980px the section links and the sidebar both move into the
+   drawer, so the links never disappear without a way to reach them */
+@media (max-width: 980px) {
+	.DocsTopbar > .DocsSections {
+		display: none;
+	}
+
+	.DocsTopbarCrumb {
+		display: inline-flex;
+	}
+
 	.DocsBody {
 		grid-template-columns: minmax(0, 1fr);
 	}
@@ -794,16 +882,15 @@
 		display: inline-grid;
 	}
 
+	/* without the sidebar, inset content from the top bar's edges so
+	   the bar reads as the frame and the page sits inside it */
 	.DocsMain {
 		max-width: none;
+		padding-inline: var(--space-5);
 	}
 }
 
 @media (max-width: 720px) {
-	.DocsTopbar > .DocsSections {
-		display: none;
-	}
-
 	.DocsSearch {
 		min-width: 0;
 	}
@@ -834,4 +921,46 @@
 .DocsHero {
 	padding-bottom: 2rem;
 	border-bottom: 1px solid var(--border-default);
+}
+
+/* sort toggle slotted into the sidebar's header slot (elements
+   section): two small text options, right-aligned, so it reads as
+   a setting rather than a control competing with the nav */
+.DocsSidebarSort {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	gap: var(--space-0-5);
+	margin-bottom: calc(var(--space-2) * -1);
+}
+
+.DocsSidebarSortOption {
+	appearance: none;
+	padding: var(--space-0-5) var(--space-1-5);
+	border: 0;
+	border-radius: var(--radius-sm);
+	background: transparent;
+	font: inherit;
+	font-size: var(--font-size-2xs);
+	font-weight: var(--font-weight-medium);
+	letter-spacing: 0.02em;
+	color: var(--text-tertiary);
+	cursor: pointer;
+	transition:
+		color var(--motion-fast) var(--ease-enter),
+		background-color var(--motion-fast) var(--ease-enter);
+}
+
+.DocsSidebarSortOption:hover {
+	color: var(--text-secondary);
+}
+
+.DocsSidebarSortOption.is-active {
+	color: var(--text-primary);
+	background: var(--surface-subtle);
+}
+
+.DocsSidebarSortOption:focus-visible {
+	outline: 2px solid color-mix(in oklch, var(--border-focus) 60%, transparent);
+	outline-offset: 0;
 }

@@ -68,7 +68,7 @@ export const App = () => (
 		<h2>Vue and Svelte</h2>
 		<p>
 			No typings needed. Vue does need <code>isCustomElement</code> to stop it resolving <code>z-</code> tags as components;
-			that is a compiler setting, not a type. See <Link href="/setup/vue">Vue</Link> and <Link href="/setup/svelte">Svelte</Link>.
+			that is a compiler setting, not a type. See <Link href="/guide/vue">Vue</Link> and <Link href="/guide/svelte">Svelte</Link>.
 		</p>
 
 		<h2>Solid</h2>

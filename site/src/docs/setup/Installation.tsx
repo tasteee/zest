@@ -1,7 +1,8 @@
 import { Article, Code } from '@app/docs/Prose'
+import { MarkupCode } from '@app/docs/frameworks/MarkupCode'
 
 export const Installation = () => (
-	<Article eyebrow="Setup" title="Installation" lede="Install the package, import it once, and every z element is defined.">
+	<Article eyebrow="Guide" title="Installation" lede="Install the package, import it once, and every z element is defined.">
 		<h2>Install</h2>
 		<Code language="bash" code={`pnpm add @tasteee/zest`} />
 		<p>npm and yarn work the same way.</p>
@@ -33,6 +34,6 @@ import '@tasteee/zest/fonts.css'
 		/>
 
 		<h2>Check it works</h2>
-		<Code language="html" code={`<z-button tone="secondary">It works</z-button>`} />
+		<MarkupCode html={`<z-button tone="secondary">It works</z-button>`} />
 	</Article>
 )

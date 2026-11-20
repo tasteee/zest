@@ -28,6 +28,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup
       - run: pnpm typecheck
+      - run: pnpm check:framework-demos
 
   # Builds the library and runs the release gate (held-back elements stay out).
   build:

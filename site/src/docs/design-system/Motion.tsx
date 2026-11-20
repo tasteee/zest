@@ -49,7 +49,7 @@ const TokenTable = ({ rows, head }: { rows: string[][]; head: string[] }) => (
 
 export const Motion = () => (
 	<Article
-		eyebrow="System"
+		eyebrow="Foundations"
 		title="Motion"
 		lede="One scale for every element, so a tooltip, a toast, and a sheet all feel like the same product. Motion confirms cause and effect; it never decorates."
 	>

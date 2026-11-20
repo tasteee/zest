@@ -6,7 +6,7 @@ import { DocsFooter, DocsHero, DocsSectionHead } from '@app/docs/DocsChrome'
 export const Typography = () => (
 	<div className="DocsPage">
 		<DocsHero
-			eyebrow="TYPE SYSTEM"
+			eyebrow="Foundations"
 			title="Typography"
 			lede={
 				<z-inline color="muted" weight={400}>
@@ -368,7 +368,7 @@ export const Typography = () => (
 		<DocsFooter
 			links={
 				<>
-					<DocsLink href="/system/color">Color</DocsLink> · <DocsLink href="/system/layout">Layout</DocsLink> ·{' '}
+					<DocsLink href="/foundations/color">Color</DocsLink> · <DocsLink href="/foundations/layout">Layout</DocsLink> ·{' '}
 					<DocsLink href="~/">Home</DocsLink>
 				</>
 			}

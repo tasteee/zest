@@ -1,5 +1,8 @@
 import { useLayoutEffect, useRef, useState } from 'react'
 import { getDemo, runDemoScript, type DemoT } from '@app/docs/demos/registry'
+import { getDemoCode } from '@app/docs/frameworks/demo-code'
+import { FRAMEWORK_LABELS, useFramework } from '@app/docs/frameworks/framework-storage'
+import { FrameworkSelect } from '@app/docs/frameworks/FrameworkPicker'
 
 type DocExamplePropsT = {
 	/** demo id: `demos/<id>.html` (+ `.js` / `.css`) */
@@ -55,11 +58,13 @@ const ReplayIcon = () => (
 /**
  * A live example: one card with a Preview / Code switch. Preview renders the
  * demo on a faint dot-grid canvas, the visual cue that this area is a live
- * sketch of the element rather than part of the page. Code shows the very same
- * files, one tab per file, with a copy button for the active one.
+ * sketch of the element rather than part of the page. Code shows the files for
+ * the reader's framework (see frameworks/demo-code.ts), one tab per file, with
+ * a copy button for the active one. The preview always runs the HTML version.
  */
 export const DocExample = ({ demo: id, title, description, isContained, isStart }: DocExamplePropsT) => {
 	const demo = getDemo(id)
+	const framework = useFramework()
 	const [view, setView] = useState<'preview' | 'code'>('preview')
 	const [fileIndex, setFileIndex] = useState(0)
 	const [runKey, setRunKey] = useState(0)
@@ -75,7 +80,12 @@ export const DocExample = ({ demo: id, title, description, isContained, isStart 
 		)
 	}
 
-	const file = demo.files[Math.min(fileIndex, demo.files.length - 1)]
+	const demoCode = getDemoCode(demo, framework)
+	const files = demoCode.files
+	const file = files[Math.min(fileIndex, files.length - 1)]
+	const isCodeView = view === 'code'
+	const isFallbackShown = isCodeView && demoCode.isFallback
+	const frameworkLabel = FRAMEWORK_LABELS[framework]
 
 	const copy = async () => {
 		try {
@@ -107,12 +117,14 @@ export const DocExample = ({ demo: id, title, description, isContained, isStart 
 						</button>
 					</div>
 
+					{isCodeView && <FrameworkSelect size="sm" className="Example-framework" />}
+
 					<div className="Example-actions">
 						{view === 'code' ? (
 							<>
-								{demo.files.length > 1 && (
+								{files.length > 1 && (
 									<div className="Example-files" role="tablist" aria-label="Files">
-										{demo.files.map((f, index) => (
+										{files.map((f, index) => (
 											<button
 												key={f.name}
 												type="button"
@@ -125,7 +137,7 @@ export const DocExample = ({ demo: id, title, description, isContained, isStart 
 										))}
 									</div>
 								)}
-								{demo.files.length === 1 && <span className="Example-filename">{file.name}</span>}
+								{files.length === 1 && <span className="Example-filename">{file.name}</span>}
 								<button
 									type="button"
 									className={isCopied ? 'Example-icon is-done' : 'Example-icon'}
@@ -152,6 +164,11 @@ export const DocExample = ({ demo: id, title, description, isContained, isStart 
 				<div className={canvasClass} hidden={view !== 'preview'}>
 					<DemoCanvas demo={demo} runKey={runKey} />
 				</div>
+				{isFallbackShown && (
+					<p className="Example-note">
+						No {frameworkLabel} version of this example yet, so this is the plain HTML and JavaScript.
+					</p>
+				)}
 				{view === 'code' && (
 					<div className="Example-code">
 						<z-code-block code={file.code} language={file.language} hasLineNumbers isHeaderHidden isFlush />
