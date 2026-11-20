@@ -61,12 +61,141 @@
 	text-decoration: none;
 }
 
-.DocsBrand .dot {
+/* brand orb + wordmark: one shared 30s cycle.
+   Negative delay lands the first run ~4s after load. */
+.DocsBrand {
+	--brand-cycle: 30s;
+	--brand-delay: -22s;
+}
+
+.DocsBrandOrb {
+	position: relative;
+	top: 1px;
+	display: grid;
+	place-items: center;
 	width: 0.5rem;
 	height: 0.5rem;
+}
+
+/* the halo ring */
+.DocsBrandOrb::before {
+	content: '';
+	position: absolute;
+	inset: -3px;
+	border-radius: 999px;
+	background: color-mix(in oklch, var(--tone) 22%, transparent);
+	animation: docs-brand-halo var(--brand-cycle) linear var(--brand-delay) infinite;
+}
+
+.DocsBrandCore {
+	position: relative;
+	width: 100%;
+	height: 100%;
 	border-radius: 999px;
 	background: var(--tone);
-	box-shadow: 0 0 0 3px color-mix(in oklch, var(--tone) 22%, transparent);
+	animation: docs-brand-core var(--brand-cycle) linear var(--brand-delay) infinite;
+}
+
+.DocsBrandSparks {
+	position: absolute;
+	inset: 0;
+	animation: docs-brand-swirl var(--brand-cycle) linear var(--brand-delay) infinite;
+}
+
+.DocsBrandSpark {
+	position: absolute;
+	inset: 0;
+	display: grid;
+	place-items: center;
+}
+
+.DocsBrandSpark::before {
+	content: '';
+	width: 4px;
+	height: 4px;
+	border-radius: 999px;
+	background: var(--spark-color);
+	opacity: 0;
+	animation: docs-brand-spark var(--brand-cycle) linear var(--brand-delay) infinite;
+}
+
+.DocsBrandSpark:nth-child(1) { rotate: 0deg; --spark-color: var(--accent-secondary); }
+.DocsBrandSpark:nth-child(2) { rotate: 72deg; --spark-color: var(--accent-tertiary); }
+.DocsBrandSpark:nth-child(3) { rotate: 144deg; --spark-color: var(--status-warning); }
+.DocsBrandSpark:nth-child(4) { rotate: 216deg; --spark-color: var(--status-success); }
+.DocsBrandSpark:nth-child(5) { rotate: 288deg; --spark-color: var(--status-danger); }
+
+/* wordmark: solid text at rest, a color band sweeps through */
+.DocsBrandWord {
+	color: transparent;
+	background-image: linear-gradient(
+		100deg,
+		var(--text-primary) 0%,
+		var(--text-primary) 38%,
+		var(--accent-secondary) 43%,
+		var(--accent-tertiary) 47%,
+		var(--status-warning) 51%,
+		var(--status-success) 55%,
+		var(--accent-secondary) 59%,
+		var(--text-primary) 64%,
+		var(--text-primary) 100%
+	);
+	background-size: 300% 100%;
+	background-position: 100% 0;
+	-webkit-background-clip: text;
+	background-clip: text;
+	animation: docs-brand-shimmer var(--brand-cycle) linear var(--brand-delay) infinite;
+}
+
+/* timeline (30s): 87–89.5% ring dissolves into sparks,
+   89.5–94.5% swirl accelerates and tightens, 94.5–96.6%
+   sparks jet into the word, 95.5–99.5% shimmer sweeps. */
+@keyframes docs-brand-halo {
+	0%, 87% { scale: 1; opacity: 1; }
+	89.5% { scale: 1.7; opacity: 0; }
+	97% { scale: 0.5; opacity: 0; }
+	100% { scale: 1; opacity: 1; }
+}
+
+@keyframes docs-brand-spark {
+	0%, 87% { translate: 5px 0; scale: 0; opacity: 0; }
+	89.5% { translate: 7px 0; scale: 1; opacity: 1; }
+	93% { translate: 4px 0; scale: 0.9; opacity: 1; }
+	94.5% { translate: 2px 0; scale: 0.8; opacity: 1; }
+	96% { translate: 1.5px 0; scale: 0.6; opacity: 1; }
+	96.6% { translate: 1px 0; scale: 0.3; opacity: 0; }
+	100% { translate: 5px 0; scale: 0; opacity: 0; }
+}
+
+@keyframes docs-brand-swirl {
+	0%, 88% { rotate: 0deg; translate: 0 0; }
+	90% { rotate: 80deg; }
+	92% { rotate: 280deg; }
+	93.5% { rotate: 560deg; }
+	94.5% { rotate: 820deg; translate: 0 0; animation-timing-function: cubic-bezier(0.5, 0, 0.9, 0.5); }
+	96.6% { rotate: 1260deg; translate: 2rem 0; }
+	96.61%, 100% { rotate: 0deg; translate: 0 0; }
+}
+
+@keyframes docs-brand-core {
+	0%, 94% { scale: 1; }
+	95% { scale: 1.3; }
+	97.5%, 100% { scale: 1; }
+}
+
+@keyframes docs-brand-shimmer {
+	0%, 95.5% { background-position: 100% 0; animation-timing-function: var(--ease-move); }
+	99.5%, 100% { background-position: 0% 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.DocsBrandOrb::before,
+	.DocsBrandCore,
+	.DocsBrandSparks,
+	.DocsBrandSpark::before,
+	.DocsBrandWord {
+		animation: none;
+	}
 }
 
 .DocsSections {
