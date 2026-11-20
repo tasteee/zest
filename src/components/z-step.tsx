@@ -188,8 +188,10 @@ const styles = css`
 		transition: background-color var(--motion-base) var(--ease-enter);
 	}
 
+	/* The line is progress, not status: an errored step still hands on
+	   in the stepper's accent. */
 	:host([state='complete']) .connector {
-		background: var(--tone);
+		background: var(--z-step-accent, var(--accent-primary));
 	}
 
 	:host([is-last]) .connector {

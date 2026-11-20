@@ -742,8 +742,10 @@ export const ZImageCropper = c(
 			isDisabled: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			load: event<{ width: number; height: number }>({ bubbles: true, composed: true }),
-			input: event<CropDetailT>({ bubbles: true, composed: true }),
-			change: event<CropDetailT>({ bubbles: true, composed: true })
+			// Written out, not CropDetailT, so the generated JSX types can
+			// carry it: they only keep shapes a consumer could write.
+			input: event<{ x: number; y: number; width: number; height: number; zoom: number }>({ bubbles: true, composed: true }),
+			change: event<{ x: number; y: number; width: number; height: number; zoom: number }>({ bubbles: true, composed: true })
 		},
 		styles: [styles, interactionStyles, srOnlyStyles]
 	}

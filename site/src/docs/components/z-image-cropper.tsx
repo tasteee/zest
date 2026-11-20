@@ -10,7 +10,7 @@ export const ZImageCropperDoc = () => (
 		<DocExample
 			demo="z-image-cropper/crop-an-avatar"
 			title="Crop an avatar"
-			description="shape="circle" rounds the frame and exports with transparent corners."
+			description={`shape="circle" rounds the frame and exports with transparent corners.`}
 		/>
 		<DocExample
 			demo="z-image-cropper/export-the-crop"

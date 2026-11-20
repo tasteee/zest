@@ -125,15 +125,15 @@ the public elements.
 
 #### Forms
 
-`z-field` `z-input` `z-number-input` `z-number-range-input` `z-date-input` `z-calendar` `z-textarea` `z-checkbox` `z-switch` `z-radio` `z-radio-group` `z-slider` `z-range` `z-select` `z-combobox` `z-filter` `z-color-picker` `z-color-panel` `z-color-swatch` `z-input-otp`
+`z-field` `z-fieldset` `z-input` `z-number-input` `z-number-range-input` `z-date-input` `z-calendar` `z-textarea` `z-tag-input` `z-checkbox` `z-checkbox-group` `z-switch` `z-radio` `z-radio-group` `z-chip` `z-chip-group` `z-rating` `z-slider` `z-range` `z-select` `z-combobox` `z-filter` `z-color-picker` `z-color-panel` `z-color-swatch` `z-input-otp` `z-image-cropper`
 
 #### Data Display
 
-`z-badge` `z-avatar` `z-avatar-stack` `z-progress` `z-skeleton` `z-table` `z-pagination` `z-stat` `z-relative-time` `z-status-dot` `z-kbd` `z-list` `z-list-row` `z-tree` 
+`z-badge` `z-avatar` `z-avatar-stack` `z-image` `z-progress` `z-meter` `z-skeleton` `z-table` `z-pagination` `z-stat` `z-relative-time` `z-status-dot` `z-kbd` `z-list` `z-list-row` `z-tree` `z-timeline` `z-timeline-item` 
 
 #### Navigation
 
-`z-breadcrumbs` `z-tabs` `z-collapsible` `z-accordion` `z-menu` `z-nav-menu` `z-sidebar` `z-dock` `z-dock-item`
+`z-breadcrumbs` `z-tabs` `z-stepper` `z-step` `z-collapsible` `z-accordion` `z-menu` `z-nav-menu` `z-sidebar` `z-dock` `z-dock-item`
 
 #### Overlays
 

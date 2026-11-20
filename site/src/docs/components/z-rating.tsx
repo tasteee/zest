@@ -10,12 +10,12 @@ export const ZRatingDoc = () => (
 		<DocExample
 			demo="z-rating/collect-a-score"
 			title="Collect a score"
-			description="can-clear lets a second click undo. step="0.5" allows halves."
+			description={`can-clear lets a second click undo. step="0.5" allows halves.`}
 		/>
 		<DocExample
 			demo="z-rating/show-an-average"
 			title="Show an average"
-			description="is-readonly renders any fraction and names it "Rated 4.3 of 5"."
+			description={`is-readonly renders any fraction and names it "Rated 4.3 of 5".`}
 		/>
 		<DocExample
 			demo="z-rating/pick-a-shape"

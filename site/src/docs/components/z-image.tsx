@@ -15,7 +15,7 @@ export const ZImageDoc = () => (
 		<DocExample
 			demo="z-image/fit-shape-and-fallback"
 			title="Fit, shape and fallback"
-			description="radius="full" with ratio 1 is a circle. focal-point keeps the subject in frame. A broken file shows a named fallback."
+			description={`radius="full" with ratio 1 is a circle. focal-point keeps the subject in frame. With no file, or a broken one, the fallback slot shows instead.`}
 		/>
 	</ComponentDoc>
 )

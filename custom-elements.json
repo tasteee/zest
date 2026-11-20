@@ -8683,17 +8683,17 @@
             {
               "name": "input",
               "type": {
-                "text": "CustomEvent<CropDetailT>"
+                "text": "CustomEvent<{ x: number; y: number; width: number; height: number; zoom: number }>"
               },
-              "detail": "CropDetailT",
+              "detail": "{ x: number; y: number; width: number; height: number; zoom: number }",
               "description": "Fired on every move while dragging or zooming. The rect is in the image's own pixels."
             },
             {
               "name": "change",
               "type": {
-                "text": "CustomEvent<CropDetailT>"
+                "text": "CustomEvent<{ x: number; y: number; width: number; height: number; zoom: number }>"
               },
-              "detail": "CropDetailT",
+              "detail": "{ x: number; y: number; width: number; height: number; zoom: number }",
               "description": "Fired when a drag, zoom or key press ends."
             }
           ],
