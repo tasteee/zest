@@ -49,7 +49,7 @@ export const ZPopover = c(
 		const [isOpen, setIsOpen] = useProp<boolean>('isOpen')
 		const lastAnnouncedOpen = useRef<boolean | undefined>(undefined)
 
-		const FOCUSABLE = 'a[href], button, input, select, textarea, [tabindex]:not([tabindex="-1"]), z-button, z-input, z-select, z-checkbox, z-switch, z-textarea, z-combobox, z-number-input'
+		const FOCUSABLE = 'a[href], button, input, select, textarea, [tabindex]:not([tabindex="-1"]), z-button, z-input, z-select, z-checkbox, z-switch, z-textarea, z-combobox, z-number-input, z-color-panel'
 		const focusInside = () => {
 			const slotted = contentSlotRef.current?.assignedElements({ flatten: true }) ?? []
 			for (const element of slotted) {

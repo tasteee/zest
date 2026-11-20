@@ -275,7 +275,8 @@ Same list/thread/composer as 3a; adds only the AI differentiators.
 
 **Property controls**
 - [x] `z-color-picker`
-- [ ] `z-color-swatch` / `z-swatches` · `z-eyedropper` · `z-gradient-editor`
+- [x] `z-color-swatch` · `z-color-panel`
+- [ ] `z-swatches` · `z-eyedropper` · `z-gradient-editor`
 - [ ] `z-number-scrubber` (drag-to-change) · `z-dimension-input` (linked X/Y/W/H)
 - [ ] `z-angle-dial` · `z-alignment-control` · `z-box-model` · `z-corner-radius`
 - [ ] `z-opacity-slider` · `z-blend-mode-picker` · `z-font-picker` · `z-icon-picker`

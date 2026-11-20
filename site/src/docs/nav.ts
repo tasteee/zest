@@ -176,7 +176,7 @@ const ELEMENTS: SectionT = {
 					label: 'Choice',
 					items: elements('z-checkbox', 'z-switch', 'z-radio', 'z-radio-group', 'z-select', 'z-combobox', 'z-filter')
 				},
-				{ label: 'Range & color', items: elements('z-slider', 'z-range', 'z-color-picker') },
+				{ label: 'Range & color', items: elements('z-slider', 'z-range', 'z-color-picker', 'z-color-panel', 'z-color-swatch') },
 				{ label: 'Files', items: elements('z-dropzone') }
 			]
 		},

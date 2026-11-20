@@ -1,19 +1,34 @@
+import { c, css, event, useEffect, useHost, useProp, useRef } from 'atomico'
 import { defineFormElement, useFormControl } from '../shared/form-control'
-import { c, css, event, useProp, useState, useHost, useEffect, useRef } from 'atomico'
-import { oneOf } from '../shared/prop-types'
+import { interactionStyles } from '../shared/interaction-styles'
 import { useLocale } from '../shared/locale'
+import { oneOf } from '../shared/prop-types'
+import { overlayPositionProps } from '../shared/overlay'
+import { warnDeprecated } from '../shared/deprecate'
+import { resolveAllowedFormats, resolveColor, type ColorDetailT, type ColorFormatT } from '../shared/color'
+import './z-popover'
+import './z-color-panel'
+import './z-color-swatch'
 
-/*
- * z-color-picker: a swatch trigger that opens a bordered, floating panel
- * holding a custom saturation/brightness area, a hue slider, a hex field, and
- * a row of preset swatches (the zest palette by default). value is a hex
- * string like #BF40BF. The spectrum is drawn here, not with the native color
- * input, so the picker stays on-theme instead of opening the OS popup.
- */
+// z-color-picker: a trigger that floats a z-color-panel.
+//
+// The trigger is a swatch button by default. Any focusable
+// element in [slot="trigger"] replaces it:
+//
+//   <z-color-picker value="#BF40BF">
+//     <z-button slot="trigger">Accent</z-button>
+//   </z-color-picker>
+//
+// The current color is published on the host as
+// --z-color-value, so a custom trigger can paint itself with
+// background: var(--z-color-value) and no script.
+//
+// The picker owns the form value and the open state; the
+// panel owns editing. Panel events are caught here and sent
+// again from the picker, so listeners see one element.
 const styles = css`
 	:host {
 		display: inline-flex;
-		position: relative;
 		--tone: var(--accent-primary);
 	}
 
@@ -29,440 +44,187 @@ const styles = css`
 		display: none;
 	}
 
-	.trigger {
+	z-popover {
+		--z-overlay-padding: var(--space-3);
+		--z-overlay-max-width: none;
+	}
+
+	.color-picker-trigger {
 		display: inline-flex;
 		align-items: center;
-		gap: var(--space-2-5);
-		background: transparent;
+		height: var(--control-height-md);
+		max-width: 100%;
+		padding-inline: var(--space-2-5) var(--space-3-5);
 		border: 1px solid var(--border-default);
 		border-radius: var(--radius-md);
-		height: var(--control-height-md);
-		padding-inline: var(--space-2-5) var(--space-3-5);
-		color: var(--text-primary);
-		font-family: var(--font-mono);
-		font-size: var(--font-size-sm);
+		background: transparent;
 		cursor: pointer;
 		transition: border-color var(--motion-fast) var(--ease-enter);
 	}
 
-	.trigger:hover {
-		border-color: color-mix(in oklch, var(--text-primary) 30%, transparent);
+	.color-picker-trigger:hover {
+		border-color: var(--border-strong);
 	}
 
-	.trigger.is-open {
+	.color-picker-trigger.isOpen {
 		border-color: var(--tone);
 	}
 
-	.trigger:focus-visible {
+	.color-picker-trigger:focus-visible {
 		outline: 2px solid var(--border-focus);
 		outline-offset: 0;
 	}
 
-	.swatch {
-		width: 1.25rem;
-		height: 1.25rem;
-		border-radius: var(--radius-sm);
-		border: 1px solid color-mix(in oklch, var(--text-primary) 25%, transparent);
-		flex-shrink: 0;
+	.color-picker-trigger:disabled {
+		opacity: var(--control-disabled-opacity);
+		cursor: not-allowed;
 	}
 
-	.panel {
-		position: fixed;
-		top: 0;
-		left: 0;
-		visibility: hidden;
-		z-index: var(--z-menu);
-		width: 15rem;
-		background: var(--surface-overlay);
-		border: 1px solid var(--border-default);
-		border-radius: var(--radius-md);
-		box-shadow: var(--shadow-overlay);
-		padding: var(--space-3);
-		display: flex;
-		flex-direction: column;
-		gap: var(--space-3);
-	}
-
-	.area {
-		position: relative;
-		width: 100%;
-		height: 8.5rem;
-		border-radius: var(--radius-sm);
-		border: 1px solid var(--border-default);
-		cursor: crosshair;
-		touch-action: none;
-		outline: none;
-		background: linear-gradient(to top, #000, transparent), linear-gradient(to right, #fff, var(--hue-color));
-	}
-	.area:focus-visible,
-	.hue:focus-visible {
-		outline: 2px solid var(--border-focus);
-		outline-offset: 0;
-	}
-
-	.hue {
-		position: relative;
-		width: 100%;
-		height: 0.75rem;
-		border-radius: var(--radius-full);
-		border: 1px solid var(--border-default);
-		cursor: pointer;
-		touch-action: none;
-		outline: none;
-		background: linear-gradient(to right, #f00, #ff0, #0f0, #0ff, #00f, #f0f, #f00);
-	}
-
-	.thumb {
-		position: absolute;
-		width: 0.875rem;
-		height: 0.875rem;
-		border-radius: var(--radius-full);
-		border: 2px solid #fff;
-		background: transparent;
-		outline: 1px solid rgb(0 0 0 / 0.5);
-		transform: translate(-50%, -50%);
-		pointer-events: none;
-	}
-	.hue .thumb {
-		top: 50%;
-		background: var(--hue-color);
-		width: 1rem;
-		height: 1rem;
-	}
-
-	.hex-row {
-		display: flex;
-		align-items: center;
-		gap: var(--space-2);
-		border: 1px solid var(--border-default);
-		border-radius: var(--radius-sm);
-		padding-inline: var(--space-2);
-		height: 2.25rem;
-	}
-	.hex-row:focus-within {
-		border-color: var(--tone);
-	}
-	.hash {
-		color: var(--text-secondary);
-		font-family: var(--font-mono);
-		font-size: var(--font-size-sm);
-	}
-	.hex-input {
-		flex: 1;
-		min-width: 0;
-		background: transparent;
-		border: none;
-		outline: none;
-		color: var(--text-primary);
-		font-family: var(--font-mono);
-		font-size: var(--font-size-sm);
-		text-transform: uppercase;
-	}
-
-	.presets {
-		display: grid;
-		grid-template-columns: repeat(8, 1fr);
-		gap: var(--space-1-5);
-	}
-	.preset {
-		aspect-ratio: 1;
-		border-radius: var(--radius-full);
-		border: 1px solid color-mix(in oklch, var(--text-primary) 20%, transparent);
-		cursor: pointer;
-		padding: 0;
-		transition: transform var(--motion-instant) var(--ease-enter);
-	}
-	.preset:hover {
-		transform: scale(1.15);
-	}
-	.preset.is-selected {
-		outline: 2px solid var(--text-primary);
-		outline-offset: 1px;
+	.color-picker-panel {
+		width: 16rem;
 	}
 `
 
-const DEFAULT_PRESETS = ['#FAFAFA', '#BF40BF', '#FF1493', '#FF3B30', '#A0A0A0', '#707070', '#2A2F2A', '#0A0F0A']
-
-const normalizeHex = (raw: string): string => {
-	let hex = raw.trim().replace(/^#/, '')
-	if (/^[0-9a-fA-F]{3}$/.test(hex)) {
-		hex = hex
-			.split('')
-			.map((c) => c + c)
-			.join('')
-	}
-	return `#${hex.toUpperCase()}`
-}
-
-type Hsv = { h: number; s: number; v: number }
-
-const clamp = (n: number, min: number, max: number): number => Math.min(max, Math.max(min, n))
-
-const hexToHsv = (hex: string): Hsv => {
-	const value = normalizeHex(hex).slice(1)
-	const r = parseInt(value.slice(0, 2), 16) / 255
-	const g = parseInt(value.slice(2, 4), 16) / 255
-	const b = parseInt(value.slice(4, 6), 16) / 255
-	const max = Math.max(r, g, b)
-	const delta = max - Math.min(r, g, b)
-	let h = 0
-	if (delta !== 0) {
-		if (max === r) h = ((g - b) / delta) % 6
-		else if (max === g) h = (b - r) / delta + 2
-		else h = (r - g) / delta + 4
-	}
-	return { h: (h * 60 + 360) % 360, s: max === 0 ? 0 : delta / max, v: max }
-}
-
-const hsvToHex = ({ h, s, v }: Hsv): string => {
-	const channel = (n: number): string => {
-		const k = (n + h / 60) % 6
-		const value = v - v * s * Math.max(0, Math.min(k, 4 - k, 1))
-		return Math.round(value * 255)
-			.toString(16)
-			.padStart(2, '0')
-	}
-	return `#${channel(5)}${channel(3)}${channel(1)}`.toUpperCase()
-}
-
-const isValidHex = (raw: string): boolean => /^#?([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/.test(raw.trim())
-
 export const ZColorPicker = c(
 	(props) => {
-		const t = useLocale()
+		const translate = useLocale()
 		const host = useHost()
 		const [value, setValue] = useProp<string>('value')
-		const [isOpen, setIsOpen] = useState(false)
+		const [format, setFormat] = useProp<ColorFormatT>('format')
+		const [isOpen, setIsOpen] = useProp<boolean>('isOpen')
 		const defaultValue = useRef(value)
 		const triggerRef = useRef<HTMLButtonElement>()
-		const panelRef = useRef<HTMLDivElement>()
 
-		const current = value || '#BF40BF'
-		// Submits the hex like <input type="color">: always a value, never empty.
+		const allowedFormats = resolveAllowedFormats(props.formats)
+		const resolved = resolveColor(value, format, allowedFormats)
+		const displayValue = resolved.text
+
 		const { isFormDisabled } = useFormControl({
-			value: current,
+			value: displayValue,
 			isDisabled: props.isDisabled,
 			control: triggerRef,
 			onReset: () => setValue(defaultValue.current),
-			onRestore: (state) => { if (typeof state === 'string' && state) setValue(state) }
+			onRestore: (state) => {
+				const isRestorable = typeof state === 'string' && state !== ''
+				if (isRestorable) setValue(state as string)
+			}
 		})
-		const isDisabled = props.isDisabled || isFormDisabled
-		const presets: string[] = Array.isArray(props.presets) ? (props.presets as string[]) : DEFAULT_PRESETS
+		const isDisabled = Boolean(props.isDisabled || isFormDisabled)
+
+		// `presets` was the name before swatches became opt-in.
+		const hasLegacyPresets = Array.isArray(props.presets)
+		if (hasLegacyPresets) warnDeprecated('z-color-picker presets', 'swatches')
+		const swatches = hasLegacyPresets ? props.presets : props.swatches
 
 		useEffect(() => {
-			if (!isOpen) return
-			const onDocumentPointerDown = (e: Event) => {
-				if (!e.composedPath().includes(host.current as EventTarget)) setIsOpen(false)
-			}
-			const onDocumentKeyDown = (event: KeyboardEvent) => {
-				if (event.key !== 'Escape') return
-				setIsOpen(false)
-				triggerRef.current?.focus()
-			}
-			document.addEventListener('pointerdown', onDocumentPointerDown)
-			document.addEventListener('keydown', onDocumentKeyDown)
-			return () => {
-				document.removeEventListener('pointerdown', onDocumentPointerDown)
-				document.removeEventListener('keydown', onDocumentKeyDown)
-			}
-		}, [isOpen])
+			host.current.style.setProperty('--z-color-value', displayValue)
+		}, [displayValue])
 
-		// The panel is fixed to the viewport so scroll containers never clip
-		// it. It opens below the trigger, flips above when there is more room
-		// there, and is clamped so it never crosses any page edge.
-		useEffect(() => {
-			if (!isOpen) return
-			const placePanel = () => {
-				const trigger = triggerRef.current
-				const panel = panelRef.current
-				if (!trigger || !panel) return
-				const gap = 6
-				const edge = 8
-				const triggerRect = trigger.getBoundingClientRect()
-				const viewportWidth = document.documentElement.clientWidth
-				const viewportHeight = window.innerHeight
-				const roomBelow = viewportHeight - triggerRect.bottom - gap - edge
-				const roomAbove = triggerRect.top - gap - edge
-				const opensBelow = panel.offsetHeight <= roomBelow || roomBelow >= roomAbove
-				const idealTop = opensBelow ? triggerRect.bottom + gap : triggerRect.top - gap - panel.offsetHeight
-				const highestTop = Math.max(edge, viewportHeight - panel.offsetHeight - edge)
-				const rightmostLeft = Math.max(edge, viewportWidth - panel.offsetWidth - edge)
-				panel.style.top = `${Math.round(clamp(idealTop, edge, highestTop))}px`
-				panel.style.left = `${Math.round(clamp(triggerRect.left, edge, rightmostLeft))}px`
-				panel.style.visibility = 'visible'
-			}
-			placePanel()
-			window.addEventListener('scroll', placePanel, true)
-			window.addEventListener('resize', placePanel)
-			return () => {
-				window.removeEventListener('scroll', placePanel, true)
-				window.removeEventListener('resize', placePanel)
-			}
-		}, [isOpen])
-
-		// Hue is tracked separately: grays and blacks have no hue of their own, so
-		// deriving it from the hex alone would snap the slider to red mid-drag.
-		const [hsv, setHsv] = useState<Hsv>(() => hexToHsv(current))
-		const derived = hexToHsv(current)
-		const synced = hsvToHex(hsv) === current.toUpperCase() ? hsv : derived
-
-		const apply = (hex: string) => {
-			setValue(hex)
-			props.change({ value: hex })
+		// Panel events stop here and leave again from the picker.
+		const handlePanelInput = (panelEvent: CustomEvent<ColorDetailT>) => {
+			const isPanelEvent = panelEvent instanceof CustomEvent
+			if (!isPanelEvent) return
+			panelEvent.stopPropagation()
+			setValue(panelEvent.detail.value)
+			props.input(panelEvent.detail)
 		}
 
-		const applyHsv = (next: Hsv) => {
-			setHsv(next)
-			apply(hsvToHex(next))
+		const handlePanelChange = (panelEvent: CustomEvent<ColorDetailT>) => {
+			panelEvent.stopPropagation()
+			setValue(panelEvent.detail.value)
+			props.change(panelEvent.detail)
 		}
 
-		const dragArea = (pointerEvent: PointerEvent) => {
-			const rect = (pointerEvent.currentTarget as HTMLElement).getBoundingClientRect()
-			const s = clamp((pointerEvent.clientX - rect.left) / rect.width, 0, 1)
-			const v = 1 - clamp((pointerEvent.clientY - rect.top) / rect.height, 0, 1)
-			applyHsv({ h: synced.h, s, v })
+		const handlePanelFormatChange = (panelEvent: CustomEvent<{ value: string; format: ColorFormatT }>) => {
+			panelEvent.stopPropagation()
+			setFormat(panelEvent.detail.format)
+			setValue(panelEvent.detail.value)
+			props.formatchange(panelEvent.detail)
 		}
 
-		const dragHue = (pointerEvent: PointerEvent) => {
-			const rect = (pointerEvent.currentTarget as HTMLElement).getBoundingClientRect()
-			const h = clamp((pointerEvent.clientX - rect.left) / rect.width, 0, 1) * 360
-			applyHsv({ ...synced, h })
+		// A native ClipboardEvent from the value field is also
+		// called "copy"; only the panel's own event is relayed.
+		const handlePanelCopy = (panelEvent: CustomEvent<{ value: string }>) => {
+			const isPanelEvent = panelEvent instanceof CustomEvent
+			if (!isPanelEvent) return
+			panelEvent.stopPropagation()
+			props.copy(panelEvent.detail)
 		}
 
-		const onDragStart = (move: (pointerEvent: PointerEvent) => void) => (pointerEvent: PointerEvent) => {
-			;(pointerEvent.currentTarget as HTMLElement).setPointerCapture(pointerEvent.pointerId)
-			move(pointerEvent)
+		const handlePopoverToggle = (popoverEvent: CustomEvent<{ open: boolean }>) => {
+			popoverEvent.stopPropagation()
+			setIsOpen(popoverEvent.detail.open)
+			props.toggle(popoverEvent.detail)
 		}
 
-		const onDragMove = (move: (pointerEvent: PointerEvent) => void) => (pointerEvent: PointerEvent) => {
-			if ((pointerEvent.currentTarget as HTMLElement).hasPointerCapture(pointerEvent.pointerId)) move(pointerEvent)
-		}
-
-		const onAreaKey = (keyEvent: KeyboardEvent) => {
-			const step = keyEvent.shiftKey ? 0.1 : 0.02
-			const delta: Record<string, [number, number]> = {
-				ArrowLeft: [-step, 0],
-				ArrowRight: [step, 0],
-				ArrowUp: [0, step],
-				ArrowDown: [0, -step]
-			}
-			const move = delta[keyEvent.key]
-			if (!move) return
-			keyEvent.preventDefault()
-			applyHsv({ h: synced.h, s: clamp(synced.s + move[0], 0, 1), v: clamp(synced.v + move[1], 0, 1) })
-		}
-
-		const onHueKey = (keyEvent: KeyboardEvent) => {
-			const step = keyEvent.shiftKey ? 15 : 3
-			const delta: Record<string, number> = { ArrowLeft: -step, ArrowDown: -step, ArrowRight: step, ArrowUp: step }
-			if (!(keyEvent.key in delta)) return
-			keyEvent.preventDefault()
-			applyHsv({ ...synced, h: clamp(synced.h + delta[keyEvent.key], 0, 360) })
-		}
-
-		const hueColor = hsvToHex({ h: synced.h, s: 1, v: 1 })
-
-		// The hex is the trigger's only text, so a bare aria-label would hide the
-		// value. Name what is being coloured, then say what it currently is.
+		// The value is the trigger's only text, so a bare
+		// aria-label would hide it. Name what is colored, then
+		// say what it is now.
 		const providedLabel = props.label || host.current?.getAttribute('aria-label')
-		const triggerLabel = providedLabel ? `${providedLabel}, ${current.toUpperCase()}` : undefined
+		const triggerLabel = providedLabel ? `${providedLabel}, ${displayValue}` : undefined
+		const triggerClass = isOpen ? 'color-picker-trigger isOpen' : 'color-picker-trigger'
+		const placement = props.placement || 'bottom-start'
 
 		return (
 			<host shadowDom={{ delegatesFocus: true }}>
-				<button
-					ref={triggerRef}
-					type="button"
-					class={isOpen ? 'trigger is-open' : 'trigger'}
-					disabled={isDisabled}
-					aria-haspopup="dialog"
-					aria-label={triggerLabel}
-					aria-expanded={isOpen ? 'true' : 'false'}
-					onclick={() => setIsOpen(!isOpen)}
+				<z-popover
+					placement={placement}
+					offset={props.offset ?? 6}
+					label={translate('chooseColor')}
+					isOpen={Boolean(isOpen)}
+					isDisabled={isDisabled}
+					tone={props.tone}
+					ontoggle={handlePopoverToggle}
 				>
-					<span class="swatch" style={{ background: current }}></span>
-					<span>{current.toUpperCase()}</span>
-				</button>
-
-				{isOpen && (
-					<div ref={panelRef} class="panel" role="dialog" aria-label={t('chooseColor')}>
-						<div
-							class="area"
-							style={{ '--hue-color': hueColor }}
-							role="slider"
-							tabindex="0"
-							aria-label={t('saturationAndBrightness')}
-							aria-valuetext={`Saturation ${Math.round(synced.s * 100)}%, brightness ${Math.round(synced.v * 100)}%`}
-							onpointerdown={onDragStart(dragArea)}
-							onpointermove={onDragMove(dragArea)}
-							onkeydown={onAreaKey}
-						>
-							<span class="thumb" style={{ left: `${synced.s * 100}%`, top: `${(1 - synced.v) * 100}%` }}></span>
-						</div>
-						<div
-							class="hue"
-							style={{ '--hue-color': hueColor }}
-							role="slider"
-							tabindex="0"
-							aria-label={t('hue')}
-							aria-valuemin="0"
-							aria-valuemax="360"
-							aria-valuenow={Math.round(synced.h)}
-							onpointerdown={onDragStart(dragHue)}
-							onpointermove={onDragMove(dragHue)}
-							onkeydown={onHueKey}
-						>
-							<span class="thumb" style={{ left: `${(synced.h / 360) * 100}%` }}></span>
-						</div>
-						<div class="hex-row">
-							<span class="hash">#</span>
-							<input
-								class="hex-input"
-								type="text"
-								value={current.replace(/^#/, '').toUpperCase()}
-								maxlength={6}
-								onchange={(e: any) => {
-									if (!isValidHex(e.target.value)) {
-										e.target.value = current.replace(/^#/, '')
-										return
-									}
-									const hex = normalizeHex(e.target.value)
-									setHsv(hexToHsv(hex))
-									apply(hex)
-								}}
-							/>
-						</div>
-						<div class="presets">
-							{presets.map((hex) => (
-								<button
-									key={hex}
-									type="button"
-									class={hex.toUpperCase() === current.toUpperCase() ? 'preset is-selected' : 'preset'}
-									style={{ background: hex }}
-									aria-label={hex}
-									onclick={() => {
-										setHsv(hexToHsv(hex))
-										apply(hex.toUpperCase())
-									}}
-								></button>
-							))}
-						</div>
-					</div>
-				)}
+					<slot name="trigger" slot="trigger">
+						<button ref={triggerRef} type="button" class={triggerClass} disabled={isDisabled} aria-label={triggerLabel}>
+							<z-color-swatch value={displayValue}></z-color-swatch>
+						</button>
+					</slot>
+					<z-color-panel
+						class="color-picker-panel"
+						value={displayValue}
+						format={resolved.format}
+						formats={props.formats}
+						swatches={swatches}
+						tone={props.tone}
+						hasAlpha={props.hasAlpha}
+						hasEyedropper={props.hasEyedropper}
+						isChannelsHidden={props.isChannelsHidden}
+						isCopyHidden={props.isCopyHidden}
+						isDisabled={isDisabled}
+						oninput={handlePanelInput}
+						onchange={handlePanelChange}
+						onformatchange={handlePanelFormatChange}
+						oncopy={handlePanelCopy}
+					></z-color-panel>
+				</z-popover>
 			</host>
 		)
 	},
 	{
 		props: {
+			...overlayPositionProps,
 			value: { type: String, reflect: true },
+			format: { type: oneOf('hex', 'rgb', 'hsl', 'hsb', 'hwb', 'oklch', 'oklab', 'lch', 'lab', 'p3'), reflect: true },
+			formats: { type: Array },
+			swatches: { type: Array },
+			presets: { type: Array },
 			name: { type: String, reflect: true },
 			label: String,
-			presets: { type: Array },
-			tone: { type: oneOf('primary', 'secondary', 'tertiary'), reflect: true },
+			hasAlpha: { type: Boolean, reflect: true },
+			hasEyedropper: { type: Boolean, reflect: true },
+			isChannelsHidden: { type: Boolean, reflect: true },
+			isCopyHidden: { type: Boolean, reflect: true },
+			isOpen: { type: Boolean, reflect: true },
 			isDisabled: { type: Boolean, reflect: true },
-			isHidden: { type: Boolean, reflect: true },
-			change: event<{ value: string }>({ bubbles: true, composed: true })
+			input: event<ColorDetailT>({ bubbles: true, composed: true }),
+			change: event<ColorDetailT>({ bubbles: true, composed: true }),
+			formatchange: event<{ value: string; format: ColorFormatT }>({ bubbles: true, composed: true }),
+			copy: event<{ value: string }>({ bubbles: true, composed: true }),
+			toggle: event<{ open: boolean }>({ bubbles: true, composed: true })
 		},
-		styles,
+		styles: [styles, interactionStyles],
 		form: true
 	}
 )

@@ -1198,23 +1198,60 @@
 			}
 		]
 	},
-	"z-color-picker": {
-		"summary": "A swatch that opens a panel for picking a color.",
+	"z-color-panel": {
+		"summary": "An inline color editor: area, sliders, format menu, value field, channels, and optional swatches.",
 		"props": {
 			"value": {
 				"default": "#BF40BF",
-				"description": "Current color as a hex string. Reflected.",
-				"example": "picker.addEventListener('change', (event) => {\n  console.log(event.detail.value)\n})"
+				"description": "Current color as a CSS string in the active format. Any supported format is accepted. Reflected.",
+				"example": "picker.addEventListener('change', (event) => {\n  console.log(event.detail.value, event.detail.hex)\n})"
 			},
-			"presets": {
-				"default": "zest palette",
-				"description": "Swatches in the quick-pick row. Set it from JavaScript.",
+			"format": {
+				"values": [
+					"hex",
+					"rgb",
+					"hsl",
+					"hsb",
+					"hwb",
+					"oklch",
+					"oklab",
+					"lch",
+					"lab",
+					"p3"
+				],
+				"description": "Active color format. It sets the value string, the 2D area, and the channel fields. Defaults to the format the value is written in. Reflected and updated when the person picks another format."
+			},
+			"formats": {
+				"default": "all",
 				"type": "string[]",
-				"example": "picker.presets = ['#FAFAFA', '#BF40BF', '#FF1493']"
+				"description": "Formats offered in the format menu, shown in a fixed order. One format turns the menu into a label.",
+				"example": "picker.formats = ['hex', 'rgb', 'oklch']"
+			},
+			"swatches": {
+				"default": "none",
+				"type": "string[]",
+				"description": "Opt-in quick-pick colors under the channels. Any CSS colors.",
+				"example": "picker.swatches = ['#BF40BF', '#F24A9B', 'oklch(70% 0.15 200)']"
+			},
+			"has-alpha": {
+				"default": "false",
+				"description": "Adds an opacity slider and an A channel. Alpha is written only when the color is translucent (8-digit hex, `/ 50%` in functions)."
+			},
+			"has-eyedropper": {
+				"default": "false",
+				"description": "Adds a button that picks a color from the screen. Shown only where the browser has the EyeDropper API."
+			},
+			"is-channels-hidden": {
+				"default": "false",
+				"description": "Hides the per-format number fields (R G B, H S L, L C H, ...)."
+			},
+			"is-copy-hidden": {
+				"default": "false",
+				"description": "Hides the copy button at the end of the value field."
 			},
 			"tone": {
 				"default": "primary",
-				"description": "Accent color of the open state.",
+				"description": "Accent of focus and selection states.",
 				"values": [
 					"primary",
 					"secondary",
@@ -1229,29 +1266,272 @@
 				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
 				"default": "false"
 			},
-			"label": {
-				"description": "Accessible name for the color picker."
-			},
 			"name": {
 				"description": "Form field name, used when the control is submitted with a form."
 			}
 		},
 		"events": {
+			"input": {
+				"description": "On every move while the color changes, including each frame of a drag.",
+				"detail": "{ value: string, format: string, hex: string, alpha: number }"
+			},
 			"change": {
-				"description": "Whenever the color changes (spectrum, hex field, or preset)."
+				"description": "When a change is committed: a drag ends, a field is confirmed, a swatch or key press lands.",
+				"detail": "{ value: string, format: string, hex: string, alpha: number }"
+			},
+			"formatchange": {
+				"description": "When the person picks another format. The color is the same; the value string is rewritten.",
+				"detail": "{ value: string, format: string }"
+			},
+			"copy": {
+				"description": "After the value is copied to the clipboard.",
+				"detail": "{ value: string }"
+			}
+		},
+		"keyboard": [
+			{
+				"keys": "Arrow keys",
+				"action": "On the area: moves the color 1%. On a slider: moves hue 1° or lightness and opacity 1%."
+			},
+			{
+				"keys": "Shift + Arrow keys",
+				"action": "Moves ten times as far."
+			},
+			{
+				"keys": "Arrow Up / Arrow Down",
+				"action": "In a channel field: steps the value. Shift steps ten times as far."
+			},
+			{
+				"keys": "Enter",
+				"action": "In the value or a channel field: applies what was typed. A pasted color in another allowed format switches to it."
+			},
+			{
+				"keys": "Arrow Down",
+				"action": "On the format button: opens the format menu."
+			},
+			{
+				"keys": "Arrow Up / Arrow Down / Home / End",
+				"action": "In the format menu: moves between formats."
+			},
+			{
+				"keys": "Esc",
+				"action": "In the format menu: closes it and returns focus to the format button."
+			}
+		],
+		"accessibility": "The area and sliders are focusable role=\"slider\" elements named for their axes (for example \"Chroma and lightness\" or \"Hue\") with a spoken value. The format button opens a labelled listbox grouped as Standard, Perceptual, and Wide gamut. Channel fields are named in full (Red, Saturation, Chroma). Every string comes from setLocale()."
+	},
+	"z-color-picker": {
+		"summary": "A swatch, or any trigger you slot, that floats a full color panel.",
+		"props": {
+			"value": {
+				"default": "#BF40BF",
+				"description": "Current color as a CSS string in the active format. Any supported format is accepted. Reflected.",
+				"example": "picker.addEventListener('change', (event) => {\n  console.log(event.detail.value, event.detail.hex)\n})"
+			},
+			"format": {
+				"values": [
+					"hex",
+					"rgb",
+					"hsl",
+					"hsb",
+					"hwb",
+					"oklch",
+					"oklab",
+					"lch",
+					"lab",
+					"p3"
+				],
+				"description": "Active color format. It sets the value string, the 2D area, and the channel fields. Defaults to the format the value is written in. Reflected and updated when the person picks another format."
+			},
+			"formats": {
+				"default": "all",
+				"type": "string[]",
+				"description": "Formats offered in the format menu, shown in a fixed order. One format turns the menu into a label.",
+				"example": "picker.formats = ['hex', 'rgb', 'oklch']"
+			},
+			"swatches": {
+				"default": "none",
+				"type": "string[]",
+				"description": "Opt-in quick-pick colors under the channels. Any CSS colors.",
+				"example": "picker.swatches = ['#BF40BF', '#F24A9B', 'oklch(70% 0.15 200)']"
+			},
+			"has-alpha": {
+				"default": "false",
+				"description": "Adds an opacity slider and an A channel. Alpha is written only when the color is translucent (8-digit hex, `/ 50%` in functions)."
+			},
+			"has-eyedropper": {
+				"default": "false",
+				"description": "Adds a button that picks a color from the screen. Shown only where the browser has the EyeDropper API."
+			},
+			"is-channels-hidden": {
+				"default": "false",
+				"description": "Hides the per-format number fields (R G B, H S L, L C H, ...)."
+			},
+			"is-copy-hidden": {
+				"default": "false",
+				"description": "Hides the copy button at the end of the value field."
+			},
+			"tone": {
+				"default": "primary",
+				"description": "Accent of focus and selection states.",
+				"values": [
+					"primary",
+					"secondary",
+					"tertiary"
+				]
+			},
+			"is-disabled": {
+				"description": "Blocks interaction, dims the element, and removes it from the keyboard focus order.",
+				"default": "false"
+			},
+			"is-hidden": {
+				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
+				"default": "false"
+			},
+			"name": {
+				"description": "Form field name, used when the control is submitted with a form."
+			},
+			"label": {
+				"description": "Accessible name for the trigger. The current value is spoken after it."
+			},
+			"presets": {
+				"description": "Deprecated. Use swatches.",
+				"type": "string[]"
+			},
+			"is-open": {
+				"description": "Opens or closes the panel. It reflects the current state.",
+				"default": "false"
+			},
+			"placement": {
+				"values": [
+					"top",
+					"bottom",
+					"left",
+					"right",
+					"top-start",
+					"top-center",
+					"top-end",
+					"bottom-start",
+					"bottom-center",
+					"bottom-end",
+					"left-start",
+					"left-center",
+					"left-end",
+					"right-start",
+					"right-center",
+					"right-end"
+				],
+				"default": "bottom-start",
+				"description": "Preferred side of the trigger. Add `-start` or `-end` to align to an edge, for example `bottom-start`. The panel flips when there is no room."
+			},
+			"offset": {
+				"default": "6",
+				"description": "Gap from the trigger."
+			}
+		},
+		"events": {
+			"input": {
+				"description": "On every move while the color changes, including each frame of a drag.",
+				"detail": "{ value: string, format: string, hex: string, alpha: number }"
+			},
+			"change": {
+				"description": "When a change is committed: a drag ends, a field is confirmed, a swatch or key press lands.",
+				"detail": "{ value: string, format: string, hex: string, alpha: number }"
+			},
+			"formatchange": {
+				"description": "When the person picks another format. The color is the same; the value string is rewritten.",
+				"detail": "{ value: string, format: string }"
+			},
+			"copy": {
+				"description": "After the value is copied to the clipboard.",
+				"detail": "{ value: string }"
+			},
+			"toggle": {
+				"description": "Fired when the panel opens or closes.",
+				"detail": "{ open: boolean }"
+			}
+		},
+		"slots": {
+			"trigger": "Replaces the default swatch button. Use a focusable element. It can paint itself with var(--z-color-value)."
+		},
+		"cssProperties": {
+			"--z-color-value": {
+				"description": "Set on the host by the picker: the current color, so a slotted trigger can paint itself with var(--z-color-value)."
 			}
 		},
 		"keyboard": [
 			{
 				"keys": "Enter / Space",
-				"action": "On the swatch: opens the panel."
+				"action": "On the trigger: opens the panel and moves focus into it."
 			},
 			{
 				"keys": "Esc",
-				"action": "Closes the panel and returns focus to the swatch."
+				"action": "Closes the panel and returns focus to the trigger."
+			},
+			{
+				"keys": "Arrow keys",
+				"action": "On the area: moves the color 1%. On a slider: moves hue 1° or lightness and opacity 1%."
+			},
+			{
+				"keys": "Shift + Arrow keys",
+				"action": "Moves ten times as far."
+			},
+			{
+				"keys": "Arrow Up / Arrow Down",
+				"action": "In a channel field: steps the value. Shift steps ten times as far."
+			},
+			{
+				"keys": "Enter",
+				"action": "In the value or a channel field: applies what was typed. A pasted color in another allowed format switches to it."
+			},
+			{
+				"keys": "Arrow Down",
+				"action": "On the format button: opens the format menu."
+			},
+			{
+				"keys": "Arrow Up / Arrow Down / Home / End",
+				"action": "In the format menu: moves between formats."
 			}
 		],
-		"accessibility": "A native button with aria-haspopup=\"dialog\" and aria-expanded, named by its label and current color. The panel is a labelled dialog, and Escape closes it and returns focus to the swatch."
+		"accessibility": "A native button with aria-haspopup=\"dialog\" and aria-expanded, named by its label and current color. The panel is a labelled dialog; Escape closes it and returns focus to the trigger. The area and sliders are focusable role=\"slider\" elements named for their axes (for example \"Chroma and lightness\" or \"Hue\") with a spoken value. The format button opens a labelled listbox grouped as Standard, Perceptual, and Wide gamut. Channel fields are named in full (Red, Saturation, Chroma). Every string comes from setLocale()."
+	},
+	"z-color-swatch": {
+		"summary": "A read-only color chip with its value.",
+		"props": {
+			"value": {
+				"description": "Any CSS color. Drawn by the browser as written. Reflected."
+			},
+			"label": {
+				"description": "Text shown instead of the value. With is-value-hidden, the accessible name of the chip."
+			},
+			"size": {
+				"default": "md",
+				"values": [
+					"sm",
+					"md",
+					"lg"
+				],
+				"description": "Chip and text size."
+			},
+			"is-round": {
+				"default": "false",
+				"description": "Draws a circle instead of a rounded square."
+			},
+			"is-value-hidden": {
+				"default": "false",
+				"description": "Shows only the chip. It becomes an image named by label or value."
+			},
+			"is-hidden": {
+				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
+				"default": "false"
+			}
+		},
+		"cssParts": {
+			"chip": "The color chip.",
+			"value": "The value text."
+		},
+		"keyboard": [],
+		"accessibility": "Not focusable. With text shown, the text is read and the chip is hidden from assistive tech. With is-value-hidden, the chip is role=\"img\" named by label or value."
 	},
 	"z-column": {
 		"summary": "A vertical flex line with spacing and alignment.",
