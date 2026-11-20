@@ -18,6 +18,15 @@ type DocExamplePropsT = {
 	isStart?: boolean
 }
 
+// Demo images live in site/public/media and are written as `/media/…`,
+// the path a reader would use in their own app. Under a base path (GitHub
+// Pages serves the site from /<repo>/) the preview prefixes it; the code
+// view keeps the path as written.
+const MEDIA_PATTERN = /(src|srcset)="\/media\//g
+const mediaBase = `${import.meta.env.BASE_URL}media/`
+
+const withMediaBase = (html: string): string => html.replace(MEDIA_PATTERN, (_match, attribute: string) => `${attribute}="${mediaBase}`)
+
 // Renders the demo's own files into the preview and runs its script against
 // it. Re-runs whenever `runKey` changes (the replay button).
 const DemoCanvas = ({ demo, runKey }: { demo: DemoT; runKey: number }) => {
@@ -26,7 +35,7 @@ const DemoCanvas = ({ demo, runKey }: { demo: DemoT; runKey: number }) => {
 	useLayoutEffect(() => {
 		const stage = stageRef.current
 		if (!stage) return
-		stage.innerHTML = (demo.css ? `<style>${demo.css}</style>` : '') + demo.html
+		stage.innerHTML = (demo.css ? `<style>${demo.css}</style>` : '') + withMediaBase(demo.html)
 		if (demo.js) runDemoScript(demo.js, stage)
 		return () => {
 			stage.innerHTML = ''

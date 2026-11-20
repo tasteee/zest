@@ -1,0 +1,14 @@
+<z-column gap="6" style="width: 100%">
+  <z-stepper value="1">
+    <z-step label="Account" description="Email and password"></z-step>
+    <z-step label="Workspace"></z-step>
+    <z-step label="Invite team" is-optional></z-step>
+    <z-step label="Done"></z-step>
+  </z-stepper>
+  <z-stepper value="2" size="sm" tone="secondary" is-navigable>
+    <z-step label="Cart"></z-step>
+    <z-step label="Shipping"></z-step>
+    <z-step label="Payment" is-error description="Card declined"></z-step>
+    <z-step label="Review"></z-step>
+  </z-stepper>
+</z-column>

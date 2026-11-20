@@ -116,7 +116,29 @@ export const englishStrings = {
 	copyLine: 'Copy line',
 	copySelection: 'Copy selection',
 	replay: 'Replay',
-	linkTo: 'Link to "{title}"'
+	linkTo: 'Link to "{title}"',
+	selectAll: 'Select all',
+	selectAtLeast: 'Please select at least {min}.',
+	selectAtMost: 'Please select at most {max}.',
+	removeItem: 'Remove {label}',
+	addTagPlaceholder: 'Add…',
+	tagsSelected: '{count} added',
+	ratingValue: '{value} of {max}',
+	ratedValue: 'Rated {value} of {max}',
+	rating: 'Rating',
+	stepOf: 'Step {index} of {count}',
+	stepComplete: 'Completed',
+	stepCurrent: 'Current',
+	stepError: 'Has an error',
+	stepOptional: 'Optional',
+	steps: 'Steps',
+	timeline: 'Timeline',
+	imageUnavailable: 'Image unavailable',
+	cropImage: 'Crop image',
+	zoom: 'Zoom',
+	zoomIn: 'Zoom in',
+	zoomOut: 'Zoom out',
+	cropPosition: 'Crop {x}% across, {y}% down, {zoom}× zoom'
 } as const
 
 export type LocaleStringsT = { [Key in keyof typeof englishStrings]: string }

@@ -39,6 +39,10 @@ const CONSTRUCTOR_TYPES: Record<string, string> = {
 const unionKey = (text: string): string =>
 	`union:${text.split('|').map((member) => member.trim().replace(/^["']|["']$/g, '')).sort().join('|')}`
 
+// CustomType<'a' | 'b'> is a string union; CustomType<string[]> (listOf) is
+// kept as written.
+const customTypeKey = (inner: string): string => (/['"]/.test(inner) ? unionKey(inner) : inner.trim())
+
 // Reads `export declare const ZName: ...<{ props: { ... } }>` out of a
 // declaration file and returns each prop's name and coarse type.
 const readDeclaredProps = (source: string, name: string): Map<string, string> | null => {
@@ -65,7 +69,7 @@ const readDeclaredProps = (source: string, name: string): Map<string, string> | 
 				const constructor = /(\w+Constructor)/.exec(rest)?.[1]
 				const isEvent = /EventProp|CustomEvent|EventInit/.test(rest)
 				const union = /CustomType<([^>]+)>/.exec(rest)?.[1]
-				props.set(propName, isEvent ? 'event' : union ? unionKey(union) : constructor ? CONSTRUCTOR_TYPES[constructor] ?? constructor : 'custom')
+				props.set(propName, isEvent ? 'event' : union ? customTypeKey(union) : constructor ? CONSTRUCTOR_TYPES[constructor] ?? constructor : 'custom')
 			}
 		}
 		nesting += (line.match(/{/g) ?? []).length - (line.match(/}/g) ?? []).length
@@ -77,7 +81,7 @@ const readDeclaredProps = (source: string, name: string): Map<string, string> | 
 		const entry = new RegExp(`\\n\\s*${propName}\\??: \\{[^}]*`, 'm').exec(block)?.[0] ?? ''
 		const union = /CustomType<([^>]+)>/.exec(entry)?.[1]
 		const constructor = /type: (\w+Constructor)/.exec(entry)?.[1]
-		if (union) props.set(propName, unionKey(union))
+		if (union) props.set(propName, customTypeKey(union))
 		else if (constructor) props.set(propName, CONSTRUCTOR_TYPES[constructor] ?? constructor)
 		else if (/EventProp|CustomEvent/.test(entry)) props.set(propName, 'event')
 	}
@@ -112,7 +116,7 @@ describe('custom-elements.json agrees with the declarations', () => {
 			if (declaredType === undefined) { problems.push(`manifest field "${member.name}" is not a declared prop`); continue }
 			const rawManifestType = member.type?.text ?? ''
 			const manifestType = rawManifestType.includes('|') ? unionKey(rawManifestType) : rawManifestType
-			const comparable = ['string', 'boolean', 'number', 'array', 'object', 'function', 'promise'].includes(declaredType) || declaredType.startsWith('union:')
+			const comparable = ['string', 'boolean', 'number', 'array', 'object', 'function', 'promise'].includes(declaredType) || declaredType.startsWith('union:') || declaredType.endsWith('[]')
 			if (comparable && manifestType && manifestType !== declaredType) problems.push(`"${member.name}" is ${rawManifestType} in the manifest but ${declaredType} in the declaration`)
 		}
 		for (const event of element.events) {

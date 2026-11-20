@@ -102,6 +102,17 @@ import { ZDraggableDoc } from '@app/docs/components/z-draggable'
 import { ZDropTargetDoc } from '@app/docs/components/z-drop-target'
 import { ZSortableDoc } from '@app/docs/components/z-sortable'
 import { ZDropzoneDoc } from '@app/docs/components/z-dropzone'
+import { ZFieldsetDoc } from '@app/docs/components/z-fieldset'
+import { ZCheckboxGroupDoc } from '@app/docs/components/z-checkbox-group'
+import { ZChipDoc } from '@app/docs/components/z-chip'
+import { ZChipGroupDoc } from '@app/docs/components/z-chip-group'
+import { ZTagInputDoc } from '@app/docs/components/z-tag-input'
+import { ZRatingDoc } from '@app/docs/components/z-rating'
+import { ZMeterDoc } from '@app/docs/components/z-meter'
+import { ZStepperDoc } from '@app/docs/components/z-stepper'
+import { ZTimelineDoc } from '@app/docs/components/z-timeline'
+import { ZImageDoc } from '@app/docs/components/z-image'
+import { ZImageCropperDoc } from '@app/docs/components/z-image-cropper'
 
 
 // slug → page component for every element doc. Which of them are listed (and
@@ -203,4 +214,15 @@ export const ELEMENT_DOCS: Record<string, ComponentType> = {
 	'z-drop-target': ZDropTargetDoc,
 	'z-sortable': ZSortableDoc,
 	'z-dropzone': ZDropzoneDoc,
+	'z-fieldset': ZFieldsetDoc,
+	'z-checkbox-group': ZCheckboxGroupDoc,
+	'z-chip': ZChipDoc,
+	'z-chip-group': ZChipGroupDoc,
+	'z-tag-input': ZTagInputDoc,
+	'z-rating': ZRatingDoc,
+	'z-meter': ZMeterDoc,
+	'z-stepper': ZStepperDoc,
+	'z-timeline': ZTimelineDoc,
+	'z-image': ZImageDoc,
+	'z-image-cropper': ZImageCropperDoc,
 }

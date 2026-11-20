@@ -109,7 +109,7 @@ These repay themselves across 3–5 domains each. The reuse map:
 
 **Status & feedback**
 - [ ] `z-status-dot` / `z-status-indicator` · `z-live-indicator`
-- [ ] `z-relative-time` (auto-updating) · `z-activity-feed` · `z-timeline`
+- [ ] `z-relative-time` (auto-updating) · `z-activity-feed` · [x] `z-timeline`
 - [ ] `z-leaderboard` · `z-progress-tracker`
 
 ---

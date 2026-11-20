@@ -29,7 +29,7 @@ const styles = css`
 		color: var(--text-primary);
 		user-select: none;
 		-webkit-user-select: none;
-		--tone: var(--accent-primary);
+		--tone: var(--z-checkbox-group-accent, var(--accent-primary));
 	}
 
 	label.is-sm { min-height: var(--control-height-sm); font-size: var(--font-size-xs); }

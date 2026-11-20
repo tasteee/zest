@@ -9,6 +9,33 @@ version and a prior deprecation. See `SUPPORT.md`.
 
 ### Added
 
+- `z-fieldset`: a titled group of controls with a group description and
+  error. `is-disabled` disables every control inside, as a native
+  fieldset does, and restores only what it disabled.
+- `z-checkbox-group`: many-of-many selection over z-checkbox children.
+  `value` is a `string[]`; `min`, `max` and `is-required` validate;
+  `has-select-all` adds a parent with a mixed state.
+- A chip family that shares one chip: `z-chip` (a toggle, optionally
+  removable), `z-chip-group` (single or `is-multiple` choice, `value`
+  is a `string[]`) and `z-tag-input` (typed entries become chips;
+  delimiter, paste, suggestions, `max`, keyboard editing).
+- `z-rating`: stars, hearts or dots; half steps, `can-clear`, and a
+  read-only display that renders fractions.
+- `z-meter`: a level in a range, coloured by `low`, `high` and
+  `optimum` as the native meter is; `segments` for cell bars.
+- `z-stepper` and `z-step`: progress through an ordered flow,
+  horizontal or vertical, with `is-navigable` back-steps.
+- `z-timeline` and `z-timeline-item`: events down a rail, with icon
+  markers and pending items.
+- `z-image`: reserved ratio box, loading shimmer, fade-in, captions
+  and a fallback slot.
+- `z-image-cropper`: pan, zoom and pinch under a fixed frame, rect or
+  circle, with `getCrop()`, `toCanvas()`, `toBlob()`, `toDataURL()`.
+- `listOf<T>()` for typed array props, so `value` reaches the manifest
+  and the React typings as `string[]` instead of `unknown`.
+- `z-checkbox` reads `--z-checkbox-group-accent`, so a group's tone
+  reaches its boxes.
+
 - `z-calendar`, a month grid for picking one day or, with `is-range`, a
   range of days, and `z-date-input`, a typed date field (or range) with an
   optional calendar. Values are ISO dates; a range is an ISO interval.

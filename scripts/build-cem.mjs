@@ -138,6 +138,12 @@ const resolvePropDescriptor = (node) => {
 			return buildPropDescriptor('function', { isAttribute: false, isEvent: true, eventDetail })
 		}
 		if (value.expression.text === 'callback') return buildPropDescriptor('function', { isAttribute: false })
+		// listOf<string>() — shared/prop-types.ts. An array prop whose element
+		// type is the call's type argument.
+		if (value.expression.text === 'listOf') {
+			const itemType = value.typeArguments?.[0]?.getText() ?? 'unknown'
+			return buildPropDescriptor(`${itemType}[]`, { isAttribute: false })
+		}
 		// oneOf('sm', 'md', 'lg') — shared/prop-types.ts. A string attribute whose
 		// declared type is the literal union; the manifest says the same.
 		if (value.expression.text === 'oneOf') {
