@@ -16,6 +16,7 @@ const styles = css`
 	:host {
 		display: block;
 		width: 100%;
+		min-width: 0;
 	}
 
 	:host([is-hidden]) {

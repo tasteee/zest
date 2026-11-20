@@ -28,6 +28,7 @@ const styles = css`
 		display: inline-flex;
 		position: relative;
 		width: 100%;
+		min-width: 0;
 		--tone: var(--accent-primary);
 	}
 
