@@ -1,0 +1,10 @@
+<z-stepper value="1" is-vertical style="max-width: 26rem">
+  <z-step label="Connect a repository" description="GitHub, GitLab or Bitbucket"></z-step>
+  <z-step label="Configure the build">
+    <z-column gap="3">
+      <z-field label="Build command"><z-input value="pnpm build"></z-input></z-field>
+      <z-row gap="2"><z-button size="sm">Continue</z-button></z-row>
+    </z-column>
+  </z-step>
+  <z-step label="Deploy"></z-step>
+</z-stepper>

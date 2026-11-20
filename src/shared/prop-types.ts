@@ -13,3 +13,13 @@ import { type as atomicoType } from 'atomico'
  */
 export const oneOf = <const Values extends readonly [string, ...string[]]>(...values: Values) =>
 	atomicoType<Values[number]>(String)
+
+/*
+ * Typed array props.
+ *
+ * `{ type: Array }` reaches the declaration file and the JSX types as
+ * `unknown`. `listOf<string>()` is still plain Array at runtime, but the
+ * declared type is string[], and scripts/build-cem.mjs reads the type
+ * argument, so the manifest and the React typings say string[] too.
+ */
+export const listOf = <Item>() => atomicoType<Item[]>(Array)

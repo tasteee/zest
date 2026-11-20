@@ -3615,7 +3615,11 @@
 			},
 			"tone": {
 				"description": "Accent color of the selection and today marker.",
-				"values": ["primary", "secondary", "tertiary"],
+				"values": [
+					"primary",
+					"secondary",
+					"tertiary"
+				],
 				"default": "primary"
 			},
 			"is-disabled": {
@@ -3737,11 +3741,19 @@
 			"size": {
 				"default": "md",
 				"description": "Matches the size of `z-number-input` and `z-select`.",
-				"values": ["sm", "md", "lg"]
+				"values": [
+					"sm",
+					"md",
+					"lg"
+				]
 			},
 			"tone": {
 				"description": "Accent color of the focus ring and the calendar's selection.",
-				"values": ["primary", "secondary", "tertiary"],
+				"values": [
+					"primary",
+					"secondary",
+					"tertiary"
+				],
 				"default": "primary"
 			},
 			"is-invalid": {
@@ -6345,6 +6357,1139 @@
 			{
 				"title": "Sanitizing",
 				"text": "By default script-like tags, event-handler attributes and javascript: URLs are removed. This is not a full HTML sanitizer: run untrusted HTML through DOMPurify before you set does-allow-html."
+			}
+		]
+	},
+	"z-fieldset": {
+		"summary": "A titled group of related form controls, with a group description and error, that can disable everything inside at once.",
+		"props": {
+			"legend": {
+				"description": "The group's title. Also its accessible name. Use the `legend` slot for rich content."
+			},
+			"description": {
+				"description": "Guidance under the legend, for the group as a whole."
+			},
+			"error": {
+				"description": "A group-level error shown under the controls, such as \"Pick at least one plan\". Announced as an alert."
+			},
+			"kind": {
+				"values": [
+					"plain",
+					"outline",
+					"soft"
+				],
+				"default": "plain",
+				"description": "`plain` sets no frame. `outline` draws a hairline border; `soft` fills a surface. Both pad the content."
+			},
+			"size": {
+				"values": [
+					"md",
+					"lg"
+				],
+				"default": "md",
+				"description": "Size of the legend. Use `lg` when the fieldset heads a page section."
+			},
+			"is-required": {
+				"description": "Adds a required marker to the legend. Mark each required control too; this is the visual cue for the group.",
+				"default": "false"
+			},
+			"is-disabled": {
+				"description": "Disables every control inside, as `<fieldset disabled>` does. Controls disabled on their own stay disabled when it is turned off.",
+				"default": "false"
+			},
+			"is-horizontal": {
+				"description": "Lays the controls in a wrapping row instead of a column.",
+				"default": "false"
+			},
+			"is-legend-hidden": {
+				"description": "Hides the legend and description visually. They still name and describe the group for screen readers.",
+				"default": "false"
+			},
+			"is-hidden": {
+				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
+				"default": "false"
+			}
+		},
+		"slots": {
+			"default": "The controls: z-field, z-checkbox-group, z-radio-group, inputs, rows of them.",
+			"legend": "Rich legend content. Its text becomes the group's name.",
+			"description": "Rich description content.",
+			"error": "Rich error content.",
+			"actions": "Content at the end of the legend row, such as a reset link."
+		},
+		"cssProperties": {
+			"--z-fieldset-gap": {
+				"description": "Space between the controls.",
+				"default": "var(--space-4)"
+			}
+		},
+		"cssParts": {
+			"fieldset": "The frame around legend, content and error.",
+			"legend": "The legend text.",
+			"content": "The box that holds the controls."
+		},
+		"keyboard": [],
+		"accessibility": "role=\"group\", named by the legend and described by the description and error. Disabling it disables each control inside, so they leave the tab order and say they are disabled. The error is a live alert.",
+		"guidance": [
+			{
+				"title": "When to use it",
+				"text": "When several controls answer one question (an address, notification settings) or when a section should switch off as a whole. One control needs only z-field."
+			},
+			{
+				"title": "Nesting",
+				"text": "Put z-field elements inside for per-control labels and errors. The fieldset's own error is for problems that belong to the group."
+			}
+		]
+	},
+	"z-checkbox-group": {
+		"summary": "Many-of-many selection across z-checkbox children, with one string[] value, min and max limits, and an optional select-all.",
+		"props": {
+			"value": {
+				"description": "The checked values, as a string[]. Set it and the children follow; leave it unset and the group reads the children seeded with `is-checked`.",
+				"default": "[]"
+			},
+			"name": {
+				"description": "Form field name, used when the control is submitted with a form."
+			},
+			"label": {
+				"description": "Accessible group label (`aria-label`). In a z-field, the field's label is used."
+			},
+			"min": {
+				"description": "The fewest checked values a valid answer has. Checked only once something is chosen, unless `is-required`."
+			},
+			"max": {
+				"description": "The most checked values a valid answer has."
+			},
+			"size": {
+				"values": [
+					"sm",
+					"md",
+					"lg"
+				],
+				"default": "md",
+				"description": "Size of the select-all checkbox. Size the children on each z-checkbox."
+			},
+			"tone": {
+				"values": [
+					"primary",
+					"secondary",
+					"tertiary",
+					"success",
+					"warning",
+					"danger"
+				],
+				"default": "primary",
+				"description": "Accent color of every checked box in the group."
+			},
+			"select-all-label": {
+				"description": "Text for the select-all checkbox.",
+				"default": "\"Select all\""
+			},
+			"has-select-all": {
+				"description": "Adds a parent checkbox above the list: checked when every enabled child is, mixed when some are, and toggling them all.",
+				"default": "false"
+			},
+			"is-horizontal": {
+				"description": "Lays the checkboxes in a wrapping row instead of a column.",
+				"default": "false"
+			},
+			"is-required": {
+				"description": "At least one value must be checked (or `min`, when set).",
+				"default": "false"
+			},
+			"is-disabled": {
+				"description": "Blocks interaction, dims the element, and removes it from the keyboard focus order.",
+				"default": "false"
+			},
+			"is-hidden": {
+				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
+				"default": "false"
+			},
+			"description": {
+				"description": "Helper text shown under the control and linked to it for screen readers."
+			},
+			"error": {
+				"description": "Error message shown under the control. Setting it marks the control invalid."
+			}
+		},
+		"events": {
+			"change": {
+				"description": "Fired when the checked set changes, with the whole value. The children's own `change` events stop at the group.",
+				"detail": "{ value: string[] }"
+			}
+		},
+		"slots": {
+			"default": "The z-checkbox children, each with a unique `value`."
+		},
+		"keyboard": [
+			{
+				"keys": "Tab",
+				"action": "Moves between the checkboxes."
+			},
+			{
+				"keys": "Space",
+				"action": "Toggles the focused checkbox."
+			}
+		],
+		"accessibility": "role=\"group\" with a name. Each checkbox stays a native checkbox in the tab order. Select-all reports a mixed state when some children are checked. Validation messages come from `setLocale()`.",
+		"guidance": [
+			{
+				"title": "Children",
+				"text": "z-checkbox children with unique values and no `name` of their own; the group submits for them, one entry per checked value."
+			},
+			{
+				"title": "Reading the value",
+				"text": "`value` is always a string[], so `group.value.includes('sms')` works without checking the type first."
+			}
+		]
+	},
+	"z-chip": {
+		"summary": "A compact toggle chip. Clicking flips `is-selected`; `is-removable` adds an ×. Group them with z-chip-group.",
+		"props": {
+			"label": {
+				"description": "Chip text. The default slot takes precedence."
+			},
+			"value": {
+				"description": "Value reported in events and used by z-chip-group. Defaults to the chip's text inside a group."
+			},
+			"tone": {
+				"values": [
+					"primary",
+					"secondary",
+					"tertiary",
+					"success",
+					"warning",
+					"danger"
+				],
+				"default": "primary",
+				"description": "Accent color of the selected state. Inherits the group's tone when unset."
+			},
+			"size": {
+				"values": [
+					"sm",
+					"md",
+					"lg"
+				],
+				"default": "md",
+				"description": "Height and type size. Inherits the group's size when unset."
+			},
+			"kind": {
+				"values": [
+					"outline",
+					"soft"
+				],
+				"default": "outline",
+				"description": "Resting look: a hairline border, or a filled surface. Inherits the group's kind when unset."
+			},
+			"is-selected": {
+				"description": "Whether the chip is on. Reflected; clicking toggles it.",
+				"default": "false"
+			},
+			"is-removable": {
+				"description": "Shows an × that fires `remove`. Delete or Backspace on the focused chip does the same.",
+				"default": "false"
+			},
+			"is-disabled": {
+				"description": "Blocks interaction, dims the element, and removes it from the keyboard focus order.",
+				"default": "false"
+			},
+			"is-hidden": {
+				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
+				"default": "false"
+			}
+		},
+		"events": {
+			"select": {
+				"description": "Fired when the chip is toggled.",
+				"detail": "{ value?: string; selected: boolean }"
+			},
+			"remove": {
+				"description": "Fired by the × or the Delete key. The chip does not remove itself; the listener decides.",
+				"detail": "{ value?: string }"
+			}
+		},
+		"slots": {
+			"default": "The chip text.",
+			"prefix": "A leading icon or tiny avatar."
+		},
+		"cssParts": {
+			"chip": "The pill."
+		},
+		"keyboard": [
+			{
+				"keys": "Space / Enter",
+				"action": "Toggles the chip."
+			},
+			{
+				"keys": "Delete / Backspace",
+				"action": "Fires `remove` on an `is-removable` chip."
+			}
+		],
+		"accessibility": "A toggle button with aria-pressed, named by its text. The × is a separate, labelled button for pointer users; keyboard users remove with Delete or Backspace, so the chip stays one tab stop.",
+		"guidance": [
+			{
+				"title": "Chip or badge",
+				"text": "A chip is an input: it toggles or removes. For a read-only status or label, use z-badge."
+			}
+		]
+	},
+	"z-chip-group": {
+		"summary": "A wrapping row of z-chip toggles with one string[] value: single choice by default, several with `is-multiple`.",
+		"props": {
+			"value": {
+				"description": "The selected values, as a string[] in both modes. Set it and the chips follow; leave it unset and the group reads the chips seeded with `is-selected`.",
+				"default": "[]"
+			},
+			"name": {
+				"description": "Form field name, used when the control is submitted with a form."
+			},
+			"label": {
+				"description": "Accessible group label (`aria-label`). In a z-field, the field's label is used."
+			},
+			"tone": {
+				"values": [
+					"primary",
+					"secondary",
+					"tertiary",
+					"success",
+					"warning",
+					"danger"
+				],
+				"default": "primary",
+				"description": "Selected color of every chip that has no tone of its own."
+			},
+			"size": {
+				"values": [
+					"sm",
+					"md",
+					"lg"
+				],
+				"default": "md",
+				"description": "Size of every chip that has no size of its own."
+			},
+			"kind": {
+				"values": [
+					"outline",
+					"soft"
+				],
+				"default": "outline",
+				"description": "Resting look of every chip that has no kind of its own."
+			},
+			"is-multiple": {
+				"description": "Lets several chips stay selected: the filter-row pattern. Off, selecting one clears the others.",
+				"default": "false"
+			},
+			"is-required": {
+				"description": "At least one chip must be selected for the form to submit.",
+				"default": "false"
+			},
+			"is-disabled": {
+				"description": "Blocks interaction, dims the element, and removes it from the keyboard focus order.",
+				"default": "false"
+			},
+			"is-hidden": {
+				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
+				"default": "false"
+			},
+			"description": {
+				"description": "Helper text shown under the control and linked to it for screen readers."
+			},
+			"error": {
+				"description": "Error message shown under the control. Setting it marks the control invalid."
+			}
+		},
+		"events": {
+			"change": {
+				"description": "Fired when the selection changes, with the whole value. The chips' own `select` events stop at the group.",
+				"detail": "{ value: string[] }"
+			}
+		},
+		"slots": {
+			"default": "The z-chip children."
+		},
+		"keyboard": [
+			{
+				"keys": "← / →",
+				"action": "Move focus to the previous or next chip, wrapping."
+			},
+			{
+				"keys": "Space / Enter",
+				"action": "Toggles the focused chip."
+			}
+		],
+		"accessibility": "role=\"group\" with a name. Each chip is a toggle button that reports aria-pressed. Arrow keys add quick movement on top of Tab.",
+		"guidance": [
+			{
+				"title": "Single or multiple",
+				"text": "Single for one answer (a size, a plan). Multiple for filters. In both, `value` is a string[]: read `value[0]` for the single choice."
+			}
+		]
+	},
+	"z-tag-input": {
+		"summary": "A text field that turns typed entries into removable chips. Its value is a string[].",
+		"props": {
+			"value": {
+				"description": "The tags, as a string[].",
+				"default": "[]"
+			},
+			"suggestions": {
+				"description": "Completions offered while typing, as a string[]. Tags already added are left out."
+			},
+			"name": {
+				"description": "Form field name, used when the control is submitted with a form."
+			},
+			"label": {
+				"description": "Accessible name for the text field. In a z-field, the field's label is used."
+			},
+			"placeholder": {
+				"description": "Shown while there are no tags."
+			},
+			"delimiter": {
+				"description": "The key that adds the typed text as a tag, besides Enter. Pasted text is split on it and on new lines. Set it empty for Enter only.",
+				"default": "\",\""
+			},
+			"max": {
+				"description": "The most tags it takes. At the limit the field stops accepting text."
+			},
+			"size": {
+				"values": [
+					"sm",
+					"md",
+					"lg"
+				],
+				"default": "md",
+				"description": "Height and type size, matching z-input."
+			},
+			"tone": {
+				"values": [
+					"primary",
+					"secondary",
+					"tertiary",
+					"success",
+					"warning",
+					"danger"
+				],
+				"default": "primary",
+				"description": "Tints the tags and the focus border."
+			},
+			"can-duplicate": {
+				"description": "Allows the same tag twice. Off, a repeat is ignored.",
+				"default": "false"
+			},
+			"is-draft-kept-on-blur": {
+				"description": "Leaves typed text in the field on blur instead of adding it as a tag.",
+				"default": "false"
+			},
+			"is-invalid": {
+				"description": "Shows the error state. Pair it with a visible message, for example through `z-field`.",
+				"default": "false"
+			},
+			"is-required": {
+				"description": "At least one tag is needed for the form to submit.",
+				"default": "false"
+			},
+			"is-readonly": {
+				"description": "Shows the tags without remove buttons and takes no new ones. Still submitted.",
+				"default": "false"
+			},
+			"is-disabled": {
+				"description": "Blocks interaction, dims the element, and removes it from the keyboard focus order.",
+				"default": "false"
+			},
+			"is-hidden": {
+				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
+				"default": "false"
+			},
+			"description": {
+				"description": "Helper text shown under the control and linked to it for screen readers."
+			},
+			"error": {
+				"description": "Error message shown under the control. Setting it marks the control invalid."
+			}
+		},
+		"events": {
+			"input": {
+				"description": "Fired on every keystroke with the text not yet added. Use it to load suggestions.",
+				"detail": "{ value: string }"
+			},
+			"change": {
+				"description": "Fired when tags are added or removed, with the whole value.",
+				"detail": "{ value: string[] }"
+			},
+			"add": {
+				"description": "Fired once per tag added.",
+				"detail": "{ value: string }"
+			},
+			"remove": {
+				"description": "Fired when a tag is removed.",
+				"detail": "{ value: string; index: number }"
+			}
+		},
+		"slots": {
+			"prefix": "A leading icon.",
+			"suffix": "A trailing icon or action."
+		},
+		"cssParts": {
+			"field": "The bordered field holding the tags and the text."
+		},
+		"keyboard": [
+			{
+				"keys": "Enter / delimiter",
+				"action": "Adds the typed text as a tag. Enter on an empty field submits the form."
+			},
+			{
+				"keys": "Backspace / ← at the start",
+				"action": "Moves focus to the last tag."
+			},
+			{
+				"keys": "← / →",
+				"action": "Move between tags; → past the last one returns to the text."
+			},
+			{
+				"keys": "Backspace / Delete on a tag",
+				"action": "Removes it and focuses the one before."
+			},
+			{
+				"keys": "Escape on a tag",
+				"action": "Returns to the text."
+			}
+		],
+		"accessibility": "The text field is a native input with the field's name and description. Tags are a list; each remove button is named \"Remove {tag}\". Suggestions use a native datalist, so the browser announces them.",
+		"guidance": [
+			{
+				"title": "Pasting",
+				"text": "Pasting \"a, b, c\" or a column of lines adds each entry, honouring `max` and duplicates."
+			}
+		]
+	},
+	"z-rating": {
+		"summary": "A row of stars, hearts or dots that picks a score, with half steps, hover preview and a read-only display mode.",
+		"props": {
+			"value": {
+				"description": "The score, from 0 to `max`. 0 means unrated.",
+				"default": "0"
+			},
+			"max": {
+				"description": "How many icons, and the top score.",
+				"default": "5"
+			},
+			"step": {
+				"description": "1 for whole marks, 0.5 for halves. The pointer picks the half it is over.",
+				"default": "1"
+			},
+			"name": {
+				"description": "Form field name, used when the control is submitted with a form."
+			},
+			"label": {
+				"description": "Accessible name. In a z-field, the field's label is used."
+			},
+			"shape": {
+				"values": [
+					"star",
+					"heart",
+					"circle"
+				],
+				"default": "star",
+				"description": "The icon."
+			},
+			"size": {
+				"values": [
+					"sm",
+					"md",
+					"lg"
+				],
+				"default": "md",
+				"description": "Icon size: 16, 20 or 28px."
+			},
+			"tone": {
+				"values": [
+					"primary",
+					"secondary",
+					"tertiary",
+					"success",
+					"warning",
+					"danger"
+				],
+				"default": "primary",
+				"description": "Color of the filled icons. `warning` gives the classic gold."
+			},
+			"does-show-value": {
+				"description": "Shows the score as a number after the icons.",
+				"default": "false"
+			},
+			"can-clear": {
+				"description": "Clicking the current score again clears it to 0.",
+				"default": "false"
+			},
+			"is-readonly": {
+				"description": "A display, not an input: no focus or hover, and any fraction renders (3.7 fills 70% of the fourth icon).",
+				"default": "false"
+			},
+			"is-required": {
+				"description": "A score above 0 is needed for the form to submit.",
+				"default": "false"
+			},
+			"is-disabled": {
+				"description": "Blocks interaction, dims the element, and removes it from the keyboard focus order.",
+				"default": "false"
+			},
+			"is-hidden": {
+				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
+				"default": "false"
+			},
+			"description": {
+				"description": "Helper text shown under the control and linked to it for screen readers."
+			},
+			"error": {
+				"description": "Error message shown under the control. Setting it marks the control invalid."
+			}
+		},
+		"events": {
+			"change": {
+				"description": "Fired when the user sets a new score.",
+				"detail": "{ value: number }"
+			}
+		},
+		"cssProperties": {
+			"--z-rating-size": {
+				"description": "Size of each icon.",
+				"default": "1.25rem"
+			},
+			"--z-rating-empty": {
+				"description": "Color of the unfilled icons.",
+				"default": "color-mix(in oklch, var(--text-primary) 14%, transparent)"
+			}
+		},
+		"cssParts": {
+			"icons": "The row of icons, which is also the focusable slider."
+		},
+		"keyboard": [
+			{
+				"keys": "→ / ↑",
+				"action": "Raises the score by one step."
+			},
+			{
+				"keys": "← / ↓",
+				"action": "Lowers the score by one step."
+			},
+			{
+				"keys": "Home / End",
+				"action": "Sets 0 or the maximum."
+			},
+			{
+				"keys": "0–9",
+				"action": "Sets that score directly."
+			}
+		],
+		"accessibility": "role=\"slider\" with aria-valuetext such as \"3 of 5\". Read-only, it is role=\"img\" named \"Rated 3.7 of 5\". Both strings come from `setLocale()`.",
+		"guidance": [
+			{
+				"title": "Showing an average",
+				"text": "Use `is-readonly` with the exact average and `does-show-value`; the icons render the fraction."
+			}
+		]
+	},
+	"z-meter": {
+		"summary": "A level inside a known range, coloured by how good it is: native meter semantics with low, high and optimum.",
+		"props": {
+			"value": {
+				"description": "The measurement, clamped to min…max.",
+				"default": "0"
+			},
+			"min": {
+				"description": "Bottom of the range.",
+				"default": "0"
+			},
+			"max": {
+				"description": "Top of the range.",
+				"default": "100"
+			},
+			"low": {
+				"description": "Values below this are in the low region."
+			},
+			"high": {
+				"description": "Values above this are in the high region."
+			},
+			"optimum": {
+				"description": "The best value. The region it falls in is the good one: the bar is success there, warning one region away, danger two away.",
+				"default": "midpoint"
+			},
+			"segments": {
+				"description": "Splits the bar into this many equal cells, the battery or strength look. 1 is a continuous bar.",
+				"default": "1"
+			},
+			"label": {
+				"description": "Text above the bar, and the accessible name."
+			},
+			"value-prefix": {
+				"description": "Text before the displayed value (e.g. `$`)."
+			},
+			"value-suffix": {
+				"description": "Text after the displayed value (e.g. `%` or ` GB`)."
+			},
+			"size": {
+				"values": [
+					"sm",
+					"md",
+					"lg"
+				],
+				"default": "md",
+				"description": "Thickness of the bar."
+			},
+			"tone": {
+				"values": [
+					"primary",
+					"secondary",
+					"tertiary",
+					"success",
+					"warning",
+					"danger"
+				],
+				"description": "A fixed color. Overrides the one low, high and optimum work out."
+			},
+			"does-show-value": {
+				"description": "Shows the value as a toned pill at the end of the header, as z-slider does.",
+				"default": "false"
+			},
+			"is-hidden": {
+				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
+				"default": "false"
+			}
+		},
+		"cssProperties": {
+			"--z-meter-height": {
+				"description": "Thickness of the bar.",
+				"default": "0.5rem"
+			},
+			"--z-meter-track": {
+				"description": "Color of the empty track.",
+				"default": "color-mix(in oklch, var(--border-default) 70%, transparent)"
+			}
+		},
+		"cssParts": {
+			"track": "The bar's track.",
+			"bar": "Each filled bar (one per segment)."
+		},
+		"keyboard": [],
+		"accessibility": "role=\"meter\" with aria-valuenow, -min, -max and a valuetext that includes the prefix and suffix. Color is never the only signal: the value can be shown and is always announced.",
+		"guidance": [
+			{
+				"title": "Meter or progress",
+				"text": "z-progress shows a task moving to done. z-meter shows a level that can be good or bad: storage, battery, a password's strength."
+			},
+			{
+				"title": "Regions",
+				"text": "Storage: low=\"70\" high=\"90\" optimum=\"0\" turns warning past 70 and danger past 90. Battery: low=\"20\" high=\"80\" optimum=\"100\" is the reverse."
+			}
+		]
+	},
+	"z-stepper": {
+		"summary": "Progress through an ordered flow, from z-step children. `value` is the current step's index.",
+		"props": {
+			"value": {
+				"description": "Index of the current step, from 0. Steps before it are complete; a value past the last step marks the flow finished.",
+				"default": "0"
+			},
+			"label": {
+				"description": "Accessible name for the list of steps.",
+				"default": "\"Steps\""
+			},
+			"size": {
+				"values": [
+					"sm",
+					"md"
+				],
+				"default": "md",
+				"description": "Marker size for every step."
+			},
+			"tone": {
+				"values": [
+					"primary",
+					"secondary",
+					"tertiary",
+					"success"
+				],
+				"default": "primary",
+				"description": "Color of the current and completed markers and lines."
+			},
+			"is-vertical": {
+				"description": "Stacks the steps, with room under each for its own content.",
+				"default": "false"
+			},
+			"is-navigable": {
+				"description": "Lets people click a completed step to go back to it. Moving forward stays with the app.",
+				"default": "false"
+			},
+			"is-hidden": {
+				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
+				"default": "false"
+			}
+		},
+		"events": {
+			"change": {
+				"description": "Fired when a completed step is clicked in an `is-navigable` stepper.",
+				"detail": "{ value: number }"
+			}
+		},
+		"slots": {
+			"default": "The z-step children, in order."
+		},
+		"keyboard": [
+			{
+				"keys": "Tab",
+				"action": "Moves between completed steps that can be clicked (`is-navigable`)."
+			},
+			{
+				"keys": "Enter / Space",
+				"action": "Goes back to the focused step."
+			}
+		],
+		"accessibility": "A list of steps. The current step carries aria-current=\"step\", and each step says whether it is completed, current, optional or in error. Strings come from `setLocale()`.",
+		"guidance": [
+			{
+				"title": "Driving it",
+				"text": "Keep the current index in your app and set `value` when a step validates. Listen for `change` only for going back."
+			}
+		]
+	},
+	"z-step": {
+		"summary": "One stage in a z-stepper: a numbered marker, a label and an optional description.",
+		"props": {
+			"label": {
+				"description": "The step's name."
+			},
+			"description": {
+				"description": "A short line under the label."
+			},
+			"state": {
+				"values": [
+					"upcoming",
+					"current",
+					"complete"
+				],
+				"default": "upcoming",
+				"description": "Set by z-stepper from its value. Set it yourself only on a step used alone."
+			},
+			"index": {
+				"description": "The number in the marker, from 1. Set by z-stepper."
+			},
+			"size": {
+				"values": [
+					"sm",
+					"md"
+				],
+				"default": "md",
+				"description": "Marker size. Set by z-stepper."
+			},
+			"is-error": {
+				"description": "Marks the step as having a problem: a danger marker with \"!\".",
+				"default": "false"
+			},
+			"is-optional": {
+				"description": "Labels the step optional, in place of a description when it has none.",
+				"default": "false"
+			},
+			"is-disabled": {
+				"description": "The step cannot be clicked, even when completed in a navigable stepper.",
+				"default": "false"
+			},
+			"is-navigable": {
+				"description": "The step is a button that fires `select`. Set by z-stepper for completed steps.",
+				"default": "false"
+			},
+			"is-vertical": {
+				"description": "Vertical layout. Set by z-stepper.",
+				"default": "false"
+			},
+			"is-last": {
+				"description": "Hides the connector after the step. Set by z-stepper.",
+				"default": "false"
+			},
+			"is-hidden": {
+				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
+				"default": "false"
+			}
+		},
+		"events": {
+			"select": {
+				"description": "Fired when a navigable step is clicked. z-stepper turns it into its own `change`.",
+				"detail": "{ index: number }"
+			}
+		},
+		"slots": {
+			"default": "Content under the step in a vertical stepper, such as the step's form.",
+			"icon": "Replaces the number in the marker."
+		},
+		"cssParts": {
+			"marker": "The circle with the number or check.",
+			"label": "The step's name."
+		},
+		"keyboard": [
+			{
+				"keys": "Enter / Space",
+				"action": "Selects a navigable step."
+			}
+		],
+		"accessibility": "A list item. The marker is hidden from screen readers; the state is spoken after the label instead (\"Profile, Current\")."
+	},
+	"z-timeline": {
+		"summary": "Events in order down a rail, from z-timeline-item children: an activity feed, a release history, a delivery.",
+		"props": {
+			"label": {
+				"description": "Accessible name for the list.",
+				"default": "\"Timeline\""
+			},
+			"size": {
+				"values": [
+					"sm",
+					"md"
+				],
+				"default": "md",
+				"description": "Space between items."
+			},
+			"tone": {
+				"values": [
+					"primary",
+					"secondary",
+					"tertiary",
+					"success",
+					"warning",
+					"danger"
+				],
+				"description": "Marker color for every item without its own. Unset, markers are a quiet neutral."
+			},
+			"is-hidden": {
+				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
+				"default": "false"
+			}
+		},
+		"slots": {
+			"default": "The z-timeline-item children, in order."
+		},
+		"keyboard": [],
+		"accessibility": "A list of events. Markers and the rail are decoration and hidden from screen readers."
+	},
+	"z-timeline-item": {
+		"summary": "One event on a z-timeline: a marker, a heading with its time, a description and any content.",
+		"props": {
+			"heading": {
+				"description": "What happened. The `heading` slot takes rich content."
+			},
+			"description": {
+				"description": "A line of detail under the heading."
+			},
+			"time": {
+				"description": "When, as text (\"2h ago\", \"Mar 3\"). Use the `time` slot for a z-relative-time that keeps itself current."
+			},
+			"tone": {
+				"values": [
+					"primary",
+					"secondary",
+					"tertiary",
+					"success",
+					"warning",
+					"danger"
+				],
+				"description": "Marker color. Overrides the timeline's tone."
+			},
+			"is-pending": {
+				"description": "Not happened yet: a hollow marker, a dashed line and a quieter heading.",
+				"default": "false"
+			},
+			"is-hidden": {
+				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
+				"default": "false"
+			}
+		},
+		"slots": {
+			"default": "Extra content under the description: a quote, an attachment, an action.",
+			"heading": "Rich heading content.",
+			"time": "The time, such as a z-relative-time.",
+			"icon": "An icon. The marker becomes a ringed badge holding it."
+		},
+		"cssParts": {
+			"marker": "The dot or icon badge.",
+			"line": "The rail down to the next item.",
+			"heading": "The heading text."
+		},
+		"keyboard": [],
+		"accessibility": "A list item. Put the most important words in the heading; the marker and line are not announced."
+	},
+	"z-image": {
+		"summary": "An image that reserves its box, shimmers while it loads, fades in, and falls back cleanly when the file fails.",
+		"props": {
+			"src": {
+				"description": "Image URL."
+			},
+			"srcset": {
+				"description": "Responsive candidates, as on `<img>`."
+			},
+			"sizes": {
+				"description": "Display sizes for `srcset`, as on `<img>`."
+			},
+			"alt": {
+				"description": "Text alternative. Describe what the image shows; leave it empty only for decoration."
+			},
+			"ratio": {
+				"description": "Reserves the box before loading: \"16/9\", \"4:3\", \"1\". Unset, the image takes its natural height once loaded."
+			},
+			"caption": {
+				"description": "A caption under the image. Turns it into a figure with a figcaption."
+			},
+			"position": {
+				"description": "object-position, for which part stays in view when cropped (\"top\", \"30% 50%\").",
+				"default": "\"center\""
+			},
+			"fit": {
+				"values": [
+					"cover",
+					"contain",
+					"fill",
+					"none",
+					"scale-down"
+				],
+				"default": "cover",
+				"description": "object-fit inside the ratio box."
+			},
+			"radius": {
+				"values": [
+					"none",
+					"sm",
+					"md",
+					"lg",
+					"xl",
+					"full"
+				],
+				"default": "md",
+				"description": "Corner radius, from the radius scale. `full` with a ratio of 1 is a circle."
+			},
+			"is-eager": {
+				"description": "Loads immediately instead of when it nears the viewport. Use it for the first image on a page.",
+				"default": "false"
+			},
+			"is-hidden": {
+				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
+				"default": "false"
+			}
+		},
+		"events": {
+			"load": {
+				"description": "Fired when the image has loaded.",
+				"detail": "{ width: number; height: number }"
+			},
+			"error": {
+				"description": "Fired when the image fails to load. The fallback shows.",
+				"detail": "{ src: string }"
+			}
+		},
+		"slots": {
+			"caption": "Rich caption content.",
+			"fallback": "Shown in place of the image when it fails or has no src."
+		},
+		"cssParts": {
+			"frame": "The box that holds the image and its placeholder.",
+			"image": "The `<img>`.",
+			"caption": "The figcaption."
+		},
+		"keyboard": [],
+		"accessibility": "A native img with your alt text. When the file fails, the fallback is named with the alt and \"Image unavailable\", so the meaning survives."
+	},
+	"z-image-cropper": {
+		"summary": "Frame part of an image by dragging and zooming it under a fixed crop frame, then export the crop as a canvas, blob or data URL.",
+		"props": {
+			"src": {
+				"description": "Image URL. For a picked file, pass `URL.createObjectURL(file)`."
+			},
+			"alt": {
+				"description": "What the image shows. Added to the crop area's name."
+			},
+			"aspect": {
+				"description": "Shape of the frame, width over height: \"1\", \"16/9\", \"4:3\".",
+				"default": "\"1\""
+			},
+			"zoom": {
+				"description": "Current zoom, from 1 (the image just covers the frame) to `max-zoom`. Reflected.",
+				"default": "1"
+			},
+			"max-zoom": {
+				"description": "Largest zoom.",
+				"default": "3"
+			},
+			"shape": {
+				"values": [
+					"rect",
+					"circle"
+				],
+				"default": "rect",
+				"description": "`circle` rounds the frame for avatars and exports with transparent corners."
+			},
+			"cross-origin": {
+				"values": [
+					"anonymous",
+					"use-credentials"
+				],
+				"description": "CORS mode for a remote image. Needed, with CORS headers on the server, to export it."
+			},
+			"is-zoom-hidden": {
+				"description": "Hides the zoom slider and buttons. Wheel, pinch and keys still zoom.",
+				"default": "false"
+			},
+			"is-disabled": {
+				"description": "Blocks interaction, dims the element, and removes it from the keyboard focus order.",
+				"default": "false"
+			},
+			"is-hidden": {
+				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
+				"default": "false"
+			}
+		},
+		"events": {
+			"load": {
+				"description": "Fired when the image has loaded.",
+				"detail": "{ width: number; height: number }"
+			},
+			"input": {
+				"description": "Fired on every move while dragging or zooming. The rect is in the image's own pixels.",
+				"detail": "{ x: number; y: number; width: number; height: number; zoom: number }"
+			},
+			"change": {
+				"description": "Fired when a drag, zoom or key press ends.",
+				"detail": "{ x: number; y: number; width: number; height: number; zoom: number }"
+			}
+		},
+		"cssProperties": {
+			"--z-image-cropper-height": {
+				"description": "Height of the stage.",
+				"default": "20rem"
+			}
+		},
+		"cssParts": {
+			"stage": "The area holding the image and frame.",
+			"controls": "The zoom row under the stage."
+		},
+		"keyboard": [
+			{
+				"keys": "← ↑ → ↓",
+				"action": "Move the image under the frame. Shift moves further."
+			},
+			{
+				"keys": "+ / −",
+				"action": "Zoom in or out."
+			},
+			{
+				"keys": "0",
+				"action": "Reset to the centre at zoom 1."
+			}
+		],
+		"accessibility": "The stage is a focusable, named group that takes arrow and zoom keys and announces the new position politely. The zoom slider and buttons are labelled. Strings come from `setLocale()`.",
+		"guidance": [
+			{
+				"title": "Methods",
+				"text": "`getCrop()` returns { x, y, width, height } in image pixels. `toCanvas({ width?, height? })`, `toBlob(type?, quality?)` and `toDataURL(type?, quality?)` cut the image; `reset()` recentres it."
+			},
+			{
+				"title": "With a file picker",
+				"text": "Pair it with z-dropzone: on `change`, set `src` to `URL.createObjectURL(file)`, then upload `await cropper.toBlob('image/webp', 0.9)`."
 			}
 		]
 	}

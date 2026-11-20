@@ -1,0 +1,8 @@
+<z-row gap="5" does-wrap aligns-y="start">
+  <z-image-cropper id="cropper" src="/media/dunes.jpg" alt="Cover image" aspect="16/9" style="width: min(100%, 24rem)"></z-image-cropper>
+  <z-column gap="2" style="width: 10rem">
+    <z-text size="xs" color="muted">Preview</z-text>
+    <z-image id="preview" alt="Cropped cover" ratio="16/9"></z-image>
+    <z-text id="crop" size="xs" color="muted" style="font-family: var(--font-mono)">Drag or zoom to crop</z-text>
+  </z-column>
+</z-row>

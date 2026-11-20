@@ -3054,6 +3054,681 @@
         {
           "kind": "class",
           "customElement": true,
+          "tagName": "z-checkbox-group",
+          "name": "ZCheckboxGroup",
+          "description": "Many-of-many selection across z-checkbox children, with one string[] value, min and max limits, and an optional select-all.",
+          "members": [
+            {
+              "kind": "field",
+              "name": "description",
+              "type": {
+                "text": "string"
+              },
+              "description": "Helper text shown under the control and linked to it for screen readers."
+            },
+            {
+              "kind": "field",
+              "name": "error",
+              "type": {
+                "text": "string"
+              },
+              "description": "Error message shown under the control. Setting it marks the control invalid."
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string[]"
+              },
+              "description": "The checked values, as a string[]. Set it and the children follow; leave it unset and the group reads the children seeded with `is-checked`."
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "description": "Form field name, used when the control is submitted with a form."
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "description": "Accessible group label (`aria-label`). In a z-field, the field's label is used."
+            },
+            {
+              "kind": "field",
+              "name": "min",
+              "type": {
+                "text": "number"
+              },
+              "description": "The fewest checked values a valid answer has. Checked only once something is chosen, unless `is-required`."
+            },
+            {
+              "kind": "field",
+              "name": "max",
+              "type": {
+                "text": "number"
+              },
+              "description": "The most checked values a valid answer has."
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "'sm' | 'md' | 'lg'"
+              },
+              "description": "Size of the select-all checkbox. Size the children on each z-checkbox."
+            },
+            {
+              "kind": "field",
+              "name": "tone",
+              "type": {
+                "text": "'primary' | 'secondary' | 'tertiary' | 'success' | 'warning' | 'danger'"
+              },
+              "description": "Accent color of every checked box in the group."
+            },
+            {
+              "kind": "field",
+              "name": "selectAllLabel",
+              "type": {
+                "text": "string"
+              },
+              "description": "Text for the select-all checkbox."
+            },
+            {
+              "kind": "field",
+              "name": "hasSelectAll",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Adds a parent checkbox above the list: checked when every enabled child is, mixed when some are, and toggling them all."
+            },
+            {
+              "kind": "field",
+              "name": "isHorizontal",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Lays the checkboxes in a wrapping row instead of a column."
+            },
+            {
+              "kind": "field",
+              "name": "isRequired",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "At least one value must be checked (or `min`, when set)."
+            },
+            {
+              "kind": "field",
+              "name": "isDisabled",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Blocks interaction, dims the element, and removes it from the keyboard focus order."
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Hides the element with display: none. It stays in the DOM and keeps its state."
+            }
+          ],
+          "attributes": [
+            {
+              "name": "description",
+              "fieldName": "description",
+              "type": {
+                "text": "string"
+              },
+              "description": "Helper text shown under the control and linked to it for screen readers."
+            },
+            {
+              "name": "error",
+              "fieldName": "error",
+              "type": {
+                "text": "string"
+              },
+              "description": "Error message shown under the control. Setting it marks the control invalid."
+            },
+            {
+              "name": "value",
+              "fieldName": "value",
+              "type": {
+                "text": "string[]"
+              },
+              "description": "The checked values, as a string[]. Set it and the children follow; leave it unset and the group reads the children seeded with `is-checked`."
+            },
+            {
+              "name": "name",
+              "fieldName": "name",
+              "type": {
+                "text": "string"
+              },
+              "description": "Form field name, used when the control is submitted with a form."
+            },
+            {
+              "name": "label",
+              "fieldName": "label",
+              "type": {
+                "text": "string"
+              },
+              "description": "Accessible group label (`aria-label`). In a z-field, the field's label is used."
+            },
+            {
+              "name": "min",
+              "fieldName": "min",
+              "type": {
+                "text": "number"
+              },
+              "description": "The fewest checked values a valid answer has. Checked only once something is chosen, unless `is-required`."
+            },
+            {
+              "name": "max",
+              "fieldName": "max",
+              "type": {
+                "text": "number"
+              },
+              "description": "The most checked values a valid answer has."
+            },
+            {
+              "name": "size",
+              "fieldName": "size",
+              "type": {
+                "text": "'sm' | 'md' | 'lg'"
+              },
+              "description": "Size of the select-all checkbox. Size the children on each z-checkbox."
+            },
+            {
+              "name": "tone",
+              "fieldName": "tone",
+              "type": {
+                "text": "'primary' | 'secondary' | 'tertiary' | 'success' | 'warning' | 'danger'"
+              },
+              "description": "Accent color of every checked box in the group."
+            },
+            {
+              "name": "select-all-label",
+              "fieldName": "selectAllLabel",
+              "type": {
+                "text": "string"
+              },
+              "description": "Text for the select-all checkbox."
+            },
+            {
+              "name": "has-select-all",
+              "fieldName": "hasSelectAll",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Adds a parent checkbox above the list: checked when every enabled child is, mixed when some are, and toggling them all."
+            },
+            {
+              "name": "is-horizontal",
+              "fieldName": "isHorizontal",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Lays the checkboxes in a wrapping row instead of a column."
+            },
+            {
+              "name": "is-required",
+              "fieldName": "isRequired",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "At least one value must be checked (or `min`, when set)."
+            },
+            {
+              "name": "is-disabled",
+              "fieldName": "isDisabled",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Blocks interaction, dims the element, and removes it from the keyboard focus order."
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Hides the element with display: none. It stays in the DOM and keeps its state."
+            }
+          ],
+          "events": [
+            {
+              "name": "change",
+              "type": {
+                "text": "CustomEvent<{ value: string[] }>"
+              },
+              "detail": "{ value: string[] }",
+              "description": "Fired when the checked set changes, with the whole value. The children's own `change` events stop at the group."
+            }
+          ],
+          "slots": [
+            {
+              "name": "",
+              "description": "The z-checkbox children, each with a unique `value`."
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
+          "tagName": "z-chip",
+          "name": "ZChip",
+          "description": "A compact toggle chip. Clicking flips `is-selected`; `is-removable` adds an ×. Group them with z-chip-group.",
+          "members": [
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "description": "Chip text. The default slot takes precedence."
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "description": "Value reported in events and used by z-chip-group. Defaults to the chip's text inside a group."
+            },
+            {
+              "kind": "field",
+              "name": "tone",
+              "type": {
+                "text": "'primary' | 'secondary' | 'tertiary' | 'success' | 'warning' | 'danger'"
+              },
+              "description": "Accent color of the selected state. Inherits the group's tone when unset."
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "'sm' | 'md' | 'lg'"
+              },
+              "description": "Height and type size. Inherits the group's size when unset."
+            },
+            {
+              "kind": "field",
+              "name": "kind",
+              "type": {
+                "text": "'outline' | 'soft'"
+              },
+              "description": "Resting look: a hairline border, or a filled surface. Inherits the group's kind when unset."
+            },
+            {
+              "kind": "field",
+              "name": "isSelected",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Whether the chip is on. Reflected; clicking toggles it."
+            },
+            {
+              "kind": "field",
+              "name": "isRemovable",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Shows an × that fires `remove`. Delete or Backspace on the focused chip does the same."
+            },
+            {
+              "kind": "field",
+              "name": "isDisabled",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Blocks interaction, dims the element, and removes it from the keyboard focus order."
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Hides the element with display: none. It stays in the DOM and keeps its state."
+            }
+          ],
+          "attributes": [
+            {
+              "name": "label",
+              "fieldName": "label",
+              "type": {
+                "text": "string"
+              },
+              "description": "Chip text. The default slot takes precedence."
+            },
+            {
+              "name": "value",
+              "fieldName": "value",
+              "type": {
+                "text": "string"
+              },
+              "description": "Value reported in events and used by z-chip-group. Defaults to the chip's text inside a group."
+            },
+            {
+              "name": "tone",
+              "fieldName": "tone",
+              "type": {
+                "text": "'primary' | 'secondary' | 'tertiary' | 'success' | 'warning' | 'danger'"
+              },
+              "description": "Accent color of the selected state. Inherits the group's tone when unset."
+            },
+            {
+              "name": "size",
+              "fieldName": "size",
+              "type": {
+                "text": "'sm' | 'md' | 'lg'"
+              },
+              "description": "Height and type size. Inherits the group's size when unset."
+            },
+            {
+              "name": "kind",
+              "fieldName": "kind",
+              "type": {
+                "text": "'outline' | 'soft'"
+              },
+              "description": "Resting look: a hairline border, or a filled surface. Inherits the group's kind when unset."
+            },
+            {
+              "name": "is-selected",
+              "fieldName": "isSelected",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Whether the chip is on. Reflected; clicking toggles it."
+            },
+            {
+              "name": "is-removable",
+              "fieldName": "isRemovable",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Shows an × that fires `remove`. Delete or Backspace on the focused chip does the same."
+            },
+            {
+              "name": "is-disabled",
+              "fieldName": "isDisabled",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Blocks interaction, dims the element, and removes it from the keyboard focus order."
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Hides the element with display: none. It stays in the DOM and keeps its state."
+            }
+          ],
+          "events": [
+            {
+              "name": "select",
+              "type": {
+                "text": "CustomEvent<{ value?: string; selected: boolean }>"
+              },
+              "detail": "{ value?: string; selected: boolean }",
+              "description": "Fired when the chip is toggled."
+            },
+            {
+              "name": "remove",
+              "type": {
+                "text": "CustomEvent<{ value?: string }>"
+              },
+              "detail": "{ value?: string }",
+              "description": "Fired by the × or the Delete key. The chip does not remove itself; the listener decides."
+            }
+          ],
+          "slots": [
+            {
+              "name": "",
+              "description": "The chip text."
+            },
+            {
+              "name": "prefix",
+              "description": "A leading icon or tiny avatar."
+            }
+          ],
+          "cssParts": [
+            {
+              "name": "chip",
+              "description": "The pill."
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
+          "tagName": "z-chip-group",
+          "name": "ZChipGroup",
+          "description": "A wrapping row of z-chip toggles with one string[] value: single choice by default, several with `is-multiple`.",
+          "members": [
+            {
+              "kind": "field",
+              "name": "description",
+              "type": {
+                "text": "string"
+              },
+              "description": "Helper text shown under the control and linked to it for screen readers."
+            },
+            {
+              "kind": "field",
+              "name": "error",
+              "type": {
+                "text": "string"
+              },
+              "description": "Error message shown under the control. Setting it marks the control invalid."
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string[]"
+              },
+              "description": "The selected values, as a string[] in both modes. Set it and the chips follow; leave it unset and the group reads the chips seeded with `is-selected`."
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "description": "Form field name, used when the control is submitted with a form."
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "description": "Accessible group label (`aria-label`). In a z-field, the field's label is used."
+            },
+            {
+              "kind": "field",
+              "name": "tone",
+              "type": {
+                "text": "'primary' | 'secondary' | 'tertiary' | 'success' | 'warning' | 'danger'"
+              },
+              "description": "Selected color of every chip that has no tone of its own."
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "'sm' | 'md' | 'lg'"
+              },
+              "description": "Size of every chip that has no size of its own."
+            },
+            {
+              "kind": "field",
+              "name": "kind",
+              "type": {
+                "text": "'outline' | 'soft'"
+              },
+              "description": "Resting look of every chip that has no kind of its own."
+            },
+            {
+              "kind": "field",
+              "name": "isMultiple",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Lets several chips stay selected: the filter-row pattern. Off, selecting one clears the others."
+            },
+            {
+              "kind": "field",
+              "name": "isRequired",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "At least one chip must be selected for the form to submit."
+            },
+            {
+              "kind": "field",
+              "name": "isDisabled",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Blocks interaction, dims the element, and removes it from the keyboard focus order."
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Hides the element with display: none. It stays in the DOM and keeps its state."
+            }
+          ],
+          "attributes": [
+            {
+              "name": "description",
+              "fieldName": "description",
+              "type": {
+                "text": "string"
+              },
+              "description": "Helper text shown under the control and linked to it for screen readers."
+            },
+            {
+              "name": "error",
+              "fieldName": "error",
+              "type": {
+                "text": "string"
+              },
+              "description": "Error message shown under the control. Setting it marks the control invalid."
+            },
+            {
+              "name": "value",
+              "fieldName": "value",
+              "type": {
+                "text": "string[]"
+              },
+              "description": "The selected values, as a string[] in both modes. Set it and the chips follow; leave it unset and the group reads the chips seeded with `is-selected`."
+            },
+            {
+              "name": "name",
+              "fieldName": "name",
+              "type": {
+                "text": "string"
+              },
+              "description": "Form field name, used when the control is submitted with a form."
+            },
+            {
+              "name": "label",
+              "fieldName": "label",
+              "type": {
+                "text": "string"
+              },
+              "description": "Accessible group label (`aria-label`). In a z-field, the field's label is used."
+            },
+            {
+              "name": "tone",
+              "fieldName": "tone",
+              "type": {
+                "text": "'primary' | 'secondary' | 'tertiary' | 'success' | 'warning' | 'danger'"
+              },
+              "description": "Selected color of every chip that has no tone of its own."
+            },
+            {
+              "name": "size",
+              "fieldName": "size",
+              "type": {
+                "text": "'sm' | 'md' | 'lg'"
+              },
+              "description": "Size of every chip that has no size of its own."
+            },
+            {
+              "name": "kind",
+              "fieldName": "kind",
+              "type": {
+                "text": "'outline' | 'soft'"
+              },
+              "description": "Resting look of every chip that has no kind of its own."
+            },
+            {
+              "name": "is-multiple",
+              "fieldName": "isMultiple",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Lets several chips stay selected: the filter-row pattern. Off, selecting one clears the others."
+            },
+            {
+              "name": "is-required",
+              "fieldName": "isRequired",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "At least one chip must be selected for the form to submit."
+            },
+            {
+              "name": "is-disabled",
+              "fieldName": "isDisabled",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Blocks interaction, dims the element, and removes it from the keyboard focus order."
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Hides the element with display: none. It stays in the DOM and keeps its state."
+            }
+          ],
+          "events": [
+            {
+              "name": "change",
+              "type": {
+                "text": "CustomEvent<{ value: string[] }>"
+              },
+              "detail": "{ value: string[] }",
+              "description": "Fired when the selection changes, with the whole value. The chips' own `select` events stop at the group."
+            }
+          ],
+          "slots": [
+            {
+              "name": "",
+              "description": "The z-chip children."
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
           "tagName": "z-code-block",
           "name": "ZCodeBlock",
           "description": "A syntax-highlighted code surface with an optional header and a copy button.",
@@ -6750,6 +7425,221 @@
         {
           "kind": "class",
           "customElement": true,
+          "tagName": "z-fieldset",
+          "name": "ZFieldset",
+          "description": "A titled group of related form controls, with a group description and error, that can disable everything inside at once.",
+          "members": [
+            {
+              "kind": "field",
+              "name": "legend",
+              "type": {
+                "text": "string"
+              },
+              "description": "The group's title. Also its accessible name. Use the `legend` slot for rich content."
+            },
+            {
+              "kind": "field",
+              "name": "description",
+              "type": {
+                "text": "string"
+              },
+              "description": "Guidance under the legend, for the group as a whole."
+            },
+            {
+              "kind": "field",
+              "name": "error",
+              "type": {
+                "text": "string"
+              },
+              "description": "A group-level error shown under the controls, such as \"Pick at least one plan\". Announced as an alert."
+            },
+            {
+              "kind": "field",
+              "name": "kind",
+              "type": {
+                "text": "'plain' | 'outline' | 'soft'"
+              },
+              "description": "`plain` sets no frame. `outline` draws a hairline border; `soft` fills a surface. Both pad the content."
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "'md' | 'lg'"
+              },
+              "description": "Size of the legend. Use `lg` when the fieldset heads a page section."
+            },
+            {
+              "kind": "field",
+              "name": "isRequired",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Adds a required marker to the legend. Mark each required control too; this is the visual cue for the group."
+            },
+            {
+              "kind": "field",
+              "name": "isDisabled",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Disables every control inside, as `<fieldset disabled>` does. Controls disabled on their own stay disabled when it is turned off."
+            },
+            {
+              "kind": "field",
+              "name": "isHorizontal",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Lays the controls in a wrapping row instead of a column."
+            },
+            {
+              "kind": "field",
+              "name": "isLegendHidden",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Hides the legend and description visually. They still name and describe the group for screen readers."
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Hides the element with display: none. It stays in the DOM and keeps its state."
+            }
+          ],
+          "attributes": [
+            {
+              "name": "legend",
+              "fieldName": "legend",
+              "type": {
+                "text": "string"
+              },
+              "description": "The group's title. Also its accessible name. Use the `legend` slot for rich content."
+            },
+            {
+              "name": "description",
+              "fieldName": "description",
+              "type": {
+                "text": "string"
+              },
+              "description": "Guidance under the legend, for the group as a whole."
+            },
+            {
+              "name": "error",
+              "fieldName": "error",
+              "type": {
+                "text": "string"
+              },
+              "description": "A group-level error shown under the controls, such as \"Pick at least one plan\". Announced as an alert."
+            },
+            {
+              "name": "kind",
+              "fieldName": "kind",
+              "type": {
+                "text": "'plain' | 'outline' | 'soft'"
+              },
+              "description": "`plain` sets no frame. `outline` draws a hairline border; `soft` fills a surface. Both pad the content."
+            },
+            {
+              "name": "size",
+              "fieldName": "size",
+              "type": {
+                "text": "'md' | 'lg'"
+              },
+              "description": "Size of the legend. Use `lg` when the fieldset heads a page section."
+            },
+            {
+              "name": "is-required",
+              "fieldName": "isRequired",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Adds a required marker to the legend. Mark each required control too; this is the visual cue for the group."
+            },
+            {
+              "name": "is-disabled",
+              "fieldName": "isDisabled",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Disables every control inside, as `<fieldset disabled>` does. Controls disabled on their own stay disabled when it is turned off."
+            },
+            {
+              "name": "is-horizontal",
+              "fieldName": "isHorizontal",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Lays the controls in a wrapping row instead of a column."
+            },
+            {
+              "name": "is-legend-hidden",
+              "fieldName": "isLegendHidden",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Hides the legend and description visually. They still name and describe the group for screen readers."
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Hides the element with display: none. It stays in the DOM and keeps its state."
+            }
+          ],
+          "events": [],
+          "slots": [
+            {
+              "name": "",
+              "description": "The controls: z-field, z-checkbox-group, z-radio-group, inputs, rows of them."
+            },
+            {
+              "name": "legend",
+              "description": "Rich legend content. Its text becomes the group's name."
+            },
+            {
+              "name": "description",
+              "description": "Rich description content."
+            },
+            {
+              "name": "error",
+              "description": "Rich error content."
+            },
+            {
+              "name": "actions",
+              "description": "Content at the end of the legend row, such as a reset link."
+            }
+          ],
+          "cssProperties": [
+            {
+              "name": "--z-fieldset-gap",
+              "description": "Space between the controls.",
+              "default": "var(--space-4)"
+            }
+          ],
+          "cssParts": [
+            {
+              "name": "fieldset",
+              "description": "The frame around legend, content and error."
+            },
+            {
+              "name": "legend",
+              "description": "The legend text."
+            },
+            {
+              "name": "content",
+              "description": "The box that holds the controls."
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
           "tagName": "z-filter",
           "name": "ZFilter",
           "description": "A pill-based control for picking from a set of options.",
@@ -7379,6 +8269,449 @@
               "name": "--z-overlay-padding",
               "description": "Padding inside the card.",
               "default": "1rem"
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
+          "tagName": "z-image",
+          "name": "ZImage",
+          "description": "An image that reserves its box, shimmers while it loads, fades in, and falls back cleanly when the file fails.",
+          "members": [
+            {
+              "kind": "field",
+              "name": "src",
+              "type": {
+                "text": "string"
+              },
+              "description": "Image URL."
+            },
+            {
+              "kind": "field",
+              "name": "srcset",
+              "type": {
+                "text": "string"
+              },
+              "description": "Responsive candidates, as on `<img>`."
+            },
+            {
+              "kind": "field",
+              "name": "sizes",
+              "type": {
+                "text": "string"
+              },
+              "description": "Display sizes for `srcset`, as on `<img>`."
+            },
+            {
+              "kind": "field",
+              "name": "alt",
+              "type": {
+                "text": "string"
+              },
+              "description": "Text alternative. Describe what the image shows; leave it empty only for decoration."
+            },
+            {
+              "kind": "field",
+              "name": "ratio",
+              "type": {
+                "text": "string"
+              },
+              "description": "Reserves the box before loading: \"16/9\", \"4:3\", \"1\". Unset, the image takes its natural height once loaded."
+            },
+            {
+              "kind": "field",
+              "name": "caption",
+              "type": {
+                "text": "string"
+              },
+              "description": "A caption under the image. Turns it into a figure with a figcaption."
+            },
+            {
+              "kind": "field",
+              "name": "position",
+              "type": {
+                "text": "string"
+              },
+              "description": "object-position, for which part stays in view when cropped (\"top\", \"30% 50%\")."
+            },
+            {
+              "kind": "field",
+              "name": "fit",
+              "type": {
+                "text": "'cover' | 'contain' | 'fill' | 'none' | 'scale-down'"
+              },
+              "description": "object-fit inside the ratio box."
+            },
+            {
+              "kind": "field",
+              "name": "radius",
+              "type": {
+                "text": "'none' | 'sm' | 'md' | 'lg' | 'xl' | 'full'"
+              },
+              "description": "Corner radius, from the radius scale. `full` with a ratio of 1 is a circle."
+            },
+            {
+              "kind": "field",
+              "name": "isEager",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Loads immediately instead of when it nears the viewport. Use it for the first image on a page."
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Hides the element with display: none. It stays in the DOM and keeps its state."
+            }
+          ],
+          "attributes": [
+            {
+              "name": "src",
+              "fieldName": "src",
+              "type": {
+                "text": "string"
+              },
+              "description": "Image URL."
+            },
+            {
+              "name": "srcset",
+              "fieldName": "srcset",
+              "type": {
+                "text": "string"
+              },
+              "description": "Responsive candidates, as on `<img>`."
+            },
+            {
+              "name": "sizes",
+              "fieldName": "sizes",
+              "type": {
+                "text": "string"
+              },
+              "description": "Display sizes for `srcset`, as on `<img>`."
+            },
+            {
+              "name": "alt",
+              "fieldName": "alt",
+              "type": {
+                "text": "string"
+              },
+              "description": "Text alternative. Describe what the image shows; leave it empty only for decoration."
+            },
+            {
+              "name": "ratio",
+              "fieldName": "ratio",
+              "type": {
+                "text": "string"
+              },
+              "description": "Reserves the box before loading: \"16/9\", \"4:3\", \"1\". Unset, the image takes its natural height once loaded."
+            },
+            {
+              "name": "caption",
+              "fieldName": "caption",
+              "type": {
+                "text": "string"
+              },
+              "description": "A caption under the image. Turns it into a figure with a figcaption."
+            },
+            {
+              "name": "position",
+              "fieldName": "position",
+              "type": {
+                "text": "string"
+              },
+              "description": "object-position, for which part stays in view when cropped (\"top\", \"30% 50%\")."
+            },
+            {
+              "name": "fit",
+              "fieldName": "fit",
+              "type": {
+                "text": "'cover' | 'contain' | 'fill' | 'none' | 'scale-down'"
+              },
+              "description": "object-fit inside the ratio box."
+            },
+            {
+              "name": "radius",
+              "fieldName": "radius",
+              "type": {
+                "text": "'none' | 'sm' | 'md' | 'lg' | 'xl' | 'full'"
+              },
+              "description": "Corner radius, from the radius scale. `full` with a ratio of 1 is a circle."
+            },
+            {
+              "name": "is-eager",
+              "fieldName": "isEager",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Loads immediately instead of when it nears the viewport. Use it for the first image on a page."
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Hides the element with display: none. It stays in the DOM and keeps its state."
+            }
+          ],
+          "events": [
+            {
+              "name": "load",
+              "type": {
+                "text": "CustomEvent<{ width: number; height: number }>"
+              },
+              "detail": "{ width: number; height: number }",
+              "description": "Fired when the image has loaded."
+            },
+            {
+              "name": "error",
+              "type": {
+                "text": "CustomEvent<{ src: string }>"
+              },
+              "detail": "{ src: string }",
+              "description": "Fired when the image fails to load. The fallback shows."
+            }
+          ],
+          "slots": [
+            {
+              "name": "caption",
+              "description": "Rich caption content."
+            },
+            {
+              "name": "fallback",
+              "description": "Shown in place of the image when it fails or has no src."
+            }
+          ],
+          "cssParts": [
+            {
+              "name": "frame",
+              "description": "The box that holds the image and its placeholder."
+            },
+            {
+              "name": "image",
+              "description": "The `<img>`."
+            },
+            {
+              "name": "caption",
+              "description": "The figcaption."
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
+          "tagName": "z-image-cropper",
+          "name": "ZImageCropper",
+          "description": "Frame part of an image by dragging and zooming it under a fixed crop frame, then export the crop as a canvas, blob or data URL.",
+          "members": [
+            {
+              "kind": "field",
+              "name": "src",
+              "type": {
+                "text": "string"
+              },
+              "description": "Image URL. For a picked file, pass `URL.createObjectURL(file)`."
+            },
+            {
+              "kind": "field",
+              "name": "alt",
+              "type": {
+                "text": "string"
+              },
+              "description": "What the image shows. Added to the crop area's name."
+            },
+            {
+              "kind": "field",
+              "name": "aspect",
+              "type": {
+                "text": "string"
+              },
+              "description": "Shape of the frame, width over height: \"1\", \"16/9\", \"4:3\"."
+            },
+            {
+              "kind": "field",
+              "name": "zoom",
+              "type": {
+                "text": "number"
+              },
+              "description": "Current zoom, from 1 (the image just covers the frame) to `max-zoom`. Reflected."
+            },
+            {
+              "kind": "field",
+              "name": "maxZoom",
+              "type": {
+                "text": "number"
+              },
+              "description": "Largest zoom."
+            },
+            {
+              "kind": "field",
+              "name": "shape",
+              "type": {
+                "text": "'rect' | 'circle'"
+              },
+              "description": "`circle` rounds the frame for avatars and exports with transparent corners."
+            },
+            {
+              "kind": "field",
+              "name": "crossOrigin",
+              "type": {
+                "text": "'anonymous' | 'use-credentials'"
+              },
+              "description": "CORS mode for a remote image. Needed, with CORS headers on the server, to export it."
+            },
+            {
+              "kind": "field",
+              "name": "isZoomHidden",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Hides the zoom slider and buttons. Wheel, pinch and keys still zoom."
+            },
+            {
+              "kind": "field",
+              "name": "isDisabled",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Blocks interaction, dims the element, and removes it from the keyboard focus order."
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Hides the element with display: none. It stays in the DOM and keeps its state."
+            }
+          ],
+          "attributes": [
+            {
+              "name": "src",
+              "fieldName": "src",
+              "type": {
+                "text": "string"
+              },
+              "description": "Image URL. For a picked file, pass `URL.createObjectURL(file)`."
+            },
+            {
+              "name": "alt",
+              "fieldName": "alt",
+              "type": {
+                "text": "string"
+              },
+              "description": "What the image shows. Added to the crop area's name."
+            },
+            {
+              "name": "aspect",
+              "fieldName": "aspect",
+              "type": {
+                "text": "string"
+              },
+              "description": "Shape of the frame, width over height: \"1\", \"16/9\", \"4:3\"."
+            },
+            {
+              "name": "zoom",
+              "fieldName": "zoom",
+              "type": {
+                "text": "number"
+              },
+              "description": "Current zoom, from 1 (the image just covers the frame) to `max-zoom`. Reflected."
+            },
+            {
+              "name": "max-zoom",
+              "fieldName": "maxZoom",
+              "type": {
+                "text": "number"
+              },
+              "description": "Largest zoom."
+            },
+            {
+              "name": "shape",
+              "fieldName": "shape",
+              "type": {
+                "text": "'rect' | 'circle'"
+              },
+              "description": "`circle` rounds the frame for avatars and exports with transparent corners."
+            },
+            {
+              "name": "cross-origin",
+              "fieldName": "crossOrigin",
+              "type": {
+                "text": "'anonymous' | 'use-credentials'"
+              },
+              "description": "CORS mode for a remote image. Needed, with CORS headers on the server, to export it."
+            },
+            {
+              "name": "is-zoom-hidden",
+              "fieldName": "isZoomHidden",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Hides the zoom slider and buttons. Wheel, pinch and keys still zoom."
+            },
+            {
+              "name": "is-disabled",
+              "fieldName": "isDisabled",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Blocks interaction, dims the element, and removes it from the keyboard focus order."
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Hides the element with display: none. It stays in the DOM and keeps its state."
+            }
+          ],
+          "events": [
+            {
+              "name": "load",
+              "type": {
+                "text": "CustomEvent<{ width: number; height: number }>"
+              },
+              "detail": "{ width: number; height: number }",
+              "description": "Fired when the image has loaded."
+            },
+            {
+              "name": "input",
+              "type": {
+                "text": "CustomEvent<CropDetailT>"
+              },
+              "detail": "CropDetailT",
+              "description": "Fired on every move while dragging or zooming. The rect is in the image's own pixels."
+            },
+            {
+              "name": "change",
+              "type": {
+                "text": "CustomEvent<CropDetailT>"
+              },
+              "detail": "CropDetailT",
+              "description": "Fired when a drag, zoom or key press ends."
+            }
+          ],
+          "cssProperties": [
+            {
+              "name": "--z-image-cropper-height",
+              "description": "Height of the stage.",
+              "default": "20rem"
+            }
+          ],
+          "cssParts": [
+            {
+              "name": "stage",
+              "description": "The area holding the image and frame."
+            },
+            {
+              "name": "controls",
+              "description": "The zoom row under the stage."
             }
           ]
         },
@@ -9027,6 +10360,264 @@
           "members": [],
           "attributes": [],
           "events": []
+        },
+        {
+          "kind": "class",
+          "customElement": true,
+          "tagName": "z-meter",
+          "name": "ZMeter",
+          "description": "A level inside a known range, coloured by how good it is: native meter semantics with low, high and optimum.",
+          "members": [
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "number"
+              },
+              "description": "The measurement, clamped to min…max."
+            },
+            {
+              "kind": "field",
+              "name": "min",
+              "type": {
+                "text": "number"
+              },
+              "description": "Bottom of the range."
+            },
+            {
+              "kind": "field",
+              "name": "max",
+              "type": {
+                "text": "number"
+              },
+              "description": "Top of the range."
+            },
+            {
+              "kind": "field",
+              "name": "low",
+              "type": {
+                "text": "number"
+              },
+              "description": "Values below this are in the low region."
+            },
+            {
+              "kind": "field",
+              "name": "high",
+              "type": {
+                "text": "number"
+              },
+              "description": "Values above this are in the high region."
+            },
+            {
+              "kind": "field",
+              "name": "optimum",
+              "type": {
+                "text": "number"
+              },
+              "description": "The best value. The region it falls in is the good one: the bar is success there, warning one region away, danger two away."
+            },
+            {
+              "kind": "field",
+              "name": "segments",
+              "type": {
+                "text": "number"
+              },
+              "description": "Splits the bar into this many equal cells, the battery or strength look. 1 is a continuous bar."
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "description": "Text above the bar, and the accessible name."
+            },
+            {
+              "kind": "field",
+              "name": "valuePrefix",
+              "type": {
+                "text": "string"
+              },
+              "description": "Text before the displayed value (e.g. `$`)."
+            },
+            {
+              "kind": "field",
+              "name": "valueSuffix",
+              "type": {
+                "text": "string"
+              },
+              "description": "Text after the displayed value (e.g. `%` or ` GB`)."
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "'sm' | 'md' | 'lg'"
+              },
+              "description": "Thickness of the bar."
+            },
+            {
+              "kind": "field",
+              "name": "tone",
+              "type": {
+                "text": "'primary' | 'secondary' | 'tertiary' | 'success' | 'warning' | 'danger'"
+              },
+              "description": "A fixed color. Overrides the one low, high and optimum work out."
+            },
+            {
+              "kind": "field",
+              "name": "doesShowValue",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Shows the value as a toned pill at the end of the header, as z-slider does."
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Hides the element with display: none. It stays in the DOM and keeps its state."
+            }
+          ],
+          "attributes": [
+            {
+              "name": "value",
+              "fieldName": "value",
+              "type": {
+                "text": "number"
+              },
+              "description": "The measurement, clamped to min…max."
+            },
+            {
+              "name": "min",
+              "fieldName": "min",
+              "type": {
+                "text": "number"
+              },
+              "description": "Bottom of the range."
+            },
+            {
+              "name": "max",
+              "fieldName": "max",
+              "type": {
+                "text": "number"
+              },
+              "description": "Top of the range."
+            },
+            {
+              "name": "low",
+              "fieldName": "low",
+              "type": {
+                "text": "number"
+              },
+              "description": "Values below this are in the low region."
+            },
+            {
+              "name": "high",
+              "fieldName": "high",
+              "type": {
+                "text": "number"
+              },
+              "description": "Values above this are in the high region."
+            },
+            {
+              "name": "optimum",
+              "fieldName": "optimum",
+              "type": {
+                "text": "number"
+              },
+              "description": "The best value. The region it falls in is the good one: the bar is success there, warning one region away, danger two away."
+            },
+            {
+              "name": "segments",
+              "fieldName": "segments",
+              "type": {
+                "text": "number"
+              },
+              "description": "Splits the bar into this many equal cells, the battery or strength look. 1 is a continuous bar."
+            },
+            {
+              "name": "label",
+              "fieldName": "label",
+              "type": {
+                "text": "string"
+              },
+              "description": "Text above the bar, and the accessible name."
+            },
+            {
+              "name": "value-prefix",
+              "fieldName": "valuePrefix",
+              "type": {
+                "text": "string"
+              },
+              "description": "Text before the displayed value (e.g. `$`)."
+            },
+            {
+              "name": "value-suffix",
+              "fieldName": "valueSuffix",
+              "type": {
+                "text": "string"
+              },
+              "description": "Text after the displayed value (e.g. `%` or ` GB`)."
+            },
+            {
+              "name": "size",
+              "fieldName": "size",
+              "type": {
+                "text": "'sm' | 'md' | 'lg'"
+              },
+              "description": "Thickness of the bar."
+            },
+            {
+              "name": "tone",
+              "fieldName": "tone",
+              "type": {
+                "text": "'primary' | 'secondary' | 'tertiary' | 'success' | 'warning' | 'danger'"
+              },
+              "description": "A fixed color. Overrides the one low, high and optimum work out."
+            },
+            {
+              "name": "does-show-value",
+              "fieldName": "doesShowValue",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Shows the value as a toned pill at the end of the header, as z-slider does."
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Hides the element with display: none. It stays in the DOM and keeps its state."
+            }
+          ],
+          "events": [],
+          "cssProperties": [
+            {
+              "name": "--z-meter-height",
+              "description": "Thickness of the bar.",
+              "default": "0.5rem"
+            },
+            {
+              "name": "--z-meter-track",
+              "description": "Color of the empty track.",
+              "default": "color-mix(in oklch, var(--border-default) 70%, transparent)"
+            }
+          ],
+          "cssParts": [
+            {
+              "name": "track",
+              "description": "The bar's track."
+            },
+            {
+              "name": "bar",
+              "description": "Each filled bar (one per segment)."
+            }
+          ]
         },
         {
           "kind": "class",
@@ -10865,6 +12456,301 @@
               },
               "detail": "RangeDetailT",
               "description": "Event detail is `{ value: [lower, upper] }`."
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
+          "tagName": "z-rating",
+          "name": "ZRating",
+          "description": "A row of stars, hearts or dots that picks a score, with half steps, hover preview and a read-only display mode.",
+          "members": [
+            {
+              "kind": "field",
+              "name": "description",
+              "type": {
+                "text": "string"
+              },
+              "description": "Helper text shown under the control and linked to it for screen readers."
+            },
+            {
+              "kind": "field",
+              "name": "error",
+              "type": {
+                "text": "string"
+              },
+              "description": "Error message shown under the control. Setting it marks the control invalid."
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "number"
+              },
+              "description": "The score, from 0 to `max`. 0 means unrated."
+            },
+            {
+              "kind": "field",
+              "name": "max",
+              "type": {
+                "text": "number"
+              },
+              "description": "How many icons, and the top score."
+            },
+            {
+              "kind": "field",
+              "name": "step",
+              "type": {
+                "text": "number"
+              },
+              "description": "1 for whole marks, 0.5 for halves. The pointer picks the half it is over."
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "description": "Form field name, used when the control is submitted with a form."
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "description": "Accessible name. In a z-field, the field's label is used."
+            },
+            {
+              "kind": "field",
+              "name": "shape",
+              "type": {
+                "text": "'star' | 'heart' | 'circle'"
+              },
+              "description": "The icon."
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "'sm' | 'md' | 'lg'"
+              },
+              "description": "Icon size: 16, 20 or 28px."
+            },
+            {
+              "kind": "field",
+              "name": "tone",
+              "type": {
+                "text": "'primary' | 'secondary' | 'tertiary' | 'success' | 'warning' | 'danger'"
+              },
+              "description": "Color of the filled icons. `warning` gives the classic gold."
+            },
+            {
+              "kind": "field",
+              "name": "doesShowValue",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Shows the score as a number after the icons."
+            },
+            {
+              "kind": "field",
+              "name": "canClear",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Clicking the current score again clears it to 0."
+            },
+            {
+              "kind": "field",
+              "name": "isReadonly",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "A display, not an input: no focus or hover, and any fraction renders (3.7 fills 70% of the fourth icon)."
+            },
+            {
+              "kind": "field",
+              "name": "isRequired",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "A score above 0 is needed for the form to submit."
+            },
+            {
+              "kind": "field",
+              "name": "isDisabled",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Blocks interaction, dims the element, and removes it from the keyboard focus order."
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Hides the element with display: none. It stays in the DOM and keeps its state."
+            }
+          ],
+          "attributes": [
+            {
+              "name": "description",
+              "fieldName": "description",
+              "type": {
+                "text": "string"
+              },
+              "description": "Helper text shown under the control and linked to it for screen readers."
+            },
+            {
+              "name": "error",
+              "fieldName": "error",
+              "type": {
+                "text": "string"
+              },
+              "description": "Error message shown under the control. Setting it marks the control invalid."
+            },
+            {
+              "name": "value",
+              "fieldName": "value",
+              "type": {
+                "text": "number"
+              },
+              "description": "The score, from 0 to `max`. 0 means unrated."
+            },
+            {
+              "name": "max",
+              "fieldName": "max",
+              "type": {
+                "text": "number"
+              },
+              "description": "How many icons, and the top score."
+            },
+            {
+              "name": "step",
+              "fieldName": "step",
+              "type": {
+                "text": "number"
+              },
+              "description": "1 for whole marks, 0.5 for halves. The pointer picks the half it is over."
+            },
+            {
+              "name": "name",
+              "fieldName": "name",
+              "type": {
+                "text": "string"
+              },
+              "description": "Form field name, used when the control is submitted with a form."
+            },
+            {
+              "name": "label",
+              "fieldName": "label",
+              "type": {
+                "text": "string"
+              },
+              "description": "Accessible name. In a z-field, the field's label is used."
+            },
+            {
+              "name": "shape",
+              "fieldName": "shape",
+              "type": {
+                "text": "'star' | 'heart' | 'circle'"
+              },
+              "description": "The icon."
+            },
+            {
+              "name": "size",
+              "fieldName": "size",
+              "type": {
+                "text": "'sm' | 'md' | 'lg'"
+              },
+              "description": "Icon size: 16, 20 or 28px."
+            },
+            {
+              "name": "tone",
+              "fieldName": "tone",
+              "type": {
+                "text": "'primary' | 'secondary' | 'tertiary' | 'success' | 'warning' | 'danger'"
+              },
+              "description": "Color of the filled icons. `warning` gives the classic gold."
+            },
+            {
+              "name": "does-show-value",
+              "fieldName": "doesShowValue",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Shows the score as a number after the icons."
+            },
+            {
+              "name": "can-clear",
+              "fieldName": "canClear",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Clicking the current score again clears it to 0."
+            },
+            {
+              "name": "is-readonly",
+              "fieldName": "isReadonly",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "A display, not an input: no focus or hover, and any fraction renders (3.7 fills 70% of the fourth icon)."
+            },
+            {
+              "name": "is-required",
+              "fieldName": "isRequired",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "A score above 0 is needed for the form to submit."
+            },
+            {
+              "name": "is-disabled",
+              "fieldName": "isDisabled",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Blocks interaction, dims the element, and removes it from the keyboard focus order."
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Hides the element with display: none. It stays in the DOM and keeps its state."
+            }
+          ],
+          "events": [
+            {
+              "name": "change",
+              "type": {
+                "text": "CustomEvent<{ value: number }>"
+              },
+              "detail": "{ value: number }",
+              "description": "Fired when the user sets a new score."
+            }
+          ],
+          "cssProperties": [
+            {
+              "name": "--z-rating-size",
+              "description": "Size of each icon.",
+              "default": "1.25rem"
+            },
+            {
+              "name": "--z-rating-empty",
+              "description": "Color of the unfilled icons.",
+              "default": "color-mix(in oklch, var(--text-primary) 14%, transparent)"
+            }
+          ],
+          "cssParts": [
+            {
+              "name": "icons",
+              "description": "The row of icons, which is also the focusable slider."
             }
           ]
         },
@@ -12849,6 +14735,378 @@
         {
           "kind": "class",
           "customElement": true,
+          "tagName": "z-step",
+          "name": "ZStep",
+          "description": "One stage in a z-stepper: a numbered marker, a label and an optional description.",
+          "members": [
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "description": "The step's name."
+            },
+            {
+              "kind": "field",
+              "name": "description",
+              "type": {
+                "text": "string"
+              },
+              "description": "A short line under the label."
+            },
+            {
+              "kind": "field",
+              "name": "state",
+              "type": {
+                "text": "'upcoming' | 'current' | 'complete'"
+              },
+              "description": "Set by z-stepper from its value. Set it yourself only on a step used alone."
+            },
+            {
+              "kind": "field",
+              "name": "index",
+              "type": {
+                "text": "number"
+              },
+              "description": "The number in the marker, from 1. Set by z-stepper."
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "'sm' | 'md'"
+              },
+              "description": "Marker size. Set by z-stepper."
+            },
+            {
+              "kind": "field",
+              "name": "isError",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Marks the step as having a problem: a danger marker with \"!\"."
+            },
+            {
+              "kind": "field",
+              "name": "isOptional",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Labels the step optional, in place of a description when it has none."
+            },
+            {
+              "kind": "field",
+              "name": "isDisabled",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "The step cannot be clicked, even when completed in a navigable stepper."
+            },
+            {
+              "kind": "field",
+              "name": "isNavigable",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "The step is a button that fires `select`. Set by z-stepper for completed steps."
+            },
+            {
+              "kind": "field",
+              "name": "isVertical",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Vertical layout. Set by z-stepper."
+            },
+            {
+              "kind": "field",
+              "name": "isLast",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Hides the connector after the step. Set by z-stepper."
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Hides the element with display: none. It stays in the DOM and keeps its state."
+            }
+          ],
+          "attributes": [
+            {
+              "name": "label",
+              "fieldName": "label",
+              "type": {
+                "text": "string"
+              },
+              "description": "The step's name."
+            },
+            {
+              "name": "description",
+              "fieldName": "description",
+              "type": {
+                "text": "string"
+              },
+              "description": "A short line under the label."
+            },
+            {
+              "name": "state",
+              "fieldName": "state",
+              "type": {
+                "text": "'upcoming' | 'current' | 'complete'"
+              },
+              "description": "Set by z-stepper from its value. Set it yourself only on a step used alone."
+            },
+            {
+              "name": "index",
+              "fieldName": "index",
+              "type": {
+                "text": "number"
+              },
+              "description": "The number in the marker, from 1. Set by z-stepper."
+            },
+            {
+              "name": "size",
+              "fieldName": "size",
+              "type": {
+                "text": "'sm' | 'md'"
+              },
+              "description": "Marker size. Set by z-stepper."
+            },
+            {
+              "name": "is-error",
+              "fieldName": "isError",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Marks the step as having a problem: a danger marker with \"!\"."
+            },
+            {
+              "name": "is-optional",
+              "fieldName": "isOptional",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Labels the step optional, in place of a description when it has none."
+            },
+            {
+              "name": "is-disabled",
+              "fieldName": "isDisabled",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "The step cannot be clicked, even when completed in a navigable stepper."
+            },
+            {
+              "name": "is-navigable",
+              "fieldName": "isNavigable",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "The step is a button that fires `select`. Set by z-stepper for completed steps."
+            },
+            {
+              "name": "is-vertical",
+              "fieldName": "isVertical",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Vertical layout. Set by z-stepper."
+            },
+            {
+              "name": "is-last",
+              "fieldName": "isLast",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Hides the connector after the step. Set by z-stepper."
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Hides the element with display: none. It stays in the DOM and keeps its state."
+            }
+          ],
+          "events": [
+            {
+              "name": "select",
+              "type": {
+                "text": "CustomEvent<{ index: number }>"
+              },
+              "detail": "{ index: number }",
+              "description": "Fired when a navigable step is clicked. z-stepper turns it into its own `change`."
+            }
+          ],
+          "slots": [
+            {
+              "name": "",
+              "description": "Content under the step in a vertical stepper, such as the step's form."
+            },
+            {
+              "name": "icon",
+              "description": "Replaces the number in the marker."
+            }
+          ],
+          "cssParts": [
+            {
+              "name": "marker",
+              "description": "The circle with the number or check."
+            },
+            {
+              "name": "label",
+              "description": "The step's name."
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
+          "tagName": "z-stepper",
+          "name": "ZStepper",
+          "description": "Progress through an ordered flow, from z-step children. `value` is the current step's index.",
+          "members": [
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "number"
+              },
+              "description": "Index of the current step, from 0. Steps before it are complete; a value past the last step marks the flow finished."
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "description": "Accessible name for the list of steps."
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "'sm' | 'md'"
+              },
+              "description": "Marker size for every step."
+            },
+            {
+              "kind": "field",
+              "name": "tone",
+              "type": {
+                "text": "'primary' | 'secondary' | 'tertiary' | 'success'"
+              },
+              "description": "Color of the current and completed markers and lines."
+            },
+            {
+              "kind": "field",
+              "name": "isVertical",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Stacks the steps, with room under each for its own content."
+            },
+            {
+              "kind": "field",
+              "name": "isNavigable",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Lets people click a completed step to go back to it. Moving forward stays with the app."
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Hides the element with display: none. It stays in the DOM and keeps its state."
+            }
+          ],
+          "attributes": [
+            {
+              "name": "value",
+              "fieldName": "value",
+              "type": {
+                "text": "number"
+              },
+              "description": "Index of the current step, from 0. Steps before it are complete; a value past the last step marks the flow finished."
+            },
+            {
+              "name": "label",
+              "fieldName": "label",
+              "type": {
+                "text": "string"
+              },
+              "description": "Accessible name for the list of steps."
+            },
+            {
+              "name": "size",
+              "fieldName": "size",
+              "type": {
+                "text": "'sm' | 'md'"
+              },
+              "description": "Marker size for every step."
+            },
+            {
+              "name": "tone",
+              "fieldName": "tone",
+              "type": {
+                "text": "'primary' | 'secondary' | 'tertiary' | 'success'"
+              },
+              "description": "Color of the current and completed markers and lines."
+            },
+            {
+              "name": "is-vertical",
+              "fieldName": "isVertical",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Stacks the steps, with room under each for its own content."
+            },
+            {
+              "name": "is-navigable",
+              "fieldName": "isNavigable",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Lets people click a completed step to go back to it. Moving forward stays with the app."
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Hides the element with display: none. It stays in the DOM and keeps its state."
+            }
+          ],
+          "events": [
+            {
+              "name": "change",
+              "type": {
+                "text": "CustomEvent<{ value: number }>"
+              },
+              "detail": "{ value: number }",
+              "description": "Fired when a completed step is clicked in an `is-navigable` stepper."
+            }
+          ],
+          "slots": [
+            {
+              "name": "",
+              "description": "The z-step children, in order."
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
           "tagName": "z-subheading",
           "name": "ZSubheading",
           "description": "An uppercase subheading, one step below a heading.",
@@ -13835,6 +16093,355 @@
         {
           "kind": "class",
           "customElement": true,
+          "tagName": "z-tag-input",
+          "name": "ZTagInput",
+          "description": "A text field that turns typed entries into removable chips. Its value is a string[].",
+          "members": [
+            {
+              "kind": "field",
+              "name": "description",
+              "type": {
+                "text": "string"
+              },
+              "description": "Helper text shown under the control and linked to it for screen readers."
+            },
+            {
+              "kind": "field",
+              "name": "error",
+              "type": {
+                "text": "string"
+              },
+              "description": "Error message shown under the control. Setting it marks the control invalid."
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string[]"
+              },
+              "description": "The tags, as a string[]."
+            },
+            {
+              "kind": "field",
+              "name": "suggestions",
+              "type": {
+                "text": "string[]"
+              },
+              "description": "Completions offered while typing, as a string[]. Tags already added are left out."
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "description": "Form field name, used when the control is submitted with a form."
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "description": "Accessible name for the text field. In a z-field, the field's label is used."
+            },
+            {
+              "kind": "field",
+              "name": "placeholder",
+              "type": {
+                "text": "string"
+              },
+              "description": "Shown while there are no tags."
+            },
+            {
+              "kind": "field",
+              "name": "delimiter",
+              "type": {
+                "text": "string"
+              },
+              "description": "The key that adds the typed text as a tag, besides Enter. Pasted text is split on it and on new lines. Set it empty for Enter only."
+            },
+            {
+              "kind": "field",
+              "name": "max",
+              "type": {
+                "text": "number"
+              },
+              "description": "The most tags it takes. At the limit the field stops accepting text."
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "'sm' | 'md' | 'lg'"
+              },
+              "description": "Height and type size, matching z-input."
+            },
+            {
+              "kind": "field",
+              "name": "tone",
+              "type": {
+                "text": "'primary' | 'secondary' | 'tertiary' | 'success' | 'warning' | 'danger'"
+              },
+              "description": "Tints the tags and the focus border."
+            },
+            {
+              "kind": "field",
+              "name": "canDuplicate",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Allows the same tag twice. Off, a repeat is ignored."
+            },
+            {
+              "kind": "field",
+              "name": "isDraftKeptOnBlur",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Leaves typed text in the field on blur instead of adding it as a tag."
+            },
+            {
+              "kind": "field",
+              "name": "isInvalid",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Shows the error state. Pair it with a visible message, for example through `z-field`."
+            },
+            {
+              "kind": "field",
+              "name": "isRequired",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "At least one tag is needed for the form to submit."
+            },
+            {
+              "kind": "field",
+              "name": "isReadonly",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Shows the tags without remove buttons and takes no new ones. Still submitted."
+            },
+            {
+              "kind": "field",
+              "name": "isDisabled",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Blocks interaction, dims the element, and removes it from the keyboard focus order."
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Hides the element with display: none. It stays in the DOM and keeps its state."
+            }
+          ],
+          "attributes": [
+            {
+              "name": "description",
+              "fieldName": "description",
+              "type": {
+                "text": "string"
+              },
+              "description": "Helper text shown under the control and linked to it for screen readers."
+            },
+            {
+              "name": "error",
+              "fieldName": "error",
+              "type": {
+                "text": "string"
+              },
+              "description": "Error message shown under the control. Setting it marks the control invalid."
+            },
+            {
+              "name": "value",
+              "fieldName": "value",
+              "type": {
+                "text": "string[]"
+              },
+              "description": "The tags, as a string[]."
+            },
+            {
+              "name": "suggestions",
+              "fieldName": "suggestions",
+              "type": {
+                "text": "string[]"
+              },
+              "description": "Completions offered while typing, as a string[]. Tags already added are left out."
+            },
+            {
+              "name": "name",
+              "fieldName": "name",
+              "type": {
+                "text": "string"
+              },
+              "description": "Form field name, used when the control is submitted with a form."
+            },
+            {
+              "name": "label",
+              "fieldName": "label",
+              "type": {
+                "text": "string"
+              },
+              "description": "Accessible name for the text field. In a z-field, the field's label is used."
+            },
+            {
+              "name": "placeholder",
+              "fieldName": "placeholder",
+              "type": {
+                "text": "string"
+              },
+              "description": "Shown while there are no tags."
+            },
+            {
+              "name": "delimiter",
+              "fieldName": "delimiter",
+              "type": {
+                "text": "string"
+              },
+              "description": "The key that adds the typed text as a tag, besides Enter. Pasted text is split on it and on new lines. Set it empty for Enter only."
+            },
+            {
+              "name": "max",
+              "fieldName": "max",
+              "type": {
+                "text": "number"
+              },
+              "description": "The most tags it takes. At the limit the field stops accepting text."
+            },
+            {
+              "name": "size",
+              "fieldName": "size",
+              "type": {
+                "text": "'sm' | 'md' | 'lg'"
+              },
+              "description": "Height and type size, matching z-input."
+            },
+            {
+              "name": "tone",
+              "fieldName": "tone",
+              "type": {
+                "text": "'primary' | 'secondary' | 'tertiary' | 'success' | 'warning' | 'danger'"
+              },
+              "description": "Tints the tags and the focus border."
+            },
+            {
+              "name": "can-duplicate",
+              "fieldName": "canDuplicate",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Allows the same tag twice. Off, a repeat is ignored."
+            },
+            {
+              "name": "is-draft-kept-on-blur",
+              "fieldName": "isDraftKeptOnBlur",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Leaves typed text in the field on blur instead of adding it as a tag."
+            },
+            {
+              "name": "is-invalid",
+              "fieldName": "isInvalid",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Shows the error state. Pair it with a visible message, for example through `z-field`."
+            },
+            {
+              "name": "is-required",
+              "fieldName": "isRequired",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "At least one tag is needed for the form to submit."
+            },
+            {
+              "name": "is-readonly",
+              "fieldName": "isReadonly",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Shows the tags without remove buttons and takes no new ones. Still submitted."
+            },
+            {
+              "name": "is-disabled",
+              "fieldName": "isDisabled",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Blocks interaction, dims the element, and removes it from the keyboard focus order."
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Hides the element with display: none. It stays in the DOM and keeps its state."
+            }
+          ],
+          "events": [
+            {
+              "name": "input",
+              "type": {
+                "text": "CustomEvent<{ value: string }>"
+              },
+              "detail": "{ value: string }",
+              "description": "Fired on every keystroke with the text not yet added. Use it to load suggestions."
+            },
+            {
+              "name": "change",
+              "type": {
+                "text": "CustomEvent<{ value: string[] }>"
+              },
+              "detail": "{ value: string[] }",
+              "description": "Fired when tags are added or removed, with the whole value."
+            },
+            {
+              "name": "add",
+              "type": {
+                "text": "CustomEvent<{ value: string }>"
+              },
+              "detail": "{ value: string }",
+              "description": "Fired once per tag added."
+            },
+            {
+              "name": "remove",
+              "type": {
+                "text": "CustomEvent<{ value: string; index: number }>"
+              },
+              "detail": "{ value: string; index: number }",
+              "description": "Fired when a tag is removed."
+            }
+          ],
+          "slots": [
+            {
+              "name": "prefix",
+              "description": "A leading icon."
+            },
+            {
+              "name": "suffix",
+              "description": "A trailing icon or action."
+            }
+          ],
+          "cssParts": [
+            {
+              "name": "field",
+              "description": "The bordered field holding the tags and the text."
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
           "tagName": "z-terminal",
           "name": "ZTerminal",
           "description": "A terminal window for command walkthroughs. Copy a command or any selected snippet, and play a session back with typing, fading and looping.",
@@ -14726,6 +17333,228 @@
               },
               "detail": "{ preference: ThemePreferenceT; theme: ThemeT }",
               "description": "Fired when the theme preference changes."
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
+          "tagName": "z-timeline",
+          "name": "ZTimeline",
+          "description": "Events in order down a rail, from z-timeline-item children: an activity feed, a release history, a delivery.",
+          "members": [
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "description": "Accessible name for the list."
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "'sm' | 'md'"
+              },
+              "description": "Space between items."
+            },
+            {
+              "kind": "field",
+              "name": "tone",
+              "type": {
+                "text": "'primary' | 'secondary' | 'tertiary' | 'success' | 'warning' | 'danger'"
+              },
+              "description": "Marker color for every item without its own. Unset, markers are a quiet neutral."
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Hides the element with display: none. It stays in the DOM and keeps its state."
+            }
+          ],
+          "attributes": [
+            {
+              "name": "label",
+              "fieldName": "label",
+              "type": {
+                "text": "string"
+              },
+              "description": "Accessible name for the list."
+            },
+            {
+              "name": "size",
+              "fieldName": "size",
+              "type": {
+                "text": "'sm' | 'md'"
+              },
+              "description": "Space between items."
+            },
+            {
+              "name": "tone",
+              "fieldName": "tone",
+              "type": {
+                "text": "'primary' | 'secondary' | 'tertiary' | 'success' | 'warning' | 'danger'"
+              },
+              "description": "Marker color for every item without its own. Unset, markers are a quiet neutral."
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Hides the element with display: none. It stays in the DOM and keeps its state."
+            }
+          ],
+          "events": [],
+          "slots": [
+            {
+              "name": "",
+              "description": "The z-timeline-item children, in order."
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
+          "tagName": "z-timeline-item",
+          "name": "ZTimelineItem",
+          "description": "One event on a z-timeline: a marker, a heading with its time, a description and any content.",
+          "members": [
+            {
+              "kind": "field",
+              "name": "heading",
+              "type": {
+                "text": "string"
+              },
+              "description": "What happened. The `heading` slot takes rich content."
+            },
+            {
+              "kind": "field",
+              "name": "description",
+              "type": {
+                "text": "string"
+              },
+              "description": "A line of detail under the heading."
+            },
+            {
+              "kind": "field",
+              "name": "time",
+              "type": {
+                "text": "string"
+              },
+              "description": "When, as text (\"2h ago\", \"Mar 3\"). Use the `time` slot for a z-relative-time that keeps itself current."
+            },
+            {
+              "kind": "field",
+              "name": "tone",
+              "type": {
+                "text": "'primary' | 'secondary' | 'tertiary' | 'success' | 'warning' | 'danger'"
+              },
+              "description": "Marker color. Overrides the timeline's tone."
+            },
+            {
+              "kind": "field",
+              "name": "isPending",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Not happened yet: a hollow marker, a dashed line and a quieter heading."
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Hides the element with display: none. It stays in the DOM and keeps its state."
+            }
+          ],
+          "attributes": [
+            {
+              "name": "heading",
+              "fieldName": "heading",
+              "type": {
+                "text": "string"
+              },
+              "description": "What happened. The `heading` slot takes rich content."
+            },
+            {
+              "name": "description",
+              "fieldName": "description",
+              "type": {
+                "text": "string"
+              },
+              "description": "A line of detail under the heading."
+            },
+            {
+              "name": "time",
+              "fieldName": "time",
+              "type": {
+                "text": "string"
+              },
+              "description": "When, as text (\"2h ago\", \"Mar 3\"). Use the `time` slot for a z-relative-time that keeps itself current."
+            },
+            {
+              "name": "tone",
+              "fieldName": "tone",
+              "type": {
+                "text": "'primary' | 'secondary' | 'tertiary' | 'success' | 'warning' | 'danger'"
+              },
+              "description": "Marker color. Overrides the timeline's tone."
+            },
+            {
+              "name": "is-pending",
+              "fieldName": "isPending",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Not happened yet: a hollow marker, a dashed line and a quieter heading."
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Hides the element with display: none. It stays in the DOM and keeps its state."
+            }
+          ],
+          "events": [],
+          "slots": [
+            {
+              "name": "",
+              "description": "Extra content under the description: a quote, an attachment, an action."
+            },
+            {
+              "name": "heading",
+              "description": "Rich heading content."
+            },
+            {
+              "name": "time",
+              "description": "The time, such as a z-relative-time."
+            },
+            {
+              "name": "icon",
+              "description": "An icon. The marker becomes a ringed badge holding it."
+            }
+          ],
+          "cssParts": [
+            {
+              "name": "marker",
+              "description": "The dot or icon badge."
+            },
+            {
+              "name": "line",
+              "description": "The rail down to the next item."
+            },
+            {
+              "name": "heading",
+              "description": "The heading text."
             }
           ]
         },
@@ -15847,6 +18676,30 @@
         },
         {
           "kind": "custom-element-definition",
+          "name": "z-checkbox-group",
+          "declaration": {
+            "name": "ZCheckboxGroup",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "z-chip",
+          "declaration": {
+            "name": "ZChip",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "z-chip-group",
+          "declaration": {
+            "name": "ZChipGroup",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
           "name": "z-code-block",
           "declaration": {
             "name": "ZCodeBlock",
@@ -16039,6 +18892,14 @@
         },
         {
           "kind": "custom-element-definition",
+          "name": "z-fieldset",
+          "declaration": {
+            "name": "ZFieldset",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
           "name": "z-filter",
           "declaration": {
             "name": "ZFilter",
@@ -16066,6 +18927,22 @@
           "name": "z-hover-card",
           "declaration": {
             "name": "ZHoverCard",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "z-image",
+          "declaration": {
+            "name": "ZImage",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "z-image-cropper",
+          "declaration": {
+            "name": "ZImageCropper",
             "module": "dist/zest.js"
           }
         },
@@ -16183,6 +19060,14 @@
         },
         {
           "kind": "custom-element-definition",
+          "name": "z-meter",
+          "declaration": {
+            "name": "ZMeter",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
           "name": "z-nav-menu",
           "declaration": {
             "name": "ZNavMenu",
@@ -16258,6 +19143,14 @@
           "name": "z-range",
           "declaration": {
             "name": "ZRange",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "z-rating",
+          "declaration": {
+            "name": "ZRating",
             "module": "dist/zest.js"
           }
         },
@@ -16383,6 +19276,22 @@
         },
         {
           "kind": "custom-element-definition",
+          "name": "z-step",
+          "declaration": {
+            "name": "ZStep",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "z-stepper",
+          "declaration": {
+            "name": "ZStepper",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
           "name": "z-subheading",
           "declaration": {
             "name": "ZSubheading",
@@ -16439,6 +19348,14 @@
         },
         {
           "kind": "custom-element-definition",
+          "name": "z-tag-input",
+          "declaration": {
+            "name": "ZTagInput",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
           "name": "z-terminal",
           "declaration": {
             "name": "ZTerminal",
@@ -16466,6 +19383,22 @@
           "name": "z-theme-switcher",
           "declaration": {
             "name": "ZThemeSwitcher",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "z-timeline",
+          "declaration": {
+            "name": "ZTimeline",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "z-timeline-item",
+          "declaration": {
+            "name": "ZTimelineItem",
             "module": "dist/zest.js"
           }
         },
