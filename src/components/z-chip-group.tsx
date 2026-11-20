@@ -74,12 +74,20 @@ const readChipValue = (chip: ChipElementT): string => {
 	return chip.getAttribute('value') ?? chip.textContent?.trim() ?? ''
 }
 
+// A property set this turn reflects to its attribute on the next render,
+// so the property wins whenever the element has upgraded and holds one.
+const readFlag = (element: HTMLElement, property: boolean | undefined, attribute: string): boolean => {
+	const hasProperty = typeof property === 'boolean'
+	if (hasProperty) return property as boolean
+	return element.hasAttribute(attribute)
+}
+
 const isChipSelected = (chip: ChipElementT): boolean => {
-	return Boolean(chip.isSelected) || chip.hasAttribute('is-selected')
+	return readFlag(chip, chip.isSelected, 'is-selected')
 }
 
 const isChipDisabled = (chip: ChipElementT): boolean => {
-	return Boolean(chip.isDisabled) || chip.hasAttribute('is-disabled')
+	return readFlag(chip, chip.isDisabled, 'is-disabled')
 }
 
 const readSelectedValues = (host: HTMLElement): string[] => {

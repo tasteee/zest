@@ -12,7 +12,8 @@ import { useLocale } from '../shared/locale'
  * `fallback` slot) when the file fails.
  *
  * It loads lazily unless `is-eager`. `fit` and `position` are
- * object-fit and object-position. A `caption` (or the `caption` slot)
+ * object-fit and object-position (`focal-point` names the part that
+ * stays in view). A `caption` (or the `caption` slot)
  * turns it into a figure with a figcaption.
  *
  * Without a ratio the image takes its natural height once loaded; the
@@ -204,7 +205,7 @@ export const ZImage = c(
 			.concat(isFailed ? ['is-failed'] : [])
 			.join(' ')
 		const frameStyle = hasRatio ? { aspectRatio } : {}
-		const imageStyle = { objectFit: props.fit ?? 'cover', objectPosition: props.position ?? 'center' }
+		const imageStyle = { objectFit: props.fit ?? 'cover', objectPosition: props.focalPoint ?? 'center' }
 		const hasCaption = Boolean(props.caption) || hasCaptionSlot
 		const altText = props.alt ?? ''
 		const failedLabel = altText ? `${altText}. ${t('imageUnavailable')}` : t('imageUnavailable')
@@ -254,7 +255,7 @@ export const ZImage = c(
 			alt: String,
 			ratio: String,
 			caption: String,
-			position: String,
+			focalPoint: String,
 			fit: { type: oneOf('cover', 'contain', 'fill', 'none', 'scale-down'), reflect: true },
 			radius: { type: oneOf('none', 'sm', 'md', 'lg', 'xl', 'full'), reflect: true },
 			isEager: { type: Boolean, reflect: true },

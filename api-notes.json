@@ -7336,8 +7336,8 @@
 			"caption": {
 				"description": "A caption under the image. Turns it into a figure with a figcaption."
 			},
-			"position": {
-				"description": "object-position, for which part stays in view when cropped (\"top\", \"30% 50%\").",
+			"focal-point": {
+				"description": "The part that stays in view when the image is cropped, as CSS object-position: \"top\", \"70% 30%\".",
 				"default": "\"center\""
 			},
 			"fit": {

@@ -8329,11 +8329,11 @@
             },
             {
               "kind": "field",
-              "name": "position",
+              "name": "focalPoint",
               "type": {
                 "text": "string"
               },
-              "description": "object-position, for which part stays in view when cropped (\"top\", \"30% 50%\")."
+              "description": "The part that stays in view when the image is cropped, as CSS object-position: \"top\", \"70% 30%\"."
             },
             {
               "kind": "field",
@@ -8418,12 +8418,12 @@
               "description": "A caption under the image. Turns it into a figure with a figcaption."
             },
             {
-              "name": "position",
-              "fieldName": "position",
+              "name": "focal-point",
+              "fieldName": "focalPoint",
               "type": {
                 "text": "string"
               },
-              "description": "object-position, for which part stays in view when cropped (\"top\", \"30% 50%\")."
+              "description": "The part that stays in view when the image is cropped, as CSS object-position: \"top\", \"70% 30%\"."
             },
             {
               "name": "fit",

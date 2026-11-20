@@ -224,6 +224,10 @@ export const ZTagInput = c(
 		const defaultValue = useRef<string[]>(initialTags)
 
 		const tags = Array.isArray(value) ? value : []
+		// Two commits can land before a render (Enter twice, fast), so
+		// edits build on the newest list, not this render's.
+		const latestTags = useRef<string[]>(tags)
+		latestTags.current = tags
 		const tagCount = tags.length
 		const hasTags = tagCount > 0
 		const delimiter = props.delimiter ?? ','
@@ -250,13 +254,14 @@ export const ZTagInput = c(
 		const canEdit = !isDisabled && !props.isReadonly
 
 		const commitTags = (nextTags: string[]) => {
+			latestTags.current = nextTags
 			setValue(nextTags)
 			props.change({ value: nextTags })
 		}
 
 		// Adds what it can from `entries`, in order, and returns how many.
 		const addEntries = (entries: string[]): number => {
-			const nextTags = [...tags]
+			const nextTags = [...latestTags.current]
 			const added: string[] = []
 			for (const entry of entries) {
 				const isAtMax = hasMax && nextTags.length >= (props.max as number)
@@ -274,18 +279,29 @@ export const ZTagInput = c(
 			return added.length
 		}
 
+		// The live text, read from the input itself: a fast typist can
+		// press Enter before the render that would update `draft`.
+		const readDraft = (): string => inputRef.current?.value ?? draft
+
+		const clearDraft = () => {
+			const input = inputRef.current
+			if (input) input.value = ''
+			setDraft('')
+		}
+
 		const commitDraft = (): boolean => {
-			const entries = splitEntries(draft, delimiter)
+			const entries = splitEntries(readDraft(), delimiter)
 			const hasEntries = entries.length > 0
 			if (!hasEntries) return false
 			addEntries(entries)
-			setDraft('')
+			clearDraft()
 			return true
 		}
 
 		const removeTagAt = (position: number) => {
-			const removedTag = tags[position]
-			const nextTags = tags.filter((_tag, tagPosition) => tagPosition !== position)
+			const currentTags = latestTags.current
+			const removedTag = currentTags[position]
+			const nextTags = currentTags.filter((_tag, tagPosition) => tagPosition !== position)
 			commitTags(nextTags)
 			props.remove({ value: removedTag, index: position })
 		}
@@ -314,7 +330,7 @@ export const ZTagInput = c(
 			if (isComposing) return
 			const isEnter = keyEvent.key === 'Enter'
 			const isDelimiter = Boolean(delimiter) && keyEvent.key === delimiter
-			const hasDraft = draft.trim().length > 0
+			const hasDraft = readDraft().trim().length > 0
 
 			if (isEnter && !hasDraft) {
 				keyEvent.preventDefault()
@@ -422,6 +438,9 @@ export const ZTagInput = c(
 		const toneClass = resolveChipToneClass(props.tone)
 		const chipClass = ['chip', toneClass, toneClass ? 'is-toned' : ''].filter(Boolean).join(' ')
 		const isRequiredNow = Boolean(props.isRequired) && !hasTags
+		// `readonly` has no camelCase property name Atomico can match, so
+		// it is written as an attribute: false must be absent, not "false".
+		const isInputReadonly = Boolean(props.isReadonly) || isFull
 
 		return (
 			<host shadowDom={{ delegatesFocus: true }}>
@@ -455,7 +474,7 @@ export const ZTagInput = c(
 						value={draft}
 						placeholder={placeholder}
 						disabled={isDisabled}
-						readonly={props.isReadonly || isFull}
+						readonly={isInputReadonly ? true : undefined}
 						required={isRequiredNow}
 						enterkeyhint="enter"
 						autocomplete="off"

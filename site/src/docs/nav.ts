@@ -47,7 +47,9 @@ export const ELEMENT_PART_PARENTS: Record<string, string> = {
 	'z-bento-item': 'z-bento-grid',
 	'z-dock-item': 'z-dock',
 	'z-list-row': 'z-list',
-	'z-toolbar-group': 'z-toolbar'
+	'z-toolbar-group': 'z-toolbar',
+	'z-step': 'z-stepper',
+	'z-timeline-item': 'z-timeline'
 }
 
 // Every page in the Elements section is a z element, so the "z-" prefix is
@@ -170,19 +172,19 @@ const ELEMENTS: SectionT = {
 		{
 			label: 'Forms',
 			items: [
-				{ label: 'Text', items: elements('z-field', 'z-input', 'z-copy-field', 'z-textarea', 'z-number-input', 'z-number-range-input', 'z-input-otp') },
+				{ label: 'Text', items: elements('z-field', 'z-fieldset', 'z-input', 'z-copy-field', 'z-textarea', 'z-number-input', 'z-number-range-input', 'z-input-otp', 'z-tag-input') },
 				{ label: 'Date', items: elements('z-date-input', 'z-calendar') },
 				{
 					label: 'Choice',
-					items: elements('z-checkbox', 'z-switch', 'z-radio', 'z-radio-group', 'z-select', 'z-combobox', 'z-filter')
+					items: elements('z-checkbox', 'z-checkbox-group', 'z-switch', 'z-radio', 'z-radio-group', 'z-chip', 'z-chip-group', 'z-rating', 'z-select', 'z-combobox', 'z-filter')
 				},
 				{ label: 'Range & color', items: elements('z-slider', 'z-range', 'z-color-picker', 'z-color-panel', 'z-color-swatch') },
-				{ label: 'Files', items: elements('z-dropzone') }
+				{ label: 'Files & images', items: elements('z-dropzone', 'z-image-cropper') }
 			]
 		},
 		{
 			label: 'Feedback',
-			items: elements('z-alert', 'z-callout', 'z-toaster', 'z-progress', 'z-spinner', 'z-skeleton', 'z-status-dot', 'z-empty-state')
+			items: elements('z-alert', 'z-callout', 'z-toaster', 'z-progress', 'z-meter', 'z-spinner', 'z-skeleton', 'z-status-dot', 'z-empty-state')
 		},
 		{
 			label: 'Overlays',
@@ -196,6 +198,7 @@ const ELEMENTS: SectionT = {
 			label: 'Navigation',
 			items: elements(
 				'z-tabs',
+				'z-stepper',
 				'z-breadcrumbs',
 				'z-pagination',
 				'z-nav-menu',
@@ -208,10 +211,10 @@ const ELEMENTS: SectionT = {
 		{
 			label: 'Data display',
 			items: [
-				{ label: 'Identity', items: elements('z-badge', 'z-avatar', 'z-avatar-stack', 'z-stat', 'z-relative-time') },
+				{ label: 'Identity', items: elements('z-badge', 'z-avatar', 'z-avatar-stack', 'z-image', 'z-stat', 'z-relative-time') },
 				{
 					label: 'Collections',
-					items: elements('z-list', 'z-table', 'z-tree', 'z-carousel')
+					items: elements('z-list', 'z-table', 'z-tree', 'z-timeline', 'z-carousel')
 				},
 				{ label: 'Content', items: elements('z-code-block', 'z-terminal', 'z-markdown') }
 			]

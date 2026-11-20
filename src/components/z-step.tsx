@@ -166,7 +166,7 @@ const styles = css`
 	}
 
 	.description {
-		color: var(--text-tertiary);
+		color: var(--text-secondary);
 		font-size: var(--font-size-xs);
 		line-height: var(--line-height-snug);
 	}

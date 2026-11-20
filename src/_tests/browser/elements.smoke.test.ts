@@ -117,7 +117,19 @@ const restingFixtures: Record<string, string> = {
 	'z-select': '<z-select label="Fruit"></z-select>',
 	'z-slider': '<z-slider label="Volume"></z-slider>',
 	'z-swap': '<z-swap label="Mute"></z-swap>',
-	'z-textarea': '<z-textarea label="Notes"></z-textarea>'
+	'z-textarea': '<z-textarea label="Notes"></z-textarea>',
+	'z-fieldset': '<z-fieldset legend="Address"><z-input label="Street"></z-input></z-fieldset>',
+	'z-checkbox-group': '<z-checkbox-group label="Topics" has-select-all><z-checkbox value="a" is-checked>A</z-checkbox><z-checkbox value="b">B</z-checkbox></z-checkbox-group>',
+	'z-chip-group': '<z-chip-group label="Cuisine"><z-chip value="thai" is-selected>Thai</z-chip><z-chip value="greek" is-removable>Greek</z-chip></z-chip-group>',
+	'z-tag-input': '<z-tag-input label="Tags" value=\'["one","two"]\'></z-tag-input>',
+	'z-rating': '<z-rating label="Quality" value="3"></z-rating>',
+	'z-meter': '<z-meter label="Storage" value="60" low="40" high="80" optimum="0" does-show-value></z-meter>',
+	'z-stepper': '<z-stepper value="1"><z-step label="One"></z-step><z-step label="Two"></z-step><z-step label="Three" is-optional></z-step></z-stepper>',
+	'z-step': '<z-stepper value="0"><z-step label="Only"></z-step></z-stepper>',
+	'z-timeline': '<z-timeline><z-timeline-item heading="Placed" time="9:41"></z-timeline-item><z-timeline-item heading="Shipped" is-pending></z-timeline-item></z-timeline>',
+	'z-timeline-item': '<z-timeline><z-timeline-item heading="Placed" time="9:41" description="Two boxes">Body</z-timeline-item></z-timeline>',
+	'z-image': '<z-image alt="Missing photo" ratio="1"></z-image>',
+	'z-image-cropper': '<z-image-cropper alt="Photo"></z-image-cropper>'
 }
 
 // Elements that open, audited while open. `is-open` is added to the first tag.

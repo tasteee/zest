@@ -142,7 +142,7 @@ const styles = css`
 	}
 
 	.time {
-		color: var(--text-tertiary);
+		color: var(--text-secondary);
 		font-size: var(--font-size-xs);
 		font-variant-numeric: tabular-nums;
 		line-height: var(--line-height-snug);

@@ -149,7 +149,8 @@ const isNativeControl = (element: Element): boolean => {
 }
 
 const isAlreadyDisabled = (element: DisableableT): boolean => {
-	const isZDisabled = Boolean(element.isDisabled) || element.hasAttribute('is-disabled')
+	const hasProperty = typeof element.isDisabled === 'boolean'
+	const isZDisabled = hasProperty ? Boolean(element.isDisabled) : element.hasAttribute('is-disabled')
 	if (isZControl(element)) return isZDisabled
 	return Boolean(element.disabled)
 }

@@ -67,7 +67,7 @@ const styles = css`
 		padding: var(--space-0-5) var(--space-2);
 		border-radius: var(--radius-full);
 		background: color-mix(in oklch, var(--tone) 12%, transparent);
-		color: var(--tone);
+		color: color-mix(in oklab, var(--tone) 70%, var(--text-primary));
 		font-size: var(--font-size-xs);
 		font-weight: var(--font-weight-semibold);
 		font-variant-numeric: tabular-nums;

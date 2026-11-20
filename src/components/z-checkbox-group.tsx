@@ -80,12 +80,20 @@ const readCheckboxValue = (checkbox: CheckboxElementT): string => {
 	return checkbox.getAttribute('value') ?? 'on'
 }
 
+// A property set this turn reflects to its attribute on the next render,
+// so the property wins whenever the element has upgraded and holds one.
+const readFlag = (element: HTMLElement, property: boolean | undefined, attribute: string): boolean => {
+	const hasProperty = typeof property === 'boolean'
+	if (hasProperty) return property as boolean
+	return element.hasAttribute(attribute)
+}
+
 const isCheckboxChecked = (checkbox: CheckboxElementT): boolean => {
-	return Boolean(checkbox.isChecked) || checkbox.hasAttribute('is-checked')
+	return readFlag(checkbox, checkbox.isChecked, 'is-checked')
 }
 
 const isCheckboxDisabled = (checkbox: CheckboxElementT): boolean => {
-	return Boolean(checkbox.isDisabled) || checkbox.hasAttribute('is-disabled')
+	return readFlag(checkbox, checkbox.isDisabled, 'is-disabled')
 }
 
 const readCheckedValues = (host: HTMLElement): string[] => {
