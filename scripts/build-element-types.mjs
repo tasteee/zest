@@ -14,14 +14,22 @@ const SIDE_EFFECT_IMPORT = /^import\s+['"]\.\/z-[\w-]+(?:\.d\.ts|\.js)?['"];?\r?
 
 // dist/shared is not published to JSR. A type imported from it is
 // shipped next to the element declarations instead, with an explicit
-// extension so Deno resolves it.
-const SHARED_TYPE_IMPORT = /from\s+['"]\.\.\/shared\/([\w-]+)(?:\.d\.ts|\.js)?['"]/g
+// extension so Deno resolves it. A .d.ts path must be imported with
+// `import type` (TypeScript rejects `import { type A }` from one), so the
+// whole statement is rewritten, not only its path.
+const SHARED_TYPE_IMPORT = /^import\s+(?:type\s+)?\{([^}]*)\}\s+from\s+['"]\.\.\/shared\/([\w-]+)(?:\.d\.ts|\.js)?['"];?/gm
 
-const copySharedDeclaration = (sharedName) => {
+const readImportedNames = (namesText) => {
+	const names = namesText.split(',').map((name) => name.replace(/^\s*type\s+/, '').trim())
+	return names.filter(Boolean).join(', ')
+}
+
+const copySharedDeclaration = (namesText, sharedName) => {
 	const source = join(distDir, 'shared', `${sharedName}.d.ts`)
 	const target = join(sharedOutputDir, `${sharedName}.d.ts`)
 	copyFileSync(source, target)
-	return `from './shared/${sharedName}.d.ts'`
+	const importedNames = readImportedNames(namesText)
+	return `import type { ${importedNames} } from './shared/${sharedName}.d.ts';`
 }
 
 const inlineComponentDts = (componentModule, targetClassName) => {
@@ -32,7 +40,7 @@ const inlineComponentDts = (componentModule, targetClassName) => {
 			/^import\s+type\s+\{\s*ThemePreferenceT\s*,\s*ThemeT\s*\}\s+from\s+['"]\.\.\/shared\/theme(?:\.d\.ts|\.js)?['"];?\r?\n/gm,
 			'type ThemeT = "dark" | "light";\ntype ThemePreferenceT = "system" | "dark" | "light";\n'
 		)
-		.replace(SHARED_TYPE_IMPORT, (_match, sharedName) => copySharedDeclaration(sharedName))
+		.replace(SHARED_TYPE_IMPORT, (_match, namesText, sharedName) => copySharedDeclaration(namesText, sharedName))
 		.replace(
 			/^export declare const (Z\w+): import\("atomico\/types\/dom"\)\.Atomico<\{[\s\S]*?^\}>;\r?\n?/gm,
 			(match, name) => (name === targetClassName ? match : '')
