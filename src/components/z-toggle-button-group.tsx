@@ -3,6 +3,7 @@ import { defineFormElement, useFormControl } from '../shared/form-control'
 import { c, css, event, useHost, useListener, useRef, useState } from 'atomico'
 import { toggleVariantProps } from '../shared/toggle-schema'
 import { oneOf } from '../shared/prop-types'
+import { warnLegacyOrientation } from '../shared/deprecate'
 
 const styles = css`
 	:host {
@@ -18,6 +19,7 @@ const styles = css`
 	   vertical mode the cross axis becomes width, and centering there lets
 	   each item sit at its own fit-content width — shorter labels end up
 	   narrower than longer ones, staircasing instead of stacking flush. */
+	:host([is-vertical]),
 	:host([direction='vertical']) {
 		flex-direction: column;
 		align-items: stretch;
@@ -33,26 +35,29 @@ const styles = css`
 		--z-toggle-button-radius: var(--radius-md);
 	}
 
-	:host(:not([direction='vertical'])) ::slotted(:first-child) {
+	:host(:not([is-vertical]):not([direction='vertical'])) ::slotted(:first-child) {
 		--z-toggle-button-radius: var(--radius-md) 0 0 var(--radius-md);
 	}
 
-	:host(:not([direction='vertical'])) ::slotted(:last-child) {
+	:host(:not([is-vertical]):not([direction='vertical'])) ::slotted(:last-child) {
 		--z-toggle-button-radius: 0 var(--radius-md) var(--radius-md) 0;
 	}
 
-	:host(:not([direction='vertical'])) ::slotted(:not(:first-child)) {
+	:host(:not([is-vertical]):not([direction='vertical'])) ::slotted(:not(:first-child)) {
 		margin-inline-start: -1px;
 	}
 
+	:host([is-vertical]) ::slotted(:first-child),
 	:host([direction='vertical']) ::slotted(:first-child) {
 		--z-toggle-button-radius: var(--radius-md) var(--radius-md) 0 0;
 	}
 
+	:host([is-vertical]) ::slotted(:last-child),
 	:host([direction='vertical']) ::slotted(:last-child) {
 		--z-toggle-button-radius: 0 0 var(--radius-md) var(--radius-md);
 	}
 
+	:host([is-vertical]) ::slotted(:not(:first-child)),
 	:host([direction='vertical']) ::slotted(:not(:first-child)) {
 		margin-top: -1px;
 	}
@@ -219,6 +224,7 @@ type ToggleGroupItemElementT = HTMLElement & { isPressed?: boolean }
 
 export const ZToggleButtonGroup = c(
 	(props) => {
+		warnLegacyOrientation({ tag: 'z-toggle-button-group', attribute: 'direction', value: props.direction, flag: 'is-vertical', flagValue: 'vertical' })
 		const host = useHost()
 		// The pressed values live on the children; a copy in state is what the
 		// form reads, refreshed on every press and slot change.
@@ -284,6 +290,8 @@ export const ZToggleButtonGroup = c(
 		props: {
 			...toggleVariantProps,
 			name: { type: String, reflect: true },
+			isVertical: { type: Boolean, reflect: true },
+			/** @deprecated use is-vertical */
 			direction: { type: oneOf('horizontal', 'vertical'), reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			isMultiple: { type: Boolean, reflect: true },

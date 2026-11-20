@@ -484,7 +484,7 @@ export const BLOCKS: BlockGroupT[] = [
 				'kanban',
 				'Kanban',
 				'Three columns of cards you can reorder by dragging.',
-				[{ demo: 'blocks/kanban', title: 'Reorder within a column', description: 'Each column is its own z-sortable on the y axis.' }],
+				[{ demo: 'blocks/kanban', title: 'Reorder within a column', description: 'Each column is its own vertical z-sortable.' }],
 				'board columns drag sortable tasks'
 			),
 			block(

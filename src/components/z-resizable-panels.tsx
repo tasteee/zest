@@ -1,11 +1,13 @@
 import { c, css, event, useHost, useRef, useEffect } from 'atomico'
+import { oneOf } from '../shared/prop-types'
+import { warnLegacyOrientation } from '../shared/deprecate'
 
 /*
  * z-resizable-panels, a group of resizable panes, modeled on
  * react-resizable-panels. Author it declaratively: z-panel children
  * separated by z-panel-handle separators.
  *
- *   <z-resizable-panels direction="horizontal" auto-save-id="editor">
+ *   <z-resizable-panels auto-save-id="editor">       (side by side; is-vertical stacks)
  *     <z-panel default-size="20%" min-size="160px" collapsible>…</z-panel>
  *     <z-panel-handle></z-panel-handle>
  *     <z-panel min-size="30%">…</z-panel>
@@ -28,6 +30,7 @@ const styles = css`
 		height: 100%;
 		overflow: hidden;
 	}
+	:host([is-vertical]),
 	:host([direction='vertical']) {
 		flex-direction: column;
 	}
@@ -53,6 +56,15 @@ const toPct = (raw: string | null, groupPx: number, fallback: number): number =>
 const dispatch = (el: Element, name: string, detail: unknown) =>
 	el.dispatchEvent(new CustomEvent(name, { detail, bubbles: true, composed: true }))
 
+// Read from the group element so handles see the same answer as the
+// group. `direction="vertical"` is the deprecated spelling.
+const checkIsVerticalGroup = (group: Element | null | undefined): boolean => {
+	if (!group) return false
+	const hasVerticalFlag = group.hasAttribute('is-vertical')
+	const hasLegacyVertical = group.getAttribute('direction') === 'vertical'
+	return hasVerticalFlag || hasLegacyVertical
+}
+
 type Cons = {
 	min: number
 	max: number
@@ -63,6 +75,7 @@ type Cons = {
 
 export const ZResizablePanels = c(
 	(props) => {
+		warnLegacyOrientation({ tag: 'z-resizable-panels', attribute: 'direction', value: props.direction, flag: 'is-vertical', flagValue: 'vertical' })
 		const host = useHost()
 		// One store object (stable across renders) holds mutable layout state; Atomico's
 		// Ref.current is typed optional, so we assert it non-null once here.
@@ -76,8 +89,8 @@ export const ZResizablePanels = c(
 		const el = () => host.current as HTMLElement
 		const panels = () =>
 			[...el().querySelectorAll(':scope > z-panel')] as HTMLElement[]
-		const extent = () =>
-			props.direction === 'vertical' ? el().clientHeight : el().clientWidth
+		const isVertical = Boolean(props.isVertical) || props.direction === 'vertical'
+		const extent = () => (isVertical ? el().clientHeight : el().clientWidth)
 		const isCollapsed = (p: Element) => p.hasAttribute('is-collapsed')
 
 		const cons = (p: HTMLElement, g: number): Cons => {
@@ -238,7 +251,7 @@ export const ZResizablePanels = c(
 				mo.disconnect()
 				ro.disconnect()
 			}
-		}, [props.direction, props.autoSaveId, props.isDisabled])
+		}, [isVertical, props.autoSaveId, props.isDisabled])
 
 		return (
 			<host shadowDom>
@@ -248,7 +261,9 @@ export const ZResizablePanels = c(
 	},
 	{
 		props: {
-			direction: { type: String, reflect: true },
+			isVertical: { type: Boolean, reflect: true },
+			/** @deprecated use is-vertical */
+			direction: { type: oneOf('horizontal', 'vertical'), reflect: true },
 			autoSaveId: { type: String, reflect: true },
 			keyboardStep: { type: Number, reflect: true },
 			isDisabled: { type: Boolean, reflect: true },
@@ -326,7 +341,7 @@ export const ZPanelHandle = c(
 		const s = useRef({ active: false, last: 0 }).current!
 
 		const group = () => (host.current as HTMLElement).parentElement as any
-		const isVertical = () => group()?.getAttribute('direction') === 'vertical'
+		const isVertical = () => checkIsVerticalGroup(group())
 
 		// Mirror the group's orientation onto the host so CSS can flip the grip +
 		// cursor without :host-context (which Firefox doesn't support).
@@ -373,7 +388,7 @@ export const ZPanelHandle = c(
 				shadowDom
 				role="separator"
 				tabindex={props.isDisabled ? '-1' : '0'}
-				aria-orientation={group()?.getAttribute('direction') === 'vertical' ? 'horizontal' : 'vertical'}
+				aria-orientation={isVertical() ? 'horizontal' : 'vertical'}
 				onpointerdown={onDown}
 				onpointermove={onMove}
 				onpointerup={onUp}

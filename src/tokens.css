@@ -15,6 +15,9 @@
  *
  *   Palette   --color-neutral-0..9. Private to the theme: step N plays a
  *             different part in light and dark. Never read by a component.
+ *             --neutral-0..9 is its short name for app code and docs.
+ *             --{tone}-0..9 (primary, secondary, tertiary, success,
+ *             warning, danger) are reference ramps derived from each tone.
  *   Roles     --{group}-{role}[-{variant}], noun first. One name per meaning,
  *             named for the job, never for the hue or the lightness.
  *   Local     --tone and the --z-* component properties.
@@ -355,6 +358,88 @@
 	--chart-3: var(--color-neutral-7);
 	--chart-4: var(--color-neutral-5);
 	--chart-5: var(--color-neutral-4);
+
+	/* Reference ramps, for app code and docs. Components still read
+     roles. --neutral-N is the short name for the palette; themes keep
+     setting --color-neutral-N, which also stays as a legacy name.
+     Tone ramps blend each tone toward black (0–4) and white (6–9);
+     step 5 is the tone itself. */
+	--neutral-0: var(--color-neutral-0);
+	--neutral-1: var(--color-neutral-1);
+	--neutral-2: var(--color-neutral-2);
+	--neutral-3: var(--color-neutral-3);
+	--neutral-4: var(--color-neutral-4);
+	--neutral-5: var(--color-neutral-5);
+	--neutral-6: var(--color-neutral-6);
+	--neutral-7: var(--color-neutral-7);
+	--neutral-8: var(--color-neutral-8);
+	--neutral-9: var(--color-neutral-9);
+
+	--primary-0: color-mix(in oklab, var(--accent-primary) 0%, black);
+	--primary-1: color-mix(in oklab, var(--accent-primary) 20%, black);
+	--primary-2: color-mix(in oklab, var(--accent-primary) 40%, black);
+	--primary-3: color-mix(in oklab, var(--accent-primary) 60%, black);
+	--primary-4: color-mix(in oklab, var(--accent-primary) 80%, black);
+	--primary-5: var(--accent-primary);
+	--primary-6: color-mix(in oklab, var(--accent-primary) 75%, white);
+	--primary-7: color-mix(in oklab, var(--accent-primary) 50%, white);
+	--primary-8: color-mix(in oklab, var(--accent-primary) 25%, white);
+	--primary-9: color-mix(in oklab, var(--accent-primary) 0%, white);
+
+	--secondary-0: color-mix(in oklab, var(--accent-secondary) 0%, black);
+	--secondary-1: color-mix(in oklab, var(--accent-secondary) 20%, black);
+	--secondary-2: color-mix(in oklab, var(--accent-secondary) 40%, black);
+	--secondary-3: color-mix(in oklab, var(--accent-secondary) 60%, black);
+	--secondary-4: color-mix(in oklab, var(--accent-secondary) 80%, black);
+	--secondary-5: var(--accent-secondary);
+	--secondary-6: color-mix(in oklab, var(--accent-secondary) 75%, white);
+	--secondary-7: color-mix(in oklab, var(--accent-secondary) 50%, white);
+	--secondary-8: color-mix(in oklab, var(--accent-secondary) 25%, white);
+	--secondary-9: color-mix(in oklab, var(--accent-secondary) 0%, white);
+
+	--tertiary-0: color-mix(in oklab, var(--accent-tertiary) 0%, black);
+	--tertiary-1: color-mix(in oklab, var(--accent-tertiary) 20%, black);
+	--tertiary-2: color-mix(in oklab, var(--accent-tertiary) 40%, black);
+	--tertiary-3: color-mix(in oklab, var(--accent-tertiary) 60%, black);
+	--tertiary-4: color-mix(in oklab, var(--accent-tertiary) 80%, black);
+	--tertiary-5: var(--accent-tertiary);
+	--tertiary-6: color-mix(in oklab, var(--accent-tertiary) 75%, white);
+	--tertiary-7: color-mix(in oklab, var(--accent-tertiary) 50%, white);
+	--tertiary-8: color-mix(in oklab, var(--accent-tertiary) 25%, white);
+	--tertiary-9: color-mix(in oklab, var(--accent-tertiary) 0%, white);
+
+	--success-0: color-mix(in oklab, var(--status-success) 0%, black);
+	--success-1: color-mix(in oklab, var(--status-success) 20%, black);
+	--success-2: color-mix(in oklab, var(--status-success) 40%, black);
+	--success-3: color-mix(in oklab, var(--status-success) 60%, black);
+	--success-4: color-mix(in oklab, var(--status-success) 80%, black);
+	--success-5: var(--status-success);
+	--success-6: color-mix(in oklab, var(--status-success) 75%, white);
+	--success-7: color-mix(in oklab, var(--status-success) 50%, white);
+	--success-8: color-mix(in oklab, var(--status-success) 25%, white);
+	--success-9: color-mix(in oklab, var(--status-success) 0%, white);
+
+	--warning-0: color-mix(in oklab, var(--status-warning) 0%, black);
+	--warning-1: color-mix(in oklab, var(--status-warning) 20%, black);
+	--warning-2: color-mix(in oklab, var(--status-warning) 40%, black);
+	--warning-3: color-mix(in oklab, var(--status-warning) 60%, black);
+	--warning-4: color-mix(in oklab, var(--status-warning) 80%, black);
+	--warning-5: var(--status-warning);
+	--warning-6: color-mix(in oklab, var(--status-warning) 75%, white);
+	--warning-7: color-mix(in oklab, var(--status-warning) 50%, white);
+	--warning-8: color-mix(in oklab, var(--status-warning) 25%, white);
+	--warning-9: color-mix(in oklab, var(--status-warning) 0%, white);
+
+	--danger-0: color-mix(in oklab, var(--status-danger) 0%, black);
+	--danger-1: color-mix(in oklab, var(--status-danger) 20%, black);
+	--danger-2: color-mix(in oklab, var(--status-danger) 40%, black);
+	--danger-3: color-mix(in oklab, var(--status-danger) 60%, black);
+	--danger-4: color-mix(in oklab, var(--status-danger) 80%, black);
+	--danger-5: var(--status-danger);
+	--danger-6: color-mix(in oklab, var(--status-danger) 75%, white);
+	--danger-7: color-mix(in oklab, var(--status-danger) 50%, white);
+	--danger-8: color-mix(in oklab, var(--status-danger) 25%, white);
+	--danger-9: color-mix(in oklab, var(--status-danger) 0%, white);
 }
 
 /* More contrast on request: hairlines step up so borders and dividers hold at

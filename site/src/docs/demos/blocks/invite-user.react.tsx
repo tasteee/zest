@@ -1,0 +1,22 @@
+import '@tasteee/zest'
+
+const ROLES = [
+  { value: 'viewer', label: 'Viewer' },
+  { value: 'editor', label: 'Editor' },
+  { value: 'admin', label: 'Admin' }
+]
+
+export const Example = () => (
+  <z-card gap="3" style={{ width: 'min(34rem, 100%)', padding: '1.25rem' }}>
+    <z-column gap="1">
+      <z-heading size="xs" tag="h2">Invite teammates</z-heading>
+      <z-text size="sm" color="muted">They’ll get an email with a link to join.</z-text>
+    </z-column>
+    <z-row gap="2" doesWrap>
+      <z-input type="email" placeholder="name@example.com" aria-label="Email" style={{ flex: '1', minWidth: '12rem' }} />
+      <z-select aria-label="Role" value="editor" options={ROLES} style={{ width: '8rem' }} />
+      <z-button tone="secondary">Send invite</z-button>
+    </z-row>
+    <z-text size="xs" color="muted">Viewers can read. Editors can change. Admins can invite.</z-text>
+  </z-card>
+)

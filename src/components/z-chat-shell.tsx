@@ -38,7 +38,7 @@ export const ZChatShell = c(
 
 		return (
 			<host shadowDom>
-				<z-resizable-panels direction="horizontal" auto-save-id={props.autoSaveId}>
+				<z-resizable-panels auto-save-id={props.autoSaveId}>
 					<z-panel default-size={listSize} min-size="240px" max-size="460px">
 						<div class="pane">
 							<slot name="list" />

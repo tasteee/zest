@@ -1,6 +1,8 @@
 import { defineElement } from '../shared/define-element'
 import { c, css, event, useHost, useRef, useEffect } from 'atomico'
 import { themedScrollbarStyles } from '../shared/scrollbar-styles'
+import { oneOf } from '../shared/prop-types'
+import { warnLegacyOrientation } from '../shared/deprecate'
 
 /*
  * z-virtual-list, windowed rendering: only the rows in view (plus overscan) are
@@ -49,9 +51,12 @@ const styles = css`
 
 export const ZVirtualList = c(
 	(props) => {
+		warnLegacyOrientation({ tag: 'z-virtual-list', attribute: 'direction', value: props.direction, flag: 'is-horizontal', flagValue: 'horizontal' })
 		const host = useHost()
 		const sizerRef = useRef<HTMLDivElement>()
 		const winRef = useRef<HTMLDivElement>()
+		// `direction="horizontal"` is the deprecated spelling of is-horizontal
+		const isHorizontal = Boolean(props.isHorizontal) || props.direction === 'horizontal'
 
 		useEffect(() => {
 			const scroller = host.current as HTMLElement
@@ -63,7 +68,7 @@ export const ZVirtualList = c(
 			const n = items.length
 			const gap = (props.gap as number) || 0
 			const overscan = (props.overscan as number) ?? 4
-			const horizontal = Boolean(props.direction === 'horizontal')
+			const horizontal = isHorizontal
 			const render = props.renderItem as ((item: unknown, i: number) => Node | string) | undefined
 			const keyFn = props.keyFn as ((item: unknown, i: number) => string | number) | undefined
 
@@ -251,7 +256,7 @@ export const ZVirtualList = c(
 			props.estimateSize,
 			props.gap,
 			props.overscan,
-			props.direction === 'horizontal',
+			isHorizontal,
 			props.renderItem,
 			props.keyFn
 		])
@@ -270,7 +275,9 @@ export const ZVirtualList = c(
 			itemHeight: { type: Number, reflect: true },
 			estimateSize: { type: Number, reflect: true },
 			overscan: { type: Number, reflect: true },
-			direction: { type: String, reflect: true },
+			isHorizontal: { type: Boolean, reflect: true },
+			/** @deprecated use is-horizontal */
+			direction: { type: oneOf('vertical', 'horizontal'), reflect: true },
 			gap: { type: Number, reflect: true },
 			renderItem: { type: Function },
 			keyFn: { type: Function },

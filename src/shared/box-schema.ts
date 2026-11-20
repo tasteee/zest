@@ -1,5 +1,6 @@
 import { oneOf } from './prop-types'
 import { coerceSize, insetProps, resolveAlign, resolveGridAlign, resolveJustify, resolveSize } from './layout-schema'
+import { warnLegacyOrientation } from './deprecate'
 
 const isPureNumber = (value: string): boolean => /^-?\d+$/.test(value)
 
@@ -47,6 +48,7 @@ const resolveGridTemplateValue = (value?: string): string | undefined => {
  */
 export const boxBooleanProps = {
 	isInline: { type: Boolean, reflect: true },
+	isVertical: { type: Boolean, reflect: true },
 	doesWrap: { type: Boolean, reflect: true },
 	doesWrapText: { type: Boolean, reflect: true },
 	isFullWidth: { type: Boolean, reflect: true },
@@ -77,6 +79,7 @@ export const boxValueProps = {
 	height: String,
 	minHeight: String,
 	maxHeight: String,
+	/** @deprecated use is-vertical */
 	direction: { type: oneOf('horizontal', 'vertical'), reflect: true },
 	display: { type: oneOf('flex', 'grid'), reflect: true },
 	columns: String,
@@ -104,6 +107,7 @@ const omitProps = (source: Record<string, unknown>, keys: string[]): Record<stri
  * already fixes the flow, so reflecting a redundant (or contradictory)
  * direction attribute would just be confusing. */
 export const directionLockedBoxProps = omitProps(boxProps, [
+	'isVertical',
 	'direction',
 	'display',
 	'columns',
@@ -114,7 +118,8 @@ export const directionLockedBoxProps = omitProps(boxProps, [
 	'extraLargeColumns'
 ])
 
-type BoxHostPropsT = { [K in keyof typeof boxValueProps]?: string }
+type BoxValueHostPropsT = { [K in keyof typeof boxValueProps]?: string }
+type BoxHostPropsT = BoxValueHostPropsT & { isVertical?: boolean }
 
 /*
  * z-box is the generic flex primitive. `aligns-x`/`aligns-y` are always the
@@ -178,7 +183,9 @@ export const getBoxHostStyle = (props: BoxHostPropsT): Record<string, string> =>
 
 	// aligns-x is always horizontal and aligns-y always vertical, so which one
 	// drives the main axis flips with the flow direction.
-	const isHorizontal = props.direction !== 'vertical'
+	warnLegacyOrientation({ tag: 'z-box', attribute: 'direction', value: props.direction, flag: 'is-vertical', flagValue: 'vertical' })
+	const isVertical = Boolean(props.isVertical) || props.direction === 'vertical'
+	const isHorizontal = !isVertical
 	const mainAxisAlign = isHorizontal ? props.alignsX : props.alignsY
 	const crossAxisAlign = isHorizontal ? props.alignsY : props.alignsX
 

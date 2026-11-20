@@ -936,6 +936,14 @@
             },
             {
               "kind": "field",
+              "name": "isVertical",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Stacks children in a column instead of a row."
+            },
+            {
+              "kind": "field",
               "name": "doesWrap",
               "type": {
                 "text": "boolean"
@@ -1156,7 +1164,7 @@
               "type": {
                 "text": "'horizontal' | 'vertical'"
               },
-              "description": "Lays children out in a row (`horizontal`) or a column (`vertical`)."
+              "description": "Deprecated: use `is-vertical`. Still works."
             },
             {
               "kind": "field",
@@ -1263,6 +1271,14 @@
                 "text": "boolean"
               },
               "description": "Sets `display: inline`."
+            },
+            {
+              "name": "is-vertical",
+              "fieldName": "isVertical",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Stacks children in a column instead of a row."
             },
             {
               "name": "does-wrap",
@@ -1486,7 +1502,7 @@
               "type": {
                 "text": "'horizontal' | 'vertical'"
               },
-              "description": "Lays children out in a row (`horizontal`) or a column (`vertical`)."
+              "description": "Deprecated: use `is-vertical`. Still works."
             },
             {
               "name": "display",
@@ -2037,11 +2053,19 @@
             },
             {
               "kind": "field",
+              "name": "isHorizontal",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Lays children in a row instead of the default column."
+            },
+            {
+              "kind": "field",
               "name": "direction",
               "type": {
                 "text": "'vertical' | 'horizontal'"
               },
-              "description": "Stacks children in a column (default) or lays them in a row."
+              "description": "Deprecated: use `is-horizontal`. Still works."
             },
             {
               "kind": "field",
@@ -2086,12 +2110,20 @@
               "description": "Gap between flex children."
             },
             {
+              "name": "is-horizontal",
+              "fieldName": "isHorizontal",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Lays children in a row instead of the default column."
+            },
+            {
               "name": "direction",
               "fieldName": "direction",
               "type": {
                 "text": "'vertical' | 'horizontal'"
               },
-              "description": "Stacks children in a column (default) or lays them in a row."
+              "description": "Deprecated: use `is-horizontal`. Still works."
             },
             {
               "name": "is-reactive",
@@ -7479,11 +7511,19 @@
             },
             {
               "kind": "field",
+              "name": "isVertical",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Scrolls up the page instead of across it."
+            },
+            {
+              "kind": "field",
               "name": "direction",
               "type": {
                 "text": "'horizontal' | 'vertical'"
               },
-              "description": "Scroll axis."
+              "description": "Deprecated: use `is-vertical`. Still works."
             },
             {
               "kind": "field",
@@ -7536,12 +7576,20 @@
               "description": "Runs the loop in the opposite direction."
             },
             {
+              "name": "is-vertical",
+              "fieldName": "isVertical",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Scrolls up the page instead of across it."
+            },
+            {
               "name": "direction",
               "fieldName": "direction",
               "type": {
                 "text": "'horizontal' | 'vertical'"
               },
-              "description": "Scroll axis."
+              "description": "Deprecated: use `is-vertical`. Still works."
             },
             {
               "name": "does-pause-on-hover",
@@ -9244,11 +9292,19 @@
             },
             {
               "kind": "field",
+              "name": "isHorizontal",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Lays the radios in a row instead of the default column."
+            },
+            {
+              "kind": "field",
               "name": "direction",
               "type": {
                 "text": "'vertical' | 'horizontal'"
               },
-              "description": "Stacks the radios (default) or lays them in a row."
+              "description": "Deprecated: use `is-horizontal`. Still works."
             },
             {
               "kind": "field",
@@ -9325,12 +9381,20 @@
               "description": "Accessible group label (`aria-label`)."
             },
             {
+              "name": "is-horizontal",
+              "fieldName": "isHorizontal",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Lays the radios in a row instead of the default column."
+            },
+            {
               "name": "direction",
               "fieldName": "direction",
               "type": {
                 "text": "'vertical' | 'horizontal'"
               },
-              "description": "Stacks the radios (default) or lays them in a row."
+              "description": "Deprecated: use `is-horizontal`. Still works."
             },
             {
               "name": "tone",
@@ -11153,11 +11217,19 @@
           "members": [
             {
               "kind": "field",
+              "name": "isHorizontal",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Reorders along a row instead of the default vertical list."
+            },
+            {
+              "kind": "field",
               "name": "axis",
               "type": {
                 "text": "'x' | 'y'"
               },
-              "description": "Direction items are reordered along."
+              "description": "Deprecated: use `is-horizontal`. Still works."
             },
             {
               "kind": "field",
@@ -11178,12 +11250,20 @@
           ],
           "attributes": [
             {
+              "name": "is-horizontal",
+              "fieldName": "isHorizontal",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Reorders along a row instead of the default vertical list."
+            },
+            {
               "name": "axis",
               "fieldName": "axis",
               "type": {
                 "text": "'x' | 'y'"
               },
-              "description": "Direction items are reordered along."
+              "description": "Deprecated: use `is-horizontal`. Still works."
             },
             {
               "name": "handle",
@@ -13671,11 +13751,19 @@
             },
             {
               "kind": "field",
+              "name": "isVertical",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Stacks the items in a column instead of a row."
+            },
+            {
+              "kind": "field",
               "name": "direction",
               "type": {
                 "text": "'horizontal' | 'vertical'"
               },
-              "description": "Lays the items out in a row or a column."
+              "description": "Deprecated: use `is-vertical`. Still works."
             },
             {
               "kind": "field",
@@ -13744,12 +13832,20 @@
               "description": "Form field name, used when the control is submitted with a form."
             },
             {
+              "name": "is-vertical",
+              "fieldName": "isVertical",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Stacks the items in a column instead of a row."
+            },
+            {
               "name": "direction",
               "fieldName": "direction",
               "type": {
                 "text": "'horizontal' | 'vertical'"
               },
-              "description": "Lays the items out in a row or a column."
+              "description": "Deprecated: use `is-vertical`. Still works."
             },
             {
               "name": "is-hidden",
@@ -13972,11 +14068,19 @@
             },
             {
               "kind": "field",
+              "name": "isVertical",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Makes a vertical strip. Arrow keys follow the axis: ↑/↓ instead of ←/→."
+            },
+            {
+              "kind": "field",
               "name": "direction",
               "type": {
                 "text": "'horizontal' | 'vertical'"
               },
-              "description": "A horizontal strip (default) or a vertical one. Arrow keys follow the axis."
+              "description": "Deprecated: use `is-vertical`. Still works."
             },
             {
               "kind": "field",
@@ -14005,12 +14109,20 @@
               "description": "Density of the toolbar and the controls inside it."
             },
             {
+              "name": "is-vertical",
+              "fieldName": "isVertical",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Makes a vertical strip. Arrow keys follow the axis: ↑/↓ instead of ←/→."
+            },
+            {
               "name": "direction",
               "fieldName": "direction",
               "type": {
                 "text": "'horizontal' | 'vertical'"
               },
-              "description": "A horizontal strip (default) or a vertical one. Arrow keys follow the axis."
+              "description": "Deprecated: use `is-vertical`. Still works."
             },
             {
               "name": "overflow",

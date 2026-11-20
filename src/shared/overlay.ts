@@ -64,6 +64,8 @@ export interface PositionResult {
 	y: number
 	side: Side
 	placement: Placement
+	/** set only when the panel is taller than the room left on screen */
+	maxHeight?: number
 }
 
 const OPPOSITE: Record<Side, Side> = {
@@ -100,6 +102,8 @@ export const computePosition = (anchor: AnchorT, floating: HTMLElement, opts: Po
 	const { placement = 'bottom', offset = 8, padding = 8 } = opts
 	const { side: prefSide, align } = parsePlacement(placement)
 
+	// drop the cap from the previous pass so we measure the natural height
+	floating.style.maxHeight = ''
 	const a = anchor.getBoundingClientRect()
 	const fw = floating.offsetWidth
 	const fh = floating.offsetHeight
@@ -118,27 +122,87 @@ export const computePosition = (anchor: AnchorT, floating: HTMLElement, opts: Po
 	}
 	if (!fits(prefSide) && fits(OPPOSITE[prefSide])) side = OPPOSITE[prefSide]
 
-	let { x, y } = coordsForSide(side, a, fw, fh, offset)
+	// room left on screen for the panel's height on a given side
+	const roomFor = (s: Side): number => {
+		if (s === 'bottom') return vh - a.bottom - offset - padding
+		if (s === 'top') return a.top - offset - padding
+		return vh - padding * 2
+	}
+
+	// neither vertical side fits it whole: take the roomier one
+	const isVertical = prefSide === 'top' || prefSide === 'bottom'
+	const doesNeitherFit = !fits(prefSide) && !fits(OPPOSITE[prefSide])
+	if (isVertical && doesNeitherFit) side = roomFor(prefSide) >= roomFor(OPPOSITE[prefSide]) ? prefSide : OPPOSITE[prefSide]
+
+	// cap the height to the room, so it can never run off screen
+	const room = Math.max(roomFor(side), 0)
+	const isTooTall = fh > room
+	const height = isTooTall ? room : fh
+	const maxHeight = isTooTall ? Math.floor(room) : undefined
+
+	let { x, y } = coordsForSide(side, a, fw, height, offset)
 
 	// cross-axis alignment
 	if (side === 'top' || side === 'bottom') {
 		if (align === 'center') x = a.left + (a.width - fw) / 2
 		else if (align === 'end') x = a.right - fw
 	} else {
-		if (align === 'center') y = a.top + (a.height - fh) / 2
-		else if (align === 'end') y = a.bottom - fh
+		if (align === 'center') y = a.top + (a.height - height) / 2
+		else if (align === 'end') y = a.bottom - height
 	}
 
 	// shift along the cross axis to keep the panel within the viewport
 	if (side === 'top' || side === 'bottom') x = clamp(x, padding, Math.max(padding, vw - fw - padding))
-	else y = clamp(y, padding, Math.max(padding, vh - fh - padding))
+	else y = clamp(y, padding, Math.max(padding, vh - height - padding))
 
 	return {
 		x: Math.round(x),
 		y: Math.round(y),
 		side,
-		placement: align === 'center' ? side : (`${side}-${align}` as Placement)
+		placement: align === 'center' ? side : (`${side}-${align}` as Placement),
+		maxHeight
 	}
+}
+
+// panels already wired by containScroll, so we attach once
+const containedPanels = new WeakSet<HTMLElement>()
+
+/** Can anything between the event target and the panel scroll this way? */
+const canScrollInside = (event: WheelEvent, panel: HTMLElement): boolean => {
+	const path = event.composedPath()
+	for (const node of path) {
+		if (node === panel.parentNode) return false
+		if (!(node instanceof HTMLElement)) continue
+		const style = getComputedStyle(node)
+		const isScrollable = /(auto|scroll)/.test(style.overflowY) && node.scrollHeight > node.clientHeight
+		if (!isScrollable) continue
+		const isScrollingUp = event.deltaY < 0
+		const canScrollUp = node.scrollTop > 0
+		const canScrollDown = node.scrollTop + node.clientHeight < node.scrollHeight - 1
+		const canScroll = isScrollingUp ? canScrollUp : canScrollDown
+		if (canScroll) return true
+	}
+	return false
+}
+
+/**
+ * A wheel over an open overlay never scrolls the page behind it. The panel
+ * scrolls itself when it can; at either end (or when it has nothing to scroll)
+ * the wheel is swallowed instead of chaining to the document.
+ */
+export const containScroll = (panel: HTMLElement): void => {
+	if (containedPanels.has(panel)) return
+	containedPanels.add(panel)
+	panel.style.overscrollBehavior = 'contain'
+	panel.addEventListener(
+		'wheel',
+		(event) => {
+			if (event.ctrlKey) return
+			if (canScrollInside(event, panel)) return
+			event.preventDefault()
+		},
+		{ passive: false }
+	)
 }
 
 /**
@@ -209,6 +273,11 @@ export const applyPosition = (floating: HTMLElement, pos: PositionResult): void 
 	floating.style.left = `${pos.x}px`
 	floating.style.top = `${pos.y}px`
 	floating.dataset.side = pos.side
+	containScroll(floating)
+
+	const isClamped = pos.maxHeight !== undefined
+	floating.style.maxHeight = isClamped ? `${pos.maxHeight}px` : ''
+	floating.style.overflowY = isClamped ? 'auto' : ''
 }
 
 /**

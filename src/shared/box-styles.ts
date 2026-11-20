@@ -90,6 +90,7 @@ export const boxLayoutStyles = css`
 		flex-direction: row;
 	}
 
+	:host([is-vertical]),
 	:host([direction='vertical']) {
 		flex-direction: column;
 	}

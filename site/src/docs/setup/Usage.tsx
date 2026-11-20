@@ -97,26 +97,44 @@ export const Inbox = (props: InboxPropsT) => {
 		/>
 
 		<h2>Events</h2>
-		<p>Listen with a ref, which works for every event name in every React version.</p>
+		<p>
+			Pass a lowercase handler named after the event: <code>onchange</code>, <code>onselect</code>. React 19 adds it as a
+			real event listener on the element, so the handler gets the element’s own <code>CustomEvent</code> and reads the
+			payload from <code>event.detail</code>.
+		</p>
 		<Code
 			language="tsx"
+			filename="StylePicker.tsx"
 			code={`
-const ref = useRef<HTMLElement>(null)
+import { useState } from 'react'
+import '@tasteee/zest'
 
-useEffect(() => {
-  const menu = ref.current
-  const onSelect = (event: Event) => run((event as CustomEvent).detail.value)
-  menu?.addEventListener('select', onSelect)
-  return () => menu?.removeEventListener('select', onSelect)
-}, [])
+const styleOptions = [
+  { value: 'calm', label: 'Calm' },
+  { value: 'electric', label: 'Electric' }
+]
 
-return <z-menu ref={ref}>…</z-menu>
+export const StylePicker = () => {
+  const [selectedStyle, setSelectedStyle] = useState('electric')
+
+  const handleChange = (event: CustomEvent<{ value: string }>) => setSelectedStyle(event.detail.value)
+
+  return <z-select value={selectedStyle} options={styleOptions} onchange={handleChange} />
+}
 `}
 		/>
+		<p>
+			Keep it lowercase. <code>onChange</code> and <code>onSelect</code> are React’s own synthetic events: they wrap the
+			event, so <code>detail</code> is only reachable through <code>event.nativeEvent</code>.
+		</p>
+		<p>
+			On React 18 and older, custom elements get no event props at all. Attach the listener with a ref and{' '}
+			<code>addEventListener</code> instead.
+		</p>
 
 		<h2>Types</h2>
 		<p>
-			See <Link href="/setup/typescript">TypeScript</Link> for declaring the z elements as JSX intrinsic elements.
+			See <Link href="/guide/typescript">TypeScript</Link> for declaring the z elements as JSX intrinsic elements.
 		</p>
 	</Article>
 )
@@ -125,32 +143,52 @@ export const UsageSvelte = () => (
 	<Article
 		eyebrow="Usage"
 		title="Svelte"
-		lede="Svelte passes props straight to custom elements, so arrays, objects, and events work without wrappers."
+		lede="Svelte 5 passes props straight to custom elements, so arrays, objects, and events work without wrappers."
 	>
 		<Code
-			language="html"
+			language="svelte"
 			filename="Inbox.svelte"
 			code={`
-<script>
+<script lang="ts">
   import '@tasteee/zest'
-  let value = 'inbox'
-  const items = [{ value: 'inbox', label: 'Inbox' }, { value: 'drafts', label: 'Drafts' }]
+
+  const items = [
+    { value: 'inbox', label: 'Inbox' },
+    { value: 'drafts', label: 'Drafts' }
+  ]
+
+  let value = $state('inbox')
+
+  const handleSelect = (event: CustomEvent<{ value: string }>) => (value = event.detail.value)
 </script>
 
-<z-sidebar {items} {value} on:select={(event) => (value = event.detail.value)} />
+<z-sidebar {items} {value} onselect={handleSelect}></z-sidebar>
+<z-button kind="outline" is-loading>Saving</z-button>
 `}
 		/>
 
-		<h2>Props and events</h2>
+		<h2>Props</h2>
 		<p>
-			Svelte sets a property on a custom element when one with that name exists, so arrays and objects such as{' '}
-			<code>items</code> or <code>options</code> arrive intact. Listen to custom events with <code>on:</code>, and read
-			the payload from <code>event.detail</code>.
+			Write fixed options as ordinary kebab-case attributes, exactly as in HTML. For anything dynamic, use the element’s
+			camelCase property name: <code>items={'{items}'}</code>, <code>isOpen={'{isOpen}'}</code>. When the element has a
+			property by that name, Svelte sets the property, so arrays and objects such as <code>items</code> or{' '}
+			<code>options</code> arrive intact. A kebab-case name like <code>is-open</code> has no matching property, so Svelte
+			writes it as an attribute instead: fine for strings and booleans, but an array would arrive as text.
+		</p>
+		<p>
+			Import <code>@tasteee/zest</code> before the component mounts. Svelte only sees an element’s properties once the
+			element is registered.
+		</p>
+
+		<h2>Events</h2>
+		<p>
+			Listen with an event attribute named after the event: <code>onselect</code>, <code>onchange</code>,{' '}
+			<code>onlinkclick</code>. Read the payload from <code>event.detail</code>.
 		</p>
 
 		<h2>Types</h2>
 		<p>
-			See <Link href="/setup/typescript">TypeScript</Link> for typing the z elements in a Svelte project.
+			See <Link href="/guide/typescript">TypeScript</Link> for typing the z elements in a Svelte project.
 		</p>
 	</Article>
 )
@@ -187,38 +225,50 @@ export default {
 		/>
 
 		<h2>Usage</h2>
-		<p>
-			Import the package once. Attributes are kebab-case, <code>:items</code> binds arrays and objects, and{' '}
-			<code>@select</code> listens for events. Read the payload from <code>event.detail</code>.
-		</p>
 		<Code
-			language="html"
+			language="vue"
 			filename="Inbox.vue"
 			code={`
 <script setup lang="ts">
 import '@tasteee/zest'
 import { ref } from 'vue'
 
-const value = ref('inbox')
 const items = [
   { value: 'inbox', label: 'Inbox' },
   { value: 'drafts', label: 'Drafts' }
 ]
 
-const handleSelect = (event: CustomEvent) => {
+const value = ref('inbox')
+
+const handleSelect = (event: CustomEvent<{ value: string }>) => {
   value.value = event.detail.value
 }
 </script>
 
 <template>
-  <z-sidebar :value="value" :items="items" @select="handleSelect" />
+  <z-sidebar :value="value" :items="items" @select="handleSelect"></z-sidebar>
   <z-button kind="outline" is-loading>Saving</z-button>
 </template>
 `}
 		/>
+
+		<h2>Props</h2>
 		<p>
-			If an array or object ever lands in the DOM as <code>[object Object]</code>, add the <code>.prop</code> modifier:{' '}
-			<code>:items.prop="items"</code>.
+			Write fixed options as ordinary kebab-case attributes, exactly as in HTML. Bind dynamic values with the element’s
+			camelCase property name: <code>:items</code>, <code>:isOpen</code>. When the element has a property by that name, Vue
+			sets the property, so arrays and objects arrive intact. A kebab-case binding like <code>:is-open</code> has no
+			matching property, so Vue writes it as an attribute instead: fine for strings and booleans, but an array would arrive
+			as <code>[object Object]</code>.
+		</p>
+		<p>
+			Import <code>@tasteee/zest</code> before the app mounts. Vue only sees an element’s properties once the element is
+			registered. To force a property either way, add the <code>.prop</code> modifier: <code>:items.prop="items"</code>.
+		</p>
+
+		<h2>Events</h2>
+		<p>
+			Listen with <code>@</code> and the event’s name: <code>@select</code>, <code>@change</code>,{' '}
+			<code>@linkclick</code>. Read the payload from <code>event.detail</code>.
 		</p>
 	</Article>
 )
@@ -227,13 +277,9 @@ export const UsageSolid = () => (
 	<Article
 		eyebrow="Usage"
 		title="Solid"
-		lede="Solid renders custom elements as plain DOM, so every z element works without wrappers. It has two prefixes for the cases that matter."
+		lede="Solid renders custom elements as plain DOM, so every z element works without wrappers. The patterns below work the same in Solid 1 and Solid 2."
 	>
 		<h2>Usage</h2>
-		<p>
-			Import the package once. Use <code>attr:</code> for kebab-case attributes, <code>prop:</code> for arrays and
-			objects, and <code>on:</code> for events. <code>on:</code> keeps the event name exactly as dispatched.
-		</p>
 		<Code
 			language="tsx"
 			filename="Inbox.tsx"
@@ -249,23 +295,44 @@ const items = [
 export const Inbox = () => {
   const [value, setValue] = createSignal('inbox')
 
-  const handleSelect = (event: CustomEvent) => {
+  const handleSelect = (event: CustomEvent<{ value: string }>) => {
     setValue(event.detail.value)
   }
 
   return (
     <>
-      <z-sidebar attr:value={value()} prop:items={items} on:select={handleSelect} />
-      <z-button attr:kind="outline" attr:is-loading="">Saving</z-button>
+      <z-sidebar prop:value={value()} prop:items={items} onSelect={handleSelect} />
+      <z-button kind="outline" is-loading="">Saving</z-button>
     </>
   )
 }
 `}
 		/>
 
+		<h2>Props</h2>
+		<p>
+			Write fixed options as plain string attributes in kebab-case, exactly as in HTML: <code>kind="outline"</code>,{' '}
+			<code>is-loading=""</code>. Pass anything dynamic, and every array or object, with <code>prop:</code> and the
+			element’s camelCase property name: <code>prop:items</code>, <code>prop:isOpen</code>.
+		</p>
+		<p>
+			Without <code>prop:</code>, the two versions go wrong in different ways. Solid 1 lowercases the name
+			(<code>isOpen</code> becomes <code>isopen</code>, which the element doesn’t have). Solid 2 writes the value as an
+			attribute, so an array arrives as text. Solid 2 also removed the <code>attr:</code> prefix, so plain strings are the
+			way to write attributes.
+		</p>
+
+		<h2>Events</h2>
+		<p>
+			Use a camelCase handler: <code>onSelect</code>, <code>onChange</code>, <code>onLinkClick</code>. Solid lowercases the
+			name, so these listen for <code>select</code>, <code>change</code>, and <code>linkclick</code>, and the handler
+			receives the element’s own event. Read the payload from <code>event.detail</code>. Solid 2 removed the{' '}
+			<code>on:</code> prefix.
+		</p>
+
 		<h2>Types</h2>
 		<p>
-			Solid does not ship typings from Zest. See <Link href="/setup/typescript">TypeScript</Link> for an optional snippet
+			Solid does not ship typings from Zest. See <Link href="/guide/typescript">TypeScript</Link> for an optional snippet
 			that declares the elements.
 		</p>
 	</Article>

@@ -88,8 +88,10 @@ const styles = css`
 		flex-direction: column;
 		flex: 1 1 auto;
 		min-height: 0;
-		gap: var(--space-0-5);
+		gap: var(--z-sidebar-gap, var(--space-1));
 		overflow-y: auto;
+		/* keeps rows off the scrollbar; padding sits between content and bar */
+		padding-inline-end: var(--space-2);
 	}
 
 	/* Firefox has no ::-webkit-scrollbar and never draws arrows, give it the
@@ -124,6 +126,13 @@ const styles = css`
 		height: 0;
 	}
 
+	/* links inside a group keep the same rhythm as top-level links */
+	.group {
+		display: flex;
+		flex-direction: column;
+		gap: var(--z-sidebar-gap, var(--space-1));
+	}
+
 	.group-label {
 		display: flex;
 		align-items: center;
@@ -131,7 +140,8 @@ const styles = css`
 		gap: var(--space-2);
 		width: 100%;
 		box-sizing: border-box;
-		padding: var(--space-1-5) var(--space-2-5) var(--space-3-5);
+		/* bottom is 4px short of the 14px it reads as: the group gap adds the rest */
+		padding: var(--space-1-5) var(--space-2-5) var(--space-2-5);
 		font-family: inherit;
 		font-size: var(--font-size-xs);
 		font-weight: var(--font-weight-bold);
@@ -153,7 +163,7 @@ const styles = css`
 
 	/* a group nested inside a group: a quieter, sentence-case sub-heading */
 	.group .group .group-label {
-		padding: var(--space-2) var(--space-2-5) var(--space-1-5) var(--space-5);
+		padding: var(--space-2) var(--space-2-5) var(--space-0-5) var(--space-5);
 		font-weight: var(--font-weight-semibold);
 		letter-spacing: 0;
 		text-transform: none;

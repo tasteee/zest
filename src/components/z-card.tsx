@@ -3,6 +3,7 @@ import { c, css } from 'atomico'
 import { sizeProp } from '../shared/layout-schema'
 import { resolveBoxSpacing } from '../shared/box-schema'
 import { oneOf } from '../shared/prop-types'
+import { warnLegacyOrientation } from '../shared/deprecate'
 
 /*
  * z-card — a surface, and optionally a titled one. `heading` and `description`
@@ -17,7 +18,7 @@ import { oneOf } from '../shared/prop-types'
  * should skip the attribute and slot its own z-heading.
  */
 const styles = css`
-	/* A card is a flex column by default; direction="horizontal" lays its
+	/* A card is a flex column by default; is-horizontal lays its
 	   children in a row, and gap spaces them on the spacing scale. */
 	:host {
 		display: flex;
@@ -32,6 +33,7 @@ const styles = css`
 		background: transparent;
 	}
 
+	:host([is-horizontal]),
 	:host([direction='horizontal']) {
 		flex-direction: row;
 		align-items: center;
@@ -79,6 +81,7 @@ const styles = css`
 
 export const ZCard = c(
 	(props) => {
+		warnLegacyOrientation({ tag: 'z-card', attribute: 'direction', value: props.direction, flag: 'is-horizontal', flagValue: 'horizontal' })
 		const hasHeader = Boolean(props.heading) || Boolean(props.description)
 		// Same scale as z-box: gap="3" is a step on the space scale.
 		const gap = resolveBoxSpacing(props.gap)
@@ -101,6 +104,8 @@ export const ZCard = c(
 			heading: String,
 			description: String,
 			gap: sizeProp,
+			isHorizontal: { type: Boolean, reflect: true },
+			/** @deprecated use is-horizontal */
 			direction: { type: oneOf('vertical', 'horizontal'), reflect: true },
 			isReactive: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true }

@@ -58,7 +58,11 @@ if (typeof document !== 'undefined') {
 	}
 }
 
-export const ScaleControl = () => {
+type ScaleControlPropsT = {
+	isInline?: boolean
+}
+
+export const ScaleControl = (props: ScaleControlPropsT) => {
 	const [scale, setScale] = useState<ScaleOptionT>(readStoredScale)
 	const [isOpen, setIsOpen] = useState(false)
 	const containerRef = useRef<HTMLDivElement>(null)
@@ -113,8 +117,13 @@ export const ScaleControl = () => {
 		}
 	}
 
+	// inline: the options list opens in the page flow under the
+	// control instead of floating, so a scrolling parent can hold it
+	const rootClassName = props.isInline ? 'ScaleControlRoot isInline' : 'ScaleControlRoot'
+
 	return (
-		<div className="ScaleControl" ref={containerRef}>
+		<div className={rootClassName} ref={containerRef}>
+		<div className="ScaleControl">
 			<button
 				type="button"
 				className="ScaleControlStep"
@@ -163,6 +172,7 @@ export const ScaleControl = () => {
 					<line x1="3.5" y1="8" x2="12.5" y2="8" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" />
 				</svg>
 			</button>
+		</div>
 
 			{isOpen && (
 				<div className="ScaleControlMenu" role="menu" aria-label="Scale options">

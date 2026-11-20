@@ -37,7 +37,7 @@ const RADIUS_SCALE = [
 export const Spacing = () => (
 	<div className="DocsPage">
 		<DocsHero
-			eyebrow="DESIGN SYSTEM"
+			eyebrow="Foundations"
 			title="Spacing"
 			lede={
 				<>
@@ -124,7 +124,7 @@ export const Spacing = () => (
 		<DocsFooter
 			links={
 				<>
-					<DocsLink href="/system/color">Color</DocsLink> · <DocsLink href="/system/layout">Layout</DocsLink> ·{' '}
+					<DocsLink href="/foundations/color">Color</DocsLink> · <DocsLink href="/foundations/layout">Layout</DocsLink> ·{' '}
 					<DocsLink href="~/">Home</DocsLink>
 				</>
 			}

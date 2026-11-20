@@ -4,7 +4,7 @@ import { DocsFooter, DocsHero } from '@app/docs/DocsChrome'
 export const Rules = () => (
 	<div className="DocsPage">
 		<DocsHero
-			eyebrow="DESIGN SYSTEM"
+			eyebrow="Foundations"
 			title="Design rules"
 			lede="The constraints that keep zest coherent. Break them on purpose, not by accident."
 		/>
@@ -27,7 +27,7 @@ export const Rules = () => (
 					</z-heading>
 					<z-text>
 						Dark is the default; light switches on with <code className="inline">data-theme="light"</code> on the root
-						element, or with <DocsLink href="/elements/z-theme-switcher">z-theme-switcher</DocsLink>. Color roles can be customized to suit your application. See <DocsLink href="/system/color">Color</DocsLink> for the ramps
+						element, or with <DocsLink href="/elements/z-theme-switcher">z-theme-switcher</DocsLink>. Color roles can be customized to suit your application. See <DocsLink href="/foundations/color">Color</DocsLink> for the ramps
 						themselves.
 					</z-text>
 
@@ -37,7 +37,7 @@ export const Rules = () => (
 					<z-text>
 						Google Sans for everything (body copy and headings both), with DM Mono reserved for code, tokens, and the small mono
 						labels that mark a demo's props. Hierarchy comes from size and weight, never a second font family. Full scale on{' '}
-						<DocsLink href="/system/typography">Typography</DocsLink>.
+						<DocsLink href="/foundations/typography">Typography</DocsLink>.
 					</z-text>
 
 					<z-heading size="sm" tag="h2">
@@ -58,7 +58,7 @@ export const Rules = () => (
 					</z-heading>
 					<z-text>
 						Colors, spacing, radii, and font sizes are all CSS custom properties (see{' '}
-						<DocsLink href="/system/spacing">Spacing</DocsLink>). Components read{' '}
+						<DocsLink href="/foundations/spacing">Spacing</DocsLink>). Components read{' '}
 						<code className="inline">var(--token)</code>, never a hardcoded hex or px value, retheming means moving a token,
 						not hunting through component source.
 					</z-text>
@@ -69,7 +69,7 @@ export const Rules = () => (
 		<DocsFooter
 			links={
 				<>
-					<DocsLink href="/system/patterns">Patterns</DocsLink> · <DocsLink href="/system/color">Color</DocsLink> ·{' '}
+					<DocsLink href="/foundations/patterns">Patterns</DocsLink> · <DocsLink href="/foundations/color">Color</DocsLink> ·{' '}
 					<DocsLink href="~/">Home</DocsLink>
 				</>
 			}

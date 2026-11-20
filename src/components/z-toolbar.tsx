@@ -2,9 +2,10 @@ import { defineElement } from '../shared/define-element'
 import { c, css, useHost, useEffect } from 'atomico'
 import { themedScrollbarStyles } from '../shared/scrollbar-styles'
 import { oneOf } from '../shared/prop-types'
+import { warnLegacyOrientation } from '../shared/deprecate'
 
 /*
- * z-toolbar, a horizontal (or `direction="vertical"`) action strip with real toolbar
+ * z-toolbar, a horizontal (or `is-vertical`) action strip with real toolbar
  * semantics: role="toolbar" + roving tabindex, so the whole bar is a single tab
  * stop and arrow keys (Home/End) move focus across its controls. Holds slotted
  * z-button / z-toggle-button / z-toolbar-group, divided by z-separator.
@@ -25,6 +26,7 @@ const styles = css`
 		gap: var(--space-2);
 		min-width: 0;
 	}
+	:host([is-vertical]),
 	:host([direction='vertical']) {
 		flex-direction: column;
 		align-items: stretch;
@@ -59,7 +61,11 @@ const FOCUSABLE = 'z-button, z-toggle-button, z-toggle-button-group-item, z-tool
 
 export const ZToolbar = c(
 	(props) => {
+		warnLegacyOrientation({ tag: 'z-toolbar', attribute: 'direction', value: props.direction, flag: 'is-vertical', flagValue: 'vertical' })
 		const host = useHost()
+		// `direction="vertical"` is the deprecated spelling of is-vertical
+		const isVertical = Boolean(props.isVertical) || props.direction === 'vertical'
+		const ariaOrientation = isVertical ? 'vertical' : 'horizontal'
 
 		useEffect(() => {
 			const el = host.current as HTMLElement
@@ -73,7 +79,6 @@ export const ZToolbar = c(
 				if (!list.length) return
 				const cur = list.indexOf(e.target as HTMLElement)
 				if (cur < 0) return
-				const isVertical = props.direction === 'vertical'
 				const next = isVertical ? 'ArrowDown' : 'ArrowRight'
 				const prev = isVertical ? 'ArrowUp' : 'ArrowLeft'
 				let to = cur
@@ -105,14 +110,10 @@ export const ZToolbar = c(
 				el.removeEventListener('focusin', onFocusIn)
 				mo.disconnect()
 			}
-		}, [props.direction, props.overflow])
+		}, [isVertical, props.overflow])
 
 		return (
-			<host
-				shadowDom
-				role='toolbar'
-				aria-orientation={props.direction === 'vertical' ? 'vertical' : 'horizontal'}
-			>
+			<host shadowDom role='toolbar' aria-orientation={ariaOrientation}>
 				<slot />
 				<div class='overflow'>
 					<slot name='overflow' />
@@ -123,6 +124,8 @@ export const ZToolbar = c(
 	{
 		props: {
 			size: { type: oneOf('sm', 'md', 'lg'), reflect: true },
+			isVertical: { type: Boolean, reflect: true },
+			/** @deprecated use is-vertical */
 			direction: { type: oneOf('horizontal', 'vertical'), reflect: true },
 			overflow: { type: String, reflect: true },
 			isDisabled: { type: Boolean, reflect: true }

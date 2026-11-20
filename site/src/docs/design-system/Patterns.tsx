@@ -1,15 +1,16 @@
 import { DocsLink } from '@app/docs/DocsLink'
 import { DocsDemo, DocsFooter, DocsHero, DocsSection } from '@app/docs/DocsChrome'
+import { MarkupCode } from '@app/docs/frameworks/MarkupCode'
 
-const TRIGGER_SLOT_CODE = `<z-dialog heading="Edit profile">
+const TRIGGER_SLOT_HTML = `<z-dialog heading="Edit profile">
   <z-button slot="trigger" kind="solid">Open dialog</z-button>
-  {/* default slot = panel content */}
+  <!-- default slot = panel content -->
 </z-dialog>`
 
 export const Patterns = () => (
 	<div className="DocsPage">
 		<DocsHero
-			eyebrow="DESIGN SYSTEM"
+			eyebrow="Foundations"
 			title="Patterns"
 			lede={
 				<>
@@ -36,7 +37,7 @@ export const Patterns = () => (
 			}
 		>
 			<DocsDemo>
-				<z-code-block language="tsx" code={TRIGGER_SLOT_CODE} />
+				<MarkupCode html={TRIGGER_SLOT_HTML} isBare />
 			</DocsDemo>
 		</DocsSection>
 
@@ -52,7 +53,7 @@ export const Patterns = () => (
 			}
 		>
 			<DocsDemo>
-				<z-box direction="vertical" gap="2" style={{ maxWidth: '20rem' }}>
+				<z-box isVertical gap="2" style={{ maxWidth: '20rem' }}>
 					<z-label>Email</z-label>
 					<z-input type="email" placeholder="you@example.com" />
 					<z-text size="xs" color="muted">
@@ -151,7 +152,7 @@ export const Patterns = () => (
 		<DocsFooter
 			links={
 				<>
-					<DocsLink href="/system/principles">Design rules</DocsLink> · <DocsLink href="/system/color">Color</DocsLink> ·{' '}
+					<DocsLink href="/foundations/principles">Design rules</DocsLink> · <DocsLink href="/foundations/color">Color</DocsLink> ·{' '}
 					<DocsLink href="~/">Home</DocsLink>
 				</>
 			}

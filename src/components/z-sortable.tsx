@@ -1,6 +1,7 @@
 import { defineElement } from '../shared/define-element'
 import { c, css, event, useHost, useRef } from 'atomico'
 import { oneOf } from '../shared/prop-types'
+import { warnLegacyOrientation } from '../shared/deprecate'
 
 /*
  * z-sortable, drag-to-reorder for its direct children. On pickup the dragged
@@ -10,7 +11,8 @@ import { oneOf } from '../shared/prop-types'
  * where the placeholder sits. Operates on real light-DOM children, so the app
  * keeps ownership of the list, it just also gets a `sort` event to sync state.
  *
- *   <z-sortable axis="y" handle=".grip">
+ *   <z-sortable handle=".grip">            (a vertical list)
+ *   <z-sortable is-horizontal>             (a row)
  *     <div>…</div> <div>…</div> …
  *   </z-sortable>
  *
@@ -21,6 +23,7 @@ const styles = css`
 	:host {
 		display: block;
 	}
+	:host([is-horizontal]),
 	:host([axis='x']) {
 		display: flex;
 	}
@@ -41,6 +44,7 @@ const styles = css`
 
 export const ZSortable = c(
 	(props) => {
+		warnLegacyOrientation({ tag: 'z-sortable', attribute: 'axis', value: props.axis, flag: 'is-horizontal', flagValue: 'x' })
 		const host = useHost()
 		const s = useRef({
 			dragged: null as HTMLElement | null,
@@ -51,7 +55,12 @@ export const ZSortable = c(
 		}).current!
 
 		const el = () => host.current as HTMLElement
-		const axis = () => (props.axis as string) || 'y'
+		// `axis="x"` is the deprecated spelling of is-horizontal
+		const axis = () => {
+			const isHorizontal = Boolean(props.isHorizontal) || props.axis === 'x'
+			if (isHorizontal) return 'x'
+			return 'y'
+		}
 
 		const childOf = (e: PointerEvent): HTMLElement | null => {
 			for (const node of e.composedPath()) {
@@ -149,6 +158,8 @@ export const ZSortable = c(
 	},
 	{
 		props: {
+			isHorizontal: { type: Boolean, reflect: true },
+			/** @deprecated use is-horizontal */
 			axis: { type: oneOf('x', 'y'), reflect: true },
 			handle: { type: String },
 			isDisabled: { type: Boolean, reflect: true },

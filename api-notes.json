@@ -410,8 +410,12 @@
 			"gap": {
 				"description": "Space between children. Accepts a size keyword (2xs to 4xl), a scale step, or any CSS length."
 			},
+			"is-vertical": {
+				"description": "Stacks children in a column instead of a row.",
+				"default": "false"
+			},
 			"direction": {
-				"description": "Lays children out in a row (`horizontal`) or a column (`vertical`).",
+				"description": "Deprecated: use `is-vertical`. Still works.",
 				"values": [
 					"horizontal",
 					"vertical"
@@ -791,8 +795,12 @@
 				"description": "Hides the card with display: none. It stays in the DOM and keeps its state.",
 				"default": "false"
 			},
+			"is-horizontal": {
+				"description": "Lays children in a row instead of the default column.",
+				"default": "false"
+			},
 			"direction": {
-				"description": "Stacks children in a column (default) or lays them in a row.",
+				"description": "Deprecated: use `is-horizontal`. Still works.",
 				"values": [
 					"vertical",
 					"horizontal"
@@ -2870,8 +2878,12 @@
 				"description": "Runs the loop in the opposite direction.",
 				"default": "false"
 			},
+			"is-vertical": {
+				"description": "Scrolls up the page instead of across it.",
+				"default": "false"
+			},
 			"direction": {
-				"description": "Scroll axis.",
+				"description": "Deprecated: use `is-vertical`. Still works.",
 				"values": [
 					"horizontal",
 					"vertical"
@@ -3573,8 +3585,12 @@
 			"label": {
 				"description": "Accessible group label (`aria-label`)."
 			},
+			"is-horizontal": {
+				"description": "Lays the radios in a row instead of the default column.",
+				"default": "false"
+			},
 			"direction": {
-				"description": "Stacks the radios (default) or lays them in a row.",
+				"description": "Deprecated: use `is-horizontal`. Still works.",
 				"values": [
 					"vertical",
 					"horizontal"
@@ -4334,8 +4350,12 @@
 				"description": "Blocks interaction, dims the element, and removes it from the keyboard focus order.",
 				"default": "false"
 			},
+			"is-horizontal": {
+				"description": "Reorders along a row instead of the default vertical list.",
+				"default": "false"
+			},
 			"axis": {
-				"description": "Direction items are reordered along.",
+				"description": "Deprecated: use `is-horizontal`. Still works.",
 				"values": [
 					"x",
 					"y"
@@ -5203,8 +5223,12 @@
 	"z-toggle-button-group": {
 		"summary": "A set of toggle buttons, one or several on at a time.",
 		"props": {
+			"is-vertical": {
+				"description": "Stacks the items in a column instead of a row.",
+				"default": "false"
+			},
 			"direction": {
-				"description": "Lays the items out in a row or a column.",
+				"description": "Deprecated: use `is-vertical`. Still works.",
 				"values": [
 					"horizontal",
 					"vertical"
@@ -5375,8 +5399,12 @@
 	"z-toolbar": {
 		"summary": "An action strip with toolbar semantics and arrow-key navigation.",
 		"props": {
+			"is-vertical": {
+				"description": "Makes a vertical strip. Arrow keys follow the axis: ↑/↓ instead of ←/→.",
+				"default": "false"
+			},
 			"direction": {
-				"description": "A horizontal strip (default) or a vertical one. Arrow keys follow the axis.",
+				"description": "Deprecated: use `is-vertical`. Still works.",
 				"values": [
 					"horizontal",
 					"vertical"

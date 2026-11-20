@@ -1,16 +1,18 @@
 import { ColorPalette } from '@app/docs/ColorPalette'
-import { ScaleControl } from '@app/docs/ScaleControl'
+import { PaletteNotice } from '@app/docs/PaletteNotice'
 import { useEffect, useLayoutEffect, useRef, useState, type ReactNode } from 'react'
 import { Link, useLocation } from 'wouter'
 import zestPackage from '@tasteee/zest/package.json'
-import { SECTIONS, pagesOf, sectionById, sidebarItemsOf, type SectionT } from '@app/docs/nav'
+import { SECTIONS, pagesOf, sectionById, sidebarItemsOf, type SectionT, type SidebarSortT } from '@app/docs/nav'
+import { useFramework } from '@app/docs/frameworks/framework-storage'
+import { markFrameworkPage } from '@app/docs/frameworks/mark-framework-page'
 import { primeRoll } from '@app/site/Roll'
 
 /*
  * Docs chrome: three coordinated regions inside one centered, max-width frame.
  *
  *   ┌──────────── outlined top bar (sticky) ────────────┐
- *   │ zest   Setup  System  Elements  Blocks   ⌘K   gh  │
+ *   │ zest  Guide  Foundations  Elements  Blocks  ⌘K gh │
  *   └───────────────────────────────────────────────────┘
  *   ┌─ sidebar ─┐  page content (scrolls with the window,
  *   │ (sticky,  │  behind the bar)
@@ -99,21 +101,136 @@ const SectionNav = ({ active, onNavigate }: { active?: SectionT; onNavigate?: ()
 	</nav>
 )
 
+type MobileSectionNavPropsT = {
+	active?: SectionT
+	onNavigate: () => void
+}
+
+type MobileSectionLinkPropsT = {
+	section: SectionT
+	isActive: boolean
+	onNavigate: () => void
+}
+
+// Mobile drawer: sections stack as full-width rows (the Tailwind /
+// Stripe docs pattern) instead of wrapping pills, styled to match
+// z-sidebar's own rows so the drawer reads as one list.
+const MobileSectionLink = (props: MobileSectionLinkPropsT) => {
+	const linkClassName = props.isActive ? 'DocsMobileSection is-active' : 'DocsMobileSection'
+	const ariaCurrent = props.isActive ? 'page' : undefined
+
+	return (
+		<Link
+			href={`/${props.section.id}`}
+			className={linkClassName}
+			aria-current={ariaCurrent}
+			onClick={props.onNavigate}
+		>
+			{props.section.label}
+		</Link>
+	)
+}
+
+const MobileSectionNav = (props: MobileSectionNavPropsT) => {
+	const activeSectionId = props.active?.id
+
+	const sectionLinks = SECTIONS.map((section) => (
+		<MobileSectionLink
+			key={section.id}
+			section={section}
+			isActive={section.id === activeSectionId}
+			onNavigate={props.onNavigate}
+		/>
+	))
+
+	return (
+		<nav className="DocsMobileSections" aria-label="Documentation sections">
+			{sectionLinks}
+		</nav>
+	)
+}
+
+const SORT_STORAGE_KEY = 'zest-sidebar-sort'
+
+const readStoredSortMode = (): SidebarSortT => {
+	try {
+		const storedMode = window.localStorage.getItem(SORT_STORAGE_KEY)
+		return storedMode === 'alphabetical' ? 'alphabetical' : 'grouped'
+	} catch {
+		// localStorage might be unavailable/blocked
+		return 'grouped'
+	}
+}
+
+const writeStoredSortMode = (sortMode: SidebarSortT): void => {
+	try {
+		window.localStorage.setItem(SORT_STORAGE_KEY, sortMode)
+	} catch {
+		// localStorage might be unavailable/blocked
+	}
+}
+
+type SortOptionPropsT = {
+	mode: SidebarSortT
+	label: string
+	activeMode: SidebarSortT
+	onSortChange: (mode: SidebarSortT) => void
+}
+
+type SortToggleT = {
+	sortMode: SidebarSortT
+	onSortChange: (mode: SidebarSortT) => void
+}
+
+const SortOption = (props: SortOptionPropsT) => {
+	const isActive = props.mode === props.activeMode
+	const optionClassName = isActive ? 'DocsSidebarSortOption is-active' : 'DocsSidebarSortOption'
+	const handleClick = () => props.onSortChange(props.mode)
+
+	return (
+		<button type="button" className={optionClassName} aria-pressed={isActive} onClick={handleClick}>
+			{props.label}
+		</button>
+	)
+}
+
+// A quiet text toggle in the sidebar's header slot: it stays put
+// while the list scrolls, without competing with the nav itself.
+const SortToggle = (props: SortToggleT) => (
+	<div slot="header" className="DocsSidebarSort" role="group" aria-label="Sort pages">
+		<SortOption mode="grouped" label="Groups" activeMode={props.sortMode} onSortChange={props.onSortChange} />
+		<SortOption mode="alphabetical" label="A–Z" activeMode={props.sortMode} onSortChange={props.onSortChange} />
+	</div>
+)
+
 const SectionSidebar = ({
 	section,
 	value,
-	onNavigate
+	sortMode,
+	isDocked,
+	onNavigate,
+	onSortChange
 }: {
 	section: SectionT
 	value: string
+	sortMode: SidebarSortT
+	isDocked?: boolean
 	onNavigate: (path: string) => void
+	onSortChange: (mode: SidebarSortT) => void
 }) => {
 	const ref = useRef<HTMLElement>(null)
 	useElementEvent(ref, 'select', (event) => {
 		const next = event.detail?.value
 		if (next) onNavigate(`/${next}`)
 	})
-	return <z-sidebar ref={ref as never} items={sidebarItemsOf(section)} value={value} />
+	const framework = useFramework()
+	const items = markFrameworkPage(sidebarItemsOf(section, sortMode), section.id, framework)
+	const isSortable = Boolean(section.isSortable)
+	return (
+		<z-sidebar ref={ref as never} items={items} value={value} isDocked={isDocked}>
+			{isSortable && <SortToggle sortMode={sortMode} onSortChange={onSortChange} />}
+		</z-sidebar>
+	)
 }
 
 const Socials = () => (
@@ -220,8 +337,14 @@ export const DocsLayout = ({ children }: { children: ReactNode }) => {
 	const [location, navigate] = useLocation()
 	const [isSearchOpen, setIsSearchOpen] = useState(false)
 	const [isMenuOpen, setIsMenuOpen] = useState(false)
+	const [sortMode, setSortMode] = useState<SidebarSortT>(readStoredSortMode)
 	const sheetRef = useRef<HTMLElement>(null)
 	useElementEvent(sheetRef, 'close', () => setIsMenuOpen(false))
+
+	const changeSortMode = (nextMode: SidebarSortT) => {
+		setSortMode(nextMode)
+		writeStoredSortMode(nextMode)
+	}
 
 	// "/elements/z-button" → section "elements", slug "z-button"
 	const [sectionId = '', slug = ''] = location.replace(/^\//, '').split('/')
@@ -255,6 +378,7 @@ export const DocsLayout = ({ children }: { children: ReactNode }) => {
 					<Link href="~/" className="DocsBrand">
 						<span className="dot" /> zest
 					</Link>
+					{section && <span className="DocsTopbarCrumb">{section.label}</span>}
 					<SectionNav active={section} />
 					<div className="DocsTopbarEnd">
 						<button type="button" className="DocsSearch" onClick={() => setIsSearchOpen(true)}>
@@ -262,8 +386,6 @@ export const DocsLayout = ({ children }: { children: ReactNode }) => {
 							<span className="DocsSearchText">Search</span>
 							<kbd>⌘K</kbd>
 						</button>
-						<ScaleControl />
-						<z-theme-switcher kind="icon" size="sm" />
 						<ColorPalette />
 						<a className="DocsIconButton" href={GITHUB_URL} target="_blank" rel="noreferrer" aria-label="GitHub">
 							<GithubIcon />
@@ -274,11 +396,12 @@ export const DocsLayout = ({ children }: { children: ReactNode }) => {
 
 			<div className="DocsBody">
 				<aside className="DocsAside">
-					{section && <SectionSidebar section={section} value={activeValue} onNavigate={go} />}
+					{section && <SectionSidebar section={section} value={activeValue} sortMode={sortMode} onNavigate={go} onSortChange={changeSortMode} />}
 					<Socials />
 				</aside>
 
 				<main className="DocsMain">
+					<PaletteNotice />
 					{children}
 					{section && slug && <Pager section={section} slug={slug} />}
 				</main>
@@ -286,8 +409,17 @@ export const DocsLayout = ({ children }: { children: ReactNode }) => {
 
 			<z-sheet ref={sheetRef as never} side="left" isOpen={isMenuOpen} heading="zest docs" className="DocsMobileSheet">
 				<div className="DocsMobileNav">
-					<SectionNav active={section} onNavigate={() => setIsMenuOpen(false)} />
-					{section && <SectionSidebar section={section} value={activeValue} onNavigate={go} />}
+					<MobileSectionNav active={section} onNavigate={() => setIsMenuOpen(false)} />
+					{section && (
+						<SectionSidebar
+							section={section}
+							value={activeValue}
+							sortMode={sortMode}
+							isDocked
+							onNavigate={go}
+							onSortChange={changeSortMode}
+						/>
+					)}
 					<Socials />
 				</div>
 			</z-sheet>

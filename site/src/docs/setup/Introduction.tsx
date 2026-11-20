@@ -1,23 +1,57 @@
 import { Link } from 'wouter'
 import { Article } from '@app/docs/Prose'
-import { SECTIONS } from '@app/docs/nav'
+import { FrameworkSegments } from '@app/docs/frameworks/FrameworkPicker'
+
+type NextStepT = {
+	href: string
+	title: string
+	summary: string
+	action: string
+}
+
+// A path forward, not a tour of the nav: the top bar already
+// says where everything lives.
+const NEXT_STEPS: NextStepT[] = [
+	{
+		href: '/guide/installation',
+		title: 'Install Zest',
+		summary: 'One script and one stylesheet, from npm or a CDN.',
+		action: 'Installation'
+	},
+	{
+		href: '/elements',
+		title: 'Browse elements',
+		summary: 'Every z element with live demos, code, and attributes.',
+		action: 'All elements'
+	},
+	{
+		href: '/blocks',
+		title: 'Copy a block',
+		summary: 'Real interfaces composed from elements, ready to adapt.',
+		action: 'All blocks'
+	}
+]
+
+const NextStepCard = (props: { step: NextStepT }) => (
+	<Link href={props.step.href} className="DocsBlockCard">
+		<span className="DocsBlockTitle">{props.step.title}</span>
+		<span className="DocsBlockSummary">{props.step.summary}</span>
+		<span className="DocsBlockMore">{props.step.action} →</span>
+	</Link>
+)
 
 export const Introduction = () => (
 	<Article
-		eyebrow="Setup"
-		title="Zest"
-		lede="A design system shipped as framework-agnostic web components. One script and one stylesheet, and every z element works in plain HTML, React, Svelte, or anything else that renders the DOM."
+		eyebrow="Guide"
+		title="Introduction"
+		lede="Zest is a design system shipped as framework-agnostic web components. One script and one stylesheet, and every z element works in plain HTML, React, Svelte, or anything else that renders the DOM."
 	>
-		<h2>How the docs are organized</h2>
-		<div className="DocsIndexGrid">
-			{SECTIONS.map((section) => (
-				<Link key={section.id} href={`/${section.id}`} className="DocsBlockCard">
-					<span className="DocsBlockTitle">{section.label}</span>
-					<span className="DocsBlockSummary">{section.blurb}</span>
-					<span className="DocsBlockMore">Open {section.label} →</span>
-				</Link>
-			))}
-		</div>
+		<h2>Pick your framework</h2>
+		<p>
+			Every code example in these docs is written for the framework you pick here. Change it any time in Settings, or from
+			any example’s Code tab.
+		</p>
+		<FrameworkSegments />
 
 		<h2>What you get</h2>
 		<ul>
@@ -41,5 +75,12 @@ export const Introduction = () => (
 			in slots (or declarative child elements), and styling goes through tokens. Motion follows one shared scale, and every
 			exit is as considered as its entrance.
 		</p>
+
+		<h2>Next steps</h2>
+		<div className="DocsIndexGrid">
+			{NEXT_STEPS.map((step) => (
+				<NextStepCard key={step.href} step={step} />
+			))}
+		</div>
 	</Article>
 )

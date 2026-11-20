@@ -88,7 +88,8 @@
 		"dev:site": "pnpm --filter @tasteee/zest-site dev",
 		"build:site": "pnpm --filter @tasteee/zest-site build",
 		"typecheck:site": "pnpm --filter @tasteee/zest-site typecheck",
-		"check:docs": "node scripts/check-docs.mjs"
+		"check:docs": "node scripts/check-docs.mjs",
+		"check:framework-demos": "node scripts/check-framework-demos.mjs"
 	},
 	"comment": "Atomico is bundled into dist/zest.js; it remains a dependency because the public declaration files reference its types.",
 	"dependencies": {
