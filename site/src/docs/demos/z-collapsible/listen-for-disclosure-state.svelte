@@ -10,7 +10,6 @@
 
 <z-column gap="3" style="width: min(30rem, 100%)">
   <z-collapsible
-    style="width: min(28rem, 100%)"
     value="details"
     tone="secondary"
     label="Implementation details"

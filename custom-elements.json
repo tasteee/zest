@@ -1925,6 +1925,251 @@
         {
           "kind": "class",
           "customElement": true,
+          "tagName": "z-calendar",
+          "name": "ZCalendar",
+          "description": "A month grid for picking one day or a range of days.",
+          "members": [
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "description": "The selection as ISO dates. One day is `2026-11-20`; with `is-range` it is an interval, `2026-11-02/2026-11-09`, and an unfinished range is `2026-11-02/`."
+            },
+            {
+              "kind": "field",
+              "name": "month",
+              "type": {
+                "text": "string"
+              },
+              "description": "The month on screen, as `YYYY-MM`. Follows the selection until the reader navigates; set it to open on a given month."
+            },
+            {
+              "kind": "field",
+              "name": "min",
+              "type": {
+                "text": "string"
+              },
+              "description": "Earliest selectable day, as an ISO date. Earlier days are dimmed and cannot be picked."
+            },
+            {
+              "kind": "field",
+              "name": "max",
+              "type": {
+                "text": "string"
+              },
+              "description": "Latest selectable day, as an ISO date. Later days are dimmed and cannot be picked."
+            },
+            {
+              "kind": "field",
+              "name": "firstDayOfWeek",
+              "type": {
+                "text": "number"
+              },
+              "description": "The weekday that starts each row, 0 for Sunday through 6 for Saturday."
+            },
+            {
+              "kind": "field",
+              "name": "locale",
+              "type": {
+                "text": "string"
+              },
+              "description": "BCP 47 language tag for month and weekday names, such as `de`. Defaults to the nearest `lang` on the page."
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "description": "Accessible name for the calendar."
+            },
+            {
+              "kind": "field",
+              "name": "tone",
+              "type": {
+                "text": "'primary' | 'secondary' | 'tertiary'"
+              },
+              "description": "Accent color of the selection and today marker."
+            },
+            {
+              "kind": "field",
+              "name": "isRange",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Selects a start and an end instead of one day. The first click sets the start, the second sets the end, and a third starts over."
+            },
+            {
+              "kind": "field",
+              "name": "isDisabled",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Blocks interaction and dims the calendar."
+            },
+            {
+              "kind": "field",
+              "name": "isReadonly",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Shows the selection but blocks changing it. Days can still be browsed."
+            },
+            {
+              "kind": "field",
+              "name": "isBorderless",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Removes the frame and padding so a parent can draw its own. Used inside `z-date-input`."
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Hides the element with display: none. It stays in the DOM and keeps its state."
+            }
+          ],
+          "attributes": [
+            {
+              "name": "value",
+              "fieldName": "value",
+              "type": {
+                "text": "string"
+              },
+              "description": "The selection as ISO dates. One day is `2026-11-20`; with `is-range` it is an interval, `2026-11-02/2026-11-09`, and an unfinished range is `2026-11-02/`."
+            },
+            {
+              "name": "month",
+              "fieldName": "month",
+              "type": {
+                "text": "string"
+              },
+              "description": "The month on screen, as `YYYY-MM`. Follows the selection until the reader navigates; set it to open on a given month."
+            },
+            {
+              "name": "min",
+              "fieldName": "min",
+              "type": {
+                "text": "string"
+              },
+              "description": "Earliest selectable day, as an ISO date. Earlier days are dimmed and cannot be picked."
+            },
+            {
+              "name": "max",
+              "fieldName": "max",
+              "type": {
+                "text": "string"
+              },
+              "description": "Latest selectable day, as an ISO date. Later days are dimmed and cannot be picked."
+            },
+            {
+              "name": "first-day-of-week",
+              "fieldName": "firstDayOfWeek",
+              "type": {
+                "text": "number"
+              },
+              "description": "The weekday that starts each row, 0 for Sunday through 6 for Saturday."
+            },
+            {
+              "name": "locale",
+              "fieldName": "locale",
+              "type": {
+                "text": "string"
+              },
+              "description": "BCP 47 language tag for month and weekday names, such as `de`. Defaults to the nearest `lang` on the page."
+            },
+            {
+              "name": "label",
+              "fieldName": "label",
+              "type": {
+                "text": "string"
+              },
+              "description": "Accessible name for the calendar."
+            },
+            {
+              "name": "tone",
+              "fieldName": "tone",
+              "type": {
+                "text": "'primary' | 'secondary' | 'tertiary'"
+              },
+              "description": "Accent color of the selection and today marker."
+            },
+            {
+              "name": "is-range",
+              "fieldName": "isRange",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Selects a start and an end instead of one day. The first click sets the start, the second sets the end, and a third starts over."
+            },
+            {
+              "name": "is-disabled",
+              "fieldName": "isDisabled",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Blocks interaction and dims the calendar."
+            },
+            {
+              "name": "is-readonly",
+              "fieldName": "isReadonly",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Shows the selection but blocks changing it. Days can still be browsed."
+            },
+            {
+              "name": "is-borderless",
+              "fieldName": "isBorderless",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Removes the frame and padding so a parent can draw its own. Used inside `z-date-input`."
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Hides the element with display: none. It stays in the DOM and keeps its state."
+            }
+          ],
+          "events": [
+            {
+              "name": "input",
+              "type": {
+                "text": "CustomEvent<{ value: string | null; start: string | null; end: string | null }>"
+              },
+              "detail": "{ value: string | null; start: string | null; end: string | null }",
+              "description": "Fires on every pick with `{ value, start, end }`. In a range, the first click reports an unfinished range."
+            },
+            {
+              "name": "change",
+              "type": {
+                "text": "CustomEvent<{ value: string | null; start: string | null; end: string | null }>"
+              },
+              "detail": "{ value: string | null; start: string | null; end: string | null }",
+              "description": "Fires when the selection is complete with `{ value, start, end }`: every click for one day, the second click for a range."
+            },
+            {
+              "name": "monthchange",
+              "type": {
+                "text": "CustomEvent<{ month: string }>"
+              },
+              "detail": "{ month: string }",
+              "description": "Fires when the reader moves to another month or year with `{ month }`, formatted `YYYY-MM`."
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
           "tagName": "z-callout",
           "name": "ZCallout",
           "description": "An in-flow note for documentation: a tip, a warning, or something important.",
@@ -4769,6 +5014,403 @@
               },
               "detail": "{ value: string }",
               "description": "Fires when the value is copied."
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
+          "tagName": "z-date-input",
+          "name": "ZDateInput",
+          "description": "A text field for one date or a range of dates, with an optional calendar.",
+          "members": [
+            {
+              "kind": "field",
+              "name": "description",
+              "type": {
+                "text": "string"
+              },
+              "description": "Help text shown under the field and read with it. `z-field` sets this for you."
+            },
+            {
+              "kind": "field",
+              "name": "error",
+              "type": {
+                "text": "string"
+              },
+              "description": "Error message shown under the field. Setting it marks the field invalid."
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "description": "The date as an ISO string, `2026-11-20`. With `is-range`, an interval: `2026-11-02/2026-11-09`; either side may be empty."
+            },
+            {
+              "kind": "field",
+              "name": "format",
+              "type": {
+                "text": "string"
+              },
+              "description": "How dates are typed and shown. Any order of `YYYY`, `MM`, and `DD` joined by punctuation, such as `MM/DD/YYYY` or `DD.MM.YYYY`. The value stays ISO."
+            },
+            {
+              "kind": "field",
+              "name": "min",
+              "type": {
+                "text": "string"
+              },
+              "description": "Earliest accepted date, as an ISO date."
+            },
+            {
+              "kind": "field",
+              "name": "max",
+              "type": {
+                "text": "string"
+              },
+              "description": "Latest accepted date, as an ISO date."
+            },
+            {
+              "kind": "field",
+              "name": "firstDayOfWeek",
+              "type": {
+                "text": "number"
+              },
+              "description": "The weekday that starts each row of the calendar, 0 for Sunday through 6 for Saturday."
+            },
+            {
+              "kind": "field",
+              "name": "locale",
+              "type": {
+                "text": "string"
+              },
+              "description": "BCP 47 language tag for the calendar's month and weekday names."
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "description": "Accessible name for the field. Prefer `z-field` for a visible label."
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "description": "Form field name. A range submits both dates under it; `FormData.getAll(name)` gives `[start, end]`."
+            },
+            {
+              "kind": "field",
+              "name": "placeholder",
+              "type": {
+                "text": "string"
+              },
+              "description": "Hint text shown while the field is empty. Defaults to the format, such as `MM/DD/YYYY`."
+            },
+            {
+              "kind": "field",
+              "name": "startPlaceholder",
+              "type": {
+                "text": "string"
+              },
+              "description": "Hint text for the empty start field of a range."
+            },
+            {
+              "kind": "field",
+              "name": "endPlaceholder",
+              "type": {
+                "text": "string"
+              },
+              "description": "Hint text for the empty end field of a range."
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "'sm' | 'md' | 'lg'"
+              },
+              "description": "Matches the size of `z-number-input` and `z-select`."
+            },
+            {
+              "kind": "field",
+              "name": "tone",
+              "type": {
+                "text": "'primary' | 'secondary' | 'tertiary'"
+              },
+              "description": "Accent color of the focus ring and the calendar's selection."
+            },
+            {
+              "kind": "field",
+              "name": "isRange",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Shows a start and an end field in one frame. The fields never cross: editing one past the other pins it to the other's date."
+            },
+            {
+              "kind": "field",
+              "name": "hasCalendar",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Adds a calendar button that opens a calendar below the field."
+            },
+            {
+              "kind": "field",
+              "name": "isInvalid",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Shows the error state."
+            },
+            {
+              "kind": "field",
+              "name": "isDisabled",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Blocks interaction, dims the element, and removes it from the keyboard focus order."
+            },
+            {
+              "kind": "field",
+              "name": "isReadonly",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Shows the value but blocks editing and opening the calendar."
+            },
+            {
+              "kind": "field",
+              "name": "isRequired",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Marks the field as required for form validation. In a range, both dates are required."
+            },
+            {
+              "kind": "field",
+              "name": "isFullWidth",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Stretches the field to its container width."
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Hides the element with display: none. It stays in the DOM and keeps its state."
+            }
+          ],
+          "attributes": [
+            {
+              "name": "description",
+              "fieldName": "description",
+              "type": {
+                "text": "string"
+              },
+              "description": "Help text shown under the field and read with it. `z-field` sets this for you."
+            },
+            {
+              "name": "error",
+              "fieldName": "error",
+              "type": {
+                "text": "string"
+              },
+              "description": "Error message shown under the field. Setting it marks the field invalid."
+            },
+            {
+              "name": "value",
+              "fieldName": "value",
+              "type": {
+                "text": "string"
+              },
+              "description": "The date as an ISO string, `2026-11-20`. With `is-range`, an interval: `2026-11-02/2026-11-09`; either side may be empty."
+            },
+            {
+              "name": "format",
+              "fieldName": "format",
+              "type": {
+                "text": "string"
+              },
+              "description": "How dates are typed and shown. Any order of `YYYY`, `MM`, and `DD` joined by punctuation, such as `MM/DD/YYYY` or `DD.MM.YYYY`. The value stays ISO."
+            },
+            {
+              "name": "min",
+              "fieldName": "min",
+              "type": {
+                "text": "string"
+              },
+              "description": "Earliest accepted date, as an ISO date."
+            },
+            {
+              "name": "max",
+              "fieldName": "max",
+              "type": {
+                "text": "string"
+              },
+              "description": "Latest accepted date, as an ISO date."
+            },
+            {
+              "name": "first-day-of-week",
+              "fieldName": "firstDayOfWeek",
+              "type": {
+                "text": "number"
+              },
+              "description": "The weekday that starts each row of the calendar, 0 for Sunday through 6 for Saturday."
+            },
+            {
+              "name": "locale",
+              "fieldName": "locale",
+              "type": {
+                "text": "string"
+              },
+              "description": "BCP 47 language tag for the calendar's month and weekday names."
+            },
+            {
+              "name": "label",
+              "fieldName": "label",
+              "type": {
+                "text": "string"
+              },
+              "description": "Accessible name for the field. Prefer `z-field` for a visible label."
+            },
+            {
+              "name": "name",
+              "fieldName": "name",
+              "type": {
+                "text": "string"
+              },
+              "description": "Form field name. A range submits both dates under it; `FormData.getAll(name)` gives `[start, end]`."
+            },
+            {
+              "name": "placeholder",
+              "fieldName": "placeholder",
+              "type": {
+                "text": "string"
+              },
+              "description": "Hint text shown while the field is empty. Defaults to the format, such as `MM/DD/YYYY`."
+            },
+            {
+              "name": "start-placeholder",
+              "fieldName": "startPlaceholder",
+              "type": {
+                "text": "string"
+              },
+              "description": "Hint text for the empty start field of a range."
+            },
+            {
+              "name": "end-placeholder",
+              "fieldName": "endPlaceholder",
+              "type": {
+                "text": "string"
+              },
+              "description": "Hint text for the empty end field of a range."
+            },
+            {
+              "name": "size",
+              "fieldName": "size",
+              "type": {
+                "text": "'sm' | 'md' | 'lg'"
+              },
+              "description": "Matches the size of `z-number-input` and `z-select`."
+            },
+            {
+              "name": "tone",
+              "fieldName": "tone",
+              "type": {
+                "text": "'primary' | 'secondary' | 'tertiary'"
+              },
+              "description": "Accent color of the focus ring and the calendar's selection."
+            },
+            {
+              "name": "is-range",
+              "fieldName": "isRange",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Shows a start and an end field in one frame. The fields never cross: editing one past the other pins it to the other's date."
+            },
+            {
+              "name": "has-calendar",
+              "fieldName": "hasCalendar",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Adds a calendar button that opens a calendar below the field."
+            },
+            {
+              "name": "is-invalid",
+              "fieldName": "isInvalid",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Shows the error state."
+            },
+            {
+              "name": "is-disabled",
+              "fieldName": "isDisabled",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Blocks interaction, dims the element, and removes it from the keyboard focus order."
+            },
+            {
+              "name": "is-readonly",
+              "fieldName": "isReadonly",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Shows the value but blocks editing and opening the calendar."
+            },
+            {
+              "name": "is-required",
+              "fieldName": "isRequired",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Marks the field as required for form validation. In a range, both dates are required."
+            },
+            {
+              "name": "is-full-width",
+              "fieldName": "isFullWidth",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Stretches the field to its container width."
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Hides the element with display: none. It stays in the DOM and keeps its state."
+            }
+          ],
+          "events": [
+            {
+              "name": "input",
+              "type": {
+                "text": "CustomEvent<{ value: string | null; start: string | null; end: string | null }>"
+              },
+              "detail": "{ value: string | null; start: string | null; end: string | null }",
+              "description": "Fires when a complete, valid date is typed, cleared, stepped, or picked, with `{ value, start, end }`."
+            },
+            {
+              "name": "change",
+              "type": {
+                "text": "CustomEvent<{ value: string | null; start: string | null; end: string | null }>"
+              },
+              "detail": "{ value: string | null; start: string | null; end: string | null }",
+              "description": "Fires when the field is committed (blur, Enter, a step, or a calendar pick) with `{ value, start, end }`. Not fired if nothing changed."
             }
           ]
         },
@@ -15149,6 +15791,14 @@
         },
         {
           "kind": "custom-element-definition",
+          "name": "z-calendar",
+          "declaration": {
+            "name": "ZCalendar",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
           "name": "z-callout",
           "declaration": {
             "name": "ZCallout",
@@ -15288,6 +15938,14 @@
           "name": "z-copy-field",
           "declaration": {
             "name": "ZCopyField",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "z-date-input",
+          "declaration": {
+            "name": "ZDateInput",
             "module": "dist/zest.js"
           }
         },

@@ -9,6 +9,9 @@ version and a prior deprecation. See `SUPPORT.md`.
 
 ### Added
 
+- `z-calendar`, a month grid for picking one day or, with `is-range`, a
+  range of days, and `z-date-input`, a typed date field (or range) with an
+  optional calendar. Values are ISO dates; a range is an ISO interval.
 - Boolean orientation flags. `is-vertical` on `z-box`, `z-toolbar`,
   `z-toggle-button-group` and `z-marquee`; `is-horizontal` on `z-card`,
   `z-radio-group` and `z-sortable`. Each names the non-default layout.

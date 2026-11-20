@@ -103,7 +103,7 @@ These repay themselves across 3–5 domains each. The reuse map:
 
 **Filtering & controls**
 - [x] `z-filter`
-- [ ] `z-date-picker` · `z-calendar` · `z-date-range-picker` · `z-time-picker`
+- [x] `z-calendar` (one day or a range) · [x] `z-date-input` (typed, with a calendar) · [ ] `z-time-picker`
 - [ ] `z-facet-list` · `z-query-builder` · `z-filter-chips`
 - [ ] `z-saved-views` / `z-view-switcher` · `z-search-input`
 
