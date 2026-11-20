@@ -10,7 +10,7 @@ export const ZCollapsibleDoc = () => (
 		<DocExample
 			demo="z-collapsible/reveal-optional-detail"
 			title="Reveal optional detail"
-			description="Keep the label short and make the hidden content independently useful."
+			description="Keep the label short and make the hidden content independently useful. z-collapsible fills its parent's width, open or closed, so set the width on the parent (here a z-column), not on the collapsible. Inside a shrink-to-fit parent it would size to its content and jump when toggled."
 		/>
 		<DocExample
 			demo="z-collapsible/start-open-or-unavailable"
