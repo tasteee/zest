@@ -209,9 +209,18 @@ const styles = css`
 export type CropRectT = { x: number; y: number; width: number; height: number }
 export type CropDetailT = CropRectT & { zoom: number }
 export type CropCanvasOptionsT = { width?: number; height?: number }
+// The <canvas> toCanvas() returns, described by the parts a caller uses.
+// Public declarations name no DOM element types (JSR checks them without
+// the DOM library); cast to HTMLCanvasElement to insert it into a page.
+export type CropCanvasT = {
+	width: number
+	height: number
+	toBlob: (callback: (blob: Blob | null) => void, type?: string, quality?: number) => void
+	toDataURL: (type?: string, quality?: number) => string
+}
 export type ImageCropperMethodsT = {
 	getCrop: () => CropRectT | null
-	toCanvas: (options?: CropCanvasOptionsT) => HTMLCanvasElement | null
+	toCanvas: (options?: CropCanvasOptionsT) => CropCanvasT | null
 	toBlob: (type?: string, quality?: number) => Promise<Blob | null>
 	toDataURL: (type?: string, quality?: number) => string | null
 	reset: () => void

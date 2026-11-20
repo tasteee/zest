@@ -7485,7 +7485,7 @@
 		"guidance": [
 			{
 				"title": "Methods",
-				"text": "`getCrop()` returns { x, y, width, height } in image pixels. `toCanvas({ width?, height? })`, `toBlob(type?, quality?)` and `toDataURL(type?, quality?)` cut the image; `reset()` recentres it."
+				"text": "`getCrop()` returns { x, y, width, height } in image pixels. `toCanvas({ width?, height? })` returns the <canvas> (typed by its width, height, toBlob and toDataURL; cast to HTMLCanvasElement to insert it). `toBlob(type?, quality?)` and `toDataURL(type?, quality?)` cut the image; `reset()` recentres it."
 			},
 			{
 				"title": "With a file picker",
