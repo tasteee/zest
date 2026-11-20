@@ -70,6 +70,22 @@ const MenuIcon = () => (
 	</svg>
 )
 
+// Five accent sparks hide inside the orb. Every 30s they
+// swirl, jet into the wordmark, and trigger its shimmer.
+// Pure CSS: the shared cycle keeps both in sync.
+const BrandOrb = () => (
+	<span className="DocsBrandOrb" aria-hidden="true">
+		<span className="DocsBrandCore" />
+		<span className="DocsBrandSparks">
+			<span className="DocsBrandSpark" />
+			<span className="DocsBrandSpark" />
+			<span className="DocsBrandSpark" />
+			<span className="DocsBrandSpark" />
+			<span className="DocsBrandSpark" />
+		</span>
+	</span>
+)
+
 // Listen for a custom element's DOM event (z-sidebar `select`, z-command `select`, z-sheet `close`).
 const useElementEvent = (ref: React.RefObject<HTMLElement | null>, name: string, handler: (event: CustomEvent) => void) => {
 	const handlerRef = useRef(handler)
@@ -253,7 +269,8 @@ export const DocsLayout = ({ children }: { children: ReactNode }) => {
 						<MenuIcon />
 					</button>
 					<Link href="~/" className="DocsBrand">
-						<span className="dot" /> zest
+						<BrandOrb />
+						<span className="DocsBrandWord">zest</span>
 					</Link>
 					<SectionNav active={section} />
 					<div className="DocsTopbarEnd">
