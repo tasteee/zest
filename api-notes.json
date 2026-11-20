@@ -3303,6 +3303,230 @@
 			}
 		]
 	},
+	"z-calendar": {
+		"summary": "A month grid for picking one day or a range of days.",
+		"props": {
+			"value": {
+				"description": "The selection as ISO dates. One day is `2026-11-20`; with `is-range` it is an interval, `2026-11-02/2026-11-09`, and an unfinished range is `2026-11-02/`.",
+				"default": "none"
+			},
+			"is-range": {
+				"description": "Selects a start and an end instead of one day. The first click sets the start, the second sets the end, and a third starts over.",
+				"default": "false"
+			},
+			"month": {
+				"description": "The month on screen, as `YYYY-MM`. Follows the selection until the reader navigates; set it to open on a given month."
+			},
+			"min": {
+				"description": "Earliest selectable day, as an ISO date. Earlier days are dimmed and cannot be picked."
+			},
+			"max": {
+				"description": "Latest selectable day, as an ISO date. Later days are dimmed and cannot be picked."
+			},
+			"first-day-of-week": {
+				"description": "The weekday that starts each row, 0 for Sunday through 6 for Saturday.",
+				"default": "0"
+			},
+			"locale": {
+				"description": "BCP 47 language tag for month and weekday names, such as `de`. Defaults to the nearest `lang` on the page."
+			},
+			"label": {
+				"description": "Accessible name for the calendar."
+			},
+			"tone": {
+				"description": "Accent color of the selection and today marker.",
+				"values": ["primary", "secondary", "tertiary"],
+				"default": "primary"
+			},
+			"is-disabled": {
+				"description": "Blocks interaction and dims the calendar.",
+				"default": "false"
+			},
+			"is-readonly": {
+				"description": "Shows the selection but blocks changing it. Days can still be browsed.",
+				"default": "false"
+			},
+			"is-borderless": {
+				"description": "Removes the frame and padding so a parent can draw its own. Used inside `z-date-input`.",
+				"default": "false"
+			},
+			"is-hidden": {
+				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
+				"default": "false"
+			}
+		},
+		"events": {
+			"input": {
+				"description": "Fires on every pick with `{ value, start, end }`. In a range, the first click reports an unfinished range."
+			},
+			"change": {
+				"description": "Fires when the selection is complete with `{ value, start, end }`: every click for one day, the second click for a range."
+			},
+			"monthchange": {
+				"description": "Fires when the reader moves to another month or year with `{ month }`, formatted `YYYY-MM`."
+			}
+		},
+		"keyboard": [
+			{
+				"keys": "← / →",
+				"action": "Move one day."
+			},
+			{
+				"keys": "↑ / ↓",
+				"action": "Move one week."
+			},
+			{
+				"keys": "Home / End",
+				"action": "Jump to the first or last day of the week."
+			},
+			{
+				"keys": "PageUp / PageDown",
+				"action": "Move one month. With Shift, move one year."
+			},
+			{
+				"keys": "Enter / Space",
+				"action": "Pick the focused day."
+			}
+		],
+		"accessibility": "A grid of day buttons, each named with its full date (\"Friday, November 20, 2026\"). Today is marked aria-current=\"date\", picked days are aria-selected, and days outside min and max are aria-disabled. Only one day is in the tab order; arrow keys move between days. The month and year arrows are named and update a live region.",
+		"guidance": [
+			{
+				"title": "Use for dates",
+				"text": "Pair it with z-date-input when people should be able to type a date as well as pick one."
+			},
+			{
+				"title": "Not a form field",
+				"text": "z-calendar does not submit with a form. Use z-date-input for a field that does."
+			}
+		]
+	},
+	"z-date-input": {
+		"summary": "A text field for one date or a range of dates, with an optional calendar.",
+		"props": {
+			"description": {
+				"description": "Help text shown under the field and read with it. `z-field` sets this for you."
+			},
+			"error": {
+				"description": "Error message shown under the field. Setting it marks the field invalid."
+			},
+			"value": {
+				"description": "The date as an ISO string, `2026-11-20`. With `is-range`, an interval: `2026-11-02/2026-11-09`; either side may be empty.",
+				"default": "none"
+			},
+			"is-range": {
+				"description": "Shows a start and an end field in one frame. The fields never cross: editing one past the other pins it to the other's date.",
+				"default": "false"
+			},
+			"format": {
+				"description": "How dates are typed and shown. Any order of `YYYY`, `MM`, and `DD` joined by punctuation, such as `MM/DD/YYYY` or `DD.MM.YYYY`. The value stays ISO.",
+				"default": "YYYY-MM-DD",
+				"open": true
+			},
+			"has-calendar": {
+				"description": "Adds a calendar button that opens a calendar below the field.",
+				"default": "false"
+			},
+			"min": {
+				"description": "Earliest accepted date, as an ISO date."
+			},
+			"max": {
+				"description": "Latest accepted date, as an ISO date."
+			},
+			"first-day-of-week": {
+				"description": "The weekday that starts each row of the calendar, 0 for Sunday through 6 for Saturday.",
+				"default": "0"
+			},
+			"locale": {
+				"description": "BCP 47 language tag for the calendar's month and weekday names."
+			},
+			"label": {
+				"description": "Accessible name for the field. Prefer `z-field` for a visible label."
+			},
+			"name": {
+				"description": "Form field name. A range submits both dates under it; `FormData.getAll(name)` gives `[start, end]`."
+			},
+			"placeholder": {
+				"description": "Hint text shown while the field is empty. Defaults to the format, such as `MM/DD/YYYY`."
+			},
+			"start-placeholder": {
+				"description": "Hint text for the empty start field of a range."
+			},
+			"end-placeholder": {
+				"description": "Hint text for the empty end field of a range."
+			},
+			"size": {
+				"default": "md",
+				"description": "Matches the size of `z-number-input` and `z-select`.",
+				"values": ["sm", "md", "lg"]
+			},
+			"tone": {
+				"description": "Accent color of the focus ring and the calendar's selection.",
+				"values": ["primary", "secondary", "tertiary"],
+				"default": "primary"
+			},
+			"is-invalid": {
+				"description": "Shows the error state.",
+				"default": "false"
+			},
+			"is-disabled": {
+				"description": "Blocks interaction, dims the element, and removes it from the keyboard focus order.",
+				"default": "false"
+			},
+			"is-readonly": {
+				"description": "Shows the value but blocks editing and opening the calendar.",
+				"default": "false"
+			},
+			"is-required": {
+				"description": "Marks the field as required for form validation. In a range, both dates are required.",
+				"default": "false"
+			},
+			"is-full-width": {
+				"description": "Stretches the field to its container width.",
+				"default": "false"
+			},
+			"is-hidden": {
+				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
+				"default": "false"
+			}
+		},
+		"events": {
+			"input": {
+				"description": "Fires when a complete, valid date is typed, cleared, stepped, or picked, with `{ value, start, end }`."
+			},
+			"change": {
+				"description": "Fires when the field is committed (blur, Enter, a step, or a calendar pick) with `{ value, start, end }`. Not fired if nothing changed."
+			}
+		},
+		"keyboard": [
+			{
+				"keys": "↑ / ↓",
+				"action": "Step the focused date by one day."
+			},
+			{
+				"keys": "Alt + ↓",
+				"action": "Open the calendar."
+			},
+			{
+				"keys": "Enter",
+				"action": "Commit the typed date."
+			},
+			{
+				"keys": "Esc",
+				"action": "Close the calendar and return to the field."
+			}
+		],
+		"accessibility": "A text field named by label (a range is a group of two fields named \"Start date\" and \"End date\", localised). The calendar button announces that it opens a dialog and whether it is expanded. Typed input is shaped as the format, and an incomplete date reverts on blur.",
+		"guidance": [
+			{
+				"title": "Typed or picked",
+				"text": "People who know the date type it; people who do not open the calendar. Offer both with has-calendar."
+			},
+			{
+				"title": "Keep the value ISO",
+				"text": "format changes only what is shown. Store and send the ISO value so dates stay unambiguous across locales."
+			}
+		]
+	},
 	"z-pagination": {
 		"summary": "Numbered page navigation with previous and next arrows.",
 		"props": {

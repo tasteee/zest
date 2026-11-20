@@ -125,7 +125,7 @@ the public elements.
 
 #### Forms
 
-`z-field` `z-input` `z-number-input` `z-number-range-input` `z-textarea` `z-checkbox` `z-switch` `z-radio` `z-radio-group` `z-slider` `z-range` `z-select` `z-combobox` `z-filter` `z-color-picker` `z-input-otp`
+`z-field` `z-input` `z-number-input` `z-number-range-input` `z-date-input` `z-calendar` `z-textarea` `z-checkbox` `z-switch` `z-radio` `z-radio-group` `z-slider` `z-range` `z-select` `z-combobox` `z-filter` `z-color-picker` `z-input-otp`
 
 #### Data Display
 

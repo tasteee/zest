@@ -36,6 +36,8 @@ import { ZCopyFieldDoc } from '@app/docs/components/z-copy-field'
 import { ZInputDoc } from '@app/docs/components/z-input'
 import { ZNumberInputDoc } from '@app/docs/components/z-number-input'
 import { ZNumberRangeInputDoc } from '@app/docs/components/z-number-range-input'
+import { ZDateInputDoc } from '@app/docs/components/z-date-input'
+import { ZCalendarDoc } from '@app/docs/components/z-calendar'
 import { ZTextareaDoc } from '@app/docs/components/z-textarea'
 import { ZCheckboxDoc } from '@app/docs/components/z-checkbox'
 import { ZSwitchDoc } from '@app/docs/components/z-switch'
@@ -137,6 +139,8 @@ export const ELEMENT_DOCS: Record<string, ComponentType> = {
 	'z-copy-field': ZCopyFieldDoc,
 	'z-number-input': ZNumberInputDoc,
 	'z-number-range-input': ZNumberRangeInputDoc,
+	'z-date-input': ZDateInputDoc,
+	'z-calendar': ZCalendarDoc,
 	'z-textarea': ZTextareaDoc,
 	'z-checkbox': ZCheckboxDoc,
 	'z-switch': ZSwitchDoc,
