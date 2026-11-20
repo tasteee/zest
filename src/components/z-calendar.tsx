@@ -53,6 +53,8 @@ const styles = css`
 		max-width: 100%;
 		--tone: var(--accent-primary);
 		--day-size: 2.25rem;
+		--calendar-padding: var(--space-3);
+		--calendar-width: 17.875rem;
 	}
 	:host([tone='secondary']) { --tone: var(--accent-secondary); }
 	:host([tone='tertiary']) { --tone: var(--accent-tertiary); }
@@ -63,8 +65,8 @@ const styles = css`
 		display: flex;
 		flex-direction: column;
 		gap: var(--space-3);
-		width: fit-content;
-		padding: var(--space-3);
+		width: var(--calendar-width);
+		padding: var(--calendar-padding);
 		background: var(--surface-default);
 		border: 1px solid var(--border-default);
 		border-radius: var(--radius-lg);
@@ -73,8 +75,8 @@ const styles = css`
 		user-select: none;
 		-webkit-user-select: none;
 	}
+	:host([is-borderless]) { --calendar-padding: 0rem; --calendar-width: calc(17.875rem - 2px - var(--space-3) * 2); }
 	:host([is-borderless]) .calendar {
-		padding: 0;
 		background: transparent;
 		border: 0;
 		border-radius: 0;
@@ -85,7 +87,7 @@ const styles = css`
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		gap: var(--space-4);
+		gap: var(--space-2);
 	}
 	.stepper {
 		display: inline-flex;
@@ -101,14 +103,17 @@ const styles = css`
 		letter-spacing: -0.01em;
 		white-space: nowrap;
 	}
+	.title { box-sizing: border-box; text-align: center; }
+	.title.is-month { min-inline-size: 5.5rem; }
+	.title.is-year { min-inline-size: 3rem; }
 	.title.is-year { color: var(--text-secondary); font-variant-numeric: tabular-nums; }
 
 	.arrow {
 		display: grid;
 		place-items: center;
 		flex: 0 0 auto;
-		width: 1.75rem;
-		height: 1.75rem;
+		width: 1.5rem;
+		height: 1.5rem;
 		padding: 0;
 		background: transparent;
 		border: 0;
@@ -125,7 +130,7 @@ const styles = css`
 	:host(:dir(rtl)) .arrow svg { scale: -1 1; }
 
 	.grid { display: flex; flex-direction: column; }
-	.week { display: grid; grid-template-columns: repeat(7, var(--day-size)); }
+	.week { display: grid; grid-template-columns: repeat(7, 1fr); }
 	.weekday {
 		display: grid;
 		place-items: center;
