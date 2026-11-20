@@ -47,6 +47,8 @@ import { ZSelectDoc } from '@app/docs/components/z-select'
 import { ZComboboxDoc } from '@app/docs/components/z-combobox'
 import { ZFilterDoc } from '@app/docs/components/z-filter'
 import { ZColorPickerDoc } from '@app/docs/components/z-color-picker'
+import { ZColorPanelDoc } from '@app/docs/components/z-color-panel'
+import { ZColorSwatchDoc } from '@app/docs/components/z-color-swatch'
 import { ZInputOtpDoc } from '@app/docs/components/z-input-otp'
 
 import { ZBadgeDoc } from '@app/docs/components/z-badge'
@@ -148,6 +150,8 @@ export const ELEMENT_DOCS: Record<string, ComponentType> = {
 	'z-combobox': ZComboboxDoc,
 	'z-filter': ZFilterDoc,
 	'z-color-picker': ZColorPickerDoc,
+	'z-color-panel': ZColorPanelDoc,
+	'z-color-swatch': ZColorSwatchDoc,
 	'z-input-otp': ZInputOtpDoc,
 	'z-badge': ZBadgeDoc,
 	'z-avatar': ZAvatarDoc,

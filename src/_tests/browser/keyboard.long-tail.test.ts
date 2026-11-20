@@ -309,9 +309,9 @@ describe('<z-color-picker>', () => {
 	it('Enter on the swatch opens the panel; Escape closes it and returns focus', async () => {
 		const wrapper = await mount('<z-color-picker label="Accent" value="#6d28d9"></z-color-picker>')
 		const host = wrapper.querySelector<HostT>('z-color-picker')!
-		const trigger = focus(innerOf<HTMLButtonElement>(host, 'button.trigger'))
+		const trigger = focus(innerOf<HTMLButtonElement>(host, 'button.color-picker-trigger'))
 		await userEvent.keyboard('{Enter}')
-		const panel = innerOf(host, '.panel')
+		const panel = innerOf(innerOf(host, 'z-popover'), '.surface')
 		await waitUntil(() => isVisible(panel))
 		expect(isVisible(panel)).toBe(true)
 		await userEvent.keyboard('{Escape}')

@@ -3181,9 +3181,9 @@
         {
           "kind": "class",
           "customElement": true,
-          "tagName": "z-color-picker",
-          "name": "ZColorPicker",
-          "description": "A swatch that opens a panel for picking a color.",
+          "tagName": "z-color-panel",
+          "name": "ZColorPanel",
+          "description": "An inline color editor: area, sliders, format menu, value field, channels, and optional swatches.",
           "members": [
             {
               "kind": "field",
@@ -3191,7 +3191,31 @@
               "type": {
                 "text": "string"
               },
-              "description": "Current color as a hex string. Reflected."
+              "description": "Current color as a CSS string in the active format. Any supported format is accepted. Reflected."
+            },
+            {
+              "kind": "field",
+              "name": "format",
+              "type": {
+                "text": "'hex' | 'rgb' | 'hsl' | 'hsb' | 'hwb' | 'oklch' | 'oklab' | 'lch' | 'lab' | 'p3'"
+              },
+              "description": "Active color format. It sets the value string, the 2D area, and the channel fields. Defaults to the format the value is written in. Reflected and updated when the person picks another format."
+            },
+            {
+              "kind": "field",
+              "name": "formats",
+              "type": {
+                "text": "array"
+              },
+              "description": "Formats offered in the format menu, shown in a fixed order. One format turns the menu into a label."
+            },
+            {
+              "kind": "field",
+              "name": "swatches",
+              "type": {
+                "text": "array"
+              },
+              "description": "Opt-in quick-pick colors under the channels. Any CSS colors."
             },
             {
               "kind": "field",
@@ -3203,27 +3227,43 @@
             },
             {
               "kind": "field",
-              "name": "label",
-              "type": {
-                "text": "string"
-              },
-              "description": "Accessible name for the color picker."
-            },
-            {
-              "kind": "field",
-              "name": "presets",
-              "type": {
-                "text": "array"
-              },
-              "description": "Swatches in the quick-pick row. Set it from JavaScript."
-            },
-            {
-              "kind": "field",
               "name": "tone",
               "type": {
                 "text": "'primary' | 'secondary' | 'tertiary'"
               },
-              "description": "Accent color of the open state."
+              "description": "Accent of focus and selection states."
+            },
+            {
+              "kind": "field",
+              "name": "hasAlpha",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Adds an opacity slider and an A channel. Alpha is written only when the color is translucent (8-digit hex, `/ 50%` in functions)."
+            },
+            {
+              "kind": "field",
+              "name": "hasEyedropper",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Adds a button that picks a color from the screen. Shown only where the browser has the EyeDropper API."
+            },
+            {
+              "kind": "field",
+              "name": "isChannelsHidden",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Hides the per-format number fields (R G B, H S L, L C H, ...)."
+            },
+            {
+              "kind": "field",
+              "name": "isCopyHidden",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Hides the copy button at the end of the value field."
             },
             {
               "kind": "field",
@@ -3249,7 +3289,31 @@
               "type": {
                 "text": "string"
               },
-              "description": "Current color as a hex string. Reflected."
+              "description": "Current color as a CSS string in the active format. Any supported format is accepted. Reflected."
+            },
+            {
+              "name": "format",
+              "fieldName": "format",
+              "type": {
+                "text": "'hex' | 'rgb' | 'hsl' | 'hsb' | 'hwb' | 'oklch' | 'oklab' | 'lch' | 'lab' | 'p3'"
+              },
+              "description": "Active color format. It sets the value string, the 2D area, and the channel fields. Defaults to the format the value is written in. Reflected and updated when the person picks another format."
+            },
+            {
+              "name": "formats",
+              "fieldName": "formats",
+              "type": {
+                "text": "array"
+              },
+              "description": "Formats offered in the format menu, shown in a fixed order. One format turns the menu into a label."
+            },
+            {
+              "name": "swatches",
+              "fieldName": "swatches",
+              "type": {
+                "text": "array"
+              },
+              "description": "Opt-in quick-pick colors under the channels. Any CSS colors."
             },
             {
               "name": "name",
@@ -3260,28 +3324,44 @@
               "description": "Form field name, used when the control is submitted with a form."
             },
             {
-              "name": "label",
-              "fieldName": "label",
-              "type": {
-                "text": "string"
-              },
-              "description": "Accessible name for the color picker."
-            },
-            {
-              "name": "presets",
-              "fieldName": "presets",
-              "type": {
-                "text": "array"
-              },
-              "description": "Swatches in the quick-pick row. Set it from JavaScript."
-            },
-            {
               "name": "tone",
               "fieldName": "tone",
               "type": {
                 "text": "'primary' | 'secondary' | 'tertiary'"
               },
-              "description": "Accent color of the open state."
+              "description": "Accent of focus and selection states."
+            },
+            {
+              "name": "has-alpha",
+              "fieldName": "hasAlpha",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Adds an opacity slider and an A channel. Alpha is written only when the color is translucent (8-digit hex, `/ 50%` in functions)."
+            },
+            {
+              "name": "has-eyedropper",
+              "fieldName": "hasEyedropper",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Adds a button that picks a color from the screen. Shown only where the browser has the EyeDropper API."
+            },
+            {
+              "name": "is-channels-hidden",
+              "fieldName": "isChannelsHidden",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Hides the per-format number fields (R G B, H S L, L C H, ...)."
+            },
+            {
+              "name": "is-copy-hidden",
+              "fieldName": "isCopyHidden",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Hides the copy button at the end of the value field."
             },
             {
               "name": "is-disabled",
@@ -3302,12 +3382,491 @@
           ],
           "events": [
             {
+              "name": "input",
+              "type": {
+                "text": "CustomEvent<ColorDetailT>"
+              },
+              "detail": "ColorDetailT",
+              "description": "On every move while the color changes, including each frame of a drag."
+            },
+            {
               "name": "change",
+              "type": {
+                "text": "CustomEvent<ColorDetailT>"
+              },
+              "detail": "ColorDetailT",
+              "description": "When a change is committed: a drag ends, a field is confirmed, a swatch or key press lands."
+            },
+            {
+              "name": "formatchange",
+              "type": {
+                "text": "CustomEvent<{ value: string; format: ColorFormatT }>"
+              },
+              "detail": "{ value: string; format: ColorFormatT }",
+              "description": "When the person picks another format. The color is the same; the value string is rewritten."
+            },
+            {
+              "name": "copy",
               "type": {
                 "text": "CustomEvent<{ value: string }>"
               },
               "detail": "{ value: string }",
-              "description": "Whenever the color changes (spectrum, hex field, or preset)."
+              "description": "After the value is copied to the clipboard."
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
+          "tagName": "z-color-picker",
+          "name": "ZColorPicker",
+          "description": "A swatch, or any trigger you slot, that floats a full color panel.",
+          "members": [
+            {
+              "kind": "field",
+              "name": "placement",
+              "type": {
+                "text": "'top' | 'bottom' | 'left' | 'right' | 'top-start' | 'top-center' | 'top-end' | 'bottom-start' | 'bottom-center' | 'bottom-end' | 'left-start' | 'left-center' | 'left-end' | 'right-start' | 'right-center' | 'right-end'"
+              },
+              "description": "Preferred side of the trigger. Add `-start` or `-end` to align to an edge, for example `bottom-start`. The panel flips when there is no room."
+            },
+            {
+              "kind": "field",
+              "name": "offset",
+              "type": {
+                "text": "number"
+              },
+              "description": "Gap from the trigger."
+            },
+            {
+              "kind": "field",
+              "name": "tone",
+              "type": {
+                "text": "'primary' | 'secondary' | 'tertiary'"
+              },
+              "description": "Accent of focus and selection states."
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Hides the element with display: none. It stays in the DOM and keeps its state."
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "description": "Current color as a CSS string in the active format. Any supported format is accepted. Reflected."
+            },
+            {
+              "kind": "field",
+              "name": "format",
+              "type": {
+                "text": "'hex' | 'rgb' | 'hsl' | 'hsb' | 'hwb' | 'oklch' | 'oklab' | 'lch' | 'lab' | 'p3'"
+              },
+              "description": "Active color format. It sets the value string, the 2D area, and the channel fields. Defaults to the format the value is written in. Reflected and updated when the person picks another format."
+            },
+            {
+              "kind": "field",
+              "name": "formats",
+              "type": {
+                "text": "array"
+              },
+              "description": "Formats offered in the format menu, shown in a fixed order. One format turns the menu into a label."
+            },
+            {
+              "kind": "field",
+              "name": "swatches",
+              "type": {
+                "text": "array"
+              },
+              "description": "Opt-in quick-pick colors under the channels. Any CSS colors."
+            },
+            {
+              "kind": "field",
+              "name": "presets",
+              "type": {
+                "text": "array"
+              },
+              "description": "Deprecated. Use swatches."
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "description": "Form field name, used when the control is submitted with a form."
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "description": "Accessible name for the trigger. The current value is spoken after it."
+            },
+            {
+              "kind": "field",
+              "name": "hasAlpha",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Adds an opacity slider and an A channel. Alpha is written only when the color is translucent (8-digit hex, `/ 50%` in functions)."
+            },
+            {
+              "kind": "field",
+              "name": "hasEyedropper",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Adds a button that picks a color from the screen. Shown only where the browser has the EyeDropper API."
+            },
+            {
+              "kind": "field",
+              "name": "isChannelsHidden",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Hides the per-format number fields (R G B, H S L, L C H, ...)."
+            },
+            {
+              "kind": "field",
+              "name": "isCopyHidden",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Hides the copy button at the end of the value field."
+            },
+            {
+              "kind": "field",
+              "name": "isOpen",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Opens or closes the panel. It reflects the current state."
+            },
+            {
+              "kind": "field",
+              "name": "isDisabled",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Blocks interaction, dims the element, and removes it from the keyboard focus order."
+            }
+          ],
+          "attributes": [
+            {
+              "name": "placement",
+              "fieldName": "placement",
+              "type": {
+                "text": "'top' | 'bottom' | 'left' | 'right' | 'top-start' | 'top-center' | 'top-end' | 'bottom-start' | 'bottom-center' | 'bottom-end' | 'left-start' | 'left-center' | 'left-end' | 'right-start' | 'right-center' | 'right-end'"
+              },
+              "description": "Preferred side of the trigger. Add `-start` or `-end` to align to an edge, for example `bottom-start`. The panel flips when there is no room."
+            },
+            {
+              "name": "offset",
+              "fieldName": "offset",
+              "type": {
+                "text": "number"
+              },
+              "description": "Gap from the trigger."
+            },
+            {
+              "name": "tone",
+              "fieldName": "tone",
+              "type": {
+                "text": "'primary' | 'secondary' | 'tertiary'"
+              },
+              "description": "Accent of focus and selection states."
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Hides the element with display: none. It stays in the DOM and keeps its state."
+            },
+            {
+              "name": "value",
+              "fieldName": "value",
+              "type": {
+                "text": "string"
+              },
+              "description": "Current color as a CSS string in the active format. Any supported format is accepted. Reflected."
+            },
+            {
+              "name": "format",
+              "fieldName": "format",
+              "type": {
+                "text": "'hex' | 'rgb' | 'hsl' | 'hsb' | 'hwb' | 'oklch' | 'oklab' | 'lch' | 'lab' | 'p3'"
+              },
+              "description": "Active color format. It sets the value string, the 2D area, and the channel fields. Defaults to the format the value is written in. Reflected and updated when the person picks another format."
+            },
+            {
+              "name": "formats",
+              "fieldName": "formats",
+              "type": {
+                "text": "array"
+              },
+              "description": "Formats offered in the format menu, shown in a fixed order. One format turns the menu into a label."
+            },
+            {
+              "name": "swatches",
+              "fieldName": "swatches",
+              "type": {
+                "text": "array"
+              },
+              "description": "Opt-in quick-pick colors under the channels. Any CSS colors."
+            },
+            {
+              "name": "presets",
+              "fieldName": "presets",
+              "type": {
+                "text": "array"
+              },
+              "description": "Deprecated. Use swatches."
+            },
+            {
+              "name": "name",
+              "fieldName": "name",
+              "type": {
+                "text": "string"
+              },
+              "description": "Form field name, used when the control is submitted with a form."
+            },
+            {
+              "name": "label",
+              "fieldName": "label",
+              "type": {
+                "text": "string"
+              },
+              "description": "Accessible name for the trigger. The current value is spoken after it."
+            },
+            {
+              "name": "has-alpha",
+              "fieldName": "hasAlpha",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Adds an opacity slider and an A channel. Alpha is written only when the color is translucent (8-digit hex, `/ 50%` in functions)."
+            },
+            {
+              "name": "has-eyedropper",
+              "fieldName": "hasEyedropper",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Adds a button that picks a color from the screen. Shown only where the browser has the EyeDropper API."
+            },
+            {
+              "name": "is-channels-hidden",
+              "fieldName": "isChannelsHidden",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Hides the per-format number fields (R G B, H S L, L C H, ...)."
+            },
+            {
+              "name": "is-copy-hidden",
+              "fieldName": "isCopyHidden",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Hides the copy button at the end of the value field."
+            },
+            {
+              "name": "is-open",
+              "fieldName": "isOpen",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Opens or closes the panel. It reflects the current state."
+            },
+            {
+              "name": "is-disabled",
+              "fieldName": "isDisabled",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Blocks interaction, dims the element, and removes it from the keyboard focus order."
+            }
+          ],
+          "events": [
+            {
+              "name": "input",
+              "type": {
+                "text": "CustomEvent<ColorDetailT>"
+              },
+              "detail": "ColorDetailT",
+              "description": "On every move while the color changes, including each frame of a drag."
+            },
+            {
+              "name": "change",
+              "type": {
+                "text": "CustomEvent<ColorDetailT>"
+              },
+              "detail": "ColorDetailT",
+              "description": "When a change is committed: a drag ends, a field is confirmed, a swatch or key press lands."
+            },
+            {
+              "name": "formatchange",
+              "type": {
+                "text": "CustomEvent<{ value: string; format: ColorFormatT }>"
+              },
+              "detail": "{ value: string; format: ColorFormatT }",
+              "description": "When the person picks another format. The color is the same; the value string is rewritten."
+            },
+            {
+              "name": "copy",
+              "type": {
+                "text": "CustomEvent<{ value: string }>"
+              },
+              "detail": "{ value: string }",
+              "description": "After the value is copied to the clipboard."
+            },
+            {
+              "name": "toggle",
+              "type": {
+                "text": "CustomEvent<{ open: boolean }>"
+              },
+              "detail": "{ open: boolean }",
+              "description": "Fired when the panel opens or closes."
+            }
+          ],
+          "slots": [
+            {
+              "name": "trigger",
+              "description": "Replaces the default swatch button. Use a focusable element. It can paint itself with var(--z-color-value)."
+            }
+          ],
+          "cssProperties": [
+            {
+              "name": "--z-color-value",
+              "description": "Set on the host by the picker: the current color, so a slotted trigger can paint itself with var(--z-color-value)."
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
+          "tagName": "z-color-swatch",
+          "name": "ZColorSwatch",
+          "description": "A read-only color chip with its value.",
+          "members": [
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "description": "Any CSS color. Drawn by the browser as written. Reflected."
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "description": "Text shown instead of the value. With is-value-hidden, the accessible name of the chip."
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "'sm' | 'md' | 'lg'"
+              },
+              "description": "Chip and text size."
+            },
+            {
+              "kind": "field",
+              "name": "isRound",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Draws a circle instead of a rounded square."
+            },
+            {
+              "kind": "field",
+              "name": "isValueHidden",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Shows only the chip. It becomes an image named by label or value."
+            },
+            {
+              "kind": "field",
+              "name": "isHidden",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Hides the element with display: none. It stays in the DOM and keeps its state."
+            }
+          ],
+          "attributes": [
+            {
+              "name": "value",
+              "fieldName": "value",
+              "type": {
+                "text": "string"
+              },
+              "description": "Any CSS color. Drawn by the browser as written. Reflected."
+            },
+            {
+              "name": "label",
+              "fieldName": "label",
+              "type": {
+                "text": "string"
+              },
+              "description": "Text shown instead of the value. With is-value-hidden, the accessible name of the chip."
+            },
+            {
+              "name": "size",
+              "fieldName": "size",
+              "type": {
+                "text": "'sm' | 'md' | 'lg'"
+              },
+              "description": "Chip and text size."
+            },
+            {
+              "name": "is-round",
+              "fieldName": "isRound",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Draws a circle instead of a rounded square."
+            },
+            {
+              "name": "is-value-hidden",
+              "fieldName": "isValueHidden",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Shows only the chip. It becomes an image named by label or value."
+            },
+            {
+              "name": "is-hidden",
+              "fieldName": "isHidden",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Hides the element with display: none. It stays in the DOM and keeps its state."
+            }
+          ],
+          "events": [],
+          "cssParts": [
+            {
+              "name": "chip",
+              "description": "The color chip."
+            },
+            {
+              "name": "value",
+              "description": "The value text."
             }
           ]
         },
@@ -14654,9 +15213,25 @@
         },
         {
           "kind": "custom-element-definition",
+          "name": "z-color-panel",
+          "declaration": {
+            "name": "ZColorPanel",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
           "name": "z-color-picker",
           "declaration": {
             "name": "ZColorPicker",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "z-color-swatch",
+          "declaration": {
+            "name": "ZColorSwatch",
             "module": "dist/zest.js"
           }
         },

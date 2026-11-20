@@ -88,6 +88,8 @@ export * from './components/z-select'
 export * from './components/z-combobox'
 export * from './components/z-filter'
 export * from './components/z-color-picker'
+export * from './components/z-color-panel'
+export * from './components/z-color-swatch'
 export * from './components/z-input-otp'
 
 // Data display
