@@ -42,7 +42,7 @@ const styles = css`
 		background: currentColor;
 		opacity: 0.28;
 		scale: 0.55;
-		box-shadow: 0 0 0 0 transparent;
+		filter: drop-shadow(0 0 0 transparent);
 		animation: dot-wave var(--spinner-cycle) var(--ease-move) infinite;
 		animation-delay: calc(var(--dot-index) * var(--spinner-stagger));
 	}
@@ -65,21 +65,21 @@ const styles = css`
 			opacity: 0.28;
 			scale: 0.55;
 			background: currentColor;
-			box-shadow: 0 0 0 0 transparent;
+			filter: drop-shadow(0 0 0 transparent);
 		}
-		3.5% { opacity: 1; scale: 1; background: currentColor; box-shadow: 0 0 0 0 transparent; }
-		36.833% { opacity: 1; scale: 1; background: currentColor; box-shadow: 0 0 0 0 transparent; }
+		3.5% { opacity: 1; scale: 1; background: currentColor; filter: drop-shadow(0 0 0 transparent); }
+		36.833% { opacity: 1; scale: 1; background: currentColor; filter: drop-shadow(0 0 0 transparent); }
 		70.5% {
 			opacity: 1;
 			scale: 1.12;
 			background: var(--spark);
-			box-shadow: 0 0 calc(var(--spinner-size) * 0.3) calc(var(--spinner-size) * 0.03) color-mix(in oklch, var(--spark) 65%, transparent);
+			filter: drop-shadow(0 0 calc(var(--spinner-size) * 0.18) color-mix(in oklch, var(--spark) 80%, transparent));
 		}
 		75% {
 			opacity: 0.75;
 			scale: 0.8;
 			background: var(--spark);
-			box-shadow: 0 0 calc(var(--spinner-size) * 0.2) 0 color-mix(in oklch, var(--spark) 35%, transparent);
+			filter: drop-shadow(0 0 calc(var(--spinner-size) * 0.12) color-mix(in oklch, var(--spark) 45%, transparent));
 		}
 	}
 
