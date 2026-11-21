@@ -5,19 +5,20 @@ import { useLocale } from '../shared/locale'
 import { oneOf } from '../shared/prop-types'
 
 // A ring of ten dots. A wave of growth travels around it.
-// Waves one and two are plain. Wave three carries the spark
-// tones and a soft glow. Each wave is followed by a pause.
-// One keyframe set drives all three waves; every dot only
-// differs by its angle, delay and spark tone.
+// Waves one and two are plain. Wave three is one continuous
+// flow of the spark tones: every dot runs the same color
+// sequence, offset by its position, so the colors travel
+// around the ring as a gradient. Each wave is followed by a
+// pause. One keyframe set drives all three waves; every dot
+// differs only by its angle and delay.
 const styles = css`
 	:host { display: inline-flex; color: inherit; }
 	:host([is-hidden]) { display: none; }
 
 	.spinner {
 		--spinner-size: var(--control-height-sm);
-		--spinner-wave: var(--motion-spin-duration, 2s);
-		--spinner-cycle: calc(var(--spinner-wave) * 3);
-		--spinner-stagger: calc(var(--spinner-wave) * 0.05);
+		--spinner-cycle: var(--motion-spin-duration, 6.15s);
+		--spinner-stagger: calc(var(--spinner-cycle) * 0.0146);
 		position: relative;
 		box-sizing: border-box;
 		width: var(--spinner-size);
@@ -42,45 +43,38 @@ const styles = css`
 		background: currentColor;
 		opacity: 0.28;
 		scale: 0.55;
-		filter: drop-shadow(0 0 0 transparent);
 		animation: dot-wave var(--spinner-cycle) var(--ease-move) infinite;
 		animation-delay: calc(var(--dot-index) * var(--spinner-stagger));
 	}
 
-	.dot:nth-child(1)  { --dot-index: 0; --dot-angle: 0deg;   --spark: var(--accent-spark-1); }
-	.dot:nth-child(2)  { --dot-index: 1; --dot-angle: 36deg;  --spark: color-mix(in oklch, var(--accent-spark-1), var(--accent-spark-2)); }
-	.dot:nth-child(3)  { --dot-index: 2; --dot-angle: 72deg;  --spark: var(--accent-spark-2); }
-	.dot:nth-child(4)  { --dot-index: 3; --dot-angle: 108deg; --spark: color-mix(in oklch, var(--accent-spark-2), var(--accent-spark-3)); }
-	.dot:nth-child(5)  { --dot-index: 4; --dot-angle: 144deg; --spark: var(--accent-spark-3); }
-	.dot:nth-child(6)  { --dot-index: 5; --dot-angle: 180deg; --spark: color-mix(in oklch, var(--accent-spark-3), var(--accent-spark-4)); }
-	.dot:nth-child(7)  { --dot-index: 6; --dot-angle: 216deg; --spark: var(--accent-spark-4); }
-	.dot:nth-child(8)  { --dot-index: 7; --dot-angle: 252deg; --spark: color-mix(in oklch, var(--accent-spark-4), var(--accent-spark-5)); }
-	.dot:nth-child(9)  { --dot-index: 8; --dot-angle: 288deg; --spark: var(--accent-spark-5); }
-	.dot:nth-child(10) { --dot-index: 9; --dot-angle: 324deg; --spark: color-mix(in oklch, var(--accent-spark-5), var(--accent-spark-1)); }
+	.dot:nth-child(1)  { --dot-index: 0; --dot-angle: 0deg; }
+	.dot:nth-child(2)  { --dot-index: 1; --dot-angle: 36deg; }
+	.dot:nth-child(3)  { --dot-index: 2; --dot-angle: 72deg; }
+	.dot:nth-child(4)  { --dot-index: 3; --dot-angle: 108deg; }
+	.dot:nth-child(5)  { --dot-index: 4; --dot-angle: 144deg; }
+	.dot:nth-child(6)  { --dot-index: 5; --dot-angle: 180deg; }
+	.dot:nth-child(7)  { --dot-index: 6; --dot-angle: 216deg; }
+	.dot:nth-child(8)  { --dot-index: 7; --dot-angle: 252deg; }
+	.dot:nth-child(9)  { --dot-index: 8; --dot-angle: 288deg; }
+	.dot:nth-child(10) { --dot-index: 9; --dot-angle: 324deg; }
 
-	/* Cycle = three waves of 33.333%. Each pulse is brief,
-	   the rest of the wave slot is the pause. */
+	/* Timeline of one cycle (6.15s at the default):
+	   wave 1 at 0%, wave 2 at 31%, wave 3 at 62%.
+	   Each wave sweeps the ring in about 0.8s and is
+	   followed by a pause of about 0.5s. */
 	@keyframes dot-wave {
-		0%, 9%, 33.333%, 42%, 66.667%, 82%, 100% {
+		0%, 9.8%, 31.1%, 40.8%, 62.1%, 80%, 100% {
 			opacity: 0.28;
 			scale: 0.55;
 			background: currentColor;
-			filter: drop-shadow(0 0 0 transparent);
 		}
-		3.5% { opacity: 1; scale: 1; background: currentColor; filter: drop-shadow(0 0 0 transparent); }
-		36.833% { opacity: 1; scale: 1; background: currentColor; filter: drop-shadow(0 0 0 transparent); }
-		70.5% {
-			opacity: 1;
-			scale: 1.12;
-			background: var(--spark);
-			filter: drop-shadow(0 0 calc(var(--spinner-size) * 0.18) color-mix(in oklch, var(--spark) 80%, transparent));
-		}
-		75% {
-			opacity: 0.75;
-			scale: 0.8;
-			background: var(--spark);
-			filter: drop-shadow(0 0 calc(var(--spinner-size) * 0.12) color-mix(in oklch, var(--spark) 45%, transparent));
-		}
+		3.4% { opacity: 1; scale: 1; background: currentColor; }
+		34.5% { opacity: 1; scale: 1; background: currentColor; }
+		65% { opacity: 1; scale: 1; background: var(--accent-spark-1); }
+		68.3% { opacity: 1; scale: 1; background: var(--accent-spark-2); }
+		71.5% { opacity: 1; scale: 1; background: var(--accent-spark-3); }
+		74.8% { opacity: 1; scale: 1; background: var(--accent-spark-4); }
+		77.8% { opacity: 0.8; scale: 0.8; background: var(--accent-spark-5); }
 	}
 
 	@media (prefers-reduced-motion: reduce) {

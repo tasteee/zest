@@ -10,10 +10,11 @@ import { oneOf } from '../shared/prop-types'
  * progress, and a solid accent thumb. The filled portion is driven by a
  * --fill custom property computed from the current value.
  *
- * An optional header sits above the track: a `label` on the left, custom DOM in
- * the `center` slot between the two, and, when `does-show-value` is set, the
- * live value anchored right as an accent-tinted pill (with optional
- * `value-prefix`/`value-suffix` for units like $ or %).
+ * An optional header sits above the track: custom DOM in the `start` slot,
+ * a `label`, custom DOM in the `center` slot, and the live value anchored
+ * right as an accent-tinted pill when `does-show-value` is set (with optional
+ * `value-prefix`/`value-suffix` for units like $ or %). Content in the
+ * `value` slot replaces the pill; read the number from the `input` event.
  *
  * `can-reset` lets a double click on the thumb or the label restore the value
  * the slider started with.
@@ -35,6 +36,20 @@ const styles = css`
 
 	.header[hidden] {
 		display: none;
+	}
+
+	.start {
+		display: flex;
+		align-items: center;
+		gap: var(--space-2);
+	}
+
+	.start:not(.hasContent) {
+		display: none;
+	}
+
+	.value-slot {
+		display: contents;
 	}
 
 	.center {
@@ -161,6 +176,8 @@ export const ZSlider = c(
 		const inputRef = useRef<HTMLInputElement>()
 		const defaultValue = useRef(value)
 		const [hasCenter, setHasCenter] = useState(false)
+		const [hasStart, setHasStart] = useState(false)
+		const [hasValueSlot, setHasValueSlot] = useState(false)
 		// Where the thumb sat before the current click sequence began. A first click
 		// on the track moves the thumb under the pointer, so the second click of a
 		// double click would otherwise always look like it landed on the thumb.
@@ -181,7 +198,8 @@ export const ZSlider = c(
 		const isDisabled = props.isDisabled || isFormDisabled
 		const fill = max > min ? ((current - min) / (max - min)) * 100 : 0
 
-		const showHeader = Boolean(props.label) || props.doesShowValue || hasCenter
+		const showHeader = Boolean(props.label) || props.doesShowValue || hasCenter || hasStart || hasValueSlot
+		const startClass = hasStart ? 'start hasContent' : 'start'
 
 		// Restore the value the slider started with, announcing it like a drag would.
 		const reset = () => {
@@ -209,6 +227,11 @@ export const ZSlider = c(
 		return (
 			<host shadowDom={{ delegatesFocus: true }} style={{ '--fill': `${fill}%` }}>
 				<div class="header" hidden={!showHeader}>
+					<slot
+						name="start"
+						class={startClass}
+						onslotchange={(e: any) => setHasStart(e.target.assignedNodes().length > 0)}
+					></slot>
 					{props.label && (
 						<span class="label" ondblclick={reset}>
 							{props.label}
@@ -219,13 +242,19 @@ export const ZSlider = c(
 						class="center"
 						onslotchange={(e: any) => setHasCenter(e.target.assignedNodes().length > 0)}
 					></slot>
-					{props.doesShowValue && (
-						<span class="value">
-							{props.valuePrefix}
-							{current}
-							{props.valueSuffix}
-						</span>
-					)}
+					<slot
+						name="value"
+						class="value-slot"
+						onslotchange={(e: any) => setHasValueSlot(e.target.assignedNodes().length > 0)}
+					>
+						{props.doesShowValue && (
+							<span class="value">
+								{props.valuePrefix}
+								{current}
+								{props.valueSuffix}
+							</span>
+						)}
+					</slot>
 				</div>
 				<input
 					ref={inputRef}

@@ -4829,7 +4829,9 @@
 			}
 		},
 		"slots": {
-			"center": "Custom content in the header row, between the label and the value."
+			"start": "Custom content at the start of the header row, before the label.",
+			"center": "Custom content in the header row, after the label.",
+			"value": "Replaces the value pill. Read the number from the `input` event."
 		},
 		"events": {
 			"input": {

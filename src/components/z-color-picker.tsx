@@ -80,6 +80,22 @@ const styles = css`
 		cursor: not-allowed;
 	}
 
+	/* The value text is monospace, so a fixed width in characters
+	   keeps the trigger still while the color moves. The widths are
+	   the longest string each format can print, with alpha. */
+	.color-picker-trigger z-color-swatch::part(value) {
+		width: 28ch;
+	}
+	.color-picker-trigger[data-format='hex'] z-color-swatch::part(value) {
+		width: 9ch;
+	}
+	.color-picker-trigger[data-format='rgb'] z-color-swatch::part(value),
+	.color-picker-trigger[data-format='hsl'] z-color-swatch::part(value),
+	.color-picker-trigger[data-format='hsb'] z-color-swatch::part(value),
+	.color-picker-trigger[data-format='hwb'] z-color-swatch::part(value) {
+		width: 24ch;
+	}
+
 	.color-picker-panel {
 		width: 16rem;
 	}
@@ -177,7 +193,7 @@ export const ZColorPicker = c(
 					ontoggle={handlePopoverToggle}
 				>
 					<slot name="trigger" slot="trigger">
-						<button ref={triggerRef} type="button" class={triggerClass} disabled={isDisabled} aria-label={triggerLabel}>
+						<button ref={triggerRef} type="button" class={triggerClass} data-format={resolved.format} disabled={isDisabled} aria-label={triggerLabel}>
 							<z-color-swatch value={displayValue}></z-color-swatch>
 						</button>
 					</slot>

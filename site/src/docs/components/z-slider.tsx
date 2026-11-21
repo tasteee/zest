@@ -20,7 +20,7 @@ export const ZSliderDoc = () => (
 		<DocExample
 			demo="z-slider/reset-to-the-starting-value"
 			title="Reset to the starting value"
-			description="can-reset lets a double click on the thumb or the label restore the original value. The center slot takes custom content between the label and the value."
+			description="can-reset lets a double click on the thumb or the label restore the original value. The start, center and value slots take custom content around the label and in place of the value pill."
 		/>
 	</ComponentDoc>
 )
