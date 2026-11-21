@@ -34,7 +34,7 @@ describe('<z-input>', () => {
 		const element = document.createElement('z-input')
 		element.setAttribute('label', 'Email')
 		element.setAttribute('is-required', '')
-		element.setAttribute('is-readonly', '')
+		element.setAttribute('is-read-only', '')
 		element.setAttribute('is-disabled', '')
 		document.body.append(element)
 		await waitForRender()
