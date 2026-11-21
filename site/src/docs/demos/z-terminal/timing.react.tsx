@@ -8,4 +8,4 @@ const LINES = [
   { text: 'All tests passed', type: 'output', delay: 900 }
 ]
 
-export const Example = () => <z-terminal shell="zsh" lines={LINES} doesAnimate />
+export const Example = () => <z-terminal width="min(100%, 36rem)" maxHeight="16rem" shell="zsh" lines={LINES} doesAnimate />

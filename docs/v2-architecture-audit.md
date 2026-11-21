@@ -221,7 +221,7 @@ type FieldLinkedControlT = {
 	// control → field: public state the field reads
 	readonly isRequired: boolean
 	readonly isDisabled: boolean
-	readonly isReadonly: boolean
+	readonly isReadOnly: boolean
 	readonly size: 'sm' | 'md' | 'lg'
 	readonly validity: ValidityState
 	readonly validationMessage: string

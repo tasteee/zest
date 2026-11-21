@@ -57,8 +57,8 @@ export type FormControlConfigT = {
 	value: FormValueT
 	/** True when the component's own `is-disabled` prop is set. */
 	isDisabled?: boolean
-	/** True when the component's own `is-readonly` prop is set. Readonly controls are not validated, as in the platform. */
-	isReadonly?: boolean
+	/** True when the component's own `is-read-only` prop is set. Readonly controls are not validated, as in the platform. */
+	isReadOnly?: boolean
 	/** The native control inside the shadow root. Its ValidityState is mirrored and it anchors the validation bubble. */
 	control?: Ref<HTMLElement | undefined>
 	/** Validity the component works out itself, merged over the mirrored native flags. */
@@ -111,7 +111,7 @@ export const useFormControl = (config: FormControlConfigT): FormControlT => {
 
 	useEffect(() => {
 		if (!internals) return
-		const inert = config.isDisabled || isFormDisabled || config.isReadonly
+		const inert = config.isDisabled || isFormDisabled || config.isReadOnly
 		if (config.isDisabled || isFormDisabled) internals.setFormValue(null)
 		else internals.setFormValue(config.value, config.value)
 
@@ -142,13 +142,13 @@ export const useFormControl = (config: FormControlConfigT): FormControlT => {
 		if (!control) return
 		const onKeyDown = (event: KeyboardEvent) => {
 			if (event.key !== 'Enter' || event.isComposing || event.defaultPrevented) return
-			if (config.isDisabled || isFormDisabled || config.isReadonly) return
+			if (config.isDisabled || isFormDisabled || config.isReadOnly) return
 			event.preventDefault()
 			requestSubmit()
 		}
 		control.addEventListener('keydown', onKeyDown)
 		return () => control.removeEventListener('keydown', onKeyDown)
-	}, [config.control?.current, config.submitsOnEnter, config.isDisabled, isFormDisabled, config.isReadonly])
+	}, [config.control?.current, config.submitsOnEnter, config.isDisabled, isFormDisabled, config.isReadOnly])
 
 	return { internals, isFormDisabled, requestSubmit }
 }

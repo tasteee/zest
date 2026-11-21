@@ -260,7 +260,7 @@ describe('<z-rating>', () => {
 	})
 
 	it('is an image with a spoken score when read-only', async () => {
-		const wrapper = await mount('<z-rating value="3.7" is-readonly></z-rating>')
+		const wrapper = await mount('<z-rating value="3.7" is-read-only></z-rating>')
 		const rating = wrapper.querySelector('z-rating') as HostT
 		const display = innerOf(rating, '[role="img"]')
 		expect(display.getAttribute('aria-label')).toBe('Rated 3.7 of 5')

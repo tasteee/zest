@@ -2011,7 +2011,7 @@
             },
             {
               "kind": "field",
-              "name": "isReadonly",
+              "name": "isReadOnly",
               "type": {
                 "text": "boolean"
               },
@@ -2116,8 +2116,8 @@
               "description": "Blocks interaction and dims the calendar."
             },
             {
-              "name": "is-readonly",
-              "fieldName": "isReadonly",
+              "name": "is-read-only",
+              "fieldName": "isReadOnly",
               "type": {
                 "text": "boolean"
               },
@@ -5853,7 +5853,7 @@
             },
             {
               "kind": "field",
-              "name": "isReadonly",
+              "name": "isReadOnly",
               "type": {
                 "text": "boolean"
               },
@@ -6038,8 +6038,8 @@
               "description": "Blocks interaction, dims the element, and removes it from the keyboard focus order."
             },
             {
-              "name": "is-readonly",
-              "fieldName": "isReadonly",
+              "name": "is-read-only",
+              "fieldName": "isReadOnly",
               "type": {
                 "text": "boolean"
               },
@@ -8966,7 +8966,7 @@
             },
             {
               "kind": "field",
-              "name": "isReadonly",
+              "name": "isReadOnly",
               "type": {
                 "text": "boolean"
               },
@@ -9111,8 +9111,8 @@
               "description": "Blocks interaction, dims the element, and removes it from the keyboard focus order."
             },
             {
-              "name": "is-readonly",
-              "fieldName": "isReadonly",
+              "name": "is-read-only",
+              "fieldName": "isReadOnly",
               "type": {
                 "text": "boolean"
               },
@@ -10833,7 +10833,7 @@
             },
             {
               "kind": "field",
-              "name": "isReadonly",
+              "name": "isReadOnly",
               "type": {
                 "text": "boolean"
               },
@@ -11010,8 +11010,8 @@
               "description": "Blocks interaction, dims the element, and removes it from the keyboard focus order."
             },
             {
-              "name": "is-readonly",
-              "fieldName": "isReadonly",
+              "name": "is-read-only",
+              "fieldName": "isReadOnly",
               "type": {
                 "text": "boolean"
               },
@@ -11222,7 +11222,7 @@
             },
             {
               "kind": "field",
-              "name": "isReadonly",
+              "name": "isReadOnly",
               "type": {
                 "text": "boolean"
               },
@@ -11391,8 +11391,8 @@
               "description": "Blocks interaction, dims the element, and removes it from the keyboard focus order."
             },
             {
-              "name": "is-readonly",
-              "fieldName": "isReadonly",
+              "name": "is-read-only",
+              "fieldName": "isReadOnly",
               "type": {
                 "text": "boolean"
               },
@@ -12564,7 +12564,7 @@
             },
             {
               "kind": "field",
-              "name": "isReadonly",
+              "name": "isReadOnly",
               "type": {
                 "text": "boolean"
               },
@@ -12693,8 +12693,8 @@
               "description": "Clicking the current score again clears it to 0."
             },
             {
-              "name": "is-readonly",
-              "fieldName": "isReadonly",
+              "name": "is-read-only",
+              "fieldName": "isReadOnly",
               "type": {
                 "text": "boolean"
               },
@@ -16219,7 +16219,7 @@
             },
             {
               "kind": "field",
-              "name": "isReadonly",
+              "name": "isReadOnly",
               "type": {
                 "text": "boolean"
               },
@@ -16364,8 +16364,8 @@
               "description": "At least one tag is needed for the form to submit."
             },
             {
-              "name": "is-readonly",
-              "fieldName": "isReadonly",
+              "name": "is-read-only",
+              "fieldName": "isReadOnly",
               "type": {
                 "text": "boolean"
               },
@@ -17039,7 +17039,7 @@
             },
             {
               "kind": "field",
-              "name": "isReadonly",
+              "name": "isReadOnly",
               "type": {
                 "text": "boolean"
               },
@@ -17168,8 +17168,8 @@
               "description": "Blocks interaction, dims the element, and removes it from the keyboard focus order."
             },
             {
-              "name": "is-readonly",
-              "fieldName": "isReadonly",
+              "name": "is-read-only",
+              "fieldName": "isReadOnly",
               "type": {
                 "text": "boolean"
               },

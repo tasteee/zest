@@ -7,4 +7,4 @@ Lockfile is up to date
 Select any part of a line, then use "Copy selection".`
 </script>
 
-<z-terminal shell="bash" copy-lines="1-2,4" code={SESSION}></z-terminal>
+<z-terminal width="min(100%, 36rem)" max-height="16rem" shell="bash" copy-lines="1-2,4" code={SESSION}></z-terminal>

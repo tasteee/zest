@@ -11,7 +11,7 @@ import { useLocale } from '../shared/locale'
  * and End jump, a digit sets the value directly.
  *
  * `step="0.5"` allows half marks; the pointer picks the half it is over.
- * `is-readonly` turns it into a display: no focus, no hover, and it
+ * `is-read-only` turns it into a display: no focus, no hover, and it
  * renders any fraction (3.7 fills 70% of the fourth icon), named for a
  * screen reader as "Rated 3.7 of 5".
  *
@@ -207,7 +207,7 @@ export const ZRating = c(
 		const shape: ShapeT = props.shape ?? 'star'
 		const score = clamp(value ?? 0, 0, max)
 		const hasScore = score > 0
-		const isReadonly = Boolean(props.isReadonly)
+		const isReadOnly = Boolean(props.isReadOnly)
 
 		const missingValidity = { flags: { valueMissing: true }, message: t('selectOneOfTheseOptions') }
 		const isMissing = Boolean(props.isRequired) && !hasScore
@@ -215,7 +215,7 @@ export const ZRating = c(
 		const formControl = useFormControl({
 			value: hasScore ? String(score) : null,
 			isDisabled: props.isDisabled,
-			isReadonly,
+			isReadOnly,
 			control: iconsRef,
 			validity: isMissing ? missingValidity : { flags: {} },
 			onReset: () => setValue(defaultValue.current),
@@ -225,7 +225,7 @@ export const ZRating = c(
 			}
 		})
 		const isDisabled = Boolean(props.isDisabled) || formControl.isFormDisabled
-		const isInteractive = !isDisabled && !isReadonly
+		const isInteractive = !isDisabled && !isReadOnly
 
 		const commitScore = (nextScore: number) => {
 			const shouldClear = Boolean(props.canClear) && nextScore === score
@@ -290,7 +290,7 @@ export const ZRating = c(
 			'aria-describedby': describedBy(props.description, props.error)
 		}
 		const readonlyAttributes = { role: 'img', 'aria-label': nameForReadonly }
-		const iconsAttributes = isReadonly ? readonlyAttributes : interactiveAttributes
+		const iconsAttributes = isReadOnly ? readonlyAttributes : interactiveAttributes
 
 		const renderIcon = (position: number) => {
 			const fillFraction = clamp(shownScore - position, 0, 1)
@@ -349,7 +349,7 @@ export const ZRating = c(
 			tone: { type: oneOf('primary', 'secondary', 'tertiary', 'success', 'warning', 'danger'), reflect: true },
 			doesShowValue: { type: Boolean, reflect: true },
 			canClear: { type: Boolean, reflect: true },
-			isReadonly: { type: Boolean, reflect: true },
+			isReadOnly: { type: Boolean, reflect: true },
 			isRequired: { type: Boolean, reflect: true },
 			isDisabled: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },

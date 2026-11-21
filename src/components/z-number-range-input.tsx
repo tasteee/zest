@@ -92,7 +92,7 @@ export const ZNumberRangeInput = c(
 		const formControl = useFormControl({
 			value: buildFormValue(),
 			isDisabled: props.isDisabled,
-			isReadonly: props.isReadonly,
+			isReadOnly: props.isReadOnly,
 			control: lowerRef,
 			onReset: () => setRequestedValue(defaultValue.current as RangeValueT),
 			onRestore: restoreFromForm
@@ -146,7 +146,7 @@ export const ZNumberRangeInput = c(
 						isBorderless={true}
 						isInvalid={isInvalid}
 						isDisabled={isDisabled}
-						isReadonly={props.isReadonly}
+						isReadOnly={props.isReadOnly}
 						isRequired={props.isRequired}
 						hasStepperButtons={props.hasStepperButtons}
 						oninput={(boundEvent: any) => handleBoundEvent('lower', 'input', boundEvent)}
@@ -167,7 +167,7 @@ export const ZNumberRangeInput = c(
 						isBorderless={true}
 						isInvalid={isInvalid}
 						isDisabled={isDisabled}
-						isReadonly={props.isReadonly}
+						isReadOnly={props.isReadOnly}
 						isRequired={props.isRequired}
 						hasStepperButtons={props.hasStepperButtons}
 						oninput={(boundEvent: any) => handleBoundEvent('upper', 'input', boundEvent)}
@@ -195,7 +195,7 @@ export const ZNumberRangeInput = c(
 			tone: { type: oneOf('primary', 'secondary', 'tertiary'), reflect: true },
 			isInvalid: { type: Boolean, reflect: true },
 			isDisabled: { type: Boolean, reflect: true },
-			isReadonly: { type: Boolean, reflect: true },
+			isReadOnly: { type: Boolean, reflect: true },
 			isRequired: { type: Boolean, reflect: true },
 			hasStepperButtons: { type: Boolean, reflect: true },
 			isFullWidth: { type: Boolean, reflect: true },

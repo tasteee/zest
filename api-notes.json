@@ -2810,7 +2810,7 @@
 				"description": "Blocks interaction, dims the element, and removes it from the keyboard focus order.",
 				"default": "false"
 			},
-			"is-readonly": {
+			"is-read-only": {
 				"description": "Shows the value but blocks editing. The field stays focusable and submittable.",
 				"default": "false"
 			},
@@ -3426,7 +3426,7 @@
 				"description": "Shows the error state.",
 				"default": "false"
 			},
-			"is-readonly": {
+			"is-read-only": {
 				"description": "Shows the value but blocks editing.",
 				"default": "false"
 			},
@@ -3539,7 +3539,7 @@
 				"description": "Blocks interaction, dims the element, and removes it from the keyboard focus order.",
 				"default": "false"
 			},
-			"is-readonly": {
+			"is-read-only": {
 				"description": "Shows the value but blocks editing.",
 				"default": "false"
 			},
@@ -3626,7 +3626,7 @@
 				"description": "Blocks interaction and dims the calendar.",
 				"default": "false"
 			},
-			"is-readonly": {
+			"is-read-only": {
 				"description": "Shows the selection but blocks changing it. Days can still be browsed.",
 				"default": "false"
 			},
@@ -3764,7 +3764,7 @@
 				"description": "Blocks interaction, dims the element, and removes it from the keyboard focus order.",
 				"default": "false"
 			},
-			"is-readonly": {
+			"is-read-only": {
 				"description": "Shows the value but blocks editing and opening the calendar.",
 				"default": "false"
 			},
@@ -5518,7 +5518,7 @@
 				"description": "Blocks interaction, dims the element, and removes it from the keyboard focus order.",
 				"default": "false"
 			},
-			"is-readonly": {
+			"is-read-only": {
 				"description": "Shows the value but blocks editing.",
 				"default": "false"
 			},
@@ -6790,7 +6790,7 @@
 				"description": "At least one tag is needed for the form to submit.",
 				"default": "false"
 			},
-			"is-readonly": {
+			"is-read-only": {
 				"description": "Shows the tags without remove buttons and takes no new ones. Still submitted.",
 				"default": "false"
 			},
@@ -6923,7 +6923,7 @@
 				"description": "Clicking the current score again clears it to 0.",
 				"default": "false"
 			},
-			"is-readonly": {
+			"is-read-only": {
 				"description": "A display, not an input: no focus or hover, and any fraction renders (3.7 fills 70% of the fourth icon).",
 				"default": "false"
 			},
@@ -6987,7 +6987,7 @@
 		"guidance": [
 			{
 				"title": "Showing an average",
-				"text": "Use `is-readonly` with the exact average and `does-show-value`; the icons render the fraction."
+				"text": "Use `is-read-only` with the exact average and `does-show-value`; the icons render the fraction."
 			}
 		]
 	},

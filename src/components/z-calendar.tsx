@@ -258,7 +258,7 @@ export const ZCalendar = c(
 
 		const isRange = Boolean(props.isRange)
 		const isDisabled = Boolean(props.isDisabled)
-		const isReadonly = Boolean(props.isReadonly)
+		const isReadOnly = Boolean(props.isReadOnly)
 		const min = normalizeIsoDate(props.min)
 		const max = normalizeIsoDate(props.max)
 		const firstDayOfWeek = resolveFirstDay(props.firstDayOfWeek)
@@ -387,7 +387,7 @@ export const ZCalendar = c(
 		}
 
 		const selectDate = (iso: IsoDateT) => {
-			const canSelect = !isDisabled && !isReadonly && !isOutsideBounds(iso, min, max)
+			const canSelect = !isDisabled && !isReadOnly && !isOutsideBounds(iso, min, max)
 			if (!canSelect) return
 			setFocusedIso(iso)
 			setPreviewIso(null)
@@ -556,7 +556,7 @@ export const ZCalendar = c(
 			tone: { type: oneOf('primary', 'secondary', 'tertiary'), reflect: true },
 			isRange: { type: Boolean, reflect: true },
 			isDisabled: { type: Boolean, reflect: true },
-			isReadonly: { type: Boolean, reflect: true },
+			isReadOnly: { type: Boolean, reflect: true },
 			isBorderless: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			input: event<{ value: string | null; start: string | null; end: string | null }>({ bubbles: true, composed: true }),
