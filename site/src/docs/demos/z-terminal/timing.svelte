@@ -10,4 +10,4 @@
   ]
 </script>
 
-<z-terminal shell="zsh" does-animate lines={LINES}></z-terminal>
+<z-terminal width="min(100%, 36rem)" max-height="16rem" shell="zsh" does-animate lines={LINES}></z-terminal>
