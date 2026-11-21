@@ -238,7 +238,7 @@ export const ZTagInput = c(
 		const formControl = useFormControl({
 			value: buildFormValue(formName, tags),
 			isDisabled: props.isDisabled,
-			isReadonly: props.isReadonly,
+			isReadOnly: props.isReadOnly,
 			control: inputRef,
 			onReset: () => {
 				setDraft('')
@@ -251,7 +251,7 @@ export const ZTagInput = c(
 			}
 		})
 		const isDisabled = Boolean(props.isDisabled) || formControl.isFormDisabled
-		const canEdit = !isDisabled && !props.isReadonly
+		const canEdit = !isDisabled && !props.isReadOnly
 
 		const commitTags = (nextTags: string[]) => {
 			latestTags.current = nextTags
@@ -440,7 +440,7 @@ export const ZTagInput = c(
 		const isRequiredNow = Boolean(props.isRequired) && !hasTags
 		// `readonly` has no camelCase property name Atomico can match, so
 		// it is written as an attribute: false must be absent, not "false".
-		const isInputReadonly = Boolean(props.isReadonly) || isFull
+		const isInputReadonly = Boolean(props.isReadOnly) || isFull
 
 		return (
 			<host shadowDom={{ delegatesFocus: true }}>
@@ -519,7 +519,7 @@ export const ZTagInput = c(
 			isDraftKeptOnBlur: { type: Boolean, reflect: true },
 			isInvalid: { type: Boolean, reflect: true },
 			isRequired: { type: Boolean, reflect: true },
-			isReadonly: { type: Boolean, reflect: true },
+			isReadOnly: { type: Boolean, reflect: true },
 			isDisabled: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			input: event<{ value: string }>({ bubbles: true, composed: true }),

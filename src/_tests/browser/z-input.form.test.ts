@@ -57,7 +57,7 @@ describe('<z-input> in a form', () => {
 	})
 
 	it('is not validated while readonly, as a native input is not', async () => {
-		const form = await mountForm('<z-input name="q" is-required is-readonly></z-input>')
+		const form = await mountForm('<z-input name="q" is-required is-read-only></z-input>')
 		expect(form.checkValidity()).toBe(true)
 		expect(trySubmit(form)).toBe(true)
 		expect(entriesOf(form)).toEqual([['q', '']])

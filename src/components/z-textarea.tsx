@@ -130,7 +130,7 @@ export const ZTextarea = c(
 		const { isFormDisabled } = useFormControl({
 			value: value ?? '',
 			isDisabled: props.isDisabled,
-			isReadonly: props.isReadonly,
+			isReadOnly: props.isReadOnly,
 			control: textareaRef,
 			onReset: () => setValue(defaultValue.current),
 			onRestore: (state) => { if (typeof state === 'string') setValue(state) }
@@ -173,7 +173,7 @@ export const ZTextarea = c(
 						placeholder={props.placeholder}
 						rows={props.rows || 3}
 						disabled={isDisabled}
-						readonly={props.isReadonly}
+						readonly={props.isReadOnly}
 						required={props.isRequired}
 						aria-label={accessibleName}
 						aria-describedby={describedBy(props.description, props.error)}
@@ -213,7 +213,7 @@ export const ZTextarea = c(
 			isFocused: { type: Boolean, reflect: true },
 			isInvalid: { type: Boolean, reflect: true },
 			isDisabled: { type: Boolean, reflect: true },
-			isReadonly: { type: Boolean, reflect: true },
+			isReadOnly: { type: Boolean, reflect: true },
 			isRequired: { type: Boolean, reflect: true },
 			isAutoResize: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },

@@ -162,7 +162,7 @@ export const ZInput = c(
 		const { isFormDisabled } = useFormControl({
 			value: value ?? '',
 			isDisabled: props.isDisabled,
-			isReadonly: props.isReadonly,
+			isReadOnly: props.isReadOnly,
 			control: inputRef,
 			submitsOnEnter: true,
 			onReset: () => setValue(defaultValue.current),
@@ -188,7 +188,7 @@ export const ZInput = c(
 						value={value ?? ''}
 						placeholder={props.placeholder}
 						disabled={isDisabled}
-						readonly={props.isReadonly}
+						readonly={props.isReadOnly}
 						required={props.isRequired}
 						autocomplete={props.autocomplete as any}
 						inputmode={props.inputmode}
@@ -234,7 +234,7 @@ export const ZInput = c(
 			isFocused: { type: Boolean, reflect: true },
 			isInvalid: { type: Boolean, reflect: true },
 			isDisabled: { type: Boolean, reflect: true },
-			isReadonly: { type: Boolean, reflect: true },
+			isReadOnly: { type: Boolean, reflect: true },
 			isRequired: { type: Boolean, reflect: true },
 			isInline: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
