@@ -11,6 +11,9 @@ editors, and documentation sites, end to end.
 
 ## Principles
 
+- **Architecture first.** Every item here must pass
+  [`docs/architecture.md`](./docs/architecture.md), including its acceptance
+  criteria. That document wins over this roadmap.
 - **Additive, not duplicative.** The elements in 1.0 are the base. Everything
   here builds on them; a new element earns its place only when the pattern can't
   already be expressed by composing existing z primitives.
