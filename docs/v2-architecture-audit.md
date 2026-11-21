@@ -14,6 +14,20 @@ smaller change.
 
 ---
 
+## 0. Start here
+
+1. **Read** [`architecture.md`](./architecture.md), especially Rules 17–21.
+2. **Work the phases in §7 in order.** Each phase lists what it unblocks.
+3. **For every file you touch**, run the acceptance criteria
+   (`architecture.md` §8) on it, not only the finding that brought you
+   there. The audit is a map, not a line-by-line review (see §9).
+4. **When a new decision comes up**, record it as a rule first
+   (`AGENTS.md` → "Recording new rules"), then build it.
+5. **Tick findings off here** as they land, so this file stays the live
+   work list.
+
+---
+
 ## 1. Verdict
 
 - **Size:** a focused major release, not a rewrite. About **45 source
@@ -182,6 +196,7 @@ apply here.
 | F12 | 13, 16 | `z-slider.tsx:231–246` | Slider owns `start`, `center`, `value` header slots and a value pill. That header is a field region. | `z-field` gets a header slot. Slider keeps value *presentation* (format, prefix, suffix); placement moves to the field. |
 | F13 | 2 | `z-slider.tsx:236` | `can-reset` double-click on the slider's own label. | Thumb double-click, plus a public `reset()` a header button can call. |
 | F14 | 3 | 30 elements | `label` that is only an accessible name. | Dropped (D1). |
+| F16 | 1, 17 | `z-input.tsx:234`, `z-textarea.tsx:213` | `is-focused` is a reflected, writable prop that mirrors browser focus. Setting it does not focus anything; the browser and the prop are two sources for one fact. | Remove the prop. Expose `:state(focused)` for styling, or rely on `:focus-within`. |
 | F15 | 7, 11 | `z-radio-group.tsx:187`, `z-checkbox-group.tsx:267`, `z-chip-group.tsx:242` | Groups put description and error on `aria-description` and derive `aria-invalid` from error text. | Field-link channel and the D3 validity model. |
 
 ---
@@ -330,6 +345,8 @@ undo a control the consumer disabled.
 5. `z-slider` / `z-range` header slots move to `z-field`'s header.
 6. Group children stop accepting state their group owns.
 7. `z-radio` and `z-switch` `label` now render visible text.
+8. `is-focused` is gone on `z-input` and `z-textarea`. Style with
+   `:state(focused)` or `:focus-within`.
 
 ---
 
@@ -354,3 +371,35 @@ undo a control the consumer disabled.
 - **Browser floor.** `:state()` custom-state selectors need Chromium 125.
   `SUPPORT.md` says 117 and the README says 119. Raise the floor to 125 and
   make both say the same.
+
+---
+
+## 9. Coverage
+
+**How this audit was done:** targeted sweeps of all 156 component files for
+the patterns the rules forbid:
+
+- form-contract props (`label`, `is-required`, `is-invalid`, `error`,
+  `description`, `size`);
+- parents writing child props or attributes;
+- reaches into another element's shadow root;
+- "first slotted element" picks;
+- name-only `label` props;
+- writable props that mirror state the browser owns (`is-focused`).
+
+The sweep then read `z-field`, `z-fieldset`, `z-input`, `z-slider`, and the
+shared form and accessibility modules in full.
+
+**Not yet audited in depth.** Check these as each phase touches them:
+
+- **Event names and payloads** across all elements (V1.md already flags
+  this as unfinished).
+- **CSS parts and custom properties** as extension points, against
+  Rules 13–15.
+- **Overlay open state** (`z-dialog`, `z-drawer`, `z-sheet`, `z-popover`,
+  `z-command`, `z-color-picker`). A first look found one owner per element,
+  which is fine, but trigger ↔ overlay relationships beyond L9 were not
+  traced.
+- **Held-back elements.** Out of V2 scope; each is checked against the rules
+  before it ships.
+- **The docs site's own wrapper components** under `site/src`.
