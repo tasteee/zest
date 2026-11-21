@@ -103,6 +103,14 @@ compile error, and events are lowercase handlers (`onchange`) with a typed
 The docs site is the single source of truth: <https://tasteee.github.io/zest/docs>.
 Every element has a page with live examples, its full API, and its keyboard map.
 
+## Architecture
+
+Every element follows one foundational rule set: one source of truth per
+responsibility, and fields compose while controls operate. Read
+[`docs/architecture.md`](./docs/architecture.md) before contributing. Known
+gaps and the V2 plan are in
+[`docs/v2-architecture-audit.md`](./docs/v2-architecture-audit.md).
+
 ## Components
 
 ### Complete catalog
