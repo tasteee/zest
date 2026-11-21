@@ -224,6 +224,13 @@
      so secondary and tertiary are opt-in tones, never the default look. */
 	--accent-secondary: lab(60 40.17 -57.68);
 	--accent-tertiary: lch(62.44 70.29 0.86 / 1);
+	/* Spark tones: bright, decorative hues for shimmer and glow
+     effects (z-spinner). Not for text; too light to read on neutral-0. */
+	--accent-spark-1: oklch(0.74 0.17 288);
+	--accent-spark-2: oklch(0.74 0.2 350);
+	--accent-spark-3: oklch(0.82 0.17 70);
+	--accent-spark-4: oklch(0.8 0.19 155);
+	--accent-spark-5: oklch(0.8 0.15 220);
 	--status-success: lch(62 58 145 / 1);
 	--status-warning: lch(72 78 76 / 1);
 	--status-danger: lch(58 72 37 / 1);
@@ -488,6 +495,11 @@
      --color-neutral-0, not by eye. */
 	--accent-secondary: oklch(0.525 0.195 288);
 	--accent-tertiary: oklch(0.565 0.2 12);
+	--accent-spark-1: oklch(0.58 0.26 288);
+	--accent-spark-2: oklch(0.62 0.26 355);
+	--accent-spark-3: oklch(0.74 0.19 60);
+	--accent-spark-4: oklch(0.66 0.21 155);
+	--accent-spark-5: oklch(0.64 0.18 235);
 	--status-success: oklch(0.522 0.128 155);
 	--status-warning: oklch(0.55 0.125 70);
 	--status-danger: oklch(0.555 0.195 27);
