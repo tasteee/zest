@@ -366,8 +366,11 @@ undo a control the consumer disabled.
 
 ## 8. Still open
 
-- **Slot proposal.** It is not in this repository. Once it lands, check it
-  against Rules 13–16 and this audit before building on it.
+- **Slot proposal.** Not in this repository, its git history, or any issue
+  or PR. Add it as `docs/proposals/slots.md`, then review it against
+  Rules 13–16 and this audit before building on it. The one slot change
+  that already shipped (`z-slider` `start` / `value`, PR #35) is finding
+  F12: those slots move to `z-field`'s header.
 - **Browser floor.** `:state()` custom-state selectors need Chromium 125.
   `SUPPORT.md` says 117 and the README says 119. Raise the floor to 125 and
   make both say the same.
