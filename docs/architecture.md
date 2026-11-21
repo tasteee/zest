@@ -12,7 +12,12 @@ composition, and extension points. The single-source-of-truth principle
 >
 > **Before any change** to an element, prop, slot, event, or behavior, read
 > this document and answer the acceptance criteria in
-> [§7](#7-architectural-acceptance-criteria).
+> [§8](#8-architectural-acceptance-criteria).
+>
+> **New rules land here.** When a decision sets a new rule, it is added to
+> this document as a numbered rule in the same change, and logged in
+> [§11](#11-rule-log). A rule that lives only in a chat, a PR, or the audit
+> is not a rule yet.
 >
 > **Where we are today.** Zest 1.0 predates these rules and breaks several of
 > them. The known gaps and the V2 plan to close them are in
@@ -32,6 +37,9 @@ not create competing sources of truth.
 Zest favors composition over duplication, semantic correctness over
 incidental markup, and explicit architectural contracts over
 implementation-dependent behavior.
+
+**Correctness over effort.** The size of a change never decides a design.
+Zest picks the correct, intuitive design, then does the work it takes.
 
 **Core principle:** A field composes. A control operates. A group organizes.
 A form orchestrates.
@@ -385,7 +393,102 @@ For example:
 
 The placement, presentation, and state responsibilities remain distinct.
 
-## 5. Accessibility is a system invariant
+## 5. State, validity, and naming
+
+### Rule 17 — Names promise only what they do
+
+A prop's name is a promise about behavior. It must not promise anything the
+element does not do.
+
+- A prop named `label` renders visible text. If a value only names the
+  element for assistive technology, it is not a label: use `aria-label` or
+  `aria-labelledby`.
+- `name` is never reused for naming. On a form control, `name` is the
+  form-submission key.
+- Elements whose `label` is visible keep it: `z-checkbox`, `z-radio`,
+  `z-switch`, `z-chip`, `z-button`, `z-badge`, `z-meter`, and similar. On
+  intrinsic-label controls, `label` is the visible option text and the
+  default slot overrides it.
+- Controls whose visible label belongs to `z-field` (Rule 2) have no
+  `label` prop at all.
+
+### Rule 18 — One validity model
+
+Validity has exactly one source: the control.
+
+- **Validity is read-only.** It is the result of the control's constraints
+  (`is-required`, `min`, `max`, `pattern`, ...) plus one custom error slot.
+- **The custom error slot is one value.** The reflected `custom-validity`
+  attribute, the `customValidity` property, and `setCustomValidity()` all
+  read and write the same slot. They can never disagree. Empty or absent
+  means no custom error.
+
+  ```html
+  <z-input custom-validity="That email is taken"></z-input>
+  ```
+
+- **There is no `is-invalid` flag.** A flag that can say "invalid" while
+  validity says "valid" is a second source of truth.
+- **Invalid is shown only when it is the user's concern:** the control is
+  invalid **and** the user has interacted with it or tried to submit. A
+  required empty field is invalid on load but not shown as invalid.
+- **The shown state is public.** Controls expose `:state(invalid)` and
+  `:state(user-invalid)` through `ElementInternals`, and the inner control's
+  `aria-invalid` follows `user-invalid`.
+- **Fields hold no error text.** `z-field` shows the control's
+  `validationMessage` while the control is `user-invalid`. Custom wording is
+  the application's call, made through `custom-validity`.
+- Groups (`z-radio-group`, `z-checkbox-group`, `z-chip-group`) follow the
+  same model.
+
+### Rule 19 — A control owns its own presentation facts
+
+Facts about how a control looks (for example `size`) live on the control,
+exactly like required and disabled.
+
+- The control must have a size when it stands alone, so the control is the
+  owner.
+- `z-field` reads the control's size and sizes its own label band, gap, and
+  control band to match. `z-field` has no `size` prop.
+- To size many controls at once, a group sets a default through the
+  inherited channel (Rule 20).
+
+### Rule 20 — Inherited state flows through a channel, never through child props
+
+When a group imposes state on its children (disabled, a default size or
+tone), it publishes that state through a shared inherited channel. Children
+combine it with their own props. The group never writes a child's public
+props.
+
+Precedence is fixed:
+
+- **Restrictive state combines.** Effective disabled is the child's own
+  `is-disabled` OR inherited disabled OR form-disabled. Re-enabling a group
+  can never undo a control the consumer disabled.
+- **Presentation defaults yield.** The child's own `size`, `tone`, or `kind`
+  wins. The nearest group default applies otherwise.
+- **Group-owned state is read-only on the child.** Where a group owns a fact
+  (a radio group's `value`, an accordion's open items, a stepper's step
+  index), the child exposes it as derived, read-only state inside that
+  group.
+
+### Rule 21 — Misuse is reported, never guessed
+
+When Zest cannot pick a correct answer, it reports the problem instead of
+silently choosing.
+
+- Reported with `console.warn`, once per element, in every build. There is
+  no development-only build and no dev-only gate.
+- The docs check fails on any console warning, so misuse in our own demos
+  fails CI.
+- Where behavior must still be deterministic, the documented winner applies
+  (for example the field label wins over a conflicting `aria-label`, per
+  Rule 4) and the report still fires.
+- Today the reported cases are: a `z-field` holding zero or more than one
+  linkable control (Rule 5), and a control inside a field with an
+  accessible name that differs from the field label (Rule 4).
+
+## 6. Accessibility is a system invariant
 
 Accessibility is not an optional feature belonging exclusively to consumers.
 
@@ -411,7 +514,7 @@ relationships it exposes.
 
 Accessibility responsibility follows architectural ownership.
 
-## 6. Preferred consumer experience
+## 7. Preferred consumer experience
 
 The preferred API should be declarative, minimal, and free of duplicated
 information.
@@ -451,16 +554,33 @@ No field wrapper is required because no visible field composition is needed.
 place a custom value readout there without altering the control's accessible
 name or transferring value ownership to the field.
 
+### Sized field
+
+```html
+<z-field label="Email">
+	<z-input name="email" size="sm"></z-input>
+</z-field>
+```
+
+Size is declared on the control. The field reads it and matches its label
+and spacing (Rule 19).
+
 ### Invalid field
+
+```html
+<z-field label="Email">
+	<z-input name="email" custom-validity="That email is taken"></z-input>
+</z-field>
+```
 
 The control receives or computes its invalid state through its public
 validation contract. The field presents the corresponding message and
-establishes its accessible relationship.
+establishes its accessible relationship (Rule 18).
 
 The consumer must not be required to duplicate validity state across
 multiple independently controlled components.
 
-## 7. Architectural acceptance criteria
+## 8. Architectural acceptance criteria
 
 Before a new component, property, slot, or behavior is introduced, its design
 must answer:
@@ -475,10 +595,13 @@ must answer:
 8. Does it introduce unnecessary coupling or duplicated functionality?
 9. Is the abstraction meaningful beyond the immediate implementation?
 10. Can its public contract be maintained as the system evolves?
+11. Does every prop name promise only what it does (Rule 17)?
+12. If a parent influences a child, does it go through the inherited
+    channel with the documented precedence (Rule 20)?
 
 An extension must not be accepted solely because it is easy to implement.
 
-## 8. Final architectural doctrine
+## 9. Final architectural doctrine
 
 Zest is a system of independently correct components that become more
 capable through intentional composition.
@@ -498,3 +621,28 @@ components, not by merging their responsibilities.
 The system must make the correct implementation the natural implementation,
 while preserving the independence, predictability, and integrity of every
 component.
+
+## 10. Process rules
+
+- **Record every new rule here.** A decision that sets a rule is added as a
+  numbered rule in this document, in the same change that makes the
+  decision, and logged in §11. `AGENTS.md` carries a short form of it.
+- **No compatibility shims before outside users.** Zest has no outside users
+  yet. APIs change directly to the correct design. No deprecation bridges.
+- **The audit is the work list, not the rulebook.**
+  [`v2-architecture-audit.md`](./v2-architecture-audit.md) tracks where code
+  breaks the rules. The rules themselves live only here.
+
+## 11. Rule log
+
+| Rule | Added | Source |
+|------|-------|--------|
+| 1–16 | 2026-11-21 | Foundational field and control architecture. |
+| Rule 1 library-wide scope, Rule 6 library-wide scope | 2026-11-21 | Single source of truth applies to all of Zest. |
+| Correctness over effort (§1) | 2026-11-21 | V2 planning. |
+| 17 Names promise only what they do | 2026-11-21 | V2 decision: drop name-only `label`. |
+| 18 One validity model | 2026-11-21 | V2 decision: remove `is-invalid` and field `error`. |
+| 19 A control owns its own presentation facts | 2026-11-21 | V2 decision: control owns `size`. |
+| 20 Inherited state flows through a channel | 2026-11-21 | V2 audit, group findings. |
+| 21 Misuse is reported, never guessed | 2026-11-21 | V2 decision: `console.warn` in every build. |
+| §10 Process rules | 2026-11-21 | Record rules here; no shims before outside users. |

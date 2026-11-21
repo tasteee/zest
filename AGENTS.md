@@ -30,21 +30,25 @@ copy.
   group reflects them; it does not set them.
 - Visible field labels belong to `z-field`. Controls (except intrinsic option
   labels such as checkbox, radio, switch, chip) do not render their own.
-- Never silently pick "the first child" when ownership is ambiguous. Report
-  it with `console.warn` (the docs check fails on any warning).
-- A prop named `label` must render visible text. If it only names the
-  element for assistive tech, use `aria-label`. Never reuse `name` for this:
-  on a control, `name` is the form-submission key.
-- Validity has one source: the control's constraints plus its
-  `custom-validity` slot. No `is-invalid` flag. The field shows the
-  control's `validationMessage`; it holds no error text of its own.
-- A control owns its own size. A field reads it. A group may set a default;
-  the control's own prop wins.
+- Correctness over effort: the size of a change never decides a design.
+- Names promise only what they do (Rule 17). A prop named `label` renders
+  visible text. Name-only values use `aria-label`. Never reuse `name`: on a
+  control it is the form-submission key.
+- One validity model (Rule 18): constraints plus one `custom-validity`
+  slot. No `is-invalid` flag. The field shows the control's
+  `validationMessage` and holds no error text.
+- A control owns its own presentation facts, like `size` (Rule 19). The
+  field reads them.
+- Inherited state flows through a channel (Rule 20): disabled combines,
+  presentation defaults yield to the child's own prop, group-owned state is
+  read-only on the child.
+- Misuse is reported, never guessed (Rule 21): `console.warn` in every
+  build. The docs check fails on any warning.
 
 ## Checklist for every change
 
 Answer these in the PR description for any new or changed public API
-(the full list is in `docs/architecture.md` §7):
+(the full list is in `docs/architecture.md` §8):
 
 1. Which component owns this responsibility? Does one already own it?
 2. Is it behavior, semantic composition, presentation, or orchestration?
@@ -56,6 +60,20 @@ Answer these in the PR description for any new or changed public API
 
 If the honest answer to any of these is "no", stop and redesign. An
 extension is never accepted only because it is easy to build.
+
+## Recording new rules
+
+When a conversation, review, or PR settles a new rule, record it in the same
+change:
+
+1. Add it to `docs/architecture.md` as a numbered rule in the right section.
+2. Log it in the rule log (`docs/architecture.md` §11).
+3. Add a one-line short form to "The one rule that governs everything"
+   above.
+4. If it changes planned work, update `docs/v2-architecture-audit.md`.
+
+A rule that exists only in chat, a PR thread, or the audit is not a rule
+yet. Short forms here never replace the full rule in `architecture.md`.
 
 ## Repository facts
 

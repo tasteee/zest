@@ -49,7 +49,10 @@ smaller change.
 
 ## 2. Decisions
 
-These are settled. Build V2 to them.
+These are settled and recorded as rules in
+[`architecture.md`](./architecture.md): D1 is Rule 17, D2 is Rule 19, D3 is
+Rule 18, D4 is Rule 21, and the inherited channel is Rule 20. The rules are
+the source; this section explains the reasoning and the scope.
 
 ### D1. `label` means visible text. Nothing else.
 
