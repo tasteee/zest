@@ -28,7 +28,7 @@ import './z-step'
 const styles = css`
 	:host {
 		display: flex;
-		align-items: flex-start;
+		align-items: center;
 		width: 100%;
 		min-width: 0;
 		--z-step-accent: var(--accent-primary);
