@@ -197,6 +197,7 @@ apply here.
 | F13 | 2 | `z-slider.tsx:236` | `can-reset` double-click on the slider's own label. | Thumb double-click, plus a public `reset()` a header button can call. |
 | F14 | 3 | 30 elements | `label` that is only an accessible name. | Dropped (D1). |
 | F16 | 1, 17 | `z-input.tsx:234`, `z-textarea.tsx:213` | `is-focused` is a reflected, writable prop that mirrors browser focus. Setting it does not focus anything; the browser and the prop are two sources for one fact. | Remove the prop. Expose `:state(focused)` for styling, or rely on `:focus-within`. |
+| F17 | 14 (slot proposal) | `z-input`, `z-tag-input` (`prefix`, `suffix`); `z-badge`, `z-chip` (`prefix`) | Row-edge slots use names outside the proposed vocabulary. | Rename to `start` / `end` once the slot proposal is approved (review C9). |
 | F15 | 7, 11 | `z-radio-group.tsx:187`, `z-checkbox-group.tsx:267`, `z-chip-group.tsx:242` | Groups put description and error on `aria-description` and derive `aria-invalid` from error text. | Field-link channel and the D3 validity model. |
 
 ---
@@ -366,11 +367,12 @@ undo a control the consumer disabled.
 
 ## 8. Still open
 
-- **Slot proposal.** Not in this repository, its git history, or any issue
-  or PR. Add it as `docs/proposals/slots.md`, then review it against
-  Rules 13–16 and this audit before building on it. The one slot change
-  that already shipped (`z-slider` `start` / `value`, PR #35) is finding
-  F12: those slots move to `z-field`'s header.
+- **Slot proposal.** Now at [`proposals/slots.md`](./proposals/slots.md),
+  reviewed in [`proposals/slots-review.md`](./proposals/slots-review.md).
+  It fits the architecture but needs 10 changes (3 real conflicts: errors in
+  `below`, `below` vs the `description` slot, and the shipped `z-slider`
+  header slots). Waiting on approval; once approved, its rules go into
+  `architecture.md` as Rules 22–23.
 - **Browser floor.** `:state()` custom-state selectors need Chromium 125.
   `SUPPORT.md` says 117 and the README says 119. Raise the floor to 125 and
   make both say the same.
