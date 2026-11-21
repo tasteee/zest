@@ -35,10 +35,9 @@ const styles = css`
 		content: '';
 		position: absolute;
 		top: 0;
-		left: 50%;
+		inset-inline-start: calc(50% - var(--spinner-size) * 0.095);
 		width: calc(var(--spinner-size) * 0.19);
 		height: calc(var(--spinner-size) * 0.19);
-		margin-left: calc(var(--spinner-size) * -0.095);
 		border-radius: var(--radius-full);
 		background: currentColor;
 		opacity: 0.28;
