@@ -30,8 +30,16 @@ copy.
   group reflects them; it does not set them.
 - Visible field labels belong to `z-field`. Controls (except intrinsic option
   labels such as checkbox, radio, switch, chip) do not render their own.
-- Never silently pick "the first child" when ownership is ambiguous. Warn in
-  development instead.
+- Never silently pick "the first child" when ownership is ambiguous. Report
+  it with `console.warn` (the docs check fails on any warning).
+- A prop named `label` must render visible text. If it only names the
+  element for assistive tech, use `aria-label`. Never reuse `name` for this:
+  on a control, `name` is the form-submission key.
+- Validity has one source: the control's constraints plus its
+  `custom-validity` slot. No `is-invalid` flag. The field shows the
+  control's `validationMessage`; it holds no error text of its own.
+- A control owns its own size. A field reads it. A group may set a default;
+  the control's own prop wins.
 
 ## Checklist for every change
 
@@ -60,7 +68,7 @@ extension is never accepted only because it is easy to build.
   `custom-elements.json` and on the docs site. Keep it in step with the code.
 - `scripts/held-back.mjs` lists elements that exist in source but are not
   public. The release gate fails if one leaks.
-- Deprecations follow `SUPPORT.md`: call `warnDeprecated()` from
-  `src/shared/deprecate.ts`, keep the old API for one minor.
+- Zest has no outside users yet. Change APIs directly to the correct
+  design. Do not add deprecation shims or compatibility bridges.
 - Build: `pnpm build`. Types: `pnpm typecheck`. Tests: `pnpm test`
   (`test:unit`, `test:browser`).
