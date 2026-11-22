@@ -14290,8 +14290,16 @@
           ],
           "slots": [
             {
+              "name": "start",
+              "description": "Custom content at the start of the header row, before the label."
+            },
+            {
               "name": "center",
-              "description": "Custom content in the header row, between the label and the value."
+              "description": "Custom content in the header row, after the label."
+            },
+            {
+              "name": "value",
+              "description": "Replaces the value pill. Read the number from the `input` event."
             }
           ]
         },
