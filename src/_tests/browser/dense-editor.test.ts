@@ -161,9 +161,9 @@ const foldMenuMarkup = `
 	<z-menu align="end">
 		<z-button slot="trigger">Fold</z-button>
 		<z-menu-label>Fold rows</z-menu-label>
-		<z-menu-item value="off" kind="radio" is-checked description="Show every pitch">Off</z-menu-item>
-		<z-menu-item value="notes" kind="radio" description="Only rows with notes">Notes</z-menu-item>
-		<z-menu-item value="scale" kind="radio" is-disabled description="Pick a key first">In key</z-menu-item>
+		<z-menu-item value="off" type="radio" is-checked description="Show every pitch">Off</z-menu-item>
+		<z-menu-item value="notes" type="radio" description="Only rows with notes">Notes</z-menu-item>
+		<z-menu-item value="scale" type="radio" is-disabled description="Pick a key first">In key</z-menu-item>
 		<z-menu-separator></z-menu-separator>
 		<z-menu-item value="reset">Reset view</z-menu-item>
 	</z-menu>`
@@ -247,7 +247,7 @@ describe('<z-menu> choice rows', () => {
 		const warn = vi.spyOn(console, 'warn').mockImplementation(() => {})
 		await mount('<z-menu><z-button slot="trigger">Menu</z-button><z-menu-item value="a" is-checked>A</z-menu-item></z-menu>')
 		await settle()
-		const checkedWarnings = warn.mock.calls.filter((call) => String(call[0]).includes('is-checked but kind is not radio or checkbox'))
+		const checkedWarnings = warn.mock.calls.filter((call) => String(call[0]).includes('is-checked but its type is not radio or checkbox'))
 		expect(checkedWarnings).toHaveLength(1)
 		warn.mockRestore()
 	})
@@ -258,7 +258,7 @@ describe('<z-context-menu> choice rows', () => {
 		const markup = `
 			<z-context-menu>
 				<div id="target" style="width: 120px; height: 60px">Right-click</div>
-				<z-menu-item value="grid" kind="checkbox" is-checked description="Show grid lines">Grid</z-menu-item>
+				<z-menu-item value="grid" type="checkbox" is-checked description="Show grid lines">Grid</z-menu-item>
 			</z-context-menu>`
 		const wrapper = await mount(markup)
 		const target = wrapper.querySelector<HTMLElement>('#target')!

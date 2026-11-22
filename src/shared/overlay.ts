@@ -251,6 +251,10 @@ export const autoUpdate = (anchor: AnchorT, floating: HTMLElement, update: () =>
  * check. Centralize it here.
  */
 export const showFloating = (el: HTMLElement): void => {
+	// An effect can run after its element has left the document (a test or a
+	// framework unmounting mid-render). showPopover() throws on a detached
+	// element, and there is nothing to show, so do nothing.
+	if (!el.isConnected) return
 	cancelExit(el)
 	if (!el.matches(':popover-open')) {
 		delete el.dataset.state

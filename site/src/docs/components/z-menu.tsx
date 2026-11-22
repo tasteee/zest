@@ -20,7 +20,7 @@ export const ZMenuDoc = () => (
 		<DocExample
 			demo="z-menu/offer-a-choice"
 			title="Offer a choice"
-			description="kind=radio rows pick one option of a set and kind=checkbox rows toggle one; is-checked marks the chosen ones. A description adds a hint line, and z-menu-label names the group. Your app owns is-checked: update it when select fires."
+			description="type=radio rows pick one option of a set and type=checkbox rows toggle one; is-checked marks the chosen ones. A description adds a hint line, and z-menu-label names the group. Your app owns is-checked: update it when select fires."
 		/>
 		<DocExample
 			demo="z-menu/align-to-the-trigger-edge"

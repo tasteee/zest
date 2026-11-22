@@ -184,8 +184,8 @@ export const ZContextMenu = c(
 		const childItems: MenuItemT[] = children.map(readMenuRow)
 		const items: MenuItemT[] = [...childItems, ...(Array.isArray(props.items) ? (props.items as MenuItemT[]) : [])]
 		const selectable = (i: number) => isSelectableRow(items[i])
-		const rawKinds = children.map((child) => child.attributes.kind)
-		useEffect(() => reportMenuRowMisuse(host.current, items, rawKinds), [items.length, rawKinds.join('|'), items.map((item) => `${item.kind}:${item.isChecked}`).join('|')])
+		const rawTypes = children.map((child) => child.attributes.type)
+		useEffect(() => reportMenuRowMisuse(host.current, items, rawTypes), [items.length, rawTypes.join('|'), items.map((item) => `${item.type}:${item.isChecked}`).join('|')])
 
 		useEffect(() => {
 			const floating = floatRef.current

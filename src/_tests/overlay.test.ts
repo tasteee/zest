@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 import { computePosition, type Placement } from '../shared/overlay'
 import './test-helpers'
 describe('overlay placement',()=>{
@@ -15,3 +15,16 @@ describe('overlay placement',()=>{
   delete (document.documentElement as unknown as Record<string,unknown>).clientHeight
  })
 })
+
+describe('showFloating', () => {
+	it('does nothing for an element that has left the document', async () => {
+		const { showFloating } = await import('../shared/overlay')
+		const detached = document.createElement('div')
+		detached.setAttribute('popover', 'manual')
+		const showPopover = vi.fn()
+		Object.assign(detached, { showPopover })
+		expect(() => showFloating(detached)).not.toThrow()
+		expect(showPopover).not.toHaveBeenCalled()
+	})
+})
+

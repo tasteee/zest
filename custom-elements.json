@@ -10310,7 +10310,7 @@
             },
             {
               "kind": "field",
-              "name": "kind",
+              "name": "type",
               "type": {
                 "text": "'action' | 'radio' | 'checkbox'"
               },
@@ -10375,8 +10375,8 @@
               "description": "A second, smaller line under the label. It is read as the row's description by screen readers."
             },
             {
-              "name": "kind",
-              "fieldName": "kind",
+              "name": "type",
+              "fieldName": "type",
               "type": {
                 "text": "'action' | 'radio' | 'checkbox'"
               },
