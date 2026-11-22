@@ -18,6 +18,11 @@ export const ZNumberInputDoc = () => (
 			description="Small number inputs and small buttons are both 32px tall. The optional controls are ghost buttons within one outlined field."
 		/>
 		<DocExample
+			demo="z-number-input/show-a-unit-beside-the-value"
+			title="Show a unit beside the value"
+			description="The prefix and suffix slots hold an adornment that stays visible while editing and is styled apart from the number, such as a tempo field with no box. They are never part of the value or the accessible name, so name the field with its unit, for example aria-label set to “Tempo in BPM”."
+		/>
+		<DocExample
 			demo="z-number-input/read-live-validity-commit-corrected"
 			title="Read live validity, commit corrected values"
 			description="input fires on every keystroke, including invalid intermediate text. change fires after blur or a step action with the normalized numeric value."

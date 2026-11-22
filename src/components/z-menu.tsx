@@ -1,7 +1,8 @@
 import { interactionStyles } from '../shared/interaction-styles'
 import { c, css, event, useState, useHost, useEffect, useRef } from 'atomico'
 import { oneOf } from '../shared/prop-types'
-import { useChildItems, hasFlag } from '../shared/child-items'
+import { useChildItems } from '../shared/child-items'
+import { MENU_ROW_ATTRIBUTES, MENU_ROW_TAGS, descriptionId, groupMenuRows, hasCheckableRows, headingId, isSelectableRow, menuItemChecked, menuItemRole, menuRowStyles, readMenuRow, renderCheck, renderRowText, reportMenuRowMisuse, type MenuEntryT, type MenuRowT } from '../shared/menu-rows'
 import { flashThen } from '../shared/menu-nav'
 import { useVisibilityPhase } from '../shared/transition'
 import { computePosition, autoUpdate, applyPosition } from '../shared/overlay'
@@ -13,8 +14,13 @@ import { computePosition, autoUpdate, applyPosition } from '../shared/overlay'
  *   <z-menu-item value="rename" shortcut="⌘R">Rename</z-menu-item>
  *   <z-menu-separator></z-menu-separator>
  *   <z-menu-item value="delete" is-danger>Delete</z-menu-item>
+ * Choice rows: type="radio" or type="checkbox" with is-checked (the app owns
+ * which is checked), an optional description line, and <z-menu-label> section
+ * headings that group the rows after them:
+ *   <z-menu-label>Fold rows</z-menu-label>
+ *   <z-menu-item value="notes" type="radio" is-checked description="Only rows with notes">Notes</z-menu-item>
  * or an `items` array property for data-driven menus:
- *   el.items = [{ value, label, icon?, shortcut?, isDisabled?, isSeparator?, isDanger? }]
+ *   el.items = [{ value, label, icon?, shortcut?, description?, type?, isChecked?, isDisabled?, isSeparator?, isHeading?, isDanger? }]
  * The panel is a bordered, floating popover. Keyboard, per the WAI-ARIA
  * menu button pattern: ↓ / Enter / Space open and focus the first item, ↑
  * opens and focuses the last; inside, ↑/↓ move (wrapping, skipping
@@ -183,19 +189,7 @@ const styles = css`
 	}
 `
 
-type MenuItemT = {
-	value?: string
-	label?: string
-	icon?: string
-	shortcut?: string
-	isDisabled?: boolean
-	isSeparator?: boolean
-	isDanger?: boolean
-	/** slot name carrying a z-menu-item's own content */
-	slot?: string
-}
-
-const ITEM_ATTRIBUTES = ['shortcut', 'is-disabled', 'is-danger']
+type MenuItemT = MenuRowT
 
 export const ZMenu = c(
 	(props) => {
@@ -209,20 +203,12 @@ export const ZMenu = c(
 		const isCommitting = flashIndex >= 0
 		const phase = useVisibilityPhase(isOpen, 140)
 
-		const childItems: MenuItemT[] = useChildItems(['z-menu-item', 'z-menu-separator'], ITEM_ATTRIBUTES).map((child) =>
-			child.tag === 'z-menu-separator'
-				? { isSeparator: true }
-				: {
-					value: child.value,
-					label: child.label,
-					shortcut: child.attributes.shortcut || undefined,
-					isDisabled: hasFlag(child, 'is-disabled'),
-					isDanger: hasFlag(child, 'is-danger'),
-					slot: child.slot
-				}
-		)
+		const children = useChildItems(MENU_ROW_TAGS, MENU_ROW_ATTRIBUTES)
+		const childItems: MenuItemT[] = children.map(readMenuRow)
 		const items: MenuItemT[] = [...childItems, ...(Array.isArray(props.items) ? (props.items as MenuItemT[]) : [])]
-		const selectable = (i: number) => items[i] && !items[i].isSeparator && !items[i].isDisabled
+		const selectable = (i: number) => isSelectableRow(items[i])
+		const rawTypes = children.map((child) => child.attributes.type)
+		useEffect(() => reportMenuRowMisuse(host.current, items, rawTypes), [items.length, rawTypes.join('|'), items.map((item) => `${item.type}:${item.isChecked}`).join('|')])
 		const selectableIndices = items.flatMap((_, index) => selectable(index) ? [index] : [])
 
 		const triggerElement = () => triggerSlotRef.current?.assignedElements({ flatten: true })[0] as HTMLElement | undefined
@@ -260,7 +246,7 @@ export const ZMenu = c(
 		}
 
 		const commit = (item: MenuItemT, index: number) => {
-			if (item.isSeparator || item.isDisabled || isCommitting) return
+			if (item.isSeparator || item.isHeading || item.isDisabled || isCommitting) return
 			setActiveIndex(index)
 			setFlashIndex(index)
 			flashThen(() => {
@@ -355,6 +341,40 @@ export const ZMenu = c(
 		}, [isOpen, activeIndex])
 
 		const panelClass = ['panel', isPanelLeaving ? 'is-closing' : '', isCommitting ? 'is-committing' : ''].join(' ')
+		const shouldReserveCheck = hasCheckableRows(items)
+
+		const renderEntry = (entry: MenuEntryT) => {
+			const item = entry.row
+			const index = entry.index
+			const cls = ['item']
+				.concat(index === activeIndex ? ['is-active'] : [])
+				.concat(item.isDanger ? ['is-error'] : [])
+				.concat(item.isDisabled ? ['is-disabled'] : [])
+				.concat(index === flashIndex ? ['is-flashing'] : [])
+				.join(' ')
+			const describedBy = item.description ? descriptionId(index) : undefined
+			return (
+				<button
+					key={item.slot || item.value || item.label || index}
+					type="button"
+					class={cls}
+					role={menuItemRole(item)}
+					aria-checked={menuItemChecked(item)}
+					aria-describedby={describedBy}
+					data-index={index}
+					id={`menu-item-${index}`}
+					tabindex={index === activeIndex ? '0' : '-1'}
+					disabled={item.isDisabled}
+					onmouseenter={() => !isCommitting && setActiveIndex(index)}
+					onclick={() => commit(item, index)}
+				>
+					{renderCheck(item, shouldReserveCheck)}
+					{item.icon && <span class="icon" innerHTML={item.icon} />}
+					{renderRowText(item, index)}
+					{item.shortcut && <span class="shortcut">{item.shortcut}</span>}
+				</button>
+			)
+		}
 
 		return (
 			<host shadowDom onkeydown={onKeyDown}>
@@ -370,31 +390,16 @@ export const ZMenu = c(
 						role={isOpen ? 'menu' : undefined}
 						inert={isPanelLeaving}
 					>
-						{items.map((item, index) => {
-							if (item.isSeparator) return <div key={`sep-${index}`} class="sep" role="separator" />
-							const cls = ['item']
-								.concat(index === activeIndex ? ['is-active'] : [])
-								.concat(item.isDanger ? ['is-error'] : [])
-								.concat(item.isDisabled ? ['is-disabled'] : [])
-								.concat(index === flashIndex ? ['is-flashing'] : [])
-								.join(' ')
+						{groupMenuRows(items).map((section) => {
+							if (section.type === 'separator') return <div key={`sep-${section.index}`} class="sep" role="separator" />
+							const rows = section.entries.map(renderEntry)
+							if (!section.heading) return rows
+							const sectionHeadingId = headingId(section.heading.index)
 							return (
-								<button
-									key={item.slot || item.value || item.label || index}
-									type="button"
-									class={cls}
-									role="menuitem"
-									data-index={index}
-									id={`menu-item-${index}`}
-									tabindex={index === activeIndex ? '0' : '-1'}
-									disabled={item.isDisabled}
-									onmouseenter={() => !isCommitting && setActiveIndex(index)}
-									onclick={() => commit(item, index)}
-								>
-									{item.icon && <span class="icon" innerHTML={item.icon} />}
-									<span class="label">{item.slot ? <slot name={item.slot} /> : item.label}</span>
-									{item.shortcut && <span class="shortcut">{item.shortcut}</span>}
-								</button>
+								<div key={sectionHeadingId} role="group" aria-labelledby={sectionHeadingId}>
+									<div class="heading" id={sectionHeadingId} role="presentation">{section.heading.row.label}</div>
+									{rows}
+								</div>
 							)
 						})}
 					</div>
@@ -410,15 +415,16 @@ export const ZMenu = c(
 			isHidden: { type: Boolean, reflect: true },
 			select: event<{ value: string }>({ bubbles: true, composed: true })
 		},
-		styles: [styles, interactionStyles]
+		styles: [styles, menuRowStyles, interactionStyles]
 	}
 )
 
 
 /*
  * z-menu-item, one declarative row for z-menu and z-context-menu. Attributes
- * mirror the `items` entries (value, label, shortcut, is-disabled, is-danger);
- * its children are the row's visible content.
+ * mirror the `items` entries (value, label, shortcut, description, type,
+ * is-checked, is-disabled, is-danger); its children are the row's visible
+ * content.
  */
 export const ZMenuItem = c(
 	() => (
@@ -431,6 +437,9 @@ export const ZMenuItem = c(
 			value: { type: String, reflect: true },
 			label: { type: String, reflect: true },
 			shortcut: { type: String, reflect: true },
+			description: { type: String, reflect: true },
+			type: { type: oneOf('action', 'radio', 'checkbox'), reflect: true },
+			isChecked: { type: Boolean, reflect: true },
 			isDisabled: { type: Boolean, reflect: true },
 			isDanger: { type: Boolean, reflect: true }
 		},
@@ -449,3 +458,9 @@ export const ZMenuItem = c(
 /** z-menu-separator, a hairline between declarative z-menu-item groups. */
 export const ZMenuSeparator = c(() => <host />, { props: {} })
 
+
+/**
+ * z-menu-label, a non-focusable section heading. The rows after it, up to the
+ * next label or separator, form a group named by this text.
+ */
+export const ZMenuLabel = c(() => <host />, { props: {} })

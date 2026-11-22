@@ -6,8 +6,9 @@ import { themedScrollbarStyles } from '../shared/scrollbar-styles'
 import { computePosition, autoUpdate, applyPosition, showFloating, hideFloating } from '../shared/overlay'
 import { oneOf } from '../shared/prop-types'
 import { useLocale } from '../shared/locale'
-import { enabledIndicesOf, findPath, hasChildren, nodeAt, siblingsOf, valuesAlong } from '../shared/nested-options'
-import type { NestedOptionT } from '../shared/nested-options'
+import { enabledIndicesOf, findPath, flattenOptionGroups, hasChildren, nodeAt, segmentByGroup, siblingsOf, valuesAlong } from '../shared/nested-options'
+import type { FlatOptionT, NestedOptionT } from '../shared/nested-options'
+import { reportMisuse } from '../shared/misuse'
 
 /*
  * z-select, a custom dropdown. Trigger shows the selected label (or a
@@ -161,6 +162,14 @@ const styles = css`
 		flex-direction: column;
 	}
 
+	.group-heading {
+		padding: var(--space-2) var(--space-2-5) var(--space-1);
+		color: var(--text-secondary);
+		font-size: var(--font-size-xs);
+		font-weight: var(--font-weight-medium);
+		user-select: none;
+	}
+
 	.option {
 		display: flex;
 		align-items: center;
@@ -238,7 +247,7 @@ const resolveSizeClass = (props: any): string => {
 	return 'is-md'
 }
 
-type OptionT = NestedOptionT
+type OptionT = FlatOptionT
 
 export const ZSelect = c(
 	(props) => {
@@ -256,7 +265,15 @@ export const ZSelect = c(
 		const [activePath, setActivePath] = useState<number[]>([])
 		const [isSubOpen, setIsSubOpen] = useState(false)
 
-		const options: OptionT[] = Array.isArray(props.options) ? (props.options as OptionT[]) : []
+		const rawOptions: NestedOptionT[] = Array.isArray(props.options) ? (props.options as NestedOptionT[]) : []
+		// Headed groups are flattened into their level up front, so every path,
+		// key and typeahead below works on plain levels.
+		const flattened = flattenOptionGroups(rawOptions)
+		const options: OptionT[] = flattened.options
+		useEffect(() => {
+			if (!flattened.hasEmptyGroup) return
+			reportMisuse(host.current, 'empty-group', 'z-select: an option has isGroup but no children, so it is not shown.')
+		}, [flattened.hasEmptyGroup])
 		const selectedPath = findPath(options, value)
 		const selected = selectedPath ? nodeAt(options, selectedPath) : undefined
 		const hasValue = value != null && value !== ''
@@ -445,6 +462,53 @@ export const ZSelect = c(
 			}
 		}
 
+		const renderOption = (opt: OptionT, index: number, level: { nodes: OptionT[]; parentPath: number[] }, depth: number, levelActive: number) => {
+			const path = [...level.parentPath, index]
+			const isBranch = hasChildren(opt)
+			const isAncestor = isBranch && selectedPath !== undefined && path.every((entry, i) => selectedPath[i] === entry)
+			const optClass = ['option']
+				.concat(index === levelActive ? ['is-active'] : [])
+				.concat(!isBranch && opt.value === value ? ['is-selected'] : [])
+				.concat(isAncestor ? ['is-ancestor'] : [])
+				.concat(opt.isDisabled ? ['is-disabled'] : [])
+				.join(' ')
+			return (
+				<div
+					key={opt.value}
+					class={optClass}
+					role="option"
+					id={`option-${path.join('-')}`}
+					aria-disabled={opt.isDisabled ? 'true' : undefined}
+					aria-selected={!isBranch && opt.value === value ? 'true' : 'false'}
+					aria-haspopup={isBranch ? 'listbox' : undefined}
+					aria-expanded={isBranch ? (levels[depth + 1]?.parentPath.join('-') === path.join('-') ? 'true' : 'false') : undefined}
+					onmouseenter={() => {
+						if (opt.isDisabled) return
+						setActivePath(path)
+						setIsSubOpen(isBranch)
+					}}
+					onmousedown={(e: MouseEvent) => e.preventDefault()}
+					onclick={() => {
+						if (!isBranch) return commit(opt, path)
+						if (opt.isDisabled) return
+						setActivePath(path)
+						setIsSubOpen(true)
+					}}
+				>
+					<span>{opt.label}</span>
+					{isBranch ? (
+						<svg class="branch-chevron" viewBox="0 0 24 24">
+							<polyline points="9 6 15 12 9 18" />
+						</svg>
+					) : opt.value === value && (
+						<svg class="tick" viewBox="0 0 24 24">
+							<polyline points="4 12 10 18 20 6" />
+						</svg>
+					)}
+				</div>
+			)
+		}
+
 		const triggerClass = ['trigger', resolveSizeClass(props)]
 			.concat(isOpen ? ['is-open'] : [])
 			.concat(props.isInvalid ? ['is-invalid'] : [])
@@ -495,49 +559,14 @@ export const ZSelect = c(
 							popover="manual"
 						>
 							{isRoot && options.length === 0 && <div class="empty">{t('noOptions')}</div>}
-							{level.nodes.map((opt, index) => {
-								const path = [...level.parentPath, index]
-								const isBranch = hasChildren(opt)
-								const isAncestor = isBranch && selectedPath !== undefined && path.every((entry, i) => selectedPath[i] === entry)
-								const optClass = ['option']
-									.concat(index === levelActive ? ['is-active'] : [])
-									.concat(!isBranch && opt.value === value ? ['is-selected'] : [])
-									.concat(isAncestor ? ['is-ancestor'] : [])
-									.concat(opt.isDisabled ? ['is-disabled'] : [])
-									.join(' ')
+							{segmentByGroup(level.nodes).map((segment) => {
+								const renderedOptions = segment.entries.map((entry) => renderOption(entry.option, entry.index, level, depth, levelActive))
+								if (!segment.groupId) return renderedOptions
+								const headingId = `${segment.groupId}-heading`
 								return (
-									<div
-										key={opt.value}
-										class={optClass}
-										role="option"
-										id={`option-${path.join('-')}`}
-										aria-disabled={opt.isDisabled ? 'true' : undefined}
-										aria-selected={!isBranch && opt.value === value ? 'true' : 'false'}
-										aria-haspopup={isBranch ? 'listbox' : undefined}
-										aria-expanded={isBranch ? (levels[depth + 1]?.parentPath.join('-') === path.join('-') ? 'true' : 'false') : undefined}
-										onmouseenter={() => {
-											if (opt.isDisabled) return
-											setActivePath(path)
-											setIsSubOpen(isBranch)
-										}}
-										onmousedown={(e: MouseEvent) => e.preventDefault()}
-										onclick={() => {
-											if (!isBranch) return commit(opt, path)
-											if (opt.isDisabled) return
-											setActivePath(path)
-											setIsSubOpen(true)
-										}}
-									>
-										<span>{opt.label}</span>
-										{isBranch ? (
-											<svg class="branch-chevron" viewBox="0 0 24 24">
-												<polyline points="9 6 15 12 9 18" />
-											</svg>
-										) : opt.value === value && (
-											<svg class="tick" viewBox="0 0 24 24">
-												<polyline points="4 12 10 18 20 6" />
-											</svg>
-										)}
+									<div key={segment.groupId} role="group" aria-labelledby={headingId}>
+										<div class="group-heading" id={headingId} role="presentation">{segment.groupLabel}</div>
+										{renderedOptions}
 									</div>
 								)
 							})}

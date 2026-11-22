@@ -484,9 +484,54 @@ silently choosing.
 - Where behavior must still be deterministic, the documented winner applies
   (for example the field label wins over a conflicting `aria-label`, per
   Rule 4) and the report still fires.
+- Reports go through `src/shared/misuse.ts` (`reportMisuse`), which warns
+  once per element and per kind of problem.
 - Today the reported cases are: a `z-field` holding zero or more than one
-  linkable control (Rule 5), and a control inside a field with an
-  accessible name that differs from the field label (Rule 4).
+  linkable control (Rule 5); a control inside a field with an accessible
+  name that differs from the field label (Rule 4); an `is-icon` button with
+  no accessible name (Rule 22); a `z-toggle-button-group` with both
+  `columns` and `is-vertical`; a menu item with an unknown `type`, or with
+  `is-checked` on an action row; a `z-select` group with no children; and a
+  `z-number-input` with both a `value-prefix`/`value-suffix` and the
+  matching slot.
+
+### Rule 22 — Size and shape are one vocabulary
+
+Every button-like control speaks the same size and shape language, so a
+button, a toggle and a group item side by side always agree.
+
+- `size` is `xs | sm | md | lg`, and each step reads one
+  `--control-height-*` token. No control hardcodes a height.
+- `is-icon` is the square, icon-only shape modifier. It composes with every
+  size, kind and tone, and means the same thing on every element that has it.
+- An icon-only control is named with `aria-label` or `aria-labelledby`,
+  never with `label` (Rule 17). An unnamed one is reported (Rule 21).
+- A dense region (an editor, a toolbar) resizes its controls by overriding
+  the `--control-height-*` tokens on a container, optionally with
+  `data-zest-scope`. Per-element height overrides are not supported.
+
+### Rule 23 — A group that acts as one control is one tab stop
+
+When a group is a single control (a toggle-button group, a menu), it is one
+stop in the tab order.
+
+- Roving tabindex: Tab enters on the selected item (or the first enabled
+  one) and Tab again leaves the group.
+- Arrow keys move focus and never change the value. Space / Enter act.
+  Home / End go to the first / last enabled item. Disabled items are skipped.
+- Layout decides the arrow directions, not the semantics (Rule 10): a line
+  uses ←/→ (or ↑/↓ when vertical), a grid (`columns`) uses both, and
+  right-to-left swaps ←/→.
+- One owner for roving focus: inside a `z-toolbar`, the toolbar owns it for
+  every control, including group items, and the group stands aside.
+
+### Rule 24 — Tints never rotate hue
+
+A tint of a tone is mixed against `transparent` in oklch, or against an
+opaque neutral (a surface, border or text role) in oklab. oklch interpolates
+hue, and Zest's neutrals carry a hue of their own, so mixing a tone into one
+in oklch turns violet or red grey-green. The token contract test enforces
+this.
 
 ## 6. Accessibility is a system invariant
 
@@ -646,3 +691,7 @@ component.
 | 20 Inherited state flows through a channel | 2026-11-21 | V2 audit, group findings. |
 | 21 Misuse is reported, never guessed | 2026-11-21 | V2 decision: `console.warn` in every build. |
 | §10 Process rules | 2026-11-21 | Record rules here; no shims before outside users. |
+| 22 Size and shape are one vocabulary | 2026-11-22 | Dense editor UI: `--control-height-xs`, `z-button` `xs` and `is-icon`. |
+| 23 A group that acts as one control is one tab stop | 2026-11-22 | `z-toggle-button-group` `columns` and roving focus. |
+| 24 Tints never rotate hue | 2026-11-22 | oklch mixes against neutrals turned tones grey-green. |
+| Rule 21 shared reporter and case list | 2026-11-22 | `src/shared/misuse.ts`; new reported cases. |

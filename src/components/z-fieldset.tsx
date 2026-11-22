@@ -120,7 +120,7 @@ const styles = css`
 	}
 
 	.fieldset.is-invalid.is-outline {
-		border-color: color-mix(in oklch, var(--status-danger) 55%, var(--border-default));
+		border-color: color-mix(in oklab, var(--status-danger) 55%, var(--border-default));
 	}
 
 	:host([is-legend-hidden]) .header {

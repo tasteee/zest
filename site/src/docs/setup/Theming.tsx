@@ -53,6 +53,55 @@ export const Theming = () => (
 `}
 		/>
 
+		<h2>Dense regions</h2>
+		<p>
+			Zest's controls are sized for forms. Editors, toolbars and inspectors need tighter controls in one part of the page.
+			Every control reads its height from the <code>--control-height-xs</code> / <code>-sm</code> / <code>-md</code> /{' '}
+			<code>-lg</code> tokens. Those are plain values, not derived ones, so overriding them on a container resizes every Zest
+			control inside it. Add <code>data-zest-scope</code> as well to rescale the type, spacing and radius for that region. Never
+			shrink a single control with your own height override: the tokens keep a button, an input and a toggle side by side in
+			agreement.
+		</p>
+		<MarkupCode
+			html={`
+<div class="editor" data-zest-scope>
+  <z-toolbar aria-label="Transport">
+    <z-button is-icon size="sm" kind="ghost" aria-label="Go to start">…</z-button>
+    <z-toggle-button is-icon size="sm" aria-label="Loop">…</z-toggle-button>
+  </z-toolbar>
+</div>
+`}
+		/>
+		<Code
+			language="css"
+			code={`
+.editor {
+  --base-font-size: 14px;
+  --control-height-xs: 1.5rem;   /* 24px */
+  --control-height-sm: 1.75rem;  /* 28px */
+  --control-height-md: 1.875rem; /* 30px */
+}
+`}
+		/>
+
+		<h2>Tinting a color</h2>
+		<p>
+			Mix a tint against <code>transparent</code> in oklch, or against an opaque neutral (a surface, border or text role) in
+			oklab. Mixing in oklch against a neutral interpolates the hue too, so a violet mixed into the tinted neutrals comes out
+			grey-green.
+		</p>
+		<Code
+			language="css"
+			code={`
+/* good */
+background: color-mix(in oklch, var(--accent-secondary) 12%, transparent);
+background: color-mix(in oklab, var(--accent-secondary) 12%, var(--surface-default));
+
+/* hue drifts toward the neutral */
+background: color-mix(in oklch, var(--accent-secondary) 12%, var(--surface-default));
+`}
+		/>
+
 		<h2>Tokens only</h2>
 		<p>
 			<code>ink.css</code> is two files. <code>tokens.css</code> holds custom properties and never touches your page;{' '}

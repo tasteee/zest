@@ -1705,9 +1705,9 @@
               "kind": "field",
               "name": "size",
               "type": {
-                "text": "'sm' | 'md' | 'lg'"
+                "text": "'xs' | 'sm' | 'md' | 'lg'"
               },
-              "description": "Height and type size of the button."
+              "description": "Height and type size of the button. Each size reads a --control-height-* token, so a dense region can resize every button at once."
             },
             {
               "kind": "field",
@@ -1724,6 +1724,14 @@
                 "text": "'neutral' | 'primary' | 'secondary' | 'tertiary' | 'success' | 'warning' | 'danger'"
               },
               "description": "Color family of the button."
+            },
+            {
+              "kind": "field",
+              "name": "isIcon",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Square, icon-only shape: the width matches the height of the current size and the text padding goes away. Composes with every size, kind and tone. Name it with aria-label or aria-labelledby; an unnamed is-icon button reports a console warning."
             },
             {
               "kind": "field",
@@ -1795,9 +1803,9 @@
               "name": "size",
               "fieldName": "size",
               "type": {
-                "text": "'sm' | 'md' | 'lg'"
+                "text": "'xs' | 'sm' | 'md' | 'lg'"
               },
-              "description": "Height and type size of the button."
+              "description": "Height and type size of the button. Each size reads a --control-height-* token, so a dense region can resize every button at once."
             },
             {
               "name": "kind",
@@ -1814,6 +1822,14 @@
                 "text": "'neutral' | 'primary' | 'secondary' | 'tertiary' | 'success' | 'warning' | 'danger'"
               },
               "description": "Color family of the button."
+            },
+            {
+              "name": "is-icon",
+              "fieldName": "isIcon",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Square, icon-only shape: the width matches the height of the current size and the text padding goes away. Composes with every size, kind and tone. Name it with aria-label or aria-labelledby; an unnamed is-icon button reports a console warning."
             },
             {
               "name": "is-hidden",
@@ -5615,7 +5631,7 @@
           "slots": [
             {
               "name": "",
-              "description": "The area that opens the menu."
+              "description": "The area that opens the menu. Declarative z-menu-item, z-menu-label and z-menu-separator children are rows, the same as in z-menu."
             },
             {
               "name": "controls",
@@ -10249,7 +10265,7 @@
             },
             {
               "name": "",
-              "description": "The z-menu-item and z-menu-separator children."
+              "description": "The z-menu-item, z-menu-label and z-menu-separator children."
             }
           ]
         },
@@ -10283,6 +10299,30 @@
                 "text": "string"
               },
               "description": "Shortcut hint shown at the end of the row. It is a label only and does not bind a key."
+            },
+            {
+              "kind": "field",
+              "name": "description",
+              "type": {
+                "text": "string"
+              },
+              "description": "A second, smaller line under the label. It is read as the row's description by screen readers."
+            },
+            {
+              "kind": "field",
+              "name": "type",
+              "type": {
+                "text": "'action' | 'radio' | 'checkbox'"
+              },
+              "description": "What choosing the row means. action runs a command (role=menuitem). radio picks one option of a set and checkbox toggles one (menuitemradio / menuitemcheckbox, with aria-checked and a check mark). An unknown value reports a console warning and acts as action."
+            },
+            {
+              "kind": "field",
+              "name": "isChecked",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Marks a radio or checkbox row as chosen. The application owns this: the menu reports the pick through select and never flips is-checked itself. Setting it on an action row reports a console warning."
             },
             {
               "kind": "field",
@@ -10327,6 +10367,30 @@
               "description": "Shortcut hint shown at the end of the row. It is a label only and does not bind a key."
             },
             {
+              "name": "description",
+              "fieldName": "description",
+              "type": {
+                "text": "string"
+              },
+              "description": "A second, smaller line under the label. It is read as the row's description by screen readers."
+            },
+            {
+              "name": "type",
+              "fieldName": "type",
+              "type": {
+                "text": "'action' | 'radio' | 'checkbox'"
+              },
+              "description": "What choosing the row means. action runs a command (role=menuitem). radio picks one option of a set and checkbox toggles one (menuitemradio / menuitemcheckbox, with aria-checked and a check mark). An unknown value reports a console warning and acts as action."
+            },
+            {
+              "name": "is-checked",
+              "fieldName": "isChecked",
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Marks a radio or checkbox row as chosen. The application owns this: the menu reports the pick through select and never flips is-checked itself. Setting it on an action row reports a console warning."
+            },
+            {
               "name": "is-disabled",
               "fieldName": "isDisabled",
               "type": {
@@ -10348,6 +10412,22 @@
             {
               "name": "",
               "description": "The item text."
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "customElement": true,
+          "tagName": "z-menu-label",
+          "name": "ZMenuLabel",
+          "description": "A section heading inside a menu.",
+          "members": [],
+          "attributes": [],
+          "events": [],
+          "slots": [
+            {
+              "name": "",
+              "description": "The heading text."
             }
           ]
         },
@@ -10789,7 +10869,7 @@
               "type": {
                 "text": "string"
               },
-              "description": "Text shown before each value while the field is not focused, such as `$`."
+              "description": "Text shown before each value while the field is not focused, such as `$`. Joined into the value text when not focused. For an adornment that stays visible and is styled apart from the number, use the prefix slot instead. Setting both reports a console warning."
             },
             {
               "kind": "field",
@@ -10797,7 +10877,7 @@
               "type": {
                 "text": "string"
               },
-              "description": "Text shown after each value while the field is not focused, such as `bpm`."
+              "description": "Text shown after each value while the field is not focused, such as `bpm`. Joined into the value text when not focused. For an adornment that stays visible and is styled apart from the number, use the suffix slot instead. Setting both reports a console warning."
             },
             {
               "kind": "field",
@@ -10967,7 +11047,7 @@
               "type": {
                 "text": "string"
               },
-              "description": "Text shown before each value while the field is not focused, such as `$`."
+              "description": "Text shown before each value while the field is not focused, such as `$`. Joined into the value text when not focused. For an adornment that stays visible and is styled apart from the number, use the prefix slot instead. Setting both reports a console warning."
             },
             {
               "name": "value-suffix",
@@ -10975,7 +11055,7 @@
               "type": {
                 "text": "string"
               },
-              "description": "Text shown after each value while the field is not focused, such as `bpm`."
+              "description": "Text shown after each value while the field is not focused, such as `bpm`. Joined into the value text when not focused. For an adornment that stays visible and is styled apart from the number, use the suffix slot instead. Setting both reports a console warning."
             },
             {
               "name": "size",
@@ -11082,6 +11162,16 @@
               },
               "detail": "{ value: number }",
               "description": "Fires after a blur correction or step action."
+            }
+          ],
+          "slots": [
+            {
+              "name": "prefix",
+              "description": "A visual adornment before the value, inside the field box: a currency sign, an icon. It stays visible while editing and is never part of the value or the accessible name."
+            },
+            {
+              "name": "suffix",
+              "description": "A visual adornment after the value, such as a unit (BPM, px). It stays visible while editing and is never part of the value or the accessible name. Put a unit that matters in aria-label, e.g. \"Tempo in BPM\"."
             }
           ]
         },
@@ -13385,7 +13475,7 @@
               "type": {
                 "text": "array"
               },
-              "description": "The options to choose from. Set it from JavaScript. An option with `children` is a branch that opens a cascading submenu and cannot itself be selected; values must be unique across the whole tree."
+              "description": "The options to choose from. Set it from JavaScript. An option with `children` is a branch that opens a cascading submenu and cannot itself be selected. Add `isGroup: true` to show its children inline under a non-selectable heading instead (its value is ignored, and it never appears in the change path). A group with no children reports a console warning. Values must be unique across the whole tree."
             },
             {
               "kind": "field",
@@ -13507,7 +13597,7 @@
               "type": {
                 "text": "array"
               },
-              "description": "The options to choose from. Set it from JavaScript. An option with `children` is a branch that opens a cascading submenu and cannot itself be selected; values must be unique across the whole tree."
+              "description": "The options to choose from. Set it from JavaScript. An option with `children` is a branch that opens a cascading submenu and cannot itself be selected. Add `isGroup: true` to show its children inline under a non-selectable heading instead (its value is ignored, and it never appears in the change path). A group with no children reports a console warning. Values must be unique across the whole tree."
             },
             {
               "name": "size",
@@ -17797,6 +17887,14 @@
             },
             {
               "kind": "field",
+              "name": "columns",
+              "type": {
+                "text": "number"
+              },
+              "description": "Lays the items out as a grid with this many columns instead of one line, for pickers like a 12-note root grid (columns=\"6\"). Items keep their own radius and sit apart by a small gap. Arrow keys then move in two dimensions. Overrides is-vertical; setting both reports a console warning."
+            },
+            {
+              "kind": "field",
               "name": "direction",
               "type": {
                 "text": "'horizontal' | 'vertical'"
@@ -17876,6 +17974,14 @@
                 "text": "boolean"
               },
               "description": "Stacks the items in a column instead of a row."
+            },
+            {
+              "name": "columns",
+              "fieldName": "columns",
+              "type": {
+                "text": "number"
+              },
+              "description": "Lays the items out as a grid with this many columns instead of one line, for pickers like a 12-note root grid (columns=\"6\"). Items keep their own radius and sit apart by a small gap. Arrow keys then move in two dimensions. Overrides is-vertical; setting both reports a console warning."
             },
             {
               "name": "direction",
@@ -19055,6 +19161,14 @@
           "name": "z-menu-item",
           "declaration": {
             "name": "ZMenuItem",
+            "module": "dist/zest.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "z-menu-label",
+          "declaration": {
+            "name": "ZMenuLabel",
             "module": "dist/zest.js"
           }
         },

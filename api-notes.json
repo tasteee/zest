@@ -643,12 +643,13 @@
 		"props": {
 			"size": {
 				"values": [
+					"xs",
 					"sm",
 					"md",
 					"lg"
 				],
 				"default": "md",
-				"description": "Height and type size of the button."
+				"description": "Height and type size of the button. Each size reads a --control-height-* token, so a dense region can resize every button at once."
 			},
 			"kind": {
 				"values": [
@@ -673,6 +674,10 @@
 				],
 				"default": "neutral",
 				"description": "Color family of the button."
+			},
+			"is-icon": {
+				"description": "Square, icon-only shape: the width matches the height of the current size and the text padding goes away. Composes with every size, kind and tone. Name it with aria-label or aria-labelledby; an unnamed is-icon button reports a console warning.",
+				"default": "false"
 			},
 			"is-hidden": {
 				"description": "Hides the element with display: none. It stays in the DOM and keeps its state.",
@@ -716,7 +721,7 @@
 				"action": "Activates it. A submit button submits its form."
 			}
 		],
-		"accessibility": "A native button inside the shadow root, so it keeps native focus, Enter and Space behaviour and form participation. An icon-only button needs a name from its label or aria-label."
+		"accessibility": "A native button inside the shadow root, so it keeps native focus, Enter and Space behaviour and form participation. An icon-only (is-icon) button is named with aria-label or aria-labelledby on the host, which Zest forwards to the inner button; without a name it warns once."
 	},
 	"z-button-group": {
 		"summary": "Joins buttons into one segmented row.",
@@ -1863,7 +1868,7 @@
 			}
 		},
 		"slots": {
-			"default": "The area that opens the menu.",
+			"default": "The area that opens the menu. Declarative z-menu-item, z-menu-label and z-menu-separator children are rows, the same as in z-menu.",
 			"controls": "Extra controls shown at the top of the menu."
 		},
 		"keyboard": [
@@ -3223,7 +3228,7 @@
 		},
 		"slots": {
 			"trigger": "The element that opens the menu.",
-			"default": "The z-menu-item and z-menu-separator children."
+			"default": "The z-menu-item, z-menu-label and z-menu-separator children."
 		},
 		"keyboard": [
 			{
@@ -3259,7 +3264,7 @@
 				"action": "Closes and moves on."
 			}
 		],
-		"accessibility": "The trigger is yours, so give it a name. The panel is a menu opened from the keyboard, with focus moving to an item, wrapping arrow keys, type-ahead and Escape to close.",
+		"accessibility": "The trigger is yours, so give it a name. The panel is a menu opened from the keyboard, with focus moving to an item, wrapping arrow keys, type-ahead and Escape to close. Choice rows (type=radio or checkbox) expose aria-checked. A z-menu-label wraps the rows after it in a group named by its text.",
 		"guidance": [
 			{
 				"title": "Trigger",
@@ -3290,18 +3295,42 @@
 			"is-danger": {
 				"description": "Styles the entry as destructive.",
 				"default": "false"
+			},
+			"description": {
+				"description": "A second, smaller line under the label. It is read as the row's description by screen readers."
+			},
+			"type": {
+				"values": [
+					"action",
+					"radio",
+					"checkbox"
+				],
+				"default": "action",
+				"description": "What choosing the row means. action runs a command (role=menuitem). radio picks one option of a set and checkbox toggles one (menuitemradio / menuitemcheckbox, with aria-checked and a check mark). An unknown value reports a console warning and acts as action."
+			},
+			"is-checked": {
+				"description": "Marks a radio or checkbox row as chosen. The application owns this: the menu reports the pick through select and never flips is-checked itself. Setting it on an action row reports a console warning.",
+				"default": "false"
 			}
 		},
 		"slots": {
 			"default": "The item text."
 		},
 		"keyboard": [],
-		"accessibility": "One entry in a menu. The menu renders it and manages focus and selection."
+		"accessibility": "One entry in a menu. The menu renders it as menuitem, menuitemradio or menuitemcheckbox (by type), with aria-checked for choice rows and the description linked by aria-describedby, and manages focus and selection."
 	},
 	"z-menu-separator": {
 		"summary": "A divider between menu entries.",
 		"keyboard": [],
 		"accessibility": "A divider between menu entries. The menu hides it from the item order."
+	},
+	"z-menu-label": {
+		"summary": "A section heading inside a menu.",
+		"slots": {
+			"default": "The heading text."
+		},
+		"keyboard": [],
+		"accessibility": "Not focusable and skipped by the keyboard. The rows after it, up to the next label or separator, form a group (role=group) named by this text."
 	},
 	"z-nav-menu": {
 		"summary": "A horizontal navigation bar driven by an items array.",
@@ -3395,10 +3424,10 @@
 				"default": "false"
 			},
 			"value-prefix": {
-				"description": "Text shown before each value while the field is not focused, such as `$`."
+				"description": "Text shown before each value while the field is not focused, such as `$`. Joined into the value text when not focused. For an adornment that stays visible and is styled apart from the number, use the prefix slot instead. Setting both reports a console warning."
 			},
 			"value-suffix": {
-				"description": "Text shown after each value while the field is not focused, such as `bpm`."
+				"description": "Text shown after each value while the field is not focused, such as `bpm`. Joined into the value text when not focused. For an adornment that stays visible and is styled apart from the number, use the suffix slot instead. Setting both reports a console warning."
 			},
 			"has-stepper-buttons": {
 				"description": "Shows ghost decrement/increment buttons inside the field."
@@ -3473,7 +3502,11 @@
 				"title": "Validation",
 				"text": "Invalid, non-numeric, and out-of-range input is styled as invalid while typing. Blur clamps numeric values to min/max and restores an invalid raw value."
 			}
-		]
+		],
+		"slots": {
+			"prefix": "A visual adornment before the value, inside the field box: a currency sign, an icon. It stays visible while editing and is never part of the value or the accessible name.",
+			"suffix": "A visual adornment after the value, such as a unit (BPM, px). It stays visible while editing and is never part of the value or the accessible name. Put a unit that matters in aria-label, e.g. \"Tempo in BPM\"."
+		}
 	},
 	"z-number-range-input": {
 		"summary": "Two number fields for a lower and upper bound.",
@@ -4465,8 +4498,8 @@
 			},
 			"options": {
 				"default": "[]",
-				"description": "The options to choose from. Set it from JavaScript. An option with `children` is a branch that opens a cascading submenu and cannot itself be selected; values must be unique across the whole tree.",
-				"type": "{ value: string; label: string; isDisabled?: boolean; children?: Option[] }[]",
+				"description": "The options to choose from. Set it from JavaScript. An option with `children` is a branch that opens a cascading submenu and cannot itself be selected. Add `isGroup: true` to show its children inline under a non-selectable heading instead (its value is ignored, and it never appears in the change path). A group with no children reports a console warning. Values must be unique across the whole tree.",
+				"type": "{ value: string; label: string; isDisabled?: boolean; isGroup?: boolean; children?: Option[] }[]",
 				"example": "select.options = [\n  { value: 'free', label: 'Free' },\n  { value: 'pro', label: 'Pro' }\n]"
 			},
 			"size": {
@@ -4552,7 +4585,7 @@
 				"action": "Type-ahead jumps to the next matching option."
 			}
 		],
-		"accessibility": "role=\"combobox\" on a native button, with aria-expanded, aria-controls and aria-haspopup, opening a listbox. Give it a label. Type-ahead jumps to a matching option.",
+		"accessibility": "role=\"combobox\" on a native button, with aria-expanded, aria-controls and aria-haspopup, opening a listbox. Give it a label. Type-ahead jumps to a matching option. Headed groups render as role=\"group\" inside the listbox, named by their heading; the keyboard moves straight across them.",
 		"guidance": [
 			{
 				"title": "Dismissal",
@@ -5745,6 +5778,9 @@
 				"description": "Stacks the items in a column instead of a row.",
 				"default": "false"
 			},
+			"columns": {
+				"description": "Lays the items out as a grid with this many columns instead of one line, for pickers like a 12-note root grid (columns=\"6\"). Items keep their own radius and sit apart by a small gap. Arrow keys then move in two dimensions. Overrides is-vertical; setting both reports a console warning."
+			},
 			"direction": {
 				"description": "Deprecated: use `is-vertical`. Still works.",
 				"values": [
@@ -5816,14 +5852,26 @@
 		"keyboard": [
 			{
 				"keys": "Tab",
-				"action": "Moves through the buttons."
+				"action": "Enters the group once, on the pressed item or the first enabled one. Tab again leaves the group."
+			},
+			{
+				"keys": "→ / ←",
+				"action": "Moves focus to the next or previous item, wrapping. In a vertical group use ↓ / ↑. Swaps in right-to-left layouts."
+			},
+			{
+				"keys": "↓ / ↑ (with columns)",
+				"action": "Moves focus one row down or up. Stops at the first and last row."
+			},
+			{
+				"keys": "Home / End",
+				"action": "Moves focus to the first or last enabled item."
 			},
 			{
 				"keys": "Space / Enter",
-				"action": "Toggles the focused button. In single mode, turning one on turns the others off."
+				"action": "Toggles the focused button. In single mode, turning one on turns the others off. Arrow keys never press."
 			}
 		],
-		"accessibility": "role=\"group\" around toggle buttons, each with aria-pressed. Give the group a label.",
+		"accessibility": "role=\"group\" around toggle buttons, each with aria-pressed, and one tab stop for the whole group (roving tabindex). Disabled items are skipped. Inside a z-toolbar, the toolbar's own roving focus takes over. Give the group a label.",
 		"guidance": [
 			{
 				"title": "Variant props",

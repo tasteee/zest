@@ -36,6 +36,16 @@ const filesMatching = (files: string[], pattern: RegExp): string[] => {
 }
 
 describe('token contract', () => {
+	it('never mixes a colour toward a neutral in oklch (the hue drifts toward the neutral)', () => {
+		// Tints mix against transparent in oklch, or against an opaque
+		// neutral (surface, border, text) in oklab. oklch interpolates hue, so a
+		// violet mixed into the green-tinted neutrals comes out grey-green.
+		const colour = String.raw`var\(--(?:tone|accent-[a-z]+|status-[a-z]+|z-toggle-button-accent)\b[^)]*\)\)?`
+		const neutral = String.raw`var\(--(?:surface-[a-z]+|border-[a-z]+|text-[a-z]+|chip-rest-bg|z-toggle-button-surface)\b`
+		const driftingMix = new RegExp(String.raw`color-mix\(in oklch,\s*${colour}\s*\d+%,\s*${neutral}`)
+		expect(filesMatching(libraryFiles, driftingMix)).toEqual([])
+	})
+
 	it('library components never read the numbered neutral palette', () => {
 		expect(filesMatching(libraryFiles, /var\(--color-neutral-/)).toEqual([])
 	})

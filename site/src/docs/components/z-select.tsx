@@ -22,5 +22,10 @@ export const ZSelectDoc = () => (
 			title="Nest options as submenus"
 			description="Give an option children to make it a branch that opens a cascading submenu. Only leaves can be selected, value stays a single string, and change also reports the path of values from the root down to the leaf."
 		/>
+		<DocExample
+			demo="z-select/group-options-under-headings"
+			title="Group options under headings"
+			description="Add isGroup to an option with children to show them inline under a heading instead of in a submenu: one flat, scrollable list, every option one click away. A group is never selected and never part of the change path. Mix plain options and groups freely."
+		/>
 	</ComponentDoc>
 )
