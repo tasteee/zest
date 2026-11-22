@@ -7,7 +7,7 @@ import { mount, settle } from './form-helpers'
 // the inner control and keep it read-only. These tests turn
 // read-only on, then off, and check a person can type again.
 
-type ReadonlyHostT = HTMLElement & { isReadonly?: boolean }
+type ReadonlyHostT = HTMLElement & { isReadOnly?: boolean }
 
 type ReadonlyCaseT = {
 	name: string
@@ -62,26 +62,26 @@ describe('read-only can be turned off again', () => {
 	})
 
 	for (const readonlyCase of readonlyCases) {
-		it(`${readonlyCase.name}: isReadonly true then false`, async () => {
+		it(`${readonlyCase.name}: isReadOnly true then false`, async () => {
 			const host = await mountHost(readonlyCase)
 
-			host.isReadonly = true
+			host.isReadOnly = true
 			await settle(host.parentNode as ParentNode)
 			expect(findInner(host, readonlyCase.selector).readOnly).toBe(true)
 
-			host.isReadonly = false
+			host.isReadOnly = false
 			await settle(host.parentNode as ParentNode)
 			await expectTypingWorks(host, readonlyCase)
 		})
 
-		it(`${readonlyCase.name}: is-readonly attribute added then removed`, async () => {
+		it(`${readonlyCase.name}: is-read-only attribute added then removed`, async () => {
 			const host = await mountHost(readonlyCase)
 
-			host.setAttribute('is-readonly', '')
+			host.setAttribute('is-read-only', '')
 			await settle(host.parentNode as ParentNode)
 			expect(findInner(host, readonlyCase.selector).readOnly).toBe(true)
 
-			host.removeAttribute('is-readonly')
+			host.removeAttribute('is-read-only')
 			await settle(host.parentNode as ParentNode)
 			await expectTypingWorks(host, readonlyCase)
 		})

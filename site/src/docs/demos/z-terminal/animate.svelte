@@ -7,4 +7,4 @@ $ pnpm build
 Built in 2.4s`
 </script>
 
-<z-terminal shell="zsh" cwd="~/my-app" does-animate does-loop code={SESSION}></z-terminal>
+<z-terminal width="min(100%, 36rem)" max-height="16rem" shell="zsh" cwd="~/my-app" does-animate does-loop code={SESSION}></z-terminal>

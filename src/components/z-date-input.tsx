@@ -204,7 +204,7 @@ export const ZDateInput = c(
 		const formControl = useFormControl({
 			value: buildFormValue(),
 			isDisabled: props.isDisabled,
-			isReadonly: props.isReadonly,
+			isReadOnly: props.isReadOnly,
 			control: startRef,
 			validity: buildValidity(),
 			submitsOnEnter: true,
@@ -215,8 +215,8 @@ export const ZDateInput = c(
 			onRestore: restoreFromForm
 		})
 		const isDisabled = props.isDisabled || formControl.isFormDisabled
-		const isReadonly = Boolean(props.isReadonly)
-		const isInert = isDisabled || isReadonly
+		const isReadOnly = Boolean(props.isReadOnly)
+		const isInert = isDisabled || isReadOnly
 
 		// A field shows the committed date unless it is being edited.
 		useEffect(() => {
@@ -446,7 +446,7 @@ export const ZDateInput = c(
 						value={rawStart}
 						placeholder={startPlaceholder}
 						disabled={isDisabled}
-						readonly={props.isReadonly ? true : undefined}
+						readonly={props.isReadOnly ? true : undefined}
 						required={props.isRequired}
 						aria-label={startLabel}
 						aria-describedby={isRange ? undefined : describedById}
@@ -467,7 +467,7 @@ export const ZDateInput = c(
 							value={rawEnd}
 							placeholder={endPlaceholder}
 							disabled={isDisabled}
-							readonly={props.isReadonly ? true : undefined}
+							readonly={props.isReadOnly ? true : undefined}
 							required={props.isRequired}
 							aria-label={endLabel}
 							aria-invalid={isInvalid ? 'true' : undefined}
@@ -539,7 +539,7 @@ export const ZDateInput = c(
 			hasCalendar: { type: Boolean, reflect: true },
 			isInvalid: { type: Boolean, reflect: true },
 			isDisabled: { type: Boolean, reflect: true },
-			isReadonly: { type: Boolean, reflect: true },
+			isReadOnly: { type: Boolean, reflect: true },
 			isRequired: { type: Boolean, reflect: true },
 			isFullWidth: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },

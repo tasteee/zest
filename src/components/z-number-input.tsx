@@ -89,7 +89,7 @@ export const ZNumberInput = c(
 		const { isFormDisabled } = useFormControl({
 			value: parsed != null ? String(parsed) : '',
 			isDisabled: props.isDisabled,
-			isReadonly: props.isReadonly,
+			isReadOnly: props.isReadOnly,
 			control: inputRef,
 			validity: formValidity(),
 			submitsOnEnter: true,
@@ -121,7 +121,7 @@ export const ZNumberInput = c(
 			props.change({ value: normalized })
 		}
 		const stepValue = (direction: 1 | -1) => {
-			if (isDisabled || props.isReadonly) return
+			if (isDisabled || props.isReadOnly) return
 			const base = parsed ?? value ?? min ?? 0
 			commit(base + direction * step)
 		}
@@ -154,7 +154,7 @@ export const ZNumberInput = c(
 			.join(' ')
 
 		return <host shadowDom={{ delegatesFocus: true }}><div class={fieldClass}>
-			{props.hasStepperButtons && <button class="stepper" type="button" tabindex="-1" disabled={isDisabled || props.isReadonly || (min != null && (parsed ?? value ?? min) <= min)} aria-label={t('decreaseValue')} onclick={() => stepValue(-1)}>−</button>}
+			{props.hasStepperButtons && <button class="stepper" type="button" tabindex="-1" disabled={isDisabled || props.isReadOnly || (min != null && (parsed ?? value ?? min) <= min)} aria-label={t('decreaseValue')} onclick={() => stepValue(-1)}>−</button>}
 			<input
 				ref={inputRef}
 				type="text"
@@ -168,7 +168,7 @@ export const ZNumberInput = c(
 				aria-valuetext={valueText}
 				placeholder={props.placeholder}
 				disabled={isDisabled}
-				readonly={props.isReadonly ? true : undefined}
+				readonly={props.isReadOnly ? true : undefined}
 				required={props.isRequired}
 				aria-label={accessibleName}
 				aria-describedby={describedBy(props.description, props.error)}
@@ -178,7 +178,7 @@ export const ZNumberInput = c(
 				onkeydown={(e: KeyboardEvent) => { if (e.key === 'ArrowUp') { e.preventDefault(); stepValue(1) } if (e.key === 'ArrowDown') { e.preventDefault(); stepValue(-1) } }}
 				oninput={(e: any) => { e.stopPropagation(); const next = e.target.value; setRawValue(next); const numeric = isNumberText(next) ? Number(next) : null; if (numeric != null) setValue(numeric); const valid = numeric != null && (min == null || numeric >= min) && (max == null || numeric <= max); props.input({ value: numeric, rawValue: next, isValid: valid }) }}
 			/>
-			{props.hasStepperButtons && <button class="stepper" type="button" tabindex="-1" disabled={isDisabled || props.isReadonly || (max != null && (parsed ?? value ?? max) >= max)} aria-label={t('increaseValue')} onclick={() => stepValue(1)}>+</button>}
+			{props.hasStepperButtons && <button class="stepper" type="button" tabindex="-1" disabled={isDisabled || props.isReadOnly || (max != null && (parsed ?? value ?? max) >= max)} aria-label={t('increaseValue')} onclick={() => stepValue(1)}>+</button>}
 		</div>{renderDescriptions(props.description, props.error)}</host>
 	},
 	{
@@ -197,7 +197,7 @@ export const ZNumberInput = c(
 			tone: { type: oneOf('primary', 'secondary', 'tertiary'), reflect: true },
 			isInvalid: { type: Boolean, reflect: true },
 			isDisabled: { type: Boolean, reflect: true },
-			isReadonly: { type: Boolean, reflect: true },
+			isReadOnly: { type: Boolean, reflect: true },
 			isRequired: { type: Boolean, reflect: true },
 			hasStepperButtons: { type: Boolean, reflect: true },
 			isFullWidth: { type: Boolean, reflect: true },

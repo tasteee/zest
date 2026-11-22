@@ -34,6 +34,9 @@ export const chipStyles = css`
 		height: var(--chip-height);
 		max-width: 100%;
 		padding-inline: var(--chip-padding);
+		/* Font metrics seat text slightly high; 1px of top padding
+		   leaves 1px less below than above. */
+		padding-top: 1px;
 		border: 1px solid var(--chip-rest-border);
 		border-radius: var(--radius-full);
 		background: var(--chip-rest-bg);

@@ -8,4 +8,4 @@ const LINES = [
   { text: 'All tests passed', type: 'output', delay: 900 }
 ]
 
-export const Example = () => <z-terminal shell="zsh" does-animate="" prop:lines={LINES} />
+export const Example = () => <z-terminal width="min(100%, 36rem)" max-height="16rem" shell="zsh" does-animate="" prop:lines={LINES} />

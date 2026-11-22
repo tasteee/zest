@@ -15,7 +15,7 @@ export const ZRatingDoc = () => (
 		<DocExample
 			demo="z-rating/show-an-average"
 			title="Show an average"
-			description={`is-readonly renders any fraction and names it "Rated 4.3 of 5".`}
+			description={`is-read-only renders any fraction and names it "Rated 4.3 of 5".`}
 		/>
 		<DocExample
 			demo="z-rating/pick-a-shape"
