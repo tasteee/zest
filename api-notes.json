@@ -3264,7 +3264,7 @@
 				"action": "Closes and moves on."
 			}
 		],
-		"accessibility": "The trigger is yours, so give it a name. The panel is a menu opened from the keyboard, with focus moving to an item, wrapping arrow keys, type-ahead and Escape to close. Choice rows (kind=radio or checkbox) expose aria-checked. A z-menu-label wraps the rows after it in a group named by its text.",
+		"accessibility": "The trigger is yours, so give it a name. The panel is a menu opened from the keyboard, with focus moving to an item, wrapping arrow keys, type-ahead and Escape to close. Choice rows (type=radio or checkbox) expose aria-checked. A z-menu-label wraps the rows after it in a group named by its text.",
 		"guidance": [
 			{
 				"title": "Trigger",
@@ -3299,7 +3299,7 @@
 			"description": {
 				"description": "A second, smaller line under the label. It is read as the row's description by screen readers."
 			},
-			"kind": {
+			"type": {
 				"values": [
 					"action",
 					"radio",
@@ -3317,7 +3317,7 @@
 			"default": "The item text."
 		},
 		"keyboard": [],
-		"accessibility": "One entry in a menu. The menu renders it as menuitem, menuitemradio or menuitemcheckbox (by kind), with aria-checked for choice rows and the description linked by aria-describedby, and manages focus and selection."
+		"accessibility": "One entry in a menu. The menu renders it as menuitem, menuitemradio or menuitemcheckbox (by type), with aria-checked for choice rows and the description linked by aria-describedby, and manages focus and selection."
 	},
 	"z-menu-separator": {
 		"summary": "A divider between menu entries.",

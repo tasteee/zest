@@ -490,7 +490,7 @@ silently choosing.
   linkable control (Rule 5); a control inside a field with an accessible
   name that differs from the field label (Rule 4); an `is-icon` button with
   no accessible name (Rule 22); a `z-toggle-button-group` with both
-  `columns` and `is-vertical`; a menu item with an unknown `kind`, or with
+  `columns` and `is-vertical`; a menu item with an unknown `type`, or with
   `is-checked` on an action row; a `z-select` group with no children; and a
   `z-number-input` with both a `value-prefix`/`value-suffix` and the
   matching slot.
