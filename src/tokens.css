@@ -142,6 +142,7 @@
 	/* Control metrics: one height scale for every interactive control, so an
      input, select, button and toggle side by side agree. Padding stays
      per-component. */
+	--control-height-xs: 1.75rem;
 	--control-height-sm: 2rem;
 	--control-height-md: 2.5rem;
 	--control-height-lg: 3rem;

@@ -43,7 +43,15 @@ copy.
   presentation defaults yield to the child's own prop, group-owned state is
   read-only on the child.
 - Misuse is reported, never guessed (Rule 21): `console.warn` in every
-  build. The docs check fails on any warning.
+  build, through `reportMisuse` in `src/shared/misuse.ts`. The docs check
+  fails on any warning.
+- Size and shape are one vocabulary (Rule 22): `size` is xs | sm | md | lg,
+  each from a `--control-height-*` token; `is-icon` is the square icon-only
+  shape, named with `aria-label`. Dense regions override the tokens.
+- A group that acts as one control is one tab stop (Rule 23): roving
+  tabindex, arrows move and never press; inside a toolbar the toolbar owns it.
+- Tints never rotate hue (Rule 24): mix against `transparent` in oklch, or
+  against an opaque neutral in oklab.
 
 ## Checklist for every change
 

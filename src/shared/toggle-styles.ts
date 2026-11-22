@@ -71,9 +71,9 @@ export const toggleStyles = css`
 	}
 
 	button.is-xs {
-		--z-toggle-button-height: 1.75rem;
+		--z-toggle-button-height: var(--control-height-xs);
 		--z-toggle-button-padding-inline: 0.625rem;
-		--z-toggle-button-min-width: 1.75rem;
+		--z-toggle-button-min-width: var(--control-height-xs);
 		--z-toggle-button-font-size: var(--font-size-xs);
 		--z-toggle-button-icon-size: 0.75rem;
 	}
@@ -158,8 +158,8 @@ export const toggleStyles = css`
 	   every other kind, just without a border change to announce it. */
 	button.is-solid {
 		--z-toggle-button-border: transparent;
-		--z-toggle-button-bg: color-mix(in oklch, var(--z-toggle-button-accent, var(--text-primary)) 12%, var(--z-toggle-button-surface, transparent));
-		--z-toggle-button-hover-bg: color-mix(in oklch, var(--z-toggle-button-accent, var(--text-primary)) 20%, var(--z-toggle-button-surface, transparent));
+		--z-toggle-button-bg: color-mix(in oklab, var(--z-toggle-button-accent, var(--text-primary)) 12%, var(--z-toggle-button-surface, transparent));
+		--z-toggle-button-hover-bg: color-mix(in oklab, var(--z-toggle-button-accent, var(--text-primary)) 20%, var(--z-toggle-button-surface, transparent));
 		--z-toggle-button-on-bg: var(--z-toggle-button-accent, var(--text-primary));
 		--z-toggle-button-on-color: var(--z-toggle-button-accent-foreground, var(--on-accent));
 		--z-toggle-button-on-border: transparent;

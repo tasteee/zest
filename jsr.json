@@ -71,6 +71,7 @@
 		"./z-marquee": "./dist/elements/z-marquee.js",
 		"./z-menu": "./dist/elements/z-menu.js",
 		"./z-menu-item": "./dist/elements/z-menu-item.js",
+		"./z-menu-label": "./dist/elements/z-menu-label.js",
 		"./z-menu-separator": "./dist/elements/z-menu-separator.js",
 		"./z-meter": "./dist/elements/z-meter.js",
 		"./z-nav-menu": "./dist/elements/z-nav-menu.js",

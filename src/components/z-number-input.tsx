@@ -5,6 +5,7 @@ import type { ValidityFlagsT } from '../shared/form-control'
 import { c, css, event, useEffect, useHost, useProp, useRef, useState } from 'atomico'
 import { oneOf } from '../shared/prop-types'
 import { useLocale } from '../shared/locale'
+import { reportMisuse } from '../shared/misuse'
 
 /*
  * z-number-input, a typed numeric field with optional ghost stepper buttons.
@@ -38,6 +39,18 @@ const styles = css`
 	input::-webkit-outer-spin-button, input::-webkit-inner-spin-button { appearance: none; margin: 0; }
 	:host([is-borderless]) .field { height: auto; border: 0; border-radius: 0; background: transparent; outline: none; }
 	:host([is-borderless]) .field:hover, :host([is-borderless]) .field.is-focused { background: transparent; }
+	/* prefix / suffix slots: visual adornments inside the field box, outside
+	   the value (a unit such as BPM, a currency sign, an icon). They stay
+	   visible while editing, unlike value-prefix / value-suffix. */
+	.adornment { display: inline-flex; align-items: center; flex-shrink: 0; color: var(--text-secondary); font-size: 0.875em; user-select: none; -webkit-user-select: none; }
+	.adornment.is-empty { display: none; }
+	.adornment.is-prefix { padding-inline-start: var(--space-2); }
+	.adornment.is-suffix { padding-inline-end: var(--space-2); }
+	:host([is-borderless]) .adornment.is-prefix { padding-inline-start: 0; padding-inline-end: var(--space-1); }
+	:host([is-borderless]) .adornment.is-suffix { padding-inline-end: 0; padding-inline-start: var(--space-1); }
+	.field.has-suffix:not(.has-prefix) input { text-align: end; }
+	.field.has-prefix:not(.has-suffix) input { text-align: start; }
+	::slotted(svg) { width: 1.125em; height: 1.125em; }
 	.stepper { display: grid; place-items: center; flex: 0 0 auto; width: 2rem; border: 0; background: transparent; color: var(--text-secondary); font: inherit; font-size: 1.125em; line-height: var(--line-height-none); cursor: pointer; user-select: none; -webkit-user-select: none; transition: color var(--motion-fast) var(--ease-enter), background-color var(--motion-fast) var(--ease-enter); }
 	.stepper:hover:not(:disabled) { color: var(--text-primary); background: color-mix(in oklch, var(--text-primary) 6%, transparent); }
 	.stepper:active:not(:disabled) { background: color-mix(in oklch, var(--tone) 12%, transparent); color: var(--tone); }
@@ -147,7 +160,19 @@ export const ZNumberInput = c(
 		const displayedValue = shouldDecorate ? decoratedValue : rawValue
 		const valueText = hasAffix && isShowingNumber ? decoratedValue : undefined
 		const affixStyle = `--affix-length: ${affixLength}`
+		const [hasPrefix, setHasPrefix] = useState(false)
+		const [hasSuffix, setHasSuffix] = useState(false)
+		const readSlotted = (slotEvent: Event) => (slotEvent.target as HTMLSlotElement).assignedNodes({ flatten: true }).some((node) => node.nodeType === Node.ELEMENT_NODE || Boolean(node.textContent?.trim()))
+		const hasDoubledPrefix = hasPrefix && Boolean(props.valuePrefix)
+		const hasDoubledSuffix = hasSuffix && Boolean(props.valueSuffix)
+		useEffect(() => {
+			if (hasDoubledPrefix) reportMisuse(host.current, 'double-prefix', 'z-number-input: both value-prefix and a prefix slot are set. Use one.')
+			if (hasDoubledSuffix) reportMisuse(host.current, 'double-suffix', 'z-number-input: both value-suffix and a suffix slot are set. Use one.')
+		}, [hasDoubledPrefix, hasDoubledSuffix])
+
 		const fieldClass = ['field', resolveSizeClass(props)]
+			.concat(hasPrefix ? ['has-prefix'] : [])
+			.concat(hasSuffix ? ['has-suffix'] : [])
 			.concat(isFocused ? ['is-focused'] : [])
 			.concat(isInvalid ? ['is-invalid'] : [])
 			.concat(isDisabled ? ['is-disabled'] : [])
@@ -155,6 +180,7 @@ export const ZNumberInput = c(
 
 		return <host shadowDom={{ delegatesFocus: true }}><div class={fieldClass}>
 			{props.hasStepperButtons && <button class="stepper" type="button" tabindex="-1" disabled={isDisabled || props.isReadOnly || (min != null && (parsed ?? value ?? min) <= min)} aria-label={t('decreaseValue')} onclick={() => stepValue(-1)}>−</button>}
+			<span class={hasPrefix ? 'adornment is-prefix' : 'adornment is-prefix is-empty'}><slot name="prefix" onslotchange={(slotEvent: Event) => setHasPrefix(readSlotted(slotEvent))} /></span>
 			<input
 				ref={inputRef}
 				type="text"
@@ -178,6 +204,7 @@ export const ZNumberInput = c(
 				onkeydown={(e: KeyboardEvent) => { if (e.key === 'ArrowUp') { e.preventDefault(); stepValue(1) } if (e.key === 'ArrowDown') { e.preventDefault(); stepValue(-1) } }}
 				oninput={(e: any) => { e.stopPropagation(); const next = e.target.value; setRawValue(next); const numeric = isNumberText(next) ? Number(next) : null; if (numeric != null) setValue(numeric); const valid = numeric != null && (min == null || numeric >= min) && (max == null || numeric <= max); props.input({ value: numeric, rawValue: next, isValid: valid }) }}
 			/>
+			<span class={hasSuffix ? 'adornment is-suffix' : 'adornment is-suffix is-empty'}><slot name="suffix" onslotchange={(slotEvent: Event) => setHasSuffix(readSlotted(slotEvent))} /></span>
 			{props.hasStepperButtons && <button class="stepper" type="button" tabindex="-1" disabled={isDisabled || props.isReadOnly || (max != null && (parsed ?? value ?? max) >= max)} aria-label={t('increaseValue')} onclick={() => stepValue(1)}>+</button>}
 		</div>{renderDescriptions(props.description, props.error)}</host>
 	},
