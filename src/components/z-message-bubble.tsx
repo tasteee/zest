@@ -46,23 +46,23 @@ const styles = css`
 	/* tone overrides the side-based background, for status/system bubbles
 	   (a payment failure, a success confirmation, …) regardless of who "sent" it. */
 	:host([tone='secondary']) .bubble {
-		background: color-mix(in oklch, var(--accent-secondary) 16%, var(--surface-default));
+		background: color-mix(in oklab, var(--accent-secondary) 16%, var(--surface-default));
 		color: var(--text-primary);
 	}
 	:host([tone='tertiary']) .bubble {
-		background: color-mix(in oklch, var(--accent-tertiary) 16%, var(--surface-default));
+		background: color-mix(in oklab, var(--accent-tertiary) 16%, var(--surface-default));
 		color: var(--text-primary);
 	}
 	:host([tone='success']) .bubble {
-		background: color-mix(in oklch, var(--status-success) 16%, var(--surface-default));
+		background: color-mix(in oklab, var(--status-success) 16%, var(--surface-default));
 		color: var(--text-primary);
 	}
 	:host([tone='warning']) .bubble {
-		background: color-mix(in oklch, var(--status-warning) 16%, var(--surface-default));
+		background: color-mix(in oklab, var(--status-warning) 16%, var(--surface-default));
 		color: var(--text-primary);
 	}
 	:host([tone='danger']) .bubble {
-		background: color-mix(in oklch, var(--status-danger) 16%, var(--surface-default));
+		background: color-mix(in oklab, var(--status-danger) 16%, var(--surface-default));
 		color: var(--text-primary);
 	}
 

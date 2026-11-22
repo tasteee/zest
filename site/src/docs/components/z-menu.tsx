@@ -4,7 +4,7 @@ import { DocExample } from '@app/docs/DocExample'
 export const ZMenuDoc = () => (
 	<ComponentDoc
 		tag="z-menu"
-		partTags={['z-menu-item', 'z-menu-separator']}
+		partTags={['z-menu-item', 'z-menu-label', 'z-menu-separator']}
 		description="A dropdown of commands for an object or view. Picking a row confirms it with a quick double flash, then the menu closes and fires select."
 	>
 		<DocExample
@@ -16,6 +16,11 @@ export const ZMenuDoc = () => (
 			demo="z-menu/rich-rows"
 			title="Compose rich rows"
 			description="A z-menu-item’s own content becomes its row: icons, avatars, badges, anything."
+		/>
+		<DocExample
+			demo="z-menu/offer-a-choice"
+			title="Offer a choice"
+			description="kind=radio rows pick one option of a set and kind=checkbox rows toggle one; is-checked marks the chosen ones. A description adds a hint line, and z-menu-label names the group. Your app owns is-checked: update it when select fires."
 		/>
 		<DocExample
 			demo="z-menu/align-to-the-trigger-edge"

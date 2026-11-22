@@ -65,9 +65,9 @@ const styles = css`
 	   (width: var(--toggle-height)) tracks whichever size is active. */
 
 	button.is-xs {
-		--toggle-height: 1.75rem;
+		--toggle-height: var(--control-height-xs);
 		--toggle-padding-inline: 0.625rem;
-		--toggle-min-width: 1.75rem;
+		--toggle-min-width: var(--control-height-xs);
 		--toggle-font-size: var(--font-size-xs);
 		--toggle-icon-size: 0.75rem;
 	}

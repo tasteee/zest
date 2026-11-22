@@ -1,6 +1,7 @@
 import { defineElement } from '../shared/define-element'
 import { c, css, event, useRef, useState, useEffect, useHost } from 'atomico'
-import { useChildItems, hasFlag } from '../shared/child-items'
+import { useChildItems } from '../shared/child-items'
+import { MENU_ROW_ATTRIBUTES, MENU_ROW_TAGS, descriptionId, groupMenuRows, hasCheckableRows, headingId, isSelectableRow, menuItemChecked, menuItemRole, menuRowStyles, readMenuRow, renderCheck, renderRowText, reportMenuRowMisuse, type MenuEntryT, type MenuRowT } from '../shared/menu-rows'
 import { flashThen } from '../shared/menu-nav'
 import { showFloating, hideFloating } from '../shared/overlay'
 import { oneOf } from '../shared/prop-types'
@@ -163,16 +164,7 @@ const styles = css`
 	}
 `
 
-type MenuItemT = {
-	value?: string
-	label?: string
-	shortcut?: string
-	isDisabled?: boolean
-	isSeparator?: boolean
-	isDanger?: boolean
-	/** slot name carrying a z-menu-item's own content */
-	slot?: string
-}
+type MenuItemT = MenuRowT
 
 const clamp = (v: number, min: number, max: number) => Math.max(min, Math.min(v, max))
 
@@ -188,23 +180,12 @@ export const ZContextMenu = c(
 
 		const [flashIndex, setFlashIndex] = useState(-1)
 		const isCommitting = flashIndex >= 0
-		const childItems: MenuItemT[] = useChildItems(
-			['z-menu-item', 'z-menu-separator'],
-			['shortcut', 'is-disabled', 'is-danger']
-		).map((child) =>
-			child.tag === 'z-menu-separator'
-				? { isSeparator: true }
-				: {
-					value: child.value,
-					label: child.label,
-					shortcut: child.attributes.shortcut || undefined,
-					isDisabled: hasFlag(child, 'is-disabled'),
-					isDanger: hasFlag(child, 'is-danger'),
-					slot: child.slot
-				}
-		)
+		const children = useChildItems(MENU_ROW_TAGS, MENU_ROW_ATTRIBUTES)
+		const childItems: MenuItemT[] = children.map(readMenuRow)
 		const items: MenuItemT[] = [...childItems, ...(Array.isArray(props.items) ? (props.items as MenuItemT[]) : [])]
-		const selectable = (i: number) => items[i] && !items[i].isSeparator && !items[i].isDisabled
+		const selectable = (i: number) => isSelectableRow(items[i])
+		const rawKinds = children.map((child) => child.attributes.kind)
+		useEffect(() => reportMenuRowMisuse(host.current, items, rawKinds), [items.length, rawKinds.join('|'), items.map((item) => `${item.kind}:${item.isChecked}`).join('|')])
 
 		useEffect(() => {
 			const floating = floatRef.current
@@ -263,7 +244,7 @@ export const ZContextMenu = c(
 		}
 
 		const commit = (item: MenuItemT, index: number) => {
-			if (item.isSeparator || item.isDisabled || isCommitting) return
+			if (item.isSeparator || item.isHeading || item.isDisabled || isCommitting) return
 			setActiveIndex(index)
 			setFlashIndex(index)
 			flashThen(() => {
@@ -290,6 +271,38 @@ export const ZContextMenu = c(
 			}
 		}
 
+		const shouldReserveCheck = hasCheckableRows(items)
+
+		const renderEntry = (entry: MenuEntryT) => {
+			const item = entry.row
+			const index = entry.index
+			const cls = ['item']
+				.concat(index === activeIndex ? ['is-active'] : [])
+				.concat(item.isDanger ? ['is-error'] : [])
+				.concat(item.isDisabled ? ['is-disabled'] : [])
+				.concat(index === flashIndex ? ['is-flashing'] : [])
+				.join(' ')
+			const describedBy = item.description ? descriptionId(index) : undefined
+			return (
+				<button
+					key={item.slot || item.value || item.label || index}
+					type="button"
+					class={cls}
+					role={menuItemRole(item)}
+					aria-checked={menuItemChecked(item)}
+					aria-describedby={describedBy}
+					data-index={index}
+					disabled={item.isDisabled}
+					onmouseenter={() => !isCommitting && setActiveIndex(index)}
+					onclick={() => commit(item, index)}
+				>
+					{renderCheck(item, shouldReserveCheck)}
+					{renderRowText(item, index)}
+					{item.shortcut && <span class="shortcut">{item.shortcut}</span>}
+				</button>
+			)
+		}
+
 		return (
 			<host shadowDom>
 				<div class="target" oncontextmenu={openAt}>
@@ -308,28 +321,16 @@ export const ZContextMenu = c(
 					<div class="controls">
 						<slot name="controls" />
 					</div>
-					{items.map((item, index) => {
-						if (item.isSeparator) return <div key={`sep-${index}`} class="sep" role="separator" />
-						const cls = ['item']
-							.concat(index === activeIndex ? ['is-active'] : [])
-							.concat(item.isDanger ? ['is-error'] : [])
-							.concat(item.isDisabled ? ['is-disabled'] : [])
-							.concat(index === flashIndex ? ['is-flashing'] : [])
-							.join(' ')
+					{groupMenuRows(items).map((section) => {
+						if (section.type === 'separator') return <div key={`sep-${section.index}`} class="sep" role="separator" />
+						const rows = section.entries.map(renderEntry)
+						if (!section.heading) return rows
+						const sectionHeadingId = headingId(section.heading.index)
 						return (
-							<button
-								key={item.slot || item.value || item.label || index}
-								type="button"
-								class={cls}
-								role="menuitem"
-								data-index={index}
-								disabled={item.isDisabled}
-								onmouseenter={() => !isCommitting && setActiveIndex(index)}
-								onclick={() => commit(item, index)}
-							>
-								<span class="label">{item.slot ? <slot name={item.slot} /> : item.label}</span>
-								{item.shortcut && <span class="shortcut">{item.shortcut}</span>}
-							</button>
+							<div key={sectionHeadingId} role="group" aria-labelledby={sectionHeadingId}>
+								<div class="heading" id={sectionHeadingId} role="presentation">{section.heading.row.label}</div>
+								{rows}
+							</div>
 						)
 					})}
 				</div>
@@ -343,7 +344,7 @@ export const ZContextMenu = c(
 			isDisabled: { type: Boolean, reflect: true },
 			select: event<{ value: string }>({ bubbles: true, composed: true })
 		},
-		styles
+		styles: [styles, menuRowStyles]
 	}
 )
 

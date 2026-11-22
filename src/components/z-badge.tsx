@@ -134,7 +134,7 @@ const styles = css`
 	.badge.is-selected {
 		background: color-mix(in oklch, var(--tone) 16%, transparent);
 		border-color: color-mix(in oklch, var(--tone) 50%, transparent);
-		color: color-mix(in oklch, var(--tone) 85%, var(--text-strong));
+		color: color-mix(in oklab, var(--tone) 85%, var(--text-strong));
 	}
 	.badge.is-primary.is-selected {
 		color: var(--text-primary);

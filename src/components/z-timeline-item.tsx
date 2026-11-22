@@ -75,7 +75,7 @@ const styles = css`
 		width: var(--rail);
 		height: var(--rail);
 		margin-block: calc((var(--rail) - var(--font-size-sm) * 1.4) / -2);
-		border: 1px solid color-mix(in oklch, var(--tone) 40%, var(--border-default));
+		border: 1px solid color-mix(in oklab, var(--tone) 40%, var(--border-default));
 		border-radius: var(--radius-full);
 		background: var(--surface-default);
 		color: var(--tone);

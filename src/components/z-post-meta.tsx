@@ -29,7 +29,7 @@ const styles = css`
 		align-items: center;
 		justify-content: center;
 		background: color-mix(in srgb, var(--tone) 22%, var(--surface-default));
-		color: color-mix(in oklch, var(--tone) 85%, var(--text-strong));
+		color: color-mix(in oklab, var(--tone) 85%, var(--text-strong));
 		font-size: var(--font-size-2xs);
 		font-weight: var(--font-weight-semibold);
 		font-family: inherit;

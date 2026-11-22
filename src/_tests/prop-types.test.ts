@@ -15,7 +15,8 @@ type PropsOf<Element extends abstract new () => unknown> = InstanceType<Element>
 
 describe('declared prop types are the documented unions', () => {
 	it('z-button', () => {
-		expectTypeOf<PropsOf<typeof ZButton>['size']>().toEqualTypeOf<'sm' | 'md' | 'lg' | undefined>()
+		expectTypeOf<PropsOf<typeof ZButton>['size']>().toEqualTypeOf<'xs' | 'sm' | 'md' | 'lg' | undefined>()
+		expectTypeOf<PropsOf<typeof ZButton>['isIcon']>().toEqualTypeOf<boolean | undefined>()
 		expectTypeOf<PropsOf<typeof ZButton>['kind']>().toEqualTypeOf<'solid' | 'outline' | 'ghost' | 'soft' | 'plain' | undefined>()
 		expectTypeOf<PropsOf<typeof ZButton>['type']>().toEqualTypeOf<'button' | 'submit' | 'reset' | undefined>()
 		// @ts-expect-error — "huge" is not a size

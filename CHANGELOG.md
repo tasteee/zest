@@ -9,6 +9,36 @@ version and a prior deprecation. See `SUPPORT.md`.
 
 ### Added
 
+- Dense editor primitives (Rules 22–24):
+  - `--control-height-xs` (1.75rem). `z-toggle-button` and
+    `z-toggle-button-group` `size="xs"` now read it instead of a
+    hardcoded height.
+  - `z-button` `size="xs"` and `is-icon`, the square icon-only shape
+    `z-toggle-button` already had. An unnamed `is-icon` button warns.
+  - `z-toggle-button-group` `columns`: a grid of items (a 12-note root
+    picker is `columns="6"`). The group is now one tab stop with roving
+    focus: arrow keys move (in two dimensions with `columns`), Home/End
+    jump, disabled items are skipped, and arrows never press.
+  - `z-menu` / `z-context-menu` choice rows: `z-menu-item` `kind`
+    (`action | radio | checkbox`) with `is-checked`, a `description`
+    line, and the new `z-menu-label` section heading that groups the
+    rows after it. The app owns `is-checked`.
+  - `z-select` headed groups: an option with `isGroup: true` shows its
+    children inline under a non-selectable heading instead of opening a
+    submenu.
+  - `z-number-input` `prefix` and `suffix` slots, matching `z-input`: an
+    adornment such as a unit that stays visible while editing.
+  - `reportMisuse` (`src/shared/misuse.ts`), one reporter for Rule 21.
+  - Docs: "Dense regions" and "Tinting a color" on the theming page.
+
+### Fixed
+
+- Tints that mixed a tone toward a neutral in oklch rotated its hue
+  toward the neutral's green tint (message bubbles, timeline markers,
+  badges, avatars, post meta, fieldset errors, solid toggle buttons on
+  a custom surface). They now mix in oklab. A token contract test guards
+  it.
+
 - `z-fieldset`: a titled group of controls with a group description and
   error. `is-disabled` disables every control inside, as a native
   fieldset does, and restores only what it disabled.

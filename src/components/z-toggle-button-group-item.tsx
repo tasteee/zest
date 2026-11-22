@@ -9,7 +9,7 @@ export const ZToggleButtonGroupItem = c(
 		const buttonClass = resolveToggleButtonClass(props)
 
 		return (
-			<host shadowDom>
+			<host shadowDom={{ delegatesFocus: true }}>
 				<button
 					type="button"
 					class={buttonClass}

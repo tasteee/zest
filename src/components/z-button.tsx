@@ -1,7 +1,8 @@
 import { interactionStyles } from '../shared/interaction-styles'
 import { defineFormElement, useFormControl } from '../shared/form-control'
-import { useAccessibleName } from '../shared/accessible'
-import { c, css } from 'atomico'
+import { resolveAccessibleName, useAccessibleName } from '../shared/accessible'
+import { reportMisuse } from '../shared/misuse'
+import { c, css, useEffect, useHost } from 'atomico'
 import { oneOf } from '../shared/prop-types'
 
 const styles = css`
@@ -53,27 +54,51 @@ const styles = css`
 		outline-offset: 0;
 	}
 
-	/* sizes */
+	/* sizes: each sets --button-height, which both the height and the
+	   square is-icon width read, so is-icon tracks whichever size is active. */
+
+	button.is-xs {
+		--button-height: var(--control-height-xs);
+		border-radius: var(--z-button-radius, var(--radius-sm));
+		height: var(--button-height);
+		padding-inline: var(--space-2-5);
+		font-size: var(--font-size-xs);
+	}
 
 	button.is-sm {
+		--button-height: var(--control-height-sm);
 		border-radius: var(--z-button-radius, var(--radius-md));
-		height: var(--control-height-sm);
+		height: var(--button-height);
 		padding-inline: var(--space-3-5);
 		font-size: var(--font-size-sm);
 	}
 
 	button.is-md {
+		--button-height: var(--control-height-md);
 		border-radius: var(--z-button-radius, var(--radius-md));
-		height: var(--control-height-md);
+		height: var(--button-height);
 		padding-inline: var(--space-4);
 		font-size: var(--font-size-sm);
 	}
 
 	button.is-lg {
+		--button-height: var(--control-height-lg);
 		border-radius: var(--z-button-radius, var(--radius-md));
-		height: var(--control-height-lg);
+		height: var(--button-height);
 		padding-inline: var(--space-6);
 		font-size: var(--font-size-md);
+	}
+
+	/* is-icon: a square, icon-only button. A shape modifier that composes with
+	   every size, kind and tone, matching z-toggle-button's is-icon. */
+	button.is-icon {
+		width: var(--button-height);
+		padding-inline: 0;
+		gap: 0;
+	}
+
+	button.is-icon.is-loading .label {
+		display: none;
 	}
 
 	button.is-neutral {
@@ -227,6 +252,11 @@ const styles = css`
 		flex-shrink: 0;
 	}
 
+	button.is-xs ::slotted(svg) {
+		width: 0.75rem;
+		height: 0.75rem;
+	}
+
 	button.is-sm ::slotted(svg) {
 		width: 0.875rem;
 		height: 0.875rem;
@@ -261,6 +291,7 @@ const styles = css`
 `
 
 const resolveSizeClass = (props: any): string => {
+	if (props.size === 'xs') return 'is-xs'
 	if (props.size === 'sm') return 'is-sm'
 	if (props.size === 'lg') return 'is-lg'
 	return 'is-md'
@@ -317,7 +348,18 @@ export const ZButton = c(
 		const sizeClass = resolveSizeClass(props)
 		const isButtonDisabled = isDisabled || props.isLoading
 
+		const host = useHost()
+		useEffect(() => {
+			if (!props.isIcon) return
+			const element = host.current as HTMLElement
+			const hasVisibleText = Boolean(props.label) || Boolean(element.textContent?.trim())
+			const hasName = Boolean(resolveAccessibleName(element)) || hasVisibleText
+			if (hasName) return
+			reportMisuse(element, 'icon-name', 'z-button: an is-icon button has no accessible name. Add aria-label or aria-labelledby.')
+		}, [props.isIcon, props.label, accessibleName])
+
 		const buttonClass = [kindClass, toneClass, sizeClass]
+			.concat(props.isIcon ? ['is-icon'] : [])
 			.concat(props.isLoading ? ['is-loading'] : [])
 			.concat(isDisabled ? ['is-disabled'] : [])
 			.concat(props.isFullWidth ? ['is-full-width'] : [])
@@ -334,9 +376,10 @@ export const ZButton = c(
 	},
 	{
 		props: {
-			size: { type: oneOf('sm', 'md', 'lg'), reflect: true },
+			size: { type: oneOf('xs', 'sm', 'md', 'lg'), reflect: true },
 			kind: { type: oneOf('solid', 'outline', 'ghost', 'soft', 'plain'), reflect: true },
 			tone: { type: oneOf('neutral', 'primary', 'secondary', 'tertiary', 'success', 'warning', 'danger'), reflect: true },
+			isIcon: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },
 			isDisabled: { type: Boolean, reflect: true },
 			isLoading: { type: Boolean, reflect: true },
