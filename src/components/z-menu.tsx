@@ -14,13 +14,13 @@ import { computePosition, autoUpdate, applyPosition } from '../shared/overlay'
  *   <z-menu-item value="rename" shortcut="⌘R">Rename</z-menu-item>
  *   <z-menu-separator></z-menu-separator>
  *   <z-menu-item value="delete" is-danger>Delete</z-menu-item>
- * Choice rows: kind="radio" or kind="checkbox" with is-checked (the app owns
+ * Choice rows: type="radio" or type="checkbox" with is-checked (the app owns
  * which is checked), an optional description line, and <z-menu-label> section
  * headings that group the rows after them:
  *   <z-menu-label>Fold rows</z-menu-label>
- *   <z-menu-item value="notes" kind="radio" is-checked description="Only rows with notes">Notes</z-menu-item>
+ *   <z-menu-item value="notes" type="radio" is-checked description="Only rows with notes">Notes</z-menu-item>
  * or an `items` array property for data-driven menus:
- *   el.items = [{ value, label, icon?, shortcut?, description?, kind?, isChecked?, isDisabled?, isSeparator?, isHeading?, isDanger? }]
+ *   el.items = [{ value, label, icon?, shortcut?, description?, type?, isChecked?, isDisabled?, isSeparator?, isHeading?, isDanger? }]
  * The panel is a bordered, floating popover. Keyboard, per the WAI-ARIA
  * menu button pattern: ↓ / Enter / Space open and focus the first item, ↑
  * opens and focuses the last; inside, ↑/↓ move (wrapping, skipping
@@ -207,8 +207,8 @@ export const ZMenu = c(
 		const childItems: MenuItemT[] = children.map(readMenuRow)
 		const items: MenuItemT[] = [...childItems, ...(Array.isArray(props.items) ? (props.items as MenuItemT[]) : [])]
 		const selectable = (i: number) => isSelectableRow(items[i])
-		const rawKinds = children.map((child) => child.attributes.kind)
-		useEffect(() => reportMenuRowMisuse(host.current, items, rawKinds), [items.length, rawKinds.join('|'), items.map((item) => `${item.kind}:${item.isChecked}`).join('|')])
+		const rawTypes = children.map((child) => child.attributes.type)
+		useEffect(() => reportMenuRowMisuse(host.current, items, rawTypes), [items.length, rawTypes.join('|'), items.map((item) => `${item.type}:${item.isChecked}`).join('|')])
 		const selectableIndices = items.flatMap((_, index) => selectable(index) ? [index] : [])
 
 		const triggerElement = () => triggerSlotRef.current?.assignedElements({ flatten: true })[0] as HTMLElement | undefined
@@ -422,7 +422,7 @@ export const ZMenu = c(
 
 /*
  * z-menu-item, one declarative row for z-menu and z-context-menu. Attributes
- * mirror the `items` entries (value, label, shortcut, description, kind,
+ * mirror the `items` entries (value, label, shortcut, description, type,
  * is-checked, is-disabled, is-danger); its children are the row's visible
  * content.
  */
@@ -438,7 +438,7 @@ export const ZMenuItem = c(
 			label: { type: String, reflect: true },
 			shortcut: { type: String, reflect: true },
 			description: { type: String, reflect: true },
-			kind: { type: oneOf('action', 'radio', 'checkbox'), reflect: true },
+			type: { type: oneOf('action', 'radio', 'checkbox'), reflect: true },
 			isChecked: { type: Boolean, reflect: true },
 			isDisabled: { type: Boolean, reflect: true },
 			isDanger: { type: Boolean, reflect: true }

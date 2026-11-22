@@ -19,7 +19,7 @@ version and a prior deprecation. See `SUPPORT.md`.
     picker is `columns="6"`). The group is now one tab stop with roving
     focus: arrow keys move (in two dimensions with `columns`), Home/End
     jump, disabled items are skipped, and arrows never press.
-  - `z-menu` / `z-context-menu` choice rows: `z-menu-item` `kind`
+  - `z-menu` / `z-context-menu` choice rows: `z-menu-item` `type`
     (`action | radio | checkbox`) with `is-checked`, a `description`
     line, and the new `z-menu-label` section heading that groups the
     rows after it. The app owns `is-checked`.

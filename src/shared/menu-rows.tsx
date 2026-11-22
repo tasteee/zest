@@ -7,8 +7,8 @@ import { reportMisuse } from './misuse'
  * same declarative children and draw the same row anatomy.
  *
  *   <z-menu-label>Fold rows</z-menu-label>
- *   <z-menu-item value="off" kind="radio" is-checked description="Show every pitch">Off</z-menu-item>
- *   <z-menu-item value="notes" kind="radio" description="Only rows with notes">Notes</z-menu-item>
+ *   <z-menu-item value="off" type="radio" is-checked description="Show every pitch">Off</z-menu-item>
+ *   <z-menu-item value="notes" type="radio" description="Only rows with notes">Notes</z-menu-item>
  *   <z-menu-separator></z-menu-separator>
  *   <z-menu-item value="rename" shortcut="⌘R">Rename</z-menu-item>
  *
@@ -16,7 +16,7 @@ import { reportMisuse } from './misuse'
  * is-checked itself; it only reports the pick through `select` (Rule 1).
  */
 
-export type MenuItemKindT = 'action' | 'radio' | 'checkbox'
+export type MenuItemTypeT = 'action' | 'radio' | 'checkbox'
 
 export type MenuRowT = {
 	value?: string
@@ -25,7 +25,7 @@ export type MenuRowT = {
 	shortcut?: string
 	/** a second, smaller line under the label */
 	description?: string
-	kind?: MenuItemKindT
+	type?: MenuItemTypeT
 	isChecked?: boolean
 	isDisabled?: boolean
 	isSeparator?: boolean
@@ -38,13 +38,13 @@ export type MenuRowT = {
 
 export const MENU_ROW_TAGS = ['z-menu-item', 'z-menu-separator', 'z-menu-label']
 
-export const MENU_ROW_ATTRIBUTES = ['shortcut', 'is-disabled', 'is-danger', 'kind', 'is-checked', 'description']
+export const MENU_ROW_ATTRIBUTES = ['shortcut', 'is-disabled', 'is-danger', 'type', 'is-checked', 'description']
 
-const KINDS: MenuItemKindT[] = ['action', 'radio', 'checkbox']
+const TYPES: MenuItemTypeT[] = ['action', 'radio', 'checkbox']
 
-const resolveKind = (value: string | null | undefined): MenuItemKindT => {
-	const isKnown = KINDS.includes(value as MenuItemKindT)
-	return isKnown ? (value as MenuItemKindT) : 'action'
+const resolveType = (value: string | null | undefined): MenuItemTypeT => {
+	const isKnown = TYPES.includes(value as MenuItemTypeT)
+	return isKnown ? (value as MenuItemTypeT) : 'action'
 }
 
 /** A declarative child as a row record. */
@@ -58,7 +58,7 @@ export const readMenuRow = (child: ChildItemT): MenuRowT => {
 		label: child.label,
 		shortcut: child.attributes.shortcut || undefined,
 		description: child.attributes.description || undefined,
-		kind: resolveKind(child.attributes.kind),
+		type: resolveType(child.attributes.type),
 		isChecked: hasFlag(child, 'is-checked'),
 		isDisabled: hasFlag(child, 'is-disabled'),
 		isDanger: hasFlag(child, 'is-danger'),
@@ -72,11 +72,11 @@ export const isSelectableRow = (row: MenuRowT | undefined): boolean => {
 	return !row.isSeparator && !row.isHeading && !row.isDisabled
 }
 
-const isCheckable = (row: MenuRowT): boolean => row.kind === 'radio' || row.kind === 'checkbox'
+const isCheckable = (row: MenuRowT): boolean => row.type === 'radio' || row.type === 'checkbox'
 
 export const menuItemRole = (row: MenuRowT): string => {
-	if (row.kind === 'radio') return 'menuitemradio'
-	if (row.kind === 'checkbox') return 'menuitemcheckbox'
+	if (row.type === 'radio') return 'menuitemradio'
+	if (row.type === 'checkbox') return 'menuitemcheckbox'
 	return 'menuitem'
 }
 
@@ -86,13 +86,13 @@ export const menuItemChecked = (row: MenuRowT): string | undefined => {
 }
 
 /** Reports rows a menu cannot draw correctly (Rule 21). */
-export const reportMenuRowMisuse = (host: Element, rows: MenuRowT[], rawKinds: Array<string | null | undefined>): void => {
-	for (const rawKind of rawKinds) {
-		const isUnknownKind = Boolean(rawKind) && !KINDS.includes(rawKind as MenuItemKindT)
-		if (isUnknownKind) reportMisuse(host, `menu-kind-${rawKind}`, `menu item kind="${rawKind}" is not one of action, radio, checkbox. It is treated as an action.`)
+export const reportMenuRowMisuse = (host: Element, rows: MenuRowT[], rawTypes: Array<string | null | undefined>): void => {
+	for (const rawType of rawTypes) {
+		const isUnknownType = Boolean(rawType) && !TYPES.includes(rawType as MenuItemTypeT)
+		if (isUnknownType) reportMisuse(host, `menu-type-${rawType}`, `menu item type="${rawType}" is not one of action, radio, checkbox. It is treated as an action.`)
 	}
 	const hasCheckedAction = rows.some((row) => row.isChecked && !isCheckable(row))
-	if (hasCheckedAction) reportMisuse(host, 'menu-checked-action', 'menu item has is-checked but kind is not radio or checkbox, so the check is not shown. Set kind="radio" or kind="checkbox".')
+	if (hasCheckedAction) reportMisuse(host, 'menu-checked-action', 'menu item has is-checked but its type is not radio or checkbox, so the check is not shown. Set type="radio" or type="checkbox".')
 }
 
 export type MenuEntryT = { row: MenuRowT; index: number }
