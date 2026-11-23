@@ -34,9 +34,6 @@ export const chipStyles = css`
 		height: var(--chip-height);
 		max-width: 100%;
 		padding-inline: var(--chip-padding);
-		/* Font metrics seat text slightly high; 1px of top padding
-		   leaves 1px less below than above. */
-		padding-top: 1px;
 		border: 1px solid var(--chip-rest-border);
 		border-radius: var(--radius-full);
 		background: var(--chip-rest-bg);
@@ -132,10 +129,17 @@ export const chipStyles = css`
 		pointer-events: none;
 	}
 
+	/* Center the capitals, not the font's ascent and descent. Those metrics
+	   differ by platform (Windows reads other font tables), which moved text
+	   up or down by a pixel or two. Trimming to cap height and baseline makes
+	   the box the capitals, so align-items: center centers them everywhere.
+	   The padding keeps ascenders and descenders inside the clipping box. */
 	.label {
 		min-width: 0;
 		overflow: hidden;
 		text-overflow: ellipsis;
+		text-box: trim-both cap alphabetic;
+		padding-block: 0.3em;
 	}
 
 	.check {
