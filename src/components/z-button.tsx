@@ -277,10 +277,18 @@ const styles = css`
 	}
 
 	.label {
-		transform: translateY(calc(var(--space-1) / 4));
 		display: inline-flex;
 		align-items: center;
 		gap: var(--space-2);
+	}
+
+	/* Center the capitals, not the font's ascent and descent. Those metrics
+	   differ by platform (Windows reads other font tables), which moved text
+	   up or down by a pixel or two. Trimming the label to cap height and
+	   baseline makes align-items: center center the capitals everywhere. */
+	.label.is-text {
+		display: block;
+		text-box: trim-both cap alphabetic;
 	}
 
 	@keyframes z-button-spin {
@@ -358,6 +366,13 @@ export const ZButton = c(
 			reportMisuse(element, 'icon-name', 'z-button: an is-icon button has no accessible name. Add aria-label or aria-labelledby.')
 		}, [props.isIcon, props.label, accessibleName])
 
+		// Text alone (no slotted icons) gets a cap-trimmed label, so the capitals
+		// sit in the exact middle on every platform.
+		const hostElement = host.current as HTMLElement
+		const hasSlottedElements = !props.label && hostElement.children.length > 0
+		const isTextOnly = !props.isIcon && !hasSlottedElements
+		const labelClass = isTextOnly ? 'label is-text' : 'label'
+
 		const buttonClass = [kindClass, toneClass, sizeClass]
 			.concat(props.isIcon ? ['is-icon'] : [])
 			.concat(props.isLoading ? ['is-loading'] : [])
@@ -369,7 +384,7 @@ export const ZButton = c(
 			<host shadowDom={{ delegatesFocus: true }}>
 				<button class={buttonClass} type={buttonType} disabled={isButtonDisabled} aria-busy={props.isLoading ? 'true' : undefined} aria-label={accessibleName} onclick={relayToForm}>
 					{props.isLoading && <span class='spinner' aria-hidden='true'></span>}
-					<span class='label'>{props.label ? props.label : <slot />}</span>
+					<span class={labelClass}>{props.label ? props.label : <slot />}</span>
 				</button>
 			</host>
 		)

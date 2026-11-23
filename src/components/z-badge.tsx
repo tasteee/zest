@@ -62,15 +62,27 @@ const styles = css`
 		--tone: var(--status-danger);
 	}
 
-	/* sizes */
+	/* Center the capitals, not the font's ascent and descent. Those metrics
+	   differ by platform (Windows reads other font tables), which moved text
+	   up or down by a pixel or two. The label box is trimmed to cap height and
+	   baseline, so align-items: center centers the capitals everywhere. */
+	.label {
+		text-box: trim-both cap alphabetic;
+	}
+
+	/* sizes: a fixed height, so trimming the text never changes the size */
 	.badge.is-sm {
+		box-sizing: border-box;
+		height: 1.3125rem;
 		font-size: var(--font-size-2xs);
-		padding: var(--space-1) var(--space-2);
+		padding: 0 var(--space-2);
 		letter-spacing: 0.01em;
 	}
 	.badge.is-md {
+		box-sizing: border-box;
+		height: 1.625rem;
 		font-size: var(--font-size-xs);
-		padding: var(--space-1-5) var(--space-2-5);
+		padding: 0 var(--space-2-5);
 	}
 
 	/* kinds */

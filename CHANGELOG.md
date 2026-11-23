@@ -7,6 +7,18 @@ version and a prior deprecation. See `SUPPORT.md`.
 
 ## [Unreleased]
 
+## [1.1.3] - 2026-11-23
+
+### Fixed
+
+- Text in `z-badge`, `z-chip` (and the chip family) and text-only
+  `z-button` sits in the exact vertical middle on every platform. Labels
+  are trimmed to cap height and baseline (`text-box`), so centering no
+  longer depends on the font's ascent and descent, which Windows reads
+  from other tables. Removes the 1px nudges in chips and buttons that
+  were tuned for one platform. Badges now have fixed heights (26px md,
+  21px sm, as before).
+
 ## [1.1.2] - 2026-11-23
 
 ### Fixed
