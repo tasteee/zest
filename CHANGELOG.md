@@ -33,6 +33,9 @@ version and a prior deprecation. See `SUPPORT.md`.
 
 ### Fixed
 
+- `z-sortable` only starts a drag on the primary button. A right-click,
+  or a synthetic `pointerdown` with no real pointer behind it, started a
+  drag that never ended, so the item followed the mouse.
 - Tints that mixed a tone toward a neutral in oklch rotated its hue
   toward the neutral's green tint (message bubbles, timeline markers,
   badges, avatars, post meta, fieldset errors, solid toggle buttons on

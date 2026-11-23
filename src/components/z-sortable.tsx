@@ -72,6 +72,10 @@ export const ZSortable = c(
 
 		const onDown = (e: PointerEvent) => {
 			if (props.isDisabled) return
+			// Only the primary button drags. A right-click (or a synthetic event with no
+			// real pointer behind it) would otherwise start a drag that never ends.
+			const isPrimary = e.button === 0 && e.isPrimary !== false
+			if (!isPrimary) return
 			const child = childOf(e)
 			if (!child || child.classList.contains('placeholder')) return
 			if (props.handle && !(e.target as HTMLElement).closest(props.handle as string)) return
