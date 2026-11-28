@@ -218,10 +218,8 @@ export const ZMenu = c(
 		const syncTriggerAria = () => {
 			const trigger = triggerElement()
 			if (!trigger) return
-			// A Zest button is itself a host; the attributes go on its inner control.
-			const control = trigger.shadowRoot?.querySelector('button, [role]') ?? trigger
-			control.setAttribute('aria-haspopup', 'menu')
-			control.setAttribute('aria-expanded', isOpen ? 'true' : 'false')
+			trigger.setAttribute('aria-haspopup', 'menu')
+			trigger.setAttribute('aria-expanded', isOpen ? 'true' : 'false')
 		}
 		useEffect(syncTriggerAria, [isOpen])
 		const openAt = (index: number) => {

@@ -67,7 +67,7 @@
  *   4. Light      The light palette, authored by hand. It declares only what
  *                 the dark palette declares, so it never ties with layer 3.
  *
- * Why derivation targets `:root, [data-theme], [data-zest-scope]`
+ * Why derivation also runs at themed, scoped and compact regions
  * ---------------------------------------------------------------
  * A custom property is substituted where it is declared, not where it is
  * used. After `--text-primary: var(--color-neutral-8)` resolves on <html>,
@@ -75,13 +75,14 @@
  * `--color-neutral-8` further down the tree does nothing to them.
  *
  * So any element that changes an input (a theme's palette, --base-radius,
- * --base-spacing, --base-font-size) must also re-run the derivations. Two
- * kinds of element do that:
+ * --base-spacing, --base-font-size) must also re-run the derivations. These
+ * regions do that:
  *
  *   [data-theme]       a themed region. Sets a palette and re-derives.
  *   [data-zest-scope]  a region that only changes the scale inputs. It keeps
  *                      the inherited palette and re-derives against its own
  *                      --base-* values.
+ *   [data-density="compact"]  applies the editor scale and re-derives it.
  *
  * Without one of those attributes, a container that sets --base-radius
  * changes the input but inherits the radius already computed on <html>.
@@ -188,6 +189,19 @@
 	--z-toast: 1000;
 }
 
+/* The compact editor scale. Consumer overrides on the same element have
+   priority, just like the root inputs. */
+:where([data-density="compact"]) {
+	--base-font-size: 14px;
+	--control-height-xs: 1.5rem;
+	--control-height-sm: 1.75rem;
+	--control-height-md: 1.875rem;
+	--control-height-lg: 2.5rem;
+	--control-icon-size-sm: 1rem;
+	--toolbar-divider-height: 1.125rem;
+	--toolbar-divider-align: center;
+}
+
 /* Reduced motion drops travel and scale. The theme fade is also retimed to
    zero, which applies the theme immediately. Opacity is not movement, but a
    full-page fade is the most visible animation zest runs, and a consumer who
@@ -273,7 +287,8 @@
  * ------------------------------------------------------------------------- */
 :root,
 [data-theme],
-[data-zest-scope] {
+[data-zest-scope],
+:where([data-density="compact"]) {
 	/* Type scale: one named scale, 2xs to 7xl. Every step follows
      --base-font-size, so one dial rescales all text. rem keeps the user's
      browser font-size setting in play. */
@@ -456,7 +471,8 @@
 
 	:root,
 	[data-theme],
-	[data-zest-scope] {
+	[data-zest-scope],
+	:where([data-density="compact"]) {
 		--border-default: var(--color-neutral-5);
 		--border-strong: var(--color-neutral-6);
 	}

@@ -1,6 +1,6 @@
 # Tightening Zest to match the Maddie toolbar design
 
-Status: notes. Nothing here is implemented in Zest yet.
+Status: partially implemented. Zest now has a compact density preset, a chip button for settings triggers, larger small glyphs and short toolbar dividers in compact regions. Transport-specific number input dimensions remain app-owned.
 
 Maddie's toolbar design (the "MIDI Editor Toolbar Redesign" canvas) looks more precise than the same toolbar built from stock Zest controls. The gap is not color or radius. It is size, icon weight and a few small details. Maddie closes it today with local overrides (`maddie/src/elements/toolbar-bar.css`, `controls.css`, `icons.ts`). These notes say what Zest itself should do so the overrides can go away.
 

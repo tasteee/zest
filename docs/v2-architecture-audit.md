@@ -259,7 +259,7 @@ child's public props**, so the consumer and the parent both write one fact.
 | L6 | `z-toggle-button-group.tsx:252` | Item `isPressed` vs group `value`. | Group owns. |
 | L7 | `z-stepper.tsx:90–94` | Step `index`, `isLast`, `isVertical`, `isNavigable`, `size`: public props the stepper overwrites. | Derived and read-only, or inherited. Not consumer props. |
 | L8 | `z-accordion.tsx:45` | Collapsible `isOpen` written by both accordion and consumer. | Accordion `value` (open item ids) owns open state, like tabs. |
-| L9 | `z-menu.tsx:236`, `z-popover.tsx:68` | Reach into the trigger's shadow root to set `aria-expanded` / `aria-haspopup`. | Trigger contract: a Zest trigger exposes a public expanded-state property; a plain element gets the attribute on the host. |
+| L9 | Menu and popover triggers | Resolved. Owners set standard popup ARIA on the trigger element. | A Zest button forwards those attributes to its native control. |
 | L10 | `z-chip-group`, `z-checkbox-group`, `z-radio-group`, `z-stepper`, `z-timeline` | Group `size` / `tone` / `kind` cascade to children through CSS variables; children have the same props; which wins is not stated. | Inherited channel with one rule: the child's own prop wins, the group sets the default (same as D2). |
 
 Held-back elements with the same pattern (`z-message-group`,
@@ -302,7 +302,6 @@ undo a control the consumer disabled.
 | 22 form-associated controls | 22 | S–M | Field link, D3 validity, inherited state, `label` dropped. |
 | `z-slider`, `z-range` header move | (in 22) | M | Header slots move to `z-field`. |
 | Groups and coordinators (`z-fieldset`, `z-stepper`, `z-step`, `z-accordion`, `z-collapsible`, `z-radio`, `z-chip`, `z-toggle-button-group-item`) | 8 | S–M | Group ownership + inherited channel. `z-radio` `label` becomes visible. |
-| Overlay triggers (`z-menu`, `z-popover`, `z-button`) | 3 | S | Trigger contract. |
 | Other `label` drops (`z-calendar`, `z-copy-field`, `z-spinner`, `z-dialog`, `z-command`, `z-tabs`, `z-pagination`, `z-filter`, `z-timeline`, `z-swap`, `z-toolbar-group`) | ~11 | S | `aria-label` instead. |
 | **Total** | **~45** | | |
 

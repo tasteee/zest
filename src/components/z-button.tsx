@@ -2,8 +2,10 @@ import { interactionStyles } from '../shared/interaction-styles'
 import { defineFormElement, useFormControl } from '../shared/form-control'
 import { resolveAccessibleName, useAccessibleName } from '../shared/accessible'
 import { reportMisuse } from '../shared/misuse'
-import { c, css, useEffect, useHost } from 'atomico'
+import { c, css, useEffect, useHost, useRef } from 'atomico'
 import { oneOf } from '../shared/prop-types'
+
+const POPUP_ATTRIBUTES = ['aria-haspopup', 'aria-expanded']
 
 const styles = css`
 	:host {
@@ -87,6 +89,35 @@ const styles = css`
 		height: var(--button-height);
 		padding-inline: var(--space-6);
 		font-size: var(--font-size-md);
+	}
+
+	button.is-chip {
+		padding-inline: var(--space-2-5);
+		background: var(--surface-default);
+		border-color: var(--border-default);
+		color: var(--tone);
+		font-size: calc(var(--font-size-md) * 25 / 28);
+	}
+
+	button.is-chip:hover,
+	button.is-chip[aria-expanded='true'] {
+		border-color: var(--border-strong);
+	}
+
+	button.is-chip:active,
+	button.is-chip[aria-expanded='true'] {
+		background: var(--surface-page);
+	}
+
+	.chip-icon {
+		display: contents;
+	}
+
+	.chevron {
+		width: 0.75rem;
+		height: 0.75rem;
+		flex: none;
+		color: var(--text-tertiary);
 	}
 
 	/* is-icon: a square, icon-only button. A shape modifier that composes with
@@ -258,13 +289,19 @@ const styles = css`
 	}
 
 	button.is-sm ::slotted(svg) {
-		width: 0.875rem;
-		height: 0.875rem;
+		width: var(--control-icon-size-sm, 0.875rem);
+		height: var(--control-icon-size-sm, 0.875rem);
 	}
 
 	button.is-lg ::slotted(svg) {
 		width: 1.125rem;
 		height: 1.125rem;
+	}
+
+	button .chip-icon::slotted(svg) {
+		width: 0.9375rem;
+		height: 0.9375rem;
+		color: var(--text-tertiary);
 	}
 
 	button.is-outline.is-neutral {
@@ -306,6 +343,7 @@ const resolveSizeClass = (props: any): string => {
 }
 
 const resolveKindClass = (props: any): string => {
+	if (props.kind === 'chip') return 'is-chip'
 	if (props.kind === 'outline') return 'is-outline'
 	if (props.kind === 'ghost') return 'is-ghost'
 	if (props.kind === 'soft') return 'is-soft'
@@ -357,6 +395,23 @@ export const ZButton = c(
 		const isButtonDisabled = isDisabled || props.isLoading
 
 		const host = useHost()
+		const buttonRef = useRef<HTMLButtonElement>()
+		useEffect(() => {
+			const element = host.current as HTMLElement
+			const syncPopupAttributes = () => {
+				const button = buttonRef.current
+				if (!button) return
+				for (const attribute of POPUP_ATTRIBUTES) {
+					const value = element.getAttribute(attribute)
+					if (value === null) button.removeAttribute(attribute)
+					else button.setAttribute(attribute, value)
+				}
+			}
+			const observer = new MutationObserver(syncPopupAttributes)
+			observer.observe(element, { attributes: true, attributeFilter: POPUP_ATTRIBUTES })
+			syncPopupAttributes()
+			return () => observer.disconnect()
+		}, [])
 		useEffect(() => {
 			if (!props.isIcon) return
 			const element = host.current as HTMLElement
@@ -369,8 +424,9 @@ export const ZButton = c(
 		// Text alone (no slotted icons) gets a cap-trimmed label, so the capitals
 		// sit in the exact middle on every platform.
 		const hostElement = host.current as HTMLElement
-		const hasSlottedElements = !props.label && hostElement.children.length > 0
+		const hasSlottedElements = !props.label && Array.from(hostElement.children).some((child) => !child.getAttribute('slot'))
 		const isTextOnly = !props.isIcon && !hasSlottedElements
+		const showsChipAffordances = props.kind === 'chip' && !props.isIcon
 		const labelClass = isTextOnly ? 'label is-text' : 'label'
 
 		const buttonClass = [kindClass, toneClass, sizeClass]
@@ -382,9 +438,15 @@ export const ZButton = c(
 
 		return (
 			<host shadowDom={{ delegatesFocus: true }}>
-				<button class={buttonClass} type={buttonType} disabled={isButtonDisabled} aria-busy={props.isLoading ? 'true' : undefined} aria-label={accessibleName} onclick={relayToForm}>
+				<button ref={buttonRef} class={buttonClass} type={buttonType} disabled={isButtonDisabled} aria-busy={props.isLoading ? 'true' : undefined} aria-label={accessibleName} onclick={relayToForm}>
 					{props.isLoading && <span class='spinner' aria-hidden='true'></span>}
+					{showsChipAffordances && <slot class='chip-icon' name='leading-icon' aria-hidden='true' />}
 					<span class={labelClass}>{props.label ? props.label : <slot />}</span>
+					{showsChipAffordances && (
+						<svg class='chevron' viewBox='0 0 12 12' aria-hidden='true' fill='none' stroke='currentColor' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'>
+							<path d='m3 4.5 3 3 3-3' />
+						</svg>
+					)}
 				</button>
 			</host>
 		)
@@ -392,7 +454,7 @@ export const ZButton = c(
 	{
 		props: {
 			size: { type: oneOf('xs', 'sm', 'md', 'lg'), reflect: true },
-			kind: { type: oneOf('solid', 'outline', 'ghost', 'soft', 'plain'), reflect: true },
+			kind: { type: oneOf('solid', 'outline', 'ghost', 'soft', 'plain', 'chip'), reflect: true },
 			tone: { type: oneOf('neutral', 'primary', 'secondary', 'tertiary', 'success', 'warning', 'danger'), reflect: true },
 			isIcon: { type: Boolean, reflect: true },
 			isHidden: { type: Boolean, reflect: true },

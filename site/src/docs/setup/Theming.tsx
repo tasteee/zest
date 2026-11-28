@@ -1,5 +1,6 @@
 import { Link } from 'wouter'
 import { Article, Code } from '@app/docs/Prose'
+import { DocExample } from '@app/docs/DocExample'
 import { MarkupCode } from '@app/docs/frameworks/MarkupCode'
 
 export const Theming = () => (
@@ -55,33 +56,15 @@ export const Theming = () => (
 
 		<h2>Dense regions</h2>
 		<p>
-			Zest's controls are sized for forms. Editors, toolbars and inspectors need tighter controls in one part of the page.
-			Every control reads its height from the <code>--control-height-xs</code> / <code>-sm</code> / <code>-md</code> /{' '}
-			<code>-lg</code> tokens. Those are plain values, not derived ones, so overriding them on a container resizes every Zest
-			control inside it. Add <code>data-zest-scope</code> as well to rescale the type, spacing and radius for that region. Never
-			shrink a single control with your own height override: the tokens keep a button, an input and a toggle side by side in
-			agreement.
+			Set <code>data-density="compact"</code> on an editor region. It applies a 14px base type scale, 24/28/30/40px control
+			heights at the default browser font size, 16px small button glyphs, and short vertical toolbar dividers.
+			The surrounding page keeps its default density. To tune the scale further, override the control heights or base type
+			size on the compact region.
 		</p>
-		<MarkupCode
-			html={`
-<div class="editor" data-zest-scope>
-  <z-toolbar aria-label="Transport">
-    <z-button is-icon size="sm" kind="ghost" aria-label="Go to start">…</z-button>
-    <z-toggle-button is-icon size="sm" aria-label="Loop">…</z-toggle-button>
-  </z-toolbar>
-</div>
-`}
-		/>
-		<Code
-			language="css"
-			code={`
-.editor {
-  --base-font-size: 14px;
-  --control-height-xs: 1.5rem;   /* 24px */
-  --control-height-sm: 1.75rem;  /* 28px */
-  --control-height-md: 1.875rem; /* 30px */
-}
-`}
+		<DocExample
+			demo="theming/compact-editor-toolbar"
+			title="Compact editor toolbar"
+			description="Play, Loop, tempo, and two settings triggers share one density. Open Grid or Output to see the expanded treatment."
 		/>
 
 		<h2>Tinting a color</h2>

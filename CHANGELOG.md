@@ -7,6 +7,15 @@ version and a prior deprecation. See `SUPPORT.md`.
 
 ## [Unreleased]
 
+### Added
+
+- Apply data-density="compact" to give editor controls shared compact heights, type, and toolbar metrics.
+- Use kind="chip" on z-button for a compact settings trigger with a leading-icon slot, a chevron, and an expanded treatment.
+
+### Fixed
+
+- Menus and popovers set popup ARIA on the slotted trigger. Zest buttons forward it to their native control.
+
 ## [1.1.3] - 2026-11-23
 
 ### Fixed

@@ -32,7 +32,7 @@ const styles = css`
 		border-radius: var(--z-toggle-button-radius, var(--radius-md));
 		height: var(--toggle-height, 2.5rem);
 		padding-inline: var(--toggle-padding-inline, 1rem);
-		min-width: var(--toggle-min-width, 2.5rem);
+		min-width: var(--toggle-height, 2.5rem);
 		font-size: var(--toggle-font-size, 0.875rem);
 		transition:
 			opacity var(--motion-instant) var(--ease-enter),
@@ -67,7 +67,6 @@ const styles = css`
 	button.is-xs {
 		--toggle-height: var(--control-height-xs);
 		--toggle-padding-inline: 0.625rem;
-		--toggle-min-width: var(--control-height-xs);
 		--toggle-font-size: var(--font-size-xs);
 		--toggle-icon-size: 0.75rem;
 	}
@@ -75,15 +74,13 @@ const styles = css`
 	button.is-sm {
 		--toggle-height: var(--control-height-sm);
 		--toggle-padding-inline: 0.75rem;
-		--toggle-min-width: 2rem;
 		--toggle-font-size: var(--font-size-sm);
-		--toggle-icon-size: 0.875rem;
+		--toggle-icon-size: var(--control-icon-size-sm, 0.875rem);
 	}
 
 	button.is-md {
 		--toggle-height: var(--control-height-md);
 		--toggle-padding-inline: 1rem;
-		--toggle-min-width: 2.5rem;
 		--toggle-font-size: var(--font-size-sm);
 		--toggle-icon-size: 1rem;
 	}
@@ -91,7 +88,6 @@ const styles = css`
 	button.is-lg {
 		--toggle-height: var(--control-height-lg);
 		--toggle-padding-inline: 1.25rem;
-		--toggle-min-width: 3rem;
 		--toggle-font-size: var(--font-size-md);
 		--toggle-icon-size: 1.125rem;
 	}

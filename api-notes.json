@@ -657,10 +657,11 @@
 					"soft",
 					"outline",
 					"ghost",
-					"plain"
+					"plain",
+					"chip"
 				],
 				"default": "solid",
-				"description": "Visual treatment. Choose `kind` for priority first, then `tone` for meaning."
+				"description": "Visual treatment. Use chip for a labeled settings trigger: a quiet outline, small chevron, and distinct expanded state. Choose `kind` for priority first, then `tone` for meaning."
 			},
 			"tone": {
 				"values": [
@@ -713,7 +714,8 @@
 			}
 		},
 		"slots": {
-			"default": "The label."
+			"default": "The label.",
+			"leading-icon": "An optional decorative SVG before the label of a chip button. Use aria-hidden on the SVG."
 		},
 		"keyboard": [
 			{
@@ -721,7 +723,7 @@
 				"action": "Activates it. A submit button submits its form."
 			}
 		],
-		"accessibility": "A native button inside the shadow root, so it keeps native focus, Enter and Space behaviour and form participation. An icon-only (is-icon) button is named with aria-label or aria-labelledby on the host, which Zest forwards to the inner button; without a name it warns once."
+		"accessibility": "A native button inside the shadow root, so it keeps native focus, Enter and Space behaviour and form participation. An icon-only (is-icon) button is named with aria-label or aria-labelledby on the host, which Zest forwards to the inner button; without a name it warns once. The button forwards aria-haspopup and aria-expanded from its host to the native button; a menu or popover supplies them for its slotted trigger."
 	},
 	"z-button-group": {
 		"summary": "Joins buttons into one segmented row.",

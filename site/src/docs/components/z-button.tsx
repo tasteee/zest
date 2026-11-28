@@ -18,6 +18,11 @@ export const ZButtonDoc = () => (
 			description="Kind communicates priority; tone communicates meaning or brand emphasis. Each row is one tone across every kind."
 		/>
 		<DocExample
+			demo="theming/compact-editor-toolbar"
+			title="Compose a compact settings trigger"
+			description="Use the chip kind for a labeled menu or popover trigger. Put an optional decorative SVG in the leading-icon slot."
+		/>
+		<DocExample
 			demo="z-button/represent-pending-work-honestly"
 			title="Represent pending work honestly"
 			description="Loading disables the native button, preventing a duplicate submission while keeping the action visible."

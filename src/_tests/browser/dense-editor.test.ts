@@ -41,6 +41,34 @@ describe('<z-button is-icon>', () => {
 })
 
 describe('dense region', () => {
+	it('applies the compact preset only inside the region and respects consumer overrides', async () => {
+		const wrapper = await mount(
+			`<z-button size="sm">Regular</z-button>
+			<z-toolbar data-density="compact" data-theme="light" aria-label="Tools">
+				<z-button is-icon size="sm" aria-label="Play"><svg aria-hidden="true"></svg></z-button>
+				<z-toggle-button size="xs">Loop</z-toggle-button>
+				<z-separator is-vertical></z-separator>
+				<z-button>Medium</z-button>
+				<z-button size="lg">Large</z-button>
+				<z-toggle-button size="lg" is-icon aria-label="Record"><svg aria-hidden="true"></svg></z-toggle-button>
+			</z-toolbar>
+			<div data-density="compact" style="--control-height-sm: 26px">
+				<z-button size="sm">Custom</z-button>
+			</div>`
+		)
+		const [regular, small, medium, large, custom] = wrapper.querySelectorAll('z-button')
+		const [smallToggle, largeToggle] = wrapper.querySelectorAll('z-toggle-button')
+		const divider = wrapper.querySelector('z-separator')!
+		expect([regular, small, medium, large, custom].map((button) => Math.round(innerButtonBox(button).height)))
+			.toEqual([32, 28, 30, 40, 26])
+		expect(Math.round(innerButtonBox(smallToggle).height)).toBe(24)
+		expect(Math.round(innerButtonBox(largeToggle).width)).toBe(40)
+		expect(Math.round(innerButtonBox(small).width)).toBe(28)
+		expect(wrapper.querySelector('svg')!.getBoundingClientRect().width).toBe(16)
+		expect(divider.getBoundingClientRect().height).toBe(18)
+		expect(getComputedStyle(medium).getPropertyValue('--base-font-size').trim()).toBe('14px')
+	})
+
 	it('scoped control-height tokens resize every Zest control inside', async () => {
 		const markup = `
 			<div data-zest-scope style="--control-height-sm: 1.75rem; --control-height-md: 1.875rem">
@@ -52,6 +80,40 @@ describe('dense region', () => {
 		const [small, medium] = [...wrapper.querySelectorAll('z-button')]
 		expect(Math.round(innerButtonBox(small).height)).toBe(28)
 		expect(Math.round(innerButtonBox(medium).height)).toBe(30)
+	})
+})
+
+describe('chip button as an overlay trigger', () => {
+	it.each([
+		['z-popover', 'dialog', '<input aria-label="Output name">'],
+		['z-menu', 'menu', '<z-menu-item value="1/16">1/16</z-menu-item>']
+	])('follows %s state and restores keyboard focus', async (tag, popup, content) => {
+		const wrapper = await mount(
+			`<div data-density="compact"><${tag} label="Settings">
+				<z-button slot="trigger" kind="chip" label="Settings">
+					<svg slot="leading-icon" aria-hidden="true" viewBox="0 0 16 16"></svg>
+				</z-button>
+				${content}
+			</${tag}></div>`
+		)
+		const trigger = wrapper.querySelector<HTMLElement>('z-button')!
+		const button = trigger.shadowRoot!.querySelector('button')!
+		const icon = trigger.querySelector('svg')!
+		expect(button.getAttribute('aria-haspopup')).toBe(popup)
+		expect(button.getAttribute('aria-expanded')).toBe('false')
+		expect(icon.getBoundingClientRect().width).toBe(15)
+		expect(getComputedStyle(button).fontSize).toBe('12.5px')
+		const restFill = getComputedStyle(button).backgroundColor
+
+		trigger.focus()
+		await userEvent.keyboard('{Enter}')
+		await settle(wrapper)
+		expect(button.getAttribute('aria-expanded')).toBe('true')
+		expect(getComputedStyle(button).backgroundColor).not.toBe(restFill)
+		await userEvent.keyboard('{Escape}')
+		await settle(wrapper)
+		expect(button.getAttribute('aria-expanded')).toBe('false')
+		expect(document.activeElement).toBe(trigger)
 	})
 })
 

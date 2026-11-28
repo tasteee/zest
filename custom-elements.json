@@ -1713,9 +1713,9 @@
               "kind": "field",
               "name": "kind",
               "type": {
-                "text": "'solid' | 'outline' | 'ghost' | 'soft' | 'plain'"
+                "text": "'solid' | 'outline' | 'ghost' | 'soft' | 'plain' | 'chip'"
               },
-              "description": "Visual treatment. Choose `kind` for priority first, then `tone` for meaning."
+              "description": "Visual treatment. Use chip for a labeled settings trigger: a quiet outline, small chevron, and distinct expanded state. Choose `kind` for priority first, then `tone` for meaning."
             },
             {
               "kind": "field",
@@ -1811,9 +1811,9 @@
               "name": "kind",
               "fieldName": "kind",
               "type": {
-                "text": "'solid' | 'outline' | 'ghost' | 'soft' | 'plain'"
+                "text": "'solid' | 'outline' | 'ghost' | 'soft' | 'plain' | 'chip'"
               },
-              "description": "Visual treatment. Choose `kind` for priority first, then `tone` for meaning."
+              "description": "Visual treatment. Use chip for a labeled settings trigger: a quiet outline, small chevron, and distinct expanded state. Choose `kind` for priority first, then `tone` for meaning."
             },
             {
               "name": "tone",
@@ -1901,6 +1901,10 @@
             {
               "name": "",
               "description": "The label."
+            },
+            {
+              "name": "leading-icon",
+              "description": "An optional decorative SVG before the label of a chip button. Use aria-hidden on the SVG."
             }
           ]
         },

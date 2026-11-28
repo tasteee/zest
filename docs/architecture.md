@@ -506,9 +506,10 @@ button, a toggle and a group item side by side always agree.
   size, kind and tone, and means the same thing on every element that has it.
 - An icon-only control is named with `aria-label` or `aria-labelledby`,
   never with `label` (Rule 17). An unnamed one is reported (Rule 21).
-- A dense region (an editor, a toolbar) resizes its controls by overriding
-  the `--control-height-*` tokens on a container, optionally with
-  `data-zest-scope`. Per-element height overrides are not supported.
+- A dense region (an editor, a toolbar) applies the compact preset with
+  `data-density="compact"`. It can override the shared scale on that
+  container. Custom scales without the preset can use `data-zest-scope`.
+  Per-element height overrides are not supported.
 
 ### Rule 23 — A group that acts as one control is one tab stop
 
@@ -692,6 +693,7 @@ component.
 | 21 Misuse is reported, never guessed | 2026-11-21 | V2 decision: `console.warn` in every build. |
 | §10 Process rules | 2026-11-21 | Record rules here; no shims before outside users. |
 | 22 Size and shape are one vocabulary | 2026-11-22 | Dense editor UI: `--control-height-xs`, `z-button` `xs` and `is-icon`. |
+| Rule 22 compact density preset | 2026-11-25 | Editor scale applied at the region. |
 | 23 A group that acts as one control is one tab stop | 2026-11-22 | `z-toggle-button-group` `columns` and roving focus. |
 | 24 Tints never rotate hue | 2026-11-22 | oklch mixes against neutrals turned tones grey-green. |
 | Rule 21 shared reporter and case list | 2026-11-22 | `src/shared/misuse.ts`; new reported cases. |

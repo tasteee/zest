@@ -47,7 +47,7 @@ copy.
   fails on any warning.
 - Size and shape are one vocabulary (Rule 22): `size` is xs | sm | md | lg,
   each from a `--control-height-*` token; `is-icon` is the square icon-only
-  shape, named with `aria-label`. Dense regions override the tokens.
+  shape, named with `aria-label`. Dense regions can apply `data-density="compact"`.
 - A group that acts as one control is one tab stop (Rule 23): roving
   tabindex, arrows move and never press; inside a toolbar the toolbar owns it.
 - Tints never rotate hue (Rule 24): mix against `transparent` in oklch, or

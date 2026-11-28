@@ -31,6 +31,10 @@ const styles = css`
 		flex-direction: column;
 		align-items: stretch;
 	}
+	:host(:not([is-vertical]):not([direction='vertical'])) ::slotted(z-separator[is-vertical]) {
+		height: var(--toolbar-divider-height, auto);
+		align-self: var(--toolbar-divider-align, stretch);
+	}
 	:host([size='sm']) {
 		gap: var(--space-1);
 	}

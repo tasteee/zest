@@ -1,0 +1,30 @@
+<z-toolbar data-density="compact" aria-label="MIDI editor toolbar" overflow="wrap">
+  <z-button id="transport-play" size="sm" tone="secondary" is-icon aria-label="Play">
+    <svg aria-hidden="true" viewBox="0 0 16 16" fill="currentColor">
+      <path id="transport-symbol" d="M5 3v10l8-5z"></path>
+    </svg>
+  </z-button>
+  <z-toggle-button size="sm" kind="ghost">Loop</z-toggle-button>
+  <z-number-input size="sm" value="120" min="20" max="300" is-borderless aria-label="Tempo">
+    <span slot="suffix">BPM</span>
+  </z-number-input>
+  <z-separator is-vertical></z-separator>
+  <z-menu id="grid-settings" placement="bottom-start">
+    <z-button slot="trigger" kind="chip">
+      <svg slot="leading-icon" aria-hidden="true" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round">
+        <path d="M2.5 2.5h11v11h-11zM8 2.5v11m-5.5-5.5h11"></path>
+      </svg>
+      <span id="grid-label">Grid 1/16</span>
+    </z-button>
+    <z-menu-item type="radio" value="1/8">1/8</z-menu-item>
+    <z-menu-item type="radio" value="1/16" is-checked>1/16</z-menu-item>
+    <z-menu-item type="radio" value="1/32">1/32</z-menu-item>
+  </z-menu>
+  <z-popover placement="bottom-end" label="Output settings">
+    <z-button slot="trigger" kind="chip" label="Output"></z-button>
+    <z-column gap="2">
+      <z-switch>Metronome</z-switch>
+      <z-switch>Monitor input</z-switch>
+    </z-column>
+  </z-popover>
+</z-toolbar>
