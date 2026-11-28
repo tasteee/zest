@@ -1,0 +1,36 @@
+export type IsoDateT = string;
+export type DateRangeT = [IsoDateT | null, IsoDateT | null];
+export type DateFormatT = string;
+export declare const DEFAULT_DATE_FORMAT: DateFormatT;
+export declare const parseIsoDate: (text: unknown) => Date | null;
+export declare const toIsoDate: (date: Date) => IsoDateT;
+export declare const normalizeIsoDate: (raw: unknown) => IsoDateT | null;
+export declare const getTodayIso: () => IsoDateT;
+export declare const addDays: (iso: IsoDateT, amount: number) => IsoDateT;
+export declare const addMonths: (iso: IsoDateT, amount: number) => IsoDateT;
+export declare const addYears: (iso: IsoDateT, amount: number) => IsoDateT;
+export declare const getMonthKey: (iso: IsoDateT) => string;
+export declare const getFirstOfMonth: (monthKey: string) => IsoDateT;
+export declare const isMonthKey: (raw: unknown) => boolean;
+export declare const clampIso: (iso: IsoDateT, min: IsoDateT | null, max: IsoDateT | null) => IsoDateT;
+export declare const isOutsideBounds: (iso: IsoDateT, min: IsoDateT | null, max: IsoDateT | null) => boolean;
+export declare const buildMonthGrid: (monthKey: string, firstDayOfWeek: number) => IsoDateT[];
+export declare const normalizeRange: (raw: unknown) => DateRangeT;
+export declare const normalizeSingle: (raw: unknown) => IsoDateT | null;
+export declare const toRangeText: (bounds: DateRangeT) => string | null;
+export type DateDetailT = {
+    value: string | null;
+    start: IsoDateT | null;
+    end: IsoDateT | null;
+};
+export declare const buildDateDetail: (bounds: DateRangeT, isRange: boolean) => DateDetailT;
+export declare const isSameRange: (first: DateRangeT, second: DateRangeT) => boolean;
+export declare const isValidFormat: (format: unknown) => boolean;
+export declare const resolveFormat: (format: unknown) => DateFormatT;
+export declare const formatIsoDate: (iso: IsoDateT | null, format: DateFormatT) => string;
+export declare const parseTypedDate: (text: string, format: DateFormatT) => IsoDateT | null;
+type MaskOptionsT = {
+    isDeleting: boolean;
+};
+export declare const maskTypedDate: (raw: string, format: DateFormatT, options: MaskOptionsT) => string;
+export {};
