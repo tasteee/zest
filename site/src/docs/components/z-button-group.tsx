@@ -5,8 +5,13 @@ export const ZButtonGroupDoc = () => (
 	<ComponentDoc
 		tag="z-button-group"
 		category="Actions"
-		description="A seamless row or column of adjacent buttons. Use it for neighboring actions that act on the same object, not for selection state."
+		description="A seamless row or column of related controls. Each control keeps its own behavior and state."
 	>
+		<DocExample
+			demo="z-button-group/pair-a-toggle-with-a-dropdown"
+			title="Pair an icon toggle with a dropdown"
+			description="Use an icon-only z-toggle-button with an accessible name to turn grid snapping on or off. Place an inline z-select beside it to choose the grid division. Give both controls the same size for an even seam."
+		/>
 		<DocExample
 			demo="z-button-group/keep-sibling-actions-together"
 			title="Keep sibling actions together"

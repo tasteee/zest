@@ -20,6 +20,11 @@ const styles = css`
 		flex-shrink: 0;
 	}
 
+	::slotted(z-toggle-button),
+	::slotted(z-select) {
+		--z-button-group-control-radius: var(--z-button-radius);
+	}
+
 	::slotted(:only-child) {
 		--z-button-radius: var(--radius-md);
 	}
@@ -97,7 +102,7 @@ const styles = css`
 	::slotted(:nth-child(8)) {
 		z-index: 2;
 	}
-	::slotted(:focus-visible) {
+	::slotted(:focus-within) {
 		z-index: 20;
 	}
 `

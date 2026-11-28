@@ -1913,7 +1913,7 @@
           "customElement": true,
           "tagName": "z-button-group",
           "name": "ZButtonGroup",
-          "description": "Joins buttons into one segmented row.",
+          "description": "Joins related controls into one segmented row or column.",
           "members": [
             {
               "kind": "field",
@@ -1921,7 +1921,7 @@
               "type": {
                 "text": "boolean"
               },
-              "description": "Stack the buttons vertically (equal width) instead of in a row."
+              "description": "Stack the controls vertically (equal width) instead of in a row."
             }
           ],
           "attributes": [
@@ -1931,14 +1931,14 @@
               "type": {
                 "text": "boolean"
               },
-              "description": "Stack the buttons vertically (equal width) instead of in a row."
+              "description": "Stack the controls vertically (equal width) instead of in a row."
             }
           ],
           "events": [],
           "slots": [
             {
               "name": "",
-              "description": "The buttons."
+              "description": "Adjacent controls such as z-button, z-toggle-button, and z-select."
             }
           ]
         },
