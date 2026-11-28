@@ -58,7 +58,7 @@ const styles = css`
 		box-sizing: border-box;
 		background: transparent;
 		border: 1px solid var(--border-default);
-		border-radius: var(--radius-md);
+		border-radius: var(--z-button-group-control-radius, var(--radius-md));
 		color: var(--text-primary);
 		font-family: inherit;
 		cursor: pointer;

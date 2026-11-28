@@ -29,7 +29,7 @@ const styles = css`
 		background: transparent;
 		border: 1px solid var(--toggle-border, transparent);
 		color: var(--tone-text, var(--text-primary));
-		border-radius: var(--z-toggle-button-radius, var(--radius-md));
+		border-radius: var(--z-toggle-button-radius, var(--z-button-group-control-radius, var(--radius-md)));
 		height: var(--toggle-height, 2.5rem);
 		padding-inline: var(--toggle-padding-inline, 1rem);
 		min-width: var(--toggle-height, 2.5rem);

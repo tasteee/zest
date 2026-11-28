@@ -726,30 +726,30 @@
 		"accessibility": "A native button inside the shadow root, so it keeps native focus, Enter and Space behaviour and form participation. An icon-only (is-icon) button is named with aria-label or aria-labelledby on the host, which Zest forwards to the inner button; without a name it warns once. The button forwards aria-haspopup and aria-expanded from its host to the native button; a menu or popover supplies them for its slotted trigger."
 	},
 	"z-button-group": {
-		"summary": "Joins buttons into one segmented row.",
+		"summary": "Joins related controls into one segmented row or column.",
 		"props": {
 			"is-vertical": {
-				"description": "Stack the buttons vertically (equal width) instead of in a row."
+				"description": "Stack the controls vertically (equal width) instead of in a row."
 			}
 		},
 		"slots": {
-			"default": "The buttons."
+			"default": "Adjacent controls such as z-button, z-toggle-button, and z-select."
 		},
 		"keyboard": [
 			{
 				"keys": "Tab",
-				"action": "Moves through the buttons in order."
+				"action": "Moves through the controls in order."
 			}
 		],
-		"accessibility": "role=\"group\" around its buttons. Give the group an aria-label when the buttons mean something together.",
+		"accessibility": "role=\"group\" around its controls. Use aria-label to name their shared purpose.",
 		"guidance": [
 			{
 				"title": "Use toggle group for modes",
-				"text": "Button group executes separate commands; z-toggle-group represents one or more selected values."
+				"text": "Use z-toggle-button-group when several buttons represent a shared selection."
 			},
 			{
 				"title": "Children",
-				"text": "Use adjacent z-button elements with a consistent kind and size."
+				"text": "Use a consistent size across adjacent controls. Add is-inline to z-select in a row so it sizes to its content."
 			}
 		]
 	},
