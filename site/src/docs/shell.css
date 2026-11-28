@@ -600,6 +600,33 @@
 	font-weight: 600;
 }
 
+/* report an issue: the last thing on every docs page */
+.DocsReportIssue {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	margin-top: 2rem;
+	padding-top: 1.25rem;
+	border-top: 1px solid var(--docs-line);
+	font-size: 0.875rem;
+	color: var(--text-secondary);
+}
+
+.DocsReportIssue a {
+	color: var(--text-primary);
+	font-weight: 500;
+	text-decoration: none;
+}
+
+.DocsReportIssue a:hover {
+	text-decoration: underline;
+}
+
+.DocsReportIssue a:focus-visible {
+	outline: 2px solid color-mix(in oklch, var(--border-focus) 60%, transparent);
+	outline-offset: 2px;
+}
+
 /* ── long-form article (Setup, Blocks, indexes, element headers) ── */
 .DocsArticle {
 	color: var(--text-primary);
