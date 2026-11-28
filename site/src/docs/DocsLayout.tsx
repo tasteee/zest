@@ -1,5 +1,6 @@
 import { ColorPalette } from '@app/docs/ColorPalette'
 import { PaletteNotice } from '@app/docs/PaletteNotice'
+import { ReportIssue } from '@app/docs/ReportIssue'
 import { useEffect, useLayoutEffect, useRef, useState, type ReactNode } from 'react'
 import { Link, useLocation } from 'wouter'
 import zestPackage from '@tasteee/zest/package.json'
@@ -421,6 +422,7 @@ export const DocsLayout = ({ children }: { children: ReactNode }) => {
 					<PaletteNotice />
 					{children}
 					{section && slug && <Pager section={section} slug={slug} />}
+					{section && <ReportIssue section={section} slug={slug} />}
 				</main>
 			</div>
 
